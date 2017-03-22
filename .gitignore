@@ -1,8 +1,9 @@
 node_modules
 dist
 bower_components
+docs
+coverage
 .DS_Store
 npm-debug.log
 .bower
 .vscode
-coverage
