@@ -1,0 +1,20 @@
+@function calculateRem($size) {
+  $remSize: $size / $baseFont;
+  @return $remSize * 1rem;
+}
+
+%clearfix {
+  &:after,
+  &:before {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin fontSize($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}

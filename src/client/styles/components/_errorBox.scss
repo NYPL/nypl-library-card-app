@@ -1,0 +1,10 @@
+.errorBox {
+  margin: 0 auto;
+  max-width: $pageMaxWidth;
+  padding: 30px 15px;
+
+  & > h2 {
+    margin: 0;
+    padding: 0;
+  }
+}

@@ -1,0 +1,35 @@
+// Page Defaults
+$pageMaxWidth: 1312px !default;
+$pageMinHeight: 700px !default;
+// Colors
+$nyplgray: #7B756F;
+$nypldarkgray: darken($nyplgray, 40%);
+$nypllightgray: lighten($nyplgray, 40%);
+$nyplyellow: #FEE24A;
+$nyplorange: #ffb81d;
+$nyplred: #e32b31;
+$nypldarkgreen: #4C842E;
+$nypllightgreen: lighten($nypldarkgreen, 20%);
+$nyplblue: #1DA1D4;
+$nyplbluedark: #1980a9;
+$nyplsearchcolor: $nyplgray;
+$nyplsearchcolordark: darken($nyplsearchcolor, 10%);
+$nyplsearchcolorlight: lighten($nyplsearchcolor, 30%);
+$focuscolor: $nyplorange;
+$pagecolor: $nypldarkgray;
+$pagecolorlight: $nypllightgray;
+$pagetextcolor: $nypldarkgray;
+$footercolor: #54514A;
+$highlightcolor: $nyplbluedark;
+$alertcolor: $nyplyellow;
+// Link colors
+$linkcolor: $nyplred;
+$linkvisitedcolor: darken($linkcolor, 20%);
+$linkhovercolor: lighten($linkcolor, 10%);
+$invertedlinkcolor: white;
+$invertedlinkvisitedcolor: darken($invertedlinkcolor, 10%);
+// Breakpoints
+$mobile: 760px !default;
+// Fonts
+$baseFontRaw: 16;
+$baseFont: $baseFontRaw * 1px;

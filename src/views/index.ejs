@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title><%- appTitle %></title>
+    <link rel="icon" type="image/png" href="<%- favicon %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content=" | The New York Public Library">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="">
+    <meta property="og:site_name" content=" | The New York Public Library">
+    <meta property="og:url" content="http://www.nypl.org/">
+    <meta name="twitter:title" content=" | The New York Public Library">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@nypl">
+    <meta name="twitter:creator" content="@nypl">
+    <meta name="twitter:image" content="">
+    <% if (isProduction) { %>
+      <!-- Minified Styles -->
+      <link rel="stylesheet" type="text/css" href="/styles.css">
+    <% } %>
+  </head>
+  <body>
+    <div id="nyplLibraryCardApp"><%- app %></div>
+		<% if (isProduction) { %>
+	    <script async src="/bundle.js"></script>
+	  <% } else { %>
+	    <script src="http://localhost:3000/bundle.js"></script>
+	  <% } %>
+  </body>
+</html>

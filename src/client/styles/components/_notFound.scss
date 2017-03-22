@@ -1,0 +1,7 @@
+.pageNotFound {
+  & > div {
+    margin: 0 auto;
+    max-width: $pageMaxWidth;
+    padding: 30px 40px;
+  }
+}
