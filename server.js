@@ -44,7 +44,7 @@ const server = app.listen(app.get('port'), (error) => {
   console.log(colors.yellow.underline(appConfig.appName));
   console.log(
     colors.green('Express server is listening at'),
-    colors.cyan('localhost:' + app.get('port'))
+    colors.cyan(`localhost:${app.get('port')}`),
   );
 });
 
@@ -90,8 +90,8 @@ if (!isProduction) {
       console.log(colors.red(error));
     }
     console.log(
-			colors.magenta('Webpack Dev Server listening at'),
-			colors.cyan(`localhost:${appConfig.webpackDevServerPort}`)
-		);
+      colors.magenta('Webpack Dev Server listening at'),
+      colors.cyan(`localhost:${appConfig.webpackDevServerPort}`),
+    );
   });
 }

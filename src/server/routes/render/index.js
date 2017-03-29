@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import ApplicationContainer from '../../../shared/containers/Application/ApplicationContainer';
 import config from '../../../../appConfig';
 
-export function renderApp(req, res, next) {
+export function renderApp(req, res) {
   const isProduction = process.env.NODE_ENV === 'production';
   const app = renderToString(<ApplicationContainer />);
 
