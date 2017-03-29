@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import isEmpty from 'lodash/isEmpty';
 import omit from 'lodash/omit';
 import assign from 'lodash/assign';
@@ -9,7 +10,8 @@ class LibraryCardForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formSubmitted: false,
+      formProcessing: false,
+      formResult: {},
       fieldErrors: {},
       patronFields: {
         firstName: '',
@@ -28,6 +30,17 @@ class LibraryCardForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  getFullName() {
+    const {
+      firstName,
+      lastName,
+    } = this.state.patronFields;
+
+    return (!isEmpty(firstName) && !isEmpty(lastName)) ? (
+      `${firstName.trim()} ${lastName.trim()}`
+    ) : null;
   }
 
   validateField(fieldName, value) {
@@ -114,6 +127,44 @@ class LibraryCardForm extends React.Component {
 
     if (isEmpty(this.state.fieldErrors)) {
       console.log('Form is Valid:', this.state);
+      this.setState({ formProcessing: true, formResults: {} });
+
+      const {
+        firstName,
+        lastName,
+        email,
+        dateOfBirth,
+        line1,
+        line2,
+        city,
+        state,
+        zip,
+        username,
+        pin,
+      } = this.state.patronFields;
+
+      axios.post('/create-patron', {
+        firstName,
+        lastName,
+        email,
+        dateOfBirth,
+        line1,
+        line2,
+        city,
+        state,
+        zip,
+        username,
+        pin,
+      })
+      .then((response) => {
+        this.setState({
+          formProcessing: false,
+          formResults: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     }
   }
 
@@ -293,33 +344,100 @@ class LibraryCardForm extends React.Component {
     );
   }
 
+  renderErrorMsg(object) {
+    let errorMessage = '';
+    if (!isEmpty(object)) {
+      if (object.type === 'unrecognized-address') {
+        errorMessage = 'The address you provided is invalid, please enter a valid New York address.';
+      } else if (object.type === 'unavailable-username') {
+        errorMessage = 'The username entered is already in use, please enter a new username.';
+      } else if (object.type === 'exception' && object.debugMessage && object.debugMessage.includes('pin')) {
+        errorMessage = 'The pin entered is invalid, must be 4 numbers.';
+      }
+    } else {
+      errorMessage = 'There was an error with your submission, please try again later.';
+    }
+
+    return (
+      <div className="errorBox">
+        <h3>Ops... there was an error while processing your request, please fix the following:</h3>
+        <p>{errorMessage}</p>
+      </div>
+    );
+  }
+
+  renderSuccessMsg(object) {
+    const barcode = object && !isEmpty(object.barCodes) ? object.barCodes[0] : null;
+    const barcodeText = !isEmpty(barcode) ? `Your barcode is ${barcode}` : null;
+    return (
+      <div className="successBox">
+        <p>Dear {this.getFullName()},</p>
+        <p>
+          Your submission has been successful.
+          You will need to visit an NYPL location to validate your information.
+        </p>
+        <p>{barcodeText}</p>
+      </div>
+    );
+  }
+
+  renderFormResults() {
+    const {
+      formProcessing,
+      formResults,
+    } = this.state;
+
+    const loadingMarkup = formProcessing ? <h3 className="loadingText">Loading...</h3> : null;
+    let resultMarkup;
+
+    if (!isEmpty(formResults)) {
+      if (formResults.error) {
+        resultMarkup = this.renderErrorMsg(formResults.response);
+      } else {
+        resultMarkup = this.renderSuccessMsg(formResults.response);
+      }
+    }
+
+    return (
+      <div className="formResults">
+        {loadingMarkup}
+        {resultMarkup}
+      </div>
+    );
+  }
+
   render() {
     return (
-      <form className="nyplLibraryCard-form" onSubmit={this.handleSubmit}>
-        <fieldset>
-          <h2>
-            Please enter the following information (Items marked with
-              <span className="required"> *</span> are required)
-          </h2>
-          {this.renderFirstNameField()}
-          {this.renderLastNameField()}
-          {this.renderDobField()}
-          {this.renderEmailField()}
-          {this.renderUsernameField()}
-          {this.renderPinField()}
-        </fieldset>
-        <fieldset>
-          <h2>Address</h2>
-          {this.renderStreetField1()}
-          {this.renderStreetField2()}
-          {this.renderCityField()}
-          {this.renderStateField()}
-          {this.renderZipcodeField()}
-        </fieldset>
-        <div>
-          <input type="submit" value="Submit Card Application" />
+      <div>
+        <div className="formResults">
+          {this.renderFormResults()}
         </div>
-      </form>
+        <form className="nyplLibraryCard-form" onSubmit={this.handleSubmit}>
+          <fieldset>
+            <h2>
+              Please enter the following information (Items marked with
+                <span className="required"> *</span> are required)
+            </h2>
+            {this.renderFirstNameField()}
+            {this.renderLastNameField()}
+            {this.renderDobField()}
+            {this.renderEmailField()}
+            {this.renderUsernameField()}
+            {this.renderPinField()}
+          </fieldset>
+          <fieldset>
+            <h2>Address</h2>
+            {this.renderStreetField1()}
+            {this.renderStreetField2()}
+            {this.renderCityField()}
+            {this.renderStateField()}
+            {this.renderZipcodeField()}
+          </fieldset>
+          <div>
+            <input type="submit" value="Submit Card Application" />
+          </div>
+        </form>
+      </div>
     );
   }
 }

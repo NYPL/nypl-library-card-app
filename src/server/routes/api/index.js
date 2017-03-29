@@ -184,8 +184,8 @@ export function createPatron(req, res) {
           constructApiHeaders(token),
         )
         .then((result) => {
-          console.log(result.data);
-          return res.json(result.data.data);
+          // console.log(result.data);
+          return res.json({ response: result.data.data });
         })
         .catch((err) => {
           console.log('Error Creating Account: ', err.response.data);
