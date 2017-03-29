@@ -1,22 +1,22 @@
 import React from 'react';
 import { Header, navConfig } from '@nypl/dgx-header-component';
 import Footer from '@nypl/dgx-react-footer';
+import LibraryCardForm from '../../components/LibraryCardForm/LibraryCardForm';
 
-class ApplicationContainer extends React.Component {
-  render() {
-    return (
-      <div id="nyplLibraryCardApp" className="nyplLibraryCardApp">
-        <Header skipNav={{ target: 'mainContent' }} navData={navConfig.current} />
-        <div id="mainContent">
-          <h1>Hello World!</h1>
-        </div>
-        <Footer id="footer" className="footer" />
-      </div>
-    );
-  }
-}
-
-ApplicationContainer.propTypes = {
-};
+const ApplicationContainer = () => (
+  <div className="nyplLibCardApp">
+    <Header
+      skipNav={{ target: 'mainContent' }}
+      navData={navConfig.current}
+    />
+    <div id="mainContent">
+      <LibraryCardForm />
+    </div>
+    <Footer
+      id="footer"
+      className="footer"
+    />
+  </div>
+);
 
 export default ApplicationContainer;

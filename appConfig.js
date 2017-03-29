@@ -5,9 +5,13 @@ export default {
   port: 3001,
   webpackDevServerPort: 3000,
   api: {
-    development: '',
-    production: '',
+    oauth: 'https://isso.nypl.org/oauth/token',
+    patron: 'https://api.nypltech.org/api/v0.1/patrons',
+    validate: 'https://api.nypltech.org/api/v0.1/validations',
   },
+  clientId: 'acct_creator',
+  clientSecret: '0d6fe25f918eb413042eaa5ca2641efc63b09f16',
+  scopes: 'account:write account:read',
   publicKey:
     '-----BEGIN PUBLIC KEY-----\n' +
     'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtmIMVmUnbwr/65MYmLGJ\n' +

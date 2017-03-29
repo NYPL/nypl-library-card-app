@@ -7,3 +7,57 @@
 @import 'utils/mixins';
 // Universal Page Components
 @import 'components/errorBox';
+
+#mainContent {
+  display: block;
+  min-height: 700px;
+}
+
+.nyplLibraryCard {
+  &-form {
+    margin: 20px auto;
+    max-width: 700px;
+
+    .required {
+      color: #ff0000;
+    }
+
+    fieldset {
+      border: 0;
+      margin: 0;
+      padding: 10px;
+
+      h2 {
+        font-size: 18px;
+        margin: 0 0 10px;
+      }
+
+      & > div {
+        display: block;
+        margin: 0 0 20px;
+      }
+
+      label {
+        display: inline;
+        font-size: 17px;
+        margin: 0 7px 0 0;
+      }
+
+      input {
+        display: inline;
+        font-size: 16px;
+        height: 20px;
+        max-width: 280px;
+        padding: 4px;
+        width: 160px;
+      }
+    }
+
+    .errorBlock {
+      color: #ff0000;
+      display: block;
+      font-size: 14px;
+      margin: 2px 0 10px;
+    }
+  }
+}
