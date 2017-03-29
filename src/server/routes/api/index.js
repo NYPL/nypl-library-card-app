@@ -17,12 +17,14 @@ function constructApiHeaders(token = '', contentType = 'application/json') {
   };
 }
 
-function constructErrorObject(property, type = 'missing-required-field') {
+function constructErrorObject(property, type = 'missing-required-field', isError = true) {
   return {
     error: {
-      type,
-      valid: false,
-      message: `The ${property} field is missing.`,
+      error: isError,
+      response: {
+        type,
+        message: `The ${property} field is missing.`,
+      },
     },
   };
 }
@@ -79,7 +81,7 @@ function constructPatronObject(object) {
     return constructErrorObject('pin');
   }
 
-  const fullName = `${firstName.trim()} ${lastName.trim()}`;
+  const fullName = `${lastName.trim()}, ${firstName.trim()}`;
   const addressObject = {
     line_1: line1,
     line_2: line2,
@@ -105,10 +107,12 @@ export function initializeAppAuth(req, res, next) {
       next();
     })
     .catch((error) => {
-      console.log(`Could not authorize App on ${config.api.oauth}`, error);
+      console.log(`Could not authenticate App on ${config.api.oauth}`, error);
       res.json({
-        error_type: 'auth_failed',
-        error_desc: error,
+        error: true,
+        type: 'app-auth-failed',
+        message: `Could not authenticate App on ${config.api.oauth}`,
+        details: error,
       });
     });
 }
@@ -158,16 +162,22 @@ export function createPatron(req, res) {
 
       if (!patronAddressResponse.valid) {
         // Address is invalid
-        return res.json(patronAddressResponse);
+        return res.json({
+          error: true,
+          response: patronAddressResponse,
+        });
       }
 
       if (!patronUsernameResponse.valid) {
         // Username is invalid
-        return res.json(patronUsernameResponse);
+        return res.json({
+          error: true,
+          response: patronUsernameResponse,
+        });
       }
 
       // Patron address is valid, create account
-      axios
+      return axios
         .post(
           config.api.patron,
           { simplePatron: patronData },
@@ -179,7 +189,10 @@ export function createPatron(req, res) {
         })
         .catch((err) => {
           console.log('Error Creating Account: ', err.response.data);
-          return res.json(err.response.data);
+          return res.json({
+            error: true,
+            response: err.response.data,
+          });
         });
     }))
     .catch((error) => {
