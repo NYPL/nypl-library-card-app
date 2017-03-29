@@ -6,7 +6,7 @@ import colors from 'colors';
 // Api Routes
 import { initializeAppAuth, createPatron } from './src/server/routes/api';
 // App Routes
-import { renderApp } from './src/server/routes/render';
+import renderApp from './src/server/routes/render';
 // App Config File
 import appConfig from './appConfig';
 // Global Configuration Variables
@@ -30,10 +30,8 @@ app.set('port', process.env.PORT || appConfig.port);
 // Sets the server path to /dist
 app.use(express.static(distPath));
 
-// Establishes all application routes handled by react-router
-app.get('/', renderApp);
+app.get('/library-card', renderApp);
 
-// Create Patron
 app.post('/create-patron', initializeAppAuth, createPatron);
 
 const server = app.listen(app.get('port'), (error) => {

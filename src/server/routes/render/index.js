@@ -1,11 +1,12 @@
-import React from 'react';
+import { createFactory } from 'react';
 import { renderToString } from 'react-dom/server';
 import ApplicationContainer from '../../../shared/containers/Application/ApplicationContainer';
 import config from '../../../../appConfig';
 
-export function renderApp(req, res) {
+export default function renderApp(req, res) {
   const isProduction = process.env.NODE_ENV === 'production';
-  const app = renderToString(<ApplicationContainer />);
+  const componentFactory = createFactory(ApplicationContainer);
+  const app = renderToString(componentFactory());
 
   return res.render('index', {
     app,
