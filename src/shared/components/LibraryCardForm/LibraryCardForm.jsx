@@ -368,26 +368,24 @@ class LibraryCardForm extends React.Component {
 
   renderSuccessMsg(object) {
     const barcode = object && !isEmpty(object.barCodes) ? object.barCodes[0] : null;
-    const barcodeText = !isEmpty(barcode) ? `Your barcode is ${barcode}` : null;
+    const barcodeText = !isEmpty(barcode) ? `${barcode}` : null;
     return (
       <div className="successBox">
-        <p>Dear {this.getFullName()},</p>
-        <p>
-          Your submission has been successful.
-          You will need to visit an NYPL location to validate your information.
-        </p>
-        <p>{barcodeText}</p>
+        <h3>Dear {this.getFullName()},</h3>
+        <p>Your submission has been successful.</p>
+        <p>You will need to visit an NYPL location to validate your information.</p>
+        {barcodeText ? <p>Your barcode is <span className="barcode">{barcodeText}</span></p> : null}
       </div>
     );
   }
 
-  renderFormResults() {
-    const {
-      formProcessing,
-      formResults,
-    } = this.state;
+  renderLoader() {
+    const { formProcessing } = this.state;
+    return formProcessing ? <div className="loading" /> : null;
+  }
 
-    const loadingMarkup = formProcessing ? <h3 className="loadingText">Loading...</h3> : null;
+  renderFormResults() {
+    const { formResults } = this.state;
     let resultMarkup;
 
     if (!isEmpty(formResults)) {
@@ -400,7 +398,6 @@ class LibraryCardForm extends React.Component {
 
     return (
       <div className="formResults">
-        {loadingMarkup}
         {resultMarkup}
       </div>
     );
@@ -408,10 +405,8 @@ class LibraryCardForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="formResults">
-          {this.renderFormResults()}
-        </div>
+      <div className="mainContent" id="mainContent">
+        {this.renderFormResults()}
         <form className="nyplLibraryCard-form" onSubmit={this.handleSubmit}>
           <fieldset>
             <h2>
@@ -434,7 +429,8 @@ class LibraryCardForm extends React.Component {
             {this.renderZipcodeField()}
           </fieldset>
           <div>
-            <input type="submit" value="Submit Card Application" />
+            <input disabled={this.state.formProcessing} type="submit" value="Submit Card Application" />
+            {this.renderLoader()}
           </div>
         </form>
       </div>

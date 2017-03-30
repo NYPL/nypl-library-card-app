@@ -8,18 +8,56 @@
 // Universal Page Components
 @import 'components/errorBox';
 
+$base-line-height: 24px;
+$blue: #1b7fa7;
+$off-blue: rgba($blue, 0.2);
+$spin-duration: 1s;
+$pulse-duration: 750ms;
+
+
 #mainContent {
   display: block;
   min-height: 700px;
 }
 
+.formResults {
+  margin: 20px auto;
+  max-width: 700px;
+}
+
+.successBox {
+  padding: 10px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+
+  & > h3 {
+    margin: 10px 0 15px;
+    padding: 0;
+    font-size: 17.5px;
+  }
+
+  & > p {
+    margin: 10px 0;
+  }
+
+  .barcode {
+    font-weight: bold;
+  }
+}
+
 .nyplLibraryCard {
   &-form {
-    margin: 20px auto;
+    margin: 40px auto;
     max-width: 700px;
 
     .required {
       color: #ff0000;
+      padding-right: 2px;
     }
 
     fieldset {
@@ -29,7 +67,7 @@
 
       h2 {
         font-size: 18px;
-        margin: 0 0 10px;
+        margin: 0 0 15px;
       }
 
       & > div {
@@ -53,11 +91,102 @@
       }
     }
 
+    input[type=submit] {
+      background-color: #1b7fa7;
+      border: 0.0625em solid #1b7fa7;
+      border-radius: 0.25em;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: normal;
+      height: auto;
+      padding: 0.5em 0.75em;
+      text-decoration: none;
+      white-space: nowrap;
+      -webkit-transition: all 0.1s ease-in 0s;
+      -moz-transition: all 0.1s ease-in 0s;
+      -o-transition: all 0.1s ease-in 0s;
+      transition: all 0.1s ease-in 0s;
+
+      &:disabled {
+        background: $off-blue;
+      }
+
+      &:hover {
+        background: #fff;
+        border-color: #1b7fa7;
+        color: #1b7fa7;
+      }
+    }
+
     .errorBlock {
       color: #ff0000;
       display: block;
       font-size: 14px;
       margin: 2px 0 10px;
     }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    background: $blue;
+  }
+}
+
+html {
+  height: 100%;
+}
+
+.loading {
+    display: inline-block;
+    margin: 0px 0 0 18px;
+    top: 10px;
+    position: relative;
+    border-radius: 50%;
+    width: $base-line-height;
+    height: $base-line-height;
+    border: .25rem solid $off-blue;
+    border-top-color: $blue;
+    animation: spin $spin-duration infinite linear;
+  &--double {
+    border-style: double;
+    border-width: .5rem;
+  }
+}
+
+.loading-pulse {
+  position: relative;
+  width: ($base-line-height / 4);
+  height: $base-line-height;
+  background: $off-blue;
+  animation: pulse $pulse-duration infinite;
+  animation-delay: ($pulse-duration / 3);
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    height: ($base-line-height / 1.5);
+    width: ($base-line-height / 4);
+    background: $off-blue;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: pulse $pulse-duration infinite;
+  }
+  &:before {
+    left: -($base-line-height / 2);
+  }
+  &:after {
+    left: ($base-line-height / 2);
+    animation-delay: ($pulse-duration / 1.5);
   }
 }

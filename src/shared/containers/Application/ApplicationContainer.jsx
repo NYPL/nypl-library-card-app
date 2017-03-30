@@ -9,9 +9,7 @@ const ApplicationContainer = () => (
       skipNav={{ target: 'mainContent' }}
       navData={navConfig.current}
     />
-    <div id="mainContent">
-      <LibraryCardForm />
-    </div>
+    <LibraryCardForm />
     <Footer
       id="footer"
       className="footer"
