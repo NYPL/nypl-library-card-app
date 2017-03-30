@@ -87,13 +87,7 @@ class LibraryCardForm extends React.Component {
           fieldErrors[fieldName] = 'Username must be between 5-25 alphanumeric characters';
           currentErrors = fieldErrors;
         } else if (value.match(/[^0-9a-z]/i)) {
-          fieldErrors[fieldName] = 'Only letters and numbers are allowed';
-          currentErrors = fieldErrors;
-        } else if (!value.match(/\d/)) {
-          fieldErrors[fieldName] = 'At least one number is required';
-          currentErrors = fieldErrors;
-        } else if (!value.match(/[a-z]/i)) {
-          fieldErrors[fieldName] = 'At least one letter is required';
+          fieldErrors[fieldName] = 'Only alphanumeric characters are allowed';
           currentErrors = fieldErrors;
         } else {
           currentErrors = omit(fieldErrors, fieldName);
