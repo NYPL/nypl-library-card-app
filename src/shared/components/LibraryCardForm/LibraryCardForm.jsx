@@ -43,6 +43,24 @@ class LibraryCardForm extends React.Component {
     ) : null;
   }
 
+  scrollToTop(scrollDuration) {
+    const cosParameter = window.scrollY / 2;
+    const duration = scrollDuration || 250;
+    let scrollCount = 0;
+    let oldTimestamp = performance.now();
+
+    function step(newTimestamp) {
+      scrollCount += Math.PI / (duration / (newTimestamp - oldTimestamp));
+      if (scrollCount >= Math.PI) window.scrollTo(0, 0);
+      if (window.scrollY === 0) return;
+      window.scrollTo(0, Math.round(cosParameter + (cosParameter * Math.cos(scrollCount))));
+      oldTimestamp = newTimestamp;
+      window.requestAnimationFrame(step);
+    }
+
+    window.requestAnimationFrame(step);
+  }
+
   validateField(fieldName, value) {
     const { fieldErrors } = this.state;
     let currentErrors = {};
@@ -58,7 +76,7 @@ class LibraryCardForm extends React.Component {
         break;
       case 'email':
         if (!isEmailValid(value)) {
-          fieldErrors[fieldName] = 'Invalid email';
+          fieldErrors[fieldName] = 'Email is invalid';
           currentErrors = fieldErrors;
         } else {
           currentErrors = omit(fieldErrors, fieldName);
@@ -66,7 +84,7 @@ class LibraryCardForm extends React.Component {
         break;
       case 'username':
         if (value.length < 5 || value.length > 25) {
-          fieldErrors[fieldName] = 'Username must be between 5-25 characters long';
+          fieldErrors[fieldName] = 'Username must be between 5-25 alphanumeric characters';
           currentErrors = fieldErrors;
         } else if (value.match(/[^0-9a-z]/i)) {
           fieldErrors[fieldName] = 'Only letters and numbers are allowed';
@@ -82,8 +100,8 @@ class LibraryCardForm extends React.Component {
         }
         break;
       case 'pin':
-        if (value.length !== 4) {
-          fieldErrors[fieldName] = 'Your pin must be 4 characters long';
+        if (value.length !== 4 || isNaN(value)) {
+          fieldErrors[fieldName] = 'Pin must be 4 numbers';
           currentErrors = fieldErrors;
         } else {
           currentErrors = omit(fieldErrors, fieldName);
@@ -126,7 +144,7 @@ class LibraryCardForm extends React.Component {
     });
 
     if (isEmpty(this.state.fieldErrors)) {
-      console.log('Form is Valid:', this.state);
+      // Form is now processing
       this.setState({ formProcessing: true, formResults: {} });
 
       const {
@@ -161,6 +179,8 @@ class LibraryCardForm extends React.Component {
           formProcessing: false,
           formResults: response.data,
         });
+
+        this.scrollToTop(500);
       })
       .catch((error) => {
         console.log(error);
@@ -348,7 +368,7 @@ class LibraryCardForm extends React.Component {
     let errorMessage = '';
     if (!isEmpty(object)) {
       if (object.type === 'unrecognized-address') {
-        errorMessage = 'The address you provided is invalid, please enter a valid New York address.';
+        errorMessage = 'The address you provided is invalid, please enter a valid address.';
       } else if (object.type === 'unavailable-username') {
         errorMessage = 'The username entered is already in use, please enter a new username.';
       } else if (object.type === 'exception' && object.debugMessage && object.debugMessage.includes('pin')) {
@@ -429,7 +449,11 @@ class LibraryCardForm extends React.Component {
             {this.renderZipcodeField()}
           </fieldset>
           <div>
-            <input disabled={this.state.formProcessing} type="submit" value="Submit Card Application" />
+            <input
+              disabled={this.state.formProcessing}
+              type="submit"
+              value="Submit Card Application"
+            />
             {this.renderLoader()}
           </div>
         </form>
