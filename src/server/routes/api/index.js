@@ -1,5 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
+import moment from 'moment';
 import config from '../../../../appConfig';
 
 const authConfig = {
@@ -99,22 +100,55 @@ function constructPatronObject(object) {
   };
 }
 
+function isTokenExipring(expirationTime, timeThreshold = 5, type = 'minutes') {
+  const currentTime = moment();
+
+  return (expirationTime.diff(currentTime, type) < timeThreshold);
+}
+
 export function initializeAppAuth(req, res, next) {
-  axios
-    .post(config.api.oauth, qs.stringify(authConfig))
-    .then((response) => {
-      req.tokenObject = response.data;
-      next();
-    })
-    .catch((error) => {
-      console.log(`Could not authenticate App on ${config.api.oauth}`, error);
-      res.json({
+  const tokenObject = req.app.get('tokenObject');
+  const tokenExpTime = req.app.get('tokenExpTime');
+  const minuteExpThreshold = 10;
+
+  if (!tokenObject) {
+    return axios
+      .post(config.api.oauth, qs.stringify(authConfig))
+      .then((response) => {
+        if (response.data) {
+          req.app.set('tokenObject', response.data);
+          req.app.set('tokenExpTime', moment().add(response.data.expires_in, 's'));
+        }
+        next();
+      })
+      .catch(error => res.json({
         error: true,
         type: 'app-auth-failed',
         message: `Could not authenticate App on ${config.api.oauth}`,
         details: error,
-      });
-    });
+      }));
+  }
+
+  if (tokenObject.access_token && isTokenExipring(tokenExpTime, minuteExpThreshold)) {
+    return axios
+      .post(config.api.oauth, qs.stringify(authConfig))
+      .then((response) => {
+        if (response.data) {
+          req.app.set('tokenObject', response.data);
+          req.app.set('tokenExpTime', moment().add(response.data.expires_in, 's'));
+        }
+        next();
+      })
+      .catch(error => res.json({
+        error: true,
+        type: 'app-auth-failed',
+        message: `Could not authenticate App on ${config.api.oauth}`,
+        response: error,
+      })
+);
+  }
+
+  next();
 }
 
 function validatePatronAddress(object, token) {
@@ -140,9 +174,9 @@ function validatePatronUsername(value, token) {
 }
 
 export function createPatron(req, res) {
-  if (req.tokenObject && req.tokenObject.access_token) {
-    // res.json(req.tokenObject);
-    const token = req.tokenObject.access_token;
+  const tokenObject = req.app.get('tokenObject');
+  if (tokenObject && tokenObject.access_token) {
+    const token = tokenObject.access_token;
     const patronData = constructPatronObject(req.body);
 
     if (patronData.error) {
@@ -150,7 +184,7 @@ export function createPatron(req, res) {
     }
     // Patron Object validation is successful
     // Validate Address and Username
-    axios.all([
+    return axios.all([
       validatePatronAddress(patronData.address, token),
       validatePatronUsername(patronData.username, token),
     ])
@@ -183,20 +217,15 @@ export function createPatron(req, res) {
           { simplePatron: patronData },
           constructApiHeaders(token),
         )
-        .then((result) => {
-          // console.log(result.data);
-          return res.json({ response: result.data.data });
-        })
-        .catch((err) => {
-          console.log('Error Creating Account: ', err.response.data);
-          return res.json({
-            error: true,
-            response: err.response.data,
-          });
-        });
+        .then(result => res.json({ response: result.data.data }))
+        .catch(err => res.json({
+          error: true,
+          response: err.response.data,
+        }));
     }))
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch(error => res.json({
+      error: true,
+      response: error,
+    }));
   }
 }
