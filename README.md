@@ -15,8 +15,6 @@ For more information see [how `nvm use` works](https://github.com/creationix/nvm
 
 ### install and running
 
-Installs all dependencies listed in `package.json`
-
 1. `cp .env.example .env` and fill out variables
 2. `npm install`  
 3. `npm start` and point browser to http://localhost:3001/library-card
