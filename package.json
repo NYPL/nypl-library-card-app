@@ -4,10 +4,10 @@
   "description": "NYPL Get A Library Card App",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
-    "prestart": "webpack --config webpack.config.js",
-    "postinstall": "npm run prestart",
     "doc": "./node_modules/.bin/esdoc -c esdoc.json",
+    "postinstall": "npm run prestart",
+    "prestart": "webpack --config webpack.config.js",
+    "start": "node index",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register"
   },
   "repository": {
