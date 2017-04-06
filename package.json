@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index",
     "prestart": "webpack --config webpack.config.js",
+    "postinstall": "npm run prestart",
     "doc": "./node_modules/.bin/esdoc -c esdoc.json",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register"
   },
@@ -35,6 +36,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/issues"
+  },
+  "engines": {
+    "node": "6.10.0"
   },
   "devDependencies": {
     "dotenv": "4.0.0",
