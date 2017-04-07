@@ -2,8 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanBuild = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 const rootPath = path.resolve(__dirname);
+const sassPaths = require('@nypl/design-toolkit').includePaths.map((sassPath) =>
+  `includePaths[]=${sassPath}`
+).join('&');
 
 // PRODUCTION ENVIRONMENT CONFIG
 if (process.env.NODE_ENV === 'production') {
@@ -29,11 +31,7 @@ if (process.env.NODE_ENV === 'production') {
         {
           test: /\.scss$/,
           include: path.resolve(rootPath, 'src'),
-          loader: ExtractTextPlugin.extract(
-            // activate source maps via loader query
-            'css?sourceMap!' +
-            'sass?sourceMap'
-          ),
+          loader: ExtractTextPlugin.extract(`css?sourceMap!sass?sourceMap&${sassPaths}`),
         },
       ],
     },
@@ -81,7 +79,7 @@ if (process.env.NODE_ENV === 'production') {
         },
         {
           test: /\.scss?$/,
-          loader: 'style!css!sass',
+          loader: `style!css!sass?${sassPaths}`,
           include: path.resolve(rootPath, 'src'),
         },
       ],
