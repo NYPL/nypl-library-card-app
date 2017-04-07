@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "@nypl/design-toolkit": "0.1.7",
+    "winston": "2.3.1",
     "@nypl/dgx-header-component": "1.5.5",
     "@nypl/dgx-react-footer": "0.3.1",
     "axios": "0.15.3",

@@ -18,6 +18,14 @@ const distPath = path.resolve(rootPath, 'dist');
 const viewsPath = path.resolve(rootPath, 'src/views');
 const isProduction = process.env.NODE_ENV === 'production';
 
+var winston = require('winston');
+winston.configure({
+  transports: [
+    new (winston.transports.File)({ filename: path.join('.', 'log', 'get_a_library_card.log') }),
+    new (winston.transports.Console)()
+  ]
+});
+
 /* Express Server Configurations
  * -----------------------------
 */
@@ -27,6 +35,9 @@ app.use(helmet({
   noCache: false,
   referrerPolicy: { policy: 'origin-when-cross-origin' },
 }));
+
+app.set('logger', winston);
+
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -62,14 +73,10 @@ app.post('/create-patron', initializeAppAuth, createPatron);
 
 const server = app.listen(app.get('port'), (error) => {
   if (error) {
-    console.log(colors.red(error));
-  }
-
-  console.log(colors.yellow.underline(appConfig.appName));
-  console.log(
-    colors.green('Express server is listening at'),
-    colors.cyan(`localhost:${app.get('port')}`),
-  );
+    app.get('logger').error(error);
+  } else {
+    app.get('logger').info(`Express server for ${appConfig.appName} is listening at ${app.get('port')}`);
+  };
 });
 
 // This function is called when you want the server to die gracefully
@@ -111,11 +118,9 @@ if (!isProduction) {
     },
   }).listen(appConfig.webpackDevServerPort, 'localhost', (error) => {
     if (error) {
-      console.log(colors.red(error));
-    }
-    console.log(
-      colors.magenta('Webpack Dev Server listening at'),
-      colors.cyan(`localhost:${appConfig.webpackDevServerPort}`),
-    );
+      winston.error(error);
+    } else {
+      winston.info(`Webpack Dev Server listening at ${appConfig.webpackDevServerPort}`)
+    };
   });
 }
