@@ -8,3 +8,4 @@ npm-debug.log
 .bower
 .vscode
 .env
+log/*.log
