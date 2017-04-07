@@ -169,6 +169,7 @@ class LibraryCardForm extends React.Component {
         pin,
       })
       .then((response) => {
+        console.log(response);
         this.setState({
           formProcessing: false,
           formResults: response.data,

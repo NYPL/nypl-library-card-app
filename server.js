@@ -3,6 +3,7 @@ import express from 'express';
 import compress from 'compression';
 import bodyParser from 'body-parser';
 import colors from 'colors';
+import helmet from 'helmet';
 // Api Routes
 import { initializeAppAuth, createPatron } from './src/server/routes/api';
 // App Routes
@@ -19,16 +20,17 @@ const isProduction = process.env.NODE_ENV === 'production';
  * -----------------------------
 */
 const app = express();
+// HTTP Security Headers
+app.use(helmet());
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// Disables the Server response from displaying Express as the server engine
-app.disable('x-powered-by');
+app.use(express.static(distPath));
+
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
 app.set('port', process.env.PORT || appConfig.port);
-// Sets the server path to /dist
-app.use(express.static(distPath));
+
 
 app.get('/library-card', renderApp);
 
