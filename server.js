@@ -21,7 +21,10 @@ const isProduction = process.env.NODE_ENV === 'production';
 */
 const app = express();
 // HTTP Security Headers
-app.use(helmet());
+app.use(helmet({
+  noCache: false,
+  referrerPolicy: {policy: 'origin-when-cross-origin' }
+}));
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,9 +34,10 @@ app.set('view engine', 'ejs');
 app.set('views', viewsPath);
 app.set('port', process.env.PORT || appConfig.port);
 
-
+// GET route displays LibraryCard App
 app.get('/library-card', renderApp);
 
+// POST route used to submit LibraryCard params
 app.post('/create-patron', initializeAppAuth, createPatron);
 
 const server = app.listen(app.get('port'), (error) => {
