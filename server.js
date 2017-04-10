@@ -23,7 +23,7 @@ const app = express();
 // HTTP Security Headers
 app.use(helmet({
   noCache: false,
-  referrerPolicy: {policy: 'origin-when-cross-origin' }
+  referrerPolicy: { policy: 'origin-when-cross-origin' },
 }));
 app.use(compress());
 app.use(bodyParser.json());
