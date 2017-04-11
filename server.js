@@ -6,6 +6,8 @@ import compress from 'compression';
 import bodyParser from 'body-parser';
 import colors from 'colors';
 import helmet from 'helmet';
+import winston from 'winston';
+
 // Api Routes
 import { initializeAppAuth, createPatron } from './src/server/routes/api';
 // App Routes
@@ -18,7 +20,6 @@ const distPath = path.resolve(rootPath, 'dist');
 const viewsPath = path.resolve(rootPath, 'src/views');
 const isProduction = process.env.NODE_ENV === 'production';
 
-var winston = require('winston');
 winston.configure({
   transports: [
     new (winston.transports.File)({ filename: path.join('.', 'log', 'get_a_library_card.log') }),
