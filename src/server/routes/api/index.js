@@ -144,8 +144,7 @@ export function initializeAppAuth(req, res, next) {
         type: 'app-auth-failed',
         message: `Could not authenticate App on ${config.api.oauth}`,
         response: error,
-      })
-);
+      }));
   }
 
   next();

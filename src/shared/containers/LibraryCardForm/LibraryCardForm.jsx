@@ -11,8 +11,9 @@ class LibraryCardForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      csrfToken: '',
       formProcessing: false,
-      formResult: {},
+      formResults: {},
       fieldErrors: {},
       patronFields: {
         firstName: '',
@@ -31,6 +32,18 @@ class LibraryCardForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  componentDidMount(){
+    const csrfToken = this.getMetaTagContent("[name=csrf-token]");
+
+    if (csrfToken) {
+      this.setState({ csrfToken });
+    }
+  }
+
+  getMetaTagContent(tag) {
+    return document.head.querySelector(tag).content;
   }
 
   getFullName() {
@@ -105,7 +118,7 @@ class LibraryCardForm extends React.Component {
       case 'line2':
         break;
       default:
-        if (isEmpty(value)) {
+        if (isEmpty(value.trim())) {
           fieldErrors[fieldName] = 'Required field';
           currentErrors = fieldErrors;
         } else {
@@ -134,6 +147,7 @@ class LibraryCardForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     forIn(this.state.patronFields, (value, key) => {
       this.validateField(key, value);
     });
@@ -168,6 +182,9 @@ class LibraryCardForm extends React.Component {
         zip,
         username,
         pin,
+      },
+      {
+        headers: { 'csrf-token': this.state.csrfToken }
       })
       .then((response) => {
         this.setState({
@@ -368,6 +385,8 @@ class LibraryCardForm extends React.Component {
         errorMessage = 'The username entered is already in use, please enter a new username.';
       } else if (object.type === 'exception' && object.debugMessage && object.debugMessage.includes('pin')) {
         errorMessage = 'The pin entered is invalid, must be 4 numbers.';
+      } else {
+        errorMessage = 'There was an error with your submission, please try again later.';
       }
     } else {
       errorMessage = 'There was an error with your submission, please try again later.';
