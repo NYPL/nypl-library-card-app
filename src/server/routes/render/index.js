@@ -1,6 +1,6 @@
 import { createFactory } from 'react';
 import { renderToString } from 'react-dom/server';
-import ApplicationContainer from '../../../shared/containers/Application/ApplicationContainer';
+import ApplicationContainer from '../../../shared/components/Application/ApplicationContainer';
 import config from '../../../../appConfig';
 
 export default function renderApp(req, res) {

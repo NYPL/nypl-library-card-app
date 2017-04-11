@@ -78,6 +78,7 @@
     "react-dom": "0.14.8",
     "sass-loader": "4.0.2",
     "style-loader": "0.13.1",
+    "validator": "7.0.0",
     "webpack": "1.13.2"
   }
 }
