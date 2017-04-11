@@ -4,14 +4,16 @@ import isEmpty from 'lodash/isEmpty';
 import omit from 'lodash/omit';
 import assign from 'lodash/assign';
 import forIn from 'lodash/forIn';
-import { isDateValid, isEmailValid } from '../../../utils/FormValidationUtils';
+import { isEmail, isLength, isAlphanumeric } from 'validator';
+import { isDate } from '../../../utils/FormValidationUtils';
 
 class LibraryCardForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      csrfToken: '',
       formProcessing: false,
-      formResult: {},
+      formResults: {},
       fieldErrors: {},
       patronFields: {
         firstName: '',
@@ -30,6 +32,18 @@ class LibraryCardForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  componentDidMount(){
+    const csrfToken = this.getMetaTagContent("[name=csrf-token]");
+
+    if (csrfToken) {
+      this.setState({ csrfToken });
+    }
+  }
+
+  getMetaTagContent(tag) {
+    return document.head.querySelector(tag).content;
   }
 
   getFullName() {
@@ -67,7 +81,7 @@ class LibraryCardForm extends React.Component {
 
     switch (fieldName) {
       case 'dateOfBirth':
-        if (!isDateValid(value)) {
+        if (!isDate(value)) {
           fieldErrors[fieldName] = 'Your date of birth must be in MM/DD/YYYY format (i.e. 04/10/1980)';
           currentErrors = fieldErrors;
         } else {
@@ -75,7 +89,7 @@ class LibraryCardForm extends React.Component {
         }
         break;
       case 'email':
-        if (!isEmailValid(value)) {
+        if (!isEmail(value)) {
           fieldErrors[fieldName] = 'Email is invalid';
           currentErrors = fieldErrors;
         } else {
@@ -83,10 +97,10 @@ class LibraryCardForm extends React.Component {
         }
         break;
       case 'username':
-        if (value.length < 5 || value.length > 25) {
+        if (!isLength(value, { min: 5, max: 25 })) {
           fieldErrors[fieldName] = 'Username must be between 5-25 alphanumeric characters';
           currentErrors = fieldErrors;
-        } else if (value.match(/[^0-9a-z]/i)) {
+        } else if (!isAlphanumeric(value)) {
           fieldErrors[fieldName] = 'Only alphanumeric characters are allowed';
           currentErrors = fieldErrors;
         } else {
@@ -104,7 +118,7 @@ class LibraryCardForm extends React.Component {
       case 'line2':
         break;
       default:
-        if (isEmpty(value)) {
+        if (isEmpty(value.trim())) {
           fieldErrors[fieldName] = 'Required field';
           currentErrors = fieldErrors;
         } else {
@@ -133,6 +147,7 @@ class LibraryCardForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     forIn(this.state.patronFields, (value, key) => {
       this.validateField(key, value);
     });
@@ -167,6 +182,9 @@ class LibraryCardForm extends React.Component {
         zip,
         username,
         pin,
+      },
+      {
+        headers: { 'csrf-token': this.state.csrfToken }
       })
       .then((response) => {
         console.log(response);
@@ -368,6 +386,8 @@ class LibraryCardForm extends React.Component {
         errorMessage = 'The username entered is already in use, please enter a new username.';
       } else if (object.type === 'exception' && object.debugMessage && object.debugMessage.includes('pin')) {
         errorMessage = 'The pin entered is invalid, must be 4 numbers.';
+      } else {
+        errorMessage = 'There was an error with your submission, please try again later.';
       }
     } else {
       errorMessage = 'There was an error with your submission, please try again later.';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import ApplicationContainer from '../shared/containers/Application/ApplicationContainer';
+import ApplicationContainer from '../shared/components/Application/ApplicationContainer';
 import './styles/main.scss';
 
 window.onload = () => {

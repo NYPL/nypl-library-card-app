@@ -1,18 +1,26 @@
-function isDateValid(input) {
-  const temp = input.split('/');
-  const d = new Date(`${temp[2]}/${temp[0]}/${temp[1]}`);
-  return (
-    d && (d.getMonth() + 1) === Number(temp[0])
-    && d.getDate() === Number(temp[1])
-    && d.getFullYear() === Number(temp[2])
-  );
-}
+function isDate(input, minYear = 1902, maxYear = new Date().getFullYear()) {
+  // regular expression to match required date format
+  const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 
-function isEmailValid(input) {
-  return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(input);
+  if (input === '') {
+    return false;
+  }
+
+  if (input.match(regex)) {
+    const temp = input.split('/');
+    const dateFromInput = new Date(`${temp[2]}/${temp[0]}/${temp[1]}`);
+
+    return (
+      dateFromInput.getDate() === Number(temp[1])
+      && (dateFromInput.getMonth() + 1) === Number(temp[0])
+      && Number(temp[2]) > minYear
+      && Number(temp[2]) < maxYear
+    );
+  }
+
+  return false;
 }
 
 export {
-  isDateValid,
-  isEmailValid,
+  isDate,
 };

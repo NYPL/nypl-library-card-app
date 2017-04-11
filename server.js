@@ -1,3 +1,5 @@
+import cookieParser from 'cookie-parser';
+import csrf from 'csurf';
 import path from 'path';
 import express from 'express';
 import compress from 'compression';
@@ -28,11 +30,31 @@ app.use(helmet({
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+// Sets the server path to /dist
 app.use(express.static(distPath));
 
+// Disables the Server response from displaying Express as the server engine
+app.disable('x-powered-by');
+
+app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
 app.set('port', process.env.PORT || appConfig.port);
+
+
+// CSRF Protection Middleware
+app.use(csrf({ cookie: true }));
+app.use((err, req, res, next) => {
+  if (err.code !== 'EBADCSRFTOKEN') {
+    return next(err);
+  }
+
+  return res.json({
+    error: true,
+    type: 'invalid-csrf-token',
+    response: err,
+  });
+})
 
 // GET route displays LibraryCard App
 app.get('/library-card', renderApp);
