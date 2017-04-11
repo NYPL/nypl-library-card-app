@@ -5,6 +5,7 @@ import express from 'express';
 import compress from 'compression';
 import bodyParser from 'body-parser';
 import colors from 'colors';
+import helmet from 'helmet';
 // Api Routes
 import { initializeAppAuth, createPatron } from './src/server/routes/api';
 // App Routes
@@ -21,17 +22,20 @@ const isProduction = process.env.NODE_ENV === 'production';
  * -----------------------------
 */
 const app = express();
+// HTTP Security Headers
+app.use(helmet({
+  noCache: false,
+  referrerPolicy: { policy: 'origin-when-cross-origin' },
+}));
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(distPath));
+
 app.use(cookieParser());
-// Disables the Server response from displaying Express as the server engine
-app.disable('x-powered-by');
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
 app.set('port', process.env.PORT || appConfig.port);
-// Sets the server path to /dist
-app.use(express.static(distPath));
 
 // CSRF Protection Middleware
 app.use(csrf({ cookie: true }));
@@ -47,8 +51,10 @@ app.use((err, req, res, next) => {
   });
 });
 
+// GET route displays LibraryCard App
 app.get('/library-card', renderApp);
 
+// POST route used to submit LibraryCard params
 app.post('/create-patron', initializeAppAuth, createPatron);
 
 const server = app.listen(app.get('port'), (error) => {
