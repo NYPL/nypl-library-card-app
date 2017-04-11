@@ -6,14 +6,11 @@ import LibraryCardForm from '../../containers/LibraryCardForm/LibraryCardForm';
 const ApplicationContainer = () => (
   <div className="nyplLibCardApp">
     <Header
-      skipNav={{ target: 'mainContent' }}
+      skipNav={{ target: 'main-content' }}
       navData={navConfig.current}
     />
     <LibraryCardForm />
-    <Footer
-      id="footer"
-      className="footer"
-    />
+    <Footer />
   </div>
 );
 

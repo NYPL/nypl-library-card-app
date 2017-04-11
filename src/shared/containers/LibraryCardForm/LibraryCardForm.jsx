@@ -6,6 +6,7 @@ import assign from 'lodash/assign';
 import forIn from 'lodash/forIn';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import { isDate } from '../../../utils/FormValidationUtils';
+import FormField from '../../components/FormField/FormField';
 
 class LibraryCardForm extends React.Component {
   constructor(props) {
@@ -34,8 +35,8 @@ class LibraryCardForm extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  componentDidMount(){
-    const csrfToken = this.getMetaTagContent("[name=csrf-token]");
+  componentDidMount() {
+    const csrfToken = this.getMetaTagContent('name=csrf-token');
 
     if (csrfToken) {
       this.setState({ csrfToken });
@@ -43,7 +44,7 @@ class LibraryCardForm extends React.Component {
   }
 
   getMetaTagContent(tag) {
-    return document.head.querySelector(tag).content;
+    return document.head.querySelector(`[${tag}]`).content;
   }
 
   getFullName() {
@@ -118,7 +119,7 @@ class LibraryCardForm extends React.Component {
       case 'line2':
         break;
       default:
-        if (isEmpty(value.trim())) {
+        if (isEmpty(value)) {
           fieldErrors[fieldName] = 'Required field';
           currentErrors = fieldErrors;
         } else {
@@ -147,7 +148,6 @@ class LibraryCardForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
     forIn(this.state.patronFields, (value, key) => {
       this.validateField(key, value);
     });
@@ -182,11 +182,12 @@ class LibraryCardForm extends React.Component {
         zip,
         username,
         pin,
-      },
-      {
-        headers: { 'csrf-token': this.state.csrfToken }
+      }, {
+        headers: { 'csrf-token': this.state.csrfToken },
       })
       .then((response) => {
+        console.log(response);
+
         this.setState({
           formProcessing: false,
           formResults: response.data,
@@ -200,182 +201,6 @@ class LibraryCardForm extends React.Component {
     }
   }
 
-  renderFieldError(field) {
-    if (this.state.fieldErrors[field]) {
-      return (
-        <span className="errorBlock">
-          {this.state.fieldErrors[field]}
-        </span>
-      );
-    }
-    return null;
-  }
-
-  renderFirstNameField() {
-    return (
-      <div>
-        <label htmlFor="patronFirstName">First Name <span className="required">*</span>:</label>
-        <input
-          id="patronFirstName"
-          type="text"
-          value={this.state.patronFields.firstName}
-          onChange={this.handleInputChange('firstName')}
-        />
-        {this.renderFieldError('firstName')}
-      </div>
-    );
-  }
-
-  renderLastNameField() {
-    return (
-      <div>
-        <label htmlFor="patronLastName">Last Name <span className="required">*</span>:</label>
-        <input
-          id="patronLastName"
-          type="text"
-          value={this.state.patronFields.lastName}
-          onChange={this.handleInputChange('lastName')}
-        />
-        {this.renderFieldError('lastName')}
-      </div>
-    );
-  }
-
-  renderDobField() {
-    return (
-      <div>
-        <label htmlFor="patronDob">Date of Birth <span className="required">*</span>:</label>
-        <input
-          id="patronDob"
-          type="text"
-          value={this.state.patronFields.dateOfBirth}
-          onChange={this.handleInputChange('dateOfBirth')}
-        />
-        {this.renderFieldError('dateOfBirth')}
-      </div>
-    );
-  }
-
-  renderEmailField() {
-    return (
-      <div>
-        <label htmlFor="patronEmail">E-Mail <span className="required">*</span>:</label>
-        <input
-          id="patronEmail"
-          type="email"
-          value={this.state.patronFields.email}
-          onChange={this.handleInputChange('email')}
-        />
-        {this.renderFieldError('email')}
-      </div>
-    );
-  }
-
-  renderUsernameField() {
-    return (
-      <div>
-        <label htmlFor="patronUsername">Username <span className="required">*</span>:</label>
-        <input
-          id="patronUsername"
-          type="text"
-          value={this.state.patronFields.username}
-          onChange={this.handleInputChange('username')}
-        />
-        {this.renderFieldError('username')}
-      </div>
-    );
-  }
-
-  renderPinField() {
-    return (
-      <div>
-        <label htmlFor="patronPin">PIN <span className="required">*</span>:</label>
-        <input
-          id="patronPin"
-          type="text"
-          value={this.state.patronFields.pin}
-          onChange={this.handleInputChange('pin')}
-        />
-        {this.renderFieldError('pin')}
-      </div>
-    );
-  }
-
-  renderStreetField1() {
-    return (
-      <div>
-        <label htmlFor="patronStreet1">Street <span className="required">*</span>:</label>
-        <input
-          id="patronStreet1"
-          type="text"
-          value={this.state.patronFields.line1}
-          onChange={this.handleInputChange('line1')}
-        />
-        {this.renderFieldError('line1')}
-      </div>
-    );
-  }
-
-  renderStreetField2() {
-    return (
-      <div>
-        <label htmlFor="patronStreet2">Apartment Number:</label>
-        <input
-          id="patronStreet2"
-          type="text"
-          value={this.state.patronFields.line2}
-          onChange={this.handleInputChange('line2')}
-        />
-        {this.renderFieldError('line2')}
-      </div>
-    );
-  }
-
-  renderCityField() {
-    return (
-      <div>
-        <label htmlFor="patronCity">City <span className="required">*</span>:</label>
-        <input
-          id="patronCity"
-          type="text"
-          value={this.state.patronFields.city}
-          onChange={this.handleInputChange('city')}
-        />
-        {this.renderFieldError('city')}
-      </div>
-    );
-  }
-
-  renderStateField() {
-    return (
-      <div>
-        <label htmlFor="patronState">State <span className="required">*</span>:</label>
-        <input
-          id="patronState"
-          type="text"
-          value={this.state.patronFields.state}
-          onChange={this.handleInputChange('state')}
-        />
-        {this.renderFieldError('state')}
-      </div>
-    );
-  }
-
-  renderZipcodeField() {
-    return (
-      <div>
-        <label htmlFor="patronZipcode">Postal Code <span className="required">*</span>:</label>
-        <input
-          id="patronZipcode"
-          type="text"
-          value={this.state.patronFields.zip}
-          onChange={this.handleInputChange('zip')}
-        />
-        {this.renderFieldError('zip')}
-      </div>
-    );
-  }
-
   renderErrorMsg(object) {
     let errorMessage = '';
     if (!isEmpty(object)) {
@@ -385,8 +210,6 @@ class LibraryCardForm extends React.Component {
         errorMessage = 'The username entered is already in use, please enter a new username.';
       } else if (object.type === 'exception' && object.debugMessage && object.debugMessage.includes('pin')) {
         errorMessage = 'The pin entered is invalid, must be 4 numbers.';
-      } else {
-        errorMessage = 'There was an error with your submission, please try again later.';
       }
     } else {
       errorMessage = 'There was an error with your submission, please try again later.';
@@ -431,46 +254,158 @@ class LibraryCardForm extends React.Component {
     }
 
     return (
-      <div className="formResults">
+      <div className="form-results">
         {resultMarkup}
       </div>
     );
   }
 
+  renderFormFields() {
+    return (
+      <form className="nypl-library-card-form" onSubmit={this.handleSubmit}>
+        <h2>Please enter the following information</h2>
+        <h3>Personal Information</h3>
+        <fieldset className="nypl-name-field">
+          <FormField
+            id="patronFirstName"
+            type="text"
+            label="First Name"
+            fieldName="firstName"
+            isRequired
+            value={this.state.patronFields.firstName}
+            handleOnChange={this.handleInputChange('firstName')}
+            errorState={this.state.fieldErrors}
+          />
+          <FormField
+            id="patronLastName"
+            type="text"
+            label="Last Name"
+            fieldName="lastName"
+            isRequired
+            value={this.state.patronFields.lastName}
+            handleOnChange={this.handleInputChange('lastName')}
+            errorState={this.state.fieldErrors}
+          />
+        </fieldset>
+        <FormField
+          id="patronDob"
+          className="nypl-date-field"
+          type="text"
+          ph="MM/DD/YYYY"
+          label="Date of birth"
+          fieldName="dateOfBirth"
+          isRequired
+          value={this.state.patronFields.dateOfBirth}
+          handleOnChange={this.handleInputChange('dateOfBirth')}
+          errorState={this.state.fieldErrors}
+        />
+        <h3>Address</h3>
+        <FormField
+          id="patronStreet1"
+          className="nypl-text-field"
+          type="text"
+          label="Street Address"
+          fieldName="line1"
+          isRequired
+          value={this.state.patronFields.line1}
+          handleOnChange={this.handleInputChange('line1')}
+          errorState={this.state.fieldErrors}
+        />
+        <FormField
+          id="patronStreet2"
+          className="nypl-text-field"
+          type="text"
+          label="Apartment / Suite"
+          fieldName="line2"
+          value={this.state.patronFields.line2}
+          handleOnChange={this.handleInputChange('line2')}
+        />
+        <FormField
+          id="patronCity"
+          className="nypl-text-field"
+          type="text"
+          label="City"
+          fieldName="city"
+          value={this.state.patronFields.city}
+          isRequired
+          handleOnChange={this.handleInputChange('city')}
+          errorState={this.state.fieldErrors}
+        />
+        <FormField
+          id="patronState"
+          className="nypl-text-field"
+          type="text"
+          label="State"
+          fieldName="state"
+          value={this.state.patronFields.state}
+          isRequired
+          handleOnChange={this.handleInputChange('state')}
+          errorState={this.state.fieldErrors}
+        />
+        <FormField
+          id="patronZip"
+          className="nypl-text-field"
+          type="text"
+          label="Postal Code"
+          fieldName="zip"
+          value={this.state.patronFields.zip}
+          isRequired
+          handleOnChange={this.handleInputChange('zip')}
+          errorState={this.state.fieldErrors}
+        />
+        <h3>Create Account</h3>
+        <FormField
+          id="patronEmail"
+          className="nypl-text-field"
+          type="text"
+          ph="youremail@example.com"
+          label="E-mail"
+          fieldName="email"
+          value={this.state.patronFields.email}
+          isRequired
+          handleOnChange={this.handleInputChange('email')}
+          errorState={this.state.fieldErrors}
+        />
+        <FormField
+          id="patronUsername"
+          className="nypl-text-field"
+          type="text"
+          label="Username"
+          fieldName="username"
+          value={this.state.patronFields.username}
+          isRequired
+          handleOnChange={this.handleInputChange('username')}
+          errorState={this.state.fieldErrors}
+        />
+        <FormField
+          id="patronPin"
+          className="nypl-text-field"
+          type="text"
+          label="Pin"
+          fieldName="pin"
+          value={this.state.patronFields.pin}
+          isRequired
+          handleOnChange={this.handleInputChange('pin')}
+          errorState={this.state.fieldErrors}
+        />
+        <div>
+          <input
+            className="nypl-request-button"
+            disabled={this.state.formProcessing}
+            type="submit"
+            value="Continue"
+          />
+          {this.renderLoader()}
+        </div>
+      </form>
+    );
+  }
+
   render() {
     return (
-      <div className="mainContent" id="mainContent">
+      <div className="main-content nypl-column-half nypl-column-offset-one" id="main-content">
         {this.renderFormResults()}
-        <form className="nyplLibraryCard-form" onSubmit={this.handleSubmit}>
-          <fieldset>
-            <h2>
-              Please enter the following information (Items marked with
-                <span className="required"> *</span> are required)
-            </h2>
-            {this.renderFirstNameField()}
-            {this.renderLastNameField()}
-            {this.renderDobField()}
-            {this.renderEmailField()}
-            {this.renderUsernameField()}
-            {this.renderPinField()}
-          </fieldset>
-          <fieldset>
-            <h2>Address</h2>
-            {this.renderStreetField1()}
-            {this.renderStreetField2()}
-            {this.renderCityField()}
-            {this.renderStateField()}
-            {this.renderZipcodeField()}
-          </fieldset>
-          <div>
-            <input
-              disabled={this.state.formProcessing}
-              type="submit"
-              value="Submit Card Application"
-            />
-            {this.renderLoader()}
-          </div>
-        </form>
+        {this.renderFormFields()}
       </div>
     );
   }

@@ -45,7 +45,7 @@ app.use((err, req, res, next) => {
     type: 'invalid-csrf-token',
     response: err,
   });
-})
+});
 
 app.get('/library-card', renderApp);
 
