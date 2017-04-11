@@ -187,6 +187,7 @@ class LibraryCardForm extends React.Component {
         headers: { 'csrf-token': this.state.csrfToken }
       })
       .then((response) => {
+        console.log(response);
         this.setState({
           formProcessing: false,
           formResults: response.data,
