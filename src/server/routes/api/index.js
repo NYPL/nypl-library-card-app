@@ -4,7 +4,6 @@ import moment from 'moment';
 import isEmpty from 'lodash/isEmpty';
 import { isEmail, isAlphanumeric, isNumeric, isLength } from 'validator';
 import config from '../../../../appConfig';
-import logger from '../../../logger';
 
 const authConfig = {
   client_id: config.clientId,
