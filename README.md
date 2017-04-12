@@ -27,3 +27,5 @@ needs to run.
 ## Deployment
 
 ### AWS Elastic Beanstalk
+
+`eb init -i --profile <<your AWS profile>>`
