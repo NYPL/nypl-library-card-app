@@ -1,10 +1,10 @@
-var winston = require('winston');
+import winston from 'winston';
 // Unexpected Errors will be handeled
 winston.emitErrs = false;
 
 const logLevel = (process.env.NODE_ENV === 'production') ? 'warn' : 'debug';
 
-var logger = new winston.Logger({
+const logger = new winston.Logger({
     transports: [
         new winston.transports.File({
             level: logLevel,

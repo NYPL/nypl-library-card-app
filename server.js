@@ -6,8 +6,7 @@ import compress from 'compression';
 import bodyParser from 'body-parser';
 import colors from 'colors';
 import helmet from 'helmet';
-import winston from 'winston';
-import logger from './src/logger';
+import logger from './src/server/logger';
 
 // Api Routes
 import { initializeAppAuth, createPatron } from './src/server/routes/api';
