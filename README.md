@@ -23,3 +23,7 @@ For more information see [how `nvm use` works](https://github.com/creationix/nvm
 
 See `.env.example` for a checklist of the environment variables the app
 needs to run.
+
+## Deployment
+
+### AWS Elastic Beanstalk
