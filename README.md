@@ -29,4 +29,4 @@ needs to run.
 ### AWS Elastic Beanstalk
 
 1. `eb init -i --profile <<your AWS profile>>`
-2. `eb create <<environment name>> -i <<size of instance>> --cname <<cname prefix>> --vpc.id <<ask for custom vpc_id>> --vpc.ec2subnets <<ask for subnets by vpc_id>> --profile <<your AWS profile>>`
+2. {{eb create <<environment name>> -i <<size of instance>> --cname <<cname prefix>> --vpc.id <<ask for custom vpc_id>> --vpc.ec2subnets <<ask for subnets by vpc_id>> --profile <<your AWS profile>>}}
