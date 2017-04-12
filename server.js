@@ -7,13 +7,12 @@ import bodyParser from 'body-parser';
 import colors from 'colors';
 import helmet from 'helmet';
 import winston from 'winston';
+import logger from './src/logger';
 
 // Api Routes
 import { initializeAppAuth, createPatron } from './src/server/routes/api';
 // App Routes
 import renderApp from './src/server/routes/render';
-// Logger middleware
-import { winstonLogger } from './src/server/utils';
 // App Config File
 import appConfig from './appConfig';
 // Global Configuration Variables
@@ -32,20 +31,21 @@ app.use(helmet({
   referrerPolicy: { policy: 'origin-when-cross-origin' },
 }));
 
+app.set('logger', logger);
+
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Sets the server path to /dist
 app.use(express.static(distPath));
 app.use(cookieParser());
+
 // Disables the Server response from displaying Express as the server engine
 app.disable('x-powered-by');
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
 app.set('port', process.env.PORT || appConfig.port);
-// Sets the server path to /dist
-app.use(express.static(distPath));
-app.set('logger', winstonLogger);
-console.log(winstonLogger);
 
 // CSRF Protection Middleware
 app.use(csrf({ cookie: true }));
@@ -71,13 +71,11 @@ app.get('/library-card', renderApp);
 app.post('/create-patron', initializeAppAuth, createPatron);
 
 const server = app.listen(app.get('port'), (error) => {
-
     if (error) {
         app.get('logger').error(error);
     } else {
         app.get('logger').info(`Express server for ${appConfig.appName} is listening at ${app.get('port')}`);
-    }
-    ;
+    };
 });
 
 // This function is called when you want the server to die gracefully
@@ -119,10 +117,9 @@ if (!isProduction) {
         },
     }).listen(appConfig.webpackDevServerPort, 'localhost', (error) => {
         if (error) {
-            // winston.error(error);
+            app.get('logger').error(error);
         } else {
-            // winston.info(`Webpack Dev Server listening at ${appConfig.webpackDevServerPort}`)
-        }
-        ;
+            app.get('logger').info(`Webpack Dev Server listening at ${appConfig.webpackDevServerPort}`)
+        };
     });
 }
