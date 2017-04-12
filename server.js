@@ -12,6 +12,8 @@ import winston from 'winston';
 import { initializeAppAuth, createPatron } from './src/server/routes/api';
 // App Routes
 import renderApp from './src/server/routes/render';
+// Logger middleware
+import { logger } from './src/server/utils';
 // App Config File
 import appConfig from './appConfig';
 // Global Configuration Variables
@@ -19,13 +21,6 @@ const rootPath = __dirname;
 const distPath = path.resolve(rootPath, 'dist');
 const viewsPath = path.resolve(rootPath, 'src/views');
 const isProduction = process.env.NODE_ENV === 'production';
-
-winston.configure({
-  transports: [
-    new (winston.transports.File)({ filename: path.join('.', 'log', 'get_a_library_card.log') }),
-    new (winston.transports.Console)()
-  ]
-});
 
 /* Express Server Configurations
  * -----------------------------
@@ -37,8 +32,6 @@ app.use(helmet({
   referrerPolicy: { policy: 'origin-when-cross-origin' },
 }));
 
-app.set('logger', winston);
-
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -48,6 +41,9 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
 app.set('port', process.env.PORT || appConfig.port);
+// Sets the server path to /dist
+app.use(express.static(distPath));
+app.use(logger);
 
 // CSRF Protection Middleware
 app.use(csrf({ cookie: true }));
@@ -74,23 +70,23 @@ app.post('/create-patron', initializeAppAuth, createPatron);
 
 const server = app.listen(app.get('port'), (error) => {
   if (error) {
-    app.get('logger').error(error);
+    // app.get('logger').error(error);
   } else {
-    app.get('logger').info(`Express server for ${appConfig.appName} is listening at ${app.get('port')}`);
+    app.get(logger).info(`Express server for ${appConfig.appName} is listening at ${app.get('port')}`);
   };
 });
 
 // This function is called when you want the server to die gracefully
 // i.e. wait for existing connections
 const gracefulShutdown = () => {
-  console.log('Received kill signal, shutting down gracefully.');
+  // app.get('logger').info('Received kill signal, shutting down gracefully.');
   server.close(() => {
-    console.log('Closed out remaining connections.');
+      // app.get('logger').info('Closed out remaining connections.');
     process.exit(0);
   });
   // if after
   setTimeout(() => {
-    console.error('Could not close connections in time, forcefully shutting down');
+    // req.app.get('logger').error('Could not close connections in time, forcefully shutting down');
     process.exit();
   }, 1000);
 };
@@ -119,9 +115,9 @@ if (!isProduction) {
     },
   }).listen(appConfig.webpackDevServerPort, 'localhost', (error) => {
     if (error) {
-      winston.error(error);
+      // winston.error(error);
     } else {
-      winston.info(`Webpack Dev Server listening at ${appConfig.webpackDevServerPort}`)
+      // winston.info(`Webpack Dev Server listening at ${appConfig.webpackDevServerPort}`)
     };
   });
 }

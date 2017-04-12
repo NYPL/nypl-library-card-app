@@ -4,6 +4,8 @@ import moment from 'moment';
 import isEmpty from 'lodash/isEmpty';
 import { isEmail, isAlphanumeric, isNumeric, isLength } from 'validator';
 import config from '../../../../appConfig';
+// Logger middleware
+import { logger } from './src/server/utils';
 
 const authConfig = {
   client_id: config.clientId,
@@ -178,7 +180,7 @@ function validatePatronAddress(object, token) {
     )
     .then(response => response.data)
     .catch((error) => {
-      console.log(error);
+        req.app.get('logger').error(error);
     });
 }
 
