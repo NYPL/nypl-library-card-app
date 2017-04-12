@@ -4,8 +4,6 @@ import moment from 'moment';
 import isEmpty from 'lodash/isEmpty';
 import { isEmail, isAlphanumeric, isNumeric, isLength } from 'validator';
 import config from '../../../../appConfig';
-// Logger middleware
-import { logger } from './src/server/utils';
 
 const authConfig = {
   client_id: config.clientId,
@@ -128,6 +126,7 @@ function isTokenExipring(expirationTime, timeThreshold = 5, type = 'minutes') {
 }
 
 export function initializeAppAuth(req, res, next) {
+  req.app.get('logger').info('initializeAppAuth');
   const tokenObject = req.app.get('tokenObject');
   const tokenExpTime = req.app.get('tokenExpTime');
   const minuteExpThreshold = 10;

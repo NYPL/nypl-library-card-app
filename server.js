@@ -13,7 +13,7 @@ import { initializeAppAuth, createPatron } from './src/server/routes/api';
 // App Routes
 import renderApp from './src/server/routes/render';
 // Logger middleware
-import { logger } from './src/server/utils';
+import { winstonLogger } from './src/server/utils';
 // App Config File
 import appConfig from './appConfig';
 // Global Configuration Variables
@@ -24,7 +24,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 /* Express Server Configurations
  * -----------------------------
-*/
+ */
 const app = express();
 // HTTP Security Headers
 app.use(helmet({
@@ -36,14 +36,16 @@ app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(distPath));
-
 app.use(cookieParser());
+// Disables the Server response from displaying Express as the server engine
+app.disable('x-powered-by');
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
 app.set('port', process.env.PORT || appConfig.port);
 // Sets the server path to /dist
 app.use(express.static(distPath));
-app.use(logger);
+app.set('logger', winstonLogger);
+console.log(winstonLogger);
 
 // CSRF Protection Middleware
 app.use(csrf({ cookie: true }));
@@ -69,26 +71,28 @@ app.get('/library-card', renderApp);
 app.post('/create-patron', initializeAppAuth, createPatron);
 
 const server = app.listen(app.get('port'), (error) => {
-  if (error) {
-    // app.get('logger').error(error);
-  } else {
-    app.get(logger).info(`Express server for ${appConfig.appName} is listening at ${app.get('port')}`);
-  };
+
+    if (error) {
+        app.get('logger').error(error);
+    } else {
+        app.get('logger').info(`Express server for ${appConfig.appName} is listening at ${app.get('port')}`);
+    }
+    ;
 });
 
 // This function is called when you want the server to die gracefully
 // i.e. wait for existing connections
 const gracefulShutdown = () => {
-  // app.get('logger').info('Received kill signal, shutting down gracefully.');
-  server.close(() => {
-      // app.get('logger').info('Closed out remaining connections.');
-    process.exit(0);
-  });
-  // if after
-  setTimeout(() => {
-    // req.app.get('logger').error('Could not close connections in time, forcefully shutting down');
-    process.exit();
-  }, 1000);
+    app.get('logger').info('Received kill signal, shutting down gracefully.');
+    server.close(() => {
+        app.get('logger').info('Closed out remaining connections.');
+        process.exit(0);
+    });
+    // if after
+    setTimeout(() => {
+        app.get('logger').error('Could not close connections in time, forcefully shutting down');
+        process.exit();
+    }, 1000);
 };
 // listen for TERM signal .e.g. kill
 process.on('SIGTERM', gracefulShutdown);
@@ -98,26 +102,27 @@ process.on('SIGINT', gracefulShutdown);
 /* Development Environment Configuration
  * -------------------------------------
  * - Using Webpack Dev Server
-*/
+ */
 if (!isProduction) {
-  const webpack = require('webpack');
-  const WebpackDevServer = require('webpack-dev-server');
-  const webpackConfig = require('./webpack.config.js');
+    const webpack = require('webpack');
+    const WebpackDevServer = require('webpack-dev-server');
+    const webpackConfig = require('./webpack.config.js');
 
-  new WebpackDevServer(webpack(webpackConfig), {
-    publicPath: webpackConfig.output.publicPath,
-    hot: true,
-    stats: false,
-    historyApiFallback: true,
-    headers: {
-      'Access-Control-Allow-Origin': 'http://localhost:3001',
-      'Access-Control-Allow-Headers': 'X-Requested-With',
-    },
-  }).listen(appConfig.webpackDevServerPort, 'localhost', (error) => {
-    if (error) {
-      // winston.error(error);
-    } else {
-      // winston.info(`Webpack Dev Server listening at ${appConfig.webpackDevServerPort}`)
-    };
-  });
+    new WebpackDevServer(webpack(webpackConfig), {
+        publicPath: webpackConfig.output.publicPath,
+        hot: true,
+        stats: false,
+        historyApiFallback: true,
+        headers: {
+            'Access-Control-Allow-Origin': 'http://localhost:3001',
+            'Access-Control-Allow-Headers': 'X-Requested-With',
+        },
+    }).listen(appConfig.webpackDevServerPort, 'localhost', (error) => {
+        if (error) {
+            // winston.error(error);
+        } else {
+            // winston.info(`Webpack Dev Server listening at ${appConfig.webpackDevServerPort}`)
+        }
+        ;
+    });
 }
