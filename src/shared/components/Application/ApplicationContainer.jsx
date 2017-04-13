@@ -25,12 +25,12 @@ const dummyBannerContent = {
   },
   image: {
     bannerImage: {
-      'full-uri': 'https://petrol.nypl.org/sites/default/files/desktop.carousel.ez-3.jpg',
+      'full-uri': 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/banner/public/spring_staffpicks_banner.png?itok=IICOHEVM',
       description: 'Alt for image 01',
       alt: 'Alt for image 01',
     },
     mobileBannerImage: {
-      'full-uri': ' https://petrol.nypl.org/sites/default/files/booklist_mobile.jpg',
+      'full-uri': 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/mobile_banner/public/spring_staffpicks_mobile.jpg?itok=chvIHr2Y',
       description: 'Alt for image 01',
       alt: 'Alt for image 01',
     },
