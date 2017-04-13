@@ -32,6 +32,9 @@ needs to run.
 3. `.ebextensions/nodecommand.config` to start node app after deployment.
 4. `eb init -i --profile <<your AWS profile>>`
 5. Initial creation of instance on Beanstalk:
-`eb create <<environment name>> -i <<size of instance>>` `--cname <<cname prefix>> --vpc.id <<ask for custom vpc_id>>` `--vpc.ec2subnets <<ask for subnets by vpc_id>> --profile <<your AWS profile>>`
+`eb create <<environment name>> -i <<size of instance>>` 
+`--cname <<cname prefix>> --vpc.id <<ask for custom vpc_id>>`
+`--vpc.ec2subnets <<ask for subnets by vpc_id>> --profile <<your AWS profile>>`
+
 6. Subsequent deployment
 `eb deploy <<environment name>> --profile <<your AWS profile>>`
