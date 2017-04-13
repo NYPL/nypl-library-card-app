@@ -23,3 +23,13 @@ For more information see [how `nvm use` works](https://github.com/creationix/nvm
 
 See `.env.example` for a checklist of the environment variables the app
 needs to run.
+
+## Deployment
+
+### AWS Elastic Beanstalk
+
+1. `eb init -i --profile <<your AWS profile>>`
+2. Initial creation of instance on Beanstalk:
+`eb create <<environment name>> -i <<size of instance>> --cname <<cname prefix>> --vpc.id <<ask for custom vpc_id>> --vpc.ec2subnets <<ask for subnets by vpc_id>> --profile <<your AWS profile>>`
+3. Subsequent deployment
+`eb deploy <<environment name>> --profile <<your AWS profile>>`
