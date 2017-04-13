@@ -28,7 +28,7 @@ needs to run.
 
 ### AWS Elastic Beanstalk
 1. `.ebextensions` directory needed at application's root directory
-2. `.ebextensions/environment.config to store environment variables. For environment variables that needs to be hidden, use `eb setenv ENV_VAR1=value1 ENV_VAR2=value2...` on command line.
+2. `.ebextensions/environment.config` to store environment variables. For environment variables that needs to be hidden, use `eb setenv ENV_VAR1=value1 ENV_VAR2=value2...` on command line.
 3. `.ebextensions/nodecommand.config` to start node app after deployment.
 4. `eb init -i --profile <<your AWS profile>>`
 5. Initial creation of instance on Beanstalk:
