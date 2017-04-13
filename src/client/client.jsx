@@ -6,6 +6,6 @@ import './styles/main.scss';
 window.onload = () => {
   render(
     <ApplicationContainer />,
-    document.getElementById('nyplLibraryCardApp'),
+    document.getElementById('nypl-library-card-app'),
   );
 };

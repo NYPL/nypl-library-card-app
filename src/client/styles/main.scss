@@ -2,10 +2,7 @@
 @import '~@nypl/dgx-header-component/dist/styles/main';
 @import '~@nypl/dgx-react-footer/dist/styles/styles';
 // Import NYPL Design Toolkit Library
-// @import "~@nypl/design-toolkit/sass/nypl-normalize";
-// @import "~@nypl/design-toolkit/sass/grid";
-// @import "~@nypl/design-toolkit/sass/forms";
-@import "toolkit";
+@import 'toolkit';
 
 // Import Globals
 @import 'utils/fonts';
@@ -15,3 +12,8 @@
 
 // Universal Page Components
 @import 'components/libCardForm';
+@import 'components/banner';
+
+.nypl-library-card-app {
+  min-height: $pageMinHeight;
+}

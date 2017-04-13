@@ -403,7 +403,7 @@ class LibraryCardForm extends React.Component {
 
   render() {
     return (
-      <div className="main-content nypl-column-half nypl-column-offset-one" id="main-content">
+      <div className="nypl-column-half nypl-column-offset-one">
         {this.renderFormResults()}
         {this.renderFormFields()}
       </div>
