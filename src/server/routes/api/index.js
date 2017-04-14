@@ -126,6 +126,7 @@ function isTokenExipring(expirationTime, timeThreshold = 5, type = 'minutes') {
 }
 
 export function initializeAppAuth(req, res, next) {
+  req.app.get('logger').info('initializeAppAuth');
   const tokenObject = req.app.get('tokenObject');
   const tokenExpTime = req.app.get('tokenExpTime');
   const minuteExpThreshold = 10;
@@ -178,7 +179,7 @@ function validatePatronAddress(object, token) {
     )
     .then(response => response.data)
     .catch((error) => {
-      console.log(error);
+      req.app.get('logger').error(error);
     });
 }
 
@@ -206,44 +207,44 @@ export function createPatron(req, res) {
       validatePatronAddress(patronData.address, token),
       validatePatronUsername(patronData.username, token),
     ])
-    .then(axios.spread((addressResponse, userRes) => {
-      // Both requests are now complete
-      const patronAddressResponse = addressResponse.data || {};
-      const patronUsernameResponse = (userRes && userRes.data && userRes.data.data) ?
-        userRes.data.data : {};
+      .then(axios.spread((addressResponse, userRes) => {
+        // Both requests are now complete
+        const patronAddressResponse = addressResponse.data || {};
+        const patronUsernameResponse = (userRes && userRes.data && userRes.data.data) ?
+          userRes.data.data : {};
 
-      if (!patronAddressResponse.valid) {
-        // Address is invalid
-        return res.status(400).json({
-          status: 400,
-          response: patronAddressResponse,
-        });
-      }
+        if (!patronAddressResponse.valid) {
+          // Address is invalid
+          return res.status(400).json({
+            status: 400,
+            response: patronAddressResponse,
+          });
+        }
 
-      if (!patronUsernameResponse.valid) {
-        // Username is invalid
-        return res.status(400).json({
-          status: 400,
-          response: patronUsernameResponse,
-        });
-      }
+        if (!patronUsernameResponse.valid) {
+          // Username is invalid
+          return res.status(400).json({
+            status: 400,
+            response: patronUsernameResponse,
+          });
+        }
 
-      // Patron address is valid, create account
-      return axios
-        .post(
-          config.api.patron,
-          { simplePatron: patronData },
-          constructApiHeaders(token),
-        )
-        .then(result => res.json({ status: 200, response: result.data.data }))
-        .catch(err => res.status(400).json({
-          status: 400,
-          response: err.response.data,
-        }));
-    }))
-    .catch(error => res.status(400).json({
-      status: 400,
-      response: error,
-    }));
+        // Patron address is valid, create account
+        return axios
+          .post(
+            config.api.patron,
+            { simplePatron: patronData },
+            constructApiHeaders(token),
+          )
+          .then(result => res.json({ status: 200, response: result.data.data }))
+          .catch(err => res.status(400).json({
+            status: 400,
+            response: err.response.data,
+          }));
+      }))
+      .catch(error => res.status(400).json({
+        status: 400,
+        response: error,
+      }));
   }
 }

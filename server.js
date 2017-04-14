@@ -6,6 +6,8 @@ import compress from 'compression';
 import bodyParser from 'body-parser';
 import colors from 'colors';
 import helmet from 'helmet';
+import logger from './src/server/logger';
+
 // Api Routes
 import { initializeAppAuth, createPatron } from './src/server/routes/api';
 // App Routes
@@ -20,22 +22,28 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 /* Express Server Configurations
  * -----------------------------
-*/
+ */
 const app = express();
 // HTTP Security Headers
 app.use(helmet({
   noCache: false,
   referrerPolicy: { policy: 'origin-when-cross-origin' },
 }));
+
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(distPath));
 
+// Sets the server path to /dist
+app.use(express.static(distPath));
 app.use(cookieParser());
+
+// Disables the Server response from displaying Express as the server engine
+app.disable('x-powered-by');
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
 app.set('port', process.env.PORT || appConfig.port);
+app.set('logger', logger);
 
 // CSRF Protection Middleware
 app.use(csrf({ cookie: true }));
@@ -62,27 +70,24 @@ app.post('/create-patron', initializeAppAuth, createPatron);
 
 const server = app.listen(app.get('port'), (error) => {
   if (error) {
-    console.log(colors.red(error));
+    app.get('logger').error(error);
+  } else {
+    app.get('logger').info(`Express server for ${appConfig.appName} is listening at ${app.get('port')}`);
   }
-
-  console.log(colors.yellow.underline(appConfig.appName));
-  console.log(
-    colors.green('Express server is listening at'),
-    colors.cyan(`localhost:${app.get('port')}`),
-  );
+  ;
 });
 
 // This function is called when you want the server to die gracefully
 // i.e. wait for existing connections
 const gracefulShutdown = () => {
-  console.log('Received kill signal, shutting down gracefully.');
+  app.get('logger').info('Received kill signal, shutting down gracefully.');
   server.close(() => {
-    console.log('Closed out remaining connections.');
+    app.get('logger').info('Closed out remaining connections.');
     process.exit(0);
   });
   // if after
   setTimeout(() => {
-    console.error('Could not close connections in time, forcefully shutting down');
+    app.get('logger').error('Could not close connections in time, forcefully shutting down');
     process.exit();
   }, 1000);
 };
@@ -94,7 +99,7 @@ process.on('SIGINT', gracefulShutdown);
 /* Development Environment Configuration
  * -------------------------------------
  * - Using Webpack Dev Server
-*/
+ */
 if (!isProduction) {
   const webpack = require('webpack');
   const WebpackDevServer = require('webpack-dev-server');
@@ -111,11 +116,10 @@ if (!isProduction) {
     },
   }).listen(appConfig.webpackDevServerPort, 'localhost', (error) => {
     if (error) {
-      console.log(colors.red(error));
+      app.get('logger').error(error);
+    } else {
+      app.get('logger').info(`Webpack Dev Server listening at ${appConfig.webpackDevServerPort}`)
     }
-    console.log(
-      colors.magenta('Webpack Dev Server listening at'),
-      colors.cyan(`localhost:${appConfig.webpackDevServerPort}`),
-    );
+    ;
   });
 }
