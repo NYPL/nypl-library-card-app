@@ -83,7 +83,7 @@ function constructPatronObject(object) {
     return constructErrorObject('missing-required-field', 'The zip field is missing.');
   }
 
-  if (!isNumeric(zip) || !isLength(zip, {min: 5, max: 5})) {
+  if (!isNumeric(zip) || !isLength(zip, { min: 5, max: 5 })) {
     return constructErrorObject('invalid-field', 'The zip field is must be 5 numbers.');
   }
 
@@ -99,7 +99,7 @@ function constructPatronObject(object) {
     return constructErrorObject('missing-required-field', 'The pin field is missing.');
   }
 
-  if (!isNumeric(pin) || !isLength(pin, {min: 4, max: 4})) {
+  if (!isNumeric(pin) || !isLength(pin, { min: 4, max: 4 })) {
     return constructErrorObject('invalid-field', 'The pin field is must be 4 numbers.');
   }
 
@@ -174,7 +174,7 @@ function validatePatronAddress(object, token) {
   return axios
     .post(
       `${config.api.validate}/address`,
-      {address: object},
+      { address: object },
       constructApiHeaders(token),
     )
     .then(response => response.data)
@@ -187,7 +187,7 @@ function validatePatronUsername(value, token) {
   return axios
     .post(
       `${config.api.validate}/username`,
-      {username: value},
+      { username: value },
       constructApiHeaders(token),
     );
 }
