@@ -86,7 +86,7 @@ class LibraryCardForm extends React.Component {
     switch (fieldName) {
       case 'dateOfBirth':
         if (!isDate(value)) {
-          fieldErrors[fieldName] = 'Your date of birth must be in MM/DD/YYYY format (i.e. 04/10/1980)';
+          fieldErrors[fieldName] = 'Please enter a valid date, MM/DD/YYYY.';
           currentErrors = fieldErrors;
         } else {
           currentErrors = omit(fieldErrors, fieldName);
@@ -94,7 +94,7 @@ class LibraryCardForm extends React.Component {
         break;
       case 'email':
         if (!isEmail(value)) {
-          fieldErrors[fieldName] = 'Email is invalid';
+          fieldErrors[fieldName] = 'Please enter a valid email address.';
           currentErrors = fieldErrors;
         } else {
           currentErrors = omit(fieldErrors, fieldName);
@@ -102,10 +102,10 @@ class LibraryCardForm extends React.Component {
         break;
       case 'username':
         if (!isLength(value, { min: 5, max: 25 })) {
-          fieldErrors[fieldName] = 'Username must be between 5-25 alphanumeric characters';
+          fieldErrors[fieldName] = 'Username must be between 5-25 alphanumeric characters.';
           currentErrors = fieldErrors;
         } else if (!isAlphanumeric(value)) {
-          fieldErrors[fieldName] = 'Only alphanumeric characters are allowed';
+          fieldErrors[fieldName] = 'Only alphanumeric characters are allowed.';
           currentErrors = fieldErrors;
         } else {
           currentErrors = omit(fieldErrors, fieldName);
@@ -113,21 +113,62 @@ class LibraryCardForm extends React.Component {
         break;
       case 'pin':
         if (value.length !== 4 || isNaN(value)) {
-          fieldErrors[fieldName] = 'Pin must be 4 numbers';
+          fieldErrors[fieldName] = 'Please enter a 4-digit PIN.';
+          currentErrors = fieldErrors;
+        } else {
+          currentErrors = omit(fieldErrors, fieldName);
+        }
+        break;
+      case 'firstName':
+        if (isEmpty(value)) {
+          fieldErrors[fieldName] = 'Please enter a valid first name.';
+          currentErrors = fieldErrors;
+        } else {
+          currentErrors = omit(fieldErrors, fieldName);
+        }
+        break;
+      case 'lastName':
+        if (isEmpty(value)) {
+          fieldErrors[fieldName] = 'Please enter a valid last name.';
+          currentErrors = fieldErrors;
+        } else {
+          currentErrors = omit(fieldErrors, fieldName);
+        }
+        break;
+      case 'line1':
+        if (isEmpty(value)) {
+          fieldErrors[fieldName] = 'Please enter a valid street address.';
+          currentErrors = fieldErrors;
+        } else {
+          currentErrors = omit(fieldErrors, fieldName);
+        }
+        break;
+      case 'city':
+        if (isEmpty(value)) {
+          fieldErrors[fieldName] = 'Please enter a valid city.';
+          currentErrors = fieldErrors;
+        } else {
+          currentErrors = omit(fieldErrors, fieldName);
+        }
+        break;
+      case 'state':
+        if (isEmpty(value) || !isLength(value, { min: 2, max: 2 })) {
+          fieldErrors[fieldName] = 'Please enter a 2-character state abbreviation.';
+          currentErrors = fieldErrors;
+        } else {
+          currentErrors = omit(fieldErrors, fieldName);
+        }
+        break;
+      case 'zip':
+        if (isEmpty(value) || isNaN(value) || !isLength(value, { min: 5, max: 5 })) {
+          fieldErrors[fieldName] = 'Please enter a 5-digit postal code.';
           currentErrors = fieldErrors;
         } else {
           currentErrors = omit(fieldErrors, fieldName);
         }
         break;
       case 'line2':
-        break;
-      default:
-        if (isEmpty(value)) {
-          fieldErrors[fieldName] = 'Required field';
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
+        currentErrors = fieldErrors;
         break;
     }
 
@@ -334,7 +375,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('zip')}
           errorState={this.state.fieldErrors}
         />
-        <h3>Create Account</h3>
+        <h3>Create Your Account</h3>
         <FormField
           id="patronEmail"
           className="nypl-text-field"
