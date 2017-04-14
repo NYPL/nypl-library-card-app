@@ -189,6 +189,7 @@ class LibraryCardForm extends React.Component {
         headers: { 'csrf-token': this.state.csrfToken },
       })
       .then((response) => {
+        // Debugging only (Alpha)
         console.log(response.data);
 
         this.setState({
@@ -196,6 +197,7 @@ class LibraryCardForm extends React.Component {
           formEntrySuccessful: true,
           apiResults: response.data,
         });
+        this.scrollToTop(500);
       })
       .catch((error) => {
         this.setState({ formProcessing: false });
@@ -203,6 +205,7 @@ class LibraryCardForm extends React.Component {
         if (error.response && error.response.data) {
           // The request was made, but the server responded with a status code
           // that falls out of the range of 2xx
+          // Debugging only (Alpha)
           console.log(error.response.data);
           this.setState({ apiResults: error.response.data });
         }

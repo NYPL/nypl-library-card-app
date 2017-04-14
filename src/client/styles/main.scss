@@ -16,6 +16,10 @@
 @import 'components/confirmation';
 @import 'components/errorBox';
 
+html {
+  @include font-settings;
+}
+
 .nypl-library-card-app {
   .main-content {
     min-height: $pageMinHeight;
