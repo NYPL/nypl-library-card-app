@@ -30,8 +30,6 @@ app.use(helmet({
   referrerPolicy: { policy: 'origin-when-cross-origin' },
 }));
 
-app.set('logger', logger);
-
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -45,6 +43,7 @@ app.disable('x-powered-by');
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
 app.set('port', process.env.PORT || appConfig.port);
+app.set('logger', logger);
 
 // CSRF Protection Middleware
 app.use(csrf({ cookie: true }));
