@@ -83,7 +83,7 @@ function constructPatronObject(object) {
     return constructErrorObject('missing-required-field', 'The zip field is missing.');
   }
 
-  if (!isNumeric(zip) || !isLength(zip, { min: 5, max: 5 })) {
+  if (!isNumeric(zip) || !isLength(zip, {min: 5, max: 5})) {
     return constructErrorObject('invalid-field', 'The zip field is must be 5 numbers.');
   }
 
@@ -99,7 +99,7 @@ function constructPatronObject(object) {
     return constructErrorObject('missing-required-field', 'The pin field is missing.');
   }
 
-  if (!isNumeric(pin) || !isLength(pin, { min: 4, max: 4 })) {
+  if (!isNumeric(pin) || !isLength(pin, {min: 4, max: 4})) {
     return constructErrorObject('invalid-field', 'The pin field is must be 4 numbers.');
   }
 
@@ -174,12 +174,12 @@ function validatePatronAddress(object, token) {
   return axios
     .post(
       `${config.api.validate}/address`,
-      { address: object },
+      {address: object},
       constructApiHeaders(token),
     )
     .then(response => response.data)
     .catch((error) => {
-        req.app.get('logger').error(error);
+      req.app.get('logger').error(error);
     });
 }
 
@@ -187,7 +187,7 @@ function validatePatronUsername(value, token) {
   return axios
     .post(
       `${config.api.validate}/username`,
-      { username: value },
+      {username: value},
       constructApiHeaders(token),
     );
 }
@@ -207,44 +207,44 @@ export function createPatron(req, res) {
       validatePatronAddress(patronData.address, token),
       validatePatronUsername(patronData.username, token),
     ])
-    .then(axios.spread((addressResponse, userRes) => {
-      // Both requests are now complete
-      const patronAddressResponse = addressResponse.data || {};
-      const patronUsernameResponse = (userRes && userRes.data && userRes.data.data) ?
-        userRes.data.data : {};
+      .then(axios.spread((addressResponse, userRes) => {
+        // Both requests are now complete
+        const patronAddressResponse = addressResponse.data || {};
+        const patronUsernameResponse = (userRes && userRes.data && userRes.data.data) ?
+          userRes.data.data : {};
 
-      if (!patronAddressResponse.valid) {
-        // Address is invalid
-        return res.status(400).json({
-          status: 400,
-          response: patronAddressResponse,
-        });
-      }
+        if (!patronAddressResponse.valid) {
+          // Address is invalid
+          return res.status(400).json({
+            status: 400,
+            response: patronAddressResponse,
+          });
+        }
 
-      if (!patronUsernameResponse.valid) {
-        // Username is invalid
-        return res.status(400).json({
-          status: 400,
-          response: patronUsernameResponse,
-        });
-      }
+        if (!patronUsernameResponse.valid) {
+          // Username is invalid
+          return res.status(400).json({
+            status: 400,
+            response: patronUsernameResponse,
+          });
+        }
 
-      // Patron address is valid, create account
-      return axios
-        .post(
-          config.api.patron,
-          { simplePatron: patronData },
-          constructApiHeaders(token),
-        )
-        .then(result => res.json({ status: 200, response: result.data.data }))
-        .catch(err => res.status(400).json({
-          status: 400,
-          response: err.response.data,
-        }));
-    }))
-    .catch(error => res.status(400).json({
-      status: 400,
-      response: error,
-    }));
+        // Patron address is valid, create account
+        return axios
+          .post(
+            config.api.patron,
+            { simplePatron: patronData },
+            constructApiHeaders(token),
+          )
+          .then(result => res.json({ status: 200, response: result.data.data }))
+          .catch(err => res.status(400).json({
+            status: 400,
+            response: err.response.data,
+          }));
+      }))
+      .catch(error => res.status(400).json({
+        status: 400,
+        response: error,
+      }));
   }
 }
