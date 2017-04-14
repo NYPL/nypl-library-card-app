@@ -1,6 +1,8 @@
 import axios from 'axios';
 import qs from 'qs';
 import moment from 'moment';
+import isEmpty from 'lodash/isEmpty';
+import { isEmail, isAlphanumeric, isNumeric, isLength } from 'validator';
 import config from '../../../../appConfig';
 
 const authConfig = {
@@ -18,16 +20,19 @@ function constructApiHeaders(token = '', contentType = 'application/json') {
   };
 }
 
-function constructErrorObject(property, type = 'missing-required-field', isError = true) {
-  return {
-    error: {
-      error: isError,
-      response: {
-        type,
-        message: `The ${property} field is missing.`,
-      },
+function constructErrorObject(type = 'general-error', message = 'There was an error with your request', status = 400, details) {
+  const response = {
+    status,
+    response: {
+      type,
+      message,
     },
   };
+
+  if (!isEmpty(details)) {
+    response.details = details;
+  }
+  return response;
 }
 
 function constructPatronObject(object) {
@@ -46,40 +51,56 @@ function constructPatronObject(object) {
   } = object;
 
 
-  if (!firstName) {
-    return constructErrorObject('firstName');
+  if (isEmpty(firstName)) {
+    return constructErrorObject('missing-required-field', 'The firstName field is missing.');
   }
 
-  if (!lastName) {
-    return constructErrorObject('lastName');
+  if (isEmpty(lastName)) {
+    return constructErrorObject('missing-required-field', 'The lastName field is missing.');
   }
 
-  if (!email) {
-    return constructErrorObject('email');
+  if (isEmpty(email)) {
+    return constructErrorObject('missing-required-field', 'The email field is missing.');
   }
 
-  if (!line1) {
-    return constructErrorObject('address.line_1');
+  if (!isEmail(email)) {
+    return constructErrorObject('invalid-field', 'The email field is invalid.');
   }
 
-  if (!city) {
-    return constructErrorObject('address.city');
+  if (isEmpty(line1)) {
+    return constructErrorObject('missing-required-field', 'The line_1 field is missing.');
   }
 
-  if (!state) {
-    return constructErrorObject('address.state');
+  if (isEmpty(city)) {
+    return constructErrorObject('missing-required-field', 'The city field is missing.');
   }
 
-  if (!zip) {
-    return constructErrorObject('address.zip');
+  if (isEmpty(state)) {
+    return constructErrorObject('missing-required-field', 'The state field is missing.');
   }
 
-  if (!username) {
-    return constructErrorObject('username');
+  if (isEmpty(zip)) {
+    return constructErrorObject('missing-required-field', 'The zip field is missing.');
   }
 
-  if (!pin) {
-    return constructErrorObject('pin');
+  if (!isNumeric(zip) || !isLength(zip, { min: 5, max: 5 })) {
+    return constructErrorObject('invalid-field', 'The zip field is must be 5 numbers.');
+  }
+
+  if (isEmpty(username)) {
+    return constructErrorObject('missing-required-field', 'The username field is missing.');
+  }
+
+  if (!isAlphanumeric(username)) {
+    return constructErrorObject('invalid-field', 'The username field must be alphanumeric');
+  }
+
+  if (isEmpty(pin)) {
+    return constructErrorObject('missing-required-field', 'The pin field is missing.');
+  }
+
+  if (!isNumeric(pin) || !isLength(pin, { min: 4, max: 4 })) {
+    return constructErrorObject('invalid-field', 'The pin field is must be 4 numbers.');
   }
 
   const fullName = `${lastName.trim()}, ${firstName.trim()}`;
@@ -101,9 +122,7 @@ function constructPatronObject(object) {
 }
 
 function isTokenExipring(expirationTime, timeThreshold = 5, type = 'minutes') {
-  const currentTime = moment();
-
-  return (expirationTime.diff(currentTime, type) < timeThreshold);
+  return (expirationTime.diff(moment(), type) < timeThreshold);
 }
 
 export function initializeAppAuth(req, res, next) {
@@ -121,12 +140,12 @@ export function initializeAppAuth(req, res, next) {
         }
         next();
       })
-      .catch(error => res.json({
-        error: true,
-        type: 'app-auth-failed',
-        message: `Could not authenticate App on ${config.api.oauth}`,
-        details: error,
-      }));
+      .catch(error => res.status(400).json(constructErrorObject(
+        'app-auth-failed',
+        'Could not authenticate App with OAuth service',
+        400,
+        error,
+      )));
   }
 
   if (tokenObject.access_token && isTokenExipring(tokenExpTime, minuteExpThreshold)) {
@@ -139,15 +158,15 @@ export function initializeAppAuth(req, res, next) {
         }
         next();
       })
-      .catch(error => res.json({
-        error: true,
-        type: 'app-auth-failed',
-        message: `Could not authenticate App on ${config.api.oauth}`,
-        response: error,
-      }));
+      .catch(error => res.status(400).json(constructErrorObject(
+        'app-reauth-failed',
+        'Could not re-authenticate App with OAuth service',
+        400,
+        error,
+      )));
   }
 
-  next();
+  return next();
 }
 
 function validatePatronAddress(object, token) {
@@ -178,8 +197,8 @@ export function createPatron(req, res) {
     const token = tokenObject.access_token;
     const patronData = constructPatronObject(req.body);
 
-    if (patronData.error) {
-      return res.json(patronData.error);
+    if (patronData.status === 400) {
+      return res.status(400).json(patronData);
     }
     // Patron Object validation is successful
     // Validate Address and Username
@@ -195,16 +214,16 @@ export function createPatron(req, res) {
 
       if (!patronAddressResponse.valid) {
         // Address is invalid
-        return res.json({
-          error: true,
+        return res.status(400).json({
+          status: 400,
           response: patronAddressResponse,
         });
       }
 
       if (!patronUsernameResponse.valid) {
         // Username is invalid
-        return res.json({
-          error: true,
+        return res.status(400).json({
+          status: 400,
           response: patronUsernameResponse,
         });
       }
@@ -217,13 +236,13 @@ export function createPatron(req, res) {
           constructApiHeaders(token),
         )
         .then(result => res.json({ response: result.data.data }))
-        .catch(err => res.json({
-          error: true,
+        .catch(err => res.status(400).json({
+          status: 400,
           response: err.response.data,
         }));
     }))
-    .catch(error => res.json({
-      error: true,
+    .catch(error => res.status(400).json({
+      status: 400,
       response: error,
     }));
   }
