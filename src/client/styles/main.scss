@@ -13,7 +13,11 @@
 // Universal Page Components
 @import 'components/libCardForm';
 @import 'components/banner';
+@import 'components/confirmation';
+@import 'components/errorBox';
 
 .nypl-library-card-app {
-  min-height: $pageMinHeight;
+  .main-content {
+    min-height: $pageMinHeight;
+  }
 }
