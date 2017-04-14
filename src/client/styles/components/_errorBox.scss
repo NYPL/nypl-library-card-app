@@ -1,20 +1,5 @@
-.errorBox {
-  padding: 10px;
-  color: #b94a48;
-  background-color: #f2dede;
-  border-color: #eed3d7;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-
-  & > h3 {
-    margin: 10px 0 15px;
-    padding: 0;
-    font-size: 18px;
-  }
-
-  & > p {
-    margin: 10px 0;
+.nypl-error {
+  &-content {
+    margin: 20px 0;
   }
 }

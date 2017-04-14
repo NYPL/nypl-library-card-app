@@ -6,7 +6,9 @@ import assign from 'lodash/assign';
 import forIn from 'lodash/forIn';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import { isDate } from '../../../utils/FormValidationUtils';
+import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
+import ErrorBox from '../../components/ErrorBox/ErrorBox';
 
 class LibraryCardForm extends React.Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class LibraryCardForm extends React.Component {
     this.state = {
       csrfToken: '',
       formProcessing: false,
+      formEntrySuccessful: false,
       apiResults: {},
       fieldErrors: {},
       patronFields: {
@@ -186,10 +189,11 @@ class LibraryCardForm extends React.Component {
         headers: { 'csrf-token': this.state.csrfToken },
       })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
 
         this.setState({
           formProcessing: false,
+          formEntrySuccessful: true,
           apiResults: response.data,
         });
       })
@@ -206,40 +210,10 @@ class LibraryCardForm extends React.Component {
     }
   }
 
-  renderErrorMsg(object) {
-    let errorMessage = '';
-    if (!isEmpty(object)) {
-      if (object.type === 'unrecognized-address') {
-        errorMessage = 'The address you provided is invalid, please enter a valid address.';
-      } else if (object.type === 'unavailable-username') {
-        errorMessage = 'The username entered is already in use, please enter a new username.';
-      } else if (object.type === 'exception' && object.debugMessage && object.debugMessage.includes('pin')) {
-        errorMessage = 'The pin entered is invalid, must be 4 numbers.';
-      }
-    } else {
-      errorMessage = 'There was an error with your submission, please try again later.';
-    }
-
-    return (
-      <div className="api-error-section">
-        <h3>Ops... there was an error while processing your request, please fix the following:</h3>
-        <p>{errorMessage}</p>
-      </div>
-    );
+  renderConfirmation() {
+    return this.state.formEntrySuccessful ?
+      <Confirmation name={this.getFullName()} apiObject={this.state.apiResults} /> : null;
   }
-
-  // renderSuccessMsg(object) {
-  //   const barcode = object && !isEmpty(object.barCodes) ? object.barCodes[0] : null;
-  //   const barcodeText = !isEmpty(barcode) ? `${barcode}` : null;
-  //   return (
-  //     <div className="successBox">
-  //       <h3>Dear {this.getFullName()},</h3>
-  //       <p>Your submission has been successful.</p>
-  //       <p>You will need to visit an NYPL location to validate your information.</p>
-  //       {barcodeText ? <p>Your barcode is <span className="barcode">{barcodeText}</span></p> : null}
-  //     </div>
-  //   );
-  // }
 
   renderLoader() {
     const { formProcessing } = this.state;
@@ -249,20 +223,23 @@ class LibraryCardForm extends React.Component {
   renderApiErrors() {
     const { apiResults } = this.state;
     let resultMarkup;
+    let errorClass = '';
 
-    if (!isEmpty(apiResults) && apiResults.status === 400) {
-      resultMarkup = this.renderErrorMsg(apiResults.response);
+    // TODO: Will be modified once we establish the correct API response from Wrapper
+    if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
+      errorClass = 'nypl-error-content';
+      resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" />;
     }
 
     return (
-      <div className="nypl-location-info">
+      <div className={errorClass}>
         {resultMarkup}
       </div>
     );
   }
 
   renderFormFields() {
-    return (
+    return !this.state.formEntrySuccessful ? (
       <form className="nypl-library-card-form" onSubmit={this.handleSubmit}>
         <h2>Please enter the following information</h2>
         <h3>Personal Information</h3>
@@ -399,13 +376,14 @@ class LibraryCardForm extends React.Component {
           {this.renderLoader()}
         </div>
       </form>
-    );
+    ) : null;
   }
 
   render() {
     return (
       <div className="nypl-column-half nypl-column-offset-one">
         {this.renderApiErrors()}
+        {this.renderConfirmation()}
         {this.renderFormFields()}
       </div>
     );
