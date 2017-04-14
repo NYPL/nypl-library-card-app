@@ -14,7 +14,7 @@ class LibraryCardForm extends React.Component {
     this.state = {
       csrfToken: '',
       formProcessing: false,
-      formResults: {},
+      apiResults: {},
       fieldErrors: {},
       patronFields: {
         firstName: '',
@@ -154,7 +154,7 @@ class LibraryCardForm extends React.Component {
 
     if (isEmpty(this.state.fieldErrors)) {
       // Form is now processing
-      this.setState({ formProcessing: true, formResults: {} });
+      this.setState({ formProcessing: true, apiResults: {} });
 
       const {
         firstName,
@@ -190,13 +190,18 @@ class LibraryCardForm extends React.Component {
 
         this.setState({
           formProcessing: false,
-          formResults: response.data,
+          apiResults: response.data,
         });
-
-        this.scrollToTop(500);
       })
       .catch((error) => {
-        console.log(error);
+        this.setState({ formProcessing: false });
+        this.scrollToTop(500);
+        if (error.response && error.response.data) {
+          // The request was made, but the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(error.response.data);
+          this.setState({ apiResults: error.response.data });
+        }
       });
     }
   }
@@ -216,45 +221,41 @@ class LibraryCardForm extends React.Component {
     }
 
     return (
-      <div className="errorBox">
+      <div className="api-error-section">
         <h3>Ops... there was an error while processing your request, please fix the following:</h3>
         <p>{errorMessage}</p>
       </div>
     );
   }
 
-  renderSuccessMsg(object) {
-    const barcode = object && !isEmpty(object.barCodes) ? object.barCodes[0] : null;
-    const barcodeText = !isEmpty(barcode) ? `${barcode}` : null;
-    return (
-      <div className="successBox">
-        <h3>Dear {this.getFullName()},</h3>
-        <p>Your submission has been successful.</p>
-        <p>You will need to visit an NYPL location to validate your information.</p>
-        {barcodeText ? <p>Your barcode is <span className="barcode">{barcodeText}</span></p> : null}
-      </div>
-    );
-  }
+  // renderSuccessMsg(object) {
+  //   const barcode = object && !isEmpty(object.barCodes) ? object.barCodes[0] : null;
+  //   const barcodeText = !isEmpty(barcode) ? `${barcode}` : null;
+  //   return (
+  //     <div className="successBox">
+  //       <h3>Dear {this.getFullName()},</h3>
+  //       <p>Your submission has been successful.</p>
+  //       <p>You will need to visit an NYPL location to validate your information.</p>
+  //       {barcodeText ? <p>Your barcode is <span className="barcode">{barcodeText}</span></p> : null}
+  //     </div>
+  //   );
+  // }
 
   renderLoader() {
     const { formProcessing } = this.state;
     return formProcessing ? <div className="loading" /> : null;
   }
 
-  renderFormResults() {
-    const { formResults } = this.state;
+  renderApiErrors() {
+    const { apiResults } = this.state;
     let resultMarkup;
 
-    if (!isEmpty(formResults)) {
-      if (formResults.error) {
-        resultMarkup = this.renderErrorMsg(formResults.response);
-      } else {
-        resultMarkup = this.renderSuccessMsg(formResults.response);
-      }
+    if (!isEmpty(apiResults) && apiResults.status === 400) {
+      resultMarkup = this.renderErrorMsg(apiResults.response);
     }
 
     return (
-      <div className="form-results">
+      <div className="nypl-location-info">
         {resultMarkup}
       </div>
     );
@@ -404,7 +405,7 @@ class LibraryCardForm extends React.Component {
   render() {
     return (
       <div className="nypl-column-half nypl-column-offset-one">
-        {this.renderFormResults()}
+        {this.renderApiErrors()}
         {this.renderFormFields()}
       </div>
     );

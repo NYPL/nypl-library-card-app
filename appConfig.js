@@ -5,8 +5,8 @@ export default {
   port: 3001,
   webpackDevServerPort: 3000,
   api: {
-    oauth:    process.env.OAUTH_PROVIDER_URL,
-    patron:   process.env.PATRON_CREATION_URL,
+    oauth: process.env.OAUTH_PROVIDER_URL,
+    patron: process.env.PATRON_CREATION_URL,
     validate: process.env.PATRON_VALIDATION_URL,
   },
   clientId: process.env.OAUTH_CLIENT_ID,

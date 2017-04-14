@@ -44,10 +44,13 @@ app.use((err, req, res, next) => {
     return next(err);
   }
 
-  return res.json({
-    error: true,
-    type: 'invalid-csrf-token',
-    response: err,
+  return res.status(400).json({
+    status: 400,
+    response: {
+      type: 'invalid-csrf-token',
+      message: 'The current CSRF token is invalid',
+      details: err,
+    },
   });
 });
 
