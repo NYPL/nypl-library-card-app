@@ -27,14 +27,14 @@ const app = express();
 // HTTP Security Headers
 app.use(helmet({
   noCache: false,
-  referrerPolicy: {policy: 'origin-when-cross-origin'},
+  referrerPolicy: { policy: 'origin-when-cross-origin' },
 }));
 
 app.set('logger', logger);
 
 app.use(compress());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Sets the server path to /dist
 app.use(express.static(distPath));
@@ -47,7 +47,7 @@ app.set('views', viewsPath);
 app.set('port', process.env.PORT || appConfig.port);
 
 // CSRF Protection Middleware
-app.use(csrf({cookie: true}));
+app.use(csrf({ cookie: true }));
 app.use((err, req, res, next) => {
   if (err.code !== 'EBADCSRFTOKEN') {
     return next(err);
