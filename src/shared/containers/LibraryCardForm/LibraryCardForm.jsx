@@ -15,6 +15,7 @@ class LibraryCardForm extends React.Component {
     super(props);
     this.state = {
       csrfToken: '',
+      focusOnResult: false,
       formProcessing: false,
       formEntrySuccessful: false,
       apiResults: {},
@@ -46,6 +47,12 @@ class LibraryCardForm extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.state.focusOnResult) {
+      this.focusOnApiResponse();
+    }
+  }
+
   getMetaTagContent(tag) {
     return document.head.querySelector(`[${tag}]`).content;
   }
@@ -61,6 +68,12 @@ class LibraryCardForm extends React.Component {
     ) : null;
   }
 
+  focusOnApiResponse() {
+    if (this.dynamicSection) {
+      this.dynamicSection.focus();
+      this.setState({ focusOnResult: false });
+    }
+  }
   scrollToTop(scrollDuration) {
     const cosParameter = window.scrollY / 2;
     const duration = scrollDuration || 250;
@@ -199,7 +212,6 @@ class LibraryCardForm extends React.Component {
     if (isEmpty(this.state.fieldErrors)) {
       // Form is now processing
       this.setState({ formProcessing: true, apiResults: {} });
-
       const {
         firstName,
         lastName,
@@ -232,16 +244,16 @@ class LibraryCardForm extends React.Component {
       .then((response) => {
         // Debugging only (Alpha)
         console.log(response.data);
-
         this.setState({
           formProcessing: false,
           formEntrySuccessful: true,
           apiResults: response.data,
+          focusOnResult: true,
         });
         this.scrollToTop(500);
       })
       .catch((error) => {
-        this.setState({ formProcessing: false });
+        this.setState({ formProcessing: false, focusOnResult: true });
         this.scrollToTop(500);
         if (error.response && error.response.data) {
           // The request was made, but the server responded with a status code
@@ -426,8 +438,10 @@ class LibraryCardForm extends React.Component {
   render() {
     return (
       <div className="nypl-column-half nypl-column-offset-one">
-        {this.renderApiErrors()}
-        {this.renderConfirmation()}
+        <div ref={(c) => { this.dynamicSection = c; }} tabIndex="0">
+          {this.renderApiErrors()}
+          {this.renderConfirmation()}
+        </div>
         {this.renderFormFields()}
       </div>
     );
