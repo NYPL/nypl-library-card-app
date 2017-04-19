@@ -31,21 +31,25 @@ const dummyBannerContent = {
   },
 };
 
-const ApplicationContainer = () => (
-  <div className="nypl-library-card-app">
-    <Header
-      skipNav={{ target: 'main-content' }}
-      navData={navConfig.current}
-    />
-    <section id="main-content" className="main-content">
-      <ContentBanner
-        className="nypl-library-card-banner"
-        items={[dummyBannerContent]}
+class ApplicationContainer extends React.Component {
+
+  render() {
+    return (<div className="nypl-library-card-app">
+      <Header
+        skipNav={{ target: 'main-content' }}
+        navData={navConfig.current}
       />
-      <LibraryCardForm />
-    </section>
-    <Footer />
-  </div>
-);
+      <section id="main-content" className="main-content">
+        <ContentBanner
+          className="nypl-library-card-banner"
+          items={[dummyBannerContent]}
+        />
+        <LibraryCardForm />
+      </section>
+      <Footer />
+    </div>
+    );
+  }
+}
 
 export default ApplicationContainer;
