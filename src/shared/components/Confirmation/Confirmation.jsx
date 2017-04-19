@@ -4,11 +4,11 @@ const Confirmation = ({ apiObject, className, name }) => {
   // TODO: Remove hard coding when API is ready. For demo only.
   apiObject = {};
   apiObject.response = {};
-  apiObject.response.id = "2456873";
+  apiObject.response.id = "245XXXX";
 
   const getIdText = () => (
     apiObject && apiObject.response && apiObject.response.id ?
-      `Use your temporary ID, ${apiObject.response.id} (this is a sample id), to place books and other materials 
+      `Use your temporary ID, ${apiObject.response.id}, to place books and other materials 
       on hold. To pick up your materials,` :
       'To pick up your card,'
   );
