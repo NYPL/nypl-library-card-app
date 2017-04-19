@@ -11,7 +11,6 @@ import FormField from '../../components/FormField/FormField';
 import ErrorBox from '../../components/ErrorBox/ErrorBox';
 
 class LibraryCardForm extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -244,7 +243,6 @@ class LibraryCardForm extends React.Component {
       })
       .then((response) => {
         // Debugging only (Alpha)
-        // logger.info(response.data);
         console.log(response.data);
         this.setState({
           formProcessing: false,

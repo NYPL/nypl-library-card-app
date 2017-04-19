@@ -50,10 +50,12 @@ class ApplicationContainer extends React.Component {
         navData={navConfig.current}
       />
       <section id="main-content" className="main-content">
-        { this.state.bannerStatus? "" : <ContentBanner
-          className="nypl-library-card-banner"
-          items={[dummyBannerContent]}
-        />}
+        {
+          this.state.bannerStatus ?
+            "" :
+            <ContentBanner className="nypl-library-card-banner"
+                           items={[dummyBannerContent]} />
+        }
         <LibraryCardForm initialBannerStatus={this.state.bannerStatus}
                          callBackParent={(newState) => this.onChildChanged(newState)}/>
       </section>
