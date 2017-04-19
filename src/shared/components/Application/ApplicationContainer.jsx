@@ -32,6 +32,16 @@ const dummyBannerContent = {
 };
 
 class ApplicationContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bannerStatus: false,
+    }
+  };
+
+  onChildChanged(newState) {
+    this.setState({bannerStatus: newState});
+  }
 
   render() {
     return (<div className="nypl-library-card-app">
@@ -40,11 +50,12 @@ class ApplicationContainer extends React.Component {
         navData={navConfig.current}
       />
       <section id="main-content" className="main-content">
-        <ContentBanner
+        { this.state.bannerStatus? "" : <ContentBanner
           className="nypl-library-card-banner"
           items={[dummyBannerContent]}
-        />
-        <LibraryCardForm />
+        />}
+        <LibraryCardForm initialBannerStatus={this.state.bannerStatus}
+                         callBackParent={(newState) => this.onChildChanged(newState)}/>
       </section>
       <Footer />
     </div>
