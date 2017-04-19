@@ -31,6 +31,7 @@ const dummyBannerContent = {
   },
 };
 
+
 class ApplicationContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -39,28 +40,28 @@ class ApplicationContainer extends React.Component {
     }
   };
 
-  onChildChanged(newState) {
-    this.setState({bannerStatus: newState});
+  updateBannerDisplay(bannerStatus) {
+    this.setState({bannerStatus: bannerStatus});
   }
 
   render() {
     return (<div className="nypl-library-card-app">
-      <Header
-        skipNav={{ target: 'main-content' }}
-        navData={navConfig.current}
-      />
-      <section id="main-content" className="main-content">
-        {
-          this.state.bannerStatus ?
-            "" :
-            <ContentBanner className="nypl-library-card-banner"
-                           items={[dummyBannerContent]} />
-        }
-        <LibraryCardForm initialBannerStatus={this.state.bannerStatus}
-                         callBackParent={(newState) => this.onChildChanged(newState)}/>
-      </section>
-      <Footer />
-    </div>
+        <Header
+          skipNav={{ target: 'main-content' }}
+          navData={navConfig.current}
+        />
+        <section id="main-content" className="main-content">
+          {
+            this.state.bannerStatus ?
+              "" :
+              <ContentBanner className="nypl-library-card-banner"
+                             items={[dummyBannerContent]} />
+          }
+          <LibraryCardForm initialBannerStatus={this.state.bannerStatus}
+                           updateBannerDisplay={(bannerStatus) => this.updateBannerDisplay(bannerStatus)}/>
+        </section>
+        <Footer />
+      </div>
     );
   }
 }
