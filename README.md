@@ -33,12 +33,12 @@ needs to run.
 4. `eb init -i --profile <<your AWS profile>>`
 5. Initial creation of instance on Beanstalk:
 
-Please use the role of _cloudwatchable-beanstalk_.
+Please use the instance profile of _cloudwatchable-beanstalk_.
 Which has all the permissions needed for a traditional or Docker-flavored Beanstalk
 machine that wants to log to CloudWatch.
 
 ```
-eb create <<environment name>> -i <<size of instance>>  --envvars FOO="bar",MYVAR="myval" --cname <<cname prefix>> --vpc.id <<ask for custom vpc_id>>  --vpc.ec2subnets <<ask for subnets by vpc_id>> --service-role cloudwatchable-beanstalk --profile <<your AWS profile>>
+eb create <<environment name>> --instance_type <<size of instance>> --instance_profile cloudwatchable-beanstalk  --envvars FOO="bar",MYVAR="myval" --cname <<cname prefix>> --vpc.id <<ask for custom vpc_id>>  --vpc.ec2subnets <<privateSubnetId1,privateSubnetId2>> --vpc.elbsubnets <<publicSubnetId1,publicSubnetId2>> --profile <<your AWS profile>>
 ```
 
 6. Subsequent deployment
