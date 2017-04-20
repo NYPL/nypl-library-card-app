@@ -37,8 +37,16 @@ Please use the instance profile of _cloudwatchable-beanstalk_.
 Which has all the permissions needed for a traditional or Docker-flavored Beanstalk
 machine that wants to log to CloudWatch.
 
-```
-eb create <<environment name>> --instance_type <<size of instance>> --instance_profile cloudwatchable-beanstalk  --envvars FOO="bar",MYVAR="myval" --cname <<cname prefix>> --vpc.id <<ask for custom vpc_id>>  --vpc.ec2subnets <<privateSubnetId1,privateSubnetId2>> --vpc.elbsubnets <<publicSubnetId1,publicSubnetId2>> --profile <<your AWS profile>>
+```bash
+eb create <<environment name>> --instance_type <<size of instance>> \
+    --instance_profile cloudwatchable-beanstalk \
+    --envvars FOO="bar",MYVAR="myval" \
+    --cname <<cname prefix (XXX.us-east-1.elasticbeanstalk.com)>> \
+    --vpc.id <<ask for custom vpc_id>> \
+    --vpc.ec2subnets <<privateSubnetId1,privateSubnetId2>> \
+    --vpc.elbsubnets <<publicSubnetId1,publicSubnetId2>> \
+    --vpc.elbpublic \
+    --profile <<your AWS profile>>
 ```
 
 6. Subsequent deployment
