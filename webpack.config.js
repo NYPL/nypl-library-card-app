@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const rootPath = path.resolve(__dirname);
 const sassPaths = require('@nypl/design-toolkit').includePaths.map((sassPath) =>
-  `includePaths[]=${sassPath}`,
+  `includePaths[]=${sassPath}`
 ).join('&');
 
 // PRODUCTION ENVIRONMENT CONFIG
