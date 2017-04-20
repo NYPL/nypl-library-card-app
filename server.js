@@ -74,7 +74,6 @@ const server = app.listen(app.get('port'), (error) => {
   } else {
     app.get('logger').info(`Express server for ${appConfig.appName} is listening at ${app.get('port')}`);
   }
-  ;
 });
 
 // This function is called when you want the server to die gracefully
@@ -120,6 +119,5 @@ if (!isProduction) {
     } else {
       app.get('logger').info(`Webpack Dev Server listening at ${appConfig.webpackDevServerPort}`)
     }
-    ;
   });
 }

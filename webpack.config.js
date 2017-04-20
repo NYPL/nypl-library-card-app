@@ -2,9 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanBuild = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 const rootPath = path.resolve(__dirname);
 const sassPaths = require('@nypl/design-toolkit').includePaths.map((sassPath) =>
-  `includePaths[]=${sassPath}`
+  `includePaths[]=${sassPath}`,
 ).join('&');
 
 // PRODUCTION ENVIRONMENT CONFIG
@@ -12,6 +13,7 @@ if (process.env.NODE_ENV === 'production') {
   module.exports = {
     devtool: 'source-map',
     entry: [
+      'babel-polyfill',
       path.resolve(rootPath, 'src/client/client.jsx'),
     ],
     output: {
@@ -60,6 +62,7 @@ if (process.env.NODE_ENV === 'production') {
     entry: [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
+      'babel-polyfill',
       path.resolve(rootPath, 'src/client/client.jsx'),
     ],
     output: {
