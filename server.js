@@ -122,5 +122,4 @@ if (!isProduction) {
     }
     ;
   });
-  
 }
