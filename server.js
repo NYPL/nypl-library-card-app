@@ -119,5 +119,6 @@ if (!isProduction) {
     } else {
       app.get('logger').info(`Webpack Dev Server listening at ${appConfig.webpackDevServerPort}`)
     }
+    ;
   });
 }
