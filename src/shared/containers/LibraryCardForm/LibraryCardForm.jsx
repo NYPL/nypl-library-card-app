@@ -393,7 +393,6 @@ class LibraryCardForm extends React.Component {
           label="E-mail"
           fieldName="email"
           value={this.state.patronFields.email}
-          isRequired
           handleOnChange={this.handleInputChange('email')}
           errorState={this.state.fieldErrors}
         />

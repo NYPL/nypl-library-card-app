@@ -13,7 +13,7 @@ const FormField = ({
   handleOnChange,
 }) => {
   const renderErrorBox = () => (
-    isRequired && errorState && errorState[fieldName] ?
+     errorState && errorState[fieldName] ?
       <div className="nypl-field-status">{errorState[fieldName]}</div> : null
   );
 
