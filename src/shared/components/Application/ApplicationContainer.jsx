@@ -66,5 +66,4 @@ class ApplicationContainer extends React.Component {
   }
 }
 
-
 export default ApplicationContainer;

@@ -250,7 +250,7 @@ class LibraryCardForm extends React.Component {
           apiResults: response.data,
           focusOnResult: true,
         });
-        this.props.callBackParent(true);
+        this.props.updateBannerDisplay(true);
         this.scrollToTop(500);
       })
       .catch((error) => {
