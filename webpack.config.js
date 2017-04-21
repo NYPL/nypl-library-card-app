@@ -14,6 +14,7 @@ if (process.env.NODE_ENV === 'production') {
     devtool: 'source-map',
     entry: [
       'babel-polyfill',
+      'raf',
       path.resolve(rootPath, 'src/client/client.jsx'),
     ],
     output: {
@@ -63,6 +64,7 @@ if (process.env.NODE_ENV === 'production') {
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
       'babel-polyfill',
+      'raf',
       path.resolve(rootPath, 'src/client/client.jsx'),
     ],
     output: {
