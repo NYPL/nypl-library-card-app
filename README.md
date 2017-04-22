@@ -1,4 +1,4 @@
-# NYPL Library Card App - Alpha
+# NYPL Library Card App
 
 The front end site that allows patrons to get a library card.
 It is built with React and Express and communicates with other
