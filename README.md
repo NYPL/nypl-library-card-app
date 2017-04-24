@@ -26,6 +26,16 @@ needs to run.
 
 ## Deployment
 
+### Git Strategy
+
+`master` is stable but bleeding edge. Cut feature branches off of `master`.
+Send PRs to be merged into `master`.
+
+`master` ==gets merged to==> `qa` ==gets merged into==> `production`.
+
+The `qa` branch should be what's running in the QA environment.
+The `production` branch should be what's running in the production environment.
+
 ### AWS Elastic Beanstalk
 1. `.ebextensions` directory needed at application's root directory
 2. `.ebextensions/environment.config` to store environment variables. For environment variables that needs to be hidden,
