@@ -31,7 +31,7 @@ const ErrorBox = ({ errorObject, className }) => {
 
   return (
     <div className={className}>
-      <h2>There were errors in your form submission. Please correct the fields below:</h2>
+      <h2>There were errors in your form submission. Please correct these fields:</h2>
       {renderErrorByType(errorObject)}
     </div>
   );
