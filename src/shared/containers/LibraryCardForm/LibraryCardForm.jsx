@@ -49,7 +49,7 @@ class LibraryCardForm extends React.Component {
 
   componentDidUpdate() {
     if (this.state.focusOnResult) {
-      this.focusOnApiResponse();
+      // this.focusOnApiResponse();
     }
   }
 
@@ -275,6 +275,20 @@ class LibraryCardForm extends React.Component {
     );
   }
 
+  renderInfoMessage() {
+    const { apiResults } = this.state;
+    let infoMarkup;
+    if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
+      infoMarkup = 'There were errors in your form submission. Please review all fields and resubmit.';
+    }
+
+    return (
+      <div className='infoMessage'>
+        {infoMarkup}
+      </div>
+    )
+  }
+
   renderFormFields() {
     return !this.state.formEntrySuccessful ? (
       <form className="nypl-library-card-form" onSubmit={this.handleSubmit}>
@@ -420,10 +434,11 @@ class LibraryCardForm extends React.Component {
     return (
       <div className="nypl-column-half nypl-column-offset-one">
         <div ref={(c) => { this.dynamicSection = c; }} tabIndex="0">
-          {this.renderApiErrors()}
           {this.renderConfirmation()}
+          {this.renderApiErrors()}
         </div>
         {this.renderFormFields()}
+        {this.renderInfoMessage()}
       </div>
     );
   }
