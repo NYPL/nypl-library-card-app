@@ -233,6 +233,8 @@ class LibraryCardForm extends React.Component {
           apiResults: response.data,
           focusOnResult: true,
         });
+        this.props.updateBannerDisplay(true);
+        this.scrollToTop(500);
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });

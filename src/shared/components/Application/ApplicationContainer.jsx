@@ -31,21 +31,40 @@ const dummyBannerContent = {
   },
 };
 
-const ApplicationContainer = () => (
-  <div className="nypl-library-card-app">
-    <Header
-      skipNav={{ target: 'main-content' }}
-      navData={navConfig.current}
-    />
-    <section id="main-content" className="main-content">
-      <ContentBanner
-        className="nypl-library-card-banner"
-        items={[dummyBannerContent]}
-      />
-      <LibraryCardForm />
-    </section>
-    <Footer />
-  </div>
-);
+
+class ApplicationContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bannerStatus: false,
+    }
+  };
+
+  updateBannerDisplay(bannerStatus) {
+    this.setState({bannerStatus: bannerStatus});
+  }
+
+  render() {
+    
+    return (<div className="nypl-library-card-app">
+        <Header
+          skipNav={{ target: 'main-content' }}
+          navData={navConfig.current}
+        />
+        <section id="main-content" className="main-content">
+          {
+            this.state.bannerStatus ?
+              "" :
+              <ContentBanner className="nypl-library-card-banner"
+                             items={[dummyBannerContent]} />
+          }
+          <LibraryCardForm initialBannerStatus={this.state.bannerStatus}
+                           updateBannerDisplay={(bannerStatus) => this.updateBannerDisplay(bannerStatus)}/>
+        </section>
+        <Footer />
+      </div>
+    );
+  }
+}
 
 export default ApplicationContainer;
