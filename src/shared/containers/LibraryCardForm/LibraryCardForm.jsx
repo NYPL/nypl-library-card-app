@@ -90,8 +90,7 @@ class LibraryCardForm extends React.Component {
       window.requestAnimationFrame(step);
     }
 
-    requestID = window.requestAnimationFrame(step);
-    window.cancelAnimationFrame(requestID);
+    window.requestAnimationFrame(step);
   }
 
   validateField(fieldName, value) {
