@@ -74,25 +74,25 @@ class LibraryCardForm extends React.Component {
       this.setState({ focusOnResult: false });
     }
   }
-  scrollToTop(scrollDuration) {
-    const raf = require('raf');
-    raf.polyfill();
-    const cosParameter = window.scrollY / 2;
-    const duration = scrollDuration || 250;
-    let scrollCount = 0;
-    let oldTimestamp = performance.now();
-
-    function step(newTimestamp) {
-      scrollCount += Math.PI / (duration / (newTimestamp - oldTimestamp));
-      if (scrollCount >= Math.PI) window.scrollTo(0, 0);
-      if (window.scrollY === 0) return;
-      window.scrollTo(0, Math.round(cosParameter + (cosParameter * Math.cos(scrollCount))));
-      oldTimestamp = newTimestamp;
-      window.requestAnimationFrame(step);
-    }
-
-    window.requestAnimationFrame(step);
-  }
+  // scrollToTop(scrollDuration) {
+  //   const raf = require('raf');
+  //   raf.polyfill();
+  //   const cosParameter = window.scrollY / 2;
+  //   const duration = scrollDuration || 250;
+  //   let scrollCount = 0;
+  //   let oldTimestamp = performance.now();
+  //
+  //   function step(newTimestamp) {
+  //     scrollCount += Math.PI / (duration / (newTimestamp - oldTimestamp));
+  //     if (scrollCount >= Math.PI) window.scrollTo(0, 0);
+  //     if (window.scrollY === 0) return;
+  //     window.scrollTo(0, Math.round(cosParameter + (cosParameter * Math.cos(scrollCount))));
+  //     oldTimestamp = newTimestamp;
+  //     window.requestAnimationFrame(step);
+  //   }
+  //
+  //   window.requestAnimationFrame(step);
+  // }
 
   validateField(fieldName, value) {
     const { fieldErrors } = this.state;
@@ -252,11 +252,11 @@ class LibraryCardForm extends React.Component {
           apiResults: response.data,
           focusOnResult: true,
         });
-        this.scrollToTop(500);
+        // this.scrollToTop(500);
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
-        this.scrollToTop(500);
+        // this.scrollToTop(500);
         if (error.response && error.response.data) {
           // The request was made, but the server responded with a status code
           // that falls out of the range of 2xx
