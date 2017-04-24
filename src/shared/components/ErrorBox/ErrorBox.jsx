@@ -13,6 +13,10 @@ const ErrorBox = ({ errorObject, className }) => {
         error =
           <li>This <a href="#patronUsername">username</a> is already taken. Please try again.</li>;
         break;
+       case 'age-not-valid':
+        error =
+          <li>Please enter a valid date, MM/DD/YYYY. If you are 13 or younger, please apply in person.</li>;
+        break;
       case 'exception':
         error = (errorObj.debugMessage && errorObj.debugMessage.includes('pin')) ?
           <li>The <a href="#patronPin">PIN</a> is invalid. Please use 4 digits.</li> :
