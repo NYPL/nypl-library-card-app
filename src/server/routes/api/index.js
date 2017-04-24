@@ -115,6 +115,7 @@ function constructPatronObject(object) {
   return {
     name: fullName,
     email,
+    dateOfBirth,
     address: addressObject,
     username,
     pin,
