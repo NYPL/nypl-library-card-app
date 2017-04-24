@@ -1,7 +1,5 @@
 // Polyfill Promise for legacy browsers
 import 'babel-polyfill';
-import 'raf';
-
 import React from 'react';
 import { render } from 'react-dom';
 import ApplicationContainer from '../shared/components/Application/ApplicationContainer';

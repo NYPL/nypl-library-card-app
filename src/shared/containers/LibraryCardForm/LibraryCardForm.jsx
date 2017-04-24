@@ -9,6 +9,7 @@ import { isDate } from '../../../utils/FormValidationUtils';
 import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
 import ErrorBox from '../../components/ErrorBox/ErrorBox';
+import raf from 'raf/polyfill';
 
 class LibraryCardForm extends React.Component {
   constructor(props) {
