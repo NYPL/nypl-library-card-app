@@ -49,7 +49,7 @@ class LibraryCardForm extends React.Component {
 
   componentDidUpdate() {
     if (this.state.focusOnResult) {
-      this.focusOnApiResponse();
+      // this.focusOnApiResponse();
     }
   }
 
@@ -73,23 +73,6 @@ class LibraryCardForm extends React.Component {
       this.dynamicSection.focus();
       this.setState({ focusOnResult: false });
     }
-  }
-  scrollToTop(scrollDuration) {
-    const cosParameter = window.scrollY / 2;
-    const duration = scrollDuration || 250;
-    let scrollCount = 0;
-    let oldTimestamp = performance.now();
-
-    function step(newTimestamp) {
-      scrollCount += Math.PI / (duration / (newTimestamp - oldTimestamp));
-      if (scrollCount >= Math.PI) window.scrollTo(0, 0);
-      if (window.scrollY === 0) return;
-      window.scrollTo(0, Math.round(cosParameter + (cosParameter * Math.cos(scrollCount))));
-      oldTimestamp = newTimestamp;
-      window.requestAnimationFrame(step);
-    }
-
-    window.requestAnimationFrame(step);
   }
 
   validateField(fieldName, value) {
@@ -255,7 +238,6 @@ class LibraryCardForm extends React.Component {
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
-        this.scrollToTop(500);
         if (error.response && error.response.data) {
           // The request was made, but the server responded with a status code
           // that falls out of the range of 2xx
@@ -293,6 +275,20 @@ class LibraryCardForm extends React.Component {
         {resultMarkup}
       </div>
     );
+  }
+
+  renderInfoMessage() {
+    const { apiResults } = this.state;
+    let infoMarkup;
+    if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
+      infoMarkup = 'There were errors in your form submission. Please review all fields and resubmit.';
+    }
+
+    return (
+      <div className='infoMessage'>
+        {infoMarkup}
+      </div>
+    )
   }
 
   renderFormFields() {
@@ -444,6 +440,7 @@ class LibraryCardForm extends React.Component {
           {this.renderConfirmation()}
         </div>
         {this.renderFormFields()}
+        {this.renderInfoMessage()}
       </div>
     );
   }
