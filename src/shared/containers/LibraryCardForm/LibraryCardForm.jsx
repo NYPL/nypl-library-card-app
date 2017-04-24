@@ -89,7 +89,7 @@ class LibraryCardForm extends React.Component {
         }
         break;
       case 'email':
-        if (!isEmail(value)) {
+        if (value.length > 0 && !isEmail(value)) {
           fieldErrors[fieldName] = 'Please enter a valid email address.';
           currentErrors = fieldErrors;
         } else {
@@ -393,7 +393,6 @@ class LibraryCardForm extends React.Component {
           label="E-mail"
           fieldName="email"
           value={this.state.patronFields.email}
-          isRequired
           handleOnChange={this.handleInputChange('email')}
           errorState={this.state.fieldErrors}
         />
