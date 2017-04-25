@@ -59,10 +59,6 @@ function constructPatronObject(object) {
     return constructErrorObject('missing-required-field', 'The lastName field is missing.');
   }
 
-  if (isEmpty(email)) {
-    return constructErrorObject('missing-required-field', 'The email field is missing.');
-  }
-
   if (!isEmail(email)) {
     return constructErrorObject('invalid-field', 'The email field is invalid.');
   }
