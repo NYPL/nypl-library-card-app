@@ -57,7 +57,7 @@ Confirmation.propTypes = {
 }
 
 Confirmation.defaultProps = {
-  className: 'nypl-confirmation-section',
+  className: 'nypl-full-width-wrapper',
 };
 
 export default Confirmation;
