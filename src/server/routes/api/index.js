@@ -137,7 +137,7 @@ export function initializeAppAuth(req, res, next) {
         next();
       }).catch((error) => {
         req.app.get('logger').error(error);
-        res.status(400).json(constructErrorObject(
+        return res.status(400).json(constructErrorObject(
           'app-auth-failed',
           'Could not authenticate App with OAuth service',
           400,
