@@ -1,6 +1,6 @@
 import React from 'react';
 
-const     FormField = ({
+const FormField = ({
   id,
   className,
   value,
@@ -11,8 +11,8 @@ const     FormField = ({
   isRequired,
   errorState,
   handleOnChange,
-  checkboxText,
-  checked
+  checked,
+  checkboxText
 }) => {
   const renderErrorBox = () => (
      errorState && errorState[fieldName] ?
