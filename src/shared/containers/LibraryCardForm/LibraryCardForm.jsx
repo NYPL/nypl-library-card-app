@@ -433,13 +433,15 @@ class LibraryCardForm extends React.Component {
 
   render() {
     return (
-      <div className="nypl-column-full">
-        <div ref={(c) => { this.dynamicSection = c; }} tabIndex="0">
-          {this.renderConfirmation()}
+      <div className="nypl-row">
+        <div className="nypl-column-half nypl-column-offset-one">
+          <div ref={(c) => { this.dynamicSection = c; }} tabIndex="0">
+            {this.renderConfirmation()}
+            {this.renderApiErrors()}
+          </div>
+          {this.renderFormFields()}
           {this.renderApiErrors()}
         </div>
-        {this.renderFormFields()}
-        {this.renderApiErrors()}
       </div>
     );
   }
