@@ -241,6 +241,7 @@ class LibraryCardForm extends React.Component {
         this.scrollToTop(500);
       })
       .catch((error) => {
+        // Debugging only (Alpha)
         this.setState({ formProcessing: false, focusOnResult: true });
         if (error.response && error.response.data) {
           // The request was made, but the server responded with a status code
