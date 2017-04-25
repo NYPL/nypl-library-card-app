@@ -19,12 +19,12 @@ const dummyBannerContent = {
   },
   image: {
     bannerImage: {
-      'full-uri': 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/banner/public/spring_staffpicks_banner.png?itok=IICOHEVM',
+      'full-uri': 'https://d140u095r09w96.cloudfront.net/sites/default/files/get-a-library-card-banner.png',
       description: 'Alt for image 01',
       alt: 'Alt for image 01',
     },
     mobileBannerImage: {
-      'full-uri': 'https://d2720ur5668dri.cloudfront.net/sites/default/files/styles/mobile_banner/public/spring_staffpicks_mobile.jpg?itok=chvIHr2Y',
+      'full-uri': 'https://d140u095r09w96.cloudfront.net/sites/default/files/get-a-library-card-banner.png',
       description: 'Alt for image 01',
       alt: 'Alt for image 01',
     },
