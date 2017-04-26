@@ -233,8 +233,8 @@ export function createPatron(req, res) {
               res.json({ status: 200, response: result.data.data.simplePatron });
             }
           )
-          .catch(err => res.status(400).json({
-            status: 400,
+          .catch(err => res.status(err.response.status).json({
+            status: err.response.status,
             response: err.response.data,
           }));
       }))
