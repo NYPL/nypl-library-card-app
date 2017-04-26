@@ -229,8 +229,9 @@ export function createPatron(req, res) {
             { simplePatron: patronData },
             constructApiHeaders(token),
           )
-          .then(result =>
-            res.json({ status: 200, response: result.data.data.simplePatron });
+          .then(result => {
+              res.json({ status: 200, response: result.data.data.simplePatron });
+            }
           )
           .catch(err => res.status(400).json({
             status: 400,
