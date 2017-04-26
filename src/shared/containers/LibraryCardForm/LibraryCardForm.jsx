@@ -211,6 +211,7 @@ class LibraryCardForm extends React.Component {
         zip,
         username,
         pin,
+        ecommunications,
       } = this.state.patronFields;
 
       axios.post('/create-patron', {
@@ -225,6 +226,7 @@ class LibraryCardForm extends React.Component {
         zip,
         username,
         pin,
+        ecommunications,
       }, {
         headers: { 'csrf-token': this.state.csrfToken },
       })
