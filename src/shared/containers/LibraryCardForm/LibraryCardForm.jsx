@@ -32,7 +32,7 @@ class LibraryCardForm extends React.Component {
         zip: '',
         username: '',
         pin: '',
-        subscribe: true,
+        ecommunications: true,
       },
     };
 
@@ -167,7 +167,7 @@ class LibraryCardForm extends React.Component {
       case 'line2':
         currentErrors = fieldErrors;
         break;
-      case 'subscribe':
+      case 'ecommunications':
         currentErrors = fieldErrors;
         break;
     }
@@ -211,6 +211,7 @@ class LibraryCardForm extends React.Component {
         zip,
         username,
         pin,
+        ecommunications,
       } = this.state.patronFields;
 
       axios.post('/create-patron', {
@@ -225,6 +226,7 @@ class LibraryCardForm extends React.Component {
         zip,
         username,
         pin,
+        ecommunications,
       }, {
         headers: { 'csrf-token': this.state.csrfToken },
       })
@@ -238,7 +240,6 @@ class LibraryCardForm extends React.Component {
           focusOnResult: true,
         });
         this.props.updateBannerDisplay(true);
-        this.scrollToTop(500);
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
@@ -401,15 +402,15 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
         />
         <FormField
-          id="patronSubscription"
+          id="patronECommunications"
           className="nypl-terms-checkbox"
           type="checkbox"
           label=""
-          fieldName="subscribe"
+          fieldName="ecommunications"
           checkboxText="Yes, I would like to receive information about NYPL’s programs and services."
-          handleOnChange={this.handleInputChange('subscribe')}
-          value={this.state.patronFields.subscribe}
-          checked={this.state.patronFields.subscribe}
+          handleOnChange={this.handleInputChange('ecommunications')}
+          value={this.state.patronFields.ecommunications}
+          checked={this.state.patronFields.ecommunications}
         />
         <FormField
           id="patronUsername"
