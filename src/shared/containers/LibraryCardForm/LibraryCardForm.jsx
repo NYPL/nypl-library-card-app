@@ -239,6 +239,7 @@ class LibraryCardForm extends React.Component {
           apiResults: response.data,
           focusOnResult: true,
         });
+        window.location.href="https://petrol.nypl.org/library-card/confirmation";
         this.props.updateBannerDisplay(true);
       })
       .catch((error) => {
@@ -277,23 +278,9 @@ class LibraryCardForm extends React.Component {
 
     return (
       <div className={errorClass}>
-        {resultMarkup}
+        { resultMarkup }
       </div>
     );
-  }
-
-  renderInfoMessage() {
-    const { apiResults } = this.state;
-    let infoMarkup;
-    if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
-      infoMarkup = 'There were errors in your form submission. Please review all fields and resubmit.';
-    }
-
-    return (
-      <div className='infoMessage'>
-        {infoMarkup}
-      </div>
-    )
   }
 
   renderFormFields() {
@@ -452,7 +439,6 @@ class LibraryCardForm extends React.Component {
       <div className="nypl-row">
         <div className="nypl-column-half nypl-column-offset-one">
           <div ref={(c) => { this.dynamicSection = c; }} tabIndex="0">
-            {this.renderConfirmation()}
             {this.renderApiErrors()}
           </div>
           {this.renderFormFields()}
