@@ -11,7 +11,7 @@ import logger from './src/server/logger';
 // Api Routes
 import { initializeAppAuth, createPatron } from './src/server/routes/api';
 // App Routes
-import renderApp from './src/server/routes/render';
+import import renderApp from './src/server/routes/render';
 // App Config File
 import appConfig from './appConfig';
 // Global Configuration Variables
