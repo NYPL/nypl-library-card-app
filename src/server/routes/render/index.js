@@ -2,10 +2,9 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Route, RouterContext, match } from 'react-router';
 import ApplicationContainer from '../../../shared/components/Application/ApplicationContainer';
-import CardBarcodeContainer from '../../../shared/components/Application/CardBarcodeContainer';
 import config from '../../../../appConfig';
 
-export function renderApp(req, res) {
+export default function renderApp(req, res) {
   const isProduction = process.env.NODE_ENV === 'production';
   const csrfToken = req.csrfToken();
   const routes = (
