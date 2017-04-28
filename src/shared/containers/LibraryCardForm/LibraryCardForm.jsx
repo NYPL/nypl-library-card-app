@@ -235,12 +235,11 @@ class LibraryCardForm extends React.Component {
         console.log(response.data);
         this.setState({
           formProcessing: false,
-          formEntrySuccessful: true,
+          formEntrySuccessful: false,
           apiResults: response.data,
           focusOnResult: true,
         });
         window.location.href="https://petrol.nypl.org/library-card/confirmation";
-        this.props.updateBannerDisplay(true);
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
@@ -441,8 +440,8 @@ class LibraryCardForm extends React.Component {
           <div ref={(c) => { this.dynamicSection = c; }} tabIndex="0">
             {this.renderApiErrors()}
             {this.renderFormFields()}
+            {this.renderApiErrors()}
           </div>
-          {this.renderApiErrors()}
         </div>
       </div>
     );
