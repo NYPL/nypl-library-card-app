@@ -440,8 +440,8 @@ class LibraryCardForm extends React.Component {
         <div className="nypl-column-half nypl-column-offset-one">
           <div ref={(c) => { this.dynamicSection = c; }} tabIndex="0">
             {this.renderApiErrors()}
+            {this.renderFormFields()}
           </div>
-          {this.renderFormFields()}
           {this.renderApiErrors()}
         </div>
       </div>
