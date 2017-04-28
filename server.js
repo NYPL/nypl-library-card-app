@@ -65,6 +65,9 @@ app.use((err, req, res, next) => {
 // GET route displays LibraryCard App
 app.get('/library-card', renderApp);
 
+// GET route displays patron's barcode
+app.get('/library-card/barcode', renderApp);
+
 // POST route used to submit LibraryCard params
 app.post('/create-patron', initializeAppAuth, createPatron);
 
