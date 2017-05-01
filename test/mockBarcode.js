@@ -1,0 +1,8 @@
+const mockBarcode = {
+  src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJ8AAAAyCAIAAADN+56HAAAAsklEQVR4nO3ROwrDMB' +
+  'QAwYfvf+e4M8EfFSakWGYKYSFZCO18lmbmGL+np4/Tzj+s3t7ter3bE55+fzrtxep6z29fZmEbutQtU7dM3TJ1y9QtU7dM' +
+  '3TJ1y9QtU7dM3TJ1y9QtU7dM3TJ1y9QtU7dM3TJ1y9QtU7dM3TJ1y9QtU7dM3TJ1y9QtU7dM3TJ1y9QtU7dM3TJ1y9QtU7' +
+  'dM3TJ1y9QtU7dM3TJ1y9QtU7dM3TJ1y3b6Ggpn/P9O6AAAAABJRU5ErkJggg==',
+};
+
+export default mockBarcode;
