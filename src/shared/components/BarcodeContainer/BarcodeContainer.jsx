@@ -18,6 +18,10 @@ class BarcodeContainer extends React.Component {
           navData={navConfig.current}
         />
         <section id="main-content" className="main-content">
+          <div className="barcode-container">
+            <div className="get-card-message">
+            </div>
+          </div>
           <img src={this.state.barcodeSrc} alt="barcode" />
         </section>
         <Footer />

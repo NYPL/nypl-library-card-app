@@ -17,16 +17,22 @@ describe('BarcodeContainer', () => {
       component = mount(<BarcodeContainer />);
     });
 
-          console.log(component);
-
     it('should have <Header>, <Footer>, and <section>.', () => {
-    //   expect(component.find('.nypl-library-card-app').find('Header')).to.have.length(1);
-    //   expect(component.find('.nypl-library-card-app').find('Footer')).to.have.length(1);
-    //   expect(component.find('.nypl-library-card-app').find('section')).to.have.length(1);
+      expect(component.find('.nypl-library-card-app').find('Header')).to.have.length(1);
+      expect(component.find('.nypl-library-card-app').find('Footer')).to.have.length(1);
+      expect(component.find('.nypl-library-card-app').find('section')).to.have.length(1);
     });
-    // it('should have a <section> with the ID, "main-content".');
-    // it('should have a <section> that contains a <div> with class "barcode-container"');
-    // it('should have a <section> that contains a <div> with class "get-card-message"');
+    it('should have a <section> with the ID, "main-content".', () => {
+      expect(component.find('.nypl-library-card-app').find('section').prop('id')).to.equal('main-content');
+    });
+    it('should have a <section> that contains a <div> with class "barcode-container"', () => {
+      expect(component.find('section').find('.barcode-container')).to.have.length(1);
+      expect(component.find('.barcode-container').type()).to.equal('div');
+    });
+    it('should have a <section> that contains a <div> with class "get-card-message"', () => {
+      expect(component.find('.barcode-container').find('.get-card-message')).to.have.length(1);
+      expect(component.find('.get-card-message').type()).to.equal('div');
+    });
     // it('should check if "nyplIdentityPatron" cookie exists');
   });
 
