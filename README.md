@@ -61,3 +61,8 @@ eb create <<environment name>> --instance_type <<size of instance>> \
 
 6. Subsequent deployment
 `eb deploy <<environment name>> --profile <<your AWS profile>>`
+
+## Changelog
+
+### v0.2.0
+> Added react-router to the appliaction for handling multiple pages.
