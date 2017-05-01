@@ -1,60 +1,73 @@
 /* eslint-env mocha */
 import React from 'react';
+// import sinon from 'sinon';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
 // Import the component that is going to be tested
-import Barcode from './../src/shared/components/BarcodeContainer/BarcodeContainer.jsx';
+import BarcodeContainer from './../src/shared/components/BarcodeContainer/BarcodeContainer.jsx';
 // Import mock data
 import mockBarcode from './mockBarcode.js';
 
 describe('BarcodeContainer', () => {
   describe('Before making API calls, <BarcodeContainer>', () => {
-    it('should have <Header>, <Footer>, and <section>.');
-    it('should have a <section> with the ID, "main-content".');
-    it('should have a <section> that contains a <div> with class "barcode-container"');
-    it('should have a <section> that contains a <div> with class "get-card-message"');
-    it('should check if "nyplIdentityPatron" cookie exists');
-  });
+    let component;
 
-  describe('If "nyplIdentityPatron" does not exist', () => {
-    it('should lead the user to OAuth log in page.');
-  });
-
-  describe('If "nyplIdentityPatron" exists but the access token is expired', () => {
-    it('should call the cookie refresh API endpoint.');
-    it('should log the patron out, if calling the refesh link fails');
-  });
-
-  describe('If "nyplIdentityPatron" exists with valid access token', () => {
-    describe('<BarcodeContainer> should make an API call to the barcode endpoint.');
-
-    describe('If the API call to the barcode endpoint fails', () => {
-      it('should have a <section> that contains a <div> with class "get-card-message"');
-      it('should have the state of "patronName" with the value of ""');
-      it('should have the state of "barcodeSrc" with a value of ""');
-      it('should have the state of "barcodeNumber" with a value of ""');
+    before(() => {
+      component = mount(<BarcodeContainer />);
     });
 
-    describe('If the API call to the barcode endpoint successes', () => {
-      describe('but no valid "barcodeSrc" value', () => {
-        it('should have a <section> contains a <p> with class "patron-name"');
-        it('should have a <section> that contains a <div> with class "get-card-message"');
-        it('should have the state of "patronName" with the value of "Stewart, Darren"');
-        it('should have the state of "barcodeSrc" with a value of ""');
-        it('should have the state of "barcodeNumber" with a value of ""');
-      });
+          console.log(component);
 
-      describe('with valid "barcodeSrc" value', () => {
-        it('should have a <section> contains a <p> with class "patron-name"');
-        it('should have a <section> contains a <img> with class "barcode-image"');
-        it('should have a <section> contains a <p> with class "barcode-number"');
-        it('should have the state of "patronName" with the value of "Stewart, Darren"');
-        it('should have the state of "barcodeSrc" with a value');
-        it('should have the state of "barcodeNumber" with a value of "25553095887111"');
-      });
+    it('should have <Header>, <Footer>, and <section>.', () => {
+    //   expect(component.find('.nypl-library-card-app').find('Header')).to.have.length(1);
+    //   expect(component.find('.nypl-library-card-app').find('Footer')).to.have.length(1);
+    //   expect(component.find('.nypl-library-card-app').find('section')).to.have.length(1);
     });
+    // it('should have a <section> with the ID, "main-content".');
+    // it('should have a <section> that contains a <div> with class "barcode-container"');
+    // it('should have a <section> that contains a <div> with class "get-card-message"');
+    // it('should check if "nyplIdentityPatron" cookie exists');
   });
+
+//   describe('If "nyplIdentityPatron" does not exist', () => {
+//     it('should lead the user to OAuth log in page.');
+//   });
+
+//   describe('If "nyplIdentityPatron" exists but the access token is expired', () => {
+//     it('should call the cookie refresh API endpoint.');
+//     it('should log the patron out, if calling the refesh link fails');
+//   });
+
+//   describe('If "nyplIdentityPatron" exists with valid access token', () => {
+//     describe('<BarcodeContainer> should make an API call to the barcode endpoint.');
+
+//     describe('If the API call to the barcode endpoint fails', () => {
+//       it('should have a <section> that contains a <div> with class "get-card-message"');
+//       it('should have the state of "patronName" with the value of ""');
+//       it('should have the state of "barcodeSrc" with a value of ""');
+//       it('should have the state of "barcodeNumber" with a value of ""');
+//     });
+
+//     describe('If the API call to the barcode endpoint successes', () => {
+//       describe('but no valid "barcodeSrc" value', () => {
+//         it('should have a <section> contains a <p> with class "patron-name"');
+//         it('should have a <section> that contains a <div> with class "get-card-message"');
+//         it('should have the state of "patronName" with the value of "Stewart, Darren"');
+//         it('should have the state of "barcodeSrc" with a value of ""');
+//         it('should have the state of "barcodeNumber" with a value of ""');
+//       });
+
+//       describe('with valid "barcodeSrc" value', () => {
+//         it('should have a <section> contains a <p> with class "patron-name"');
+//         it('should have a <section> contains a <img> with class "barcode-image"');
+//         it('should have a <section> contains a <p> with class "barcode-number"');
+//         it('should have the state of "patronName" with the value of "Stewart, Darren"');
+//         it('should have the state of "barcodeSrc" with a value');
+//         it('should have the state of "barcodeNumber" with a value of "25553095887111"');
+//       });
+//     });
+//   });
 });
 
 
