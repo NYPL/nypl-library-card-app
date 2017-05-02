@@ -281,34 +281,34 @@ class LibraryCardForm extends React.Component {
       </div>
     );
   }
-
+  
   renderFormFields() {
     return !this.state.formEntrySuccessful ? (
       <form className="nypl-library-card-form" onSubmit={this.handleSubmit}>
         <h2>Please enter the following information</h2>
         <h3>Personal Information</h3>
-        <FormField
-          id="patronFirstName"
-          className="nypl-name-field"
-          type="text"
-          label="First Name"
-          fieldName="firstName"
-          isRequired
-          value={this.state.patronFields.firstName}
-          handleOnChange={this.handleInputChange('firstName')}
-          errorState={this.state.fieldErrors}
-        />
-        <FormField
-          id="patronLastName"
-          className="nypl-name-field"
-          type="text"
-          label="Last Name"
-          fieldName="lastName"
-          isRequired
-          value={this.state.patronFields.lastName}
-          handleOnChange={this.handleInputChange('lastName')}
-          errorState={this.state.fieldErrors}
-        />
+        <div className="nypl-name-field">
+          <FormField
+            id="patronFirstName"
+            type="text"
+            label="First Name"
+            fieldName="firstName"
+            isRequired
+            value={this.state.patronFields.firstName}
+            handleOnChange={this.handleInputChange('firstName')}
+            errorState={this.state.fieldErrors}
+          />
+          <FormField
+            id="patronLastName"
+            type="text"
+            label="Last Name"
+            fieldName="lastName"
+            isRequired
+            value={this.state.patronFields.lastName}
+            handleOnChange={this.handleInputChange('lastName')}
+            errorState={this.state.fieldErrors}
+          />
+        </div>
         <FormField
           id="patronDob"
           className="nypl-date-field"
