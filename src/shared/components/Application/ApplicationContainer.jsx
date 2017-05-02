@@ -20,13 +20,13 @@ const dummyBannerContent = {
   image: {
     bannerImage: {
       'full-uri': 'https://d140u095r09w96.cloudfront.net/sites/default/files/get-a-library-card-banner.png',
-      description: 'Alt for image 01',
-      alt: 'Alt for image 01',
+      description: 'books centered on a bookshelf',
+      alt: 'books centered on a bookshelf',
     },
     mobileBannerImage: {
       'full-uri': 'https://d140u095r09w96.cloudfront.net/sites/default/files/get-a-library-card-banner.png',
-      description: 'Alt for image 01',
-      alt: 'Alt for image 01',
+      description: 'books centered on a bookshelf',
+      alt: 'books centered on a bookshelf',
     },
   },
 };
