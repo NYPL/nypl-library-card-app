@@ -1,9 +1,10 @@
 /* eslint-env mocha */
 import React from 'react';
-// import sinon from 'sinon';
+import sinon from 'sinon';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
-
+// Import the related functions
+import { utils } from '@nypl/dgx-header-component';
 // Import the component that is going to be tested
 import BarcodeContainer from './../src/shared/components/BarcodeContainer/BarcodeContainer.jsx';
 // Import mock data
@@ -12,9 +13,20 @@ import mockBarcode from './mockBarcode.js';
 describe('BarcodeContainer', () => {
   describe('Before making API calls, <BarcodeContainer>', () => {
     let component;
+    let getPatronCookie;
 
     before(() => {
+      getPatronCookie = sinon.stub(BarcodeContainer.prototype, 'getPatronCookie')
+        .withArgs('nyplIdentityPatron')
+        .returns(true);
+
       component = mount(<BarcodeContainer />);
+    });
+
+    after(() => {
+      // stubs don't have restore(), the way to restore them is go back to the original functions.
+      // However, if the sutbs only use the methods that belong to spies, restore() will work.
+      BarcodeContainer.prototype.getPatronCookie.restore();
     });
 
     it('should have <Header>, <Footer>, and <section>.', () => {
@@ -33,7 +45,10 @@ describe('BarcodeContainer', () => {
       expect(component.find('.barcode-container').find('.get-card-message')).to.have.length(1);
       expect(component.find('.get-card-message').type()).to.equal('div');
     });
-    // it('should check if "nyplIdentityPatron" cookie exists');
+    it('should check if "nyplIdentityPatron" cookie exists', () => {
+      expect(getPatronCookie.calledOnce).to.equal(true);
+      getPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron');
+    });
   });
 
 //   describe('If "nyplIdentityPatron" does not exist', () => {

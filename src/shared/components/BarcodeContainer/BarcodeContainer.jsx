@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, navConfig } from '@nypl/dgx-header-component';
+import { Header, navConfig, utils } from '@nypl/dgx-header-component';
 import Footer from '@nypl/dgx-react-footer';
 
 class BarcodeContainer extends React.Component {
@@ -9,6 +9,20 @@ class BarcodeContainer extends React.Component {
       barcodeSrc: '',
     }
   };
+
+  componentDidMount() {
+    // Checks if "nyplIdentityPatron" cookie exists.
+    this.getPatronCookie('nyplIdentityPatron');
+  }
+
+  getPatronCookie(cookie) {
+    if (utils.hasCookie(cookie)) {
+      console.log(utils.getCookie(cookie));
+      return utils.getCookie(cookie);
+    }
+
+    // make OAuth call to get cookie
+  }
 
   render() {
     return (
