@@ -8,17 +8,16 @@ import { utils } from '@nypl/dgx-header-component';
 // Import the component that is going to be tested
 import BarcodeContainer from './../src/shared/components/BarcodeContainer/BarcodeContainer.jsx';
 // Import mock data
-import mockBarcode from './mockBarcode.js';
+import mockBarcodeContainerTestData from './mockBarcodeContainerTestData.js';
 
 describe('BarcodeContainer', () => {
-  describe('Before making API calls, <BarcodeContainer>', () => {
+  describe('Before making API calls for barcodes, <BarcodeContainer>', () => {
     let component;
-    let getPatronCookie;
+    let getOAuthAccessToken;
 
     before(() => {
-      getPatronCookie = sinon.stub(BarcodeContainer.prototype, 'getPatronCookie')
-        .withArgs('nyplIdentityPatron')
-        .returns(true);
+      getOAuthAccessToken = sinon.stub(BarcodeContainer.prototype, 'getOAuthAccessToken')
+        .withArgs('nyplIdentityPatron');
 
       component = mount(<BarcodeContainer />);
     });
@@ -26,7 +25,7 @@ describe('BarcodeContainer', () => {
     after(() => {
       // stubs don't have restore(), the way to restore them is go back to the original functions.
       // However, if the sutbs only use the methods that belong to spies, restore() will work.
-      BarcodeContainer.prototype.getPatronCookie.restore();
+      BarcodeContainer.prototype.getOAuthAccessToken.restore();
     });
 
     it('should have <Header>, <Footer>, and <section>.', () => {
@@ -45,9 +44,9 @@ describe('BarcodeContainer', () => {
       expect(component.find('.barcode-container').find('.get-card-message')).to.have.length(1);
       expect(component.find('.get-card-message').type()).to.equal('div');
     });
-    it('should check if "nyplIdentityPatron" cookie exists', () => {
-      expect(getPatronCookie.calledOnce).to.equal(true);
-      getPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron');
+    it('should try to get the "access_token" from the "nyplIdentityPatron" cookie', () => {
+      expect(getOAuthAccessToken.calledOnce).to.equal(true);
+      getOAuthAccessToken.alwaysCalledWithExactly('nyplIdentityPatron');
     });
   });
 

@@ -6,19 +6,19 @@ class BarcodeContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      accessToken: '',
       barcodeSrc: '',
     }
   };
 
   componentDidMount() {
     // Checks if "nyplIdentityPatron" cookie exists.
-    this.getPatronCookie('nyplIdentityPatron');
+    this.getOAuthAccessToken('nyplIdentityPatron');
   }
 
-  getPatronCookie(cookie) {
+  getOAuthAccessToken(cookie) {
     if (utils.hasCookie(cookie)) {
-      console.log(utils.getCookie(cookie));
-      return utils.getCookie(cookie);
+      this.setState({ accessToken: JSON.parse(utils.getCookie(cookie)).access_token || '' });
     }
 
     // make OAuth call to get cookie
