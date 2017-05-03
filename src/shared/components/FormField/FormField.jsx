@@ -58,7 +58,7 @@ FormField.propTypes = {
   type: React.PropTypes.string.isRequired,
   fieldName: React.PropTypes.string.isRequired,
   errorState: React.PropTypes.object,
-  value: React.PropTypes.string,
+  value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]) ,
   className: React.PropTypes.string,
   ph: React.PropTypes.string,
   isRequired: React.PropTypes.bool,
