@@ -20,7 +20,7 @@ const FormField = ({
   );
   const requiredMarkup = isRequired ? <span className="nypl-required-field"> Required</span> : null;
   const errorClass = errorState && errorState[fieldName] ? 'nypl-field-error' : '';
-  
+
   const renderInstructionText = (text) => {
     if (!text) {
       return null;
