@@ -23,7 +23,7 @@ const CheckBox = ({
   return (
     <div className={`${className} ${errorClass}`}>
       <label htmlFor={id}>
-        <span>{label}</span>
+        <span style={{"display":"none"}}>{label}</span>
         {requiredMarkup}
       </label>
       <input
@@ -46,7 +46,7 @@ CheckBox.propTypes = {
   type: React.PropTypes.string.isRequired,
   fieldName: React.PropTypes.string.isRequired,
   errorState: React.PropTypes.object,
-  value: React.PropTypes.booleanValue,
+  value: React.PropTypes.bool,
   className: React.PropTypes.string,
   isRequired: React.PropTypes.bool,
   handleOnChange: React.PropTypes.func,
@@ -55,7 +55,6 @@ CheckBox.propTypes = {
 CheckBox.defaultProps = {
   className: '',
   value: '',
-  ph: '',
   isRequired: false,
   errorState: {},
 };
