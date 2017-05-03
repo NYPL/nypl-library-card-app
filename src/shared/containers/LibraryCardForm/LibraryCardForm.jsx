@@ -8,6 +8,7 @@ import { isEmail, isLength, isAlphanumeric } from 'validator';
 import { isDate } from '../../../utils/FormValidationUtils';
 import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
+import CheckBox from '../../components/FormField/CheckBox';
 import ErrorBox from '../../components/ErrorBox/ErrorBox';
 
 class LibraryCardForm extends React.Component {
@@ -67,13 +68,6 @@ class LibraryCardForm extends React.Component {
     return (!isEmpty(firstName) && !isEmpty(lastName)) ? (
       `${firstName.trim()} ${lastName.trim()}`
     ) : null;
-  }
-
-  focusOnApiResponse() {
-    if (this.dynamicSection) {
-      this.dynamicSection.focus();
-      this.setState({ focusOnResult: false });
-    }
   }
 
   validateField(fieldName, value) {
@@ -281,7 +275,7 @@ class LibraryCardForm extends React.Component {
       </div>
     );
   }
-  
+
   renderFormFields() {
     return !this.state.formEntrySuccessful ? (
       <form className="nypl-library-card-form" onSubmit={this.handleSubmit}>
@@ -387,11 +381,11 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('email')}
           errorState={this.state.fieldErrors}
         />
-        <FormField
+        <CheckBox
           id="patronECommunications"
           className={this.state.patronFields.ecommunications? "nypl-terms-checkbox checked" : "nypl-terms-checkbox"}
           type="checkbox"
-          label=""
+          label="ECommunications"
           fieldName="ecommunications"
           checkboxText="Yes, I would like to receive information about NYPL’s programs and services."
           handleOnChange={this.handleInputChange('ecommunications')}

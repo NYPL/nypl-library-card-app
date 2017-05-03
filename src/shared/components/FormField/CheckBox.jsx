@@ -1,19 +1,20 @@
 import React from 'react';
 
-const FormField = ({
+const CheckBox = ({
   id,
   className,
   value,
-  ph,
   label,
   type,
   fieldName,
   isRequired,
   errorState,
-  handleOnChange
+  handleOnChange,
+  checked,
+  checkboxText
 }) => {
   const renderErrorBox = () => (
-     errorState && errorState[fieldName] ?
+    errorState && errorState[fieldName] ?
       <div className="nypl-field-status">{errorState[fieldName]}</div> : null
   );
 
@@ -27,36 +28,35 @@ const FormField = ({
       </label>
       <input
         value={value}
-        placeholder={ph}
         type={type}
         id={id}
         required={isRequired}
-        aria-required={isRequired}
         onChange={handleOnChange}
+        checked={checked}
       />
+      {checkboxText}
       {renderErrorBox()}
     </div>
   );
 };
 
-FormField.propTypes = {
+CheckBox.propTypes = {
   id: React.PropTypes.string.isRequired,
   label: React.PropTypes.string.isRequired,
   type: React.PropTypes.string.isRequired,
   fieldName: React.PropTypes.string.isRequired,
   errorState: React.PropTypes.object,
-  value: React.PropTypes.string,
+  value: React.PropTypes.booleanValue,
   className: React.PropTypes.string,
-  ph: React.PropTypes.string,
   isRequired: React.PropTypes.bool,
   handleOnChange: React.PropTypes.func,
 };
 
-FormField.defaultProps = {
+CheckBox.defaultProps = {
   className: '',
   value: '',
   ph: '',
   isRequired: false,
   errorState: {},
 };
-export default FormField;
+export default CheckBox;
