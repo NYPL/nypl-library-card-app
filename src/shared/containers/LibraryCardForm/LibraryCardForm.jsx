@@ -8,7 +8,6 @@ import { isEmail, isLength, isAlphanumeric } from 'validator';
 import { isDate } from '../../../utils/FormValidationUtils';
 import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
-import CheckBox from '../../components/FormField/CheckBox';
 import ErrorBox from '../../components/ErrorBox/ErrorBox';
 
 class LibraryCardForm extends React.Component {

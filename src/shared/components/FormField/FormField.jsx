@@ -20,6 +20,7 @@ const FormField = ({
   );
   const requiredMarkup = isRequired ? <span className="nypl-required-field"> Required</span> : null;
   const errorClass = errorState && errorState[fieldName] ? 'nypl-field-error' : '';
+  
   const renderInstructionText = (text) => {
     if (!text) {
       return null;
@@ -33,7 +34,11 @@ const FormField = ({
   return (
     <div className={`${className} ${errorClass}`}>
       <label htmlFor={id}>
-        <span>{label}</span>
+        {
+          type === 'checkbox' ?
+            <span className={"visuallyHidden"}>{label}</span> :
+            <span>{label}</span>
+        }
         {requiredMarkup}
       </label>
       <input
@@ -42,7 +47,7 @@ const FormField = ({
         type={type}
         id={id}
         required={isRequired}
-        aria-required={isRequired}
+        aria-required={ type === 'checkbox' ? null : isRequired }
         onChange={handleOnChange}
         checked={checked}
       />
