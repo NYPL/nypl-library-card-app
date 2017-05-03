@@ -402,13 +402,13 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('email')}
           errorState={this.state.fieldErrors}
         />
-        <CheckBox
+        <FormField
           id="patronECommunications"
           className={this.state.patronFields.ecommunications? "nypl-terms-checkbox checked" : "nypl-terms-checkbox"}
           type="checkbox"
           label="ECommunications"
           fieldName="ecommunications"
-          checkboxText="Yes, I would like to receive information about NYPL’s programs and services."
+          instructionText="Yes, I would like to receive information about NYPL’s programs and services."
           handleOnChange={this.handleInputChange('ecommunications')}
           value={this.state.patronFields.ecommunications}
           checked={this.state.patronFields.ecommunications}

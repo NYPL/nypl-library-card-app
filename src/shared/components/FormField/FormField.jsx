@@ -10,15 +10,26 @@ const FormField = ({
   fieldName,
   isRequired,
   errorState,
-  handleOnChange
+  handleOnChange,
+  checked,
+  instructionText,
 }) => {
   const renderErrorBox = () => (
      errorState && errorState[fieldName] ?
       <div className="nypl-field-status">{errorState[fieldName]}</div> : null
   );
-
   const requiredMarkup = isRequired ? <span className="nypl-required-field"> Required</span> : null;
   const errorClass = errorState && errorState[fieldName] ? 'nypl-field-error' : '';
+  const renderInstructionText = (text) => {
+    if (!text) {
+      return null;
+    }
+
+    return <span>{text}</span>;
+  };
+
+  const checkPh = (ph) ? (ph) : null;
+
   return (
     <div className={`${className} ${errorClass}`}>
       <label htmlFor={id}>
@@ -27,13 +38,15 @@ const FormField = ({
       </label>
       <input
         value={value}
-        placeholder={ph}
+        placeholder={checkPh}
         type={type}
         id={id}
         required={isRequired}
         aria-required={isRequired}
         onChange={handleOnChange}
+        checked={checked}
       />
+      {renderInstructionText(instructionText)}
       {renderErrorBox()}
     </div>
   );
