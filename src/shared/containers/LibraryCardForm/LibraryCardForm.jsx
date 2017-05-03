@@ -70,6 +70,13 @@ class LibraryCardForm extends React.Component {
     ) : null;
   }
 
+  focusOnApiResponse() {
+    if (this.dynamicSection) {
+      this.dynamicSection.focus();
+      this.setState({ focusOnResult: false });
+    }
+  }
+
   validateField(fieldName, value) {
     const { fieldErrors } = this.state;
     let currentErrors = {};
@@ -274,6 +281,20 @@ class LibraryCardForm extends React.Component {
         { resultMarkup }
       </div>
     );
+  }
+
+  renderInfoMessage() {
+    const { apiResults } = this.state;
+    let infoMarkup;
+    if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
+      infoMarkup = 'There were errors in your form submission. Please review all fields and resubmit.';
+    }
+
+    return (
+      <div className='infoMessage'>
+        {infoMarkup}
+      </div>
+    )
   }
 
   renderFormFields() {
