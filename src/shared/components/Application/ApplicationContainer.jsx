@@ -54,7 +54,7 @@ class ApplicationContainer extends React.Component {
         <section id="main-content" className="main-content">
           {
             this.state.bannerStatus ?
-              "" :
+              null :
               <ContentBanner className="nypl-library-card-banner"
                              items={[dummyBannerContent]} />
           }
