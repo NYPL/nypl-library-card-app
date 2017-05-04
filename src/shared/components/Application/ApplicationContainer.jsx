@@ -40,13 +40,13 @@ const ApplicationContainer = () => (
       skipNav={{ target: 'main-content' }}
       navData={navConfig.current}
     />
-    <section id="main-content" className="main-content">
+    <main id="main-content">
       <ContentBanner
         className="nypl-library-card-banner"
         items={[dummyBannerContent]}
       />
       <LibraryCardForm />
-    </section>
+    </main>
     <Footer />
   </div>
 );

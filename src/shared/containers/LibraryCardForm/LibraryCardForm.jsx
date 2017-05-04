@@ -403,7 +403,7 @@ class LibraryCardForm extends React.Component {
         />
         <FormField
           id="patronECommunications"
-          className={this.state.patronFields.ecommunications? "nypl-terms-checkbox checked" : "nypl-terms-checkbox"}
+          className={this.state.patronFields.ecommunications_pref? "nypl-terms-checkbox checked" : "nypl-terms-checkbox"}
           type="checkbox"
           label="ECommunications"
           fieldName="ecommunications"
