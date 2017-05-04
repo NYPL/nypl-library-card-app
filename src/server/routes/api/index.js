@@ -48,7 +48,7 @@ function constructPatronObject(object) {
     zip,
     username,
     pin,
-    ecommunications,
+    ecommunications_pref: ecommunications_pref,
   } = object;
 
 
@@ -112,7 +112,7 @@ function constructPatronObject(object) {
     address: addressObject,
     username,
     pin,
-    ecommunications,
+    ecommunications_pref,
   };
 }
 
