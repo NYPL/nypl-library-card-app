@@ -1,8 +1,11 @@
 import React from 'react';
 import { Header, navConfig } from '@nypl/dgx-header-component';
 import Footer from '@nypl/dgx-react-footer';
-import ContentBanner from 'dgx-homepage-content-banner';
 import LibraryCardForm from '../../containers/LibraryCardForm/LibraryCardForm';
+// ContentBanner is inside the app instead of importing from dgx-homepage-content-banner
+//   for h1 title tag accessibility compliance.
+// import ContentBanner from 'dgx-homepage-content-banner';
+import ContentBanner from '../../components/ContentBanner/ContentBanner';
 
 const dummyBannerContent = {
   title: {
@@ -31,40 +34,21 @@ const dummyBannerContent = {
   },
 };
 
-
-class ApplicationContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      bannerStatus: false,
-    }
-  };
-
-  updateBannerDisplay(bannerStatus) {
-    this.setState({bannerStatus: bannerStatus});
-  }
-
-  render() {
-    
-    return (<div className="nypl-library-card-app">
-        <Header
-          skipNav={{ target: 'main-content' }}
-          navData={navConfig.current}
-        />
-        <section id="main-content" className="main-content">
-          {
-            this.state.bannerStatus ?
-              null :
-              <ContentBanner className="nypl-library-card-banner"
-                             items={[dummyBannerContent]} />
-          }
-          <LibraryCardForm initialBannerStatus={this.state.bannerStatus}
-                           updateBannerDisplay={(bannerStatus) => this.updateBannerDisplay(bannerStatus)}/>
-        </section>
-        <Footer />
-      </div>
-    );
-  }
-}
+const ApplicationContainer = () => (
+  <div className="nypl-library-card-app">
+    <Header
+      skipNav={{ target: 'main-content' }}
+      navData={navConfig.current}
+    />
+    <section id="main-content" className="main-content">
+      <ContentBanner
+        className="nypl-library-card-banner"
+        items={[dummyBannerContent]}
+      />
+      <LibraryCardForm />
+    </section>
+    <Footer />
+  </div>
+);
 
 export default ApplicationContainer;
