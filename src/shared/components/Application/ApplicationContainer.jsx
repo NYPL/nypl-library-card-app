@@ -34,7 +34,6 @@ const dummyBannerContent = {
   },
 };
 
-
 const ApplicationContainer = () => (
   <div className="nypl-library-card-app">
     <Header
@@ -51,6 +50,5 @@ const ApplicationContainer = () => (
     <Footer />
   </div>
 );
-
 
 export default ApplicationContainer;
