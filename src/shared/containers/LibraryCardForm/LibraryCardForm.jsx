@@ -281,13 +281,13 @@ class LibraryCardForm extends React.Component {
       </div>
     );
   }
-
+  
   renderFormFields() {
     return !this.state.formEntrySuccessful ? (
       <form className="nypl-library-card-form" onSubmit={this.handleSubmit}>
         <h2>Please enter the following information</h2>
         <h3>Personal Information</h3>
-        <fieldset className="nypl-name-field">
+        <div className="nypl-name-field">
           <FormField
             id="patronFirstName"
             type="text"
@@ -308,7 +308,7 @@ class LibraryCardForm extends React.Component {
             handleOnChange={this.handleInputChange('lastName')}
             errorState={this.state.fieldErrors}
           />
-        </fieldset>
+        </div>
         <FormField
           id="patronDob"
           className="nypl-date-field"
@@ -389,7 +389,7 @@ class LibraryCardForm extends React.Component {
         />
         <FormField
           id="patronECommunications"
-          className="nypl-terms-checkbox"
+          className={this.state.patronFields.ecommunications? "nypl-terms-checkbox checked" : "nypl-terms-checkbox"}
           type="checkbox"
           label=""
           fieldName="ecommunications"
