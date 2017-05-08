@@ -26,7 +26,16 @@ const FormField = ({
       return null;
     }
 
-    return <span>{text}</span>;
+    return (
+      <span
+        class="nypl-field-status"
+        id={`${id}-status`}
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        {text}
+      </span>
+    );
   };
 
   const checkPh = (ph) ? (ph) : null;
@@ -48,6 +57,7 @@ const FormField = ({
         id={id}
         required={isRequired}
         aria-required={ type === 'checkbox' ? null : isRequired }
+        aria-labelledby={ (instructionText) ? `${id}-label ${id}-stauts` : null }
         onChange={handleOnChange}
         checked={checked}
       />
