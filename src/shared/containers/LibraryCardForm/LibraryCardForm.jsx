@@ -28,7 +28,7 @@ class LibraryCardForm extends React.Component {
         line1: '',
         line2: '',
         city: '',
-        state: 'NY',
+        state: '',
         zip: '',
         username: '',
         pin: '',
@@ -150,7 +150,7 @@ class LibraryCardForm extends React.Component {
         break;
       case 'state':
         if (isEmpty(value) || !isLength(value, { min: 2, max: 2 })) {
-          fieldErrors[fieldName] = 'Please enter a 2-character abbreviation.';
+          fieldErrors[fieldName] = 'Please enter a 2-character state abbreviation.';
           currentErrors = fieldErrors;
         } else {
           currentErrors = omit(fieldErrors, fieldName);
@@ -358,6 +358,7 @@ class LibraryCardForm extends React.Component {
           id="patronState"
           className="nypl-text-field"
           type="text"
+          ph="2-letter abbreviation"
           label="State"
           fieldName="state"
           value={this.state.patronFields.state}
