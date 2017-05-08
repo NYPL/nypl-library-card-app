@@ -31,7 +31,7 @@ const ErrorBox = ({ errorObject, className }) => {
 
       if (debug && debug.birthdate) {
         error =
-          <li>Please enter a valid date, MM/DD/YYYY. If you are 13 or younger, please apply in person.</li>;
+          <li>Please enter a valid date, MM/DD/YYYY, including slashes. If you are 13 or younger, please apply in person.</li>;
       } else if (debug && debug.address) {
         error = <li>This address is invalid. Please enter a valid address.</li>;
       } else {
