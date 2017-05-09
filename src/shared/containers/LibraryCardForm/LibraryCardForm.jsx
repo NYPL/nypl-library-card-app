@@ -32,7 +32,7 @@ class LibraryCardForm extends React.Component {
         zip: '',
         username: '',
         pin: '',
-        subscribe: true,
+        ecommunications_pref: true,
       },
     };
 
@@ -167,7 +167,7 @@ class LibraryCardForm extends React.Component {
       case 'line2':
         currentErrors = fieldErrors;
         break;
-      case 'subscribe':
+      case 'ecommunications_pref':
         currentErrors = fieldErrors;
         break;
     }
@@ -211,6 +211,7 @@ class LibraryCardForm extends React.Component {
         zip,
         username,
         pin,
+        ecommunications_pref,
       } = this.state.patronFields;
 
       axios.post('/create-patron', {
@@ -225,6 +226,7 @@ class LibraryCardForm extends React.Component {
         zip,
         username,
         pin,
+        ecommunications_pref,
       }, {
         headers: { 'csrf-token': this.state.csrfToken },
       })
@@ -233,12 +235,11 @@ class LibraryCardForm extends React.Component {
         console.log(response.data);
         this.setState({
           formProcessing: false,
-          formEntrySuccessful: true,
+          formEntrySuccessful: false,
           apiResults: response.data,
           focusOnResult: true,
         });
-        this.props.updateBannerDisplay(true);
-        this.scrollToTop(500);
+        window.location.href="https://www.nypl.org/get-help/library-card/confirmation";
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
@@ -276,7 +277,7 @@ class LibraryCardForm extends React.Component {
 
     return (
       <div className={errorClass}>
-        {resultMarkup}
+        { resultMarkup }
       </div>
     );
   }
@@ -300,7 +301,7 @@ class LibraryCardForm extends React.Component {
       <form className="nypl-library-card-form" onSubmit={this.handleSubmit}>
         <h2>Please enter the following information</h2>
         <h3>Personal Information</h3>
-        <fieldset className="nypl-name-field">
+        <div className="nypl-name-field">
           <FormField
             id="patronFirstName"
             type="text"
@@ -321,7 +322,7 @@ class LibraryCardForm extends React.Component {
             handleOnChange={this.handleInputChange('lastName')}
             errorState={this.state.fieldErrors}
           />
-        </fieldset>
+        </div>
         <FormField
           id="patronDob"
           className="nypl-date-field"
@@ -401,15 +402,15 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
         />
         <FormField
-          id="patronSubscription"
-          className="nypl-terms-checkbox"
+          id="patronECommunications"
+          className={this.state.patronFields.ecommunications_pref? "nypl-terms-checkbox checked" : "nypl-terms-checkbox"}
           type="checkbox"
-          label=""
-          fieldName="subscribe"
-          checkboxText="Yes, I would like to receive information about NYPL’s programs and services."
-          handleOnChange={this.handleInputChange('subscribe')}
-          value={this.state.patronFields.subscribe}
-          checked={this.state.patronFields.subscribe}
+          label="ECommunications"
+          fieldName="ecommunications"
+          instructionText="Yes, I would like to receive information about NYPL’s programs and services."
+          handleOnChange={this.handleInputChange('ecommunications_pref')}
+          value={this.state.patronFields.ecommunications_pref}
+          checked={this.state.patronFields.ecommunications_pref}
         />
         <FormField
           id="patronUsername"
@@ -451,11 +452,10 @@ class LibraryCardForm extends React.Component {
       <div className="nypl-row">
         <div className="nypl-column-half nypl-column-offset-one">
           <div ref={(c) => { this.dynamicSection = c; }} tabIndex="0">
-            {this.renderConfirmation()}
+            {this.renderApiErrors()}
+            {this.renderFormFields()}
             {this.renderApiErrors()}
           </div>
-          {this.renderFormFields()}
-          {this.renderApiErrors()}
         </div>
       </div>
     );
