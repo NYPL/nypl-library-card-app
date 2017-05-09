@@ -28,7 +28,7 @@ const FormField = ({
 
     return (
       <span
-        class="nypl-field-status"
+        className="nypl-field-status"
         id={`${id}-status`}
         aria-live="assertive"
         aria-atomic="true"
