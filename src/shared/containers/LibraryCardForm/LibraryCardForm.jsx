@@ -239,7 +239,7 @@ class LibraryCardForm extends React.Component {
           apiResults: response.data,
           focusOnResult: true,
         });
-        window.location.href="https://www.nypl.org/get-help/library-card/confirmation";
+        window.location.href="https://www.nypl.org/get-help/library-card/confirmation" + "?" + "patronID=" + response.data.patron_id + "&" + "patronName=" + this.getFullName();
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
