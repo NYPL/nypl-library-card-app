@@ -28,7 +28,7 @@ class LibraryCardForm extends React.Component {
         line1: '',
         line2: '',
         city: '',
-        state: 'NY',
+        state: '',
         zip: '',
         username: '',
         pin: '',
@@ -158,7 +158,7 @@ class LibraryCardForm extends React.Component {
         break;
       case 'zip':
         if (isEmpty(value) || isNaN(value) || !isLength(value, { min: 5, max: 5 })) {
-          fieldErrors[fieldName] = 'Please enter a 5-digit postal code.';
+          fieldErrors[fieldName] = 'Please enter a 5 digits postal code.';
           currentErrors = fieldErrors;
         } else {
           currentErrors = omit(fieldErrors, fieldName);
@@ -272,6 +272,7 @@ class LibraryCardForm extends React.Component {
     // TODO: Will be modified once we establish the correct API response from Wrapper
     if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
       errorClass = 'nypl-error-content';
+
       resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" />;
     }
 
@@ -280,20 +281,6 @@ class LibraryCardForm extends React.Component {
         { resultMarkup }
       </div>
     );
-  }
-
-  renderInfoMessage() {
-    const { apiResults } = this.state;
-    let infoMarkup;
-    if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
-      infoMarkup = 'There were errors in your form submission. Please review all fields and resubmit.';
-    }
-
-    return (
-      <div className='infoMessage'>
-        {infoMarkup}
-      </div>
-    )
   }
 
   renderFormFields() {
@@ -328,7 +315,7 @@ class LibraryCardForm extends React.Component {
           className="nypl-date-field"
           type="text"
           ph="MM/DD/YYYY"
-          label="Date of birth"
+          label="Date of Birth"
           fieldName="dateOfBirth"
           isRequired
           value={this.state.patronFields.dateOfBirth}
@@ -371,6 +358,7 @@ class LibraryCardForm extends React.Component {
           id="patronState"
           className="nypl-text-field"
           type="text"
+          ph="2-letter abbreviation"
           label="State"
           fieldName="state"
           value={this.state.patronFields.state}
@@ -405,9 +393,9 @@ class LibraryCardForm extends React.Component {
           id="patronECommunications"
           className={this.state.patronFields.ecommunications_pref? "nypl-terms-checkbox checked" : "nypl-terms-checkbox"}
           type="checkbox"
-          label="ECommunications"
-          fieldName="ecommunications"
-          instructionText="Yes, I would like to receive information about NYPL’s programs and services."
+          label="Email Checkbox"
+          fieldName="ecommunications_pref"
+          instructionText="Yes, I would like to receive information about NYPL's programs and services."
           handleOnChange={this.handleInputChange('ecommunications_pref')}
           value={this.state.patronFields.ecommunications_pref}
           checked={this.state.patronFields.ecommunications_pref}
@@ -427,7 +415,7 @@ class LibraryCardForm extends React.Component {
           id="patronPin"
           className="nypl-text-field"
           type="text"
-          label="Pin"
+          label="PIN"
           fieldName="pin"
           value={this.state.patronFields.pin}
           isRequired
