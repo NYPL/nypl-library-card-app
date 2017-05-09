@@ -83,7 +83,7 @@ class LibraryCardForm extends React.Component {
     switch (fieldName) {
       case 'dateOfBirth':
         if (!isDate(value)) {
-          fieldErrors[fieldName] = 'Please enter a valid date, MM/DD/YYYY.';
+          fieldErrors[fieldName] = 'Please enter a valid date, MM/DD/YYYY, including slashes.';
           currentErrors = fieldErrors;
         } else {
           currentErrors = omit(fieldErrors, fieldName);
@@ -314,8 +314,8 @@ class LibraryCardForm extends React.Component {
           id="patronDob"
           className="nypl-date-field"
           type="text"
-          ph="MM/DD/YYYY"
-          label="Date of Birth"
+          ph="MM/DD/YYYY, including slashes"
+          label="Date of birth"
           fieldName="dateOfBirth"
           isRequired
           value={this.state.patronFields.dateOfBirth}
