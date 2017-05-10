@@ -9,7 +9,7 @@ const ErrorBox = ({ errorObject, className }) => {
     if (type) {
       switch (type) {
         case 'unrecognized-address':
-          error = <li>This address is invalid. Please enter a valid address.</li>;
+          error = <li>This <a href="#patronStreet1">address</a> is invalid. Please enter a valid address.</li>;
           break;
         case 'unavailable-username':
           error =
@@ -31,9 +31,9 @@ const ErrorBox = ({ errorObject, className }) => {
 
       if (debug && debug.birthdate) {
         error =
-          <li>Please enter a valid date, MM/DD/YYYY, including slashes. If you are 13 or younger, please apply in person.</li>;
+          <li>Please enter a valid <a href="#patronDob">date</a>, MM/DD/YYYY, including slashes. If you are 13 or younger, please apply in person.</li>;
       } else if (debug && debug.address) {
-        error = <li>This address is invalid. Please enter a valid address.</li>;
+        error = <li>This <a href="#patronStreet1">address</a> is invalid. Please enter a valid address.</li>;
       } else {
         error = <li>{defaultError}</li>;
       }
