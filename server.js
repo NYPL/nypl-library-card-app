@@ -63,13 +63,13 @@ app.use((err, req, res, next) => {
 });
 
 // GET route displays LibraryCard App
-app.get('/library-card', renderApp);
+app.get('/library-card/new', renderApp);
 
 // GET route displays patron's barcode
-app.get('/library-card/barcode', renderApp);
+app.get('/library-card/new/barcode', renderApp);
 
 // POST route used to submit LibraryCard params
-app.post('/create-patron', initializeAppAuth, createPatron);
+app.post('/library-card/new/create-patron', initializeAppAuth, createPatron);
 
 const server = app.listen(app.get('port'), (error) => {
   if (error) {
