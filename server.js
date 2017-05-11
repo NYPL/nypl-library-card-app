@@ -62,6 +62,11 @@ app.use((err, req, res, next) => {
   });
 });
 
+app.get('/', (req, res) => {
+  res.redirect('/library-card/new');
+});
+
+
 // GET route displays LibraryCard App
 app.get('/library-card/new', renderApp);
 
@@ -77,7 +82,6 @@ const server = app.listen(app.get('port'), (error) => {
   } else {
     app.get('logger').info(`Express server for ${appConfig.appName} is listening at ${app.get('port')}`);
   }
-  ;
 });
 
 // This function is called when you want the server to die gracefully
