@@ -4,7 +4,8 @@ import ApplicationContainer from './../components/Application/ApplicationContain
 import BarcodeContainer from './../components/BarcodeContainer/BarcodeContainer';
 
 export default (
-  <Route path="/library-card/new" component={ApplicationContainer} >
+  <Route path="/">
+    <Route path="/library-card/new" component={ApplicationContainer} />
     <Route path="/library-card/new/barcode" component={BarcodeContainer} />
   </Route>
 );

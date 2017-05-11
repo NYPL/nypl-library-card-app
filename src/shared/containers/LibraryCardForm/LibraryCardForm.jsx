@@ -214,7 +214,7 @@ class LibraryCardForm extends React.Component {
         ecommunications_pref,
       } = this.state.patronFields;
 
-      axios.post('create-patron', {
+      axios.post('/library-card/new/create-patron', {
         firstName,
         lastName,
         email,
