@@ -50,7 +50,7 @@ class LibraryCardForm extends React.Component {
 
   componentDidUpdate() {
     if (this.state.focusOnResult) {
-      // this.focusOnApiResponse();
+      this.focusOnApiResponse();
     }
   }
 
@@ -72,6 +72,7 @@ class LibraryCardForm extends React.Component {
   focusOnApiResponse() {
     if (this.dynamicSection) {
       this.dynamicSection.focus();
+      console.log(this.dynamicSection);
       this.setState({ focusOnResult: false });
     }
   }
@@ -447,7 +448,6 @@ class LibraryCardForm extends React.Component {
           <div ref={(c) => { this.dynamicSection = c; }} tabIndex="0">
             {this.renderApiErrors()}
             {this.renderFormFields()}
-            {this.renderApiErrors()}
           </div>
         </div>
       </div>
