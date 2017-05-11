@@ -66,7 +66,6 @@ app.get('/', (req, res) => {
   res.redirect('/library-card/new');
 });
 
-
 // GET route displays LibraryCard App
 app.get('/library-card/new', renderApp);
 
