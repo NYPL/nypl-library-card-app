@@ -21,14 +21,14 @@
     <meta name="csrf-token" content="<%- csrfToken %>">
     <% if (isProduction) { %>
       <!-- Minified Styles -->
-      <link rel="stylesheet" type="text/css" href="/library-card/new/styles.css">
+      <link rel="stylesheet" type="text/css" href="styles.css">
     <% } %>
     <script src="https://cdn.optimizely.com/js/284748925.js"></script>
   </head>
   <body>
     <div id="nypl-library-card-app"><%- app %></div>
 		<% if (isProduction) { %>
-	    <script async src="/library-card/new/bundle.js"></script>
+	    <script async src="bundle.js"></script>
 	  <% } else { %>
 	    <script src="http://localhost:3000/bundle.js"></script>
 	  <% } %>
