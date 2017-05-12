@@ -274,7 +274,7 @@ class LibraryCardForm extends React.Component {
     if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
       errorClass = 'nypl-error-content';
 
-      resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" ref="errorBox" />;
+      resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" />;
     }
 
     return (
