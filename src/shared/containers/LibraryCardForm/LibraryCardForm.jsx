@@ -72,12 +72,9 @@ class LibraryCardForm extends React.Component {
   }
 
   focusOnApiResponse() {
-    console.log('what we want to focus ', ReactDOM.findDOMNode(this.refs['ApiErrors'].refs['ErrorBox']));
-    if (ReactDOM.findDOMNode(this.refs['ApiErrors'].refs['ErrorBox'])) {
-      setTimeout(() => ReactDOM.findDOMNode(this.refs['ApiErrors'].refs['ErrorBox']).focus(), 1000);
+     if (this.dynamicSection) {
+      this.dynamicSection.focus();
       this.setState({ focusOnResult: false });
-
-      console.log('what we want to focus ', ReactDOM.findDOMNode(this.refs['ApiErrors'].refs['ErrorBox']));
     }
   }
 
@@ -448,9 +445,9 @@ class LibraryCardForm extends React.Component {
     return (
       <div className="nypl-row">
         <div className="nypl-column-half nypl-column-offset-one">
-          <div tabIndex="0">
+          <div>
             <ApiErrors
-              childRef="ErrorBox"
+              childRef={(el) => { this.dynamicSection = el; }}
               apiResults={this.state.apiResults}
               ref="ApiErrors"
             />
@@ -480,7 +477,7 @@ class ApiErrors extends React.Component {
     }
 
     return (
-      <div ref={this.props.childRef} className={errorClass}>
+      <div ref={this.props.childRef} className={errorClass} tabIndex="0">
         {resultMarkup}
       </div>
     );
