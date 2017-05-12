@@ -61,7 +61,7 @@ const FormField = ({
         aria-labelledby={ (instructionText) ? `${id}-label ${id}-stauts` : null }
         onChange={handleOnChange}
         checked={checked}
-        maxLength={maxLength}
+        maxLength={maxLength || null}
       />
       {renderInstructionText(instructionText)}
       {renderErrorBox()}
