@@ -10,8 +10,6 @@ import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
 import ErrorBox from '../../components/ErrorBox/ErrorBox';
 
-import ReactDOM from 'react-dom';
-
 class LibraryCardForm extends React.Component {
   constructor(props) {
     super(props);
