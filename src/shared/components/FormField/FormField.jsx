@@ -13,6 +13,7 @@ const FormField = ({
   handleOnChange,
   checked,
   instructionText,
+  maxLength,
 }) => {
   const renderErrorBox = () => (
      errorState && errorState[fieldName] ?
@@ -60,6 +61,7 @@ const FormField = ({
         aria-labelledby={ (instructionText) ? `${id}-label ${id}-stauts` : null }
         onChange={handleOnChange}
         checked={checked}
+        maxLength={maxLength || null}
       />
       {renderInstructionText(instructionText)}
       {renderErrorBox()}
