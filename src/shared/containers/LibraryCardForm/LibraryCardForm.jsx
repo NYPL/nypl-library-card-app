@@ -10,6 +10,8 @@ import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
 import ApiErrors from '../../components/ApiErrors/ApiErrors';
 
+import ReactDOM from 'react-dom';
+
 class LibraryCardForm extends React.Component {
   constructor(props) {
     super(props);
@@ -71,10 +73,12 @@ class LibraryCardForm extends React.Component {
   }
 
   focusOnApiResponse() {
-    if (this.dynamicSection) {
-      this.dynamicSection.focus();
-      console.log(this.dynamicSection);
+    console.log('what we want to focus ', ReactDOM.findDOMNode(this.refs['ApiErrors'].refs['ErrorBox']));
+    if (ReactDOM.findDOMNode(this.refs['ApiErrors'].refs['ErrorBox'])) {
+      setTimeout(() => ReactDOM.findDOMNode(this.refs['ApiErrors'].refs['ErrorBox']).focus(), 1000);
       this.setState({ focusOnResult: false });
+
+      console.log('what we want to focus ', ReactDOM.findDOMNode(this.refs['ApiErrors'].refs['ErrorBox']));
     }
   }
 
@@ -243,7 +247,6 @@ class LibraryCardForm extends React.Component {
           formProcessing: false,
           formEntrySuccessful: false,
           apiResults: response.data,
-          focusOnResult: true,
         });
         window.location.href="https://www.nypl.org/get-help/library-card/confirmation" + "?" + "patronID=" + response.data.response.patron_id + "&" + "patronName=" + this.getFullName();
       })
@@ -463,11 +466,40 @@ class LibraryCardForm extends React.Component {
     return (
       <div className="nypl-row">
         <div className="nypl-column-half nypl-column-offset-one">
-          <div>
-            {this.renderApiErrors(this.state.apiResults)}
+          <div tabIndex="0">
+            <ApiErrors
+              childRef="ErrorBox"
+              apiResults={this.state.apiResults}
+              ref="ApiErrors"
+            />
             {this.renderFormFields()}
           </div>
         </div>
+      </div>
+    );
+  }
+}
+
+class ApiErrors extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const apiResults = this.props.apiResults;
+    let resultMarkup;
+    let errorClass = '';
+
+    // TODO: Will be modified once we establish the correct API response from Wrapper
+    if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
+      errorClass = 'nypl-error-content';
+
+      resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" />;
+    }
+
+    return (
+      <div ref={this.props.childRef} className={errorClass}>
+        {resultMarkup}
       </div>
     );
   }
