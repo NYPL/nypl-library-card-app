@@ -321,6 +321,7 @@ class LibraryCardForm extends React.Component {
           value={this.state.patronFields.dateOfBirth}
           handleOnChange={this.handleInputChange('dateOfBirth')}
           errorState={this.state.fieldErrors}
+          maxLength="10"
         />
         <h3>Address</h3>
         <FormField
@@ -365,6 +366,7 @@ class LibraryCardForm extends React.Component {
           isRequired
           handleOnChange={this.handleInputChange('state')}
           errorState={this.state.fieldErrors}
+          maxLength="2"
         />
         <FormField
           id="patronZip"
@@ -376,6 +378,7 @@ class LibraryCardForm extends React.Component {
           isRequired
           handleOnChange={this.handleInputChange('zip')}
           errorState={this.state.fieldErrors}
+          maxLength="5"
         />
         <h3>Create Your Account</h3>
         <FormField
@@ -410,6 +413,7 @@ class LibraryCardForm extends React.Component {
           isRequired
           handleOnChange={this.handleInputChange('username')}
           errorState={this.state.fieldErrors}
+          maxLength="25"
         />
         <FormField
           id="patronPin"
@@ -421,6 +425,7 @@ class LibraryCardForm extends React.Component {
           isRequired
           handleOnChange={this.handleInputChange('pin')}
           errorState={this.state.fieldErrors}
+          maxLength="4"
         />
         <div>
           <input
