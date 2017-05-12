@@ -8,7 +8,7 @@ import { isEmail, isLength, isAlphanumeric } from 'validator';
 import { isDate } from '../../../utils/FormValidationUtils';
 import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
-import ErrorBox from '../../components/ErrorBox/ErrorBox';
+import ApiErrors from '../../components/ApiErrors/ApiErrors';
 
 class LibraryCardForm extends React.Component {
   constructor(props) {
@@ -70,7 +70,7 @@ class LibraryCardForm extends React.Component {
   }
 
   focusOnApiResponse() {
-     if (this.dynamicSection) {
+    if (this.dynamicSection) {
       this.dynamicSection.focus();
       this.setState({ focusOnResult: false });
     }
@@ -452,31 +452,6 @@ class LibraryCardForm extends React.Component {
             {this.renderFormFields()}
           </div>
         </div>
-      </div>
-    );
-  }
-}
-
-class ApiErrors extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const apiResults = this.props.apiResults;
-    let resultMarkup;
-    let errorClass = '';
-
-    // TODO: Will be modified once we establish the correct API response from Wrapper
-    if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
-      errorClass = 'nypl-error-content';
-
-      resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" />;
-    }
-
-    return (
-      <div ref={this.props.childRef} className={errorClass} tabIndex="0">
-        {resultMarkup}
       </div>
     );
   }
