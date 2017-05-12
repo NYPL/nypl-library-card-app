@@ -73,6 +73,7 @@ class LibraryCardForm extends React.Component {
   focusOnApiResponse() {
     if (this.dynamicSection) {
       this.dynamicSection.focus();
+      console.log(this.dynamicSection);
       this.setState({ focusOnResult: false });
     }
   }
@@ -242,8 +243,9 @@ class LibraryCardForm extends React.Component {
           formProcessing: false,
           formEntrySuccessful: false,
           apiResults: response.data,
+          focusOnResult: true,
         });
-        window.location.href = `https://www.nypl.org/get-help/library-card/confirmation?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
+        window.location.href="https://www.nypl.org/get-help/library-card/confirmation" + "?" + "patronID=" + response.data.response.patron_id + "&" + "patronName=" + this.getFullName();
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
@@ -268,18 +270,23 @@ class LibraryCardForm extends React.Component {
     return formProcessing ? <div className="loading" /> : null;
   }
 
-  renderApiErrors(errorObj) {
-    if (!isEmpty(errorObj) && errorObj.status >= 400) {
-      return (
-        <ApiErrors
-          childRef={(el) => { this.dynamicSection = el; }}
-          apiResults={errorObj}
-          ref="ApiErrors"
-        />
-      );
-    }
+  renderApiErrors() {
+    const { apiResults } = this.state;
+    let resultMarkup;
+    let errorClass = '';
 
-    return null;
+    // TODO: Will be modified once we establish the correct API response from Wrapper
+    if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
+    errorClass = 'nypl-error-content';
+
+    resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" />;
+  }
+
+    return (
+    <div className={errorClass}>
+    { resultMarkup }
+    </div>
+    );
   }
 
   renderFormFields() {
