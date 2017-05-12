@@ -72,7 +72,7 @@ class LibraryCardForm extends React.Component {
   focusOnApiResponse() {
     if (this.dynamicSection) {
       this.dynamicSection.focus();
-      console.log(this.dynamicSection);
+      // console.log(this.dynamicSection.props.children);
       this.setState({ focusOnResult: false });
     }
   }
@@ -238,7 +238,7 @@ class LibraryCardForm extends React.Component {
           formProcessing: false,
           formEntrySuccessful: false,
           apiResults: response.data,
-          focusOnResult: true,
+          // focusOnResult: true,
         });
         window.location.href="https://www.nypl.org/get-help/library-card/confirmation" + "?" + "patronID=" + response.data.response.patron_id + "&" + "patronName=" + this.getFullName();
       })
@@ -274,7 +274,7 @@ class LibraryCardForm extends React.Component {
     if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
       errorClass = 'nypl-error-content';
 
-      resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" />;
+      resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" ref="errorBox" />;
     }
 
     return (
