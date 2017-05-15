@@ -17,7 +17,7 @@ const ErrorBox = ({ errorObject, className }) => {
           break;
         case 'server':
           error =
-            <li>There was a server error processing your request ({errorObject.data}).</li>;
+            <li>There was a server error processing your request. Please try again.</li>;
           break;
         default:
           error = <li>{defaultError}</li>;

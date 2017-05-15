@@ -240,7 +240,6 @@ export function createPatron(req, res) {
               status: err.response.status,
               response: {
                 type: 'server',
-                data: err.message,
               },
             });
           });
@@ -252,7 +251,6 @@ export function createPatron(req, res) {
           status: 400,
           response: {
             type: 'server',
-            data: 'Unable to call external API',
           },
         });
       });
