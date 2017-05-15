@@ -17,6 +17,7 @@ function constructApiHeaders(token = '', contentType = 'application/json') {
       'Content-Type': contentType,
       Authorization: `Bearer ${token}`,
     },
+    timeout: 10000
   };
 }
 
