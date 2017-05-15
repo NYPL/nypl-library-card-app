@@ -232,10 +232,17 @@ export function createPatron(req, res) {
               res.json({ status: 200, response: result.data.data.simplePatron });
             }
           )
-          .catch(err => res.status(err.response.status).json({
-            status: err.response.status,
-            response: err.response.data,
-          }));
+          .catch((err) => {
+            req.app.get('logger').error('Error calling Card Creator API: ', err.message);
+
+            res.status(err.response.status).json({
+              status: err.response.status,
+              response: {
+                type: 'server',
+                data: err.message,
+              },
+            });
+          });
       }))
       .catch((error) => {
         req.app.get('logger').error('Error creating patron: ', error.message);
@@ -246,7 +253,7 @@ export function createPatron(req, res) {
             type: 'server',
             data: 'Unable to call external API',
           },
-        })
+        });
       });
   }
 }
