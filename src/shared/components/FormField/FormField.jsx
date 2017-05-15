@@ -13,7 +13,7 @@ const FormField = ({
   checked,
   instructionText,
   maxLength,
-  onBlur = null,
+  onBlur = () => {},
 }) => {
   const requiredMarkup = isRequired ? <span className="nypl-required-field"> Required</span> : null;
   const renderInstructionText = (text) => {
@@ -59,8 +59,8 @@ const FormField = ({
         type={type}
         id={id}
         required={isRequired}
-        aria-required={ type === 'checkbox' ? null : isRequired }
-        aria-labelledby={ (instructionText) ? `${id}-label ${id}-stauts` : null }
+        aria-required={type === 'checkbox' ? null : isRequired}
+        aria-labelledby={(instructionText) ? `${id}-label ${id}-stauts` : null}
         onChange={handleOnChange}
         checked={checked}
         maxLength={maxLength || null}
@@ -77,10 +77,14 @@ FormField.propTypes = {
   type: React.PropTypes.string.isRequired,
   fieldName: React.PropTypes.string.isRequired,
   errorState: React.PropTypes.object,
-  value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]) ,
+  value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
   className: React.PropTypes.string,
   isRequired: React.PropTypes.bool,
   handleOnChange: React.PropTypes.func,
+  checked: React.PropTypes.bool,
+  instructionText: React.PropTypes.string,
+  maxLength: React.PropTypes.number,
+  onBlur: React.PropTypes.func,
 };
 
 FormField.defaultProps = {

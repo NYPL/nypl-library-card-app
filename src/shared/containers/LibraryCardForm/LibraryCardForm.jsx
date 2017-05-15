@@ -191,7 +191,7 @@ class LibraryCardForm extends React.Component {
       const value = target.value;
 
       this.validateField(property, value);
-    }
+    };
   }
 
   handleSubmit(event) {
@@ -242,7 +242,7 @@ class LibraryCardForm extends React.Component {
           formEntrySuccessful: false,
           apiResults: response.data,
         });
-        window.location.href="https://www.nypl.org/get-help/library-card/confirmation" + "?" + "patronID=" + response.data.response.patron_id + "&" + "patronName=" + this.getFullName();
+        window.location.href = `https://www.nypl.org/get-help/library-card/confirmation?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
@@ -281,7 +281,7 @@ class LibraryCardForm extends React.Component {
 
     return (
       <div className={errorClass}>
-        { resultMarkup }
+        {resultMarkup}
       </div>
     );
   }
@@ -406,11 +406,13 @@ class LibraryCardForm extends React.Component {
         />
         <FormField
           id="patronECommunications"
-          className={this.state.patronFields.ecommunications_pref? "nypl-terms-checkbox checked" : "nypl-terms-checkbox"}
+          className={this.state.patronFields.ecommunications_pref ? 'nypl-terms-checkbox checked' :
+            'nypl-terms-checkbox'}
           type="checkbox"
           label="Email Checkbox"
           fieldName="ecommunications_pref"
-          instructionText="Yes, I would like to receive information about NYPL's programs and services."
+          instructionText={'Yes, I would like to receive information about NYPL\'s programs' +
+            'and services.'}
           handleOnChange={this.handleInputChange('ecommunications_pref')}
           value={this.state.patronFields.ecommunications_pref}
           checked={this.state.patronFields.ecommunications_pref}
