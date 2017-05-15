@@ -313,7 +313,7 @@ class LibraryCardForm extends React.Component {
           id="patronDob"
           className="nypl-date-field"
           type="text"
-          ph="MM/DD/YYYY, including slashes"
+          instructionText="MM/DD/YYYY, including slashes"
           label="Date of birth"
           fieldName="dateOfBirth"
           isRequired
@@ -358,7 +358,7 @@ class LibraryCardForm extends React.Component {
           id="patronState"
           className="nypl-text-field"
           type="text"
-          ph="2-letter abbreviation"
+          instructionText="2-letter abbreviation"
           label="State"
           fieldName="state"
           value={this.state.patronFields.state}
@@ -384,7 +384,7 @@ class LibraryCardForm extends React.Component {
           id="patronEmail"
           className="nypl-text-field"
           type="text"
-          ph="youremail@example.com"
+          instructionText="youremail@example.com"
           label="E-mail"
           fieldName="email"
           value={this.state.patronFields.email}
