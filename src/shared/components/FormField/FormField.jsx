@@ -4,7 +4,6 @@ const FormField = ({
   id,
   className,
   value,
-  ph,
   label,
   type,
   fieldName,
@@ -15,13 +14,7 @@ const FormField = ({
   instructionText,
   maxLength,
 }) => {
-  const renderErrorBox = () => (
-     errorState && errorState[fieldName] ?
-      <div className="nypl-field-status">{errorState[fieldName]}</div> : null
-  );
   const requiredMarkup = isRequired ? <span className="nypl-required-field"> Required</span> : null;
-  const errorClass = errorState && errorState[fieldName] ? 'nypl-field-error' : '';
-
   const renderInstructionText = (text) => {
     if (!text) {
       return null;
@@ -38,8 +31,17 @@ const FormField = ({
       </span>
     );
   };
+  const renderErrorBox = () => (
+    <div className="nypl-field-status">{errorState[fieldName]}</div>
+  );
 
-  const checkPh = (ph) ? (ph) : null;
+  let underInputSuggestion = renderInstructionText(instructionText);
+  let errorClass = '';
+
+  if (errorState && errorState[fieldName]) {
+    errorClass = 'nypl-field-error';
+    underInputSuggestion = renderErrorBox();
+  }
 
   return (
     <div className={`${className} ${errorClass}`}>
@@ -53,7 +55,6 @@ const FormField = ({
       </label>
       <input
         value={value}
-        placeholder={checkPh}
         type={type}
         id={id}
         required={isRequired}
@@ -63,8 +64,7 @@ const FormField = ({
         checked={checked}
         maxLength={maxLength || null}
       />
-      {renderInstructionText(instructionText)}
-      {renderErrorBox()}
+      {underInputSuggestion}
     </div>
   );
 };
@@ -77,7 +77,6 @@ FormField.propTypes = {
   errorState: React.PropTypes.object,
   value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]) ,
   className: React.PropTypes.string,
-  ph: React.PropTypes.string,
   isRequired: React.PropTypes.bool,
   handleOnChange: React.PropTypes.func,
 };
@@ -85,7 +84,6 @@ FormField.propTypes = {
 FormField.defaultProps = {
   className: '',
   value: '',
-  ph: '',
   isRequired: false,
   errorState: {},
 };
