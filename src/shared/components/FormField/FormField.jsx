@@ -46,7 +46,7 @@ const FormField = ({
 
   return (
     <div className={`${className} ${errorClass}`}>
-      <label htmlFor={id}>
+      <label htmlFor={id} id={`${id}-label`}>
         {
           type === 'checkbox' ?
             <span className={"visuallyHidden"}>{label}</span> :
@@ -60,7 +60,7 @@ const FormField = ({
         id={id}
         required={isRequired}
         aria-required={type === 'checkbox' ? null : isRequired}
-        aria-labelledby={(instructionText) ? `${id}-label ${id}-stauts` : null}
+        aria-labelledby={(instructionText) ? `${id}-label ${id}-status` : null}
         onChange={handleOnChange}
         checked={checked}
         maxLength={maxLength || null}
