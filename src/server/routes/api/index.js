@@ -168,7 +168,7 @@ export function initializeAppAuth(req, res, next) {
 function validatePatronAddress(req, object, token) {
   return axios
     .post(
-      `${config.api.validate}aaa/address`,
+      `${config.api.validate}/address`,
       { address: object },
       constructApiHeaders(token),
     )
@@ -178,7 +178,7 @@ function validatePatronAddress(req, object, token) {
 function validatePatronUsername(req, value, token) {
   return axios
     .post(
-      `${config.api.validate}aaaa/username`,
+      `${config.api.validate}/username`,
       { username: value },
       constructApiHeaders(token),
     )
