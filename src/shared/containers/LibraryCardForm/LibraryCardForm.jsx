@@ -267,23 +267,18 @@ class LibraryCardForm extends React.Component {
     return formProcessing ? <div className="loading" /> : null;
   }
 
-  renderApiErrors() {
-    const { apiResults } = this.state;
-    let resultMarkup;
-    let errorClass = '';
-
-    // TODO: Will be modified once we establish the correct API response from Wrapper
-    if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
-      errorClass = 'nypl-error-content';
-
-      resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" />;
+  renderApiErrors(errorObj) {
+    if (!isEmpty(errorObj) && errorObj.status >= 300 && !errorObj.response.id) {
+      return (
+        <ApiErrors
+          childRef={(el) => { this.dynamicSection = el; }}
+          apiResults={errorObj}
+          ref="ApiErrors"
+        />
+      );
     }
 
-    return (
-      <div className={errorClass}>
-        {resultMarkup}
-      </div>
-    );
+    return null;
   }
 
   renderFormFields() {
@@ -461,11 +456,7 @@ class LibraryCardForm extends React.Component {
       <div className="nypl-row">
         <div className="nypl-column-half nypl-column-offset-one">
           <div>
-            <ApiErrors
-              childRef={(el) => { this.dynamicSection = el; }}
-              apiResults={this.state.apiResults}
-              ref="ApiErrors"
-            />
+            {this.renderApiErrors(this.state.apiResults)}
             {this.renderFormFields()}
           </div>
         </div>
