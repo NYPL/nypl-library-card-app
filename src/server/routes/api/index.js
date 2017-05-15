@@ -165,26 +165,23 @@ export function initializeAppAuth(req, res, next) {
   return next();
 }
 
-function validatePatronAddress(object, token) {
+function validatePatronAddress(req, object, token) {
   return axios
     .post(
-      `${config.api.validate}/address`,
+      `${config.api.validate}aaa/address`,
       { address: object },
       constructApiHeaders(token),
     )
     .then(response => response.data)
-    .catch((error) => {
-      req.app.get('logger').error(error);
-    });
 }
 
-function validatePatronUsername(value, token) {
+function validatePatronUsername(req, value, token) {
   return axios
     .post(
-      `${config.api.validate}/username`,
+      `${config.api.validate}aaaa/username`,
       { username: value },
       constructApiHeaders(token),
-    );
+    )
 }
 
 export function createPatron(req, res) {
@@ -199,8 +196,8 @@ export function createPatron(req, res) {
     // Patron Object validation is successful
     // Validate Address and Username
     return axios.all([
-      validatePatronAddress(patronData.address, token),
-      validatePatronUsername(patronData.username, token),
+      validatePatronAddress(req, patronData.address, token),
+      validatePatronUsername(req, patronData.username, token),
     ])
       .then(axios.spread((addressResponse, userRes) => {
         // Both requests are now complete
@@ -240,9 +237,16 @@ export function createPatron(req, res) {
             response: err.response.data,
           }));
       }))
-      .catch(error => res.status(400).json({
-        status: 400,
-        response: error,
-      }));
+      .catch((error) => {
+        req.app.get('logger').error('Error creating patron: ', error.message);
+
+        res.status(400).json({
+          status: 400,
+          response: {
+            type: 'server',
+            data: 'Unable to call external API',
+          },
+        })
+      });
   }
 }

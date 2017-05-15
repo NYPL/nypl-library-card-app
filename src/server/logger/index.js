@@ -19,6 +19,7 @@ const logger = new winston.Logger({
       level: logLevel,
       handleExceptions: true,
       json: true,
+      stringify: true,
       colorize: true
     })
   ],

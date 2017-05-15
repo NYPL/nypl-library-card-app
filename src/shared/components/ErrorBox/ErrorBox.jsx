@@ -15,6 +15,10 @@ const ErrorBox = ({ errorObject, className }) => {
           error =
             <li>This <a href="#patronUsername">username</a> is already taken. Please try again.</li>;
           break;
+        case 'server':
+          error =
+            <li>There was a server error processing your request ({errorObject.data}).</li>;
+          break;
         default:
           error = <li>{defaultError}</li>;
       }
