@@ -9,7 +9,7 @@ class ApiErrors extends React.Component {
 
   render() {
     const apiResults = this.props.apiResults;
-    let resultMarkup;
+    let resultMarkup = null;
     let errorClass = '';
 
     // TODO: Will be modified once we establish the correct API response from Wrapper
