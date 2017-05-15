@@ -13,6 +13,7 @@ const FormField = ({
   checked,
   instructionText,
   maxLength,
+  onBlur = null,
 }) => {
   const requiredMarkup = isRequired ? <span className="nypl-required-field"> Required</span> : null;
   const renderInstructionText = (text) => {
@@ -63,6 +64,7 @@ const FormField = ({
         onChange={handleOnChange}
         checked={checked}
         maxLength={maxLength || null}
+        onBlur={onBlur}
       />
       {underInputSuggestion}
     </div>

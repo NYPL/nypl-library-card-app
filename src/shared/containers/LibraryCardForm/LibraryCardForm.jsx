@@ -181,13 +181,17 @@ class LibraryCardForm extends React.Component {
       const value = target.type === 'checkbox' ? target.checked : target.value;
       const newState = assign({}, this.state.patronFields, { [property]: value });
 
-      this.setState(
-        { patronFields: newState },
-        () => {
-          this.validateField(property, value);
-        },
-      );
+      this.setState({ patronFields: newState });
     };
+  }
+
+  handleOnBlur(property) {
+    return (event) => {
+      const target = event.target;
+      const value = target.value;
+
+      this.validateField(property, value);
+    }
   }
 
   handleSubmit(event) {
@@ -297,6 +301,7 @@ class LibraryCardForm extends React.Component {
             value={this.state.patronFields.firstName}
             handleOnChange={this.handleInputChange('firstName')}
             errorState={this.state.fieldErrors}
+            onBlur={this.handleOnBlur('firstName')}
           />
           <FormField
             id="patronLastName"
@@ -307,6 +312,7 @@ class LibraryCardForm extends React.Component {
             value={this.state.patronFields.lastName}
             handleOnChange={this.handleInputChange('lastName')}
             errorState={this.state.fieldErrors}
+            onBlur={this.handleOnBlur('lastName')}
           />
         </div>
         <FormField
@@ -321,6 +327,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('dateOfBirth')}
           errorState={this.state.fieldErrors}
           maxLength="10"
+          onBlur={this.handleOnBlur('dateOfBirth')}
         />
         <h3>Address</h3>
         <FormField
@@ -333,6 +340,7 @@ class LibraryCardForm extends React.Component {
           value={this.state.patronFields.line1}
           handleOnChange={this.handleInputChange('line1')}
           errorState={this.state.fieldErrors}
+          onBlur={this.handleOnBlur('line1')}
         />
         <FormField
           id="patronStreet2"
@@ -342,6 +350,7 @@ class LibraryCardForm extends React.Component {
           fieldName="line2"
           value={this.state.patronFields.line2}
           handleOnChange={this.handleInputChange('line2')}
+          onBlur={this.handleOnBlur('line2')}
         />
         <FormField
           id="patronCity"
@@ -353,6 +362,7 @@ class LibraryCardForm extends React.Component {
           isRequired
           handleOnChange={this.handleInputChange('city')}
           errorState={this.state.fieldErrors}
+          onBlur={this.handleOnBlur('city')}
         />
         <FormField
           id="patronState"
@@ -366,6 +376,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('state')}
           errorState={this.state.fieldErrors}
           maxLength="2"
+          onBlur={this.handleOnBlur('state')}
         />
         <FormField
           id="patronZip"
@@ -378,6 +389,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('zip')}
           errorState={this.state.fieldErrors}
           maxLength="5"
+          onBlur={this.handleOnBlur('zip')}
         />
         <h3>Create Your Account</h3>
         <FormField
@@ -390,6 +402,7 @@ class LibraryCardForm extends React.Component {
           value={this.state.patronFields.email}
           handleOnChange={this.handleInputChange('email')}
           errorState={this.state.fieldErrors}
+          onBlur={this.handleOnBlur('email')}
         />
         <FormField
           id="patronECommunications"
@@ -413,6 +426,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('username')}
           errorState={this.state.fieldErrors}
           maxLength="25"
+          onBlur={this.handleOnBlur('username')}
         />
         <FormField
           id="patronPin"
@@ -425,6 +439,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('pin')}
           errorState={this.state.fieldErrors}
           maxLength="4"
+          onBlur={this.handleOnBlur('pin')}
         />
         <div>
           <input
