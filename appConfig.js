@@ -12,4 +12,7 @@ export default {
   clientId: process.env.OAUTH_CLIENT_ID,
   clientSecret: process.env.OAUTH_CLIENT_SECRET,
   scopes: 'account:write account:read',
+  confirmationURL:{
+    base: 'https://www.nypl.org/get-help/library-card/confirmation',
+  },
 };

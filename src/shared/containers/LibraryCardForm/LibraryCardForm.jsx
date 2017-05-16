@@ -9,6 +9,7 @@ import { isDate } from '../../../utils/FormValidationUtils';
 import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
 import ApiErrors from '../../components/ApiErrors/ApiErrors';
+import config from './../../../../appConfig.js';
 
 class LibraryCardForm extends React.Component {
   constructor(props) {
@@ -243,7 +244,7 @@ class LibraryCardForm extends React.Component {
           formEntrySuccessful: false,
           apiResults: response.data,
         });
-        window.location.href = `https://www.nypl.org/get-help/library-card/confirmation?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
+        window.location.href = `${config.confirmationURL.base}?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
