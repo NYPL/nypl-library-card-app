@@ -8,9 +8,16 @@ import { isEmail, isLength, isAlphanumeric } from 'validator';
 import { isDate } from '../../../utils/FormValidationUtils';
 import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
+<<<<<<< HEAD
 import ApiErrors from '../../components/ApiErrors/ApiErrors';
 
 import ReactDOM from 'react-dom';
+||||||| merged common ancestors
+import ErrorBox from '../../components/ErrorBox/ErrorBox';
+=======
+import ErrorBox from '../../components/ErrorBox/ErrorBox';
+import config from './../../../../appConfig.js';
+>>>>>>> Updated confirmation page URL to appConfig.js
 
 class LibraryCardForm extends React.Component {
   constructor(props) {
@@ -248,7 +255,7 @@ class LibraryCardForm extends React.Component {
           formEntrySuccessful: false,
           apiResults: response.data,
         });
-        window.location.href = `https://www.nypl.org/get-help/library-card/confirmation?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
+        window.location.href = `${config.confirmationURL.base}?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
