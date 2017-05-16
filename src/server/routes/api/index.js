@@ -17,6 +17,7 @@ function constructApiHeaders(token = '', contentType = 'application/json') {
       'Content-Type': contentType,
       Authorization: `Bearer ${token}`,
     },
+    timeout: 10000
   };
 }
 
@@ -165,7 +166,7 @@ export function initializeAppAuth(req, res, next) {
   return next();
 }
 
-function validatePatronAddress(object, token) {
+function validatePatronAddress(req, object, token) {
   return axios
     .post(
       `${config.api.validate}/address`,
@@ -173,18 +174,17 @@ function validatePatronAddress(object, token) {
       constructApiHeaders(token),
     )
     .then(response => response.data)
-    .catch((error) => {
-      req.app.get('logger').error(error);
-    });
+    .catch(err => Promise.reject(new Error(`Error validating patron address: ${err.message}`)));
 }
 
-function validatePatronUsername(value, token) {
+function validatePatronUsername(req, value, token) {
   return axios
     .post(
       `${config.api.validate}/username`,
       { username: value },
       constructApiHeaders(token),
-    );
+    )
+    .catch(err => Promise.reject(new Error(`Error validating username: ${err.message}`)));
 }
 
 export function createPatron(req, res) {
@@ -199,8 +199,8 @@ export function createPatron(req, res) {
     // Patron Object validation is successful
     // Validate Address and Username
     return axios.all([
-      validatePatronAddress(patronData.address, token),
-      validatePatronUsername(patronData.username, token),
+      validatePatronAddress(req, patronData.address, token),
+      validatePatronUsername(req, patronData.username, token),
     ])
       .then(axios.spread((addressResponse, userRes) => {
         // Both requests are now complete
@@ -235,14 +235,26 @@ export function createPatron(req, res) {
               res.json({ status: 200, response: result.data.data.simplePatron });
             }
           )
-          .catch(err => res.status(err.response.status).json({
-            status: err.response.status,
-            response: err.response.data,
-          }));
+          .catch((err) => {
+            req.app.get('logger').error('Error calling Card Creator API: ', err.message);
+
+            res.status(err.response.status).json({
+              status: err.response.status,
+              response: {
+                type: 'server',
+              },
+            });
+          });
       }))
-      .catch(error => res.status(400).json({
-        status: 400,
-        response: error,
-      }));
+      .catch((error) => {
+        req.app.get('logger').error('Error creating patron: ', error.message);
+
+        res.status(400).json({
+          status: 400,
+          response: {
+            type: 'server',
+          },
+        });
+      });
   }
 }
