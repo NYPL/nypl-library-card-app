@@ -174,6 +174,7 @@ function validatePatronAddress(req, object, token) {
       constructApiHeaders(token),
     )
     .then(response => response.data)
+    .catch(err => Promise.reject(new Error(`Error validating patron address: ${err.message}`)));
 }
 
 function validatePatronUsername(req, value, token) {
@@ -183,6 +184,7 @@ function validatePatronUsername(req, value, token) {
       { username: value },
       constructApiHeaders(token),
     )
+    .catch(err => Promise.reject(new Error(`Error validating username: ${err.message}`)));
 }
 
 export function createPatron(req, res) {
