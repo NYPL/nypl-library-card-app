@@ -4,3 +4,14 @@
     margin: 20px 0;
   };
 }
+
+.nypl-name-field div:first-child input[type=text] {
+  width: 95%;
+}
+
+.nypl-address-fieldset input[type=text], .nypl-text-field input[type=text], .nypl-date-field input[type=text], .nypl-name-field div input[type=text] {
+  background-color: white;
+  border-radius: 0.4rem;
+  border: 0.1rem solid black;
+  box-shadow: none;
+}
