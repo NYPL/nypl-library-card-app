@@ -381,7 +381,7 @@ class LibraryCardForm extends React.Component {
           isRequired
           handleOnChange={this.handleInputChange('state')}
           errorState={this.state.fieldErrors}
-          maxLength="2"
+          maxLength={2}
           onBlur={this.handleOnBlur('state')}
         />
         <FormField
@@ -394,7 +394,7 @@ class LibraryCardForm extends React.Component {
           isRequired
           handleOnChange={this.handleInputChange('zip')}
           errorState={this.state.fieldErrors}
-          maxLength="5"
+          maxLength={5}
           onBlur={this.handleOnBlur('zip')}
         />
         <h3>Create Your Account</h3>
@@ -433,7 +433,7 @@ class LibraryCardForm extends React.Component {
           isRequired
           handleOnChange={this.handleInputChange('username')}
           errorState={this.state.fieldErrors}
-          maxLength="25"
+          maxLength={25}
           onBlur={this.handleOnBlur('username')}
         />
         <FormField
@@ -446,7 +446,7 @@ class LibraryCardForm extends React.Component {
           isRequired
           handleOnChange={this.handleInputChange('pin')}
           errorState={this.state.fieldErrors}
-          maxLength="4"
+          maxLength={4}
           onBlur={this.handleOnBlur('pin')}
         />
         <div>
