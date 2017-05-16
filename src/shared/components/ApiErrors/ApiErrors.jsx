@@ -1,5 +1,4 @@
 import React from 'react';
-import isEmpty from 'lodash/isEmpty';
 import ErrorBox from '../../components/ErrorBox/ErrorBox';
 
 class ApiErrors extends React.Component {
@@ -9,13 +8,10 @@ class ApiErrors extends React.Component {
 
   render() {
     const apiResults = this.props.apiResults;
+    const errorClass = 'nypl-error-content';
     let resultMarkup = null;
-    let errorClass = '';
 
-    // TODO: Will be modified once we establish the correct API response from Wrapper
-    if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
-      errorClass = 'nypl-error-content';
-
+    if (apiResults.response) {
       resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" />;
     }
 
@@ -26,5 +22,10 @@ class ApiErrors extends React.Component {
     );
   }
 }
+
+ApiErrors.propTypes = {
+  apiResults: React.PropTypes.object,
+  childRef: React.PropTypes.func,
+};
 
 export default ApiErrors;

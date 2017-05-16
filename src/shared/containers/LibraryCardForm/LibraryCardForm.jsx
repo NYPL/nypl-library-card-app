@@ -269,7 +269,7 @@ class LibraryCardForm extends React.Component {
   }
 
   renderApiErrors(errorObj) {
-    if (!isEmpty(errorObj) && errorObj.status >= 300 && !errorObj.response.id) {
+    if (!isEmpty(errorObj) && errorObj.status >= 400) {
       return (
         <ApiErrors
           childRef={(el) => { this.dynamicSection = el; }}
