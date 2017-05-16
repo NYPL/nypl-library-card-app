@@ -10,8 +10,6 @@ import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
 import ApiErrors from '../../components/ApiErrors/ApiErrors';
 
-import ReactDOM from 'react-dom';
-
 class LibraryCardForm extends React.Component {
   constructor(props) {
     super(props);
@@ -73,12 +71,9 @@ class LibraryCardForm extends React.Component {
   }
 
   focusOnApiResponse() {
-    console.log('what we want to focus ', ReactDOM.findDOMNode(this.refs['ApiErrors'].refs['ErrorBox']));
-    if (ReactDOM.findDOMNode(this.refs['ApiErrors'].refs['ErrorBox'])) {
-      setTimeout(() => ReactDOM.findDOMNode(this.refs['ApiErrors'].refs['ErrorBox']).focus(), 1000);
+    if (this.dynamicSection) {
+      this.dynamicSection.focus();
       this.setState({ focusOnResult: false });
-
-      console.log('what we want to focus ', ReactDOM.findDOMNode(this.refs['ApiErrors'].refs['ErrorBox']));
     }
   }
 
@@ -273,23 +268,17 @@ class LibraryCardForm extends React.Component {
     return formProcessing ? <div className="loading" /> : null;
   }
 
-  renderApiErrors() {
-    const { apiResults } = this.state;
-    let resultMarkup;
-    let errorClass = '';
-
-    // TODO: Will be modified once we establish the correct API response from Wrapper
-    if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
-      errorClass = 'nypl-error-content';
-
-      resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" />;
+  renderApiErrors(errorObj) {
+    if (!isEmpty(errorObj) && errorObj.status >= 400) {
+      return (
+        <ApiErrors
+          childRef={(el) => { this.dynamicSection = el; }}
+          apiResults={errorObj}
+        />
+      );
     }
 
-    return (
-      <div className={errorClass}>
-        {resultMarkup}
-      </div>
-    );
+    return null;
   }
 
   renderFormFields() {
@@ -466,12 +455,8 @@ class LibraryCardForm extends React.Component {
     return (
       <div className="nypl-row">
         <div className="nypl-column-half nypl-column-offset-one">
-          <div tabIndex="0">
-            <ApiErrors
-              childRef="ErrorBox"
-              apiResults={this.state.apiResults}
-              ref="ApiErrors"
-            />
+          <div>
+            {this.renderApiErrors(this.state.apiResults)}
             {this.renderFormFields()}
           </div>
         </div>
