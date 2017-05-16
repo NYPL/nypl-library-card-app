@@ -8,16 +8,10 @@ import { isEmail, isLength, isAlphanumeric } from 'validator';
 import { isDate } from '../../../utils/FormValidationUtils';
 import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
-<<<<<<< HEAD
 import ApiErrors from '../../components/ApiErrors/ApiErrors';
-
 import ReactDOM from 'react-dom';
-||||||| merged common ancestors
-import ErrorBox from '../../components/ErrorBox/ErrorBox';
-=======
 import ErrorBox from '../../components/ErrorBox/ErrorBox';
 import config from './../../../../appConfig.js';
->>>>>>> Updated confirmation page URL to appConfig.js
 
 class LibraryCardForm extends React.Component {
   constructor(props) {
