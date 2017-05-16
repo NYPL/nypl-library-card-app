@@ -332,7 +332,7 @@ class LibraryCardForm extends React.Component {
           value={this.state.patronFields.dateOfBirth}
           handleOnChange={this.handleInputChange('dateOfBirth')}
           errorState={this.state.fieldErrors}
-          maxLength="10"
+          maxLength={10}
           onBlur={this.handleOnBlur('dateOfBirth')}
         />
         <h3>Address</h3>
