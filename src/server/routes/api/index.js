@@ -236,18 +236,18 @@ export function createPatron(req, res) {
             }
           )
           .catch((err) => {
-            let typeObj = null;
+            let serverErrorType = null;
 
             // If the response from the Patron Creator Service(the wrapper)
             // does not include valid error details, we mark this result as an internal server error
             if (!err.response.data.data) {
               req.app.get('logger').error('Error calling Card Creator API: ', err.message);
-              typeObj = { type: 'server' };
+              serverErrorType = { type: 'server' };
             }
 
             res.status(err.response.status).json({
               status: err.response.status,
-              response: (typeObj) ? Object.assign(err.response.data, typeObj) : err.response.data,
+              response: (serverErrorType) ? Object.assign(err.response.data, serverErrorType) : err.response.data,
             });
           });
       }))
