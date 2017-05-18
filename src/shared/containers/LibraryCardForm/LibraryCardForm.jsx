@@ -407,7 +407,7 @@ class LibraryCardForm extends React.Component {
           type="checkbox"
           label="Email Checkbox"
           fieldName="ecommunications_pref"
-          instructionText={'Yes, I would like to receive information about NYPL\'s programs' +
+          instructionText={'Yes, I would like to receive information about NYPL\'s programs ' +
             'and services.'}
           handleOnChange={this.handleInputChange('ecommunications_pref')}
           value={this.state.patronFields.ecommunications_pref}
