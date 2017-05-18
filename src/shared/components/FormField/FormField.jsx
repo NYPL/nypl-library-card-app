@@ -58,7 +58,6 @@ const FormField = ({
         value={value}
         type={type}
         id={id}
-        required={isRequired}
         aria-required={type === 'checkbox' ? null : isRequired}
         aria-labelledby={(instructionText) ? `${id}-label ${id}-stauts` : null}
         onChange={handleOnChange}
