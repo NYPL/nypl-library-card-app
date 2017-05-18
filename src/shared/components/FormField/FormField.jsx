@@ -60,7 +60,7 @@ const FormField = ({
         id={id}
         required={isRequired}
         aria-required={type === 'checkbox' ? null : isRequired}
-        aria-labelledby={(instructionText) ? `${id}-label ${id}-stauts` : null}
+        aria-labelledby={(instructionText) ? `${id}-label ${id}-status` : null}
         onChange={handleOnChange}
         checked={checked}
         maxLength={maxLength || null}
