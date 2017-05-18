@@ -418,6 +418,7 @@ class LibraryCardForm extends React.Component {
           type="text"
           label="Username"
           fieldName="username"
+          instructionText="5-25 alphanumeric characters"
           value={this.state.patronFields.username}
           isRequired
           handleOnChange={this.handleInputChange('username')}
@@ -431,6 +432,7 @@ class LibraryCardForm extends React.Component {
           type="text"
           label="PIN"
           fieldName="pin"
+          instructionText="4 digits"
           value={this.state.patronFields.pin}
           isRequired
           handleOnChange={this.handleInputChange('pin')}
