@@ -392,7 +392,6 @@ class LibraryCardForm extends React.Component {
           id="patronEmail"
           className="nypl-text-field"
           type="text"
-          instructionText="youremail@example.com"
           label="E-mail"
           fieldName="email"
           value={this.state.patronFields.email}
