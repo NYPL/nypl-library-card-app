@@ -2,9 +2,20 @@ import React from 'react';
 
 const ErrorBox = ({ errorObject, className }) => {
   const renderErrorByType = (errorObj) => {
-    const { type } = errorObject;
+    const { type, details } = errorObject;
     const defaultError = 'There was an error processing your submission. Please try again later.';
     let error;
+    const renderServerValidationError = (object) => {
+      const errorMessages = [];
+
+      for (var key in object) {
+        if (object.hasOwnProperty(key)) {
+          errorMessages.push(<li>{object[key]}</li>);
+        }
+      }
+
+      return errorMessages;
+    };
 
     if (type) {
       switch (type) {
@@ -16,8 +27,7 @@ const ErrorBox = ({ errorObject, className }) => {
             <li>This <a href="#patronUsername">username</a> is already taken. Please try again.</li>;
           break;
         case 'server-validation-error':
-          error =
-            <li>something is wrong</li>;
+          error = <div>{renderServerValidationError(details)}</div>;
           break;
         case 'server':
           error =
