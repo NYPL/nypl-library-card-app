@@ -34,7 +34,7 @@ class FormField extends React.Component {
       underInputSuggestion = this.renderErrorBox();
     }
     return (
-      <div className={`${this.props.className} ${errorClass}`}>
+      <div  className={`${this.props.className} ${errorClass}`}>
         <label htmlFor={this.props.id} id={`${this.props.id}-label`}>
           {
             this.props.type === 'checkbox' ?
