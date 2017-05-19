@@ -31,8 +31,9 @@ function constructErrorObject(type = 'general-error', message = 'There was an er
   };
 
   if (!isEmpty(details)) {
-    response.details = details;
+    response.response.details = details;
   }
+  console.log('check if constructErrorObject structure changes affect initializeAppAuth()');
   return response;
 }
 
@@ -52,49 +53,55 @@ function constructPatronObject(object) {
     ecommunications_pref: ecommunications_pref,
   } = object;
 
+  const errorObj = {};
+
 
   if (isEmpty(firstName)) {
-    return constructErrorObject('missing-required-field', 'The firstName field is missing.');
+    Object.assign(errorObj, { firstName: 'The firstName field is missing.' });
   }
 
   if (isEmpty(lastName)) {
-    return constructErrorObject('missing-required-field', 'The lastName field is missing.');
+    Object.assign(errorObj, { lastName: 'The lastName field is missing.' });
   }
 
   if (isEmpty(line1)) {
-    return constructErrorObject('missing-required-field', 'The line_1 field is missing.');
+    Object.assign(errorObj, { line1: 'The line_1 field is missing.' });
   }
 
   if (isEmpty(city)) {
-    return constructErrorObject('missing-required-field', 'The city field is missing.');
+    Object.assign(errorObj, { line1: 'The city field is missing.' });
   }
 
   if (isEmpty(state)) {
-    return constructErrorObject('missing-required-field', 'The state field is missing.');
+    Object.assign(errorObj, { line1: 'The state field is missing.' });
   }
 
   if (isEmpty(zip)) {
-    return constructErrorObject('missing-required-field', 'The zip field is missing.');
+    Object.assign(errorObj, { zip: 'The zip field is missing.' });
   }
 
-  if (!isNumeric(zip) || !isLength(zip, { min: 5, max: 5 })) {
-    return constructErrorObject('invalid-field', 'The zip field is must be 5 numbers.');
+  if (!isEmpty(zip) && (!isNumeric(zip) || !isLength(zip, { min: 5, max: 5 }))) {
+    Object.assign(errorObj, { zip: 'The zip field must be 5 numbers.' });
   }
 
   if (isEmpty(username)) {
-    return constructErrorObject('missing-required-field', 'The username field is missing.');
+    Object.assign(errorObj, { username: 'The username field is missing.' });
   }
 
-  if (!isAlphanumeric(username)) {
-    return constructErrorObject('invalid-field', 'The username field must be alphanumeric');
+  if (!isEmpty(username) && (!isAlphanumeric(username) || !isLength(username, { min: 5, max: 25 }))) {
+    Object.assign(errorObj, { username: 'The username field must be 5 to 25 alphanumeric characters .' });
   }
 
   if (isEmpty(pin)) {
-    return constructErrorObject('missing-required-field', 'The pin field is missing.');
+    Object.assign(errorObj, { pin: 'The pin field is missing.' });
   }
 
-  if (!isNumeric(pin) || !isLength(pin, { min: 4, max: 4 })) {
-    return constructErrorObject('invalid-field', 'The pin field is must be 4 numbers.');
+  if (!isEmpty(pin) && (!isNumeric(pin) || !isLength(pin, { min: 4, max: 4 }))) {
+    Object.assign(errorObj, { pin: 'The pin field must be 4 numbers.' });
+  }
+
+  if (errorObj) {
+    return constructErrorObject('server-validation-error', 'server side validation error', 400, errorObj);
   }
 
   const fullName = `${lastName.trim()}, ${firstName.trim()}`;

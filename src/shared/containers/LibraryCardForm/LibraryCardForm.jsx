@@ -174,7 +174,7 @@ class LibraryCardForm extends React.Component {
         break;
     }
 
-    this.setState({ fieldErrors: currentErrors });
+    // this.setState({ fieldErrors: currentErrors });
   }
 
   handleInputChange(property) {
@@ -201,8 +201,8 @@ class LibraryCardForm extends React.Component {
     forIn(this.state.patronFields, (value, key) => {
       this.validateField(key, value);
     });
-
-    if (isEmpty(this.state.fieldErrors)) {
+    console.log('Remember we turned off client side check here');
+    // if (isEmpty(this.state.fieldErrors)) {
       // Form is now processing
       this.setState({ formProcessing: true, apiResults: {} });
       const {
@@ -256,7 +256,7 @@ class LibraryCardForm extends React.Component {
           this.setState({ apiResults: error.response.data });
         }
       });
-    }
+    // }
   }
 
   renderConfirmation() {

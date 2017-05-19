@@ -15,6 +15,10 @@ const ErrorBox = ({ errorObject, className }) => {
           error =
             <li>This <a href="#patronUsername">username</a> is already taken. Please try again.</li>;
           break;
+        case 'server-validation-error':
+          error =
+            <li>something is wrong</li>;
+          break;
         case 'server':
           error =
             <li>There was a system error processing your request. Please try again.</li>;
