@@ -75,19 +75,16 @@ class LibraryCardForm extends React.Component {
     if (this.dynamicSection) {
       this.dynamicSection.focus();
       this.setState({ focusOnResult: false });
-      console.log('focusOnResult ' + this.state.focusOnResult);
       return;
     }
     for (var fieldName in this.state.fieldErrors) {
       if (this.state.fieldErrors[fieldName]) {
-        console.log(fieldName);
         if (fieldName == "state") {
           this.stateName.focus();
         } else {
           this[fieldName].focus();
         }
         this.setState({ focusOnResult: false });
-        console.log('focusOnResult ' + this.state.focusOnResult);
         break;
       }
     }
