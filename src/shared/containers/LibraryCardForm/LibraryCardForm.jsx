@@ -75,8 +75,25 @@ class LibraryCardForm extends React.Component {
     if (this.dynamicSection) {
       this.dynamicSection.focus();
       this.setState({ focusOnResult: false });
+      console.log('focusOnResult ' + this.state.focusOnResult);
+      return;
     }
+    for (var fieldName in this.state.fieldErrors) {
+      if (this.state.fieldErrors[fieldName]) {
+        console.log(fieldName);
+        if (fieldName == "state") {
+          this.stateName.focus();
+        } else {
+          this[fieldName].focus();
+        }
+        this.setState({ focusOnResult: false });
+        console.log('focusOnResult ' + this.state.focusOnResult);
+        break;
+      }
+    }
+
   }
+
 
   validateField(fieldName, value) {
     const { fieldErrors } = this.state;
@@ -174,7 +191,7 @@ class LibraryCardForm extends React.Component {
         break;
     }
 
-    this.setState({ fieldErrors: currentErrors });
+    this.setState({ fieldErrors: currentErrors, focusOnResult: true });
   }
 
   handleInputChange(property) {
@@ -197,6 +214,8 @@ class LibraryCardForm extends React.Component {
   }
 
   handleSubmit(event) {
+    // Clearing server side errors for re-submission.
+    this.setState({ apiResults: {} });
     event.preventDefault();
     forIn(this.state.patronFields, (value, key) => {
       this.validateField(key, value);
@@ -298,6 +317,7 @@ class LibraryCardForm extends React.Component {
             handleOnChange={this.handleInputChange('firstName')}
             errorState={this.state.fieldErrors}
             onBlur={this.handleOnBlur('firstName')}
+            childRef={(el) => { this.firstName = el; }}
           />
           <FormField
             id="patronLastName"
@@ -309,6 +329,7 @@ class LibraryCardForm extends React.Component {
             handleOnChange={this.handleInputChange('lastName')}
             errorState={this.state.fieldErrors}
             onBlur={this.handleOnBlur('lastName')}
+            childRef={(el) => { this.lastName = el; }}
           />
         </div>
         <FormField
@@ -324,6 +345,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={10}
           onBlur={this.handleOnBlur('dateOfBirth')}
+          childRef={(el) => { this.dateOfBirth = el; }}
         />
         <h3>Address</h3>
         <FormField
@@ -337,6 +359,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('line1')}
           errorState={this.state.fieldErrors}
           onBlur={this.handleOnBlur('line1')}
+          childRef={(el) => { this.line1 = el; }}
         />
         <FormField
           id="patronStreet2"
@@ -359,6 +382,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('city')}
           errorState={this.state.fieldErrors}
           onBlur={this.handleOnBlur('city')}
+          childRef={(el) => { this.city = el; }}
         />
         <FormField
           id="patronState"
@@ -373,6 +397,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={2}
           onBlur={this.handleOnBlur('state')}
+          childRef={(el) => { this.stateName = el; }}
         />
         <FormField
           id="patronZip"
@@ -386,6 +411,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={5}
           onBlur={this.handleOnBlur('zip')}
+          childRef={(el) => { this.zip = el; }}
         />
         <h3>Create Your Account</h3>
         <FormField
@@ -425,6 +451,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={25}
           onBlur={this.handleOnBlur('username')}
+          childRef={(el) => { this.username = el; }}
         />
         <FormField
           id="patronPin"
@@ -439,6 +466,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={4}
           onBlur={this.handleOnBlur('pin')}
+          childRef={(el) => { this.pin = el; }}
         />
         <div>
           <input

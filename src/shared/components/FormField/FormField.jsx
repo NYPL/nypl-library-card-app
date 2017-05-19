@@ -37,7 +37,7 @@ class FormField extends React.Component {
       underInputSuggestion = this.renderErrorBox();
     }
     return (
-      <div className={`${this.props.className} ${errorClass}`}>
+      <div  className={`${this.props.className} ${errorClass}`}>
         <label htmlFor={this.props.id} id={`${this.props.id}-label`}>
           {
             this.props.type === 'checkbox' ?
@@ -56,6 +56,8 @@ class FormField extends React.Component {
           checked={this.props.checked}
           maxLength={this.props.maxLength || null}
           onBlur={this.props.onBlur}
+          ref={this.props.childRef}
+          tabIndex="0"
         />
         {underInputSuggestion}
       </div>
@@ -77,6 +79,7 @@ FormField.propTypes = {
   instructionText: React.PropTypes.string,
   maxLength: React.PropTypes.number,
   onBlur: React.PropTypes.func,
+  childRef: React.PropTypes.func,
 };
 
 FormField.defaultProps = {
