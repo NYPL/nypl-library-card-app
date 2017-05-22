@@ -33,7 +33,7 @@ function constructErrorObject(type = 'general-error', message = 'There was an er
   if (!isEmpty(details)) {
     response.response.details = details;
   }
-  console.log('check if constructErrorObject structure changes affect initializeAppAuth()');
+
   return response;
 }
 
@@ -57,47 +57,51 @@ function constructPatronObject(object) {
 
 
   if (isEmpty(firstName)) {
-    Object.assign(errorObj, { firstName: 'The firstName field is missing.' });
+    Object.assign(errorObj, { firstName: 'First Name field is empty.' });
   }
 
   if (isEmpty(lastName)) {
-    Object.assign(errorObj, { lastName: 'The lastName field is missing.' });
+    Object.assign(errorObj, { lastName: 'Last Name field is empty.' });
+  }
+
+  if (isEmpty(dateOfBirth)) {
+    Object.assign(errorObj, { dateOfBirth: 'Date of Birth field is empty.' });
   }
 
   if (isEmpty(line1)) {
-    Object.assign(errorObj, { line1: 'The line_1 field is missing.' });
+    Object.assign(errorObj, { line1: 'Street Address field is empty.' });
   }
 
   if (isEmpty(city)) {
-    Object.assign(errorObj, { line1: 'The city field is missing.' });
+    Object.assign(errorObj, { city: 'City field is empty.' });
   }
 
   if (isEmpty(state)) {
-    Object.assign(errorObj, { line1: 'The state field is missing.' });
+    Object.assign(errorObj, { state: 'State field is empty.' });
   }
 
   if (isEmpty(zip)) {
-    Object.assign(errorObj, { zip: 'The zip field is missing.' });
+    Object.assign(errorObj, { zip: 'Postal Code field is empty.' });
   }
 
   if (!isEmpty(zip) && (!isNumeric(zip) || !isLength(zip, { min: 5, max: 5 }))) {
-    Object.assign(errorObj, { zip: 'The zip field must be 5 numbers.' });
+    Object.assign(errorObj, { zip: 'Please enter a 5-digit postal code.' });
   }
 
   if (isEmpty(username)) {
-    Object.assign(errorObj, { username: 'The username field is missing.' });
+    Object.assign(errorObj, { username: 'Username field is empty.' });
   }
 
   if (!isEmpty(username) && (!isAlphanumeric(username) || !isLength(username, { min: 5, max: 25 }))) {
-    Object.assign(errorObj, { username: 'The username field must be 5 to 25 alphanumeric characters .' });
+    Object.assign(errorObj, { username: 'Please enter a username between 5-25 alphanumeric characters.' });
   }
 
   if (isEmpty(pin)) {
-    Object.assign(errorObj, { pin: 'The pin field is missing.' });
+    Object.assign(errorObj, { pin: 'PIN field is empty.' });
   }
 
   if (!isEmpty(pin) && (!isNumeric(pin) || !isLength(pin, { min: 4, max: 4 }))) {
-    Object.assign(errorObj, { pin: 'The pin field must be 4 numbers.' });
+    Object.assign(errorObj, { pin: 'Please enter a 4-digit PIN.' });
   }
 
   if (errorObj && !isEmpty(errorObj)) {
@@ -146,7 +150,7 @@ export function initializeAppAuth(req, res, next) {
       })
       .catch(error => res.status(400).json(constructErrorObject(
         'app-auth-failed',
-        'Could not authenticate App with OAuth service',
+        'Could not authenticate App with OAuth service.',
         400,
         error,
       )));
@@ -164,7 +168,7 @@ export function initializeAppAuth(req, res, next) {
       })
       .catch(error => res.status(400).json(constructErrorObject(
         'app-reauth-failed',
-        'Could not re-authenticate App with OAuth service',
+        'Could not re-authenticate App with OAuth service.',
         400,
         error,
       )));
