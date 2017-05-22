@@ -77,17 +77,23 @@ class LibraryCardForm extends React.Component {
       this.setState({ focusOnResult: false });
       return;
     }
-    for (var fieldName in this.state.fieldErrors) {
-      if (this.state.fieldErrors[fieldName]) {
-        if (fieldName === 'state') {
+    Object.keys(this.state.fieldErrors).some((key) => {
+      if (this.state.fieldErrors[key]) {
+        if (key === 'state') {
           this.stateName.focus();
-        } else {
-          this[fieldName].focus();
+          this.setState({ focusOnResult: false });
+
+          return true;
         }
+
+        this[key].focus();
         this.setState({ focusOnResult: false });
-        break;
+
+        return true;
       }
-    }
+
+      return true;
+    });
   }
 
   validateField(fieldName, value) {
