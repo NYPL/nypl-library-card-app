@@ -1,11 +1,7 @@
 import React from 'react';
 
 class FormField extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  renderInstructionText (text) {
+  renderInstructionText(text) {
     if (!text) {
       return null;
     }
@@ -20,16 +16,17 @@ class FormField extends React.Component {
         {text}
       </span>
     );
-  };
+  }
 
   renderErrorBox() {
     return (
       <div className="nypl-field-status">{this.props.errorState[this.props.fieldName]}</div>
     );
-  };
+  }
 
   render() {
-    const requiredMarkup = this.props.isRequired ? <span className="nypl-required-field"> Required</span> : null;
+    const requiredMarkup = this.props.isRequired ?
+      <span className="nypl-required-field"> Required</span> : null;
     let errorClass = '';
     let underInputSuggestion = this.renderInstructionText(this.props.instructionText);
     if (this.props.errorState && this.props.errorState[this.props.fieldName]) {
@@ -37,7 +34,7 @@ class FormField extends React.Component {
       underInputSuggestion = this.renderErrorBox();
     }
     return (
-      <div  className={`${this.props.className} ${errorClass}`}>
+      <div className={`${this.props.className} ${errorClass}`}>
         <label htmlFor={this.props.id} id={`${this.props.id}-label`}>
           {
             this.props.type === 'checkbox' ?
@@ -51,7 +48,9 @@ class FormField extends React.Component {
           type={this.props.type}
           id={this.props.id}
           aria-required={this.props.type === 'checkbox' ? null : this.props.isRequired}
-          aria-labelledby={(this.props.instructionText) ? `${this.props.id}-label ${this.props.id}-status` : null}
+          aria-labelledby={
+            (this.props.instructionText) ? `${this.props.id}-label ${this.props.id}-status` : null
+          }
           onChange={this.props.handleOnChange}
           checked={this.props.checked}
           maxLength={this.props.maxLength || null}
@@ -63,7 +62,7 @@ class FormField extends React.Component {
       </div>
     );
   }
-};
+}
 
 FormField.propTypes = {
   id: React.PropTypes.string.isRequired,
