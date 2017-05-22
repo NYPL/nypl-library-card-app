@@ -198,6 +198,8 @@ class LibraryCardForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    // clear the previous error response
+    this.setState({ apiResults: {} });
     forIn(this.state.patronFields, (value, key) => {
       this.validateField(key, value);
     });
