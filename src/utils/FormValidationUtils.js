@@ -23,15 +23,29 @@ function isDate(input, minYear = 1902, maxYear = new Date().getFullYear()) {
   return false;
 }
 
-function createAnchorText(string = '') {
-  const anchorText = string.split(' field')[0] || '';
-  const restText = (!string.split(' field')[1]) ? '' : ` field ${string.split(' field')[1]}`;
+/**
+ * createAnchorID(wholeText)
+ * Splits the error message into two parts. One will be wrapped by an <a> tag, and another will not.
+ *
+ * @param {string} wholeText
+ * return {object} {anchorText, restText}
+ */
+function createAnchorText(wholeText) {
+  const anchorText = (wholeText) ? wholeText.split(' field')[0] : '';
+  const restText = (!anchorText) ? '' : ` field ${wholeText.split(' field')[1]}`;
 
   return { anchorText, restText };
 }
 
+/**
+ * createAnchorID(key)
+ * Creates the proper anchor ID for the href of the <a> tag in the error message.
+ *
+ * @param {string} key
+ * return {string}
+ */
 function createAnchorID(key) {
-  let hashElement = `${key.charAt(0).toUpperCase()}${key.substr(1)}`;
+  let hashElement = (key) ? `${key.charAt(0).toUpperCase()}${key.substr(1)}` : '';
 
   if (hashElement === 'DateOfBirth') {
     hashElement = 'Dob';
@@ -41,10 +55,19 @@ function createAnchorID(key) {
     hashElement = 'Street1';
   }
 
+  if (!hashElement) { return null; };
+
   return `#patron${hashElement}`;
 }
 
-
+/**
+ * renderServerValidationError(object)
+ * Renders the proper error messages based on each error field.
+ * Returns all the messages as an array.
+ *
+ * @param {object} object
+ * return {array}
+ */
 function renderServerValidationError(object) {
   const errorMessages = [];
 
@@ -55,6 +78,7 @@ function renderServerValidationError(object) {
       if (object[key].indexOf('empty') !== -1) {
         const anchorText = createAnchorText(object[key]).anchorText || '';
         const restText = createAnchorText(object[key]).restText || '';
+
         errorMessage = <li key={index}><a href={createAnchorID(key)}>{anchorText}</a>{restText}</li>;
       } else {
         if (key === 'zip') {
