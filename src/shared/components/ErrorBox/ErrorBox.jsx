@@ -8,11 +8,11 @@ const ErrorBox = ({ errorObject, className }) => {
     const renderServerValidationError = (object) => {
       const errorMessages = [];
 
-      for (var key in object) {
+      Object.keys(object).forEach((key) => {
         if (object.hasOwnProperty(key)) {
           errorMessages.push(<li>{object[key]}</li>);
         }
-      }
+    });
 
       return errorMessages;
     };
