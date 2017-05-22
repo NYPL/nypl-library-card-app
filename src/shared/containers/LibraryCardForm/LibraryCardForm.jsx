@@ -160,7 +160,7 @@ class LibraryCardForm extends React.Component {
         break;
       case 'zip':
         if (isEmpty(value) || isNaN(value) || !isLength(value, { min: 5, max: 5 })) {
-          fieldErrors[fieldName] = 'Please enter a 5 digits postal code.';
+          fieldErrors[fieldName] = 'Please enter a 5-digit postal code.';
           currentErrors = fieldErrors;
         } else {
           currentErrors = omit(fieldErrors, fieldName);
@@ -316,7 +316,7 @@ class LibraryCardForm extends React.Component {
           className="nypl-date-field"
           type="text"
           instructionText="MM/DD/YYYY, including slashes"
-          label="Date of birth"
+          label="Date of Birth"
           fieldName="dateOfBirth"
           isRequired
           value={this.state.patronFields.dateOfBirth}
