@@ -12,7 +12,7 @@ const ErrorBox = ({ errorObject, className }) => {
         if (object.hasOwnProperty(key)) {
           errorMessages.push(<li>{object[key]}</li>);
         }
-    });
+      });
 
       return errorMessages;
     };

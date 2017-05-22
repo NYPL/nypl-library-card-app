@@ -100,7 +100,7 @@ function constructPatronObject(object) {
     Object.assign(errorObj, { pin: 'The pin field must be 4 numbers.' });
   }
 
-  if (errorObj) {
+  if (errorObj && !isEmpty(errorObj)) {
     return constructErrorObject('server-validation-error', 'server side validation error', 400, errorObj);
   }
 
