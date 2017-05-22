@@ -79,7 +79,7 @@ class LibraryCardForm extends React.Component {
     }
     for (var fieldName in this.state.fieldErrors) {
       if (this.state.fieldErrors[fieldName]) {
-        if (fieldName == "state") {
+        if (fieldName === 'state') {
           this.stateName.focus();
         } else {
           this[fieldName].focus();
@@ -88,9 +88,7 @@ class LibraryCardForm extends React.Component {
         break;
       }
     }
-
   }
-
 
   validateField(fieldName, value) {
     const { fieldErrors } = this.state;
@@ -185,6 +183,8 @@ class LibraryCardForm extends React.Component {
         break;
       case 'ecommunications_pref':
         currentErrors = fieldErrors;
+        break;
+      default:
         break;
     }
 
