@@ -173,8 +173,6 @@ class LibraryCardForm extends React.Component {
         currentErrors = fieldErrors;
         break;
     }
-
-    // this.setState({ fieldErrors: currentErrors });
   }
 
   handleInputChange(property) {

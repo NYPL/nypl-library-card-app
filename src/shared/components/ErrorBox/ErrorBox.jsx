@@ -1,21 +1,11 @@
 import React from 'react';
+import { renderServerValidationError } from './../../../utils/FormValidationUtils.js';
 
 const ErrorBox = ({ errorObject, className }) => {
   const renderErrorByType = (errorObj) => {
     const { type, details } = errorObject;
     const defaultError = 'There was an error processing your submission. Please try again later.';
     let error;
-    const renderServerValidationError = (object) => {
-      const errorMessages = [];
-
-      Object.keys(object).forEach((key) => {
-        if (object.hasOwnProperty(key)) {
-          errorMessages.push(<li>{object[key]}</li>);
-        }
-      });
-
-      return errorMessages;
-    };
 
     if (type) {
       switch (type) {
