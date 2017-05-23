@@ -9,7 +9,7 @@
   width: 95%;
 }
 
-.nypl-address-fieldset input[type=text], .nypl-text-field input[type=text], .nypl-date-field input[type=text], .nypl-name-field div input[type=text] {
+.nypl-address-fieldset input[type=text], .nypl-text-field input[type=text], .nypl-date-field input[type=text], .nypl-name-field input[type=text] {
   background-color: white;
   border-radius: 0.4rem;
   border: 0.1rem solid black;
@@ -17,7 +17,7 @@
 }
 
 .nypl-field-error input[type=text] {
-    background-color: #f6d6d8;
-    border-bottom: .125rem solid #97272c;
-    box-shadow: none;
+  background-color: #f6d6d8;
+  border-bottom: .125rem solid #97272c;
+  box-shadow: none;
 }
