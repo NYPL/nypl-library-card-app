@@ -6,10 +6,10 @@ import assign from 'lodash/assign';
 import forIn from 'lodash/forIn';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import { isDate } from '../../../utils/FormValidationUtils';
-import Confirmation from '../../components/Confirmation/Confirmation';
+// import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
 import ApiErrors from '../../components/ApiErrors/ApiErrors';
-import config from './../../../../appConfig.js';
+import config from './../../../../appConfig';
 
 class LibraryCardForm extends React.Component {
   constructor(props) {
@@ -18,7 +18,6 @@ class LibraryCardForm extends React.Component {
       csrfToken: '',
       focusOnResult: false,
       formProcessing: false,
-      formEntrySuccessful: false,
       apiResults: {},
       fieldErrors: {},
       patronFields: {
@@ -74,26 +73,7 @@ class LibraryCardForm extends React.Component {
   focusOnApiResponse() {
     if (this.dynamicSection) {
       this.dynamicSection.focus();
-      this.setState({ focusOnResult: false });
-      return;
     }
-    Object.keys(this.state.fieldErrors).some((key) => {
-      if (this.state.fieldErrors[key]) {
-        if (key === 'state') {
-          this.stateName.focus();
-          this.setState({ focusOnResult: false });
-
-          return true;
-        }
-
-        this[key].focus();
-        this.setState({ focusOnResult: false });
-
-        return true;
-      }
-
-      return true;
-    });
   }
 
   validateField(fieldName, value) {
@@ -194,7 +174,25 @@ class LibraryCardForm extends React.Component {
         break;
     }
 
-    this.setState({ fieldErrors: currentErrors, focusOnResult: true });
+    this.setState({ fieldErrors: currentErrors });
+  }
+
+  focusOnErrorElement() {
+    // Handle focusing on first element in the object that contains an error
+    Object.keys(this.state.fieldErrors).some((key) => {
+      if (this.state.fieldErrors[key]) {
+        // the keyword state is reserved in React, therefore the reference to the State field
+        // is renamed to stateName
+        if (key === 'state') {
+          this.stateName.focus();
+          return true;
+        }
+
+        this[key].focus();
+        return true;
+      }
+      return true;
+    });
   }
 
   handleInputChange(property) {
@@ -220,13 +218,18 @@ class LibraryCardForm extends React.Component {
     // Clearing server side errors for re-submission.
     this.setState({ apiResults: {} });
     event.preventDefault();
+
+    // Iterate through patron fields and ensure all fields are valid
     forIn(this.state.patronFields, (value, key) => {
       this.validateField(key, value);
     });
 
-    if (isEmpty(this.state.fieldErrors)) {
-      // Form is now processing
-      this.setState({ formProcessing: true, apiResults: {} });
+    if (!isEmpty(this.state.fieldErrors)) {
+      // A required form field contains an error, focus on the first error field
+      this.focusOnErrorElement();
+    } else {
+      // No client-side errors, form is now processing
+      this.setState({ formProcessing: true });
       const {
         firstName,
         lastName,
@@ -263,7 +266,6 @@ class LibraryCardForm extends React.Component {
         console.log(response.data);
         this.setState({
           formProcessing: false,
-          formEntrySuccessful: false,
           apiResults: response.data,
         });
         window.location.href = `${config.confirmationURL.base}?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
@@ -281,10 +283,11 @@ class LibraryCardForm extends React.Component {
     }
   }
 
-  renderConfirmation() {
-    return this.state.formEntrySuccessful ?
-      <Confirmation name={this.getFullName()} apiObject={this.state.apiResults} /> : null;
-  }
+  // TODO: Confirmation page exists in Drupal
+  // renderConfirmation() {
+  //   return this.state.formEntrySuccessful ?
+  //     <Confirmation name={this.getFullName()} apiObject={this.state.apiResults} /> : null;
+  // }
 
   renderLoader() {
     const { formProcessing } = this.state;
@@ -305,7 +308,7 @@ class LibraryCardForm extends React.Component {
   }
 
   renderFormFields() {
-    return !this.state.formEntrySuccessful ? (
+    return (
       <form className="nypl-library-card-form" onSubmit={this.handleSubmit}>
         <h2>Please enter the following information</h2>
         <h3>Personal Information</h3>
@@ -481,7 +484,7 @@ class LibraryCardForm extends React.Component {
           {this.renderLoader()}
         </div>
       </form>
-    ) : null;
+    );
   }
 
   render() {
