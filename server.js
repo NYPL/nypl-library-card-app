@@ -70,7 +70,8 @@ app.get('/', (req, res) => {
 app.get('/library-card/new', renderApp);
 
 // GET route displays patron's barcode
-app.get('/library-card/new/barcode', renderApp);
+// This route to barcode has been approved but not in the current release.
+// app.get('/library-card/new/barcode', renderApp);
 
 // POST route used to submit LibraryCard params
 app.post('/library-card/new/create-patron', initializeAppAuth, createPatron);

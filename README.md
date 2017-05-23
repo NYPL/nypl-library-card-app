@@ -68,3 +68,4 @@ eb create <<environment name>> --instance_type <<size of instance>> \
 > Added react-router to the appliaction for handling multiple pages.
 > Added tests for <BarcodeContainer> and its related functions.
 > Updated the client side input field validation to be activated on blur.
+> Updated the route for barcode service. It is commented out for current release.
