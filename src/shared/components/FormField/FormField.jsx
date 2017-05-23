@@ -38,7 +38,7 @@ class FormField extends React.Component {
         <label htmlFor={this.props.id} id={`${this.props.id}-label`}>
           {
             this.props.type === 'checkbox' ?
-              <span className={"visuallyHidden"}>{this.props.label}</span> :
+              <span className="visuallyHidden">{this.props.label}</span> :
               <span>{this.props.label}</span>
           }
           {requiredMarkup}
@@ -69,7 +69,7 @@ FormField.propTypes = {
   label: React.PropTypes.string.isRequired,
   type: React.PropTypes.string.isRequired,
   fieldName: React.PropTypes.string.isRequired,
-  errorState: React.PropTypes.object,
+  errorState: React.PropTypes.shape(),
   value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
   className: React.PropTypes.string,
   isRequired: React.PropTypes.bool,
