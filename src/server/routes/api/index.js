@@ -2,7 +2,7 @@ import axios from 'axios';
 import qs from 'qs';
 import moment from 'moment';
 import isEmpty from 'lodash/isEmpty';
-import { isAlphanumeric, isNumeric, isLength } from 'validator';
+import { isEmail, isAlphanumeric, isNumeric, isLength } from 'validator';
 import config from '../../../../appConfig';
 
 const authConfig = {
@@ -86,6 +86,10 @@ function constructPatronObject(object) {
 
   if (!isEmpty(zip) && (!isNumeric(zip) || !isLength(zip, { min: 5, max: 5 }))) {
     Object.assign(errorObj, { zip: 'Please enter a 5-digit postal code.' });
+  }
+
+  if (!isEmpty(email) && !isEmail(email)) {
+    Object.assign(errorObj, { email: 'Please enter a valid email address.' });
   }
 
   if (isEmpty(username)) {
