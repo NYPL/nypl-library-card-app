@@ -423,6 +423,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('email')}
           errorState={this.state.fieldErrors}
           onBlur={this.handleOnBlur('email')}
+          childRef={(el) => { this.email = el; }}
         />
         <FormField
           id="patronECommunications"
