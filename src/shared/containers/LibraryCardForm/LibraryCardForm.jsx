@@ -6,10 +6,9 @@ import assign from 'lodash/assign';
 import forIn from 'lodash/forIn';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import { isDate } from '../../../utils/FormValidationUtils';
-import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
 import ApiErrors from '../../components/ApiErrors/ApiErrors';
-import config from './../../../../appConfig.js';
+import config from './../../../../appConfig';
 
 class LibraryCardForm extends React.Component {
   constructor(props) {
@@ -18,7 +17,6 @@ class LibraryCardForm extends React.Component {
       csrfToken: '',
       focusOnResult: false,
       formProcessing: false,
-      formEntrySuccessful: false,
       apiResults: {},
       fieldErrors: {},
       patronFields: {
@@ -172,7 +170,29 @@ class LibraryCardForm extends React.Component {
       case 'ecommunications_pref':
         currentErrors = fieldErrors;
         break;
+      default:
+        break;
     }
+
+    this.setState({ fieldErrors: currentErrors });
+  }
+
+  focusOnErrorElement() {
+    // Handle focusing on first element in the object that contains an error
+    Object.keys(this.state.fieldErrors).some((key) => {
+      if (this.state.fieldErrors[key]) {
+        // the keyword state is reserved in React, therefore the reference to the State field
+        // is renamed to stateName
+        if (key === 'state') {
+          this.stateName.focus();
+          return true;
+        }
+
+        this[key].focus();
+        return true;
+      }
+      return true;
+    });
   }
 
   handleInputChange(property) {
@@ -195,16 +215,23 @@ class LibraryCardForm extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
-    // clear the previous error response
+    // Clearing server side errors for re-submission.
     this.setState({ apiResults: {} });
+    event.preventDefault();
+
+    // Iterate through patron fields and ensure all fields are valid
     forIn(this.state.patronFields, (value, key) => {
       this.validateField(key, value);
     });
-    console.log('Remember we turned off client side check here');
-    // if (isEmpty(this.state.fieldErrors)) {
-      // Form is now processing
-      this.setState({ formProcessing: true, apiResults: {} });
+
+    // console.log('Remember we turned off client side check here');
+    if (isEmpty(this.state.fieldErrors)) {
+      // A required form field contains an error, focus on the first error field
+      this.focusOnErrorElement();
+    } else {
+      // No client-side errors, form is now processing
+      this.setState({ formProcessing: true });
+
       const {
         firstName,
         lastName,
@@ -236,28 +263,23 @@ class LibraryCardForm extends React.Component {
       }, {
         headers: { 'csrf-token': this.state.csrfToken },
       })
-      .then((response) => {
-        this.setState({
-          formProcessing: false,
-          formEntrySuccessful: false,
-          apiResults: response.data,
+        .then((response) => {
+          this.setState({
+            formProcessing: false,
+            formEntrySuccessful: false,
+            apiResults: response.data,
+          });
+          window.location.href = `${config.confirmationURL.base}?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
+        })
+        .catch((error) => {
+          this.setState({ formProcessing: false, focusOnResult: true });
+          if (error.response && error.response.data) {
+            // The request was made, but the server responded with a status code
+            // that falls out of the range of 2xx
+            this.setState({ apiResults: error.response.data });
+          }
         });
-        window.location.href = `${config.confirmationURL.base}?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
-      })
-      .catch((error) => {
-        this.setState({ formProcessing: false, focusOnResult: true });
-        if (error.response && error.response.data) {
-          // The request was made, but the server responded with a status code
-          // that falls out of the range of 2xx
-          this.setState({ apiResults: error.response.data });
-        }
-      });
-    // }
-  }
-
-  renderConfirmation() {
-    return this.state.formEntrySuccessful ?
-      <Confirmation name={this.getFullName()} apiObject={this.state.apiResults} /> : null;
+    }
   }
 
   renderLoader() {
@@ -279,7 +301,7 @@ class LibraryCardForm extends React.Component {
   }
 
   renderFormFields() {
-    return !this.state.formEntrySuccessful ? (
+    return (
       <form className="nypl-library-card-form" onSubmit={this.handleSubmit}>
         <h2>Please enter the following information</h2>
         <h3>Personal Information</h3>
@@ -294,6 +316,7 @@ class LibraryCardForm extends React.Component {
             handleOnChange={this.handleInputChange('firstName')}
             errorState={this.state.fieldErrors}
             onBlur={this.handleOnBlur('firstName')}
+            childRef={(el) => { this.firstName = el; }}
           />
           <FormField
             id="patronLastName"
@@ -305,6 +328,7 @@ class LibraryCardForm extends React.Component {
             handleOnChange={this.handleInputChange('lastName')}
             errorState={this.state.fieldErrors}
             onBlur={this.handleOnBlur('lastName')}
+            childRef={(el) => { this.lastName = el; }}
           />
         </div>
         <FormField
@@ -320,6 +344,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={10}
           onBlur={this.handleOnBlur('dateOfBirth')}
+          childRef={(el) => { this.dateOfBirth = el; }}
         />
         <h3>Address</h3>
         <FormField
@@ -333,6 +358,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('line1')}
           errorState={this.state.fieldErrors}
           onBlur={this.handleOnBlur('line1')}
+          childRef={(el) => { this.line1 = el; }}
         />
         <FormField
           id="patronStreet2"
@@ -355,6 +381,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('city')}
           errorState={this.state.fieldErrors}
           onBlur={this.handleOnBlur('city')}
+          childRef={(el) => { this.city = el; }}
         />
         <FormField
           id="patronState"
@@ -369,6 +396,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={2}
           onBlur={this.handleOnBlur('state')}
+          childRef={(el) => { this.stateName = el; }}
         />
         <FormField
           id="patronZip"
@@ -382,6 +410,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={5}
           onBlur={this.handleOnBlur('zip')}
+          childRef={(el) => { this.zip = el; }}
         />
         <h3>Create Your Account</h3>
         <FormField
@@ -403,7 +432,7 @@ class LibraryCardForm extends React.Component {
           label="Email Checkbox"
           fieldName="ecommunications_pref"
           instructionText={'Yes, I would like to receive information about NYPL\'s programs ' +
-            'and services.'}
+          'and services.'}
           handleOnChange={this.handleInputChange('ecommunications_pref')}
           value={this.state.patronFields.ecommunications_pref}
           checked={this.state.patronFields.ecommunications_pref}
@@ -421,6 +450,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={25}
           onBlur={this.handleOnBlur('username')}
+          childRef={(el) => { this.username = el; }}
         />
         <FormField
           id="patronPin"
@@ -435,6 +465,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={4}
           onBlur={this.handleOnBlur('pin')}
+          childRef={(el) => { this.pin = el; }}
         />
         <div>
           <input
@@ -446,7 +477,7 @@ class LibraryCardForm extends React.Component {
           {this.renderLoader()}
         </div>
       </form>
-    ) : null;
+    );
   }
 
   render() {
