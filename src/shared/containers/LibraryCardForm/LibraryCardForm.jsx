@@ -224,12 +224,14 @@ class LibraryCardForm extends React.Component {
       this.validateField(key, value);
     });
 
+    // Has client-side errors, stop processing
     if (!isEmpty(this.state.fieldErrors)) {
       // A required form field contains an error, focus on the first error field
       this.focusOnErrorElement();
     } else {
       // No client-side errors, form is now processing
       this.setState({ formProcessing: true });
+
       const {
         firstName,
         lastName,
@@ -262,10 +264,9 @@ class LibraryCardForm extends React.Component {
         headers: { 'csrf-token': this.state.csrfToken },
       })
         .then((response) => {
-          // Debugging only (Alpha)
-          console.log(response.data);
           this.setState({
             formProcessing: false,
+            formEntrySuccessful: false,
             apiResults: response.data,
           });
           window.location.href = `${config.confirmationURL.base}?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
@@ -275,8 +276,6 @@ class LibraryCardForm extends React.Component {
           if (error.response && error.response.data) {
             // The request was made, but the server responded with a status code
             // that falls out of the range of 2xx
-            // Debugging only (Alpha)
-            console.log(error.response.data);
             this.setState({ apiResults: error.response.data });
           }
         });
