@@ -15,3 +15,9 @@
   border: 0.1rem solid black;
   box-shadow: none;
 }
+
+.nypl-field-error input[type=text] {
+    background-color: #f6d6d8;
+    border-bottom: .125rem solid #97272c;
+    box-shadow: none;
+}
