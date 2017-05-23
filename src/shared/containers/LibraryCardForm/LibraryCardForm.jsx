@@ -224,8 +224,8 @@ class LibraryCardForm extends React.Component {
       this.validateField(key, value);
     });
 
-    // console.log('Remember we turned off client side check here');
-    if (isEmpty(this.state.fieldErrors)) {
+    // Has client-side errors, stop processing
+    if (!isEmpty(this.state.fieldErrors)) {
       // A required form field contains an error, focus on the first error field
       this.focusOnErrorElement();
     } else {
