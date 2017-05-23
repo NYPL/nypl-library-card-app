@@ -70,3 +70,5 @@ eb create <<environment name>> --instance_type <<size of instance>> \
 > Updated the client side input field validation to be activated on blur.
 > Updated the route for barcode service. It is commented out for current release.
 > Updated server side validation. So now the error messages will be displayed in <ErrorBox> if client side validations fail.
+> Added related functions for the email validation from Card Creator.
+
