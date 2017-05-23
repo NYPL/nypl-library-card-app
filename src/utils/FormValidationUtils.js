@@ -31,7 +31,8 @@ function isDate(input, minYear = 1902, maxYear = new Date().getFullYear()) {
  * return {object} {anchorText, restText}
  */
 function createAnchorText(wholeText) {
-  const anchorText = (wholeText) ? wholeText.split(' field')[0] : '';
+  const anchorText = (wholeText && typeof wholeText === 'string') ?
+    wholeText.split(' field')[0] : '';
   const restText = (!anchorText) ? '' : ` field ${wholeText.split(' field')[1]}`;
 
   return { anchorText, restText };
@@ -45,7 +46,8 @@ function createAnchorText(wholeText) {
  * return {string}
  */
 function createAnchorID(key) {
-  let hashElement = (key) ? `${key.charAt(0).toUpperCase()}${key.substr(1)}` : '';
+  let hashElement = (key && typeof key === 'string') ?
+    `${key.charAt(0).toUpperCase()}${key.substr(1)}` : '';
 
   if (hashElement === 'DateOfBirth') {
     hashElement = 'Dob';
@@ -55,7 +57,7 @@ function createAnchorID(key) {
     hashElement = 'Street1';
   }
 
-  if (!hashElement) { return null; };
+  if (!hashElement) { return null; }
 
   return `#patron${hashElement}`;
 }
@@ -79,7 +81,8 @@ function renderServerValidationError(object) {
         const anchorText = createAnchorText(object[key]).anchorText || '';
         const restText = createAnchorText(object[key]).restText || '';
 
-        errorMessage = <li key={index}><a href={createAnchorID(key)}>{anchorText}</a>{restText}</li>;
+        errorMessage = (!anchorText && !anchorText) ? <li>One of the fields is incorrect.</li> :
+          <li key={index}><a href={createAnchorID(key)}>{anchorText}</a>{restText}</li>;
       } else {
         if (key === 'zip') {
           errorMessage = <li key={index}>Please enter a 5-digit <a href={createAnchorID(key)}>postal code</a>.</li>;
