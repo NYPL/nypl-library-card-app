@@ -1,8 +1,9 @@
 import React from 'react';
+import { renderServerValidationError } from './../../../utils/FormValidationUtils.js';
 
 const ErrorBox = ({ errorObject, className }) => {
   const renderErrorByType = (errorObj) => {
-    const { type } = errorObject;
+    const { type, details } = errorObject;
     const defaultError = 'There was an error processing your submission. Please try again later.';
     let error;
 
@@ -14,6 +15,9 @@ const ErrorBox = ({ errorObject, className }) => {
         case 'unavailable-username':
           error =
             <li>This <a href="#patronUsername">username</a> is already taken. Please try again.</li>;
+          break;
+        case 'server-validation-error':
+          error = <div>{renderServerValidationError(details)}</div>;
           break;
         case 'server':
           error =
