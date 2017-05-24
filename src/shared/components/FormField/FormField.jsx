@@ -55,7 +55,11 @@ class FormField extends React.Component {
           type={this.props.type}
           id={this.props.id}
           aria-required={this.props.type === 'checkbox' ? null : this.props.isRequired}
-          aria-labelledby={`${this.props.id}-label ${this.props.id}-status`}
+          aria-labelledby={
+            (this.props.instructionText || (this.props.errorState && this.props.errorState[this.props.fieldName]))
+              ? `${this.props.id}-label ${this.props.id}-status`
+              : `${this.props.id}-label`
+          }
           onChange={this.props.handleOnChange}
           checked={this.props.checked}
           maxLength={this.props.maxLength || null}
