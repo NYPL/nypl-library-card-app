@@ -20,7 +20,14 @@ class FormField extends React.Component {
 
   renderErrorBox() {
     return (
-      <div className="nypl-field-status">{this.props.errorState[this.props.fieldName]}</div>
+      <span
+        className="nypl-field-status"
+        id={`${this.props.id}-status`}
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        {this.props.errorState[this.props.fieldName]}
+      </span>
     );
   }
 
@@ -49,7 +56,9 @@ class FormField extends React.Component {
           id={this.props.id}
           aria-required={this.props.type === 'checkbox' ? null : this.props.isRequired}
           aria-labelledby={
-            (this.props.instructionText) ? `${this.props.id}-label ${this.props.id}-status` : null
+            (this.props.instructionText || (this.props.errorState && this.props.errorState[this.props.fieldName]))
+              ? `${this.props.id}-label ${this.props.id}-status`
+              : `${this.props.id}-label`
           }
           onChange={this.props.handleOnChange}
           checked={this.props.checked}
