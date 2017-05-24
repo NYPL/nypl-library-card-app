@@ -88,6 +88,10 @@ function renderServerValidationError(object) {
           errorMessage = <li key={index}>Please enter a 5-digit <a href={createAnchorID(key)}>postal code</a>.</li>;
         }
 
+        if (key === 'email') {
+          errorMessage = <li key={index}>Please enter a valid <a href={createAnchorID(key)}>email address</a>.</li>;
+        }
+
         if (key === 'username') {
           errorMessage = <li key={index}>Please enter a <a href={createAnchorID(key)}>username</a> between 5-25 alphanumeric characters.</li>;
         }
