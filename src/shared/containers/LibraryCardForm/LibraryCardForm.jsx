@@ -51,6 +51,9 @@ class LibraryCardForm extends React.Component {
   componentDidUpdate() {
     if (this.state.focusOnResult) {
       this.focusOnApiResponse();
+      if (document && document.title !== '') {
+        document.title = 'Form Submission Error | NYPL';
+      }
     }
   }
 
