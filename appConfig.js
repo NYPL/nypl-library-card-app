@@ -1,5 +1,5 @@
 export default {
-  appTitle: 'NYPL | Get a library card (Alpha)',
+  appTitle: 'Library Card application | NYPL',
   appName: 'NYPL Library Card App',
   favIconPath: '//d2znry4lg8s0tq.cloudfront.net/images/favicon.ico',
   port: 3001,
