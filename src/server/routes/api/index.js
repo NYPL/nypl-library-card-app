@@ -151,13 +151,15 @@ export function initializeAppAuth(req, res, next) {
           req.app.set('tokenExpTime', moment().add(response.data.expires_in, 's'));
         }
         next();
-      })
-      .catch(error => res.status(400).json(constructErrorObject(
-        'app-auth-failed',
-        'Could not authenticate App with OAuth service.',
-        400,
-        error,
-      )));
+      }).catch((error) => {
+        req.app.get('logger').error(error);
+        return res.status(400).json(constructErrorObject(
+          'app-auth-failed',
+          'Could not authenticate App with OAuth service',
+          400,
+          error,
+        ));
+      });
   }
 
   if (tokenObject.access_token && isTokenExipring(tokenExpTime, minuteExpThreshold)) {
@@ -170,12 +172,15 @@ export function initializeAppAuth(req, res, next) {
         }
         next();
       })
-      .catch(error => res.status(400).json(constructErrorObject(
-        'app-reauth-failed',
-        'Could not re-authenticate App with OAuth service.',
-        400,
-        error,
-      )));
+      .catch((error) => {
+        req.app.get('logger').error(error);
+        return res.status(400).json(constructErrorObject(
+          'app-reauth-failed',
+          'Could not re-authenticate App with OAuth service',
+          400,
+          error,
+        ));
+      });
   }
 
   return next();
