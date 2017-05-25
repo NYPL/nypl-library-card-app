@@ -149,8 +149,16 @@ export function initializeAppAuth(req, res, next) {
         if (response.data) {
           req.app.set('tokenObject', response.data);
           req.app.set('tokenExpTime', moment().add(response.data.expires_in, 's'));
+          next();
+        } else {
+          req.app.get('logger').error('No response received from OAuth Server.');
+          return res.status(400).json(constructErrorObject(
+            'app-auth-failed',
+            'Could not authenticate App with OAuth service',
+            400,
+            null,
+          ));
         }
-        next();
       }).catch((error) => {
         req.app.get('logger').error(error);
         return res.status(400).json(constructErrorObject(
