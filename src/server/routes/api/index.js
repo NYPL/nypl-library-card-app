@@ -17,7 +17,7 @@ function constructApiHeaders(token = '', contentType = 'application/json') {
       'Content-Type': contentType,
       Authorization: `Bearer ${token}`,
     },
-    timeout: 10000
+    timeout: 10000,
   };
 }
 
@@ -50,11 +50,11 @@ function constructPatronObject(object) {
     zip,
     username,
     pin,
-    ecommunications_pref: ecommunications_pref,
+    ecommunications_pref,
+    agencyType,
   } = object;
 
   const errorObj = {};
-
 
   if (isEmpty(firstName)) {
     Object.assign(errorObj, { firstName: 'First Name field is empty.' });
@@ -96,8 +96,12 @@ function constructPatronObject(object) {
     Object.assign(errorObj, { username: 'Username field is empty.' });
   }
 
-  if (!isEmpty(username) && (!isAlphanumeric(username) || !isLength(username, { min: 5, max: 25 }))) {
-    Object.assign(errorObj, { username: 'Please enter a username between 5-25 alphanumeric characters.' });
+  if (!isEmpty(username) && (!isAlphanumeric(username)
+    || !isLength(username, { min: 5, max: 25 }))) {
+    Object.assign(
+      errorObj,
+      { username: 'Please enter a username between 5-25 alphanumeric characters.' },
+    );
   }
 
   if (isEmpty(pin)) {
@@ -129,6 +133,7 @@ function constructPatronObject(object) {
     username,
     pin,
     ecommunications_pref,
+    patron_agency: agencyType || config.agencyType.default,
   };
 }
 
@@ -251,10 +256,10 @@ export function createPatron(req, res) {
             { simplePatron: patronData },
             constructApiHeaders(token),
           )
-          .then(result => {
-              res.json({ status: 200, response: result.data.data.simplePatron });
-            }
-          )
+          .then(result => res.json({
+            status: 200,
+            response: result.data.data.simplePatron,
+          }))
           .catch((err) => {
             let serverError = null;
 
@@ -267,7 +272,8 @@ export function createPatron(req, res) {
 
             res.status(err.response.status).json({
               status: err.response.status,
-              response: (serverError) ? Object.assign(err.response.data, serverError) : err.response.data,
+              response: (serverError) ?
+                Object.assign(err.response.data, serverError) : err.response.data,
             });
           });
       }))
