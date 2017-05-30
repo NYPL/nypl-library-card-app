@@ -154,8 +154,18 @@ export function initializeAppAuth(req, res, next) {
         if (response.data) {
           req.app.set('tokenObject', response.data);
           req.app.set('tokenExpTime', moment().add(response.data.expires_in, 's'));
+          next();
+        } else {
+          req.app.get('logger').error('No access_token obtained from OAuth Service.');
+          const errorObj = {};
+          Object.assign(errorObj, { oauth: 'No access_token obtained from OAuth Service.' });
+          return res.status(400).json(constructErrorObject(
+            'no-access-token',
+            'No access_token obtained from OAuth Service.',
+            400,
+            errorObj,
+          ));
         }
-        next();
       }).catch((error) => {
         req.app.get('logger').error(error);
         return res.status(400).json(constructErrorObject(
