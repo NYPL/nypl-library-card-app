@@ -95,8 +95,7 @@ function constructPatronObject(object) {
   if (isEmpty(username)) {
     Object.assign(errorObj, { username: 'Username field is empty.' });
   }
-
-
+  
   if (!isEmpty(username) && (!isAlphanumeric(username)
     || !isLength(username, { min: 5, max: 25 }))) {
     Object.assign(
