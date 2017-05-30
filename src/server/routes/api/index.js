@@ -17,7 +17,7 @@ function constructApiHeaders(token = '', contentType = 'application/json') {
       'Content-Type': contentType,
       Authorization: `Bearer ${token}`,
     },
-    timeout: 10000
+    timeout: 10000,
   };
 }
 
@@ -96,7 +96,8 @@ function constructPatronObject(object) {
     Object.assign(errorObj, { username: 'Username field is empty.' });
   }
 
-  if (!isEmpty(username) && (!isAlphanumeric(username) || !isLength(username, { min: 5, max: 25 }))) {
+  if (!isEmpty(username) && (!isAlphanumeric(username)
+    || !isLength(username, { min: 5, max: 25 }))) {
     Object.assign(errorObj, { username: 'Please enter a username between 5-25 alphanumeric characters.' });
   }
 
@@ -153,7 +154,7 @@ export function initializeAppAuth(req, res, next) {
         } else {
           req.app.get('logger').error('No access_token obtained from OAuth Service.');
           const errorObj = {};
-          Object.assign(errorObj, {oauth: 'No access_token obtained from OAuth Service.'});
+          Object.assign(errorObj, { oauth: 'No access_token obtained from OAuth Service.' });
           return res.status(400).json(constructErrorObject(
             'no-access-token',
             'No access_token obtained from OAuth Service.',
@@ -262,8 +263,8 @@ export function createPatron(req, res) {
             constructApiHeaders(token),
           )
           .then(result => {
-              res.json({ status: 200, response: result.data.data.simplePatron });
-            }
+            res.json({ status: 200, response: result.data.data.simplePatron });
+          },
           )
           .catch((err) => {
             let serverError = null;
@@ -277,7 +278,8 @@ export function createPatron(req, res) {
 
             res.status(err.response.status).json({
               status: err.response.status,
-              response: (serverError) ? Object.assign(err.response.data, serverError) : err.response.data,
+              response: (serverError) ?
+                Object.assign(err.response.data, serverError) : err.response.data,
             });
           });
       }))
