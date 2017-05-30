@@ -152,11 +152,13 @@ export function initializeAppAuth(req, res, next) {
           next();
         } else {
           req.app.get('logger').error('No response received from OAuth Server.');
+          const errorObj = {};
+          Object.assign(errorObj, {oauth: 'Oauth server error. Please try again later.'});
           return res.status(400).json(constructErrorObject(
             'app-auth-failed',
             'Could not authenticate App with OAuth service',
             400,
-            null,
+            errorObj,
           ));
         }
       }).catch((error) => {
