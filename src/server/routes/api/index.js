@@ -50,11 +50,11 @@ function constructPatronObject(object) {
     zip,
     username,
     pin,
-    ecommunications_pref: ecommunications_pref,
+    ecommunications_pref,
+    agencyType,
   } = object;
 
   const errorObj = {};
-
 
   if (isEmpty(firstName)) {
     Object.assign(errorObj, { firstName: 'First Name field is empty.' });
@@ -96,9 +96,21 @@ function constructPatronObject(object) {
     Object.assign(errorObj, { username: 'Username field is empty.' });
   }
 
+<<<<<<< HEAD
   if (!isEmpty(username) && (!isAlphanumeric(username)
     || !isLength(username, { min: 5, max: 25 }))) {
     Object.assign(errorObj, { username: 'Please enter a username between 5-25 alphanumeric characters.' });
+||||||| merged common ancestors
+  if (!isEmpty(username) && (!isAlphanumeric(username) || !isLength(username, { min: 5, max: 25 }))) {
+    Object.assign(errorObj, { username: 'Please enter a username between 5-25 alphanumeric characters.' });
+=======
+  if (!isEmpty(username) && (!isAlphanumeric(username)
+    || !isLength(username, { min: 5, max: 25 }))) {
+    Object.assign(
+      errorObj,
+      { username: 'Please enter a username between 5-25 alphanumeric characters.' },
+    );
+>>>>>>> remotes/origin/master
   }
 
   if (isEmpty(pin)) {
@@ -130,6 +142,7 @@ function constructPatronObject(object) {
     username,
     pin,
     ecommunications_pref,
+    patron_agency: agencyType || config.agencyType.default,
   };
 }
 
@@ -262,10 +275,11 @@ export function createPatron(req, res) {
             { simplePatron: patronData },
             constructApiHeaders(token),
           )
-          .then(result => {
-            res.json({ status: 200, response: result.data.data.simplePatron });
-          },
-          )
+          .then(result => ({
+            res.json({
+              status: 200,
+              response: result.data.data.simplePatron 
+          }))
           .catch((err) => {
             let serverError = null;
 

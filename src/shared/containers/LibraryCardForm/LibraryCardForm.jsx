@@ -32,6 +32,7 @@ class LibraryCardForm extends React.Component {
         username: '',
         pin: '',
         ecommunications_pref: true,
+        agencyType: this.getPatronAgencyType(),
       },
     };
 
@@ -59,6 +60,13 @@ class LibraryCardForm extends React.Component {
 
   getMetaTagContent(tag) {
     return document.head.querySelector(`[${tag}]`).content;
+  }
+
+  getPatronAgencyType() {
+    const agencyTypeParam = this.props.agencyType;
+    const { agencyType } = config;
+    return (!isEmpty(agencyTypeParam) && agencyTypeParam.toLowerCase() === 'nys')
+      ? agencyType.nys : agencyType.default;
   }
 
   getFullName() {
@@ -248,6 +256,7 @@ class LibraryCardForm extends React.Component {
         username,
         pin,
         ecommunications_pref,
+        agencyType,
       } = this.state.patronFields;
 
       axios.post('/library-card/new/create-patron', {
@@ -263,6 +272,7 @@ class LibraryCardForm extends React.Component {
         username,
         pin,
         ecommunications_pref,
+        agencyType,
       }, {
         headers: { 'csrf-token': this.state.csrfToken },
       })
@@ -497,5 +507,13 @@ class LibraryCardForm extends React.Component {
     );
   }
 }
+
+LibraryCardForm.propTypes = {
+  agencyType: React.PropTypes.string,
+};
+
+LibraryCardForm.defaultProps = {
+  agencyType: '',
+};
 
 export default LibraryCardForm;
