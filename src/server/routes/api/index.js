@@ -98,7 +98,11 @@ function constructPatronObject(object) {
 
   if (!isEmpty(username) && (!isAlphanumeric(username)
     || !isLength(username, { min: 5, max: 25 }))) {
-    Object.assign(errorObj, { username: 'Please enter a username between 5-25 alphanumeric characters.' });
+    Object.assign(
+      errorObj,
+      { username: 'Please enter a username between 5-25 alphanumeric characters.' },
+    );
+
   }
 
   if (isEmpty(pin)) {
@@ -262,10 +266,11 @@ export function createPatron(req, res) {
             { simplePatron: patronData },
             constructApiHeaders(token),
           )
-          .then(result => {
-            res.json({ status: 200, response: result.data.data.simplePatron });
-          },
-          )
+          .then(result => ({
+            res.json({
+              status: 200,
+              response: result.data.data.simplePatron 
+          }))
           .catch((err) => {
             let serverError = null;
 
