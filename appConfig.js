@@ -11,8 +11,12 @@ export default {
   },
   clientId: process.env.OAUTH_CLIENT_ID,
   clientSecret: process.env.OAUTH_CLIENT_SECRET,
+  agencyType: {
+    default: '198',
+    nys: '199',
+  },
   scopes: 'account:write account:read',
-  confirmationURL:{
+  confirmationURL: {
     base: 'https://www.nypl.org/get-help/library-card/confirmation',
   },
 };

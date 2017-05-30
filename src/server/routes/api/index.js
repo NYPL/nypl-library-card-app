@@ -50,11 +50,11 @@ function constructPatronObject(object) {
     zip,
     username,
     pin,
-    ecommunications_pref: ecommunications_pref,
+    ecommunications_pref,
+    agencyType,
   } = object;
 
   const errorObj = {};
-
 
   if (isEmpty(firstName)) {
     Object.assign(errorObj, { firstName: 'First Name field is empty.' });
@@ -96,13 +96,13 @@ function constructPatronObject(object) {
     Object.assign(errorObj, { username: 'Username field is empty.' });
   }
 
+
   if (!isEmpty(username) && (!isAlphanumeric(username)
     || !isLength(username, { min: 5, max: 25 }))) {
     Object.assign(
       errorObj,
       { username: 'Please enter a username between 5-25 alphanumeric characters.' },
     );
-
   }
 
   if (isEmpty(pin)) {
@@ -134,6 +134,7 @@ function constructPatronObject(object) {
     username,
     pin,
     ecommunications_pref,
+    patron_agency: agencyType || config.agencyType.default,
   };
 }
 
