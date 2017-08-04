@@ -1,11 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ErrorBox from '../../components/ErrorBox/ErrorBox';
 
 class ApiErrors extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const apiResults = this.props.apiResults;
     const errorClass = 'nypl-error-content';
@@ -24,8 +21,8 @@ class ApiErrors extends React.Component {
 }
 
 ApiErrors.propTypes = {
-  apiResults: React.PropTypes.object,
-  childRef: React.PropTypes.func,
+  apiResults: PropTypes.object,
+  childRef: PropTypes.func,
 };
 
 export default ApiErrors;

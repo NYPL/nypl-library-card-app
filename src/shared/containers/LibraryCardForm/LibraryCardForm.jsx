@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import isEmpty from 'lodash/isEmpty';
 import omit from 'lodash/omit';
@@ -32,7 +33,7 @@ class LibraryCardForm extends React.Component {
         username: '',
         pin: '',
         ecommunications_pref: true,
-        agencyType: this.getPatronAgencyType(),
+        agencyType: '',
       },
     };
 
@@ -46,6 +47,12 @@ class LibraryCardForm extends React.Component {
 
     if (csrfToken) {
       this.setState({ csrfToken });
+    }
+
+    const agencyType = this.getPatronAgencyType();
+
+    if (agencyType) {
+      this.setState({ agencyType });
     }
   }
 
@@ -62,8 +69,15 @@ class LibraryCardForm extends React.Component {
     return document.head.querySelector(`[${tag}]`).content;
   }
 
+  getUrlParameter(name) {
+    const paramName = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    const regex = new RegExp(`[\\?&]${paramName}=([^&#]*)`);
+    const results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  }
+
   getPatronAgencyType() {
-    const agencyTypeParam = this.props.agencyType;
+    const agencyTypeParam = this.getUrlParameter(this.props.agencyType);
     const { agencyType } = config;
     return (!isEmpty(agencyTypeParam) && agencyTypeParam.toLowerCase() === 'nys')
       ? agencyType.nys : agencyType.default;
@@ -509,7 +523,7 @@ class LibraryCardForm extends React.Component {
 }
 
 LibraryCardForm.propTypes = {
-  agencyType: React.PropTypes.string,
+  agencyType: PropTypes.string,
 };
 
 LibraryCardForm.defaultProps = {

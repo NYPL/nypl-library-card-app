@@ -60,6 +60,7 @@ if (process.env.NODE_ENV === 'production') {
   module.exports = {
     devtool: 'eval',
     entry: [
+      'react-hot-loader/patch',
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
       'babel-polyfill',
@@ -78,7 +79,7 @@ if (process.env.NODE_ENV === 'production') {
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loaders: ['react-hot', 'babel-loader'],
+          loaders: ['react-hot-loader/webpack', 'babel-loader'],
         },
         {
           test: /\.scss?$/,
