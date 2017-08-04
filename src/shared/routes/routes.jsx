@@ -1,3 +1,4 @@
+// As of 07/2017 we are disabling the /barcode route in production
 import React from 'react';
 import { Route } from 'react-router';
 import ApplicationContainer from './../components/Application/ApplicationContainer';

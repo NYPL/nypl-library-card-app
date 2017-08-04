@@ -1,5 +1,6 @@
 import React from 'react';
-import { renderServerValidationError } from './../../../utils/FormValidationUtils.js';
+import PropTypes from 'prop-types';
+import { renderServerValidationError } from './../../../utils/FormValidationUtils';
 
 const ErrorBox = ({ errorObject, className }) => {
   const renderErrorByType = (errorObj) => {
@@ -65,8 +66,8 @@ const ErrorBox = ({ errorObject, className }) => {
 };
 
 ErrorBox.propTypes = {
-  className: React.PropTypes.string,
-  errorObject: React.PropTypes.object.isRequired,
+  className: PropTypes.string,
+  errorObject: PropTypes.object.isRequired,
 };
 
 ErrorBox.defaultProps = {

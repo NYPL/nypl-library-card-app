@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class FormField extends React.Component {
   renderInstructionText(text) {
@@ -74,20 +75,20 @@ class FormField extends React.Component {
 }
 
 FormField.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  label: React.PropTypes.string.isRequired,
-  type: React.PropTypes.string.isRequired,
-  fieldName: React.PropTypes.string.isRequired,
-  errorState: React.PropTypes.shape(),
-  value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
-  className: React.PropTypes.string,
-  isRequired: React.PropTypes.bool,
-  handleOnChange: React.PropTypes.func,
-  checked: React.PropTypes.bool,
-  instructionText: React.PropTypes.string,
-  maxLength: React.PropTypes.number,
-  onBlur: React.PropTypes.func,
-  childRef: React.PropTypes.func,
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  fieldName: PropTypes.string.isRequired,
+  errorState: PropTypes.shape(),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  className: PropTypes.string,
+  isRequired: PropTypes.bool,
+  handleOnChange: PropTypes.func,
+  checked: PropTypes.bool,
+  instructionText: PropTypes.string,
+  maxLength: PropTypes.number,
+  onBlur: PropTypes.func,
+  childRef: PropTypes.func,
 };
 
 FormField.defaultProps = {

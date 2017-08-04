@@ -45,7 +45,7 @@ const ApplicationContainer = props => (
         className="nypl-library-card-banner"
         items={[bannerContent]}
       />
-      <LibraryCardForm agencyType={props.location.query.form_type} />
+      <LibraryCardForm agencyType={'form_type'} />
     </main>
     <Footer />
   </div>
