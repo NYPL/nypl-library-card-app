@@ -15,6 +15,7 @@ class LibraryCardForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      agencyType: '',
       csrfToken: '',
       focusOnResult: false,
       formProcessing: false,
@@ -33,7 +34,6 @@ class LibraryCardForm extends React.Component {
         username: '',
         pin: '',
         ecommunications_pref: true,
-        agencyType: '',
       },
     };
 
@@ -52,7 +52,7 @@ class LibraryCardForm extends React.Component {
     const agencyType = this.getPatronAgencyType();
 
     if (agencyType) {
-      this.setState({ patronFields: { agencyType } });
+      this.setState({ agencyType });
     }
   }
 
@@ -249,6 +249,7 @@ class LibraryCardForm extends React.Component {
       this.validateField(key, value);
     });
 
+
     // Has client-side errors, stop processing
     if (!isEmpty(this.state.fieldErrors)) {
       // A required form field contains an error, focus on the first error field
@@ -270,8 +271,8 @@ class LibraryCardForm extends React.Component {
         username,
         pin,
         ecommunications_pref,
-        agencyType,
       } = this.state.patronFields;
+      const agencyType = this.state.agencyType;
 
       axios.post('/library-card/new/create-patron', {
         firstName,
@@ -290,22 +291,22 @@ class LibraryCardForm extends React.Component {
       }, {
         headers: { 'csrf-token': this.state.csrfToken },
       })
-        .then((response) => {
-          this.setState({
-            formProcessing: false,
-            formEntrySuccessful: false,
-            apiResults: response.data,
-          });
-          window.location.href = `${config.confirmationURL.base}?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
-        })
-        .catch((error) => {
-          this.setState({ formProcessing: false, focusOnResult: true });
-          if (error.response && error.response.data) {
-            // The request was made, but the server responded with a status code
-            // that falls out of the range of 2xx
-            this.setState({ apiResults: error.response.data });
-          }
+      .then((response) => {
+        this.setState({
+          formProcessing: false,
+          formEntrySuccessful: false,
+          apiResults: response.data,
         });
+        window.location.href = `${config.confirmationURL.base}?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
+      })
+      .catch((error) => {
+        this.setState({ formProcessing: false, focusOnResult: true });
+        if (error.response && error.response.data) {
+          // The request was made, but the server responded with a status code
+          // that falls out of the range of 2xx
+          this.setState({ apiResults: error.response.data });
+        }
+      });
     }
   }
 
