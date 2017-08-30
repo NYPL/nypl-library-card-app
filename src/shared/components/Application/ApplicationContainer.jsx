@@ -34,7 +34,7 @@ const bannerContent = {
   },
 };
 
-const ApplicationContainer = props => (
+const ApplicationContainer = () => (
   <div className="nypl-library-card-app">
     <Header
       skipNav={{ target: 'main-content' }}
@@ -45,7 +45,7 @@ const ApplicationContainer = props => (
         className="nypl-library-card-banner"
         items={[bannerContent]}
       />
-      <LibraryCardForm agencyType={'form_type'} />
+      <LibraryCardForm agencyType="form_type" />
     </main>
     <Footer />
   </div>
