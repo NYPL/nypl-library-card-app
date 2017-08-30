@@ -34,7 +34,7 @@ const bannerContent = {
   },
 };
 
-const ApplicationContainer = props => (
+const ApplicationContainer = () => (
   <div className="nypl-library-card-app">
     <Header
       skipNav={{ target: 'main-content' }}
