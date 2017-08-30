@@ -52,7 +52,7 @@ class LibraryCardForm extends React.Component {
     const agencyType = this.getPatronAgencyType();
 
     if (agencyType) {
-      this.setState({ agencyType });
+      this.setState({ patronFields: { agencyType } });
     }
   }
 
