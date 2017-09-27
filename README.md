@@ -4,7 +4,7 @@ A Universal JavaScript Application that allows NYPL Patrons to request a library
 a patron record.
 
 ## Version
-> 0.2.1
+> 0.3.2
 
 ## Installation & Configuration
 
