@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import isEmpty from 'lodash/isEmpty';
 import omit from 'lodash/omit';
@@ -6,18 +7,18 @@ import assign from 'lodash/assign';
 import forIn from 'lodash/forIn';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import { isDate } from '../../../utils/FormValidationUtils';
-import Confirmation from '../../components/Confirmation/Confirmation';
 import FormField from '../../components/FormField/FormField';
-import ErrorBox from '../../components/ErrorBox/ErrorBox';
+import ApiErrors from '../../components/ApiErrors/ApiErrors';
+import config from './../../../../appConfig';
 
 class LibraryCardForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      agencyType: '',
       csrfToken: '',
       focusOnResult: false,
       formProcessing: false,
-      formEntrySuccessful: false,
       apiResults: {},
       fieldErrors: {},
       patronFields: {
@@ -38,6 +39,7 @@ class LibraryCardForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleOnBlur = this.handleOnBlur.bind(this);
   }
 
   componentDidMount() {
@@ -46,16 +48,39 @@ class LibraryCardForm extends React.Component {
     if (csrfToken) {
       this.setState({ csrfToken });
     }
+
+    const agencyType = this.getPatronAgencyType();
+
+    if (agencyType) {
+      this.setState({ agencyType });
+    }
   }
 
   componentDidUpdate() {
     if (this.state.focusOnResult) {
-      // this.focusOnApiResponse();
+      this.focusOnApiResponse();
+      if (document && document.title !== '') {
+        document.title = 'Form Submission Error | NYPL';
+      }
     }
   }
 
   getMetaTagContent(tag) {
     return document.head.querySelector(`[${tag}]`).content;
+  }
+
+  getUrlParameter(name) {
+    const paramName = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    const regex = new RegExp(`[\\?&]${paramName}=([^&#]*)`);
+    const results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  }
+
+  getPatronAgencyType() {
+    const agencyTypeParam = this.getUrlParameter(this.props.agencyType);
+    const { agencyType } = config;
+    return (!isEmpty(agencyTypeParam) && agencyTypeParam.toLowerCase() === 'nys')
+      ? agencyType.nys : agencyType.default;
   }
 
   getFullName() {
@@ -90,7 +115,7 @@ class LibraryCardForm extends React.Component {
         }
         break;
       case 'email':
-        if (value.length > 0 && !isEmail(value)) {
+        if (value.trim().length > 0 && !isEmail(value)) {
           fieldErrors[fieldName] = 'Please enter a valid email address.';
           currentErrors = fieldErrors;
         } else {
@@ -158,7 +183,7 @@ class LibraryCardForm extends React.Component {
         break;
       case 'zip':
         if (isEmpty(value) || isNaN(value) || !isLength(value, { min: 5, max: 5 })) {
-          fieldErrors[fieldName] = 'Please enter a 5 digits postal code.';
+          fieldErrors[fieldName] = 'Please enter a 5-digit postal code.';
           currentErrors = fieldErrors;
         } else {
           currentErrors = omit(fieldErrors, fieldName);
@@ -170,9 +195,29 @@ class LibraryCardForm extends React.Component {
       case 'ecommunications_pref':
         currentErrors = fieldErrors;
         break;
+      default:
+        break;
     }
 
     this.setState({ fieldErrors: currentErrors });
+  }
+
+  focusOnErrorElement() {
+    // Handle focusing on first element in the object that contains an error
+    Object.keys(this.state.fieldErrors).some((key) => {
+      if (this.state.fieldErrors[key]) {
+        // the keyword state is reserved in React, therefore the reference to the State field
+        // is renamed to stateName
+        if (key === 'state') {
+          this.stateName.focus();
+          return true;
+        }
+
+        this[key].focus();
+        return true;
+      }
+      return true;
+    });
   }
 
   handleInputChange(property) {
@@ -181,24 +226,38 @@ class LibraryCardForm extends React.Component {
       const value = target.type === 'checkbox' ? target.checked : target.value;
       const newState = assign({}, this.state.patronFields, { [property]: value });
 
-      this.setState(
-        { patronFields: newState },
-        () => {
-          this.validateField(property, value);
-        },
-      );
+      this.setState({ patronFields: newState });
+    };
+  }
+
+  handleOnBlur(property) {
+    return (event) => {
+      const target = event.target;
+      const value = target.value;
+
+      this.validateField(property, value);
     };
   }
 
   handleSubmit(event) {
+    // Clearing server side errors for re-submission.
+    this.setState({ apiResults: {} });
     event.preventDefault();
+
+    // Iterate through patron fields and ensure all fields are valid
     forIn(this.state.patronFields, (value, key) => {
       this.validateField(key, value);
     });
 
-    if (isEmpty(this.state.fieldErrors)) {
-      // Form is now processing
-      this.setState({ formProcessing: true, apiResults: {} });
+
+    // Has client-side errors, stop processing
+    if (!isEmpty(this.state.fieldErrors)) {
+      // A required form field contains an error, focus on the first error field
+      this.focusOnErrorElement();
+    } else {
+      // No client-side errors, form is now processing
+      this.setState({ formProcessing: true });
+
       const {
         firstName,
         lastName,
@@ -213,8 +272,9 @@ class LibraryCardForm extends React.Component {
         pin,
         ecommunications_pref,
       } = this.state.patronFields;
+      const agencyType = this.state.agencyType;
 
-      axios.post('/create-patron', {
+      axios.post('/library-card/new/create-patron', {
         firstName,
         lastName,
         email,
@@ -227,36 +287,27 @@ class LibraryCardForm extends React.Component {
         username,
         pin,
         ecommunications_pref,
+        agencyType,
       }, {
         headers: { 'csrf-token': this.state.csrfToken },
       })
       .then((response) => {
-        // Debugging only (Alpha)
-        console.log(response.data);
         this.setState({
           formProcessing: false,
           formEntrySuccessful: false,
           apiResults: response.data,
-          focusOnResult: true,
         });
-        window.location.href="https://www.nypl.org/get-help/library-card/confirmation" + "?" + "patronID=" + response.data.patron_id + "&" + "patronName=" + this.getFullName();
+        window.location.href = `${config.confirmationURL.base}?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
         if (error.response && error.response.data) {
           // The request was made, but the server responded with a status code
           // that falls out of the range of 2xx
-          // Debugging only (Alpha)
-          console.log(error.response.data);
           this.setState({ apiResults: error.response.data });
         }
       });
     }
-  }
-
-  renderConfirmation() {
-    return this.state.formEntrySuccessful ?
-      <Confirmation name={this.getFullName()} apiObject={this.state.apiResults} /> : null;
   }
 
   renderLoader() {
@@ -264,27 +315,21 @@ class LibraryCardForm extends React.Component {
     return formProcessing ? <div className="loading" /> : null;
   }
 
-  renderApiErrors() {
-    const { apiResults } = this.state;
-    let resultMarkup;
-    let errorClass = '';
-
-    // TODO: Will be modified once we establish the correct API response from Wrapper
-    if (!isEmpty(apiResults) && apiResults.status >= 300 && !apiResults.response.id) {
-      errorClass = 'nypl-error-content';
-
-      resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" />;
+  renderApiErrors(errorObj) {
+    if (!isEmpty(errorObj) && errorObj.status >= 400) {
+      return (
+        <ApiErrors
+          childRef={(el) => { this.dynamicSection = el; }}
+          apiResults={errorObj}
+        />
+      );
     }
 
-    return (
-      <div className={errorClass}>
-        { resultMarkup }
-      </div>
-    );
+    return null;
   }
 
   renderFormFields() {
-    return !this.state.formEntrySuccessful ? (
+    return (
       <form className="nypl-library-card-form" onSubmit={this.handleSubmit}>
         <h2>Please enter the following information</h2>
         <h3>Personal Information</h3>
@@ -298,6 +343,8 @@ class LibraryCardForm extends React.Component {
             value={this.state.patronFields.firstName}
             handleOnChange={this.handleInputChange('firstName')}
             errorState={this.state.fieldErrors}
+            onBlur={this.handleOnBlur('firstName')}
+            childRef={(el) => { this.firstName = el; }}
           />
           <FormField
             id="patronLastName"
@@ -308,19 +355,24 @@ class LibraryCardForm extends React.Component {
             value={this.state.patronFields.lastName}
             handleOnChange={this.handleInputChange('lastName')}
             errorState={this.state.fieldErrors}
+            onBlur={this.handleOnBlur('lastName')}
+            childRef={(el) => { this.lastName = el; }}
           />
         </div>
         <FormField
           id="patronDob"
           className="nypl-date-field"
           type="text"
-          ph="MM/DD/YYYY, including slashes"
-          label="Date of birth"
+          instructionText="MM/DD/YYYY, including slashes"
+          label="Date of Birth"
           fieldName="dateOfBirth"
           isRequired
           value={this.state.patronFields.dateOfBirth}
           handleOnChange={this.handleInputChange('dateOfBirth')}
           errorState={this.state.fieldErrors}
+          maxLength={10}
+          onBlur={this.handleOnBlur('dateOfBirth')}
+          childRef={(el) => { this.dateOfBirth = el; }}
         />
         <h3>Address</h3>
         <FormField
@@ -333,6 +385,8 @@ class LibraryCardForm extends React.Component {
           value={this.state.patronFields.line1}
           handleOnChange={this.handleInputChange('line1')}
           errorState={this.state.fieldErrors}
+          onBlur={this.handleOnBlur('line1')}
+          childRef={(el) => { this.line1 = el; }}
         />
         <FormField
           id="patronStreet2"
@@ -342,6 +396,7 @@ class LibraryCardForm extends React.Component {
           fieldName="line2"
           value={this.state.patronFields.line2}
           handleOnChange={this.handleInputChange('line2')}
+          onBlur={this.handleOnBlur('line2')}
         />
         <FormField
           id="patronCity"
@@ -353,18 +408,23 @@ class LibraryCardForm extends React.Component {
           isRequired
           handleOnChange={this.handleInputChange('city')}
           errorState={this.state.fieldErrors}
+          onBlur={this.handleOnBlur('city')}
+          childRef={(el) => { this.city = el; }}
         />
         <FormField
           id="patronState"
           className="nypl-text-field"
           type="text"
-          ph="2-letter abbreviation"
+          instructionText="2-letter abbreviation"
           label="State"
           fieldName="state"
           value={this.state.patronFields.state}
           isRequired
           handleOnChange={this.handleInputChange('state')}
           errorState={this.state.fieldErrors}
+          maxLength={2}
+          onBlur={this.handleOnBlur('state')}
+          childRef={(el) => { this.stateName = el; }}
         />
         <FormField
           id="patronZip"
@@ -376,26 +436,32 @@ class LibraryCardForm extends React.Component {
           isRequired
           handleOnChange={this.handleInputChange('zip')}
           errorState={this.state.fieldErrors}
+          maxLength={5}
+          onBlur={this.handleOnBlur('zip')}
+          childRef={(el) => { this.zip = el; }}
         />
         <h3>Create Your Account</h3>
         <FormField
           id="patronEmail"
           className="nypl-text-field"
           type="text"
-          ph="youremail@example.com"
           label="E-mail"
           fieldName="email"
           value={this.state.patronFields.email}
           handleOnChange={this.handleInputChange('email')}
           errorState={this.state.fieldErrors}
+          onBlur={this.handleOnBlur('email')}
+          childRef={(el) => { this.email = el; }}
         />
         <FormField
           id="patronECommunications"
-          className={this.state.patronFields.ecommunications_pref? "nypl-terms-checkbox checked" : "nypl-terms-checkbox"}
+          className={this.state.patronFields.ecommunications_pref ? 'nypl-terms-checkbox checked' :
+            'nypl-terms-checkbox'}
           type="checkbox"
-          label="Email Checkbox"
+          label="Receive emails"
           fieldName="ecommunications_pref"
-          instructionText="Yes, I would like to receive information about NYPL's programs and services."
+          instructionText={'Yes, I would like to receive information about NYPL\'s programs ' +
+          'and services.'}
           handleOnChange={this.handleInputChange('ecommunications_pref')}
           value={this.state.patronFields.ecommunications_pref}
           checked={this.state.patronFields.ecommunications_pref}
@@ -406,10 +472,14 @@ class LibraryCardForm extends React.Component {
           type="text"
           label="Username"
           fieldName="username"
+          instructionText="5-25 alphanumeric characters"
           value={this.state.patronFields.username}
           isRequired
           handleOnChange={this.handleInputChange('username')}
           errorState={this.state.fieldErrors}
+          maxLength={25}
+          onBlur={this.handleOnBlur('username')}
+          childRef={(el) => { this.username = el; }}
         />
         <FormField
           id="patronPin"
@@ -417,10 +487,14 @@ class LibraryCardForm extends React.Component {
           type="text"
           label="PIN"
           fieldName="pin"
+          instructionText="4 digits"
           value={this.state.patronFields.pin}
           isRequired
           handleOnChange={this.handleInputChange('pin')}
           errorState={this.state.fieldErrors}
+          maxLength={4}
+          onBlur={this.handleOnBlur('pin')}
+          childRef={(el) => { this.pin = el; }}
         />
         <div>
           <input
@@ -432,22 +506,29 @@ class LibraryCardForm extends React.Component {
           {this.renderLoader()}
         </div>
       </form>
-    ) : null;
+    );
   }
 
   render() {
     return (
       <div className="nypl-row">
         <div className="nypl-column-half nypl-column-offset-one">
-          <div ref={(c) => { this.dynamicSection = c; }} tabIndex="0">
-            {this.renderApiErrors()}
+          <div>
+            {this.renderApiErrors(this.state.apiResults)}
             {this.renderFormFields()}
-            {this.renderApiErrors()}
           </div>
         </div>
       </div>
     );
   }
 }
+
+LibraryCardForm.propTypes = {
+  agencyType: PropTypes.string,
+};
+
+LibraryCardForm.defaultProps = {
+  agencyType: '',
+};
 
 export default LibraryCardForm;

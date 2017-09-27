@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * @desc Verifies that the property value exists and returns it.
@@ -69,15 +70,15 @@ const TextItem = ({
 };
 
 TextItem.propTypes = {
-  className: React.PropTypes.string,
-  lang: React.PropTypes.string,
-  target: React.PropTypes.string,
-  location: React.PropTypes.string,
-  tag: React.PropTypes.object,
-  title: React.PropTypes.object,
-  date: React.PropTypes.object,
-  description: React.PropTypes.object,
-  gaClickEvent: React.PropTypes.func,
+  className: PropTypes.string,
+  lang: PropTypes.string,
+  target: PropTypes.string,
+  location: PropTypes.string,
+  tag: PropTypes.object,
+  title: PropTypes.object,
+  date: PropTypes.object,
+  description: PropTypes.object,
+  gaClickEvent: PropTypes.func,
 };
 
 TextItem.defaultProps = {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   isEmpty as _isEmpty,
 } from 'underscore';
@@ -112,15 +113,15 @@ class ContentBanner extends React.Component {
 }
 
 ContentBanner.propTypes = {
-  items: React.PropTypes.array.isRequired,
-  lazyLoad: React.PropTypes.bool,
-  defaultImage: React.PropTypes.string,
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string,
-  onClick: React.PropTypes.func,
-  onImageLoad: React.PropTypes.func,
-  error: React.PropTypes.object,
-  gaClickEvent: React.PropTypes.func,
+  items: PropTypes.array.isRequired,
+  lazyLoad: PropTypes.bool,
+  defaultImage: PropTypes.string,
+  lang: PropTypes.string,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+  onImageLoad: PropTypes.func,
+  error: PropTypes.object,
+  gaClickEvent: PropTypes.func,
 };
 
 ContentBanner.defaultProps = {

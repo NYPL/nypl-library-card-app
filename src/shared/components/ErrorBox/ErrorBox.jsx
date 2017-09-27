@@ -1,19 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { renderServerValidationError } from './../../../utils/FormValidationUtils';
 
 const ErrorBox = ({ errorObject, className }) => {
   const renderErrorByType = (errorObj) => {
-    const { type } = errorObject;
+    const { type, details } = errorObject;
     const defaultError = 'There was an error processing your submission. Please try again later.';
     let error;
 
     if (type) {
       switch (type) {
         case 'unrecognized-address':
-          error = <li>This address is invalid. Please enter a valid address.</li>;
+          error = <li>This <a href="#patronStreet1">address</a> is invalid. Please enter a valid address.</li>;
           break;
         case 'unavailable-username':
           error =
             <li>This <a href="#patronUsername">username</a> is already taken. Please try again.</li>;
+          break;
+        case 'server-validation-error':
+          error = <div>{renderServerValidationError(details)}</div>;
+          break;
+        case 'server':
+          error =
+            <li>There was a system error processing your request. Please try again.</li>;
           break;
         default:
           error = <li>{defaultError}</li>;
@@ -31,9 +40,11 @@ const ErrorBox = ({ errorObject, className }) => {
 
       if (debug && debug.birthdate) {
         error =
-          <li>Please enter a valid date, MM/DD/YYYY, including slashes. If you are 13 or younger, please apply in person.</li>;
+          <li>Please enter a valid <a href="#patronDob">date</a>, MM/DD/YYYY, including slashes. If you are 13 or younger, please apply in person.</li>;
       } else if (debug && debug.address) {
-        error = <li>This address is invalid. Please enter a valid address.</li>;
+        error = <li>This <a href="#patronStreet1">address</a> is invalid. Please enter a valid address.</li>;
+      } else if (debug && debug.email) {
+        error = <li>This <a href="#patronEmail">email address</a> is invalid. Please enter a valid email address.</li>;
       } else {
         error = <li>{defaultError}</li>;
       }
@@ -55,8 +66,8 @@ const ErrorBox = ({ errorObject, className }) => {
 };
 
 ErrorBox.propTypes = {
-  className: React.PropTypes.string,
-  errorObject: React.PropTypes.object.isRequired,
+  className: PropTypes.string,
+  errorObject: PropTypes.object.isRequired,
 };
 
 ErrorBox.defaultProps = {

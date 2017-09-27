@@ -1,5 +1,5 @@
 export default {
-  appTitle: 'NYPL | Get a library card (Alpha)',
+  appTitle: 'Library Card Application Form | NYPL',
   appName: 'NYPL Library Card App',
   favIconPath: '//d2znry4lg8s0tq.cloudfront.net/images/favicon.ico',
   port: 3001,
@@ -11,5 +11,12 @@ export default {
   },
   clientId: process.env.OAUTH_CLIENT_ID,
   clientSecret: process.env.OAUTH_CLIENT_SECRET,
+  agencyType: {
+    default: '198',
+    nys: '199',
+  },
   scopes: 'account:write account:read',
+  confirmationURL: {
+    base: 'https://www.nypl.org/get-help/library-card/confirmation',
+  },
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class ImageItem extends React.Component {
   constructor(props) {
@@ -121,11 +122,11 @@ class ImageItem extends React.Component {
 }
 
 ImageItem.propTypes = {
-  images: React.PropTypes.object,
-  handleOnLoad: React.PropTypes.func,
-  handleOnError: React.PropTypes.func,
-  viewportWidth: React.PropTypes.number,
-  viewportBreakpoint: React.PropTypes.number,
+  images: PropTypes.object,
+  handleOnLoad: PropTypes.func,
+  handleOnError: PropTypes.func,
+  viewportWidth: PropTypes.number,
+  viewportBreakpoint: PropTypes.number,
 };
 
 ImageItem.defaultProps = {

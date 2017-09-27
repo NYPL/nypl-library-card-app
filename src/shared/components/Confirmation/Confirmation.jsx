@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Confirmation = ({ apiObject, className, name }) => {
 
   const getIdText = () => (
     apiObject && apiObject.response && apiObject.response.id ?
-      `Use your temporary ID, ${apiObject.response.id}, to place books and other materials 
+      `Use your temporary ID, ${apiObject.response.id}, to place books and other materials
       on hold. To pick up your materials,` :
       'To get your card,'
   );
@@ -47,10 +48,10 @@ const Confirmation = ({ apiObject, className, name }) => {
 };
 
 Confirmation.propTypes = {
-  className: React.PropTypes.string,
-  apiObject: React.PropTypes.object,
-  name: React.PropTypes.string,
-}
+  className: PropTypes.string,
+  apiObject: PropTypes.object,
+  name: PropTypes.string,
+};
 
 Confirmation.defaultProps = {
   className: 'nypl-full-width-wrapper',

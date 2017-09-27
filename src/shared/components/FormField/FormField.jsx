@@ -1,27 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const FormField = ({
-  id,
-  className,
-  value,
-  ph,
-  label,
-  type,
-  fieldName,
-  isRequired,
-  errorState,
-  handleOnChange,
-  checked,
-  instructionText,
-}) => {
-  const renderErrorBox = () => (
-     errorState && errorState[fieldName] ?
-      <div className="nypl-field-status">{errorState[fieldName]}</div> : null
-  );
-  const requiredMarkup = isRequired ? <span className="nypl-required-field"> Required</span> : null;
-  const errorClass = errorState && errorState[fieldName] ? 'nypl-field-error' : '';
-
-  const renderInstructionText = (text) => {
+class FormField extends React.Component {
+  renderInstructionText(text) {
     if (!text) {
       return null;
     }
@@ -29,61 +10,90 @@ const FormField = ({
     return (
       <span
         className="nypl-field-status"
-        id={`${id}-status`}
+        id={`${this.props.id}-status`}
         aria-live="assertive"
         aria-atomic="true"
       >
         {text}
       </span>
     );
-  };
+  }
 
-  const checkPh = (ph) ? (ph) : null;
+  renderErrorBox() {
+    return (
+      <span
+        className="nypl-field-status"
+        id={`${this.props.id}-status`}
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        {this.props.errorState[this.props.fieldName]}
+      </span>
+    );
+  }
 
-  return (
-    <div className={`${className} ${errorClass}`}>
-      <label htmlFor={id}>
-        {
-          type === 'checkbox' ?
-            <span className={"visuallyHidden"}>{label}</span> :
-            <span>{label}</span>
-        }
-        {requiredMarkup}
-      </label>
-      <input
-        value={value}
-        placeholder={checkPh}
-        type={type}
-        id={id}
-        required={isRequired}
-        aria-required={ type === 'checkbox' ? null : isRequired }
-        aria-labelledby={ (instructionText) ? `${id}-label ${id}-stauts` : null }
-        onChange={handleOnChange}
-        checked={checked}
-      />
-      {renderInstructionText(instructionText)}
-      {renderErrorBox()}
-    </div>
-  );
-};
+  render() {
+    const requiredMarkup = this.props.isRequired ?
+      <span className="nypl-required-field"> Required</span> : null;
+    let errorClass = '';
+    let underInputSuggestion = this.renderInstructionText(this.props.instructionText);
+    if (this.props.errorState && this.props.errorState[this.props.fieldName]) {
+      errorClass = 'nypl-field-error';
+      underInputSuggestion = this.renderErrorBox();
+    }
+    return (
+      <div className={`${this.props.className} ${errorClass}`}>
+        <label htmlFor={this.props.id} id={`${this.props.id}-label`}>
+          {
+            this.props.type === 'checkbox' ?
+              <span className="visuallyHidden">{this.props.label}</span> :
+              <span>{this.props.label}</span>
+          }
+          {requiredMarkup}
+        </label>
+        <input
+          value={this.props.value}
+          type={this.props.type}
+          id={this.props.id}
+          aria-required={this.props.type === 'checkbox' ? null : this.props.isRequired}
+          aria-labelledby={
+            (this.props.instructionText || (this.props.errorState && this.props.errorState[this.props.fieldName]))
+              ? `${this.props.id}-label ${this.props.id}-status`
+              : `${this.props.id}-label`
+          }
+          onChange={this.props.handleOnChange}
+          checked={this.props.checked}
+          maxLength={this.props.maxLength || null}
+          onBlur={this.props.onBlur}
+          ref={this.props.childRef}
+          tabIndex="0"
+        />
+        {underInputSuggestion}
+      </div>
+    );
+  }
+}
 
 FormField.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  label: React.PropTypes.string.isRequired,
-  type: React.PropTypes.string.isRequired,
-  fieldName: React.PropTypes.string.isRequired,
-  errorState: React.PropTypes.object,
-  value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]) ,
-  className: React.PropTypes.string,
-  ph: React.PropTypes.string,
-  isRequired: React.PropTypes.bool,
-  handleOnChange: React.PropTypes.func,
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  fieldName: PropTypes.string.isRequired,
+  errorState: PropTypes.shape(),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  className: PropTypes.string,
+  isRequired: PropTypes.bool,
+  handleOnChange: PropTypes.func,
+  checked: PropTypes.bool,
+  instructionText: PropTypes.string,
+  maxLength: PropTypes.number,
+  onBlur: PropTypes.func,
+  childRef: PropTypes.func,
 };
 
 FormField.defaultProps = {
   className: '',
   value: '',
-  ph: '',
   isRequired: false,
   errorState: {},
 };

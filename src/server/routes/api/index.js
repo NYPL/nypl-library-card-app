@@ -17,6 +17,7 @@ function constructApiHeaders(token = '', contentType = 'application/json') {
       'Content-Type': contentType,
       Authorization: `Bearer ${token}`,
     },
+    timeout: 10000,
   };
 }
 
@@ -30,8 +31,9 @@ function constructErrorObject(type = 'general-error', message = 'There was an er
   };
 
   if (!isEmpty(details)) {
-    response.details = details;
+    response.response.details = details;
   }
+
   return response;
 }
 
@@ -48,52 +50,72 @@ function constructPatronObject(object) {
     zip,
     username,
     pin,
-    ecommunications_pref: ecommunications_pref,
+    ecommunications_pref,
+    agencyType,
   } = object;
 
+  const errorObj = {};
 
   if (isEmpty(firstName)) {
-    return constructErrorObject('missing-required-field', 'The firstName field is missing.');
+    Object.assign(errorObj, { firstName: 'First Name field is empty.' });
   }
 
   if (isEmpty(lastName)) {
-    return constructErrorObject('missing-required-field', 'The lastName field is missing.');
+    Object.assign(errorObj, { lastName: 'Last Name field is empty.' });
+  }
+
+  if (isEmpty(dateOfBirth)) {
+    Object.assign(errorObj, { dateOfBirth: 'Date of Birth field is empty.' });
   }
 
   if (isEmpty(line1)) {
-    return constructErrorObject('missing-required-field', 'The line_1 field is missing.');
+    Object.assign(errorObj, { line1: 'Street Address field is empty.' });
   }
 
   if (isEmpty(city)) {
-    return constructErrorObject('missing-required-field', 'The city field is missing.');
+    Object.assign(errorObj, { city: 'City field is empty.' });
   }
 
   if (isEmpty(state)) {
-    return constructErrorObject('missing-required-field', 'The state field is missing.');
+    Object.assign(errorObj, { state: 'State field is empty.' });
   }
 
   if (isEmpty(zip)) {
-    return constructErrorObject('missing-required-field', 'The zip field is missing.');
+    Object.assign(errorObj, { zip: 'Postal Code field is empty.' });
   }
 
-  if (!isNumeric(zip) || !isLength(zip, { min: 5, max: 5 })) {
-    return constructErrorObject('invalid-field', 'The zip field is must be 5 numbers.');
+  if (!isEmpty(zip) && (!isNumeric(zip) || !isLength(zip, { min: 5, max: 5 }))) {
+    Object.assign(errorObj, { zip: 'Please enter a 5-digit postal code.' });
+  }
+
+  if (isEmpty(email)) {
+    Object.assign(errorObj, { email: 'Email field is empty.' });
+  } else if (!isEmpty(email.trim()) && !isEmail(email)) {
+    Object.assign(errorObj, { email: 'Please enter a valid email address.' });
   }
 
   if (isEmpty(username)) {
-    return constructErrorObject('missing-required-field', 'The username field is missing.');
+    Object.assign(errorObj, { username: 'Username field is empty.' });
   }
 
-  if (!isAlphanumeric(username)) {
-    return constructErrorObject('invalid-field', 'The username field must be alphanumeric');
+  if (!isEmpty(username) && (!isAlphanumeric(username)
+    || !isLength(username, { min: 5, max: 25 }))) {
+    Object.assign(
+      errorObj,
+      { username: 'Please enter a username between 5-25 alphanumeric characters.' },
+    );
   }
 
   if (isEmpty(pin)) {
-    return constructErrorObject('missing-required-field', 'The pin field is missing.');
+    Object.assign(errorObj, { pin: 'PIN field is empty.' });
   }
 
-  if (!isNumeric(pin) || !isLength(pin, { min: 4, max: 4 })) {
-    return constructErrorObject('invalid-field', 'The pin field is must be 4 numbers.');
+  if (!isEmpty(pin) && (!isNumeric(pin) || !isLength(pin, { min: 4, max: 4 }))) {
+    Object.assign(errorObj, { pin: 'Please enter a 4-digit PIN.' });
+  }
+
+  if (errorObj && !isEmpty(errorObj)) {
+    return constructErrorObject('server-validation-error', 'server side validation error', 400, errorObj);
   }
 
   const fullName = `${lastName.trim()}, ${firstName.trim()}`;
@@ -113,6 +135,7 @@ function constructPatronObject(object) {
     username,
     pin,
     ecommunications_pref,
+    patron_agency: agencyType || config.agencyType.default,
   };
 }
 
@@ -133,15 +156,27 @@ export function initializeAppAuth(req, res, next) {
         if (response.data) {
           req.app.set('tokenObject', response.data);
           req.app.set('tokenExpTime', moment().add(response.data.expires_in, 's'));
+          next();
+        } else {
+          req.app.get('logger').error('No access_token obtained from OAuth Service.');
+          const errorObj = {};
+          Object.assign(errorObj, { oauth: 'No access_token obtained from OAuth Service.' });
+          return res.status(400).json(constructErrorObject(
+            'no-access-token',
+            'No access_token obtained from OAuth Service.',
+            400,
+            errorObj,
+          ));
         }
-        next();
-      })
-      .catch(error => res.status(400).json(constructErrorObject(
-        'app-auth-failed',
-        'Could not authenticate App with OAuth service',
-        400,
-        error,
-      )));
+      }).catch((error) => {
+        req.app.get('logger').error(error);
+        return res.status(400).json(constructErrorObject(
+          'app-auth-failed',
+          'Could not authenticate App with OAuth service',
+          400,
+          error,
+        ));
+      });
   }
 
   if (tokenObject.access_token && isTokenExipring(tokenExpTime, minuteExpThreshold)) {
@@ -154,18 +189,21 @@ export function initializeAppAuth(req, res, next) {
         }
         next();
       })
-      .catch(error => res.status(400).json(constructErrorObject(
-        'app-reauth-failed',
-        'Could not re-authenticate App with OAuth service',
-        400,
-        error,
-      )));
+      .catch((error) => {
+        req.app.get('logger').error(error);
+        return res.status(400).json(constructErrorObject(
+          'app-reauth-failed',
+          'Could not re-authenticate App with OAuth service',
+          400,
+          error,
+        ));
+      });
   }
 
   return next();
 }
 
-function validatePatronAddress(object, token) {
+function validatePatronAddress(req, object, token) {
   return axios
     .post(
       `${config.api.validate}/address`,
@@ -173,18 +211,17 @@ function validatePatronAddress(object, token) {
       constructApiHeaders(token),
     )
     .then(response => response.data)
-    .catch((error) => {
-      req.app.get('logger').error(error);
-    });
+    .catch(err => Promise.reject(new Error(`Error validating patron address: ${err.message}`)));
 }
 
-function validatePatronUsername(value, token) {
+function validatePatronUsername(req, value, token) {
   return axios
     .post(
       `${config.api.validate}/username`,
       { username: value },
       constructApiHeaders(token),
-    );
+    )
+    .catch(err => Promise.reject(new Error(`Error validating username: ${err.message}`)));
 }
 
 export function createPatron(req, res) {
@@ -199,8 +236,8 @@ export function createPatron(req, res) {
     // Patron Object validation is successful
     // Validate Address and Username
     return axios.all([
-      validatePatronAddress(patronData.address, token),
-      validatePatronUsername(patronData.username, token),
+      validatePatronAddress(req, patronData.address, token),
+      validatePatronUsername(req, patronData.username, token),
     ])
       .then(axios.spread((addressResponse, userRes) => {
         // Both requests are now complete
@@ -231,18 +268,36 @@ export function createPatron(req, res) {
             { simplePatron: patronData },
             constructApiHeaders(token),
           )
-          .then(result => {
-              res.json({ status: 200, response: result.data.data.simplePatron });
+          .then(result => res.json({
+            status: 200,
+            response: result.data.data.simplePatron,
+          }))
+          .catch((err) => {
+            let serverError = null;
+
+            // If the response from the Patron Creator Service(the wrapper)
+            // does not include valid error details, we mark this result as an internal server error
+            if (!err.response.data.data) {
+              req.app.get('logger').error('Error calling Card Creator API: ', err.message);
+              serverError = { type: 'server' };
             }
-          )
-          .catch(err => res.status(err.response.status).json({
-            status: err.response.status,
-            response: err.response.data,
-          }));
+
+            res.status(err.response.status).json({
+              status: err.response.status,
+              response: (serverError) ?
+                Object.assign(err.response.data, serverError) : err.response.data,
+            });
+          });
       }))
-      .catch(error => res.status(400).json({
-        status: 400,
-        response: error,
-      }));
+      .catch((error) => {
+        req.app.get('logger').error('Error creating patron: ', error.message);
+
+        res.status(400).json({
+          status: 400,
+          response: {
+            type: 'server',
+          },
+        });
+      });
   }
 }
