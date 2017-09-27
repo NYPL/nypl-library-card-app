@@ -88,11 +88,11 @@ function constructPatronObject(object) {
     Object.assign(errorObj, { zip: 'Please enter a 5-digit postal code.' });
   }
 
-  if (isEmpty(email)) {
-    Object.assign(errorObj, { email: 'Email field is empty.' });
-  } else if (!isEmpty(email.trim()) && !isEmail(email)) {
-    Object.assign(errorObj, { email: 'Please enter a valid email address.' });
-  }
+  // if (isEmpty(email)) {
+  //   Object.assign(errorObj, { email: 'Email field is empty.' });
+  // } else if (!isEmpty(email.trim()) && !isEmail(email)) {
+  //   Object.assign(errorObj, { email: 'Please enter a valid email address.' });
+  // }
 
   if (isEmpty(username)) {
     Object.assign(errorObj, { username: 'Username field is empty.' });
