@@ -65,6 +65,15 @@ eb create <<environment name>> --instance_type <<size of instance>> \
 
 ## Changelog
 
+### v0.3.2
+#### Updated
+> Updated header to 2.1.0.
+> Removed email as a required field.
+
+### v0.3.1
+
+### v0.3.0
+
 ### v0.2.1
 #### Added
 > Added support for NYS agency_type via URL parameter.
