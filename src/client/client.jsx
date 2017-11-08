@@ -5,10 +5,17 @@ import React from 'react';
 import { render } from 'react-dom';
 import ApplicationContainer from '../shared/components/Application/ApplicationContainer';
 import './styles/main.scss';
+import { ga } from 'dgx-react-ga';
 
 window.onload = () => {
   if (!window.dgxFeatureFlags) {
     window.dgxFeatureFlags = FeatureFlags.utils;
+  }
+
+  if (!window.ga) {
+    const gaOpts = { debug: false, titleCase: false };
+
+    ga.initialize('UA-1420324-3', gaOpts);
   }
 
   render(
