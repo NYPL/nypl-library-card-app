@@ -5,7 +5,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import ApplicationContainer from '../shared/components/Application/ApplicationContainer';
 import './styles/main.scss';
-import { gaUtils } from 'dgx-react-ga';
+import { config, gaUtils } from 'dgx-react-ga';
 
 window.onload = () => {
   if (!window.dgxFeatureFlags) {
@@ -13,9 +13,10 @@ window.onload = () => {
   }
 
   if (!window.ga) {
-    const gaOpts = { debug: false, titleCase: false };
+    const isProd = process.env.NODE_ENV === 'production';
+    const gaOpts = { debug: !isProd, titleCase: false };
 
-    gaUtils.initialize('UA-1420324-3', gaOpts);
+    gaUtils.initialize(config.google.code(isProd), gaOpts);
   }
 
   render(
