@@ -4,7 +4,7 @@ A Universal JavaScript Application that allows NYPL Patrons to request a library
 a patron record.
 
 ## Version
-> 0.4.1
+> 0.4.2
 
 ## Installation & Configuration
 
@@ -64,6 +64,10 @@ eb create <<environment name>> --instance_type <<size of instance>> \
 `eb deploy <<environment name>> --profile <<your AWS profile>>`
 
 ## Changelog
+
+### v0.4.1
+#### Updated
+> Updated Header component version to 2.4.0.
 
 ### v0.4.1
 #### Updated
