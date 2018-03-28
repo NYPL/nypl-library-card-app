@@ -27,10 +27,13 @@
   </head>
   <body>
     <div id="nypl-library-card-app"><%- app %></div>
-		<% if (isProduction) { %>
-	    <script async src="bundle.js"></script>
-	  <% } else { %>
-	    <script src="http://localhost:3000/bundle.js"></script>
-	  <% } %>
+    <% if (isProduction) { %>
+      <script async src="bundle.js"></script>
+    <% } else { %>
+      <script src="http://localhost:3000/bundle.js"></script>
+    <% } %>
+    <!-- OptinMonster -->
+    <script src="https://assets.nypl.org/js/advocacy.js"></script>
+    <!-- /OptinMonster -->
   </body>
 </html>
