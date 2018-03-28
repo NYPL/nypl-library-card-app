@@ -3,8 +3,11 @@
 A Universal JavaScript Application that allows NYPL Patrons to request a library card and create an account. The front-end is built with React, the back-end uses Node/Express to communicates with other services, via the API gateway which handles validating & creating
 a patron record.
 
+## URL
+https://www.nypl.org/library-card/new/
+
 ## Version
-> 0.4.4
+> 0.4.5
 
 ## Installation & Configuration
 
@@ -64,6 +67,10 @@ eb create <<environment name>> --instance_type <<size of instance>> \
 `eb deploy <<environment name>> --profile <<your AWS profile>>`
 
 ## Changelog
+
+### v0.4.5
+> Updated the Header component to 2.4.7.
+> Added OptinMonster for advocacy 2018.
 
 ### v0.4.4
 > Updated the Header component to 2.4.5.
