@@ -51,7 +51,8 @@
     "mocha": "3.2.0",
     "chai": "3.5.0",
     "enzyme": "2.8.2",
-    "sinon": "1.17.6"
+    "sinon": "1.17.6",
+    "react-addons-test-utils": "15.6.0"
   },
   "dependencies": {
     "@nypl/design-toolkit": "0.1.13",
