@@ -20,7 +20,7 @@ deploy:
   bucket_path: nypl-library-card-app-production
   on:
     repo: NYPL/nypl-library-card-app
-    branch: master
+    branch: production
 - provider: elasticbeanstalk
   skip_cleanup: true
   access_key_id: "$AWS_ACCESS_KEY_ID_PRODUCTION"
@@ -32,7 +32,7 @@ deploy:
   bucket_path: nypl-library-card-app-qa
   on:
     repo: NYPL/nypl-library-card-app
-    branch: travis-aws-setup
+    branch: qa
 - provider: elasticbeanstalk
   skip_cleanup: true
   access_key_id: "$AWS_ACCESS_KEY_ID_DEVELOPMENT"
