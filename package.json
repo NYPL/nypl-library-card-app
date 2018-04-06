@@ -48,12 +48,11 @@
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.10.3",
-    "react-hot-loader": "3.0.0-beta.6",
-    "webpack-dev-server": "1.14.1",
     "mocha": "3.2.0",
     "chai": "3.5.0",
     "enzyme": "2.8.2",
-    "sinon": "1.17.6"
+    "sinon": "1.17.6",
+    "react-addons-test-utils": "15.6.0"
   },
   "dependencies": {
     "@nypl/design-toolkit": "0.1.13",
@@ -81,18 +80,20 @@
     "helmet": "3.5.0",
     "history": "1.15.0",
     "lodash": "4.17.4",
-    "moment": "2.18.1",
+    "moment": "2.19.3",
     "node-sass": "3.8.0",
     "prop-types": "^15.5.10",
     "qs": "6.4.0",
     "react": "15.5.4",
     "react-dom": "15.5.4",
+    "react-hot-loader": "3.0.0-beta.6",
     "react-router": "2.4.0",
     "sass-loader": "4.0.2",
     "style-loader": "0.13.1",
     "underscore": "1.8.3",
     "validator": "7.0.0",
     "webpack": "1.13.2",
+    "webpack-dev-server": "1.14.1",
     "winston": "2.3.1"
   }
 }
