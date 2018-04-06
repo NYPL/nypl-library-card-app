@@ -42,7 +42,7 @@ Our branches (in order of stability are):
 
 | Branch      | Environment | AWS Account     |
 |:------------|:------------|:----------------|
-| master      | none        | none            |
+| master      | development | aws-sandbox     |
 | qa          | qa          | aws-digital-dev |
 | production  | production  | aws-digital-dev |
 
@@ -52,6 +52,8 @@ Our branches (in order of stability are):
 2. Once the feature branch is ready to be merged, file a pull request of the feature branch _into_ `master`.
 
 `master` ==gets merged to==> `qa` ==gets merged into==> `production`.
+
+The `master` branch should be what's running in the Development environment.
 
 The `qa` branch should be what's running in the QA environment.
 The `production` branch should be what's running in the production environment.
