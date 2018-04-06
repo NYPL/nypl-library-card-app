@@ -44,7 +44,7 @@ deploy:
   bucket_path: nypl-library-card-app-development
   on:
     repo: NYPL/nypl-library-card-app
-    branch: development
+    branch: master
 after_deploy: echo 'Successfully executed deploy trigger for Get a Library Card on
   AWS'
 env:
