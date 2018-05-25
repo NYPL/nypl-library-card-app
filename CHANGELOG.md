@@ -1,4 +1,4 @@
-### v0.4.7
+### v0.4.8
 #### Updated
 - Remove patron information from redirect URL
 
