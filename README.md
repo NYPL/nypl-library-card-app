@@ -9,6 +9,13 @@ https://www.nypl.org/library-card/new/
 ## Version
 > 0.4.7
 
+| Branch        | Status                                                                                                                                                   |
+|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `master`      | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=master)](https://travis-ci.org/NYPL/nypl-library-card-app)      |
+| `production` | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=production)](https://travis-ci.org/NYPL/nypl-library-card-app) |
+| `qa`  | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-library-card-app)  |
+
+
 ## Installation & Configuration
 
 ### Node Version Manager (nvm)
