@@ -11,7 +11,7 @@ https://www.nypl.org/library-card/new/
 
 ## Installation & Configuration
 
-### NVM
+### Node Version Manager (nvm)
 
 Developers can use [nvm](https://github.com/creationix/nvm) if they wish.
 This repo has a `.nvmrc` file that indicates which node version we development against.
@@ -23,19 +23,31 @@ For more information see [how `nvm use` works](https://github.com/creationix/nvm
 2. `npm install`  
 3. `npm start` and point browser to http://localhost:3001/library-card/new
 
-### Environtment Variables
+### Environment Variables
 
 See `.env.example` for a checklist of the environment variables the app
 needs to run.
 
 ## Deployment
 
-### Git Strategy
+### Git Workflow
 
-`master` is stable but bleeding edge. Cut feature branches off of `master`.
-Send PRs to be merged into `master`.
+Our branches (in order of stability are):
+
+| Branch      | Environment | AWS Account     |
+|:------------|:------------|:----------------|
+| master      | development | aws-sandbox     |
+| qa          | qa          | aws-digital-dev |
+| production  | production  | aws-digital-dev |
+
+### Cutting a feature branch
+
+1. Feature branches are cut off from `master`
+2. Once the feature branch is ready to be merged, file a pull request of the feature branch _into_ `master`.
 
 `master` ==gets merged to==> `qa` ==gets merged into==> `production`.
+
+The `master` branch should be what's running in the Development environment.
 
 The `qa` branch should be what's running in the QA environment.
 The `production` branch should be what's running in the production environment.
@@ -63,64 +75,8 @@ eb create <<environment name>> --instance_type <<size of instance>> \
     --profile <<your AWS profile>>
 ```
 
-6. Subsequent deployment
-`eb deploy <<environment name>> --profile <<your AWS profile>>`
+### Travis CI
 
-## Changelog
+Subsequent deployments are accomplished via pushing code into `qa` and `production` branches, which triggers Travis CI to build, test, and deploy.
 
-### v0.5.0
-#### Added
-> Added GA trackPageview event.
-
-### v0.4.5
-> Updated the Header component to 2.4.7.
-> Added OptinMonster for advocacy 2018.
-
-### v0.4.4
-> Updated the Header component to 2.4.5.
-
-### v0.4.3
-> Updated the Header component to 2.4.2 and Footer component to 0.4.1.
-
-### v0.4.1
-#### Updated
-> Updated Header component version to 2.4.0.
-
-### v0.4.1
-#### Updated
-> Updated header to v2.3.0 -- Includes FundraisingBanner integration
-
-### v0.4.0
-#### Added
-> Initialized GA.
-#### Updated
-> Updated header to 2.2.0.
-
-### v0.3.3
-#### Updated
-> Updated header to 2.1.1.
-
-### v0.3.2
-#### Updated
-> Updated header to 2.1.0.
-> Removed email as a required field.
-
-### v0.3.1
-
-### v0.3.0
-
-### v0.2.1
-#### Added
-> Added support for NYS agency_type via URL parameter.
-#### Updated
-> Updated Patron Model to handle default and NYS agency type ID's.
-
-### v0.2.0
-#### Added
-> Added react-router to the application for handling multiple pages.
-> Added tests for <BarcodeContainer> and it's related functions.
-> Added related functions for the email validation from server side.
-#### Updated
-> Updated the client side input field validation to be activated on blur.
-> Updated the route for barcode service. It is commented out for current release.
-> Updated server side validation, server error messages will be displayed in <ErrorBox> if client side validations fails.
+Configuration can be adjusted via `.travis.yml`, located at the root directory of this code repository. Travis CI is set to watch `qa` and `production` branches and waits for code push, e.g. `git push origin qa` will trigger Travis CI to build. When build and test are successful, Travis CI will deploy to specified Elastic Beanstalk instance.
