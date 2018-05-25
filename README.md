@@ -70,7 +70,7 @@ eb create <<environment name>> --instance_type <<size of instance>> \
 
 ### v0.5.0
 #### Added
-> Added GA pageview event.
+> Added GA trackPageview event.
 
 ### v0.4.5
 > Updated the Header component to 2.4.7.
