@@ -19,6 +19,8 @@ window.onload = () => {
     gaUtils.initialize(config.google.code(isProd), gaOpts);
   }
 
+  gaUtils.trackPageview(window.location.pathname);
+
   render(
     <ApplicationContainer />,
     document.getElementById('nypl-library-card-app'),

@@ -2,6 +2,10 @@
 #### Updated
 - Remove patron information from redirect URL
 
+### v0.4.7
+#### Updated
+- Add Google Analytics pageview event.
+
 ### v0.4.6
 #### Updated
 - Updated README to reflect new deployment strategies.
