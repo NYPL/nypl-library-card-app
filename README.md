@@ -7,7 +7,7 @@ a patron record.
 https://www.nypl.org/library-card/new/
 
 ## Version
-> 0.5.0
+> 0.4.7
 
 ## Installation & Configuration
 
