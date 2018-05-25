@@ -297,7 +297,7 @@ class LibraryCardForm extends React.Component {
           formEntrySuccessful: false,
           apiResults: response.data,
         });
-        window.location.href = `${config.confirmationURL.base}?patronID=${response.data.response.patron_id}&patronName=${this.getFullName()}`;
+        window.location.href = config.confirmationURL.base;
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
