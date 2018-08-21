@@ -14,6 +14,7 @@ export default function renderApp(req, res) {
     isProduction,
     appTitle: config.appTitle,
     favicon: config.favIconPath,
+    confirmationURL: config.confirmationURL.base,
     csrfToken,
   });
 }

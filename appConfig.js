@@ -17,6 +17,6 @@ export default {
   },
   scopes: 'account:write account:read',
   confirmationURL: {
-    base: 'https://www.nypl.org/get-help/library-card/confirmation',
+    base: process.env.CONFIRMATION_URL || 'https://www.nypl.org/get-help/library-card/confirmation',
   },
 };
