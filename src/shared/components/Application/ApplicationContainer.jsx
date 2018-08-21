@@ -17,7 +17,7 @@ const bannerContent = {
   description: {
     type: 'text-group',
     en: {
-      text: 'Get free access to resources and services across all New York Public Library locations. With a library card, you can borrow library materials, reserve a computer, download digital media, and search hundreds of online magazines and databases.',
+      text: 'Any person who lives, works, attends school or pays property taxes in New York State is eligible to receive a New York Public Library card free of charge. With a library card you get free access to resources and services across all New York Public Library locations. You can borrow library materials, reserve a computer, download digital media, and search hundreds on online magazines and databases.',
     },
   },
   image: {
