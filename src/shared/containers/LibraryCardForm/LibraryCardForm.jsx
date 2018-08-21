@@ -516,6 +516,33 @@ class LibraryCardForm extends React.Component {
           <div>
             {this.renderApiErrors(this.state.apiResults)}
             {this.renderFormFields()}
+            <p>
+              By submitting an application, you understand and agree to our <a href="https://www.nypl.org/help/library-card/terms-conditions">Cardholder Terms and Conditions</a> and
+              agree to our <a href="https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations">Rules and Regulations</a>. To learn more about The Library’s use of personal information, please read
+              our <a href="https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy">Privacy Policy</a>.
+            </p>
+            <h2>What to Expect Next</h2>
+            <p>
+              After you submit your application, you will see a confirmation page with a temporary account number,
+              and you will be able to log in and request books and materials. To get your card, follow the confirmation
+              page instructions. You may also apply in person at any <a href="https://www.nypl.org/locations">library location</a> in
+              the Bronx, Manhattan,
+              or Staten Island.
+            </p>
+            <h2>Applying in Person</h2>
+            <p>
+              <a href="https://www.nypl.org/help/library-card/terms-conditions#juv">Children 12 and under</a>, <a href="https://www.nypl.org/help/library-card/terms-conditions#download">classrooms and other groups</a>,&nbsp;
+              <a href="https://www.nypl.org/help/library-card/terms-conditions#Educator%20Cards">educators</a>, <a href="https://www.nypl.org/help/library-card/terms-conditions#homebound">homebound individuals</a>,
+              and <a href="https://www.nypl.org/help/library-card/terms-conditions#organizational">organizational</a> borrowers should apply in person or
+              download the appropriate <a href="https://www.nypl.org/help/library-card/terms-conditions#download">library card application form</a>.
+            </p>
+            <h2>Learn More</h2>
+            <p>
+              <a href="https://www.nypl.org/help/library-card/terms-conditions">About eligibility</a>
+            </p>
+            <p>
+              <a href="https://www.nypl.org/help/library-card#renew">About how to validate or renew your NYPL card</a>
+            </p>
           </div>
         </div>
       </div>
