@@ -45,7 +45,7 @@ const ApplicationContainer = () => (
         className="nypl-library-card-banner"
         items={[bannerContent]}
       />
-      <LibraryCardForm agencyType="form_type" />
+      <LibraryCardForm />
     </main>
     <Footer />
   </div>

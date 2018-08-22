@@ -34,6 +34,7 @@ class LibraryCardForm extends React.Component {
         username: '',
         pin: '',
         ecommunications_pref: true,
+        location: 'nyc',
       },
     };
 
@@ -42,17 +43,12 @@ class LibraryCardForm extends React.Component {
     this.handleOnBlur = this.handleOnBlur.bind(this);
   }
 
+
   componentDidMount() {
     const csrfToken = this.getMetaTagContent('name=csrf-token');
 
     if (csrfToken) {
       this.setState({ csrfToken });
-    }
-
-    const agencyType = this.getPatronAgencyType();
-
-    if (agencyType) {
-      this.setState({ agencyType });
     }
   }
 
@@ -69,15 +65,7 @@ class LibraryCardForm extends React.Component {
     return document.head.querySelector(`[${tag}]`).content;
   }
 
-  getUrlParameter(name) {
-    const paramName = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    const regex = new RegExp(`[\\?&]${paramName}=([^&#]*)`);
-    const results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-  }
-
-  getPatronAgencyType() {
-    const agencyTypeParam = this.getUrlParameter(this.props.agencyType);
+  getPatronAgencyType(agencyTypeParam) {
     const { agencyType } = config;
     return (!isEmpty(agencyTypeParam) && agencyTypeParam.toLowerCase() === 'nys')
       ? agencyType.nys : agencyType.default;
@@ -157,6 +145,14 @@ class LibraryCardForm extends React.Component {
           currentErrors = omit(fieldErrors, fieldName);
         }
         break;
+      case 'location':
+        if (isEmpty(value)) {
+          fieldErrors[fieldName] = 'Please select an address option.';
+          currentErrors = fieldErrors;
+        } else {
+          currentErrors = omit(fieldErrors, fieldName);
+        }
+        break;
       case 'line1':
         if (isEmpty(value)) {
           fieldErrors[fieldName] = 'Please enter a valid street address.';
@@ -223,11 +219,17 @@ class LibraryCardForm extends React.Component {
   handleInputChange(property) {
     return (event) => {
       const target = event.target;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const value = (target.type === 'checkbox') ? target.checked : target.value;
       const newState = assign({}, this.state.patronFields, { [property]: value });
 
       this.setState({ patronFields: newState });
     };
+  }
+
+  handleOptionChange(changeEvent) {
+    this.setState({
+      selectedOption: changeEvent.target.value,
+    });
   }
 
   handleOnBlur(property) {
@@ -272,7 +274,7 @@ class LibraryCardForm extends React.Component {
         pin,
         ecommunications_pref,
       } = this.state.patronFields;
-      const agencyType = this.state.agencyType;
+      const agencyType = this.getPatronAgencyType(this.state.patronFields.location);
 
       axios.post('/library-card/new/create-patron', {
         firstName,
@@ -374,7 +376,81 @@ class LibraryCardForm extends React.Component {
           onBlur={this.handleOnBlur('dateOfBirth')}
           childRef={(el) => { this.dateOfBirth = el; }}
         />
+        <FormField
+          id="patronEmail"
+          className="nypl-text-field"
+          type="text"
+          label="E-mail"
+          fieldName="email"
+          value={this.state.patronFields.email}
+          handleOnChange={this.handleInputChange('email')}
+          errorState={this.state.fieldErrors}
+          onBlur={this.handleOnBlur('email')}
+          childRef={(el) => { this.email = el; }}
+        />
+        <FormField
+          id="patronECommunications"
+          className={this.state.patronFields.ecommunications_pref ? 'nypl-terms-checkbox checked' :
+            'nypl-terms-checkbox'}
+          type="checkbox"
+          label="Receive emails"
+          fieldName="ecommunications_pref"
+          instructionText={'Yes, I would like to receive information about NYPL\'s programs ' +
+          'and services.'}
+          handleOnChange={this.handleInputChange('ecommunications_pref')}
+          value={this.state.patronFields.ecommunications_pref}
+          checked={this.state.patronFields.ecommunications_pref}
+        />
         <h3>Address</h3>
+
+        <div className="nypl-radiobutton-field">
+          <fieldset>
+            <legend id="radiobutton-location">
+              I live, work, go to school, or pay property taxes at an address in: <span className="nypl-required-field"> Required</span>
+            </legend>
+            <label id="radiobutton-location_nyc" htmlFor="location-nyc">
+              <input
+                aria-labelledby="radiobutton-location radiobutton-location_nyc"
+                id="location-nyc"
+                type="radio"
+                name="location"
+                value="nyc"
+                checked={this.state.patronFields.location === 'nyc'}
+                onChange={this.handleInputChange('location')}
+              />
+              New York City (All five boroughs)
+            </label>
+            <label id="radiobutton-location_nys" htmlFor="location-nys">
+              <input
+                aria-labelledby="radiobutton-location radiobutton-location_nys"
+                id="location-nys"
+                type="radio"
+                name="location"
+                value="nys"
+                checked={this.state.patronFields.location === 'nys'}
+                onChange={this.handleInputChange('location')}
+              />
+              New York State (Outside NYC)
+            </label>
+            <label id="radiobutton-location_us" htmlFor="location-us">
+              <input
+                aria-labelledby="radiobutton-location radiobutton-location_us"
+                id="location-us"
+                type="radio"
+                name="location"
+                value="us"
+                checked={this.state.patronFields.location === 'us'}
+                onChange={this.handleInputChange('location')}
+              />
+              United States (Visiting NYC)
+            </label>
+          </fieldset>
+        </div>
+
+        <p className="nypl-terms-checkbox checked">
+          If your address is outside the United States, please use our <a href="https://catalog.nypl.org/selfreg/patonsite">alternate form</a>.
+        </p>
+
         <FormField
           id="patronStreet1"
           className="nypl-text-field"
@@ -441,31 +517,6 @@ class LibraryCardForm extends React.Component {
           childRef={(el) => { this.zip = el; }}
         />
         <h3>Create Your Account</h3>
-        <FormField
-          id="patronEmail"
-          className="nypl-text-field"
-          type="text"
-          label="E-mail"
-          fieldName="email"
-          value={this.state.patronFields.email}
-          handleOnChange={this.handleInputChange('email')}
-          errorState={this.state.fieldErrors}
-          onBlur={this.handleOnBlur('email')}
-          childRef={(el) => { this.email = el; }}
-        />
-        <FormField
-          id="patronECommunications"
-          className={this.state.patronFields.ecommunications_pref ? 'nypl-terms-checkbox checked' :
-            'nypl-terms-checkbox'}
-          type="checkbox"
-          label="Receive emails"
-          fieldName="ecommunications_pref"
-          instructionText={'Yes, I would like to receive information about NYPL\'s programs ' +
-          'and services.'}
-          handleOnChange={this.handleInputChange('ecommunications_pref')}
-          value={this.state.patronFields.ecommunications_pref}
-          checked={this.state.patronFields.ecommunications_pref}
-        />
         <FormField
           id="patronUsername"
           className="nypl-text-field"
@@ -551,11 +602,9 @@ class LibraryCardForm extends React.Component {
 }
 
 LibraryCardForm.propTypes = {
-  agencyType: PropTypes.string,
 };
 
 LibraryCardForm.defaultProps = {
-  agencyType: '',
 };
 
 export default LibraryCardForm;
