@@ -447,7 +447,7 @@ class LibraryCardForm extends React.Component {
           </fieldset>
         </div>
 
-        <p className="nypl-terms-checkbox checked">
+        <p className="nypl-a11y-note">
           If your address is outside the United States, please use our <a href="https://catalog.nypl.org/selfreg/patonsite">alternate form</a>.
         </p>
 
