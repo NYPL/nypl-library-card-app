@@ -34,7 +34,7 @@ class LibraryCardForm extends React.Component {
         username: '',
         pin: '',
         ecommunications_pref: true,
-        location: 'nyc',
+        location: '',
       },
     };
 
@@ -48,6 +48,8 @@ class LibraryCardForm extends React.Component {
     const csrfToken = this.getMetaTagContent('name=csrf-token');
 
     if (csrfToken) {
+      this.state.patronFields.location = this.getUrlParameter('form_type') || 'nyc';
+
       this.setState({ csrfToken });
     }
   }
@@ -63,6 +65,16 @@ class LibraryCardForm extends React.Component {
 
   getMetaTagContent(tag) {
     return document.head.querySelector(`[${tag}]`).content;
+  }
+
+  getUrlParameter(name) {
+    console.log(window);
+    if (typeof location === 'undefined') return '';
+
+    const paramName = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    const regex = new RegExp(`[\\?&]${paramName}=([^&#]*)`);
+    const results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
   }
 
   getPatronAgencyType(agencyTypeParam) {
@@ -224,12 +236,6 @@ class LibraryCardForm extends React.Component {
 
       this.setState({ patronFields: newState });
     };
-  }
-
-  handleOptionChange(changeEvent) {
-    this.setState({
-      selectedOption: changeEvent.target.value,
-    });
   }
 
   handleOnBlur(property) {
@@ -567,6 +573,8 @@ class LibraryCardForm extends React.Component {
           <div>
             {this.renderApiErrors(this.state.apiResults)}
             {this.renderFormFields()}
+          </div>
+          <div className="nypl-library-card-form">
             <p>
               By submitting an application, you understand and agree to our <a href="https://www.nypl.org/help/library-card/terms-conditions">Cardholder Terms and Conditions</a> and
               agree to our <a href="https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations">Rules and Regulations</a>. To learn more about The Library’s use of personal information, please read
