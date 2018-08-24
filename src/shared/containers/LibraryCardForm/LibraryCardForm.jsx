@@ -68,7 +68,6 @@ class LibraryCardForm extends React.Component {
   }
 
   getUrlParameter(name) {
-    console.log(window);
     if (typeof location === 'undefined') return '';
 
     const paramName = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
