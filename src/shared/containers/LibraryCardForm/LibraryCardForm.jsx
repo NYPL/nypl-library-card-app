@@ -48,9 +48,11 @@ class LibraryCardForm extends React.Component {
     const csrfToken = this.getMetaTagContent('name=csrf-token');
 
     if (csrfToken) {
-      this.state.patronFields.location = this.getUrlParameter('form_type') || 'nyc';
+      const patronFields = {
+        location: this.getUrlParameter('form_type') || 'nyc',
+      };
 
-      this.setState({ csrfToken });
+      this.setState({ csrfToken, patronFields });
     }
   }
 
