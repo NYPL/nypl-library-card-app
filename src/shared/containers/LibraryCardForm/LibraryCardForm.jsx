@@ -454,7 +454,7 @@ class LibraryCardForm extends React.Component {
           </fieldset>
         </div>
 
-        <p className="nypl-a11y-note">
+        <p className="nypl-address-note">
           If your address is outside the United States, please use our <a href="https://catalog.nypl.org/selfreg/patonsite">alternate form</a>.
         </p>
 
@@ -598,10 +598,10 @@ class LibraryCardForm extends React.Component {
             </p>
             <h2>Learn More</h2>
             <p>
-              <a href="https://www.nypl.org/help/library-card/terms-conditions">About eligibility</a>
+              <a href="https://www.nypl.org/help/library-card/terms-conditions">Who is eligible for an NYPL card?</a>
             </p>
             <p>
-              <a href="https://www.nypl.org/help/library-card#renew">About how to validate or renew your NYPL card</a>
+              <a href="https://www.nypl.org/help/library-card#renew">How to validate or renew your NYPL card</a>
             </p>
           </div>
         </div>
