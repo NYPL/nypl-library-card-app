@@ -556,6 +556,13 @@ class LibraryCardForm extends React.Component {
           onBlur={this.handleOnBlur('pin')}
           childRef={(el) => { this.pin = el; }}
         />
+
+        <p>
+          By submitting an application, you understand and agree to our <a href="https://www.nypl.org/help/library-card/terms-conditions">Cardholder Terms and Conditions</a> and
+          agree to our <a href="https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations">Rules and Regulations</a>. To learn more about The Library’s use of personal information, please read
+          our <a href="https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy">Privacy Policy</a>.
+        </p>
+
         <div>
           <input
             className="nypl-request-button"
@@ -578,11 +585,6 @@ class LibraryCardForm extends React.Component {
             {this.renderFormFields()}
           </div>
           <div className="nypl-library-card-form">
-            <p>
-              By submitting an application, you understand and agree to our <a href="https://www.nypl.org/help/library-card/terms-conditions">Cardholder Terms and Conditions</a> and
-              agree to our <a href="https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations">Rules and Regulations</a>. To learn more about The Library’s use of personal information, please read
-              our <a href="https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy">Privacy Policy</a>.
-            </p>
             <h2>What to Expect Next</h2>
             <p>
               After you submit your application, you will see a confirmation page with a temporary account number,
