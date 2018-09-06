@@ -34,6 +34,7 @@ class LibraryCardForm extends React.Component {
         username: '',
         pin: '',
         ecommunications_pref: true,
+        location: '',
       },
     };
 
@@ -42,17 +43,18 @@ class LibraryCardForm extends React.Component {
     this.handleOnBlur = this.handleOnBlur.bind(this);
   }
 
+
   componentDidMount() {
     const csrfToken = this.getMetaTagContent('name=csrf-token');
 
     if (csrfToken) {
-      this.setState({ csrfToken });
-    }
+      const patronFields = Object.assign(
+        this.state.patronFields,
+        {
+          location: this.getUrlParameter('form_type') || 'nyc',
+        });
 
-    const agencyType = this.getPatronAgencyType();
-
-    if (agencyType) {
-      this.setState({ agencyType });
+      this.setState({ csrfToken, patronFields });
     }
   }
 
@@ -70,14 +72,15 @@ class LibraryCardForm extends React.Component {
   }
 
   getUrlParameter(name) {
+    if (typeof location === 'undefined') return '';
+
     const paramName = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     const regex = new RegExp(`[\\?&]${paramName}=([^&#]*)`);
     const results = regex.exec(location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
   }
 
-  getPatronAgencyType() {
-    const agencyTypeParam = this.getUrlParameter(this.props.agencyType);
+  getPatronAgencyType(agencyTypeParam) {
     const { agencyType } = config;
     return (!isEmpty(agencyTypeParam) && agencyTypeParam.toLowerCase() === 'nys')
       ? agencyType.nys : agencyType.default;
@@ -157,6 +160,14 @@ class LibraryCardForm extends React.Component {
           currentErrors = omit(fieldErrors, fieldName);
         }
         break;
+      case 'location':
+        if (isEmpty(value)) {
+          fieldErrors[fieldName] = 'Please select an address option.';
+          currentErrors = fieldErrors;
+        } else {
+          currentErrors = omit(fieldErrors, fieldName);
+        }
+        break;
       case 'line1':
         if (isEmpty(value)) {
           fieldErrors[fieldName] = 'Please enter a valid street address.';
@@ -223,7 +234,7 @@ class LibraryCardForm extends React.Component {
   handleInputChange(property) {
     return (event) => {
       const target = event.target;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const value = (target.type === 'checkbox') ? target.checked : target.value;
       const newState = assign({}, this.state.patronFields, { [property]: value });
 
       this.setState({ patronFields: newState });
@@ -272,7 +283,7 @@ class LibraryCardForm extends React.Component {
         pin,
         ecommunications_pref,
       } = this.state.patronFields;
-      const agencyType = this.state.agencyType;
+      const agencyType = this.getPatronAgencyType(this.state.patronFields.location);
 
       axios.post('/library-card/new/create-patron', {
         firstName,
@@ -297,7 +308,7 @@ class LibraryCardForm extends React.Component {
           formEntrySuccessful: false,
           apiResults: response.data,
         });
-        window.location.href = config.confirmationURL.base;
+        window.location.href = window.confirmationURL;
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
@@ -374,7 +385,81 @@ class LibraryCardForm extends React.Component {
           onBlur={this.handleOnBlur('dateOfBirth')}
           childRef={(el) => { this.dateOfBirth = el; }}
         />
+        <FormField
+          id="patronEmail"
+          className="nypl-text-field"
+          type="text"
+          label="E-mail"
+          fieldName="email"
+          value={this.state.patronFields.email}
+          handleOnChange={this.handleInputChange('email')}
+          errorState={this.state.fieldErrors}
+          onBlur={this.handleOnBlur('email')}
+          childRef={(el) => { this.email = el; }}
+        />
+        <FormField
+          id="patronECommunications"
+          className={this.state.patronFields.ecommunications_pref ? 'nypl-terms-checkbox checked' :
+            'nypl-terms-checkbox'}
+          type="checkbox"
+          label="Receive emails"
+          fieldName="ecommunications_pref"
+          instructionText={'Yes, I would like to receive information about NYPL\'s programs ' +
+          'and services.'}
+          handleOnChange={this.handleInputChange('ecommunications_pref')}
+          value={this.state.patronFields.ecommunications_pref}
+          checked={this.state.patronFields.ecommunications_pref}
+        />
         <h3>Address</h3>
+
+        <div className="nypl-radiobutton-field">
+          <fieldset>
+            <legend id="radiobutton-location">
+              I live, work, go to school, or pay property taxes at an address in: <span className="nypl-required-field"> Required</span>
+            </legend>
+            <label id="radiobutton-location_nyc" htmlFor="location-nyc">
+              <input
+                aria-labelledby="radiobutton-location radiobutton-location_nyc"
+                id="location-nyc"
+                type="radio"
+                name="location"
+                value="nyc"
+                checked={this.state.patronFields.location === 'nyc'}
+                onChange={this.handleInputChange('location')}
+              />
+              New York City (All five boroughs)
+            </label>
+            <label id="radiobutton-location_nys" htmlFor="location-nys">
+              <input
+                aria-labelledby="radiobutton-location radiobutton-location_nys"
+                id="location-nys"
+                type="radio"
+                name="location"
+                value="nys"
+                checked={this.state.patronFields.location === 'nys'}
+                onChange={this.handleInputChange('location')}
+              />
+              New York State (Outside NYC)
+            </label>
+            <label id="radiobutton-location_us" htmlFor="location-us">
+              <input
+                aria-labelledby="radiobutton-location radiobutton-location_us"
+                id="location-us"
+                type="radio"
+                name="location"
+                value="us"
+                checked={this.state.patronFields.location === 'us'}
+                onChange={this.handleInputChange('location')}
+              />
+              United States (Visiting NYC)
+            </label>
+          </fieldset>
+        </div>
+
+        <p className="nypl-address-note">
+          If your address is outside the United States, please use our <a href="https://catalog.nypl.org/selfreg/patonsite">alternate form</a>.
+        </p>
+
         <FormField
           id="patronStreet1"
           className="nypl-text-field"
@@ -442,31 +527,6 @@ class LibraryCardForm extends React.Component {
         />
         <h3>Create Your Account</h3>
         <FormField
-          id="patronEmail"
-          className="nypl-text-field"
-          type="text"
-          label="E-mail"
-          fieldName="email"
-          value={this.state.patronFields.email}
-          handleOnChange={this.handleInputChange('email')}
-          errorState={this.state.fieldErrors}
-          onBlur={this.handleOnBlur('email')}
-          childRef={(el) => { this.email = el; }}
-        />
-        <FormField
-          id="patronECommunications"
-          className={this.state.patronFields.ecommunications_pref ? 'nypl-terms-checkbox checked' :
-            'nypl-terms-checkbox'}
-          type="checkbox"
-          label="Receive emails"
-          fieldName="ecommunications_pref"
-          instructionText={'Yes, I would like to receive information about NYPL\'s programs ' +
-          'and services.'}
-          handleOnChange={this.handleInputChange('ecommunications_pref')}
-          value={this.state.patronFields.ecommunications_pref}
-          checked={this.state.patronFields.ecommunications_pref}
-        />
-        <FormField
           id="patronUsername"
           className="nypl-text-field"
           type="text"
@@ -496,6 +556,13 @@ class LibraryCardForm extends React.Component {
           onBlur={this.handleOnBlur('pin')}
           childRef={(el) => { this.pin = el; }}
         />
+
+        <p>
+          By submitting an application, you understand and agree to our <a href="https://www.nypl.org/help/library-card/terms-conditions">Cardholder Terms and Conditions</a> and
+          agree to our <a href="https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations">Rules and Regulations</a>. To learn more about The Library’s use of personal information, please read
+          our <a href="https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy">Privacy Policy</a>.
+        </p>
+
         <div>
           <input
             className="nypl-request-button"
@@ -517,6 +584,30 @@ class LibraryCardForm extends React.Component {
             {this.renderApiErrors(this.state.apiResults)}
             {this.renderFormFields()}
           </div>
+          <div className="nypl-library-card-form">
+            <h2>What to Expect Next</h2>
+            <p>
+              After you submit your application, you will see a confirmation page with a temporary account number,
+              and you will be able to log in and request books and materials. To get your card, follow the confirmation
+              page instructions. You may also apply in person at any <a href="https://www.nypl.org/locations">library location</a> in
+              the Bronx, Manhattan,
+              or Staten Island.
+            </p>
+            <h2>Applying in Person</h2>
+            <p>
+              <a href="https://www.nypl.org/help/library-card/terms-conditions#juv">Children 12 and under</a>, <a href="https://www.nypl.org/help/library-card/terms-conditions#download">classrooms and other groups</a>,&nbsp;
+              <a href="https://www.nypl.org/help/library-card/terms-conditions#Educator%20Cards">educators</a>, <a href="https://www.nypl.org/help/library-card/terms-conditions#homebound">homebound individuals</a>,
+              and <a href="https://www.nypl.org/help/library-card/terms-conditions#organizational">organizational</a> borrowers should apply in person or
+              download the appropriate <a href="https://www.nypl.org/help/library-card/terms-conditions#download">library card application form</a>.
+            </p>
+            <h2>Learn More</h2>
+            <p>
+              <a href="https://www.nypl.org/help/library-card/terms-conditions">Who is eligible for an NYPL card?</a>
+            </p>
+            <p>
+              <a href="https://www.nypl.org/help/library-card#renew">How to validate or renew your NYPL card</a>
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -524,11 +615,9 @@ class LibraryCardForm extends React.Component {
 }
 
 LibraryCardForm.propTypes = {
-  agencyType: PropTypes.string,
 };
 
 LibraryCardForm.defaultProps = {
-  agencyType: '',
 };
 
 export default LibraryCardForm;
