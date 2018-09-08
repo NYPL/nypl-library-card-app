@@ -1,5 +1,10 @@
 ## CHANGE LOG
 
+### v0.4.11
+- Updates to form: add radio button, change ptype selection logic from query parameter to radio button
+- Copy updates
+- Bump Design Toolkit to latest version
+
 ### v0.4.10
 - Updating @nypl/dgx-react-footer version to 0.5.1 and @nypl/dgx-header-component to 2.4.11.
 

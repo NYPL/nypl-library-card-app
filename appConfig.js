@@ -1,7 +1,7 @@
 export default {
   appTitle: 'Library Card Application Form | NYPL',
   appName: 'NYPL Library Card App',
-  favIconPath: '//cdn-www.nypl.org/images/favicon.ico',
+  favIconPath: '//www.nypl.org/images/favicon.ico',
   port: 3001,
   webpackDevServerPort: 3000,
   api: {

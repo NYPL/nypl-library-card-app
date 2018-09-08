@@ -22,12 +22,12 @@ const bannerContent = {
   },
   image: {
     bannerImage: {
-      'full-uri': 'https://cdn-www.nypl.org/sites/default/files/get-a-library-card-banner.png',
+      'full-uri': 'https://www.nypl.org/sites/default/files/get-a-library-card-banner.png',
       description: 'books centered on a bookshelf',
       alt: '',
     },
     mobileBannerImage: {
-      'full-uri': 'https://cdn-www.nypl.org/sites/default/files/get-a-library-card-banner.png',
+      'full-uri': 'https://www.nypl.org/sites/default/files/get-a-library-card-banner.png',
       description: 'books centered on a bookshelf',
       alt: '',
     },
