@@ -1,5 +1,8 @@
 ## CHANGE LOG
 
+### v0.4.13
+- Updating @nypl/dgx-header-component to 2.4.12.
+
 ### v0.4.12
 - Update to use green from Design Toolkit
 
