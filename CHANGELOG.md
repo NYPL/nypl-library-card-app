@@ -1,5 +1,20 @@
 ## CHANGE LOG
 
+### v0.4.16
+- Updating @nypl/dgx-header-component to 2.4.15 and checking for QA in APP_ENV.
+
+### v0.4.15
+- Updating @nypl/dgx-header-component to 2.4.14 and setting APP_ENV.
+
+### v0.4.14
+- Updating @nypl/dgx-header-component to 2.4.13.
+
+### v0.4.13
+- Updating @nypl/dgx-header-component to 2.4.12.
+
+### v0.4.12
+- Update to use green from Design Toolkit
+
 ### v0.4.11
 - Updates to form: add radio button, change ptype selection logic from query parameter to radio button
 - Copy updates

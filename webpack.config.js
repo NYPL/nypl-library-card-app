@@ -2,13 +2,13 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanBuild = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+// Sets appEnv so the the header component will point to the search app on either Dev or Prod
+const appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'production';
 const rootPath = path.resolve(__dirname);
 const sassPaths = require('@nypl/design-toolkit').includePaths.map((sassPath) =>
   `includePaths[]=${sassPath}`
 ).join('&');
 
-// PRODUCTION ENVIRONMENT CONFIG
 if (process.env.NODE_ENV === 'production') {
   module.exports = {
     devtool: 'source-map',
@@ -44,6 +44,7 @@ if (process.env.NODE_ENV === 'production') {
       new CleanBuild(['dist']),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        appEnv: JSON.stringify(appEnv),
       }),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurenceOrderPlugin(),
@@ -92,6 +93,7 @@ if (process.env.NODE_ENV === 'production') {
       new CleanBuild(['dist']),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        appEnv: JSON.stringify(appEnv),
       }),
       new webpack.HotModuleReplacementPlugin(),
     ],
