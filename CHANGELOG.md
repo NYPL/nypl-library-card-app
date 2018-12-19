@@ -1,5 +1,8 @@
 ## CHANGE LOG
 
+### v0.4.17
+- Updating @nypl/dgx-header-component to 2.4.19
+
 ### v0.4.16
 - Updating @nypl/dgx-header-component to 2.4.15 and checking for QA in APP_ENV.
 
