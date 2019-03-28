@@ -1,5 +1,9 @@
 ## CHANGE LOG
 
+### v0.4.19
+#### Added
+- Added Falcon Crowdstrike sensor to the operating system.
+
 ### v0.4.18
 - Updating @nypl/dgx-react-footer to 0.5.2.
 
