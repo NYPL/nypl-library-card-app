@@ -1,5 +1,9 @@
 ## CHANGE LOG
 
+### v0.4.20
+#### Updated
+- Updated the error message for the youngest age to get a library card online from 13 to 12.
+
 ### v0.4.19
 #### Added
 - Added Falcon Crowdstrike sensor to the operating system.
