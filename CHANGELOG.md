@@ -3,6 +3,7 @@
 ### v0.4.20
 #### Updated
 - Updated the error message for the youngest age to get a library card online from 13 to 12.
+- Installs Falcon Crowdstrike only on new Elastic Beanstalk instances.
 
 ### v0.4.19
 #### Added
