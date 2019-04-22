@@ -7,7 +7,7 @@ a patron record.
 https://www.nypl.org/library-card/new/
 
 ## Version
-> 0.4.20
+> 0.4.21
 
 | Branch        | Status                                                                                                                                                   |
 |:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -46,6 +46,9 @@ Our branches (in order of stability are):
 | master      | development | aws-sandbox     |
 | qa          | qa          | aws-digital-dev |
 | production  | production  | aws-digital-dev |
+
+
+Notice that since QA is calling QA endpoint of Card Creator (via QA Patron Creator Service) and currently (April/2019) QA endpoint of Card Creator is down, any request from QA is not working and will return a 503 error.
 
 ### Cutting a feature branch
 
