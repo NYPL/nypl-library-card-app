@@ -6,7 +6,7 @@
   "scripts": {
     "doc": "./node_modules/.bin/esdoc -c esdoc.json",
     "postinstall": "npm run prestart",
-    "prestart": "webpack --config webpack.config.js",
+    "prestart": "NODE_ENV=production webpack --config webpack.config.js",
     "start": "node index",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register test/helpers/browser.js test/*.test.js"
   },
@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@nypl/design-toolkit": "0.1.36",
-    "@nypl/dgx-header-component": "2.4.19",
+    "@nypl/dgx-header-component": "2.5.6",
     "@nypl/dgx-react-footer": "0.5.2",
     "axios": "0.15.3",
     "babel-core": "6.24.0",
