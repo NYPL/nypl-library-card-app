@@ -9,6 +9,15 @@ const sassPaths = require('@nypl/design-toolkit').includePaths.map((sassPath) =>
   `includePaths[]=${sassPath}`
 ).join('&');
 
+// Because we run webpack in `prestart`, we should ensure that NODE_ENV agrees
+// with whatever's in `.env`. The following code is essentially the first thing
+// the server does when it starts up locally, so if our webpack build doesn't
+// do the same thing, the local server may start up in NODE_ENV production
+// while webpack starts up in 'development'.
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 if (process.env.NODE_ENV === 'production') {
   module.exports = {
     devtool: 'source-map',
