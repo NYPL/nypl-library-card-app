@@ -1,5 +1,9 @@
 ## CHANGE LOG
 
+### v0.4.24
+#### Added
+- Updated @nypl/dgx-header-component to 2.6.0
+
 ### v0.4.23
 #### Added
 - Updated @nypl/dgx-header-component to 2.5.8
