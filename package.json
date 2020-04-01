@@ -41,18 +41,21 @@
     "node": "6.10.0"
   },
   "devDependencies": {
+    "chai": "3.5.0",
     "dotenv": "4.0.0",
+    "enzyme": "2.8.2",
     "esdoc": "0.5.2",
     "eslint": "3.19.0",
     "eslint-config-airbnb": "14.1.0",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.10.3",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.1.1",
     "mocha": "3.2.0",
-    "chai": "3.5.0",
-    "enzyme": "2.8.2",
-    "sinon": "1.17.6",
-    "react-addons-test-utils": "15.6.0"
+    "prettier": "^2.0.2",
+    "react-addons-test-utils": "15.6.0",
+    "sinon": "1.17.6"
   },
   "dependencies": {
     "@nypl/design-toolkit": "0.1.36",
@@ -89,11 +92,21 @@
     "react-hot-loader": "3.0.0-beta.6",
     "react-router": "2.4.0",
     "sass-loader": "4.0.2",
+    "save-dev": "0.0.1-security",
     "style-loader": "0.13.1",
     "underscore": "1.8.3",
     "validator": "7.0.0",
     "webpack": "1.13.2",
     "webpack-dev-server": "1.14.1",
     "winston": "2.3.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
   }
 }
