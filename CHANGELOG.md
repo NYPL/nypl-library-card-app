@@ -1,5 +1,9 @@
 ## CHANGE LOG
 
+### v0.4.25
+#### Added
+- Use nodemon for local development
+
 ### v0.4.24
 #### Added
 - Updated @nypl/dgx-header-component to 2.6.0
