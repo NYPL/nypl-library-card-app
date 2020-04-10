@@ -5,9 +5,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // Sets appEnv so the the header component will point to the search app on either Dev or Prod
 const appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'production';
 const rootPath = path.resolve(__dirname);
-const sassPaths = require('@nypl/design-toolkit').includePaths.map((sassPath) =>
-  `includePaths[]=${sassPath}`
-).join('&');
+const sassPaths = require('@nypl/design-toolkit')
+  .includePaths.map((sassPath) => `includePaths[]=${sassPath}`)
+  .join('&');
 
 // Because we run webpack in `prestart`, we should ensure that NODE_ENV agrees
 // with whatever's in `.env`. The following code is essentially the first thing
@@ -21,16 +21,13 @@ if (process.env.NODE_ENV !== 'production') {
 if (process.env.NODE_ENV === 'production') {
   module.exports = {
     devtool: 'source-map',
-    entry: [
-      'babel-polyfill',
-      path.resolve(rootPath, 'src/client/client.jsx'),
-    ],
+    entry: ['babel-polyfill', path.resolve(rootPath, 'src/client/client.jsx')],
     output: {
       path: path.resolve(rootPath, 'dist'),
       filename: 'bundle.js',
     },
     resolve: {
-      extensions: ['', '.js', '.jsx'],
+      extensions: ['*', '.js', '.jsx'],
     },
     module: {
       loaders: [
@@ -42,7 +39,9 @@ if (process.env.NODE_ENV === 'production') {
         {
           test: /\.scss$/,
           include: path.resolve(rootPath, 'src'),
-          loader: ExtractTextPlugin.extract(`css?sourceMap!sass?sourceMap&${sassPaths}`),
+          loader: ExtractTextPlugin.extract(
+            `css-loader?sourceMap!sass-loader?sourceMap&${sassPaths}`,
+          ),
         },
       ],
     },
@@ -82,10 +81,10 @@ if (process.env.NODE_ENV === 'production') {
       filename: 'bundle.js',
     },
     resolve: {
-      extensions: ['', '.js', '.jsx', '.scss'],
+      extensions: ['*', '.js', '.jsx', '.scss'],
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
@@ -93,7 +92,7 @@ if (process.env.NODE_ENV === 'production') {
         },
         {
           test: /\.scss?$/,
-          loader: `style!css!sass?${sassPaths}`,
+          loader: `style-loader!css-loader!sass-loader?${sassPaths}`,
           include: path.resolve(rootPath, 'src'),
         },
       ],
