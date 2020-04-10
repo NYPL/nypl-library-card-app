@@ -1,10 +1,8 @@
 import winston from 'winston';
-// Unexpected Errors will be handled
-winston.emitErrs = false;
 
 const logLevel = process.env.NODE_ENV === 'production' ? 'info' : 'debug';
 
-const logger = new winston.Logger({
+const logger = winston.createLogger({
   transports: [
     new winston.transports.File({
       level: logLevel,
