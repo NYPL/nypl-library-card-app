@@ -1,13 +1,13 @@
 {
   "name": "nypl-library-card-app",
-  "version": "0.4.24",
+  "version": "0.4.25",
   "description": "NYPL Get A Library Card App",
   "main": "index.js",
   "scripts": {
     "doc": "./node_modules/.bin/esdoc -c esdoc.json",
     "postinstall": "npm run prestart",
     "prestart": "webpack --config webpack.config.js",
-    "start": "node index",
+    "start": "nodemon index",
     "test": "./node_modules/.bin/mocha mocha --require babel-core/register babel-core test/helpers/browser.js test/*.test.js"
   },
   "repository": {
