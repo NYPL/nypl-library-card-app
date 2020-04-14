@@ -1,29 +1,27 @@
 import winston from 'winston';
-// Unexpected Errors will be handeled
-winston.emitErrs = false;
 
-const logLevel = (process.env.NODE_ENV === 'production') ? 'info' : 'debug';
+const logLevel = process.env.NODE_ENV === 'production' ? 'info' : 'debug';
 
-const logger = new winston.Logger({
+const logger = winston.createLogger({
   transports: [
     new winston.transports.File({
       level: logLevel,
       filename: './log/get_a_library_card.log',
       handleExceptions: true,
       json: true,
-      maxsize: 5242880, //5MB
+      maxsize: 5242880, // 5MB
       maxFiles: 5,
-      colorize: false
+      colorize: false,
     }),
     new winston.transports.Console({
       level: logLevel,
       handleExceptions: true,
       json: true,
       stringify: true,
-      colorize: true
-    })
+      colorize: true,
+    }),
   ],
-  exitOnError: false
+  exitOnError: false,
 });
 
 module.exports = logger;
