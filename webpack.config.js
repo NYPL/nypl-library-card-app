@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CleanBuild = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // Sets appEnv so the the header component will point to the search app on either Dev or Prod
@@ -29,8 +30,17 @@ if (process.env.NODE_ENV === 'production') {
     resolve: {
       extensions: ['*', '.js', '.jsx'],
     },
+    optimization: {
+      minimizer: [
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            warnings: false,
+          },
+        }),
+      ],
+    },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
@@ -49,18 +59,12 @@ if (process.env.NODE_ENV === 'production') {
       // Cleans the Dist folder after every build.
       // Alternately, we can run rm -rf dist/ as
       // part of the package.json scripts.
-      new CleanBuild(['dist']),
+      new CleanBuild(),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         appEnv: JSON.stringify(appEnv),
       }),
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false,
-        },
-      }),
+      new webpack.optimize.OccurrenceOrderPlugin(),
       new ExtractTextPlugin('styles.css'),
     ],
   };
