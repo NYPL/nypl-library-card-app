@@ -1,16 +1,14 @@
 ## CHANGE LOG
 
-### v0.4.26
+### v0.5.0
 
 #### Updated
 
 - Updated several packages, including Webpack, to the most recent versions possible
 
-### v0.4.25
-
 #### Added
 
-- Use nodemon for local development
+- Implemented nodemon for local development
 
 ### v0.4.24
 
