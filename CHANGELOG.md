@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.4.26
+
+#### Updated
+
+- Updated several packages, including Webpack, to the most recent versions possible
+
 ### v0.4.25
 
 #### Added
