@@ -1,5 +1,12 @@
 ## CHANGE LOG
 
+### v0.4.26
+- Updating @nypl/dgx-react-footer to 0.5.5.
+- Updating Falcon Crowdstrike sensor to 5.29.
+
+### v0.4.25
+- Updating @nypl/dgx-react-footer to 0.5.4.
+
 ### v0.4.24
 #### Added
 - Updated @nypl/dgx-header-component to 2.6.0
