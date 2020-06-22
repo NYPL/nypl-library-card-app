@@ -10,6 +10,7 @@ npm-debug.log
 .env
 .env.prod
 log/*.log
+.eslintcache
 
 # WebStorm IDE
 .idea
