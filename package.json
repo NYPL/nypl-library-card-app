@@ -1,6 +1,6 @@
 {
   "name": "nypl-library-card-app",
-  "version": "0.4.26",
+  "version": "0.5.0",
   "description": "NYPL Get A Library Card App",
   "main": "index.js",
   "scripts": {
@@ -65,7 +65,7 @@
   "dependencies": {
     "@nypl/design-toolkit": "0.1.37",
     "@nypl/dgx-header-component": "2.6.0",
-    "@nypl/dgx-react-footer": "0.5.2",
+    "@nypl/dgx-react-footer": "0.5.6",
     "axios": "0.19.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",

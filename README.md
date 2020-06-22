@@ -4,17 +4,18 @@ A Universal JavaScript Application that allows NYPL Patrons to request a library
 a patron record.
 
 ## URL
+
 https://www.nypl.org/library-card/new/
 
 ## Version
-> 0.4.24
 
-| Branch        | Status                                                                                                                                                   |
-|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `master`      | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=master)](https://travis-ci.org/NYPL/nypl-library-card-app)      |
+> 0.4.27
+
+| Branch       | Status                                                                                                                                      |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| `master`     | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=master)](https://travis-ci.org/NYPL/nypl-library-card-app)     |
 | `production` | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=production)](https://travis-ci.org/NYPL/nypl-library-card-app) |
-| `qa`  | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-library-card-app)  |
-
+| `qa`         | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-library-card-app)         |
 
 ## Installation & Configuration
 
@@ -27,7 +28,7 @@ For more information see [how `nvm use` works](https://github.com/creationix/nvm
 ### Install & Running Locally
 
 1. `cp .env.example .env` and fill out variables
-2. `npm install`  
+2. `npm install`
 3. `npm start` and point browser to http://localhost:3001/library-card/new
 
 ### Environment Variables
@@ -41,12 +42,11 @@ needs to run.
 
 Our branches (in order of stability are):
 
-| Branch      | Environment | AWS Account     |
-|:------------|:------------|:----------------|
-| master      | development | aws-sandbox     |
-| qa          | qa          | aws-digital-dev |
-| production  | production  | aws-digital-dev |
-
+| Branch     | Environment | AWS Account     |
+| :--------- | :---------- | :-------------- |
+| master     | development | aws-sandbox     |
+| qa         | qa          | aws-digital-dev |
+| production | production  | aws-digital-dev |
 
 Notice that since QA is calling QA endpoint of Card Creator (via QA Patron Creator Service) and currently (April/2019) QA endpoint of Card Creator is down, any request from QA is not working and will return a 503 error.
 
@@ -63,6 +63,7 @@ The `qa` branch should be what's running in the QA environment.
 The `production` branch should be what's running in the production environment.
 
 ### AWS Elastic Beanstalk
+
 1. `.ebextensions` directory needed at application's root directory
 2. `.ebextensions/environment.config` to store environment variables. For environment variables that needs to be hidden,
 3. `.ebextensions/nodecommand.config` to start node app after deployment.
