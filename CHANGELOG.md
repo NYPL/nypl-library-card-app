@@ -4,11 +4,26 @@
 
 #### Updated
 
-- Updated several packages, including Webpack, to the most recent versions possible
+- Updated several packages, including Webpack, to the most recent versions possible.
+- Updated to React 16.
+- Added react-axe for accessibility review while doing development.
 
 #### Added
 
-- Implemented nodemon for local development
+- Implemented nodemon for local development.
+
+### v0.4.27
+
+- Updating @nypl/dgx-react-footer to 0.5.6.
+
+### v0.4.26
+
+- Updating @nypl/dgx-react-footer to 0.5.5.
+- Updating Falcon Crowdstrike sensor to 5.29.
+
+### v0.4.25
+
+- Updating @nypl/dgx-react-footer to 0.5.4.
 
 ### v0.4.27
 
@@ -27,19 +42,19 @@
 
 #### Added
 
-- Updated @nypl/dgx-header-component to 2.6.0
+- Updated @nypl/dgx-header-component to 2.6.0.
 
 ### v0.4.23
 
 #### Added
 
-- Updated @nypl/dgx-header-component to 2.5.8
+- Updated @nypl/dgx-header-component to 2.5.8.
 
 ### v0.4.22
 
 #### Added
 
-- Updated @nypl/dgx-header-component to 2.5.6
+- Updated @nypl/dgx-header-component to 2.5.6.
 
 ### v0.4.21
 

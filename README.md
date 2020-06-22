@@ -9,7 +9,7 @@ https://www.nypl.org/library-card/new/
 
 ## Version
 
-> 0.4.27
+> 0.5.0
 
 | Branch       | Status                                                                                                                                      |
 | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -61,6 +61,13 @@ The `master` branch should be what's running in the Development environment.
 
 The `qa` branch should be what's running in the QA environment.
 The `production` branch should be what's running in the production environment.
+
+### Accessibility
+
+There are two ways to use the `react-axe` package for accessibility review while developing. This is the package of choice used in a few NYPL React applications. Only turn it on when needed and not while developing all the time because it uses a lot of browser resouces.
+
+1. Run `TEST_ENV=true npm start`
+2. or update the `TEST_ENV` environment variable in your `.env` file.
 
 ### AWS Elastic Beanstalk
 

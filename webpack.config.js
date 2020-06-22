@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CleanBuild = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // Sets appEnv so the the header component will point to the search app on either Dev or Prod
 const appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'production';
 const rootPath = path.resolve(__dirname);
@@ -21,8 +21,9 @@ if (process.env.NODE_ENV !== 'production') {
 
 if (process.env.NODE_ENV === 'production') {
   module.exports = {
+    mode: 'production',
     devtool: 'source-map',
-    entry: ['babel-polyfill', path.resolve(rootPath, 'src/client/client.jsx')],
+    entry: [path.resolve(rootPath, 'src/client/client.jsx')],
     output: {
       path: path.resolve(rootPath, 'dist'),
       filename: 'bundle.js',
@@ -47,11 +48,9 @@ if (process.env.NODE_ENV === 'production') {
           loaders: ['babel-loader'],
         },
         {
-          test: /\.scss$/,
+          test: /\.scss?$/,
+          loader: `style-loader!css-loader!sass-loader?${sassPaths}`,
           include: path.resolve(rootPath, 'src'),
-          loader: ExtractTextPlugin.extract(
-            `css-loader?sourceMap!sass-loader?sourceMap&${sassPaths}`,
-          ),
         },
       ],
     },
@@ -65,18 +64,18 @@ if (process.env.NODE_ENV === 'production') {
         appEnv: JSON.stringify(appEnv),
       }),
       new webpack.optimize.OccurrenceOrderPlugin(),
-      new ExtractTextPlugin('styles.css'),
+      new MiniCssExtractPlugin('styles.css'),
     ],
   };
 } else {
   // DEVELOPMENT ENVIRONMENT CONFIG
   module.exports = {
+    mode: 'development',
     devtool: 'eval',
     entry: [
       'react-hot-loader/patch',
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
-      'babel-polyfill',
       path.resolve(rootPath, 'src/client/client.jsx'),
     ],
     output: {
@@ -105,6 +104,7 @@ if (process.env.NODE_ENV === 'production') {
       new CleanBuild(),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        'process.env.TEST_ENV': JSON.stringify(process.env.TEST_ENV),
         appEnv: JSON.stringify(appEnv),
       }),
       new webpack.HotModuleReplacementPlugin(),
