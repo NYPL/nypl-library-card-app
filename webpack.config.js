@@ -104,6 +104,7 @@ if (process.env.NODE_ENV === 'production') {
       new CleanBuild(),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        'process.env.TEST_ENV': JSON.stringify(process.env.TEST_ENV),
         appEnv: JSON.stringify(appEnv),
       }),
       new webpack.HotModuleReplacementPlugin(),

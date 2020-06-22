@@ -1,5 +1,5 @@
 import React from 'react';
-import { hydrate } from 'react-dom';
+import ReactDOM from 'react-dom';
 import ApplicationContainer from '../shared/components/Application/ApplicationContainer';
 import './styles/main.scss';
 import { config, gaUtils } from 'dgx-react-ga';
@@ -14,7 +14,12 @@ window.onload = () => {
 
   gaUtils.trackPageview(window.location.pathname);
 
-  hydrate(
+  if (process.env.TEST_ENV === 'true') {
+    var axe = require('react-axe');
+    axe(React, ReactDOM, 1000);
+  }
+
+  ReactDOM.hydrate(
     <ApplicationContainer />,
     document.getElementById('nypl-library-card-app'),
   );
