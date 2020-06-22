@@ -6,6 +6,7 @@
 
 - Updated several packages, including Webpack, to the most recent versions possible.
 - Updated to React 16.
+- Added react-axe for accessibility review while doing development.
 
 #### Added
 
