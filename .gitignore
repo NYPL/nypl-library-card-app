@@ -8,6 +8,7 @@ npm-debug.log
 .bower
 .vscode
 .env
+.env.prod
 log/*.log
 
 # WebStorm IDE

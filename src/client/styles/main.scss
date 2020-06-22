@@ -2,7 +2,8 @@
 @import '~@nypl/dgx-header-component/dist/styles/main';
 @import '~@nypl/dgx-react-footer/dist/styles/styles';
 // Import NYPL Design Toolkit Library
-@import 'toolkit';
+// Webpack 4 update:
+@import '~@nypl/design-toolkit/sass/_toolkit.scss';
 
 // Import Globals
 @import 'utils/fonts';
