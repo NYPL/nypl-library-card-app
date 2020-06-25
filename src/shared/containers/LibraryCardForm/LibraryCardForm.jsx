@@ -46,7 +46,6 @@ class LibraryCardForm extends React.Component {
 
   componentDidMount() {
     const csrfToken = this.getMetaTagContent('name=csrf-token');
-
     if (csrfToken) {
       const patronFields = Object.assign(
         this.state.patronFields,
@@ -285,7 +284,8 @@ class LibraryCardForm extends React.Component {
       } = this.state.patronFields;
       const agencyType = this.getPatronAgencyType(this.state.patronFields.location);
 
-      axios.post('/library-card/new/create-patron', {
+      // The new and simplier endpoint:
+      axios.post('/api/create-patron', {
         firstName,
         lastName,
         email,

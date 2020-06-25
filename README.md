@@ -9,7 +9,7 @@ https://www.nypl.org/library-card/new/
 
 ## Version
 
-> 0.5.0
+> 0.6.0
 
 | Branch       | Status                                                                                                                                      |
 | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -29,7 +29,16 @@ For more information see [how `nvm use` works](https://github.com/creationix/nvm
 
 1. `cp .env.example .env` and fill out variables
 2. `npm install`
-3. `npm start` and point browser to http://localhost:3001/library-card/new
+3. `npm run dev` and point browser to http://localhost:3000/library-card/new
+
+#### Production build
+
+To build and run the app locally in production mode, run the following:
+
+1. `npm run build`
+2. `npm start`
+
+Make sure that `NODE_ENV=production` is set in the `.env` file.
 
 ### Environment Variables
 
@@ -66,8 +75,8 @@ The `production` branch should be what's running in the production environment.
 
 There are two ways to use the `react-axe` package for accessibility review while developing. This is the package of choice used in a few NYPL React applications. Only turn it on when needed and not while developing all the time because it uses a lot of browser resouces.
 
-1. Run `TEST_ENV=true npm start`
-2. or update the `TEST_ENV` environment variable in your `.env` file.
+1. Run `USE_AXE_ENV=true npm run dev`
+2. or update the `USE_AXE_ENV` environment variable in your `.env` file.
 
 ### AWS Elastic Beanstalk
 

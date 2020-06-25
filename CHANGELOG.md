@@ -1,5 +1,13 @@
 ## CHANGE LOG
 
+### v0.6.0
+
+#### Updated
+
+- Updated to use Nextjs for the server and updated app and api routes accordingly.
+- Added Typescript for development.
+- Replaced Mocha with Jest, but still using Enzyme to test React components.
+
 ### v0.5.0
 
 #### Updated
