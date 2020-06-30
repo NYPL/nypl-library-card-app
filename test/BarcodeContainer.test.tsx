@@ -15,17 +15,17 @@ describe('BarcodeContainer', () => {
     let component;
     let getOAuthAccessToken;
 
-    before(() => {
+    beforeAll(() => {
       getOAuthAccessToken = sinon.stub(BarcodeContainer.prototype, 'getOAuthAccessToken')
         .withArgs('nyplIdentityPatron');
 
       component = mount(<BarcodeContainer />);
     });
 
-    after(() => {
+    afterAll(() => {
       // stubs don't have restore(), the way to restore them is go back to the original functions.
       // However, if the sutbs only use the methods that belong to spies, restore() will work.
-      BarcodeContainer.prototype.getOAuthAccessToken.restore();
+      getOAuthAccessToken.restore();
     });
 
     it('should have <Header>, <Footer>, and <section>.', () => {
