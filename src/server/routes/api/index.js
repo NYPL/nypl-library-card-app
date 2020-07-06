@@ -56,7 +56,7 @@ function constructPatronObject(object) {
     zip,
     username,
     pin,
-    ecommunications_pref,
+    ecommunicationsPref,
     agencyType,
   } = object;
 
@@ -138,8 +138,8 @@ function constructPatronObject(object) {
 
   const fullName = `${lastName.trim()}, ${firstName.trim()}`;
   const addressObject = {
-    line_1: line1,
-    line_2: line2,
+    line1,
+    line2,
     city,
     state,
     zip,
@@ -148,11 +148,11 @@ function constructPatronObject(object) {
   return {
     name: fullName,
     email,
-    dateOfBirth,
+    birthdate: dateOfBirth,
     address: addressObject,
     username,
     pin,
-    ecommunications_pref,
+    ecommunicationsPref,
     patron_agency: agencyType || config.agencyType.default,
   };
 }
@@ -278,78 +278,36 @@ export async function createPatron(req, res) {
     if (patronData.status === 400) {
       return res.status(400).json(patronData);
     }
-    // Patron Object validation is successful
-    // Validate Address and Username
+
     return axios
-      .all([
-        validatePatronAddress(req, patronData.address, token),
-        validatePatronUsername(req, patronData.username, token),
-      ])
-      .then(
-        axios.spread((addressResponse, userRes) => {
-          // Both requests are now complete
-          const patronAddressResponse = addressResponse.data || {};
-          const patronUsernameResponse =
-            userRes && userRes.data && userRes.data.data
-              ? userRes.data.data
-              : {};
+      .post(config.api.patron, patronData, constructApiHeaders(token))
+      .then((result) => {
+        return res.json({
+          status: result.data.status,
+          ...result.data,
+        });
+      })
+      .catch((err) => {
+        let serverError = null;
 
-          if (!patronAddressResponse.valid) {
-            // Address is invalid
-            return res.status(400).json({
-              status: 400,
-              response: patronAddressResponse,
-            });
-          }
+        // If the response from the Patron Creator Service(the wrapper)
+        // does not include valid error details, we mark this result as an internal server error
+        if (!err.response.data) {
+          // req.app.get('logger').error('Error calling Card Creator API: ', err.message);
+          serverError = { type: "server" };
+        }
 
-          if (!patronUsernameResponse.valid) {
-            // Username is invalid
-            return res.status(400).json({
-              status: 400,
-              response: patronUsernameResponse,
-            });
-          }
-
-          // Patron address is valid, create account
-          return axios
-            .post(
-              config.api.patron,
-              { simplePatron: patronData },
-              constructApiHeaders(token)
-            )
-            .then((result) => {
-              return res.json({
-                status: 200,
-                response: result.data.data.simplePatron,
-              });
-            })
-            .catch((err) => {
-              let serverError = null;
-
-              // If the response from the Patron Creator Service(the wrapper)
-              // does not include valid error details, we mark this result as an internal server error
-              if (!err.response.data.data) {
-                // req.app.get('logger').error('Error calling Card Creator API: ', err.message);
-                serverError = { type: "server" };
-              }
-
-              res.status(err.response.status).json({
-                status: err.response.status,
-                response: serverError
-                  ? Object.assign(err.response.data, serverError)
-                  : err.response.data,
-              });
-            });
-        })
-      )
-      .catch((error) => {
-        // req.app.get('logger').error('Error creating patron: ', error.message);
-        res.status(400).json({
-          status: 400,
-          response: {
-            type: "server",
-          },
+        res.status(err.response.status).json({
+          status: err.response.status,
+          response: serverError
+            ? Object.assign(err.response.data, serverError)
+            : err.response.data,
         });
       });
   }
+  // Else return a no token error
+  res.status(400).json({
+    status: 500,
+    response: "The access token could not be generated.",
+  });
 }

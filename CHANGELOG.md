@@ -7,6 +7,7 @@
 - Updated to use Nextjs for the server and updated app and api routes accordingly.
 - Added Typescript for development.
 - Replaced Mocha with Jest, but still using Enzyme to test React components.
+- Updated the API endpoints and the error/response objects from the API endpoint that the front-end will use.
 
 ### v0.5.0
 

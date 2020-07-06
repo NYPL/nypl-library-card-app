@@ -1,7 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import ApplicationContainer from "../../../src/shared/components/Application/ApplicationContainer";
-import { config, gaUtils } from 'dgx-react-ga';
+import { config, gaUtils } from "dgx-react-ga";
+import appConfig from "../../../appConfig";
 
 /**
  * Determines if we are running on server or in the client.
@@ -36,13 +37,14 @@ if (process.env.USE_AXE_ENV === 'true' && !isServerRendered()) {
 function HomePage() {
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
+  const { favIconPath, appTitle } = appConfig;
   return (
     <>
       <Head>
         <meta charSet="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>Library Card Application Form | NYPL</title>
-        <link rel="icon" type="image/png" href="//www.nypl.org/images/favicon.ico" />
+        <title>{appTitle} | NYPL</title>
+        <link rel="icon" type="image/png" href={favIconPath} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="With a library card you get free access to resources and services across all New York Public Library locations." />
         <meta name="keywords" content="NYPL, The New York Public Library, Manhattan, Bronx, Staten Island" />
