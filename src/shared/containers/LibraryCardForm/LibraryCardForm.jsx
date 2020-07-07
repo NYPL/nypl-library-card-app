@@ -33,7 +33,7 @@ class LibraryCardForm extends React.Component {
         zip: '',
         username: '',
         pin: '',
-        ecommunications_pref: true,
+        ecommunicationsPref: true,
         location: '',
       },
     };
@@ -202,7 +202,7 @@ class LibraryCardForm extends React.Component {
       case 'line2':
         currentErrors = fieldErrors;
         break;
-      case 'ecommunications_pref':
+      case 'ecommunicationsPref':
         currentErrors = fieldErrors;
         break;
       default:
@@ -280,7 +280,7 @@ class LibraryCardForm extends React.Component {
         zip,
         username,
         pin,
-        ecommunications_pref,
+        ecommunicationsPref,
       } = this.state.patronFields;
       const agencyType = this.getPatronAgencyType(this.state.patronFields.location);
 
@@ -297,7 +297,7 @@ class LibraryCardForm extends React.Component {
         zip,
         username,
         pin,
-        ecommunications_pref,
+        ecommunicationsPref,
         agencyType,
       }, {
         headers: { 'csrf-token': this.state.csrfToken },
@@ -308,7 +308,9 @@ class LibraryCardForm extends React.Component {
           formEntrySuccessful: false,
           apiResults: response.data,
         });
-        window.location.href = window.confirmationURL;
+        // TODO: Waiting on whether we will make a redirect in the app
+        // or in Drupal.
+        // window.location.href = window.confirmationURL;
       })
       .catch((error) => {
         this.setState({ formProcessing: false, focusOnResult: true });
@@ -399,16 +401,16 @@ class LibraryCardForm extends React.Component {
         />
         <FormField
           id="patronECommunications"
-          className={this.state.patronFields.ecommunications_pref ? 'nypl-terms-checkbox checked' :
+          className={this.state.patronFields.ecommunicationsPref ? 'nypl-terms-checkbox checked' :
             'nypl-terms-checkbox'}
           type="checkbox"
           label="Receive emails"
-          fieldName="ecommunications_pref"
+          fieldName="ecommunicationsPref"
           instructionText={'Yes, I would like to receive information about NYPL\'s programs ' +
           'and services.'}
-          handleOnChange={this.handleInputChange('ecommunications_pref')}
-          value={this.state.patronFields.ecommunications_pref}
-          checked={this.state.patronFields.ecommunications_pref}
+          handleOnChange={this.handleInputChange('ecommunicationsPref')}
+          value={this.state.patronFields.ecommunicationsPref}
+          checked={this.state.patronFields.ecommunicationsPref}
         />
         <h3>Address</h3>
 

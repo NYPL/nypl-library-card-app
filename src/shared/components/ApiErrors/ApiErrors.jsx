@@ -8,7 +8,7 @@ class ApiErrors extends React.Component {
     const errorClass = 'nypl-error-content';
     let resultMarkup = null;
 
-    if (apiResults.response) {
+    if (apiResults.response.message) {
       resultMarkup = <ErrorBox errorObject={apiResults.response} className="nypl-form-error" />;
     }
 

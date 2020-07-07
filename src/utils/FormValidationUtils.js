@@ -1,22 +1,23 @@
-import React from 'react';
+/* eslint-disable */
+import React from "react";
 
 function isDate(input, minYear = 1902, maxYear = new Date().getFullYear()) {
   // regular expression to match required date format
   const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 
-  if (input === '') {
+  if (input === "") {
     return false;
   }
 
   if (input.match(regex)) {
-    const temp = input.split('/');
+    const temp = input.split("/");
     const dateFromInput = new Date(`${temp[2]}/${temp[0]}/${temp[1]}`);
 
     return (
-      dateFromInput.getDate() === Number(temp[1])
-      && (dateFromInput.getMonth() + 1) === Number(temp[0])
-      && Number(temp[2]) > minYear
-      && Number(temp[2]) < maxYear
+      dateFromInput.getDate() === Number(temp[1]) &&
+      dateFromInput.getMonth() + 1 === Number(temp[0]) &&
+      Number(temp[2]) > minYear &&
+      Number(temp[2]) < maxYear
     );
   }
 
@@ -31,9 +32,11 @@ function isDate(input, minYear = 1902, maxYear = new Date().getFullYear()) {
  * return {object} {anchorText, restText}
  */
 function createAnchorText(wholeText) {
-  const anchorText = (wholeText && typeof wholeText === 'string') ?
-    wholeText.split(' field')[0] : '';
-  const restText = (!anchorText) ? '' : ` field ${wholeText.split(' field')[1]}`;
+  const anchorText =
+    wholeText && typeof wholeText === "string"
+      ? wholeText.split(" field")[0]
+      : "";
+  const restText = !anchorText ? "" : ` field ${wholeText.split(" field")[1]}`;
 
   return { anchorText, restText };
 }
@@ -46,18 +49,22 @@ function createAnchorText(wholeText) {
  * return {string}
  */
 function createAnchorID(key) {
-  let hashElement = (key && typeof key === 'string') ?
-    `${key.charAt(0).toUpperCase()}${key.substr(1)}` : '';
+  let hashElement =
+    key && typeof key === "string"
+      ? `${key.charAt(0).toUpperCase()}${key.substr(1)}`
+      : "";
 
-  if (hashElement === 'DateOfBirth') {
-    hashElement = 'Dob';
+  if (hashElement === "DateOfBirth") {
+    hashElement = "Dob";
   }
 
-  if (hashElement === 'Line1') {
-    hashElement = 'Street1';
+  if (hashElement === "Line1") {
+    hashElement = "Street1";
   }
 
-  if (!hashElement) { return null; }
+  if (!hashElement) {
+    return null;
+  }
 
   return `#patron${hashElement}`;
 }
@@ -77,27 +84,61 @@ function renderServerValidationError(object) {
     if (object.hasOwnProperty(key)) {
       let errorMessage = null;
 
-      if (object[key].indexOf('empty') !== -1) {
-        const anchorText = createAnchorText(object[key]).anchorText || '';
-        const restText = createAnchorText(object[key]).restText || '';
+      if (object[key].indexOf("empty") !== -1) {
+        const anchorText = createAnchorText(object[key]).anchorText || "";
+        const restText = createAnchorText(object[key]).restText || "";
 
-        errorMessage = (!anchorText && !anchorText) ? <li>One of the fields is incorrect.</li> :
-          <li key={index}><a href={createAnchorID(key)}>{anchorText}</a>{restText}</li>;
+        errorMessage =
+          !anchorText && !anchorText ? (
+            <li>One of the fields is incorrect.</li>
+          ) : (
+            <li key={index}>
+              <a href={createAnchorID(key)}>{anchorText}</a>
+              {restText}
+            </li>
+          );
       } else {
-        if (key === 'zip') {
-          errorMessage = <li key={index}>Please enter a 5-digit <a href={createAnchorID(key)}>postal code</a>.</li>;
+        if (key === "zip") {
+          errorMessage = (
+            <li key={index}>
+              Please enter a 5-digit{" "}
+              <a href={createAnchorID(key)}>postal code</a>.
+            </li>
+          );
         }
 
-        if (key === 'email') {
-          errorMessage = <li key={index}>Please enter a valid <a href={createAnchorID(key)}>email address</a>.</li>;
+        if (key === "email") {
+          errorMessage = (
+            <li key={index}>
+              Please enter a valid{" "}
+              <a href={createAnchorID(key)}>email address</a>.
+            </li>
+          );
         }
 
-        if (key === 'username') {
-          errorMessage = <li key={index}>Please enter a <a href={createAnchorID(key)}>username</a> between 5-25 alphanumeric characters.</li>;
+        if (key === "username") {
+          errorMessage = (
+            <li key={index}>
+              Please enter a <a href={createAnchorID(key)}>username</a> between
+              5-25 alphanumeric characters.
+            </li>
+          );
         }
 
-        if (key === 'pin') {
-          errorMessage = <li key={index}>Please enter a 4-digit <a href={createAnchorID(key)}>PIN</a>.</li>;
+        if (key === "pin") {
+          errorMessage = (
+            <li key={index}>
+              Please enter a 4-digit <a href={createAnchorID(key)}>PIN</a>.
+            </li>
+          );
+        }
+
+        if (key === "address") {
+          errorMessage = (
+            <li key={index}>
+              <a href={createAnchorID("Street1")}>{object[key]}</a>
+            </li>
+          );
         }
       }
 
@@ -108,7 +149,4 @@ function renderServerValidationError(object) {
   return errorMessages;
 }
 
-export {
-  isDate,
-  renderServerValidationError,
-};
+export { isDate, renderServerValidationError };

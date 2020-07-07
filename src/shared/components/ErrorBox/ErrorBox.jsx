@@ -4,7 +4,7 @@ import { renderServerValidationError } from './../../../utils/FormValidationUtil
 
 const ErrorBox = ({ errorObject, className }) => {
   const renderErrorByType = (errorObj) => {
-    const { type, details } = errorObject;
+    const { type, details, message } = errorObject;
     const defaultError = 'There was an error processing your submission. Please try again later.';
     let error;
 
@@ -17,8 +17,9 @@ const ErrorBox = ({ errorObject, className }) => {
           error =
             <li>This <a href="#patronUsername">username</a> is already taken. Please try again.</li>;
           break;
+        case 'invalid-request':
         case 'server-validation-error':
-          error = <div>{renderServerValidationError(details)}</div>;
+          error = <div>{renderServerValidationError(message)}</div>;
           break;
         case 'server':
           error =
