@@ -6,10 +6,10 @@ import omit from 'lodash/omit';
 import assign from 'lodash/assign';
 import forIn from 'lodash/forIn';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
-import { isDate } from '../../../utils/FormValidationUtils';
-import FormField from '../../components/FormField/FormField';
-import ApiErrors from '../../components/ApiErrors/ApiErrors';
-import config from './../../../../appConfig';
+import { isDate } from '../../utils/FormValidationUtils';
+import FormField from '../FormField/FormField';
+import ApiErrors from '../ApiErrors/ApiErrors';
+import config from '../../../appConfig';
 
 class LibraryCardForm extends React.Component {
   constructor(props) {
