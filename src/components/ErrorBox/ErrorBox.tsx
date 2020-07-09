@@ -9,32 +9,49 @@ interface ErrorBoxProps {
     message: string;
     data: any;
   };
-};
+}
 
-const ErrorBox = ({ errorObject, className = "nypl-error-box"}: ErrorBoxProps) => {
+const ErrorBox = ({
+  errorObject,
+  className = "nypl-error-box",
+}: ErrorBoxProps) => {
   const renderErrorByType = (errorObj) => {
     const { type, details, message } = errorObj;
-    const defaultError = "There was an error processing your submission. Please try again later.";
+    const defaultError =
+      "There was an error processing your submission. Please try again later.";
     let error;
 
     if (type) {
       switch (type) {
         case "unrecognized-address":
-          error = <li>This <a href="#patronStreet1">address</a> is invalid. Please enter a valid address.</li>;
+          error = (
+            <li>
+              This <a href="#patronStreet1">address</a> is invalid. Please enter
+              a valid address.
+            </li>
+          );
           break;
         case "unavailable-username":
-          error =
-            <li>This <a href="#patronUsername">username</a> is already taken. Please try again.</li>;
+          error = (
+            <li>
+              This <a href="#patronUsername">username</a> is already taken.
+              Please try again.
+            </li>
+          );
           break;
         case "invalid-request":
-          error = <div>{renderServerValidationError(message)}</div>;
+          error = <>{renderServerValidationError(message)}</>;
           break;
         case "server-validation-error":
-          error = <div>{renderServerValidationError(details)}</div>;
+          error = <>{renderServerValidationError(details)}</>;
           break;
         case "server":
-          error =
-            <li>There was a system error processing your request. Please try again.</li>;
+          error = (
+            <li>
+              There was a system error processing your request. Please try
+              again.
+            </li>
+          );
           break;
         default:
           error = <li>{defaultError}</li>;
@@ -43,20 +60,32 @@ const ErrorBox = ({ errorObject, className = "nypl-error-box"}: ErrorBoxProps) =
       const {
         data: {
           simplePatron: {
-            detail: {
-              debug,
-            },
+            detail: { debug },
           },
         },
       } = errorObject;
 
       if (debug && debug.birthdate) {
-        error =
-          <li>Please enter a valid <a href="#patronDob">date</a>, MM/DD/YYYY, including slashes. If you are 12 or younger, please apply in person.</li>;
+        error = (
+          <li>
+            Please enter a valid <a href="#patronDob">date</a>, MM/DD/YYYY,
+            including slashes. If you are 12 or younger, please apply in person.
+          </li>
+        );
       } else if (debug && debug.address) {
-        error = <li>This <a href="#patronStreet1">address</a> is invalid. Please enter a valid address.</li>;
+        error = (
+          <li>
+            This <a href="#patronStreet1">address</a> is invalid. Please enter a
+            valid address.
+          </li>
+        );
       } else if (debug && debug.email) {
-        error = <li>This <a href="#patronEmail">email address</a> is invalid. Please enter a valid email address.</li>;
+        error = (
+          <li>
+            This <a href="#patronEmail">email address</a> is invalid. Please
+            enter a valid email address.
+          </li>
+        );
       } else {
         error = <li>{defaultError}</li>;
       }
@@ -67,7 +96,9 @@ const ErrorBox = ({ errorObject, className = "nypl-error-box"}: ErrorBoxProps) =
 
   return (
     <div className={className}>
-      <h2>There were errors in your form submission. Please correct these fields:</h2>
+      <h2>
+        There were errors in your form submission. Please correct these fields:
+      </h2>
       {renderErrorByType(errorObject)}
     </div>
   );
