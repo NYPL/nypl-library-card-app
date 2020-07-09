@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import isEmpty from 'lodash/isEmpty';
 import omit from 'lodash/omit';
@@ -11,12 +10,36 @@ import FormField from '../FormField/FormField';
 import ApiErrors from '../ApiErrors/ApiErrors';
 import config from '../../../appConfig';
 
-class LibraryCardForm extends React.Component {
+interface LibraryCardFormState {
+  agencyType: string;
+  csrfToken: string;
+  focusOnResult: boolean;
+  formProcessing: boolean;
+  formEntrySuccessful: boolean,
+  apiResults: any;
+  fieldErrors: any;
+  patronFields: any;
+}
+
+class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
+  dynamicSection = React.createRef<HTMLDivElement>();
+  stateName = React.createRef<any>();
+  firstName = React.createRef<any>();
+  lastName = React.createRef<any>();
+  dateOfBirth = React.createRef<any>();
+  email = React.createRef<any>();
+  line1 = React.createRef<any>();
+  zip = React.createRef<any>();
+  city = React.createRef<any>();
+  username = React.createRef<any>();
+  pin = React.createRef<any>();
+
   constructor(props) {
     super(props);
     this.state = {
       agencyType: '',
       csrfToken: '',
+      formEntrySuccessful: false,
       focusOnResult: false,
       formProcessing: false,
       apiResults: {},
@@ -67,7 +90,7 @@ class LibraryCardForm extends React.Component {
   }
 
   getMetaTagContent(tag) {
-    return document.head.querySelector(`[${tag}]`).content;
+    return document.head.querySelector(`[${tag}]`).textContent;
   }
 
   getUrlParameter(name) {
@@ -97,10 +120,12 @@ class LibraryCardForm extends React.Component {
   }
 
   focusOnApiResponse() {
-    if (this.dynamicSection) {
-      this.dynamicSection.focus();
-      this.setState({ focusOnResult: false });
-    }
+    setTimeout(() => {
+      if (this.dynamicSection) {
+        this.dynamicSection.current.focus();
+        this.setState({ focusOnResult: false });
+      }
+    }, 1000);
   }
 
   validateField(fieldName, value) {
@@ -219,11 +244,11 @@ class LibraryCardForm extends React.Component {
         // the keyword state is reserved in React, therefore the reference to the State field
         // is renamed to stateName
         if (key === 'state') {
-          this.stateName.focus();
+          this.stateName.current.focus();
           return true;
         }
 
-        this[key].focus();
+        this[key] && this[key].current.focus();
         return true;
       }
       return true;
@@ -235,7 +260,6 @@ class LibraryCardForm extends React.Component {
       const target = event.target;
       const value = (target.type === 'checkbox') ? target.checked : target.value;
       const newState = assign({}, this.state.patronFields, { [property]: value });
-
       this.setState({ patronFields: newState });
     };
   }
@@ -258,7 +282,6 @@ class LibraryCardForm extends React.Component {
     forIn(this.state.patronFields, (value, key) => {
       this.validateField(key, value);
     });
-
 
     // Has client-side errors, stop processing
     if (!isEmpty(this.state.fieldErrors)) {
@@ -332,7 +355,7 @@ class LibraryCardForm extends React.Component {
     if (!isEmpty(errorObj) && errorObj.status >= 400) {
       return (
         <ApiErrors
-          childRef={(el) => { this.dynamicSection = el; }}
+          ref={this.dynamicSection}
           apiResults={errorObj}
         />
       );
@@ -357,7 +380,7 @@ class LibraryCardForm extends React.Component {
             handleOnChange={this.handleInputChange('firstName')}
             errorState={this.state.fieldErrors}
             onBlur={this.handleOnBlur('firstName')}
-            childRef={(el) => { this.firstName = el; }}
+            childRef={this.firstName}
           />
           <FormField
             id="patronLastName"
@@ -369,7 +392,7 @@ class LibraryCardForm extends React.Component {
             handleOnChange={this.handleInputChange('lastName')}
             errorState={this.state.fieldErrors}
             onBlur={this.handleOnBlur('lastName')}
-            childRef={(el) => { this.lastName = el; }}
+            childRef={this.lastName}
           />
         </div>
         <FormField
@@ -385,7 +408,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={10}
           onBlur={this.handleOnBlur('dateOfBirth')}
-          childRef={(el) => { this.dateOfBirth = el; }}
+          childRef={this.dateOfBirth}
         />
         <FormField
           id="patronEmail"
@@ -397,7 +420,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('email')}
           errorState={this.state.fieldErrors}
           onBlur={this.handleOnBlur('email')}
-          childRef={(el) => { this.email = el; }}
+          childRef={this.email}
         />
         <FormField
           id="patronECommunications"
@@ -473,7 +496,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('line1')}
           errorState={this.state.fieldErrors}
           onBlur={this.handleOnBlur('line1')}
-          childRef={(el) => { this.line1 = el; }}
+          childRef={this.line1}
         />
         <FormField
           id="patronStreet2"
@@ -496,7 +519,7 @@ class LibraryCardForm extends React.Component {
           handleOnChange={this.handleInputChange('city')}
           errorState={this.state.fieldErrors}
           onBlur={this.handleOnBlur('city')}
-          childRef={(el) => { this.city = el; }}
+          childRef={this.city}
         />
         <FormField
           id="patronState"
@@ -511,7 +534,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={2}
           onBlur={this.handleOnBlur('state')}
-          childRef={(el) => { this.stateName = el; }}
+          childRef={this.stateName}
         />
         <FormField
           id="patronZip"
@@ -525,7 +548,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={5}
           onBlur={this.handleOnBlur('zip')}
-          childRef={(el) => { this.zip = el; }}
+          childRef={this.zip}
         />
         <h3>Create Your Account</h3>
         <FormField
@@ -541,7 +564,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={25}
           onBlur={this.handleOnBlur('username')}
-          childRef={(el) => { this.username = el; }}
+          childRef={this.username}
         />
         <FormField
           id="patronPin"
@@ -556,7 +579,7 @@ class LibraryCardForm extends React.Component {
           errorState={this.state.fieldErrors}
           maxLength={4}
           onBlur={this.handleOnBlur('pin')}
-          childRef={(el) => { this.pin = el; }}
+          childRef={this.pin}
         />
 
         <p>
@@ -615,11 +638,5 @@ class LibraryCardForm extends React.Component {
     );
   }
 }
-
-LibraryCardForm.propTypes = {
-};
-
-LibraryCardForm.defaultProps = {
-};
 
 export default LibraryCardForm;

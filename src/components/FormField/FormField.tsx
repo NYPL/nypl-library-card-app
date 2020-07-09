@@ -1,7 +1,30 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-class FormField extends React.Component {
+interface FormFieldProps {
+  id: string;
+  label: string;
+  type: string;
+  fieldName: string;
+  errorState?: any;
+  value: any;
+  className?: string;
+  isRequired?: boolean;
+  handleOnChange?: any;
+  checked?: boolean;
+  instructionText?: string;
+  maxLength?: number;
+  onBlur?: any;
+  childRef?: any;
+};
+
+class FormField extends React.Component<FormFieldProps> {
+  static defaultProps = {
+    className: '',
+    value: '',
+    isRequired: false,
+    errorState: {},
+  }
+
   renderInstructionText(text) {
     if (!text) {
       return null;
@@ -66,7 +89,7 @@ class FormField extends React.Component {
           maxLength={this.props.maxLength || null}
           onBlur={this.props.onBlur}
           ref={this.props.childRef}
-          tabIndex="0"
+          tabIndex={0}
         />
         {underInputSuggestion}
       </div>
@@ -74,27 +97,4 @@ class FormField extends React.Component {
   }
 }
 
-FormField.propTypes = {
-  id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  fieldName: PropTypes.string.isRequired,
-  errorState: PropTypes.shape(),
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  className: PropTypes.string,
-  isRequired: PropTypes.bool,
-  handleOnChange: PropTypes.func,
-  checked: PropTypes.bool,
-  instructionText: PropTypes.string,
-  maxLength: PropTypes.number,
-  onBlur: PropTypes.func,
-  childRef: PropTypes.func,
-};
-
-FormField.defaultProps = {
-  className: '',
-  value: '',
-  isRequired: false,
-  errorState: {},
-};
 export default FormField;

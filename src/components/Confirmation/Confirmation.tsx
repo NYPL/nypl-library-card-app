@@ -1,7 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Confirmation = ({ apiObject, className, name }) => {
+interface ConfirmationProps {
+  className: string;
+  apiObject: any;
+  name: string;
+};
+
+/**
+ * This component is currently not used in the app. The confirmation page a
+ * user gets redirected to is in Drupal. Will delete later if it turns out
+ * that the flow will remain the same.
+ */
+const Confirmation = ({
+  apiObject,
+  name,
+  className = "nypl-full-width-wrapper",
+}: ConfirmationProps) => {
 
   const getIdText = () => (
     apiObject && apiObject.response && apiObject.response.id ?
@@ -45,16 +59,6 @@ const Confirmation = ({ apiObject, className, name }) => {
       </p>
     </div>
   );
-};
-
-Confirmation.propTypes = {
-  className: PropTypes.string,
-  apiObject: PropTypes.object,
-  name: PropTypes.string,
-};
-
-Confirmation.defaultProps = {
-  className: 'nypl-full-width-wrapper',
 };
 
 export default Confirmation;

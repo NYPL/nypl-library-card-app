@@ -1,27 +1,38 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { renderServerValidationError } from '../../utils/FormValidationUtils';
+import React from "react";
+import { renderServerValidationError } from "../../utils/FormValidationUtils";
 
-const ErrorBox = ({ errorObject, className }) => {
+interface ErrorBoxProps {
+  className: string;
+  errorObject?: {
+    type: string;
+    details: any;
+    message: string;
+    data: any;
+  };
+};
+
+const ErrorBox = ({ errorObject, className = "nypl-error-box"}: ErrorBoxProps) => {
   const renderErrorByType = (errorObj) => {
-    const { type, details, message } = errorObject;
-    const defaultError = 'There was an error processing your submission. Please try again later.';
+    const { type, details, message } = errorObj;
+    const defaultError = "There was an error processing your submission. Please try again later.";
     let error;
 
     if (type) {
       switch (type) {
-        case 'unrecognized-address':
+        case "unrecognized-address":
           error = <li>This <a href="#patronStreet1">address</a> is invalid. Please enter a valid address.</li>;
           break;
-        case 'unavailable-username':
+        case "unavailable-username":
           error =
             <li>This <a href="#patronUsername">username</a> is already taken. Please try again.</li>;
           break;
-        case 'invalid-request':
-        case 'server-validation-error':
+        case "invalid-request":
           error = <div>{renderServerValidationError(message)}</div>;
           break;
-        case 'server':
+        case "server-validation-error":
+          error = <div>{renderServerValidationError(details)}</div>;
+          break;
+        case "server":
           error =
             <li>There was a system error processing your request. Please try again.</li>;
           break;
@@ -51,11 +62,7 @@ const ErrorBox = ({ errorObject, className }) => {
       }
     }
 
-    return (
-      <ul>
-        {error}
-      </ul>
-    );
+    return <ul>{error}</ul>;
   };
 
   return (
@@ -64,15 +71,6 @@ const ErrorBox = ({ errorObject, className }) => {
       {renderErrorByType(errorObject)}
     </div>
   );
-};
-
-ErrorBox.propTypes = {
-  className: PropTypes.string,
-  errorObject: PropTypes.object.isRequired,
-};
-
-ErrorBox.defaultProps = {
-  className: 'nypl-error-box',
 };
 
 export default ErrorBox;

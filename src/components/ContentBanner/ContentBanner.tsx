@@ -1,15 +1,47 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   isEmpty as _isEmpty,
 } from 'underscore';
 
-import ImageItem from './../ImageItem/ImageItem.jsx';
-import TextItem from './../TextItem/TextItem.jsx';
+import ImageItem from '../ImageItem/ImageItem';
+import TextItem from '../TextItem/TextItem';
 
 const MIN_INTERVAL = 500;
 
-class ContentBanner extends React.Component {
+interface ContentBannerProps {
+  items: any[];
+  className: string;
+  lazyLoad?: boolean;
+  defaultImage?: string;
+  lang?: string;
+  onClick?: () => {};
+  onImageLoad?: () => {};
+  error?: {
+    tag: string;
+    title: string;
+    description: string;
+  };
+  gaClickEvent?: () => {};
+};
+
+interface ContentBannerState {
+  viewportWidth: number;
+};
+
+class ContentBanner extends React.Component<ContentBannerProps, ContentBannerState> {
+  contentBanner = React.createRef<HTMLDivElement>();
+  static defaultProps = {
+    lang: 'en',
+    className: 'hpContentBanner',
+    items: [],
+    lazyLoad: false,
+    error: {
+      tag: 'ERROR',
+      title: 'Something has gone wrong.',
+      description: 'We\'re sorry. Information isn\'t available for this feature.',
+    },
+  };
+
   constructor(props) {
     super(props);
 
@@ -70,7 +102,7 @@ class ContentBanner extends React.Component {
    */
   handleResize() {
     if (this.contentBanner) {
-      this.setState({ viewportWidth: this.contentBanner.offsetWidth });
+      this.setState({ viewportWidth: this.contentBanner.current.offsetWidth });
     }
   }
 
@@ -103,7 +135,7 @@ class ContentBanner extends React.Component {
 
     return (
       <div
-        ref={i => (this.contentBanner = i)}
+        ref={this.contentBanner}
         className={this.props.className}
       >
         {this.renderContentBanner(item)}
@@ -111,29 +143,5 @@ class ContentBanner extends React.Component {
     );
   }
 }
-
-ContentBanner.propTypes = {
-  items: PropTypes.array.isRequired,
-  lazyLoad: PropTypes.bool,
-  defaultImage: PropTypes.string,
-  lang: PropTypes.string,
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  onImageLoad: PropTypes.func,
-  error: PropTypes.object,
-  gaClickEvent: PropTypes.func,
-};
-
-ContentBanner.defaultProps = {
-  lang: 'en',
-  className: 'hpContentBanner',
-  items: [],
-  lazyLoad: false,
-  error: {
-    tag: 'ERROR',
-    title: 'Something has gone wrong.',
-    description: 'We\'re sorry. Information isn\'t available for this feature.',
-  },
-};
 
 export default ContentBanner;

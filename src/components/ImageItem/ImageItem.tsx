@@ -1,7 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-class ImageItem extends React.Component {
+interface ImageItemProps {
+  handleOnLoad: (e?) => {};
+  images: any;
+  viewportWidth: number;
+  viewportBreakpoint: number;
+  handleOnError?: () => {};
+};
+
+interface ImageItemState {
+  loaded: boolean;
+}
+
+class ImageItem extends React.Component<ImageItemProps, ImageItemState> {
+  static defaultProps = {
+    viewportBreakpoint: 769,
+  }
+
   constructor(props) {
     super(props);
     this.handleOnLoad = this.handleOnLoad.bind(this);
@@ -41,7 +56,7 @@ class ImageItem extends React.Component {
    * @param {string} type of image as string (small, large)
    * @return {string} it returns a string representation of image source or its fallback.
    */
-  getImage(obj = {}, type) {
+  getImage(obj: any, type) {
     if (type === 'small') {
       return (obj && obj.mobileBannerImage && obj.mobileBannerImage['full-uri']) ?
         obj.mobileBannerImage['full-uri'] : '';
@@ -58,7 +73,7 @@ class ImageItem extends React.Component {
    * @param {object} obj has the contents of image object with description.
    * @return {string} it returns a string representation or its fallback.
    */
-  getImageAlt(obj = {}) {
+  getImageAlt(obj: any) {
     let alt;
 
     try {
@@ -80,7 +95,7 @@ class ImageItem extends React.Component {
    * @desc This function is called on every image load, assigns loaded class when fired.
    * @param {object} Prototype.event global for onLoad method
    */
-  handleOnLoad(event) {
+  handleOnLoad(event?) {
     this.setState({ loaded: true });
     if (this.props.handleOnLoad) {
       this.props.handleOnLoad(event);
@@ -115,22 +130,10 @@ class ImageItem extends React.Component {
         alt={alt}
         onLoad={this.handleOnLoad}
         onError={this.handleOnError}
-        tabIndex="0"
+        tabIndex={0}
       />
     );
   }
 }
-
-ImageItem.propTypes = {
-  images: PropTypes.object,
-  handleOnLoad: PropTypes.func,
-  handleOnError: PropTypes.func,
-  viewportWidth: PropTypes.number,
-  viewportBreakpoint: PropTypes.number,
-};
-
-ImageItem.defaultProps = {
-  viewportBreakpoint: 769,
-};
 
 export default ImageItem;
