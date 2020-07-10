@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, navConfig } from '@nypl/dgx-header-component';
 import Footer from '@nypl/dgx-react-footer';
-import CookieUtils from './../../../utils/CookieUtils.js';
+import CookieUtils from '../../utils/CookieUtils';
 
 class BarcodeContainer extends React.Component {
   constructor(props) {

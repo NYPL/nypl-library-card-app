@@ -6,7 +6,7 @@ import { mount } from 'enzyme';
 // Import the related functions
 import CookieUtils from './../src/utils/CookieUtils.js';
 // Import the component that is going to be tested
-import BarcodeContainer from './../src/shared/components/BarcodeContainer/BarcodeContainer.jsx';
+import BarcodeContainer from './../src/components/BarcodeContainer/BarcodeContainer.jsx';
 // Import mock data
 import mockBarcodeContainerTestData from './mockBarcodeContainerTestData.js';
 

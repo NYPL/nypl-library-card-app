@@ -1,8 +1,8 @@
 import React from 'react';
 import { Header, navConfig } from '@nypl/dgx-header-component';
 import Footer from '@nypl/dgx-react-footer';
-import LibraryCardForm from '../../containers/LibraryCardForm/LibraryCardForm';
-import ContentBanner from '../../components/ContentBanner/ContentBanner';
+import LibraryCardForm from '../LibraryCardForm/LibraryCardForm';
+import ContentBanner from '../ContentBanner/ContentBanner';
 
 const bannerContent = {
   title: {

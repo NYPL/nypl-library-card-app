@@ -1,6 +1,6 @@
 import Cors from "cors";
 import { NextApiRequest, NextApiResponse } from "next"
-import { initializeAppAuth, createPatron } from "../../src/server/routes/api";
+import { initializeAppAuth, createPatron } from "../../src/utils/api";
 
 // Initializing the cors middleware
 const cors = Cors({

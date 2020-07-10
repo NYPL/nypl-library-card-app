@@ -4,7 +4,7 @@ import qs from "qs";
 import moment from "moment";
 import isEmpty from "lodash/isEmpty";
 import { isEmail, isAlphanumeric, isNumeric, isLength } from "validator";
-import config from "../../../../appConfig";
+import config from "../../appConfig";
 
 const authConfig = {
   client_id: config.clientId,

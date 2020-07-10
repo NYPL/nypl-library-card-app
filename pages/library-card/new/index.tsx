@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import ApplicationContainer from "../../../src/shared/components/Application/ApplicationContainer";
+import ApplicationContainer from "../../../src/components/Application/ApplicationContainer";
 import { config, gaUtils } from "dgx-react-ga";
 import appConfig from "../../../appConfig";
 
@@ -62,6 +62,10 @@ function HomePage() {
         <meta name="twitter:creator" content="@nypl" />
         <meta name="twitter:image" content="https://www.nypl.org/sites/default/files/library_card-1200x800.jpg" />
         <meta name="csrf-token" content={csrfToken} />
+        {/* <!-- Optimizely --> */}
+        <script src="https://cdn.optimizely.com/js/284748925.js"></script>
+        {/* <!-- OptinMonster --> */}
+        <script src="https://assets.nypl.org/js/advocacy.js"></script>
       </Head>
       <ApplicationContainer />
     </>
