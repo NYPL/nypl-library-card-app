@@ -24,16 +24,16 @@ interface LibraryCardFormState {
 
 class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
   dynamicSection = React.createRef<HTMLDivElement>();
-  stateName = React.createRef<any>();
-  firstName = React.createRef<any>();
-  lastName = React.createRef<any>();
-  dateOfBirth = React.createRef<any>();
-  email = React.createRef<any>();
-  line1 = React.createRef<any>();
-  zip = React.createRef<any>();
-  city = React.createRef<any>();
-  username = React.createRef<any>();
-  pin = React.createRef<any>();
+  stateName = React.createRef<HTMLInputElement>();
+  firstName = React.createRef<HTMLInputElement>();
+  lastName = React.createRef<HTMLInputElement>();
+  dateOfBirth = React.createRef<HTMLInputElement>();
+  email = React.createRef<HTMLInputElement>();
+  line1 = React.createRef<HTMLInputElement>();
+  zip = React.createRef<HTMLInputElement>();
+  city = React.createRef<HTMLInputElement>();
+  username = React.createRef<HTMLInputElement>();
+  pin = React.createRef<HTMLInputElement>();
 
   constructor(props) {
     super(props);
