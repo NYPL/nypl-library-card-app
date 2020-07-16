@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable */
+import React, { useState } from "react";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import omit from "lodash/omit";
@@ -11,6 +12,7 @@ import ApiErrors from "../ApiErrors/ApiErrors";
 import config from "../../../appConfig";
 import FormFooterText from "../FormFooterText";
 import { Checkbox } from "@nypl/design-system-react-components";
+import { useForm } from "react-hook-form";
 
 interface LibraryCardFormState {
   agencyType: string;
@@ -23,76 +25,89 @@ interface LibraryCardFormState {
   patronFields: any;
 }
 
-class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
-  dynamicSection = React.createRef<HTMLDivElement>();
-  stateName = React.createRef<HTMLInputElement>();
-  firstName = React.createRef<HTMLInputElement>();
-  lastName = React.createRef<HTMLInputElement>();
-  dateOfBirth = React.createRef<HTMLInputElement>();
-  email = React.createRef<HTMLInputElement>();
-  line1 = React.createRef<HTMLInputElement>();
-  zip = React.createRef<HTMLInputElement>();
-  city = React.createRef<HTMLInputElement>();
-  username = React.createRef<HTMLInputElement>();
-  pin = React.createRef<HTMLInputElement>();
+interface FormInput {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  email: string;
+  line1: string;
+  line2: string;
+  city: string;
+  state: string;
+  zip: string;
+  username: string;
+  pin: string;
+  ecommunicationsPref: boolean;
+  location?: string;
+}
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      agencyType: "",
-      csrfToken: "",
-      formEntrySuccessful: false,
-      focusOnResult: false,
-      formProcessing: false,
-      apiResults: {},
-      fieldErrors: {},
-      patronFields: {
-        firstName: "",
-        lastName: "",
-        dateOfBirth: "",
-        email: "",
-        line1: "",
-        line2: "",
-        city: "",
-        state: "",
-        zip: "",
-        username: "",
-        pin: "",
-        ecommunicationsPref: true,
-        location: "",
-      },
-    };
+const LibraryCardForm = () => {
+  const dynamicSection = React.createRef<HTMLDivElement>();
+  const stateName = React.createRef<HTMLInputElement>();
+  const firstName = React.createRef<HTMLInputElement>();
+  const lastName = React.createRef<HTMLInputElement>();
+  const dateOfBirth = React.createRef<HTMLInputElement>();
+  const email = React.createRef<HTMLInputElement>();
+  const line1 = React.createRef<HTMLInputElement>();
+  const zip = React.createRef<HTMLInputElement>();
+  const city = React.createRef<HTMLInputElement>();
+  const username = React.createRef<HTMLInputElement>();
+  const pin = React.createRef<HTMLInputElement>();
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleOnBlur = this.handleOnBlur.bind(this);
-  }
+  //   this.state = {
+  //     agencyType: "",
+  //     csrfToken: "",
+  //     formEntrySuccessful: false,
+  //     focusOnResult: false,
+  //     formProcessing: false,
+  //     apiResults: {},
+  //     fieldErrors: {},
+  //     patronFields: {
+  //       firstName: "",
+  //       lastName: "",
+  //       dateOfBirth: "",
+  //       email: "",
+  //       line1: "",
+  //       line2: "",
+  //       city: "",
+  //       state: "",
+  //       zip: "",
+  //       username: "",
+  //       pin: "",
+  //       ecommunicationsPref: true,
+  //       location: "",
+  //     },
+  //   };
 
-  componentDidMount() {
-    const csrfToken = this.getMetaTagContent("name=csrf-token");
-    if (csrfToken) {
-      const patronFields = Object.assign(this.state.patronFields, {
-        location: this.getUrlParameter("form_type") || "nyc",
-      });
+  //   this.handleInputChange = this.handleInputChange.bind(this);
+  //   this.handleOnBlur = this.handleOnBlur.bind(this);
+  // }
 
-      this.setState({ csrfToken, patronFields });
-    }
-  }
+  // componentDidMount() {
+  //   const csrfToken = this.getMetaTagContent("name=csrf-token");
+  //   if (csrfToken) {
+  //     const patronFields = Object.assign(this.state.patronFields, {
+  //       location: this.getUrlParameter("form_type") || "nyc",
+  //     });
 
-  componentDidUpdate() {
-    if (this.state.focusOnResult) {
-      this.focusOnApiResponse();
-      if (document && document.title !== "") {
-        document.title = "Form Submission Error | NYPL";
-      }
-    }
-  }
+  //     this.setState({ csrfToken, patronFields });
+  //   }
+  // }
 
-  getMetaTagContent(tag) {
+  // componentDidUpdate() {
+  //   if (this.state.focusOnResult) {
+  //     this.focusOnApiResponse();
+  //     if (document && document.title !== "") {
+  //       document.title = "Form Submission Error | NYPL";
+  //     }
+  //   }
+  // }
+
+  const getMetaTagContent = (tag) => {
     return document.head.querySelector(`[${tag}]`).textContent;
-  }
+  };
 
-  getUrlParameter(name) {
+  const getUrlParameter = (name) => {
     if (typeof location === "undefined") return "";
 
     const paramName = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -101,280 +116,288 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
     return results === null
       ? ""
       : decodeURIComponent(results[1].replace(/\+/g, " "));
-  }
+  };
 
-  getPatronAgencyType(agencyTypeParam) {
+  const getPatronAgencyType = (agencyTypeParam) => {
     const { agencyType } = config;
     return !isEmpty(agencyTypeParam) && agencyTypeParam.toLowerCase() === "nys"
       ? agencyType.nys
       : agencyType.default;
-  }
+  };
 
-  getFullName() {
+  const getFullName = () => {
     const { firstName, lastName } = this.state.patronFields;
 
     return !isEmpty(firstName) && !isEmpty(lastName)
       ? `${firstName.trim()} ${lastName.trim()}`
       : null;
-  }
+  };
 
-  focusOnApiResponse() {
+  const focusOnApiResponse = () => {
     setTimeout(() => {
-      if (this.dynamicSection) {
-        this.dynamicSection.current.focus();
-        this.setState({ focusOnResult: false });
+      if (dynamicSection) {
+        dynamicSection.current.focus();
+        // this.setState({ focusOnResult: false });
       }
     }, 1000);
-  }
+  };
 
-  validateField(fieldName, value) {
-    const { fieldErrors } = this.state;
-    let currentErrors = {};
+  // const validateField = (fieldName, value) => {
+  //   const { fieldErrors } = this.state;
+  //   let currentErrors = {};
 
-    switch (fieldName) {
-      case "dateOfBirth":
-        if (!isDate(value)) {
-          fieldErrors[fieldName] =
-            "Please enter a valid date, MM/DD/YYYY, including slashes.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "email":
-        if (value.trim().length > 0 && !isEmail(value)) {
-          fieldErrors[fieldName] = "Please enter a valid email address.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "username":
-        if (!isLength(value, { min: 5, max: 25 })) {
-          fieldErrors[fieldName] =
-            "Username must be between 5-25 alphanumeric characters.";
-          currentErrors = fieldErrors;
-        } else if (!isAlphanumeric(value)) {
-          fieldErrors[fieldName] = "Only alphanumeric characters are allowed.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "pin":
-        if (value.length !== 4 || isNaN(value)) {
-          fieldErrors[fieldName] = "Please enter a 4-digit PIN.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "firstName":
-        if (isEmpty(value)) {
-          fieldErrors[fieldName] = "Please enter a valid first name.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "lastName":
-        if (isEmpty(value)) {
-          fieldErrors[fieldName] = "Please enter a valid last name.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "location":
-        if (isEmpty(value)) {
-          fieldErrors[fieldName] = "Please select an address option.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "line1":
-        if (isEmpty(value)) {
-          fieldErrors[fieldName] = "Please enter a valid street address.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "city":
-        if (isEmpty(value)) {
-          fieldErrors[fieldName] = "Please enter a valid city.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "state":
-        if (isEmpty(value) || !isLength(value, { min: 2, max: 2 })) {
-          fieldErrors[fieldName] =
-            "Please enter a 2-character state abbreviation.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "zip":
-        if (
-          isEmpty(value) ||
-          isNaN(value) ||
-          !isLength(value, { min: 5, max: 5 })
-        ) {
-          fieldErrors[fieldName] = "Please enter a 5-digit postal code.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "line2":
-        currentErrors = fieldErrors;
-        break;
-      case "ecommunicationsPref":
-        currentErrors = fieldErrors;
-        break;
-      default:
-        break;
-    }
+  //   switch (fieldName) {
+  //     case "dateOfBirth":
+  //       if (!isDate(value)) {
+  //         fieldErrors[fieldName] =
+  //           "Please enter a valid date, MM/DD/YYYY, including slashes.";
+  //         currentErrors = fieldErrors;
+  //       } else {
+  //         currentErrors = omit(fieldErrors, fieldName);
+  //       }
+  //       break;
+  //     case "email":
+  //       if (value.trim().length > 0 && !isEmail(value)) {
+  //         fieldErrors[fieldName] = "Please enter a valid email address.";
+  //         currentErrors = fieldErrors;
+  //       } else {
+  //         currentErrors = omit(fieldErrors, fieldName);
+  //       }
+  //       break;
+  //     case "username":
+  //       if (!isLength(value, { min: 5, max: 25 })) {
+  //         fieldErrors[fieldName] =
+  //           "Username must be between 5-25 alphanumeric characters.";
+  //         currentErrors = fieldErrors;
+  //       } else if (!isAlphanumeric(value)) {
+  //         fieldErrors[fieldName] = "Only alphanumeric characters are allowed.";
+  //         currentErrors = fieldErrors;
+  //       } else {
+  //         currentErrors = omit(fieldErrors, fieldName);
+  //       }
+  //       break;
+  //     case "pin":
+  //       if (value.length !== 4 || isNaN(value)) {
+  //         fieldErrors[fieldName] = "Please enter a 4-digit PIN.";
+  //         currentErrors = fieldErrors;
+  //       } else {
+  //         currentErrors = omit(fieldErrors, fieldName);
+  //       }
+  //       break;
+  //     case "firstName":
+  //       if (isEmpty(value)) {
+  //         fieldErrors[fieldName] = "Please enter a valid first name.";
+  //         currentErrors = fieldErrors;
+  //       } else {
+  //         currentErrors = omit(fieldErrors, fieldName);
+  //       }
+  //       break;
+  //     case "lastName":
+  //       if (isEmpty(value)) {
+  //         fieldErrors[fieldName] = "Please enter a valid last name.";
+  //         currentErrors = fieldErrors;
+  //       } else {
+  //         currentErrors = omit(fieldErrors, fieldName);
+  //       }
+  //       break;
+  //     case "location":
+  //       if (isEmpty(value)) {
+  //         fieldErrors[fieldName] = "Please select an address option.";
+  //         currentErrors = fieldErrors;
+  //       } else {
+  //         currentErrors = omit(fieldErrors, fieldName);
+  //       }
+  //       break;
+  //     case "line1":
+  //       if (isEmpty(value)) {
+  //         fieldErrors[fieldName] = "Please enter a valid street address.";
+  //         currentErrors = fieldErrors;
+  //       } else {
+  //         currentErrors = omit(fieldErrors, fieldName);
+  //       }
+  //       break;
+  //     case "city":
+  //       if (isEmpty(value)) {
+  //         fieldErrors[fieldName] = "Please enter a valid city.";
+  //         currentErrors = fieldErrors;
+  //       } else {
+  //         currentErrors = omit(fieldErrors, fieldName);
+  //       }
+  //       break;
+  //     case "state":
+  //       if (isEmpty(value) || !isLength(value, { min: 2, max: 2 })) {
+  //         fieldErrors[fieldName] =
+  //           "Please enter a 2-character state abbreviation.";
+  //         currentErrors = fieldErrors;
+  //       } else {
+  //         currentErrors = omit(fieldErrors, fieldName);
+  //       }
+  //       break;
+  //     case "zip":
+  //       if (
+  //         isEmpty(value) ||
+  //         isNaN(value) ||
+  //         !isLength(value, { min: 5, max: 5 })
+  //       ) {
+  //         fieldErrors[fieldName] = "Please enter a 5-digit postal code.";
+  //         currentErrors = fieldErrors;
+  //       } else {
+  //         currentErrors = omit(fieldErrors, fieldName);
+  //       }
+  //       break;
+  //     case "line2":
+  //       currentErrors = fieldErrors;
+  //       break;
+  //     case "ecommunicationsPref":
+  //       currentErrors = fieldErrors;
+  //       break;
+  //     default:
+  //       break;
+  //   }
 
-    this.setState({ fieldErrors: currentErrors });
-  }
+  //   this.setState({ fieldErrors: currentErrors });
+  // }
 
-  focusOnErrorElement() {
+  const focusOnErrorElement = () => {
     // Handle focusing on first element in the object that contains an error
     Object.keys(this.state.fieldErrors).some((key) => {
       if (this.state.fieldErrors[key]) {
         // the keyword state is reserved in React, therefore the reference to the State field
         // is renamed to stateName
         if (key === "state") {
-          this.stateName.current.focus();
+          stateName.current.focus();
           return true;
         }
 
-        this[key] && this[key].current.focus();
+        // this[key] && this[key].current.focus();
         return true;
       }
       return true;
     });
-  }
+  };
 
-  handleInputChange(property) {
-    return (event) => {
-      const target = event.target;
-      const value = target.type === "checkbox" ? target.checked : target.value;
-      const newState = assign({}, this.state.patronFields, {
-        [property]: value,
-      });
-      this.setState({ patronFields: newState });
-    };
-  }
+  const handleInputChange = ({ target }) => {
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    console.log("handle change", value);
+    // return (event) => {
+    //   const target = event.target;
+    //   console.log("target", target.value);
+    //   // const value = target.type === "checkbox" ? target.checked : target.value;
+    //   // const newState = assign({}, this.state.patronFields, {
+    //   //   [property]: value,
+    //   // });
+    //   // this.setState({ patronFields: newState });
+    // };
+  };
 
-  handleOnBlur(property) {
+  const handleOnBlur = (property) => {
     return (event) => {
+      console.log("blur handle", event.target);
       const target = event.target;
       const value = target.value;
 
-      this.validateField(property, value);
+      // validateField(property, value);
     };
-  }
+  };
 
-  handleSubmit(event) {
+  const handleSubmitHere = (formData: FormInput) => {
+    console.log("submit", formData);
     // Clearing server side errors for re-submission.
-    this.setState({ apiResults: {} });
-    event.preventDefault();
+    // this.setState({ apiResults: {} });
+    // event.preventDefault();
 
     // Iterate through patron fields and ensure all fields are valid
-    forIn(this.state.patronFields, (value, key) => {
-      this.validateField(key, value);
-    });
+    // forIn(this.state.patronFields, (value, key) => {
+    //   validateField(key, value);
+    // });
 
     // Has client-side errors, stop processing
-    if (!isEmpty(this.state.fieldErrors)) {
-      // A required form field contains an error, focus on the first error field
-      this.focusOnErrorElement();
-    } else {
+    // if (!isEmpty(this.state.fieldErrors)) {
+    //   // A required form field contains an error, focus on the first error field
+    //   focusOnErrorElement();
+    // } else {
+    console.log("fake submit to API");
+    if (false) {
       // No client-side errors, form is now processing
-      this.setState({ formProcessing: true });
+      // this.setState({ formProcessing: true });
 
-      const {
-        firstName,
-        lastName,
-        email,
-        dateOfBirth,
-        line1,
-        line2,
-        city,
-        state,
-        zip,
-        username,
-        pin,
-        ecommunicationsPref,
-      } = this.state.patronFields;
-      const agencyType = this.getPatronAgencyType(
-        this.state.patronFields.location
-      );
+      // const {
+      //   firstName,
+      //   lastName,
+      //   email,
+      //   dateOfBirth,
+      //   line1,
+      //   line2,
+      //   city,
+      //   state,
+      //   zip,
+      //   username,
+      //   pin,
+      //   ecommunicationsPref,
+      // } = this.state.patronFields;
+      // const agencyType = getPatronAgencyType(
+      //   this.state.patronFields.location
+      // );
 
       // The new and simplier endpoint:
       axios
         .post(
           "/api/create-patron",
           {
-            firstName,
-            lastName,
-            email,
-            dateOfBirth,
-            line1,
-            line2,
-            city,
-            state,
-            zip,
-            username,
-            pin,
-            ecommunicationsPref,
-            agencyType,
-          },
-          {
-            headers: { "csrf-token": this.state.csrfToken },
+            firstName: "test",
+            // lastName,
+            // email,
+            // dateOfBirth,
+            // line1,
+            // line2,
+            // city,
+            // state,
+            // zip,
+            // username,
+            // pin,
+            // ecommunicationsPref,
+            // agencyType,
           }
+          // {
+          // headers: { "csrf-token": this.state.csrfToken },
+          // }
         )
         .then((response) => {
-          this.setState({
-            formProcessing: false,
-            formEntrySuccessful: false,
-            apiResults: response.data,
-          });
+          // this.setState({
+          //   formProcessing: false,
+          //   formEntrySuccessful: false,
+          //   apiResults: response.data,
+          // });
           // TODO: Waiting on whether we will make a redirect in the app
           // or in Drupal.
           // window.location.href = window.confirmationURL;
         })
         .catch((error) => {
-          this.setState({ formProcessing: false, focusOnResult: true });
-          if (error.response && error.response.data) {
-            // The request was made, but the server responded with a status code
-            // that falls out of the range of 2xx
-            this.setState({ apiResults: error.response.data });
-          }
+          console.log("error", error.response);
+          // this.setState({ formProcessing: false, focusOnResult: true });
+          // if (error.response && error.response.data) {
+          //   // The request was made, but the server responded with a status code
+          //   // that falls out of the range of 2xx
+          //   this.setState({ apiResults: error.response.data });
+          // }
         });
     }
-  }
+  };
 
-  renderLoader() {
+  const renderLoader = () => {
     const { formProcessing } = this.state;
     return formProcessing ? <div className="loading" /> : null;
-  }
+  };
 
-  renderApiErrors(errorObj) {
+  const renderApiErrors = (errorObj) => {
     if (!isEmpty(errorObj) && errorObj.status >= 400) {
-      return <ApiErrors ref={this.dynamicSection} apiResults={errorObj} />;
+      return <ApiErrors ref={dynamicSection} apiResults={errorObj} />;
     }
 
     return null;
-  }
+  };
 
-  renderFormFields() {
+  const renderFormFields = () => {
     const checkBoxLabelOptions = {
       id: "receiveEmails",
       labelContent: (
@@ -385,8 +408,13 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
       ),
     };
 
+    const { register, handleSubmit, errors } = useForm<FormInput>();
+
     return (
-      <form className="nypl-library-card-form" onSubmit={this.handleSubmit}>
+      <form
+        className="nypl-library-card-form"
+        onSubmit={handleSubmit(handleSubmitHere)}
+      >
         <h2>Please enter the following information</h2>
         <h3>Personal Information</h3>
         <div className="nypl-name-field">
@@ -396,13 +424,12 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
             label="First Name"
             fieldName="firstName"
             isRequired
-            value={this.state.patronFields.firstName}
-            handleOnChange={this.handleInputChange("firstName")}
-            errorState={this.state.fieldErrors}
-            onBlur={this.handleOnBlur("firstName")}
-            childRef={this.firstName}
+            childRef={register({
+              required: "Please enter a valid first name.",
+            })}
+            errorState={errors}
           />
-          <FormField
+          {/* <FormField
             id="patronLastName"
             type="text"
             label="Last Name"
@@ -413,9 +440,9 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
             errorState={this.state.fieldErrors}
             onBlur={this.handleOnBlur("lastName")}
             childRef={this.lastName}
-          />
+          /> */}
         </div>
-        <FormField
+        {/* <FormField
           id="patronDob"
           className="nypl-date-field"
           type="text"
@@ -600,6 +627,7 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
           onBlur={this.handleOnBlur("pin")}
           childRef={this.pin}
         />
+        */}
 
         <p>
           By submitting an application, you understand and agree to our{" "}
@@ -621,29 +649,27 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
         <div>
           <input
             className="nypl-request-button"
-            disabled={this.state.formProcessing}
+            // disabled={this.state.formProcessing}
             type="submit"
             value="Continue"
           />
-          {this.renderLoader()}
+          {/* {this.renderLoader()} */}
         </div>
       </form>
     );
-  }
+  };
 
-  render() {
-    return (
-      <div className="nypl-row">
-        <div className="nypl-column-half nypl-column-offset-one">
-          <div>
-            {this.renderApiErrors(this.state.apiResults)}
-            {this.renderFormFields()}
-          </div>
-          <FormFooterText />
+  return (
+    <div className="nypl-row">
+      <div className="nypl-column-half nypl-column-offset-one">
+        <div>
+          {/* {renderApiErrors(this.state.apiResults)} */}
+          {renderFormFields()}
         </div>
+        <FormFooterText />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default LibraryCardForm;
