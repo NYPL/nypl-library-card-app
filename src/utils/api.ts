@@ -281,24 +281,24 @@ export async function createPatron(req, res) {
     // Just for testing purposes locally. Used to verify refs and focus are
     // properly working but also to update the server response interface/type
     // later on.
-    return res.status(400).json({
-      status: 400,
-      response: {
-        type: "server-validation-error",
-        message: "server side validation error",
-        details: {
-          firstName: "First Name field is empty.",
-          lastName: "Last Name field is empty.",
-          dateOfBirth: "Date of Birth field is empty.",
-          line1: "Street Address field is empty.",
-          city: "City field is empty.",
-          state: "State field is empty.",
-          zip: "Postal Code field is empty.",
-          username: "Username field is empty.",
-          pin: "PIN field is empty.",
-        },
-      },
-    });
+    // return res.status(400).json({
+    //   status: 400,
+    //   response: {
+    //     type: "server-validation-error",
+    //     message: "server side validation error",
+    //     details: {
+    //       firstName: "First Name field is empty.",
+    //       lastName: "Last Name field is empty.",
+    //       dateOfBirth: "Date of Birth field is empty.",
+    //       line1: "Street Address field is empty.",
+    //       city: "City field is empty.",
+    //       state: "State field is empty.",
+    //       zip: "Postal Code field is empty.",
+    //       username: "Username field is empty.",
+    //       pin: "PIN field is empty.",
+    //     },
+    //   },
+    // });
 
     return axios
       .post(config.api.patron, patronData, constructApiHeaders(token))

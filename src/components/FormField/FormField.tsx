@@ -15,13 +15,17 @@ interface FormFieldProps {
   errorState?: any;
   className?: string;
   isRequired?: boolean;
-  // handleOnChange?: any;
   instructionText?: string;
-  // maxLength?: number;
-  // onBlur?: any;
+  maxLength?: number;
   childRef?: any;
 }
 
+/**
+ * FormField
+ * Renders a complete form field that includes a label, input, and helper text
+ * which also renders errors. Internal components are rendered by the
+ * NYPL Design System.
+ */
 class FormField extends React.Component<FormFieldProps> {
   static defaultProps = {
     className: "",
@@ -40,6 +44,7 @@ class FormField extends React.Component<FormFieldProps> {
       isRequired,
       instructionText,
       childRef,
+      maxLength,
     } = this.props;
     const errorText = errorState[fieldName];
     let helperText = instructionText || null;
@@ -65,7 +70,7 @@ class FormField extends React.Component<FormFieldProps> {
           helperTextId={`${id}-helperText`}
           attributes={{
             ["aria-invalid"]: errorText ? "true" : "false",
-            // maxLength: maxLength || null,
+            maxLength: maxLength || null,
             name: fieldName,
             tabIndex: 0,
           }}
