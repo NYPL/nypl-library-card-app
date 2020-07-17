@@ -42,7 +42,7 @@ function HomePage() {
     <>
       <Head>
         <meta charSet="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <title>{appTitle} | NYPL</title>
         <link rel="icon" type="image/png" href={favIconPath} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -62,10 +62,6 @@ function HomePage() {
         <meta name="twitter:creator" content="@nypl" />
         <meta name="twitter:image" content="https://www.nypl.org/sites/default/files/library_card-1200x800.jpg" />
         <meta name="csrf-token" content={csrfToken} />
-        {/* <!-- Optimizely --> */}
-        <script src="https://cdn.optimizely.com/js/284748925.js"></script>
-        {/* <!-- OptinMonster --> */}
-        <script src="https://assets.nypl.org/js/advocacy.js"></script>
       </Head>
       <ApplicationContainer />
     </>

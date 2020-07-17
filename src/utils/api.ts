@@ -5,6 +5,7 @@ import moment from "moment";
 import isEmpty from "lodash/isEmpty";
 import { isEmail, isAlphanumeric, isNumeric, isLength } from "validator";
 import config from "../../appConfig";
+import logger from "../logger/index";
 
 const authConfig = {
   client_id: config.clientId,
@@ -12,23 +13,21 @@ const authConfig = {
   grant_type: "client_credentials",
 };
 
-function constructApiHeaders(token = "", contentType = "application/json") {
-  return {
-    headers: {
-      "Content-Type": contentType,
-      Authorization: `Bearer ${token}`,
-    },
-    timeout: 10000,
-  };
-}
+const constructApiHeaders = (token = "", contentType = "application/json") => ({
+  headers: {
+    "Content-Type": contentType,
+    Authorization: `Bearer ${token}`,
+  },
+  timeout: 10000,
+});
 
-function constructErrorObject(
+const constructErrorObject = (
   type = "general-error",
   message = "There was an error with your request",
   status = 400,
   details
-) {
-  const response = {
+) => {
+  const response: any = {
     status,
     response: {
       type,
@@ -41,9 +40,9 @@ function constructErrorObject(
   }
 
   return response;
-}
+};
 
-function constructPatronObject(object) {
+const constructPatronObject = (object) => {
   const {
     firstName,
     lastName,
@@ -60,71 +59,71 @@ function constructPatronObject(object) {
     agencyType,
   } = object;
 
-  const errorObj = {};
+  let errorObj = {};
 
   if (isEmpty(firstName)) {
-    Object.assign(errorObj, { firstName: "First Name field is empty." });
+    errorObj = { ...errorObj, firstName: "First Name field is empty." };
   }
 
   if (isEmpty(lastName)) {
-    Object.assign(errorObj, { lastName: "Last Name field is empty." });
+    errorObj = { ...errorObj, lastName: "Last Name field is empty." };
   }
 
   if (isEmpty(dateOfBirth)) {
-    Object.assign(errorObj, { dateOfBirth: "Date of Birth field is empty." });
+    errorObj = { ...errorObj, dateOfBirth: "Date of Birth field is empty." };
   }
 
   if (isEmpty(line1)) {
-    Object.assign(errorObj, { line1: "Street Address field is empty." });
+    errorObj = { ...errorObj, line1: "Street Address field is empty." };
   }
 
   if (isEmpty(city)) {
-    Object.assign(errorObj, { city: "City field is empty." });
+    errorObj = { ...errorObj, city: "City field is empty." };
   }
 
   if (isEmpty(state)) {
-    Object.assign(errorObj, { state: "State field is empty." });
+    errorObj = { ...errorObj, state: "State field is empty." };
   }
 
   if (isEmpty(zip)) {
-    Object.assign(errorObj, { zip: "Postal Code field is empty." });
+    errorObj = { ...errorObj, zip: "Postal Code field is empty." };
   }
 
   if (
     !isEmpty(zip) &&
     (!isNumeric(zip) || !isLength(zip, { min: 5, max: 5 }))
   ) {
-    Object.assign(errorObj, { zip: "Please enter a 5-digit postal code." });
+    errorObj = { ...errorObj, zip: "Please enter a 5-digit postal code." };
   }
 
   // if (isEmpty(email)) {
-  //   Object.assign(errorObj, { email: 'Email field is empty.' });
+  //   errorObj = { ...errorObj, email: 'Email field is empty.' };
   // } else if (!isEmpty(email.trim()) && !isEmail(email)) {
-  //   Object.assign(errorObj, { email: 'Please enter a valid email address.' });
+  //   errorObj = { ...errorObj, email: 'Please enter a valid email address.' };
   // }
 
   if (isEmpty(username)) {
-    Object.assign(errorObj, { username: "Username field is empty." });
+    errorObj = { ...errorObj, username: "Username field is empty." };
   }
 
   if (
     !isEmpty(username) &&
     (!isAlphanumeric(username) || !isLength(username, { min: 5, max: 25 }))
   ) {
-    Object.assign(errorObj, {
+    errorObj = { ...errorObj,
       username: "Please enter a username between 5-25 alphanumeric characters.",
-    });
+    };
   }
 
   if (isEmpty(pin)) {
-    Object.assign(errorObj, { pin: "PIN field is empty." });
+    errorObj = { ...errorObj, pin: "PIN field is empty." };
   }
 
   if (
     !isEmpty(pin) &&
     (!isNumeric(pin) || !isLength(pin, { min: 4, max: 4 }))
   ) {
-    Object.assign(errorObj, { pin: "Please enter a 4-digit PIN." });
+    errorObj = { ...errorObj, pin: "Please enter a 4-digit PIN." };
   }
 
   if (errorObj && !isEmpty(errorObj)) {
@@ -136,7 +135,7 @@ function constructPatronObject(object) {
     );
   }
 
-  const fullName = `${lastName.trim()}, ${firstName.trim()}`;
+  const fullName = `${firstName.trim()} ${lastName.trim()}`;
   const addressObject = {
     line1,
     line2,
@@ -155,20 +154,22 @@ function constructPatronObject(object) {
     ecommunicationsPref,
     patron_agency: agencyType || config.agencyType.default,
   };
-}
+};
 
-function isTokenExipring(expirationTime, timeThreshold = 5, type = "minutes") {
-  return expirationTime.diff(moment(), type) < timeThreshold;
-}
+const isTokenExpiring = (
+  expirationTime,
+  timeThreshold = 5,
+  type = "minutes"
+): boolean => (
+  expirationTime.diff(moment(), type) < timeThreshold
+);
 
 // App-level cache object for API token related variables to be used in
 // `initializeAppAuth` and `createPatron`.
 const app = {};
 
 export async function initializeAppAuth(req, res) {
-  // TODO: Update the logger. `req.app` no longer exists and was used
-  // specifically from express.
-  // req.app.get('logger').info('initializeAppAuth');
+  logger.info('initializeAppAuth');
   const tokenObject = app["tokenObject"];
   const tokenExpTime = app["tokenExpTime"];
   const minuteExpThreshold = 10;
@@ -181,7 +182,7 @@ export async function initializeAppAuth(req, res) {
           app["tokenObject"] = response.data;
           app["tokenExpTime"] = moment().add(response.data.expires_in, "s");
         } else {
-          // req.app.get('logger').error('No access_token obtained from OAuth Service.');
+          logger.error('No access_token obtained from OAuth Service.');
           const errorObj = {};
           Object.assign(errorObj, {
             oauth: "No access_token obtained from OAuth Service.",
@@ -199,7 +200,7 @@ export async function initializeAppAuth(req, res) {
         }
       })
       .catch((error) => {
-        // req.app.get('logger').error(error);
+        logger.error(error);
         return res
           .status(400)
           .json(
@@ -215,7 +216,7 @@ export async function initializeAppAuth(req, res) {
 
   if (
     tokenObject.access_token &&
-    isTokenExipring(tokenExpTime, minuteExpThreshold)
+    isTokenExpiring(tokenExpTime, minuteExpThreshold)
   ) {
     return axios
       .post(config.api.oauth, qs.stringify(authConfig))
@@ -226,7 +227,7 @@ export async function initializeAppAuth(req, res) {
         }
       })
       .catch((error) => {
-        // req.app.get('logger').error(error);
+        logger.error(error);
         return res
           .status(400)
           .json(
@@ -274,10 +275,31 @@ export async function createPatron(req, res) {
   if (tokenObject && tokenObject.access_token) {
     const token = tokenObject.access_token;
     const patronData = constructPatronObject(req.body);
-
     if (patronData.status === 400) {
       return res.status(400).json(patronData);
     }
+
+    // Just for testing purposes locally. Used to verify refs and focus are
+    // properly working but also to update the server response interface/type
+    // later on.
+    // return res.status(400).json({
+    //   "status": 400,
+    //   "response": {
+    //     "type": "server-validation-error",
+    //     "message": "server side validation error",
+    //     "details": {
+    //       "firstName": "First Name field is empty.",
+    //       "lastName": "Last Name field is empty.",
+    //       "dateOfBirth": "Date of Birth field is empty.",
+    //       "line1": "Street Address field is empty.",
+    //       "city": "City field is empty.",
+    //       "state": "State field is empty.",
+    //       "zip": "Postal Code field is empty.",
+    //       "username": "Username field is empty.",
+    //       "pin": "PIN field is empty."
+    //     }
+    //   }
+    // });
 
     return axios
       .post(config.api.patron, patronData, constructApiHeaders(token))
@@ -293,7 +315,7 @@ export async function createPatron(req, res) {
         // If the response from the Patron Creator Service(the wrapper)
         // does not include valid error details, we mark this result as an internal server error
         if (!err.response.data) {
-          // req.app.get('logger').error('Error calling Card Creator API: ', err.message);
+          logger.error('Error calling Card Creator API: ', err.message);
           serverError = { type: "server" };
         }
 

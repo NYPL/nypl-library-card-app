@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 
-function isDate(input, minYear = 1902, maxYear = new Date().getFullYear()) {
+function isDate(input, minYear = 1902, maxYear = new Date().getFullYear()): boolean {
   // regular expression to match required date format
   const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 
@@ -26,14 +26,14 @@ function isDate(input, minYear = 1902, maxYear = new Date().getFullYear()) {
 
 /**
  * createAnchorID(wholeText)
- * Splits the error message into two parts. One will be wrapped by an <a> tag, and another will not.
+ * Splits the error message into two parts to be used by the consumer to create
+ * anchor tag text. The string ` field` is expected to in `wholeText`.
  *
  * @param {string} wholeText
  * return {object} {anchorText, restText}
  */
-function createAnchorText(wholeText) {
-  const anchorText =
-    wholeText && typeof wholeText === "string"
+function createAnchorText(wholeText: string) {
+  const anchorText = wholeText
       ? wholeText.split(" field")[0]
       : "";
   const restText = !anchorText ? "" : ` field ${wholeText.split(" field")[1]}`;
@@ -48,9 +48,8 @@ function createAnchorText(wholeText) {
  * @param {string} key
  * return {string}
  */
-function createAnchorID(key) {
-  let hashElement =
-    key && typeof key === "string"
+function createAnchorID(key: string): string | null {
+  let hashElement = key 
       ? `${key.charAt(0).toUpperCase()}${key.substr(1)}`
       : "";
 
@@ -85,8 +84,7 @@ function renderServerValidationError(object) {
       let errorMessage = null;
 
       if (object[key].indexOf("empty") !== -1) {
-        const anchorText = createAnchorText(object[key]).anchorText || "";
-        const restText = createAnchorText(object[key]).restText || "";
+        const { anchorText, restText } = createAnchorText(object[key]);
 
         errorMessage =
           !anchorText && !anchorText ? (

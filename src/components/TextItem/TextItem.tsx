@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 /**
  * @desc Verifies that the property value exists and returns it.
@@ -8,7 +7,7 @@ import PropTypes from 'prop-types';
  * @param {String} param - String representation of the language property name.
  * @returns {String} param - Returns the string value for the given property match.
  */
-function getProperty(prop = {}, lang, fallback) {
+function getProperty(prop = {}, lang = "en", fallback?) {
   const defaultValue = fallback || null;
   return prop && prop[lang] && prop[lang].text ? prop[lang].text : defaultValue;
 }
@@ -18,22 +17,34 @@ function getProperty(prop = {}, lang, fallback) {
  * @param {String} param - String representation of the target property.
  * @returns {String} param - Returns the string value for the given property match.
  */
-function getString(string, fallback) {
+function getString(str: string, fallback?) {
   const defaultValue = fallback || null;
-  return (typeof string === 'string' && string !== '') ? string : defaultValue;
+  return str !== '' ? str : defaultValue;
 }
 
+interface TextItemProps {
+  className?: string;
+  lang?: string;
+  target: string;
+  location: string;
+  tag: object;
+  title: object;
+  date: object;
+  description: object;
+  gaClickEvent: (a, b) => {};
+};
+
 const TextItem = ({
-                    className,
-                    target,
-                    tag,
-                    title,
-                    description,
-                    location,
-                    date,
-                    lang,
-                    gaClickEvent,
-                  }) => {
+  className = 'textItem',
+  lang = 'en',
+  target,
+  tag,
+  title,
+  description,
+  location,
+  date,
+  gaClickEvent,
+}: TextItemProps) => {
   const content = {
     url: getString(target, '#'),
     tag: getProperty(tag, lang, 'ERROR'),
@@ -67,23 +78,6 @@ const TextItem = ({
       </a>
     </div>
   );
-};
-
-TextItem.propTypes = {
-  className: PropTypes.string,
-  lang: PropTypes.string,
-  target: PropTypes.string,
-  location: PropTypes.string,
-  tag: PropTypes.object,
-  title: PropTypes.object,
-  date: PropTypes.object,
-  description: PropTypes.object,
-  gaClickEvent: PropTypes.func,
-};
-
-TextItem.defaultProps = {
-  className: 'textItem',
-  lang: 'en',
 };
 
 export default TextItem;

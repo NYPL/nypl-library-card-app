@@ -19,6 +19,8 @@
 
 html {
   @include font-settings;
+  // Including NYPL DS gave the footer extra space at the bottom.
+  box-sizing: inherit;
 }
 
 .nypl-library-card-app {

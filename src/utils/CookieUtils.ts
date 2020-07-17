@@ -1,6 +1,6 @@
 /**
  * encodeURI(sKey)
- * Enocode the cookie response.
+ * Encode the cookie response.
  *
  * @param {string} sKey -  The name of the cookie to be looked up.
  */

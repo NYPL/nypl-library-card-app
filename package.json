@@ -27,22 +27,24 @@
     "url": "https://github.com/issues"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.10.4",
     "@types/enzyme": "^3.10.5",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/jest": "^26.0.3",
     "@types/node": "^14.0.14",
     "@types/react": "^16.9.41",
-    "chai": "4.2.0",
+    "@typescript-eslint/parser": "^3.6.0",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "babel-jest": "^25.2.6",
     "dotenv": "8.2.0",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.1.0",
-    "eslint-loader": "^4.0.0",
-    "eslint-plugin-flowtype": "^4.7.0",
-    "eslint-plugin-import": "^2.20.2",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "7.19.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
     "husky": "^4.2.3",
     "jest": "^26.1.0",
     "lint-staged": "10.1.3",
@@ -52,6 +54,7 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
+    "@nypl/design-system-react-components": "^0.6.2",
     "@nypl/design-toolkit": "0.1.37",
     "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component#reactupdate",
     "@nypl/dgx-react-footer": "0.5.7",
@@ -70,7 +73,6 @@
     "lodash": "4.17.15",
     "moment": "2.24.0",
     "next": "^9.4.4",
-    "prop-types": "^15.5.10",
     "qs": "6.9.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -87,7 +89,7 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.{js,css,md}": "prettier --write"
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
   }
 }
