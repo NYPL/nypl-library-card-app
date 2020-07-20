@@ -72,6 +72,8 @@ const UsernameValidationForm = ({
         });
       });
   };
+  const inputValidation = (value = "") =>
+    value.length >= 5 && value.length <= 25 && isAlphanumeric(value);
   let availableClassname = usernameIsAvailable.available
     ? "available"
     : "unavailable";
@@ -82,8 +84,10 @@ const UsernameValidationForm = ({
    * if there's no success or error message.
    */
   const renderButton = () => {
+    const username = getValues("username");
+    const canValidate = inputValidation(username);
     return (
-      usernameWatch &&
+      canValidate &&
       !usernameIsAvailable.message && (
         <Button onClick={validateUsername}>
           Check if username is available
@@ -105,9 +109,7 @@ const UsernameValidationForm = ({
         errorState={errors}
         maxLength={25}
         childRef={register({
-          validate: (val) =>
-            (val.length >= 5 && val.length <= 25 && isAlphanumeric(val)) ||
-            errorMessages.username,
+          validate: (val) => inputValidation(val) || errorMessages.username,
         })}
       />
       {renderButton()}
