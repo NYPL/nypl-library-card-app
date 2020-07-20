@@ -35,10 +35,15 @@ html {
 
 .username-helper-text {
   margin: 10px 0;
+
   &.available {
-    color: green;
+    // From DS
+    // $nypl-green-dark: #497629
+    color: #497629;
   }
   &.unavailable {
-    color: red;
+    // From DS
+    // $nypl-red-regular: #d0343a;
+    color: #d0343a;
   }
 }

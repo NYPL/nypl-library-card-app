@@ -8,7 +8,7 @@ import FormField from "./FormField/FormField";
 interface UsernameValidationFormProps {
   watch: (value) => boolean;
   getValues: (value) => string;
-  register: (object?) => RefObject<HTMLInputElement>;
+  register: any;
   errorMessages?: {
     username?: string;
   };
