@@ -32,3 +32,13 @@ html {
 .emailSubscription-wrapper {
   line-height: 1 !important;
 }
+
+.username-helper-text {
+  margin: 10px 0;
+  &.available {
+    color: green;
+  }
+  &.unavailable {
+    color: red;
+  }
+}

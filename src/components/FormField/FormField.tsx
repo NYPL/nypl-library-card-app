@@ -12,7 +12,7 @@ interface FormFieldProps {
   label: string;
   type: string;
   fieldName: string;
-  errorState?: any;
+  errorState?: {};
   className?: string;
   isRequired?: boolean;
   instructionText?: string;

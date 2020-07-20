@@ -4,8 +4,27 @@ import qs from "qs";
 import moment from "moment";
 import isEmpty from "lodash/isEmpty";
 import { isEmail, isAlphanumeric, isNumeric, isLength } from "validator";
+import Cors from "cors";
 import config from "../../appConfig";
 import logger from "../logger/index";
+
+// Initializing the cors middleware
+export const cors = Cors({
+  methods: ["GET", "HEAD", "POST"],
+});
+
+// Helper method to wait for a middleware to execute before continuing and
+// to throw an error when an error happens in a middleware.
+export async function runMiddleware(req, res, fn) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+      return resolve(result);
+    });
+  });
+}
 
 const authConfig = {
   client_id: config.clientId,
@@ -57,6 +76,7 @@ const constructPatronObject = (object) => {
     pin,
     ecommunicationsPref,
     agencyType,
+    usernameHasBeenValidated,
   } = object;
 
   let errorObj = {};
@@ -145,6 +165,9 @@ const constructPatronObject = (object) => {
     zip,
   };
 
+  const boolMap = { true: true, false: false };
+  const usernameHasBeenValidatedBool = boolMap[usernameHasBeenValidated];
+
   return {
     name: fullName,
     email,
@@ -154,6 +177,7 @@ const constructPatronObject = (object) => {
     pin,
     ecommunicationsPref,
     patron_agency: agencyType || config.agencyType.default,
+    usernameHasBeenValidated: usernameHasBeenValidatedBool,
   };
 };
 
@@ -257,16 +281,39 @@ function validatePatronAddress(req, object, token) {
     );
 }
 
-function validatePatronUsername(req, value, token) {
-  return axios
-    .post(
-      `${config.api.validate}/username`,
-      { username: value },
-      constructApiHeaders(token)
-    )
-    .catch((err) =>
-      Promise.reject(new Error(`Error validating username: ${err.message}`))
-    );
+/**
+ * validatePatronUsername
+ * Call the Card Creator API to validate a username.
+ */
+export async function validatePatronUsername(req, res) {
+  const tokenObject = app["tokenObject"];
+  if (tokenObject && tokenObject.access_token) {
+    const token = tokenObject.access_token;
+    const username = req.body.username;
+    return axios
+      .post(
+        `${config.api.validate}/username`,
+        { username },
+        constructApiHeaders(token)
+      )
+      .then((result) => {
+        return res.json({
+          status: result.data.status,
+          ...result.data,
+        });
+      })
+      .catch((err) => {
+        res.status(err.response.status).json({
+          ...err.response?.data,
+        });
+      });
+  }
+
+  // Else return a no token error
+  res.status(500).json({
+    status: 500,
+    response: "The access token could not be generated.",
+  });
 }
 
 export async function createPatron(req, res) {
@@ -327,7 +374,7 @@ export async function createPatron(req, res) {
       });
   }
   // Else return a no token error
-  res.status(400).json({
+  res.status(500).json({
     status: 500,
     response: "The access token could not be generated.",
   });
