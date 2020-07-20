@@ -1,7 +1,11 @@
 /* eslint-disable */
 import React from "react";
 
-function isDate(input, minYear = 1902, maxYear = new Date().getFullYear()): boolean {
+function isDate(
+  input,
+  minYear = 1902,
+  maxYear = new Date().getFullYear()
+): boolean {
   // regular expression to match required date format
   const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 
@@ -33,9 +37,7 @@ function isDate(input, minYear = 1902, maxYear = new Date().getFullYear()): bool
  * return {object} {anchorText, restText}
  */
 function createAnchorText(wholeText: string) {
-  const anchorText = wholeText
-      ? wholeText.split(" field")[0]
-      : "";
+  const anchorText = wholeText ? wholeText.split(" field")[0] : "";
   const restText = !anchorText ? "" : ` field ${wholeText.split(" field")[1]}`;
 
   return { anchorText, restText };
@@ -49,9 +51,7 @@ function createAnchorText(wholeText: string) {
  * return {string}
  */
 function createAnchorID(key: string): string | null {
-  let hashElement = key 
-      ? `${key.charAt(0).toUpperCase()}${key.substr(1)}`
-      : "";
+  let hashElement = key ? `${key.charAt(0).toUpperCase()}${key.substr(1)}` : "";
 
   if (hashElement === "DateOfBirth") {
     hashElement = "Dob";
@@ -65,7 +65,9 @@ function createAnchorID(key: string): string | null {
     return null;
   }
 
-  return `#patron${hashElement}`;
+  // @nypl/design-system-react-components prepends an `input` before the
+  // id of the input element we want an anchor for.
+  return `#input-patron${hashElement}`;
 }
 
 /**

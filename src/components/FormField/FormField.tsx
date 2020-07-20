@@ -1,4 +1,10 @@
-import React from 'react';
+import React from "react";
+import {
+  Label,
+  Input,
+  InputTypes,
+  HelperErrorText,
+} from "@nypl/design-system-react-components";
 
 interface FormFieldProps {
   id: string;
@@ -10,88 +16,57 @@ interface FormFieldProps {
   className?: string;
   isRequired?: boolean;
   handleOnChange?: any;
-  checked?: boolean;
   instructionText?: string;
   maxLength?: number;
   onBlur?: any;
   childRef?: any;
-};
+}
 
 class FormField extends React.Component<FormFieldProps> {
   static defaultProps = {
-    className: '',
-    value: '',
+    className: "",
+    value: "",
     isRequired: false,
     errorState: {},
-  }
-
-  renderInstructionText(text) {
-    if (!text) {
-      return null;
-    }
-
-    return (
-      <span
-        className="nypl-field-status"
-        id={`${this.props.id}-status`}
-        aria-live="assertive"
-        aria-atomic="true"
-      >
-        {text}
-      </span>
-    );
-  }
-
-  renderErrorBox() {
-    return (
-      <span
-        className="nypl-field-status"
-        id={`${this.props.id}-status`}
-        aria-live="assertive"
-        aria-atomic="true"
-      >
-        {this.props.errorState[this.props.fieldName]}
-      </span>
-    );
-  }
+  };
 
   render() {
-    const requiredMarkup = this.props.isRequired ?
-      <span className="nypl-required-field"> Required</span> : null;
-    let errorClass = '';
-    let underInputSuggestion = this.renderInstructionText(this.props.instructionText);
-    if (this.props.errorState && this.props.errorState[this.props.fieldName]) {
-      errorClass = 'nypl-field-error';
-      underInputSuggestion = this.renderErrorBox();
+    const errorText = this.props.errorState[this.props.fieldName];
+    let helperText = this.props.instructionText || null;
+    let isError = false;
+    if (this.props.errorState && errorText) {
+      isError = true;
+      helperText = errorText;
     }
+    const ariaLabelledby = helperText ? `${this.props.id}-helperText` : "";
+
     return (
-      <div className={`${this.props.className} ${errorClass}`}>
-        <label htmlFor={this.props.id} id={`${this.props.id}-label`}>
-          {
-            this.props.type === 'checkbox' ?
-              <span className="visuallyHidden">{this.props.label}</span> :
-              <span>{this.props.label}</span>
-          }
-          {requiredMarkup}
-        </label>
-        <input
+      <div className={this.props.className}>
+        <Label
+          htmlFor={`input-${this.props.id}`}
+          id={`${this.props.id}-label`}
+          optReqFlag={this.props.isRequired ? "Required" : ""}
+        >
+          <span>{this.props.label}</span>
+        </Label>
+        <Input
           value={this.props.value}
-          type={this.props.type}
+          type={InputTypes.text}
           id={this.props.id}
-          aria-required={this.props.type === 'checkbox' ? null : this.props.isRequired}
-          aria-labelledby={
-            (this.props.instructionText || (this.props.errorState && this.props.errorState[this.props.fieldName]))
-              ? `${this.props.id}-label ${this.props.id}-status`
-              : `${this.props.id}-label`
-          }
-          onChange={this.props.handleOnChange}
-          checked={this.props.checked}
-          maxLength={this.props.maxLength || null}
-          onBlur={this.props.onBlur}
+          aria-required={this.props.isRequired}
+          aria-labelledby={`${this.props.id}-label ${ariaLabelledby}`}
+          helperTextId={`${this.props.id}-helperText`}
+          attributes={{
+            onChange: this.props.handleOnChange,
+            maxLength: this.props.maxLength || null,
+            onBlur: this.props.onBlur,
+            tabIndex: 0,
+          }}
           ref={this.props.childRef}
-          tabIndex={0}
         />
-        {underInputSuggestion}
+        <HelperErrorText id={`${this.props.id}-helperText`} isError={isError}>
+          {helperText}
+        </HelperErrorText>
       </div>
     );
   }

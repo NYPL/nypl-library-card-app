@@ -10,6 +10,7 @@ import FormField from "../FormField/FormField";
 import ApiErrors from "../ApiErrors/ApiErrors";
 import config from "../../../appConfig";
 import FormFooterText from "../FormFooterText";
+import { Checkbox } from "@nypl/design-system-react-components";
 
 interface LibraryCardFormState {
   agencyType: string;
@@ -374,6 +375,16 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
   }
 
   renderFormFields() {
+    const checkBoxLabelOptions = {
+      id: "receiveEmails",
+      labelContent: (
+        <>
+          Yes, I would like to receive information about NYPL&apos;s programs
+          and services
+        </>
+      ),
+    };
+
     return (
       <form className="nypl-library-card-form" onSubmit={this.handleSubmit}>
         <h2>Please enter the following information</h2>
@@ -431,23 +442,12 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
           onBlur={this.handleOnBlur("email")}
           childRef={this.email}
         />
-        <FormField
-          id="patronECommunications"
-          className={
-            this.state.patronFields.ecommunicationsPref
-              ? "nypl-terms-checkbox checked"
-              : "nypl-terms-checkbox"
-          }
-          type="checkbox"
-          label="Receive emails"
-          fieldName="ecommunicationsPref"
-          instructionText={
-            "Yes, I would like to receive information about NYPL's programs " +
-            "and services."
-          }
-          handleOnChange={this.handleInputChange("ecommunicationsPref")}
-          value={this.state.patronFields.ecommunicationsPref}
-          checked={this.state.patronFields.ecommunicationsPref}
+        <Checkbox
+          checkboxId="patronECommunications"
+          isSelected={this.state.patronFields.ecommunicationsPref}
+          name="ecommunicationsPref"
+          onChange={this.handleInputChange("ecommunicationsPref")}
+          labelOptions={checkBoxLabelOptions}
         />
         <h3>Address</h3>
 
