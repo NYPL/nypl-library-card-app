@@ -1,9 +1,9 @@
+/* eslint-disable */
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 // `import` axios does not work so it must be required.
-// const axios = require("axios");
-import axios from "axios";
+const axios = require("axios");
 jest.mock("axios");
 
 import UsernameValidationForm from "../src/components/UsernameValidationForm";
