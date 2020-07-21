@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState, useEffect, RefObject } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { isAlphanumeric } from "validator";
 import { Button } from "@nypl/design-system-react-components";
@@ -89,7 +89,7 @@ const UsernameValidationForm = ({
     return (
       canValidate &&
       !usernameIsAvailable.message && (
-        <Button onClick={validateUsername}>
+        <Button onClick={validateUsername} type="button">
           Check if username is available
         </Button>
       )
@@ -120,6 +120,7 @@ const UsernameValidationForm = ({
           </div>
           <input
             type="hidden"
+            aria-hidden={true}
             name="usernameHasBeenValidated"
             defaultValue={`${usernameIsAvailable.available}`}
             ref={register()}
