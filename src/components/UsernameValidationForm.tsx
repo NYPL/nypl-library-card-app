@@ -9,9 +9,7 @@ interface UsernameValidationFormProps {
   watch: (value) => boolean;
   getValues: (value) => string;
   register: any;
-  errorMessages?: {
-    username?: string;
-  };
+  errorMessage?: string;
   errors?: {};
 }
 
@@ -27,7 +25,7 @@ const UsernameValidationForm = ({
   watch,
   getValues,
   register,
-  errorMessages = {},
+  errorMessage = "",
   errors = {},
 }: UsernameValidationFormProps) => {
   const defaultState = {
@@ -109,7 +107,7 @@ const UsernameValidationForm = ({
         errorState={errors}
         maxLength={25}
         childRef={register({
-          validate: (val) => inputValidation(val) || errorMessages.username,
+          validate: (val) => inputValidation(val) || errorMessage,
         })}
       />
       {renderButton()}

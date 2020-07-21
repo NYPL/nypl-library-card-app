@@ -181,4 +181,40 @@ describe("UsernameValidationForm", () => {
     expect(hiddenInput).toBeInTheDocument();
     expect(hiddenInput.value).toEqual("true");
   });
+
+  test("should render an error message if the input is invalid", async () => {
+    const invalid = "test!!";
+    const mockRegister = jest.fn();
+    const mockWatch = jest.fn();
+    const mockGetValues = jest.fn().mockReturnValue(invalid);
+    const message = "Username must be between 5-25 alphanumeric characters.";
+    // Error-like object returned from react-hook-form
+    const errors = {
+      username: { message },
+    };
+
+    // This essentially tests both the `errors` and `errorMessage` props. The
+    // `errorMessage` prop sets up the error message that react-hook-form will
+    // return if the input value is wrong. But in this test, we are mocking
+    // the `errors` object that react-hook-form returns so we are both, setting
+    // it up and returning it.
+    render(
+      <UsernameValidationForm
+        register={mockRegister}
+        watch={mockWatch}
+        getValues={mockGetValues}
+        errors={errors}
+      />
+    );
+    // Casting the returned value so we can access `value`.
+    const input = screen.getByRole("textbox") as HTMLInputElement;
+    expect(input).toBeInTheDocument();
+    await act(async () =>
+      fireEvent.change(input, { target: { value: invalid } })
+    );
+    expect(input.value).toEqual(invalid);
+
+    const errorMessage = screen.getByText(message);
+    expect(errorMessage).toBeInTheDocument();
+  });
 });
