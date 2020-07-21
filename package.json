@@ -76,6 +76,7 @@
     "qs": "6.9.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-hook-form": "^6.0.6",
     "sass": "^1.26.9",
     "save-dev": "0.0.1-security",
     "underscore": "1.10.2",

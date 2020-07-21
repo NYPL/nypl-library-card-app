@@ -110,7 +110,8 @@ const constructPatronObject = (object) => {
     !isEmpty(username) &&
     (!isAlphanumeric(username) || !isLength(username, { min: 5, max: 25 }))
   ) {
-    errorObj = { ...errorObj,
+    errorObj = {
+      ...errorObj,
       username: "Please enter a username between 5-25 alphanumeric characters.",
     };
   }
@@ -160,16 +161,14 @@ const isTokenExpiring = (
   expirationTime,
   timeThreshold = 5,
   type = "minutes"
-): boolean => (
-  expirationTime.diff(moment(), type) < timeThreshold
-);
+): boolean => expirationTime.diff(moment(), type) < timeThreshold;
 
 // App-level cache object for API token related variables to be used in
 // `initializeAppAuth` and `createPatron`.
 const app = {};
 
 export async function initializeAppAuth(req, res) {
-  logger.info('initializeAppAuth');
+  logger.info("initializeAppAuth");
   const tokenObject = app["tokenObject"];
   const tokenExpTime = app["tokenExpTime"];
   const minuteExpThreshold = 10;
@@ -182,7 +181,7 @@ export async function initializeAppAuth(req, res) {
           app["tokenObject"] = response.data;
           app["tokenExpTime"] = moment().add(response.data.expires_in, "s");
         } else {
-          logger.error('No access_token obtained from OAuth Service.');
+          logger.error("No access_token obtained from OAuth Service.");
           const errorObj = {};
           Object.assign(errorObj, {
             oauth: "No access_token obtained from OAuth Service.",
@@ -283,22 +282,22 @@ export async function createPatron(req, res) {
     // properly working but also to update the server response interface/type
     // later on.
     // return res.status(400).json({
-    //   "status": 400,
-    //   "response": {
-    //     "type": "server-validation-error",
-    //     "message": "server side validation error",
-    //     "details": {
-    //       "firstName": "First Name field is empty.",
-    //       "lastName": "Last Name field is empty.",
-    //       "dateOfBirth": "Date of Birth field is empty.",
-    //       "line1": "Street Address field is empty.",
-    //       "city": "City field is empty.",
-    //       "state": "State field is empty.",
-    //       "zip": "Postal Code field is empty.",
-    //       "username": "Username field is empty.",
-    //       "pin": "PIN field is empty."
-    //     }
-    //   }
+    //   status: 400,
+    //   response: {
+    //     type: "server-validation-error",
+    //     message: "server side validation error",
+    //     details: {
+    //       firstName: "First Name field is empty.",
+    //       lastName: "Last Name field is empty.",
+    //       dateOfBirth: "Date of Birth field is empty.",
+    //       line1: "Street Address field is empty.",
+    //       city: "City field is empty.",
+    //       state: "State field is empty.",
+    //       zip: "Postal Code field is empty.",
+    //       username: "Username field is empty.",
+    //       pin: "PIN field is empty.",
+    //     },
+    //   },
     // });
 
     return axios
@@ -315,7 +314,7 @@ export async function createPatron(req, res) {
         // If the response from the Patron Creator Service(the wrapper)
         // does not include valid error details, we mark this result as an internal server error
         if (!err.response.data) {
-          logger.error('Error calling Card Creator API: ', err.message);
+          logger.error("Error calling Card Creator API: ", err.message);
           serverError = { type: "server" };
         }
 

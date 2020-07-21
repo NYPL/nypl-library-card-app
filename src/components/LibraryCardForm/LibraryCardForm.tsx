@@ -1,380 +1,144 @@
-import React from "react";
+/* eslint-disable */
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
-import omit from "lodash/omit";
-import assign from "lodash/assign";
-import forIn from "lodash/forIn";
-import { isEmail, isLength, isAlphanumeric } from "validator";
+import { isEmail, isAlphanumeric } from "validator";
+import { Checkbox } from "@nypl/design-system-react-components";
+import { useForm } from "react-hook-form";
 import { isDate } from "../../utils/FormValidationUtils";
 import FormField from "../FormField/FormField";
 import ApiErrors from "../ApiErrors/ApiErrors";
 import config from "../../../appConfig";
 import FormFooterText from "../FormFooterText";
-import { Checkbox } from "@nypl/design-system-react-components";
 
-interface LibraryCardFormState {
-  agencyType: string;
-  csrfToken: string;
-  focusOnResult: boolean;
-  formProcessing: boolean;
-  formEntrySuccessful: boolean;
-  apiResults: any;
-  fieldErrors: any;
-  patronFields: any;
+// The interface for the react-hook-form state data object.
+interface FormInput {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  email: string;
+  line1: string;
+  line2: string;
+  city: string;
+  state: string;
+  zip: string;
+  username: string;
+  pin: string;
+  ecommunicationsPref: boolean;
+  location?: string;
 }
 
-class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
-  dynamicSection = React.createRef<HTMLDivElement>();
-  stateName = React.createRef<HTMLInputElement>();
-  firstName = React.createRef<HTMLInputElement>();
-  lastName = React.createRef<HTMLInputElement>();
-  dateOfBirth = React.createRef<HTMLInputElement>();
-  email = React.createRef<HTMLInputElement>();
-  line1 = React.createRef<HTMLInputElement>();
-  zip = React.createRef<HTMLInputElement>();
-  city = React.createRef<HTMLInputElement>();
-  username = React.createRef<HTMLInputElement>();
-  pin = React.createRef<HTMLInputElement>();
+const errorMessages = {
+  firstName: "Please enter a valid first name.",
+  lastName: "Please enter a valid last name.",
+  birthdate: "Please enter a valid date, MM/DD/YYYY, including slashes.",
+  email: "Please enter a valid email address.",
+  username: "Username must be between 5-25 alphanumeric characters.",
+  pin: "Please enter a 4-digit PIN.",
+  location: "Please select an address option.",
+  line1: "Please enter a valid street address.",
+  city: "Please enter a valid city.",
+  state: "Please enter a 2-character state abbreviation.",
+  zip: "Please enter a 5-digit postal code.",
+};
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      agencyType: "",
-      csrfToken: "",
-      formEntrySuccessful: false,
-      focusOnResult: false,
-      formProcessing: false,
-      apiResults: {},
-      fieldErrors: {},
-      patronFields: {
-        firstName: "",
-        lastName: "",
-        dateOfBirth: "",
-        email: "",
-        line1: "",
-        line2: "",
-        city: "",
-        state: "",
-        zip: "",
-        username: "",
-        pin: "",
-        ecommunicationsPref: true,
-        location: "",
-      },
-    };
+const LibraryCardForm = () => {
+  const errorSection = React.createRef<HTMLDivElement>();
+  const [errorObj, setErrorObj] = useState(null);
+  const [apiResults, setApiResults] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [csrfToken, setCsrfToken] = useState(null);
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleOnBlur = this.handleOnBlur.bind(this);
-  }
-
-  componentDidMount() {
-    const csrfToken = this.getMetaTagContent("name=csrf-token");
-    if (csrfToken) {
-      const patronFields = Object.assign(this.state.patronFields, {
-        location: this.getUrlParameter("form_type") || "nyc",
-      });
-
-      this.setState({ csrfToken, patronFields });
+  // Will run whenever the `errorObj` has changes, specifically for
+  // bad requests.
+  useEffect(() => {
+    if (errorObj) {
+      errorSection.current.focus();
+      document.title = "Form Submission Error | NYPL";
     }
-  }
+  }, [errorObj]);
 
-  componentDidUpdate() {
-    if (this.state.focusOnResult) {
-      this.focusOnApiResponse();
-      if (document && document.title !== "") {
-        document.title = "Form Submission Error | NYPL";
-      }
-    }
-  }
-
-  getMetaTagContent(tag) {
+  // TODO: This works but need to implement CSRF in the backend.
+  // useEffect(() => {
+  //   const csrfToken = getMetaTagContent("name=csrf-token");
+  //   csrfToken && setCsrfToken(csrfToken);
+  // });
+  const getMetaTagContent = (tag) => {
     return document.head.querySelector(`[${tag}]`).textContent;
-  }
+  };
 
-  getUrlParameter(name) {
-    if (typeof location === "undefined") return "";
-
-    const paramName = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    const regex = new RegExp(`[\\?&]${paramName}=([^&#]*)`);
-    const results = regex.exec(location.search);
-    return results === null
-      ? ""
-      : decodeURIComponent(results[1].replace(/\+/g, " "));
-  }
-
-  getPatronAgencyType(agencyTypeParam) {
+  const getPatronAgencyType = (agencyTypeParam) => {
     const { agencyType } = config;
     return !isEmpty(agencyTypeParam) && agencyTypeParam.toLowerCase() === "nys"
       ? agencyType.nys
       : agencyType.default;
-  }
+  };
 
-  getFullName() {
-    const { firstName, lastName } = this.state.patronFields;
+  /**
+   * submitForm
+   * Makes an internal API call to create a new patron.
+   * @param formData - data object returned from react-hook-form
+   */
+  const submitForm = (formData: FormInput) => {
+    // This is resetting any errors from previous submissions, if any.
+    setErrorObj(null);
+    // Render the loading component.
+    setIsLoading(true);
 
-    return !isEmpty(firstName) && !isEmpty(lastName)
-      ? `${firstName.trim()} ${lastName.trim()}`
-      : null;
-  }
+    const agencyType = getPatronAgencyType(formData.location);
 
-  focusOnApiResponse() {
-    setTimeout(() => {
-      if (this.dynamicSection) {
-        this.dynamicSection.current.focus();
-        this.setState({ focusOnResult: false });
-      }
-    }, 1000);
-  }
-
-  validateField(fieldName, value) {
-    const { fieldErrors } = this.state;
-    let currentErrors = {};
-
-    switch (fieldName) {
-      case "dateOfBirth":
-        if (!isDate(value)) {
-          fieldErrors[fieldName] =
-            "Please enter a valid date, MM/DD/YYYY, including slashes.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
+    axios
+      .post(
+        "/api/create-patron",
+        {
+          ...formData,
+          agencyType,
         }
-        break;
-      case "email":
-        if (value.trim().length > 0 && !isEmail(value)) {
-          fieldErrors[fieldName] = "Please enter a valid email address.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "username":
-        if (!isLength(value, { min: 5, max: 25 })) {
-          fieldErrors[fieldName] =
-            "Username must be between 5-25 alphanumeric characters.";
-          currentErrors = fieldErrors;
-        } else if (!isAlphanumeric(value)) {
-          fieldErrors[fieldName] = "Only alphanumeric characters are allowed.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "pin":
-        if (value.length !== 4 || isNaN(value)) {
-          fieldErrors[fieldName] = "Please enter a 4-digit PIN.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "firstName":
-        if (isEmpty(value)) {
-          fieldErrors[fieldName] = "Please enter a valid first name.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "lastName":
-        if (isEmpty(value)) {
-          fieldErrors[fieldName] = "Please enter a valid last name.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "location":
-        if (isEmpty(value)) {
-          fieldErrors[fieldName] = "Please select an address option.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "line1":
-        if (isEmpty(value)) {
-          fieldErrors[fieldName] = "Please enter a valid street address.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "city":
-        if (isEmpty(value)) {
-          fieldErrors[fieldName] = "Please enter a valid city.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "state":
-        if (isEmpty(value) || !isLength(value, { min: 2, max: 2 })) {
-          fieldErrors[fieldName] =
-            "Please enter a 2-character state abbreviation.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "zip":
-        if (
-          isEmpty(value) ||
-          isNaN(value) ||
-          !isLength(value, { min: 5, max: 5 })
-        ) {
-          fieldErrors[fieldName] = "Please enter a 5-digit postal code.";
-          currentErrors = fieldErrors;
-        } else {
-          currentErrors = omit(fieldErrors, fieldName);
-        }
-        break;
-      case "line2":
-        currentErrors = fieldErrors;
-        break;
-      case "ecommunicationsPref":
-        currentErrors = fieldErrors;
-        break;
-      default:
-        break;
-    }
-
-    this.setState({ fieldErrors: currentErrors });
-  }
-
-  focusOnErrorElement() {
-    // Handle focusing on first element in the object that contains an error
-    Object.keys(this.state.fieldErrors).some((key) => {
-      if (this.state.fieldErrors[key]) {
-        // the keyword state is reserved in React, therefore the reference to the State field
-        // is renamed to stateName
-        if (key === "state") {
-          this.stateName.current.focus();
-          return true;
-        }
-
-        this[key] && this[key].current.focus();
-        return true;
-      }
-      return true;
-    });
-  }
-
-  handleInputChange(property) {
-    return (event) => {
-      const target = event.target;
-      const value = target.type === "checkbox" ? target.checked : target.value;
-      const newState = assign({}, this.state.patronFields, {
-        [property]: value,
+        // {
+        // headers: { "csrf-token": csrfToken },
+        // }
+      )
+      .then((response) => {
+        // This is setting the state for returned valid response, but
+        // it's not being used. The updated confirmation page is still TBD.
+        setApiResults(response.data);
+        // Don't render the loading component anymore.
+        setIsLoading(false);
+        // TODO: Waiting on whether we will make a redirect in the app
+        // or in Drupal.
+        // window.location.href = window.confirmationURL;
+      })
+      .catch((error) => {
+        // There are server-side errors!
+        // So render the component to display them.
+        setErrorObj(error.response.data);
+        setIsLoading(false);
       });
-      this.setState({ patronFields: newState });
-    };
-  }
+  };
 
-  handleOnBlur(property) {
-    return (event) => {
-      const target = event.target;
-      const value = target.value;
+  const renderLoader = () => {
+    return isLoading ? <div className="loading" /> : null;
+  };
 
-      this.validateField(property, value);
-    };
-  }
-
-  handleSubmit(event) {
-    // Clearing server side errors for re-submission.
-    this.setState({ apiResults: {} });
-    event.preventDefault();
-
-    // Iterate through patron fields and ensure all fields are valid
-    forIn(this.state.patronFields, (value, key) => {
-      this.validateField(key, value);
-    });
-
-    // Has client-side errors, stop processing
-    if (!isEmpty(this.state.fieldErrors)) {
-      // A required form field contains an error, focus on the first error field
-      this.focusOnErrorElement();
-    } else {
-      // No client-side errors, form is now processing
-      this.setState({ formProcessing: true });
-
-      const {
-        firstName,
-        lastName,
-        email,
-        dateOfBirth,
-        line1,
-        line2,
-        city,
-        state,
-        zip,
-        username,
-        pin,
-        ecommunicationsPref,
-      } = this.state.patronFields;
-      const agencyType = this.getPatronAgencyType(
-        this.state.patronFields.location
-      );
-
-      // The new and simplier endpoint:
-      axios
-        .post(
-          "/api/create-patron",
-          {
-            firstName,
-            lastName,
-            email,
-            dateOfBirth,
-            line1,
-            line2,
-            city,
-            state,
-            zip,
-            username,
-            pin,
-            ecommunicationsPref,
-            agencyType,
-          },
-          {
-            headers: { "csrf-token": this.state.csrfToken },
-          }
-        )
-        .then((response) => {
-          this.setState({
-            formProcessing: false,
-            formEntrySuccessful: false,
-            apiResults: response.data,
-          });
-          // TODO: Waiting on whether we will make a redirect in the app
-          // or in Drupal.
-          // window.location.href = window.confirmationURL;
-        })
-        .catch((error) => {
-          this.setState({ formProcessing: false, focusOnResult: true });
-          if (error.response && error.response.data) {
-            // The request was made, but the server responded with a status code
-            // that falls out of the range of 2xx
-            this.setState({ apiResults: error.response.data });
-          }
-        });
-    }
-  }
-
-  renderLoader() {
-    const { formProcessing } = this.state;
-    return formProcessing ? <div className="loading" /> : null;
-  }
-
-  renderApiErrors(errorObj) {
+  /**
+   * renderApiErrors
+   * This renders the component above the form that displays information on
+   * the error(s) from the submission. Also renders links that link to the
+   * specific input element that is returning an error.
+   * @param errorObj
+   */
+  const renderApiErrors = (errorObj) => {
     if (!isEmpty(errorObj) && errorObj.status >= 400) {
-      return <ApiErrors ref={this.dynamicSection} apiResults={errorObj} />;
+      return <ApiErrors ref={errorSection} apiResults={errorObj} />;
     }
-
     return null;
-  }
+  };
 
-  renderFormFields() {
+  /**
+   * renderFormFields
+   * This renders the complete form. Refactoring this later.
+   */
+  const renderFormFields = () => {
     const checkBoxLabelOptions = {
       id: "receiveEmails",
       labelContent: (
@@ -385,8 +149,16 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
       ),
     };
 
+    // Specific functions and object from react-hook-form.
+    const { register, handleSubmit, errors } = useForm<FormInput>({
+      mode: "onBlur",
+    });
+
     return (
-      <form className="nypl-library-card-form" onSubmit={this.handleSubmit}>
+      <form
+        className="nypl-library-card-form"
+        onSubmit={handleSubmit(submitForm)}
+      >
         <h2>Please enter the following information</h2>
         <h3>Personal Information</h3>
         <div className="nypl-name-field">
@@ -396,11 +168,13 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
             label="First Name"
             fieldName="firstName"
             isRequired
-            value={this.state.patronFields.firstName}
-            handleOnChange={this.handleInputChange("firstName")}
-            errorState={this.state.fieldErrors}
-            onBlur={this.handleOnBlur("firstName")}
-            childRef={this.firstName}
+            // Every input field is registered to react-hook-form. If this
+            // field is empty on blur or on submission, the error message will
+            // display below the input.
+            childRef={register({
+              required: errorMessages.firstName,
+            })}
+            errorState={errors}
           />
           <FormField
             id="patronLastName"
@@ -408,11 +182,10 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
             label="Last Name"
             fieldName="lastName"
             isRequired
-            value={this.state.patronFields.lastName}
-            handleOnChange={this.handleInputChange("lastName")}
-            errorState={this.state.fieldErrors}
-            onBlur={this.handleOnBlur("lastName")}
-            childRef={this.lastName}
+            errorState={errors}
+            childRef={register({
+              required: errorMessages.lastName,
+            })}
           />
         </div>
         <FormField
@@ -423,12 +196,13 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
           label="Date of Birth"
           fieldName="dateOfBirth"
           isRequired
-          value={this.state.patronFields.dateOfBirth}
-          handleOnChange={this.handleInputChange("dateOfBirth")}
-          errorState={this.state.fieldErrors}
+          errorState={errors}
           maxLength={10}
-          onBlur={this.handleOnBlur("dateOfBirth")}
-          childRef={this.dateOfBirth}
+          // This `validate` callback allows for specific validation
+          childRef={register({
+            validate: (val) =>
+              (val.length <= 10 && isDate(val)) || errorMessages.birthdate,
+          })}
         />
         <FormField
           id="patronEmail"
@@ -436,19 +210,22 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
           type="text"
           label="E-mail"
           fieldName="email"
-          value={this.state.patronFields.email}
-          handleOnChange={this.handleInputChange("email")}
-          errorState={this.state.fieldErrors}
-          onBlur={this.handleOnBlur("email")}
-          childRef={this.email}
+          errorState={errors}
+          childRef={register({
+            required: false,
+            validate: (val) =>
+              val === "" || isEmail(val) || errorMessages.email,
+          })}
         />
         <Checkbox
           checkboxId="patronECommunications"
-          isSelected={this.state.patronFields.ecommunicationsPref}
           name="ecommunicationsPref"
-          onChange={this.handleInputChange("ecommunicationsPref")}
           labelOptions={checkBoxLabelOptions}
+          // Users must opt-out.
+          isSelected={true}
+          ref={register()}
         />
+
         <h3>Address</h3>
 
         <div className="nypl-radiobutton-field">
@@ -464,8 +241,7 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
                 type="radio"
                 name="location"
                 value="nyc"
-                checked={this.state.patronFields.location === "nyc"}
-                onChange={this.handleInputChange("location")}
+                ref={register()}
               />
               New York City (All five boroughs)
             </label>
@@ -476,8 +252,7 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
                 type="radio"
                 name="location"
                 value="nys"
-                checked={this.state.patronFields.location === "nys"}
-                onChange={this.handleInputChange("location")}
+                ref={register()}
               />
               New York State (Outside NYC)
             </label>
@@ -488,8 +263,11 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
                 type="radio"
                 name="location"
                 value="us"
-                checked={this.state.patronFields.location === "us"}
-                onChange={this.handleInputChange("location")}
+                // For radio buttons or for grouped inputs, the validation
+                // config goes in the last element.
+                ref={register({
+                  required: errorMessages.location,
+                })}
               />
               United States (Visiting NYC)
             </label>
@@ -511,11 +289,10 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
           label="Street Address"
           fieldName="line1"
           isRequired
-          value={this.state.patronFields.line1}
-          handleOnChange={this.handleInputChange("line1")}
-          errorState={this.state.fieldErrors}
-          onBlur={this.handleOnBlur("line1")}
-          childRef={this.line1}
+          errorState={errors}
+          childRef={register({
+            required: errorMessages.line1,
+          })}
         />
         <FormField
           id="patronStreet2"
@@ -523,9 +300,7 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
           type="text"
           label="Apartment / Suite"
           fieldName="line2"
-          value={this.state.patronFields.line2}
-          handleOnChange={this.handleInputChange("line2")}
-          onBlur={this.handleOnBlur("line2")}
+          childRef={register()}
         />
         <FormField
           id="patronCity"
@@ -533,12 +308,11 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
           type="text"
           label="City"
           fieldName="city"
-          value={this.state.patronFields.city}
           isRequired
-          handleOnChange={this.handleInputChange("city")}
-          errorState={this.state.fieldErrors}
-          onBlur={this.handleOnBlur("city")}
-          childRef={this.city}
+          errorState={errors}
+          childRef={register({
+            required: errorMessages.city,
+          })}
         />
         <FormField
           id="patronState"
@@ -547,13 +321,12 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
           instructionText="2-letter abbreviation"
           label="State"
           fieldName="state"
-          value={this.state.patronFields.state}
           isRequired
-          handleOnChange={this.handleInputChange("state")}
-          errorState={this.state.fieldErrors}
+          errorState={errors}
           maxLength={2}
-          onBlur={this.handleOnBlur("state")}
-          childRef={this.stateName}
+          childRef={register({
+            validate: (val) => val.length === 2 || errorMessages.state,
+          })}
         />
         <FormField
           id="patronZip"
@@ -561,13 +334,12 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
           type="text"
           label="Postal Code"
           fieldName="zip"
-          value={this.state.patronFields.zip}
           isRequired
-          handleOnChange={this.handleInputChange("zip")}
-          errorState={this.state.fieldErrors}
+          errorState={errors}
           maxLength={5}
-          onBlur={this.handleOnBlur("zip")}
-          childRef={this.zip}
+          childRef={register({
+            validate: (val) => val.length === 5 || errorMessages.zip,
+          })}
         />
         <h3>Create Your Account</h3>
         <FormField
@@ -577,13 +349,14 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
           label="Username"
           fieldName="username"
           instructionText="5-25 alphanumeric characters"
-          value={this.state.patronFields.username}
           isRequired
-          handleOnChange={this.handleInputChange("username")}
-          errorState={this.state.fieldErrors}
+          errorState={errors}
           maxLength={25}
-          onBlur={this.handleOnBlur("username")}
-          childRef={this.username}
+          childRef={register({
+            validate: (val) =>
+              (val.length >= 5 && val.length <= 25 && isAlphanumeric(val)) ||
+              errorMessages.username,
+          })}
         />
         <FormField
           id="patronPin"
@@ -592,13 +365,12 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
           label="PIN"
           fieldName="pin"
           instructionText="4 digits"
-          value={this.state.patronFields.pin}
           isRequired
-          handleOnChange={this.handleInputChange("pin")}
-          errorState={this.state.fieldErrors}
+          errorState={errors}
           maxLength={4}
-          onBlur={this.handleOnBlur("pin")}
-          childRef={this.pin}
+          childRef={register({
+            validate: (val) => val.length === 4 || errorMessages.pin,
+          })}
         />
 
         <p>
@@ -621,29 +393,27 @@ class LibraryCardForm extends React.Component<{}, LibraryCardFormState> {
         <div>
           <input
             className="nypl-request-button"
-            disabled={this.state.formProcessing}
+            disabled={isLoading}
             type="submit"
             value="Continue"
           />
-          {this.renderLoader()}
+          {renderLoader()}
         </div>
       </form>
     );
-  }
+  };
 
-  render() {
-    return (
-      <div className="nypl-row">
-        <div className="nypl-column-half nypl-column-offset-one">
-          <div>
-            {this.renderApiErrors(this.state.apiResults)}
-            {this.renderFormFields()}
-          </div>
-          <FormFooterText />
+  return (
+    <div className="nypl-row">
+      <div className="nypl-column-half nypl-column-offset-one">
+        <div>
+          {renderApiErrors(errorObj)}
+          {renderFormFields()}
         </div>
+        <FormFooterText />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default LibraryCardForm;
