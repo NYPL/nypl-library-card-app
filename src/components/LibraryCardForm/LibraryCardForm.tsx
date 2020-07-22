@@ -12,6 +12,7 @@ import config from "../../../appConfig";
 import FormFooterText from "../FormFooterText";
 import UsernameValidationForm from "../UsernameValidationForm";
 import LibraryListForm, { LibraryListObject } from "../LibraryListForm";
+import ilsLibraryList from "../../data/ilsLibraryList";
 
 // The interface for the react-hook-form state data object.
 interface FormInput {
@@ -44,9 +45,6 @@ const errorMessages = {
   state: "Please enter a 2-character state abbreviation.",
   zip: "Please enter a 5-digit postal code.",
 };
-
-// Currently, there's only one value but more will be added soon.
-const libraryList: LibraryListObject[] = [{ value: "eb", label: "SimplyE" }];
 
 const LibraryCardForm = () => {
   const errorSection = React.createRef<HTMLDivElement>();
@@ -351,7 +349,7 @@ const LibraryCardForm = () => {
 
         <LibraryListForm
           register={register}
-          libraryList={libraryList}
+          libraryList={ilsLibraryList}
           // The default branch is the "SimplyE" branch with a code of "eb".
           defaultValue="eb"
         />
