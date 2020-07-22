@@ -35,7 +35,7 @@ describe("LibraryListForm", () => {
     ).toBeInTheDocument();
   });
 
-  test("it updates the selected value from the dropdown", () => {
+  test("it updates the selected value from the dropdown", async () => {
     const mockRegister = jest.fn();
 
     render(
@@ -49,9 +49,21 @@ describe("LibraryListForm", () => {
     const select = screen.getByRole("combobox");
 
     expect(screen.getByDisplayValue("SimplyE")).toBeInTheDocument();
+    expect(screen.queryByDisplayValue("Schwarzman")).not.toBeInTheDocument();
+    expect(screen.queryByDisplayValue("Schomburg")).not.toBeInTheDocument();
 
-    fireEvent.change(select, { target: { value: "sasb" } });
-
+    await act(async () =>
+      fireEvent.click(select, { target: { value: "sasb" } })
+    );
     expect(screen.getByDisplayValue("Schwarzman")).toBeInTheDocument();
+    expect(screen.queryByDisplayValue("SimplyE")).not.toBeInTheDocument();
+    expect(screen.queryByDisplayValue("Schomburg")).not.toBeInTheDocument();
+
+    await act(async () =>
+      fireEvent.click(select, { target: { value: "schomburg" } })
+    );
+    expect(screen.getByDisplayValue("Schomburg")).toBeInTheDocument();
+    expect(screen.queryByDisplayValue("Schwarzman")).not.toBeInTheDocument();
+    expect(screen.queryByDisplayValue("SimplyE")).not.toBeInTheDocument();
   });
 });
