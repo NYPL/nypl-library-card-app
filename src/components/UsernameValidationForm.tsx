@@ -32,8 +32,8 @@ const UsernameValidationForm = ({
     available: false,
     message: "",
   };
-  const usernameWatch = watch("username");
   const [usernameIsAvailable, setUsernameIsAvailable] = useState(defaultState);
+  const usernameWatch = watch("username");
 
   // Whenever the username input changes, revert back to the default state.
   // This is to re-render the button after a patron tries a new username.

@@ -5,10 +5,18 @@
 #### Updated
 
 - Updated to use Nextjs for the server and updated app and api routes accordingly.
-- Added Typescript for development.
 - Replaced Mocha with Jest, but still using Enzyme to test React components.
 - Updated the API endpoints and the error/response objects from the API endpoint that the front-end will use.
 - Updated the app's code structure, specifically in the `/src` folder.
+
+#### Added
+
+- Added Typescript for development.
+- Added `react-hook-form` for processing the whole app's form.
+- Added the NYPL Design System for react components.
+- Added `react-testing-library` for UI testing.
+- Added the `UsernameValidationForm` component to check for username availability in the ILS right away instead of waiting for the complete form to be submitted.
+- Added the `LibraryListForm` component which renders a drop down list of libraries for patrons to select their home library.
 
 ### v0.5.0
 
