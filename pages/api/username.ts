@@ -2,7 +2,7 @@ import Cors from "cors";
 import { NextApiRequest, NextApiResponse } from "next";
 import {
   initializeAppAuth,
-  createPatron,
+  validatePatronUsername,
   runMiddleware,
   cors,
 } from "../../src/utils/api";
@@ -20,7 +20,7 @@ async function patron(req: NextApiRequest, res: NextApiResponse) {
   await initializeAppAuth(req, res);
   // Now, we can call the NYPL Platform API to validate the patron's
   // address and username, and create a new ILS patron account.
-  await createPatron(req, res);
+  await validatePatronUsername(req, res);
 }
 
 export default patron;

@@ -12,7 +12,7 @@ interface FormFieldProps {
   label: string;
   type: string;
   fieldName: string;
-  errorState?: any;
+  errorState?: {};
   className?: string;
   isRequired?: boolean;
   instructionText?: string;
@@ -67,7 +67,6 @@ class FormField extends React.Component<FormFieldProps> {
           id={id}
           aria-required={isRequired}
           aria-labelledby={`${id}-label ${ariaLabelledby}`}
-          helperTextId={`${id}-helperText`}
           attributes={{
             ["aria-invalid"]: errorText ? "true" : "false",
             maxLength: maxLength || null,

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
-import { isEmail, isAlphanumeric } from "validator";
+import { isEmail } from "validator";
 import { Checkbox } from "@nypl/design-system-react-components";
 import { useForm } from "react-hook-form";
 import { isDate } from "../../utils/FormValidationUtils";
@@ -10,6 +10,7 @@ import FormField from "../FormField/FormField";
 import ApiErrors from "../ApiErrors/ApiErrors";
 import config from "../../../appConfig";
 import FormFooterText from "../FormFooterText";
+import UsernameValidationForm from "../UsernameValidationForm";
 
 // The interface for the react-hook-form state data object.
 interface FormInput {
@@ -86,7 +87,6 @@ const LibraryCardForm = () => {
     setIsLoading(true);
 
     const agencyType = getPatronAgencyType(formData.location);
-
     axios
       .post(
         "/api/create-patron",
@@ -150,7 +150,9 @@ const LibraryCardForm = () => {
     };
 
     // Specific functions and object from react-hook-form.
-    const { register, handleSubmit, errors } = useForm<FormInput>({
+    const { register, handleSubmit, errors, watch, getValues } = useForm<
+      FormInput
+    >({
       mode: "onBlur",
     });
 
@@ -342,22 +344,15 @@ const LibraryCardForm = () => {
           })}
         />
         <h3>Create Your Account</h3>
-        <FormField
-          id="patronUsername"
-          className="nypl-text-field"
-          type="text"
-          label="Username"
-          fieldName="username"
-          instructionText="5-25 alphanumeric characters"
-          isRequired
-          errorState={errors}
-          maxLength={25}
-          childRef={register({
-            validate: (val) =>
-              (val.length >= 5 && val.length <= 25 && isAlphanumeric(val)) ||
-              errorMessages.username,
-          })}
+
+        <UsernameValidationForm
+          watch={watch}
+          getValues={getValues}
+          register={register}
+          errors={errors}
+          errorMessage={errorMessages.username}
         />
+
         <FormField
           id="patronPin"
           className="nypl-text-field"

@@ -32,3 +32,18 @@ html {
 .emailSubscription-wrapper {
   line-height: 1 !important;
 }
+
+.username-helper-text {
+  margin: 10px 0;
+
+  &.available {
+    // From DS
+    // $nypl-green-dark: #497629
+    color: #497629;
+  }
+  &.unavailable {
+    // From DS
+    // $nypl-red-regular: #d0343a;
+    color: #d0343a;
+  }
+}
