@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState, useEffect, RefObject } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { isAlphanumeric } from "validator";
 import { Button } from "@nypl/design-system-react-components";
@@ -9,9 +9,7 @@ interface UsernameValidationFormProps {
   watch: (value) => boolean;
   getValues: (value) => string;
   register: any;
-  errorMessages?: {
-    username?: string;
-  };
+  errorMessage?: string;
   errors?: {};
 }
 
@@ -27,7 +25,7 @@ const UsernameValidationForm = ({
   watch,
   getValues,
   register,
-  errorMessages = {},
+  errorMessage = "",
   errors = {},
 }: UsernameValidationFormProps) => {
   const defaultState = {
@@ -89,7 +87,7 @@ const UsernameValidationForm = ({
     return (
       canValidate &&
       !usernameIsAvailable.message && (
-        <Button onClick={validateUsername}>
+        <Button onClick={validateUsername} type="button">
           Check if username is available
         </Button>
       )
@@ -109,7 +107,7 @@ const UsernameValidationForm = ({
         errorState={errors}
         maxLength={25}
         childRef={register({
-          validate: (val) => inputValidation(val) || errorMessages.username,
+          validate: (val) => inputValidation(val) || errorMessage,
         })}
       />
       {renderButton()}
@@ -120,6 +118,7 @@ const UsernameValidationForm = ({
           </div>
           <input
             type="hidden"
+            aria-hidden={true}
             name="usernameHasBeenValidated"
             defaultValue={`${usernameIsAvailable.available}`}
             ref={register()}

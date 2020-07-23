@@ -350,7 +350,7 @@ const LibraryCardForm = () => {
           getValues={getValues}
           register={register}
           errors={errors}
-          errorMessages={errorMessages}
+          errorMessage={errorMessages.username}
         />
 
         <FormField
