@@ -11,8 +11,9 @@ import ApiErrors from "../ApiErrors/ApiErrors";
 import config from "../../../appConfig";
 import FormFooterText from "../FormFooterText";
 import UsernameValidationForm from "../UsernameValidationForm";
-import LibraryListForm, { LibraryListObject } from "../LibraryListForm";
+import LibraryListForm from "../LibraryListForm";
 import ilsLibraryList from "../../data/ilsLibraryList";
+import AcceptTermsForm from "../AcceptTermsForm";
 
 // The interface for the react-hook-form state data object.
 interface FormInput {
@@ -158,6 +159,9 @@ const LibraryCardForm = () => {
     >({
       mode: "onBlur",
     });
+    // Watch the `acceptTerms` named field. If it's checked/true, the submit
+    // button will be enabled.
+    const acceptedTerms = watch("acceptTerms");
 
     return (
       <form
@@ -379,27 +383,12 @@ const LibraryCardForm = () => {
           })}
         />
 
-        <p>
-          By submitting an application, you understand and agree to our{" "}
-          <a href="https://www.nypl.org/help/library-card/terms-conditions">
-            Cardholder Terms and Conditions
-          </a>{" "}
-          and agree to our{" "}
-          <a href="https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations">
-            Rules and Regulations
-          </a>
-          . To learn more about The Library’s use of personal information,
-          please read our{" "}
-          <a href="https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy">
-            Privacy Policy
-          </a>
-          .
-        </p>
+        <AcceptTermsForm register={register} />
 
         <div>
           <input
             className="nypl-request-button"
-            disabled={isLoading}
+            disabled={!acceptedTerms || isLoading}
             type="submit"
             value="Continue"
           />
