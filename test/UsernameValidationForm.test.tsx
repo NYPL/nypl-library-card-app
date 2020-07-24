@@ -1,22 +1,41 @@
 /* eslint-disable */
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
+import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 // `import` axios does not work so it must be required.
 const axios = require("axios");
+
+expect.extend(toHaveNoViolations);
 jest.mock("axios");
 
 import UsernameValidationForm from "../src/components/UsernameValidationForm";
 
 describe("UsernameValidationForm", () => {
+  let mockRegister;
+  let mockWatch;
+  let mockGetValues;
+
   beforeEach(() => {
+    mockRegister = jest.fn();
+    mockWatch = jest.fn();
+    mockGetValues = jest.fn();
     axios.mockClear();
   });
-  test("renders the basic label, input, and helper text elements", async () => {
-    const mockRegister = jest.fn();
-    const mockWatch = jest.fn();
-    const mockGetValues = jest.fn();
 
+  test("passes accessibility checks", async () => {
+    const { container } = render(
+      <UsernameValidationForm
+        register={mockRegister}
+        watch={mockWatch}
+        getValues={mockGetValues}
+      />
+    );
+
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  test("renders the basic label, input, and helper text elements", async () => {
     const { container } = render(
       <UsernameValidationForm
         register={mockRegister}
@@ -52,9 +71,7 @@ describe("UsernameValidationForm", () => {
     const tooShort = "user";
     const invalid = "usernam!";
     const justRight = "username";
-    const mockRegister = jest.fn();
-    const mockWatch = jest.fn();
-    let mockGetValues = jest.fn().mockReturnValue(tooShort);
+    mockGetValues = jest.fn().mockReturnValue(tooShort);
     const { rerender } = render(
       <UsernameValidationForm
         register={mockRegister}
@@ -101,9 +118,8 @@ describe("UsernameValidationForm", () => {
     axios.post.mockImplementation(() =>
       Promise.reject({ response: { data: { message: errorMessage } } })
     );
-    const mockRegister = jest.fn();
-    const mockWatch = jest.fn().mockReturnValue(true);
-    const mockGetValues = jest.fn().mockReturnValue("notAvailableUsername");
+    mockWatch = jest.fn().mockReturnValue(true);
+    mockGetValues = jest.fn().mockReturnValue("notAvailableUsername");
 
     const { container } = render(
       <UsernameValidationForm
@@ -144,9 +160,8 @@ describe("UsernameValidationForm", () => {
   test("renders a good message response from the API call", async () => {
     const message = "This username is available.";
     axios.post.mockImplementation(() => Promise.resolve({ data: { message } }));
-    const mockRegister = jest.fn();
-    const mockWatch = jest.fn().mockReturnValue(true);
-    const mockGetValues = jest.fn().mockReturnValue("availableUsername");
+    mockWatch = jest.fn().mockReturnValue(true);
+    mockGetValues = jest.fn().mockReturnValue("availableUsername");
 
     const { container } = render(
       <UsernameValidationForm
@@ -184,9 +199,7 @@ describe("UsernameValidationForm", () => {
 
   test("should render an error message if the input is invalid", async () => {
     const invalid = "test!!";
-    const mockRegister = jest.fn();
-    const mockWatch = jest.fn();
-    const mockGetValues = jest.fn().mockReturnValue(invalid);
+    mockGetValues = jest.fn().mockReturnValue(invalid);
     const message = "Username must be between 5-25 alphanumeric characters.";
     // Error-like object returned from react-hook-form
     const errors = {
