@@ -26,16 +26,16 @@ const ErrorBox = ({
         case "unrecognized-address":
           error = (
             <li>
-              This <a href="#patronStreet1">address</a> is invalid. Please enter
-              a valid address.
+              This <a href="#input-patronLine1-home">address</a> is invalid.
+              Please enter a valid address.
             </li>
           );
           break;
         case "unavailable-username":
           error = (
             <li>
-              This <a href="#patronUsername">username</a> is already taken.
-              Please try again.
+              This <a href="#input-patronUsername">username</a> is already
+              taken. Please try again.
             </li>
           );
           break;
@@ -68,22 +68,23 @@ const ErrorBox = ({
       if (debug && debug.birthdate) {
         error = (
           <li>
-            Please enter a valid <a href="#patronDob">date</a>, MM/DD/YYYY,
-            including slashes. If you are 12 or younger, please apply in person.
+            Please enter a valid <a href="#input-patronDob">date</a>,
+            MM/DD/YYYY, including slashes. If you are 12 or younger, please
+            apply in person.
           </li>
         );
       } else if (debug && debug.address) {
         error = (
           <li>
-            This <a href="#patronStreet1">address</a> is invalid. Please enter a
-            valid address.
+            This <a href="#input-patronLine1">address</a> is invalid. Please
+            enter a valid address.
           </li>
         );
       } else if (debug && debug.email) {
         error = (
           <li>
-            This <a href="#patronEmail">email address</a> is invalid. Please
-            enter a valid email address.
+            This <a href="#input-patronEmail">email address</a> is invalid.
+            Please enter a valid email address.
           </li>
         );
       } else {

@@ -29,7 +29,7 @@ function isDate(
 }
 
 /**
- * createAnchorID(wholeText)
+ * createAnchorText(wholeText)
  * Splits the error message into two parts to be used by the consumer to create
  * anchor tag text. The string ` field` is expected to in `wholeText`.
  *
@@ -51,18 +51,14 @@ function createAnchorText(wholeText: string) {
  * return {string}
  */
 function createAnchorID(key: string): string | null {
+  const addressElements = ["Line1", "City", "State", "Zip"];
   let hashElement = key ? `${key.charAt(0).toUpperCase()}${key.substr(1)}` : "";
-
-  if (hashElement === "DateOfBirth") {
-    hashElement = "Dob";
-  }
-
-  if (hashElement === "Line1") {
-    hashElement = "Street1";
-  }
 
   if (!hashElement) {
     return null;
+  }
+  if (addressElements.includes(hashElement)) {
+    hashElement = `${hashElement}-home`;
   }
 
   // @nypl/design-system-react-components prepends an `input` before the
@@ -136,7 +132,7 @@ function renderServerValidationError(object) {
         if (key === "address") {
           errorMessage = (
             <li key={index}>
-              <a href={createAnchorID("Street1")}>{object[key]}</a>
+              <a href={createAnchorID("Line1")}>{object[key]}</a>
             </li>
           );
         }

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import { isEmail } from "validator";
-import { Checkbox } from "@nypl/design-system-react-components";
+import { Checkbox, Accordion } from "@nypl/design-system-react-components";
 import { useForm } from "react-hook-form";
 import { isDate } from "../../utils/FormValidationUtils";
 import FormField from "../FormField/FormField";
@@ -14,23 +14,30 @@ import UsernameValidationForm from "../UsernameValidationForm";
 import LibraryListForm from "../LibraryListForm";
 import ilsLibraryList from "../../data/ilsLibraryList";
 import AcceptTermsForm from "../AcceptTermsForm";
+import AddressForm, { AddressTypes, AddressFields } from "../AddressForm";
 
 // The interface for the react-hook-form state data object.
 interface FormInput {
   firstName: string;
   lastName: string;
-  dateOfBirth: string;
+  birthDate: string;
   email: string;
-  line1: string;
-  line2: string;
-  city: string;
-  state: string;
-  zip: string;
+  "home-line1": string;
+  "home-line2": string;
+  "home-city": string;
+  "home-state": string;
+  "home-zip": string;
+  "work-line1": string;
+  "work-line2": string;
+  "work-city": string;
+  "work-state": string;
+  "work-zip": string;
   username: string;
   pin: string;
   ecommunicationsPref: boolean;
   location?: string;
   homeLibraryCode: string;
+  acceptTerms: boolean;
 }
 
 const errorMessages = {
@@ -41,10 +48,12 @@ const errorMessages = {
   username: "Username must be between 5-25 alphanumeric characters.",
   pin: "Please enter a 4-digit PIN.",
   location: "Please select an address option.",
-  line1: "Please enter a valid street address.",
-  city: "Please enter a valid city.",
-  state: "Please enter a 2-character state abbreviation.",
-  zip: "Please enter a 5-digit postal code.",
+  address: {
+    line1: "Please enter a valid street address.",
+    city: "Please enter a valid city.",
+    state: "Please enter a 2-character state abbreviation.",
+    zip: "Please enter a 5-digit postal code.",
+  } as AddressFields,
 };
 
 const LibraryCardForm = () => {
@@ -198,12 +207,12 @@ const LibraryCardForm = () => {
           />
         </div>
         <FormField
-          id="patronDob"
+          id="patronBirthDate"
           className="nypl-date-field"
           type="text"
           instructionText="MM/DD/YYYY, including slashes"
           label="Date of Birth"
-          fieldName="dateOfBirth"
+          fieldName="birthDate"
           isRequired
           errorState={errors}
           maxLength={10}
@@ -291,65 +300,26 @@ const LibraryCardForm = () => {
           .
         </p>
 
-        <FormField
-          id="patronStreet1"
-          className="nypl-text-field"
-          type="text"
-          label="Street Address"
-          fieldName="line1"
-          isRequired
-          errorState={errors}
-          childRef={register({
-            required: errorMessages.line1,
-          })}
+        <AddressForm
+          type={AddressTypes.Home}
+          register={register}
+          errors={errors}
+          errorMessages={errorMessages.address}
         />
-        <FormField
-          id="patronStreet2"
-          className="nypl-text-field"
-          type="text"
-          label="Apartment / Suite"
-          fieldName="line2"
-          childRef={register()}
-        />
-        <FormField
-          id="patronCity"
-          className="nypl-text-field"
-          type="text"
-          label="City"
-          fieldName="city"
-          isRequired
-          errorState={errors}
-          childRef={register({
-            required: errorMessages.city,
-          })}
-        />
-        <FormField
-          id="patronState"
-          className="nypl-text-field"
-          type="text"
-          instructionText="2-letter abbreviation"
-          label="State"
-          fieldName="state"
-          isRequired
-          errorState={errors}
-          maxLength={2}
-          childRef={register({
-            validate: (val) => val.length === 2 || errorMessages.state,
-          })}
-        />
-        <FormField
-          id="patronZip"
-          className="nypl-text-field"
-          type="text"
-          label="Postal Code"
-          fieldName="zip"
-          isRequired
-          errorState={errors}
-          maxLength={5}
-          childRef={register({
-            validate: (val) => val.length === 5 || errorMessages.zip,
-          })}
-        />
+
+        <h3>Work Address</h3>
+        <Accordion
+          id="work-address-accordion"
+          accordionLabel="Optional Fields"
+          className="work-address-accordion"
+        >
+          <AddressForm
+            type={AddressTypes.Work}
+            register={register}
+            errors={errors}
+            errorMessages={errorMessages.address}
+          />
+        </Accordion>
 
         <LibraryListForm
           register={register}
