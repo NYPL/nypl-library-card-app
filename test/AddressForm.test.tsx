@@ -2,16 +2,14 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
-import AddressForm, {
-  AddressTypes,
-  AddressErrors,
-} from "../src/components/AddressForm";
+import AddressForm, { AddressTypes } from "../src/components/AddressForm";
+import { Address } from "../src/interfaces";
 
 expect.extend(toHaveNoViolations);
 
 const mockRegister = jest.fn();
 const noHookFormErrors = {};
-const addressErrorMessages: AddressErrors = {
+const addressErrorMessages: Address = {
   line1: "Please enter a valid street address.",
   city: "Please enter a valid city.",
   state: "Please enter a 2-character state abbreviation.",

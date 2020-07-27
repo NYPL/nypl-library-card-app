@@ -7,7 +7,7 @@ import { isEmail, isAlphanumeric, isNumeric, isLength } from "validator";
 import Cors from "cors";
 import config from "../../appConfig";
 import logger from "../logger/index";
-import { AddressFields } from "../components/AddressForm";
+import { Address } from "../interfaces";
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -63,8 +63,8 @@ const constructErrorObject = (
 };
 
 export interface AddressesType {
-  home: Partial<AddressFields>;
-  work?: Partial<AddressFields>;
+  home: Partial<Address>;
+  work?: Partial<Address>;
 }
 /**
  * constructAddresses
@@ -101,6 +101,7 @@ const constructPatronObject = (object) => {
     ecommunicationsPref,
     agencyType,
     usernameHasBeenValidated,
+    policyType,
   } = object;
 
   const addresses: AddressesType = constructAddresses(object);
@@ -198,6 +199,7 @@ const constructPatronObject = (object) => {
     ecommunicationsPref,
     patron_agency: agencyType || config.agencyType.default,
     usernameHasBeenValidated: usernameHasBeenValidatedBool,
+    policyType: policyType || "simplye",
   };
 };
 

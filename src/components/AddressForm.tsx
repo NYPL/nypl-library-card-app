@@ -1,31 +1,16 @@
 import React from "react";
 import FormField from "./FormField/FormField";
+import { Address } from "../interfaces";
 
 export enum AddressTypes {
   Home = "home",
   Work = "work",
 }
 
-export interface AddressFields {
-  line1: string;
-  line2?: string;
-  city: string;
-  state: string;
-  zip: string;
-}
-
-export interface AddressErrors {
-  line1: string;
-  line2?: string;
-  city: string;
-  state: string;
-  zip: string;
-}
-
 interface AddressFormProps {
   type: AddressTypes;
   register: any;
-  errorMessages?: AddressErrors;
+  errorMessages?: Address;
   errors?: {};
 }
 

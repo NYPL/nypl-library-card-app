@@ -14,7 +14,9 @@ import UsernameValidationForm from "../UsernameValidationForm";
 import LibraryListForm from "../LibraryListForm";
 import ilsLibraryList from "../../data/ilsLibraryList";
 import AcceptTermsForm from "../AcceptTermsForm";
-import AddressForm, { AddressTypes, AddressFields } from "../AddressForm";
+import AddressForm, { AddressTypes } from "../AddressForm";
+import { Address } from "../../interfaces";
+import useParamsContext from "../../context/ParamsContext";
 
 // The interface for the react-hook-form state data object.
 interface FormInput {
@@ -53,7 +55,7 @@ const errorMessages = {
     city: "Please enter a valid city.",
     state: "Please enter a 2-character state abbreviation.",
     zip: "Please enter a 5-digit postal code.",
-  } as AddressFields,
+  } as Address,
 };
 
 const LibraryCardForm = () => {
@@ -62,6 +64,7 @@ const LibraryCardForm = () => {
   const [apiResults, setApiResults] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [csrfToken, setCsrfToken] = useState(null);
+  const params = useParamsContext();
 
   // Will run whenever the `errorObj` has changes, specifically for
   // bad requests.
@@ -354,6 +357,14 @@ const LibraryCardForm = () => {
         />
 
         <AcceptTermsForm register={register} />
+
+        <input
+          type="hidden"
+          aria-hidden={true}
+          name="policyType"
+          defaultValue={params.policyType || undefined}
+          ref={register()}
+        />
 
         <div>
           <input
