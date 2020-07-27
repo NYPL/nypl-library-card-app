@@ -22,7 +22,7 @@ const reactHookFormErrors = {
   },
 };
 
-describe.only("AgeForm", () => {
+describe("AgeForm", () => {
   test("it passes accessibility checks for the field input", async () => {
     const { container } = render(
       <AgeForm
