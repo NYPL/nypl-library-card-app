@@ -95,13 +95,14 @@ const constructPatronObject = (object) => {
     firstName,
     lastName,
     email,
-    birthDate,
+    birthdate,
     username,
     pin,
     ecommunicationsPref,
     agencyType,
     usernameHasBeenValidated,
     policyType,
+    ageGate,
   } = object;
 
   const addresses: AddressesType = constructAddresses(object);
@@ -116,8 +117,13 @@ const constructPatronObject = (object) => {
     errorObj = { ...errorObj, lastName: "Last Name field is empty." };
   }
 
-  if (isEmpty(birthDate)) {
-    errorObj = { ...errorObj, birthDate: "Date of Birth field is empty." };
+  if (policyType === "webApplicant" && isEmpty(birthdate)) {
+    errorObj = { ...errorObj, birthdate: "Date of Birth field is empty." };
+  } else if (policyType === "simplye" && !ageGate) {
+    errorObj = {
+      ...errorObj,
+      ageGate: "You must be 13 years or older to continue.",
+    };
   }
 
   if (isEmpty(addresses.home.line1)) {
@@ -191,7 +197,8 @@ const constructPatronObject = (object) => {
   return {
     name: fullName,
     email,
-    birthdate: birthDate,
+    birthdate,
+    ageGate,
     address: addresses.home,
     workAddress: !isEmpty(addresses.work) ? addresses.work : null,
     username,
@@ -358,7 +365,7 @@ export async function createPatron(req, res) {
     //     details: {
     //       firstName: "First Name field is empty.",
     //       lastName: "Last Name field is empty.",
-    //       birthDate: "Date of Birth field is empty.",
+    //       birthdate: "Date of Birth field is empty.",
     //       line1: "Street Address field is empty.",
     //       city: "City field is empty.",
     //       state: "State field is empty.",

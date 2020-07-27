@@ -6,7 +6,6 @@ import { isEmail } from "validator";
 import { Checkbox, Accordion } from "@nypl/design-system-react-components";
 import { useForm } from "react-hook-form";
 import Router from "next/router";
-import { isDate } from "../../utils/FormValidationUtils";
 import FormField from "../FormField/FormField";
 import ApiErrors from "../ApiErrors/ApiErrors";
 import config from "../../../appConfig";
@@ -19,12 +18,13 @@ import AddressForm, { AddressTypes } from "../AddressForm";
 import { Address } from "../../interfaces";
 import useParamsContext from "../../context/ParamsContext";
 import useFormResultsContext from "../../context/FormResultsContext";
+import AgeForm from "../AgeForm";
 
 // The interface for the react-hook-form state data object.
 interface FormInput {
   firstName: string;
   lastName: string;
-  birthDate: string;
+  birthdate: string;
   email: string;
   "home-line1": string;
   "home-line2": string;
@@ -48,6 +48,7 @@ const errorMessages = {
   firstName: "Please enter a valid first name.",
   lastName: "Please enter a valid last name.",
   birthdate: "Please enter a valid date, MM/DD/YYYY, including slashes.",
+  ageGate: "You must be 13 years or older to continue.",
   email: "Please enter a valid email address.",
   username: "Username must be between 5-25 alphanumeric characters.",
   pin: "Please enter a 4-digit PIN.",
@@ -208,22 +209,14 @@ const LibraryCardForm = () => {
             })}
           />
         </div>
-        <FormField
-          id="patronBirthDate"
-          className="nypl-date-field"
-          type="text"
-          instructionText="MM/DD/YYYY, including slashes"
-          label="Date of Birth"
-          fieldName="birthDate"
-          isRequired
-          errorState={errors}
-          maxLength={10}
-          // This `validate` callback allows for specific validation
-          childRef={register({
-            validate: (val) =>
-              (val.length <= 10 && isDate(val)) || errorMessages.birthdate,
-          })}
+
+        <AgeForm
+          policyType={params.policyType}
+          errors={errors}
+          register={register}
+          errorMessages={errorMessages}
         />
+
         <FormField
           id="patronEmail"
           className="nypl-text-field"
