@@ -5,6 +5,7 @@ import isEmpty from "lodash/isEmpty";
 import { isEmail } from "validator";
 import { Checkbox, Accordion } from "@nypl/design-system-react-components";
 import { useForm } from "react-hook-form";
+import Router from "next/router";
 import { isDate } from "../../utils/FormValidationUtils";
 import FormField from "../FormField/FormField";
 import ApiErrors from "../ApiErrors/ApiErrors";
@@ -17,6 +18,7 @@ import AcceptTermsForm from "../AcceptTermsForm";
 import AddressForm, { AddressTypes } from "../AddressForm";
 import { Address } from "../../interfaces";
 import useParamsContext from "../../context/ParamsContext";
+import useFormResultsContext from "../../context/FormResultsContext";
 
 // The interface for the react-hook-form state data object.
 interface FormInput {
@@ -61,10 +63,10 @@ const errorMessages = {
 const LibraryCardForm = () => {
   const errorSection = React.createRef<HTMLDivElement>();
   const [errorObj, setErrorObj] = useState(null);
-  const [apiResults, setApiResults] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [csrfToken, setCsrfToken] = useState(null);
   const params = useParamsContext();
+  const { setFormResults } = useFormResultsContext();
 
   // Will run whenever the `errorObj` has changes, specifically for
   // bad requests.
@@ -115,19 +117,16 @@ const LibraryCardForm = () => {
         // }
       )
       .then((response) => {
-        // This is setting the state for returned valid response, but
-        // it's not being used. The updated confirmation page is still TBD.
-        setApiResults(response.data);
         // Don't render the loading component anymore.
         setIsLoading(false);
-        // TODO: Waiting on whether we will make a redirect in the app
-        // or in Drupal.
-        // window.location.href = window.confirmationURL;
+        // Set the returned response as the global data.
+        setFormResults(response.data);
+        Router.push("/confirmation?newCard=true");
       })
       .catch((error) => {
         // There are server-side errors!
         // So render the component to display them.
-        setErrorObj(error.response.data);
+        setErrorObj(error.response?.data);
         setIsLoading(false);
       });
   };

@@ -35,3 +35,20 @@ export interface Params {
   parentsEmail?: string;
   parentsAddress?: Partial<Address>;
 }
+
+export interface FormResults {
+  status?: number;
+  type?: string;
+  link?: string;
+  barcode: string;
+  username: string;
+  pin: string;
+  temporary: boolean;
+  message: string;
+  patronId: number;
+}
+
+export interface FormResultsContextType {
+  setFormResults: (formResults) => {};
+  formResults: FormResults;
+}
