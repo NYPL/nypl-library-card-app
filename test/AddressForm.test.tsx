@@ -1,28 +1,70 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
-
 import AddressForm, {
   AddressTypes,
   AddressErrors,
 } from "../src/components/AddressForm";
 
+expect.extend(toHaveNoViolations);
+
+const mockRegister = jest.fn();
+const noHookFormErrors = {};
+const addressErrorMessages: AddressErrors = {
+  line1: "Please enter a valid street address.",
+  city: "Please enter a valid city.",
+  state: "Please enter a 2-character state abbreviation.",
+  zip: "Please enter a 5-digit postal code.",
+};
+// The `errors` object shape from `react-hook-form`.
+const reactHookFormErrors = {
+  "home-line1": {
+    message: "Please enter a valid street address.",
+  },
+  "home-city": {
+    message: "Please enter a valid city.",
+  },
+  "home-state": {
+    message: "Please enter a 2-character state abbreviation.",
+  },
+  "home-zip": {
+    message: "Please enter a 5-digit postal code.",
+  },
+};
+
 describe("AddressForm", () => {
-  const mockRegister = jest.fn();
-  const errors = {};
-  const addressErrorMessages: AddressErrors = {
-    line1: "Please enter a valid street address.",
-    city: "Please enter a valid city.",
-    state: "Please enter a 2-character state abbreviation.",
-    zip: "Please enter a 5-digit postal code.",
-  };
+  test("it passes accessibility checks", async () => {
+    const { container } = render(
+      <AddressForm
+        type={AddressTypes.Home}
+        register={mockRegister}
+        errors={noHookFormErrors}
+        errorMessages={addressErrorMessages}
+      />
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  test("it passess accessibilty checks with error messages", async () => {
+    const { container } = render(
+      <AddressForm
+        type={AddressTypes.Home}
+        register={mockRegister}
+        errors={reactHookFormErrors}
+        errorMessages={addressErrorMessages}
+      />
+    );
+
+    expect(await axe(container)).toHaveNoViolations();
+  });
 
   test("it should render five fields", () => {
     render(
       <AddressForm
         type={AddressTypes.Home}
         register={mockRegister}
-        errors={errors}
+        errors={noHookFormErrors}
         errorMessages={addressErrorMessages}
       />
     );
@@ -51,7 +93,7 @@ describe("AddressForm", () => {
       <AddressForm
         type={AddressTypes.Work}
         register={mockRegister}
-        errors={errors}
+        errors={noHookFormErrors}
         errorMessages={addressErrorMessages}
       />
     );
@@ -72,35 +114,25 @@ describe("AddressForm", () => {
   });
 
   test("it should render any error messages for required fields", () => {
-    // The `errors` object shape from `react-hook-form`.
-    const errors = {
-      "home-line1": {
-        message: "Please enter a valid street address.",
-      },
-      "home-city": {
-        message: "Please enter a valid city.",
-      },
-      "home-state": {
-        message: "Please enter a 2-character state abbreviation.",
-      },
-      "home-zip": {
-        message: "Please enter a 5-digit postal code.",
-      },
-    };
-
     render(
       <AddressForm
         type={AddressTypes.Home}
         register={mockRegister}
-        errors={errors}
+        errors={reactHookFormErrors}
         errorMessages={addressErrorMessages}
       />
     );
 
-    const line1Error = screen.getByText(errors["home-line1"].message);
-    const cityError = screen.getByText(errors["home-city"].message);
-    const stateError = screen.getByText(errors["home-state"].message);
-    const zipError = screen.getByText(errors["home-zip"].message);
+    const line1Error = screen.getByText(
+      reactHookFormErrors["home-line1"].message
+    );
+    const cityError = screen.getByText(
+      reactHookFormErrors["home-city"].message
+    );
+    const stateError = screen.getByText(
+      reactHookFormErrors["home-state"].message
+    );
+    const zipError = screen.getByText(reactHookFormErrors["home-zip"].message);
 
     expect(line1Error).toBeInTheDocument();
     expect(cityError).toBeInTheDocument();
