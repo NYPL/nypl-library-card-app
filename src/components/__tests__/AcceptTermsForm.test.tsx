@@ -3,16 +3,16 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
-
+import { TestHookFormProvider } from "../../../testHelper/utils";
 import AcceptTermsForm from "../AcceptTermsForm";
 
 expect.extend(toHaveNoViolations);
 
-const mockRegister = jest.fn();
-
 describe("AcceptTermsForm", () => {
   beforeEach(() => {
-    render(<AcceptTermsForm register={mockRegister} />);
+    render(<AcceptTermsForm />, {
+      wrapper: TestHookFormProvider,
+    });
   });
 
   test("renders text with three links", () => {
@@ -45,7 +45,9 @@ describe("AcceptTermsForm", () => {
 
 describe("Accessibility check", () => {
   test("passes axe", async () => {
-    const { container } = render(<AcceptTermsForm register={mockRegister} />);
+    const { container } = render(<AcceptTermsForm />, {
+      wrapper: TestHookFormProvider,
+    });
     expect(await axe(container)).toHaveNoViolations();
   });
 });

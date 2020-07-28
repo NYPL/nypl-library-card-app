@@ -3,6 +3,7 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
+import { TestHookFormProvider } from "../../../testHelper/utils";
 // `import` axios does not work so it must be required.
 const axios = require("axios");
 
@@ -12,37 +13,22 @@ jest.mock("axios");
 import UsernameValidationForm from "../UsernameValidationForm";
 
 describe("UsernameValidationForm", () => {
-  let mockRegister;
-  let mockWatch;
-  let mockGetValues;
-
   beforeEach(() => {
-    mockRegister = jest.fn();
-    mockWatch = jest.fn();
-    mockGetValues = jest.fn();
     axios.mockClear();
   });
 
   test("passes accessibility checks", async () => {
-    const { container } = render(
-      <UsernameValidationForm
-        register={mockRegister}
-        watch={mockWatch}
-        getValues={mockGetValues}
-      />
-    );
+    const { container } = render(<UsernameValidationForm />, {
+      wrapper: TestHookFormProvider,
+    });
 
     expect(await axe(container)).toHaveNoViolations();
   });
 
   test("renders the basic label, input, and helper text elements", async () => {
-    const { container } = render(
-      <UsernameValidationForm
-        register={mockRegister}
-        watch={mockWatch}
-        getValues={mockGetValues}
-      />
-    );
+    const { container } = render(<UsernameValidationForm />, {
+      wrapper: TestHookFormProvider,
+    });
 
     const label = screen.getByText("Username");
     const labelRequired = screen.getByText("Required");
@@ -71,13 +57,14 @@ describe("UsernameValidationForm", () => {
     const tooShort = "user";
     const invalid = "usernam!";
     const justRight = "username";
-    mockGetValues = jest.fn().mockReturnValue(tooShort);
+    // We want to mock these functions from `react-hook-form` so we override
+    // them and their return values here before mounting the component.
+    const mockWatch = jest.fn().mockReturnValue(true);
+    let mockGetValues = jest.fn().mockReturnValue(tooShort);
     const { rerender } = render(
-      <UsernameValidationForm
-        register={mockRegister}
-        watch={mockWatch}
-        getValues={mockGetValues}
-      />
+      <TestHookFormProvider getValues={mockGetValues} watch={mockWatch}>
+        <UsernameValidationForm />
+      </TestHookFormProvider>
     );
     let validateButton = screen.queryByRole("button");
 
@@ -88,12 +75,11 @@ describe("UsernameValidationForm", () => {
     // Now let's mock another invalid value.
     mockGetValues = jest.fn().mockReturnValue(invalid);
     rerender(
-      <UsernameValidationForm
-        register={mockRegister}
-        watch={mockWatch}
-        getValues={mockGetValues}
-      />
+      <TestHookFormProvider getValues={mockGetValues} watch={mockWatch}>
+        <UsernameValidationForm />
+      </TestHookFormProvider>
     );
+
     validateButton = screen.queryByRole("button");
     // And the button should still not render.
     expect(validateButton).not.toBeInTheDocument();
@@ -101,12 +87,11 @@ describe("UsernameValidationForm", () => {
     // Mock a valid value.
     mockGetValues = jest.fn().mockReturnValue(justRight);
     rerender(
-      <UsernameValidationForm
-        register={mockRegister}
-        watch={mockWatch}
-        getValues={mockGetValues}
-      />
+      <TestHookFormProvider getValues={mockGetValues} watch={mockWatch}>
+        <UsernameValidationForm />
+      </TestHookFormProvider>
     );
+
     validateButton = screen.queryByRole("button");
     // Now the button will render.
     expect(validateButton).toBeInTheDocument();
@@ -118,15 +103,13 @@ describe("UsernameValidationForm", () => {
     axios.post.mockImplementation(() =>
       Promise.reject({ response: { data: { message: errorMessage } } })
     );
-    mockWatch = jest.fn().mockReturnValue(true);
-    mockGetValues = jest.fn().mockReturnValue("notAvailableUsername");
+    const mockWatch = jest.fn().mockReturnValue(true);
+    const mockGetValues = jest.fn().mockReturnValue("notAvailableUsername");
 
     const { container } = render(
-      <UsernameValidationForm
-        register={mockRegister}
-        watch={mockWatch}
-        getValues={mockGetValues}
-      />
+      <TestHookFormProvider watch={mockWatch} getValues={mockGetValues}>
+        <UsernameValidationForm />
+      </TestHookFormProvider>
     );
 
     const button = await screen.findByText("Check if username is available");
@@ -160,15 +143,13 @@ describe("UsernameValidationForm", () => {
   test("renders a good message response from the API call", async () => {
     const message = "This username is available.";
     axios.post.mockImplementation(() => Promise.resolve({ data: { message } }));
-    mockWatch = jest.fn().mockReturnValue(true);
-    mockGetValues = jest.fn().mockReturnValue("availableUsername");
+    const mockWatch = jest.fn().mockReturnValue(true);
+    const mockGetValues = jest.fn().mockReturnValue("availableUsername");
 
     const { container } = render(
-      <UsernameValidationForm
-        register={mockRegister}
-        watch={mockWatch}
-        getValues={mockGetValues}
-      />
+      <TestHookFormProvider watch={mockWatch} getValues={mockGetValues}>
+        <UsernameValidationForm />
+      </TestHookFormProvider>
     );
 
     const button = await screen.findByText("Check if username is available");
@@ -199,7 +180,7 @@ describe("UsernameValidationForm", () => {
 
   test("should render an error message if the input is invalid", async () => {
     const invalid = "test!!";
-    mockGetValues = jest.fn().mockReturnValue(invalid);
+    const mockGetValues = jest.fn().mockReturnValue(invalid);
     const message = "Username must be between 5-25 alphanumeric characters.";
     // Error-like object returned from react-hook-form
     const errors = {
@@ -212,12 +193,9 @@ describe("UsernameValidationForm", () => {
     // the `errors` object that react-hook-form returns so we are both, setting
     // it up and returning it.
     render(
-      <UsernameValidationForm
-        register={mockRegister}
-        watch={mockWatch}
-        getValues={mockGetValues}
-        errors={errors}
-      />
+      <TestHookFormProvider errors={errors} getValues={mockGetValues}>
+        <UsernameValidationForm />
+      </TestHookFormProvider>
     );
     // Casting the returned value so we can access `value`.
     const input = screen.getByRole("textbox") as HTMLInputElement;

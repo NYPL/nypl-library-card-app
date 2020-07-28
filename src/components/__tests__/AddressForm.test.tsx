@@ -3,12 +3,11 @@ import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import AddressForm, { AddressTypes } from "../AddressForm";
+import { TestHookFormProvider } from "../../../testHelper/utils";
 import { Address } from "../../interfaces";
 
 expect.extend(toHaveNoViolations);
 
-const mockRegister = jest.fn();
-const noHookFormErrors = {};
 const addressErrorMessages: Address = {
   line1: "Please enter a valid street address.",
   city: "Please enter a valid city.",
@@ -36,22 +35,23 @@ describe("AddressForm", () => {
     const { container } = render(
       <AddressForm
         type={AddressTypes.Home}
-        register={mockRegister}
-        errors={noHookFormErrors}
         errorMessages={addressErrorMessages}
-      />
+      />,
+      {
+        wrapper: TestHookFormProvider,
+      }
     );
     expect(await axe(container)).toHaveNoViolations();
   });
 
   test("it passess accessibilty checks with error messages", async () => {
     const { container } = render(
-      <AddressForm
-        type={AddressTypes.Home}
-        register={mockRegister}
-        errors={reactHookFormErrors}
-        errorMessages={addressErrorMessages}
-      />
+      <TestHookFormProvider errors={reactHookFormErrors}>
+        <AddressForm
+          type={AddressTypes.Home}
+          errorMessages={addressErrorMessages}
+        />
+      </TestHookFormProvider>
     );
 
     expect(await axe(container)).toHaveNoViolations();
@@ -61,10 +61,11 @@ describe("AddressForm", () => {
     render(
       <AddressForm
         type={AddressTypes.Home}
-        register={mockRegister}
-        errors={noHookFormErrors}
         errorMessages={addressErrorMessages}
-      />
+      />,
+      {
+        wrapper: TestHookFormProvider,
+      }
     );
 
     // Unfortunately, getByLabelText doesn't work for these label since the
@@ -90,10 +91,11 @@ describe("AddressForm", () => {
     render(
       <AddressForm
         type={AddressTypes.Work}
-        register={mockRegister}
-        errors={noHookFormErrors}
         errorMessages={addressErrorMessages}
-      />
+      />,
+      {
+        wrapper: TestHookFormProvider,
+      }
     );
 
     // Since none of the fields are required for the work address, we can
@@ -113,12 +115,12 @@ describe("AddressForm", () => {
 
   test("it should render any error messages for required fields", () => {
     render(
-      <AddressForm
-        type={AddressTypes.Home}
-        register={mockRegister}
-        errors={reactHookFormErrors}
-        errorMessages={addressErrorMessages}
-      />
+      <TestHookFormProvider errors={reactHookFormErrors}>
+        <AddressForm
+          type={AddressTypes.Home}
+          errorMessages={addressErrorMessages}
+        />
+      </TestHookFormProvider>
     );
 
     const line1Error = screen.getByText(

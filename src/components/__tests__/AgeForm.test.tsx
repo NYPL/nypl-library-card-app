@@ -3,10 +3,10 @@ import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import AgeForm from "../AgeForm";
+import { TestHookFormProvider } from "../../../testHelper/utils";
 
 expect.extend(toHaveNoViolations);
 
-const mockRegister = jest.fn();
 const noHookFormErrors = {};
 const ageFormErrorMessages = {
   ageGate: "You must be 13 years or older to continue.",
@@ -24,36 +24,26 @@ const reactHookFormErrors = {
 
 describe("AgeForm", () => {
   test("it passes accessibility checks for the field input", async () => {
-    const { container } = render(
-      <AgeForm
-        register={mockRegister}
-        errors={noHookFormErrors}
-        errorMessages={noHookFormErrors}
-      />
-    );
+    const { container } = render(<AgeForm errorMessages={noHookFormErrors} />, {
+      wrapper: TestHookFormProvider,
+    });
     expect(await axe(container)).toHaveNoViolations();
   });
 
   test("it passes accessibility checks for the checkbox input", async () => {
     const { container } = render(
-      <AgeForm
-        policyType="simplye"
-        register={mockRegister}
-        errors={noHookFormErrors}
-        errorMessages={noHookFormErrors}
-      />
+      <AgeForm policyType="simplye" errorMessages={noHookFormErrors} />,
+      {
+        wrapper: TestHookFormProvider,
+      }
     );
     expect(await axe(container)).toHaveNoViolations();
   });
 
   test("it renders an input field with the default webApplicant policyType", () => {
-    render(
-      <AgeForm
-        register={mockRegister}
-        errors={noHookFormErrors}
-        errorMessages={noHookFormErrors}
-      />
-    );
+    render(<AgeForm errorMessages={noHookFormErrors} />, {
+      wrapper: TestHookFormProvider,
+    });
 
     const description = screen.getByText("MM/DD/YYYY, including slashes");
     const input = screen.getByRole("textbox", {
@@ -69,14 +59,9 @@ describe("AgeForm", () => {
   });
 
   test("it renders a checkbox with the simplye policyType", () => {
-    render(
-      <AgeForm
-        policyType="simplye"
-        register={mockRegister}
-        errors={noHookFormErrors}
-        errorMessages={noHookFormErrors}
-      />
-    );
+    render(<AgeForm policyType="simplye" errorMessages={noHookFormErrors} />, {
+      wrapper: TestHookFormProvider,
+    });
 
     const description = screen.queryByText("MM/DD/YYYY, including slashes");
     const input = screen.queryByRole("textbox", {
@@ -92,14 +77,9 @@ describe("AgeForm", () => {
   });
 
   test("updates the age gate checkbox", async () => {
-    render(
-      <AgeForm
-        policyType="simplye"
-        register={mockRegister}
-        errors={noHookFormErrors}
-        errorMessages={noHookFormErrors}
-      />
-    );
+    render(<AgeForm policyType="simplye" errorMessages={noHookFormErrors} />, {
+      wrapper: TestHookFormProvider,
+    });
 
     const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
 
@@ -111,11 +91,9 @@ describe("AgeForm", () => {
 
   test("it should render a webApplicant error message", () => {
     render(
-      <AgeForm
-        register={mockRegister}
-        errors={reactHookFormErrors}
-        errorMessages={ageFormErrorMessages}
-      />
+      <TestHookFormProvider errors={reactHookFormErrors}>
+        <AgeForm errorMessages={ageFormErrorMessages} />
+      </TestHookFormProvider>
     );
 
     const inputError = screen.getByText(ageFormErrorMessages["birthdate"]);
@@ -124,12 +102,9 @@ describe("AgeForm", () => {
 
   test("it should render a simplye error message", () => {
     render(
-      <AgeForm
-        policyType="simplye"
-        register={mockRegister}
-        errors={reactHookFormErrors}
-        errorMessages={ageFormErrorMessages}
-      />
+      <TestHookFormProvider errors={reactHookFormErrors}>
+        <AgeForm policyType="simplye" errorMessages={ageFormErrorMessages} />
+      </TestHookFormProvider>
     );
 
     const inputError = screen.getByText(ageFormErrorMessages["ageGate"]);

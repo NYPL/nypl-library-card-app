@@ -3,14 +3,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { isAlphanumeric } from "validator";
 import { Button } from "@nypl/design-system-react-components";
+import { useFormContext } from "react-hook-form";
 import FormField from "./FormField";
 
 interface UsernameValidationFormProps {
-  watch: (value) => boolean;
-  getValues: (value) => string;
-  register: any;
   errorMessage?: string;
-  errors?: {};
 }
 
 /**
@@ -22,17 +19,14 @@ interface UsernameValidationFormProps {
  * re-evaluate the username (and make one less request to the NYPL ILS).
  */
 const UsernameValidationForm = ({
-  watch,
-  getValues,
-  register,
   errorMessage = "",
-  errors = {},
 }: UsernameValidationFormProps) => {
   const defaultState = {
     available: false,
     message: "",
   };
   const [usernameIsAvailable, setUsernameIsAvailable] = useState(defaultState);
+  const { watch, getValues, register, errors } = useFormContext();
   const usernameWatch = watch("username");
 
   // Whenever the username input changes, revert back to the default state.
@@ -106,7 +100,7 @@ const UsernameValidationForm = ({
         isRequired
         errorState={errors}
         maxLength={25}
-        childRef={register({
+        ref={register({
           validate: (val) => inputValidation(val) || errorMessage,
         })}
       />

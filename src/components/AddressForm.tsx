@@ -1,6 +1,7 @@
 import React from "react";
 import FormField from "./FormField";
 import { Address } from "../interfaces";
+import { useFormContext } from "react-hook-form";
 
 export enum AddressTypes {
   Home = "home",
@@ -9,9 +10,7 @@ export enum AddressTypes {
 
 interface AddressFormProps {
   type: AddressTypes;
-  register: any;
-  errorMessages?: Address;
-  errors?: {};
+  errorMessages: Address;
 }
 
 /**
@@ -20,12 +19,10 @@ interface AddressFormProps {
  * street address (line1), second street address (line2), city, state,
  * and zip code.
  */
-const AddressForm = ({
-  type,
-  register,
-  errorMessages,
-  errors,
-}: AddressFormProps) => {
+const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
+  // This component must be used within the `react-hook-form` provider so that
+  // these functions are available to use.
+  const { register, errors } = useFormContext();
   const MAXLENGTHSTATE = 2;
   const MAXLENGTHZIP = 5;
   // Only the home address is required. The work address is optional.
@@ -53,7 +50,7 @@ const AddressForm = ({
         fieldName={`${type}-line1`}
         isRequired={isRequired}
         errorState={errors}
-        childRef={register({
+        ref={register({
           required: {
             value: isRequired,
             message: errorMessages.line1,
@@ -66,7 +63,7 @@ const AddressForm = ({
         type="text"
         label="Apartment / Suite"
         fieldName={`${type}-line2`}
-        childRef={register()}
+        ref={register()}
       />
       <FormField
         id={`patronCity-${type}`}
@@ -76,7 +73,7 @@ const AddressForm = ({
         fieldName={`${type}-city`}
         isRequired={isRequired}
         errorState={errors}
-        childRef={register({
+        ref={register({
           required: {
             value: isRequired,
             message: errorMessages.city,
@@ -93,7 +90,7 @@ const AddressForm = ({
         isRequired={isRequired}
         errorState={errors}
         maxLength={MAXLENGTHSTATE}
-        childRef={register({
+        ref={register({
           validate: lengthValidation(MAXLENGTHSTATE, "state"),
         })}
       />
@@ -106,7 +103,7 @@ const AddressForm = ({
         isRequired={isRequired}
         errorState={errors}
         maxLength={MAXLENGTHZIP}
-        childRef={register({
+        ref={register({
           validate: lengthValidation(MAXLENGTHZIP, "zip"),
         })}
       />

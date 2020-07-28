@@ -4,6 +4,7 @@ import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import LibraryListForm, { LibraryListObject } from "../LibraryListForm";
+import { TestHookFormProvider } from "../../../testHelper/utils";
 
 expect.extend(toHaveNoViolations);
 
@@ -12,28 +13,22 @@ const libraryList: LibraryListObject[] = [
   { value: "sasb", label: "Schwarzman" },
   { value: "schomburg", label: "Schomburg" },
 ];
-const mockRegister = jest.fn();
 
 describe("LibraryListForm", () => {
   test("passes accessibility checks", async () => {
     const { container } = render(
-      <LibraryListForm
-        register={mockRegister}
-        libraryList={libraryList}
-        defaultValue="eb"
-      />
+      <LibraryListForm libraryList={libraryList} defaultValue="eb" />,
+      {
+        wrapper: TestHookFormProvider,
+      }
     );
     expect(await axe(container)).toHaveNoViolations();
   });
 
   test("renders a label, select, and description", () => {
-    render(
-      <LibraryListForm
-        register={mockRegister}
-        libraryList={libraryList}
-        defaultValue="eb"
-      />
-    );
+    render(<LibraryListForm libraryList={libraryList} defaultValue="eb" />, {
+      wrapper: TestHookFormProvider,
+    });
 
     expect(screen.getByLabelText("Home Library:")).toBeInTheDocument();
     // `combobox` is the role for `select` elements.
@@ -46,13 +41,9 @@ describe("LibraryListForm", () => {
   });
 
   test("it updates the selected value from the dropdown", async () => {
-    render(
-      <LibraryListForm
-        register={mockRegister}
-        libraryList={libraryList}
-        defaultValue="eb"
-      />
-    );
+    render(<LibraryListForm libraryList={libraryList} defaultValue="eb" />, {
+      wrapper: TestHookFormProvider,
+    });
 
     const select = screen.getByRole("combobox");
 
