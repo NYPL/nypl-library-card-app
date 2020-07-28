@@ -6,19 +6,19 @@ import { isEmail } from "validator";
 import { Checkbox, Accordion } from "@nypl/design-system-react-components";
 import { useForm } from "react-hook-form";
 import Router from "next/router";
-import FormField from "../FormField/FormField";
-import ApiErrors from "../ApiErrors/ApiErrors";
-import config from "../../../appConfig";
-import FormFooterText from "../FormFooterText";
-import UsernameValidationForm from "../UsernameValidationForm";
-import LibraryListForm from "../LibraryListForm";
-import ilsLibraryList from "../../data/ilsLibraryList";
-import AcceptTermsForm from "../AcceptTermsForm";
-import AddressForm, { AddressTypes } from "../AddressForm";
-import { Address } from "../../interfaces";
-import useParamsContext from "../../context/ParamsContext";
-import useFormResultsContext from "../../context/FormResultsContext";
-import AgeForm from "../AgeForm";
+import FormField from "./FormField";
+import ApiErrors from "./ApiErrors";
+import config from "../../appConfig";
+import FormFooterText from "./FormFooterText";
+import UsernameValidationForm from "./UsernameValidationForm";
+import LibraryListForm from "./LibraryListForm";
+import ilsLibraryList from "../data/ilsLibraryList";
+import AcceptTermsForm from "./AcceptTermsForm";
+import AddressForm, { AddressTypes } from "./AddressForm";
+import { Address } from "../interfaces";
+import useParamsContext from "../context/ParamsContext";
+import useFormResultsContext from "../context/FormResultsContext";
+import AgeForm from "./AgeForm";
 
 // The interface for the react-hook-form state data object.
 interface FormInput {

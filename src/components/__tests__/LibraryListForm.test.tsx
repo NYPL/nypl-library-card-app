@@ -3,9 +3,7 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
-import LibraryListForm, {
-  LibraryListObject,
-} from "../src/components/LibraryListForm";
+import LibraryListForm, { LibraryListObject } from "../LibraryListForm";
 
 expect.extend(toHaveNoViolations);
 

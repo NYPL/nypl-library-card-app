@@ -9,7 +9,7 @@ const axios = require("axios");
 expect.extend(toHaveNoViolations);
 jest.mock("axios");
 
-import UsernameValidationForm from "../src/components/UsernameValidationForm";
+import UsernameValidationForm from "../UsernameValidationForm";
 
 describe("UsernameValidationForm", () => {
   let mockRegister;

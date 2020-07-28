@@ -4,7 +4,7 @@ import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 
-import AcceptTermsForm from "../src/components/AcceptTermsForm";
+import AcceptTermsForm from "../AcceptTermsForm";
 
 expect.extend(toHaveNoViolations);
 

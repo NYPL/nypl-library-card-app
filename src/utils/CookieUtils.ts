@@ -5,7 +5,7 @@
  * @param {string} sKey -  The name of the cookie to be looked up.
  */
 function encodeURI(sKey) {
-  encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&');
+  encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&");
 }
 
 /**
@@ -15,13 +15,20 @@ function encodeURI(sKey) {
  * @param {string} sKey - The name of the cookie to be looked up.
  */
 function getCookie(sKey) {
-  if (!sKey) { return null; }
+  if (!sKey) {
+    return null;
+  }
 
-  return decodeURIComponent(
-    document.cookie.replace(
-      new RegExp(`(?:(?:^|.*;)\\s*${encodeURI(sKey)}\\s*\\=\\s*([^;]*).*$)|^.*$`), '$1'
-    )
-  ) || null;
+  return (
+    decodeURIComponent(
+      document.cookie.replace(
+        new RegExp(
+          `(?:(?:^|.*;)\\s*${encodeURI(sKey)}\\s*\\=\\s*([^;]*).*$)|^.*$`
+        ),
+        "$1"
+      )
+    ) || null
+  );
 }
 
 /**
@@ -31,11 +38,11 @@ function getCookie(sKey) {
  * @param {string} sKey - The name of the cookie to be looked up.
  */
 function hasCookie(sKey) {
-  if (!sKey) { return false; }
-
-  return (
-    new RegExp(`(?:^|;\\s*)${encodeURI(sKey)}\\s*\\=`)
-  ).test(document.cookie);
+  if (!sKey) {
+    return false;
+  }
+  const regExp = new RegExp(`(?:^|;\\s*)${encodeURI(sKey)}\\s*\\=`);
+  return regExp.test(document.cookie);
 }
 
 export default {

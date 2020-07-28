@@ -1,5 +1,5 @@
 import React from "react";
-import FormField from "./FormField/FormField";
+import FormField from "./FormField";
 import { Address } from "../interfaces";
 
 export enum AddressTypes {

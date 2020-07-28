@@ -2,8 +2,8 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
-import AddressForm, { AddressTypes } from "../src/components/AddressForm";
-import { Address } from "../src/interfaces";
+import AddressForm, { AddressTypes } from "../AddressForm";
+import { Address } from "../../interfaces";
 
 expect.extend(toHaveNoViolations);
 

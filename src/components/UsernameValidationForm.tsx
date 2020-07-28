@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { isAlphanumeric } from "validator";
 import { Button } from "@nypl/design-system-react-components";
-import FormField from "./FormField/FormField";
+import FormField from "./FormField";
 
 interface UsernameValidationFormProps {
   watch: (value) => boolean;
