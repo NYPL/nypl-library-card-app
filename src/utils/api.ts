@@ -7,6 +7,7 @@ import { isEmail, isAlphanumeric, isNumeric, isLength } from "validator";
 import Cors from "cors";
 import config from "../../appConfig";
 import logger from "../logger/index";
+import { AddressFields } from "../components/AddressForm";
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -61,23 +62,48 @@ const constructErrorObject = (
   return response;
 };
 
+export interface AddressesType {
+  home: Partial<AddressFields>;
+  work?: Partial<AddressFields>;
+}
+/**
+ * constructAddresses
+ * Address form fields have "home-" or "work-" as prefixes in their name
+ * attribute, such as "home-line1" or "home-city". We need to remove the prefix
+ * and create objects for the home and work addresses.
+ * @param object FormData object from the client's form submission.
+ */
+export const constructAddresses = (object = {}) => {
+  const addresses: AddressesType = { home: {}, work: {} };
+
+  // Remove the addresses fields' prefix and add to the proper object.
+  const prefixes = ["home", "work"];
+  Object.keys(object).forEach((key) => {
+    prefixes.forEach((prefix) => {
+      if (key.indexOf(`${prefix}-`) !== -1) {
+        const field = key.split("-")[1];
+        addresses[prefix][field] = object[key];
+      }
+    });
+  });
+
+  return addresses;
+};
+
 const constructPatronObject = (object) => {
   const {
     firstName,
     lastName,
     email,
-    dateOfBirth,
-    line1,
-    line2 = "",
-    city,
-    state,
-    zip,
+    birthDate,
     username,
     pin,
     ecommunicationsPref,
     agencyType,
     usernameHasBeenValidated,
   } = object;
+
+  const addresses: AddressesType = constructAddresses(object);
 
   let errorObj = {};
 
@@ -89,29 +115,30 @@ const constructPatronObject = (object) => {
     errorObj = { ...errorObj, lastName: "Last Name field is empty." };
   }
 
-  if (isEmpty(dateOfBirth)) {
-    errorObj = { ...errorObj, dateOfBirth: "Date of Birth field is empty." };
+  if (isEmpty(birthDate)) {
+    errorObj = { ...errorObj, birthDate: "Date of Birth field is empty." };
   }
 
-  if (isEmpty(line1)) {
+  if (isEmpty(addresses.home.line1)) {
     errorObj = { ...errorObj, line1: "Street Address field is empty." };
   }
 
-  if (isEmpty(city)) {
+  if (isEmpty(addresses.home.city)) {
     errorObj = { ...errorObj, city: "City field is empty." };
   }
 
-  if (isEmpty(state)) {
+  if (isEmpty(addresses.home.state)) {
     errorObj = { ...errorObj, state: "State field is empty." };
   }
 
-  if (isEmpty(zip)) {
+  if (isEmpty(addresses.home.zip)) {
     errorObj = { ...errorObj, zip: "Postal Code field is empty." };
   }
 
   if (
-    !isEmpty(zip) &&
-    (!isNumeric(zip) || !isLength(zip, { min: 5, max: 5 }))
+    !isEmpty(addresses.home.zip) &&
+    (!isNumeric(addresses.home.zip) ||
+      !isLength(addresses.home.zip, { min: 5, max: 5 }))
   ) {
     errorObj = { ...errorObj, zip: "Please enter a 5-digit postal code." };
   }
@@ -157,22 +184,15 @@ const constructPatronObject = (object) => {
   }
 
   const fullName = `${firstName.trim()} ${lastName.trim()}`;
-  const addressObject = {
-    line1,
-    line2,
-    city,
-    state,
-    zip,
-  };
-
   const boolMap = { true: true, false: false };
   const usernameHasBeenValidatedBool = boolMap[usernameHasBeenValidated];
 
   return {
     name: fullName,
     email,
-    birthdate: dateOfBirth,
-    address: addressObject,
+    birthdate: birthDate,
+    address: addresses.home,
+    workAddress: !isEmpty(addresses.work) ? addresses.work : null,
     username,
     pin,
     ecommunicationsPref,
@@ -336,7 +356,7 @@ export async function createPatron(req, res) {
     //     details: {
     //       firstName: "First Name field is empty.",
     //       lastName: "Last Name field is empty.",
-    //       dateOfBirth: "Date of Birth field is empty.",
+    //       birthDate: "Date of Birth field is empty.",
     //       line1: "Street Address field is empty.",
     //       city: "City field is empty.",
     //       state: "State field is empty.",

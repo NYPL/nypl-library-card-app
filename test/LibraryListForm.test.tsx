@@ -1,22 +1,34 @@
 /* eslint-disable */
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
+import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
-
 import LibraryListForm, {
   LibraryListObject,
 } from "../src/components/LibraryListForm";
+
+expect.extend(toHaveNoViolations);
 
 const libraryList: LibraryListObject[] = [
   { value: "eb", label: "SimplyE" },
   { value: "sasb", label: "Schwarzman" },
   { value: "schomburg", label: "Schomburg" },
 ];
+const mockRegister = jest.fn();
 
 describe("LibraryListForm", () => {
-  test("renders a label, select, and description", () => {
-    const mockRegister = jest.fn();
+  test("passes accessibility checks", async () => {
+    const { container } = render(
+      <LibraryListForm
+        register={mockRegister}
+        libraryList={libraryList}
+        defaultValue="eb"
+      />
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
 
+  test("renders a label, select, and description", () => {
     render(
       <LibraryListForm
         register={mockRegister}
@@ -36,8 +48,6 @@ describe("LibraryListForm", () => {
   });
 
   test("it updates the selected value from the dropdown", async () => {
-    const mockRegister = jest.fn();
-
     render(
       <LibraryListForm
         register={mockRegister}

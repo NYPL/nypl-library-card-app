@@ -1,14 +1,17 @@
 /* eslint-disable */
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
+import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 
 import AcceptTermsForm from "../src/components/AcceptTermsForm";
 
+expect.extend(toHaveNoViolations);
+
+const mockRegister = jest.fn();
+
 describe("AcceptTermsForm", () => {
   beforeEach(() => {
-    const mockRegister = jest.fn();
-
     render(<AcceptTermsForm register={mockRegister} />);
   });
 
@@ -37,5 +40,12 @@ describe("AcceptTermsForm", () => {
     expect(checkbox.checked).toEqual(false);
     await act(async () => await fireEvent.click(checkbox));
     expect(checkbox.checked).toEqual(true);
+  });
+});
+
+describe("Accessibility check", () => {
+  test("passes axe", async () => {
+    const { container } = render(<AcceptTermsForm register={mockRegister} />);
+    expect(await axe(container)).toHaveNoViolations();
   });
 });
