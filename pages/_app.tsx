@@ -5,6 +5,7 @@ import Head from "next/head";
 import { FormResultsContextProvider } from "../src/context/FormResultsContext";
 import "../src/styles/main.scss";
 import appConfig from "../appConfig";
+import { FormResultsContextType } from "../src/interfaces";
 
 interface MyAppProps {
   Component: any;
@@ -46,7 +47,7 @@ if (process.env.TEST_AXE_ENV === "true" && !isServerRendered()) {
 export default function MyApp<MyAppProps>({ Component, pageProps }) {
   // Keep track of the API result from a successful form submission at the
   // top level of the app. It is exposed to the two pages through context.
-  const [formResults, setFormResults] = useState({});
+  const [formResults, setFormResults] = useState(undefined);
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
   const { favIconPath, appTitle } = appConfig;
