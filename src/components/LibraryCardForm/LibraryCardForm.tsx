@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import { isEmail } from "validator";
-import { Checkbox } from "@nypl/design-system-react-components";
+import { Checkbox, Accordion } from "@nypl/design-system-react-components";
 import { useForm } from "react-hook-form";
 import { isDate } from "../../utils/FormValidationUtils";
 import FormField from "../FormField/FormField";
@@ -11,25 +11,33 @@ import ApiErrors from "../ApiErrors/ApiErrors";
 import config from "../../../appConfig";
 import FormFooterText from "../FormFooterText";
 import UsernameValidationForm from "../UsernameValidationForm";
-import LibraryListForm, { LibraryListObject } from "../LibraryListForm";
+import LibraryListForm from "../LibraryListForm";
 import ilsLibraryList from "../../data/ilsLibraryList";
+import AcceptTermsForm from "../AcceptTermsForm";
+import AddressForm, { AddressTypes, AddressFields } from "../AddressForm";
 
 // The interface for the react-hook-form state data object.
 interface FormInput {
   firstName: string;
   lastName: string;
-  dateOfBirth: string;
+  birthDate: string;
   email: string;
-  line1: string;
-  line2: string;
-  city: string;
-  state: string;
-  zip: string;
+  "home-line1": string;
+  "home-line2": string;
+  "home-city": string;
+  "home-state": string;
+  "home-zip": string;
+  "work-line1": string;
+  "work-line2": string;
+  "work-city": string;
+  "work-state": string;
+  "work-zip": string;
   username: string;
   pin: string;
   ecommunicationsPref: boolean;
   location?: string;
   homeLibraryCode: string;
+  acceptTerms: boolean;
 }
 
 const errorMessages = {
@@ -40,10 +48,12 @@ const errorMessages = {
   username: "Username must be between 5-25 alphanumeric characters.",
   pin: "Please enter a 4-digit PIN.",
   location: "Please select an address option.",
-  line1: "Please enter a valid street address.",
-  city: "Please enter a valid city.",
-  state: "Please enter a 2-character state abbreviation.",
-  zip: "Please enter a 5-digit postal code.",
+  address: {
+    line1: "Please enter a valid street address.",
+    city: "Please enter a valid city.",
+    state: "Please enter a 2-character state abbreviation.",
+    zip: "Please enter a 5-digit postal code.",
+  } as AddressFields,
 };
 
 const LibraryCardForm = () => {
@@ -158,6 +168,9 @@ const LibraryCardForm = () => {
     >({
       mode: "onBlur",
     });
+    // Watch the `acceptTerms` named field. If it's checked/true, the submit
+    // button will be enabled.
+    const acceptedTerms = watch("acceptTerms");
 
     return (
       <form
@@ -194,12 +207,12 @@ const LibraryCardForm = () => {
           />
         </div>
         <FormField
-          id="patronDob"
+          id="patronBirthDate"
           className="nypl-date-field"
           type="text"
           instructionText="MM/DD/YYYY, including slashes"
           label="Date of Birth"
-          fieldName="dateOfBirth"
+          fieldName="birthDate"
           isRequired
           errorState={errors}
           maxLength={10}
@@ -287,65 +300,26 @@ const LibraryCardForm = () => {
           .
         </p>
 
-        <FormField
-          id="patronStreet1"
-          className="nypl-text-field"
-          type="text"
-          label="Street Address"
-          fieldName="line1"
-          isRequired
-          errorState={errors}
-          childRef={register({
-            required: errorMessages.line1,
-          })}
+        <AddressForm
+          type={AddressTypes.Home}
+          register={register}
+          errors={errors}
+          errorMessages={errorMessages.address}
         />
-        <FormField
-          id="patronStreet2"
-          className="nypl-text-field"
-          type="text"
-          label="Apartment / Suite"
-          fieldName="line2"
-          childRef={register()}
-        />
-        <FormField
-          id="patronCity"
-          className="nypl-text-field"
-          type="text"
-          label="City"
-          fieldName="city"
-          isRequired
-          errorState={errors}
-          childRef={register({
-            required: errorMessages.city,
-          })}
-        />
-        <FormField
-          id="patronState"
-          className="nypl-text-field"
-          type="text"
-          instructionText="2-letter abbreviation"
-          label="State"
-          fieldName="state"
-          isRequired
-          errorState={errors}
-          maxLength={2}
-          childRef={register({
-            validate: (val) => val.length === 2 || errorMessages.state,
-          })}
-        />
-        <FormField
-          id="patronZip"
-          className="nypl-text-field"
-          type="text"
-          label="Postal Code"
-          fieldName="zip"
-          isRequired
-          errorState={errors}
-          maxLength={5}
-          childRef={register({
-            validate: (val) => val.length === 5 || errorMessages.zip,
-          })}
-        />
+
+        <h3>Work Address</h3>
+        <Accordion
+          id="work-address-accordion"
+          accordionLabel="Optional Fields"
+          className="work-address-accordion"
+        >
+          <AddressForm
+            type={AddressTypes.Work}
+            register={register}
+            errors={errors}
+            errorMessages={errorMessages.address}
+          />
+        </Accordion>
 
         <LibraryListForm
           register={register}
@@ -379,27 +353,12 @@ const LibraryCardForm = () => {
           })}
         />
 
-        <p>
-          By submitting an application, you understand and agree to our{" "}
-          <a href="https://www.nypl.org/help/library-card/terms-conditions">
-            Cardholder Terms and Conditions
-          </a>{" "}
-          and agree to our{" "}
-          <a href="https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations">
-            Rules and Regulations
-          </a>
-          . To learn more about The Library’s use of personal information,
-          please read our{" "}
-          <a href="https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy">
-            Privacy Policy
-          </a>
-          .
-        </p>
+        <AcceptTermsForm register={register} />
 
         <div>
           <input
             className="nypl-request-button"
-            disabled={isLoading}
+            disabled={!acceptedTerms || isLoading}
             type="submit"
             value="Continue"
           />

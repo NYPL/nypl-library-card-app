@@ -16,6 +16,7 @@
 @import 'components/banner';
 @import 'components/confirmation';
 @import 'components/errorBox';
+@import 'components/accordion';
 
 html {
   @include font-settings;
