@@ -17,6 +17,7 @@ interface FormFieldProps {
   isRequired?: boolean;
   instructionText?: string;
   maxLength?: number;
+  other?: any;
 }
 
 /**
@@ -37,6 +38,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
       isRequired = false,
       instructionText,
       maxLength,
+      other,
     },
     ref
   ) => {
@@ -66,6 +68,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
             maxLength: maxLength || null,
             name: fieldName,
             tabIndex: 0,
+            ...other,
           }}
           ref={ref}
         />

@@ -42,6 +42,7 @@ interface FormInput {
   location?: string;
   homeLibraryCode: string;
   acceptTerms: boolean;
+  libraryListSuggest?: string;
 }
 
 const errorMessages = {
@@ -108,6 +109,13 @@ const LibraryCardForm = () => {
     setErrorObj(null);
     // Render the loading component.
     setIsLoading(true);
+    console.log("formdata", formData);
+
+    const lib = ilsLibraryList.find(
+      (list) => list.label === formData.libraryListSuggest
+    );
+    console.log("lib", lib);
+    formData.homeLibraryCode = lib.value;
 
     const agencyType = getPatronAgencyType(formData.location);
     axios
@@ -308,7 +316,7 @@ const LibraryCardForm = () => {
         <LibraryListForm
           libraryList={ilsLibraryList}
           // The default branch is the "SimplyE" branch with a code of "eb".
-          defaultValue="eb"
+          defaultValue=""
         />
 
         <h3>Create Your Account</h3>
