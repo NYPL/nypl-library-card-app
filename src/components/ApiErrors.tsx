@@ -1,5 +1,6 @@
-import React from 'react';
-import ErrorBox from '../ErrorBox/ErrorBox';
+/* eslint-disable */
+import React from "react";
+import ErrorBox from "./ErrorBox";
 
 interface ApiErrorsProps {
   // This needs a better API interface/type.

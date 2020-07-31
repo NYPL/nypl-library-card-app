@@ -1,5 +1,5 @@
 import React from "react";
-import { renderServerValidationError } from "../../utils/FormValidationUtils";
+import { renderServerValidationError } from "../utils/FormValidationUtils";
 
 interface ErrorBoxProps {
   className: string;

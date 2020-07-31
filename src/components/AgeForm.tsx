@@ -1,16 +1,15 @@
 import React from "react";
-import FormField from "./FormField/FormField";
+import FormField from "./FormField";
 import { isDate } from "../utils/FormValidationUtils";
 import {
   Checkbox,
   HelperErrorText,
 } from "@nypl/design-system-react-components";
+import { useFormContext } from "react-hook-form";
 
 interface AgeFormProps {
   policyType?: string;
-  register: any;
   errorMessages: {};
-  errors?: {};
 }
 
 /**
@@ -20,17 +19,16 @@ interface AgeFormProps {
  */
 const AgeForm = ({
   policyType = "webApplicant",
-  register,
   errorMessages,
-  errors,
 }: AgeFormProps) => {
+  const { register, errors } = useFormContext();
   const MAXLENGTHDATE = 10;
   const isWebApplicant = policyType === "webApplicant";
   const ageGateLabelOptions = {
     id: "ageGateLabel",
     labelContent: <>Yes, I am over 13 years old.</>,
   };
-  const ageGateError = errors["ageGate"]?.message;
+  const ageGateError = errors?.ageGate?.message;
 
   const birthdateField = (
     <FormField
@@ -44,7 +42,7 @@ const AgeForm = ({
       errorState={errors}
       maxLength={MAXLENGTHDATE}
       // This `validate` callback allows for specific validation
-      childRef={register({
+      ref={register({
         validate: (val) =>
           (val.length <= MAXLENGTHDATE && isDate(val)) ||
           errorMessages["birthdate"],
