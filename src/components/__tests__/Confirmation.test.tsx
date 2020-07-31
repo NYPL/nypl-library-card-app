@@ -4,8 +4,8 @@ import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 
-import Confirmation from "../src/components/Confirmation";
-import { FormResults } from "../src/interfaces";
+import Confirmation from "../Confirmation";
+import { FormResults } from "../../interfaces";
 
 expect.extend(toHaveNoViolations);
 

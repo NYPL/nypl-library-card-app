@@ -2,8 +2,8 @@ import React from "react";
 import { renderHook } from "@testing-library/react-hooks";
 import useFormResultsContext, {
   FormResultsContextProvider,
-} from "../src/context/FormResultsContext";
-import { FormResults, FormResultsContextType } from "../src/interfaces";
+} from "../FormResultsContext";
+import { FormResults, FormResultsContextType } from "../../interfaces";
 
 const formResults: FormResults = {
   barcode: "12345678912345",

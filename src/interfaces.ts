@@ -1,7 +1,8 @@
 export interface ErrorParams {
   firstName?: string;
   lastName?: string;
-  birthDate?: string;
+  birthdate?: string;
+  ageGate?: string;
   email?: string;
   "home-line1"?: string;
   "home-line2"?: string;

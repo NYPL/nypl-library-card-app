@@ -1,9 +1,6 @@
 import React from "react";
 import { Checkbox } from "@nypl/design-system-react-components";
-
-interface AcceptTermsFormProps {
-  register: any;
-}
+import { useFormContext } from "react-hook-form";
 
 /**
  * AcceptTermsForm
@@ -12,7 +9,8 @@ interface AcceptTermsFormProps {
  * the state of the checkbox. The parent component must use `react-hook-form`
  * to get the value and trigger updates.
  */
-const AcceptTermsForm = ({ register }: AcceptTermsFormProps) => {
+const AcceptTermsForm = () => {
+  const { register } = useFormContext();
   const acceptTermsLabelOptions = {
     id: "acceptTerms",
     labelContent: <>Yes, I accept the terms and conditions.</>,
