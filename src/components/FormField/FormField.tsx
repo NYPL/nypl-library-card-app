@@ -55,7 +55,6 @@ class FormField extends React.Component<FormFieldProps> {
           id={this.props.id}
           aria-required={this.props.isRequired}
           aria-labelledby={`${this.props.id}-label ${ariaLabelledby}`}
-          helperTextId={`${this.props.id}-helperText`}
           attributes={{
             onChange: this.props.handleOnChange,
             maxLength: this.props.maxLength || null,
