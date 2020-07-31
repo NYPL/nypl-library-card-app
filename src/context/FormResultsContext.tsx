@@ -5,10 +5,9 @@ const FormResultsContext = React.createContext<
   FormResultsContextType | undefined
 >(undefined);
 
-export const FormResultsContextProvider: React.FC<{ value: any }> = ({
-  value = {},
-  children,
-}) => (
+export const FormResultsContextProvider: React.FC<{
+  value: FormResultsContextType;
+}> = ({ value, children }) => (
   <FormResultsContext.Provider value={value}>
     {children}
   </FormResultsContext.Provider>
@@ -21,7 +20,9 @@ export const FormResultsContextProvider: React.FC<{ value: any }> = ({
  * function and data.
  */
 export default function useFormResultsContext() {
-  const { setFormResults, formResults } = React.useContext(FormResultsContext);
+  const { setFormResults, formResults } = React.useContext<
+    FormResultsContextType
+  >(FormResultsContext);
   if (typeof setFormResults === "undefined") {
     throw new Error(
       "useFormResultsContext must be used within a FormResultsContextProvider"

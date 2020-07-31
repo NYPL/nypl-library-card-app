@@ -50,6 +50,6 @@ export interface FormResults {
 }
 
 export interface FormResultsContextType {
-  setFormResults: (formResults) => {};
+  setFormResults: (formResults) => void;
   formResults: FormResults;
 }
