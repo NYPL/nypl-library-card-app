@@ -1,7 +1,8 @@
 export interface ErrorParams {
   firstName?: string;
   lastName?: string;
-  birthDate?: string;
+  birthdate?: string;
+  ageGate?: string;
   email?: string;
   "home-line1"?: string;
   "home-line2"?: string;
@@ -34,4 +35,21 @@ export interface Params {
   parentsUsername?: string;
   parentsEmail?: string;
   parentsAddress?: Partial<Address>;
+}
+
+export interface FormResults {
+  status?: number;
+  type?: string;
+  link?: string;
+  barcode: string;
+  username: string;
+  pin: string;
+  temporary: boolean;
+  message: string;
+  patronId: number;
+}
+
+export interface FormResultsContextType {
+  setFormResults: (formResults) => void;
+  formResults: FormResults;
 }

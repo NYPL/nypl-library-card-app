@@ -1,5 +1,6 @@
 import React from "react";
 import { Params } from "../interfaces";
+
 const ParamsContext = React.createContext<Params | undefined>(undefined);
 
 export const ParamsContextProvider: React.FC<{ params: Params }> = ({

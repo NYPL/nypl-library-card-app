@@ -1,9 +1,7 @@
 import React from "react";
 import { renderHook } from "@testing-library/react-hooks";
-import useParamsContext, {
-  ParamsContextProvider,
-} from "../src/context/ParamsContext";
-import { Params } from "../src/interfaces";
+import useParamsContext, { ParamsContextProvider } from "../ParamsContext";
+import { Params } from "../../interfaces";
 
 const contextWrapper = (params?: Params) => ({ children }) => (
   <ParamsContextProvider params={params}>{children}</ParamsContextProvider>

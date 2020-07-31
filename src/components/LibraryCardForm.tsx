@@ -4,25 +4,27 @@ import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import { isEmail } from "validator";
 import { Checkbox, Accordion } from "@nypl/design-system-react-components";
-import { useForm } from "react-hook-form";
-import { isDate } from "../../utils/FormValidationUtils";
-import FormField from "../FormField/FormField";
-import ApiErrors from "../ApiErrors/ApiErrors";
-import config from "../../../appConfig";
-import FormFooterText from "../FormFooterText";
-import UsernameValidationForm from "../UsernameValidationForm";
-import LibraryListForm from "../LibraryListForm";
-import ilsLibraryList from "../../data/ilsLibraryList";
-import AcceptTermsForm from "../AcceptTermsForm";
-import AddressForm, { AddressTypes } from "../AddressForm";
-import { Address } from "../../interfaces";
-import useParamsContext from "../../context/ParamsContext";
+import { useForm, FormProvider } from "react-hook-form";
+import Router from "next/router";
+import FormField from "./FormField";
+import ApiErrors from "./ApiErrors";
+import config from "../../appConfig";
+import FormFooterText from "./FormFooterText";
+import UsernameValidationForm from "./UsernameValidationForm";
+import LibraryListForm from "./LibraryListForm";
+import ilsLibraryList from "../data/ilsLibraryList";
+import AcceptTermsForm from "./AcceptTermsForm";
+import AddressForm, { AddressTypes } from "./AddressForm";
+import { Address } from "../interfaces";
+import useParamsContext from "../context/ParamsContext";
+import useFormResultsContext from "../context/FormResultsContext";
+import AgeForm from "./AgeForm";
 
 // The interface for the react-hook-form state data object.
 interface FormInput {
   firstName: string;
   lastName: string;
-  birthDate: string;
+  birthdate: string;
   email: string;
   "home-line1": string;
   "home-line2": string;
@@ -46,6 +48,7 @@ const errorMessages = {
   firstName: "Please enter a valid first name.",
   lastName: "Please enter a valid last name.",
   birthdate: "Please enter a valid date, MM/DD/YYYY, including slashes.",
+  ageGate: "You must be 13 years or older to continue.",
   email: "Please enter a valid email address.",
   username: "Username must be between 5-25 alphanumeric characters.",
   pin: "Please enter a 4-digit PIN.",
@@ -61,10 +64,14 @@ const errorMessages = {
 const LibraryCardForm = () => {
   const errorSection = React.createRef<HTMLDivElement>();
   const [errorObj, setErrorObj] = useState(null);
-  const [apiResults, setApiResults] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [csrfToken, setCsrfToken] = useState(null);
   const params = useParamsContext();
+  const { setFormResults } = useFormResultsContext();
+  const formMethods = useForm<FormInput>({ mode: "onBlur" });
+
+  // Specific functions and object from react-hook-form.
+  const { register, handleSubmit, errors, watch } = formMethods;
 
   // Will run whenever the `errorObj` has changes, specifically for
   // bad requests.
@@ -115,19 +122,16 @@ const LibraryCardForm = () => {
         // }
       )
       .then((response) => {
-        // This is setting the state for returned valid response, but
-        // it's not being used. The updated confirmation page is still TBD.
-        setApiResults(response.data);
         // Don't render the loading component anymore.
         setIsLoading(false);
-        // TODO: Waiting on whether we will make a redirect in the app
-        // or in Drupal.
-        // window.location.href = window.confirmationURL;
+        // Set the returned response as the global data.
+        setFormResults(response.data);
+        Router.push("/confirmation?newCard=true");
       })
       .catch((error) => {
         // There are server-side errors!
         // So render the component to display them.
-        setErrorObj(error.response.data);
+        setErrorObj(error.response?.data);
         setIsLoading(false);
       });
   };
@@ -165,12 +169,6 @@ const LibraryCardForm = () => {
       ),
     };
 
-    // Specific functions and object from react-hook-form.
-    const { register, handleSubmit, errors, watch, getValues } = useForm<
-      FormInput
-    >({
-      mode: "onBlur",
-    });
     // Watch the `acceptTerms` named field. If it's checked/true, the submit
     // button will be enabled.
     const acceptedTerms = watch("acceptTerms");
@@ -192,7 +190,7 @@ const LibraryCardForm = () => {
             // Every input field is registered to react-hook-form. If this
             // field is empty on blur or on submission, the error message will
             // display below the input.
-            childRef={register({
+            ref={register({
               required: errorMessages.firstName,
             })}
             errorState={errors}
@@ -204,27 +202,14 @@ const LibraryCardForm = () => {
             fieldName="lastName"
             isRequired
             errorState={errors}
-            childRef={register({
+            ref={register({
               required: errorMessages.lastName,
             })}
           />
         </div>
-        <FormField
-          id="patronBirthDate"
-          className="nypl-date-field"
-          type="text"
-          instructionText="MM/DD/YYYY, including slashes"
-          label="Date of Birth"
-          fieldName="birthDate"
-          isRequired
-          errorState={errors}
-          maxLength={10}
-          // This `validate` callback allows for specific validation
-          childRef={register({
-            validate: (val) =>
-              (val.length <= 10 && isDate(val)) || errorMessages.birthdate,
-          })}
-        />
+
+        <AgeForm policyType={params.policyType} errorMessages={errorMessages} />
+
         <FormField
           id="patronEmail"
           className="nypl-text-field"
@@ -232,7 +217,7 @@ const LibraryCardForm = () => {
           label="E-mail"
           fieldName="email"
           errorState={errors}
-          childRef={register({
+          ref={register({
             required: false,
             validate: (val) =>
               val === "" || isEmail(val) || errorMessages.email,
@@ -305,8 +290,6 @@ const LibraryCardForm = () => {
 
         <AddressForm
           type={AddressTypes.Home}
-          register={register}
-          errors={errors}
           errorMessages={errorMessages.address}
         />
 
@@ -318,14 +301,11 @@ const LibraryCardForm = () => {
         >
           <AddressForm
             type={AddressTypes.Work}
-            register={register}
-            errors={errors}
             errorMessages={errorMessages.address}
           />
         </Accordion>
 
         <LibraryListForm
-          register={register}
           libraryList={ilsLibraryList}
           // The default branch is the "SimplyE" branch with a code of "eb".
           defaultValue="eb"
@@ -333,13 +313,7 @@ const LibraryCardForm = () => {
 
         <h3>Create Your Account</h3>
 
-        <UsernameValidationForm
-          watch={watch}
-          getValues={getValues}
-          register={register}
-          errors={errors}
-          errorMessage={errorMessages.username}
-        />
+        <UsernameValidationForm errorMessage={errorMessages.username} />
 
         <FormField
           id="patronPin"
@@ -351,12 +325,12 @@ const LibraryCardForm = () => {
           isRequired
           errorState={errors}
           maxLength={4}
-          childRef={register({
+          ref={register({
             validate: (val) => val.length === 4 || errorMessages.pin,
           })}
         />
 
-        <AcceptTermsForm register={register} />
+        <AcceptTermsForm />
 
         <input
           type="hidden"
@@ -383,8 +357,10 @@ const LibraryCardForm = () => {
     <div className="nypl-row">
       <div className="nypl-column-half nypl-column-offset-one">
         <div>
-          {renderApiErrors(errorObj)}
-          {renderFormFields()}
+          <FormProvider {...formMethods}>
+            {renderApiErrors(errorObj)}
+            {renderFormFields()}
+          </FormProvider>
         </div>
         <FormFooterText />
       </div>

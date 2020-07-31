@@ -95,13 +95,15 @@ const constructPatronObject = (object) => {
     firstName,
     lastName,
     email,
-    birthDate,
+    birthdate,
     username,
     pin,
     ecommunicationsPref,
     agencyType,
     usernameHasBeenValidated,
     policyType,
+    ageGate,
+    homeLibraryCode,
   } = object;
 
   const addresses: AddressesType = constructAddresses(object);
@@ -116,8 +118,13 @@ const constructPatronObject = (object) => {
     errorObj = { ...errorObj, lastName: "Last Name field is empty." };
   }
 
-  if (isEmpty(birthDate)) {
-    errorObj = { ...errorObj, birthDate: "Date of Birth field is empty." };
+  if (policyType === "webApplicant" && isEmpty(birthdate)) {
+    errorObj = { ...errorObj, birthdate: "Date of Birth field is empty." };
+  } else if (policyType === "simplye" && !ageGate) {
+    errorObj = {
+      ...errorObj,
+      ageGate: "You must be 13 years or older to continue.",
+    };
   }
 
   if (isEmpty(addresses.home.line1)) {
@@ -191,7 +198,8 @@ const constructPatronObject = (object) => {
   return {
     name: fullName,
     email,
-    birthdate: birthDate,
+    birthdate,
+    ageGate,
     address: addresses.home,
     workAddress: !isEmpty(addresses.work) ? addresses.work : null,
     username,
@@ -200,6 +208,7 @@ const constructPatronObject = (object) => {
     patron_agency: agencyType || config.agencyType.default,
     usernameHasBeenValidated: usernameHasBeenValidatedBool,
     policyType: policyType || "simplye",
+    homeLibraryCode,
   };
 };
 
@@ -347,26 +356,40 @@ export async function createPatron(req, res) {
       return res.status(400).json(patronData);
     }
 
+    console.log("patrondata", patronData);
+
     // Just for testing purposes locally. Used to verify refs and focus are
     // properly working but also to update the server response interface/type
     // later on.
-    // return res.status(400).json({
-    //   status: 400,
-    //   response: {
-    //     type: "server-validation-error",
-    //     message: "server side validation error",
-    //     details: {
-    //       firstName: "First Name field is empty.",
-    //       lastName: "Last Name field is empty.",
-    //       birthDate: "Date of Birth field is empty.",
-    //       line1: "Street Address field is empty.",
-    //       city: "City field is empty.",
-    //       state: "State field is empty.",
-    //       zip: "Postal Code field is empty.",
-    //       username: "Username field is empty.",
-    //       pin: "PIN field is empty.",
-    //     },
-    //   },
+    return res.status(400).json({
+      status: 400,
+      response: {
+        type: "server-validation-error",
+        message: "server side validation error",
+        details: {
+          firstName: "First Name field is empty.",
+          lastName: "Last Name field is empty.",
+          birthdate: "Date of Birth field is empty.",
+          line1: "Street Address field is empty.",
+          city: "City field is empty.",
+          state: "State field is empty.",
+          zip: "Postal Code field is empty.",
+          username: "Username field is empty.",
+          pin: "PIN field is empty.",
+        },
+      },
+    });
+    // Uncomment to test routing to a confirmation page with test data.
+    // return res.status(200).json({
+    //   status: 200,
+    //   type: "card-granted",
+    //   link: "some-link",
+    //   barcode: "12345678912345",
+    //   username: "tomnook",
+    //   pin: "1234",
+    //   temporary: false,
+    //   message: "The library card will be a standard library card.",
+    //   patronId: 1234567,
     // });
 
     return axios

@@ -1,4 +1,4 @@
-import { constructAddresses, AddressesType } from "../src/utils/api";
+import { constructAddresses, AddressesType } from "../api";
 
 describe("constructAddresses", () => {
   test("it returns an empty AddressType object with no input", () => {
