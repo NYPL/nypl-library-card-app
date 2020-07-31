@@ -4,6 +4,7 @@ import {
   Select,
   HelperErrorText,
 } from "@nypl/design-system-react-components";
+import { useFormContext } from "react-hook-form";
 
 export interface LibraryListObject {
   value: string;
@@ -11,8 +12,6 @@ export interface LibraryListObject {
 }
 
 interface LibraryListFormProps {
-  // This component depends on react-hook-form's `register` ref callback.
-  register: any;
   libraryList: LibraryListObject[];
   defaultValue: string;
 }
@@ -25,10 +24,10 @@ interface LibraryListFormProps {
  * the select element and for form values.
  */
 const LibraryListForm = ({
-  register,
   libraryList = [],
   defaultValue,
 }: LibraryListFormProps) => {
+  const { register } = useFormContext();
   return (
     <>
       <Label htmlFor="homeLibrarySelect" id="homeLibrarylabel">

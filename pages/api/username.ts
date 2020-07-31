@@ -1,4 +1,3 @@
-import Cors from "cors";
 import { NextApiRequest, NextApiResponse } from "next";
 import {
   initializeAppAuth,

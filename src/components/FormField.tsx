@@ -17,7 +17,6 @@ interface FormFieldProps {
   isRequired?: boolean;
   instructionText?: string;
   maxLength?: number;
-  childRef?: any;
 }
 
 /**
@@ -26,26 +25,21 @@ interface FormFieldProps {
  * which also renders errors. Internal components are rendered by the
  * NYPL Design System.
  */
-class FormField extends React.Component<FormFieldProps> {
-  static defaultProps = {
-    className: "",
-    isRequired: false,
-    errorState: {},
-  };
-
-  render() {
-    const {
+const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
+  (
+    {
       id,
       label,
       type,
       fieldName,
-      errorState,
-      className,
-      isRequired,
+      errorState = {},
+      className = "",
+      isRequired = false,
       instructionText,
-      childRef,
       maxLength,
-    } = this.props;
+    },
+    ref
+  ) => {
     const errorText = errorState[fieldName];
     let helperText = instructionText || null;
 
@@ -73,7 +67,7 @@ class FormField extends React.Component<FormFieldProps> {
             name: fieldName,
             tabIndex: 0,
           }}
-          ref={childRef}
+          ref={ref}
         />
         <HelperErrorText id={`${id}-helperText`} isError={!!errorText}>
           {helperText}
@@ -81,6 +75,6 @@ class FormField extends React.Component<FormFieldProps> {
       </div>
     );
   }
-}
+);
 
 export default FormField;
