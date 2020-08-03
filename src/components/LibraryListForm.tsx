@@ -1,9 +1,4 @@
 import React, { useState } from "react";
-import {
-  Label,
-  Select,
-  HelperErrorText,
-} from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
 import Autosuggest from "react-autosuggest";
 import FormField from "./FormField";
@@ -18,29 +13,30 @@ interface LibraryListFormProps {
   defaultValue: string;
 }
 
-// Teach Autosuggest how to calculate suggestions for any given input value.
-const getSuggestions = (value, list) => {
+/**
+ * getSuggestions
+ * This function tells react-autosuggest how to filter the suggestions. In this
+ * case, if the user input is found anywhere in any of the libraries' name,
+ * return the library. This is to "search" even if the user doesn't start with
+ * the library's first name.
+ */
+const getSuggestions = (value: string, list: LibraryListObject[]) => {
   const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
-
-  return inputLength === 0
-    ? []
-    : list.filter(
-        (l) => l.label.toLowerCase().slice(0, inputLength) === inputValue
-      );
+  const findInString = (l) => l.label.toLowerCase().indexOf(inputValue) !== -1;
+  return inputValue.length === 0 ? [] : list.filter(findInString);
 };
-
-// When suggestion is clicked, Autosuggest needs to populate the input
-// based on the clicked suggestion. Teach Autosuggest how to calculate the
-// input value for every given suggestion.
-const getSuggestionValue = (suggestion) => {
-  return suggestion.label;
-};
-
-// Use your imagination to render suggestions.
-const renderSuggestion = (suggestion) => {
-  return <div>{suggestion.label}</div>;
-};
+/**
+ * getSuggestionValue
+ * All we need is the label of the library object as the value.
+ */
+const getSuggestionValue = (suggestion: LibraryListObject) => suggestion.label;
+/**
+ * renderSuggestion
+ * How to display each suggestion which gets rendered in a list item element.
+ */
+const renderSuggestion = (suggestion: LibraryListObject) => (
+  <div>{suggestion.label}</div>
+);
 
 /**
  * LibraryListForm
@@ -63,69 +59,43 @@ const LibraryListForm = ({
   };
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
-  const onSuggestionsFetchRequested = ({ value }) => {
+  const onSuggestionsFetchRequested = ({ value }) =>
     setSuggestions(getSuggestions(value, libraryList));
-  };
 
   // Autosuggest will call this function every time you need to clear suggestions.
-  const onSuggestionsClearRequested = () => {
-    setSuggestions([]);
-  };
+  const onSuggestionsClearRequested = () => setSuggestions([]);
   // Autosuggest will pass through all these props to the input.
   const inputProps = {
-    placeholder: "Type a library name",
+    placeholder: "Type a library name, e.g. Stavros Niarchos",
     value,
     onChange,
+    // Pass in the `react-hook-form` register function so it can handle this
+    // form element's state for us.
     ref: register(),
   };
 
-  const renderInputComponent = (inputProps) => {
-    return (
-      <FormField
-        other={inputProps}
-        id="librarylist-suggest-test"
-        type="text"
-        label="Home Library:"
-        fieldName="libraryListSuggest"
-        isRequired
-        instructionText="Select your home library from the list."
-      />
-    );
-  };
+  const renderInputComponent = (inputProps) => (
+    <FormField
+      id="librarylist-autosuggest"
+      type="text"
+      label="Home Library:"
+      fieldName="homeLibraryCode"
+      isRequired={false}
+      instructionText="Select your home library from the list. Start by typing the name of the library."
+      {...inputProps}
+    />
+  );
 
   return (
-    <>
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-        renderInputComponent={renderInputComponent}
-      />
-      {/* <Label htmlFor="homeLibrarySelect" id="homeLibrarylabel">
-        Home Library:
-      </Label>
-      <Select
-        isRequired={false}
-        helperTextId="homeLibraryHelperText"
-        id="homeLibrarySelect"
-        labelId="homeLibrarylabel"
-        name="homeLibraryCode"
-        selectedOption={defaultValue}
-        ref={register()}
-      >
-        {libraryList.map((library) => (
-          <option key={library.value} value={library.value}>
-            {library.label}
-          </option>
-        ))}
-      </Select>
-      <HelperErrorText id="homeLibraryHelperText" isError={false}>
-        Select your home library from the list.
-      </HelperErrorText> */}
-    </>
+    <Autosuggest
+      suggestions={suggestions}
+      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+      onSuggestionsClearRequested={onSuggestionsClearRequested}
+      getSuggestionValue={getSuggestionValue}
+      renderSuggestion={renderSuggestion}
+      inputProps={inputProps}
+      renderInputComponent={renderInputComponent}
+    />
   );
 };
 

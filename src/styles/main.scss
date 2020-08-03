@@ -17,6 +17,7 @@
 @import 'components/confirmation';
 @import 'components/errorBox';
 @import 'components/accordion';
+@import 'components/autosuggest';
 
 html {
   @include font-settings;
