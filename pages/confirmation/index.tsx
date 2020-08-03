@@ -1,14 +1,13 @@
 import React from "react";
 import Confirmation from "../../src/components/Confirmation";
-import useFormResultsContext from "../../src/context/FormResultsContext";
+import useFormDataContext from "../../src/context/FormDataContext";
 import ApplicationContainer from "../../src/components/ApplicationContainer";
 
 function ConfirmationPage() {
-  const { formResults } = useFormResultsContext();
-
+  const { state } = useFormDataContext();
   return (
     <ApplicationContainer>
-      <Confirmation formResults={formResults} />
+      <Confirmation formResults={state.results} />
     </ApplicationContainer>
   );
 }
