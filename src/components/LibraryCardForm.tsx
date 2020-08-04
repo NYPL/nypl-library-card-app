@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import { isEmail } from "validator";
@@ -17,7 +17,7 @@ import AcceptTermsForm from "./AcceptTermsForm";
 import AddressForm, { AddressTypes } from "./AddressForm";
 import { Address } from "../interfaces";
 import useParamsContext from "../context/ParamsContext";
-import useFormResultsContext from "../context/FormResultsContext";
+import useFormDataContext from "../context/FormDataContext";
 import AgeForm from "./AgeForm";
 
 // The interface for the react-hook-form state data object.
@@ -62,13 +62,11 @@ const errorMessages = {
 };
 
 const LibraryCardForm = () => {
-  const errorSection = React.createRef<HTMLDivElement>();
-  const [errorObj, setErrorObj] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [csrfToken, setCsrfToken] = useState(null);
+  const { state, dispatch } = useFormDataContext();
+  const { errorObj, isLoading, csrfToken } = state;
   const params = useParamsContext();
-  const { setFormResults } = useFormResultsContext();
   const formMethods = useForm<FormInput>({ mode: "onBlur" });
+  const errorSection = React.createRef<HTMLDivElement>();
 
   // Specific functions and object from react-hook-form.
   const { register, handleSubmit, errors, watch } = formMethods;
@@ -85,7 +83,9 @@ const LibraryCardForm = () => {
   // TODO: This works but need to implement CSRF in the backend.
   // useEffect(() => {
   //   const csrfToken = getMetaTagContent("name=csrf-token");
-  //   csrfToken && setCsrfToken(csrfToken);
+  //   if (csrfToken) {
+  //     dispatch({ type: "SET_CSRF_TOKEN", value: csrfToken });
+  //   }
   // });
   const getMetaTagContent = (tag) => {
     return document.head.querySelector(`[${tag}]`).textContent;
@@ -105,9 +105,9 @@ const LibraryCardForm = () => {
    */
   const submitForm = (formData: FormInput) => {
     // This is resetting any errors from previous submissions, if any.
-    setErrorObj(null);
+    dispatch({ type: "SET_FORM_ERRORS", value: null });
     // Render the loading component.
-    setIsLoading(true);
+    dispatch({ type: "SET_IS_LOADING", value: true });
 
     const agencyType = getPatronAgencyType(formData.location);
     axios
@@ -122,18 +122,16 @@ const LibraryCardForm = () => {
         // }
       )
       .then((response) => {
-        // Don't render the loading component anymore.
-        setIsLoading(false);
-        // Set the returned response as the global data.
-        setFormResults(response.data);
+        // Update the global state with a successful form submission data.
+        dispatch({ type: "SET_FORM_RESULTS", value: response.data });
         Router.push("/confirmation?newCard=true");
       })
       .catch((error) => {
-        // There are server-side errors!
-        // So render the component to display them.
-        setErrorObj(error.response?.data);
-        setIsLoading(false);
-      });
+        // There are server-side errors! So we will render them.
+        dispatch({ type: "SET_FORM_ERRORS", value: error.response?.data });
+      })
+      // Don't render the loading component anymore.
+      .finally(() => dispatch({ type: "SET_IS_LOADING", value: false }));
   };
 
   const renderLoader = () => {

@@ -2,7 +2,7 @@ import React from "react";
 import { FormResults } from "../interfaces";
 
 const Confirmation: React.FC<{ formResults: FormResults }> = ({
-  formResults,
+  formResults = {},
 }) => {
   const { barcode, username, pin, temporary, patronId, message } = formResults;
   return (

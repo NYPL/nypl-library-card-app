@@ -49,7 +49,14 @@ export interface FormResults {
   patronId: number;
 }
 
-export interface FormResultsContextType {
-  setFormResults: (formResults) => void;
-  formResults: FormResults;
+export interface FormData {
+  results: FormResults;
+  errorObj: {};
+  isLoading: boolean;
+  csrfToken: string;
+}
+
+export interface FormDataContextType {
+  dispatch: ({ type: string, value: any }) => void;
+  state: FormData;
 }
