@@ -13,7 +13,7 @@ const formResults: FormResults = {
   message: "The library card will be a standard library card.",
   patronId: 1234567,
 };
-const state: FormData = {
+const initState: FormData = {
   results: formResults,
   errorObj: {},
   isLoading: false,
@@ -29,18 +29,13 @@ describe("ParamsContext", () => {
   test("exposes a context `value` prop that has a function and a value object", () => {
     const formProps: FormDataContextType = {
       dispatch,
-      state,
+      state: initState,
     };
     const { result } = renderHook(() => useFormDataContext(), {
       wrapper: contextWrapper(formProps),
     });
 
     expect(typeof result.current.dispatch).toEqual("function");
-    expect(result.current.state).toEqual({
-      results: formResults,
-      errorObj: {},
-      isLoading: false,
-      csrfToken: null,
-    });
+    expect(result.current.state).toEqual(initState);
   });
 });
