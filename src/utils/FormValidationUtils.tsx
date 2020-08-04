@@ -153,7 +153,7 @@ function renderServerValidationError(object) {
  * "e-branch" or "simplye" (interchangeable names);
  * @param libraryName Name of library to find in the list.
  */
-function findLibraryCode(libraryName: string) {
+function findLibraryCode(libraryName?: string) {
   const library = ilsLibraryList.find(
     (library) => library.label === libraryName
   );

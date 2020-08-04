@@ -111,7 +111,6 @@ const LibraryCardForm = () => {
     setIsLoading(true);
 
     formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
-    // console.log("formdata", formData);
 
     const agencyType = getPatronAgencyType(formData.location);
     axios
