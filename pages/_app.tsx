@@ -45,7 +45,7 @@ if (process.env.TEST_AXE_ENV === "true" && !isServerRendered()) {
 }
 
 export default function MyApp<MyAppProps>({ Component, pageProps }) {
-  // Keep track of the API results and erros from a form submission as global
+  // Keep track of the API results and errors from a form submission as global
   // data in the app. It is exposed to the two pages through context. Use
   // the `dispatch` function to update the state properties.
   const { state, dispatch } = useFormReducer(formInitialState);
