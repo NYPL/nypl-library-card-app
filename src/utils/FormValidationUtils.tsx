@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from "react";
+import ilsLibraryList from "../data/ilsLibraryList";
 
 function isDate(
   input,
@@ -145,4 +146,18 @@ function renderServerValidationError(object) {
   return errorMessages;
 }
 
-export { isDate, renderServerValidationError };
+/**
+ * findLibraryCode
+ * Find the code for a library by searching for its name in the `ilsLibraryList`
+ * array. If no object is found, return the default value of "eb" for
+ * "e-branch" or "simplye" (interchangeable names);
+ * @param libraryName Name of library to find in the list.
+ */
+function findLibraryCode(libraryName?: string) {
+  const library = ilsLibraryList.find(
+    (library) => library.label === libraryName
+  );
+  return library?.value || "eb";
+}
+
+export { isDate, renderServerValidationError, findLibraryCode };
