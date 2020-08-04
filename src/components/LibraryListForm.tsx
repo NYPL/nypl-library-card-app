@@ -86,6 +86,12 @@ const LibraryListForm = ({
     />
   );
 
+  const renderSuggestionsContainer = ({ containerProps, children }) => (
+    <div {...containerProps} aria-label="List of library name suggestions.">
+      {children}
+    </div>
+  );
+
   return (
     <Autosuggest
       suggestions={suggestions}
@@ -95,6 +101,7 @@ const LibraryListForm = ({
       renderSuggestion={renderSuggestion}
       inputProps={inputProps}
       renderInputComponent={renderInputComponent}
+      renderSuggestionsContainer={renderSuggestionsContainer}
     />
   );
 };
