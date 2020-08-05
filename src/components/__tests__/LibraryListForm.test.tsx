@@ -25,44 +25,88 @@ describe("LibraryListForm", () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  test("renders a label, select, and description", () => {
-    render(<LibraryListForm libraryList={libraryList} defaultValue="eb" />, {
-      wrapper: TestHookFormProvider,
-    });
+  test("renders a label, input, and description", () => {
+    render(
+      <LibraryListForm libraryList={libraryList} defaultValue="SimplyE" />,
+      {
+        wrapper: TestHookFormProvider,
+      }
+    );
 
     expect(screen.getByLabelText("Home Library:")).toBeInTheDocument();
-    // `combobox` is the role for `select` elements.
-    expect(screen.getByRole("combobox")).toBeInTheDocument();
+    // "textbox" is the role for the input element.
+    expect(screen.getByRole("textbox")).toBeInTheDocument();
     // SimplyE is the default value so it's displayed when the component loads.
     expect(screen.getByDisplayValue("SimplyE")).toBeInTheDocument();
     expect(
-      screen.getByText("Select your home library from the list.")
+      screen.getByText(
+        "Select your home library from the list. Start by typing the name of the library."
+      )
     ).toBeInTheDocument();
   });
 
   test("it updates the selected value from the dropdown", async () => {
-    render(<LibraryListForm libraryList={libraryList} defaultValue="eb" />, {
+    render(
+      <LibraryListForm libraryList={libraryList} defaultValue="SimplyE" />,
+      {
+        wrapper: TestHookFormProvider,
+      }
+    );
+
+    const input = screen.getByRole("textbox");
+
+    // Default input value:
+    expect(screen.getByDisplayValue("SimplyE")).toBeInTheDocument();
+    expect(screen.queryByText("Schwarzman")).not.toBeInTheDocument();
+    expect(screen.queryByText("Schomburg")).not.toBeInTheDocument();
+
+    await act(async () =>
+      fireEvent.change(input, { target: { value: "Schwarzman" } })
+    );
+    input.focus();
+
+    // Instead of `getByDisplayValue`, we want to `getByText` since this the
+    // suggestions are rendered in a list element.
+    expect(screen.getByText("Schwarzman")).toBeInTheDocument();
+    expect(screen.queryByText("SimplyE")).not.toBeInTheDocument();
+    expect(screen.queryByText("Schomburg")).not.toBeInTheDocument();
+
+    await act(async () =>
+      fireEvent.change(input, { target: { value: "Schomburg" } })
+    );
+    input.focus();
+    expect(screen.getByText("Schomburg")).toBeInTheDocument();
+    expect(screen.queryByText("Schwarzman")).not.toBeInTheDocument();
+    expect(screen.queryByText("SimplyE")).not.toBeInTheDocument();
+  });
+
+  test("it shows the suggestions", async () => {
+    render(<LibraryListForm libraryList={libraryList} defaultValue="" />, {
       wrapper: TestHookFormProvider,
     });
 
-    const select = screen.getByRole("combobox");
+    const input = screen.getByRole("textbox");
 
-    expect(screen.getByDisplayValue("SimplyE")).toBeInTheDocument();
-    expect(screen.queryByDisplayValue("Schwarzman")).not.toBeInTheDocument();
-    expect(screen.queryByDisplayValue("Schomburg")).not.toBeInTheDocument();
+    expect(screen.queryByText("SimplyE")).not.toBeInTheDocument();
+    expect(screen.queryByText("Schwarzman")).not.toBeInTheDocument();
+    expect(screen.queryByText("Schomburg")).not.toBeInTheDocument();
+
+    await act(async () => fireEvent.change(input, { target: { value: "S" } }));
+    input.focus();
+
+    // All suggestions start with "S" so we expect all to show up.
+    expect(screen.getByText("SimplyE")).toBeInTheDocument();
+    expect(screen.getByText("Schwarzman")).toBeInTheDocument();
+    expect(screen.getByText("Schomburg")).toBeInTheDocument();
 
     await act(async () =>
-      fireEvent.click(select, { target: { value: "sasb" } })
+      fireEvent.change(input, { target: { value: "Sch" } })
     );
-    expect(screen.getByDisplayValue("Schwarzman")).toBeInTheDocument();
-    expect(screen.queryByDisplayValue("SimplyE")).not.toBeInTheDocument();
-    expect(screen.queryByDisplayValue("Schomburg")).not.toBeInTheDocument();
+    input.focus();
 
-    await act(async () =>
-      fireEvent.click(select, { target: { value: "schomburg" } })
-    );
-    expect(screen.getByDisplayValue("Schomburg")).toBeInTheDocument();
-    expect(screen.queryByDisplayValue("Schwarzman")).not.toBeInTheDocument();
-    expect(screen.queryByDisplayValue("SimplyE")).not.toBeInTheDocument();
+    // But now we search by "Sch" so only two should display.
+    expect(screen.queryByText("SimplyE")).not.toBeInTheDocument();
+    expect(screen.getByText("Schwarzman")).toBeInTheDocument();
+    expect(screen.getByText("Schomburg")).toBeInTheDocument();
   });
 });

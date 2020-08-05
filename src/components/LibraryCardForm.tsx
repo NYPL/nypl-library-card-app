@@ -20,6 +20,7 @@ import useParamsContext from "../context/ParamsContext";
 import useFormDataContext from "../context/FormDataContext";
 import AgeForm from "./AgeForm";
 import LocationForm from "./LocationForm";
+import { findLibraryCode } from "../utils/FormValidationUtils";
 
 // The interface for the react-hook-form state data object.
 interface FormInput {
@@ -110,6 +111,8 @@ const LibraryCardForm = () => {
     // Render the loading component.
     dispatch({ type: "SET_IS_LOADING", value: true });
     console.log(formData);
+
+    formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
 
     const agencyType = getPatronAgencyType(formData.location);
     axios
@@ -255,8 +258,9 @@ const LibraryCardForm = () => {
 
         <LibraryListForm
           libraryList={ilsLibraryList}
-          // The default branch is the "SimplyE" branch with a code of "eb".
-          defaultValue="eb"
+          // The default branch is the "SimplyE" branch with a code of "eb",
+          // but we do that in the server side on form submission.
+          defaultValue=""
         />
 
         <h3>Create Your Account</h3>
