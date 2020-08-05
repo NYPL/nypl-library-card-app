@@ -19,6 +19,7 @@ import { Address } from "../interfaces";
 import useParamsContext from "../context/ParamsContext";
 import useFormDataContext from "../context/FormDataContext";
 import AgeForm from "./AgeForm";
+import LocationForm from "./LocationForm";
 
 // The interface for the react-hook-form state data object.
 interface FormInput {
@@ -108,6 +109,7 @@ const LibraryCardForm = () => {
     dispatch({ type: "SET_FORM_ERRORS", value: null });
     // Render the loading component.
     dispatch({ type: "SET_IS_LOADING", value: true });
+    console.log(formData);
 
     const agencyType = getPatronAgencyType(formData.location);
     axios
@@ -232,59 +234,7 @@ const LibraryCardForm = () => {
 
         <h3>Address</h3>
 
-        <div className="nypl-radiobutton-field">
-          <fieldset>
-            <legend id="radiobutton-location">
-              I live, work, go to school, or pay property taxes at an address
-              in: <span className="nypl-required-field"> Required</span>
-            </legend>
-            <label id="radiobutton-location_nyc" htmlFor="location-nyc">
-              <input
-                aria-labelledby="radiobutton-location radiobutton-location_nyc"
-                id="location-nyc"
-                type="radio"
-                name="location"
-                value="nyc"
-                ref={register()}
-              />
-              New York City (All five boroughs)
-            </label>
-            <label id="radiobutton-location_nys" htmlFor="location-nys">
-              <input
-                aria-labelledby="radiobutton-location radiobutton-location_nys"
-                id="location-nys"
-                type="radio"
-                name="location"
-                value="nys"
-                ref={register()}
-              />
-              New York State (Outside NYC)
-            </label>
-            <label id="radiobutton-location_us" htmlFor="location-us">
-              <input
-                aria-labelledby="radiobutton-location radiobutton-location_us"
-                id="location-us"
-                type="radio"
-                name="location"
-                value="us"
-                // For radio buttons or for grouped inputs, the validation
-                // config goes in the last element.
-                ref={register({
-                  required: errorMessages.location,
-                })}
-              />
-              United States (Visiting NYC)
-            </label>
-          </fieldset>
-        </div>
-
-        <p className="nypl-address-note">
-          If your address is outside the United States, please use our{" "}
-          <a href="https://catalog.nypl.org/selfreg/patonsite">
-            alternate form
-          </a>
-          .
-        </p>
+        <LocationForm errorMessage={errorMessages.location} />
 
         <AddressForm
           type={AddressTypes.Home}
