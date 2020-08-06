@@ -110,7 +110,6 @@ const LibraryCardForm = () => {
     dispatch({ type: "SET_FORM_ERRORS", value: null });
     // Render the loading component.
     dispatch({ type: "SET_IS_LOADING", value: true });
-    console.log(formData);
 
     formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
 

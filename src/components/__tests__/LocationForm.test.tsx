@@ -34,7 +34,6 @@ describe("LocationForm", () => {
       wrapper: TestHookFormProvider,
     });
 
-    // const select = screen.getByRole("combobox");
     expect(screen.getByLabelText(nyc)).toBeInTheDocument();
     expect(screen.getByLabelText(nys)).toBeInTheDocument();
     expect(screen.getByLabelText(us)).toBeInTheDocument();
