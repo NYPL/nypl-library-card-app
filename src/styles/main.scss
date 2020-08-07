@@ -31,6 +31,33 @@ html {
   }
 }
 
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  .radio-input {
+    width: auto;
+  }
+
+  .radio-field {
+    margin: 10px 0;
+    border: 1px solid var(--ui-gray-medium);
+    padding: 20px;
+
+    label {
+      display: inline-block;
+      margin: 0 20px;
+    }
+  }
+}
+
+.required-field {
+  color: var(--ui-error);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
 .emailSubscription-wrapper {
   line-height: 1 !important;
 }
