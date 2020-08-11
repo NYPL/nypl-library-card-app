@@ -41,6 +41,7 @@ export interface FormResults {
   status?: number;
   type?: string;
   link?: string;
+  name?: string;
   barcode: string;
   username: string;
   pin: string;
