@@ -9,6 +9,9 @@ const Confirmation: React.FC<{ formResults: FormResults }> = ({
   const { barcode, username, pin, temporary, message, name } = formResults;
 
   let canvas;
+  // What we want to do is render the HTML and then pick up the canvas element.
+  // We can then draw a barcode on it using `bwipjs`. The ILS uses `Codabar` as
+  // its barcode type which is `rationalizedCodabar` in the bwip library.
   useEffect(() => {
     if (barcode && typeof document !== "undefined") {
       canvas = document.getElementById("barcodeCanvas") as HTMLCanvasElement;
@@ -28,9 +31,12 @@ const Confirmation: React.FC<{ formResults: FormResults }> = ({
       }
     }
   }, [canvas]);
+  // This is easier, for now, to render through the component rather than
+  // through scss.
   const bgStyles = {
     backgroundImage: "url('./cardbg.png')",
   };
+
   return (
     <div className="nypl-full-width-wrapper">
       <p className="name-message">Thank you for submitting your application.</p>
@@ -60,6 +66,7 @@ const Confirmation: React.FC<{ formResults: FormResults }> = ({
         </div>
       </div>
 
+      {/* Still dummy content for now. */}
       <ul>
         <li>username: {username}</li>
         <li>temporary: {`${temporary}`}</li>

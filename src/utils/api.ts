@@ -382,7 +382,7 @@ export async function createPatron(req, res) {
       status: 200,
       type: "card-granted",
       link: "some-link",
-      barcode: "23333111112222",
+      barcode: "12345678912345",
       username: "tomnook",
       pin: "1234",
       temporary: false,

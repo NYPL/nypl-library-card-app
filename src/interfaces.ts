@@ -1,3 +1,29 @@
+// The interface for the react-hook-form state data object.
+export interface FormInputData {
+  firstName: string;
+  lastName: string;
+  birthdate?: string;
+  ageGate?: string;
+  email: string;
+  "home-line1": string;
+  "home-line2": string;
+  "home-city": string;
+  "home-state": string;
+  "home-zip": string;
+  "work-line1": string;
+  "work-line2": string;
+  "work-city": string;
+  "work-state": string;
+  "work-zip": string;
+  username: string;
+  pin: string;
+  ecommunicationsPref: boolean;
+  location?: string;
+  homeLibraryCode: string;
+  acceptTerms: boolean;
+  agencyType: string;
+  policyType: string;
+}
 export interface ErrorParams {
   firstName?: string;
   lastName?: string;
@@ -17,7 +43,6 @@ export interface ErrorParams {
   username?: string;
   pin?: string;
   location?: string;
-  acceptTerms?: string;
 }
 
 export interface Address {
@@ -55,6 +80,7 @@ export interface FormData {
   errorObj: {};
   isLoading: boolean;
   csrfToken: string;
+  formValues: FormInputData;
 }
 
 export interface FormDataContextType {
