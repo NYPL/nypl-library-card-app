@@ -42,8 +42,8 @@ const Confirmation: React.FC<{ formResults: FormResults }> = ({
         <div className="grid-item">
           <Icon
             decorative
-            className="xlarge white-fill"
-            name={LogoNames["logo_nypl"]}
+            className="nypl-svg"
+            name={LogoNames["logo_nypl_negative"]}
           />
         </div>
         <div className="grid-item barcode-container">
