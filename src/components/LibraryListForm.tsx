@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import Autosuggest from "react-autosuggest";
 import FormField from "./FormField";
+import useFormDataContext from "../context/FormDataContext";
 
 export interface LibraryListObject {
   value: string;
@@ -10,7 +11,7 @@ export interface LibraryListObject {
 
 interface LibraryListFormProps {
   libraryList: LibraryListObject[];
-  defaultValue: string;
+  defaultValue?: string;
 }
 
 /**
@@ -25,7 +26,9 @@ const LibraryListForm = ({
   libraryList = [],
   defaultValue,
 }: LibraryListFormProps) => {
-  const [value, setValue] = useState(defaultValue);
+  const { state } = useFormDataContext();
+  const { formValues } = state;
+  const [value, setValue] = useState(formValues?.homeLibraryCode || "");
   const [suggestions, setSuggestions] = useState([]);
   const { register } = useFormContext();
 
@@ -65,6 +68,7 @@ const LibraryListForm = ({
   // Clear suggestions.
   const onSuggestionsClearRequested = () => setSuggestions([]);
   // Autosuggest will pass through all these props to the input.
+  console.log("code", formValues.homeLibraryCode);
   const inputProps = {
     placeholder: "Type a library name, e.g. Stavros Niarchos",
     value,
@@ -85,6 +89,7 @@ const LibraryListForm = ({
       fieldName="homeLibraryCode"
       isRequired={false}
       instructionText="Select your home library from the list. Start by typing the name of the library."
+      // defaultValue={formValues?.homeLibraryCode}
       {...inputProps}
     />
   );

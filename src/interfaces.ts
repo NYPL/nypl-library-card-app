@@ -54,6 +54,7 @@ export interface FormData {
   errorObj: {};
   isLoading: boolean;
   csrfToken: string;
+  formValues: any;
 }
 
 export interface FormDataContextType {

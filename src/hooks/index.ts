@@ -7,9 +7,10 @@ export const formInitialState: FormData = {
   errorObj: null,
   isLoading: false,
   csrfToken: null,
+  formValues: {},
 };
 
-export function useFormReducer(init) {
+export function useGlobalFormHook(init) {
   const [state, dispatch] = useReducer(formReducer, init);
 
   return { state, dispatch };

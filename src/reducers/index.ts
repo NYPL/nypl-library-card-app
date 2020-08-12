@@ -1,5 +1,11 @@
 export function formReducer(state, action) {
   switch (action.type) {
+    case "SET_FORM_DATA": {
+      return {
+        ...state,
+        formValues: action.value,
+      };
+    }
     case "SET_IS_LOADING": {
       return {
         ...state,

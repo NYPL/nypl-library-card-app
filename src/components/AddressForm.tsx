@@ -2,6 +2,7 @@ import React from "react";
 import FormField from "./FormField";
 import { Address } from "../interfaces";
 import { useFormContext } from "react-hook-form";
+import useFormDataContext from "../context/FormDataContext";
 
 export enum AddressTypes {
   Home = "home",
@@ -20,6 +21,8 @@ interface AddressFormProps {
  * and zip code.
  */
 const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
+  const { state } = useFormDataContext();
+  const { formValues } = state;
   // This component must be used within the `react-hook-form` provider so that
   // these functions are available to use.
   const { register, errors } = useFormContext();
@@ -56,6 +59,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
             message: errorMessages.line1,
           },
         })}
+        defaultValue={formValues[`${type}-line1`]}
       />
       <FormField
         id={`patronLine2-${type}`}
@@ -64,6 +68,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
         label="Apartment / Suite"
         fieldName={`${type}-line2`}
         ref={register()}
+        defaultValue={formValues[`${type}-line2`]}
       />
       <FormField
         id={`patronCity-${type}`}
@@ -79,6 +84,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
             message: errorMessages.city,
           },
         })}
+        defaultValue={formValues[`${type}-city`]}
       />
       <FormField
         id={`patronState-${type}`}
@@ -93,6 +99,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
         ref={register({
           validate: lengthValidation(MAXLENGTHSTATE, "state"),
         })}
+        defaultValue={formValues[`${type}-state`]}
       />
       <FormField
         id={`patronZip-${type}`}
@@ -106,6 +113,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
         ref={register({
           validate: lengthValidation(MAXLENGTHZIP, "zip"),
         })}
+        defaultValue={formValues[`${type}-zip`]}
       />
     </>
   );

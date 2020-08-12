@@ -5,7 +5,8 @@ import Head from "next/head";
 import { FormDataContextProvider } from "../src/context/FormDataContext";
 import "../src/styles/main.scss";
 import appConfig from "../appConfig";
-import { useFormReducer, formInitialState } from "../src/hooks";
+import { useGlobalFormHook, formInitialState } from "../src/hooks";
+import { useForm, FormProvider } from "react-hook-form";
 
 interface MyAppProps {
   Component: any;
@@ -44,11 +45,39 @@ if (process.env.TEST_AXE_ENV === "true" && !isServerRendered()) {
   axe(React, ReactDOM, 1000);
 }
 
+// The interface for the react-hook-form state data object.
+interface FormInput {
+  firstName: string;
+  lastName: string;
+  birthdate: string;
+  email: string;
+  "home-line1": string;
+  "home-line2": string;
+  "home-city": string;
+  "home-state": string;
+  "home-zip": string;
+  "work-line1": string;
+  "work-line2": string;
+  "work-city": string;
+  "work-state": string;
+  "work-zip": string;
+  username: string;
+  pin: string;
+  ecommunicationsPref: boolean;
+  location?: string;
+  homeLibraryCode: string;
+  acceptTerms: boolean;
+}
+
 export default function MyApp<MyAppProps>({ Component, pageProps }) {
   // Keep track of the API results and errors from a form submission as global
   // data in the app. It is exposed to the two pages through context. Use
   // the `dispatch` function to update the state properties.
-  const { state, dispatch } = useFormReducer(formInitialState);
+  const { state, dispatch } = useGlobalFormHook(formInitialState);
+  const formMethods = useForm<FormInput>({
+    mode: "onBlur",
+    defaultValues: state.formValues,
+  });
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
   const { favIconPath, appTitle } = appConfig;
@@ -107,9 +136,11 @@ export default function MyApp<MyAppProps>({ Component, pageProps }) {
         />
         <meta name="csrf-token" content={csrfToken} />
       </Head>
-      <FormDataContextProvider value={{ state, dispatch }}>
-        <Component {...pageProps} />
-      </FormDataContextProvider>
+      <FormProvider {...formMethods}>
+        <FormDataContextProvider value={{ state, dispatch }}>
+          <Component {...pageProps} />
+        </FormDataContextProvider>
+      </FormProvider>
     </>
   );
 }

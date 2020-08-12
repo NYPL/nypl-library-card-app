@@ -1,6 +1,7 @@
 import React from "react";
 import { Checkbox } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
+import useFormDataContext from "../context/FormDataContext";
 
 /**
  * AcceptTermsForm
@@ -10,6 +11,8 @@ import { useFormContext } from "react-hook-form";
  * to get the value and trigger updates.
  */
 const AcceptTermsForm = () => {
+  const { state } = useFormDataContext();
+  const { formValues } = state;
   const { register } = useFormContext();
   const acceptTermsLabelOptions = {
     id: "acceptTerms",
@@ -44,6 +47,7 @@ const AcceptTermsForm = () => {
         ref={register({
           required: true,
         })}
+        attributes={{ defaultChecked: formValues.acceptTerms }}
       />
     </>
   );
