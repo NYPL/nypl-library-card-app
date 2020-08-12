@@ -1,16 +1,27 @@
 import React from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import ApplicationContainer from "../../../src/components/ApplicationContainer";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import { useFormContext } from "react-hook-form";
+
+const addressKeys = [
+  "home-line1",
+  "home-line2",
+  "home-city",
+  "home-state",
+  "home-zip",
+  "work-line1",
+  "work-line2",
+  "work-city",
+  "work-state",
+  "work-zip",
+];
 
 function HomePage() {
   const { handleSubmit } = useFormContext();
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const router = useRouter();
-  const formKeys = Object.keys(formValues);
 
   const submitForm = (formData) => {
     // Merge any updates, specifically to the address value, and continue to
@@ -24,17 +35,16 @@ function HomePage() {
   };
   return (
     <ApplicationContainer>
+      <h2>Confirm your Address</h2>
       <form onSubmit={handleSubmit(submitForm)}>
-        <Link href="/library-card/new">
-          {/* eslint-disable-next-line  jsx-a11y/anchor-is-valid */}
-          <a>Back</a>
-        </Link>
-        <div>Please review your address</div>
-
+        <h3>
+          We have found an alternate address for you. Please choose which is
+          correct:
+        </h3>
         {/* Just dummy HTML to render all the values. Eventually we'll
         just need the address data to display any updates. */}
         <ul>
-          {formKeys.map((k) => (
+          {addressKeys.map((k) => (
             <li key={k}>
               {k}: {formValues[k]}
             </li>

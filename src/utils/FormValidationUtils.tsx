@@ -160,4 +160,23 @@ function findLibraryCode(libraryName?: string) {
   return library?.value || "eb";
 }
 
-export { isDate, renderServerValidationError, findLibraryCode };
+/**
+ * findLibraryName
+ * Find the name for a library by searching for its code in the `ilsLibraryList`
+ * array. If no object is found, return the default value of "eb" for
+ * "e-branch" or "simplye" (interchangeable names);
+ * @param libraryCode Name of library to find in the list.
+ */
+function findLibraryName(libraryCode?: string) {
+  const library = ilsLibraryList.find(
+    (library) => library.value === libraryCode
+  );
+  return library?.label || "SimplyE";
+}
+
+export {
+  isDate,
+  renderServerValidationError,
+  findLibraryCode,
+  findLibraryName,
+};

@@ -231,13 +231,6 @@ const LibraryCardForm = () => {
           />
         </Accordion>
 
-        <LibraryListForm
-          libraryList={ilsLibraryList}
-          // The default branch is the "SimplyE" branch with a code of "eb",
-          // but we do that in the server side on form submission.
-          defaultValue=""
-        />
-
         <h3>Create Your Account</h3>
 
         <UsernameValidationForm errorMessage={errorMessages.username} />
@@ -257,6 +250,8 @@ const LibraryCardForm = () => {
           })}
           defaultValue={formValues.pin}
         />
+
+        <LibraryListForm libraryList={ilsLibraryList} />
 
         <AcceptTermsForm />
 

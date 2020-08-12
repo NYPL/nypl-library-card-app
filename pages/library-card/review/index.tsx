@@ -67,12 +67,12 @@ function HomePage() {
 
   return (
     <ApplicationContainer>
+      <h2>Verify your Information</h2>
       <form onSubmit={handleSubmit(submitForm)}>
-        <Link href="/library-card/address">
-          {/* eslint-disable-next-line  jsx-a11y/anchor-is-valid */}
-          <a>Back</a>
-        </Link>
-        <div>Please review your submission</div>
+        <h3>
+          You have entered the information listed below. Please review before
+          before submitting.
+        </h3>
 
         <ul>
           {formKeys.map((k) => (
