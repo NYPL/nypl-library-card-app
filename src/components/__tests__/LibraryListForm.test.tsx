@@ -5,6 +5,7 @@ import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import LibraryListForm, { LibraryListObject } from "../LibraryListForm";
 import { TestHookFormProvider } from "../../../testHelper/utils";
+import { FormDataContextProvider } from "../../context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 
@@ -17,7 +18,9 @@ const libraryList: LibraryListObject[] = [
 describe("LibraryListForm", () => {
   test("passes accessibility checks", async () => {
     const { container } = render(
-      <LibraryListForm libraryList={libraryList} defaultValue="eb" />,
+      <FormDataContextProvider>
+        <LibraryListForm libraryList={libraryList} />
+      </FormDataContextProvider>,
       {
         wrapper: TestHookFormProvider,
       }
@@ -27,7 +30,9 @@ describe("LibraryListForm", () => {
 
   test("renders a label, input, and description", () => {
     render(
-      <LibraryListForm libraryList={libraryList} defaultValue="SimplyE" />,
+      <FormDataContextProvider>
+        <LibraryListForm libraryList={libraryList} />
+      </FormDataContextProvider>,
       {
         wrapper: TestHookFormProvider,
       }
@@ -36,8 +41,6 @@ describe("LibraryListForm", () => {
     expect(screen.getByLabelText("Home Library:")).toBeInTheDocument();
     // "textbox" is the role for the input element.
     expect(screen.getByRole("textbox")).toBeInTheDocument();
-    // SimplyE is the default value so it's displayed when the component loads.
-    expect(screen.getByDisplayValue("SimplyE")).toBeInTheDocument();
     expect(
       screen.getByText(
         "Select your home library from the list. Start by typing the name of the library."
@@ -47,7 +50,9 @@ describe("LibraryListForm", () => {
 
   test("it updates the selected value from the dropdown", async () => {
     render(
-      <LibraryListForm libraryList={libraryList} defaultValue="SimplyE" />,
+      <FormDataContextProvider>
+        <LibraryListForm libraryList={libraryList} />
+      </FormDataContextProvider>,
       {
         wrapper: TestHookFormProvider,
       }
@@ -56,7 +61,7 @@ describe("LibraryListForm", () => {
     const input = screen.getByRole("textbox");
 
     // Default input value:
-    expect(screen.getByDisplayValue("SimplyE")).toBeInTheDocument();
+    expect(screen.queryByText("SimplyE")).not.toBeInTheDocument();
     expect(screen.queryByText("Schwarzman")).not.toBeInTheDocument();
     expect(screen.queryByText("Schomburg")).not.toBeInTheDocument();
 
@@ -81,9 +86,14 @@ describe("LibraryListForm", () => {
   });
 
   test("it shows the suggestions", async () => {
-    render(<LibraryListForm libraryList={libraryList} defaultValue="" />, {
-      wrapper: TestHookFormProvider,
-    });
+    render(
+      <FormDataContextProvider>
+        <LibraryListForm libraryList={libraryList} />
+      </FormDataContextProvider>,
+      {
+        wrapper: TestHookFormProvider,
+      }
+    );
 
     const input = screen.getByRole("textbox");
 

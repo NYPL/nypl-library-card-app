@@ -3,13 +3,17 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import Link from "next/link";
+import { useFormContext } from "react-hook-form";
 import config from "../../../appConfig";
 import ApplicationContainer from "../../../src/components/ApplicationContainer";
 import useFormDataContext from "../../../src/context/FormDataContext";
-import { useFormContext } from "react-hook-form";
 import { findLibraryCode } from "../../../src/utils/FormValidationUtils";
 
-function HomePage() {
+/**
+ * ReviewPage
+ * Main page component for the "form submission review" page.
+ */
+function ReviewPage() {
   const { handleSubmit } = useFormContext();
   const { state, dispatch } = useFormDataContext();
   const { formValues, isLoading } = state;
@@ -29,9 +33,9 @@ function HomePage() {
     dispatch({ type: "SET_IS_LOADING", value: true });
 
     formValues.homeLibraryCode = findLibraryCode(formValues.homeLibraryCode);
-    const agencyType = getPatronAgencyType(formValues.location);
+    formValues.agencyType = getPatronAgencyType(formValues.location);
 
-    const dataToSubmit = { ...formData, ...state.formValues, agencyType };
+    const dataToSubmit = { ...formData, ...formValues };
 
     // Update the global state.
     dispatch({
@@ -44,7 +48,7 @@ function HomePage() {
         "/api/create-patron",
         dataToSubmit
         // {
-        // headers: { "csrf-token": csrfToken },
+        //    headers: { "csrf-token": csrfToken },
         // }
       )
       .then((response) => {
@@ -71,7 +75,7 @@ function HomePage() {
       <form onSubmit={handleSubmit(submitForm)}>
         <h3>
           You have entered the information listed below. Please review before
-          before submitting.
+          submitting.
         </h3>
 
         <ul>
@@ -96,4 +100,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default ReviewPage;

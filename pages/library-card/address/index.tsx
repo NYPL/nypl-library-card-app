@@ -17,7 +17,11 @@ const addressKeys = [
   "work-zip",
 ];
 
-function HomePage() {
+/**
+ * AddressPage
+ * Main page component for the "address review" page.
+ */
+function AddressPage() {
   const { handleSubmit } = useFormContext();
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
@@ -25,7 +29,7 @@ function HomePage() {
 
   const submitForm = (formData) => {
     // Merge any updates, specifically to the address value, and continue to
-    // the next page.
+    // the next page. For now, it's only setting up the dispatch.
     dispatch({
       type: "SET_FORM_DATA",
       value: { ...formData, ...formValues },
@@ -33,6 +37,7 @@ function HomePage() {
 
     router.push("/library-card/review");
   };
+
   return (
     <ApplicationContainer>
       <h2>Confirm your Address</h2>
@@ -57,4 +62,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default AddressPage;

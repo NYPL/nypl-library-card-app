@@ -22,30 +22,6 @@ import LocationForm from "./LocationForm";
 import { findLibraryCode } from "../utils/FormValidationUtils";
 import config from "../../appConfig";
 
-// The interface for the react-hook-form state data object.
-interface FormInput {
-  firstName: string;
-  lastName: string;
-  birthdate: string;
-  email: string;
-  "home-line1": string;
-  "home-line2": string;
-  "home-city": string;
-  "home-state": string;
-  "home-zip": string;
-  "work-line1": string;
-  "work-line2": string;
-  "work-city": string;
-  "work-state": string;
-  "work-zip": string;
-  username: string;
-  pin: string;
-  ecommunicationsPref: boolean;
-  location?: string;
-  homeLibraryCode: string;
-  acceptTerms: boolean;
-}
-
 const errorMessages = {
   firstName: "Please enter a valid first name.",
   lastName: "Please enter a valid last name.",
