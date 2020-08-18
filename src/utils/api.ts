@@ -388,6 +388,7 @@ export async function createPatron(req, res) {
       temporary: false,
       message: "The library card will be a standard library card.",
       patronId: 1234567,
+      name: "Tom Nook",
     });
 
     return axios
@@ -395,6 +396,7 @@ export async function createPatron(req, res) {
       .then((result) => {
         return res.json({
           status: result.data.status,
+          name: patronData.name,
           ...result.data,
         });
       })
