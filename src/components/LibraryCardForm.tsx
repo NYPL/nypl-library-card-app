@@ -72,8 +72,6 @@ const LibraryCardForm = () => {
     formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
     formData.agencyType = getPatronAgencyType(formData.location);
 
-    console.log("init submit", formData);
-
     // Set the global state...
     dispatch({ type: "SET_FORM_DATA", value: formData });
     // And now go to the next page.

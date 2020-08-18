@@ -46,7 +46,6 @@ function ReviewPage() {
   const [editAccountInfoFlag, setEditAccountInfoFlag] = useState(false);
 
   const editSectionInfo = (formData) => {
-    console.log("formdata account", formData);
     dispatch({
       type: "SET_FORM_DATA",
       value: {
@@ -65,7 +64,6 @@ function ReviewPage() {
 
     // Convert the home library name to its code value.
     formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
-    console.log("last submit", formData);
 
     // Update the global state.
     dispatch({
@@ -93,101 +91,128 @@ function ReviewPage() {
         router.push("/library-card/new");
       });
   };
+  const submitButton = (
+    <Button buttonType={ButtonTypes.Primary} onClick={() => {}} type="submit">
+      Submit
+    </Button>
+  );
+  const editButton = (editSectionFlag) => (
+    <Button
+      buttonType={ButtonTypes.Primary}
+      onClick={() => editSectionFlag(true)}
+    >
+      Edit
+    </Button>
+  );
 
   return (
     <div className="nypl-row review-page">
       <div className="nypl-column-half nypl-column-offset-one">
         <h2>Verify your Information</h2>
-        <p>
+        <h3>
           You have entered the information listed below. Please review before
           submitting.
-        </p>
+        </h3>
 
-        <h3>Personal Information</h3>
-        {!editPersonalInfoFlag ? (
-          <dl>
-            <dt>Name</dt>
-            <dd>
-              {formValues.firstName} {formValues.lastName}
-            </dd>
-            <dt>BirthDate</dt>
-            <dd>{formValues.birthdate}</dd>
-            <dt>Email</dt>
-            <dd>{formValues.email}</dd>
-            <dt>Receive information about NYPL&apos;s programs and services</dt>
-            <dd>{formValues.ecommunicationsPref ? "Yes" : "No"}</dd>
-            <button onClick={() => setEditPersonalInfoFlag(true)}>Edit</button>
-          </dl>
-        ) : (
-          <form onSubmit={handleSubmit(editSectionInfo)}>
-            <PersonalInformationForm />
-            <button type="submit">Submit</button>
-          </form>
-        )}
-
-        <h4>Address</h4>
-        {!editAddressInfoFlag ? (
-          <dl>
-            <dt>Location</dt>
-            <dd>{getLocationValue(formValues.location)}</dd>
-            <dt>Home Address</dt>
-            <dd>
-              {formValues["home-line1"]}
-              {formValues["home-line2"]}
-              <br />
-              {formValues["home-city"]}, {formValues["home-state"]}{" "}
-              {formValues["home-zip"]}
-            </dd>
-            {formValues["work-line1"] && (
-              <>
-                <dt>Work Address</dt>
+        <div className="form-review-section">
+          <h4>Personal Information</h4>
+          {!editPersonalInfoFlag ? (
+            <>
+              <dl>
+                <dt>Name</dt>
                 <dd>
-                  {formValues["work-line1"]}
-                  {formValues["work-line2"]}
-                  <br />
-                  {formValues["work-city"]}, {formValues["work-state"]}{" "}
-                  {formValues["work-zip"]}
+                  {formValues.firstName} {formValues.lastName}
                 </dd>
-              </>
-            )}
-            <button onClick={() => setEditAddressInfoFlag(true)}>Edit</button>
-          </dl>
-        ) : (
-          <form onSubmit={handleSubmit(editSectionInfo)}>
-            <AddressForm
-              type={AddressTypes.Home}
-              errorMessages={errorMessages.address}
-            />
-            {formValues["work-line1"] && (
-              <>
-                <h4>Work Address</h4>
-                <AddressForm
-                  type={AddressTypes.Work}
-                  errorMessages={errorMessages.address}
-                />
-              </>
-            )}
-            <button type="submit">Submit</button>
-          </form>
-        )}
+                <dt>BirthDate</dt>
+                <dd>{formValues.birthdate}</dd>
+                <dt>Email</dt>
+                <dd>{formValues.email}</dd>
+                <dt>
+                  Receive information about NYPL&apos;s programs and services
+                </dt>
+                <dd>{formValues.ecommunicationsPref ? "Yes" : "No"}</dd>
+              </dl>
+              {editButton(setEditPersonalInfoFlag)}
+            </>
+          ) : (
+            <form onSubmit={handleSubmit(editSectionInfo)}>
+              <PersonalInformationForm />
+              {submitButton}
+            </form>
+          )}
+        </div>
 
-        <h4>Account</h4>
-        {!editAccountInfoFlag ? (
-          <dl>
-            <dt>Username</dt>
-            <dd>{formValues.username}</dd>
-            <dt>Pin</dt>
-            <dd>{formValues.pin}</dd>
-            <dt>Home Library</dt>
-            <dd>{findLibraryName(formValues.homeLibraryCode)}</dd>
-            <button onClick={() => setEditAccountInfoFlag(true)}>Edit</button>
-          </dl>
-        ) : (
-          <form onSubmit={handleSubmit(editSectionInfo)}>
-            <AccountForm />
-            <button type="submit">Submit</button>
-          </form>
-        )}
+        <div className="form-review-section">
+          <h4>Address</h4>
+          {!editAddressInfoFlag ? (
+            <>
+              <dl>
+                <dt>Location</dt>
+                <dd>{getLocationValue(formValues.location)}</dd>
+                <dt>Home Address</dt>
+                <dd>
+                  {formValues["home-line1"]}
+                  {formValues["home-line2"]}
+                  <br />
+                  {formValues["home-city"]}, {formValues["home-state"]}{" "}
+                  {formValues["home-zip"]}
+                </dd>
+                {formValues["work-line1"] && (
+                  <>
+                    <dt>Work Address</dt>
+                    <dd>
+                      {formValues["work-line1"]}
+                      {formValues["work-line2"]}
+                      <br />
+                      {formValues["work-city"]}, {formValues["work-state"]}{" "}
+                      {formValues["work-zip"]}
+                    </dd>
+                  </>
+                )}
+              </dl>
+              {editButton(setEditAddressInfoFlag)}
+            </>
+          ) : (
+            <form onSubmit={handleSubmit(editSectionInfo)}>
+              <AddressForm
+                type={AddressTypes.Home}
+                errorMessages={errorMessages.address}
+              />
+              {formValues["work-line1"] && (
+                <>
+                  <h4>Work Address</h4>
+                  <AddressForm
+                    type={AddressTypes.Work}
+                    errorMessages={errorMessages.address}
+                  />
+                </>
+              )}
+              {submitButton}
+            </form>
+          )}
+        </div>
+
+        <div className="form-review-section">
+          <h4>Account</h4>
+          {!editAccountInfoFlag ? (
+            <>
+              <dl>
+                <dt>Username</dt>
+                <dd>{formValues.username}</dd>
+                <dt>Pin</dt>
+                <dd>{formValues.pin}</dd>
+                <dt>Home Library</dt>
+                <dd>{findLibraryName(formValues.homeLibraryCode)}</dd>
+              </dl>
+              {editButton(setEditAccountInfoFlag)}
+            </>
+          ) : (
+            <form onSubmit={handleSubmit(editSectionInfo)}>
+              <AccountForm />
+              {submitButton}
+            </form>
+          )}
+        </div>
 
         <div className="form-buttons">
           <form onSubmit={handleSubmit(submitForm)}>
@@ -197,13 +222,7 @@ function ReviewPage() {
                 Edit
               </DSLink>
             </Link>
-            <Button
-              buttonType={ButtonTypes.Primary}
-              onClick={() => {}}
-              type="submit"
-            >
-              Submit
-            </Button>
+            {submitButton}
           </form>
         </div>
       </div>

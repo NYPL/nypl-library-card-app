@@ -17,6 +17,8 @@
 }
 
 .form-buttons {
+  margin-top: 20px;
+
   form {
     display: flex;
     justify-content: space-between;
@@ -29,4 +31,8 @@
       }
     }
   }
+}
+
+.form-review-section {
+  margin: 20px 0;
 }
