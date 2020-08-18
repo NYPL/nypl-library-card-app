@@ -7,6 +7,7 @@ import { FormDataContextProvider } from "../src/context/FormDataContext";
 import "../src/styles/main.scss";
 import appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
+import ApplicationContainer from "../src/components/ApplicationContainer";
 
 interface MyAppProps {
   Component: any;
@@ -107,7 +108,9 @@ export default function MyApp<MyAppProps>({ Component, pageProps }) {
       </Head>
       <FormProvider {...formMethods}>
         <FormDataContextProvider>
-          <Component {...pageProps} />
+          <ApplicationContainer>
+            <Component {...pageProps} />
+          </ApplicationContainer>
         </FormDataContextProvider>
       </FormProvider>
     </>

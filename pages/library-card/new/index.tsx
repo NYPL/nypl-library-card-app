@@ -1,14 +1,11 @@
 import React from "react";
-import ApplicationContainer from "../../../src/components/ApplicationContainer";
 import { ParamsContextProvider } from "../../../src/context/ParamsContext";
 import LibraryCardForm from "../../../src/components/LibraryCardForm";
 
 function HomePage({ query }) {
   return (
     <ParamsContextProvider params={query}>
-      <ApplicationContainer>
-        <LibraryCardForm />
-      </ApplicationContainer>
+      <LibraryCardForm />
     </ParamsContextProvider>
   );
 }

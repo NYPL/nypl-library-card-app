@@ -1,26 +1,21 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
 import isEmpty from "lodash/isEmpty";
-import { isEmail } from "validator";
-import { Checkbox, Accordion } from "@nypl/design-system-react-components";
+import { Accordion } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
 
-import FormField from "./FormField";
 import ApiErrors from "./ApiErrors";
 import FormFooterText from "./FormFooterText";
-import UsernameValidationForm from "./UsernameValidationForm";
-import LibraryListForm from "./LibraryListForm";
-import ilsLibraryList from "../data/ilsLibraryList";
-import AcceptTermsForm from "./AcceptTermsForm";
 import AddressForm, { AddressTypes } from "./AddressForm";
 import { Address } from "../interfaces";
 import useParamsContext from "../context/ParamsContext";
 import useFormDataContext from "../context/FormDataContext";
-import AgeForm from "./AgeForm";
 import LocationForm from "./LocationForm";
-import { findLibraryCode } from "../utils/FormValidationUtils";
-import config from "../../appConfig";
+import { findLibraryCode, getPatronAgencyType } from "../utils/formDataUtils";
+import PersonalInformationForm from "./PersonalInformationForm";
+import AccountForm from "./AccountForm";
+import AcceptTermsForm from "./AcceptTermsForm";
 
 const errorMessages = {
   firstName: "Please enter a valid first name.",
@@ -46,7 +41,7 @@ const LibraryCardForm = () => {
   const errorSection = React.createRef<HTMLDivElement>();
   const router = useRouter();
   // Specific functions and object from react-hook-form.
-  const { register, handleSubmit, errors, watch } = useFormContext();
+  const { register, handleSubmit, watch } = useFormContext();
 
   // Will run whenever the `errorObj` has changes, specifically for
   // bad requests.
@@ -68,13 +63,6 @@ const LibraryCardForm = () => {
     return document.head.querySelector(`[${tag}]`).textContent;
   };
 
-  const getPatronAgencyType = (agencyTypeParam) => {
-    const { agencyType } = config;
-    return !isEmpty(agencyTypeParam) && agencyTypeParam.toLowerCase() === "nys"
-      ? agencyType.nys
-      : agencyType.default;
-  };
-
   /**
    * submitForm
    * Makes an internal API call to create a new patron.
@@ -83,6 +71,8 @@ const LibraryCardForm = () => {
   const submitForm = (formData) => {
     formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
     formData.agencyType = getPatronAgencyType(formData.location);
+
+    console.log("init submit", formData);
 
     // Set the global state...
     dispatch({ type: "SET_FORM_DATA", value: formData });
@@ -109,16 +99,6 @@ const LibraryCardForm = () => {
    * This renders the complete form. Refactoring this later.
    */
   const renderFormFields = () => {
-    const checkBoxLabelOptions = {
-      id: "receiveEmails",
-      labelContent: (
-        <>
-          Yes, I would like to receive information about NYPL&apos;s programs
-          and services
-        </>
-      ),
-    };
-
     // Watch the `acceptTerms` named field. If it's checked/true, the submit
     // button will be enabled.
     const acceptedTerms = watch("acceptTerms");
@@ -130,61 +110,8 @@ const LibraryCardForm = () => {
       >
         <h2>Please enter the following information</h2>
         <h3>Personal Information</h3>
-        <div className="nypl-name-field">
-          <FormField
-            id="patronFirstName"
-            type="text"
-            label="First Name"
-            fieldName="firstName"
-            isRequired
-            // Every input field is registered to react-hook-form. If this
-            // field is empty on blur or on submission, the error message will
-            // display below the input.
-            ref={register({
-              required: errorMessages.firstName,
-            })}
-            errorState={errors}
-            defaultValue={formValues.firstName}
-          />
-          <FormField
-            id="patronLastName"
-            type="text"
-            label="Last Name"
-            fieldName="lastName"
-            isRequired
-            errorState={errors}
-            ref={register({
-              required: errorMessages.lastName,
-            })}
-            defaultValue={formValues.lastName}
-          />
-        </div>
 
-        <AgeForm policyType={params.policyType} errorMessages={errorMessages} />
-
-        <FormField
-          id="patronEmail"
-          className="nypl-text-field"
-          type="text"
-          label="E-mail"
-          fieldName="email"
-          errorState={errors}
-          ref={register({
-            required: false,
-            validate: (val) =>
-              val === "" || isEmail(val) || errorMessages.email,
-          })}
-          defaultValue={formValues.email}
-        />
-        <Checkbox
-          checkboxId="patronECommunications"
-          name="ecommunicationsPref"
-          labelOptions={checkBoxLabelOptions}
-          // Users must opt-out.
-          isSelected={true}
-          ref={register()}
-          attributes={{ defaultChecked: formValues.ecommunicationsPref }}
-        />
+        <PersonalInformationForm agencyType={params.policyType} />
 
         <h3>Address</h3>
 
@@ -209,25 +136,7 @@ const LibraryCardForm = () => {
 
         <h3>Create Your Account</h3>
 
-        <UsernameValidationForm errorMessage={errorMessages.username} />
-
-        <FormField
-          id="patronPin"
-          className="nypl-text-field"
-          type="text"
-          label="PIN"
-          fieldName="pin"
-          instructionText="4 digits"
-          isRequired
-          errorState={errors}
-          maxLength={4}
-          ref={register({
-            validate: (val) => val.length === 4 || errorMessages.pin,
-          })}
-          defaultValue={formValues.pin}
-        />
-
-        <LibraryListForm libraryList={ilsLibraryList} />
+        <AccountForm />
 
         <AcceptTermsForm />
 
@@ -235,7 +144,7 @@ const LibraryCardForm = () => {
           type="hidden"
           aria-hidden={true}
           name="policyType"
-          defaultValue={params.policyType || formValues.policyType || undefined}
+          defaultValue={params.policyType || formValues.policyType}
           ref={register()}
         />
 

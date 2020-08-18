@@ -5,9 +5,11 @@ import { FormDataContextType, FormData, FormInputData } from "../interfaces";
 export const formInitialState: FormData = {
   results: undefined,
   errorObj: null,
-  isLoading: false,
   csrfToken: null,
-  formValues: {} as FormInputData,
+  formValues: {
+    ecommunicationsPref: true,
+    policyType: "webApplicant",
+  } as FormInputData,
 };
 
 const FormDataContext = React.createContext<FormDataContextType | undefined>(

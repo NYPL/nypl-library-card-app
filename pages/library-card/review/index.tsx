@@ -1,13 +1,35 @@
-import React from "react";
+/* eslint-disable */
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import isEmpty from "lodash/isEmpty";
 import Link from "next/link";
 import { useFormContext } from "react-hook-form";
-import config from "../../../appConfig";
-import ApplicationContainer from "../../../src/components/ApplicationContainer";
+import {
+  Button,
+  ButtonTypes,
+  Link as DSLink,
+  LinkTypes,
+} from "@nypl/design-system-react-components";
+
 import useFormDataContext from "../../../src/context/FormDataContext";
-import { findLibraryCode } from "../../../src/utils/FormValidationUtils";
+import {
+  getLocationValue,
+  findLibraryName,
+  findLibraryCode,
+} from "../../../src/utils/formDataUtils";
+import PersonalInformationForm from "../../../src/components/PersonalInformationForm";
+import AccountForm from "../../../src/components/AccountForm";
+import AddressForm, { AddressTypes } from "../../../src/components/AddressForm";
+import { Address } from "../../../src/interfaces";
+
+const errorMessages = {
+  address: {
+    line1: "Please enter a valid street address.",
+    city: "Please enter a valid city.",
+    state: "Please enter a 2-character state abbreviation.",
+    zip: "Please enter a 5-digit postal code.",
+  } as Address,
+};
 
 /**
  * ReviewPage
@@ -16,37 +38,45 @@ import { findLibraryCode } from "../../../src/utils/FormValidationUtils";
 function ReviewPage() {
   const { handleSubmit } = useFormContext();
   const { state, dispatch } = useFormDataContext();
-  const { formValues, isLoading } = state;
+  const { formValues } = state;
   const router = useRouter();
 
-  const formKeys = Object.keys(formValues);
-  const getPatronAgencyType = (agencyTypeParam) => {
-    const { agencyType } = config;
-    return !isEmpty(agencyTypeParam) && agencyTypeParam.toLowerCase() === "nys"
-      ? agencyType.nys
-      : agencyType.default;
+  const [editPersonalInfoFlag, setEditPersonalInfoFlag] = useState(false);
+  const [editAddressInfoFlag, setEditAddressInfoFlag] = useState(false);
+  const [editAccountInfoFlag, setEditAccountInfoFlag] = useState(false);
+
+  const editSectionInfo = (formData) => {
+    console.log("formdata account", formData);
+    dispatch({
+      type: "SET_FORM_DATA",
+      value: {
+        ...formValues,
+        ...formData,
+      },
+    });
+    setEditPersonalInfoFlag(false);
+    setEditAccountInfoFlag(false);
+    setEditAddressInfoFlag(false);
   };
+
   const submitForm = (formData) => {
     // This is resetting any errors from previous submissions, if any.
     dispatch({ type: "SET_FORM_ERRORS", value: null });
-    // Render the loading component.
-    dispatch({ type: "SET_IS_LOADING", value: true });
 
-    formValues.homeLibraryCode = findLibraryCode(formValues.homeLibraryCode);
-    formValues.agencyType = getPatronAgencyType(formValues.location);
-
-    const dataToSubmit = { ...formData, ...formValues };
+    // Convert the home library name to its code value.
+    formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
+    console.log("last submit", formData);
 
     // Update the global state.
     dispatch({
       type: "SET_FORM_DATA",
-      value: dataToSubmit,
+      value: formData,
     });
 
     axios
       .post(
         "/api/create-patron",
-        dataToSubmit
+        formData
         // {
         //    headers: { "csrf-token": csrfToken },
         // }
@@ -57,46 +87,127 @@ function ReviewPage() {
         router.push("/confirmation?newCard=true");
       })
       .catch((error) => {
-        // There are server-side errors! So we will render them.
+        // There are server-side errors! So go back to the main page and
+        // render the error messages so they can be fixed.
         dispatch({ type: "SET_FORM_ERRORS", value: error.response?.data });
         router.push("/library-card/new");
-      })
-      // Don't render the loading component anymore.
-      .finally(() => dispatch({ type: "SET_IS_LOADING", value: false }));
-  };
-
-  const renderLoader = () => {
-    return isLoading ? <div className="loading" /> : null;
+      });
   };
 
   return (
-    <ApplicationContainer>
-      <h2>Verify your Information</h2>
-      <form onSubmit={handleSubmit(submitForm)}>
-        <h3>
+    <div className="nypl-row review-page">
+      <div className="nypl-column-half nypl-column-offset-one">
+        <h2>Verify your Information</h2>
+        <p>
           You have entered the information listed below. Please review before
           submitting.
-        </h3>
+        </p>
 
-        <ul>
-          {formKeys.map((k) => (
-            <li key={k}>
-              {k}: {state.formValues[k]}
-            </li>
-          ))}
-        </ul>
+        <h3>Personal Information</h3>
+        {!editPersonalInfoFlag ? (
+          <dl>
+            <dt>Name</dt>
+            <dd>
+              {formValues.firstName} {formValues.lastName}
+            </dd>
+            <dt>BirthDate</dt>
+            <dd>{formValues.birthdate}</dd>
+            <dt>Email</dt>
+            <dd>{formValues.email}</dd>
+            <dt>Receive information about NYPL&apos;s programs and services</dt>
+            <dd>{formValues.ecommunicationsPref ? "Yes" : "No"}</dd>
+            <button onClick={() => setEditPersonalInfoFlag(true)}>Edit</button>
+          </dl>
+        ) : (
+          <form onSubmit={handleSubmit(editSectionInfo)}>
+            <PersonalInformationForm />
+            <button type="submit">Submit</button>
+          </form>
+        )}
 
-        <Link href="/library-card/new">
-          {/* eslint-disable-next-line  jsx-a11y/anchor-is-valid */}
-          <a>Edit</a>
-        </Link>
+        <h4>Address</h4>
+        {!editAddressInfoFlag ? (
+          <dl>
+            <dt>Location</dt>
+            <dd>{getLocationValue(formValues.location)}</dd>
+            <dt>Home Address</dt>
+            <dd>
+              {formValues["home-line1"]}
+              {formValues["home-line2"]}
+              <br />
+              {formValues["home-city"]}, {formValues["home-state"]}{" "}
+              {formValues["home-zip"]}
+            </dd>
+            {formValues["work-line1"] && (
+              <>
+                <dt>Work Address</dt>
+                <dd>
+                  {formValues["work-line1"]}
+                  {formValues["work-line2"]}
+                  <br />
+                  {formValues["work-city"]}, {formValues["work-state"]}{" "}
+                  {formValues["work-zip"]}
+                </dd>
+              </>
+            )}
+            <button onClick={() => setEditAddressInfoFlag(true)}>Edit</button>
+          </dl>
+        ) : (
+          <form onSubmit={handleSubmit(editSectionInfo)}>
+            <AddressForm
+              type={AddressTypes.Home}
+              errorMessages={errorMessages.address}
+            />
+            {formValues["work-line1"] && (
+              <>
+                <h4>Work Address</h4>
+                <AddressForm
+                  type={AddressTypes.Work}
+                  errorMessages={errorMessages.address}
+                />
+              </>
+            )}
+            <button type="submit">Submit</button>
+          </form>
+        )}
 
-        <div>
-          <input className="nypl-request-button" type="submit" value="Submit" />
-          {renderLoader()}
+        <h4>Account</h4>
+        {!editAccountInfoFlag ? (
+          <dl>
+            <dt>Username</dt>
+            <dd>{formValues.username}</dd>
+            <dt>Pin</dt>
+            <dd>{formValues.pin}</dd>
+            <dt>Home Library</dt>
+            <dd>{findLibraryName(formValues.homeLibraryCode)}</dd>
+            <button onClick={() => setEditAccountInfoFlag(true)}>Edit</button>
+          </dl>
+        ) : (
+          <form onSubmit={handleSubmit(editSectionInfo)}>
+            <AccountForm />
+            <button type="submit">Submit</button>
+          </form>
+        )}
+
+        <div className="form-buttons">
+          <form onSubmit={handleSubmit(submitForm)}>
+            <Link href="/library-card/new" passHref>
+              <DSLink type={LinkTypes.Button}>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                Edit
+              </DSLink>
+            </Link>
+            <Button
+              buttonType={ButtonTypes.Primary}
+              onClick={() => {}}
+              type="submit"
+            >
+              Submit
+            </Button>
+          </form>
         </div>
-      </form>
-    </ApplicationContainer>
+      </div>
+    </div>
   );
 }
 
