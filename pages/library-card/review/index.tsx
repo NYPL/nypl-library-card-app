@@ -20,16 +20,7 @@ import {
 import PersonalInformationForm from "../../../src/components/PersonalInformationForm";
 import AccountForm from "../../../src/components/AccountForm";
 import AddressForm, { AddressTypes } from "../../../src/components/AddressForm";
-import { Address } from "../../../src/interfaces";
-
-const errorMessages = {
-  address: {
-    line1: "Please enter a valid street address.",
-    city: "Please enter a valid city.",
-    state: "Please enter a 2-character state abbreviation.",
-    zip: "Please enter a 5-digit postal code.",
-  } as Address,
-};
+import { errorMessages } from "../../../src/utils/formDataUtils";
 
 /**
  * ReviewPage
@@ -41,10 +32,32 @@ function ReviewPage() {
   const { formValues } = state;
   const router = useRouter();
 
+  // Flags to set a section to editable or read-only.
   const [editPersonalInfoFlag, setEditPersonalInfoFlag] = useState(false);
   const [editAddressInfoFlag, setEditAddressInfoFlag] = useState(false);
   const [editAccountInfoFlag, setEditAccountInfoFlag] = useState(false);
 
+  // Shareable button for each editable section.
+  const editButton = (editSectionFlag) => (
+    <Button
+      buttonType={ButtonTypes.Primary}
+      onClick={() => editSectionFlag(true)}
+    >
+      Edit
+    </Button>
+  );
+  const submitButton = (
+    <Button buttonType={ButtonTypes.Primary} onClick={() => {}} type="submit">
+      Submit
+    </Button>
+  );
+
+  /**
+   * editSectionInfo
+   * Each section has its own form and needs its own edit button, but the data
+   * is not being manipulated, just updated, so they can all use the same
+   * function to set the global data.
+   */
   const editSectionInfo = (formData) => {
     dispatch({
       type: "SET_FORM_DATA",
@@ -53,11 +66,16 @@ function ReviewPage() {
         ...formData,
       },
     });
+    // Set all to false even though not all are on.
     setEditPersonalInfoFlag(false);
     setEditAccountInfoFlag(false);
     setEditAddressInfoFlag(false);
   };
 
+  /**
+   * submitForm
+   * Update the form values again but this time submit to the API.
+   */
   const submitForm = (formData) => {
     // This is resetting any errors from previous submissions, if any.
     dispatch({ type: "SET_FORM_ERRORS", value: null });
@@ -91,19 +109,6 @@ function ReviewPage() {
         router.push("/library-card/new");
       });
   };
-  const submitButton = (
-    <Button buttonType={ButtonTypes.Primary} onClick={() => {}} type="submit">
-      Submit
-    </Button>
-  );
-  const editButton = (editSectionFlag) => (
-    <Button
-      buttonType={ButtonTypes.Primary}
-      onClick={() => editSectionFlag(true)}
-    >
-      Edit
-    </Button>
-  );
 
   return (
     <div className="nypl-row review-page">

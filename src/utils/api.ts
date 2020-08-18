@@ -356,8 +356,6 @@ export async function createPatron(req, res) {
       return res.status(400).json(patronData);
     }
 
-    // console.log("patrondata", patronData);
-
     // Just for testing purposes locally. Used to verify refs and focus are
     // properly working but also to update the server response interface/type
     // later on.

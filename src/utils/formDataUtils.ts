@@ -2,6 +2,24 @@ import isEmpty from "lodash/isEmpty";
 
 import ilsLibraryList from "../data/ilsLibraryList";
 import config from "../../appConfig";
+import { Address } from "../interfaces";
+
+const errorMessages = {
+  firstName: "Please enter a valid first name.",
+  lastName: "Please enter a valid last name.",
+  birthdate: "Please enter a valid date, MM/DD/YYYY, including slashes.",
+  ageGate: "You must be 13 years or older to continue.",
+  email: "Please enter a valid email address.",
+  username: "Username must be between 5-25 alphanumeric characters.",
+  pin: "Please enter a 4-digit PIN.",
+  location: "Please select an address option.",
+  address: {
+    line1: "Please enter a valid street address.",
+    city: "Please enter a valid city.",
+    state: "Please enter a 2-character state abbreviation.",
+    zip: "Please enter a 5-digit postal code.",
+  } as Address,
+};
 
 /**
  * findLibraryCode
@@ -31,13 +49,22 @@ function findLibraryName(libraryCode?: string) {
   return library?.label || "SimplyE";
 }
 
-const getPatronAgencyType = (agencyTypeParam) => {
+/**
+ * getPatronAgencyType
+ * Returns the agency type based on the patron's location
+ * from the query param.
+ */
+const getPatronAgencyType = (agencyTypeParam?) => {
   const { agencyType } = config;
   return !isEmpty(agencyTypeParam) && agencyTypeParam.toLowerCase() === "nys"
     ? agencyType.nys
     : agencyType.default;
 };
 
+/**
+ * getLocationValue
+ * Map the location value from the form field into the string value.
+ */
 const getLocationValue = (location: string): string => {
   const locationMap = {
     nyc: "New York City (All five boroughs)",
@@ -52,4 +79,5 @@ export {
   findLibraryName,
   getPatronAgencyType,
   getLocationValue,
+  errorMessages,
 };

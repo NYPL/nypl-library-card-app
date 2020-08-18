@@ -1,4 +1,9 @@
-import { findLibraryCode, findLibraryName } from "../formDataUtils";
+import {
+  findLibraryCode,
+  findLibraryName,
+  getPatronAgencyType,
+  getLocationValue,
+} from "../formDataUtils";
 
 describe("findLibraryCode", () => {
   // `eb` is the default value describing the "E-Branch" or "SimplyE" library.
@@ -27,5 +32,25 @@ describe("findLibraryName", () => {
     expect(findLibraryName("ew")).toEqual("Edenwald Branch");
     expect(findLibraryName("ht")).toEqual("Countee Cullen Branch");
     expect(findLibraryName("se")).toEqual("Seward Park Branch");
+  });
+});
+
+describe("getPatronAgencyType", () => {
+  test("it returns '198' as the default agency value", () => {
+    expect(getPatronAgencyType()).toEqual("198");
+  });
+
+  test("it returns the value code for nys", () => {
+    expect(getPatronAgencyType("nys")).toEqual("199");
+  });
+});
+
+describe("getLocationValue", () => {
+  test("it returns the string value for the location code", () => {
+    expect(getLocationValue("nyc")).toEqual(
+      "New York City (All five boroughs)"
+    );
+    expect(getLocationValue("nys")).toEqual("New York State (Outside NYC)");
+    expect(getLocationValue("us")).toEqual("United States (Visiting NYC)");
   });
 });

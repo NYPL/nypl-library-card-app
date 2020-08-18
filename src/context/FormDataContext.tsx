@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import { formReducer } from "../reducers";
 import { FormDataContextType, FormData, FormInputData } from "../interfaces";
 
+// Default initial values.
 export const formInitialState: FormData = {
   results: undefined,
   errorObj: null,

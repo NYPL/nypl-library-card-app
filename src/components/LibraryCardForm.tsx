@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import ApiErrors from "./ApiErrors";
 import FormFooterText from "./FormFooterText";
 import AddressForm, { AddressTypes } from "./AddressForm";
-import { Address } from "../interfaces";
 import useParamsContext from "../context/ParamsContext";
 import useFormDataContext from "../context/FormDataContext";
 import LocationForm from "./LocationForm";
@@ -16,23 +15,7 @@ import { findLibraryCode, getPatronAgencyType } from "../utils/formDataUtils";
 import PersonalInformationForm from "./PersonalInformationForm";
 import AccountForm from "./AccountForm";
 import AcceptTermsForm from "./AcceptTermsForm";
-
-const errorMessages = {
-  firstName: "Please enter a valid first name.",
-  lastName: "Please enter a valid last name.",
-  birthdate: "Please enter a valid date, MM/DD/YYYY, including slashes.",
-  ageGate: "You must be 13 years or older to continue.",
-  email: "Please enter a valid email address.",
-  username: "Username must be between 5-25 alphanumeric characters.",
-  pin: "Please enter a 4-digit PIN.",
-  location: "Please select an address option.",
-  address: {
-    line1: "Please enter a valid street address.",
-    city: "Please enter a valid city.",
-    state: "Please enter a 2-character state abbreviation.",
-    zip: "Please enter a 5-digit postal code.",
-  } as Address,
-};
+import { errorMessages } from "../utils/formDataUtils";
 
 const LibraryCardForm = () => {
   const { state, dispatch } = useFormDataContext();

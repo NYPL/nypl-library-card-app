@@ -12,12 +12,11 @@ expect.extend(toHaveNoViolations);
 describe("AcceptTermsForm", () => {
   beforeEach(() => {
     render(
-      <FormDataContextProvider>
-        <AcceptTermsForm />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      <TestHookFormProvider>
+        <FormDataContextProvider>
+          <AcceptTermsForm />
+        </FormDataContextProvider>
+      </TestHookFormProvider>
     );
   });
 
@@ -52,12 +51,11 @@ describe("AcceptTermsForm", () => {
 describe("Accessibility check", () => {
   test("passes axe", async () => {
     const { container } = render(
-      <FormDataContextProvider>
-        <AcceptTermsForm />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      <TestHookFormProvider>
+        <FormDataContextProvider>
+          <AcceptTermsForm />
+        </FormDataContextProvider>
+      </TestHookFormProvider>
     );
     expect(await axe(container)).toHaveNoViolations();
   });
