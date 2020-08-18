@@ -4,6 +4,7 @@ import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import AgeForm from "../AgeForm";
 import { TestHookFormProvider } from "../../../testHelper/utils";
+import { FormDataContextProvider } from "../../context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 
@@ -24,15 +25,22 @@ const reactHookFormErrors = {
 
 describe("AgeForm", () => {
   test("it passes accessibility checks for the field input", async () => {
-    const { container } = render(<AgeForm errorMessages={noHookFormErrors} />, {
-      wrapper: TestHookFormProvider,
-    });
+    const { container } = render(
+      <FormDataContextProvider>
+        <AgeForm errorMessages={noHookFormErrors} />
+      </FormDataContextProvider>,
+      {
+        wrapper: TestHookFormProvider,
+      }
+    );
     expect(await axe(container)).toHaveNoViolations();
   });
 
   test("it passes accessibility checks for the checkbox input", async () => {
     const { container } = render(
-      <AgeForm policyType="simplye" errorMessages={noHookFormErrors} />,
+      <FormDataContextProvider>
+        <AgeForm policyType="simplye" errorMessages={noHookFormErrors} />
+      </FormDataContextProvider>,
       {
         wrapper: TestHookFormProvider,
       }
@@ -41,9 +49,14 @@ describe("AgeForm", () => {
   });
 
   test("it renders an input field with the default webApplicant policyType", () => {
-    render(<AgeForm errorMessages={noHookFormErrors} />, {
-      wrapper: TestHookFormProvider,
-    });
+    render(
+      <FormDataContextProvider>
+        <AgeForm errorMessages={noHookFormErrors} />
+      </FormDataContextProvider>,
+      {
+        wrapper: TestHookFormProvider,
+      }
+    );
 
     const description = screen.getByText("MM/DD/YYYY, including slashes");
     const input = screen.getByRole("textbox", {
@@ -59,9 +72,14 @@ describe("AgeForm", () => {
   });
 
   test("it renders a checkbox with the simplye policyType", () => {
-    render(<AgeForm policyType="simplye" errorMessages={noHookFormErrors} />, {
-      wrapper: TestHookFormProvider,
-    });
+    render(
+      <FormDataContextProvider>
+        <AgeForm policyType="simplye" errorMessages={noHookFormErrors} />
+      </FormDataContextProvider>,
+      {
+        wrapper: TestHookFormProvider,
+      }
+    );
 
     const description = screen.queryByText("MM/DD/YYYY, including slashes");
     const input = screen.queryByRole("textbox", {
@@ -77,9 +95,14 @@ describe("AgeForm", () => {
   });
 
   test("updates the age gate checkbox", async () => {
-    render(<AgeForm policyType="simplye" errorMessages={noHookFormErrors} />, {
-      wrapper: TestHookFormProvider,
-    });
+    render(
+      <FormDataContextProvider>
+        <AgeForm policyType="simplye" errorMessages={noHookFormErrors} />
+      </FormDataContextProvider>,
+      {
+        wrapper: TestHookFormProvider,
+      }
+    );
 
     const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
 
@@ -91,9 +114,11 @@ describe("AgeForm", () => {
 
   test("it should render a webApplicant error message", () => {
     render(
-      <TestHookFormProvider errors={reactHookFormErrors}>
-        <AgeForm errorMessages={ageFormErrorMessages} />
-      </TestHookFormProvider>
+      <FormDataContextProvider>
+        <TestHookFormProvider errors={reactHookFormErrors}>
+          <AgeForm errorMessages={ageFormErrorMessages} />
+        </TestHookFormProvider>
+      </FormDataContextProvider>
     );
 
     const inputError = screen.getByText(ageFormErrorMessages["birthdate"]);
@@ -102,9 +127,11 @@ describe("AgeForm", () => {
 
   test("it should render a simplye error message", () => {
     render(
-      <TestHookFormProvider errors={reactHookFormErrors}>
-        <AgeForm policyType="simplye" errorMessages={ageFormErrorMessages} />
-      </TestHookFormProvider>
+      <FormDataContextProvider>
+        <TestHookFormProvider errors={reactHookFormErrors}>
+          <AgeForm policyType="simplye" errorMessages={ageFormErrorMessages} />
+        </TestHookFormProvider>
+      </FormDataContextProvider>
     );
 
     const inputError = screen.getByText(ageFormErrorMessages["ageGate"]);

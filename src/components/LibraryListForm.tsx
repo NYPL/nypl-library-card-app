@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import Autosuggest from "react-autosuggest";
 import FormField from "./FormField";
+import useFormDataContext from "../context/FormDataContext";
+import { findLibraryName } from "../utils/FormValidationUtils";
 
 export interface LibraryListObject {
   value: string;
@@ -10,7 +12,6 @@ export interface LibraryListObject {
 
 interface LibraryListFormProps {
   libraryList: LibraryListObject[];
-  defaultValue: string;
 }
 
 /**
@@ -21,10 +22,12 @@ interface LibraryListFormProps {
  * the select element and for form values. Also uses `react-autosuggest` to
  * render suggestions when a patron starts to type a library name.
  */
-const LibraryListForm = ({
-  libraryList = [],
-  defaultValue,
-}: LibraryListFormProps) => {
+const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
+  const { state } = useFormDataContext();
+  const { formValues } = state;
+  const defaultValue = formValues?.homeLibraryCode
+    ? findLibraryName(formValues?.homeLibraryCode)
+    : "";
   const [value, setValue] = useState(defaultValue);
   const [suggestions, setSuggestions] = useState([]);
   const { register } = useFormContext();
@@ -65,6 +68,7 @@ const LibraryListForm = ({
   // Clear suggestions.
   const onSuggestionsClearRequested = () => setSuggestions([]);
   // Autosuggest will pass through all these props to the input.
+
   const inputProps = {
     placeholder: "Type a library name, e.g. Stavros Niarchos",
     value,

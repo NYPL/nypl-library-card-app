@@ -5,6 +5,7 @@ import { isAlphanumeric } from "validator";
 import { Button } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
 import FormField from "./FormField";
+import useFormDataContext from "../context/FormDataContext";
 
 interface UsernameValidationFormProps {
   errorMessage?: string;
@@ -28,6 +29,8 @@ const UsernameValidationForm = ({
   const [usernameIsAvailable, setUsernameIsAvailable] = useState(defaultState);
   const { watch, getValues, register, errors } = useFormContext();
   const usernameWatch = watch("username");
+  const { state } = useFormDataContext();
+  const { formValues } = state;
 
   // Whenever the username input changes, revert back to the default state.
   // This is to re-render the button after a patron tries a new username.
@@ -103,6 +106,7 @@ const UsernameValidationForm = ({
         ref={register({
           validate: (val) => inputValidation(val) || errorMessage,
         })}
+        defaultValue={formValues.username}
       />
       {renderButton()}
       {usernameIsAvailable.message && (

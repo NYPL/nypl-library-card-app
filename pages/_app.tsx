@@ -2,10 +2,11 @@ import React from "react";
 import "@nypl/design-system-react-components/dist/styles.css";
 import { config, gaUtils } from "dgx-react-ga";
 import Head from "next/head";
+import { useForm, FormProvider } from "react-hook-form";
 import { FormDataContextProvider } from "../src/context/FormDataContext";
 import "../src/styles/main.scss";
 import appConfig from "../appConfig";
-import { useFormReducer, formInitialState } from "../src/hooks";
+import { FormInputData } from "../src/interfaces";
 
 interface MyAppProps {
   Component: any;
@@ -45,10 +46,7 @@ if (process.env.TEST_AXE_ENV === "true" && !isServerRendered()) {
 }
 
 export default function MyApp<MyAppProps>({ Component, pageProps }) {
-  // Keep track of the API results and errors from a form submission as global
-  // data in the app. It is exposed to the two pages through context. Use
-  // the `dispatch` function to update the state properties.
-  const { state, dispatch } = useFormReducer(formInitialState);
+  const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
   const { favIconPath, appTitle } = appConfig;
@@ -107,9 +105,11 @@ export default function MyApp<MyAppProps>({ Component, pageProps }) {
         />
         <meta name="csrf-token" content={csrfToken} />
       </Head>
-      <FormDataContextProvider value={{ state, dispatch }}>
-        <Component {...pageProps} />
-      </FormDataContextProvider>
+      <FormProvider {...formMethods}>
+        <FormDataContextProvider>
+          <Component {...pageProps} />
+        </FormDataContextProvider>
+      </FormProvider>
     </>
   );
 }

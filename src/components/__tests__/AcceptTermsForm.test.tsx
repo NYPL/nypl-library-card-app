@@ -5,14 +5,20 @@ import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import { TestHookFormProvider } from "../../../testHelper/utils";
 import AcceptTermsForm from "../AcceptTermsForm";
+import { FormDataContextProvider } from "../../context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 
 describe("AcceptTermsForm", () => {
   beforeEach(() => {
-    render(<AcceptTermsForm />, {
-      wrapper: TestHookFormProvider,
-    });
+    render(
+      <FormDataContextProvider>
+        <AcceptTermsForm />
+      </FormDataContextProvider>,
+      {
+        wrapper: TestHookFormProvider,
+      }
+    );
   });
 
   test("renders text with three links", () => {
@@ -45,9 +51,14 @@ describe("AcceptTermsForm", () => {
 
 describe("Accessibility check", () => {
   test("passes axe", async () => {
-    const { container } = render(<AcceptTermsForm />, {
-      wrapper: TestHookFormProvider,
-    });
+    const { container } = render(
+      <FormDataContextProvider>
+        <AcceptTermsForm />
+      </FormDataContextProvider>,
+      {
+        wrapper: TestHookFormProvider,
+      }
+    );
     expect(await axe(container)).toHaveNoViolations();
   });
 });

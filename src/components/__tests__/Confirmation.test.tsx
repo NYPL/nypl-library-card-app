@@ -16,6 +16,7 @@ const formResults: FormResults = {
   temporary: false,
   message: "The library card will be a standard library card.",
   patronId: 1234567,
+  name: "Tom Nook",
 };
 
 describe("Confirmation", () => {
@@ -31,15 +32,26 @@ describe("Confirmation", () => {
     expect(
       screen.getByText("Thank you for submitting your application.")
     ).toBeInTheDocument();
-    expect(screen.getByText("barcode: 12345678912345")).toBeInTheDocument();
     expect(screen.getByText("username: tomnook")).toBeInTheDocument();
-    expect(screen.getByText("pin: 1234")).toBeInTheDocument();
     expect(screen.getByText("temporary: false")).toBeInTheDocument();
-    expect(screen.getByText("id: 1234567")).toBeInTheDocument();
     expect(
       screen.getByText(
         "message: The library card will be a standard library card."
       )
     ).toBeInTheDocument();
+  });
+
+  test("renders the NYPL card info", () => {
+    render(<Confirmation formResults={formResults} />);
+
+    expect(screen.getByText("MEMBER NAME")).toBeInTheDocument();
+    expect(screen.getByText("Tom Nook")).toBeInTheDocument();
+
+    expect(screen.getByText("12345678912345")).toBeInTheDocument();
+
+    expect(screen.getByText("PIN")).toBeInTheDocument();
+    expect(screen.getByText("1234")).toBeInTheDocument();
+
+    expect(screen.getByText("ISSUED")).toBeInTheDocument();
   });
 });

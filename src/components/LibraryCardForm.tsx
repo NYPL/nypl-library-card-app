@@ -1,14 +1,13 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
-import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import { isEmail } from "validator";
 import { Checkbox, Accordion } from "@nypl/design-system-react-components";
-import { useForm, FormProvider } from "react-hook-form";
-import Router from "next/router";
+import { useFormContext } from "react-hook-form";
+import { useRouter } from "next/router";
+
 import FormField from "./FormField";
 import ApiErrors from "./ApiErrors";
-import config from "../../appConfig";
 import FormFooterText from "./FormFooterText";
 import UsernameValidationForm from "./UsernameValidationForm";
 import LibraryListForm from "./LibraryListForm";
@@ -21,30 +20,7 @@ import useFormDataContext from "../context/FormDataContext";
 import AgeForm from "./AgeForm";
 import LocationForm from "./LocationForm";
 import { findLibraryCode } from "../utils/FormValidationUtils";
-
-// The interface for the react-hook-form state data object.
-interface FormInput {
-  firstName: string;
-  lastName: string;
-  birthdate: string;
-  email: string;
-  "home-line1": string;
-  "home-line2": string;
-  "home-city": string;
-  "home-state": string;
-  "home-zip": string;
-  "work-line1": string;
-  "work-line2": string;
-  "work-city": string;
-  "work-state": string;
-  "work-zip": string;
-  username: string;
-  pin: string;
-  ecommunicationsPref: boolean;
-  location?: string;
-  homeLibraryCode: string;
-  acceptTerms: boolean;
-}
+import config from "../../appConfig";
 
 const errorMessages = {
   firstName: "Please enter a valid first name.",
@@ -65,13 +41,12 @@ const errorMessages = {
 
 const LibraryCardForm = () => {
   const { state, dispatch } = useFormDataContext();
-  const { errorObj, isLoading, csrfToken } = state;
+  const { errorObj, formValues } = state;
   const params = useParamsContext();
-  const formMethods = useForm<FormInput>({ mode: "onBlur" });
   const errorSection = React.createRef<HTMLDivElement>();
-
+  const router = useRouter();
   // Specific functions and object from react-hook-form.
-  const { register, handleSubmit, errors, watch } = formMethods;
+  const { register, handleSubmit, errors, watch } = useFormContext();
 
   // Will run whenever the `errorObj` has changes, specifically for
   // bad requests.
@@ -105,41 +80,14 @@ const LibraryCardForm = () => {
    * Makes an internal API call to create a new patron.
    * @param formData - data object returned from react-hook-form
    */
-  const submitForm = (formData: FormInput) => {
-    // This is resetting any errors from previous submissions, if any.
-    dispatch({ type: "SET_FORM_ERRORS", value: null });
-    // Render the loading component.
-    dispatch({ type: "SET_IS_LOADING", value: true });
-
+  const submitForm = (formData) => {
     formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
+    formData.agencyType = getPatronAgencyType(formData.location);
 
-    const agencyType = getPatronAgencyType(formData.location);
-    axios
-      .post(
-        "/api/create-patron",
-        {
-          ...formData,
-          agencyType,
-        }
-        // {
-        // headers: { "csrf-token": csrfToken },
-        // }
-      )
-      .then((response) => {
-        // Update the global state with a successful form submission data.
-        dispatch({ type: "SET_FORM_RESULTS", value: response.data });
-        Router.push("/confirmation?newCard=true");
-      })
-      .catch((error) => {
-        // There are server-side errors! So we will render them.
-        dispatch({ type: "SET_FORM_ERRORS", value: error.response?.data });
-      })
-      // Don't render the loading component anymore.
-      .finally(() => dispatch({ type: "SET_IS_LOADING", value: false }));
-  };
-
-  const renderLoader = () => {
-    return isLoading ? <div className="loading" /> : null;
+    // Set the global state...
+    dispatch({ type: "SET_FORM_DATA", value: formData });
+    // And now go to the next page.
+    router.push("/library-card/address");
   };
 
   /**
@@ -196,6 +144,7 @@ const LibraryCardForm = () => {
               required: errorMessages.firstName,
             })}
             errorState={errors}
+            defaultValue={formValues.firstName}
           />
           <FormField
             id="patronLastName"
@@ -207,6 +156,7 @@ const LibraryCardForm = () => {
             ref={register({
               required: errorMessages.lastName,
             })}
+            defaultValue={formValues.lastName}
           />
         </div>
 
@@ -224,6 +174,7 @@ const LibraryCardForm = () => {
             validate: (val) =>
               val === "" || isEmail(val) || errorMessages.email,
           })}
+          defaultValue={formValues.email}
         />
         <Checkbox
           checkboxId="patronECommunications"
@@ -232,6 +183,7 @@ const LibraryCardForm = () => {
           // Users must opt-out.
           isSelected={true}
           ref={register()}
+          attributes={{ defaultChecked: formValues.ecommunicationsPref }}
         />
 
         <h3>Address</h3>
@@ -255,13 +207,6 @@ const LibraryCardForm = () => {
           />
         </Accordion>
 
-        <LibraryListForm
-          libraryList={ilsLibraryList}
-          // The default branch is the "SimplyE" branch with a code of "eb",
-          // but we do that in the server side on form submission.
-          defaultValue=""
-        />
-
         <h3>Create Your Account</h3>
 
         <UsernameValidationForm errorMessage={errorMessages.username} />
@@ -279,7 +224,10 @@ const LibraryCardForm = () => {
           ref={register({
             validate: (val) => val.length === 4 || errorMessages.pin,
           })}
+          defaultValue={formValues.pin}
         />
+
+        <LibraryListForm libraryList={ilsLibraryList} />
 
         <AcceptTermsForm />
 
@@ -287,19 +235,16 @@ const LibraryCardForm = () => {
           type="hidden"
           aria-hidden={true}
           name="policyType"
-          defaultValue={params.policyType || undefined}
+          defaultValue={params.policyType || formValues.policyType || undefined}
           ref={register()}
         />
 
-        <div>
-          <input
-            className="nypl-request-button"
-            disabled={!acceptedTerms || isLoading}
-            type="submit"
-            value="Continue"
-          />
-          {renderLoader()}
-        </div>
+        <input
+          className="nypl-request-button"
+          disabled={!acceptedTerms}
+          type="submit"
+          value="Continue"
+        />
       </form>
     );
   };
@@ -307,12 +252,8 @@ const LibraryCardForm = () => {
   return (
     <div className="nypl-row">
       <div className="nypl-column-half nypl-column-offset-one">
-        <div>
-          <FormProvider {...formMethods}>
-            {renderApiErrors(errorObj)}
-            {renderFormFields()}
-          </FormProvider>
-        </div>
+        {renderApiErrors(errorObj)}
+        {renderFormFields()}
         <FormFooterText />
       </div>
     </div>

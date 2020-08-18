@@ -6,6 +6,7 @@ import {
   HelperErrorText,
 } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
+import useFormDataContext from "../context/FormDataContext";
 
 interface AgeFormProps {
   policyType?: string;
@@ -21,6 +22,8 @@ const AgeForm = ({
   policyType = "webApplicant",
   errorMessages,
 }: AgeFormProps) => {
+  const { state } = useFormDataContext();
+  const { formValues } = state;
   const { register, errors } = useFormContext();
   const MAXLENGTHDATE = 10;
   const isWebApplicant = policyType === "webApplicant";
@@ -47,6 +50,7 @@ const AgeForm = ({
           (val.length <= MAXLENGTHDATE && isDate(val)) ||
           errorMessages["birthdate"],
       })}
+      defaultValue={formValues.birthdate}
     />
   );
   const ageGateField = (
@@ -59,6 +63,7 @@ const AgeForm = ({
         ref={register({
           required: errorMessages["ageGate"],
         })}
+        attributes={{ defaultChecked: formValues.ageGate }}
       />
       {!!ageGateError && (
         <HelperErrorText isError={true}>{ageGateError}</HelperErrorText>
