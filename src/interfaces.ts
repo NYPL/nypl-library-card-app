@@ -80,6 +80,7 @@ export interface FormData {
   errorObj: {};
   csrfToken: string;
   formValues: FormInputData;
+  addressResponse: any;
 }
 
 export interface FormDataContextType {

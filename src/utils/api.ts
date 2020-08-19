@@ -5,9 +5,15 @@ import moment from "moment";
 import isEmpty from "lodash/isEmpty";
 import { isEmail, isAlphanumeric, isNumeric, isLength } from "validator";
 import Cors from "cors";
+import allSettled from "promise.allsettled";
+
 import config from "../../appConfig";
 import logger from "../logger/index";
 import { Address } from "../interfaces";
+import { homedir } from "os";
+import { isWorker } from "cluster";
+
+allSettled.shim();
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -297,26 +303,98 @@ export async function initializeAppAuth(req, res) {
   return;
 }
 
-function validatePatronAddress(req, object, token) {
+function makeAddressAPICalls(addresses, token) {
+  return Promise.all(
+    addresses.map((a) => axiosAddressPost(a.address, a.isWorkAddress, token))
+  );
+}
+
+function axiosAddressPost(address, isWorkAddress, token) {
   return axios
     .post(
       `${config.api.validate}/address`,
-      { address: object },
+      { address, isWorkAddress },
       constructApiHeaders(token)
     )
-    .then((response) => response.data)
-    .catch((err) =>
-      Promise.reject(
-        new Error(`Error validating patron address: ${err.message}`)
-      )
-    );
+    .then((result) => {
+      return {
+        status: result.data.status,
+        success: true,
+        isWorkAddress,
+        ...result.data,
+      };
+    })
+    .catch((err) => {
+      return {
+        status: err.response?.status,
+        success: false,
+        isWorkAddress,
+        ...err.response?.data,
+      };
+    });
 }
 
 /**
- * validatePatronUsername
- * Call the Card Creator API to validate a username.
+ * validateAddress
+ * Call the NYPL Platform API to validate an address.
  */
-export async function validatePatronUsername(req, res) {
+export async function validateAddress(req, res) {
+  const tokenObject = app["tokenObject"];
+  if (tokenObject && tokenObject.access_token) {
+    const token = tokenObject.access_token;
+    const reqAddresses: AddressesType = constructAddresses(req.body.formData);
+    const addressesData = [
+      { address: reqAddresses.home, isWorkAddress: false },
+    ];
+
+    if (reqAddresses.work?.line1) {
+      addressesData.push({ address: reqAddresses.work, isWorkAddress: true });
+    }
+
+    return makeAddressAPICalls(addressesData, token)
+      .then((results: any) => {
+        let response = { home: {}, work: {} };
+        const homeData = results[0];
+        const workData = results[1];
+        response.home = {
+          address: homeData?.address || homeData.originalAddress,
+          addresses: homeData?.addresses,
+          message: homeData.message,
+          reason: homeData.reason,
+        };
+        if (workData) {
+          response.work = {
+            address: workData?.address || workData?.originalAddress,
+            addresses: workData?.addresses,
+            message: workData?.message,
+            reason: workData?.reason,
+          };
+        }
+        // console.log("resp?", response);
+        return res.status(homeData.status).json({
+          status: homeData.status,
+          ...response,
+        });
+      })
+      .catch((err) => {
+        console.log("server call error", err.response?.data);
+        return res.status(err.response?.status).json({
+          ...err.response?.data,
+        });
+      });
+  }
+  // Else return a no token error
+  res.status(500).json({
+    status: 500,
+    response: "The access token could not be generated.",
+  });
+}
+
+/**
+ * validateUsername
+ * Call the NYPL Platform API to validate a username.
+ */
+export async function validateUsername(req, res) {
   const tokenObject = app["tokenObject"];
   if (tokenObject && tokenObject.access_token) {
     const token = tokenObject.access_token;

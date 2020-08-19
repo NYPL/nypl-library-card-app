@@ -4,6 +4,7 @@ import isEmpty from "lodash/isEmpty";
 import { Accordion } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 import ApiErrors from "./ApiErrors";
 import FormFooterText from "./FormFooterText";
@@ -55,10 +56,66 @@ const LibraryCardForm = () => {
     formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
     formData.agencyType = getPatronAgencyType(formData.location);
 
-    // Set the global state...
+    // Set the global form state...
     dispatch({ type: "SET_FORM_DATA", value: formData });
-    // And now go to the next page.
-    router.push("/library-card/address");
+
+    axios
+      .post("/api/address", { formData })
+      .then((response) => {
+        console.log("then response", response);
+        const home = response.data?.home;
+        const work = response.data?.work;
+        // Update the global address state values with ...
+        dispatch({
+          type: "SET_ADDRESSES_VALUE",
+          value: {
+            home: {
+              cardType: home.cardType,
+              address: home.address,
+              addresses: home.addresses,
+              message: home.message,
+              reason: home.reason,
+            },
+            work: {
+              cardType: work.cardType,
+              address: work.address,
+              addresses: work.addresses,
+              message: work.message,
+              reason: work.reason,
+            },
+          },
+        });
+      })
+      .catch((error) => {
+        let value = { home: {}, work: {} };
+        console.log("catch error", error.response?.data);
+        const home = error.response?.data?.home;
+        const work = error.response?.data?.work;
+        if (error.response?.data?.home) {
+          value.home = {
+            cardType: home.cardType,
+            address: home.address,
+            addresses: home.addresses,
+            message: home.message,
+            reason: home.reason,
+          };
+        }
+        if (error.response?.data?.work) {
+          value.work = {
+            cardType: work.cardType,
+            address: work.address,
+            addresses: work.addresses,
+            message: work.message,
+            reason: work.reason,
+          };
+        }
+        dispatch({
+          type: "SET_ADDRESSES_VALUE",
+          value,
+        });
+      })
+      // Go to the next page regardless if it's a correct or error response.
+      .finally(() => router.push("/library-card/address"));
   };
 
   /**
