@@ -5,15 +5,10 @@ import moment from "moment";
 import isEmpty from "lodash/isEmpty";
 import { isEmail, isAlphanumeric, isNumeric, isLength } from "validator";
 import Cors from "cors";
-import allSettled from "promise.allsettled";
 
 import config from "../../appConfig";
 import logger from "../logger/index";
 import { Address } from "../interfaces";
-import { homedir } from "os";
-import { isWorker } from "cluster";
-
-allSettled.shim();
 
 // Initializing the cors middleware
 export const cors = Cors({

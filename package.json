@@ -76,7 +76,6 @@
     "lodash": "4.17.15",
     "moment": "2.24.0",
     "next": "^9.4.4",
-    "promise.allsettled": "^1.0.2",
     "qs": "6.9.3",
     "react": "16.13.1",
     "react-autosuggest": "^10.0.2",
