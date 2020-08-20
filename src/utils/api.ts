@@ -8,7 +8,14 @@ import Cors from "cors";
 
 import config from "../../appConfig";
 import logger from "../logger/index";
-import { Address } from "../interfaces";
+import {
+  Address,
+  Addresses,
+  AddressRequestData,
+  AddressAPIResponseData,
+  AddressResponse,
+  AddressRenderType,
+} from "../interfaces";
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -63,10 +70,6 @@ const constructErrorObject = (
   return response;
 };
 
-export interface AddressesType {
-  home: Partial<Address>;
-  work?: Partial<Address>;
-}
 /**
  * constructAddresses
  * Address form fields have "home-" or "work-" as prefixes in their name
@@ -75,7 +78,10 @@ export interface AddressesType {
  * @param object FormData object from the client's form submission.
  */
 export const constructAddresses = (object = {}) => {
-  const addresses: AddressesType = { home: {}, work: {} };
+  const addresses: Addresses = {
+    home: {} as Address,
+    work: {} as Address,
+  };
 
   // Remove the addresses fields' prefix and add to the proper object.
   const prefixes = ["home", "work"];
@@ -107,7 +113,7 @@ const constructPatronObject = (object) => {
     homeLibraryCode,
   } = object;
 
-  const addresses: AddressesType = constructAddresses(object);
+  const addresses: Addresses = constructAddresses(object);
 
   let errorObj = {};
 
@@ -298,13 +304,38 @@ export async function initializeAppAuth(req, res) {
   return;
 }
 
-function makeAddressAPICalls(addresses, token) {
+/**
+ * makeAddressAPICalls
+ * A wrapper function around `Promise.all` to make one or two asychronous requests
+ * to the API to validate a home address and an optional work address. Each
+ * POST request is handled separately because `Promise.all` either succeeds or
+ * fails. If one request succeeds but one request fails, the overall request
+ * fails. To safely catch requests and return the overall data even if one
+ * request fails, each request is handled by `axiosAddressPost`.
+ */
+function makeAddressAPICalls(
+  addresses: AddressRequestData[],
+  token: string
+): Promise<AddressAPIResponseData[]> {
   return Promise.all(
     addresses.map((a) => axiosAddressPost(a.address, a.isWorkAddress, token))
   );
 }
 
-function axiosAddressPost(address, isWorkAddress, token) {
+/**
+ * axiosAddressPost
+ * Makes a validated POST request to the API with the address and if it's a
+ * work address. An `AddressAPIResponseData` object will be returned regardless if
+ * the request was successful or not. We want to catch the error and safely
+ * return it to the user. In some cases, an "error" will be multiple addresses
+ * that the user has the choose from, or an error from Service Objects when
+ * attempting to validate the address.
+ */
+function axiosAddressPost(
+  address: Address,
+  isWorkAddress: boolean,
+  token: string
+): Promise<AddressAPIResponseData> {
   return axios
     .post(
       `${config.api.validate}/address`,
@@ -337,7 +368,7 @@ export async function validateAddress(req, res) {
   const tokenObject = app["tokenObject"];
   if (tokenObject && tokenObject.access_token) {
     const token = tokenObject.access_token;
-    const reqAddresses: AddressesType = constructAddresses(req.body.formData);
+    const reqAddresses: Addresses = constructAddresses(req.body.formData);
     const addressesData = [
       { address: reqAddresses.home, isWorkAddress: false },
     ];
@@ -347,8 +378,11 @@ export async function validateAddress(req, res) {
     }
 
     return makeAddressAPICalls(addressesData, token)
-      .then((results: any) => {
-        let response = { home: {}, work: {} };
+      .then((results: AddressAPIResponseData[]) => {
+        let response: AddressResponse = {
+          home: {} as AddressRenderType,
+          work: {} as AddressRenderType,
+        };
         const homeData = results[0];
         const workData = results[1];
         response.home = {
@@ -365,14 +399,12 @@ export async function validateAddress(req, res) {
             reason: workData?.reason,
           };
         }
-        // console.log("resp?", response);
         return res.status(homeData.status).json({
           status: homeData.status,
           ...response,
         });
       })
       .catch((err) => {
-        console.log("server call error", err.response?.data);
         return res.status(err.response?.status).json({
           ...err.response?.data,
         });

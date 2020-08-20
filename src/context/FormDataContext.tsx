@@ -1,6 +1,12 @@
-import React, { useReducer } from "react";
+import React, { useReducer, PropsWithChildren } from "react";
 import { formReducer } from "../reducers";
-import { FormDataContextType, FormData, FormInputData } from "../interfaces";
+import {
+  FormDataContextType,
+  FormData,
+  FormInputData,
+  AddressRenderType,
+  AddressResponse,
+} from "../interfaces";
 
 // Default initial values.
 export const formInitialState: FormData = {
@@ -11,17 +17,27 @@ export const formInitialState: FormData = {
     ecommunicationsPref: true,
     policyType: "webApplicant",
   } as FormInputData,
+  addressResponse: {
+    home: {} as AddressRenderType,
+    work: {} as AddressRenderType,
+  } as AddressResponse,
 };
+
+interface FormDataType {
+  initState: FormData;
+}
 
 const FormDataContext = React.createContext<FormDataContextType | undefined>(
   undefined
 );
 
-export const FormDataContextProvider: React.FC = ({ children }) => {
+export const FormDataContextProvider: React.FC<PropsWithChildren<
+  FormDataType
+>> = ({ initState, children }) => {
   // Keep track of the API results and errors from a form submission as global
   // data in the app. It is exposed to the pages through context. Use
   // the `dispatch` function to update the state properties.
-  const [state, dispatch] = useReducer(formReducer, formInitialState);
+  const [state, dispatch] = useReducer(formReducer, initState);
   return (
     <FormDataContext.Provider value={{ state, dispatch }}>
       {children}

@@ -17,6 +17,7 @@ import PersonalInformationForm from "./PersonalInformationForm";
 import AccountForm from "./AccountForm";
 import AcceptTermsForm from "./AcceptTermsForm";
 import { errorMessages } from "../utils/formDataUtils";
+import { AddressRenderType, AddressResponse } from "../interfaces";
 
 const LibraryCardForm = () => {
   const { state, dispatch } = useFormDataContext();
@@ -62,52 +63,26 @@ const LibraryCardForm = () => {
     axios
       .post("/api/address", { formData })
       .then((response) => {
-        console.log("then response", response);
-        const home = response.data?.home;
-        const work = response.data?.work;
+        const home: AddressRenderType = response.data?.home;
+        const work: AddressRenderType = response.data?.work;
         // Update the global address state values with ...
         dispatch({
           type: "SET_ADDRESSES_VALUE",
-          value: {
-            home: {
-              cardType: home.cardType,
-              address: home.address,
-              addresses: home.addresses,
-              message: home.message,
-              reason: home.reason,
-            },
-            work: {
-              cardType: work.cardType,
-              address: work.address,
-              addresses: work.addresses,
-              message: work.message,
-              reason: work.reason,
-            },
-          },
+          value: { home, work } as AddressResponse,
         });
       })
       .catch((error) => {
-        let value = { home: {}, work: {} };
-        console.log("catch error", error.response?.data);
-        const home = error.response?.data?.home;
-        const work = error.response?.data?.work;
+        let value: AddressResponse = {
+          home: {} as AddressRenderType,
+          work: {} as AddressRenderType,
+        };
+        const home: AddressRenderType = error.response?.data?.home;
+        const work: AddressRenderType = error.response?.data?.work;
         if (error.response?.data?.home) {
-          value.home = {
-            cardType: home.cardType,
-            address: home.address,
-            addresses: home.addresses,
-            message: home.message,
-            reason: home.reason,
-          };
+          value.home = home;
         }
         if (error.response?.data?.work) {
-          value.work = {
-            cardType: work.cardType,
-            address: work.address,
-            addresses: work.addresses,
-            message: work.message,
-            reason: work.reason,
-          };
+          value.work = work;
         }
         dispatch({
           type: "SET_ADDRESSES_VALUE",

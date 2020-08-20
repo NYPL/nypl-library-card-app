@@ -11,7 +11,10 @@ expect.extend(toHaveNoViolations);
 jest.mock("axios");
 
 import UsernameValidationForm from "../UsernameValidationForm";
-import { FormDataContextProvider } from "../../context/FormDataContext";
+import {
+  FormDataContextProvider,
+  formInitialState,
+} from "../../context/FormDataContext";
 
 describe("UsernameValidationForm", () => {
   beforeEach(() => {
@@ -20,7 +23,7 @@ describe("UsernameValidationForm", () => {
 
   test("passes accessibility checks", async () => {
     const { container } = render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <UsernameValidationForm />
       </FormDataContextProvider>,
       {
@@ -33,7 +36,7 @@ describe("UsernameValidationForm", () => {
 
   test("renders the basic label, input, and helper text elements", async () => {
     const { container } = render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <UsernameValidationForm />
       </FormDataContextProvider>,
       {
@@ -73,7 +76,7 @@ describe("UsernameValidationForm", () => {
     const mockWatch = jest.fn().mockReturnValue(true);
     let mockGetValues = jest.fn().mockReturnValue(tooShort);
     const { rerender } = render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <TestHookFormProvider getValues={mockGetValues} watch={mockWatch}>
           <UsernameValidationForm />
         </TestHookFormProvider>
@@ -88,7 +91,7 @@ describe("UsernameValidationForm", () => {
     // Now let's mock another invalid value.
     mockGetValues = jest.fn().mockReturnValue(invalid);
     rerender(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <TestHookFormProvider getValues={mockGetValues} watch={mockWatch}>
           <UsernameValidationForm />
         </TestHookFormProvider>
@@ -102,7 +105,7 @@ describe("UsernameValidationForm", () => {
     // Mock a valid value.
     mockGetValues = jest.fn().mockReturnValue(justRight);
     rerender(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <TestHookFormProvider getValues={mockGetValues} watch={mockWatch}>
           <UsernameValidationForm />
         </TestHookFormProvider>
@@ -124,7 +127,7 @@ describe("UsernameValidationForm", () => {
     const mockGetValues = jest.fn().mockReturnValue("notAvailableUsername");
 
     const { container } = render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <TestHookFormProvider watch={mockWatch} getValues={mockGetValues}>
           <UsernameValidationForm />
         </TestHookFormProvider>
@@ -166,7 +169,7 @@ describe("UsernameValidationForm", () => {
     const mockGetValues = jest.fn().mockReturnValue("availableUsername");
 
     const { container } = render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <TestHookFormProvider watch={mockWatch} getValues={mockGetValues}>
           <UsernameValidationForm />
         </TestHookFormProvider>
@@ -214,7 +217,7 @@ describe("UsernameValidationForm", () => {
     // the `errors` object that react-hook-form returns so we are both, setting
     // it up and returning it.
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <TestHookFormProvider errors={errors} getValues={mockGetValues}>
           <UsernameValidationForm />
         </TestHookFormProvider>

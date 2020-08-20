@@ -5,7 +5,10 @@ import "@testing-library/jest-dom/extend-expect";
 import AddressForm, { AddressTypes } from "../AddressForm";
 import { TestHookFormProvider } from "../../../testHelper/utils";
 import { Address } from "../../interfaces";
-import { FormDataContextProvider } from "../../context/FormDataContext";
+import {
+  FormDataContextProvider,
+  formInitialState,
+} from "../../context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 
@@ -34,7 +37,7 @@ const reactHookFormErrors = {
 describe("AddressForm", () => {
   test("it passes accessibility checks", async () => {
     const { container } = render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <AddressForm
           type={AddressTypes.Home}
           errorMessages={addressErrorMessages}
@@ -49,7 +52,7 @@ describe("AddressForm", () => {
 
   test("it passess accessibilty checks with error messages", async () => {
     const { container } = render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <TestHookFormProvider errors={reactHookFormErrors}>
           <AddressForm
             type={AddressTypes.Home}
@@ -64,7 +67,7 @@ describe("AddressForm", () => {
 
   test("it should render five fields", () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <AddressForm
           type={AddressTypes.Home}
           errorMessages={addressErrorMessages}
@@ -96,7 +99,7 @@ describe("AddressForm", () => {
 
   test("it should render five optional fields for the work address", () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <AddressForm
           type={AddressTypes.Work}
           errorMessages={addressErrorMessages}
@@ -124,7 +127,7 @@ describe("AddressForm", () => {
 
   test("it should render any error messages for required fields", () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <TestHookFormProvider errors={reactHookFormErrors}>
           <AddressForm
             type={AddressTypes.Home}

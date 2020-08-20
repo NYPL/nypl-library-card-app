@@ -4,7 +4,10 @@ import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import ReviewPage from "../library-card/review";
-import { FormDataContextProvider } from "../../src/context/FormDataContext";
+import {
+  FormDataContextProvider,
+  formInitialState,
+} from "../../src/context/FormDataContext";
 import { TestHookFormProvider } from "../../testHelper/utils";
 
 expect.extend(toHaveNoViolations);
@@ -13,7 +16,7 @@ describe("ReviewPage", () => {
   let container;
   beforeEach(() => {
     const utils = render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <TestHookFormProvider>
           <ReviewPage />
         </TestHookFormProvider>

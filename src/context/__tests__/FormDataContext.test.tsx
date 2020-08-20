@@ -13,9 +13,12 @@ const initState: FormData = {
     ecommunicationsPref: true,
     policyType: "webApplicant",
   } as FormInputData,
+  addressResponse: {},
 };
 const contextWrapper = () => ({ children }) => (
-  <FormDataContextProvider>{children}</FormDataContextProvider>
+  <FormDataContextProvider initState={initState}>
+    {children}
+  </FormDataContextProvider>
 );
 
 describe("ParamsContext", () => {

@@ -3,7 +3,10 @@ import "@nypl/design-system-react-components/dist/styles.css";
 import { config, gaUtils } from "dgx-react-ga";
 import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";
-import { FormDataContextProvider } from "../src/context/FormDataContext";
+import {
+  FormDataContextProvider,
+  formInitialState,
+} from "../src/context/FormDataContext";
 import "../src/styles/main.scss";
 import appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
@@ -107,7 +110,7 @@ export default function MyApp<MyAppProps>({ Component, pageProps }) {
         <meta name="csrf-token" content={csrfToken} />
       </Head>
       <FormProvider {...formMethods}>
-        <FormDataContextProvider>
+        <FormDataContextProvider initState={formInitialState}>
           <ApplicationContainer>
             <Component {...pageProps} />
           </ApplicationContainer>

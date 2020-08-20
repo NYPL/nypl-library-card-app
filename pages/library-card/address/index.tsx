@@ -13,7 +13,6 @@ function AddressPage() {
   const { formValues, addressResponse } = state;
   const router = useRouter();
 
-  console.log("addressResponse", addressResponse);
   const homeAddress = addressResponse?.home;
   const workAddress = addressResponse?.work;
   const submitForm = (formData) => {
@@ -33,61 +32,74 @@ function AddressPage() {
         <h2>Confirm your Address</h2>
         <form onSubmit={handleSubmit(submitForm)}>
           <h3>Home Address</h3>
-          {homeAddress?.addresses ? (
+          {homeAddress?.addresses && (
             <>
               <p>
-                We have found an alternate address for you. Please choose which
-                is correct:
+                We have found alternate home addresses. Please choose the
+                correct address:
               </p>
               <ul>
                 {homeAddress.addresses.map((address, idx) => (
                   <li key={idx}>
-                    {address["line1"]}
-                    {address["line2"]}
+                    <span>
+                      {address.line1} {address.line2}
+                    </span>
                     <br />
-                    {address["city"]}, {address["state"]} {address["zip"]}
+                    <span>
+                      {address.city}, {address.state} {address.zip}
+                    </span>
                   </li>
                 ))}
               </ul>
             </>
-          ) : (
+          )}
+          {homeAddress?.address?.line1 && (
             <>
-              {homeAddress.address["line1"]}
-              {homeAddress.address["line2"]}
+              <span>
+                {homeAddress.address.line1} {homeAddress.address.line2}
+              </span>
               <br />
-              {homeAddress.address["city"]}, {homeAddress.address["state"]}{" "}
-              {homeAddress.address["zip"]}
+              <span>
+                {homeAddress.address.city}, {homeAddress.address.state}
+              </span>{" "}
+              <span>{homeAddress.address.zip}</span>
             </>
           )}
 
           {(workAddress?.addresses || workAddress?.address) && (
             <h3>Work Address</h3>
           )}
-          {workAddress?.addresses ? (
+          {workAddress?.addresses?.length > 0 ? (
             <>
               <p>
-                We have found an alternate address for you. Please choose which
-                is correct:
+                We have found alternate work addresses. Please choose the
+                correct address:
               </p>
               <ul>
                 {workAddress.addresses.map((address, idx) => (
                   <li key={idx}>
-                    {address["line1"]}
-                    {address["line2"]}
+                    <span>
+                      {address.line1} {address.line2}
+                    </span>
                     <br />
-                    {address["city"]}, {address["state"]} {address["zip"]}
+                    <span>
+                      {address.city}, {address.state} {address.zip}
+                    </span>
                   </li>
                 ))}
               </ul>
             </>
           ) : (
-            workAddress?.address && (
+            workAddress?.address?.line1 && (
               <>
-                {workAddress.address["line1"]}
-                {workAddress.address["line2"]}
+                <span>
+                  {workAddress.address.line1} {workAddress.address.line2}
+                </span>
                 <br />
-                {workAddress.address["city"]}, {workAddress.address["state"]}{" "}
-                {workAddress.address["zip"]}
+                <span>
+                  {workAddress.address.city}, {workAddress.address.state}
+                </span>{" "}
+                <span>{workAddress.address.zip}</span>
               </>
             )
           )}
