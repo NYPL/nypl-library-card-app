@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 import Autosuggest from "react-autosuggest";
 import FormField from "./FormField";
 import useFormDataContext from "../context/FormDataContext";
-import { findLibraryName } from "../utils/FormValidationUtils";
+import { findLibraryName } from "../utils/formDataUtils";
 
 export interface LibraryListObject {
   value: string;

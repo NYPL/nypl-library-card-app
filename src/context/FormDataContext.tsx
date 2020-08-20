@@ -2,12 +2,15 @@ import React, { useReducer } from "react";
 import { formReducer } from "../reducers";
 import { FormDataContextType, FormData, FormInputData } from "../interfaces";
 
+// Default initial values.
 export const formInitialState: FormData = {
   results: undefined,
   errorObj: null,
-  isLoading: false,
   csrfToken: null,
-  formValues: {} as FormInputData,
+  formValues: {
+    ecommunicationsPref: true,
+    policyType: "webApplicant",
+  } as FormInputData,
 };
 
 const FormDataContext = React.createContext<FormDataContextType | undefined>(

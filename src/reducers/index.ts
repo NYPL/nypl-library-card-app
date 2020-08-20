@@ -6,12 +6,6 @@ export function formReducer(state, action) {
         formValues: action.value,
       };
     }
-    case "SET_IS_LOADING": {
-      return {
-        ...state,
-        isLoading: action.value,
-      };
-    }
     case "SET_FORM_ERRORS": {
       return {
         ...state,

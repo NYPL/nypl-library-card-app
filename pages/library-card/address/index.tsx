@@ -1,6 +1,5 @@
 import React from "react";
 import { useRouter } from "next/router";
-import ApplicationContainer from "../../../src/components/ApplicationContainer";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import { useFormContext } from "react-hook-form";
 
@@ -39,26 +38,28 @@ function AddressPage() {
   };
 
   return (
-    <ApplicationContainer>
-      <h2>Confirm your Address</h2>
-      <form onSubmit={handleSubmit(submitForm)}>
-        <h3>
-          We have found an alternate address for you. Please choose which is
-          correct:
-        </h3>
-        {/* Just dummy HTML to render all the values. Eventually we'll
-        just need the address data to display any updates. */}
-        <ul>
-          {addressKeys.map((k) => (
-            <li key={k}>
-              {k}: {formValues[k]}
-            </li>
-          ))}
-        </ul>
+    <div className="nypl-row">
+      <div className="nypl-column-half nypl-column-offset-one">
+        <h2>Confirm your Address</h2>
+        <form onSubmit={handleSubmit(submitForm)}>
+          <h3>
+            We have found an alternate address for you. Please choose which is
+            correct:
+          </h3>
+          {/* Just dummy HTML to render all the values. Eventually we'll
+          just need the address data to display any updates. */}
+          <ul>
+            {addressKeys.map((k) => (
+              <li key={k}>
+                {k}: {formValues[k]}
+              </li>
+            ))}
+          </ul>
 
-        <input className="nypl-request-button" type="submit" value="Review" />
-      </form>
-    </ApplicationContainer>
+          <input className="nypl-request-button" type="submit" value="Review" />
+        </form>
+      </div>
+    </div>
   );
 }
 

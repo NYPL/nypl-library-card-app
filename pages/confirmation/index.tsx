@@ -1,15 +1,16 @@
 import React from "react";
 import Confirmation from "../../src/components/Confirmation";
 import useFormDataContext from "../../src/context/FormDataContext";
-import ApplicationContainer from "../../src/components/ApplicationContainer";
 
+/**
+ * ConfirmationPage
+ * The main page component for the confirmation page. Gets the global state
+ * form submission results and renders the confirmation page.
+ */
 function ConfirmationPage() {
   const { state } = useFormDataContext();
-  return (
-    <ApplicationContainer>
-      <Confirmation formResults={state.results} />
-    </ApplicationContainer>
-  );
+
+  return <Confirmation formResults={state.results} />;
 }
 
 ConfirmationPage.getInitialProps = ({ res, query }) => {

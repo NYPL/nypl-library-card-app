@@ -78,7 +78,6 @@ export interface FormResults {
 export interface FormData {
   results: FormResults;
   errorObj: {};
-  isLoading: boolean;
   csrfToken: string;
   formValues: FormInputData;
 }

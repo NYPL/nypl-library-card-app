@@ -8,9 +8,11 @@ import { FormData, FormInputData } from "../../interfaces";
 const initState: FormData = {
   results: undefined,
   errorObj: null,
-  isLoading: false,
   csrfToken: null,
-  formValues: {} as FormInputData,
+  formValues: {
+    ecommunicationsPref: true,
+    policyType: "webApplicant",
+  } as FormInputData,
 };
 const contextWrapper = () => ({ children }) => (
   <FormDataContextProvider>{children}</FormDataContextProvider>
