@@ -10,11 +10,15 @@ export interface FormInputData {
   "home-city": string;
   "home-state": string;
   "home-zip": string;
+  "home-hasBeenValidated": boolean;
+  "home-isResidential": string;
   "work-line1": string;
   "work-line2": string;
   "work-city": string;
   "work-state": string;
   "work-zip": string;
+  "work-hasBeenValidated": boolean;
+  "work-isResidential": string;
   username: string;
   pin: string;
   ecommunicationsPref: boolean;

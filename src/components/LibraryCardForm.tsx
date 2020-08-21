@@ -84,6 +84,7 @@ const LibraryCardForm = () => {
         if (error.response?.data?.work) {
           value.work = work;
         }
+        console.log("catch", value);
         dispatch({
           type: "SET_ADDRESSES_VALUE",
           value,

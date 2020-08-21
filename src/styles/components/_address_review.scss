@@ -1,0 +1,29 @@
+.original-address {
+  margin: 0 0 20px;
+}
+
+.multiple-address-list {
+  display: flex;
+  padding: 0;
+  justify-content: space-between;
+  list-style: none;
+
+  li {
+    border: 1px solid var(--ui-gray-medium);
+
+    &.checked {
+      background: var(--ui-gray-medium);
+    }
+  }
+
+  .label {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    cursor: pointer;
+  }
+
+  .input {
+    margin-right: 20px;
+  }
+}
