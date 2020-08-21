@@ -3,7 +3,7 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
-import { TestHookFormProvider } from "../../../testHelper/utils";
+import { TestProviderWrapper } from "../../../testHelper/utils";
 // `import` axios does not work so it must be required.
 const axios = require("axios");
 
@@ -11,24 +11,17 @@ expect.extend(toHaveNoViolations);
 jest.mock("axios");
 
 import UsernameValidationForm from "../UsernameValidationForm";
-import {
-  FormDataContextProvider,
-  formInitialState,
-} from "../../context/FormDataContext";
 
 describe("UsernameValidationForm", () => {
   beforeEach(() => {
     axios.mockClear();
   });
 
-  test("passes accessibility checks", async () => {
+  test("passes axe accessibility checks", async () => {
     const { container } = render(
-      <FormDataContextProvider initState={formInitialState}>
+      <TestProviderWrapper>
         <UsernameValidationForm />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      </TestProviderWrapper>
     );
 
     expect(await axe(container)).toHaveNoViolations();
@@ -36,12 +29,9 @@ describe("UsernameValidationForm", () => {
 
   test("renders the basic label, input, and helper text elements", async () => {
     const { container } = render(
-      <FormDataContextProvider initState={formInitialState}>
+      <TestProviderWrapper>
         <UsernameValidationForm />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      </TestProviderWrapper>
     );
 
     const label = screen.getByText("Username");
@@ -76,11 +66,11 @@ describe("UsernameValidationForm", () => {
     const mockWatch = jest.fn().mockReturnValue(true);
     let mockGetValues = jest.fn().mockReturnValue(tooShort);
     const { rerender } = render(
-      <FormDataContextProvider initState={formInitialState}>
-        <TestHookFormProvider getValues={mockGetValues} watch={mockWatch}>
-          <UsernameValidationForm />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper
+        hookFormState={{ getValues: mockGetValues, watch: mockWatch }}
+      >
+        <UsernameValidationForm />
+      </TestProviderWrapper>
     );
     let validateButton = screen.queryByRole("button");
 
@@ -91,11 +81,11 @@ describe("UsernameValidationForm", () => {
     // Now let's mock another invalid value.
     mockGetValues = jest.fn().mockReturnValue(invalid);
     rerender(
-      <FormDataContextProvider initState={formInitialState}>
-        <TestHookFormProvider getValues={mockGetValues} watch={mockWatch}>
-          <UsernameValidationForm />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper
+        hookFormState={{ getValues: mockGetValues, watch: mockWatch }}
+      >
+        <UsernameValidationForm />
+      </TestProviderWrapper>
     );
 
     validateButton = screen.queryByRole("button");
@@ -105,11 +95,11 @@ describe("UsernameValidationForm", () => {
     // Mock a valid value.
     mockGetValues = jest.fn().mockReturnValue(justRight);
     rerender(
-      <FormDataContextProvider initState={formInitialState}>
-        <TestHookFormProvider getValues={mockGetValues} watch={mockWatch}>
-          <UsernameValidationForm />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper
+        hookFormState={{ getValues: mockGetValues, watch: mockWatch }}
+      >
+        <UsernameValidationForm />
+      </TestProviderWrapper>
     );
 
     validateButton = screen.queryByRole("button");
@@ -127,11 +117,11 @@ describe("UsernameValidationForm", () => {
     const mockGetValues = jest.fn().mockReturnValue("notAvailableUsername");
 
     const { container } = render(
-      <FormDataContextProvider initState={formInitialState}>
-        <TestHookFormProvider watch={mockWatch} getValues={mockGetValues}>
-          <UsernameValidationForm />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper
+        hookFormState={{ getValues: mockGetValues, watch: mockWatch }}
+      >
+        <UsernameValidationForm />
+      </TestProviderWrapper>
     );
 
     const button = await screen.findByText("Check if username is available");
@@ -169,11 +159,11 @@ describe("UsernameValidationForm", () => {
     const mockGetValues = jest.fn().mockReturnValue("availableUsername");
 
     const { container } = render(
-      <FormDataContextProvider initState={formInitialState}>
-        <TestHookFormProvider watch={mockWatch} getValues={mockGetValues}>
-          <UsernameValidationForm />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper
+        hookFormState={{ getValues: mockGetValues, watch: mockWatch }}
+      >
+        <UsernameValidationForm />
+      </TestProviderWrapper>
     );
 
     const button = await screen.findByText("Check if username is available");
@@ -217,11 +207,9 @@ describe("UsernameValidationForm", () => {
     // the `errors` object that react-hook-form returns so we are both, setting
     // it up and returning it.
     render(
-      <FormDataContextProvider initState={formInitialState}>
-        <TestHookFormProvider errors={errors} getValues={mockGetValues}>
-          <UsernameValidationForm />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper hookFormState={{ getValues: mockGetValues, errors }}>
+        <UsernameValidationForm />
+      </TestProviderWrapper>
     );
     // Casting the returned value so we can access `value`.
     const input = screen.getByRole("textbox") as HTMLInputElement;

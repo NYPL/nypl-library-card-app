@@ -41,9 +41,13 @@ const authConfig = {
   grant_type: "client_credentials",
 };
 
-const constructApiHeaders = (token = "", contentType = "application/json") => ({
+/**
+ * constructApiHeaders
+ * Creates the authorization header to use when calling the NYPL Platform API.
+ */
+export const constructApiHeaders = (token: string) => ({
   headers: {
-    "Content-Type": contentType,
+    "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   },
   timeout: 10000,

@@ -1,25 +1,19 @@
 /* eslint-disable */
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
-import { TestHookFormProvider } from "../../../testHelper/utils";
+import { TestProviderWrapper } from "../../../testHelper/utils";
 import AccountForm from "../AccountForm";
-import {
-  FormDataContextProvider,
-  formInitialState,
-} from "../../context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 
 describe("AccountForm", () => {
   beforeEach(() => {
     render(
-      <TestHookFormProvider>
-        <FormDataContextProvider initState={formInitialState}>
-          <AccountForm />
-        </FormDataContextProvider>
-      </TestHookFormProvider>
+      <TestProviderWrapper>
+        <AccountForm />
+      </TestProviderWrapper>
     );
   });
 
@@ -36,14 +30,12 @@ describe("AccountForm", () => {
   });
 });
 
-describe("AccountForm Accessibility check", () => {
-  test("passes axe", async () => {
+describe("AccountForm accessibility check", () => {
+  test("passes axe accessibility test", async () => {
     const { container } = render(
-      <TestHookFormProvider>
-        <FormDataContextProvider initState={formInitialState}>
-          <AccountForm />
-        </FormDataContextProvider>
-      </TestHookFormProvider>
+      <TestProviderWrapper>
+        <AccountForm />
+      </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
   });

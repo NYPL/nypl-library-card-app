@@ -3,23 +3,17 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
-import { TestHookFormProvider } from "../../../testHelper/utils";
+import { TestProviderWrapper } from "../../../testHelper/utils";
 import AcceptTermsForm from "../AcceptTermsForm";
-import {
-  FormDataContextProvider,
-  formInitialState,
-} from "../../context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 
 describe("AcceptTermsForm", () => {
   beforeEach(() => {
     render(
-      <TestHookFormProvider>
-        <FormDataContextProvider initState={formInitialState}>
-          <AcceptTermsForm />
-        </FormDataContextProvider>
-      </TestHookFormProvider>
+      <TestProviderWrapper>
+        <AcceptTermsForm />
+      </TestProviderWrapper>
     );
   });
 
@@ -51,14 +45,12 @@ describe("AcceptTermsForm", () => {
   });
 });
 
-describe("Accessibility check", () => {
-  test("passes axe", async () => {
+describe("AcceptTermsForm accessibility check", () => {
+  test("passes axe accessibility test", async () => {
     const { container } = render(
-      <TestHookFormProvider>
-        <FormDataContextProvider initState={formInitialState}>
-          <AcceptTermsForm />
-        </FormDataContextProvider>
-      </TestHookFormProvider>
+      <TestProviderWrapper>
+        <AcceptTermsForm />
+      </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
   });

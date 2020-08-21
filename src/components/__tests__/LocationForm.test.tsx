@@ -4,11 +4,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import LocationForm from "../LocationForm";
-import { TestHookFormProvider } from "../../../testHelper/utils";
-import {
-  FormDataContextProvider,
-  formInitialState,
-} from "../../context/FormDataContext";
+import { TestProviderWrapper } from "../../../testHelper/utils";
 
 expect.extend(toHaveNoViolations);
 
@@ -18,26 +14,20 @@ describe("LocationForm", () => {
   const nys = "New York State (Outside NYC)";
   const us = "United States (Visiting NYC)";
 
-  test("passes accessibility checks", async () => {
+  test("passes axe accessibility checks", async () => {
     const { container } = render(
-      <FormDataContextProvider initState={formInitialState}>
+      <TestProviderWrapper>
         <LocationForm errorMessage={errorMessage} />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
   });
 
   test("renders an alternate form link", () => {
     render(
-      <FormDataContextProvider initState={formInitialState}>
+      <TestProviderWrapper>
         <LocationForm errorMessage={errorMessage} />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      </TestProviderWrapper>
     );
 
     expect(screen.getByText("alternate form")).toBeInTheDocument();
@@ -45,12 +35,9 @@ describe("LocationForm", () => {
 
   test("renders three radio buttons", () => {
     render(
-      <FormDataContextProvider initState={formInitialState}>
+      <TestProviderWrapper>
         <LocationForm errorMessage={errorMessage} />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      </TestProviderWrapper>
     );
 
     expect(screen.getByLabelText(nyc)).toBeInTheDocument();
@@ -60,12 +47,9 @@ describe("LocationForm", () => {
 
   test("updates the value selected", async () => {
     render(
-      <FormDataContextProvider initState={formInitialState}>
+      <TestProviderWrapper>
         <LocationForm errorMessage={errorMessage} />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      </TestProviderWrapper>
     );
 
     let radio = screen.getByLabelText(nyc) as HTMLInputElement;
@@ -86,11 +70,9 @@ describe("LocationForm", () => {
       },
     };
     render(
-      <FormDataContextProvider initState={formInitialState}>
-        <TestHookFormProvider errors={reactHookFormErrors}>
-          <LocationForm errorMessage={errorMessage} />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
+        <LocationForm errorMessage={errorMessage} />
+      </TestProviderWrapper>
     );
 
     expect(screen.getByText(errorMessage)).toBeInTheDocument();

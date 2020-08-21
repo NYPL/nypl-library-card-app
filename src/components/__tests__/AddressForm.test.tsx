@@ -3,12 +3,8 @@ import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import AddressForm, { AddressTypes } from "../AddressForm";
-import { TestHookFormProvider } from "../../../testHelper/utils";
+import { TestProviderWrapper } from "../../../testHelper/utils";
 import { Address } from "../../interfaces";
-import {
-  FormDataContextProvider,
-  formInitialState,
-} from "../../context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 
@@ -35,31 +31,26 @@ const reactHookFormErrors = {
 };
 
 describe("AddressForm", () => {
-  test("it passes accessibility checks", async () => {
+  test("it passes axe accessibility test", async () => {
     const { container } = render(
-      <FormDataContextProvider initState={formInitialState}>
+      <TestProviderWrapper>
         <AddressForm
           type={AddressTypes.Home}
           errorMessages={addressErrorMessages}
         />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
   });
 
   test("it passess accessibilty checks with error messages", async () => {
     const { container } = render(
-      <FormDataContextProvider initState={formInitialState}>
-        <TestHookFormProvider errors={reactHookFormErrors}>
-          <AddressForm
-            type={AddressTypes.Home}
-            errorMessages={addressErrorMessages}
-          />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
+        <AddressForm
+          type={AddressTypes.Home}
+          errorMessages={addressErrorMessages}
+        />
+      </TestProviderWrapper>
     );
 
     expect(await axe(container)).toHaveNoViolations();
@@ -67,15 +58,12 @@ describe("AddressForm", () => {
 
   test("it should render five fields", () => {
     render(
-      <FormDataContextProvider initState={formInitialState}>
+      <TestProviderWrapper>
         <AddressForm
           type={AddressTypes.Home}
           errorMessages={addressErrorMessages}
         />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      </TestProviderWrapper>
     );
 
     // Unfortunately, getByLabelText doesn't work for these label since the
@@ -99,15 +87,12 @@ describe("AddressForm", () => {
 
   test("it should render five optional fields for the work address", () => {
     render(
-      <FormDataContextProvider initState={formInitialState}>
+      <TestProviderWrapper>
         <AddressForm
           type={AddressTypes.Work}
           errorMessages={addressErrorMessages}
         />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      </TestProviderWrapper>
     );
 
     // Since none of the fields are required for the work address, we can
@@ -127,14 +112,12 @@ describe("AddressForm", () => {
 
   test("it should render any error messages for required fields", () => {
     render(
-      <FormDataContextProvider initState={formInitialState}>
-        <TestHookFormProvider errors={reactHookFormErrors}>
-          <AddressForm
-            type={AddressTypes.Home}
-            errorMessages={addressErrorMessages}
-          />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
+        <AddressForm
+          type={AddressTypes.Home}
+          errorMessages={addressErrorMessages}
+        />
+      </TestProviderWrapper>
     );
 
     const line1Error = screen.getByText(

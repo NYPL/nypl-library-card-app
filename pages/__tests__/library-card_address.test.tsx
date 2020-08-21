@@ -4,22 +4,17 @@ import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import AddressPage from "../library-card/address";
-import {
-  FormDataContextProvider,
-  formInitialState,
-} from "../../src/context/FormDataContext";
-import { TestHookFormProvider } from "../../testHelper/utils";
+import { TestProviderWrapper } from "../../testHelper/utils";
+import { formInitialState } from "../../src/context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 
-describe("AddressPage a11y test", () => {
-  test("passes axe", async () => {
+describe("AddressPage accessibility", () => {
+  test("passes axe accessibility test", async () => {
     const { container } = render(
-      <FormDataContextProvider initState={formInitialState}>
-        <TestHookFormProvider>
-          <AddressPage />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper>
+        <AddressPage />
+      </TestProviderWrapper>
     );
 
     expect(await axe(container)).toHaveNoViolations();
@@ -29,11 +24,9 @@ describe("AddressPage a11y test", () => {
 describe("AddressPage", () => {
   test("renders a title and decription", () => {
     render(
-      <FormDataContextProvider initState={formInitialState}>
-        <TestHookFormProvider>
-          <AddressPage />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper>
+        <AddressPage />
+      </TestProviderWrapper>
     );
     expect(screen.getByText("Confirm your Address")).toBeInTheDocument();
   });
@@ -58,11 +51,9 @@ describe("AddressPage", () => {
       },
     };
     render(
-      <FormDataContextProvider initState={initState}>
-        <TestHookFormProvider>
-          <AddressPage />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper formDataState={initState}>
+        <AddressPage />
+      </TestProviderWrapper>
     );
 
     expect(screen.getByText("Home Address")).toBeInTheDocument();
@@ -99,11 +90,9 @@ describe("AddressPage", () => {
       },
     };
     render(
-      <FormDataContextProvider initState={initState}>
-        <TestHookFormProvider>
-          <AddressPage />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper formDataState={initState}>
+        <AddressPage />
+      </TestProviderWrapper>
     );
 
     expect(screen.getByText("Home Address")).toBeInTheDocument();
@@ -150,11 +139,9 @@ describe("AddressPage", () => {
       },
     };
     render(
-      <FormDataContextProvider initState={initState}>
-        <TestHookFormProvider>
-          <AddressPage />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper formDataState={initState}>
+        <AddressPage />
+      </TestProviderWrapper>
     );
 
     expect(screen.getByText("Home Address")).toBeInTheDocument();
@@ -215,11 +202,9 @@ describe("AddressPage", () => {
       },
     };
     render(
-      <FormDataContextProvider initState={initState}>
-        <TestHookFormProvider>
-          <AddressPage />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper formDataState={initState}>
+        <AddressPage />
+      </TestProviderWrapper>
     );
 
     expect(screen.getByText("Home Address")).toBeInTheDocument();
