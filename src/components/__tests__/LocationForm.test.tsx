@@ -5,7 +5,10 @@ import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import LocationForm from "../LocationForm";
 import { TestHookFormProvider } from "../../../testHelper/utils";
-import { FormDataContextProvider } from "../../context/FormDataContext";
+import {
+  FormDataContextProvider,
+  formInitialState,
+} from "../../context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 
@@ -17,7 +20,7 @@ describe("LocationForm", () => {
 
   test("passes accessibility checks", async () => {
     const { container } = render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <LocationForm errorMessage={errorMessage} />
       </FormDataContextProvider>,
       {
@@ -29,7 +32,7 @@ describe("LocationForm", () => {
 
   test("renders an alternate form link", () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <LocationForm errorMessage={errorMessage} />
       </FormDataContextProvider>,
       {
@@ -42,7 +45,7 @@ describe("LocationForm", () => {
 
   test("renders three radio buttons", () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <LocationForm errorMessage={errorMessage} />
       </FormDataContextProvider>,
       {
@@ -57,7 +60,7 @@ describe("LocationForm", () => {
 
   test("updates the value selected", async () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <LocationForm errorMessage={errorMessage} />
       </FormDataContextProvider>,
       {
@@ -83,7 +86,7 @@ describe("LocationForm", () => {
       },
     };
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <TestHookFormProvider errors={reactHookFormErrors}>
           <LocationForm errorMessage={errorMessage} />
         </TestHookFormProvider>

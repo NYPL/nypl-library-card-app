@@ -4,6 +4,7 @@ import isEmpty from "lodash/isEmpty";
 import { Accordion } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 import ApiErrors from "./ApiErrors";
 import FormFooterText from "./FormFooterText";
@@ -16,6 +17,7 @@ import PersonalInformationForm from "./PersonalInformationForm";
 import AccountForm from "./AccountForm";
 import AcceptTermsForm from "./AcceptTermsForm";
 import { errorMessages } from "../utils/formDataUtils";
+import { AddressRenderType, AddressResponse } from "../interfaces";
 
 const LibraryCardForm = () => {
   const { state, dispatch } = useFormDataContext();
@@ -55,10 +57,40 @@ const LibraryCardForm = () => {
     formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
     formData.agencyType = getPatronAgencyType(formData.location);
 
-    // Set the global state...
+    // Set the global form state...
     dispatch({ type: "SET_FORM_DATA", value: formData });
-    // And now go to the next page.
-    router.push("/library-card/address");
+
+    axios
+      .post("/api/address", { formData })
+      .then((response) => {
+        const home: AddressRenderType = response.data?.home;
+        const work: AddressRenderType = response.data?.work;
+        // Update the global address state values with ...
+        dispatch({
+          type: "SET_ADDRESSES_VALUE",
+          value: { home, work } as AddressResponse,
+        });
+      })
+      .catch((error) => {
+        let value: AddressResponse = {
+          home: {} as AddressRenderType,
+          work: {} as AddressRenderType,
+        };
+        const home: AddressRenderType = error.response?.data?.home;
+        const work: AddressRenderType = error.response?.data?.work;
+        if (error.response?.data?.home) {
+          value.home = home;
+        }
+        if (error.response?.data?.work) {
+          value.work = work;
+        }
+        dispatch({
+          type: "SET_ADDRESSES_VALUE",
+          value,
+        });
+      })
+      // Go to the next page regardless if it's a correct or error response.
+      .finally(() => router.push("/library-card/address"));
   };
 
   /**

@@ -4,7 +4,10 @@ import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import AgeForm from "../AgeForm";
 import { TestHookFormProvider } from "../../../testHelper/utils";
-import { FormDataContextProvider } from "../../context/FormDataContext";
+import {
+  FormDataContextProvider,
+  formInitialState,
+} from "../../context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 
@@ -26,7 +29,7 @@ const reactHookFormErrors = {
 describe("AgeForm", () => {
   test("it passes accessibility checks for the field input", async () => {
     const { container } = render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <AgeForm errorMessages={noHookFormErrors} />
       </FormDataContextProvider>,
       {
@@ -38,7 +41,7 @@ describe("AgeForm", () => {
 
   test("it passes accessibility checks for the checkbox input", async () => {
     const { container } = render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <AgeForm policyType="simplye" errorMessages={noHookFormErrors} />
       </FormDataContextProvider>,
       {
@@ -50,7 +53,7 @@ describe("AgeForm", () => {
 
   test("it renders an input field with the default webApplicant policyType", () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <AgeForm errorMessages={noHookFormErrors} />
       </FormDataContextProvider>,
       {
@@ -73,7 +76,7 @@ describe("AgeForm", () => {
 
   test("it renders a checkbox with the simplye policyType", () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <AgeForm policyType="simplye" errorMessages={noHookFormErrors} />
       </FormDataContextProvider>,
       {
@@ -96,7 +99,7 @@ describe("AgeForm", () => {
 
   test("updates the age gate checkbox", async () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <AgeForm policyType="simplye" errorMessages={noHookFormErrors} />
       </FormDataContextProvider>,
       {
@@ -114,7 +117,7 @@ describe("AgeForm", () => {
 
   test("it should render a webApplicant error message", () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <TestHookFormProvider errors={reactHookFormErrors}>
           <AgeForm errorMessages={ageFormErrorMessages} />
         </TestHookFormProvider>
@@ -127,7 +130,7 @@ describe("AgeForm", () => {
 
   test("it should render a simplye error message", () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <TestHookFormProvider errors={reactHookFormErrors}>
           <AgeForm policyType="simplye" errorMessages={ageFormErrorMessages} />
         </TestHookFormProvider>

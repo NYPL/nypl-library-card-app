@@ -1,8 +1,9 @@
-import { constructAddresses, AddressesType } from "../api";
+import { constructAddresses } from "../api";
+import { Addresses } from "../../interfaces";
 
 describe("constructAddresses", () => {
   test("it returns an empty AddressType object with no input", () => {
-    const empty: AddressesType = constructAddresses();
+    const empty: Addresses = constructAddresses();
 
     expect(empty).toStrictEqual({ home: {}, work: {} });
   });
@@ -15,7 +16,7 @@ describe("constructAddresses", () => {
       "home-state": "NY",
       "home-zip": "11377",
     };
-    const addresses: AddressesType = constructAddresses(formData);
+    const addresses: Addresses = constructAddresses(formData);
 
     expect(addresses.home).toEqual({
       line1: "3747 61st St",
@@ -34,7 +35,7 @@ describe("constructAddresses", () => {
       "work-state": "NY",
       "work-zip": "10018",
     };
-    const addresses: AddressesType = constructAddresses(formData);
+    const addresses: Addresses = constructAddresses(formData);
 
     expect(addresses.work).toEqual({
       line1: "476 5th Avenue",
@@ -58,7 +59,7 @@ describe("constructAddresses", () => {
       "work-state": "NY",
       "work-zip": "10018",
     };
-    const addresses: AddressesType = constructAddresses(formData);
+    const addresses: Addresses = constructAddresses(formData);
 
     expect(addresses).toEqual({
       home: {

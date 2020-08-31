@@ -5,7 +5,10 @@ import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import { TestHookFormProvider } from "../../../testHelper/utils";
 import PersonalInformationForm from "../PersonalInformationForm";
-import { FormDataContextProvider } from "../../context/FormDataContext";
+import {
+  FormDataContextProvider,
+  formInitialState,
+} from "../../context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 
@@ -13,7 +16,7 @@ describe("PersonalInformationForm", () => {
   beforeEach(() => {
     render(
       <TestHookFormProvider>
-        <FormDataContextProvider>
+        <FormDataContextProvider initState={formInitialState}>
           <PersonalInformationForm />
         </FormDataContextProvider>
       </TestHookFormProvider>
@@ -43,7 +46,7 @@ describe("Accessibility check", () => {
   test("passes axe", async () => {
     const { container } = render(
       <TestHookFormProvider>
-        <FormDataContextProvider>
+        <FormDataContextProvider initState={formInitialState}>
           <PersonalInformationForm />
         </FormDataContextProvider>
       </TestHookFormProvider>

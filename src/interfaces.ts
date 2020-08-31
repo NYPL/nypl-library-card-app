@@ -51,6 +51,43 @@ export interface Address {
   city: string;
   state: string;
   zip: string;
+  isResidential?: boolean;
+  hasBeenValidated?: boolean;
+}
+
+export interface Addresses {
+  home: Address;
+  work?: Address;
+}
+
+export interface AddressRequestData {
+  address: Address;
+  isWorkAddress: boolean;
+}
+
+export interface AddressAPIResponseData {
+  status: string;
+  success: boolean;
+  isWorkAddress: boolean;
+  cardType: null | string;
+  address?: Address;
+  originalAddress?: Address;
+  addresses?: Address[];
+  message?: string;
+  reason?: string;
+}
+
+export interface AddressRenderType {
+  address: Address | undefined;
+  addresses: Address[] | undefined;
+  message: string;
+  reason: string;
+  cardType?: null | string;
+}
+
+export interface AddressResponse {
+  home: AddressRenderType;
+  work: AddressRenderType;
 }
 
 export interface Params {
@@ -80,6 +117,7 @@ export interface FormData {
   errorObj: {};
   csrfToken: string;
   formValues: FormInputData;
+  addressResponse: any;
 }
 
 export interface FormDataContextType {

@@ -5,7 +5,10 @@ import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import LibraryListForm, { LibraryListObject } from "../LibraryListForm";
 import { TestHookFormProvider } from "../../../testHelper/utils";
-import { FormDataContextProvider } from "../../context/FormDataContext";
+import {
+  FormDataContextProvider,
+  formInitialState,
+} from "../../context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 
@@ -18,7 +21,7 @@ const libraryList: LibraryListObject[] = [
 describe("LibraryListForm", () => {
   test("passes accessibility checks", async () => {
     const { container } = render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <LibraryListForm libraryList={libraryList} />
       </FormDataContextProvider>,
       {
@@ -30,7 +33,7 @@ describe("LibraryListForm", () => {
 
   test("renders a label, input, and description", () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <LibraryListForm libraryList={libraryList} />
       </FormDataContextProvider>,
       {
@@ -50,7 +53,7 @@ describe("LibraryListForm", () => {
 
   test("it updates the selected value from the dropdown", async () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <LibraryListForm libraryList={libraryList} />
       </FormDataContextProvider>,
       {
@@ -87,7 +90,7 @@ describe("LibraryListForm", () => {
 
   test("it shows the suggestions", async () => {
     render(
-      <FormDataContextProvider>
+      <FormDataContextProvider initState={formInitialState}>
         <LibraryListForm libraryList={libraryList} />
       </FormDataContextProvider>,
       {

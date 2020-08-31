@@ -24,6 +24,12 @@ export function formReducer(state, action) {
         results: action.value,
       };
     }
+    case "SET_ADDRESSES_VALUE": {
+      return {
+        ...state,
+        addressResponse: action.value,
+      };
+    }
     default: {
       return state;
     }
