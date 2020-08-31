@@ -23,8 +23,8 @@ export const formInitialState: FormData = {
   } as AddressResponse,
 };
 
-interface FormDataType {
-  initState: FormData;
+interface FormDataContextProps {
+  initState?: FormData;
 }
 
 const FormDataContext = React.createContext<FormDataContextType | undefined>(
@@ -32,8 +32,8 @@ const FormDataContext = React.createContext<FormDataContextType | undefined>(
 );
 
 export const FormDataContextProvider: React.FC<PropsWithChildren<
-  FormDataType
->> = ({ initState, children }) => {
+  FormDataContextProps
+>> = ({ initState = formInitialState, children }) => {
   // Keep track of the API results and errors from a form submission as global
   // data in the app. It is exposed to the pages through context. Use
   // the `dispatch` function to update the state properties.

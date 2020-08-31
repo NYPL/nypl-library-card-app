@@ -20,7 +20,7 @@ const formResults: FormResults = {
 };
 
 describe("Confirmation", () => {
-  test("passes axe", async () => {
+  test("passes axe accessibility test", async () => {
     const { container } = render(<Confirmation formResults={formResults} />);
 
     expect(await axe(container)).toHaveNoViolations();

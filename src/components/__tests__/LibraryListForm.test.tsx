@@ -4,11 +4,7 @@ import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import LibraryListForm, { LibraryListObject } from "../LibraryListForm";
-import { TestHookFormProvider } from "../../../testHelper/utils";
-import {
-  FormDataContextProvider,
-  formInitialState,
-} from "../../context/FormDataContext";
+import { TestProviderWrapper } from "../../../testHelper/utils";
 
 expect.extend(toHaveNoViolations);
 
@@ -19,26 +15,20 @@ const libraryList: LibraryListObject[] = [
 ];
 
 describe("LibraryListForm", () => {
-  test("passes accessibility checks", async () => {
+  test("passes axe accessibility checks", async () => {
     const { container } = render(
-      <FormDataContextProvider initState={formInitialState}>
+      <TestProviderWrapper>
         <LibraryListForm libraryList={libraryList} />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
   });
 
   test("renders a label, input, and description", () => {
     render(
-      <FormDataContextProvider initState={formInitialState}>
+      <TestProviderWrapper>
         <LibraryListForm libraryList={libraryList} />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      </TestProviderWrapper>
     );
 
     expect(screen.getByLabelText("Home Library:")).toBeInTheDocument();
@@ -53,12 +43,9 @@ describe("LibraryListForm", () => {
 
   test("it updates the selected value from the dropdown", async () => {
     render(
-      <FormDataContextProvider initState={formInitialState}>
+      <TestProviderWrapper>
         <LibraryListForm libraryList={libraryList} />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      </TestProviderWrapper>
     );
 
     const input = screen.getByRole("textbox");
@@ -90,12 +77,9 @@ describe("LibraryListForm", () => {
 
   test("it shows the suggestions", async () => {
     render(
-      <FormDataContextProvider initState={formInitialState}>
+      <TestProviderWrapper>
         <LibraryListForm libraryList={libraryList} />
-      </FormDataContextProvider>,
-      {
-        wrapper: TestHookFormProvider,
-      }
+      </TestProviderWrapper>
     );
 
     const input = screen.getByRole("textbox");

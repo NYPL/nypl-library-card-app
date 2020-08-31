@@ -10,6 +10,10 @@ export const ParamsContextProvider: React.FC<{ params: Params }> = ({
   <ParamsContext.Provider value={params}>{children}</ParamsContext.Provider>
 );
 
+/**
+ * useParamsContext
+ * Custom context hook to get the URL query params in child components.
+ */
 export default function useParamsContext() {
   const context = React.useContext(ParamsContext);
   if (typeof context === "undefined") {

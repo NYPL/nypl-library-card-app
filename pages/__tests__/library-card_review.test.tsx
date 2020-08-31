@@ -4,11 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import "@testing-library/jest-dom/extend-expect";
 import ReviewPage from "../library-card/review";
-import {
-  FormDataContextProvider,
-  formInitialState,
-} from "../../src/context/FormDataContext";
-import { TestHookFormProvider } from "../../testHelper/utils";
+import { TestProviderWrapper } from "../../testHelper/utils";
 
 expect.extend(toHaveNoViolations);
 
@@ -16,17 +12,15 @@ describe("ReviewPage", () => {
   let container;
   beforeEach(() => {
     const utils = render(
-      <FormDataContextProvider initState={formInitialState}>
-        <TestHookFormProvider>
-          <ReviewPage />
-        </TestHookFormProvider>
-      </FormDataContextProvider>
+      <TestProviderWrapper>
+        <ReviewPage />
+      </TestProviderWrapper>
     );
 
     container = utils.container;
   });
 
-  test("passes axe", async () => {
+  test("passes axe accessibility test", async () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 

@@ -9,7 +9,7 @@ import ApplicationContainer from "../ApplicationContainer";
 expect.extend(toHaveNoViolations);
 
 describe("ApplicationContainer", () => {
-  test("passes axe", async () => {
+  test("passes axe accessibility test", async () => {
     const { container } = render(<ApplicationContainer />);
 
     expect(await axe(container)).toHaveNoViolations();

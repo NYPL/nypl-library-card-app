@@ -1,11 +1,21 @@
 import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
+import {
+  FormDataContextProvider,
+  formInitialState,
+} from "../src/context/FormDataContext";
+import { FormData } from "../src/interfaces";
 
 interface MockMethods {
   errors?: {};
   // The types coming from `react-hook-form` for its functions.
   getValues?: () => { [x: string]: any };
   watch?: () => { [x: string]: any };
+}
+
+interface TestProviderType {
+  formDataState?: FormData;
+  hookFormState?: MockMethods;
 }
 
 /**
@@ -32,4 +42,22 @@ export const TestHookFormProvider: React.FC<MockMethods> = ({
     updatedMethods.watch = watch;
   }
   return <FormProvider {...updatedMethods}>{children}</FormProvider>;
+};
+
+/**
+ * TestProviderWrapper
+ * Wrapper component that wraps the child component with the
+ * `FormDataContextProvider` and the `TestHookFormProvider`. Allows props to
+ * pass to their respective providers to make tests look leaner.
+ */
+export const TestProviderWrapper: React.FC<TestProviderType> = ({
+  formDataState = formInitialState,
+  hookFormState,
+  children,
+}) => {
+  return (
+    <FormDataContextProvider initState={formDataState}>
+      <TestHookFormProvider {...hookFormState}>{children}</TestHookFormProvider>
+    </FormDataContextProvider>
+  );
 };
