@@ -17,7 +17,7 @@ const errorMessages = {
     line1: "Please enter a valid street address.",
     city: "Please enter a valid city.",
     state: "Please enter a 2-character state abbreviation.",
-    zip: "Please enter a 5-digit postal code.",
+    zip: "Please enter a 5 or 9-digit postal code.",
   } as Address,
 };
 

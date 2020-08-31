@@ -68,7 +68,12 @@ describe("AddressPage", () => {
       addressResponse: {
         home: {
           cardType: "standard",
-          address: undefined,
+          address: {
+            line1: "1234 61st",
+            city: "Woodside",
+            state: "NY",
+            zip: "11377",
+          },
           addresses: [
             {
               line1: "1234 61st",
@@ -98,10 +103,9 @@ describe("AddressPage", () => {
     expect(screen.getByText("Home Address")).toBeInTheDocument();
     expect(
       screen.getByText(
-        "We have found alternate home addresses. Please choose the correct address:"
+        "We have found an alternate home address. Please choose which is correct:"
       )
     ).toBeInTheDocument();
-    expect(screen.getByText("1234 61st")).toBeInTheDocument();
     expect(screen.getByText("Woodside, NY 11377")).toBeInTheDocument();
 
     expect(screen.getByText("5678 61st")).toBeInTheDocument();
@@ -161,7 +165,12 @@ describe("AddressPage", () => {
       addressResponse: {
         home: {
           cardType: "standard",
-          address: undefined,
+          address: {
+            line1: "1234 61st",
+            city: "Woodside",
+            state: "NY",
+            zip: "11377",
+          },
           addresses: [
             {
               line1: "1234 61st",
@@ -181,7 +190,12 @@ describe("AddressPage", () => {
         },
         work: {
           cardType: "standard",
-          address: undefined,
+          address: {
+            line1: "476 5th Ave",
+            city: "New York",
+            state: "NY",
+            zip: "10018",
+          },
           addresses: [
             {
               line1: "476 5th Ave",
@@ -210,10 +224,9 @@ describe("AddressPage", () => {
     expect(screen.getByText("Home Address")).toBeInTheDocument();
     expect(
       screen.getByText(
-        "We have found alternate home addresses. Please choose the correct address:"
+        "We have found an alternate home address. Please choose which is correct:"
       )
     ).toBeInTheDocument();
-    expect(screen.getByText("1234 61st")).toBeInTheDocument();
     expect(screen.getByText("Woodside, NY 11377")).toBeInTheDocument();
 
     expect(screen.getByText("5678 61st")).toBeInTheDocument();
@@ -222,10 +235,9 @@ describe("AddressPage", () => {
     expect(screen.getByText("Work Address")).toBeInTheDocument();
     expect(
       screen.getByText(
-        "We have found alternate work addresses. Please choose the correct address:"
+        "We have found an alternate work address. Please choose which is correct:"
       )
     ).toBeInTheDocument();
-    expect(screen.getByText("476 5th Ave")).toBeInTheDocument();
     expect(screen.getByText("New York, NY 10018")).toBeInTheDocument();
 
     expect(screen.getByText("1111 1st Ave")).toBeInTheDocument();

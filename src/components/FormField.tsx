@@ -16,6 +16,7 @@ interface FormFieldProps {
   className?: string;
   isRequired?: boolean;
   instructionText?: string;
+  minLength?: number;
   maxLength?: number;
   defaultValue?: any;
 }
@@ -37,6 +38,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
       className = "",
       isRequired = false,
       instructionText,
+      minLength,
       maxLength,
       defaultValue,
       // any extra input element attributes
@@ -67,6 +69,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
           aria-labelledby={`${id}-label ${ariaLabelledby}`}
           attributes={{
             ["aria-invalid"]: errorText ? "true" : "false",
+            minLength: minLength || null,
             maxLength: maxLength || null,
             name: fieldName,
             tabIndex: 0,
