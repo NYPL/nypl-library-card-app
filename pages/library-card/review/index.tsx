@@ -80,19 +80,21 @@ function ReviewPage() {
     // This is resetting any errors from previous submissions, if any.
     dispatch({ type: "SET_FORM_ERRORS", value: null });
 
+    const submitValues = { ...formData, ...formValues };
+
     // Convert the home library name to its code value.
-    formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
+    submitValues.homeLibraryCode = findLibraryCode(formValues.homeLibraryCode);
 
     // Update the global state.
     dispatch({
       type: "SET_FORM_DATA",
-      value: formData,
+      value: submitValues,
     });
 
     axios
       .post(
         "/api/create-patron",
-        formData
+        submitValues
         // {
         //    headers: { "csrf-token": csrfToken },
         // }

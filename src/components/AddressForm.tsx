@@ -27,7 +27,8 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
   // these functions are available to use.
   const { register, errors } = useFormContext();
   const MAXLENGTHSTATE = 2;
-  const MAXLENGTHZIP = 5;
+  const MINLENGTHZIP = 5;
+  const MAXLENGTHZIP = 10;
   // Only the home address is required. The work address is optional.
   const isRequired = type === AddressTypes.Home;
   /**
@@ -40,8 +41,17 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
    * @param length Max length of the field input.
    * @param field The key name of the field.
    */
-  const lengthValidation = (length, field) => (value) =>
-    !isRequired || value.length === length || errorMessages[field];
+  const lengthValidation = (max, field, min = undefined) => (value) => {
+    if (!min) {
+      return !isRequired || value.length === max || errorMessages[field];
+    }
+    return (
+      !isRequired ||
+      value.length === min ||
+      value.length === max ||
+      errorMessages[field]
+    );
+  };
 
   return (
     <>
@@ -109,9 +119,10 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
         fieldName={`${type}-zip`}
         isRequired={isRequired}
         errorState={errors}
+        minLength={MAXLENGTHZIP}
         maxLength={MAXLENGTHZIP}
         ref={register({
-          validate: lengthValidation(MAXLENGTHZIP, "zip"),
+          validate: lengthValidation(MAXLENGTHZIP, "zip", MINLENGTHZIP),
         })}
         defaultValue={formValues[`${type}-zip`]}
       />

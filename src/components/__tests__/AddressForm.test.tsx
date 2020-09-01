@@ -12,22 +12,14 @@ const addressErrorMessages: Address = {
   line1: "Please enter a valid street address.",
   city: "Please enter a valid city.",
   state: "Please enter a 2-character state abbreviation.",
-  zip: "Please enter a 5-digit postal code.",
+  zip: "Please enter a 5 or 9-digit postal code.",
 };
 // The `errors` object shape from `react-hook-form`.
 const reactHookFormErrors = {
-  "home-line1": {
-    message: "Please enter a valid street address.",
-  },
-  "home-city": {
-    message: "Please enter a valid city.",
-  },
-  "home-state": {
-    message: "Please enter a 2-character state abbreviation.",
-  },
-  "home-zip": {
-    message: "Please enter a 5-digit postal code.",
-  },
+  "home-line1": { message: addressErrorMessages.line1 },
+  "home-city": { message: addressErrorMessages.city },
+  "home-state": { message: addressErrorMessages.state },
+  "home-zip": { message: addressErrorMessages.zip },
 };
 
 describe("AddressForm", () => {

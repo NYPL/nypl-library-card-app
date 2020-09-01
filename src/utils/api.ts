@@ -115,6 +115,7 @@ const constructPatronObject = (object) => {
     policyType,
     ageGate,
     homeLibraryCode,
+    acceptTerms,
   } = object;
 
   const addresses: Addresses = constructAddresses(object);
@@ -154,13 +155,13 @@ const constructPatronObject = (object) => {
     errorObj = { ...errorObj, zip: "Postal Code field is empty." };
   }
 
-  if (
-    !isEmpty(addresses.home.zip) &&
-    (!isNumeric(addresses.home.zip) ||
-      !isLength(addresses.home.zip, { min: 5, max: 5 }))
-  ) {
-    errorObj = { ...errorObj, zip: "Please enter a 5-digit postal code." };
-  }
+  // if (
+  //   !isEmpty(addresses.home.zip) &&
+  //   (!isNumeric(addresses.home.zip) ||
+  //     !isLength(addresses.home.zip, { min: 5, max: 10 }))
+  // ) {
+  //   errorObj = { ...errorObj, zip: "Please enter a 5 or 9-digit postal code." };
+  // }
 
   // if (isEmpty(email)) {
   //   errorObj = { ...errorObj, email: 'Email field is empty.' };
@@ -220,6 +221,7 @@ const constructPatronObject = (object) => {
     usernameHasBeenValidated: usernameHasBeenValidatedBool,
     policyType: policyType || "simplye",
     homeLibraryCode,
+    acceptTerms,
   };
 };
 
