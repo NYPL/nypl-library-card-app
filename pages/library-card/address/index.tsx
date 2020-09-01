@@ -10,10 +10,16 @@ import { Address } from "../../../src/interfaces";
  * Main page component for the "address review" page.
  */
 function AddressPage() {
+  // Keep track of the user's selection of the preferred home
+  // and/or work address.
   const [homeAddressSelect, setHomeAddressSelect] = useState("");
   const [workAddressSelect, setWorkAddressSelect] = useState("");
+  // Use react-hook-form for the new radio button input form.
   const { handleSubmit, register } = useForm();
   const { state, dispatch } = useFormDataContext();
+  // The `addressResponse` is the value from Service Objects through the NYPL
+  // Platform API.
+  // The `formValues` object holds all the submitted user values.
   const { formValues, addressResponse } = state;
   const router = useRouter();
 
@@ -22,11 +28,16 @@ function AddressPage() {
   const homeAddress = addressResponse?.home;
   const workAddress = addressResponse?.work;
 
-  const extractUpdatedAddressValues = (address, addressType) => {
+  /**
+   * extractUpdatedAddressValues
+   * Returns an object with either the home or work address values from a
+   * larger data object.
+   */
+  const extractUpdatedAddressValues = (data, addressType) => {
     const updatedValues = {};
-    if (address) {
-      Object.keys(address).forEach((key) => {
-        updatedValues[`${addressType}-${key}`] = address[key];
+    if (data) {
+      Object.keys(data).forEach((key) => {
+        updatedValues[`${addressType}-${key}`] = data[key];
       });
     }
     return updatedValues;
@@ -79,7 +90,7 @@ function AddressPage() {
     // the next page.
     dispatch({
       type: "SET_FORM_DATA",
-      // Updating the existing submitted values with the selected valid address.
+      // Update the existing submitted values with the selected valid address.
       value: {
         ...formValues,
         ...updatedSelectedHomeAddress,
@@ -87,12 +98,17 @@ function AddressPage() {
       },
     });
 
+    // Finally, go to the review page.
     router.push("/library-card/review");
   };
 
-  const renderOriginalAddress = (address: Address) => (
-    <div className="original-address">
-      <p>Address submitted:</p>
+  /**
+   * renderValidatedAddress
+   * Temporary. Just renders the original address submitted by the user if
+   * the API response returned other valid addresses.
+   */
+  const renderValidatedAddress = (address: Address) => (
+    <div className="validated-address">
       <span>
         {address.line1} {address.line2}
       </span>
@@ -104,6 +120,12 @@ function AddressPage() {
     </div>
   );
 
+  /**
+   * renderMultipleAddresses
+   * Renders a list of alternate valid addresses from an invalid/ambiguous
+   * user submitted address. Each address is rendered inside a label/input
+   * combination so the user can select the right address.
+   */
   const renderMultipleAddresses = (
     addresses: Address[],
     addressType,
@@ -160,10 +182,11 @@ function AddressPage() {
         <h2>Confirm your Address</h2>
         <form onSubmit={handleSubmit(submitForm)}>
           <h3>Home Address</h3>
+
+          {/* If there are multiple addresses,
+          render the alternate addresses. */}
           {homeAddress?.addresses?.length > 0 && (
             <>
-              {renderOriginalAddress(homeAddress.address)}
-
               <p>
                 We have found an alternate home address. Please choose which is
                 correct:
@@ -177,17 +200,18 @@ function AddressPage() {
               )}
             </>
           )}
+          {/* Otherwise, just render the validated address. */}
           {!homeAddress.addresses &&
             homeAddress?.address?.line1 &&
-            renderOriginalAddress(homeAddress.address)}
+            renderValidatedAddress(homeAddress.address)}
 
           {(workAddress?.addresses || workAddress?.address) && (
             <h3>Work Address</h3>
           )}
+          {/* If there are multiple work addresses,
+          render the alternate addresses. */}
           {workAddress?.addresses?.length > 0 && (
             <>
-              {renderOriginalAddress(workAddress.address)}
-
               <p>
                 We have found an alternate work address. Please choose which is
                 correct:
@@ -201,9 +225,10 @@ function AddressPage() {
               )}
             </>
           )}
+          {/* If there is a validated work address, render it. */}
           {!workAddress.addresses &&
             workAddress?.address?.line1 &&
-            renderOriginalAddress(workAddress.address)}
+            renderValidatedAddress(workAddress.address)}
 
           <div>
             <input
