@@ -1,0 +1,38 @@
+.review-page {
+  dl {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  dt {
+    flex-basis: 40%;
+    padding: 5px;
+  }
+
+  dd {
+    flex-basis: 60%;
+    flex-grow: 1;
+    margin: 0;
+  }
+}
+
+.form-buttons {
+  margin-top: 20px;
+
+  form {
+    display: flex;
+    justify-content: space-between;
+
+    a, button {
+      width: 100px;
+
+      &:focus {
+        background-color: var(--ui-link-primary);
+      }
+    }
+  }
+}
+
+.form-review-section {
+  margin: 20px 0;
+}
