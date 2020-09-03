@@ -82,6 +82,7 @@
     "react-autosuggest": "^10.0.2",
     "react-dom": "16.13.1",
     "react-hook-form": "^6.0.6",
+    "request-ip": "^2.1.3",
     "sass": "^1.26.9",
     "save-dev": "0.0.1-security",
     "underscore": "1.10.2",

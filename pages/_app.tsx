@@ -3,6 +3,7 @@ import "@nypl/design-system-react-components/dist/styles.css";
 import { config, gaUtils } from "dgx-react-ga";
 import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";
+import requestIp from "request-ip";
 import { FormDataContextProvider } from "../src/context/FormDataContext";
 import "../src/styles/main.scss";
 import appConfig from "../appConfig";
@@ -46,7 +47,7 @@ if (process.env.TEST_AXE_ENV === "true" && !isServerRendered()) {
   axe(React, ReactDOM, 1000);
 }
 
-export default function MyApp<MyAppProps>({ Component, pageProps }) {
+function MyApp<MyAppProps>({ Component, pageProps }) {
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
@@ -116,3 +117,23 @@ export default function MyApp<MyAppProps>({ Component, pageProps }) {
     </>
   );
 }
+
+MyApp.getInitialProps = async ({ ctx }) => {
+  let ipTest;
+  const clientIp = requestIp.getClientIp(ctx.req);
+  console.log("clientIp", clientIp);
+  // if (clientIp) {
+  fetch(
+    `http://api.ipstack.com/2604:2000:6ac5:1200:c5ab:8b66:af48:a555?access_key=ef2d1c10a42501e10ceab496fea81a38`
+  )
+    .then(async (response) => {
+      console.log("response", await response.json());
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
+  // }
+  return { ipTest: ipTest };
+};
+
+export default MyApp;
