@@ -2,10 +2,9 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
-import "@testing-library/jest-dom/extend-expect";
-import AddressPage from "../library-card/address";
-import { TestProviderWrapper } from "../../testHelper/utils";
-import { formInitialState } from "../../src/context/FormDataContext";
+import AddressPage from "../pages/library-card/address";
+import { TestProviderWrapper } from "../testHelper/utils";
+import { formInitialState } from "../src/context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 

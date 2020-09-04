@@ -4,7 +4,7 @@ module.exports = {
     "!**/*.d.ts",
     "!**/node_modules/**",
   ],
-  setupFilesAfterEnv: ["<rootDir>/testHelper/browser.js"],
+  setupFilesAfterEnv: ["<rootDir>/testHelper/browser.ts"],
   testPathIgnorePatterns: ["/node_modules/", "/.next/"],
   transform: {
     "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",

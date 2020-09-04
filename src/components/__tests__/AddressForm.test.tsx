@@ -1,7 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
-import "@testing-library/jest-dom/extend-expect";
 import AddressForm, { AddressTypes } from "../AddressForm";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 import { Address } from "../../interfaces";

@@ -2,9 +2,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
-import "@testing-library/jest-dom/extend-expect";
-import ReviewPage from "../library-card/review";
-import { TestProviderWrapper } from "../../testHelper/utils";
+import ReviewPage from "../pages/library-card/review";
+import { TestProviderWrapper } from "../testHelper/utils";
 
 expect.extend(toHaveNoViolations);
 

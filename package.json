@@ -7,7 +7,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "eb:start": "NODE_ENV=production npm run build && NODE_ENV=production npm start",
+    "eb:start": "npm run build && npm start",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
@@ -76,7 +76,7 @@
     "jsdom": "^16.2.2",
     "lodash": "4.17.15",
     "moment": "2.24.0",
-    "next": "^9.4.4",
+    "next": "^9.5.3",
     "qs": "6.9.3",
     "react": "16.13.1",
     "react-autosuggest": "^10.0.2",

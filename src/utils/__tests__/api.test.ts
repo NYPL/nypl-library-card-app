@@ -1,5 +1,4 @@
 import { constructAddresses, constructApiHeaders } from "../api";
-import "@testing-library/jest-dom/extend-expect";
 import { Addresses } from "../../interfaces";
 
 describe("constructAddresses", () => {

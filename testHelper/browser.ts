@@ -1,5 +1,6 @@
 /* eslint-disable */
 require("babel-register")();
+import "@testing-library/jest-dom/extend-expect";
 
 const { JSDOM } = require("jsdom");
 
@@ -18,6 +19,6 @@ Object.keys(document.defaultView).forEach((property) => {
   }
 });
 
-global.navigator = {
+global["navigator"] = {
   userAgent: "node.js",
-};
+} as Navigator;
