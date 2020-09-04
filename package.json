@@ -7,7 +7,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "eb:start": "npm run build && npm start",
+    "eb:start": "npm run build && npm start -p 8080",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
