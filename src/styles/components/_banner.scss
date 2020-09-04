@@ -90,7 +90,7 @@
     }
 
     &-title {
-      @include Milo-Regular;
+      // @include Milo-Regular;
       @include min-screen($large-screen) {
         color: #FFF;
       }

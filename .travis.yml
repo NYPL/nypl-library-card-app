@@ -27,7 +27,7 @@ deploy:
   secret_access_key: "$AWS_SECRET_ACCESS_KEY_PRODUCTION"
   region: us-east-1
   app: nypl-library-card-app
-  env: nypl-library-card-app-3
+  env: nypl-library-card-app-qa-10
   bucket_name: elasticbeanstalk-us-east-1-946183545209
   bucket_path: nypl-library-card-app-qa
   on:
