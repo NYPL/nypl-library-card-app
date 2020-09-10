@@ -38,7 +38,7 @@ To build and run the app locally in production mode, run the following:
 1. `npm run build`
 2. `npm start`
 
-Make sure that `NODE_ENV=production` is set in the `.env` file.
+Make sure that `PORT=3001` and `NODE_ENV=production` is set in the `.env` file.
 
 ### Environment Variables
 

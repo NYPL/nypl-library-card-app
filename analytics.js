@@ -2,8 +2,8 @@
 const google = {
   code(isProd) {
     const codes = {
-      production: 'UA-1420324-3',
-      dev: 'UA-1420324-122',
+      production: "UA-1420324-3",
+      dev: "UA-1420324-122",
     };
     return isProd ? codes.production : codes.dev;
   },
