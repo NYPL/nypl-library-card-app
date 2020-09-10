@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start -p 3001",
+    "start": "next start -p $PORT",
     "eb:start": "npm run build && npm run start",
     "test": "jest",
     "test:watch": "jest --watch",
