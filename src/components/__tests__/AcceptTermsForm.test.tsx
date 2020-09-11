@@ -2,7 +2,6 @@
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
-import "@testing-library/jest-dom/extend-expect";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 import AcceptTermsForm from "../AcceptTermsForm";
 

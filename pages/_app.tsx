@@ -1,9 +1,9 @@
 import React from "react";
 import "@nypl/design-system-react-components/dist/styles.css";
-import { config, gaUtils } from "dgx-react-ga";
 import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";
 import requestIp from "request-ip";
+import ga from "../src/externals/ga-index";
 import { FormDataContextProvider } from "../src/context/FormDataContext";
 import "../src/styles/main.scss";
 import appConfig from "../appConfig";
@@ -30,10 +30,10 @@ if (!isServerRendered()) {
     const isProd = process.env.NODE_ENV === "production";
     const gaOpts = { debug: !isProd, titleCase: false };
 
-    gaUtils.initialize(config.google.code(isProd), gaOpts);
+    ga.gaUtils.initialize(ga.config.google.code(isProd), gaOpts);
   }
 
-  gaUtils.trackPageview(window.location.pathname);
+  ga.gaUtils.trackPageview(window.location.pathname);
 }
 
 // Accessibility helper that outputs to the console on dev and test

@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from "react";
 import { renderHook } from "@testing-library/react-hooks";
 import useParamsContext, { ParamsContextProvider } from "../ParamsContext";
