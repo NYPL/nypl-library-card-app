@@ -2,13 +2,14 @@ import React from "react";
 import "@nypl/design-system-react-components/dist/styles.css";
 import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";
-import requestIp from "request-ip";
 import ga from "../src/externals/ga-index";
 import { FormDataContextProvider } from "../src/context/FormDataContext";
+import { IPLocationContextProvider } from "../src/context/IPLocationContext";
 import "../src/styles/main.scss";
 import appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
 import ApplicationContainer from "../src/components/ApplicationContainer";
+import IPLocationAPI from "../src/utils/IPLocationAPI";
 
 interface MyAppProps {
   Component: any;
@@ -47,7 +48,7 @@ if (process.env.TEST_AXE_ENV === "true" && !isServerRendered()) {
   axe(React, ReactDOM, 1000);
 }
 
-function MyApp<MyAppProps>({ Component, pageProps }) {
+function MyApp<MyAppProps>({ Component, pageProps, userLocation }) {
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
@@ -108,32 +109,22 @@ function MyApp<MyAppProps>({ Component, pageProps }) {
         <meta name="csrf-token" content={csrfToken} />
       </Head>
       <FormProvider {...formMethods}>
-        <FormDataContextProvider>
-          <ApplicationContainer>
-            <Component {...pageProps} />
-          </ApplicationContainer>
-        </FormDataContextProvider>
+        <IPLocationContextProvider userLocation={userLocation}>
+          <FormDataContextProvider>
+            <ApplicationContainer>
+              <Component {...pageProps} />
+            </ApplicationContainer>
+          </FormDataContextProvider>
+        </IPLocationContextProvider>
       </FormProvider>
     </>
   );
 }
 
 MyApp.getInitialProps = async ({ ctx }) => {
-  let ipTest;
-  const clientIp = requestIp.getClientIp(ctx.req);
-  console.log("clientIp", clientIp);
-  // if (clientIp) {
-  fetch(
-    `http://api.ipstack.com/2604:2000:6ac5:1200:c5ab:8b66:af48:a555?access_key=ef2d1c10a42501e10ceab496fea81a38`
-  )
-    .then(async (response) => {
-      console.log("response", await response.json());
-    })
-    .catch((error) => {
-      console.log("error", error);
-    });
-  // }
-  return { ipTest: ipTest };
+  const userLocation = await IPLocationAPI.getLocationFromIP(ctx);
+
+  return { userLocation };
 };
 
 export default MyApp;
