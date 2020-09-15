@@ -1,10 +1,6 @@
 import React from "react";
+import { LocationResponse } from "../interfaces";
 
-interface LocationResponse {
-  inUS: boolean;
-  inNYState: boolean;
-  inNYCBounds: boolean;
-}
 const IPLocationContext = React.createContext<
   LocationResponse | null | undefined
 >(undefined);

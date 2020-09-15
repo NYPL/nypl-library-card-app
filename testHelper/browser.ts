@@ -1,5 +1,4 @@
 /* eslint-disable */
-require("babel-register")();
 import "@testing-library/jest-dom/extend-expect";
 
 const { JSDOM } = require("jsdom");
