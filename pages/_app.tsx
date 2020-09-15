@@ -10,6 +10,7 @@ import appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
 import ApplicationContainer from "../src/components/ApplicationContainer";
 import IPLocationAPI from "../src/utils/IPLocationAPI";
+import enableAxe from "../src/utils/axe";
 
 interface MyAppProps {
   Component: any;
@@ -28,7 +29,7 @@ function isServerRendered(): boolean {
 // TODO: This is using an older NYPL GA package and should be updated later.
 if (!isServerRendered()) {
   if (!window["ga"]) {
-    const isProd = process.env.NODE_ENV === "production";
+    const isProd = appConfig.nodeEnv === "production";
     const gaOpts = { debug: !isProd, titleCase: false };
 
     ga.gaUtils.initialize(ga.config.google.code(isProd), gaOpts);
@@ -37,15 +38,9 @@ if (!isServerRendered()) {
   ga.gaUtils.trackPageview(window.location.pathname);
 }
 
-// Accessibility helper that outputs to the console on dev and test
-// environment only and client-side only.
-// https://github.com/dequelabs/react-axe
-if (process.env.TEST_AXE_ENV === "true" && !isServerRendered()) {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const ReactDOM = require("react-dom");
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const axe = require("react-axe");
-  axe(React, ReactDOM, 1000);
+// Only run react-axe in the client-side and when the flag is set.
+if (appConfig.testAxeEnv === "true" && !isServerRendered()) {
+  enableAxe();
 }
 
 function MyApp<MyAppProps>({ Component, pageProps, userLocation }) {
