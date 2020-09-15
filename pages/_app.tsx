@@ -4,10 +4,12 @@ import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";
 import ga from "../src/externals/ga-index";
 import { FormDataContextProvider } from "../src/context/FormDataContext";
+import { IPLocationContextProvider } from "../src/context/IPLocationContext";
 import "../src/styles/main.scss";
 import appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
 import ApplicationContainer from "../src/components/ApplicationContainer";
+import IPLocationAPI from "../src/utils/IPLocationAPI";
 
 interface MyAppProps {
   Component: any;
@@ -46,7 +48,7 @@ if (process.env.TEST_AXE_ENV === "true" && !isServerRendered()) {
   axe(React, ReactDOM, 1000);
 }
 
-export default function MyApp<MyAppProps>({ Component, pageProps }) {
+function MyApp<MyAppProps>({ Component, pageProps, userLocation }) {
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
@@ -107,12 +109,26 @@ export default function MyApp<MyAppProps>({ Component, pageProps }) {
         <meta name="csrf-token" content={csrfToken} />
       </Head>
       <FormProvider {...formMethods}>
-        <FormDataContextProvider>
-          <ApplicationContainer>
-            <Component {...pageProps} />
-          </ApplicationContainer>
-        </FormDataContextProvider>
+        <IPLocationContextProvider userLocation={userLocation}>
+          <FormDataContextProvider>
+            <ApplicationContainer>
+              <Component {...pageProps} />
+            </ApplicationContainer>
+          </FormDataContextProvider>
+        </IPLocationContextProvider>
       </FormProvider>
     </>
   );
 }
+
+MyApp.getInitialProps = async ({ ctx }) => {
+  // Get the user's IP address and convert it to an object that tells us if
+  // the user is in NYS/NYC. Will be `undefined` if the call to the IP/location
+  // conversion API fails or if there is no IP address.
+  const userLocation = await IPLocationAPI.getLocationFromIP(ctx);
+
+  // Send it to the component as a prop.
+  return { userLocation };
+};
+
+export default MyApp;

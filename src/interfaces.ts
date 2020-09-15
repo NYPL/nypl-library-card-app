@@ -128,3 +128,9 @@ export interface FormDataContextType {
   dispatch: ({ type: string, value: any }) => void;
   state: FormData;
 }
+
+export interface LocationResponse {
+  inUS: boolean;
+  inNYState: boolean;
+  inNYCity: boolean;
+}

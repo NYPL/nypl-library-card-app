@@ -1,3 +1,5 @@
+process.env.IPSTACK_KEY = "some-key";
+
 module.exports = {
   collectCoverageFrom: [
     "**/*.{js,jsx,ts,tsx}",

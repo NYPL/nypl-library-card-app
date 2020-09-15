@@ -9,6 +9,7 @@ export default {
   },
   clientId: process.env.OAUTH_CLIENT_ID,
   clientSecret: process.env.OAUTH_CLIENT_SECRET,
+  ipStackKey: process.env.IPSTACK_KEY,
   agencyType: {
     default: "198",
     nys: "199",
