@@ -17,6 +17,7 @@
 - Added `react-testing-library` for UI testing.
 - Added the `UsernameValidationForm` component to check for username availability in the ILS right away instead of waiting for the complete form to be submitted.
 - Added the `LibraryListForm` component which renders a drop down list of libraries for patrons to select their home library.
+- Added IP address server-side lookup and an API call to IP Stack to verify the user's location.
 
 ### v0.5.0
 

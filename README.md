@@ -75,8 +75,8 @@ The `production` branch should be what's running in the production environment.
 
 There are two ways to use the `react-axe` package for accessibility review while developing. This is the package of choice used in a few NYPL React applications. Only turn it on when needed and not while developing all the time because it uses a lot of browser resouces.
 
-1. Run `USE_AXE_ENV=true npm run dev`
-2. or update the `USE_AXE_ENV` environment variable in your `.env` file.
+1. Run `TEST_AXE_ENV=true npm run dev`
+2. or update the `TEST_AXE_ENV` environment variable in your `.env` file.
 
 ### AWS Elastic Beanstalk
 
