@@ -2,7 +2,7 @@ import React from "react";
 import "@nypl/design-system-react-components/dist/styles.css";
 import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";
-import ga from "../src/externals/ga-index";
+import ga from "../src/externals/ga";
 import { FormDataContextProvider } from "../src/context/FormDataContext";
 import { IPLocationContextProvider } from "../src/context/IPLocationContext";
 import "../src/styles/main.scss";
@@ -28,18 +28,11 @@ function isServerRendered(): boolean {
 // Set up Google Analytics on the client side.
 // TODO: This is using an older NYPL GA package and should be updated later.
 if (!isServerRendered()) {
-  if (!window["ga"]) {
-    const isProd = appConfig.nodeEnv === "production";
-    const gaOpts = { debug: !isProd, titleCase: false };
-
-    ga.gaUtils.initialize(ga.config.google.code(isProd), gaOpts);
-  }
-
-  ga.gaUtils.trackPageview(window.location.pathname);
+  ga.setupAnalytics(window["ga"], appConfig.nodeEnv);
 }
 
 // Only run react-axe in the client-side and when the flag is set.
-if (appConfig.testAxeEnv === "true" && !isServerRendered()) {
+if (appConfig.useAxe === "true" && !isServerRendered()) {
   enableAxe();
 }
 

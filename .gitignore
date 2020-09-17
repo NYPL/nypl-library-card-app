@@ -7,8 +7,6 @@ coverage
 npm-debug.log
 .bower
 .vscode
-.env
-.env.prod
 log/*.log
 .eslintcache
 
@@ -20,6 +18,8 @@ log/*.log
 !.elasticbeanstalk/*.global.yml
 
 .next
+.env.local
+.env.prod
 .env.buid
 npm-debug.log*
 yarn-debug.log*

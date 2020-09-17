@@ -27,7 +27,7 @@ For more information see [how `nvm use` works](https://github.com/creationix/nvm
 
 ### Install & Running Locally
 
-1. `cp .env.example .env` and fill out variables
+1. `cp .env.example .env.local` and fill out variables
 2. `npm install`
 3. `npm run dev` and point browser to http://localhost:3000/library-card/new
 
@@ -38,7 +38,10 @@ To build and run the app locally in production mode, run the following:
 1. `npm run build`
 2. `npm start`
 
-Make sure that `PORT=3001` and `NODE_ENV=production` is set in the `.env` file.
+Make sure that `PORT=3001` and `NODE_ENV=production` is set in the `.env.local` file or run the commands as:
+
+1. `PORT=3001 NODE_ENV=production npm build`
+2. `PORT=3001 NODE_ENV=production npm start`
 
 ### Environment Variables
 
@@ -75,8 +78,8 @@ The `production` branch should be what's running in the production environment.
 
 There are two ways to use the `react-axe` package for accessibility review while developing. This is the package of choice used in a few NYPL React applications. Only turn it on when needed and not while developing all the time because it uses a lot of browser resouces.
 
-1. Run `TEST_AXE_ENV=true npm run dev`
-2. or update the `TEST_AXE_ENV` environment variable in your `.env` file.
+1. Run `NEXT_PUBLIC_USE_AXE=true npm run dev`
+2. or update the `NEXT_PUBLIC_USE_AXE` environment variable in your `.env` file.
 
 ### AWS Elastic Beanstalk
 

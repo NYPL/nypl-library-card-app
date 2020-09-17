@@ -109,7 +109,20 @@ function GaUtils() {
 
 const gaUtils = new GaUtils();
 
+// TODO: This is using an older NYPL GA package and should be updated later.
+const setupAnalytics = (windowGA, nodeEnv) => {
+  if (!windowGA) {
+    const isProd = nodeEnv === "production";
+    const gaOpts = { debug: !isProd, titleCase: false };
+
+    gaUtils.initialize(config.google.code(isProd), gaOpts);
+  }
+
+  gaUtils.trackPageview(window.location.pathname);
+};
+
 export default {
+  setupAnalytics,
   gaUtils,
   config,
   ga,
