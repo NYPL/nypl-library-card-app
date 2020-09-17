@@ -48,6 +48,8 @@ Make sure that `PORT=3001` and `NODE_ENV=production` is set in the `.env.local` 
 See `.env.example` for a checklist of the environment variables the app
 needs to run.
 
+Note: Nextjs uses `.env.development` and `.env.production` for their respective platform environment variables. The keys are not encrypted in the repo and are therefore directly added/updated through the AWS Elastic Beanstalk UI.
+
 ## Deployment
 
 ### Git Workflow
