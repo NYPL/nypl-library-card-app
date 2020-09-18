@@ -13,4 +13,13 @@ module.exports = {
 
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/library-card/new",
+        permanent: true,
+      },
+    ];
+  },
 };
