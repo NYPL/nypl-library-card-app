@@ -8,6 +8,7 @@
 - Replaced Mocha with Jest, but still using Enzyme to test React components.
 - Updated the API endpoints and the error/response objects from the API endpoint that the front-end will use.
 - Updated the app's code structure, specifically in the `/src` folder.
+- Updated environment variables to use Next's convention and removed the `dotenv` package.
 
 #### Added
 
