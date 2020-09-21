@@ -147,7 +147,7 @@ describe("IPLocationAPI", () => {
       );
 
       const userLocation = await getLocationFromIP({ req: {} } as any);
-      expect(userLocation).toEqual(undefined);
+      expect(userLocation).toEqual({});
     });
 
     it("should return the updated user location object", async () => {

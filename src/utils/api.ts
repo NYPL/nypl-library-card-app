@@ -411,7 +411,7 @@ export async function validateAddress(req, res) {
         });
       })
       .catch((err) => {
-        return res.status(err.response?.status).json({
+        return res.status(err.response?.status || 502).json({
           ...err.response?.data,
         });
       });

@@ -105,9 +105,9 @@ const IPLocationAPI = () => {
    */
   const getLocationFromIP = async (
     ctx: NextPageContext
-  ): Promise<LocationResponse | undefined> => {
+  ): Promise<LocationResponse | {}> => {
     const ipAddress: string = requestIp.getClientIp(ctx.req);
-    let userLocation;
+    let userLocation = {};
 
     if (ipAddress) {
       // This is specifically calling IP Stack but any other API can
