@@ -115,7 +115,7 @@ function ReviewPage() {
   return (
     <div className="nypl-row review-page">
       <div className="nypl-column-half nypl-column-offset-one">
-        <h2>Verify your Information</h2>
+        <h2>Step 6 of 6: Review Your Information</h2>
         <h3>
           You have entered the information listed below. Please review before
           submitting.

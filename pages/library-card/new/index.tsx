@@ -1,17 +1,12 @@
 import React from "react";
-import { ParamsContextProvider } from "../../../src/context/ParamsContext";
-import LibraryCardForm from "../../../src/components/LibraryCardForm";
 
-function HomePage({ query }) {
+function HomePage() {
   return (
-    <ParamsContextProvider params={query}>
-      <LibraryCardForm />
-    </ParamsContextProvider>
+    <div>
+      <h2>Apply for a Library Card Online</h2>
+      <p>Lorem ipsum</p>
+    </div>
   );
 }
-
-HomePage.getInitialProps = ({ query }) => {
-  return { query };
-};
 
 export default HomePage;

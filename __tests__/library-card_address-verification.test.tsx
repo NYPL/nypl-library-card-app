@@ -2,17 +2,17 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
-import AddressPage from "../pages/library-card/address";
+import AddressVerificationPage from "../pages/library-card/address-verification";
 import { TestProviderWrapper } from "../testHelper/utils";
 import { formInitialState } from "../src/context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
 
-describe("AddressPage accessibility", () => {
+describe("AddressVerificationPage accessibility", () => {
   test("passes axe accessibility test", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <AddressPage />
+        <AddressVerificationPage />
       </TestProviderWrapper>
     );
 
@@ -20,14 +20,16 @@ describe("AddressPage accessibility", () => {
   });
 });
 
-describe("AddressPage", () => {
+describe("AddressVerificationPage", () => {
   test("renders a title and decription", () => {
     render(
       <TestProviderWrapper>
-        <AddressPage />
+        <AddressVerificationPage />
       </TestProviderWrapper>
     );
-    expect(screen.getByText("Confirm your Address")).toBeInTheDocument();
+    expect(
+      screen.getByText("Step 4 of 6: Address Verification")
+    ).toBeInTheDocument();
   });
 
   test("renders a home address", async () => {
@@ -51,11 +53,13 @@ describe("AddressPage", () => {
     };
     render(
       <TestProviderWrapper formDataState={initState}>
-        <AddressPage />
+        <AddressVerificationPage />
       </TestProviderWrapper>
     );
 
-    expect(screen.getByText("Home Address")).toBeInTheDocument();
+    expect(
+      screen.getByText("Step 4 of 6: Address Verification")
+    ).toBeInTheDocument();
     expect(screen.getByText("1234 61st")).toBeInTheDocument();
     expect(screen.getByText("Woodside, NY")).toBeInTheDocument();
     expect(screen.getByText("11377")).toBeInTheDocument();
@@ -95,11 +99,13 @@ describe("AddressPage", () => {
     };
     render(
       <TestProviderWrapper formDataState={initState}>
-        <AddressPage />
+        <AddressVerificationPage />
       </TestProviderWrapper>
     );
 
-    expect(screen.getByText("Home Address")).toBeInTheDocument();
+    expect(
+      screen.getByText("Step 4 of 6: Address Verification")
+    ).toBeInTheDocument();
     expect(
       screen.getByText(
         "We have found an alternate home address. Please choose which is correct:"
@@ -143,16 +149,14 @@ describe("AddressPage", () => {
     };
     render(
       <TestProviderWrapper formDataState={initState}>
-        <AddressPage />
+        <AddressVerificationPage />
       </TestProviderWrapper>
     );
 
-    expect(screen.getByText("Home Address")).toBeInTheDocument();
     expect(screen.getByText("1234 61st")).toBeInTheDocument();
     expect(screen.getByText("Woodside, NY")).toBeInTheDocument();
     expect(screen.getByText("11377")).toBeInTheDocument();
 
-    expect(screen.getByText("Work Address")).toBeInTheDocument();
     expect(screen.getByText("476 5th Ave")).toBeInTheDocument();
     expect(screen.getByText("New York, NY")).toBeInTheDocument();
     expect(screen.getByText("10018")).toBeInTheDocument();
@@ -216,11 +220,10 @@ describe("AddressPage", () => {
     };
     render(
       <TestProviderWrapper formDataState={initState}>
-        <AddressPage />
+        <AddressVerificationPage />
       </TestProviderWrapper>
     );
 
-    expect(screen.getByText("Home Address")).toBeInTheDocument();
     expect(
       screen.getByText(
         "We have found an alternate home address. Please choose which is correct:"
@@ -231,7 +234,6 @@ describe("AddressPage", () => {
     expect(screen.getByText("5678 61st")).toBeInTheDocument();
     expect(screen.getByText("Woodside, NY 11388")).toBeInTheDocument();
 
-    expect(screen.getByText("Work Address")).toBeInTheDocument();
     expect(
       screen.getByText(
         "We have found an alternate work address. Please choose which is correct:"
