@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Input, Label, InputTypes } from "@nypl/design-system-react-components";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import { Address } from "../../../src/interfaces";
+import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
 
 /**
  * AddressVerificationPage
@@ -238,6 +239,10 @@ function AddressVerificationPage() {
             />
           </div>
         </form>
+        <RoutingLinks
+          previous={{ url: "/library-card/address" }}
+          next={{ url: "/library-card/account" }}
+        />
       </div>
     </div>
   );

@@ -1,11 +1,16 @@
 import React from "react";
+import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
 
 function HomePage() {
   return (
-    <div>
+    <>
       <h2>Apply for a Library Card Online</h2>
       <p>Lorem ipsum</p>
-    </div>
+
+      <RoutingLinks
+        next={{ url: "/library-card/location", text: "Get Started" }}
+      />
+    </>
   );
 }
 

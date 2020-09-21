@@ -1,10 +1,15 @@
 import React from "react";
+import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
 
 function AccountPage() {
   return (
-    <div>
+    <>
       <h2>Step 5 of 6: Create Your Account</h2>
-    </div>
+      <RoutingLinks
+        previous={{ url: "/library-card/address-verification" }}
+        next={{ url: "/library-card/review" }}
+      />
+    </>
   );
 }
 
