@@ -10,7 +10,9 @@ export interface LinkType {
 
 export interface RoutingLinksType {
   previous?: LinkType;
-  next: LinkType;
+  // We only want an optional "submit" property for the next prop.
+  // The "url" and "text" props are not needed if "submit" is passed.
+  next: Partial<LinkType> & { submit?: boolean };
 }
 
 /**
@@ -20,16 +22,26 @@ export interface RoutingLinksType {
  * approach to routing until submitting forms is integrated into routing.
  */
 function RoutingLinks({ previous, next }: RoutingLinksType): JSX.Element {
+  const nextText = next.text || "Next";
+  const previousText = previous?.text || "Previous";
   return (
     <div className={styles.container}>
       {previous?.url && (
         <Link href={previous.url} passHref>
-          <a className={styles.previous}>{previous.text || "Previous"}</a>
+          <a className={styles.previous}>{previousText}</a>
         </Link>
       )}
-      <Link href={next.url} passHref>
-        <a className="button">{next.text || "Next"}</a>
-      </Link>
+      {!next?.submit ? (
+        <Link href={next.url} passHref>
+          <a className="button">{nextText}</a>
+        </Link>
+      ) : (
+        <input
+          className={`button ${styles.next}`}
+          type="submit"
+          value={nextText}
+        />
+      )}
     </div>
   );
 }

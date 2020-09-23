@@ -19,3 +19,7 @@
 .previous:visited {
   color: var(--ui-black);
 }
+
+.next {
+  padding: 7px 20px;
+}
