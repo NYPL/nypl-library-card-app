@@ -4,7 +4,7 @@ import ConfirmationContainer from "../../../src/components/ConfirmationContainer
 function ConfirmationPage() {
   return (
     <div>
-      <h2>Congratulations! You now have an NPL digital library card.</h2>
+      <h2>Congratulations! You now have an NYPL digital library card.</h2>
       <ConfirmationContainer />
     </div>
   );
