@@ -7,6 +7,17 @@ import AcceptTermsForm from ".";
 
 expect.extend(toHaveNoViolations);
 
+describe("AcceptTermsForm accessibility check", () => {
+  test("passes axe accessibility test", async () => {
+    const { container } = render(
+      <TestProviderWrapper>
+        <AcceptTermsForm />
+      </TestProviderWrapper>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+});
+
 describe("AcceptTermsForm", () => {
   beforeEach(() => {
     render(
@@ -41,16 +52,5 @@ describe("AcceptTermsForm", () => {
     expect(checkbox.checked).toEqual(false);
     await act(async () => await fireEvent.click(checkbox));
     expect(checkbox.checked).toEqual(true);
-  });
-});
-
-describe("AcceptTermsForm accessibility check", () => {
-  test("passes axe accessibility test", async () => {
-    const { container } = render(
-      <TestProviderWrapper>
-        <AcceptTermsForm />
-      </TestProviderWrapper>
-    );
-    expect(await axe(container)).toHaveNoViolations();
   });
 });

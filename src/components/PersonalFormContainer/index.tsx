@@ -21,9 +21,6 @@ const PersonalFormContainer = () => {
    * @param formData - data object returned from react-hook-form
    */
   const submitForm = (formData) => {
-    console.log("Personal");
-    console.log("formData", formData);
-    console.log("formValues", formValues);
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",

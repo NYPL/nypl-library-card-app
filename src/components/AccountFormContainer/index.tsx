@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import useFormDataContext from "../../context/FormDataContext";
 import RoutingLinks from "../RoutingLinks.tsx";
-import AccountForm from "../AccountForm/AccountForm";
+import AccountForm from "../AccountForm";
 import AcceptTermsForm from "../AcceptTermsForm";
 
 const AccountFormContainer = () => {
@@ -20,9 +20,6 @@ const AccountFormContainer = () => {
    * @param formData - data object returned from react-hook-form
    */
   const submitForm = (formData) => {
-    console.log("Account");
-    console.log("formData", formData);
-    console.log("formValues", formValues);
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",

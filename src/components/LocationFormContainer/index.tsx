@@ -11,32 +11,17 @@ import RoutingLinks from "../RoutingLinks.tsx";
 
 const LocationFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
-  const { errorObj, formValues } = state;
+  const { formValues } = state;
   const params = useParamsContext();
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { register, handleSubmit } = useFormContext();
-
-  // TODO: This works but need to implement CSRF in the backend.
-  // useEffect(() => {
-  //   const csrfToken = getMetaTagContent("name=csrf-token");
-  //   if (csrfToken) {
-  //     dispatch({ type: "SET_CSRF_TOKEN", value: csrfToken });
-  //   }
-  // });
-  // const getMetaTagContent = (tag) => {
-  //   return document.head.querySelector(`[${tag}]`).textContent;
-  // };
 
   /**
    * submitForm
    * @param formData - data object returned from react-hook-form
    */
   const submitForm = (formData) => {
-    console.log("Location");
-    console.log("formData", formData);
-    console.log("formValues", formValues);
-
     formData.agencyType = getPatronAgencyType(formData.location);
     // Set the global form state...
     dispatch({

@@ -22,16 +22,6 @@ describe("LocationForm", () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  test("renders an alternate form link", () => {
-    render(
-      <TestProviderWrapper>
-        <LocationForm errorMessage={errorMessage} />
-      </TestProviderWrapper>
-    );
-
-    expect(screen.getByText("alternate form")).toBeInTheDocument();
-  });
-
   test("renders three radio buttons", () => {
     render(
       <TestProviderWrapper>

@@ -11,7 +11,7 @@ import {
   findLibraryName,
 } from "../../../src/utils/formDataUtils";
 import PersonalInformationForm from "../PersonalInformationForm";
-import AccountForm from "../AccountForm/AccountForm";
+import AccountForm from "../AccountForm";
 import AddressForm, { AddressTypes } from "../AddressForm";
 import { errorMessages } from "../../../src/utils/formDataUtils";
 import RoutingLinks from "../RoutingLinks.tsx";
@@ -96,9 +96,6 @@ function ReviewFormContainer() {
    * Update the form values again but this time submit to the API.
    */
   const submitForm = (formData) => {
-    console.log("Review");
-    console.log("formData", formData);
-    console.log("formValues", formValues);
     // This is resetting any errors from previous submissions, if any.
     dispatch({ type: "SET_FORM_ERRORS", value: null });
 

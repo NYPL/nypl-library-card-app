@@ -25,9 +25,6 @@ const AddressFormContainer = () => {
    * @param formData - data object returned from react-hook-form
    */
   const submitForm = (formData) => {
-    console.log("Address");
-    console.log("formData", formData);
-    console.log("formValues", formValues);
     // Convert the home library name to its code value.
     formData.homeLibraryCode = findLibraryCode(formValues.homeLibraryCode);
     // Set the global form state...

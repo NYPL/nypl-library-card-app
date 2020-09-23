@@ -45,9 +45,6 @@ function AddressVerificationContainer() {
   };
 
   const submitForm = (formData) => {
-    console.log("Address verification");
-    console.log("formData", formData);
-    console.log("formValues", formValues);
     // These are the values from the radio button inputs if they were rendered.
     const home = formData["home-address-select"];
     const work = formData["work-address-select"];
