@@ -1,5 +1,5 @@
 /* eslint-disable */
-import IPLocationAPI from "../IPLocationAPI";
+import IPLocationAPI, { getLocationValueFromResponse } from "../IPLocationAPI";
 const requestIp = require("request-ip");
 const axios = require("axios");
 
@@ -174,5 +174,40 @@ describe("IPLocationAPI", () => {
         inNYCity: true,
       });
     });
+  });
+});
+
+describe("getLocationValueFromResponse", () => {
+  it("returns an empty string by default", () => {
+    // The geolocation API returns an empty object by default:
+    const userLocationResponse = {};
+    expect(getLocationValueFromResponse(userLocationResponse)).toEqual("");
+  });
+
+  it("returns 'us' if that's the true option", () => {
+    const userLocationResponse = {
+      inNYCity: false,
+      inNYState: false,
+      inUS: true,
+    };
+    expect(getLocationValueFromResponse(userLocationResponse)).toEqual("us");
+  });
+
+  it("returns 'NYS' if that's the true option", () => {
+    const userLocationResponse = {
+      inNYCity: false,
+      inNYState: true,
+      inUS: true,
+    };
+    expect(getLocationValueFromResponse(userLocationResponse)).toEqual("nys");
+  });
+
+  it("returns 'nyc' if that's the true option", () => {
+    const userLocationResponse = {
+      inNYCity: true,
+      inNYState: true,
+      inUS: true,
+    };
+    expect(getLocationValueFromResponse(userLocationResponse)).toEqual("nyc");
   });
 });
