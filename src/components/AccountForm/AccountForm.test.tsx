@@ -2,32 +2,37 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
-import AddressVerificationPage from "../pages/library-card/address-verification";
-import { TestProviderWrapper } from "../testHelper/utils";
+import { TestProviderWrapper } from "../../../testHelper/utils";
+import AccountForm from ".";
 
 expect.extend(toHaveNoViolations);
 
-describe("AddressVerificationPage accessibility", () => {
+describe("AccountForm accessibility check", () => {
   test("passes axe accessibility test", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <AddressVerificationPage />
+        <AccountForm />
       </TestProviderWrapper>
     );
-
     expect(await axe(container)).toHaveNoViolations();
   });
 });
 
-describe("AddressVerificationPage", () => {
-  test("renders a title and decription", () => {
+describe("AccountForm", () => {
+  beforeEach(() => {
     render(
       <TestProviderWrapper>
-        <AddressVerificationPage />
+        <AccountForm />
       </TestProviderWrapper>
     );
+  });
+
+  test("renders username and pin fields", () => {
     expect(
-      screen.getByText("Step 4 of 6: Address Verification")
+      screen.getByRole("textbox", { name: "Username Required" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("textbox", { name: "PIN Required" })
     ).toBeInTheDocument();
   });
 });

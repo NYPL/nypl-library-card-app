@@ -8,7 +8,10 @@ function HomePage() {
       <p>Lorem ipsum</p>
 
       <RoutingLinks
-        next={{ url: "/library-card/location", text: "Get Started" }}
+        next={{
+          url: "/library-card/location?newCard=true",
+          text: "Get Started",
+        }}
       />
     </>
   );
