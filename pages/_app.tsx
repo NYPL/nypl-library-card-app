@@ -11,6 +11,7 @@ import { FormInputData } from "../src/interfaces";
 import ApplicationContainer from "../src/components/ApplicationContainer";
 import IPLocationAPI from "../src/utils/IPLocationAPI";
 import enableAxe from "../src/utils/axe";
+import { ParamsContextProvider } from "../src/context/ParamsContext";
 
 interface MyAppProps {
   Component: any;
@@ -36,7 +37,7 @@ if (appConfig.useAxe === "true" && !isServerRendered()) {
   enableAxe();
 }
 
-function MyApp<MyAppProps>({ Component, pageProps, userLocation }) {
+function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
@@ -96,20 +97,22 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation }) {
         />
         <meta name="csrf-token" content={csrfToken} />
       </Head>
-      <FormProvider {...formMethods}>
-        <IPLocationContextProvider userLocation={userLocation}>
-          <FormDataContextProvider>
-            <ApplicationContainer>
-              <Component {...pageProps} />
-            </ApplicationContainer>
-          </FormDataContextProvider>
-        </IPLocationContextProvider>
-      </FormProvider>
+      <ParamsContextProvider params={query}>
+        <FormProvider {...formMethods}>
+          <IPLocationContextProvider userLocation={userLocation}>
+            <FormDataContextProvider>
+              <ApplicationContainer>
+                <Component {...pageProps} />
+              </ApplicationContainer>
+            </FormDataContextProvider>
+          </IPLocationContextProvider>
+        </FormProvider>
+      </ParamsContextProvider>
     </>
   );
 }
 
-MyApp.getInitialProps = async ({ ctx }) => {
+MyApp.getInitialProps = async ({ ctx, query }) => {
   // Get the user's IP address and convert it to an object that tells us if
   // the user is in NYS/NYC. Will be `undefined` if the call to the IP/location
   // conversion API fails or if there is no IP address.
@@ -119,7 +122,7 @@ MyApp.getInitialProps = async ({ ctx }) => {
   }
 
   // Send it to the component as a prop.
-  return { userLocation };
+  return { userLocation, query };
 };
 
 export default MyApp;

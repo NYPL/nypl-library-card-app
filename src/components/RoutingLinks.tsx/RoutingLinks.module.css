@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+}
+
+/*
+* This should eventually go into the Design System for the alternate `Link`
+* component styling but not until the functionality for that is working.
+*/
+.previous {
+  padding: 7px 30px;
+  background-color: var(--ui-white);
+  color: var(--ui-black);
+  border: 1px solid var(--ui-gray-medium);
+  margin-right: 10px;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.previous:visited {
+  color: var(--ui-black);
+}
+
+.next {
+  padding: 7px 20px;
+}

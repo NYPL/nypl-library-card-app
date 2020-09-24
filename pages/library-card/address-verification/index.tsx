@@ -1,12 +1,12 @@
 import React from "react";
 
-import ReviewFormContainer from "../../../src/components/ReviewFormContainer";
+import AddressVerificationContainer from "../../../src/components/AddressVerificationContainer";
 
-function ReviewPage() {
+function AddressVerificationPage() {
   return (
     <>
-      <h2>Step 6 of 6: Review Your Information</h2>
-      <ReviewFormContainer />
+      <h2>Step 4 of 6: Address Verification</h2>
+      <AddressVerificationContainer />
     </>
   );
 }
@@ -24,4 +24,4 @@ export async function getServerSideProps({ res, query }) {
   return { props: {} };
 }
 
-export default ReviewPage;
+export default AddressVerificationPage;

@@ -1,12 +1,12 @@
 import React from "react";
 
-import ReviewFormContainer from "../../../src/components/ReviewFormContainer";
+import PersonalFormContainer from "../../../src/components/PersonalFormContainer";
 
-function ReviewPage() {
+function PersonalInformationPage() {
   return (
     <>
-      <h2>Step 6 of 6: Review Your Information</h2>
-      <ReviewFormContainer />
+      <h2>Step 2 of 6: Personal Information</h2>
+      <PersonalFormContainer />
     </>
   );
 }
@@ -24,4 +24,4 @@ export async function getServerSideProps({ res, query }) {
   return { props: {} };
 }
 
-export default ReviewPage;
+export default PersonalInformationPage;

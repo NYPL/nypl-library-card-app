@@ -24,7 +24,9 @@ describe("ReviewPage", () => {
   });
 
   test("renders a title and decription", () => {
-    expect(screen.getByText("Verify your Information")).toBeInTheDocument();
+    expect(
+      screen.getByText("Step 6 of 6: Review Your Information")
+    ).toBeInTheDocument();
     expect(
       screen.getByText(
         "You have entered the information listed below. Please review before submitting."

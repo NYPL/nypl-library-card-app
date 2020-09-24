@@ -1,13 +1,12 @@
 import React from "react";
+import ConfirmationContainer from "../../../src/components/ConfirmationContainer";
 
-import ReviewFormContainer from "../../../src/components/ReviewFormContainer";
-
-function ReviewPage() {
+function ConfirmationPage() {
   return (
-    <>
-      <h2>Step 6 of 6: Review Your Information</h2>
-      <ReviewFormContainer />
-    </>
+    <div>
+      <h2>Congratulations! You now have an NYPL digital library card.</h2>
+      <ConfirmationContainer />
+    </div>
   );
 }
 
@@ -24,4 +23,4 @@ export async function getServerSideProps({ res, query }) {
   return { props: {} };
 }
 
-export default ReviewPage;
+export default ConfirmationPage;

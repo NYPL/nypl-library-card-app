@@ -1,12 +1,12 @@
 import React from "react";
 
-import ReviewFormContainer from "../../../src/components/ReviewFormContainer";
+import LocationFormContainer from "../../../src/components/LocationFormContainer";
 
-function ReviewPage() {
+function LocationPage() {
   return (
     <>
-      <h2>Step 6 of 6: Review Your Information</h2>
-      <ReviewFormContainer />
+      <h2>Step 1 of 6: Location</h2>
+      <LocationFormContainer />
     </>
   );
 }
@@ -24,4 +24,4 @@ export async function getServerSideProps({ res, query }) {
   return { props: {} };
 }
 
-export default ReviewPage;
+export default LocationPage;
