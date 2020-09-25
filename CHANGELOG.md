@@ -10,6 +10,10 @@
 - Updated the app's code structure, specifically in the `/src` folder.
 - Updated environment variables to use Next's convention and removed the `dotenv` package.
 
+#### Removed
+
+- Removed the `@nypl/design-toolkit` package.
+
 #### Added
 
 - Added Typescript for development.
