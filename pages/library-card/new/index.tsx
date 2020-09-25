@@ -9,7 +9,7 @@ function HomePage() {
 
       <RoutingLinks
         next={{
-          url: "/library-card/location?newCard=true",
+          url: "/library-card/personal?newCard=true",
           text: "Get Started",
         }}
       />

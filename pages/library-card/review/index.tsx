@@ -5,7 +5,7 @@ import ReviewFormContainer from "../../../src/components/ReviewFormContainer";
 function ReviewPage() {
   return (
     <>
-      <h2>Step 6 of 6: Review Your Information</h2>
+      <h2>Step 5 of 5: Review Your Information</h2>
       <ReviewFormContainer />
     </>
   );

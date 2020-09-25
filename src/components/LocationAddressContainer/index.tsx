@@ -8,12 +8,13 @@ import useFormDataContext from "../../context/FormDataContext";
 import AddressForm, { AddressTypes } from "../AddressForm";
 import RoutingLinks from "../RoutingLinks.tsx";
 import LibraryListForm from "../LibraryListForm";
+import LocationForm from "../LocationForm";
 import ilsLibraryList from "../../data/ilsLibraryList";
 import { errorMessages, findLibraryCode } from "../../utils/formDataUtils";
 import { Accordion } from "@nypl/design-system-react-components";
 import { AddressRenderType, AddressResponse } from "../../interfaces";
 
-const AddressFormContainer = () => {
+const LocationAddressContainer = () => {
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const router = useRouter();
@@ -73,6 +74,8 @@ const AddressFormContainer = () => {
       className="nypl-library-card-form"
       onSubmit={handleSubmit(submitForm)}
     >
+      <LocationForm errorMessage={errorMessages.location} />
+
       <AddressForm
         type={AddressTypes.Home}
         errorMessages={errorMessages.address}
@@ -100,4 +103,4 @@ const AddressFormContainer = () => {
   );
 };
 
-export default AddressFormContainer;
+export default LocationAddressContainer;

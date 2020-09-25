@@ -1,12 +1,12 @@
 import React from "react";
 
-import LocationFormContainer from "../../../src/components/LocationFormContainer";
+import LocationAddressContainer from "../../../src/components/LocationAddressContainer";
 
-function LocationPage() {
+function LocationAddressPage() {
   return (
     <>
-      <h2>Step 1 of 6: Location</h2>
-      <LocationFormContainer />
+      <h2>Step 2 of 5: Location</h2>
+      <LocationAddressContainer />
     </>
   );
 }
@@ -24,4 +24,4 @@ export async function getServerSideProps({ res, query }) {
   return { props: {} };
 }
 
-export default LocationPage;
+export default LocationAddressPage;
