@@ -1,11 +1,11 @@
 import React from "react";
 import "@nypl/design-system-react-components/dist/styles.css";
+import "../src/styles/main.scss";
 import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";
 import ga from "../src/externals/ga";
 import { FormDataContextProvider } from "../src/context/FormDataContext";
 import { IPLocationContextProvider } from "../src/context/IPLocationContext";
-import "../src/styles/main.scss";
 import appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
 import ApplicationContainer from "../src/components/ApplicationContainer";

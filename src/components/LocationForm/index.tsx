@@ -6,6 +6,8 @@ import {
   InputTypes,
   HelperErrorText,
 } from "@nypl/design-system-react-components";
+import useIPLocationContext from "../../context/IPLocationContext";
+import { getLocationValueFromResponse } from "../../utils/IPLocationAPI";
 
 interface LocationFormProps {
   errorMessage: string;
@@ -24,8 +26,17 @@ interface LocationInput {
  * LocationForm
  * Renders a radio button form to select a user location.
  */
-const LocationForm = ({ errorMessage, ipLocation = "" }: LocationFormProps) => {
-  const [stateValue, setStateValue] = useState(ipLocation);
+const LocationForm = ({ errorMessage }: LocationFormProps) => {
+  // Get the user's location from the geolocation API based on their IP address.
+  const userLocationResponse = useIPLocationContext();
+  // Convert the response to the default value that should be selected in the
+  // UI. If the geolocation API failed, no option will be selected by default.
+  // Even though this location value is pre-selected, users should still be
+  // able to update their location in the UI.
+  const defaultUserLocation = getLocationValueFromResponse(
+    userLocationResponse
+  );
+  const [stateValue, setStateValue] = useState(defaultUserLocation);
   const { register, errors } = useFormContext();
   const fieldName = "location";
   const legendId = `radio-legend-${fieldName}`;
@@ -67,7 +78,7 @@ const LocationForm = ({ errorMessage, ipLocation = "" }: LocationFormProps) => {
           attributes={{
             name: fieldName,
             "aria-checked": checked,
-            defaultChecked: checked,
+            checked: checked,
             onChange,
           }}
           value={value}

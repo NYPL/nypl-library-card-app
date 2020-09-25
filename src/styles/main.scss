@@ -1,36 +1,21 @@
 // Import styles from NYPL React components
 @import '~@nypl/dgx-header-component/dist/styles/main';
 @import '~@nypl/dgx-react-footer/dist/styles/styles';
-// Import NYPL Design Toolkit Library
-// Webpack 4 update:
-@import '~@nypl/design-toolkit/sass/_toolkit.scss';
 
 // Import Globals
-@import 'utils/fonts';
 @import 'utils/variables';
-@import 'utils/mixins';
-@import 'utils/animations';
 
-// Universal Page Components
+// Page Components
 @import 'components/libCardForm';
-@import 'components/banner';
-@import 'components/confirmation_page';
+@import 'components/congrats_page';
 @import 'components/errorBox';
 @import 'components/accordion';
 @import 'components/autosuggest';
 @import 'components/review_page';
-@import 'components/address_verification';
+@import 'components/address_verification_page';
 
-html {
-  @include font-settings;
-  // Including NYPL DS gave the footer extra space at the bottom.
-  box-sizing: inherit;
-}
-
-.nypl-library-card-app {
-  .main-content {
-    min-height: $pageMinHeight;
-  }
+.content-primary {
+  margin: 40px 0 40px 40px;
 }
 
 fieldset {

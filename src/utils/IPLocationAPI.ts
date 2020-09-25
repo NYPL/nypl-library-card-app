@@ -131,4 +131,30 @@ const IPLocationAPI = () => {
   };
 };
 
+/**
+ * getLocationValueFromResponse
+ * Converts a user location response from geolocating their location based on
+ * their IP address, to a value to use in the UI. The logic branches out from
+ * NYC to the larger US area. The default is just an empty string to signify
+ * that no UI option should be pre-selected.
+ */
+export function getLocationValueFromResponse(
+  userLocationResponse: Partial<LocationResponse>
+) {
+  // For a user in NYC, the location response sets "true" for all the
+  // properties, since if you're in NYC then you must be in NYS and in US. So
+  // it's possible to not be in NYC but be in NYS and in US. This logic
+  // branches out so it returns the most detailed location first.
+  if (userLocationResponse?.inNYCity) {
+    return "nyc";
+  } else if (userLocationResponse?.inNYState) {
+    return "nys";
+  } else if (userLocationResponse?.inUS) {
+    return "us";
+  }
+  // The default value is an empty string so that
+  // no option is selected by default.
+  return "";
+}
+
 export default IPLocationAPI();
