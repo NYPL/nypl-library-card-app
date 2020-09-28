@@ -6,6 +6,10 @@ function ReviewPage() {
   return (
     <>
       <h2>Step 5 of 5: Review Your Information</h2>
+      <p>
+        You can use your username or library card barcode along with your PIN to
+        log into and manage your account.
+      </p>
       <ReviewFormContainer />
     </>
   );

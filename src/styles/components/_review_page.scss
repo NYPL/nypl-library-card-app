@@ -1,38 +1,31 @@
-.review-page {
-  dl {
+.form-review-section {
+  border-top: 1px solid var(--ui-gray-medium);
+  margin: 40px 0 0 0;
+  padding: 40px 0 0 0;
+
+  .field-container {
     display: flex;
-    flex-flow: row wrap;
+    flex-wrap: wrap;
+    flex-direction: row;
   }
 
-  dt {
-    flex-basis: 40%;
-    padding: 5px;
+  .work_title {
+    width: 100%;
+    border-top: 1px solid var(--ui-gray-medium);
+    padding-top: 20px;
   }
 
-  dd {
-    flex-basis: 60%;
-    flex-grow: 1;
-    margin: 0;
-  }
-}
+  .field {
+    .title {
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
 
-.form-buttons {
-  margin-top: 20px;
+    margin: 15px 0;
+    flex: 1 1 100%;
 
-  form {
-    display: flex;
-    justify-content: space-between;
-
-    a, button {
-      width: 100px;
-
-      &:focus {
-        background-color: var(--ui-link-primary);
-      }
+    &.names {
+      flex: 1 1 50%;
     }
   }
-}
-
-.form-review-section {
-  margin: 20px 0;
 }

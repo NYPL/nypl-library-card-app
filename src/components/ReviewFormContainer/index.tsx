@@ -3,19 +3,25 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useFormContext } from "react-hook-form";
-import { Button, ButtonTypes } from "@nypl/design-system-react-components";
+import {
+  Button,
+  ButtonTypes,
+  Input,
+  Label,
+  InputTypes,
+} from "@nypl/design-system-react-components";
 import isEmpty from "lodash/isEmpty";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import {
   getLocationValue,
   findLibraryName,
+  findLibraryCode,
 } from "../../../src/utils/formDataUtils";
 import PersonalForm from "../PersonalForm";
 import AccountForm from "../AccountForm";
-import AddressForm, { AddressTypes } from "../AddressForm";
-import { errorMessages } from "../../../src/utils/formDataUtils";
 import RoutingLinks from "../RoutingLinks.tsx";
 import ApiErrors from "../ApiErrors";
+import styles from "./ReviewFormContainer.module.css";
 
 /**
  * ReviewFormContainer
@@ -64,6 +70,9 @@ function ReviewFormContainer() {
    * function to set the global data.
    */
   const editSectionInfo = (formData) => {
+    if (formData.homeLibraryCode) {
+      formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
+    }
     dispatch({
       type: "SET_FORM_DATA",
       value: {
@@ -102,7 +111,7 @@ function ReviewFormContainer() {
     const submitValues = { ...formData, ...formValues };
 
     // Convert the home library name to its code value.
-    // submitValues.homeLibraryCode = findLibraryCode(formValues.homeLibraryCode);
+    submitValues.homeLibraryCode = findLibraryCode(formValues.homeLibraryCode);
 
     // Update the global state.
     dispatch({
@@ -127,31 +136,34 @@ function ReviewFormContainer() {
 
   return (
     <>
-      <h3>
-        You have entered the information listed below. Please review before
-        submitting.
-      </h3>
-
-      <div className="form-review-section">
-        <h4>Personal Information</h4>
+      <div className={styles.form_section}>
+        <h3>Personal Information</h3>
         {!editPersonalInfoFlag ? (
-          <>
-            <dl>
-              <dt>Name</dt>
-              <dd>
-                {formValues.firstName} {formValues.lastName}
-              </dd>
-              <dt>BirthDate</dt>
-              <dd>{formValues.birthdate}</dd>
-              <dt>Email</dt>
-              <dd>{formValues.email}</dd>
-              <dt>
+          <div className={styles.container}>
+            <div className={styles.multi_field}>
+              <div className={styles.title}>First Name</div>
+              <div>{formValues.firstName}</div>
+            </div>
+            <div className={styles.multi_field}>
+              <div className={styles.title}>Last Name</div>
+              <div>{formValues.lastName}</div>
+            </div>
+            <div className={styles.field}>
+              <div className={styles.title}>Date Of Birth</div>
+              <div>{formValues.birthdate}</div>
+            </div>
+            <div className={styles.field}>
+              <div className={styles.title}>E-Mail Address</div>
+              <div>{formValues.email}</div>
+            </div>
+            <div className={styles.field}>
+              <div className={styles.title}>
                 Receive information about NYPL&apos;s programs and services
-              </dt>
-              <dd>{formValues.ecommunicationsPref ? "Yes" : "No"}</dd>
-            </dl>
+              </div>
+              <div>{formValues.ecommunicationsPref ? "Yes" : "No"}</div>
+            </div>
             {editButton(setEditPersonalInfoFlag)}
-          </>
+          </div>
         ) : (
           <form onSubmit={handleSubmit(editSectionInfo)}>
             <PersonalForm />
@@ -160,76 +172,132 @@ function ReviewFormContainer() {
         )}
       </div>
 
-      <div className="form-review-section">
-        <h4>Address</h4>
-        {!editAddressInfoFlag ? (
-          <>
-            <dl>
-              <dt>Location</dt>
-              <dd>{getLocationValue(formValues.location)}</dd>
-              <dt>Home Address</dt>
-              <dd>
-                {formValues["home-line1"]}
-                {formValues["home-line2"]}
-                <br />
-                {formValues["home-city"]}, {formValues["home-state"]}{" "}
-                {formValues["home-zip"]}
-              </dd>
-              {formValues["work-line1"] && (
-                <>
-                  <dt>Work Address</dt>
-                  <dd>
-                    {formValues["work-line1"]}
-                    {formValues["work-line2"]}
-                    <br />
-                    {formValues["work-city"]}, {formValues["work-state"]}{" "}
-                    {formValues["work-zip"]}
-                  </dd>
-                </>
+      <div className={styles.form_section}>
+        <h3>Address</h3>
+        <div className={styles.container}>
+          <div className={styles.field}>
+            <div className={styles.title}>Location</div>
+            <fieldset>
+              {/* For now until we have better tests. This needs a value or an
+              empty input and label causes accessibility issues. */}
+              {formValues.location && (
+                <div className="radio-field">
+                  <Input
+                    className="radio-input"
+                    aria-labelledby="review-location-label"
+                    id="review-location-id"
+                    type={InputTypes.radio}
+                    attributes={{
+                      name: "location",
+                      "aria-checked": true,
+                      checked: true,
+                      readOnly: true,
+                    }}
+                    value={formValues.location}
+                  />
+                  <Label
+                    id="review-location-label"
+                    htmlFor="input-review-location-id"
+                  >
+                    {getLocationValue(formValues.location)}
+                  </Label>
+                </div>
               )}
-            </dl>
-            {editButton(setEditAddressInfoFlag)}
-          </>
-        ) : (
-          <form onSubmit={handleSubmit(editSectionInfo)}>
-            <AddressForm
-              type={AddressTypes.Home}
-              errorMessages={errorMessages.address}
-            />
-            {formValues["work-line1"] && (
-              <>
-                <h4>Work Address</h4>
-                <AddressForm
-                  type={AddressTypes.Work}
-                  errorMessages={errorMessages.address}
-                />
-              </>
-            )}
-            {submitButton}
-          </form>
-        )}
+            </fieldset>
+          </div>
+          {formValues["work-line1"] && <h4>Home</h4>}
+          <div className={styles.field}>
+            <div className={styles.title}>Street Address</div>
+            <div>{formValues["home-line1"]}</div>
+          </div>
+          {formValues["home-line2"] && (
+            <div className={styles.field}>
+              <div className={styles.title}>Apartment/Suite</div>
+              <div>{formValues["home-line2"]}</div>
+            </div>
+          )}
+          <div className={styles.multi_field}>
+            <div className={styles.title}>City</div>
+            <div>{formValues["home-city"]}</div>
+          </div>
+          <div className={styles.multi_field}>
+            <div className={styles.title}>State</div>
+            <div>{formValues["home-state"]}</div>
+          </div>
+          <div className={styles.field}>
+            <div className={styles.title}>Postal Code</div>
+            <div>{formValues["home-zip"]}</div>
+          </div>
+          {formValues["work-line1"] && (
+            <>
+              <h4 className={styles.work_title}>Work</h4>
+              <div className={styles.field}>
+                <div className={styles.title}>Street Address</div>
+                <div>{formValues["home-line1"]}</div>
+              </div>
+              {formValues["home-line2"] && (
+                <div className={styles.field}>
+                  <div className={styles.title}>Apartment/Suite</div>
+                  <div>{formValues["home-line2"]}</div>
+                </div>
+              )}
+              <div className={styles.multi_field}>
+                <div className={styles.title}>City</div>
+                <div>{formValues["home-city"]}</div>
+              </div>
+              <div className={styles.multi_field}>
+                <div className={styles.title}>State</div>
+                <div>{formValues["home-state"]}</div>
+              </div>
+              <div className={styles.field}>
+                <div className={styles.title}>Postal Code</div>
+                <div>{formValues["home-zip"]}</div>
+              </div>
+            </>
+          )}
+          <div className={styles.field}>
+            <div className={styles.title}>Home Library</div>
+            <div>{findLibraryName(formValues.homeLibraryCode)}</div>
+          </div>
+
+          <RoutingLinks
+            next={{
+              url: "/library-card/location?newCard=true",
+              text: "Edit",
+            }}
+          />
+        </div>
       </div>
 
-      <div className="form-review-section">
-        <h4>Account</h4>
+      <div className={styles.form_section}>
+        <h3>Create Your Account</h3>
         {!editAccountInfoFlag ? (
-          <>
-            <dl>
-              <dt>Username</dt>
-              <dd>{formValues.username}</dd>
-              <dt>Pin</dt>
-              <dd>{formValues.pin}</dd>
-              <dt>Home Library</dt>
-              <dd>{findLibraryName(formValues.homeLibraryCode)}</dd>
-            </dl>
+          <div className={styles.container}>
+            <div className={styles.field}>
+              <div className={styles.title}>Username</div>
+              <div>{formValues.username}</div>
+            </div>
+            <div className={styles.field}>
+              <div className={styles.title}>PIN</div>
+              <div>{formValues.pin}</div>
+            </div>
             {editButton(setEditAccountInfoFlag)}
-          </>
+          </div>
         ) : (
           <form onSubmit={handleSubmit(editSectionInfo)}>
             <AccountForm />
             {submitButton}
           </form>
         )}
+      </div>
+
+      <div className={styles.form_section}>
+        After you submit your application, you will see a confirmation page with
+        a temporary account number, and you will be able to log in and request
+        books and materials. To get your card, follow the confirmation page
+        instructions. You may also apply in person at any{" "}
+        <a href="#">library location</a> in the Bronx, Manhattan, or Staten
+        Island.
       </div>
 
       <form onSubmit={handleSubmit(submitForm)}>
