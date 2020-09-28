@@ -54,9 +54,13 @@ const LocationAddressContainer = () => {
         const work: AddressRenderType = error.response?.data?.work;
         if (error.response?.data?.home) {
           value.home = home;
+        } else {
+          console.log("api failed home, formdata", formData);
         }
         if (error.response?.data?.work) {
           value.work = work;
+        } else {
+          console.log("api failed work, formdata", formData);
         }
         dispatch({
           type: "SET_ADDRESSES_VALUE",

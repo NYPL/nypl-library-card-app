@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { Input, Label, InputTypes } from "@nypl/design-system-react-components";
 import useFormDataContext from "../../../src/context/FormDataContext";
-import { Address } from "../../../src/interfaces";
+import { Address, AddressRenderType } from "../../../src/interfaces";
 import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
+import styles from "./AddressVerificationContainer.module.css";
 
 /**
  * AddressVerificationContainer
@@ -24,10 +25,28 @@ function AddressVerificationContainer() {
   const { formValues, addressResponse } = state;
   const router = useRouter();
 
+  /**
+   * getAddresses
+   * Returns an array of a single or multiple addresses returned from the API
+   * call to Service Objects. If there was response (could be from no input),
+   * then just return undefined. That's the case for the optional work address.
+   * We want an array so we always render the list of radio buttons, even if
+   * there's only one option.
+   */
+  const getAddresses = (addressObj: AddressRenderType): Address[] => {
+    if (!addressObj?.address) {
+      return;
+    }
+    if (addressObj?.addresses?.length) {
+      return addressObj.addresses;
+    }
+    return [addressObj.address];
+  };
+
   const onChangeHome = (e) => setHomeAddressSelect(e.target?.value);
   const onChangeWork = (e) => setWorkAddressSelect(e.target?.value);
-  const homeAddress = addressResponse?.home;
-  const workAddress = addressResponse?.work;
+  const homeAddress = getAddresses(addressResponse?.home);
+  const workAddress = getAddresses(addressResponse?.work);
 
   /**
    * extractUpdatedAddressValues
@@ -49,7 +68,6 @@ function AddressVerificationContainer() {
     const home = formData["home-address-select"];
     const work = formData["work-address-select"];
 
-    let selectedHomeAddress;
     let updatedSelectedHomeAddress = {};
     let selectedWorkAddress;
     let updatedSelectedWorkAddress = {};
@@ -57,16 +75,11 @@ function AddressVerificationContainer() {
     // Was the home address updated?
     // In this case, the home address was vague and the user has to select
     // between multiple valid addresses returned from Service Objects.
-    if (home) {
-      // Get the index of the object that was selected...
-      const idx = parseInt(home.split("-")[1], 10);
-      // ...and use the address of the selected object.
-      selectedHomeAddress = homeAddress.addresses[idx];
-    } else {
-      // In this case, the response from Service Objects only returned one
-      // address, so that's the updated value.
-      selectedHomeAddress = homeAddress.address;
-    }
+
+    // Get the index of the object that was selected...
+    const idx = parseInt(home.split("-")[1], 10);
+    // ...and use the address of the selected object.
+    const selectedHomeAddress = homeAddress[idx];
 
     updatedSelectedHomeAddress = extractUpdatedAddressValues(
       selectedHomeAddress,
@@ -78,9 +91,7 @@ function AddressVerificationContainer() {
     // there's nothing to update so keep moving forward.
     if (work) {
       const idx = parseInt(work.split("-")[1], 10);
-      selectedWorkAddress = workAddress.addresses[idx];
-    } else if (workAddress?.message) {
-      selectedWorkAddress = workAddress.address;
+      selectedWorkAddress = workAddress[idx];
     }
     updatedSelectedWorkAddress = extractUpdatedAddressValues(
       selectedWorkAddress,
@@ -104,24 +115,6 @@ function AddressVerificationContainer() {
   };
 
   /**
-   * renderValidatedAddress
-   * Temporary. Just renders the original address submitted by the user if
-   * the API response returned other valid addresses.
-   */
-  const renderValidatedAddress = (address: Address) => (
-    <div className="validated-address">
-      <span>
-        {address.line1} {address.line2}
-      </span>
-      <br />
-      <span>
-        {address.city}, {address.state}
-      </span>{" "}
-      <span>{address.zip}</span>
-    </div>
-  );
-
-  /**
    * renderMultipleAddresses
    * Renders a list of alternate valid addresses from an invalid/ambiguous
    * user submitted address. Each address is rendered inside a label/input
@@ -132,101 +125,84 @@ function AddressVerificationContainer() {
     addressType,
     selectedValue,
     onChange
-  ) => (
-    <ul className="multiple-address-list">
-      {addresses.map((address, idx) => {
-        const selected = `${addressType}-${idx}`;
-        const checked = selected === selectedValue;
-        const checkedClass = checked ? "checked" : "";
-        return (
-          <li
-            key={`${addressType}-${idx}`}
-            className={`radio-field ${checkedClass}`}
-          >
-            <Label
-              id={`${addressType}-${idx}-label`}
-              htmlFor={`input-${addressType}-${idx}`}
+  ) => {
+    if (!addresses?.length) {
+      return null;
+    }
+    const addressesLength = addresses.length;
+    return (
+      <ul className={styles.multiple_address_list}>
+        {addresses.map((address, idx) => {
+          const selected = `${addressType}-${idx}`;
+          // If there's only one option, it's checked by default. Otherwise,
+          // the user can choose between the two options.
+          const checked =
+            addressesLength === 1 ? true : selected === selectedValue;
+          const checkedClass = checked ? "checked" : "";
+          return (
+            <li
+              key={`${addressType}-${idx}`}
+              className={`radio-field ${checkedClass}`}
             >
-              <Input
-                className="radio-input"
-                aria-labelledby={`${addressType}-${idx}-label`}
-                id={`${addressType}-${idx}`}
-                type={InputTypes.radio}
-                attributes={{
-                  name: `${addressType}-address-select`,
-                  "aria-checked": checked,
-                  defaultChecked: checked,
-                  onChange,
-                }}
-                value={selected}
-                ref={register()}
-              />
-              <div>
-                <span>
-                  {address.line1} {address.line2}
-                </span>
-                <br />
-                <span>
-                  {address.city}, {address.state} {address.zip}
-                </span>
-              </div>
-            </Label>
-          </li>
-        );
-      })}
-    </ul>
-  );
+              <Label
+                className={styles.label}
+                id={`${addressType}-${idx}-label`}
+                htmlFor={`input-${addressType}-${idx}`}
+              >
+                <Input
+                  className={`radio-input ${styles.input}`}
+                  aria-labelledby={`${addressType}-${idx}-label`}
+                  id={`${addressType}-${idx}`}
+                  type={InputTypes.radio}
+                  attributes={{
+                    name: `${addressType}-address-select`,
+                    "aria-checked": checked,
+                    defaultChecked: checked,
+                    onChange,
+                  }}
+                  value={selected}
+                  ref={register({
+                    required: true,
+                  })}
+                />
+                <div>
+                  <div>{address.line1}</div>
+                  {address.line2 && <div>{address.line2}</div>}
+                  <div>
+                    {address.city}, {address.state} {address.zip}
+                  </div>
+                </div>
+              </Label>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  };
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
-      <h3>Home Address</h3>
+      <p>Home Address</p>
 
-      {/* If there are multiple addresses,
-      render the alternate addresses. */}
-      {homeAddress?.addresses?.length > 0 && (
+      {renderMultipleAddresses(
+        homeAddress,
+        "home",
+        homeAddressSelect,
+        onChangeHome
+      )}
+
+      {workAddress?.length > 0 && (
         <>
-          <p>
-            We have found an alternate home address. Please choose which is
-            correct:
-          </p>
+          <p>Work Address</p>
 
           {renderMultipleAddresses(
-            homeAddress.addresses,
-            "home",
-            homeAddressSelect,
-            onChangeHome
-          )}
-        </>
-      )}
-      {/* Otherwise, just render the validated address. */}
-      {!homeAddress.addresses &&
-        homeAddress?.address?.line1 &&
-        renderValidatedAddress(homeAddress.address)}
-
-      {(workAddress?.addresses || workAddress?.address) && (
-        <h3>Work Address</h3>
-      )}
-      {/* If there are multiple work addresses,
-      render the alternate addresses. */}
-      {workAddress?.addresses?.length > 0 && (
-        <>
-          <p>
-            We have found an alternate work address. Please choose which is
-            correct:
-          </p>
-
-          {renderMultipleAddresses(
-            workAddress.addresses,
+            workAddress,
             "work",
             workAddressSelect,
             onChangeWork
           )}
         </>
       )}
-      {/* If there is a validated work address, render it. */}
-      {!workAddress.addresses &&
-        workAddress?.address?.line1 &&
-        renderValidatedAddress(workAddress.address)}
 
       <RoutingLinks
         previous={{ url: "/library-card/location?newCard=true" }}

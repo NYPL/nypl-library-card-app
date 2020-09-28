@@ -47,8 +47,7 @@ describe("AddressVerificationContainer", () => {
     );
 
     expect(screen.getByText("1234 61st")).toBeInTheDocument();
-    expect(screen.getByText("Woodside, NY")).toBeInTheDocument();
-    expect(screen.getByText("11377")).toBeInTheDocument();
+    expect(screen.getByText("Woodside, NY 11377")).toBeInTheDocument();
   });
 
   test("renders multiple home addresses", async () => {
@@ -89,11 +88,6 @@ describe("AddressVerificationContainer", () => {
       </TestProviderWrapper>
     );
 
-    expect(
-      screen.getByText(
-        "We have found an alternate home address. Please choose which is correct:"
-      )
-    ).toBeInTheDocument();
     expect(screen.getByText("Woodside, NY 11377")).toBeInTheDocument();
 
     expect(screen.getByText("5678 61st")).toBeInTheDocument();
@@ -137,12 +131,10 @@ describe("AddressVerificationContainer", () => {
     );
 
     expect(screen.getByText("1234 61st")).toBeInTheDocument();
-    expect(screen.getByText("Woodside, NY")).toBeInTheDocument();
-    expect(screen.getByText("11377")).toBeInTheDocument();
+    expect(screen.getByText("Woodside, NY 11377")).toBeInTheDocument();
 
     expect(screen.getByText("476 5th Ave")).toBeInTheDocument();
-    expect(screen.getByText("New York, NY")).toBeInTheDocument();
-    expect(screen.getByText("10018")).toBeInTheDocument();
+    expect(screen.getByText("New York, NY 10018")).toBeInTheDocument();
   });
 
   test("renders multiple optional work addresses", async () => {
@@ -207,23 +199,11 @@ describe("AddressVerificationContainer", () => {
       </TestProviderWrapper>
     );
 
-    expect(
-      screen.getByText(
-        "We have found an alternate home address. Please choose which is correct:"
-      )
-    ).toBeInTheDocument();
     expect(screen.getByText("Woodside, NY 11377")).toBeInTheDocument();
-
     expect(screen.getByText("5678 61st")).toBeInTheDocument();
     expect(screen.getByText("Woodside, NY 11388")).toBeInTheDocument();
 
-    expect(
-      screen.getByText(
-        "We have found an alternate work address. Please choose which is correct:"
-      )
-    ).toBeInTheDocument();
     expect(screen.getByText("New York, NY 10018")).toBeInTheDocument();
-
     expect(screen.getByText("1111 1st Ave")).toBeInTheDocument();
     expect(screen.getByText("New York, NY 10001")).toBeInTheDocument();
   });
