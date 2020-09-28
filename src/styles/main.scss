@@ -5,8 +5,7 @@
 // Import Globals
 @import 'utils/variables';
 
-// Page Components
-@import 'components/libCardForm';
+// Components
 @import 'components/congrats_page';
 @import 'components/errorBox';
 @import 'components/accordion';
@@ -14,8 +13,17 @@
 @import 'components/review_page';
 @import 'components/address_verification_page';
 
+// Global rules
 .content-primary {
   margin: 40px 0 40px 40px;
+}
+
+.form-field {
+  margin: 10px 0;
+}
+
+.checkbox {
+  margin: 30px 0 0;
 }
 
 fieldset {
@@ -43,10 +51,6 @@ fieldset {
   color: var(--ui-error);
   font-size: 0.9rem;
   font-weight: 400;
-}
-
-.emailSubscription-wrapper {
-  line-height: 1 !important;
 }
 
 .username-helper-text {

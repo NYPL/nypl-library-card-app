@@ -8,7 +8,7 @@ import AgeForm from "../AgeForm";
 import useFormDataContext from "../../context/FormDataContext";
 import { errorMessages } from "../../utils/formDataUtils";
 
-function PersonalInformationForm({ agencyType = "" }) {
+function PersonalForm({ agencyType = "" }) {
   const { register, errors } = useFormContext();
   const { state } = useFormDataContext();
   const { formValues } = state;
@@ -22,37 +22,46 @@ function PersonalInformationForm({ agencyType = "" }) {
       </>
     ),
   };
-
+  const instructionText = (
+    <>
+      If you do not wish to provide an email address, please use our{" "}
+      <a href="#something">alternate form</a>.
+    </>
+  );
   return (
     <>
-      <div className="nypl-name-field">
-        <FormField
-          id="patronFirstName"
-          type="text"
-          label="First Name"
-          fieldName="firstName"
-          isRequired
-          // Every input field is registered to react-hook-form. If this
-          // field is empty on blur or on submission, the error message will
-          // display below the input.
-          ref={register({
-            required: errorMessages.firstName,
-          })}
-          errorState={errors}
-          defaultValue={formValues.firstName}
-        />
-        <FormField
-          id="patronLastName"
-          type="text"
-          label="Last Name"
-          fieldName="lastName"
-          isRequired
-          errorState={errors}
-          ref={register({
-            required: errorMessages.lastName,
-          })}
-          defaultValue={formValues.lastName}
-        />
+      <div className="input-group">
+        <div style={{ flex: "1" }}>
+          <FormField
+            id="patronFirstName"
+            type="text"
+            label="First Name"
+            fieldName="firstName"
+            isRequired
+            // Every input field is registered to react-hook-form. If this
+            // field is empty on blur or on submission, the error message will
+            // display below the input.
+            ref={register({
+              required: errorMessages.firstName,
+            })}
+            errorState={errors}
+            defaultValue={formValues.firstName}
+          />
+        </div>
+        <div style={{ flex: "1" }}>
+          <FormField
+            id="patronLastName"
+            type="text"
+            label="Last Name"
+            fieldName="lastName"
+            isRequired
+            errorState={errors}
+            ref={register({
+              required: errorMessages.lastName,
+            })}
+            defaultValue={formValues.lastName}
+          />
+        </div>
       </div>
 
       <AgeForm
@@ -62,17 +71,19 @@ function PersonalInformationForm({ agencyType = "" }) {
 
       <FormField
         id="patronEmail"
-        className="nypl-text-field"
         type="text"
-        label="E-mail"
+        label="E-Mail Address"
         fieldName="email"
         errorState={errors}
+        isRequired
         ref={register({
-          required: false,
+          required: errorMessages.email,
           validate: (val) => val === "" || isEmail(val) || errorMessages.email,
         })}
         defaultValue={formValues.email}
+        instructionText={instructionText as any}
       />
+
       <Checkbox
         checkboxId="patronECommunications"
         name="ecommunicationsPref"
@@ -86,4 +97,4 @@ function PersonalInformationForm({ agencyType = "" }) {
   );
 }
 
-export default PersonalInformationForm;
+export default PersonalForm;

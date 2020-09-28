@@ -70,10 +70,7 @@ const LocationAddressContainer = () => {
   };
 
   return (
-    <form
-      className="nypl-library-card-form"
-      onSubmit={handleSubmit(submitForm)}
-    >
+    <form onSubmit={handleSubmit(submitForm)}>
       <LocationForm errorMessage={errorMessages.location} />
 
       <AddressForm

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import useParamsContext from "../../context/ParamsContext";
 import useFormDataContext from "../../context/FormDataContext";
-import PersonalInformationForm from "../PersonalInformationForm";
+import PersonalForm from "../PersonalForm";
 import RoutingLinks from "../RoutingLinks.tsx";
 
 const PersonalFormContainer = () => {
@@ -31,11 +31,8 @@ const PersonalFormContainer = () => {
   };
 
   return (
-    <form
-      className="nypl-library-card-form"
-      onSubmit={handleSubmit(submitForm)}
-    >
-      <PersonalInformationForm agencyType={params.policyType} />
+    <form onSubmit={handleSubmit(submitForm)}>
+      <PersonalForm agencyType={params.policyType} />
 
       <input
         type="hidden"

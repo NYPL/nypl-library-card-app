@@ -57,7 +57,6 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
     <>
       <FormField
         id={`patronLine1-${type}`}
-        className="nypl-text-field"
         type="text"
         label="Street Address"
         fieldName={`${type}-line1`}
@@ -73,7 +72,6 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
       />
       <FormField
         id={`patronLine2-${type}`}
-        className="nypl-text-field"
         type="text"
         label="Apartment / Suite"
         fieldName={`${type}-line2`}
@@ -82,7 +80,6 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
       />
       <FormField
         id={`patronCity-${type}`}
-        className="nypl-text-field"
         type="text"
         label="City"
         fieldName={`${type}-city`}
@@ -98,7 +95,6 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
       />
       <FormField
         id={`patronState-${type}`}
-        className="nypl-text-field"
         type="text"
         instructionText="2-letter abbreviation"
         label="State"
@@ -113,7 +109,6 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
       />
       <FormField
         id={`patronZip-${type}`}
-        className="nypl-text-field"
         type="text"
         label="Postal Code"
         fieldName={`${type}-zip`}

@@ -95,7 +95,6 @@ const UsernameValidationForm = ({
     <>
       <FormField
         id="patronUsername"
-        className="nypl-text-field"
         type="text"
         label="Username"
         fieldName="username"

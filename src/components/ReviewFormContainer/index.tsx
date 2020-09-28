@@ -10,7 +10,7 @@ import {
   getLocationValue,
   findLibraryName,
 } from "../../../src/utils/formDataUtils";
-import PersonalInformationForm from "../PersonalInformationForm";
+import PersonalForm from "../PersonalForm";
 import AccountForm from "../AccountForm";
 import AddressForm, { AddressTypes } from "../AddressForm";
 import { errorMessages } from "../../../src/utils/formDataUtils";
@@ -154,7 +154,7 @@ function ReviewFormContainer() {
           </>
         ) : (
           <form onSubmit={handleSubmit(editSectionInfo)}>
-            <PersonalInformationForm />
+            <PersonalForm />
             {submitButton}
           </form>
         )}

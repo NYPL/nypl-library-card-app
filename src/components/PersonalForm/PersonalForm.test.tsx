@@ -3,15 +3,15 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import { TestProviderWrapper } from "../../../testHelper/utils";
-import PersonalInformationForm from ".";
+import PersonalForm from ".";
 
 expect.extend(toHaveNoViolations);
 
-describe("PersonalInformationForm", () => {
+describe("PersonalForm", () => {
   beforeEach(() => {
     render(
       <TestProviderWrapper>
-        <PersonalInformationForm />
+        <PersonalForm />
       </TestProviderWrapper>
     );
   });
@@ -26,7 +26,9 @@ describe("PersonalInformationForm", () => {
     expect(
       screen.getByRole("textbox", { name: "Date of Birth Required" })
     ).toBeInTheDocument();
-    expect(screen.getByRole("textbox", { name: "E-mail" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("textbox", { name: "E-Mail Address Required" })
+    ).toBeInTheDocument();
     expect(
       screen.getByLabelText(
         "Yes, I would like to receive information about NYPL's programs and services"
@@ -35,11 +37,11 @@ describe("PersonalInformationForm", () => {
   });
 });
 
-describe("PersonalInformationForm Accessibility check", () => {
+describe("PersonalForm Accessibility check", () => {
   test("passes axe accessibility test", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <PersonalInformationForm />
+        <PersonalForm />
       </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();

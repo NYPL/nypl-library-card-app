@@ -6,7 +6,7 @@ import { Link } from "@nypl/design-system-react-components";
  * the submit button.
  */
 const FormFooterText = () => (
-  <div className="nypl-library-card-form">
+  <div>
     <h2>What to Expect Next</h2>
     <p>
       After you submit your application, you will see a confirmation page with a
