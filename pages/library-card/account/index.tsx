@@ -4,7 +4,7 @@ import AccountFormContainer from "../../../src/components/AccountFormContainer";
 function AccountPage() {
   return (
     <>
-      <h2>Step 5 of 6: Create Your Account</h2>
+      <h2>Step 4 of 5: Create Your Account</h2>
       <AccountFormContainer />
     </>
   );

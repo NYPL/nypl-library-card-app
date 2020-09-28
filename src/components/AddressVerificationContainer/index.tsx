@@ -229,7 +229,7 @@ function AddressVerificationContainer() {
         renderValidatedAddress(workAddress.address)}
 
       <RoutingLinks
-        previous={{ url: "/library-card/address?newCard=true" }}
+        previous={{ url: "/library-card/location?newCard=true" }}
         next={{ submit: true }}
       />
     </form>

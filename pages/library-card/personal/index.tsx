@@ -5,7 +5,7 @@ import PersonalFormContainer from "../../../src/components/PersonalFormContainer
 function PersonalInformationPage() {
   return (
     <>
-      <h2>Step 2 of 6: Personal Information</h2>
+      <h2>Step 1 of 5: Personal Information</h2>
       <PersonalFormContainer />
     </>
   );

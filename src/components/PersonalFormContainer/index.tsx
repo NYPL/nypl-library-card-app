@@ -14,7 +14,7 @@ const PersonalFormContainer = () => {
   const params = useParamsContext();
   const router = useRouter();
   // Specific functions and object from react-hook-form.
-  const { handleSubmit } = useFormContext();
+  const { register, handleSubmit } = useFormContext();
 
   /**
    * submitForm
@@ -27,7 +27,7 @@ const PersonalFormContainer = () => {
       value: { ...formValues, ...formData },
     });
 
-    router.push("/library-card/address?newCard=true");
+    router.push("/library-card/location?newCard=true");
   };
 
   return (
@@ -37,8 +37,16 @@ const PersonalFormContainer = () => {
     >
       <PersonalInformationForm agencyType={params.policyType} />
 
+      <input
+        type="hidden"
+        aria-hidden={true}
+        name="policyType"
+        defaultValue={params.policyType || formValues.policyType}
+        ref={register()}
+      />
+
       <RoutingLinks
-        previous={{ url: "/library-card/location?newCard=true" }}
+        previous={{ url: "/library-card/new?newCard=true" }}
         next={{ submit: true }}
       />
     </form>

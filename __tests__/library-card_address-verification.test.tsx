@@ -27,7 +27,7 @@ describe("AddressVerificationPage", () => {
       </TestProviderWrapper>
     );
     expect(
-      screen.getByText("Step 4 of 6: Address Verification")
+      screen.getByText("Step 3 of 5: Address Verification")
     ).toBeInTheDocument();
   });
 });

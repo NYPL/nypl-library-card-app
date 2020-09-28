@@ -5,7 +5,7 @@ import AddressVerificationContainer from "../../../src/components/AddressVerific
 function AddressVerificationPage() {
   return (
     <>
-      <h2>Step 4 of 6: Address Verification</h2>
+      <h2>Step 3 of 5: Address Verification</h2>
       <AddressVerificationContainer />
     </>
   );
