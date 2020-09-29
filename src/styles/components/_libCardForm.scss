@@ -1,28 +1,6 @@
-.nypl-library-card-form {
-  margin: 20px;
-  @media only screen and (min-width: 966px) {
-    margin: 20px 0;
-  };
-}
-
-.nypl-name-field div:first-child input[type=text] {
-  width: 95%;
-}
-
-.nypl-address-fieldset input[type=text], .nypl-text-field input[type=text], .nypl-date-field input[type=text], .nypl-name-field input[type=text] {
+.nypl-text-field input[type=text] {
   background-color: white;
   border-radius: 0.4rem;
   border: 0.1rem solid black;
   box-shadow: none;
-}
-
-.nypl-field-error input[type=text] {
-  background-color: #f6d6d8;
-  border-bottom: .125rem solid #97272c;
-  box-shadow: none;
-}
-
-.nypl-address-note {
-  border-left: 0.5rem solid #008918;
-  padding-left: 0.5rem;
 }

@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  margin-top: 40px;
 }
 
 /*
@@ -7,7 +8,7 @@
 * component styling but not until the functionality for that is working.
 */
 .previous {
-  padding: 7px 30px;
+  padding: 8px 40px;
   background-color: var(--ui-white);
   color: var(--ui-black);
   border: 1px solid var(--ui-gray-medium);
@@ -21,5 +22,5 @@
 }
 
 .next {
-  padding: 7px 20px;
+  padding: 8px 40px;
 }

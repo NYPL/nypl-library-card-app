@@ -5,6 +5,10 @@ function AccountPage() {
   return (
     <>
       <h2>Step 4 of 5: Create Your Account</h2>
+      <p>
+        You can use either your username or library card barcode along with your
+        PIN to log into and manage your account.
+      </p>
       <AccountFormContainer />
     </>
   );

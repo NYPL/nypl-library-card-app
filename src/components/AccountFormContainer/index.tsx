@@ -30,10 +30,7 @@ const AccountFormContainer = () => {
   };
 
   return (
-    <form
-      className="nypl-library-card-form"
-      onSubmit={handleSubmit(submitForm)}
-    >
+    <form onSubmit={handleSubmit(submitForm)}>
       <AccountForm />
 
       <AcceptTermsForm />

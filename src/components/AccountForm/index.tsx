@@ -17,7 +17,6 @@ function AccountInformationForm() {
 
       <FormField
         id="patronPin"
-        className="nypl-text-field"
         type="text"
         label="PIN"
         fieldName="pin"

@@ -54,7 +54,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
     }
     const ariaLabelledby = helperText ? `${id}-helperText` : "";
     return (
-      <div className={className}>
+      <div className={`form-field ${className}`}>
         <Label
           htmlFor={`input-${id}`}
           id={`${id}-label`}

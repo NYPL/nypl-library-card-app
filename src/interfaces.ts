@@ -85,7 +85,7 @@ export interface AddressRenderType {
   address: Address | undefined;
   addresses: Address[] | undefined;
   message: string;
-  reason: string;
+  reason?: string;
   cardType?: null | string;
 }
 
