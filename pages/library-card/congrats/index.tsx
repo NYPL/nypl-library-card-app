@@ -1,11 +1,20 @@
 import React from "react";
-import ConfirmationContainer from "../../../src/components/ConfirmationContainer";
 
 function ConfirmationPage() {
   return (
     <div>
       <h2>Congratulations! You now have an NYPL digital library card.</h2>
-      <ConfirmationContainer />
+      <p>
+        You will receive a confirmation email with all of the details of your
+        new card, plus information about what you can access.
+      </p>
+
+      <h3>SimplyE: NYPL&apos;s E-Reader App</h3>
+      <p>Lorem ipsum</p>
+      <h3>Browse Catalog</h3>
+      <p>Lorem ipsum</p>
+      <h3>Account Page</h3>
+      <p>Lorem ipsum</p>
     </div>
   );
 }
