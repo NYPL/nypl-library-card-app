@@ -13,10 +13,31 @@ describe("LocationForm", () => {
   const nys = "New York State (Outside NYC)";
   const us = "United States (Visiting NYC)";
 
+  const inputRadioList = [
+    {
+      value: "nyc",
+      label: nyc,
+      ref: () => {},
+      addressFields: <div>Some fields</div>,
+    },
+    {
+      value: "nys",
+      label: nys,
+      ref: () => {},
+      addressFields: <div>Some fields</div>,
+    },
+    {
+      value: "us",
+      label: us,
+      ref: () => {},
+      addressFields: <div>Some fields</div>,
+    },
+  ];
+
   test("passes axe accessibility checks", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <LocationForm errorMessage={errorMessage} />
+        <LocationForm inputRadioList={inputRadioList} />
       </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
@@ -25,7 +46,7 @@ describe("LocationForm", () => {
   test("renders three radio buttons", () => {
     render(
       <TestProviderWrapper>
-        <LocationForm errorMessage={errorMessage} />
+        <LocationForm inputRadioList={inputRadioList} />
       </TestProviderWrapper>
     );
 
@@ -37,7 +58,7 @@ describe("LocationForm", () => {
   test("updates the value selected", async () => {
     render(
       <TestProviderWrapper>
-        <LocationForm errorMessage={errorMessage} />
+        <LocationForm inputRadioList={inputRadioList} />
       </TestProviderWrapper>
     );
 
@@ -74,7 +95,7 @@ describe("LocationForm", () => {
     };
     render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
-        <LocationForm errorMessage={errorMessage} />
+        <LocationForm inputRadioList={inputRadioList} />
       </TestProviderWrapper>
     );
 
@@ -89,7 +110,7 @@ describe("LocationForm", () => {
     };
     render(
       <TestProviderWrapper userLocation={userLocation}>
-        <LocationForm errorMessage={errorMessage} />
+        <LocationForm inputRadioList={inputRadioList} />
       </TestProviderWrapper>
     );
 

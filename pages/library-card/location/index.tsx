@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import LocationAddressContainer from "../../../src/components/LocationAddressContainer";
 
 function LocationAddressPage() {
+  // We use this ref to scroll to the heading every time a new location option
+  // is selected so the page doesn't jump around too much.
+  const scrollRef = useRef<HTMLHeadingElement>(null);
+
   return (
     <>
-      <h2>Step 2 of 5: Location</h2>
-      <LocationAddressContainer />
+      <h2 ref={scrollRef}>Step 2 of 5: Location</h2>
+      <p>
+        The application process is slightly different depending on whether you
+        live, work, go to school, or pay property taxes in New York City,
+        elsewhere in New York State, or elsewhere in the United States and
+        you&apos;re just visiting New York City. Please select one of the
+        following and fill out the required fields.
+      </p>
+      <LocationAddressContainer scrollRef={scrollRef} />
     </>
   );
 }
