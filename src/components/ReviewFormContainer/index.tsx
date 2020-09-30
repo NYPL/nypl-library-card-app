@@ -36,7 +36,6 @@ function ReviewFormContainer() {
 
   // Flags to set a section to editable or read-only.
   const [editPersonalInfoFlag, setEditPersonalInfoFlag] = useState(false);
-  const [editAddressInfoFlag, setEditAddressInfoFlag] = useState(false);
   const [editAccountInfoFlag, setEditAccountInfoFlag] = useState(false);
 
   // Will run whenever the `errorObj` has changes, specifically for
@@ -83,7 +82,6 @@ function ReviewFormContainer() {
     // Set all to false even though not all are on.
     setEditPersonalInfoFlag(false);
     setEditAccountInfoFlag(false);
-    setEditAddressInfoFlag(false);
   };
 
   /**
