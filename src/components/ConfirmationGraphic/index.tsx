@@ -7,11 +7,7 @@ import useFormDataContext from "../../context/FormDataContext";
 const ConfirmationContainer: React.FC = () => {
   const { state } = useFormDataContext();
   const formResults: FormResults = state.results;
-  // const { barcode, pin, name } = formResults;
-  const barcode = "1234567891234567";
-  const pin = "1234";
-  const name = "Tom Nook";
-
+  const { barcode, pin, name } = formResults;
   let canvas;
   // What we want to do is render the HTML and then pick up the canvas element.
   // We can then draw a barcode on it using `bwipjs`. The ILS uses `Codabar` as
