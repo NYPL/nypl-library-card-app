@@ -27,7 +27,6 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
   // these functions are available to use.
   const { register, errors } = useFormContext();
   const MAXLENGTHSTATE = 2;
-  // TODO: use for zip code
   const MINLENGTHZIP = 5;
   const MAXLENGTHZIP = 10;
   // Only the home address is required. The work address is optional.
@@ -79,49 +78,61 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
         ref={register()}
         defaultValue={formValues[`${type}-line2`]}
       />
-      <FormField
-        id={`patronCity-${type}`}
-        type="text"
-        label="City"
-        fieldName={`${type}-city`}
-        isRequired={isRequired}
-        errorState={errors}
-        ref={register({
-          required: {
-            value: isRequired,
-            message: errorMessages.city,
-          },
-        })}
-        defaultValue={formValues[`${type}-city`]}
-      />
-      <FormField
-        id={`patronState-${type}`}
-        type="text"
-        instructionText="2-letter abbreviation"
-        label="State"
-        fieldName={`${type}-state`}
-        isRequired={isRequired}
-        errorState={errors}
-        maxLength={MAXLENGTHSTATE}
-        ref={register({
-          validate: lengthValidation(MAXLENGTHSTATE, "state"),
-        })}
-        defaultValue={formValues[`${type}-state`]}
-      />
-      <FormField
-        id={`patronZip-${type}`}
-        type="text"
-        label="Postal Code"
-        fieldName={`${type}-zip`}
-        isRequired={isRequired}
-        errorState={errors}
-        // minLength={MAXLENGTHZIP}
-        maxLength={MAXLENGTHZIP}
-        ref={register({
-          validate: lengthValidation(MAXLENGTHZIP, "zip"),
-        })}
-        defaultValue={formValues[`${type}-zip`]}
-      />
+      <div className="input-group">
+        <div style={{ flex: "1" }}>
+          <FormField
+            id={`patronCity-${type}`}
+            type="text"
+            label="City"
+            fieldName={`${type}-city`}
+            isRequired={isRequired}
+            errorState={errors}
+            ref={register({
+              required: {
+                value: isRequired,
+                message: errorMessages.city,
+              },
+            })}
+            defaultValue={formValues[`${type}-city`]}
+          />
+        </div>
+        <div style={{ flex: "1" }}>
+          <FormField
+            id={`patronState-${type}`}
+            type="text"
+            instructionText="2-letter abbreviation"
+            label="State"
+            fieldName={`${type}-state`}
+            isRequired={isRequired}
+            errorState={errors}
+            maxLength={MAXLENGTHSTATE}
+            ref={register({
+              validate: lengthValidation(MAXLENGTHSTATE, "state"),
+            })}
+            defaultValue={formValues[`${type}-state`]}
+          />
+        </div>
+      </div>
+      <div className="input-group">
+        <div style={{ flex: "1" }}>
+          <FormField
+            id={`patronZip-${type}`}
+            type="text"
+            label="Postal Code"
+            fieldName={`${type}-zip`}
+            isRequired={isRequired}
+            errorState={errors}
+            minLength={MINLENGTHZIP}
+            maxLength={MAXLENGTHZIP}
+            ref={register({
+              validate: lengthValidation(MAXLENGTHZIP, "zip", MINLENGTHZIP),
+            })}
+            defaultValue={formValues[`${type}-zip`]}
+          />
+        </div>
+        {/* Easier to align with an empty block. */}
+        <div style={{ flex: "1" }}></div>
+      </div>
     </>
   );
 };

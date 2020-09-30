@@ -13,13 +13,20 @@ import ilsLibraryList from "../../data/ilsLibraryList";
 import { errorMessages, findLibraryCode } from "../../utils/formDataUtils";
 import { Accordion } from "@nypl/design-system-react-components";
 import { AddressRenderType, AddressResponse } from "../../interfaces";
+import styles from "./LocationAddressContainer.module.css";
 
-const LocationAddressContainer = () => {
+interface LocationAddressContainerProps {
+  scrollRef: React.RefObject<HTMLHeadingElement>;
+}
+
+const LocationAddressContainer = ({
+  scrollRef,
+}: LocationAddressContainerProps) => {
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const router = useRouter();
   // Specific functions and object from react-hook-form.
-  const { handleSubmit } = useFormContext();
+  const { handleSubmit, register } = useFormContext();
 
   /**
    * submitForm
@@ -73,28 +80,81 @@ const LocationAddressContainer = () => {
       );
   };
 
+  /**
+   * addressFields
+   * Renders the field sections for the home address, work address, and the
+   * home library. The two parameters are required to be explicit about what
+   * fields will be rendered when the function is called.
+   */
+  const addressFields = ({
+    work,
+    homeLibrary,
+  }: {
+    work: boolean;
+    homeLibrary: boolean;
+  }) => (
+    <>
+      <div className={styles.address_section}>
+        <h3>Home Address</h3>
+        <Accordion
+          id="home-address-accordion"
+          accordionLabel="If you live in NYC, please fill out the home address form."
+        >
+          <AddressForm
+            type={AddressTypes.Home}
+            errorMessages={errorMessages.address}
+          />
+        </Accordion>
+      </div>
+
+      {work && (
+        <div className={styles.address_section}>
+          <h3>Work Address</h3>
+          <Accordion
+            id="work-address-accordion"
+            accordionLabel="If you live in NYC, please fill out the work address form."
+          >
+            <AddressForm
+              type={AddressTypes.Work}
+              errorMessages={errorMessages.address}
+            />
+          </Accordion>
+        </div>
+      )}
+
+      {homeLibrary && <LibraryListForm libraryList={ilsLibraryList} />}
+    </>
+  );
+
   return (
     <form onSubmit={handleSubmit(submitForm)}>
-      <LocationForm errorMessage={errorMessages.location} />
-
-      <AddressForm
-        type={AddressTypes.Home}
-        errorMessages={errorMessages.address}
+      <LocationForm
+        scrollRef={scrollRef}
+        inputRadioList={[
+          {
+            value: "nyc",
+            label: "New York City (All five boroughs)",
+            ref: register(),
+            addressFields: addressFields({ work: true, homeLibrary: true }),
+          },
+          {
+            value: "nys",
+            label: "New York State (Outside NYC)",
+            ref: register(),
+            addressFields: addressFields({ work: true, homeLibrary: false }),
+          },
+          {
+            value: "us",
+            label: "United States (Visiting NYC)",
+            // For radio buttons or for grouped inputs, the validation ref config for
+            // react-hook-form goes in the last input element.
+            ref: register({
+              required: errorMessages.location,
+            }),
+            addressFields: addressFields({ work: false, homeLibrary: false }),
+          },
+        ]}
       />
-
-      <h3>Work Address</h3>
-      <Accordion
-        id="work-address-accordion"
-        accordionLabel="Optional Fields"
-        className="work-address-accordion"
-      >
-        <AddressForm
-          type={AddressTypes.Work}
-          errorMessages={errorMessages.address}
-        />
-      </Accordion>
-
-      <LibraryListForm libraryList={ilsLibraryList} />
 
       <RoutingLinks
         previous={{ url: "/library-card/personal?newCard=true" }}

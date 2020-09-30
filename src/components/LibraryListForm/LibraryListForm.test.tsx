@@ -30,14 +30,9 @@ describe("LibraryListForm", () => {
       </TestProviderWrapper>
     );
 
-    expect(screen.getByLabelText("Home Library:")).toBeInTheDocument();
+    expect(screen.getByLabelText("Select a home library:")).toBeInTheDocument();
     // "textbox" is the role for the input element.
     expect(screen.getByRole("textbox")).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "Select your home library from the list. Start by typing the name of the library."
-      )
-    ).toBeInTheDocument();
   });
 
   test("it updates the selected value from the dropdown", async () => {
