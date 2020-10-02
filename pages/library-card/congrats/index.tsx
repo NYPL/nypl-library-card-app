@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import ConfirmationGraphic from "../../../src/components/ConfirmationGraphic";
 
 function ConfirmationPage() {
   return (
@@ -6,8 +8,11 @@ function ConfirmationPage() {
       <h2>Congratulations! You now have an NYPL digital library card.</h2>
       <p>
         You will receive a confirmation email with all of the details of your
-        new card, plus information about what you can access.
+        new card, plus information about what you can access.{" "}
+        <a href="#">Learn more</a>.
       </p>
+
+      <ConfirmationGraphic />
 
       <h3>SimplyE: NYPL&apos;s E-Reader App</h3>
       <p>Lorem ipsum</p>
