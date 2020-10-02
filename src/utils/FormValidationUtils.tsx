@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable no-prototype-builtins */
 import React from "react";
 
 function isDate(

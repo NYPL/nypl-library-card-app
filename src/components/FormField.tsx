@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from "react";
 import {
   Label,
@@ -10,7 +9,6 @@ import {
 interface FormFieldProps {
   id: string;
   label: string;
-  type: string;
   fieldName: string;
   errorState?: {};
   className?: string;
@@ -32,7 +30,6 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
     {
       id,
       label,
-      type,
       fieldName,
       errorState = {},
       className = "",

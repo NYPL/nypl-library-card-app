@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
@@ -58,7 +57,7 @@ const LocationAddressContainer = ({
         });
       })
       .catch((error) => {
-        let value: AddressResponse = {
+        const value: AddressResponse = {
           home: {} as AddressRenderType,
           work: {} as AddressRenderType,
         };

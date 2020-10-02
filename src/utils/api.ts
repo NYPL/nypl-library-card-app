@@ -14,6 +14,7 @@ import {
   AddressResponse,
   AddressRenderType,
   ErrorResponse,
+  FormAPISubmission,
 } from "../interfaces";
 import {
   constructAddresses,
@@ -62,7 +63,7 @@ export const constructApiHeaders = (token: string) => ({
  * Returns if the auth token's expiration time is less than a certain time
  * limit, which defaults to 5 minutes.
  */
-const isTokenExpiring = (
+export const isTokenExpiring = (
   expirationTime,
   timeThreshold = 5,
   type = "minutes"
@@ -70,19 +71,35 @@ const isTokenExpiring = (
 
 // App-level cache object for API token related variables to be used in
 // `initializeAppAuth` and `createPatron`.
-const app = {};
+export const app = {};
 
-export async function initializeAppAuth(req, res) {
+/**
+ * initializeAppAuth
+ * This function makes an API call to the NYPL Auth API endpoint to get a valid
+ * token to make requests to the NYPL Platform API. The NYPL Platform API hosts
+ * all the Card Creator endpoints. This function is called for all the nextjs
+ * API endpoints. If there is no access token available, one will requested
+ * with an API call and stored in the `app` variable. If there is a token
+ * available, but it's expiring in less than ten minutes, then make a request
+ * to get a new access token.
+ *
+ * Note: appObj is used to make testing easier.
+ */
+export async function initializeAppAuth(req, res, appObj = app) {
   logger.info("initializeAppAuth");
-  const tokenObject = app["tokenObject"];
-  const tokenExpTime = app["tokenExpTime"];
+  const tokenObject = appObj["tokenObject"];
+  const tokenExpTime = appObj["tokenExpTime"];
   const minuteExpThreshold = 10;
 
-  if (!tokenObject) {
+  // There's no token object at all. This is the initial case before the first
+  // API call. Let's request one and store it.
+  if (!tokenObject?.access_token) {
     return axios
       .post(config.api.oauth, qs.stringify(authConfig))
       .then((response) => {
         if (response.data) {
+          // Store the access token and other data. The expiration time is
+          // "3600" but we use moment to convert it to a moment date object.
           app["tokenObject"] = response.data;
           app["tokenExpTime"] = moment().add(response.data.expires_in, "s");
         } else {
@@ -104,6 +121,7 @@ export async function initializeAppAuth(req, res) {
         }
       })
       .catch((error) => {
+        // Oh no! Return the error.
         logger.error(error);
         return res
           .status(400)
@@ -118,16 +136,35 @@ export async function initializeAppAuth(req, res) {
       });
   }
 
+  // If there is an access token available but it will expire within ten
+  // minutes, then request a new acces token.
   if (
     tokenObject.access_token &&
     isTokenExpiring(tokenExpTime, minuteExpThreshold)
   ) {
+    logger.error("The access_token is expiring. Requesting a new access token");
     return axios
       .post(config.api.oauth, qs.stringify(authConfig))
       .then((response) => {
         if (response.data) {
           app["tokenObject"] = response.data;
           app["tokenExpTime"] = moment().add(response.data.expires_in, "s");
+        } else {
+          logger.error("No access_token reobtained from OAuth Service.");
+          const errorObj = {};
+          Object.assign(errorObj, {
+            oauth: "No access_token reobtained from OAuth Service.",
+          });
+          return res
+            .status(400)
+            .json(
+              constructErrorObject(
+                "no-access-token",
+                "No access_token reobtained from OAuth Service.",
+                400,
+                errorObj
+              )
+            );
         }
       })
       .catch((error) => {
@@ -156,17 +193,14 @@ export async function initializeAppAuth(req, res) {
  * that the user has the choose from, or an error from Service Objects when
  * attempting to validate the address.
  */
-function axiosAddressPost(
+export function axiosAddressPost(
   address: Address,
   isWorkAddress: boolean,
-  token: string
+  token: string,
+  validateUrl = `${config.api.validate}/address`
 ): Promise<AddressAPIResponseData> {
   return axios
-    .post(
-      `${config.api.validate}/address`,
-      { address, isWorkAddress },
-      constructApiHeaders(token)
-    )
+    .post(validateUrl, { address, isWorkAddress }, constructApiHeaders(token))
     .then((result) => {
       return {
         status: result.data.status,
@@ -194,7 +228,7 @@ function axiosAddressPost(
  * fails. To safely catch requests and return the overall data even if one
  * request fails, each request is handled by `axiosAddressPost`.
  */
-function makeAddressAPICalls(
+export function makeAddressAPICalls(
   addresses: AddressRequestData[],
   token: string
 ): Promise<AddressAPIResponseData[]> {
@@ -207,9 +241,9 @@ function makeAddressAPICalls(
  * validateAddress
  * Call the NYPL Platform API to validate an address.
  */
-export async function validateAddress(req, res) {
-  const tokenObject = app["tokenObject"];
-  if (tokenObject && tokenObject.access_token) {
+export async function validateAddress(req, res, appObj = app) {
+  const tokenObject = appObj["tokenObject"];
+  if (tokenObject && tokenObject?.access_token) {
     const token = tokenObject.access_token;
     const reqAddresses: Addresses = constructAddresses(req.body.formData);
     const addressesData = [
@@ -254,7 +288,7 @@ export async function validateAddress(req, res) {
       });
   }
   // Else return a no token error
-  res.status(500).json({
+  return res.status(500).json({
     status: 500,
     response: "The access token could not be generated.",
   });
@@ -342,10 +376,9 @@ export async function createPatron(req, res) {
     return axios
       .post(config.api.patron, patronData, constructApiHeaders(token))
       .then((result) => {
-        console.log("result", result.data);
         return res.json({
           status: result.data.status,
-          name: result.data.name,
+          name: (patronData as FormAPISubmission).name,
           ...result.data,
         });
       })
