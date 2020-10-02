@@ -66,8 +66,8 @@ const LocationForm = ({ inputRadioList, scrollRef }: LocationFormProps) => {
     const labelId = `radio-${fieldName}-${value}`;
     const inputId = `${fieldName}-${value}`;
     return (
-      <div>
-        <div key={value} className="radio-field">
+      <div key={value}>
+        <div className="radio-field">
           <Input
             className="radio-input"
             aria-labelledby={`${legendId} ${labelId}`}

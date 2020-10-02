@@ -3,29 +3,32 @@ export interface FormInputData {
   firstName: string;
   lastName: string;
   birthdate?: string;
-  ageGate?: string;
+  ageGate?: boolean;
   email: string;
   "home-line1": string;
   "home-line2": string;
   "home-city": string;
   "home-state": string;
   "home-zip": string;
-  "home-hasBeenValidated": boolean;
-  "home-isResidential": string;
-  "work-line1": string;
-  "work-line2": string;
-  "work-city": string;
-  "work-state": string;
-  "work-zip": string;
-  "work-hasBeenValidated": boolean;
-  "work-isResidential": string;
+  "home-hasBeenValidated"?: boolean;
+  "home-isResidential"?: boolean;
+  "home-county"?: string;
+  "work-line1"?: string;
+  "work-line2"?: string;
+  "work-city"?: string;
+  "work-state"?: string;
+  "work-zip"?: string;
+  "work-hasBeenValidated"?: boolean;
+  "work-isResidential"?: boolean;
+  "work-county"?: string;
   username: string;
+  usernameHasBeenValidated?: boolean;
   pin: string;
   ecommunicationsPref: boolean;
   location?: string;
   homeLibraryCode: string;
   acceptTerms: boolean;
-  agencyType: string;
+  agencyType?: string;
   policyType: string;
 }
 export interface ErrorParams {
@@ -49,12 +52,18 @@ export interface ErrorParams {
   location?: string;
 }
 
+export enum AddressTypes {
+  Home = "home",
+  Work = "work",
+}
+
 export interface Address {
   line1: string;
   line2?: string;
   city: string;
   state: string;
   zip: string;
+  county?: string;
   isResidential?: boolean;
   hasBeenValidated?: boolean;
 }
@@ -133,4 +142,37 @@ export interface LocationResponse {
   inUS: boolean;
   inNYState: boolean;
   inNYCity: boolean;
+}
+
+export interface LibraryListObject {
+  value: string;
+  label: string;
+}
+
+export interface ErrorResponse {
+  status: number;
+  response: {
+    type: string;
+    message: string;
+    details?: string;
+  };
+}
+
+export interface FormAPISubmission {
+  name?: string;
+  firstName?: string;
+  lastName?: string;
+  username: string;
+  usernameHasBeenValidated?: boolean;
+  pin: string;
+  address: Address;
+  workAddress?: Address;
+  email: string;
+  ageGate?: boolean;
+  birthdate?: string;
+  ecommunicationsPref: boolean;
+  policyType: string;
+  agencyType?: string;
+  homeLibraryCode: string;
+  acceptTerms: boolean;
 }

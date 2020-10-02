@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { isAlphanumeric } from "validator";
@@ -69,7 +68,7 @@ const UsernameValidationForm = ({
   };
   const inputValidation = (value = "") =>
     value.length >= 5 && value.length <= 25 && isAlphanumeric(value);
-  let availableClassname = usernameIsAvailable.available
+  const availableClassname = usernameIsAvailable.available
     ? "available"
     : "unavailable";
 

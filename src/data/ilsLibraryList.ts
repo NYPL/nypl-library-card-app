@@ -1,4 +1,4 @@
-import { LibraryListObject } from "../components/LibraryListForm";
+import { LibraryListObject } from "../interfaces";
 
 const ilsLibraryList: LibraryListObject[] = [
   { label: "SimplyE", value: "eb" },

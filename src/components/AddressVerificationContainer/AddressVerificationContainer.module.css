@@ -13,3 +13,8 @@
 .input {
   margin-right: 20px;
 }
+
+.work_address_container {
+  border-top: 1px solid var(--ui-gray-medium);
+  padding-top: 30px;
+}

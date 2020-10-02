@@ -4,11 +4,7 @@ import Autosuggest from "react-autosuggest";
 import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
 import { findLibraryName } from "../../utils/formDataUtils";
-
-export interface LibraryListObject {
-  value: string;
-  label: string;
-}
+import { LibraryListObject } from "../../interfaces";
 
 interface LibraryListFormProps {
   libraryList: LibraryListObject[];
