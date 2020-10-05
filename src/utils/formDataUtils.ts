@@ -242,8 +242,6 @@ const constructPatronObject = (
   }
 
   const fullName = `${firstName.trim()} ${lastName.trim()}`;
-  const boolMap = { true: true, false: false };
-  const usernameHasBeenValidatedBool = boolMap[usernameHasBeenValidated];
 
   return {
     name: fullName,
@@ -256,7 +254,7 @@ const constructPatronObject = (
     pin,
     ecommunicationsPref,
     agencyType: agencyType || config.agencyType.default,
-    usernameHasBeenValidated: usernameHasBeenValidatedBool,
+    usernameHasBeenValidated,
     policyType: policyType || "simplye",
     homeLibraryCode,
     acceptTerms,
