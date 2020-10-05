@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable @typescript-eslint/no-var-requires */
 import "@testing-library/jest-dom/extend-expect";
 
 const { JSDOM } = require("jsdom");

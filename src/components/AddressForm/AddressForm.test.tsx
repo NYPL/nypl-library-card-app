@@ -1,9 +1,9 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
-import AddressForm, { AddressTypes } from ".";
+import AddressForm from ".";
 import { TestProviderWrapper } from "../../../testHelper/utils";
-import { Address } from "../../interfaces";
+import { Address, AddressTypes } from "../../interfaces";
 
 expect.extend(toHaveNoViolations);
 
@@ -34,7 +34,7 @@ describe("AddressForm", () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  test("it passess accessibilty checks with error messages", async () => {
+  test("it passes accessibilty checks with error messages", async () => {
     const { container } = render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
         <AddressForm

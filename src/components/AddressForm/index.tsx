@@ -1,13 +1,8 @@
 import React from "react";
 import FormField from "../FormField";
-import { Address } from "../../interfaces";
+import { Address, AddressTypes } from "../../interfaces";
 import { useFormContext } from "react-hook-form";
 import useFormDataContext from "../../context/FormDataContext";
-
-export enum AddressTypes {
-  Home = "home",
-  Work = "work",
-}
 
 interface AddressFormProps {
   type: AddressTypes;

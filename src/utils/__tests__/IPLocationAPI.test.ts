@@ -1,4 +1,5 @@
-/* eslint-disable */
+/* eslint-disable @typescript-eslint/camelcase,
+@typescript-eslint/no-var-requires */
 import IPLocationAPI, { getLocationValueFromResponse } from "../IPLocationAPI";
 const requestIp = require("request-ip");
 const axios = require("axios");
@@ -16,21 +17,21 @@ describe("IPLocationAPI", () => {
   describe("inNYCBounds", () => {
     const { inNYCBounds } = IPLocationAPI;
 
-    it("should return false if the coordinates are outside NYC", () => {
+    test("should return false if the coordinates are outside NYC", () => {
       const userCoords = { lat: 41.111, long: -74.4 };
       expect(inNYCBounds(userCoords)).toEqual(false);
     });
 
-    it("should return true if the coordinates are outside NYC", () => {
+    test("should return true if the coordinates are outside NYC", () => {
       const userCoords = { lat: 40.78, long: -73.81 };
       expect(inNYCBounds(userCoords)).toEqual(true);
     });
   });
 
   describe("verifyLocation", () => {
-    let { verifyLocation } = IPLocationAPI;
+    const { verifyLocation } = IPLocationAPI;
 
-    it("returns an object for users outside US", () => {
+    test("returns an object for users outside US", () => {
       const outsideUSResponse = {
         latitude: 44,
         longitude: -76,
@@ -44,7 +45,7 @@ describe("IPLocationAPI", () => {
         inNYCity: false,
       });
     });
-    it("returns an object for users in US but outside NYS", () => {
+    test("returns an object for users in US but outside NYS", () => {
       const outsideUSResponse = {
         latitude: 44,
         longitude: -76,
@@ -58,7 +59,7 @@ describe("IPLocationAPI", () => {
         inNYCity: false,
       });
     });
-    it("returns an object for users in NYC", () => {
+    test("returns an object for users in NYC", () => {
       const outsideUSResponse = {
         latitude: 40.78,
         longitude: -73.81,
@@ -77,7 +78,7 @@ describe("IPLocationAPI", () => {
   describe("callIpStackAPI", () => {
     const { callIpStackAPI } = IPLocationAPI;
 
-    it("calls the API with the IP address and secret key", async () => {
+    test("calls the API with the IP address and secret key", async () => {
       axios.get.mockImplementation(() => Promise.resolve({}));
       const ipAddress = "ip-address";
       await callIpStackAPI(ipAddress);
@@ -88,7 +89,7 @@ describe("IPLocationAPI", () => {
       );
     });
 
-    it("returns null if there's an error with the API", async () => {
+    test("returns null if there's an error with the API", async () => {
       axios.get.mockImplementation(() =>
         Promise.reject({ response: "some error" })
       );
@@ -96,7 +97,7 @@ describe("IPLocationAPI", () => {
       expect(await callIpStackAPI("ip-address")).toEqual(null);
     });
 
-    it("returns null if the API returned an error", async () => {
+    test("returns null if the API returned an error", async () => {
       axios.get.mockImplementation(() =>
         Promise.resolve({
           success: false,
@@ -112,13 +113,13 @@ describe("IPLocationAPI", () => {
       expect(await callIpStackAPI("ip-address")).toEqual(null);
     });
 
-    it("returns null if the API returned a response with no data type", async () => {
+    test("returns null if the API returned a response with no data type", async () => {
       axios.get.mockImplementation(() => Promise.resolve({ type: undefined }));
 
       expect(await callIpStackAPI("ip-address")).toEqual(null);
     });
 
-    it("returns data on a successful response", async () => {
+    test("returns data on a successful response", async () => {
       const validResponse = {
         data: {
           type: "ipv4",
@@ -140,7 +141,7 @@ describe("IPLocationAPI", () => {
   describe("getLocationFromIP", () => {
     const { getLocationFromIP } = IPLocationAPI;
 
-    it("should return null if the API call failed", async () => {
+    test("should return null if the API call failed", async () => {
       requestIp.getClientIp.mockImplementation(() => "ip-address");
       axios.get.mockImplementation(() =>
         Promise.reject({ response: "some error" })
@@ -150,7 +151,7 @@ describe("IPLocationAPI", () => {
       expect(userLocation).toEqual({});
     });
 
-    it("should return the updated user location object", async () => {
+    test("should return the updated user location object", async () => {
       requestIp.getClientIp.mockImplementation(() => "ip-address");
       const validResponse = {
         data: {
@@ -178,13 +179,13 @@ describe("IPLocationAPI", () => {
 });
 
 describe("getLocationValueFromResponse", () => {
-  it("returns an empty string by default", () => {
+  test("returns an empty string by default", () => {
     // The geolocation API returns an empty object by default:
     const userLocationResponse = {};
     expect(getLocationValueFromResponse(userLocationResponse)).toEqual("");
   });
 
-  it("returns 'us' if that's the true option", () => {
+  test("returns 'us' if that's the true option", () => {
     const userLocationResponse = {
       inNYCity: false,
       inNYState: false,
@@ -193,7 +194,7 @@ describe("getLocationValueFromResponse", () => {
     expect(getLocationValueFromResponse(userLocationResponse)).toEqual("us");
   });
 
-  it("returns 'NYS' if that's the true option", () => {
+  test("returns 'NYS' if that's the true option", () => {
     const userLocationResponse = {
       inNYCity: false,
       inNYState: true,
@@ -202,7 +203,7 @@ describe("getLocationValueFromResponse", () => {
     expect(getLocationValueFromResponse(userLocationResponse)).toEqual("nys");
   });
 
-  it("returns 'nyc' if that's the true option", () => {
+  test("returns 'nyc' if that's the true option", () => {
     const userLocationResponse = {
       inNYCity: true,
       inNYState: true,

@@ -1,37 +1,113 @@
+/* For reference, these breakpoints are in the design system. The respective
+ * CSS variables cannot be used in the @media query so they are defined again.
+ */
+$breakpoint-small: 320px;
+// The next two are not from DS.
+$breakpoint-intermediate: 370px;
+$breakpoint-intermediate-2: 500px;
+$breakpoint-medium: 600px;
+$breakpoint-large: 960px;
+$breakpoint-xl: 1280px;
+
+.confirmation_graphic {
+  background-color: var(--ui-gray-light);
+  position: relative;
+}
+
+.image-lion {
+  position: relative;
+  font-size: 1em;
+  margin: 0 auto;
+
+  img {
+    width: 100%;
+  }
+
+  @media only screen and (min-width: $breakpoint-small) {
+    font-size: 0.8em;
+  }
+
+  @media only screen and (min-width: $breakpoint-intermediate-2) {
+    font-size: 1em;
+  }
+  @media only screen and (min-width: $breakpoint-medium) {
+    width: 80%;
+  }
+  @media only screen and (min-width: $breakpoint-large) {
+    width: 60%;
+  }
+}
+
 .background-lion {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   -webkit-background-size: contain;
   -moz-background-size: contain;
   -o-background-size: contain;
-  height: 420px;
-  padding: 45px 0 0 60px;
+  height: 100%;
+  padding: 20px 0 0 25px;
   margin: 0;
   display: grid;
-  grid-gap: 15px 5px;
-  grid-template-columns: 30% 20%;
-  grid-template-rows: 24% 38% 20%;
-  // small/mid
-  // grid-template-columns: 50% 32%;
-  // grid-template-rows: 20% 36% 20%;
-  background-color: #fff;
-  color: #444;
+  grid-gap: 10px 5px;
+  grid-template-columns: 58% 30%;
+  grid-template-rows: 20% 40% 20%;
+  background-color: transparent;
+
+  @media only screen and (min-width: $breakpoint-small) {
+    padding: 25px 0 0 30px;
+  }
+
+  @media only screen and (min-width: $breakpoint-intermediate-2) {
+    padding: 35px 0 0 40px;
+  }
+
+  @media only screen and (min-width: $breakpoint-medium) {
+    padding: 30px 0 0 40px;
+  }
+  @media only screen and (min-width: $breakpoint-large) {
+    padding: 40px 0 0 50px;
+  }
 }
 
 .grid-item {
-  font-size: 0.7em;
+  font-size: 0.6em;
   color: white;
 
+  @media only screen and (min-width: $breakpoint-intermediate) {
+    font-size: 0.8em;
+  }
+
+  @media only screen and (min-width: $breakpoint-large) {
+    font-size: 0.7em;
+  }
+
   .content {
-    margin-top: 8px;
-    font-size: 1.8em;
+    margin-top: 2px;
+    font-size: 1.7em;
+
+    @media only screen and (min-width: $breakpoint-small) {
+      margin-top: 5px;
+      font-size: 1.6em;
+    }
   }
 
   .nypl-svg {
     fill: white;
-    width: 115px;
-    margin: 0 20px;
-    float: right;
+
+    width: 90%;
+    margin-left: 15px;
+
+    @media only screen and (min-width: $breakpoint-small) {
+      width: 80%;
+    }
+    @media only screen and (min-width: $breakpoint-intermediate-2) {
+      width: 65%;
+      margin-left: 35px;
+    }
   }
 
   &.barcode-container {
@@ -47,14 +123,26 @@
 
     #barcodeCanvas {
       width: 100%;
+
+      @media only screen and (min-width: $breakpoint-xl) {
+        height: 100px;
+      }
     }
 
     .barcode {
       color: black;
       margin: 0 auto;
       position: relative;
-      font-size: 22px;
+      font-size: 2em;
       display: table;
+
+      @media only screen and (min-width: $breakpoint-intermediate-2) {
+        font-size: 1.7em;
+      }
+
+      @media only screen and (min-width: $breakpoint-large) {
+        font-size: 1.9em;
+      }
     }
   }
 }

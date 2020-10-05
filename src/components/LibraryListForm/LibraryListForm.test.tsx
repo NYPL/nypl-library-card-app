@@ -1,9 +1,9 @@
-/* eslint-disable */
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
-import LibraryListForm, { LibraryListObject } from ".";
+import LibraryListForm from ".";
 import { TestProviderWrapper } from "../../../testHelper/utils";
+import { LibraryListObject } from "../../interfaces";
 
 expect.extend(toHaveNoViolations);
 

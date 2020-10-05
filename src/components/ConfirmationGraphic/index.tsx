@@ -7,8 +7,7 @@ import useFormDataContext from "../../context/FormDataContext";
 const ConfirmationContainer: React.FC = () => {
   const { state } = useFormDataContext();
   const formResults: FormResults = state.results;
-  const { barcode, username, pin, temporary, message, name } = formResults;
-
+  const { barcode, pin, name } = formResults;
   let canvas;
   // What we want to do is render the HTML and then pick up the canvas element.
   // We can then draw a barcode on it using `bwipjs`. The ILS uses `Codabar` as
@@ -32,47 +31,37 @@ const ConfirmationContainer: React.FC = () => {
       }
     }
   }, [canvas]);
-  // This is easier, for now, to render through the component rather than
-  // through scss.
-  const bgStyles = {
-    backgroundImage: "url('../cardbg.png')",
-  };
 
   return (
-    <div className="nypl-full-width-wrapper">
-      <p className="name-message">Thank you for submitting your application.</p>
-      <div className="background-lion" style={bgStyles}>
-        <div className="grid-item">
-          MEMBER NAME
-          <div className="content">{name}</div>
-        </div>
-        <div className="grid-item">
-          <Icon
-            decorative
-            className="nypl-svg"
-            name={LogoNames["logo_nypl_negative"]}
-          />
-        </div>
-        <div className="grid-item barcode-container">
-          <canvas id="barcodeCanvas"></canvas>
-          <div className="barcode">{barcode}</div>
-        </div>
-        <div className="grid-item">
-          PIN
-          <div className="content">{pin}</div>
-        </div>
-        <div className="grid-item">
-          ISSUED
-          <div className="content">{new Date().toLocaleDateString()}</div>
+    <div className="confirmation_graphic">
+      <div className="image-lion">
+        <img src="/cardbg.png" alt="" />
+        <div className="background-lion">
+          <div className="grid-item">
+            MEMBER NAME
+            <div className="content">{name}</div>
+          </div>
+          <div className="grid-item">
+            <Icon
+              decorative
+              className="nypl-svg"
+              name={LogoNames["logo_nypl_negative"]}
+            />
+          </div>
+          <div className="grid-item barcode-container">
+            <canvas id="barcodeCanvas"></canvas>
+            <div className="barcode">{barcode}</div>
+          </div>
+          <div className="grid-item">
+            PIN
+            <div className="content">{pin}</div>
+          </div>
+          <div className="grid-item">
+            ISSUED
+            <div className="content">{new Date().toLocaleDateString()}</div>
+          </div>
         </div>
       </div>
-
-      {/* Still dummy content for now. */}
-      <ul>
-        <li>username: {username}</li>
-        <li>temporary: {`${temporary}`}</li>
-        <li>message: {message}</li>
-      </ul>
     </div>
   );
 };

@@ -6,7 +6,7 @@ function AddressVerificationPage() {
   return (
     <>
       <h2>Step 3 of 5: Address Verification</h2>
-      <h3>Please select the correct address.</h3>
+      <p>Please select the correct address.</p>
       <AddressVerificationContainer />
     </>
   );
