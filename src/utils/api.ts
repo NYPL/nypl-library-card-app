@@ -71,7 +71,7 @@ export const isTokenExpiring = (
 
 // App-level cache object for API token related variables to be used in
 // `initializeAppAuth` and `createPatron`.
-export const app = {};
+const app = {};
 
 /**
  * initializeAppAuth
@@ -102,6 +102,7 @@ export async function initializeAppAuth(req, res, appObj = app) {
           // "3600" but we use moment to convert it to a moment date object.
           app["tokenObject"] = response.data;
           app["tokenExpTime"] = moment().add(response.data.expires_in, "s");
+          return;
         } else {
           logger.error("No access_token obtained from OAuth Service.");
           const errorObj = {};
@@ -149,6 +150,7 @@ export async function initializeAppAuth(req, res, appObj = app) {
         if (response.data) {
           app["tokenObject"] = response.data;
           app["tokenExpTime"] = moment().add(response.data.expires_in, "s");
+          return;
         } else {
           logger.error("No access_token reobtained from OAuth Service.");
           const errorObj = {};
@@ -298,17 +300,18 @@ export async function validateAddress(req, res, appObj = app) {
  * validateUsername
  * Call the NYPL Platform API to validate a username.
  */
-export async function validateUsername(req, res) {
-  const tokenObject = app["tokenObject"];
-  if (tokenObject && tokenObject.access_token) {
+export async function validateUsername(
+  req,
+  res,
+  validateUrl = `${config.api.validate}/username`,
+  appObj = app
+) {
+  const tokenObject = appObj["tokenObject"];
+  if (tokenObject && tokenObject?.access_token) {
     const token = tokenObject.access_token;
     const username = req.body.username;
     return axios
-      .post(
-        `${config.api.validate}/username`,
-        { username },
-        constructApiHeaders(token)
-      )
+      .post(validateUrl, { username }, constructApiHeaders(token))
       .then((result) => {
         return res.json({
           status: result.data.status,
@@ -316,21 +319,26 @@ export async function validateUsername(req, res) {
         });
       })
       .catch((err) => {
-        res.status(err.response.status).json({
+        return res.status(err.response.status).json({
           ...err.response?.data,
         });
       });
   }
 
   // Else return a no token error
-  res.status(500).json({
+  return res.status(500).json({
     status: 500,
     response: "The access token could not be generated.",
   });
 }
 
-export async function createPatron(req, res) {
-  const tokenObject = app["tokenObject"];
+export async function createPatron(
+  req,
+  res,
+  createPatronUrl = config.api.patron,
+  appObj = app
+) {
+  const tokenObject = appObj["tokenObject"];
   if (tokenObject && tokenObject.access_token) {
     const token = tokenObject.access_token;
     const patronData = constructPatronObject(req.body);
@@ -374,7 +382,7 @@ export async function createPatron(req, res) {
     // });
 
     return axios
-      .post(config.api.patron, patronData, constructApiHeaders(token))
+      .post(createPatronUrl, patronData, constructApiHeaders(token))
       .then((result) => {
         return res.json({
           status: result.data.status,
@@ -393,7 +401,7 @@ export async function createPatron(req, res) {
           serverError = { type: "server" };
         }
 
-        res.status(err.response.status).json({
+        return res.status(err.response.status).json({
           status: err.response.status,
           response: serverError
             ? Object.assign(err.response.data, serverError)
@@ -402,7 +410,7 @@ export async function createPatron(req, res) {
       });
   }
   // Else return a no token error
-  res.status(500).json({
+  return res.status(500).json({
     status: 500,
     response: "The access token could not be generated.",
   });

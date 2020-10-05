@@ -7,9 +7,12 @@ import {
   axiosAddressPost,
   makeAddressAPICalls,
   validateAddress,
+  validateUsername,
+  createPatron,
 } from "../api";
 const axios = require("axios");
 import moment from "moment";
+import { create } from "domain";
 
 jest.mock("axios");
 let mockedReturnedJson = {};
@@ -69,29 +72,56 @@ describe("initializeAppAuth", () => {
     axios.post.mockClear();
   });
 
-  test("calls the Auth API once since there is already no access token", async () => {
+  test("it should throw an error if the Auth endpoint returned bad data", async () => {
+    const invalidResp = {
+      error: "some error",
+    };
+    axios.post.mockResolvedValue(invalidResp);
+
+    await initializeAppAuth({}, mockRes, {});
+
+    expect(axios.post).toHaveBeenCalledTimes(1);
+    expect(mockedReturnedJson).toEqual({
+      response: {
+        details: {
+          oauth: "No access_token obtained from OAuth Service.",
+        },
+        message: "No access_token obtained from OAuth Service.",
+        type: "no-access-token",
+      },
+      status: 400,
+    });
+  });
+
+  test("calls the Auth API once since there is no access token", async () => {
     const validResp = {
-      access_token: "someToken",
-      expires_in: 3600,
-      token_type: "Bearer",
-      scope: "openid",
-      id_token: "someIdToken",
+      data: {
+        access_token: "someToken",
+        expires_in: 3600,
+        token_type: "Bearer",
+        scope: "openid",
+        id_token: "someIdToken",
+      },
     };
 
     axios.post.mockResolvedValue(validResp);
-
-    await initializeAppAuth({}, mockRes);
+    const result = await initializeAppAuth({}, mockRes, {});
 
     expect(axios.post).toHaveBeenCalledTimes(1);
+    // Nothing is returned from an API call with a valid response.
+    // The token is just added to the global level `app` variable.
+    expect(result).toEqual(undefined);
   });
 
   test("shouldn't make an API call since there already is an access token", async () => {
     const validResp = {
-      access_token: "someToken",
-      expires_in: 3600,
-      token_type: "Bearer",
-      scope: "openid",
-      id_token: "someIdToken",
+      data: {
+        access_token: "someToken",
+        expires_in: 3600,
+        token_type: "Bearer",
+        scope: "openid",
+        id_token: "someIdToken",
+      },
     };
     const appObj = {
       tokenObject: { ["access_token"]: "token" },
@@ -100,18 +130,23 @@ describe("initializeAppAuth", () => {
 
     axios.post.mockResolvedValue(validResp);
 
-    await initializeAppAuth({}, mockRes, appObj);
+    const result = await initializeAppAuth({}, mockRes, appObj);
 
     expect(axios.post).toHaveBeenCalledTimes(0);
+    // Nothing is returned from an API call with a valid response.
+    // The token is just added to the global level `app` variable.
+    expect(result).toEqual(undefined);
   });
 
   test("should make an API call if there's an access token but it's about to expire", async () => {
     const validResp = {
-      access_token: "someToken",
-      expires_in: 3600,
-      token_type: "Bearer",
-      scope: "openid",
-      id_token: "someIdToken",
+      data: {
+        access_token: "someToken",
+        expires_in: 3600,
+        token_type: "Bearer",
+        scope: "openid",
+        id_token: "someIdToken",
+      },
     };
     const appObj = {
       tokenObject: { ["access_token"]: "token" },
@@ -120,9 +155,12 @@ describe("initializeAppAuth", () => {
 
     axios.post.mockResolvedValue(validResp);
 
-    await initializeAppAuth({}, mockRes, appObj);
+    const result = await initializeAppAuth({}, mockRes, appObj);
 
     expect(axios.post).toHaveBeenCalledTimes(1);
+    // Nothing is returned from an API call with a valid response.
+    // The token is just added to the global level `app` variable.
+    expect(result).toEqual(undefined);
   });
 });
 
@@ -282,19 +320,6 @@ describe("validateAddress", () => {
     axios.post.mockClear();
   });
 
-  test("it does not make an API call without an access token", async () => {
-    const requestBody = {
-      body: {
-        formData: {},
-      },
-    };
-    axios.post.mockResolvedValue({});
-
-    await validateAddress(requestBody, mockRes);
-
-    expect(axios.post).toHaveBeenCalledTimes(0);
-  });
-
   test("it returns validated address responses from the API calls", async () => {
     const appObj = {
       tokenObject: { ["access_token"]: "token" },
@@ -317,6 +342,8 @@ describe("validateAddress", () => {
     axios.post.mockResolvedValueOnce({
       data: {
         status: 200,
+        type: "valid-address",
+        cardType: "standard",
         address: {
           line1: "111 1st St.",
           city: "New York",
@@ -325,7 +352,7 @@ describe("validateAddress", () => {
           isResidential: true,
           hasBeenValidated: true,
         },
-        addresses: [],
+        originalAddress: {},
         message: "",
         reason: "",
       },
@@ -333,6 +360,8 @@ describe("validateAddress", () => {
     axios.post.mockResolvedValueOnce({
       data: {
         status: 200,
+        type: "valid-address",
+        cardType: "standard",
         address: {
           line1: "476 5th Avenue",
           city: "New York",
@@ -341,7 +370,7 @@ describe("validateAddress", () => {
           isResidential: true,
           hasBeenValidated: true,
         },
-        addresses: [],
+        originalAddress: {},
         message: "",
         reason: "",
       },
@@ -362,7 +391,7 @@ describe("validateAddress", () => {
           isResidential: true,
           hasBeenValidated: true,
         },
-        addresses: [],
+        addresses: undefined,
         message: "",
         reason: "",
       },
@@ -375,10 +404,259 @@ describe("validateAddress", () => {
           isResidential: true,
           hasBeenValidated: true,
         },
-        addresses: [],
+        addresses: undefined,
         message: "",
         reason: "",
       },
+    });
+  });
+
+  test("it does not make an API call without an access token", async () => {
+    const requestBody = {
+      body: {
+        formData: {},
+      },
+    };
+    axios.post.mockResolvedValue({});
+
+    await validateAddress(requestBody, mockRes, {});
+
+    expect(axios.post).toHaveBeenCalledTimes(0);
+  });
+});
+
+describe("validateUsername", () => {
+  beforeEach(() => {
+    axios.post.mockClear();
+  });
+
+  test("it should not make an API call if there is no oauth token", async () => {
+    const requestBody = {
+      body: {
+        username: "tomnook42",
+      },
+    };
+    axios.post.mockResolvedValue({
+      data: {
+        status: 200,
+        type: "available-username",
+        cardType: "standard",
+        message: "This username is available.",
+      },
+    });
+    await validateUsername(requestBody, mockRes, "url", {});
+
+    expect(axios.post).toHaveBeenCalledTimes(0);
+  });
+
+  test("it should make an API call and return the data from a successful call", async () => {
+    const appObj = {
+      tokenObject: { ["access_token"]: "token" },
+      tokenExpTime: moment().add(4000, "s"),
+    };
+    const requestBody = {
+      body: {
+        username: "tomnook42",
+      },
+    };
+    axios.post.mockResolvedValue({
+      data: {
+        status: 200,
+        type: "available-username",
+        cardType: "standard",
+        message: "This username is available.",
+      },
+    });
+
+    await validateUsername(requestBody, mockRes, "url", appObj);
+
+    expect(axios.post).toHaveBeenCalledTimes(1);
+    expect(axios.post).toHaveBeenCalledWith(
+      "url",
+      { username: "tomnook42" },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer token",
+        },
+        timeout: 10000,
+      }
+    );
+    expect(mockedReturnedJson).toEqual({
+      status: 200,
+      type: "available-username",
+      cardType: "standard",
+      message: "This username is available.",
+    });
+  });
+
+  test("it should make an API call and return data from an unsuccessful call", async () => {
+    const appObj = {
+      tokenObject: { ["access_token"]: "token" },
+      tokenExpTime: moment().add(4000, "s"),
+    };
+    const requestBody = {
+      body: {
+        username: "tomnook42",
+      },
+    };
+    axios.post.mockRejectedValue({
+      response: {
+        status: 400,
+        data: {
+          type: "unavailable-username",
+          cardType: null,
+          message: "This username is unavailable. Please try another.",
+          detail: {},
+        },
+      },
+    });
+
+    await validateUsername(requestBody, mockRes, "url", appObj);
+
+    expect(axios.post).toHaveBeenCalledTimes(1);
+    expect(axios.post).toHaveBeenCalledWith(
+      "url",
+      { username: "tomnook42" },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer token",
+        },
+        timeout: 10000,
+      }
+    );
+    expect(mockedReturnedJson).toEqual({
+      type: "unavailable-username",
+      cardType: null,
+      message: "This username is unavailable. Please try another.",
+      detail: {},
+    });
+  });
+});
+
+describe("createPatron", () => {
+  beforeEach(() => {
+    axios.post.mockClear();
+  });
+
+  test("it should not make an API call if there is no oauth token", async () => {
+    const requestBody = {};
+    axios.post.mockResolvedValue({});
+    await validateUsername(requestBody, mockRes, "url", {});
+
+    expect(axios.post).toHaveBeenCalledTimes(0);
+  });
+
+  test("it should make an API call and return the data from a successful call", async () => {
+    const appObj = {
+      tokenObject: { ["access_token"]: "token" },
+      tokenExpTime: moment().add(4000, "s"),
+    };
+    const requestBody = {
+      body: {
+        ecommunicationsPref: true,
+        policyType: "webApplicant",
+        firstName: "Tom",
+        lastName: "Nook",
+        birthdate: "01/01/1988",
+        email: "tomnook@nypl.org",
+        location: "nyc",
+        homeLibraryCode: "ch",
+        "home-line1": "111 1st St",
+        "home-line2": "",
+        "home-city": "New York",
+        "home-state": "NY",
+        "home-zip": "10018-2788",
+        "work-line1": "476 5th Ave",
+        "work-line2": "",
+        "work-city": "New York",
+        "work-state": "NY",
+        "work-zip": "10018-2788",
+        "home-county": "New York",
+        "home-isResidential": true,
+        "home-hasBeenValidated": true,
+        "work-county": "New York",
+        "work-isResidential": false,
+        "work-hasBeenValidated": true,
+        username: "tomnook42",
+        pin: "1234",
+        acceptTerms: true,
+      },
+    };
+    axios.post.mockResolvedValue({
+      data: {
+        status: 200,
+        type: "card-granted",
+        link: "https://link.com/to/ils/1234567",
+        barcode: "111122222222345",
+        username: "tomnook42",
+        pin: "1234",
+        temporary: true,
+        message: "The library card will be a standard library card.",
+      },
+    });
+
+    await createPatron(requestBody, mockRes, "url", appObj);
+
+    expect(axios.post).toHaveBeenCalledTimes(1);
+    expect(axios.post).toHaveBeenCalledWith(
+      "url",
+      // Note: the following is the result of passing `requestBody.body` into
+      // the `constructPatronObject` function which is tested in
+      // `formDataUtils.test.ts`.
+      {
+        name: "Tom Nook",
+        email: "tomnook@nypl.org",
+        birthdate: "01/01/1988",
+        ageGate: undefined,
+        address: {
+          line1: "111 1st St",
+          line2: "",
+          city: "New York",
+          state: "NY",
+          zip: "10018-2788",
+          county: "New York",
+          isResidential: true,
+          hasBeenValidated: true,
+        },
+        workAddress: {
+          line1: "476 5th Ave",
+          line2: "",
+          city: "New York",
+          state: "NY",
+          zip: "10018-2788",
+          county: "New York",
+          isResidential: false,
+          hasBeenValidated: true,
+        },
+        username: "tomnook42",
+        pin: "1234",
+        ecommunicationsPref: true,
+        agencyType: "198",
+        usernameHasBeenValidated: undefined,
+        policyType: "webApplicant",
+        homeLibraryCode: "ch",
+        acceptTerms: true,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer token",
+        },
+        timeout: 10000,
+      }
+    );
+    expect(mockedReturnedJson).toEqual({
+      status: 200,
+      name: "Tom Nook",
+      type: "card-granted",
+      link: "https://link.com/to/ils/1234567",
+      barcode: "111122222222345",
+      username: "tomnook42",
+      pin: "1234",
+      temporary: true,
+      message: "The library card will be a standard library card.",
     });
   });
 });
