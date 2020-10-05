@@ -85,10 +85,9 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
     <FormField
       id="librarylist-autosuggest"
       type="text"
-      label="Home Library:"
+      label="Select a home library:"
       fieldName="homeLibraryCode"
       isRequired={false}
-      instructionText="Select your home library from the list. Start by typing the name of the library."
       {...inputProps}
     />
   );
@@ -104,16 +103,25 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   );
 
   return (
-    <Autosuggest
-      suggestions={suggestions}
-      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-      onSuggestionsClearRequested={onSuggestionsClearRequested}
-      getSuggestionValue={getSuggestionValue}
-      renderSuggestion={renderSuggestion}
-      inputProps={inputProps}
-      renderInputComponent={renderInputComponent}
-      renderSuggestionsContainer={renderSuggestionsContainer}
-    />
+    <>
+      <h3>Home Library</h3>
+      <p>
+        Choosing a home library will help us make sure you&apos;re getting
+        everything you need from a branch that&apos;s most convenient for you.
+        You can change your home library at any point through your account.
+      </p>
+      <p>Skipping this step will automatically default a home library.</p>
+      <Autosuggest
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+        inputProps={inputProps}
+        renderInputComponent={renderInputComponent}
+        renderSuggestionsContainer={renderSuggestionsContainer}
+      />
+    </>
   );
 };
 

@@ -27,10 +27,5 @@ describe("ReviewPage", () => {
     expect(
       screen.getByText("Step 5 of 5: Review Your Information")
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "You have entered the information listed below. Please review before submitting."
-      )
-    ).toBeInTheDocument();
   });
 });

@@ -1,0 +1,27 @@
+.form_section {
+  border-top: 1px solid var(--ui-gray-medium);
+  margin: 40px 0 0 0;
+  padding: 40px 0 0 0;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.field {
+  margin: 15px 0;
+  flex: 1 1 100%;
+}
+.multi_field {
+  margin: 15px 0;
+  flex: 1 1 50%;
+}
+.title {
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.work_title {
+  width: 100%;
+  border-top: 1px solid var(--ui-gray-medium);
+  padding-top: 20px;
+}

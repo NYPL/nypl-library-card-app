@@ -36,25 +36,6 @@ describe("Confirmation", () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  test("renders with the basic form submission result displaying", () => {
-    render(
-      <FormDataContextProvider initState={formState}>
-        <ConfirmationContainer />
-      </FormDataContextProvider>
-    );
-
-    expect(
-      screen.getByText("Thank you for submitting your application.")
-    ).toBeInTheDocument();
-    expect(screen.getByText("username: tomnook")).toBeInTheDocument();
-    expect(screen.getByText("temporary: false")).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "message: The library card will be a standard library card."
-      )
-    ).toBeInTheDocument();
-  });
-
   test("renders the NYPL card info", () => {
     render(
       <FormDataContextProvider initState={formState}>

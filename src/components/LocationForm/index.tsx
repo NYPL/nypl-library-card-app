@@ -10,23 +10,26 @@ import useIPLocationContext from "../../context/IPLocationContext";
 import { getLocationValueFromResponse } from "../../utils/IPLocationAPI";
 
 interface LocationFormProps {
-  errorMessage: string;
-  // Currently not used but will be set in the future and that
-  // value will be the default.
-  ipLocation?: string;
+  scrollRef?: React.RefObject<HTMLHeadingElement>;
+  inputRadioList: LocationRadioInput[];
 }
 
-interface LocationInput {
+interface LocationRadioInput {
   value: string;
   label: string;
   ref: (ref: HTMLInputElement) => void;
+  addressFields: any;
 }
 
 /**
  * LocationForm
  * Renders a radio button form to select a user location.
  */
-const LocationForm = ({ errorMessage }: LocationFormProps) => {
+const LocationForm = ({ inputRadioList, scrollRef }: LocationFormProps) => {
+  if (!inputRadioList?.length) {
+    return null;
+  }
+
   // Get the user's location from the geolocation API based on their IP address.
   const userLocationResponse = useIPLocationContext();
   // Convert the response to the default value that should be selected in the
@@ -37,61 +40,59 @@ const LocationForm = ({ errorMessage }: LocationFormProps) => {
     userLocationResponse
   );
   const [stateValue, setStateValue] = useState(defaultUserLocation);
-  const { register, errors } = useFormContext();
+  const { errors } = useFormContext();
   const fieldName = "location";
   const legendId = `radio-legend-${fieldName}`;
   const errorText = errors?.location?.message;
 
-  const onChange = (e) => setStateValue(e.target?.value);
-  const locationInputs: LocationInput[] = [
-    {
-      value: "nyc",
-      label: "New York City (All five boroughs)",
-      ref: register(),
-    },
-    {
-      value: "nys",
-      label: "New York State (Outside NYC)",
-      ref: register(),
-    },
-    {
-      value: "us",
-      label: "United States (Visiting NYC)",
-      // For radio buttons or for grouped inputs, the validation ref config for
-      // react-hook-form goes in the last input element.
-      ref: register({
-        required: errorMessage,
-      }),
-    },
-  ];
-  const createInput = (value, label, ref) => {
+  const onChange = (e) => {
+    // We want to scroll to the page heading so the page doesn't jump around
+    // too much when rendering a new set of address fields when a radio input
+    // option is selected.
+    if (scrollRef?.current) {
+      window.scrollTo(0, scrollRef.current.offsetTop);
+    }
+    setStateValue(e.target?.value);
+  };
+  /**
+   * createInputSection
+   * From a `LocationRadioInput` object, this function will return a section of
+   * a location option along with its relevant address fields to render. This
+   * function will always render a radio input element but will only render its
+   * address fields if it is checked.
+   */
+  const createInputSection = ({ value, label, ref, addressFields }) => {
     const checked = value === stateValue;
     const labelId = `radio-${fieldName}-${value}`;
     const inputId = `${fieldName}-${value}`;
     return (
-      <div key={value} className="radio-field">
-        <Input
-          className="radio-input"
-          aria-labelledby={`${legendId} ${labelId}`}
-          id={inputId}
-          type={InputTypes.radio}
-          attributes={{
-            name: fieldName,
-            "aria-checked": checked,
-            checked: checked,
-            onChange,
-          }}
-          value={value}
-          ref={ref}
-        />
-        <Label id={labelId} htmlFor={`input-${inputId}`}>
-          {label}
-        </Label>
+      <div>
+        <div key={value} className="radio-field">
+          <Input
+            className="radio-input"
+            aria-labelledby={`${legendId} ${labelId}`}
+            id={inputId}
+            type={InputTypes.radio}
+            attributes={{
+              name: fieldName,
+              "aria-checked": checked,
+              checked: checked,
+              onChange,
+            }}
+            value={value}
+            ref={ref}
+          />
+          <Label id={labelId} htmlFor={`input-${inputId}`}>
+            {label}
+          </Label>
+        </div>
+
+        {checked && addressFields}
       </div>
     );
   };
-  const createRadioForm = (inputList: LocationInput[]) =>
-    inputList.map((input) => createInput(input.value, input.label, input.ref));
+  const createRadioForm = (inputList: LocationRadioInput[]) =>
+    inputList.map((input) => createInputSection(input));
 
   return (
     <>
@@ -100,10 +101,10 @@ const LocationForm = ({ errorMessage }: LocationFormProps) => {
       )}
       <fieldset>
         <legend id={legendId}>
-          I live, work, go to school, or pay property taxes at an address in:
+          I live, work, or go to school:
           <span className="required-field"> Required</span>
         </legend>
-        {createRadioForm(locationInputs)}
+        {createRadioForm(inputRadioList)}
       </fieldset>
     </>
   );

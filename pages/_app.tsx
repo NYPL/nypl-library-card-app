@@ -12,6 +12,7 @@ import ApplicationContainer from "../src/components/ApplicationContainer";
 import IPLocationAPI from "../src/utils/IPLocationAPI";
 import enableAxe from "../src/utils/axe";
 import { ParamsContextProvider } from "../src/context/ParamsContext";
+import useRouterScroll from "../src/hooks/useRouterScroll";
 
 interface MyAppProps {
   Component: any;
@@ -38,6 +39,7 @@ if (appConfig.useAxe === "true" && !isServerRendered()) {
 }
 
 function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
+  useRouterScroll({ top: 640 });
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
