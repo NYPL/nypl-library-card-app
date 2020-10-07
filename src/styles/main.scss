@@ -6,57 +6,6 @@
 @import 'utils/variables';
 
 // Components
-@import 'components/errorBox';
 @import 'components/autosuggest';
 @import 'components/congrats_page';
-
-// Global rules
-.content-primary {
-  margin: 30px 0;
-}
-
-.form-field {
-  margin: 10px 0;
-}
-
-fieldset {
-  border: none;
-  margin: 0;
-  padding: 0;
-
-  .radio-input {
-    width: auto;
-  }
-
-  .radio-field {
-    margin: 10px 0;
-    border: 1px solid var(--ui-gray-medium);
-    padding: 20px;
-
-    label {
-      display: inline-block;
-      margin: 0 20px;
-    }
-  }
-}
-
-.required-field {
-  color: var(--ui-error);
-  font-size: 0.9rem;
-  font-weight: 400;
-}
-
-.username-helper-text {
-  margin: 10px 0;
-
-  &.available {
-    // From DS
-    // $nypl-green-dark: #497629
-    color: #497629;
-  }
-  &.unavailable {
-    // From DS
-    // $nypl-red-regular: #d0343a;
-    color: #d0343a;
-  }
-}
+@import 'components/globals';

@@ -33,7 +33,7 @@ const ConfirmationContainer: React.FC = () => {
   }, [canvas]);
 
   return (
-    <div className="confirmation_graphic">
+    <div className="confirmation-graphic">
       <div className="image-lion">
         <img src="/cardbg.png" alt="" />
         <div className="background-lion">

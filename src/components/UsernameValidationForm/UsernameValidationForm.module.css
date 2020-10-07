@@ -1,0 +1,11 @@
+.usernameHelperText {
+  margin: 10px 0;
+}
+
+.usernameAvailable {
+  color: var(--ui-success);
+}
+
+.usernameUnavailable {
+  color: var(--ui-error);
+}

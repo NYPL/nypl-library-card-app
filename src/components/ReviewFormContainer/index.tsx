@@ -142,11 +142,11 @@ function ReviewFormContainer() {
    */
   const renderPersonalInformationValues = () => (
     <div className={styles.container}>
-      <div className={styles.multi_field}>
+      <div className={styles.multiField}>
         <div className={styles.title}>First Name</div>
         <div>{formValues.firstName}</div>
       </div>
-      <div className={styles.multi_field}>
+      <div className={styles.multiField}>
         <div className={styles.title}>Last Name</div>
         <div>{formValues.lastName}</div>
       </div>
@@ -241,11 +241,11 @@ function ReviewFormContainer() {
           <div>{formValues["home-line2"]}</div>
         </div>
       )}
-      <div className={styles.multi_field}>
+      <div className={styles.multiField}>
         <div className={styles.title}>City</div>
         <div>{formValues["home-city"]}</div>
       </div>
-      <div className={styles.multi_field}>
+      <div className={styles.multiField}>
         <div className={styles.title}>State</div>
         <div>{formValues["home-state"]}</div>
       </div>
@@ -255,7 +255,7 @@ function ReviewFormContainer() {
       </div>
       {formValues["work-line1"] && (
         <>
-          <h4 className={styles.work_title}>Work</h4>
+          <h4 className={styles.workTitle}>Work</h4>
           <div className={styles.field}>
             <div className={styles.title}>Street Address</div>
             <div>{formValues["home-line1"]}</div>
@@ -266,11 +266,11 @@ function ReviewFormContainer() {
               <div>{formValues["home-line2"]}</div>
             </div>
           )}
-          <div className={styles.multi_field}>
+          <div className={styles.multiField}>
             <div className={styles.title}>City</div>
             <div>{formValues["home-city"]}</div>
           </div>
-          <div className={styles.multi_field}>
+          <div className={styles.multiField}>
             <div className={styles.title}>State</div>
             <div>{formValues["home-state"]}</div>
           </div>
@@ -296,7 +296,7 @@ function ReviewFormContainer() {
 
   return (
     <>
-      <div className={styles.form_section}>
+      <div className={styles.formSection}>
         <h3>Personal Information</h3>
         {!editPersonalInfoFlag ? (
           renderPersonalInformationValues()
@@ -308,12 +308,12 @@ function ReviewFormContainer() {
         )}
       </div>
 
-      <div className={styles.form_section}>
+      <div className={styles.formSection}>
         <h3>Address</h3>
         {renderAddressValues()}
       </div>
 
-      <div className={styles.form_section}>
+      <div className={styles.formSection}>
         <h3>Create Your Account</h3>
         {!editAccountInfoFlag ? (
           renderAccountValues()
@@ -325,7 +325,7 @@ function ReviewFormContainer() {
         )}
       </div>
 
-      <div className={styles.form_section}>
+      <div className={styles.formSection}>
         After you submit your application, you will see a confirmation page with
         a temporary account number, and you will be able to log in and request
         books and materials. To get your card, follow the confirmation page
