@@ -5,6 +5,7 @@ import {
 } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
 import useFormDataContext from "../../context/FormDataContext";
+import styles from "./AcceptTermsForm.module.css";
 
 /**
  * AcceptTermsForm
@@ -42,6 +43,7 @@ const AcceptTermsForm = () => {
       </p>
 
       <Checkbox
+        className={styles.checkbox}
         checkboxId="acceptTermsCheckbox"
         name="acceptTerms"
         labelOptions={acceptTermsLabelOptions}

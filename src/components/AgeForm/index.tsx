@@ -1,11 +1,11 @@
 import React from "react";
-import FormField from "../FormField";
-import { isDate } from "../../utils/FormValidationUtils";
 import {
   Checkbox,
   HelperErrorText,
 } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
+import FormField from "../FormField";
+import { isDate } from "../../utils/FormValidationUtils";
 import useFormDataContext from "../../context/FormDataContext";
 
 interface AgeFormProps {
@@ -36,7 +36,6 @@ const AgeForm = ({
   const birthdateField = (
     <FormField
       id="patronBirthdate"
-      type="text"
       instructionText="MM/DD/YYYY, including slashes"
       label="Date of Birth"
       fieldName="birthdate"

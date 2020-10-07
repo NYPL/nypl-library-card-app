@@ -94,7 +94,6 @@ const UsernameValidationForm = ({
     <>
       <FormField
         id="patronUsername"
-        type="text"
         label="Username"
         fieldName="username"
         instructionText="5-25 alphanumeric characters"

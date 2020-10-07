@@ -80,7 +80,6 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   const renderInputComponent = (inputProps) => (
     <FormField
       id="librarylist-autosuggest"
-      type="text"
       label="Select a home library:"
       fieldName="homeLibraryCode"
       isRequired={false}
