@@ -31,7 +31,7 @@ function HomePage() {
         </a>{" "}
         and agree to our{" "}
         <a href="https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations">
-          and Regulations
+          Rules and Regulations
         </a>
         . To learn more about The Library’s use of personal information, please
         read our{" "}
