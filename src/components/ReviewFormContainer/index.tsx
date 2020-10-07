@@ -9,6 +9,7 @@ import {
   Input,
   Label,
   InputTypes,
+  Checkbox,
 } from "@nypl/design-system-react-components";
 import isEmpty from "lodash/isEmpty";
 import useFormDataContext from "../../../src/context/FormDataContext";
@@ -37,6 +38,14 @@ function ReviewFormContainer() {
   // Flags to set a section to editable or read-only.
   const [editPersonalInfoFlag, setEditPersonalInfoFlag] = useState(false);
   const [editAccountInfoFlag, setEditAccountInfoFlag] = useState(false);
+
+  const [showPin, setShowPin] = useState(false);
+
+  const checkBoxLabelOptions = {
+    id: "showPinId",
+    labelContent: <>Show PIN</>,
+  };
+  const updateShowPin = () => setShowPin(!showPin);
 
   // Will run whenever the `errorObj` has changes, specifically for
   // bad requests.
@@ -170,7 +179,17 @@ function ReviewFormContainer() {
       </div>
       <div className={styles.field}>
         <div className={styles.title}>PIN</div>
-        <div>{formValues.pin}</div>
+        <div>{showPin ? formValues.pin : "****"}</div>
+        <Checkbox
+          checkboxId="showPINReview"
+          name="showPINReview"
+          labelOptions={checkBoxLabelOptions}
+          isSelected={false}
+          attributes={{
+            defaultChecked: showPin,
+            onClick: updateShowPin,
+          }}
+        />
       </div>
       {editButton(setEditAccountInfoFlag)}
     </div>

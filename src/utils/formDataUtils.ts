@@ -18,6 +18,7 @@ const errorMessages = {
   email: "Please enter a valid email address.",
   username: "Username must be between 5-25 alphanumeric characters.",
   pin: "Please enter a 4-digit PIN.",
+  verifyPin: "The two PINs don't match.",
   location: "Please select an address option.",
   address: {
     line1: "Please enter a valid street address.",
