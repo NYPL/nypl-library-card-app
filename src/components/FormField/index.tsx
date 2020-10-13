@@ -7,6 +7,7 @@ import {
   HelperErrorText,
   Checkbox,
 } from "@nypl/design-system-react-components";
+import styles from "./FormField.module.css";
 
 interface FormFieldProps {
   id: string;
@@ -72,7 +73,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
       );
     }
     return (
-      <div className={`form-field ${className}`}>
+      <div className={`${styles.formField} ${className}`}>
         <Label
           htmlFor={`input-${id}`}
           id={`${id}-label`}

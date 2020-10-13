@@ -5,6 +5,7 @@ import { Button } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
 import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
+import styles from "./UsernameValidationForm.module.css";
 
 interface UsernameValidationFormProps {
   errorMessage?: string;
@@ -69,8 +70,8 @@ const UsernameValidationForm = ({
   const inputValidation = (value = "") =>
     value.length >= 5 && value.length <= 25 && isAlphanumeric(value);
   const availableClassname = usernameIsAvailable.available
-    ? "available"
-    : "unavailable";
+    ? styles.usernameAvailable
+    : styles.usernameUnavailable;
 
   /**
    * renderButton
@@ -108,7 +109,7 @@ const UsernameValidationForm = ({
       {renderButton()}
       {usernameIsAvailable.message && (
         <>
-          <div className={`username-helper-text ${availableClassname}`}>
+          <div className={`${styles.usernameHelperText} ${availableClassname}`}>
             {usernameIsAvailable.message}
           </div>
           <input

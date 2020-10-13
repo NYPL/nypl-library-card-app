@@ -1,0 +1,51 @@
+// Global rules
+
+// Override for DS layout class
+.content-primary {
+  margin: 30px 0;
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  .radio-input {
+    width: auto;
+  }
+
+  .radio-field {
+    margin: 10px 0;
+    border: 1px solid var(--ui-gray-medium);
+    padding: 20px;
+
+    label {
+      display: inline-block;
+      margin: 0 20px;
+    }
+  }
+}
+
+.checkbox {
+  margin-top: 20px;
+}
+
+// Override for DS classes for mobile under 400px.
+@media only screen and (max-width: 400px) {
+  // Accordions used for addresses
+  .accordion {
+    .accordion__content {
+      padding: 10px;
+    }
+  }
+
+  // For input groups that are single column on mobile but two columns
+  // on desktop, such as the first and last name input fields.
+  .input-group {
+    display: inline;
+  }
+
+  .input-group > *:first-child {
+    margin-right: 0px;
+  }
+}

@@ -1,4 +1,4 @@
-.multiple_address_list {
+.multipleAddressList {
   display: flex;
   padding: 0;
   list-style: none;
@@ -14,7 +14,13 @@
   margin-right: 20px;
 }
 
-.work_address_container {
+.workAddressContainer {
   border-top: 1px solid var(--ui-gray-medium);
   padding-top: 30px;
+}
+
+@media only screen and (max-width: 400px) {
+  .multipleAddressList {
+    display: inline-block;
+  }
 }

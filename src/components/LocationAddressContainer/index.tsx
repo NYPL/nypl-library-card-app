@@ -111,7 +111,7 @@ const LocationAddressContainer = ({
     homeLibrary: boolean;
   }) => (
     <>
-      <div className={styles.address_section}>
+      <div className={styles.addressSection}>
         <h3>Home Address</h3>
         <Accordion
           id="home-address-accordion"
@@ -125,7 +125,7 @@ const LocationAddressContainer = ({
       </div>
 
       {work && (
-        <div className={styles.address_section}>
+        <div className={styles.addressSection}>
           <h3>Work Address</h3>
           <Accordion
             id="work-address-accordion"

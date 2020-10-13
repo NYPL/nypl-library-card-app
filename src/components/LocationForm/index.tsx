@@ -100,10 +100,7 @@ const LocationForm = ({ inputRadioList, scrollRef }: LocationFormProps) => {
         <HelperErrorText isError={errorText}>{errorText}</HelperErrorText>
       )}
       <fieldset>
-        <legend id={legendId}>
-          I live, work, or go to school:
-          <span className="required-field"> Required</span>
-        </legend>
+        <legend id={legendId}>I live, work, or go to school:</legend>
         {createRadioForm(inputRadioList)}
       </fieldset>
     </>

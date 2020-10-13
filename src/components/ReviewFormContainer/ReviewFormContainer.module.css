@@ -1,4 +1,4 @@
-.form_section {
+.formSection {
   border-top: 1px solid var(--ui-gray-medium);
   margin: 40px 0 0 0;
   padding: 40px 0 0 0;
@@ -12,7 +12,7 @@
   margin: 15px 0;
   flex: 1 1 100%;
 }
-.multi_field {
+.multiField {
   margin: 15px 0;
   flex: 1 1 50%;
 }
@@ -20,8 +20,14 @@
   font-weight: 400;
   margin-bottom: 10px;
 }
-.work_title {
+.workTitle {
   width: 100%;
   border-top: 1px solid var(--ui-gray-medium);
   padding-top: 20px;
+}
+
+@media only screen and (max-width: 400px) {
+  .container {
+    display: inline-block;
+  }
 }
