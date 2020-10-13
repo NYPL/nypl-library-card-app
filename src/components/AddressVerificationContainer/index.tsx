@@ -134,7 +134,7 @@ function AddressVerificationContainer() {
     }
     const addressesLength = addresses.length;
     return (
-      <ul className={styles.multiple_address_list}>
+      <ul className={styles.multipleAddressList}>
         {addresses.map((address, idx) => {
           const selected = `${addressType}-${idx}`;
           // If there's only one option, it's checked by default. Otherwise,
@@ -195,7 +195,7 @@ function AddressVerificationContainer() {
       )}
 
       {workAddress?.length > 0 && (
-        <div className={styles.work_address_container}>
+        <div className={styles.workAddressContainer}>
           <h3>Work Address</h3>
 
           {renderMultipleAddresses(

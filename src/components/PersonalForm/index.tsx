@@ -7,6 +7,7 @@ import FormField from "../FormField";
 import AgeForm from "../AgeForm";
 import useFormDataContext from "../../context/FormDataContext";
 import { errorMessages } from "../../utils/formDataUtils";
+import styles from "./PersonalForm.module.css";
 
 function PersonalForm({ agencyType = "" }) {
   const { register, errors } = useFormContext();
@@ -30,11 +31,10 @@ function PersonalForm({ agencyType = "" }) {
   );
   return (
     <>
-      <div className="input-group">
+      <div className={`input-group ${styles.inputGroup}`}>
         <div style={{ flex: "1" }}>
           <FormField
             id="patronFirstName"
-            type="text"
             label="First Name"
             fieldName="firstName"
             isRequired
@@ -51,7 +51,6 @@ function PersonalForm({ agencyType = "" }) {
         <div style={{ flex: "1" }}>
           <FormField
             id="patronLastName"
-            type="text"
             label="Last Name"
             fieldName="lastName"
             isRequired
@@ -71,7 +70,6 @@ function PersonalForm({ agencyType = "" }) {
 
       <FormField
         id="patronEmail"
-        type="text"
         label="E-Mail Address"
         fieldName="email"
         errorState={errors}

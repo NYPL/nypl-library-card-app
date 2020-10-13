@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import FormField from "../FormField";
 import UsernameValidationForm from "../UsernameValidationForm";
 import useFormDataContext from "../../context/FormDataContext";
 import { errorMessages } from "../../utils/formDataUtils";
+import { Checkbox } from "@nypl/design-system-react-components";
 
 function AccountInformationForm() {
-  const { register, errors } = useFormContext();
+  const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();
+  const [showPin, setShowPin] = useState(false);
   const { formValues } = state;
+  const originalPin = getValues("pin");
+
+  const checkBoxLabelOptions = {
+    id: "showPinId",
+    labelContent: <>Show PIN</>,
+  };
+  const update = () => setShowPin(!showPin);
+  const pinType = showPin ? "text" : "password";
 
   return (
     <>
@@ -17,7 +27,7 @@ function AccountInformationForm() {
 
       <FormField
         id="patronPin"
-        type="text"
+        type={pinType}
         label="PIN"
         fieldName="pin"
         instructionText="4 digits"
@@ -28,6 +38,34 @@ function AccountInformationForm() {
           validate: (val) => val.length === 4 || errorMessages.pin,
         })}
         defaultValue={formValues.pin}
+      />
+
+      <FormField
+        id="patronVerifyPin"
+        type={pinType}
+        label="Verify PIN"
+        fieldName="verifyPin"
+        instructionText="4 digits"
+        isRequired
+        errorState={errors}
+        maxLength={4}
+        ref={register({
+          validate: (val) =>
+            (val.length === 4 && val === originalPin) ||
+            errorMessages.verifyPin,
+        })}
+        defaultValue={formValues.pin}
+      />
+
+      <Checkbox
+        checkboxId="showPIN"
+        name="showPIN"
+        labelOptions={checkBoxLabelOptions}
+        isSelected={false}
+        attributes={{
+          defaultChecked: showPin,
+          onClick: update,
+        }}
       />
     </>
   );
