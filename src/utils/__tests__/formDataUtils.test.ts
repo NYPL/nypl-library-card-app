@@ -142,27 +142,23 @@ describe("constructErrorObject", () => {
   test("returns an object with default values", () => {
     expect(constructErrorObject()).toEqual({
       status: 400,
-      response: {
-        type: "general-error",
-        message: "There was an error with your request",
-      },
+      type: "general-error",
+      title: "General Error",
+      detail: "There was an error with your request",
     });
   });
 
   test("returns an object along with details", () => {
     expect(
-      constructErrorObject("error", "invalid request", 500, {
-        error: "details",
+      constructErrorObject(500, "invalid-request", "Invalid Request", "", {
+        field: "uhoh",
       })
     ).toEqual({
       status: 500,
-      response: {
-        type: "error",
-        message: "invalid request",
-        details: {
-          error: "details",
-        },
-      },
+      type: "invalid-request",
+      title: "Invalid Request",
+      detail: "",
+      error: { field: "uhoh" },
     });
   });
 });
@@ -185,18 +181,17 @@ describe("constructPatronObject", () => {
       "home-zip": "10018-2788",
       username: "tomnook42",
       pin: "1234",
+      verifyPin: "1234",
       acceptTerms: true,
     };
     expect(constructPatronObject(patronFormValuesMissingValues)).toEqual({
       status: 400,
-      response: {
-        type: "server-validation-error",
-        message: "server side validation error",
-        details: {
-          lastName: "Last Name field is empty.",
-          email: "Email field is empty.",
-          city: "City field is empty.",
-        },
+      type: "server-validation-error",
+      message: "server side validation error",
+      details: {
+        lastName: "Last Name field is empty.",
+        email: "Email field is empty.",
+        city: "City field is empty.",
       },
     });
   });
@@ -229,6 +224,7 @@ describe("constructPatronObject", () => {
       "work-hasBeenValidated": true,
       username: "tomnook42",
       pin: "1234",
+      verifyPin: "1234",
       acceptTerms: true,
     };
     const patronRequestObject: FormAPISubmission = {

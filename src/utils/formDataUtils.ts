@@ -9,6 +9,7 @@ import {
   FormAPISubmission,
   FormInputData,
 } from "../interfaces";
+import { isDate } from "./FormValidationUtils";
 
 const errorMessages = {
   firstName: "Please enter a valid first name.",
@@ -19,7 +20,8 @@ const errorMessages = {
   username: "Username must be between 5-25 alphanumeric characters.",
   pin: "Please enter a 4-digit PIN.",
   verifyPin: "The two PINs don't match.",
-  location: "Please select an address option.",
+  location: "Please select a location option.",
+  acceptTerms: "The terms and conditions were not accepted.",
   address: {
     line1: "Please enter a valid street address.",
     city: "Please enter a valid city.",
@@ -113,24 +115,139 @@ const constructAddresses = (object = {}) => {
  * Create an error object to be returned by the API endpoints.
  */
 const constructErrorObject = (
-  type = "general-error",
-  message = "There was an error with your request",
   status = 400,
-  details?
-) => {
-  const response: ErrorResponse = {
+  type = "general-error",
+  title = "General Error",
+  detail = "There was an error with your request",
+  error = null
+): ErrorResponse => {
+  return {
     status,
-    response: {
-      type,
-      message,
-    },
+    type,
+    title,
+    detail,
+    error,
   };
+};
 
-  if (!isEmpty(details)) {
-    response.response.details = details;
+const validateFormData = (object, addresses) => {
+  const {
+    firstName,
+    lastName,
+    email,
+    birthdate,
+    ageGate,
+    policyType,
+    username,
+    pin,
+    verifyPin,
+    acceptTerms,
+    location,
+  } = object;
+  let errorObj = {};
+  let homeObj = {};
+  // let workObj = {};
+
+  if (isEmpty(firstName)) {
+    errorObj = { ...errorObj, firstName: errorMessages.firstName };
   }
 
-  return response;
+  if (isEmpty(lastName)) {
+    errorObj = { ...errorObj, lastName: errorMessages.lastName };
+  }
+  const MAXLENGTHDATE = 10;
+  if (policyType === "webApplicant") {
+    if (
+      isEmpty(birthdate) ||
+      (birthdate.length <= MAXLENGTHDATE && !isDate(birthdate))
+    ) {
+      errorObj = {
+        ...errorObj,
+        birthdate: errorMessages.birthdate,
+      };
+    }
+  } else if (policyType === "simplye" && !ageGate) {
+    errorObj = {
+      ...errorObj,
+      ageGate: errorMessages.ageGate,
+    };
+  }
+
+  if (!acceptTerms) {
+    errorObj = { ...errorObj, acceptTerms: errorMessages.acceptTerms };
+  }
+
+  if (isEmpty(email) || !isEmail(email)) {
+    errorObj = { ...errorObj, email: errorMessages.email };
+  }
+
+  if (
+    isEmpty(username) ||
+    !isAlphanumeric(username) ||
+    !isLength(username, { min: 5, max: 25 })
+  ) {
+    errorObj = {
+      ...errorObj,
+      username: errorMessages.username,
+    };
+  }
+
+  if (isEmpty(pin) || !isNumeric(pin) || !isLength(pin, { min: 4, max: 4 })) {
+    errorObj = { ...errorObj, pin: errorMessages.pin };
+  }
+
+  if (isEmpty(verifyPin) || pin !== verifyPin) {
+    errorObj = { ...errorObj, verifyPin: errorMessages.verifyPin };
+  }
+
+  if (!location) {
+    errorObj = { ...errorObj, location: errorMessages.location };
+  }
+
+  if (isEmpty(addresses.home.line1)) {
+    homeObj = {
+      ...homeObj,
+      line1: errorMessages.address.line1,
+    };
+  } else if (
+    addresses.home?.line1?.length + addresses.home?.line2?.length >
+    100
+  ) {
+    homeObj = {
+      ...homeObj,
+      line1: "Street address fields must not be more than 100 lines.",
+    };
+  }
+
+  if (isEmpty(addresses.home.city)) {
+    homeObj = {
+      ...homeObj,
+      city: errorMessages.address.city,
+    };
+  }
+
+  if (isEmpty(addresses.home.state) || addresses.home.state.length !== 2) {
+    homeObj = {
+      ...homeObj,
+      state: errorMessages.address.state,
+    };
+  }
+
+  if (
+    isEmpty(addresses.home.zip) ||
+    !isLength(addresses.home.zip, { min: 5, max: 10 })
+  ) {
+    homeObj = {
+      ...homeObj,
+      zip: errorMessages.address.zip,
+    };
+  }
+
+  if (!isEmpty(homeObj)) {
+    errorObj = { ...errorObj, address: { home: homeObj } };
+  }
+
+  return errorObj;
 };
 
 /**
@@ -146,99 +263,27 @@ const constructPatronObject = (
     lastName,
     email,
     birthdate,
-    username,
-    pin,
+    ageGate,
     ecommunicationsPref,
     agencyType,
-    usernameHasBeenValidated,
     policyType,
-    ageGate,
+    username,
+    usernameHasBeenValidated,
+    pin,
     homeLibraryCode,
     acceptTerms,
   } = object;
 
   const addresses: Addresses = constructAddresses(object);
+  const errors = validateFormData(object, addresses);
 
-  let errorObj = {};
-
-  if (isEmpty(firstName)) {
-    errorObj = { ...errorObj, firstName: "First Name field is empty." };
-  }
-
-  if (isEmpty(lastName)) {
-    errorObj = { ...errorObj, lastName: "Last Name field is empty." };
-  }
-
-  if (policyType === "webApplicant" && isEmpty(birthdate)) {
-    errorObj = { ...errorObj, birthdate: "Date of Birth field is empty." };
-  } else if (policyType === "simplye" && !ageGate) {
-    errorObj = {
-      ...errorObj,
-      ageGate: "You must be 13 years or older to continue.",
-    };
-  }
-
-  if (isEmpty(addresses.home.line1)) {
-    errorObj = { ...errorObj, line1: "Street Address field is empty." };
-  }
-
-  if (isEmpty(addresses.home.city)) {
-    errorObj = { ...errorObj, city: "City field is empty." };
-  }
-
-  if (isEmpty(addresses.home.state)) {
-    errorObj = { ...errorObj, state: "State field is empty." };
-  }
-
-  if (isEmpty(addresses.home.zip)) {
-    errorObj = { ...errorObj, zip: "Postal Code field is empty." };
-  }
-
-  // if (
-  //   !isEmpty(addresses.home.zip) &&
-  //   (!isNumeric(addresses.home.zip) ||
-  //     !isLength(addresses.home.zip, { min: 5, max: 10 }))
-  // ) {
-  //   errorObj = { ...errorObj, zip: "Please enter a 5 or 9-digit postal code." };
-  // }
-
-  if (isEmpty(email)) {
-    errorObj = { ...errorObj, email: "Email field is empty." };
-  } else if (!isEmpty(email.trim()) && !isEmail(email)) {
-    errorObj = { ...errorObj, email: "Please enter a valid email address." };
-  }
-
-  if (isEmpty(username)) {
-    errorObj = { ...errorObj, username: "Username field is empty." };
-  }
-
-  if (
-    !isEmpty(username) &&
-    (!isAlphanumeric(username) || !isLength(username, { min: 5, max: 25 }))
-  ) {
-    errorObj = {
-      ...errorObj,
-      username: "Please enter a username between 5-25 alphanumeric characters.",
-    };
-  }
-
-  if (isEmpty(pin)) {
-    errorObj = { ...errorObj, pin: "PIN field is empty." };
-  }
-
-  if (
-    !isEmpty(pin) &&
-    (!isNumeric(pin) || !isLength(pin, { min: 4, max: 4 }))
-  ) {
-    errorObj = { ...errorObj, pin: "Please enter a 4-digit PIN." };
-  }
-
-  if (errorObj && !isEmpty(errorObj)) {
+  if (!isEmpty(errors)) {
     return constructErrorObject(
-      "server-validation-error",
-      "server side validation error",
       400,
-      errorObj
+      "invalid-request",
+      "Invalid Request",
+      "There was an error with the submitted form values.",
+      errors
     );
   }
 

@@ -4,7 +4,10 @@ import "../src/styles/main.scss";
 import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";
 import ga from "../src/externals/ga";
-import { FormDataContextProvider } from "../src/context/FormDataContext";
+import {
+  FormDataContextProvider,
+  formInitialState,
+} from "../src/context/FormDataContext";
 import { IPLocationContextProvider } from "../src/context/IPLocationContext";
 import appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
@@ -44,6 +47,7 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
   const { favIconPath, appTitle } = appConfig;
+  const initState = { ...formInitialState, query };
   return (
     <>
       <Head>
@@ -102,7 +106,7 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
       <ParamsContextProvider params={query}>
         <FormProvider {...formMethods}>
           <IPLocationContextProvider userLocation={userLocation}>
-            <FormDataContextProvider>
+            <FormDataContextProvider initState={initState}>
               <ApplicationContainer>
                 <Component {...pageProps} />
               </ApplicationContainer>
@@ -114,7 +118,7 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
   );
 }
 
-MyApp.getInitialProps = async ({ ctx, query }) => {
+MyApp.getInitialProps = async ({ ctx }) => {
   // Get the user's IP address and convert it to an object that tells us if
   // the user is in NYS/NYC. Will be `undefined` if the call to the IP/location
   // conversion API fails or if there is no IP address.
@@ -124,7 +128,7 @@ MyApp.getInitialProps = async ({ ctx, query }) => {
   }
 
   // Send it to the component as a prop.
-  return { userLocation, query };
+  return { userLocation, query: ctx.query };
 };
 
 export default MyApp;

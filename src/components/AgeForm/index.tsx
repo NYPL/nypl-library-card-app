@@ -35,7 +35,7 @@ const AgeForm = ({
 
   const birthdateField = (
     <FormField
-      id="patronBirthdate"
+      id="birthdate"
       instructionText="MM/DD/YYYY, including slashes"
       label="Date of Birth"
       fieldName="birthdate"

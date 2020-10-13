@@ -26,7 +26,7 @@ function AccountInformationForm() {
       <UsernameValidationForm errorMessage={errorMessages.username} />
 
       <FormField
-        id="patronPin"
+        id="pin"
         type={pinType}
         label="PIN"
         fieldName="pin"
@@ -41,7 +41,7 @@ function AccountInformationForm() {
       />
 
       <FormField
-        id="patronVerifyPin"
+        id="verifyPin"
         type={pinType}
         label="Verify PIN"
         fieldName="verifyPin"

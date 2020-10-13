@@ -11,7 +11,6 @@ import {
   InputTypes,
   Checkbox,
 } from "@nypl/design-system-react-components";
-import isEmpty from "lodash/isEmpty";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import {
   getLocationValue,
@@ -23,6 +22,7 @@ import AccountForm from "../AccountForm";
 import RoutingLinks from "../RoutingLinks.tsx";
 import ApiErrors from "../ApiErrors";
 import styles from "./ReviewFormContainer.module.css";
+import AcceptTermsForm from "../AcceptTermsForm";
 
 /**
  * ReviewFormContainer
@@ -53,6 +53,8 @@ function ReviewFormContainer() {
     if (errorObj) {
       errorSection.current.focus();
       document.title = "Form Submission Error | NYPL";
+      setEditAccountInfoFlag(true);
+      setEditPersonalInfoFlag(true);
     }
   }, [errorObj]);
 
@@ -94,20 +96,6 @@ function ReviewFormContainer() {
   };
 
   /**
-   * renderApiErrors
-   * This renders the component above the form that displays information on
-   * the error(s) from the submission. Also renders links that link to the
-   * specific input element that is returning an error.
-   * @param errorObj
-   */
-  const renderApiErrors = (errorObj) => {
-    if (!isEmpty(errorObj) && errorObj.status >= 400) {
-      return <ApiErrors ref={errorSection} apiResults={errorObj} />;
-    }
-    return null;
-  };
-
-  /**
    * submitForm
    * Update the form values again but this time submit to the API.
    */
@@ -129,10 +117,9 @@ function ReviewFormContainer() {
         router.push("/library-card/congrats?newCard=true");
       })
       .catch((error) => {
-        // There are server-side errors! So go back to the main page and
-        // render the error messages so they can be fixed.
+        // There are server-side errors! Display them to the user
+        // so they can be fixed.
         dispatch({ type: "SET_FORM_ERRORS", value: error.response?.data });
-        router.push("/library-card/new");
       });
   };
 
@@ -199,7 +186,7 @@ function ReviewFormContainer() {
    * and address form section.
    */
   const renderAddressValues = () => (
-    <div className={styles.container}>
+    <div className={styles.container} id="address-section" tabIndex={0}>
       <div className={styles.field}>
         <div className={styles.title}>Location</div>
         <fieldset>
@@ -296,6 +283,8 @@ function ReviewFormContainer() {
 
   return (
     <>
+      <ApiErrors ref={errorSection} apiResults={errorObj} />
+
       <div className={styles.formSection}>
         <h3>Personal Information</h3>
         {!editPersonalInfoFlag ? (
@@ -320,6 +309,7 @@ function ReviewFormContainer() {
         ) : (
           <form onSubmit={handleSubmit(editSectionInfo)}>
             <AccountForm />
+            <AcceptTermsForm />
             {submitButton}
           </form>
         )}

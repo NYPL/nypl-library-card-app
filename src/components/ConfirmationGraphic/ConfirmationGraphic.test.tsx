@@ -18,10 +18,11 @@ const formResults: FormResults = {
 };
 const formState = {
   results: formResults,
-  errorObj: {},
+  errorObj: undefined,
   csrfToken: "",
   formValues: {} as FormInputData,
   addressResponse: {},
+  query: {},
 };
 
 describe("Confirmation", () => {

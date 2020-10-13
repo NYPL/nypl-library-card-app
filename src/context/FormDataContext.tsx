@@ -11,7 +11,7 @@ import {
 // Default initial values.
 export const formInitialState: FormData = {
   results: undefined,
-  errorObj: null,
+  errorObj: undefined,
   csrfToken: null,
   formValues: {
     ecommunicationsPref: true,
@@ -21,6 +21,7 @@ export const formInitialState: FormData = {
     home: {} as AddressRenderType,
     work: {} as AddressRenderType,
   } as AddressResponse,
+  query: {},
 };
 
 interface FormDataContextProps {

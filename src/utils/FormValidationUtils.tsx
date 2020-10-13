@@ -28,20 +28,22 @@ function isDate(
   return false;
 }
 
-/**
- * createAnchorText(wholeText)
- * Splits the error message into two parts to be used by the consumer to create
- * anchor tag text. The string ` field` is expected to in `wholeText`.
- *
- * @param {string} wholeText
- * return {object} {anchorText, restText}
- */
-function createAnchorText(wholeText: string) {
-  const anchorText = wholeText ? wholeText.split(" field")[0] : "";
-  const restText = !anchorText ? "" : ` field ${wholeText.split(" field")[1]}`;
-
-  return { anchorText, restText };
-}
+export const errorMessageHashMap = {
+  firstName: "first name",
+  lastName: "last name",
+  birthdate: "date",
+  ageGate: "13 years or older",
+  email: "email",
+  username: "Username",
+  pin: "PIN.",
+  verifyPin: "PINs",
+  location: "location option",
+  line1: "street address",
+  city: "city",
+  state: "state",
+  zip: "postal code",
+  acceptTerms: "terms and conditions",
+};
 
 /**
  * createAnchorID(key)
@@ -51,9 +53,8 @@ function createAnchorText(wholeText: string) {
  * return {string}
  */
 function createAnchorID(key: string): string | null {
-  const addressElements = ["Line1", "City", "State", "Zip"];
-  let hashElement = key ? `${key.charAt(0).toUpperCase()}${key.substr(1)}` : "";
-
+  const addressElements = ["line1", "city", "state", "zip"];
+  let hashElement = key;
   if (!hashElement) {
     return null;
   }
@@ -63,7 +64,37 @@ function createAnchorID(key: string): string | null {
 
   // @nypl/design-system-react-components prepends an `input` before the
   // id of the input element we want an anchor for.
-  return `#input-patron${hashElement}`;
+  return `#input-${hashElement}`;
+}
+
+/**
+ * createAnchorText
+ */
+function createAnchorText(key, errors) {
+  const message = errors[key];
+  if (!message) {
+    return;
+  }
+  const displayText = errorMessageHashMap[key];
+  return message.replace(
+    displayText,
+    `<a href=${createAnchorID(key)}>${displayText}</a>`
+  );
+}
+
+/**
+ * createAddressAnchorText
+ */
+function createAddressAnchorText(key, errors, type) {
+  const message = errors[key];
+  if (!message) {
+    return;
+  }
+  const displayText = errorMessageHashMap[key];
+  return message.replace(
+    displayText,
+    `${type} <a href="#address-section">${displayText}</a>`
+  );
 }
 
 /**
@@ -76,73 +107,46 @@ function createAnchorID(key: string): string | null {
  */
 function renderServerValidationError(object) {
   const errorMessages = [];
+  const { address, location, ...errors } = object;
 
-  Object.keys(object).forEach((key, index) => {
+  Object.keys(errors).forEach((key) => {
     if (object.hasOwnProperty(key)) {
-      let errorMessage = null;
-
-      if (object[key].indexOf("empty") !== -1) {
-        const { anchorText, restText } = createAnchorText(object[key]);
-
-        errorMessage =
-          !anchorText && !anchorText ? (
-            <li>One of the fields is incorrect.</li>
-          ) : (
-            <li key={index}>
-              <a href={createAnchorID(key)}>{anchorText}</a>
-              {restText}
-            </li>
-          );
-      } else {
-        if (key === "zip") {
-          errorMessage = (
-            <li key={index}>
-              Please enter a 5-digit{" "}
-              <a href={createAnchorID(key)}>postal code</a>.
-            </li>
-          );
-        }
-
-        if (key === "email") {
-          errorMessage = (
-            <li key={index}>
-              Please enter a valid{" "}
-              <a href={createAnchorID(key)}>email address</a>.
-            </li>
-          );
-        }
-
-        if (key === "username") {
-          errorMessage = (
-            <li key={index}>
-              Please enter a <a href={createAnchorID(key)}>username</a> between
-              5-25 alphanumeric characters.
-            </li>
-          );
-        }
-
-        if (key === "pin") {
-          errorMessage = (
-            <li key={index}>
-              Please enter a 4-digit <a href={createAnchorID(key)}>PIN</a>.
-            </li>
-          );
-        }
-
-        if (key === "address") {
-          errorMessage = (
-            <li key={index}>
-              <a href={createAnchorID("Line1")}>{object[key]}</a>
-            </li>
-          );
-        }
+      const message = createAnchorText(key, errors);
+      if (message) {
+        const errorMessage = (
+          <li key={key} dangerouslySetInnerHTML={{ __html: message }} />
+        );
+        errorMessages.push(errorMessage);
       }
-
-      errorMessages.push(errorMessage);
     }
   });
+
+  if (location) {
+    const message = createAddressAnchorText("location", object, "");
+    const errorMessage = (
+      <li key="location" dangerouslySetInnerHTML={{ __html: message }} />
+    );
+    errorMessages.push(errorMessage);
+  }
+
+  if (address && typeof address !== "string") {
+    Object.keys(address).forEach((addressKey) => {
+      const addressType = address[addressKey];
+      Object.keys(addressType).forEach((key) => {
+        if (addressType.hasOwnProperty(key)) {
+          const message = createAddressAnchorText(key, addressType, addressKey);
+          const errorMessage = (
+            <li key={key} dangerouslySetInnerHTML={{ __html: message }} />
+          );
+          errorMessages.push(errorMessage);
+        }
+      });
+    });
+  } else {
+    errorMessages.push(<li>{address}</li>);
+  }
 
   return errorMessages;
 }
 
-export { isDate, renderServerValidationError };
+export { isDate, renderServerValidationError, createAnchorText };

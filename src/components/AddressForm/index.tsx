@@ -51,7 +51,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
   return (
     <>
       <FormField
-        id={`patronLine1-${type}`}
+        id={`line1-${type}`}
         label="Street Address"
         fieldName={`${type}-line1`}
         isRequired={isRequired}
@@ -65,7 +65,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
         defaultValue={formValues[`${type}-line1`]}
       />
       <FormField
-        id={`patronLine2-${type}`}
+        id={`line2-${type}`}
         label="Apartment / Suite"
         fieldName={`${type}-line2`}
         ref={register()}
@@ -74,7 +74,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
       <div className="input-group">
         <div style={{ flex: "1" }}>
           <FormField
-            id={`patronCity-${type}`}
+            id={`city-${type}`}
             label="City"
             fieldName={`${type}-city`}
             isRequired={isRequired}
@@ -90,7 +90,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
         </div>
         <div style={{ flex: "1" }}>
           <FormField
-            id={`patronState-${type}`}
+            id={`state-${type}`}
             instructionText="2-letter abbreviation"
             label="State"
             fieldName={`${type}-state`}
@@ -107,7 +107,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
       <div className="input-group">
         <div style={{ flex: "1" }}>
           <FormField
-            id={`patronZip-${type}`}
+            id={`zip-${type}`}
             label="Postal Code"
             fieldName={`${type}-zip`}
             isRequired={isRequired}
