@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { isAlphanumeric } from "validator";
@@ -6,6 +5,7 @@ import { Button } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
 import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
+import styles from "./UsernameValidationForm.module.css";
 
 interface UsernameValidationFormProps {
   errorMessage?: string;
@@ -69,9 +69,9 @@ const UsernameValidationForm = ({
   };
   const inputValidation = (value = "") =>
     value.length >= 5 && value.length <= 25 && isAlphanumeric(value);
-  let availableClassname = usernameIsAvailable.available
-    ? "available"
-    : "unavailable";
+  const availableClassname = usernameIsAvailable.available
+    ? styles.usernameAvailable
+    : styles.usernameUnavailable;
 
   /**
    * renderButton
@@ -95,7 +95,6 @@ const UsernameValidationForm = ({
     <>
       <FormField
         id="patronUsername"
-        type="text"
         label="Username"
         fieldName="username"
         instructionText="5-25 alphanumeric characters"
@@ -110,7 +109,7 @@ const UsernameValidationForm = ({
       {renderButton()}
       {usernameIsAvailable.message && (
         <>
-          <div className={`username-helper-text ${availableClassname}`}>
+          <div className={`${styles.usernameHelperText} ${availableClassname}`}>
             {usernameIsAvailable.message}
           </div>
           <input

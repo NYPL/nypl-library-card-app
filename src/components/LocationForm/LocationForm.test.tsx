@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
@@ -62,13 +62,13 @@ describe("LocationForm", () => {
       </TestProviderWrapper>
     );
 
-    let radionyc = screen.getByLabelText(nyc, {
+    const radionyc = screen.getByLabelText(nyc, {
       selector: "input",
     }) as HTMLInputElement;
-    let radionys = screen.getByLabelText(nys, {
+    const radionys = screen.getByLabelText(nys, {
       selector: "input",
     }) as HTMLInputElement;
-    let radious = screen.getByLabelText(us, {
+    const radious = screen.getByLabelText(us, {
       selector: "input",
     }) as HTMLInputElement;
     expect(radionyc).not.toBeChecked();
@@ -114,13 +114,13 @@ describe("LocationForm", () => {
       </TestProviderWrapper>
     );
 
-    let radionyc = screen.getByLabelText(nyc, {
+    const radionyc = screen.getByLabelText(nyc, {
       selector: "input",
     }) as HTMLInputElement;
-    let radionys = screen.getByLabelText(nys, {
+    const radionys = screen.getByLabelText(nys, {
       selector: "input",
     }) as HTMLInputElement;
-    let radious = screen.getByLabelText(us, {
+    const radious = screen.getByLabelText(us, {
       selector: "input",
     }) as HTMLInputElement;
     expect(radionyc).not.toBeChecked();

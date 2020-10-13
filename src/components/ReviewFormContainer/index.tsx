@@ -9,6 +9,7 @@ import {
   Input,
   Label,
   InputTypes,
+  Checkbox,
 } from "@nypl/design-system-react-components";
 import isEmpty from "lodash/isEmpty";
 import useFormDataContext from "../../../src/context/FormDataContext";
@@ -37,6 +38,14 @@ function ReviewFormContainer() {
   // Flags to set a section to editable or read-only.
   const [editPersonalInfoFlag, setEditPersonalInfoFlag] = useState(false);
   const [editAccountInfoFlag, setEditAccountInfoFlag] = useState(false);
+
+  const [showPin, setShowPin] = useState(false);
+
+  const checkBoxLabelOptions = {
+    id: "showPinId",
+    labelContent: <>Show PIN</>,
+  };
+  const updateShowPin = () => setShowPin(!showPin);
 
   // Will run whenever the `errorObj` has changes, specifically for
   // bad requests.
@@ -102,23 +111,18 @@ function ReviewFormContainer() {
    * submitForm
    * Update the form values again but this time submit to the API.
    */
-  const submitForm = (formData) => {
+  const submitForm = () => {
     // This is resetting any errors from previous submissions, if any.
     dispatch({ type: "SET_FORM_ERRORS", value: null });
-
-    const submitValues = { ...formData, ...formValues };
-
-    // Convert the home library name to its code value.
-    submitValues.homeLibraryCode = findLibraryCode(formValues.homeLibraryCode);
 
     // Update the global state.
     dispatch({
       type: "SET_FORM_DATA",
-      value: submitValues,
+      value: formValues,
     });
 
     axios
-      .post("/api/create-patron", submitValues)
+      .post("/api/create-patron", formValues)
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
@@ -132,78 +136,126 @@ function ReviewFormContainer() {
       });
   };
 
-  return (
-    <>
-      <div className={styles.form_section}>
-        <h3>Personal Information</h3>
-        {!editPersonalInfoFlag ? (
-          <div className={styles.container}>
-            <div className={styles.multi_field}>
-              <div className={styles.title}>First Name</div>
-              <div>{formValues.firstName}</div>
-            </div>
-            <div className={styles.multi_field}>
-              <div className={styles.title}>Last Name</div>
-              <div>{formValues.lastName}</div>
-            </div>
-            <div className={styles.field}>
-              <div className={styles.title}>Date Of Birth</div>
-              <div>{formValues.birthdate}</div>
-            </div>
-            <div className={styles.field}>
-              <div className={styles.title}>E-Mail Address</div>
-              <div>{formValues.email}</div>
-            </div>
-            <div className={styles.field}>
-              <div className={styles.title}>
-                Receive information about NYPL&apos;s programs and services
-              </div>
-              <div>{formValues.ecommunicationsPref ? "Yes" : "No"}</div>
-            </div>
-            {editButton(setEditPersonalInfoFlag)}
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit(editSectionInfo)}>
-            <PersonalForm />
-            {submitButton}
-          </form>
-        )}
+  /**
+   * Render a read-only display of all the submitted values from the personal
+   * information form section.
+   */
+  const renderPersonalInformationValues = () => (
+    <div className={styles.container}>
+      <div className={styles.multiField}>
+        <div className={styles.title}>First Name</div>
+        <div>{formValues.firstName}</div>
       </div>
-
-      <div className={styles.form_section}>
-        <h3>Address</h3>
-        <div className={styles.container}>
-          <div className={styles.field}>
-            <div className={styles.title}>Location</div>
-            <fieldset>
-              {/* For now until we have better tests. This needs a value or an
-              empty input and label causes accessibility issues. */}
-              {formValues.location && (
-                <div className="radio-field">
-                  <Input
-                    className="radio-input"
-                    aria-labelledby="review-location-label"
-                    id="review-location-id"
-                    type={InputTypes.radio}
-                    attributes={{
-                      name: "location",
-                      "aria-checked": true,
-                      checked: true,
-                      readOnly: true,
-                    }}
-                    value={formValues.location}
-                  />
-                  <Label
-                    id="review-location-label"
-                    htmlFor="input-review-location-id"
-                  >
-                    {getLocationValue(formValues.location)}
-                  </Label>
-                </div>
-              )}
-            </fieldset>
-          </div>
-          {formValues["work-line1"] && <h4>Home</h4>}
+      <div className={styles.multiField}>
+        <div className={styles.title}>Last Name</div>
+        <div>{formValues.lastName}</div>
+      </div>
+      <div className={styles.field}>
+        <div className={styles.title}>Date Of Birth</div>
+        <div>{formValues.birthdate}</div>
+      </div>
+      <div className={styles.field}>
+        <div className={styles.title}>E-Mail Address</div>
+        <div>{formValues.email}</div>
+      </div>
+      <div className={styles.field}>
+        <div className={styles.title}>
+          Receive information about NYPL&apos;s programs and services
+        </div>
+        <div>{formValues.ecommunicationsPref ? "Yes" : "No"}</div>
+      </div>
+      {editButton(setEditPersonalInfoFlag)}
+    </div>
+  );
+  /**
+   * Render a read-only display of all the submitted values from the account
+   * form section.
+   */
+  const renderAccountValues = () => (
+    <div className={styles.container}>
+      <div className={styles.field}>
+        <div className={styles.title}>Username</div>
+        <div>{formValues.username}</div>
+      </div>
+      <div className={styles.field}>
+        <div className={styles.title}>PIN</div>
+        <div>{showPin ? formValues.pin : "****"}</div>
+        <Checkbox
+          checkboxId="showPINReview"
+          name="showPINReview"
+          labelOptions={checkBoxLabelOptions}
+          isSelected={false}
+          attributes={{
+            defaultChecked: showPin,
+            onClick: updateShowPin,
+          }}
+        />
+      </div>
+      {editButton(setEditAccountInfoFlag)}
+    </div>
+  );
+  /**
+   * Render a read-only display of all the submitted values from the location
+   * and address form section.
+   */
+  const renderAddressValues = () => (
+    <div className={styles.container}>
+      <div className={styles.field}>
+        <div className={styles.title}>Location</div>
+        <fieldset>
+          {/* For now until we have better tests. This needs a value or an
+          empty input and label causes accessibility issues. */}
+          {formValues.location && (
+            <div className="radio-field">
+              <Input
+                className="radio-input"
+                aria-labelledby="review-location-label"
+                id="review-location-id"
+                type={InputTypes.radio}
+                attributes={{
+                  name: "location",
+                  "aria-checked": true,
+                  checked: true,
+                  readOnly: true,
+                }}
+                value={formValues.location}
+              />
+              <Label
+                id="review-location-label"
+                htmlFor="input-review-location-id"
+              >
+                {getLocationValue(formValues.location)}
+              </Label>
+            </div>
+          )}
+        </fieldset>
+      </div>
+      {formValues["work-line1"] && <h4>Home</h4>}
+      <div className={styles.field}>
+        <div className={styles.title}>Street Address</div>
+        <div>{formValues["home-line1"]}</div>
+      </div>
+      {formValues["home-line2"] && (
+        <div className={styles.field}>
+          <div className={styles.title}>Apartment/Suite</div>
+          <div>{formValues["home-line2"]}</div>
+        </div>
+      )}
+      <div className={styles.multiField}>
+        <div className={styles.title}>City</div>
+        <div>{formValues["home-city"]}</div>
+      </div>
+      <div className={styles.multiField}>
+        <div className={styles.title}>State</div>
+        <div>{formValues["home-state"]}</div>
+      </div>
+      <div className={styles.field}>
+        <div className={styles.title}>Postal Code</div>
+        <div>{formValues["home-zip"]}</div>
+      </div>
+      {formValues["work-line1"] && (
+        <>
+          <h4 className={styles.workTitle}>Work</h4>
           <div className={styles.field}>
             <div className={styles.title}>Street Address</div>
             <div>{formValues["home-line1"]}</div>
@@ -214,11 +266,11 @@ function ReviewFormContainer() {
               <div>{formValues["home-line2"]}</div>
             </div>
           )}
-          <div className={styles.multi_field}>
+          <div className={styles.multiField}>
             <div className={styles.title}>City</div>
             <div>{formValues["home-city"]}</div>
           </div>
-          <div className={styles.multi_field}>
+          <div className={styles.multiField}>
             <div className={styles.title}>State</div>
             <div>{formValues["home-state"]}</div>
           </div>
@@ -226,61 +278,45 @@ function ReviewFormContainer() {
             <div className={styles.title}>Postal Code</div>
             <div>{formValues["home-zip"]}</div>
           </div>
-          {formValues["work-line1"] && (
-            <>
-              <h4 className={styles.work_title}>Work</h4>
-              <div className={styles.field}>
-                <div className={styles.title}>Street Address</div>
-                <div>{formValues["home-line1"]}</div>
-              </div>
-              {formValues["home-line2"] && (
-                <div className={styles.field}>
-                  <div className={styles.title}>Apartment/Suite</div>
-                  <div>{formValues["home-line2"]}</div>
-                </div>
-              )}
-              <div className={styles.multi_field}>
-                <div className={styles.title}>City</div>
-                <div>{formValues["home-city"]}</div>
-              </div>
-              <div className={styles.multi_field}>
-                <div className={styles.title}>State</div>
-                <div>{formValues["home-state"]}</div>
-              </div>
-              <div className={styles.field}>
-                <div className={styles.title}>Postal Code</div>
-                <div>{formValues["home-zip"]}</div>
-              </div>
-            </>
-          )}
-          <div className={styles.field}>
-            <div className={styles.title}>Home Library</div>
-            <div>{findLibraryName(formValues.homeLibraryCode)}</div>
-          </div>
-
-          <RoutingLinks
-            next={{
-              url: "/library-card/location?newCard=true",
-              text: "Edit",
-            }}
-          />
-        </div>
+        </>
+      )}
+      <div className={styles.field}>
+        <div className={styles.title}>Home Library</div>
+        <div>{findLibraryName(formValues.homeLibraryCode)}</div>
       </div>
 
-      <div className={styles.form_section}>
+      <RoutingLinks
+        next={{
+          url: "/library-card/location?newCard=true",
+          text: "Edit",
+        }}
+      />
+    </div>
+  );
+
+  return (
+    <>
+      <div className={styles.formSection}>
+        <h3>Personal Information</h3>
+        {!editPersonalInfoFlag ? (
+          renderPersonalInformationValues()
+        ) : (
+          <form onSubmit={handleSubmit(editSectionInfo)}>
+            <PersonalForm />
+            {submitButton}
+          </form>
+        )}
+      </div>
+
+      <div className={styles.formSection}>
+        <h3>Address</h3>
+        {renderAddressValues()}
+      </div>
+
+      <div className={styles.formSection}>
         <h3>Create Your Account</h3>
         {!editAccountInfoFlag ? (
-          <div className={styles.container}>
-            <div className={styles.field}>
-              <div className={styles.title}>Username</div>
-              <div>{formValues.username}</div>
-            </div>
-            <div className={styles.field}>
-              <div className={styles.title}>PIN</div>
-              <div>{formValues.pin}</div>
-            </div>
-            {editButton(setEditAccountInfoFlag)}
-          </div>
+          renderAccountValues()
         ) : (
           <form onSubmit={handleSubmit(editSectionInfo)}>
             <AccountForm />
@@ -289,7 +325,7 @@ function ReviewFormContainer() {
         )}
       </div>
 
-      <div className={styles.form_section}>
+      <div className={styles.formSection}>
         After you submit your application, you will see a confirmation page with
         a temporary account number, and you will be able to log in and request
         books and materials. To get your card, follow the confirmation page

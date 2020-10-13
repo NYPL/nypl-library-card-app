@@ -51,7 +51,10 @@ function AddressVerificationContainer() {
   /**
    * extractUpdatedAddressValues
    * Returns an object with either the home or work address values from a
-   * larger data object.
+   * larger data object. The updated address object has the address type
+   * prepended before its key so it can update the react-hook-form value for
+   * that key property. So a "city" field from the API response will be updated
+   * to "home-city" in order to update the state for the form submission values.
    */
   const extractUpdatedAddressValues = (data, addressType) => {
     const updatedValues = {};
@@ -131,7 +134,7 @@ function AddressVerificationContainer() {
     }
     const addressesLength = addresses.length;
     return (
-      <ul className={styles.multiple_address_list}>
+      <ul className={styles.multipleAddressList}>
         {addresses.map((address, idx) => {
           const selected = `${addressType}-${idx}`;
           // If there's only one option, it's checked by default. Otherwise,
@@ -182,7 +185,7 @@ function AddressVerificationContainer() {
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
-      <p>Home Address</p>
+      <h3>Home Address</h3>
 
       {renderMultipleAddresses(
         homeAddress,
@@ -192,8 +195,8 @@ function AddressVerificationContainer() {
       )}
 
       {workAddress?.length > 0 && (
-        <>
-          <p>Work Address</p>
+        <div className={styles.workAddressContainer}>
+          <h3>Work Address</h3>
 
           {renderMultipleAddresses(
             workAddress,
@@ -201,7 +204,7 @@ function AddressVerificationContainer() {
             workAddressSelect,
             onChangeWork
           )}
-        </>
+        </div>
       )}
 
       <RoutingLinks

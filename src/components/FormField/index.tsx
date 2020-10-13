@@ -5,12 +5,14 @@ import {
   Input,
   InputTypes,
   HelperErrorText,
+  Checkbox,
 } from "@nypl/design-system-react-components";
+import styles from "./FormField.module.css";
 
 interface FormFieldProps {
   id: string;
   label: string;
-  type: string;
+  type?: string;
   fieldName: string;
   errorState?: {};
   className?: string;
@@ -32,7 +34,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
     {
       id,
       label,
-      type,
+      type = "text",
       fieldName,
       errorState = {},
       className = "",
@@ -47,23 +49,40 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
     ref
   ) => {
     const errorText = errorState[fieldName];
+    const typeToInputTypeMap = {
+      text: InputTypes.text,
+      password: InputTypes.password,
+      radio: InputTypes.radio,
+    };
     let helperText = instructionText || null;
 
     if (errorText?.message) {
       helperText = errorText.message;
     }
     const ariaLabelledby = helperText ? `${id}-helperText` : "";
+
+    if (type === "hidden") {
+      return (
+        <input
+          type="hidden"
+          aria-hidden={true}
+          name={fieldName}
+          defaultValue={defaultValue}
+          ref={ref}
+        />
+      );
+    }
     return (
-      <div className={`form-field ${className}`}>
+      <div className={`${styles.formField} ${className}`}>
         <Label
           htmlFor={`input-${id}`}
           id={`${id}-label`}
           optReqFlag={isRequired ? "Required" : ""}
         >
-          <span>{label}</span>
+          {label}
         </Label>
         <Input
-          type={InputTypes.text}
+          type={typeToInputTypeMap[type]}
           id={id}
           aria-required={isRequired}
           aria-labelledby={`${id}-label ${ariaLabelledby}`}

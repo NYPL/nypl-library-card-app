@@ -1,9 +1,7 @@
-/* eslint-disable */
+/* eslint-disable @typescript-eslint/camelcase */
 import axios from "axios";
 import qs from "qs";
 import moment from "moment";
-import isEmpty from "lodash/isEmpty";
-import { isEmail, isAlphanumeric, isNumeric, isLength } from "validator";
 import Cors from "cors";
 
 import config from "../../appConfig";
@@ -15,7 +13,14 @@ import {
   AddressAPIResponseData,
   AddressResponse,
   AddressRenderType,
+  ErrorResponse,
+  FormAPISubmission,
 } from "../interfaces";
+import {
+  constructAddresses,
+  constructPatronObject,
+  constructErrorObject,
+} from "./formDataUtils";
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -53,179 +58,12 @@ export const constructApiHeaders = (token: string) => ({
   timeout: 10000,
 });
 
-const constructErrorObject = (
-  type = "general-error",
-  message = "There was an error with your request",
-  status = 400,
-  details
-) => {
-  const response: any = {
-    status,
-    response: {
-      type,
-      message,
-    },
-  };
-
-  if (!isEmpty(details)) {
-    response.response.details = details;
-  }
-
-  return response;
-};
-
 /**
- * constructAddresses
- * Address form fields have "home-" or "work-" as prefixes in their name
- * attribute, such as "home-line1" or "home-city". We need to remove the prefix
- * and create objects for the home and work addresses.
- * @param object FormData object from the client's form submission.
+ * isTokenExpiring
+ * Returns if the auth token's expiration time is less than a certain time
+ * limit, which defaults to 5 minutes.
  */
-export const constructAddresses = (object = {}) => {
-  const addresses: Addresses = {
-    home: {} as Address,
-    work: {} as Address,
-  };
-
-  // Remove the addresses fields' prefix and add to the proper object.
-  const prefixes = ["home", "work"];
-  Object.keys(object).forEach((key) => {
-    prefixes.forEach((prefix) => {
-      if (key.indexOf(`${prefix}-`) !== -1) {
-        const field = key.split("-")[1];
-        addresses[prefix][field] = object[key];
-      }
-    });
-  });
-
-  return addresses;
-};
-
-const constructPatronObject = (object) => {
-  const {
-    firstName,
-    lastName,
-    email,
-    birthdate,
-    username,
-    pin,
-    ecommunicationsPref,
-    agencyType,
-    usernameHasBeenValidated,
-    policyType,
-    ageGate,
-    homeLibraryCode,
-    acceptTerms,
-  } = object;
-
-  const addresses: Addresses = constructAddresses(object);
-
-  let errorObj = {};
-
-  if (isEmpty(firstName)) {
-    errorObj = { ...errorObj, firstName: "First Name field is empty." };
-  }
-
-  if (isEmpty(lastName)) {
-    errorObj = { ...errorObj, lastName: "Last Name field is empty." };
-  }
-
-  if (policyType === "webApplicant" && isEmpty(birthdate)) {
-    errorObj = { ...errorObj, birthdate: "Date of Birth field is empty." };
-  } else if (policyType === "simplye" && !ageGate) {
-    errorObj = {
-      ...errorObj,
-      ageGate: "You must be 13 years or older to continue.",
-    };
-  }
-
-  if (isEmpty(addresses.home.line1)) {
-    errorObj = { ...errorObj, line1: "Street Address field is empty." };
-  }
-
-  if (isEmpty(addresses.home.city)) {
-    errorObj = { ...errorObj, city: "City field is empty." };
-  }
-
-  if (isEmpty(addresses.home.state)) {
-    errorObj = { ...errorObj, state: "State field is empty." };
-  }
-
-  if (isEmpty(addresses.home.zip)) {
-    errorObj = { ...errorObj, zip: "Postal Code field is empty." };
-  }
-
-  // if (
-  //   !isEmpty(addresses.home.zip) &&
-  //   (!isNumeric(addresses.home.zip) ||
-  //     !isLength(addresses.home.zip, { min: 5, max: 10 }))
-  // ) {
-  //   errorObj = { ...errorObj, zip: "Please enter a 5 or 9-digit postal code." };
-  // }
-
-  // if (isEmpty(email)) {
-  //   errorObj = { ...errorObj, email: 'Email field is empty.' };
-  // } else if (!isEmpty(email.trim()) && !isEmail(email)) {
-  //   errorObj = { ...errorObj, email: 'Please enter a valid email address.' };
-  // }
-
-  if (isEmpty(username)) {
-    errorObj = { ...errorObj, username: "Username field is empty." };
-  }
-
-  if (
-    !isEmpty(username) &&
-    (!isAlphanumeric(username) || !isLength(username, { min: 5, max: 25 }))
-  ) {
-    errorObj = {
-      ...errorObj,
-      username: "Please enter a username between 5-25 alphanumeric characters.",
-    };
-  }
-
-  if (isEmpty(pin)) {
-    errorObj = { ...errorObj, pin: "PIN field is empty." };
-  }
-
-  if (
-    !isEmpty(pin) &&
-    (!isNumeric(pin) || !isLength(pin, { min: 4, max: 4 }))
-  ) {
-    errorObj = { ...errorObj, pin: "Please enter a 4-digit PIN." };
-  }
-
-  if (errorObj && !isEmpty(errorObj)) {
-    return constructErrorObject(
-      "server-validation-error",
-      "server side validation error",
-      400,
-      errorObj
-    );
-  }
-
-  const fullName = `${firstName.trim()} ${lastName.trim()}`;
-  const boolMap = { true: true, false: false };
-  const usernameHasBeenValidatedBool = boolMap[usernameHasBeenValidated];
-
-  return {
-    name: fullName,
-    email,
-    birthdate,
-    ageGate,
-    address: addresses.home,
-    workAddress: !isEmpty(addresses.work) ? addresses.work : null,
-    username,
-    pin,
-    ecommunicationsPref,
-    patron_agency: agencyType || config.agencyType.default,
-    usernameHasBeenValidated: usernameHasBeenValidatedBool,
-    policyType: policyType || "simplye",
-    homeLibraryCode,
-    acceptTerms,
-  };
-};
-
-const isTokenExpiring = (
+export const isTokenExpiring = (
   expirationTime,
   timeThreshold = 5,
   type = "minutes"
@@ -235,19 +73,36 @@ const isTokenExpiring = (
 // `initializeAppAuth` and `createPatron`.
 const app = {};
 
-export async function initializeAppAuth(req, res) {
+/**
+ * initializeAppAuth
+ * This function makes an API call to the NYPL Auth API endpoint to get a valid
+ * token to make requests to the NYPL Platform API. The NYPL Platform API hosts
+ * all the Card Creator endpoints. This function is called for all the nextjs
+ * API endpoints. If there is no access token available, one will requested
+ * with an API call and stored in the `app` variable. If there is a token
+ * available, but it's expiring in less than ten minutes, then make a request
+ * to get a new access token.
+ *
+ * Note: appObj is used to make testing easier.
+ */
+export async function initializeAppAuth(req, res, appObj = app) {
   logger.info("initializeAppAuth");
-  const tokenObject = app["tokenObject"];
-  const tokenExpTime = app["tokenExpTime"];
+  const tokenObject = appObj["tokenObject"];
+  const tokenExpTime = appObj["tokenExpTime"];
   const minuteExpThreshold = 10;
 
-  if (!tokenObject) {
+  // There's no token object at all. This is the initial case before the first
+  // API call. Let's request one and store it.
+  if (!tokenObject?.access_token) {
     return axios
       .post(config.api.oauth, qs.stringify(authConfig))
       .then((response) => {
         if (response.data) {
+          // Store the access token and other data. The expiration time is
+          // "3600" but we use moment to convert it to a moment date object.
           app["tokenObject"] = response.data;
           app["tokenExpTime"] = moment().add(response.data.expires_in, "s");
+          return;
         } else {
           logger.error("No access_token obtained from OAuth Service.");
           const errorObj = {};
@@ -267,6 +122,7 @@ export async function initializeAppAuth(req, res) {
         }
       })
       .catch((error) => {
+        // Oh no! Return the error.
         logger.error(error);
         return res
           .status(400)
@@ -281,16 +137,36 @@ export async function initializeAppAuth(req, res) {
       });
   }
 
+  // If there is an access token available but it will expire within ten
+  // minutes, then request a new acces token.
   if (
     tokenObject.access_token &&
     isTokenExpiring(tokenExpTime, minuteExpThreshold)
   ) {
+    logger.error("The access_token is expiring. Requesting a new access token");
     return axios
       .post(config.api.oauth, qs.stringify(authConfig))
       .then((response) => {
         if (response.data) {
           app["tokenObject"] = response.data;
           app["tokenExpTime"] = moment().add(response.data.expires_in, "s");
+          return;
+        } else {
+          logger.error("No access_token reobtained from OAuth Service.");
+          const errorObj = {};
+          Object.assign(errorObj, {
+            oauth: "No access_token reobtained from OAuth Service.",
+          });
+          return res
+            .status(400)
+            .json(
+              constructErrorObject(
+                "no-access-token",
+                "No access_token reobtained from OAuth Service.",
+                400,
+                errorObj
+              )
+            );
         }
       })
       .catch((error) => {
@@ -311,24 +187,6 @@ export async function initializeAppAuth(req, res) {
 }
 
 /**
- * makeAddressAPICalls
- * A wrapper function around `Promise.all` to make one or two asychronous requests
- * to the API to validate a home address and an optional work address. Each
- * POST request is handled separately because `Promise.all` either succeeds or
- * fails. If one request succeeds but one request fails, the overall request
- * fails. To safely catch requests and return the overall data even if one
- * request fails, each request is handled by `axiosAddressPost`.
- */
-function makeAddressAPICalls(
-  addresses: AddressRequestData[],
-  token: string
-): Promise<AddressAPIResponseData[]> {
-  return Promise.all(
-    addresses.map((a) => axiosAddressPost(a.address, a.isWorkAddress, token))
-  );
-}
-
-/**
  * axiosAddressPost
  * Makes a validated POST request to the API with the address and if it's a
  * work address. An `AddressAPIResponseData` object will be returned regardless if
@@ -337,17 +195,14 @@ function makeAddressAPICalls(
  * that the user has the choose from, or an error from Service Objects when
  * attempting to validate the address.
  */
-function axiosAddressPost(
+export function axiosAddressPost(
   address: Address,
   isWorkAddress: boolean,
-  token: string
+  token: string,
+  validateUrl = `${config.api.validate}/address`
 ): Promise<AddressAPIResponseData> {
   return axios
-    .post(
-      `${config.api.validate}/address`,
-      { address, isWorkAddress },
-      constructApiHeaders(token)
-    )
+    .post(validateUrl, { address, isWorkAddress }, constructApiHeaders(token))
     .then((result) => {
       return {
         status: result.data.status,
@@ -367,12 +222,30 @@ function axiosAddressPost(
 }
 
 /**
+ * makeAddressAPICalls
+ * A wrapper function around `Promise.all` to make one or two asychronous requests
+ * to the API to validate a home address and an optional work address. Each
+ * POST request is handled separately because `Promise.all` either succeeds or
+ * fails. If one request succeeds but one request fails, the overall request
+ * fails. To safely catch requests and return the overall data even if one
+ * request fails, each request is handled by `axiosAddressPost`.
+ */
+export function makeAddressAPICalls(
+  addresses: AddressRequestData[],
+  token: string
+): Promise<AddressAPIResponseData[]> {
+  return Promise.all(
+    addresses.map((a) => axiosAddressPost(a.address, a.isWorkAddress, token))
+  );
+}
+
+/**
  * validateAddress
  * Call the NYPL Platform API to validate an address.
  */
-export async function validateAddress(req, res) {
-  const tokenObject = app["tokenObject"];
-  if (tokenObject && tokenObject.access_token) {
+export async function validateAddress(req, res, appObj = app) {
+  const tokenObject = appObj["tokenObject"];
+  if (tokenObject && tokenObject?.access_token) {
     const token = tokenObject.access_token;
     const reqAddresses: Addresses = constructAddresses(req.body.formData);
     const addressesData = [
@@ -385,7 +258,7 @@ export async function validateAddress(req, res) {
 
     return makeAddressAPICalls(addressesData, token)
       .then((results: AddressAPIResponseData[]) => {
-        let response: AddressResponse = {
+        const response: AddressResponse = {
           home: {} as AddressRenderType,
           work: {} as AddressRenderType,
         };
@@ -417,7 +290,7 @@ export async function validateAddress(req, res) {
       });
   }
   // Else return a no token error
-  res.status(500).json({
+  return res.status(500).json({
     status: 500,
     response: "The access token could not be generated.",
   });
@@ -427,17 +300,18 @@ export async function validateAddress(req, res) {
  * validateUsername
  * Call the NYPL Platform API to validate a username.
  */
-export async function validateUsername(req, res) {
-  const tokenObject = app["tokenObject"];
-  if (tokenObject && tokenObject.access_token) {
+export async function validateUsername(
+  req,
+  res,
+  validateUrl = `${config.api.validate}/username`,
+  appObj = app
+) {
+  const tokenObject = appObj["tokenObject"];
+  if (tokenObject && tokenObject?.access_token) {
     const token = tokenObject.access_token;
     const username = req.body.username;
     return axios
-      .post(
-        `${config.api.validate}/username`,
-        { username },
-        constructApiHeaders(token)
-      )
+      .post(validateUrl, { username }, constructApiHeaders(token))
       .then((result) => {
         return res.json({
           status: result.data.status,
@@ -445,25 +319,30 @@ export async function validateUsername(req, res) {
         });
       })
       .catch((err) => {
-        res.status(err.response.status).json({
+        return res.status(err.response.status).json({
           ...err.response?.data,
         });
       });
   }
 
   // Else return a no token error
-  res.status(500).json({
+  return res.status(500).json({
     status: 500,
     response: "The access token could not be generated.",
   });
 }
 
-export async function createPatron(req, res) {
-  const tokenObject = app["tokenObject"];
+export async function createPatron(
+  req,
+  res,
+  createPatronUrl = config.api.patron,
+  appObj = app
+) {
+  const tokenObject = appObj["tokenObject"];
   if (tokenObject && tokenObject.access_token) {
     const token = tokenObject.access_token;
     const patronData = constructPatronObject(req.body);
-    if (patronData.status === 400) {
+    if ((patronData as ErrorResponse).status === 400) {
       return res.status(400).json(patronData);
     }
 
@@ -489,25 +368,25 @@ export async function createPatron(req, res) {
     //   },
     // });
     // Uncomment to test routing to a confirmation page with test data.
-    return res.status(200).json({
-      status: 200,
-      type: "card-granted",
-      link: "some-link",
-      barcode: "12345678912345",
-      username: "tomnook",
-      pin: "1234",
-      temporary: false,
-      message: "The library card will be a standard library card.",
-      patronId: 1234567,
-      name: "Tom Nook",
-    });
+    // return res.status(200).json({
+    //   status: 200,
+    //   type: "card-granted",
+    //   link: "some-link",
+    //   barcode: "12345678912345",
+    //   username: "tomnook",
+    //   pin: "1234",
+    //   temporary: false,
+    //   message: "The library card will be a standard library card.",
+    //   patronId: 1234567,
+    //   name: "Tom Nook",
+    // });
 
     return axios
-      .post(config.api.patron, patronData, constructApiHeaders(token))
+      .post(createPatronUrl, patronData, constructApiHeaders(token))
       .then((result) => {
         return res.json({
           status: result.data.status,
-          name: patronData.name,
+          name: (patronData as FormAPISubmission).name,
           ...result.data,
         });
       })
@@ -515,13 +394,14 @@ export async function createPatron(req, res) {
         let serverError = null;
 
         // If the response from the Patron Creator Service(the wrapper)
-        // does not include valid error details, we mark this result as an internal server error
+        // does not include valid error details, we mark this result as
+        // an internal server error.
         if (!err.response.data) {
           logger.error("Error calling Card Creator API: ", err.message);
           serverError = { type: "server" };
         }
 
-        res.status(err.response.status).json({
+        return res.status(err.response.status).json({
           status: err.response.status,
           response: serverError
             ? Object.assign(err.response.data, serverError)
@@ -530,7 +410,7 @@ export async function createPatron(req, res) {
       });
   }
   // Else return a no token error
-  res.status(500).json({
+  return res.status(500).json({
     status: 500,
     response: "The access token could not be generated.",
   });

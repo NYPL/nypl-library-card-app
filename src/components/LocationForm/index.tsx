@@ -66,8 +66,8 @@ const LocationForm = ({ inputRadioList, scrollRef }: LocationFormProps) => {
     const labelId = `radio-${fieldName}-${value}`;
     const inputId = `${fieldName}-${value}`;
     return (
-      <div>
-        <div key={value} className="radio-field">
+      <div key={value}>
+        <div className="radio-field">
           <Input
             className="radio-input"
             aria-labelledby={`${legendId} ${labelId}`}
@@ -100,10 +100,7 @@ const LocationForm = ({ inputRadioList, scrollRef }: LocationFormProps) => {
         <HelperErrorText isError={errorText}>{errorText}</HelperErrorText>
       )}
       <fieldset>
-        <legend id={legendId}>
-          I live, work, or go to school:
-          <span className="required-field"> Required</span>
-        </legend>
+        <legend id={legendId}>I live, work, or go to school:</legend>
         {createRadioForm(inputRadioList)}
       </fieldset>
     </>
