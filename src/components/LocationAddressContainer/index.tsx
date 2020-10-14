@@ -30,7 +30,8 @@ const LocationAddressContainer = ({
   const { formValues } = state;
   const router = useRouter();
   // Specific functions and object from react-hook-form.
-  const { handleSubmit, register } = useFormContext();
+  const { handleSubmit, register, watch } = useFormContext();
+  const selectedLocation = watch("location");
 
   /**
    * submitForm
@@ -113,15 +114,13 @@ const LocationAddressContainer = ({
     <>
       <div className={styles.addressSection}>
         <h3>Home Address</h3>
-        <Accordion
-          id="home-address-accordion"
-          accordionLabel="If you live in NYC, please fill out the home address form."
-        >
-          <AddressForm
-            type={AddressTypes.Home}
-            errorMessages={errorMessages.address}
-          />
-        </Accordion>
+        {selectedLocation === "nyc" && (
+          <p>If you live in NYC, please fill out the home address form.</p>
+        )}
+        <AddressForm
+          type={AddressTypes.Home}
+          errorMessages={errorMessages.address}
+        />
       </div>
 
       {work && (
@@ -129,7 +128,7 @@ const LocationAddressContainer = ({
           <h3>Work Address</h3>
           <Accordion
             id="work-address-accordion"
-            accordionLabel="If you live in NYC, please fill out the work address form."
+            accordionLabel="If you work in NYC, please fill out the work address form."
           >
             <AddressForm
               type={AddressTypes.Work}

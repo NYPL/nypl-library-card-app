@@ -21,7 +21,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
   // This component must be used within the `react-hook-form` provider so that
   // these functions are available to use.
   const { register, errors } = useFormContext();
-  const MAXLENGTHSTATE = 2;
+  const STATELENGTH = 2;
   const MINLENGTHZIP = 5;
   const MAXLENGTHZIP = 10;
   // Only the home address is required. The work address is optional.
@@ -36,7 +36,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
    * @param length Max length of the field input.
    * @param field The key name of the field.
    */
-  const lengthValidation = (max, field, min = undefined) => (value) => {
+  const lengthValidation = (min, max, field) => (value) => {
     if (!min) {
       return !isRequired || value.length <= max || errorMessages[field];
     }
@@ -96,9 +96,9 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
             fieldName={`${type}-state`}
             isRequired={isRequired}
             errorState={errors}
-            maxLength={MAXLENGTHSTATE}
+            maxLength={STATELENGTH}
             ref={register({
-              validate: lengthValidation(MAXLENGTHSTATE, "state"),
+              validate: lengthValidation(STATELENGTH, STATELENGTH, "state"),
             })}
             defaultValue={formValues[`${type}-state`]}
           />
@@ -115,7 +115,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
             minLength={MINLENGTHZIP}
             maxLength={MAXLENGTHZIP}
             ref={register({
-              validate: lengthValidation(MAXLENGTHZIP, "zip", MINLENGTHZIP),
+              validate: lengthValidation(MINLENGTHZIP, MAXLENGTHZIP, "zip"),
             })}
             defaultValue={formValues[`${type}-zip`]}
           />
