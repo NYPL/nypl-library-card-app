@@ -13,13 +13,13 @@ import {
   AddressAPIResponseData,
   AddressResponse,
   AddressRenderType,
-  ErrorResponse,
+  ProblemDetail,
   FormAPISubmission,
 } from "../interfaces";
 import {
   constructAddresses,
   constructPatronObject,
-  constructErrorObject,
+  constructProblemDetail,
 } from "./formDataUtils";
 
 // Initializing the cors middleware
@@ -112,10 +112,11 @@ export async function initializeAppAuth(req, res, appObj = app) {
           return res
             .status(400)
             .json(
-              constructErrorObject(
-                "no-access-token",
-                "No access_token obtained from OAuth Service.",
+              constructProblemDetail(
                 400,
+                "no-access-token",
+                "No Access Token",
+                "No access_token obtained from OAuth Service.",
                 errorObj
               )
             );
@@ -127,10 +128,11 @@ export async function initializeAppAuth(req, res, appObj = app) {
         return res
           .status(400)
           .json(
-            constructErrorObject(
-              "app-auth-failed",
-              "Could not authenticate App with OAuth service",
+            constructProblemDetail(
               400,
+              "app-auth-failed",
+              "App Auth failed",
+              "Could not authenticate App with OAuth service",
               error
             )
           );
@@ -160,10 +162,11 @@ export async function initializeAppAuth(req, res, appObj = app) {
           return res
             .status(400)
             .json(
-              constructErrorObject(
-                "no-access-token",
-                "No access_token reobtained from OAuth Service.",
+              constructProblemDetail(
                 400,
+                "no-access-token",
+                "No Access token",
+                "No access_token reobtained from OAuth Service.",
                 errorObj
               )
             );
@@ -174,10 +177,11 @@ export async function initializeAppAuth(req, res, appObj = app) {
         return res
           .status(400)
           .json(
-            constructErrorObject(
-              "app-reauth-failed",
-              "Could not re-authenticate App with OAuth service",
+            constructProblemDetail(
               400,
+              "app-reauth-failed",
+              "App re-auth failed",
+              "Could not re-authenticate App with OAuth service",
               error
             )
           );
@@ -267,14 +271,14 @@ export async function validateAddress(req, res, appObj = app) {
         response.home = {
           address: homeData?.address || homeData.originalAddress,
           addresses: homeData?.addresses,
-          message: homeData.message,
+          detail: homeData.detail,
           reason: homeData.reason,
         };
         if (workData) {
           response.work = {
             address: workData?.address || workData?.originalAddress,
             addresses: workData?.addresses,
-            message: workData?.message,
+            detail: workData?.detail,
             reason: workData?.reason,
           };
         }
@@ -290,10 +294,16 @@ export async function validateAddress(req, res, appObj = app) {
       });
   }
   // Else return a no token error
-  return res.status(500).json({
-    status: 500,
-    response: "The access token could not be generated.",
-  });
+  return res
+    .status(500)
+    .json(
+      constructProblemDetail(
+        500,
+        "no-access-token",
+        "No Access Token",
+        "The access token could not be generated."
+      )
+    );
 }
 
 /**
@@ -326,10 +336,16 @@ export async function validateUsername(
   }
 
   // Else return a no token error
-  return res.status(500).json({
-    status: 500,
-    response: "The access token could not be generated.",
-  });
+  return res
+    .status(500)
+    .json(
+      constructProblemDetail(
+        500,
+        "no-access-token",
+        "No Access Token",
+        "The access token could not be generated."
+      )
+    );
 }
 
 export async function createPatron(
@@ -342,7 +358,8 @@ export async function createPatron(
   if (tokenObject && tokenObject.access_token) {
     const token = tokenObject.access_token;
     const patronData = constructPatronObject(req.body);
-    if ((patronData as ErrorResponse).status === 400) {
+    if ((patronData as ProblemDetail).status === 400) {
+      logger.error("Invalid patron data");
       return res.status(400).json(patronData);
     }
 
@@ -352,9 +369,10 @@ export async function createPatron(
     // return res.status(400).json({
     //   status: 400,
     //   response: {
-    //     type: "server-validation-error",
-    //     message: "server side validation error",
-    //     details: {
+    //     type: "invalid-request",
+    //     title: "Invalid Request",
+    //     detail: "There were errors in the submission.",
+    //     error: {
     //       firstName: "First Name field is empty.",
     //       lastName: "Last Name field is empty.",
     //       birthdate: "Date of Birth field is empty.",
@@ -391,27 +409,45 @@ export async function createPatron(
         });
       })
       .catch((err) => {
+        const status = err.response.status;
         let serverError = null;
 
-        // If the response from the Patron Creator Service(the wrapper)
+        // If the response from the Patron Creator Service
         // does not include valid error details, we mark this result as
         // an internal server error.
-        if (!err.response.data) {
-          logger.error("Error calling Card Creator API: ", err.message);
+        if (status === 401 || status === 403) {
           serverError = { type: "server" };
         }
 
+        const restOfErrors = serverError
+          ? { ...err.response.data, ...serverError }
+          : err.response.data;
+
+        logger.error(
+          `Error calling Card Creator API: ${
+            status === 403 ? "bad API call" : err.response.data.message
+          }`
+        );
         return res.status(err.response.status).json({
           status: err.response.status,
-          response: serverError
-            ? Object.assign(err.response.data, serverError)
-            : err.response.data,
+          ...restOfErrors,
         });
       });
   }
-  // Else return a no token error
-  return res.status(500).json({
-    status: 500,
-    response: "The access token could not be generated.",
-  });
+
+  // Else return a no token error.
+  const tokenGenerationError =
+    "The access token could not be generated before calling the Card Creator API.";
+
+  logger.error(tokenGenerationError);
+  return res
+    .status(500)
+    .json(
+      constructProblemDetail(
+        500,
+        "no-access-token",
+        "No Access Token",
+        tokenGenerationError
+      )
+    );
 }

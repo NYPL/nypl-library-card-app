@@ -42,7 +42,7 @@ const AcceptTermsForm = () => {
       </p>
 
       <Checkbox
-        checkboxId="acceptTermsCheckbox"
+        checkboxId="input-acceptTerms"
         name="acceptTerms"
         labelOptions={acceptTermsLabelOptions}
         // Users must click the checkbox in order to submit.

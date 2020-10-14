@@ -34,7 +34,7 @@ function PersonalForm({ agencyType = "" }) {
       <div className={`input-group ${styles.inputGroup}`}>
         <div style={{ flex: "1" }}>
           <FormField
-            id="patronFirstName"
+            id="firstName"
             label="First Name"
             fieldName="firstName"
             isRequired
@@ -50,7 +50,7 @@ function PersonalForm({ agencyType = "" }) {
         </div>
         <div style={{ flex: "1" }}>
           <FormField
-            id="patronLastName"
+            id="lastName"
             label="Last Name"
             fieldName="lastName"
             isRequired
@@ -69,7 +69,7 @@ function PersonalForm({ agencyType = "" }) {
       />
 
       <FormField
-        id="patronEmail"
+        id="email"
         label="E-Mail Address"
         fieldName="email"
         errorState={errors}
@@ -83,7 +83,7 @@ function PersonalForm({ agencyType = "" }) {
       />
 
       <Checkbox
-        checkboxId="patronECommunications"
+        checkboxId="eCommunications"
         name="ecommunicationsPref"
         labelOptions={checkBoxLabelOptions}
         // Users must opt-out.

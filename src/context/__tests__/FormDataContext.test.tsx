@@ -14,6 +14,7 @@ const initState: FormData = {
     policyType: "webApplicant",
   } as FormInputData,
   addressResponse: {},
+  query: {},
 };
 const contextWrapper = () => ({ children }) => (
   <FormDataContextProvider initState={initState}>
