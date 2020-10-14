@@ -9,7 +9,6 @@ import {
   FormAPISubmission,
   FormInputData,
 } from "../interfaces";
-import { isDate } from "./FormValidationUtils";
 
 const errorMessages = {
   firstName: "Please enter a valid first name.",
@@ -29,6 +28,38 @@ const errorMessages = {
     zip: "Please enter a 5 or 9-digit postal code.",
   } as Address,
 };
+
+/**
+ * isDate
+ * Makes sure that the input value matches the desired path and is a date with
+ * the year bounds.
+ */
+function isDate(
+  input,
+  minYear = 1902,
+  maxYear = new Date().getFullYear()
+): boolean {
+  // regular expression to match required date format
+  const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+
+  if (input === "") {
+    return false;
+  }
+
+  if (input.match(regex)) {
+    const temp = input.split("/");
+    const dateFromInput = new Date(`${temp[2]}/${temp[0]}/${temp[1]}`);
+
+    return (
+      dateFromInput.getDate() === Number(temp[1]) &&
+      dateFromInput.getMonth() + 1 === Number(temp[0]) &&
+      Number(temp[2]) > minYear &&
+      Number(temp[2]) < maxYear
+    );
+  }
+
+  return false;
+}
 
 /**
  * findLibraryCode
@@ -141,14 +172,21 @@ const constructProblemDetail = (
 
 /**
  * validateAddressFormData
+ * This validates fields in an address object, adds any errors to the object
+ * containing any existing errors from other fields, and returns it. The
+ * validation is perform on the home and work address, if available. Since the
+ * work address is optional, having an empty work address is acceptable.
  */
-const validateAddressFormData = (object, addresses) => {
-  let errorObj = { ...object };
+const validateAddressFormData = (initErrorObj, addresses: Addresses) => {
+  let errorObj = { ...initErrorObj };
+  // Keep track of the home or work address errors in this larger object.
   const addressErrors = {};
 
   Object.keys(addresses).forEach((addressType) => {
+    // `addressType` can be either "home" or "work".
     const typeObj = addresses[addressType];
 
+    // Now validate each field for that specific address object:
     if (isEmpty(typeObj.line1)) {
       addressErrors[addressType] = {
         ...addressErrors[addressType],
@@ -183,6 +221,8 @@ const validateAddressFormData = (object, addresses) => {
     }
   });
 
+  // Now add it back to the original error object as the separate
+  // `address` property.
   if (!isEmpty(addressErrors)) {
     errorObj = { ...errorObj, address: addressErrors };
   }
@@ -190,6 +230,11 @@ const validateAddressFormData = (object, addresses) => {
   return errorObj;
 };
 
+/**
+ * validateFormData
+ * Validates the form submission values and returns any errors. Internally, it
+ * uses `validateAddressFormData` to validate home and work addresses.
+ */
 const validateFormData = (object, addresses) => {
   const {
     firstName,
@@ -325,12 +370,15 @@ const constructPatronObject = (
 };
 
 export {
+  errorMessages,
+  isDate,
   findLibraryCode,
   findLibraryName,
   getPatronAgencyType,
   getLocationValue,
-  errorMessages,
   constructAddresses,
-  constructPatronObject,
   constructProblemDetail,
+  validateAddressFormData,
+  validateFormData,
+  constructPatronObject,
 };

@@ -5,7 +5,7 @@ import {
 } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
 import FormField from "../FormField";
-import { isDate } from "../../utils/FormValidationUtils";
+import { isDate } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
 
 interface AgeFormProps {

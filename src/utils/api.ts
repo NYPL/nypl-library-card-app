@@ -358,7 +358,6 @@ export async function createPatron(
   if (tokenObject && tokenObject.access_token) {
     const token = tokenObject.access_token;
     const patronData = constructPatronObject(req.body);
-    console.log("patronData", patronData);
     if ((patronData as ProblemDetail).status === 400) {
       logger.error("Invalid patron data");
       return res.status(400).json(patronData);
@@ -429,8 +428,6 @@ export async function createPatron(
             status === 403 ? "bad API call" : err.response.data.message
           }`
         );
-        console.log("err.response", err.response);
-        console.log("restOfErrors", restOfErrors);
         return res.status(err.response.status).json({
           status: err.response.status,
           ...restOfErrors,
