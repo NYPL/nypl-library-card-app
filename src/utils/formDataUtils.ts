@@ -5,7 +5,7 @@ import config from "../../appConfig";
 import {
   Address,
   Addresses,
-  ErrorResponse,
+  ProblemDetail,
   FormAPISubmission,
   FormInputData,
 } from "../interfaces";
@@ -107,27 +107,87 @@ const constructAddresses = (object = {}) => {
     });
   });
 
+  // The work object is optional, so if it's completely empty, just remove it
+  // or else we'll get false errors of work fields being empty.
+  if (isEmpty(addresses.work)) {
+    delete addresses.work;
+  }
+
   return addresses;
 };
 
 /**
- * constructErrorObject
+ * constructProblemDetail
  * Create an error object to be returned by the API endpoints.
  */
-const constructErrorObject = (
+const constructProblemDetail = (
   status = 400,
   type = "general-error",
   title = "General Error",
   detail = "There was an error with your request",
   error = null
-): ErrorResponse => {
-  return {
+): ProblemDetail => {
+  const pd: ProblemDetail = {
     status,
     type,
     title,
     detail,
-    error,
   };
+  if (error) {
+    pd.error = error;
+  }
+  return pd;
+};
+
+/**
+ * validateAddressFormData
+ */
+const validateAddressFormData = (object, addresses) => {
+  let errorObj = { ...object };
+  const addressErrors = {};
+
+  Object.keys(addresses).forEach((addressType) => {
+    const typeObj = addresses[addressType];
+
+    if (isEmpty(typeObj.line1)) {
+      addressErrors[addressType] = {
+        ...addressErrors[addressType],
+        line1: errorMessages.address.line1,
+      };
+    } else if (typeObj?.line1?.length + typeObj?.line2?.length > 100) {
+      addressErrors[addressType] = {
+        ...addressErrors[addressType],
+        line1: "Street address fields must not be more than 100 lines.",
+      };
+    }
+
+    if (isEmpty(typeObj.city)) {
+      addressErrors[addressType] = {
+        ...addressErrors[addressType],
+        city: errorMessages.address.city,
+      };
+    }
+
+    if (isEmpty(typeObj.state) || typeObj.state.length !== 2) {
+      addressErrors[addressType] = {
+        ...addressErrors[addressType],
+        state: errorMessages.address.state,
+      };
+    }
+
+    if (isEmpty(typeObj.zip) || !isLength(typeObj.zip, { min: 5, max: 10 })) {
+      addressErrors[addressType] = {
+        ...addressErrors[addressType],
+        zip: errorMessages.address.zip,
+      };
+    }
+  });
+
+  if (!isEmpty(addressErrors)) {
+    errorObj = { ...errorObj, address: addressErrors };
+  }
+
+  return errorObj;
 };
 
 const validateFormData = (object, addresses) => {
@@ -145,8 +205,6 @@ const validateFormData = (object, addresses) => {
     location,
   } = object;
   let errorObj = {};
-  let homeObj = {};
-  // let workObj = {};
 
   if (isEmpty(firstName)) {
     errorObj = { ...errorObj, firstName: errorMessages.firstName };
@@ -204,48 +262,7 @@ const validateFormData = (object, addresses) => {
     errorObj = { ...errorObj, location: errorMessages.location };
   }
 
-  if (isEmpty(addresses.home.line1)) {
-    homeObj = {
-      ...homeObj,
-      line1: errorMessages.address.line1,
-    };
-  } else if (
-    addresses.home?.line1?.length + addresses.home?.line2?.length >
-    100
-  ) {
-    homeObj = {
-      ...homeObj,
-      line1: "Street address fields must not be more than 100 lines.",
-    };
-  }
-
-  if (isEmpty(addresses.home.city)) {
-    homeObj = {
-      ...homeObj,
-      city: errorMessages.address.city,
-    };
-  }
-
-  if (isEmpty(addresses.home.state) || addresses.home.state.length !== 2) {
-    homeObj = {
-      ...homeObj,
-      state: errorMessages.address.state,
-    };
-  }
-
-  if (
-    isEmpty(addresses.home.zip) ||
-    !isLength(addresses.home.zip, { min: 5, max: 10 })
-  ) {
-    homeObj = {
-      ...homeObj,
-      zip: errorMessages.address.zip,
-    };
-  }
-
-  if (!isEmpty(homeObj)) {
-    errorObj = { ...errorObj, address: { home: homeObj } };
-  }
+  errorObj = validateAddressFormData(errorObj, addresses);
 
   return errorObj;
 };
@@ -257,7 +274,7 @@ const validateFormData = (object, addresses) => {
  */
 const constructPatronObject = (
   object: FormInputData
-): FormAPISubmission | ErrorResponse => {
+): FormAPISubmission | ProblemDetail => {
   const {
     firstName,
     lastName,
@@ -278,7 +295,7 @@ const constructPatronObject = (
   const errors = validateFormData(object, addresses);
 
   if (!isEmpty(errors)) {
-    return constructErrorObject(
+    return constructProblemDetail(
       400,
       "invalid-request",
       "Invalid Request",
@@ -315,5 +332,5 @@ export {
   errorMessages,
   constructAddresses,
   constructPatronObject,
-  constructErrorObject,
+  constructProblemDetail,
 };

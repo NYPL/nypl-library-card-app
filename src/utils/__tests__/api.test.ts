@@ -12,7 +12,6 @@ import {
 } from "../api";
 const axios = require("axios");
 import moment from "moment";
-import { create } from "domain";
 
 jest.mock("axios");
 let mockedReturnedJson = {};
@@ -82,14 +81,13 @@ describe("initializeAppAuth", () => {
 
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(mockedReturnedJson).toEqual({
-      response: {
-        details: {
-          oauth: "No access_token obtained from OAuth Service.",
-        },
-        message: "No access_token obtained from OAuth Service.",
-        type: "no-access-token",
-      },
       status: 400,
+      type: "no-access-token",
+      title: "No Access Token",
+      detail: "No access_token obtained from OAuth Service.",
+      error: {
+        oauth: "No access_token obtained from OAuth Service.",
+      },
     });
   });
 
@@ -392,7 +390,7 @@ describe("validateAddress", () => {
           hasBeenValidated: true,
         },
         addresses: undefined,
-        message: "",
+        detail: undefined,
         reason: "",
       },
       work: {
@@ -405,7 +403,7 @@ describe("validateAddress", () => {
           hasBeenValidated: true,
         },
         addresses: undefined,
-        message: "",
+        detail: undefined,
         reason: "",
       },
     });
@@ -581,6 +579,7 @@ describe("createPatron", () => {
         "work-hasBeenValidated": true,
         username: "tomnook42",
         pin: "1234",
+        verifyPin: "1234",
         acceptTerms: true,
       },
     };

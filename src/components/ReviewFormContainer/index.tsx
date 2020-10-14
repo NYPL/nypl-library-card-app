@@ -53,6 +53,8 @@ function ReviewFormContainer() {
     if (errorObj) {
       errorSection.current.focus();
       document.title = "Form Submission Error | NYPL";
+      // When we display errors, we want to go into the "Edit" state so
+      // that it's easier to go to input fields from the error messages.
       setEditAccountInfoFlag(true);
       setEditPersonalInfoFlag(true);
     }
@@ -283,7 +285,7 @@ function ReviewFormContainer() {
 
   return (
     <>
-      <ApiErrors ref={errorSection} apiResults={errorObj} />
+      <ApiErrors ref={errorSection} problemDetail={errorObj} />
 
       <div className={styles.formSection}>
         <h3>Personal Information</h3>

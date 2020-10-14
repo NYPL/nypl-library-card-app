@@ -13,13 +13,13 @@ import {
   AddressAPIResponseData,
   AddressResponse,
   AddressRenderType,
-  ErrorResponse,
+  ProblemDetail,
   FormAPISubmission,
 } from "../interfaces";
 import {
   constructAddresses,
   constructPatronObject,
-  constructErrorObject,
+  constructProblemDetail,
 } from "./formDataUtils";
 
 // Initializing the cors middleware
@@ -112,7 +112,7 @@ export async function initializeAppAuth(req, res, appObj = app) {
           return res
             .status(400)
             .json(
-              constructErrorObject(
+              constructProblemDetail(
                 400,
                 "no-access-token",
                 "No Access Token",
@@ -128,7 +128,7 @@ export async function initializeAppAuth(req, res, appObj = app) {
         return res
           .status(400)
           .json(
-            constructErrorObject(
+            constructProblemDetail(
               400,
               "app-auth-failed",
               "App Auth failed",
@@ -162,7 +162,7 @@ export async function initializeAppAuth(req, res, appObj = app) {
           return res
             .status(400)
             .json(
-              constructErrorObject(
+              constructProblemDetail(
                 400,
                 "no-access-token",
                 "No Access token",
@@ -177,7 +177,7 @@ export async function initializeAppAuth(req, res, appObj = app) {
         return res
           .status(400)
           .json(
-            constructErrorObject(
+            constructProblemDetail(
               400,
               "app-reauth-failed",
               "App re-auth failed",
@@ -294,10 +294,16 @@ export async function validateAddress(req, res, appObj = app) {
       });
   }
   // Else return a no token error
-  return res.status(500).json({
-    status: 500,
-    response: "The access token could not be generated.",
-  });
+  return res
+    .status(500)
+    .json(
+      constructProblemDetail(
+        500,
+        "no-access-token",
+        "No Access Token",
+        "The access token could not be generated."
+      )
+    );
 }
 
 /**
@@ -330,10 +336,16 @@ export async function validateUsername(
   }
 
   // Else return a no token error
-  return res.status(500).json({
-    status: 500,
-    response: "The access token could not be generated.",
-  });
+  return res
+    .status(500)
+    .json(
+      constructProblemDetail(
+        500,
+        "no-access-token",
+        "No Access Token",
+        "The access token could not be generated."
+      )
+    );
 }
 
 export async function createPatron(
@@ -347,7 +359,7 @@ export async function createPatron(
     const token = tokenObject.access_token;
     const patronData = constructPatronObject(req.body);
     console.log("patronData", patronData);
-    if ((patronData as ErrorResponse).status === 400) {
+    if ((patronData as ProblemDetail).status === 400) {
       logger.error("Invalid patron data");
       return res.status(400).json(patronData);
     }
@@ -358,10 +370,9 @@ export async function createPatron(
     // return res.status(400).json({
     //   status: 400,
     //   response: {
-    //     type: "server-validation-error",
-    //     title: "",
-    //     message: "server side validation error",
-    //     details: "",
+    //     type: "invalid-request",
+    //     title: "Invalid Request",
+    //     detail: "There were errors in the submission.",
     //     error: {
     //       firstName: "First Name field is empty.",
     //       lastName: "Last Name field is empty.",
@@ -432,10 +443,14 @@ export async function createPatron(
     "The access token could not be generated before calling the Card Creator API.";
 
   logger.error(tokenGenerationError);
-  return res.status(500).json({
-    status: 500,
-    type: "no-access-token",
-    title: "No access token.",
-    detail: tokenGenerationError,
-  });
+  return res
+    .status(500)
+    .json(
+      constructProblemDetail(
+        500,
+        "no-access-token",
+        "No Access Token",
+        tokenGenerationError
+      )
+    );
 }

@@ -2,14 +2,14 @@
 import React from "react";
 import isEmpty from "lodash/isEmpty";
 import {
-  renderServerValidationError,
-  createAnchorText,
+  renderServerValidationErrors,
+  createUsernameAnchor,
 } from "../../utils/FormValidationUtils";
 import styles from "./ApiErrors.module.css";
-import { ErrorResponse } from "../../interfaces";
+import { ProblemDetail } from "../../interfaces";
 
 interface ApiErrorsProps {
-  apiResults: ErrorResponse | undefined;
+  problemDetail: ProblemDetail | undefined;
 }
 
 /**
@@ -19,17 +19,19 @@ interface ApiErrorsProps {
  * specific input element that is returning an error.
  */
 const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
-  ({ apiResults }, ref) => {
-    if (!apiResults || isEmpty(apiResults) || apiResults?.status < 400) {
+  ({ problemDetail }, ref) => {
+    if (
+      !problemDetail ||
+      isEmpty(problemDetail) ||
+      problemDetail?.status < 400
+    ) {
       return null;
     }
-    console.log(apiResults);
     const renderErrorByType = (errorObj) => {
       const { type, detail, error } = errorObj;
       const defaultError =
         "There was an error processing your submission. Please try again later.";
       let errorElements;
-      let message;
 
       // The following error types can be found in the wiki:
       // https://github.com/NYPL/dgx-patron-creator-service/wiki/API-V0.3#error-responses-2
@@ -40,19 +42,19 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
           // sending a request to the Card Creator API. The Card Creator API
           // can also return these types of errors based on its own validations.
           case "invalid-request":
-            errorElements = <>{renderServerValidationError(error)}</>;
+            errorElements = renderServerValidationErrors(error);
             break;
           // All the errors are in the `error` property but for the `username`,
           // the error is in the `detail` property. This error is thrown in the
           // API right away so it can't attempt to create an invalid account.
           case "invalid-username":
           case "unavailable-username":
-            message = detail.replace(
-              "username",
-              `<a href="#input-username">username</a>`
-            );
             errorElements = (
-              <li dangerouslySetInnerHTML={{ __html: message }} />
+              <li
+                dangerouslySetInnerHTML={{
+                  __html: createUsernameAnchor(detail),
+                }}
+              />
             );
             break;
           // Note: the following shouldn't happen since empty values will be
@@ -77,7 +79,7 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
     return (
       <div ref={ref} className={styles.container} tabIndex={0}>
         <h3 className={styles.heading}>Form submission error</h3>
-        {renderErrorByType(apiResults)}
+        {renderErrorByType(problemDetail)}
       </div>
     );
   }

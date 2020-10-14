@@ -47,6 +47,7 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
   const { favIconPath, appTitle } = appConfig;
+  // We want to store the initial url query params into the app's store state.
   const initState = { ...formInitialState, query };
   return (
     <>

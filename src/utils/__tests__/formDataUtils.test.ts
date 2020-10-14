@@ -4,7 +4,7 @@ import {
   getPatronAgencyType,
   getLocationValue,
   constructAddresses,
-  constructErrorObject,
+  constructProblemDetail,
   constructPatronObject,
 } from "../formDataUtils";
 import { Addresses, FormInputData, FormAPISubmission } from "../../interfaces";
@@ -63,7 +63,7 @@ describe("constructAddresses", () => {
   test("it returns an empty AddressType object with no input", () => {
     const empty: Addresses = constructAddresses();
 
-    expect(empty).toStrictEqual({ home: {}, work: {} });
+    expect(empty).toStrictEqual({ home: {} });
   });
 
   test("returns an updated home address object property", () => {
@@ -138,9 +138,9 @@ describe("constructAddresses", () => {
   });
 });
 
-describe("constructErrorObject", () => {
+describe("constructProblemDetail", () => {
   test("returns an object with default values", () => {
-    expect(constructErrorObject()).toEqual({
+    expect(constructProblemDetail()).toEqual({
       status: 400,
       type: "general-error",
       title: "General Error",
@@ -150,7 +150,7 @@ describe("constructErrorObject", () => {
 
   test("returns an object along with details", () => {
     expect(
-      constructErrorObject(500, "invalid-request", "Invalid Request", "", {
+      constructProblemDetail(500, "invalid-request", "Invalid Request", "", {
         field: "uhoh",
       })
     ).toEqual({
@@ -164,7 +164,7 @@ describe("constructErrorObject", () => {
 });
 
 describe("constructPatronObject", () => {
-  test("returns an ErrorResponse with missing values in the details", () => {
+  test("returns a ProblemDetail with missing values in the details", () => {
     const patronFormValuesMissingValues: FormInputData = {
       ecommunicationsPref: true,
       policyType: "webApplicant",
@@ -186,12 +186,17 @@ describe("constructPatronObject", () => {
     };
     expect(constructPatronObject(patronFormValuesMissingValues)).toEqual({
       status: 400,
-      type: "server-validation-error",
-      message: "server side validation error",
-      details: {
-        lastName: "Last Name field is empty.",
-        email: "Email field is empty.",
-        city: "City field is empty.",
+      type: "invalid-request",
+      title: "Invalid Request",
+      detail: "There was an error with the submitted form values.",
+      error: {
+        lastName: "Please enter a valid last name.",
+        email: "Please enter a valid email address.",
+        address: {
+          home: {
+            city: "Please enter a valid city.",
+          },
+        },
       },
     });
   });

@@ -28,6 +28,8 @@ function isDate(
   return false;
 }
 
+// Each key points to a string of text that will be used as text
+// inside an anchor element.
 export const errorMessageHashMap = {
   firstName: "first name",
   lastName: "last name",
@@ -46,68 +48,44 @@ export const errorMessageHashMap = {
 };
 
 /**
- * createAnchorID(key)
- * Creates the proper anchor ID for the href of the <a> tag in the error message.
- *
- * @param {string} key
- * return {string}
- */
-function createAnchorID(key: string): string | null {
-  const addressElements = ["line1", "city", "state", "zip"];
-  let hashElement = key;
-  if (!hashElement) {
-    return null;
-  }
-  if (addressElements.includes(hashElement)) {
-    hashElement = `${hashElement}-home`;
-  }
-
-  // @nypl/design-system-react-components prepends an `input` before the
-  // id of the input element we want an anchor for.
-  return `#input-${hashElement}`;
-}
-
-/**
  * createAnchorText
+ * For every key that has an error, we want to replace its respective text as
+ * an anchor element. For address input fields, we instead want to focus on the
+ * location/address section instead of individual fields. This is because the
+ * "edit" button will redirect to the location/address form page instead
+ * of allowing to edit the values in the review page.
  */
-function createAnchorText(key, errors) {
+function createAnchorText(key, errors, type = "") {
   const message = errors[key];
   if (!message) {
     return;
   }
   const displayText = errorMessageHashMap[key];
-  return message.replace(
-    displayText,
-    `<a href=${createAnchorID(key)}>${displayText}</a>`
-  );
+  const anchorString =
+    type || key === "location"
+      ? `${type} <a href="#address-section">${displayText}</a>`
+      : `<a href="#input-${key}">${displayText}</a>`;
+
+  return message.replace(displayText, anchorString);
 }
 
 /**
- * createAddressAnchorText
+ * createUsernameAnchor
+ * This is used for errors caught from the response of an API call when
+ * attempting to _create_ a patron. The detail message is coming from the API.
  */
-function createAddressAnchorText(key, errors, type) {
-  const message = errors[key];
-  if (!message) {
-    return;
-  }
-  const displayText = errorMessageHashMap[key];
-  return message.replace(
-    displayText,
-    `${type} <a href="#address-section">${displayText}</a>`
-  );
+function createUsernameAnchor(detail) {
+  return detail.replace("username", `<a href="#input-username">username</a>`);
 }
 
 /**
- * renderServerValidationError(object)
+ * renderServerValidationErrors(object)
  * Renders the proper error messages based on each error field.
  * Returns all the messages as an array.
- *
- * @param {object} object
- * return {array}
  */
-function renderServerValidationError(object) {
+function renderServerValidationErrors(object) {
   const errorMessages = [];
-  const { address, location, ...errors } = object;
+  const { address, ...errors } = object;
 
   Object.keys(errors).forEach((key) => {
     if (object.hasOwnProperty(key)) {
@@ -121,22 +99,17 @@ function renderServerValidationError(object) {
     }
   });
 
-  if (location) {
-    const message = createAddressAnchorText("location", object, "");
-    const errorMessage = (
-      <li key="location" dangerouslySetInnerHTML={{ __html: message }} />
-    );
-    errorMessages.push(errorMessage);
-  }
-
   if (address && typeof address !== "string") {
     Object.keys(address).forEach((addressKey) => {
       const addressType = address[addressKey];
       Object.keys(addressType).forEach((key) => {
         if (addressType.hasOwnProperty(key)) {
-          const message = createAddressAnchorText(key, addressType, addressKey);
+          const message = createAnchorText(key, addressType, addressKey);
           const errorMessage = (
-            <li key={key} dangerouslySetInnerHTML={{ __html: message }} />
+            <li
+              key={`${addressKey}-${key}`}
+              dangerouslySetInnerHTML={{ __html: message }}
+            />
           );
           errorMessages.push(errorMessage);
         }
@@ -149,4 +122,9 @@ function renderServerValidationError(object) {
   return errorMessages;
 }
 
-export { isDate, renderServerValidationError, createAnchorText };
+export {
+  isDate,
+  renderServerValidationErrors,
+  createAnchorText,
+  createUsernameAnchor,
+};

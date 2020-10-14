@@ -128,7 +128,7 @@ export interface FormResults {
 
 export interface FormData {
   results: FormResults | undefined;
-  errorObj: ErrorResponse | undefined;
+  errorObj: ProblemDetail | undefined;
   csrfToken: string;
   formValues: FormInputData;
   addressResponse: any;
@@ -151,7 +151,7 @@ export interface LibraryListObject {
   label: string;
 }
 
-export interface ErrorResponse {
+export interface ProblemDetail {
   status: number;
   type: string;
   title: string;
