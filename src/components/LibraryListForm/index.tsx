@@ -5,6 +5,7 @@ import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
 import { findLibraryName } from "../../utils/formDataUtils";
 import { LibraryListObject } from "../../interfaces";
+import styles from "./LibraryListForm.module.css";
 
 interface LibraryListFormProps {
   libraryList: LibraryListObject[];
@@ -98,7 +99,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   );
 
   return (
-    <>
+    <div className={styles.container}>
       <h3>Home Library</h3>
       <p>
         Choosing a home library will help us make sure you&apos;re getting
@@ -116,7 +117,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
         renderInputComponent={renderInputComponent}
         renderSuggestionsContainer={renderSuggestionsContainer}
       />
-    </>
+    </div>
   );
 };
 

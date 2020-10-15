@@ -6,6 +6,7 @@ import useFormDataContext from "../../context/FormDataContext";
 import RoutingLinks from "../RoutingLinks.tsx";
 import AccountForm from "../AccountForm";
 import AcceptTermsForm from "../AcceptTermsForm";
+import { findLibraryCode } from "../../utils/formDataUtils";
 
 const AccountFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
@@ -19,6 +20,8 @@ const AccountFormContainer = () => {
    * @param formData - data object returned from react-hook-form
    */
   const submitForm = (formData) => {
+    // Convert the home library name to its code value.
+    formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",
