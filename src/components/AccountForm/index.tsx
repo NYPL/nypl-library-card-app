@@ -6,6 +6,8 @@ import UsernameValidationForm from "../UsernameValidationForm";
 import useFormDataContext from "../../context/FormDataContext";
 import { errorMessages } from "../../utils/formDataUtils";
 import { Checkbox } from "@nypl/design-system-react-components";
+import ilsLibraryList from "../../data/ilsLibraryList";
+import LibraryListForm from "../LibraryListForm";
 
 function AccountInformationForm() {
   const { register, errors, getValues } = useFormContext();
@@ -67,6 +69,8 @@ function AccountInformationForm() {
           onClick: update,
         }}
       />
+
+      <LibraryListForm libraryList={ilsLibraryList} />
     </>
   );
 }
