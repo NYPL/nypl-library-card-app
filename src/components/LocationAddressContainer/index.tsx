@@ -6,10 +6,8 @@ import axios from "axios";
 import useFormDataContext from "../../context/FormDataContext";
 import AddressForm from "../AddressForm";
 import RoutingLinks from "../RoutingLinks.tsx";
-import LibraryListForm from "../LibraryListForm";
 import LocationForm from "../LocationForm";
-import ilsLibraryList from "../../data/ilsLibraryList";
-import { errorMessages, findLibraryCode } from "../../utils/formDataUtils";
+import { errorMessages } from "../../utils/formDataUtils";
 import { Accordion } from "@nypl/design-system-react-components";
 import {
   AddressRenderType,
@@ -38,8 +36,6 @@ const LocationAddressContainer = ({
    * @param formData - data object returned from react-hook-form
    */
   const submitForm = (formData) => {
-    // Convert the home library name to its code value.
-    formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",
@@ -104,13 +100,7 @@ const LocationAddressContainer = ({
    * home library. The two parameters are required to be explicit about what
    * fields will be rendered when the function is called.
    */
-  const addressFields = ({
-    work,
-    homeLibrary,
-  }: {
-    work: boolean;
-    homeLibrary: boolean;
-  }) => (
+  const addressFields = (displayWork: boolean) => (
     <>
       <div className={styles.addressSection}>
         <h3>Home Address</h3>
@@ -123,7 +113,7 @@ const LocationAddressContainer = ({
         />
       </div>
 
-      {work && (
+      {displayWork && (
         <div className={styles.addressSection}>
           <h3>Work Address</h3>
           <Accordion
@@ -137,8 +127,6 @@ const LocationAddressContainer = ({
           </Accordion>
         </div>
       )}
-
-      {homeLibrary && <LibraryListForm libraryList={ilsLibraryList} />}
     </>
   );
 
@@ -151,13 +139,13 @@ const LocationAddressContainer = ({
             value: "nyc",
             label: "New York City (All five boroughs)",
             ref: register(),
-            addressFields: addressFields({ work: true, homeLibrary: true }),
+            addressFields: addressFields(true),
           },
           {
             value: "nys",
             label: "New York State (Outside NYC)",
             ref: register(),
-            addressFields: addressFields({ work: true, homeLibrary: false }),
+            addressFields: addressFields(true),
           },
           {
             value: "us",
@@ -167,7 +155,7 @@ const LocationAddressContainer = ({
             ref: register({
               required: errorMessages.location,
             }),
-            addressFields: addressFields({ work: false, homeLibrary: false }),
+            addressFields: addressFields(false),
           },
         ]}
       />

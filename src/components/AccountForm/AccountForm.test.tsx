@@ -70,4 +70,9 @@ describe("AccountForm", () => {
       screen.getByRole("textbox", { name: "Verify PIN Required" })
     ).toBeInTheDocument();
   });
+
+  test("renders the autosuggest dropdown", () => {
+    expect(screen.getByText("Home Library")).toBeInTheDocument();
+    expect(screen.getByLabelText("Select a home library:")).toBeInTheDocument();
+  });
 });
