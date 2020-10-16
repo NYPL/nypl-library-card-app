@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import useFormDataContext from "../../context/FormDataContext";
 import PersonalForm from "../PersonalForm";
 import RoutingLinks from "../RoutingLinks.tsx";
+import { lcaEvents } from "../../externals/gaUtils";
 
 const PersonalFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
@@ -24,7 +25,9 @@ const PersonalFormContainer = () => {
       value: { ...formValues, ...formData },
     });
 
-    router.push("/library-card/location?newCard=true");
+    const nextUrl = "/library-card/location?newCard=true";
+    lcaEvents("Navigation", `Next button to ${nextUrl}`);
+    router.push(nextUrl);
   };
 
   return (

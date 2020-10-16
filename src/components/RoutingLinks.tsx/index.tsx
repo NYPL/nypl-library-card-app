@@ -1,6 +1,9 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import Link from "next/link";
+import { lcaEvents } from "../../externals/gaUtils";
 import styles from "./RoutingLinks.module.css";
 
 export interface LinkType {
@@ -28,12 +31,26 @@ function RoutingLinks({ previous, next }: RoutingLinksType): JSX.Element {
     <div className={styles.container}>
       {previous?.url && (
         <Link href={previous.url} passHref>
-          <a className={styles.previous}>{previousText}</a>
+          <a
+            className={styles.previous}
+            onClick={() =>
+              lcaEvents("Navigation", `Previous button to ${previous.url}`)
+            }
+          >
+            {previousText}
+          </a>
         </Link>
       )}
       {!next?.submit ? (
         <Link href={next.url} passHref>
-          <a className="button">{nextText}</a>
+          <a
+            className="button"
+            // Just track the "Get Started" or "Submit" clicks. Routing events
+            // are tracked at the component level in each "onSubmit".
+            onClick={() => lcaEvents("Navigation", next.text)}
+          >
+            {nextText}
+          </a>
         </Link>
       ) : (
         <input

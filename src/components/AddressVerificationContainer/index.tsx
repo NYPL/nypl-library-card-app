@@ -6,6 +6,7 @@ import useFormDataContext from "../../../src/context/FormDataContext";
 import { Address, AddressRenderType } from "../../../src/interfaces";
 import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
 import styles from "./AddressVerificationContainer.module.css";
+import { lcaEvents } from "../../externals/gaUtils";
 
 /**
  * AddressVerificationContainer
@@ -114,7 +115,9 @@ function AddressVerificationContainer() {
     });
 
     // Finally, go to the acount page.
-    router.push("/library-card/account?newCard=true");
+    const nextUrl = "/library-card/account?newCard=true";
+    lcaEvents("Navigation", `Next button to ${nextUrl}`);
+    router.push(nextUrl);
   };
 
   /**
