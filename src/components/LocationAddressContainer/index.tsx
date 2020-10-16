@@ -74,7 +74,7 @@ const LocationAddressContainer = ({
           value.home = {
             address: initialAddresses.home,
             addresses: [],
-            message: "",
+            detail: "",
           };
         }
         if (error.response?.data?.work) {
@@ -83,7 +83,7 @@ const LocationAddressContainer = ({
           value.work = {
             address: initialAddresses.work,
             addresses: [],
-            message: "",
+            detail: "",
           };
         }
         dispatch({

@@ -2,15 +2,13 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
 
-import useParamsContext from "../../context/ParamsContext";
 import useFormDataContext from "../../context/FormDataContext";
 import PersonalForm from "../PersonalForm";
 import RoutingLinks from "../RoutingLinks.tsx";
 
 const PersonalFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
-  const { formValues } = state;
-  const params = useParamsContext();
+  const { formValues, query } = state;
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { register, handleSubmit } = useFormContext();
@@ -31,13 +29,17 @@ const PersonalFormContainer = () => {
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
-      <PersonalForm agencyType={params.policyType} />
+      <PersonalForm agencyType={query.policyType} />
 
       <input
         type="hidden"
         aria-hidden={true}
         name="policyType"
-        defaultValue={params.policyType || formValues.policyType}
+        // Both `query` and `formValues` are coming from the app's state. The
+        // default for the `policyType` is "webApplicant" but the app can
+        // override that by passing in the `policyType` through a query param
+        // in the URL. All query params are also stored in the app's state.
+        defaultValue={query.policyType || formValues.policyType}
         ref={register()}
       />
 

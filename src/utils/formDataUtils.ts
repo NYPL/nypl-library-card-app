@@ -5,7 +5,7 @@ import config from "../../appConfig";
 import {
   Address,
   Addresses,
-  ErrorResponse,
+  ProblemDetail,
   FormAPISubmission,
   FormInputData,
 } from "../interfaces";
@@ -19,7 +19,8 @@ const errorMessages = {
   username: "Username must be between 5-25 alphanumeric characters.",
   pin: "Please enter a 4-digit PIN.",
   verifyPin: "The two PINs don't match.",
-  location: "Please select an address option.",
+  location: "Please select a location option.",
+  acceptTerms: "The terms and conditions were not accepted.",
   address: {
     line1: "Please enter a valid street address.",
     city: "Please enter a valid city.",
@@ -27,6 +28,38 @@ const errorMessages = {
     zip: "Please enter a 5 or 9-digit postal code.",
   } as Address,
 };
+
+/**
+ * isDate
+ * Makes sure that the input value matches the desired path and is a date with
+ * the year bounds.
+ */
+function isDate(
+  input,
+  minYear = 1902,
+  maxYear = new Date().getFullYear()
+): boolean {
+  // regular expression to match required date format
+  const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+
+  if (input === "") {
+    return false;
+  }
+
+  if (input.match(regex)) {
+    const temp = input.split("/");
+    const dateFromInput = new Date(`${temp[2]}/${temp[0]}/${temp[1]}`);
+
+    return (
+      dateFromInput.getDate() === Number(temp[1]) &&
+      dateFromInput.getMonth() + 1 === Number(temp[0]) &&
+      Number(temp[2]) > minYear &&
+      Number(temp[2]) < maxYear
+    );
+  }
+
+  return false;
+}
 
 /**
  * findLibraryCode
@@ -105,32 +138,178 @@ const constructAddresses = (object = {}) => {
     });
   });
 
+  // The work object is optional, so if it's completely empty, just remove it
+  // or else we'll get false errors of work fields being empty.
+  if (isEmpty(addresses.work)) {
+    delete addresses.work;
+  }
+
   return addresses;
 };
 
 /**
- * constructErrorObject
+ * constructProblemDetail
  * Create an error object to be returned by the API endpoints.
  */
-const constructErrorObject = (
-  type = "general-error",
-  message = "There was an error with your request",
+const constructProblemDetail = (
   status = 400,
-  details?
-) => {
-  const response: ErrorResponse = {
+  type = "general-error",
+  title = "General Error",
+  detail = "There was an error with your request",
+  error = null
+): ProblemDetail => {
+  const pd: ProblemDetail = {
     status,
-    response: {
-      type,
-      message,
-    },
+    type,
+    title,
+    detail,
   };
+  if (error) {
+    pd.error = error;
+  }
+  return pd;
+};
 
-  if (!isEmpty(details)) {
-    response.response.details = details;
+/**
+ * validateAddressFormData
+ * This validates fields in an address object, adds any errors to the object
+ * containing any existing errors from other fields, and returns it. The
+ * validation is perform on the home and work address, if available. Since the
+ * work address is optional, having an empty work address is acceptable.
+ */
+const validateAddressFormData = (initErrorObj, addresses: Addresses) => {
+  let errorObj = { ...initErrorObj };
+  // Keep track of the home or work address errors in this larger object.
+  const addressErrors = {};
+
+  Object.keys(addresses).forEach((addressType) => {
+    // `addressType` can be either "home" or "work".
+    const typeObj = addresses[addressType];
+
+    // Now validate each field for that specific address object:
+    if (isEmpty(typeObj.line1)) {
+      addressErrors[addressType] = {
+        ...addressErrors[addressType],
+        line1: errorMessages.address.line1,
+      };
+    } else if (typeObj?.line1?.length + typeObj?.line2?.length > 100) {
+      addressErrors[addressType] = {
+        ...addressErrors[addressType],
+        line1: "Street address fields must not be more than 100 lines.",
+      };
+    }
+
+    if (isEmpty(typeObj.city)) {
+      addressErrors[addressType] = {
+        ...addressErrors[addressType],
+        city: errorMessages.address.city,
+      };
+    }
+
+    if (isEmpty(typeObj.state) || typeObj.state.length !== 2) {
+      addressErrors[addressType] = {
+        ...addressErrors[addressType],
+        state: errorMessages.address.state,
+      };
+    }
+
+    if (isEmpty(typeObj.zip) || !isLength(typeObj.zip, { min: 5, max: 10 })) {
+      addressErrors[addressType] = {
+        ...addressErrors[addressType],
+        zip: errorMessages.address.zip,
+      };
+    }
+  });
+
+  // Now add it back to the original error object as the separate
+  // `address` property.
+  if (!isEmpty(addressErrors)) {
+    errorObj = { ...errorObj, address: addressErrors };
   }
 
-  return response;
+  return errorObj;
+};
+
+/**
+ * validateFormData
+ * Validates the form submission values and returns any errors. Internally, it
+ * uses `validateAddressFormData` to validate home and work addresses.
+ */
+const validateFormData = (object, addresses) => {
+  const {
+    firstName,
+    lastName,
+    email,
+    birthdate,
+    ageGate,
+    policyType,
+    username,
+    pin,
+    verifyPin,
+    acceptTerms,
+    location,
+  } = object;
+  let errorObj = {};
+
+  if (isEmpty(firstName)) {
+    errorObj = { ...errorObj, firstName: errorMessages.firstName };
+  }
+
+  if (isEmpty(lastName)) {
+    errorObj = { ...errorObj, lastName: errorMessages.lastName };
+  }
+  const MAXLENGTHDATE = 10;
+  if (policyType === "webApplicant") {
+    if (
+      isEmpty(birthdate) ||
+      (birthdate.length <= MAXLENGTHDATE && !isDate(birthdate))
+    ) {
+      errorObj = {
+        ...errorObj,
+        birthdate: errorMessages.birthdate,
+      };
+    }
+  } else if (policyType === "simplye" && !ageGate) {
+    errorObj = {
+      ...errorObj,
+      ageGate: errorMessages.ageGate,
+    };
+  }
+
+  if (!acceptTerms) {
+    errorObj = { ...errorObj, acceptTerms: errorMessages.acceptTerms };
+  }
+
+  if (isEmpty(email) || !isEmail(email)) {
+    errorObj = { ...errorObj, email: errorMessages.email };
+  }
+
+  if (
+    isEmpty(username) ||
+    !isAlphanumeric(username) ||
+    !isLength(username, { min: 5, max: 25 })
+  ) {
+    errorObj = {
+      ...errorObj,
+      username: errorMessages.username,
+    };
+  }
+
+  if (isEmpty(pin) || !isNumeric(pin) || !isLength(pin, { min: 4, max: 4 })) {
+    errorObj = { ...errorObj, pin: errorMessages.pin };
+  }
+
+  if (isEmpty(verifyPin) || pin !== verifyPin) {
+    errorObj = { ...errorObj, verifyPin: errorMessages.verifyPin };
+  }
+
+  if (!location) {
+    errorObj = { ...errorObj, location: errorMessages.location };
+  }
+
+  errorObj = validateAddressFormData(errorObj, addresses);
+
+  return errorObj;
 };
 
 /**
@@ -140,105 +319,33 @@ const constructErrorObject = (
  */
 const constructPatronObject = (
   object: FormInputData
-): FormAPISubmission | ErrorResponse => {
+): FormAPISubmission | ProblemDetail => {
   const {
     firstName,
     lastName,
     email,
     birthdate,
-    username,
-    pin,
+    ageGate,
     ecommunicationsPref,
     agencyType,
-    usernameHasBeenValidated,
     policyType,
-    ageGate,
+    username,
+    usernameHasBeenValidated,
+    pin,
     homeLibraryCode,
     acceptTerms,
   } = object;
 
   const addresses: Addresses = constructAddresses(object);
+  const errors = validateFormData(object, addresses);
 
-  let errorObj = {};
-
-  if (isEmpty(firstName)) {
-    errorObj = { ...errorObj, firstName: "First Name field is empty." };
-  }
-
-  if (isEmpty(lastName)) {
-    errorObj = { ...errorObj, lastName: "Last Name field is empty." };
-  }
-
-  if (policyType === "webApplicant" && isEmpty(birthdate)) {
-    errorObj = { ...errorObj, birthdate: "Date of Birth field is empty." };
-  } else if (policyType === "simplye" && !ageGate) {
-    errorObj = {
-      ...errorObj,
-      ageGate: "You must be 13 years or older to continue.",
-    };
-  }
-
-  if (isEmpty(addresses.home.line1)) {
-    errorObj = { ...errorObj, line1: "Street Address field is empty." };
-  }
-
-  if (isEmpty(addresses.home.city)) {
-    errorObj = { ...errorObj, city: "City field is empty." };
-  }
-
-  if (isEmpty(addresses.home.state)) {
-    errorObj = { ...errorObj, state: "State field is empty." };
-  }
-
-  if (isEmpty(addresses.home.zip)) {
-    errorObj = { ...errorObj, zip: "Postal Code field is empty." };
-  }
-
-  // if (
-  //   !isEmpty(addresses.home.zip) &&
-  //   (!isNumeric(addresses.home.zip) ||
-  //     !isLength(addresses.home.zip, { min: 5, max: 10 }))
-  // ) {
-  //   errorObj = { ...errorObj, zip: "Please enter a 5 or 9-digit postal code." };
-  // }
-
-  if (isEmpty(email)) {
-    errorObj = { ...errorObj, email: "Email field is empty." };
-  } else if (!isEmpty(email.trim()) && !isEmail(email)) {
-    errorObj = { ...errorObj, email: "Please enter a valid email address." };
-  }
-
-  if (isEmpty(username)) {
-    errorObj = { ...errorObj, username: "Username field is empty." };
-  }
-
-  if (
-    !isEmpty(username) &&
-    (!isAlphanumeric(username) || !isLength(username, { min: 5, max: 25 }))
-  ) {
-    errorObj = {
-      ...errorObj,
-      username: "Please enter a username between 5-25 alphanumeric characters.",
-    };
-  }
-
-  if (isEmpty(pin)) {
-    errorObj = { ...errorObj, pin: "PIN field is empty." };
-  }
-
-  if (
-    !isEmpty(pin) &&
-    (!isNumeric(pin) || !isLength(pin, { min: 4, max: 4 }))
-  ) {
-    errorObj = { ...errorObj, pin: "Please enter a 4-digit PIN." };
-  }
-
-  if (errorObj && !isEmpty(errorObj)) {
-    return constructErrorObject(
-      "server-validation-error",
-      "server side validation error",
+  if (!isEmpty(errors)) {
+    return constructProblemDetail(
       400,
-      errorObj
+      "invalid-request",
+      "Invalid Request",
+      "There was an error with the submitted form values.",
+      errors
     );
   }
 
@@ -263,12 +370,15 @@ const constructPatronObject = (
 };
 
 export {
+  errorMessages,
+  isDate,
   findLibraryCode,
   findLibraryName,
   getPatronAgencyType,
   getLocationValue,
-  errorMessages,
   constructAddresses,
+  constructProblemDetail,
+  validateAddressFormData,
+  validateFormData,
   constructPatronObject,
-  constructErrorObject,
 };

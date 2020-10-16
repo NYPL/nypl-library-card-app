@@ -24,6 +24,7 @@ export interface FormInputData {
   username: string;
   usernameHasBeenValidated?: boolean;
   pin: string;
+  verifyPin: string;
   ecommunicationsPref: boolean;
   location?: string;
   homeLibraryCode: string;
@@ -86,14 +87,14 @@ export interface AddressAPIResponseData {
   address?: Address;
   originalAddress?: Address;
   addresses?: Address[];
-  message?: string;
+  detail?: string;
   reason?: string;
 }
 
 export interface AddressRenderType {
   address: Address | undefined;
   addresses: Address[] | undefined;
-  message: string;
+  detail: string;
   reason?: string;
   cardType?: null | string;
 }
@@ -126,11 +127,12 @@ export interface FormResults {
 }
 
 export interface FormData {
-  results: FormResults;
-  errorObj: {};
+  results: FormResults | undefined;
+  errorObj: ProblemDetail | undefined;
   csrfToken: string;
   formValues: FormInputData;
   addressResponse: any;
+  query: any;
 }
 
 export interface FormDataContextType {
@@ -149,13 +151,13 @@ export interface LibraryListObject {
   label: string;
 }
 
-export interface ErrorResponse {
+export interface ProblemDetail {
   status: number;
-  response: {
-    type: string;
-    message: string;
-    details?: string;
-  };
+  type: string;
+  title: string;
+  detail?: string;
+  message?: string;
+  error?: {};
 }
 
 export interface FormAPISubmission {
