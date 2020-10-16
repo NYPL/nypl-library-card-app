@@ -20,15 +20,17 @@ interface ApiErrorsProps {
  */
 const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
   ({ problemDetail }, ref) => {
-    if (
-      !problemDetail ||
-      isEmpty(problemDetail) ||
-      problemDetail?.status < 400
-    ) {
+    // We expect problem details to have a status greater than or equal to 400.
+    if (!problemDetail || problemDetail?.status < 400) {
       return null;
     }
-    const renderErrorByType = (errorObj) => {
-      const { type, detail, error } = errorObj;
+
+    /**
+     * renderErrorByType
+     * Returns list elements with detail errors.
+     */
+    const renderErrorByType = (pd) => {
+      const { type, detail, error } = pd;
       const defaultError =
         "There was an error processing your submission. Please try again later.";
       let errorElements;

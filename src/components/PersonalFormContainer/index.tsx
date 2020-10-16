@@ -35,6 +35,10 @@ const PersonalFormContainer = () => {
         type="hidden"
         aria-hidden={true}
         name="policyType"
+        // Both `query` and `formValues` are coming from the app's state. The
+        // default for the `policyType` is "webApplicant" but the app can
+        // override that by passing in the `policyType` through a query param
+        // in the URL. All query params are also stored in the app's state.
         defaultValue={query.policyType || formValues.policyType}
         ref={register()}
       />
