@@ -1,21 +1,16 @@
 import ga from "react-ga";
 
-// Account codes for Google Analytics for different environments
-const Google = {
-  // Return the Google Analytics code for the production property if
-  // isProd is true, or the dev property if isProd is false
-  code: (isProd: boolean) => {
-    const codes = {
-      production: "UA-1420324-3",
-      dev: "UA-1420324-122",
-    };
-
-    return isProd ? codes.production : codes.dev;
-  },
-};
-
-const config = {
-  google: Google,
+/**
+ * getGoogleGACode
+ * Return the Google Analytics code for the production property if isProd is
+ * true, or the dev property if isProd is false
+ */
+const getGoogleGACode = (isProd: boolean) => {
+  const codes = {
+    production: "UA-1420324-3",
+    dev: "UA-1420324-122",
+  };
+  return isProd ? codes.production : codes.dev;
 };
 
 function GaUtils() {
@@ -34,25 +29,10 @@ function GaUtils() {
   };
 
   /**
-   * trackGeneralEvent(category, action, label, value)
-   * Track a GA event.
-   *
-   * @param {category} String Category for GA event.
-   * @param {action} String Action for GA event.
-   * @param {label} String Label for GA event.
-   * @param {value} String Value for GA event.
-   */
-  this.trackGeneralEvent = (category, action, label, value) =>
-    ga.event({
-      category,
-      action,
-      label,
-      value,
-    });
-
-  /**
    * trackEvent(category)
-   * Track a GA click event, wrapped in a curried function.
+   * Create a function to track a specific category of GA events. A convenience
+   * function so that `category`, which doens't change, doesn't have to be
+   * added every time.
    *
    * @param {category} String Category for GA event.
    * @returns {function} Returns a function with the category set.
@@ -109,21 +89,20 @@ function GaUtils() {
 
 const gaUtils = new GaUtils();
 
-// TODO: This is using an older NYPL GA package and should be updated later.
+/**
+ * setupAnalytics
+ * Sets up Google Analytics if it's not already set up. Also initializes
+ * page view tracking.
+ */
 const setupAnalytics = (windowGA, nodeEnv) => {
   if (!windowGA) {
     const isProd = nodeEnv === "production";
     const gaOpts = { debug: !isProd, titleCase: false };
 
-    gaUtils.initialize(config.google.code(isProd), gaOpts);
+    gaUtils.initialize(getGoogleGACode(isProd), gaOpts);
   }
 
   gaUtils.trackPageview(window.location.pathname);
 };
 
-export default {
-  setupAnalytics,
-  gaUtils,
-  config,
-  ga,
-};
+export { setupAnalytics, gaUtils };

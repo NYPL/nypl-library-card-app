@@ -3,7 +3,7 @@ import "@nypl/design-system-react-components/dist/styles.css";
 import "../src/styles/main.scss";
 import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";
-import ga from "../src/externals/ga";
+import { setupAnalytics } from "../src/externals/ga";
 import {
   FormDataContextProvider,
   formInitialState,
@@ -31,9 +31,8 @@ function isServerRendered(): boolean {
 }
 
 // Set up Google Analytics on the client side.
-// TODO: This is using an older NYPL GA package and should be updated later.
 if (!isServerRendered()) {
-  ga.setupAnalytics(window["ga"], appConfig.nodeEnv);
+  setupAnalytics(window["ga"], appConfig.nodeEnv);
 }
 
 // Only run react-axe in the client-side and when the flag is set.
