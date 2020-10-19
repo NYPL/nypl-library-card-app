@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -16,6 +16,7 @@ import {
 } from "../../interfaces";
 import styles from "./LocationAddressContainer.module.css";
 import { constructAddresses } from "../../utils/formDataUtils";
+import Loader from "../Loader";
 
 interface LocationAddressContainerProps {
   scrollRef: React.RefObject<HTMLHeadingElement>;
@@ -24,6 +25,7 @@ interface LocationAddressContainerProps {
 const LocationAddressContainer = ({
   scrollRef,
 }: LocationAddressContainerProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const router = useRouter();
@@ -36,6 +38,7 @@ const LocationAddressContainer = ({
    * @param formData - data object returned from react-hook-form
    */
   const submitForm = (formData) => {
+    setIsLoading(true);
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",
@@ -89,9 +92,10 @@ const LocationAddressContainer = ({
         });
       })
       // Go to the next page regardless if it's a correct or error response.
-      .finally(() =>
-        router.push("/library-card/address-verification?newCard=true")
-      );
+      .finally(() => {
+        setIsLoading(false);
+        router.push("/library-card/address-verification?newCard=true");
+      });
   };
 
   /**
@@ -132,6 +136,8 @@ const LocationAddressContainer = ({
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
+      <Loader isLoading={isLoading} />
+
       <LocationForm
         scrollRef={scrollRef}
         inputRadioList={[

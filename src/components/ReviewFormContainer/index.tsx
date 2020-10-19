@@ -23,12 +23,14 @@ import RoutingLinks from "../RoutingLinks.tsx";
 import ApiErrors from "../ApiErrors";
 import styles from "./ReviewFormContainer.module.css";
 import AcceptTermsForm from "../AcceptTermsForm";
+import Loader from "../Loader";
 
 /**
  * ReviewFormContainer
  * Main page component for the "form submission review" page.
  */
 function ReviewFormContainer() {
+  const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit } = useFormContext();
   const errorSection = React.createRef<HTMLDivElement>();
   const { state, dispatch } = useFormDataContext();
@@ -102,6 +104,7 @@ function ReviewFormContainer() {
    * Update the form values again but this time submit to the API.
    */
   const submitForm = () => {
+    setIsLoading(true);
     // This is resetting any errors from previous submissions, if any.
     dispatch({ type: "SET_FORM_ERRORS", value: null });
 
@@ -122,7 +125,8 @@ function ReviewFormContainer() {
         // There are server-side errors! Display them to the user
         // so they can be fixed.
         dispatch({ type: "SET_FORM_ERRORS", value: error.response?.data });
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   /**
@@ -285,6 +289,7 @@ function ReviewFormContainer() {
 
   return (
     <>
+      <Loader isLoading={isLoading} />
       <ApiErrors ref={errorSection} problemDetail={errorObj} />
 
       <div className={styles.formSection}>
