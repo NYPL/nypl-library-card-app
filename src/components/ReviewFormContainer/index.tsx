@@ -24,6 +24,7 @@ import ApiErrors from "../ApiErrors";
 import styles from "./ReviewFormContainer.module.css";
 import AcceptTermsForm from "../AcceptTermsForm";
 import Loader from "../Loader";
+import { lcaEvents } from "../../externals/gaUtils";
 
 /**
  * ReviewFormContainer
@@ -63,15 +64,29 @@ function ReviewFormContainer() {
   }, [errorObj]);
 
   // Shareable button for each editable section.
-  const editButton = (editSectionFlag) => (
+  const editSectionButton = (editSectionFlag, sectionName) => (
     <Button
       buttonType={ButtonTypes.Primary}
-      onClick={() => editSectionFlag(true)}
+      onClick={() => {
+        lcaEvents("Edit", sectionName);
+        editSectionFlag(true);
+      }}
     >
       Edit
     </Button>
   );
-  const submitButton = (
+  const editAddressButton = () => (
+    <Button
+      buttonType={ButtonTypes.Primary}
+      onClick={() => {
+        lcaEvents("Edit", "Location/Address");
+        router.push("/library-card/location?newCard=true");
+      }}
+    >
+      Edit
+    </Button>
+  );
+  const submitSectionButton = (
     <Button buttonType={ButtonTypes.Primary} onClick={() => {}} type="submit">
       Submit
     </Button>
@@ -119,6 +134,7 @@ function ReviewFormContainer() {
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
+        lcaEvents("Submit", "Submit");
         router.push("/library-card/congrats?newCard=true");
       })
       .catch((error) => {
@@ -157,7 +173,7 @@ function ReviewFormContainer() {
         </div>
         <div>{formValues.ecommunicationsPref ? "Yes" : "No"}</div>
       </div>
-      {editButton(setEditPersonalInfoFlag)}
+      {editSectionButton(setEditPersonalInfoFlag, "Personal Information")}
     </div>
   );
   /**
@@ -188,7 +204,7 @@ function ReviewFormContainer() {
         <div className={styles.title}>Home Library</div>
         <div>{findLibraryName(formValues.homeLibraryCode)}</div>
       </div>
-      {editButton(setEditAccountInfoFlag)}
+      {editSectionButton(setEditAccountInfoFlag, "Create Your Account")}
     </div>
   );
   /**
@@ -278,12 +294,7 @@ function ReviewFormContainer() {
         </>
       )}
 
-      <RoutingLinks
-        next={{
-          url: "/library-card/location?newCard=true",
-          text: "Edit",
-        }}
-      />
+      {editAddressButton()}
     </div>
   );
 
@@ -299,7 +310,7 @@ function ReviewFormContainer() {
         ) : (
           <form onSubmit={handleSubmit(editSectionInfo)}>
             <PersonalForm />
-            {submitButton}
+            {submitSectionButton}
           </form>
         )}
       </div>
@@ -317,7 +328,7 @@ function ReviewFormContainer() {
           <form onSubmit={handleSubmit(editSectionInfo)}>
             <AccountForm />
             <AcceptTermsForm />
-            {submitButton}
+            {submitSectionButton}
           </form>
         )}
       </div>

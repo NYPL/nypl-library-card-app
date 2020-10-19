@@ -17,6 +17,7 @@ import {
 import styles from "./LocationAddressContainer.module.css";
 import { constructAddresses } from "../../utils/formDataUtils";
 import Loader from "../Loader";
+import { lcaEvents } from "../../externals/gaUtils";
 
 interface LocationAddressContainerProps {
   scrollRef: React.RefObject<HTMLHeadingElement>;
@@ -30,8 +31,7 @@ const LocationAddressContainer = ({
   const { formValues } = state;
   const router = useRouter();
   // Specific functions and object from react-hook-form.
-  const { handleSubmit, register, watch } = useFormContext();
-  const selectedLocation = watch("location");
+  const { handleSubmit, register } = useFormContext();
 
   /**
    * submitForm
@@ -94,7 +94,9 @@ const LocationAddressContainer = ({
       // Go to the next page regardless if it's a correct or error response.
       .finally(() => {
         setIsLoading(false);
-        router.push("/library-card/address-verification?newCard=true");
+        const nextUrl = "/library-card/address-verification?newCard=true";
+        lcaEvents("Navigation", `Next button to ${nextUrl}`);
+        router.push(nextUrl);
       });
   };
 
@@ -108,9 +110,7 @@ const LocationAddressContainer = ({
     <>
       <div className={styles.addressSection}>
         <h3>Home Address</h3>
-        {selectedLocation === "nyc" && (
-          <p>If you live in NYC, please fill out the home address form.</p>
-        )}
+        <p>If you live in NYC, please fill out the home address form.</p>
         <AddressForm
           type={AddressTypes.Home}
           errorMessages={errorMessages.address}

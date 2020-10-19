@@ -6,6 +6,7 @@ import { useFormContext } from "react-hook-form";
 import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
 import styles from "./UsernameValidationForm.module.css";
+import { lcaEvents } from "../../externals/gaUtils";
 
 interface UsernameValidationFormProps {
   errorMessage?: string;
@@ -55,12 +56,14 @@ const UsernameValidationForm = ({
         // }
       )
       .then((response) => {
+        lcaEvents("Availability Checker", "Username - available");
         setUsernameIsAvailable({
           available: true,
           message: response.data?.message,
         });
       })
       .catch((error) => {
+        lcaEvents("Availability Checker", "Username - unavailable");
         setUsernameIsAvailable({
           available: false,
           message: error.response?.data?.message,

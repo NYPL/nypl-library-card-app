@@ -8,6 +8,7 @@ import {
 } from "@nypl/design-system-react-components";
 import useIPLocationContext from "../../context/IPLocationContext";
 import { getLocationValueFromResponse } from "../../utils/IPLocationAPI";
+import { lcaEvents } from "../../externals/gaUtils";
 
 interface LocationFormProps {
   scrollRef?: React.RefObject<HTMLHeadingElement>;
@@ -46,13 +47,23 @@ const LocationForm = ({ inputRadioList, scrollRef }: LocationFormProps) => {
   const errorText = errors?.location?.message;
 
   const onChange = (e) => {
+    const location = e.target?.value;
+    // For GA, if the geolocation was found, we want to track if the user
+    // selected another location from the preselected location. Otherwise,
+    // geolocation failed and the user will pick a location (or switch) and
+    // we track each change.
+    const eventText = defaultUserLocation
+      ? `From preselected location ${defaultUserLocation} to ${location}`
+      : `Selected ${location}`;
+
     // We want to scroll to the page heading so the page doesn't jump around
     // too much when rendering a new set of address fields when a radio input
     // option is selected.
     if (scrollRef?.current) {
       window.scrollTo(0, scrollRef.current.offsetTop);
     }
-    setStateValue(e.target?.value);
+    lcaEvents("Location selection", eventText);
+    setStateValue(location);
   };
   /**
    * createInputSection
