@@ -196,6 +196,10 @@ function ReviewFormContainer() {
           }}
         />
       </div>
+      <div className={styles.field}>
+        <div className={styles.title}>Home Library</div>
+        <div>{findLibraryName(formValues.homeLibraryCode)}</div>
+      </div>
       {editSectionButton(setEditAccountInfoFlag, "Create Your Account")}
     </div>
   );
@@ -263,32 +267,28 @@ function ReviewFormContainer() {
           <h4 className={styles.workTitle}>Work</h4>
           <div className={styles.field}>
             <div className={styles.title}>Street Address</div>
-            <div>{formValues["home-line1"]}</div>
+            <div>{formValues["work-line1"]}</div>
           </div>
-          {formValues["home-line2"] && (
+          {formValues["work-line2"] && (
             <div className={styles.field}>
               <div className={styles.title}>Apartment/Suite</div>
-              <div>{formValues["home-line2"]}</div>
+              <div>{formValues["work-line2"]}</div>
             </div>
           )}
           <div className={styles.multiField}>
             <div className={styles.title}>City</div>
-            <div>{formValues["home-city"]}</div>
+            <div>{formValues["work-city"]}</div>
           </div>
           <div className={styles.multiField}>
             <div className={styles.title}>State</div>
-            <div>{formValues["home-state"]}</div>
+            <div>{formValues["work-state"]}</div>
           </div>
           <div className={styles.field}>
             <div className={styles.title}>Postal Code</div>
-            <div>{formValues["home-zip"]}</div>
+            <div>{formValues["work-zip"]}</div>
           </div>
         </>
       )}
-      <div className={styles.field}>
-        <div className={styles.title}>Home Library</div>
-        <div>{findLibraryName(formValues.homeLibraryCode)}</div>
-      </div>
 
       {editAddressButton()}
     </div>
