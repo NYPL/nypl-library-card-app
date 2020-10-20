@@ -9,6 +9,9 @@
 - Updated the API endpoints and the error/response objects from the API endpoint that the front-end will use.
 - Updated the app's code structure, specifically in the `/src` folder.
 - Updated environment variables to use Next's convention and removed the `dotenv` package.
+- Updated internal API errors to be structured as problem details.
+- Updated how API request errors are displayed to the user.
+- Updated how Google Analytics tracks page views and events.
 
 #### Removed
 
