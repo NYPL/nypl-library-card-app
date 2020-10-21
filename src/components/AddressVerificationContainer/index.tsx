@@ -115,7 +115,7 @@ function AddressVerificationContainer() {
     });
 
     // Finally, go to the acount page.
-    const nextUrl = "/library-card/account?newCard=true";
+    const nextUrl = "/account?newCard=true";
     lcaEvents("Navigation", `Next button to ${nextUrl}`);
     router.push(nextUrl);
   };
@@ -211,7 +211,7 @@ function AddressVerificationContainer() {
       )}
 
       <RoutingLinks
-        previous={{ url: "/library-card/location?newCard=true" }}
+        previous={{ url: "/location?newCard=true" }}
         next={{ submit: true }}
       />
     </form>

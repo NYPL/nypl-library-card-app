@@ -1,5 +1,5 @@
 import React from "react";
-import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
+import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 
 function HomePage() {
   return (
