@@ -1,13 +1,9 @@
-const { NEXT_PUBLIC_USE_AXE, ASSET_PREFIX } = process.env;
+const { NEXT_PUBLIC_USE_AXE } = process.env;
 
 module.exports = {
+  basePath: "/library-card",
   async redirects() {
     return [
-      {
-        source: "/",
-        destination: "/library-card/new",
-        permanent: true,
-      },
       {
         source: "/library-card",
         destination: "/library-card/new",
@@ -15,19 +11,19 @@ module.exports = {
       },
     ];
   },
-  assetPrefix: ASSET_PREFIX,
-  async rewrites() {
-    return [
-      {
-        source: `/library-card/${ASSET_PREFIX}/_next/:path*`,
-        destination: "/_next/:path*",
-      },
-      {
-        source: `/${ASSET_PREFIX}/_next/:path*`,
-        destination: "/_next/:path*",
-      },
-    ];
-  },
+  // assetPrefix: ASSET_PREFIX,
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: `/library-card/${ASSET_PREFIX}/_next/:path*`,
+  //       destination: "/_next/:path*",
+  //     },
+  //     {
+  //       source: `/${ASSET_PREFIX}/_next/:path*`,
+  //       destination: "/_next/:path*",
+  //     },
+  //   ];
+  // },
   webpack: (config, { isServer, webpack }) => {
     // react-axe should only be bundled when NEXT_PUBLIC_USE_AXE=true
     !NEXT_PUBLIC_USE_AXE &&

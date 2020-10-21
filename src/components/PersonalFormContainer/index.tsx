@@ -25,7 +25,7 @@ const PersonalFormContainer = () => {
       value: { ...formValues, ...formData },
     });
 
-    const nextUrl = "/library-card/location?newCard=true";
+    const nextUrl = "/location?newCard=true";
     lcaEvents("Navigation", `Next button to ${nextUrl}`);
     router.push(nextUrl);
   };
@@ -47,7 +47,7 @@ const PersonalFormContainer = () => {
       />
 
       <RoutingLinks
-        previous={{ url: "/library-card/new?newCard=true" }}
+        previous={{ url: "/new?newCard=true" }}
         next={{ submit: true }}
       />
     </form>
