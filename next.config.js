@@ -22,6 +22,10 @@ module.exports = {
         source: `/library-card/${ASSET_PREFIX}/_next/:path*`,
         destination: "/_next/:path*",
       },
+      {
+        source: `/${ASSET_PREFIX}/_next/:path*`,
+        destination: "/_next/:path*",
+      },
     ];
   },
   webpack: (config, { isServer, webpack }) => {
