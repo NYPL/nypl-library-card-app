@@ -5,25 +5,12 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: "/library-card",
+        source: "/library-card/",
         destination: "/library-card/new",
         permanent: true,
       },
     ];
   },
-  // assetPrefix: ASSET_PREFIX,
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: `/library-card/${ASSET_PREFIX}/_next/:path*`,
-  //       destination: "/_next/:path*",
-  //     },
-  //     {
-  //       source: `/${ASSET_PREFIX}/_next/:path*`,
-  //       destination: "/_next/:path*",
-  //     },
-  //   ];
-  // },
   webpack: (config, { isServer, webpack }) => {
     // react-axe should only be bundled when NEXT_PUBLIC_USE_AXE=true
     !NEXT_PUBLIC_USE_AXE &&
