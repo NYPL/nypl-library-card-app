@@ -46,7 +46,7 @@ const LocationAddressContainer = ({
     });
 
     axios
-      .post("/api/address", { formData })
+      .post("/library-card/api/address", { formData })
       .then((response) => {
         const home: AddressRenderType = response.data?.home;
         const work: AddressRenderType = response.data?.work;

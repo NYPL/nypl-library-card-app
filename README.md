@@ -52,11 +52,11 @@ Note: Nextjs uses `.env.development` and `.env.production` for their respective 
 
 ## Deployment
 
-### Reverse Proxy and Asset Prefix
+### Reverse Proxy and basePath
 
-NYPL.org serves many apps on separate subdomains through a reverse proxy. They all live in the nypl.org domain and typically this isn't an issue since each app has its own assets directory. But, for Nextjs apps, the `_next` directory is used for assets. In order to route the correct assets to the correct app, the QA and Production environments will have an asset prefix.
+NYPL.org serves many apps on separate subdomains through a reverse proxy. They all live in the nypl.org domain and typically this isn't an issue since each app has its own assets directory. But, for Nextjs apps, the `_next` directory is used for assets. In order to route the correct assets to the correct app, the app will be assigned a base path so all page routes and assets are fetched from there.
 
-The prefix is set through the environment variable `ASSET_PREFIX`. For the QA and Production environment, `ASSET_PREFIX` will be set to `card/`. For local development, keep the environment variable an empty string (already set by default in `.env`).
+The `basePath` value is set to `/library-card`.
 
 ### Git Workflow
 

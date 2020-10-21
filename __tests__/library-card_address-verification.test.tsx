@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
-import AddressVerificationPage from "../pages/library-card/address-verification";
+import AddressVerificationPage from "../pages/address-verification";
 import { TestProviderWrapper } from "../testHelper/utils";
 
 expect.extend(toHaveNoViolations);
