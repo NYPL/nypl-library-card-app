@@ -49,7 +49,7 @@ const UsernameValidationForm = ({
     const username = getValues("username");
     axios
       .post(
-        "/api/username",
+        "/library-card/api/username",
         { username }
         // {
         // headers: { "csrf-token": csrfToken },
