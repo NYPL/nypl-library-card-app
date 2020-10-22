@@ -108,6 +108,10 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
         />
         <meta name="csrf-token" content={csrfToken} />
         {/* <!-- Google Analytics --> */}
+        {/* We can't directly put the script into this component because React
+            doesn't allow it, so we must add it through the
+            `dangerouslySetInnerHTML` prop.
+        */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
