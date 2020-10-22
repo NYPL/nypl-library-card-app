@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import AddressVerificationPage from "../pages/address-verification";
 import { TestProviderWrapper } from "../testHelper/utils";
+import { getPageTitles } from "../src/utils/utils";
 
 expect.extend(toHaveNoViolations);
 
@@ -10,7 +11,7 @@ describe("AddressVerificationPage accessibility", () => {
   test("passes axe accessibility test", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <AddressVerificationPage />
+        <AddressVerificationPage pageTitles={getPageTitles("nyc")} />
       </TestProviderWrapper>
     );
 
@@ -22,7 +23,7 @@ describe("AddressVerificationPage", () => {
   test("renders a title and decription", () => {
     render(
       <TestProviderWrapper>
-        <AddressVerificationPage />
+        <AddressVerificationPage pageTitles={getPageTitles("nyc")} />
       </TestProviderWrapper>
     );
     expect(

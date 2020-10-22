@@ -19,7 +19,6 @@ const errorMessages = {
   username: "Username must be between 5-25 alphanumeric characters.",
   pin: "Please enter a 4-digit PIN.",
   verifyPin: "The two PINs don't match.",
-  location: "Please select a location option.",
   acceptTerms: "The terms and conditions were not accepted.",
   address: {
     line1: "Please enter a valid street address.",
@@ -111,32 +110,38 @@ const getLocationValue = (location: string): string => {
     nys: "New York State (Outside NYC)",
     us: "United States (Visiting NYC)",
   };
-  return locationMap[location];
+  return locationMap[location] || "United States (Visiting NYC)";
+};
+
+/**
+ * constructAddressType
+ * Address form fields have "home-" or "work-" as prefixes in their name
+ * attribute, such as "home-line1" or "home-city". We need to remove the prefix
+ * and create an object for address type that was passed.
+ */
+const constructAddressType = (object = {}, type: string) => {
+  const address = {};
+  Object.keys(object).forEach((key) => {
+    if (key.indexOf(`${type}-`) !== -1) {
+      // Remove the addresses field prefix and add to the proper object.
+      const field = key.split("-")[1];
+      address[field] = object[key];
+    }
+  });
+  return address;
 };
 
 /**
  * constructAddresses
- * Address form fields have "home-" or "work-" as prefixes in their name
- * attribute, such as "home-line1" or "home-city". We need to remove the prefix
- * and create objects for the home and work addresses.
+ * From a single object that has address data prefixed with "home-" or "work-",
+ * create an Addresses object.
  * @param object FormData object from the client's form submission.
  */
-const constructAddresses = (object = {}) => {
-  const addresses: Addresses = {
-    home: {} as Address,
-    work: {} as Address,
-  };
-
-  // Remove the addresses fields' prefix and add to the proper object.
-  const prefixes = ["home", "work"];
-  Object.keys(object).forEach((key) => {
-    prefixes.forEach((prefix) => {
-      if (key.indexOf(`${prefix}-`) !== -1) {
-        const field = key.split("-")[1];
-        addresses[prefix][field] = object[key];
-      }
-    });
-  });
+const constructAddresses = (object = {}): Addresses => {
+  const addresses = {
+    home: constructAddressType(object, "home"),
+    work: constructAddressType(object, "work"),
+  } as Addresses;
 
   // The work object is optional, so if it's completely empty, just remove it
   // or else we'll get false errors of work fields being empty.
@@ -247,7 +252,6 @@ const validateFormData = (object, addresses) => {
     pin,
     verifyPin,
     acceptTerms,
-    location,
   } = object;
   let errorObj = {};
 
@@ -301,10 +305,6 @@ const validateFormData = (object, addresses) => {
 
   if (isEmpty(verifyPin) || pin !== verifyPin) {
     errorObj = { ...errorObj, verifyPin: errorMessages.verifyPin };
-  }
-
-  if (!location) {
-    errorObj = { ...errorObj, location: errorMessages.location };
   }
 
   errorObj = validateAddressFormData(errorObj, addresses);
@@ -377,6 +377,7 @@ export {
   getPatronAgencyType,
   getLocationValue,
   constructAddresses,
+  constructAddressType,
   constructProblemDetail,
   validateAddressFormData,
   validateFormData,

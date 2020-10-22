@@ -2,7 +2,11 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import ConfirmationContainer from ".";
-import { FormResults, FormInputData } from "../../interfaces";
+import {
+  FormResults,
+  FormInputData,
+  AddressesResponse,
+} from "../../interfaces";
 import { FormDataContextProvider } from "../../context/FormDataContext";
 
 expect.extend(toHaveNoViolations);
@@ -21,7 +25,7 @@ const formState = {
   errorObj: undefined,
   csrfToken: "",
   formValues: {} as FormInputData,
-  addressResponse: {},
+  addressesResponse: {} as AddressesResponse,
   query: {},
 };
 

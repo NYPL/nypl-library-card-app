@@ -4,8 +4,8 @@ import {
   FormDataContextType,
   FormData,
   FormInputData,
-  AddressRenderType,
   AddressResponse,
+  AddressesResponse,
 } from "../interfaces";
 
 // Default initial values.
@@ -17,11 +17,12 @@ export const formInitialState: FormData = {
     ecommunicationsPref: true,
     policyType: "webApplicant",
   } as FormInputData,
-  addressResponse: {
-    home: {} as AddressRenderType,
-    work: {} as AddressRenderType,
-  } as AddressResponse,
+  addressesResponse: {
+    home: {} as AddressResponse,
+    work: {} as AddressResponse,
+  } as AddressesResponse,
   query: {},
+  userLocation: "",
 };
 
 interface FormDataContextProps {
