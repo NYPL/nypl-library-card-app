@@ -58,7 +58,6 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
   };
   // We want to store the initial url query params in the app's store state.
   const initState = { ...formInitialState, query };
-
   const pageTitles = getPageTitles(userLocation);
 
   return (

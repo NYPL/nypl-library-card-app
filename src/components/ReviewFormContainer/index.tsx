@@ -213,6 +213,8 @@ function ReviewFormContainer() {
    */
   const renderAddressValues = () => (
     <div className={styles.container} id="address-section" tabIndex={0}>
+      {/* If there is no location value, don't render this at all -
+          there's nothing to show and will just be confusing. */}
       {formValues.location && (
         <div className={styles.field}>
           <div className={styles.title}>Location</div>

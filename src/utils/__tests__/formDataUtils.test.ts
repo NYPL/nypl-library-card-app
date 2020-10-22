@@ -5,6 +5,7 @@ import {
   findLibraryName,
   getPatronAgencyType,
   getLocationValue,
+  constructAddressType,
   constructAddresses,
   constructProblemDetail,
   validateAddressFormData,
@@ -80,8 +81,41 @@ describe("getLocationValue", () => {
   });
 });
 
+// This is called by `constructAddresses` internally and is tested below.
+describe("constructAddressType", () => {
+  test("it returns the specific address values requested", () => {
+    const formData = {
+      "home-line1": "3747 61st St",
+      "home-line2": "",
+      "home-city": "Woodside",
+      "home-state": "NY",
+      "home-zip": "11377",
+      "work-line1": "476 5th Avenue",
+      "work-line2": "",
+      "work-city": "New York",
+      "work-state": "NY",
+      "work-zip": "10018",
+    };
+
+    expect(constructAddressType(formData, "home")).toEqual({
+      line1: "3747 61st St",
+      line2: "",
+      city: "Woodside",
+      state: "NY",
+      zip: "11377",
+    });
+    expect(constructAddressType(formData, "work")).toEqual({
+      line1: "476 5th Avenue",
+      line2: "",
+      city: "New York",
+      state: "NY",
+      zip: "10018",
+    });
+  });
+});
+
 describe("constructAddresses", () => {
-  test("it returns an empty AddressType object with no input", () => {
+  test("it returns an empty Addresses object with no input", () => {
     const empty: Addresses = constructAddresses();
 
     expect(empty).toStrictEqual({ home: {} });

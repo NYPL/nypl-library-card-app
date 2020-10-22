@@ -15,7 +15,7 @@ import {
 import Loader from "../Loader";
 import { lcaEvents } from "../../externals/gaUtils";
 
-const LocationAddressContainer = () => {
+const AddressContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
@@ -51,7 +51,6 @@ const LocationAddressContainer = () => {
         });
       })
       .catch((error) => {
-        console.log("error", error.response);
         let home = error.response?.data;
         // If the API call failed because the service is down and there is no
         // returned address data from the response, then display the initial
@@ -104,4 +103,4 @@ const LocationAddressContainer = () => {
   );
 };
 
-export default LocationAddressContainer;
+export default AddressContainer;

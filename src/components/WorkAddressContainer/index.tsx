@@ -15,7 +15,7 @@ import {
 import Loader from "../Loader";
 import { lcaEvents } from "../../externals/gaUtils";
 
-const LocationAddressContainer = () => {
+const AddressContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
   const { formValues, addressesResponse } = state;
@@ -97,4 +97,4 @@ const LocationAddressContainer = () => {
   );
 };
 
-export default LocationAddressContainer;
+export default AddressContainer;

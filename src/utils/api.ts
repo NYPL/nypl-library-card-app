@@ -341,18 +341,18 @@ export async function createPatron(
     //   },
     // });
     // Uncomment to test routing to a confirmation page with test data.
-    return res.status(200).json({
-      status: 200,
-      type: "card-granted",
-      link: "some-link",
-      barcode: "12345678912345",
-      username: "tomnook",
-      pin: "1234",
-      temporary: false,
-      message: "The library card will be a standard library card.",
-      patronId: 1234567,
-      name: "Tom Nook",
-    });
+    // return res.status(200).json({
+    //   status: 200,
+    //   type: "card-granted",
+    //   link: "some-link",
+    //   barcode: "12345678912345",
+    //   username: "tomnook",
+    //   pin: "1234",
+    //   temporary: false,
+    //   message: "The library card will be a standard library card.",
+    //   patronId: 1234567,
+    //   name: "Tom Nook",
+    // });
 
     return axios
       .post(createPatronUrl, patronData, constructApiHeaders(token))
