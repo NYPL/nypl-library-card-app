@@ -13,7 +13,7 @@ const initState: FormData = {
     ecommunicationsPref: true,
     policyType: "webApplicant",
   } as FormInputData,
-  addressResponse: {},
+  addressesResponse: {},
   query: {},
 };
 const contextWrapper = () => ({ children }) => (

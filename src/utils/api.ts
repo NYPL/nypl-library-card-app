@@ -6,21 +6,14 @@ import Cors from "cors";
 
 import config from "../../appConfig";
 import logger from "../logger/index";
+import { constructPatronObject, constructProblemDetail } from "./formDataUtils";
 import {
-  Address,
-  Addresses,
-  AddressRequestData,
   AddressAPIResponseData,
-  AddressResponse,
-  AddressRenderType,
+  AddressAPIRequestData,
   ProblemDetail,
   FormAPISubmission,
+  AddressResponse,
 } from "../interfaces";
-import {
-  constructAddresses,
-  constructPatronObject,
-  constructProblemDetail,
-} from "./formDataUtils";
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -200,18 +193,16 @@ export async function initializeAppAuth(req, res, appObj = app) {
  * attempting to validate the address.
  */
 export function axiosAddressPost(
-  address: Address,
-  isWorkAddress: boolean,
+  addressRequest: AddressAPIRequestData,
   token: string,
   validateUrl = `${config.api.validate}/address`
 ): Promise<AddressAPIResponseData> {
   return axios
-    .post(validateUrl, { address, isWorkAddress }, constructApiHeaders(token))
+    .post(validateUrl, addressRequest, constructApiHeaders(token))
     .then((result) => {
       return {
         status: result.data.status,
         success: true,
-        isWorkAddress,
         ...result.data,
       };
     })
@@ -219,28 +210,9 @@ export function axiosAddressPost(
       return {
         status: err.response?.status,
         success: false,
-        isWorkAddress,
         ...err.response?.data,
       };
     });
-}
-
-/**
- * makeAddressAPICalls
- * A wrapper function around `Promise.all` to make one or two asychronous requests
- * to the API to validate a home address and an optional work address. Each
- * POST request is handled separately because `Promise.all` either succeeds or
- * fails. If one request succeeds but one request fails, the overall request
- * fails. To safely catch requests and return the overall data even if one
- * request fails, each request is handled by `axiosAddressPost`.
- */
-export function makeAddressAPICalls(
-  addresses: AddressRequestData[],
-  token: string
-): Promise<AddressAPIResponseData[]> {
-  return Promise.all(
-    addresses.map((a) => axiosAddressPost(a.address, a.isWorkAddress, token))
-  );
 }
 
 /**
@@ -251,41 +223,23 @@ export async function validateAddress(req, res, appObj = app) {
   const tokenObject = appObj["tokenObject"];
   if (tokenObject && tokenObject?.access_token) {
     const token = tokenObject.access_token;
-    const reqAddresses: Addresses = constructAddresses(req.body.formData);
-    const addressesData = [
-      { address: reqAddresses.home, isWorkAddress: false },
-    ];
+    const addressRequest: AddressAPIRequestData = {
+      address: req.body.address,
+      isWorkAddress: req.body.isWorkAddress,
+    };
 
-    if (reqAddresses.work?.line1) {
-      addressesData.push({ address: reqAddresses.work, isWorkAddress: true });
-    }
-
-    return makeAddressAPICalls(addressesData, token)
-      .then((results: AddressAPIResponseData[]) => {
+    return axiosAddressPost(addressRequest, token)
+      .then((result) => {
         const response: AddressResponse = {
-          home: {} as AddressRenderType,
-          work: {} as AddressRenderType,
+          address: result?.address || result.originalAddress,
+          addresses: result?.addresses,
+          success: result.success,
+          cardType: result.cardType,
+          detail: result.detail || result.message,
+          reason: result.reason,
         };
-        const homeData = results[0];
-        const workData = results[1];
-        response.home = {
-          address: homeData?.address || homeData.originalAddress,
-          addresses: homeData?.addresses,
-          detail: homeData.detail,
-          reason: homeData.reason,
-        };
-        if (workData) {
-          response.work = {
-            address: workData?.address || workData?.originalAddress,
-            addresses: workData?.addresses,
-            detail: workData?.detail,
-            reason: workData?.reason,
-          };
-        }
-        return res.status(homeData.status).json({
-          status: homeData.status,
-          ...response,
-        });
+
+        return res.status(result.status).json(response);
       })
       .catch((err) => {
         return res.status(err.response?.status || 502).json({
@@ -293,6 +247,7 @@ export async function validateAddress(req, res, appObj = app) {
         });
       });
   }
+
   // Else return a no token error
   return res
     .status(500)
@@ -362,6 +317,7 @@ export async function createPatron(
       logger.error("Invalid patron data");
       return res.status(400).json(patronData);
     }
+    console.log(patronData);
 
     // Just for testing purposes locally. Used to verify refs and focus are
     // properly working but also to update the server response interface/type
@@ -386,18 +342,18 @@ export async function createPatron(
     //   },
     // });
     // Uncomment to test routing to a confirmation page with test data.
-    // return res.status(200).json({
-    //   status: 200,
-    //   type: "card-granted",
-    //   link: "some-link",
-    //   barcode: "12345678912345",
-    //   username: "tomnook",
-    //   pin: "1234",
-    //   temporary: false,
-    //   message: "The library card will be a standard library card.",
-    //   patronId: 1234567,
-    //   name: "Tom Nook",
-    // });
+    return res.status(200).json({
+      status: 200,
+      type: "card-granted",
+      link: "some-link",
+      barcode: "12345678912345",
+      username: "tomnook",
+      pin: "1234",
+      temporary: false,
+      message: "The library card will be a standard library card.",
+      patronId: 1234567,
+      name: "Tom Nook",
+    });
 
     return axios
       .post(createPatronUrl, patronData, constructApiHeaders(token))

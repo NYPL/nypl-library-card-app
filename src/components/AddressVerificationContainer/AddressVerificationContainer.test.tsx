@@ -4,6 +4,7 @@ import { axe, toHaveNoViolations } from "jest-axe";
 import AddressVerificationContainer from ".";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 import { formInitialState } from "../../context/FormDataContext";
+import { AddressResponse } from "../../interfaces";
 
 expect.extend(toHaveNoViolations);
 
@@ -23,7 +24,7 @@ describe("AddressVerificationContainer", () => {
   test("renders a home address", async () => {
     const initState = {
       ...formInitialState,
-      addressResponse: {
+      addressesResponse: {
         home: {
           cardType: "standard",
           address: {
@@ -33,10 +34,11 @@ describe("AddressVerificationContainer", () => {
             zip: "11377",
           },
           addresses: undefined,
-          message: "",
+          detail: "",
           reason: "",
+          success: true,
         },
-        work: {},
+        work: {} as AddressResponse,
       },
     };
     render(
@@ -52,7 +54,7 @@ describe("AddressVerificationContainer", () => {
   test("renders multiple home addresses", async () => {
     const initState = {
       ...formInitialState,
-      addressResponse: {
+      addressesResponse: {
         home: {
           cardType: "standard",
           address: {
@@ -75,10 +77,11 @@ describe("AddressVerificationContainer", () => {
               zip: "11388",
             },
           ],
-          message: "",
+          detail: "",
           reason: "",
+          success: true,
         },
-        work: {},
+        work: {} as AddressResponse,
       },
     };
     render(
@@ -96,7 +99,7 @@ describe("AddressVerificationContainer", () => {
   test("renders an optional work address", async () => {
     const initState = {
       ...formInitialState,
-      addressResponse: {
+      addressesResponse: {
         home: {
           cardType: "standard",
           address: {
@@ -106,7 +109,8 @@ describe("AddressVerificationContainer", () => {
             zip: "11377",
           },
           addresses: undefined,
-          message: "",
+          detail: "",
+          success: true,
           reason: "",
         },
         work: {
@@ -118,7 +122,8 @@ describe("AddressVerificationContainer", () => {
             zip: "10018",
           },
           addresses: undefined,
-          message: "",
+          detail: "",
+          success: true,
           reason: "",
         },
       },
@@ -139,7 +144,7 @@ describe("AddressVerificationContainer", () => {
   test("renders multiple optional work addresses", async () => {
     const initState = {
       ...formInitialState,
-      addressResponse: {
+      addressesResponse: {
         home: {
           cardType: "standard",
           address: {
@@ -162,7 +167,8 @@ describe("AddressVerificationContainer", () => {
               zip: "11388",
             },
           ],
-          message: "",
+          detail: "",
+          success: true,
           reason: "",
         },
         work: {
@@ -187,7 +193,8 @@ describe("AddressVerificationContainer", () => {
               zip: "10001",
             },
           ],
-          message: "",
+          detail: "",
+          success: true,
           reason: "",
         },
       },
