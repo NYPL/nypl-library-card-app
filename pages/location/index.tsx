@@ -1,11 +1,16 @@
 import React from "react";
 
 import AddressContainer from "../../src/components/AddressContainer";
+import { PageTitles } from "../../src/interfaces";
 
-function AddressPage() {
+interface PageProps {
+  pageTitles: PageTitles;
+}
+
+function AddressPage({ pageTitles }: PageProps) {
   return (
     <>
-      <h2>Step 2 of 5: Location</h2>
+      <h2>{pageTitles.address}</h2>
       <p>
         The application process is slightly different depending on whether you
         live, work, go to school, or pay property taxes in New York City,

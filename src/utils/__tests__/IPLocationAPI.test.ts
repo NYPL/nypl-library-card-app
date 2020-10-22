@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase,
 @typescript-eslint/no-var-requires */
-import IPLocationAPI, { getLocationValueFromResponse } from "../IPLocationAPI";
+import IPLocationAPI from "../IPLocationAPI";
 const requestIp = require("request-ip");
 const axios = require("axios");
 
@@ -141,17 +141,17 @@ describe("IPLocationAPI", () => {
   describe("getLocationFromIP", () => {
     const { getLocationFromIP } = IPLocationAPI;
 
-    test("should return null if the API call failed", async () => {
+    test("should return an empty if the API call failed", async () => {
       requestIp.getClientIp.mockImplementation(() => "ip-address");
       axios.get.mockImplementation(() =>
         Promise.reject({ response: "some error" })
       );
 
       const userLocation = await getLocationFromIP({ req: {} } as any);
-      expect(userLocation).toEqual({});
+      expect(userLocation).toEqual("");
     });
 
-    test("should return the updated user location object", async () => {
+    test("should return the user's location", async () => {
       requestIp.getClientIp.mockImplementation(() => "ip-address");
       const validResponse = {
         data: {
@@ -169,20 +169,18 @@ describe("IPLocationAPI", () => {
       // In the real world, the `ctx.req` object has headers and multiple
       // ways to get the IP address.
       const userLocation = await getLocationFromIP({ req: {} } as any);
-      expect(userLocation).toEqual({
-        inUS: true,
-        inNYState: true,
-        inNYCity: true,
-      });
+      expect(userLocation).toEqual("nyc");
     });
   });
 });
 
-describe("getLocationValueFromResponse", () => {
+describe("getLocationString", () => {
+  const { getLocationString } = IPLocationAPI;
+
   test("returns an empty string by default", () => {
     // The geolocation API returns an empty object by default:
     const userLocationResponse = {};
-    expect(getLocationValueFromResponse(userLocationResponse)).toEqual("");
+    expect(getLocationString(userLocationResponse)).toEqual("");
   });
 
   test("returns 'us' if that's the true option", () => {
@@ -191,7 +189,7 @@ describe("getLocationValueFromResponse", () => {
       inNYState: false,
       inUS: true,
     };
-    expect(getLocationValueFromResponse(userLocationResponse)).toEqual("us");
+    expect(getLocationString(userLocationResponse)).toEqual("us");
   });
 
   test("returns 'NYS' if that's the true option", () => {
@@ -200,7 +198,7 @@ describe("getLocationValueFromResponse", () => {
       inNYState: true,
       inUS: true,
     };
-    expect(getLocationValueFromResponse(userLocationResponse)).toEqual("nys");
+    expect(getLocationString(userLocationResponse)).toEqual("nys");
   });
 
   test("returns 'nyc' if that's the true option", () => {
@@ -209,6 +207,6 @@ describe("getLocationValueFromResponse", () => {
       inNYState: true,
       inUS: true,
     };
-    expect(getLocationValueFromResponse(userLocationResponse)).toEqual("nyc");
+    expect(getLocationString(userLocationResponse)).toEqual("nyc");
   });
 });

@@ -22,6 +22,7 @@ export const formInitialState: FormData = {
     work: {} as AddressResponse,
   } as AddressesResponse,
   query: {},
+  userLocation: "",
 };
 
 interface FormDataContextProps {

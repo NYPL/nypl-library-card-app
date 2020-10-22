@@ -14,8 +14,6 @@ import {
 } from "../../interfaces";
 import Loader from "../Loader";
 import { lcaEvents } from "../../externals/gaUtils";
-import useIPLocationContext from "../../context/IPLocationContext";
-import { getLocationValueFromResponse } from "../../utils/IPLocationAPI";
 
 const LocationAddressContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,13 +22,6 @@ const LocationAddressContainer = () => {
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
-  // Get the user's location from the geolocation API based on their IP address.
-  const userLocationResponse = useIPLocationContext();
-  // Convert the response to the default value that should be selected in the
-  // UI. If the geolocation API failed, no option will be selected by default.
-  // Even though this location value is pre-selected, users should still be
-  // able to update their location in the UI.
-  const userLocation = getLocationValueFromResponse(userLocationResponse);
 
   /**
    * submitForm
@@ -38,9 +29,6 @@ const LocationAddressContainer = () => {
    */
   const submitForm = (formData) => {
     setIsLoading(true);
-
-    // Manually set the user's location in the form data.
-    formData.location = userLocation;
 
     // Set the global form state...
     dispatch({
@@ -86,7 +74,7 @@ const LocationAddressContainer = () => {
         // If the user is not in "nyc", then we ask the user for their
         // work address information. Otherwise, the home address is enough
         // and we can go to the next step.
-        if (userLocation !== "nyc") {
+        if (formValues.location !== "nyc") {
           nextUrl = "/workAddress?newCard=true";
         } else {
           nextUrl = "/address-verification?newCard=true";

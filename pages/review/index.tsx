@@ -1,11 +1,16 @@
 import React from "react";
 
 import ReviewFormContainer from "../../src/components/ReviewFormContainer";
+import { PageTitles } from "../../src/interfaces";
 
-function ReviewPage() {
+interface PageProps {
+  pageTitles: PageTitles;
+}
+
+function ReviewPage({ pageTitles }: PageProps) {
   return (
     <>
-      <h2>Step 5 of 5: Review Your Information</h2>
+      <h2>{pageTitles.review}</h2>
       <p>
         You can use your username or library card barcode along with your PIN to
         log into and manage your account.

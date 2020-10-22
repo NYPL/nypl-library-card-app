@@ -1,11 +1,16 @@
 import React from "react";
 
 import WorkAddressContainer from "../../src/components/WorkAddressContainer";
+import { PageTitles } from "../../src/interfaces";
 
-function LocationAddressPage() {
+interface PageProps {
+  pageTitles: PageTitles;
+}
+
+function WorkAddressPage({ pageTitles }: PageProps) {
   return (
     <>
-      <h2>Step 2 of 5: Work Address</h2>
+      <h2>{pageTitles.workAddress}</h2>
       <p>
         The application process is slightly different depending on whether you
         live, work, go to school, or pay property taxes in New York City,
@@ -31,4 +36,4 @@ export async function getServerSideProps({ res, query }) {
   return { props: {} };
 }
 
-export default LocationAddressPage;
+export default WorkAddressPage;

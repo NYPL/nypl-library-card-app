@@ -1,11 +1,16 @@
 import React from "react";
 
 import PersonalFormContainer from "../../src/components/PersonalFormContainer";
+import { PageTitles } from "../../src/interfaces";
 
-function PersonalInformationPage() {
+interface PageProps {
+  pageTitles: PageTitles;
+}
+
+function PersonalInformationPage({ pageTitles }: PageProps) {
   return (
     <>
-      <h2>Step 1 of 5: Personal Information</h2>
+      <h2>{pageTitles.personal}</h2>
       <PersonalFormContainer />
     </>
   );

@@ -53,6 +53,15 @@ export interface ErrorParams {
   location?: string;
 }
 
+export interface PageTitles {
+  personal: string;
+  address: string;
+  workAddress: string;
+  verification: string;
+  account: string;
+  review: string;
+}
+
 export enum AddressTypes {
   Home = "home",
   Work = "work",

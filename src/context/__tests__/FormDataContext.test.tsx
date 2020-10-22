@@ -3,7 +3,7 @@ import { renderHook } from "@testing-library/react-hooks";
 import useFormDataContext, {
   FormDataContextProvider,
 } from "../FormDataContext";
-import { FormData, FormInputData } from "../../interfaces";
+import { FormData, FormInputData, AddressesResponse } from "../../interfaces";
 
 const initState: FormData = {
   results: undefined,
@@ -13,7 +13,7 @@ const initState: FormData = {
     ecommunicationsPref: true,
     policyType: "webApplicant",
   } as FormInputData,
-  addressesResponse: {},
+  addressesResponse: {} as AddressesResponse,
   query: {},
 };
 const contextWrapper = () => ({ children }) => (

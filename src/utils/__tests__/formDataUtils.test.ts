@@ -274,7 +274,6 @@ describe("validateFormData", () => {
       birthdate: errorMessages.birthdate,
       username: errorMessages.username,
       verifyPin: errorMessages.verifyPin,
-      location: errorMessages.location,
       acceptTerms: errorMessages.acceptTerms,
       address: {
         home: { city: errorMessages.address.city },

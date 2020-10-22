@@ -19,7 +19,6 @@ const errorMessages = {
   username: "Username must be between 5-25 alphanumeric characters.",
   pin: "Please enter a 4-digit PIN.",
   verifyPin: "The two PINs don't match.",
-  location: "Please select a location option.",
   acceptTerms: "The terms and conditions were not accepted.",
   address: {
     line1: "Please enter a valid street address.",
@@ -111,7 +110,7 @@ const getLocationValue = (location: string): string => {
     nys: "New York State (Outside NYC)",
     us: "United States (Visiting NYC)",
   };
-  return locationMap[location];
+  return locationMap[location] || "United States (Visiting NYC)";
 };
 
 /**
@@ -253,7 +252,6 @@ const validateFormData = (object, addresses) => {
     pin,
     verifyPin,
     acceptTerms,
-    location,
   } = object;
   let errorObj = {};
 
@@ -308,10 +306,6 @@ const validateFormData = (object, addresses) => {
   if (isEmpty(verifyPin) || pin !== verifyPin) {
     errorObj = { ...errorObj, verifyPin: errorMessages.verifyPin };
   }
-
-  // if (!location) {
-  //   errorObj = { ...errorObj, location: errorMessages.location };
-  // }
 
   errorObj = validateAddressFormData(errorObj, addresses);
 

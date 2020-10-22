@@ -317,7 +317,6 @@ export async function createPatron(
       logger.error("Invalid patron data");
       return res.status(400).json(patronData);
     }
-    console.log(patronData);
 
     // Just for testing purposes locally. Used to verify refs and focus are
     // properly working but also to update the server response interface/type

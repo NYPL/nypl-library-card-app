@@ -14,7 +14,6 @@ describe("createAnchorText", () => {
     pin: errorMessages.pin,
     acceptTerms: errorMessages.acceptTerms,
     username: errorMessages.username,
-    location: errorMessages.location,
     line1: errorMessages.address.line1,
     state: errorMessages.address.state,
   };
@@ -63,9 +62,6 @@ describe("createAnchorText", () => {
     );
     expect(createAnchorText("state", errors, "work")).toEqual(
       'Please enter a 2-character work <a href="#address-section">state</a> abbreviation.'
-    );
-    expect(createAnchorText("location", errors)).toEqual(
-      'Please select a  <a href="#address-section">location option</a>.'
     );
   });
 });
