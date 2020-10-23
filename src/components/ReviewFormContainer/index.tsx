@@ -80,7 +80,7 @@ function ReviewFormContainer() {
       buttonType={ButtonTypes.Primary}
       onClick={() => {
         lcaEvents("Edit", "Location/Address");
-        router.push("/library-card/location?newCard=true");
+        router.push("/location?newCard=true");
       }}
     >
       Edit
@@ -130,12 +130,12 @@ function ReviewFormContainer() {
     });
 
     axios
-      .post("/api/create-patron", formValues)
+      .post("/library-card/api/create-patron", formValues)
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
         lcaEvents("Submit", "Submit");
-        router.push("/library-card/congrats?newCard=true");
+        router.push("/congrats?newCard=true");
       })
       .catch((error) => {
         // There are server-side errors! Display them to the user

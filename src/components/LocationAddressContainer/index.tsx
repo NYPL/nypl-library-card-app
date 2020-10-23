@@ -46,7 +46,7 @@ const LocationAddressContainer = ({
     });
 
     axios
-      .post("/api/address", { formData })
+      .post("/library-card/api/address", { formData })
       .then((response) => {
         const home: AddressRenderType = response.data?.home;
         const work: AddressRenderType = response.data?.work;
@@ -94,7 +94,7 @@ const LocationAddressContainer = ({
       // Go to the next page regardless if it's a correct or error response.
       .finally(() => {
         setIsLoading(false);
-        const nextUrl = "/library-card/address-verification?newCard=true";
+        const nextUrl = "/address-verification?newCard=true";
         lcaEvents("Navigation", `Next button to ${nextUrl}`);
         router.push(nextUrl);
       });
@@ -167,7 +167,7 @@ const LocationAddressContainer = ({
       />
 
       <RoutingLinks
-        previous={{ url: "/library-card/personal?newCard=true" }}
+        previous={{ url: "/personal?newCard=true" }}
         next={{ submit: true }}
       />
     </form>

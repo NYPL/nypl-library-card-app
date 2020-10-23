@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import ConfirmationGraphic from "../../../src/components/ConfirmationGraphic";
+import ConfirmationGraphic from "../../src/components/ConfirmationGraphic";
 
 function ConfirmationPage() {
   return (
