@@ -1,6 +1,6 @@
 import React from "react";
 
-import PersonalFormContainer from "../../../src/components/PersonalFormContainer";
+import PersonalFormContainer from "../../src/components/PersonalFormContainer";
 
 function PersonalInformationPage() {
   return (

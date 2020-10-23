@@ -30,6 +30,10 @@ fieldset {
   margin-top: 20px;
 }
 
+.no-scroll {
+  position: inherit !important;
+}
+
 // Override for DS classes for mobile under 400px.
 @media only screen and (max-width: 400px) {
   // Accordions used for addresses

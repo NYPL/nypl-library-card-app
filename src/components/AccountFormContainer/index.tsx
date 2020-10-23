@@ -7,6 +7,7 @@ import RoutingLinks from "../RoutingLinks.tsx";
 import AccountForm from "../AccountForm";
 import AcceptTermsForm from "../AcceptTermsForm";
 import { findLibraryCode } from "../../utils/formDataUtils";
+import { lcaEvents } from "../../externals/gaUtils";
 
 const AccountFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
@@ -28,7 +29,9 @@ const AccountFormContainer = () => {
       value: { ...formValues, ...formData },
     });
 
-    router.push("/library-card/review?newCard=true");
+    const nextUrl = "/review?newCard=true";
+    lcaEvents("Navigation", `Next button to ${nextUrl}`);
+    router.push(nextUrl);
   };
 
   return (
@@ -38,7 +41,7 @@ const AccountFormContainer = () => {
       <AcceptTermsForm />
 
       <RoutingLinks
-        previous={{ url: "/library-card/address-verification?newCard=true" }}
+        previous={{ url: "/address-verification?newCard=true" }}
         next={{ submit: true }}
       />
     </form>

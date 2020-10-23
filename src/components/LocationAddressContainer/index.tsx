@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -16,6 +16,8 @@ import {
 } from "../../interfaces";
 import styles from "./LocationAddressContainer.module.css";
 import { constructAddresses } from "../../utils/formDataUtils";
+import Loader from "../Loader";
+import { lcaEvents } from "../../externals/gaUtils";
 
 interface LocationAddressContainerProps {
   scrollRef: React.RefObject<HTMLHeadingElement>;
@@ -24,18 +26,19 @@ interface LocationAddressContainerProps {
 const LocationAddressContainer = ({
   scrollRef,
 }: LocationAddressContainerProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const router = useRouter();
   // Specific functions and object from react-hook-form.
-  const { handleSubmit, register, watch } = useFormContext();
-  const selectedLocation = watch("location");
+  const { handleSubmit, register } = useFormContext();
 
   /**
    * submitForm
    * @param formData - data object returned from react-hook-form
    */
   const submitForm = (formData) => {
+    setIsLoading(true);
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",
@@ -43,7 +46,7 @@ const LocationAddressContainer = ({
     });
 
     axios
-      .post("/api/address", { formData })
+      .post("/library-card/api/address", { formData })
       .then((response) => {
         const home: AddressRenderType = response.data?.home;
         const work: AddressRenderType = response.data?.work;
@@ -89,9 +92,12 @@ const LocationAddressContainer = ({
         });
       })
       // Go to the next page regardless if it's a correct or error response.
-      .finally(() =>
-        router.push("/library-card/address-verification?newCard=true")
-      );
+      .finally(() => {
+        setIsLoading(false);
+        const nextUrl = "/address-verification?newCard=true";
+        lcaEvents("Navigation", `Next button to ${nextUrl}`);
+        router.push(nextUrl);
+      });
   };
 
   /**
@@ -104,9 +110,7 @@ const LocationAddressContainer = ({
     <>
       <div className={styles.addressSection}>
         <h3>Home Address</h3>
-        {selectedLocation === "nyc" && (
-          <p>If you live in NYC, please fill out the home address form.</p>
-        )}
+        <p>If you live in NYC, please fill out the home address form.</p>
         <AddressForm
           type={AddressTypes.Home}
           errorMessages={errorMessages.address}
@@ -132,6 +136,8 @@ const LocationAddressContainer = ({
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
+      <Loader isLoading={isLoading} />
+
       <LocationForm
         scrollRef={scrollRef}
         inputRadioList={[
@@ -161,7 +167,7 @@ const LocationAddressContainer = ({
       />
 
       <RoutingLinks
-        previous={{ url: "/library-card/personal?newCard=true" }}
+        previous={{ url: "/personal?newCard=true" }}
         next={{ submit: true }}
       />
     </form>

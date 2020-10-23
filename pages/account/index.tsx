@@ -1,16 +1,15 @@
 import React from "react";
+import AccountFormContainer from "../../src/components/AccountFormContainer";
 
-import ReviewFormContainer from "../../../src/components/ReviewFormContainer";
-
-function ReviewPage() {
+function AccountPage() {
   return (
     <>
-      <h2>Step 5 of 5: Review Your Information</h2>
+      <h2>Step 4 of 5: Create Your Account</h2>
       <p>
-        You can use your username or library card barcode along with your PIN to
-        log into and manage your account.
+        You can use either your username or library card barcode along with your
+        PIN to log into and manage your account.
       </p>
-      <ReviewFormContainer />
+      <AccountFormContainer />
     </>
   );
 }
@@ -28,4 +27,4 @@ export async function getServerSideProps({ res, query }) {
   return { props: {} };
 }
 
-export default ReviewPage;
+export default AccountPage;

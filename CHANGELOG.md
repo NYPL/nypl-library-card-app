@@ -9,6 +9,9 @@
 - Updated the API endpoints and the error/response objects from the API endpoint that the front-end will use.
 - Updated the app's code structure, specifically in the `/src` folder.
 - Updated environment variables to use Next's convention and removed the `dotenv` package.
+- Updated internal API errors to be structured as problem details.
+- Updated how API request errors are displayed to the user.
+- Updated how Google Analytics tracks page views and events.
 
 #### Removed
 
@@ -23,6 +26,7 @@
 - Added the `UsernameValidationForm` component to check for username availability in the ILS right away instead of waiting for the complete form to be submitted.
 - Added the `LibraryListForm` component which renders a drop down list of libraries for patrons to select their home library.
 - Added IP address server-side lookup and an API call to IP Stack to verify the user's location.
+- Set up a `basePath` name for reverse proxy rules.
 
 ### v0.5.0
 

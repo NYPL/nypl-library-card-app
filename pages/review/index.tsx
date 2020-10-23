@@ -1,13 +1,16 @@
 import React from "react";
 
-import AddressVerificationContainer from "../../../src/components/AddressVerificationContainer";
+import ReviewFormContainer from "../../src/components/ReviewFormContainer";
 
-function AddressVerificationPage() {
+function ReviewPage() {
   return (
     <>
-      <h2>Step 3 of 5: Address Verification</h2>
-      <p>Please select the correct address.</p>
-      <AddressVerificationContainer />
+      <h2>Step 5 of 5: Review Your Information</h2>
+      <p>
+        You can use your username or library card barcode along with your PIN to
+        log into and manage your account.
+      </p>
+      <ReviewFormContainer />
     </>
   );
 }
@@ -25,4 +28,4 @@ export async function getServerSideProps({ res, query }) {
   return { props: {} };
 }
 
-export default AddressVerificationPage;
+export default ReviewPage;

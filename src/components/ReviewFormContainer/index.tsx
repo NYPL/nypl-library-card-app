@@ -23,12 +23,15 @@ import RoutingLinks from "../RoutingLinks.tsx";
 import ApiErrors from "../ApiErrors";
 import styles from "./ReviewFormContainer.module.css";
 import AcceptTermsForm from "../AcceptTermsForm";
+import Loader from "../Loader";
+import { lcaEvents } from "../../externals/gaUtils";
 
 /**
  * ReviewFormContainer
  * Main page component for the "form submission review" page.
  */
 function ReviewFormContainer() {
+  const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit } = useFormContext();
   const errorSection = React.createRef<HTMLDivElement>();
   const { state, dispatch } = useFormDataContext();
@@ -61,15 +64,29 @@ function ReviewFormContainer() {
   }, [errorObj]);
 
   // Shareable button for each editable section.
-  const editButton = (editSectionFlag) => (
+  const editSectionButton = (editSectionFlag, sectionName) => (
     <Button
       buttonType={ButtonTypes.Primary}
-      onClick={() => editSectionFlag(true)}
+      onClick={() => {
+        lcaEvents("Edit", sectionName);
+        editSectionFlag(true);
+      }}
     >
       Edit
     </Button>
   );
-  const submitButton = (
+  const editAddressButton = () => (
+    <Button
+      buttonType={ButtonTypes.Primary}
+      onClick={() => {
+        lcaEvents("Edit", "Location/Address");
+        router.push("/location?newCard=true");
+      }}
+    >
+      Edit
+    </Button>
+  );
+  const submitSectionButton = (
     <Button buttonType={ButtonTypes.Primary} onClick={() => {}} type="submit">
       Submit
     </Button>
@@ -102,6 +119,7 @@ function ReviewFormContainer() {
    * Update the form values again but this time submit to the API.
    */
   const submitForm = () => {
+    setIsLoading(true);
     // This is resetting any errors from previous submissions, if any.
     dispatch({ type: "SET_FORM_ERRORS", value: null });
 
@@ -112,17 +130,19 @@ function ReviewFormContainer() {
     });
 
     axios
-      .post("/api/create-patron", formValues)
+      .post("/library-card/api/create-patron", formValues)
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
-        router.push("/library-card/congrats?newCard=true");
+        lcaEvents("Submit", "Submit");
+        router.push("/congrats?newCard=true");
       })
       .catch((error) => {
         // There are server-side errors! Display them to the user
         // so they can be fixed.
         dispatch({ type: "SET_FORM_ERRORS", value: error.response?.data });
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   /**
@@ -153,7 +173,7 @@ function ReviewFormContainer() {
         </div>
         <div>{formValues.ecommunicationsPref ? "Yes" : "No"}</div>
       </div>
-      {editButton(setEditPersonalInfoFlag)}
+      {editSectionButton(setEditPersonalInfoFlag, "Personal Information")}
     </div>
   );
   /**
@@ -184,7 +204,7 @@ function ReviewFormContainer() {
         <div className={styles.title}>Home Library</div>
         <div>{findLibraryName(formValues.homeLibraryCode)}</div>
       </div>
-      {editButton(setEditAccountInfoFlag)}
+      {editSectionButton(setEditAccountInfoFlag, "Create Your Account")}
     </div>
   );
   /**
@@ -274,17 +294,13 @@ function ReviewFormContainer() {
         </>
       )}
 
-      <RoutingLinks
-        next={{
-          url: "/library-card/location?newCard=true",
-          text: "Edit",
-        }}
-      />
+      {editAddressButton()}
     </div>
   );
 
   return (
     <>
+      <Loader isLoading={isLoading} />
       <ApiErrors ref={errorSection} problemDetail={errorObj} />
 
       <div className={styles.formSection}>
@@ -294,7 +310,7 @@ function ReviewFormContainer() {
         ) : (
           <form onSubmit={handleSubmit(editSectionInfo)}>
             <PersonalForm />
-            {submitButton}
+            {submitSectionButton}
           </form>
         )}
       </div>
@@ -312,7 +328,7 @@ function ReviewFormContainer() {
           <form onSubmit={handleSubmit(editSectionInfo)}>
             <AccountForm />
             <AcceptTermsForm />
-            {submitButton}
+            {submitSectionButton}
           </form>
         )}
       </div>
