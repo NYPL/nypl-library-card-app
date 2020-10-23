@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-import LocationAddressContainer from "../../../src/components/LocationAddressContainer";
+import LocationAddressContainer from "../../src/components/LocationAddressContainer";
 
 function LocationAddressPage() {
   // We use this ref to scroll to the heading every time a new location option

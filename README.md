@@ -52,6 +52,12 @@ Note: Nextjs uses `.env.development` and `.env.production` for their respective 
 
 ## Deployment
 
+### Reverse Proxy and basePath
+
+NYPL.org serves many apps on separate subdomains through a reverse proxy. They all live in the nypl.org domain and typically this isn't an issue since each app has its own assets directory. But, for Nextjs apps, the `_next` directory is used for assets. In order to route the correct assets to the correct app, the app will be assigned a base path so all page routes and assets are fetched from there.
+
+The `basePath` value is set to `/library-card`.
+
 ### Git Workflow
 
 Our branches (in order of stability are):

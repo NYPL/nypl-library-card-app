@@ -23,6 +23,7 @@ import RoutingLinks from "../RoutingLinks.tsx";
 import ApiErrors from "../ApiErrors";
 import styles from "./ReviewFormContainer.module.css";
 import AcceptTermsForm from "../AcceptTermsForm";
+import Loader from "../Loader";
 import { lcaEvents } from "../../externals/gaUtils";
 
 /**
@@ -30,6 +31,7 @@ import { lcaEvents } from "../../externals/gaUtils";
  * Main page component for the "form submission review" page.
  */
 function ReviewFormContainer() {
+  const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit } = useFormContext();
   const errorSection = React.createRef<HTMLDivElement>();
   const { state, dispatch } = useFormDataContext();
@@ -78,7 +80,7 @@ function ReviewFormContainer() {
       buttonType={ButtonTypes.Primary}
       onClick={() => {
         lcaEvents("Edit", "Location/Address");
-        router.push("/library-card/location?newCard=true");
+        router.push("/location?newCard=true");
       }}
     >
       Edit
@@ -117,6 +119,7 @@ function ReviewFormContainer() {
    * Update the form values again but this time submit to the API.
    */
   const submitForm = () => {
+    setIsLoading(true);
     // This is resetting any errors from previous submissions, if any.
     dispatch({ type: "SET_FORM_ERRORS", value: null });
 
@@ -127,18 +130,19 @@ function ReviewFormContainer() {
     });
 
     axios
-      .post("/api/create-patron", formValues)
+      .post("/library-card/api/create-patron", formValues)
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
         lcaEvents("Submit", "Submit");
-        router.push("/library-card/congrats?newCard=true");
+        router.push("/congrats?newCard=true");
       })
       .catch((error) => {
         // There are server-side errors! Display them to the user
         // so they can be fixed.
         dispatch({ type: "SET_FORM_ERRORS", value: error.response?.data });
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   /**
@@ -296,6 +300,7 @@ function ReviewFormContainer() {
 
   return (
     <>
+      <Loader isLoading={isLoading} />
       <ApiErrors ref={errorSection} problemDetail={errorObj} />
 
       <div className={styles.formSection}>

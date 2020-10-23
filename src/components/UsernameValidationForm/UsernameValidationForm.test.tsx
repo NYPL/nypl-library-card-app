@@ -132,7 +132,7 @@ describe("UsernameValidationForm", () => {
 
     await act(async () => fireEvent.click(button));
 
-    expect(axios.post).toBeCalledWith("/api/username", {
+    expect(axios.post).toBeCalledWith("/library-card/api/username", {
       username: "notAvailableUsername",
     });
     // Once we know that the error message _is_ in the document,
@@ -172,7 +172,7 @@ describe("UsernameValidationForm", () => {
 
     await act(async () => fireEvent.click(button));
 
-    expect(axios.post).toBeCalledWith("/api/username", {
+    expect(axios.post).toBeCalledWith("/library-card/api/username", {
       username: "availableUsername",
     });
 

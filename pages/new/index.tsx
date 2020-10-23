@@ -1,5 +1,5 @@
 import React from "react";
-import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
+import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 
 function HomePage() {
   return (
@@ -43,7 +43,7 @@ function HomePage() {
 
       <RoutingLinks
         next={{
-          url: "/library-card/personal?newCard=true",
+          url: "/personal?newCard=true",
           text: "Get Started",
         }}
       />

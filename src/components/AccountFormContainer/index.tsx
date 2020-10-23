@@ -29,7 +29,7 @@ const AccountFormContainer = () => {
       value: { ...formValues, ...formData },
     });
 
-    const nextUrl = "/library-card/review?newCard=true";
+    const nextUrl = "/review?newCard=true";
     lcaEvents("Navigation", `Next button to ${nextUrl}`);
     router.push(nextUrl);
   };
@@ -41,7 +41,7 @@ const AccountFormContainer = () => {
       <AcceptTermsForm />
 
       <RoutingLinks
-        previous={{ url: "/library-card/address-verification?newCard=true" }}
+        previous={{ url: "/address-verification?newCard=true" }}
         next={{ submit: true }}
       />
     </form>
