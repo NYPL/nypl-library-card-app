@@ -53,6 +53,15 @@ export interface ErrorParams {
   location?: string;
 }
 
+export interface PageTitles {
+  personal: string;
+  address: string;
+  workAddress: string;
+  verification: string;
+  account: string;
+  review: string;
+}
+
 export enum AddressTypes {
   Home = "home",
   Work = "work",
@@ -74,7 +83,7 @@ export interface Addresses {
   work?: Address;
 }
 
-export interface AddressRequestData {
+export interface AddressAPIRequestData {
   address: Address;
   isWorkAddress: boolean;
 }
@@ -82,31 +91,34 @@ export interface AddressRequestData {
 export interface AddressAPIResponseData {
   status: string;
   success: boolean;
-  isWorkAddress: boolean;
   cardType: null | string;
+  type: string;
+  title: string;
   address?: Address;
   originalAddress?: Address;
   addresses?: Address[];
   detail?: string;
+  message?: string;
   reason?: string;
 }
 
-export interface AddressRenderType {
+export interface AddressResponse {
   address: Address | undefined;
   addresses: Address[] | undefined;
   detail: string;
   reason?: string;
   cardType?: null | string;
+  success: boolean;
 }
 
-export interface AddressResponse {
-  home: AddressRenderType;
-  work: AddressRenderType;
+export interface AddressesResponse {
+  home: AddressResponse;
+  work?: AddressResponse;
 }
 
 export interface Params {
-  errors?: ErrorParams;
   policyType?: string;
+  errors?: ErrorParams;
   parentsBarcode?: string;
   parentsUsername?: string;
   parentsEmail?: string;
@@ -131,8 +143,8 @@ export interface FormData {
   errorObj: ProblemDetail | undefined;
   csrfToken: string;
   formValues: FormInputData;
-  addressResponse: any;
-  query: any;
+  addressesResponse: AddressesResponse;
+  query: { [key: string]: string };
 }
 
 export interface FormDataContextType {
@@ -157,7 +169,7 @@ export interface ProblemDetail {
   title: string;
   detail?: string;
   message?: string;
-  error?: {};
+  error?: { [key: string]: string };
 }
 
 export interface FormAPISubmission {

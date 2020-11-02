@@ -1,11 +1,16 @@
 import React from "react";
 
 import AddressVerificationContainer from "../../src/components/AddressVerificationContainer";
+import { PageTitles } from "../../src/interfaces";
 
-function AddressVerificationPage() {
+interface PageProps {
+  pageTitles: PageTitles;
+}
+
+function AddressVerificationPage({ pageTitles }: PageProps) {
   return (
     <>
-      <h2>Step 3 of 5: Address Verification</h2>
+      <h2>{pageTitles.verification}</h2>
       <p>Please select the correct address.</p>
       <AddressVerificationContainer />
     </>

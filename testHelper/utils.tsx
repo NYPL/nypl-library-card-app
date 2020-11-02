@@ -5,7 +5,6 @@ import {
   formInitialState,
 } from "../src/context/FormDataContext";
 import { FormData, LocationResponse } from "../src/interfaces";
-import { IPLocationContextProvider } from "../src/context/IPLocationContext";
 
 interface MockMethods {
   errors?: {};
@@ -55,16 +54,11 @@ export const TestHookFormProvider: React.FC<MockMethods> = ({
 export const TestProviderWrapper: React.FC<TestProviderType> = ({
   formDataState = formInitialState,
   hookFormState,
-  userLocation = {} as LocationResponse,
   children,
 }) => {
   return (
-    <IPLocationContextProvider userLocation={userLocation}>
-      <FormDataContextProvider initState={formDataState}>
-        <TestHookFormProvider {...hookFormState}>
-          {children}
-        </TestHookFormProvider>
-      </FormDataContextProvider>
-    </IPLocationContextProvider>
+    <FormDataContextProvider initState={formDataState}>
+      <TestHookFormProvider {...hookFormState}>{children}</TestHookFormProvider>
+    </FormDataContextProvider>
   );
 };

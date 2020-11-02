@@ -97,26 +97,53 @@ const IPLocationAPI = () => {
   };
 
   /**
+   * getLocationString
+   * Converts a user location response from geolocating their location based on
+   * their IP address, to a value to use in the UI. The logic branches out from
+   * NYC to the larger US area. The default is just an empty string to signify
+   * that no UI option should be pre-selected.
+   */
+  const getLocationString = (
+    userLocationResponse: Partial<LocationResponse>
+  ) => {
+    // For a user in NYC, the location response sets "true" for all the
+    // properties, since if you're in NYC then you must be in NYS and in US. So
+    // it's possible to not be in NYC but be in NYS and in US. This logic
+    // branches out so it returns the most detailed location first.
+    if (userLocationResponse?.inNYCity) {
+      return "nyc";
+    } else if (userLocationResponse?.inNYState) {
+      return "nys";
+    } else if (userLocationResponse?.inUS) {
+      return "us";
+    }
+    // The default value is an empty string so that
+    // no option is selected by default.
+    return "";
+  };
+
+  /**
    * getLocationFromIP
    * Use the `requestIp` package to get a user's IP address through different
    * request header properties. If there's an ipAddress, then call the
    * IP/location API to get a user's geolocation and condense it to an
    * app-friendly object.
    */
-  const getLocationFromIP = async (
-    ctx: NextPageContext
-  ): Promise<LocationResponse | {}> => {
+  const getLocationFromIP = async (ctx: NextPageContext): Promise<string> => {
     const ipAddress: string = requestIp.getClientIp(ctx.req);
-    let userLocation = {};
+    let userLocation = "";
 
     if (ipAddress) {
       // This is specifically calling IP Stack but any other API can
       // be used here instead.
       const locationResponse = await callIpStackAPI(ipAddress);
       // We received a valid response from the IP/geolocation API but let's
-      // condense the response and validate that the user is in NYC/NYS.
+      // condense the response and check that the user is in NYC/NYS.
       if (locationResponse) {
-        userLocation = verifyLocation(locationResponse);
+        const userLocationObject = verifyLocation(locationResponse);
+        // From the responses of where the user is, get the most
+        // accurate location in a string form.
+        userLocation = getLocationString(userLocationObject);
       }
     }
 
@@ -125,36 +152,11 @@ const IPLocationAPI = () => {
 
   return {
     getLocationFromIP,
+    getLocationString,
     verifyLocation,
     inNYCBounds,
     callIpStackAPI,
   };
 };
-
-/**
- * getLocationValueFromResponse
- * Converts a user location response from geolocating their location based on
- * their IP address, to a value to use in the UI. The logic branches out from
- * NYC to the larger US area. The default is just an empty string to signify
- * that no UI option should be pre-selected.
- */
-export function getLocationValueFromResponse(
-  userLocationResponse: Partial<LocationResponse>
-) {
-  // For a user in NYC, the location response sets "true" for all the
-  // properties, since if you're in NYC then you must be in NYS and in US. So
-  // it's possible to not be in NYC but be in NYS and in US. This logic
-  // branches out so it returns the most detailed location first.
-  if (userLocationResponse?.inNYCity) {
-    return "nyc";
-  } else if (userLocationResponse?.inNYState) {
-    return "nys";
-  } else if (userLocationResponse?.inUS) {
-    return "us";
-  }
-  // The default value is an empty string so that
-  // no option is selected by default.
-  return "";
-}
 
 export default IPLocationAPI();

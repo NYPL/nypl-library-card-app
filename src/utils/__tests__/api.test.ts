@@ -5,7 +5,6 @@ import {
   isTokenExpiring,
   initializeAppAuth,
   axiosAddressPost,
-  makeAddressAPICalls,
   validateAddress,
   validateUsername,
   createPatron,
@@ -175,36 +174,31 @@ describe("axiosAddressPost", () => {
       zip: "10018",
     };
     const isWorkAddress = false;
+    const addressRequest = { address, isWorkAddress };
     axios.post.mockResolvedValue({
       data: {
         status: 200,
         address,
       },
     });
-    // );
+
     const result = await axiosAddressPost(
-      address,
-      isWorkAddress,
+      addressRequest,
       "token",
       "addressUrl"
     );
 
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(axios.post).toHaveBeenCalledWith(
-      "addressUrl",
-      { address, isWorkAddress },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer token",
-        },
-        timeout: 10000,
-      }
-    );
+    expect(axios.post).toHaveBeenCalledWith("addressUrl", addressRequest, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer token",
+      },
+      timeout: 10000,
+    });
     expect(result).toEqual({
       status: 200,
       success: true,
-      isWorkAddress,
       address,
     });
   });
@@ -217,6 +211,7 @@ describe("axiosAddressPost", () => {
       zip: "10018",
     };
     const isWorkAddress = true;
+    const addressRequest = { address, isWorkAddress };
     axios.post.mockRejectedValue({
       response: {
         status: 400,
@@ -224,92 +219,24 @@ describe("axiosAddressPost", () => {
       },
     });
     const result = await axiosAddressPost(
-      address,
-      isWorkAddress,
+      addressRequest,
       "token",
       "addressUrl"
     );
 
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(axios.post).toHaveBeenCalledWith(
-      "addressUrl",
-      { address, isWorkAddress },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer token",
-        },
-        timeout: 10000,
-      }
-    );
+    expect(axios.post).toHaveBeenCalledWith("addressUrl", addressRequest, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer token",
+      },
+      timeout: 10000,
+    });
     expect(result).toEqual({
       status: 400,
       success: false,
-      isWorkAddress,
       address,
     });
-  });
-});
-
-describe("makeAddressAPICalls", () => {
-  beforeEach(() => {
-    axios.post.mockClear();
-  });
-
-  test("makes individual API call for each address passed", async () => {
-    const homeAddress = {
-      address: {
-        line1: "111 1st St.",
-        city: "New York",
-        state: "NY",
-        zip: "10018",
-      },
-      isWorkAddress: false,
-    };
-    const workAddress = {
-      address: {
-        line1: "476 5th Ave",
-        city: "New York",
-        state: "NY",
-        zip: "10018",
-      },
-      isWorkAddress: true,
-    };
-    const addresses = [homeAddress, workAddress];
-    // Mock each API call response in sequence.
-    axios.post.mockResolvedValueOnce({
-      data: {
-        status: 200,
-        address: homeAddress.address,
-      },
-    });
-    axios.post.mockRejectedValueOnce({
-      response: {
-        status: 400,
-        data: { address: workAddress.address },
-      },
-    });
-
-    const result = await makeAddressAPICalls(addresses, "token");
-
-    expect(axios.post).toHaveBeenCalledTimes(2);
-    // We expect to have an array of two address response objects
-    // (valid or error responses).
-    expect(result.length).toEqual(2);
-    expect(result).toEqual([
-      {
-        status: 200,
-        success: true,
-        isWorkAddress: false,
-        address: homeAddress.address,
-      },
-      {
-        status: 400,
-        success: false,
-        isWorkAddress: true,
-        address: workAddress.address,
-      },
-    ]);
   });
 });
 
@@ -325,16 +252,13 @@ describe("validateAddress", () => {
     };
     const requestBody = {
       body: {
-        formData: {
-          "home-line1": "111 1st St.",
-          "home-city": "New York",
-          "home-state": "NY",
-          "home-zip": "11018",
-          "work-line1": "476 5th Avenue",
-          "work-city": "New York",
-          "work-state": "NY",
-          "work-zip": "11018",
+        address: {
+          line1: "111 1st St.",
+          city: "New York",
+          state: "NY",
+          zip: "11018",
         },
+        isWorkAddress: false,
       },
     };
     axios.post.mockResolvedValueOnce({
@@ -351,61 +275,29 @@ describe("validateAddress", () => {
           hasBeenValidated: true,
         },
         originalAddress: {},
-        message: "",
-        reason: "",
-      },
-    });
-    axios.post.mockResolvedValueOnce({
-      data: {
-        status: 200,
-        type: "valid-address",
-        cardType: "standard",
-        address: {
-          line1: "476 5th Avenue",
-          city: "New York",
-          state: "NY",
-          zip: "11018",
-          isResidential: true,
-          hasBeenValidated: true,
-        },
-        originalAddress: {},
-        message: "",
+        message: "This will result in a standard card.",
         reason: "",
       },
     });
 
     await validateAddress(requestBody, mockRes, appObj);
 
-    expect(axios.post).toHaveBeenCalledTimes(2);
+    expect(axios.post).toHaveBeenCalledTimes(1);
 
     expect(mockedReturnedJson).toEqual({
-      status: 200,
-      home: {
-        address: {
-          line1: "111 1st St.",
-          city: "New York",
-          state: "NY",
-          zip: "11018",
-          isResidential: true,
-          hasBeenValidated: true,
-        },
-        addresses: undefined,
-        detail: undefined,
-        reason: "",
+      address: {
+        line1: "111 1st St.",
+        city: "New York",
+        state: "NY",
+        zip: "11018",
+        isResidential: true,
+        hasBeenValidated: true,
       },
-      work: {
-        address: {
-          line1: "476 5th Avenue",
-          city: "New York",
-          state: "NY",
-          zip: "11018",
-          isResidential: true,
-          hasBeenValidated: true,
-        },
-        addresses: undefined,
-        detail: undefined,
-        reason: "",
-      },
+      addresses: undefined,
+      detail: "This will result in a standard card.",
+      reason: "",
+      success: true,
+      cardType: "standard",
     });
   });
 

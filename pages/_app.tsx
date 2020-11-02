@@ -8,12 +8,12 @@ import {
   FormDataContextProvider,
   formInitialState,
 } from "../src/context/FormDataContext";
-import { IPLocationContextProvider } from "../src/context/IPLocationContext";
 import appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
 import ApplicationContainer from "../src/components/ApplicationContainer";
 import IPLocationAPI from "../src/utils/IPLocationAPI";
 import enableAxe from "../src/utils/axe";
+import { getPageTitles } from "../src/utils/utils";
 import { ParamsContextProvider } from "../src/context/ParamsContext";
 import useRouterScroll from "../src/hooks/useRouterScroll";
 
@@ -51,8 +51,15 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
   const { favIconPath, appTitle } = appConfig;
-  // We want to store the initial url query params into the app's store state.
+  // Update the form values state with the user's location value.
+  formInitialState.formValues = {
+    ...formInitialState.formValues,
+    location: userLocation,
+  };
+  // We want to store the initial url query params in the app's store state.
   const initState = { ...formInitialState, query };
+  const pageTitles = getPageTitles(userLocation);
+
   return (
     <>
       <Head>
@@ -129,13 +136,11 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
       </Head>
       <ParamsContextProvider params={query}>
         <FormProvider {...formMethods}>
-          <IPLocationContextProvider userLocation={userLocation}>
-            <FormDataContextProvider initState={initState}>
-              <ApplicationContainer>
-                <Component {...pageProps} />
-              </ApplicationContainer>
-            </FormDataContextProvider>
-          </IPLocationContextProvider>
+          <FormDataContextProvider initState={initState}>
+            <ApplicationContainer>
+              <Component {...pageProps} pageTitles={pageTitles} />
+            </ApplicationContainer>
+          </FormDataContextProvider>
         </FormProvider>
       </ParamsContextProvider>
     </>

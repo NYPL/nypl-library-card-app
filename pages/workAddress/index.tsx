@@ -1,16 +1,16 @@
 import React from "react";
 
-import AddressContainer from "../../src/components/AddressContainer";
+import WorkAddressContainer from "../../src/components/WorkAddressContainer";
 import { PageTitles } from "../../src/interfaces";
 
 interface PageProps {
   pageTitles: PageTitles;
 }
 
-function AddressPage({ pageTitles }: PageProps) {
+function WorkAddressPage({ pageTitles }: PageProps) {
   return (
     <>
-      <h2>{pageTitles.address}</h2>
+      <h2>{pageTitles.workAddress}</h2>
       <p>
         The application process is slightly different depending on whether you
         live, work, go to school, or pay property taxes in New York City,
@@ -18,7 +18,7 @@ function AddressPage({ pageTitles }: PageProps) {
         you&apos;re just visiting New York City. Please select one of the
         following and fill out the required fields.
       </p>
-      <AddressContainer />
+      <WorkAddressContainer />
     </>
   );
 }
@@ -36,4 +36,4 @@ export async function getServerSideProps({ res, query }) {
   return { props: {} };
 }
 
-export default AddressPage;
+export default WorkAddressPage;

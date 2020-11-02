@@ -213,12 +213,14 @@ function ReviewFormContainer() {
    */
   const renderAddressValues = () => (
     <div className={styles.container} id="address-section" tabIndex={0}>
-      <div className={styles.field}>
-        <div className={styles.title}>Location</div>
-        <fieldset>
-          {/* For now until we have better tests. This needs a value or an
-          empty input and label causes accessibility issues. */}
-          {formValues.location && (
+      {/* If there is no location value, don't render this at all -
+          there's nothing to show and will just be confusing. */}
+      {formValues.location && (
+        <div className={styles.field}>
+          <div className={styles.title}>Location</div>
+          <fieldset>
+            {/* For now until we have better tests. This needs a value or an
+            empty input and label causes accessibility issues. */}
             <div className="radio-field">
               <Input
                 className="radio-input"
@@ -240,9 +242,9 @@ function ReviewFormContainer() {
                 {getLocationValue(formValues.location)}
               </Label>
             </div>
-          )}
-        </fieldset>
-      </div>
+          </fieldset>
+        </div>
+      )}
       {formValues["work-line1"] && <h4>Home</h4>}
       <div className={styles.field}>
         <div className={styles.title}>Street Address</div>

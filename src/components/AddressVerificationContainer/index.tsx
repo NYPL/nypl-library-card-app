@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { Input, Label, InputTypes } from "@nypl/design-system-react-components";
 import useFormDataContext from "../../../src/context/FormDataContext";
-import { Address, AddressRenderType } from "../../../src/interfaces";
+import { Address, AddressResponse } from "../../../src/interfaces";
 import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
 import styles from "./AddressVerificationContainer.module.css";
 import { lcaEvents } from "../../externals/gaUtils";
@@ -20,10 +20,10 @@ function AddressVerificationContainer() {
   // Use react-hook-form for the new radio button input form.
   const { handleSubmit, register } = useForm();
   const { state, dispatch } = useFormDataContext();
-  // The `addressResponse` is the value from Service Objects through the NYPL
+  // The `addressesResponse` is the value from Service Objects through the NYPL
   // Platform API.
   // The `formValues` object holds all the submitted user values.
-  const { formValues, addressResponse } = state;
+  const { formValues, addressesResponse } = state;
   const router = useRouter();
 
   /**
@@ -34,7 +34,7 @@ function AddressVerificationContainer() {
    * We want an array so we always render the list of radio buttons, even if
    * there's only one option.
    */
-  const getAddresses = (addressObj: AddressRenderType): Address[] => {
+  const getAddresses = (addressObj: AddressResponse): Address[] => {
     if (!addressObj?.address) {
       return;
     }
@@ -46,8 +46,8 @@ function AddressVerificationContainer() {
 
   const onChangeHome = (e) => setHomeAddressSelect(e.target?.value);
   const onChangeWork = (e) => setWorkAddressSelect(e.target?.value);
-  const homeAddress = getAddresses(addressResponse?.home);
-  const workAddress = getAddresses(addressResponse?.work);
+  const homeAddress = getAddresses(addressesResponse?.home);
+  const workAddress = getAddresses(addressesResponse?.work);
 
   /**
    * extractUpdatedAddressValues

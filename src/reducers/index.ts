@@ -27,7 +27,7 @@ export function formReducer(state, action) {
     case "SET_ADDRESSES_VALUE": {
       return {
         ...state,
-        addressResponse: action.value,
+        addressesResponse: action.value,
       };
     }
     default: {

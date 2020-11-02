@@ -1,10 +1,16 @@
 import React from "react";
-import AccountFormContainer from "../../src/components/AccountFormContainer";
 
-function AccountPage() {
+import AccountFormContainer from "../../src/components/AccountFormContainer";
+import { PageTitles } from "../../src/interfaces";
+
+interface PageProps {
+  pageTitles: PageTitles;
+}
+
+function AccountPage({ pageTitles }: PageProps) {
   return (
     <>
-      <h2>Step 4 of 5: Create Your Account</h2>
+      <h2>{pageTitles.account}</h2>
       <p>
         You can use either your username or library card barcode along with your
         PIN to log into and manage your account.
