@@ -13,7 +13,7 @@ const PersonalFormContainer = () => {
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { register, handleSubmit } = useFormContext();
-  console.log("formValues personal", formValues);
+
   /**
    * submitForm
    * @param formData - data object returned from react-hook-form

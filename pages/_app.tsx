@@ -58,7 +58,6 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
     location: userLocation,
   };
   const initState = { ...formInitialState };
-  console.log("client initState", initState);
   const pageTitles = getPageTitles(userLocation);
 
   return (
