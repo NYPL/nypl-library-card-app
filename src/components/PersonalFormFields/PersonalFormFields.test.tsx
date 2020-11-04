@@ -2,15 +2,15 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import { TestProviderWrapper } from "../../../testHelper/utils";
-import PersonalForm from ".";
+import PersonalFormFields from ".";
 
 expect.extend(toHaveNoViolations);
 
-describe("PersonalForm", () => {
+describe("PersonalFormFields", () => {
   beforeEach(() => {
     render(
       <TestProviderWrapper>
-        <PersonalForm />
+        <PersonalFormFields />
       </TestProviderWrapper>
     );
   });
@@ -36,11 +36,11 @@ describe("PersonalForm", () => {
   });
 });
 
-describe("PersonalForm Accessibility check", () => {
+describe("PersonalFormFields Accessibility check", () => {
   test("passes axe accessibility test", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <PersonalForm />
+        <PersonalFormFields />
       </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();

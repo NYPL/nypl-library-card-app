@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 import useFormDataContext from "../../context/FormDataContext";
-import AddressForm from "../AddressForm";
+import AddressFormFields from "../AddressFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import { errorMessages, constructAddressType } from "../../utils/formDataUtils";
 import {
@@ -22,7 +22,7 @@ const AddressContainer = () => {
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
-
+  console.log("formValues personal", formValues);
   /**
    * submitForm
    * @param formData - data object returned from react-hook-form
@@ -85,14 +85,28 @@ const AddressContainer = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitForm)}>
+    <form
+      onSubmit={handleSubmit(submitForm)}
+      method="post"
+      action="/library-card/api/submit"
+    >
       <Loader isLoading={isLoading} />
 
       <h3>Home Address</h3>
       <p>If you live in NYC, please fill out the home address form.</p>
-      <AddressForm
+      <AddressFormFields
         type={AddressTypes.Home}
         errorMessages={errorMessages.address}
+      />
+
+      {/* Not register to react-hook-form because we only want to
+          use this value for the no-js scenario. */}
+      <input type="hidden" aria-hidden={true} name="page" value="location" />
+      <input
+        type="hidden"
+        aria-hidden={true}
+        name="formValues"
+        value={JSON.stringify(formValues)}
       />
 
       <RoutingLinks

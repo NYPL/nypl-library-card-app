@@ -3,17 +3,17 @@ import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
 
 import useFormDataContext from "../../context/FormDataContext";
-import PersonalForm from "../PersonalForm";
+import PersonalFormFields from "../PersonalFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import { lcaEvents } from "../../externals/gaUtils";
 
 const PersonalFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
-  const { formValues, query } = state;
+  const { formValues } = state;
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { register, handleSubmit } = useFormContext();
-
+  console.log("formValues personal", formValues);
   /**
    * submitForm
    * @param formData - data object returned from react-hook-form
@@ -31,19 +31,29 @@ const PersonalFormContainer = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitForm)}>
-      <PersonalForm agencyType={query.policyType} />
+    <form
+      onSubmit={handleSubmit(submitForm)}
+      method="post"
+      action="/library-card/api/submit"
+    >
+      <PersonalFormFields agencyType={formValues.policyType} />
 
       <input
         type="hidden"
         aria-hidden={true}
         name="policyType"
-        // Both `query` and `formValues` are coming from the app's state. The
-        // default for the `policyType` is "webApplicant" but the app can
-        // override that by passing in the `policyType` through a query param
-        // in the URL. All query params are also stored in the app's state.
-        defaultValue={query.policyType || formValues.policyType}
+        defaultValue={formValues.policyType}
         ref={register()}
+      />
+
+      {/* Not register to react-hook-form because we only want to
+          use this value for the no-js scenario. */}
+      <input type="hidden" aria-hidden={true} name="page" value="personal" />
+      <input
+        type="hidden"
+        aria-hidden={true}
+        name="formValues"
+        value={JSON.stringify(formValues)}
       />
 
       <RoutingLinks

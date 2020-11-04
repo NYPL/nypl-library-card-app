@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 
 import useFormDataContext from "../../context/FormDataContext";
 import RoutingLinks from "../RoutingLinks.tsx";
-import AccountForm from "../AccountForm";
-import AcceptTermsForm from "../AcceptTermsForm";
+import AccountFormFields from "../AccountFormFields";
+import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import { findLibraryCode } from "../../utils/formDataUtils";
 import { lcaEvents } from "../../externals/gaUtils";
 
@@ -35,10 +35,24 @@ const AccountFormContainer = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitForm)}>
-      <AccountForm />
+    <form
+      onSubmit={handleSubmit(submitForm)}
+      method="post"
+      action="/library-card/api/submit"
+    >
+      <AccountFormFields />
 
-      <AcceptTermsForm />
+      <AcceptTermsFormFields />
+
+      {/* Not register to react-hook-form because we only want to
+          use this value for the no-js scenario. */}
+      <input type="hidden" aria-hidden={true} name="page" value="account" />
+      <input
+        type="hidden"
+        aria-hidden={true}
+        name="formValues"
+        value={JSON.stringify(formValues)}
+      />
 
       <RoutingLinks
         previous={{ url: "/address-verification?newCard=true" }}

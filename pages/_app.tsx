@@ -14,7 +14,6 @@ import ApplicationContainer from "../src/components/ApplicationContainer";
 import IPLocationAPI from "../src/utils/IPLocationAPI";
 import enableAxe from "../src/utils/axe";
 import { getPageTitles } from "../src/utils/utils";
-import { ParamsContextProvider } from "../src/context/ParamsContext";
 import useRouterScroll from "../src/hooks/useRouterScroll";
 
 interface MyAppProps {
@@ -51,13 +50,15 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
   const { favIconPath, appTitle } = appConfig;
-  // Update the form values state with the user's location value.
+  // Update the form values state with the user's location value. We also want
+  /// to store the initial url query params in the app's store state.
   formInitialState.formValues = {
     ...formInitialState.formValues,
+    ...query,
     location: userLocation,
   };
-  // We want to store the initial url query params in the app's store state.
-  const initState = { ...formInitialState, query };
+  const initState = { ...formInitialState };
+  console.log("client initState", initState);
   const pageTitles = getPageTitles(userLocation);
 
   return (
@@ -134,15 +135,17 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
         />
         {/* <!-- End Google Analytics --> */}
       </Head>
-      <ParamsContextProvider params={query}>
-        <FormProvider {...formMethods}>
-          <FormDataContextProvider initState={initState}>
-            <ApplicationContainer>
-              <Component {...pageProps} pageTitles={pageTitles} />
-            </ApplicationContainer>
-          </FormDataContextProvider>
-        </FormProvider>
-      </ParamsContextProvider>
+      <FormProvider {...formMethods}>
+        <FormDataContextProvider initState={initState}>
+          <ApplicationContainer>
+            <Component
+              {...pageProps}
+              pageTitles={pageTitles}
+              policyType={query.policyType}
+            />
+          </ApplicationContainer>
+        </FormDataContextProvider>
+      </FormProvider>
     </>
   );
 }

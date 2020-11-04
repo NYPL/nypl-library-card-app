@@ -5,7 +5,7 @@ import { Button } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
 import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
-import styles from "./UsernameValidationForm.module.css";
+import styles from "./UsernameValidationFormFields.module.css";
 import { lcaEvents } from "../../externals/gaUtils";
 
 interface UsernameValidationFormProps {

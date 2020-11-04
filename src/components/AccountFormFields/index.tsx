@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import FormField from "../FormField";
-import UsernameValidationForm from "../UsernameValidationForm";
+import UsernameValidationFormFields from "../UsernameValidationFormFields";
 import useFormDataContext from "../../context/FormDataContext";
 import { errorMessages } from "../../utils/formDataUtils";
 import { Checkbox } from "@nypl/design-system-react-components";
 import ilsLibraryList from "../../data/ilsLibraryList";
-import LibraryListForm from "../LibraryListForm";
+import LibraryListFormFields from "../LibraryListFormFields";
 
 function AccountInformationForm() {
   const { register, errors, getValues } = useFormContext();
@@ -25,7 +25,7 @@ function AccountInformationForm() {
 
   return (
     <>
-      <UsernameValidationForm errorMessage={errorMessages.username} />
+      <UsernameValidationFormFields errorMessage={errorMessages.username} />
 
       <FormField
         id="pin"
@@ -70,7 +70,7 @@ function AccountInformationForm() {
         }}
       />
 
-      <LibraryListForm libraryList={ilsLibraryList} />
+      <LibraryListFormFields libraryList={ilsLibraryList} />
     </>
   );
 }

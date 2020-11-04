@@ -144,7 +144,6 @@ export interface FormData {
   csrfToken: string;
   formValues: FormInputData;
   addressesResponse: AddressesResponse;
-  query: { [key: string]: string };
 }
 
 export interface FormDataContextType {

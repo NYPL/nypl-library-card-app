@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 import useFormDataContext from "../../context/FormDataContext";
-import AddressForm from "../AddressForm";
+import AddressFormFields from "../AddressFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import { errorMessages, constructAddressType } from "../../utils/formDataUtils";
 import {
@@ -80,13 +80,27 @@ const AddressContainer = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitForm)}>
+    <form
+      onSubmit={handleSubmit(submitForm)}
+      method="post"
+      action="/library-card/api/submit"
+    >
       <Loader isLoading={isLoading} />
 
       <h3>Work Address</h3>
-      <AddressForm
+      <AddressFormFields
         type={AddressTypes.Work}
         errorMessages={errorMessages.address}
+      />
+
+      {/* Not register to react-hook-form because we only want to
+          use this value for the no-js scenario. */}
+      <input type="hidden" aria-hidden={true} name="page" value="workAddress" />
+      <input
+        type="hidden"
+        aria-hidden={true}
+        name="formValues"
+        value={JSON.stringify(formValues)}
       />
 
       <RoutingLinks
