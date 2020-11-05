@@ -30,3 +30,19 @@ export function getPageTitles(userLocation: string): PageTitles {
     review: "Step 6 of 6: Review Your Information",
   };
 }
+
+export const createQueryParams = (obj) => {
+  let query = "";
+  for (const [key, value] of Object.entries(obj)) {
+    query += `&${key}=${value}`;
+  }
+  return query;
+};
+
+export const createNestedQueryParams = (dataAsString = "", type) => {
+  let query = "";
+  if (dataAsString) {
+    query = `&${type}=${JSON.stringify(dataAsString)}`;
+  }
+  return query;
+};

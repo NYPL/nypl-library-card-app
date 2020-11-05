@@ -3,6 +3,7 @@ import "@nypl/design-system-react-components/dist/styles.css";
 import "../src/styles/main.scss";
 import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";
+import isEmpty from "lodash/isEmpty";
 import gaUtils, { getGoogleGACode } from "../src/externals/gaUtils";
 import {
   FormDataContextProvider,
@@ -46,18 +47,32 @@ if (appConfig.useAxe === "true" && !isServerRendered()) {
 
 function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
   useRouterScroll({ top: 640 });
+  const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
   const { favIconPath, appTitle } = appConfig;
+
+  // TODO: Display the errors for individual pages.
+  let errors;
+  if (!isEmpty(query.errors)) {
+    errors = JSON.parse(query.errors);
+    // We don't want to keep the errors in this object since it's
+    // going to go into the app's store.
+    delete query.errors;
+  }
+  if (!isEmpty(query.results)) {
+    formInitialStateCopy.results = JSON.parse(query.results);
+  }
+
   // Update the form values state with the user's location value. We also want
-  /// to store the initial url query params in the app's store state.
-  formInitialState.formValues = {
-    ...formInitialState.formValues,
+  // to store the initial url query params in the app's store state.
+  formInitialStateCopy.formValues = {
+    ...formInitialStateCopy.formValues,
     ...query,
     location: userLocation,
   };
-  const initState = { ...formInitialState };
+  const initState = { ...formInitialStateCopy };
   const pageTitles = getPageTitles(userLocation);
 
   return (
@@ -157,9 +172,10 @@ MyApp.getInitialProps = async ({ ctx }) => {
   if (ctx.req?.headers) {
     userLocation = await IPLocationAPI.getLocationFromIP(ctx);
   }
+  const query = ctx.query;
 
   // Send it to the component as a prop.
-  return { userLocation, query: ctx.query };
+  return { userLocation, query };
 };
 
 export default MyApp;
