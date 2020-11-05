@@ -304,11 +304,16 @@ export async function validateUsername(
     );
 }
 
+/**
+ * callPatronAPI
+ * Make a validated call to the NYPL Patrons API endpoint to create a patron
+ * ILS account.
+ */
 export async function callPatronAPI(
   data,
   createPatronUrl = config.api.patron,
   appObj = app
-): Promise<any> {
+) {
   const tokenObject = appObj["tokenObject"];
   if (tokenObject && tokenObject.access_token) {
     const token = tokenObject.access_token;
@@ -381,11 +386,22 @@ export async function callPatronAPI(
   );
 }
 
-export async function createPatron(req, res) {
+/**
+ * createPatron
+ * Internally, this make a call to `createPatron` and the NYPL Patrons API to
+ * create a patron ILS account. This just returns that result as JSON for the
+ * `/library-card/api/create-patron` endpoint.
+ */
+export async function createPatron(
+  req,
+  res,
+  createPatronUrl = config.api.patron,
+  appObj = app
+) {
   const data = req.body;
 
   try {
-    const response = await callPatronAPI(data);
+    const response = await callPatronAPI(data, createPatronUrl, appObj);
     return res.json(response);
   } catch (error) {
     return res.status(error.status).json(error);

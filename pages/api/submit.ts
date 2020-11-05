@@ -25,6 +25,7 @@ import {
 async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
   // Run the request through the middleware.
   await runMiddleware(req, res, cors);
+  // Get a token to be able to call the NYPL API.
   await initializeAppAuth(req, res);
 
   let newSubmittedValues = { ...req.body };

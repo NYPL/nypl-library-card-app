@@ -1,4 +1,5 @@
 import { PageTitles } from "../interfaces";
+import isEmpty from "lodash/isEmpty";
 
 /**
  * getPageTitles
@@ -31,6 +32,10 @@ export function getPageTitles(userLocation: string): PageTitles {
   };
 }
 
+/**
+ * createQueryParams
+ * Converts an object into key/value pairs to be use as url query params.
+ */
 export const createQueryParams = (obj) => {
   let query = "";
   for (const [key, value] of Object.entries(obj)) {
@@ -39,10 +44,17 @@ export const createQueryParams = (obj) => {
   return query;
 };
 
-export const createNestedQueryParams = (dataAsString = "", type) => {
+/**
+ * createNestedQueryParams
+ * Stringifies an object to be used as the value for a specified key in a url
+ * query param string. This makes it easier to group together errors and
+ * results and doesn't override any existing url queries if the same key name
+ * appears more than once.
+ */
+export const createNestedQueryParams = (dataAsString = {}, key) => {
   let query = "";
-  if (dataAsString) {
-    query = `&${type}=${JSON.stringify(dataAsString)}`;
+  if (!isEmpty(dataAsString) && key) {
+    query = `&${key}=${JSON.stringify(dataAsString)}`;
   }
   return query;
 };

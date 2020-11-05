@@ -237,6 +237,7 @@ const validateAddressFormData = (initErrorObj, addresses: Addresses) => {
 
 /**
  * validatePersonalFormData
+ * * Validates the firstName, lastName, birthdate, ageGate, and email fields.
  */
 const validatePersonalFormData = (initErrorObj, data) => {
   let errorObj = { ...initErrorObj };
@@ -274,6 +275,7 @@ const validatePersonalFormData = (initErrorObj, data) => {
 
 /**
  * validateAccountFormData
+ * Validates the username, pin, verifyPin, and acceptTerms fields.
  */
 const validateAccountFormData = (initErrorObj, data) => {
   let errorObj = { ...initErrorObj };
@@ -307,7 +309,9 @@ const validateAccountFormData = (initErrorObj, data) => {
 /**
  * validateFormData
  * Validates the form submission values and returns any errors. Internally, it
- * uses `validateAddressFormData` to validate home and work addresses.
+ * uses other functions to validate groups of data separately, to make it
+ * easier to validate data on a per page basis if it needs to, and then all at
+ * once here.
  */
 const validateFormData = (data, addresses) => {
   // Initially, there are no errors so the first param is an empty object.

@@ -172,10 +172,9 @@ MyApp.getInitialProps = async ({ ctx }) => {
   if (ctx.req?.headers) {
     userLocation = await IPLocationAPI.getLocationFromIP(ctx);
   }
-  const query = ctx.query;
 
   // Send it to the component as a prop.
-  return { userLocation, query };
+  return { userLocation, query: ctx.query };
 };
 
 export default MyApp;
