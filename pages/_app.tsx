@@ -55,11 +55,13 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
   const { favIconPath, appTitle } = appConfig;
 
   let error;
-  // These errors are from the server-side query string.
+  // These errors are from the server-side query string form submission.
   if (!isEmpty(query.errors)) {
     const errorObject = JSON.parse(query.errors);
-    // If we already received a problem detail, just forward it. Otherwise,
-    // create a problem detail for the errors.
+    // If we already received a problem detail, just forward it. Problme
+    // details get sent when a request is sent to the NYPL Platform API.
+    // If we get simple errors from form field validation, create the problem
+    // detail for the errors.
     if (errorObject?.status) {
       error = errorObject;
     } else {
@@ -68,13 +70,16 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
         "invalid-request",
         "Invalid Request",
         "There were errors with your submission.",
-        JSON.parse(query.errors)
+        errorObject
       );
     }
     // We don't want to keep the errors in this object since it's
     // going to go into the app's store.
     delete query.errors;
   }
+  // These are results specifically from the `/library-card/api/create-patron`
+  // API endpoint, which makes a request to the NYPL Platform API. These are
+  // results from the server-side form submission.
   if (!isEmpty(query.results)) {
     formInitialStateCopy.results = JSON.parse(query.results);
   }
@@ -170,7 +175,6 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
               {...pageProps}
               pageTitles={pageTitles}
               policyType={query.policyType}
-              error={error}
             />
           </ApplicationContainer>
         </FormDataContextProvider>

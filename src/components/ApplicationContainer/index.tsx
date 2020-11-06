@@ -11,6 +11,8 @@ const ApplicationContainer = ({ children, problemDetail }) => {
   const { errorObj } = state;
   const errorToDisplay = problemDetail ? problemDetail : errorObj;
 
+  // If there are errors, focus on the element that displays those errors,
+  // for client-side rendering.
   useEffect(() => {
     if (errorToDisplay) {
       errorSection.current.focus();
