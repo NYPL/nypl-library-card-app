@@ -20,7 +20,6 @@ import {
 import PersonalFormFields from "../PersonalFormFields";
 import AccountFormFields from "../AccountFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
-import ApiErrors from "../ApiErrors";
 import styles from "./ReviewFormContainer.module.css";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import Loader from "../Loader";
@@ -33,7 +32,6 @@ import { lcaEvents } from "../../externals/gaUtils";
 function ReviewFormContainer() {
   const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit } = useFormContext();
-  const errorSection = React.createRef<HTMLDivElement>();
   const { state, dispatch } = useFormDataContext();
   const { formValues, errorObj } = state;
   const router = useRouter();
@@ -54,7 +52,6 @@ function ReviewFormContainer() {
   // bad requests.
   useEffect(() => {
     if (errorObj) {
-      errorSection.current.focus();
       document.title = "Form Submission Error | NYPL";
       // When we display errors, we want to go into the "Edit" state so
       // that it's easier to go to input fields from the error messages.
@@ -303,7 +300,6 @@ function ReviewFormContainer() {
   return (
     <>
       <Loader isLoading={isLoading} />
-      <ApiErrors ref={errorSection} problemDetail={errorObj} />
 
       <div className={styles.formSection}>
         <h3>Personal Information</h3>
