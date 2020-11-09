@@ -1,5 +1,21 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { runMiddleware, cors } from "../../src/utils/api";
+import isEmpty from "lodash/isEmpty";
+import {
+  runMiddleware,
+  cors,
+  initializeAppAuth,
+  callPatronAPI,
+} from "../../src/utils/api";
+import {
+  validatePersonalFormData,
+  validateAddressFormData,
+  validateAccountFormData,
+  constructAddresses,
+} from "../../src/utils/formDataUtils";
+import {
+  createQueryParams,
+  createNestedQueryParams,
+} from "../../src/utils/utils";
 
 /**
  * serverSubmit
@@ -9,6 +25,9 @@ import { runMiddleware, cors } from "../../src/utils/api";
 async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
   // Run the request through the middleware.
   await runMiddleware(req, res, cors);
+  // Get a token to be able to call the NYPL API.
+  await initializeAppAuth(req, res);
+
   let newSubmittedValues = { ...req.body };
   // All already submitted values are stored here so we dont run validations
   // on those values again.
@@ -19,44 +38,86 @@ async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
   delete newSubmittedValues.formValues;
   delete existingValues.newCard;
 
-  let page;
+  // The default is the current page. If there are no errors, then this gets
+  // updated and we can proceed to the next page.
+  let page = currentPage;
   let queryValues = "";
+  let addresses;
+  let results;
+  let errors;
 
-  // TODO: run values through validation. After the new form field values
-  // are validated, then merge all together:
-  newSubmittedValues = { ...newSubmittedValues, ...existingValues };
-  for (const [key, value] of Object.entries(newSubmittedValues)) {
-    queryValues += `&${key}=${value}`;
-  }
-  // A switch statement so later on we can do form value validation on specific
-  // fields based on the current page.
   switch (currentPage) {
     case "personal":
-      page = "location";
+      // Validate the form values for this specific step.
+      errors = validatePersonalFormData({}, newSubmittedValues);
+      if (isEmpty(errors)) {
+        page = "location";
+      }
       break;
     case "location":
-      page = "workAddress";
+      addresses = constructAddresses(newSubmittedValues);
+      errors = validateAddressFormData({}, addresses);
+      if (isEmpty(errors)) {
+        if (newSubmittedValues.location !== "nyc") {
+          page = "workAddress";
+        } else {
+          page = "account";
+        }
+      }
       break;
     case "workAddress":
-      page = "address-verification";
-      // TODO: Do address API call here.
-      break;
-    case "addressVerification":
-      page = "account";
+      // We need to add the existing home address values since
+      // `validateAddressFormData` checks for both home and work addresses.
+      addresses = constructAddresses({
+        ...newSubmittedValues,
+        ...existingValues,
+      });
+      errors = validateAddressFormData({}, addresses);
+      if (isEmpty(errors)) {
+        page = "account";
+      }
       break;
     case "account":
-      page = "review";
+      errors = validateAccountFormData({}, newSubmittedValues);
+      if (isEmpty(errors)) {
+        page = "review";
+      }
       break;
     case "review":
-      page = "congrats";
-      // TODO: Call the `createPatron` function with all the form values here.
+      try {
+        // All the data values are in the `existingValues` variable since
+        // no new data is submitted on the "review" page. When JS is not on,
+        // checkbox values are submitted as "on" and "off". We need to convert
+        // the values into booleans for the API to understand.
+        for (const [key, value] of Object.entries(existingValues)) {
+          if (value === "on") {
+            existingValues[key] = true;
+          } else if (value === "off") {
+            existingValues[key] = false;
+          }
+        }
+        // If the API call was successful and a patron account was created,
+        // go to the congrats page and display the results.
+        results = await callPatronAPI(existingValues);
+        page = "congrats";
+      } catch (error) {
+        errors = error;
+      }
       break;
     default:
       page = "new";
       break;
   }
 
-  return res.redirect(`/library-card/${page}?newCard=true${queryValues}`);
+  newSubmittedValues = { ...existingValues, ...newSubmittedValues };
+  queryValues =
+    createQueryParams(newSubmittedValues) +
+    createNestedQueryParams(errors, "errors") +
+    createNestedQueryParams(results, "results");
+
+  return res.redirect(
+    `/library-card/${page}?${encodeURI(`newCard=true${queryValues}`)}`
+  );
 }
 
 export default serverSubmit;

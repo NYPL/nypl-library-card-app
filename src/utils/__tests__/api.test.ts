@@ -7,7 +7,7 @@ import {
   axiosAddressPost,
   validateAddress,
   validateUsername,
-  createPatron,
+  callPatronAPI,
 } from "../api";
 const axios = require("axios");
 import moment from "moment";
@@ -417,6 +417,7 @@ describe("validateUsername", () => {
       }
     );
     expect(mockedReturnedJson).toEqual({
+      status: 400,
       type: "unavailable-username",
       cardType: null,
       message: "This username is unavailable. Please try another.",
@@ -425,7 +426,7 @@ describe("validateUsername", () => {
   });
 });
 
-describe("createPatron", () => {
+describe("callPatronAPI", () => {
   beforeEach(() => {
     axios.post.mockClear();
   });
@@ -433,7 +434,15 @@ describe("createPatron", () => {
   test("it should not make an API call if there is no oauth token", async () => {
     const requestBody = {};
     axios.post.mockResolvedValue({});
-    await validateUsername(requestBody, mockRes, "url", {});
+
+    try {
+      await callPatronAPI(requestBody, "url", {});
+    } catch (error) {
+      expect(error.type).toEqual("no-access-token");
+      expect(error.detail).toEqual(
+        "The access token could not be generated before calling the Card Creator API."
+      );
+    }
 
     expect(axios.post).toHaveBeenCalledTimes(0);
   });
@@ -443,37 +452,35 @@ describe("createPatron", () => {
       tokenObject: { ["access_token"]: "token" },
       tokenExpTime: moment().add(4000, "s"),
     };
-    const requestBody = {
-      body: {
-        ecommunicationsPref: true,
-        policyType: "webApplicant",
-        firstName: "Tom",
-        lastName: "Nook",
-        birthdate: "01/01/1988",
-        email: "tomnook@nypl.org",
-        location: "nyc",
-        homeLibraryCode: "ch",
-        "home-line1": "111 1st St",
-        "home-line2": "",
-        "home-city": "New York",
-        "home-state": "NY",
-        "home-zip": "10018-2788",
-        "work-line1": "476 5th Ave",
-        "work-line2": "",
-        "work-city": "New York",
-        "work-state": "NY",
-        "work-zip": "10018-2788",
-        "home-county": "New York",
-        "home-isResidential": true,
-        "home-hasBeenValidated": true,
-        "work-county": "New York",
-        "work-isResidential": false,
-        "work-hasBeenValidated": true,
-        username: "tomnook42",
-        pin: "1234",
-        verifyPin: "1234",
-        acceptTerms: true,
-      },
+    const requestData = {
+      ecommunicationsPref: true,
+      policyType: "webApplicant",
+      firstName: "Tom",
+      lastName: "Nook",
+      birthdate: "01/01/1988",
+      email: "tomnook@nypl.org",
+      location: "nyc",
+      homeLibraryCode: "ch",
+      "home-line1": "111 1st St",
+      "home-line2": "",
+      "home-city": "New York",
+      "home-state": "NY",
+      "home-zip": "10018-2788",
+      "work-line1": "476 5th Ave",
+      "work-line2": "",
+      "work-city": "New York",
+      "work-state": "NY",
+      "work-zip": "10018-2788",
+      "home-county": "New York",
+      "home-isResidential": true,
+      "home-hasBeenValidated": true,
+      "work-county": "New York",
+      "work-isResidential": false,
+      "work-hasBeenValidated": true,
+      username: "tomnook42",
+      pin: "1234",
+      verifyPin: "1234",
+      acceptTerms: true,
     };
     axios.post.mockResolvedValue({
       data: {
@@ -488,7 +495,7 @@ describe("createPatron", () => {
       },
     });
 
-    await createPatron(requestBody, mockRes, "url", appObj);
+    const response = await callPatronAPI(requestData, "url", appObj);
 
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(
@@ -538,7 +545,7 @@ describe("createPatron", () => {
         timeout: 10000,
       }
     );
-    expect(mockedReturnedJson).toEqual({
+    expect(response).toEqual({
       status: 200,
       name: "Tom Nook",
       type: "card-granted",

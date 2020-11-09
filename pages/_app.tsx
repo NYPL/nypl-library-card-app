@@ -3,6 +3,7 @@ import "@nypl/design-system-react-components/dist/styles.css";
 import "../src/styles/main.scss";
 import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";
+import isEmpty from "lodash/isEmpty";
 import gaUtils, { getGoogleGACode } from "../src/externals/gaUtils";
 import {
   FormDataContextProvider,
@@ -15,6 +16,7 @@ import IPLocationAPI from "../src/utils/IPLocationAPI";
 import enableAxe from "../src/utils/axe";
 import { getPageTitles } from "../src/utils/utils";
 import useRouterScroll from "../src/hooks/useRouterScroll";
+import { constructProblemDetail } from "../src/utils/formDataUtils";
 
 interface MyAppProps {
   Component: any;
@@ -46,18 +48,50 @@ if (appConfig.useAxe === "true" && !isServerRendered()) {
 
 function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
   useRouterScroll({ top: 640 });
+  const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   // TODO: Work on CSRF token auth.
   const csrfToken = "";
   const { favIconPath, appTitle } = appConfig;
+
+  let error;
+  // These errors are from the server-side query string form submission.
+  if (!isEmpty(query.errors)) {
+    const errorObject = JSON.parse(query.errors);
+    // If we already received a problem detail, just forward it. Problme
+    // details get sent when a request is sent to the NYPL Platform API.
+    // If we get simple errors from form field validation, create the problem
+    // detail for the errors.
+    if (errorObject?.status) {
+      error = errorObject;
+    } else {
+      error = constructProblemDetail(
+        400,
+        "invalid-request",
+        "Invalid Request",
+        "There were errors with your submission.",
+        errorObject
+      );
+    }
+    // We don't want to keep the errors in this object since it's
+    // going to go into the app's store.
+    delete query.errors;
+  }
+  // These are results specifically from the `/library-card/api/create-patron`
+  // API endpoint, which makes a request to the NYPL Platform API. These are
+  // results from the server-side form submission.
+  if (!isEmpty(query.results)) {
+    formInitialStateCopy.results = JSON.parse(query.results);
+  }
+
   // Update the form values state with the user's location value. We also want
-  /// to store the initial url query params in the app's store state.
-  formInitialState.formValues = {
-    ...formInitialState.formValues,
+  // to store the initial url query params in the app's store state.
+  formInitialStateCopy.formValues = {
+    ...formInitialStateCopy.formValues,
     ...query,
     location: userLocation,
   };
-  const initState = { ...formInitialState };
+  const initState = { ...formInitialStateCopy };
   const pageTitles = getPageTitles(userLocation);
 
   return (
@@ -136,7 +170,7 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
       </Head>
       <FormProvider {...formMethods}>
         <FormDataContextProvider initState={initState}>
-          <ApplicationContainer>
+          <ApplicationContainer problemDetail={error}>
             <Component
               {...pageProps}
               pageTitles={pageTitles}
