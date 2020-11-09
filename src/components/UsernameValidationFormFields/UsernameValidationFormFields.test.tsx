@@ -9,9 +9,9 @@ const axios = require("axios");
 expect.extend(toHaveNoViolations);
 jest.mock("axios");
 
-import UsernameValidationForm from ".";
+import UsernameValidationFormFields from ".";
 
-describe("UsernameValidationForm", () => {
+describe("UsernameValidationFormFields", () => {
   beforeEach(() => {
     axios.mockClear();
   });
@@ -19,7 +19,7 @@ describe("UsernameValidationForm", () => {
   test("passes axe accessibility checks", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <UsernameValidationForm />
+        <UsernameValidationFormFields />
       </TestProviderWrapper>
     );
 
@@ -29,7 +29,7 @@ describe("UsernameValidationForm", () => {
   test("renders the basic label, input, and helper text elements", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <UsernameValidationForm />
+        <UsernameValidationFormFields />
       </TestProviderWrapper>
     );
 
@@ -68,7 +68,7 @@ describe("UsernameValidationForm", () => {
       <TestProviderWrapper
         hookFormState={{ getValues: mockGetValues, watch: mockWatch }}
       >
-        <UsernameValidationForm />
+        <UsernameValidationFormFields />
       </TestProviderWrapper>
     );
     let validateButton = screen.queryByRole("button");
@@ -83,7 +83,7 @@ describe("UsernameValidationForm", () => {
       <TestProviderWrapper
         hookFormState={{ getValues: mockGetValues, watch: mockWatch }}
       >
-        <UsernameValidationForm />
+        <UsernameValidationFormFields />
       </TestProviderWrapper>
     );
 
@@ -97,7 +97,7 @@ describe("UsernameValidationForm", () => {
       <TestProviderWrapper
         hookFormState={{ getValues: mockGetValues, watch: mockWatch }}
       >
-        <UsernameValidationForm />
+        <UsernameValidationFormFields />
       </TestProviderWrapper>
     );
 
@@ -119,7 +119,7 @@ describe("UsernameValidationForm", () => {
       <TestProviderWrapper
         hookFormState={{ getValues: mockGetValues, watch: mockWatch }}
       >
-        <UsernameValidationForm />
+        <UsernameValidationFormFields />
       </TestProviderWrapper>
     );
 
@@ -161,7 +161,7 @@ describe("UsernameValidationForm", () => {
       <TestProviderWrapper
         hookFormState={{ getValues: mockGetValues, watch: mockWatch }}
       >
-        <UsernameValidationForm />
+        <UsernameValidationFormFields />
       </TestProviderWrapper>
     );
 
@@ -207,7 +207,7 @@ describe("UsernameValidationForm", () => {
     // it up and returning it.
     render(
       <TestProviderWrapper hookFormState={{ getValues: mockGetValues, errors }}>
-        <UsernameValidationForm />
+        <UsernameValidationFormFields />
       </TestProviderWrapper>
     );
     // Casting the returned value so we can access `value`.

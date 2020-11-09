@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
-import LibraryListForm from ".";
+import LibraryListFormFields from ".";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 import { LibraryListObject } from "../../interfaces";
 
@@ -13,11 +13,11 @@ const libraryList: LibraryListObject[] = [
   { value: "schomburg", label: "Schomburg" },
 ];
 
-describe("LibraryListForm", () => {
+describe("LibraryListFormFields", () => {
   test("passes axe accessibility checks", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <LibraryListForm libraryList={libraryList} />
+        <LibraryListFormFields libraryList={libraryList} />
       </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
@@ -26,7 +26,7 @@ describe("LibraryListForm", () => {
   test("renders a label, input, and description", () => {
     render(
       <TestProviderWrapper>
-        <LibraryListForm libraryList={libraryList} />
+        <LibraryListFormFields libraryList={libraryList} />
       </TestProviderWrapper>
     );
 
@@ -38,7 +38,7 @@ describe("LibraryListForm", () => {
   test("it updates the selected value from the dropdown", async () => {
     render(
       <TestProviderWrapper>
-        <LibraryListForm libraryList={libraryList} />
+        <LibraryListFormFields libraryList={libraryList} />
       </TestProviderWrapper>
     );
 
@@ -72,7 +72,7 @@ describe("LibraryListForm", () => {
   test("it shows the suggestions", async () => {
     render(
       <TestProviderWrapper>
-        <LibraryListForm libraryList={libraryList} />
+        <LibraryListFormFields libraryList={libraryList} />
       </TestProviderWrapper>
     );
 

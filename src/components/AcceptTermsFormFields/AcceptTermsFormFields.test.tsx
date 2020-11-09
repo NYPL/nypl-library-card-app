@@ -2,26 +2,26 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import { TestProviderWrapper } from "../../../testHelper/utils";
-import AcceptTermsForm from ".";
+import AcceptTermsFormFields from ".";
 
 expect.extend(toHaveNoViolations);
 
-describe("AcceptTermsForm accessibility check", () => {
+describe("AcceptTermsFormFields accessibility check", () => {
   test("passes axe accessibility test", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <AcceptTermsForm />
+        <AcceptTermsFormFields />
       </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
   });
 });
 
-describe("AcceptTermsForm", () => {
+describe("AcceptTermsFormFields", () => {
   beforeEach(() => {
     render(
       <TestProviderWrapper>
-        <AcceptTermsForm />
+        <AcceptTermsFormFields />
       </TestProviderWrapper>
     );
   });

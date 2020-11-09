@@ -9,6 +9,8 @@ import {
   constructAddresses,
   constructProblemDetail,
   validateAddressFormData,
+  validatePersonalFormData,
+  validateAccountFormData,
   validateFormData,
   constructPatronObject,
 } from "../formDataUtils";
@@ -275,6 +277,97 @@ describe("validateAddressFormData", () => {
           zip: errorMessages.address.zip,
         },
       },
+    });
+  });
+});
+
+describe("validatePersonalFormData", () => {
+  test("it should return errors for all bad fields", () => {
+    const data = {
+      firstName: "",
+      lastName: "",
+      birthdate: "",
+      email: "",
+      policyType: "webApplicant",
+    };
+
+    expect(validatePersonalFormData({}, data)).toEqual({
+      firstName: errorMessages.firstName,
+      lastName: errorMessages.lastName,
+      email: errorMessages.email,
+      birthdate: errorMessages.birthdate,
+    });
+  });
+
+  test("it should return an empty object since there are no errors", () => {
+    const data = {
+      firstName: "Tom",
+      lastName: "Nook",
+      birthdate: "01/01/1999",
+      email: "tomnook@acnh.com",
+      policyType: "webApplicant",
+    };
+
+    expect(validatePersonalFormData({}, data)).toEqual({});
+  });
+
+  test("it should add erros to the existing error object", () => {
+    const errors = { someKey: "some value" };
+    const data = {
+      firstName: "",
+      lastName: "Nook",
+      birthdate: "01/01/1999",
+      email: "tomnook@acnh.com",
+      policyType: "webApplicant",
+    };
+
+    expect(validatePersonalFormData(errors, data)).toEqual({
+      ...errors,
+      firstName: errorMessages.firstName,
+    });
+  });
+});
+
+describe("validateAccountFormData", () => {
+  test("it should return errors for all bad fields", () => {
+    const data = {
+      username: "",
+      pin: "",
+      verifyPin: "",
+      acceptTerms: "",
+    };
+
+    expect(validateAccountFormData({}, data)).toEqual({
+      username: errorMessages.username,
+      pin: errorMessages.pin,
+      verifyPin: errorMessages.verifyPin,
+      acceptTerms: errorMessages.acceptTerms,
+    });
+  });
+
+  test("it should return an empty object since there are no errors", () => {
+    const data = {
+      username: "tomnook",
+      pin: "1234",
+      verifyPin: "1234",
+      acceptTerms: true,
+    };
+
+    expect(validateAccountFormData({}, data)).toEqual({});
+  });
+
+  test("it should add erros to the existing error object", () => {
+    const errors = { someKey: "some value" };
+    const data = {
+      username: "",
+      pin: "1234",
+      verifyPin: "1234",
+      acceptTerms: true,
+    };
+
+    expect(validateAccountFormData(errors, data)).toEqual({
+      ...errors,
+      username: errorMessages.username,
     });
   });
 });

@@ -4,10 +4,10 @@ import { isEmail } from "validator";
 import { Checkbox } from "@nypl/design-system-react-components";
 
 import FormField from "../FormField";
-import AgeForm from "../AgeForm";
+import AgeFormFields from "../AgeFormFields";
 import useFormDataContext from "../../context/FormDataContext";
 import { errorMessages } from "../../utils/formDataUtils";
-import styles from "./PersonalForm.module.css";
+import styles from "./PersonalFormFields.module.css";
 
 function PersonalForm({ agencyType = "" }) {
   const { register, errors } = useFormContext();
@@ -63,7 +63,7 @@ function PersonalForm({ agencyType = "" }) {
         </div>
       </div>
 
-      <AgeForm
+      <AgeFormFields
         policyType={agencyType || formValues.policyType}
         errorMessages={errorMessages}
       />
