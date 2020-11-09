@@ -16,6 +16,7 @@ import IPLocationAPI from "../src/utils/IPLocationAPI";
 import enableAxe from "../src/utils/axe";
 import { getPageTitles } from "../src/utils/utils";
 import useRouterScroll from "../src/hooks/useRouterScroll";
+import { constructProblemDetail } from "../src/utils/formDataUtils";
 
 interface MyAppProps {
   Component: any;
@@ -53,14 +54,32 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
   const csrfToken = "";
   const { favIconPath, appTitle } = appConfig;
 
-  // TODO: Display the errors for individual pages.
-  let errors;
+  let error;
+  // These errors are from the server-side query string form submission.
   if (!isEmpty(query.errors)) {
-    errors = JSON.parse(query.errors);
+    const errorObject = JSON.parse(query.errors);
+    // If we already received a problem detail, just forward it. Problme
+    // details get sent when a request is sent to the NYPL Platform API.
+    // If we get simple errors from form field validation, create the problem
+    // detail for the errors.
+    if (errorObject?.status) {
+      error = errorObject;
+    } else {
+      error = constructProblemDetail(
+        400,
+        "invalid-request",
+        "Invalid Request",
+        "There were errors with your submission.",
+        errorObject
+      );
+    }
     // We don't want to keep the errors in this object since it's
     // going to go into the app's store.
     delete query.errors;
   }
+  // These are results specifically from the `/library-card/api/create-patron`
+  // API endpoint, which makes a request to the NYPL Platform API. These are
+  // results from the server-side form submission.
   if (!isEmpty(query.results)) {
     formInitialStateCopy.results = JSON.parse(query.results);
   }
@@ -151,7 +170,7 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
       </Head>
       <FormProvider {...formMethods}>
         <FormDataContextProvider initState={initState}>
-          <ApplicationContainer>
+          <ApplicationContainer problemDetail={error}>
             <Component
               {...pageProps}
               pageTitles={pageTitles}
