@@ -5,7 +5,7 @@ import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
 import { findLibraryName } from "../../utils/formDataUtils";
 import { LibraryListObject } from "../../interfaces";
-import styles from "./LibraryListForm.module.css";
+import styles from "./LibraryListFormFields.module.css";
 
 interface LibraryListFormProps {
   libraryList: LibraryListObject[];

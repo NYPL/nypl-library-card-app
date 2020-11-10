@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from "react";
-import isEmpty from "lodash/isEmpty";
 import {
   renderErrorElements,
   createUsernameAnchor,

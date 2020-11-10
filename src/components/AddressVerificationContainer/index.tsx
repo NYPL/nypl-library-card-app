@@ -187,7 +187,11 @@ function AddressVerificationContainer() {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitForm)}>
+    <form
+      onSubmit={handleSubmit(submitForm)}
+      method="post"
+      action="/library-card/api/submit"
+    >
       <h3>Home Address</h3>
 
       {renderMultipleAddresses(
@@ -209,6 +213,21 @@ function AddressVerificationContainer() {
           )}
         </div>
       )}
+
+      {/* Not register to react-hook-form because we only want to
+          use this value for the no-js scenario. */}
+      <input
+        type="hidden"
+        aria-hidden={true}
+        name="page"
+        value="addressVerification"
+      />
+      <input
+        type="hidden"
+        aria-hidden={true}
+        name="formValues"
+        value={JSON.stringify(formValues)}
+      />
 
       <RoutingLinks
         previous={{ url: "/location?newCard=true" }}

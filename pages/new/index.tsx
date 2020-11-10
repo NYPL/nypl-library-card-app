@@ -1,7 +1,10 @@
 import React from "react";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 
-function HomePage() {
+function HomePage({ policyType }) {
+  // If we get a new policy type from the home page, make sure it gets to the
+  // form on the next page. Used for the no-js scenario.
+  const queryParam = policyType ? `&policyType=${policyType}` : "";
   return (
     <>
       <h2>Apply for a Library Card Online</h2>
@@ -43,7 +46,7 @@ function HomePage() {
 
       <RoutingLinks
         next={{
-          url: "/personal?newCard=true",
+          url: `/personal?newCard=true${queryParam}`,
           text: "Get Started",
         }}
       />

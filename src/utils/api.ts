@@ -285,6 +285,7 @@ export async function validateUsername(
       })
       .catch((err) => {
         return res.status(err.response.status).json({
+          status: err.response.status,
           ...err.response?.data,
         });
       });
@@ -303,45 +304,22 @@ export async function validateUsername(
     );
 }
 
-export async function createPatron(
-  req,
-  res,
+/**
+ * callPatronAPI
+ * Make a validated call to the NYPL Patrons API endpoint to create a patron
+ * ILS account.
+ */
+export async function callPatronAPI(
+  data,
   createPatronUrl = config.api.patron,
   appObj = app
 ) {
   const tokenObject = appObj["tokenObject"];
   if (tokenObject && tokenObject.access_token) {
     const token = tokenObject.access_token;
-    const patronData = constructPatronObject(req.body);
-    if ((patronData as ProblemDetail).status === 400) {
-      logger.error("Invalid patron data");
-      return res.status(400).json(patronData);
-    }
-
-    // Just for testing purposes locally. Used to verify refs and focus are
-    // properly working but also to update the server response interface/type
-    // later on.
-    // return res.status(400).json({
-    //   status: 400,
-    //   response: {
-    //     type: "invalid-request",
-    //     title: "Invalid Request",
-    //     detail: "There were errors in the submission.",
-    //     error: {
-    //       firstName: "First Name field is empty.",
-    //       lastName: "Last Name field is empty.",
-    //       birthdate: "Date of Birth field is empty.",
-    //       line1: "Street Address field is empty.",
-    //       city: "City field is empty.",
-    //       state: "State field is empty.",
-    //       zip: "Postal Code field is empty.",
-    //       username: "Username field is empty.",
-    //       pin: "PIN field is empty.",
-    //     },
-    //   },
-    // });
-    // Uncomment to test routing to a confirmation page with test data.
-    // return res.status(200).json({
+    const patronData = constructPatronObject(data);
+    // Used for testing:
+    // return Promise.resolve({
     //   status: 200,
     //   type: "card-granted",
     //   link: "some-link",
@@ -353,18 +331,22 @@ export async function createPatron(
     //   patronId: 1234567,
     //   name: "Tom Nook",
     // });
+    if ((patronData as ProblemDetail).status === 400) {
+      logger.error("Invalid patron data");
+      return Promise.reject(patronData);
+    }
 
     return axios
       .post(createPatronUrl, patronData, constructApiHeaders(token))
       .then((result) => {
-        return res.json({
+        return Promise.resolve({
           status: result.data.status,
           name: (patronData as FormAPISubmission).name,
           ...result.data,
         });
       })
       .catch((err) => {
-        const status = err.response.status;
+        const status = err.response?.status;
         let serverError = null;
 
         // If the response from the Patron Creator Service
@@ -375,34 +357,53 @@ export async function createPatron(
         }
 
         const restOfErrors = serverError
-          ? { ...err.response.data, ...serverError }
-          : err.response.data;
+          ? { ...err.response?.data, ...serverError }
+          : err.response?.data;
 
         logger.error(
           `Error calling Card Creator API: ${
-            status === 403 ? "bad API call" : err.response.data.message
+            status === 403 ? "bad API call" : err.response?.data?.message
           }`
         );
-        return res.status(err.response.status).json({
-          status: err.response.status,
+        return Promise.reject({
+          status,
           ...restOfErrors,
         });
       });
   }
-
-  // Else return a no token error.
+  // Else return a "no token generated" error.
   const tokenGenerationError =
     "The access token could not be generated before calling the Card Creator API.";
 
   logger.error(tokenGenerationError);
-  return res
-    .status(500)
-    .json(
-      constructProblemDetail(
-        500,
-        "no-access-token",
-        "No Access Token",
-        tokenGenerationError
-      )
-    );
+  return Promise.reject(
+    constructProblemDetail(
+      500,
+      "no-access-token",
+      "No Access Token",
+      tokenGenerationError
+    )
+  );
+}
+
+/**
+ * createPatron
+ * Internally, this make a call to `createPatron` and the NYPL Patrons API to
+ * create a patron ILS account. This just returns that result as JSON for the
+ * `/library-card/api/create-patron` endpoint.
+ */
+export async function createPatron(
+  req,
+  res,
+  createPatronUrl = config.api.patron,
+  appObj = app
+) {
+  const data = req.body;
+
+  try {
+    const response = await callPatronAPI(data, createPatronUrl, appObj);
+    return res.json(response);
+  } catch (error) {
+    return res.status(error.status).json(error);
+  }
 }

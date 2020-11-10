@@ -2,27 +2,27 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import { TestProviderWrapper } from "../../../testHelper/utils";
-import AccountForm from ".";
+import AccountFormFields from ".";
 
 expect.extend(toHaveNoViolations);
 
-describe("AccountForm accessibility check", () => {
+describe("AccountFormFields accessibility check", () => {
   test("passes axe accessibility test", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <AccountForm />
+        <AccountFormFields />
       </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
   });
 });
 
-describe("AccountForm", () => {
+describe("AccountFormFields", () => {
   let container;
   beforeEach(() => {
     const utils = render(
       <TestProviderWrapper>
-        <AccountForm />
+        <AccountFormFields />
       </TestProviderWrapper>
     );
     container = utils.container;

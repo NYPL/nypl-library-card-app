@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
-import AddressForm from ".";
+import AddressFormFields from ".";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 import { Address, AddressTypes } from "../../interfaces";
 
@@ -21,11 +21,11 @@ const reactHookFormErrors = {
   "home-zip": { message: addressErrorMessages.zip },
 };
 
-describe("AddressForm", () => {
+describe("AddressFormFields", () => {
   test("it passes axe accessibility test", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <AddressForm
+        <AddressFormFields
           type={AddressTypes.Home}
           errorMessages={addressErrorMessages}
         />
@@ -37,7 +37,7 @@ describe("AddressForm", () => {
   test("it passes accessibilty checks with error messages", async () => {
     const { container } = render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
-        <AddressForm
+        <AddressFormFields
           type={AddressTypes.Home}
           errorMessages={addressErrorMessages}
         />
@@ -50,7 +50,7 @@ describe("AddressForm", () => {
   test("it should render five fields", () => {
     render(
       <TestProviderWrapper>
-        <AddressForm
+        <AddressFormFields
           type={AddressTypes.Home}
           errorMessages={addressErrorMessages}
         />
@@ -79,7 +79,7 @@ describe("AddressForm", () => {
   test("it should render five optional fields for the work address", () => {
     render(
       <TestProviderWrapper>
-        <AddressForm
+        <AddressFormFields
           type={AddressTypes.Work}
           errorMessages={addressErrorMessages}
         />
@@ -104,7 +104,7 @@ describe("AddressForm", () => {
   test("it should render any error messages for required fields", () => {
     render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
-        <AddressForm
+        <AddressFormFields
           type={AddressTypes.Home}
           errorMessages={addressErrorMessages}
         />

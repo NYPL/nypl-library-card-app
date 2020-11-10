@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
-import AgeForm from ".";
+import AgeFormFields from ".";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 
 expect.extend(toHaveNoViolations);
@@ -21,11 +21,11 @@ const reactHookFormErrors = {
   },
 };
 
-describe("AgeForm", () => {
+describe("AgeFormFields", () => {
   test("it passes axe accessibility checks for the field input", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <AgeForm errorMessages={noHookFormErrors} />
+        <AgeFormFields errorMessages={noHookFormErrors} />
       </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
@@ -34,7 +34,7 @@ describe("AgeForm", () => {
   test("it passes axe accessibility checks for the checkbox input", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <AgeForm policyType="simplye" errorMessages={noHookFormErrors} />
+        <AgeFormFields policyType="simplye" errorMessages={noHookFormErrors} />
       </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
@@ -43,7 +43,7 @@ describe("AgeForm", () => {
   test("it renders an input field with the default webApplicant policyType", () => {
     render(
       <TestProviderWrapper>
-        <AgeForm errorMessages={noHookFormErrors} />
+        <AgeFormFields errorMessages={noHookFormErrors} />
       </TestProviderWrapper>
     );
 
@@ -63,7 +63,7 @@ describe("AgeForm", () => {
   test("it renders a checkbox with the simplye policyType", () => {
     render(
       <TestProviderWrapper>
-        <AgeForm policyType="simplye" errorMessages={noHookFormErrors} />
+        <AgeFormFields policyType="simplye" errorMessages={noHookFormErrors} />
       </TestProviderWrapper>
     );
 
@@ -83,7 +83,7 @@ describe("AgeForm", () => {
   test("updates the age gate checkbox", async () => {
     render(
       <TestProviderWrapper>
-        <AgeForm policyType="simplye" errorMessages={noHookFormErrors} />
+        <AgeFormFields policyType="simplye" errorMessages={noHookFormErrors} />
       </TestProviderWrapper>
     );
 
@@ -98,7 +98,7 @@ describe("AgeForm", () => {
   test("it should render a webApplicant error message", () => {
     render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
-        <AgeForm errorMessages={ageFormErrorMessages} />
+        <AgeFormFields errorMessages={ageFormErrorMessages} />
       </TestProviderWrapper>
     );
 
@@ -109,7 +109,10 @@ describe("AgeForm", () => {
   test("it should render a simplye error message", () => {
     render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
-        <AgeForm policyType="simplye" errorMessages={ageFormErrorMessages} />
+        <AgeFormFields
+          policyType="simplye"
+          errorMessages={ageFormErrorMessages}
+        />
       </TestProviderWrapper>
     );
 

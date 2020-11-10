@@ -1,4 +1,8 @@
-import { getPageTitles } from "../utils";
+import {
+  getPageTitles,
+  createQueryParams,
+  createNestedQueryParams,
+} from "../utils";
 
 describe("getPageTiles", () => {
   test("it returns text saying there are 5 steps if the user is in nyc", () => {
@@ -30,5 +34,44 @@ describe("getPageTiles", () => {
     expect(getPageTitles(userLocationEmpty)).toEqual(sixStepTitles);
     expect(getPageTitles(userLocationUS)).toEqual(sixStepTitles);
     expect(getPageTitles(userLocationNYS)).toEqual(sixStepTitles);
+  });
+});
+
+describe("createQueryParams", () => {
+  test("it should return an empty string with an empty object", () => {
+    expect(createQueryParams({})).toEqual("");
+  });
+
+  test("it should return a url query string", () => {
+    const data = {
+      key1: "value1",
+      key2: "value2",
+      key3: "value3",
+    };
+    expect(createQueryParams(data)).toEqual(
+      "&key1=value1&key2=value2&key3=value3"
+    );
+  });
+});
+
+describe("createNestedQueryParams", () => {
+  test("it should return an empty string with an empty string or type argument", () => {
+    expect(createNestedQueryParams({}, "key")).toEqual("");
+    expect(createNestedQueryParams({ key: "somevalue" }, "")).toEqual("");
+  });
+
+  test("it should return a nested url query string", () => {
+    const data = {
+      key1: "value1",
+      key2: "value2",
+      key3: "value3",
+    };
+    expect(createNestedQueryParams(data, "results")).toEqual(
+      `&results=${JSON.stringify(data)}`
+    );
+
+    expect(createNestedQueryParams(data, "errors")).toEqual(
+      `&errors=${JSON.stringify(data)}`
+    );
   });
 });

@@ -14,7 +14,6 @@ const initState: FormData = {
     policyType: "webApplicant",
   } as FormInputData,
   addressesResponse: {} as AddressesResponse,
-  query: {},
 };
 const contextWrapper = () => ({ children }) => (
   <FormDataContextProvider initState={initState}>
@@ -22,7 +21,7 @@ const contextWrapper = () => ({ children }) => (
   </FormDataContextProvider>
 );
 
-describe("ParamsContext", () => {
+describe("FormDataContext", () => {
   test("exposes a context `value` prop that has a function and a value object", () => {
     const { result } = renderHook(() => useFormDataContext(), {
       wrapper: contextWrapper(),

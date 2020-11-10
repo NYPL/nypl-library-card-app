@@ -236,29 +236,16 @@ const validateAddressFormData = (initErrorObj, addresses: Addresses) => {
 };
 
 /**
- * validateFormData
- * Validates the form submission values and returns any errors. Internally, it
- * uses `validateAddressFormData` to validate home and work addresses.
+ * validatePersonalFormData
+ * * Validates the firstName, lastName, birthdate, ageGate, and email fields.
  */
-const validateFormData = (object, addresses) => {
-  const {
-    firstName,
-    lastName,
-    email,
-    birthdate,
-    ageGate,
-    policyType,
-    username,
-    pin,
-    verifyPin,
-    acceptTerms,
-  } = object;
-  let errorObj = {};
+const validatePersonalFormData = (initErrorObj, data) => {
+  let errorObj = { ...initErrorObj };
+  const { firstName, lastName, birthdate, ageGate, email, policyType } = data;
 
   if (isEmpty(firstName)) {
     errorObj = { ...errorObj, firstName: errorMessages.firstName };
   }
-
   if (isEmpty(lastName)) {
     errorObj = { ...errorObj, lastName: errorMessages.lastName };
   }
@@ -279,14 +266,20 @@ const validateFormData = (object, addresses) => {
       ageGate: errorMessages.ageGate,
     };
   }
-
-  if (!acceptTerms) {
-    errorObj = { ...errorObj, acceptTerms: errorMessages.acceptTerms };
-  }
-
   if (isEmpty(email) || !isEmail(email)) {
     errorObj = { ...errorObj, email: errorMessages.email };
   }
+
+  return errorObj;
+};
+
+/**
+ * validateAccountFormData
+ * Validates the username, pin, verifyPin, and acceptTerms fields.
+ */
+const validateAccountFormData = (initErrorObj, data) => {
+  let errorObj = { ...initErrorObj };
+  const { username, pin, verifyPin, acceptTerms } = data;
 
   if (
     isEmpty(username) ||
@@ -306,8 +299,25 @@ const validateFormData = (object, addresses) => {
   if (isEmpty(verifyPin) || pin !== verifyPin) {
     errorObj = { ...errorObj, verifyPin: errorMessages.verifyPin };
   }
+  if (!acceptTerms) {
+    errorObj = { ...errorObj, acceptTerms: errorMessages.acceptTerms };
+  }
 
+  return errorObj;
+};
+
+/**
+ * validateFormData
+ * Validates the form submission values and returns any errors. Internally, it
+ * uses other functions to validate groups of data separately, to make it
+ * easier to validate data on a per page basis if it needs to, and then all at
+ * once here.
+ */
+const validateFormData = (data, addresses) => {
+  // Initially, there are no errors so the first param is an empty object.
+  let errorObj = validatePersonalFormData({}, data);
   errorObj = validateAddressFormData(errorObj, addresses);
+  errorObj = validateAccountFormData(errorObj, data);
 
   return errorObj;
 };
@@ -379,7 +389,9 @@ export {
   constructAddresses,
   constructAddressType,
   constructProblemDetail,
-  validateAddressFormData,
-  validateFormData,
   constructPatronObject,
+  validateFormData,
+  validatePersonalFormData,
+  validateAddressFormData,
+  validateAccountFormData,
 };

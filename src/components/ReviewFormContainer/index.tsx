@@ -17,12 +17,11 @@ import {
   findLibraryName,
   findLibraryCode,
 } from "../../../src/utils/formDataUtils";
-import PersonalForm from "../PersonalForm";
-import AccountForm from "../AccountForm";
+import PersonalFormFields from "../PersonalFormFields";
+import AccountFormFields from "../AccountFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
-import ApiErrors from "../ApiErrors";
 import styles from "./ReviewFormContainer.module.css";
-import AcceptTermsForm from "../AcceptTermsForm";
+import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import Loader from "../Loader";
 import { lcaEvents } from "../../externals/gaUtils";
 
@@ -33,7 +32,6 @@ import { lcaEvents } from "../../externals/gaUtils";
 function ReviewFormContainer() {
   const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit } = useFormContext();
-  const errorSection = React.createRef<HTMLDivElement>();
   const { state, dispatch } = useFormDataContext();
   const { formValues, errorObj } = state;
   const router = useRouter();
@@ -54,7 +52,6 @@ function ReviewFormContainer() {
   // bad requests.
   useEffect(() => {
     if (errorObj) {
-      errorSection.current.focus();
       document.title = "Form Submission Error | NYPL";
       // When we display errors, we want to go into the "Edit" state so
       // that it's easier to go to input fields from the error messages.
@@ -303,7 +300,6 @@ function ReviewFormContainer() {
   return (
     <>
       <Loader isLoading={isLoading} />
-      <ApiErrors ref={errorSection} problemDetail={errorObj} />
 
       <div className={styles.formSection}>
         <h3>Personal Information</h3>
@@ -311,7 +307,7 @@ function ReviewFormContainer() {
           renderPersonalInformationValues()
         ) : (
           <form onSubmit={handleSubmit(editSectionInfo)}>
-            <PersonalForm />
+            <PersonalFormFields />
             {submitSectionButton}
           </form>
         )}
@@ -328,8 +324,8 @@ function ReviewFormContainer() {
           renderAccountValues()
         ) : (
           <form onSubmit={handleSubmit(editSectionInfo)}>
-            <AccountForm />
-            <AcceptTermsForm />
+            <AccountFormFields />
+            <AcceptTermsFormFields />
             {submitSectionButton}
           </form>
         )}
@@ -344,7 +340,21 @@ function ReviewFormContainer() {
         Island.
       </div>
 
-      <form onSubmit={handleSubmit(submitForm)}>
+      <form
+        onSubmit={handleSubmit(submitForm)}
+        method="post"
+        action="/library-card/api/submit"
+      >
+        {/* Not register to react-hook-form because we only want to
+          use this value for the no-js scenario. */}
+        <input type="hidden" aria-hidden={true} name="page" value="review" />
+        <input
+          type="hidden"
+          aria-hidden={true}
+          name="formValues"
+          value={JSON.stringify(formValues)}
+        />
+
         <RoutingLinks next={{ submit: true, text: "Submit" }} />
       </form>
     </>
