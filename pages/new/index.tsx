@@ -1,7 +1,23 @@
-import React from "react";
-import RoutingLinks from "../../src/components/RoutingLinks.tsx";
+import React, { useEffect } from "react";
+// import axios from "axios";
+// import asyncUseEffect from "use-async-effect";
 
-function HomePage({ policyType }) {
+import RoutingLinks from "../../src/components/RoutingLinks.tsx";
+import useFormDataContext from "../../src/context/FormDataContext";
+import { getCsrfToken } from "../../src/utils/api";
+
+function HomePage({ policyType, csrfToken }) {
+  const { dispatch } = useFormDataContext();
+  console.log("homepage otken", csrfToken);
+  useEffect(() => {
+    // const token = await getCsrfToken2();
+    // console.log("HomePage token", token);
+    dispatch({
+      type: "SET_CSRF_TOKEN",
+      value: csrfToken,
+    });
+  }, []);
+
   // If we get a new policy type from the home page, make sure it gets to the
   // form on the next page. Used for the no-js scenario.
   const queryParam = policyType ? `&policyType=${policyType}` : "";
@@ -52,6 +68,31 @@ function HomePage({ policyType }) {
       />
     </>
   );
+}
+
+// const _fetchData = async (url, options = {}) => {
+//   return axios
+//     .post(`http://localhost:3000${url}`, options)
+//     .then((response) => {
+//       const data = response.data;
+//       return Promise.resolve(Object.keys(data).length > 0 ? data : null);
+//     })
+//     .catch((error) => {
+//       console.log("error calling csrf endpoing", error);
+//       return Promise.resolve(null);
+//     });
+// };
+
+// const getCsrfToken2 = async () => {
+//   const data = await _fetchData("/library-card/api/csrf", {});
+//   return data?.csrfToken ? data.csrfToken : null;
+// };
+
+export async function getServerSideProps(context) {
+  const { csrfToken } = getCsrfToken(context.req, context.res);
+  return {
+    props: { csrfToken },
+  };
 }
 
 export default HomePage;

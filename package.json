@@ -34,7 +34,7 @@
   "dependencies": {
     "@axe-core/react": "^4.0.0",
     "@babel/preset-typescript": "^7.10.4",
-    "@nypl/design-system-react-components": "^0.17.3",
+    "@nypl/design-system-react-components": "^0.18.2",
     "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component#reactupdate",
     "@nypl/dgx-react-footer": "0.5.7",
     "@testing-library/jest-dom": "5.11.4",
@@ -51,6 +51,7 @@
     "bwip-js": "^2.0.10",
     "cookie-parser": "1.4.5",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "csurf": "1.11.0",
     "eslint": "7.11.0",
     "eslint-config-prettier": "^6.11.0",
@@ -84,6 +85,7 @@
     "sinon": "9.0.2",
     "typescript": "^3.9.5",
     "underscore": "1.10.2",
+    "use-async-effect": "^2.2.2",
     "validator": "13.0.0",
     "webpack": "4.42.1",
     "winston": "3.3.3"

@@ -31,7 +31,8 @@ const UsernameValidationForm = ({
   const { watch, getValues, register, errors } = useFormContext();
   const usernameWatch = watch("username");
   const { state } = useFormDataContext();
-  const { formValues } = state;
+  const { formValues, csrfToken } = state;
+  console.log("username csrfToken", csrfToken);
 
   // Whenever the username input changes, revert back to the default state.
   // This is to re-render the button after a patron tries a new username.
@@ -48,13 +49,7 @@ const UsernameValidationForm = ({
     e.preventDefault();
     const username = getValues("username");
     axios
-      .post(
-        "/library-card/api/username",
-        { username }
-        // {
-        // headers: { "csrf-token": csrfToken },
-        // }
-      )
+      .post("/library-card/api/username", { username, csrfToken })
       .then((response) => {
         lcaEvents("Availability Checker", "Username - available");
         setUsernameIsAvailable({

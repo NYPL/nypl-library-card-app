@@ -18,7 +18,7 @@ import { lcaEvents } from "../../externals/gaUtils";
 const AddressContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
-  const { formValues, addressesResponse } = state;
+  const { formValues, addressesResponse, csrfToken } = state;
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
@@ -41,6 +41,7 @@ const AddressContainer = () => {
       .post("/library-card/api/address", {
         address: workAddress,
         isWorkAddress: true,
+        csrfToken,
       })
       .then((response) => {
         const work: AddressResponse = response.data;

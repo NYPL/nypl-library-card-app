@@ -50,8 +50,6 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
   useRouterScroll({ top: 640 });
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
-  // TODO: Work on CSRF token auth.
-  const csrfToken = "";
   const { favIconPath, appTitle } = appConfig;
 
   let error;
@@ -147,7 +145,6 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
           name="twitter:image"
           content="https://www.nypl.org/sites/default/files/library_card-1200x800.jpg"
         />
-        <meta name="csrf-token" content={csrfToken} />
         {/* <!-- Google Analytics --> */}
         {/* We can't directly put the script into this component because React
             doesn't allow it, so we must add it through the
@@ -174,7 +171,7 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
             <Component
               {...pageProps}
               pageTitles={pageTitles}
-              policyType={query.policyType}
+              policyType={query?.policyType}
             />
           </ApplicationContainer>
         </FormDataContextProvider>
@@ -182,6 +179,32 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
     </>
   );
 }
+
+// const _fetchData = async (url, options = {}) => {
+//   return axios
+//     .post(`http://localhost:3000${url}`, options)
+//     .then((response) => {
+//       const data = response.data;
+//       return Promise.resolve(Object.keys(data).length > 0 ? data : null);
+//     })
+//     .catch((error) => {
+//       // console.log("error", error);
+//       return Promise.resolve(null);
+//     });
+// };
+// // Universal method (client + server)
+// const getCsrfToken = async ({ req, ctx }) => {
+//   // If passed 'appContext' via getInitialProps() in _app.js then get the req
+//   // object from ctx and use that for the req value to allow getCsrfToken() to
+//   // work seemlessly in getInitialProps() on server side pages *and* in _app.js.
+//   if (!req && ctx && ctx.req) {
+//     req = ctx.req;
+//   }
+
+//   const fetchOptions = req ? { headers: { cookie: req.headers.cookie } } : {};
+//   const data = await _fetchData("/library-card/api/csrf", fetchOptions);
+//   return data?.csrfToken ? data.csrfToken : null;
+// };
 
 MyApp.getInitialProps = async ({ ctx }) => {
   // Get the user's IP address and convert it to an object that tells us if
@@ -191,6 +214,8 @@ MyApp.getInitialProps = async ({ ctx }) => {
   if (ctx.req?.headers) {
     userLocation = await IPLocationAPI.getLocationFromIP(ctx);
   }
+  // const csrfToken = await getCsrfToken({ req: ctx.req, ctx });
+  // console.log("server _app csrfToken", csrfToken);
 
   // Send it to the component as a prop.
   return { userLocation, query: ctx.query };
