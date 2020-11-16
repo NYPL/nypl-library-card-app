@@ -1,17 +1,14 @@
 import React, { useEffect } from "react";
-// import axios from "axios";
-// import asyncUseEffect from "use-async-effect";
 
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 import useFormDataContext from "../../src/context/FormDataContext";
-import { getCsrfToken } from "../../src/utils/api";
+import { getCsrfToken } from "../../src/utils/utils";
 
 function HomePage({ policyType, csrfToken }) {
   const { dispatch } = useFormDataContext();
-  console.log("homepage otken", csrfToken);
+  // When the app loads, get the CSRF token from the server and set it in
+  // the app's state.
   useEffect(() => {
-    // const token = await getCsrfToken2();
-    // console.log("HomePage token", token);
     dispatch({
       type: "SET_CSRF_TOKEN",
       value: csrfToken,
@@ -69,24 +66,6 @@ function HomePage({ policyType, csrfToken }) {
     </>
   );
 }
-
-// const _fetchData = async (url, options = {}) => {
-//   return axios
-//     .post(`http://localhost:3000${url}`, options)
-//     .then((response) => {
-//       const data = response.data;
-//       return Promise.resolve(Object.keys(data).length > 0 ? data : null);
-//     })
-//     .catch((error) => {
-//       console.log("error calling csrf endpoing", error);
-//       return Promise.resolve(null);
-//     });
-// };
-
-// const getCsrfToken2 = async () => {
-//   const data = await _fetchData("/library-card/api/csrf", {});
-//   return data?.csrfToken ? data.csrfToken : null;
-// };
 
 export async function getServerSideProps(context) {
   const { csrfToken } = getCsrfToken(context.req, context.res);

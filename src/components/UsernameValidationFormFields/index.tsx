@@ -32,7 +32,6 @@ const UsernameValidationForm = ({
   const usernameWatch = watch("username");
   const { state } = useFormDataContext();
   const { formValues, csrfToken } = state;
-  console.log("username csrfToken", csrfToken);
 
   // Whenever the username input changes, revert back to the default state.
   // This is to re-render the button after a patron tries a new username.
@@ -58,11 +57,19 @@ const UsernameValidationForm = ({
         });
       })
       .catch((error) => {
-        lcaEvents("Availability Checker", "Username - unavailable");
-        setUsernameIsAvailable({
-          available: false,
-          message: error.response?.data?.message,
-        });
+        // Catch any CSRF token issues and return a generic error message.
+        if (error.response.status == 403) {
+          setUsernameIsAvailable({
+            available: false,
+            message: "A server error occurred validating a token.",
+          });
+        } else {
+          lcaEvents("Availability Checker", "Username - unavailable");
+          setUsernameIsAvailable({
+            available: false,
+            message: error.response?.data?.message,
+          });
+        }
       });
   };
   const inputValidation = (value = "") =>

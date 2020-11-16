@@ -9,10 +9,12 @@ import {
   validateUsername,
   callPatronAPI,
 } from "../api";
+import utils from "../utils";
 const axios = require("axios");
 import moment from "moment";
 
 jest.mock("axios");
+jest.mock("../utils");
 let mockedReturnedJson = {};
 class MockRes {
   status() {
@@ -24,6 +26,10 @@ class MockRes {
   }
 }
 const mockRes = new MockRes();
+utils.getCsrfToken = jest.fn(() => ({
+  csrfToken: "csrfToken",
+  csrfTokenValid: true,
+}));
 
 describe("constructApiHeaders", () => {
   test("it returns authorization headers object", () => {
@@ -250,7 +256,7 @@ describe("validateAddress", () => {
       tokenObject: { ["access_token"]: "token" },
       tokenExpTime: moment().add(4000, "s"),
     };
-    const requestBody = {
+    const req = {
       body: {
         address: {
           line1: "111 1st St.",
@@ -259,6 +265,9 @@ describe("validateAddress", () => {
           zip: "11018",
         },
         isWorkAddress: false,
+      },
+      cookies: {
+        "next-auth.csrf-token": "csrfToken",
       },
     };
     axios.post.mockResolvedValueOnce({
@@ -280,10 +289,9 @@ describe("validateAddress", () => {
       },
     });
 
-    await validateAddress(requestBody, mockRes, appObj);
+    await validateAddress(req, mockRes, appObj);
 
     expect(axios.post).toHaveBeenCalledTimes(1);
-
     expect(mockedReturnedJson).toEqual({
       address: {
         line1: "111 1st St.",
@@ -302,14 +310,14 @@ describe("validateAddress", () => {
   });
 
   test("it does not make an API call without an access token", async () => {
-    const requestBody = {
+    const req = {
       body: {
         formData: {},
       },
     };
     axios.post.mockResolvedValue({});
 
-    await validateAddress(requestBody, mockRes, {});
+    await validateAddress(req, mockRes, {});
 
     expect(axios.post).toHaveBeenCalledTimes(0);
   });
@@ -321,7 +329,7 @@ describe("validateUsername", () => {
   });
 
   test("it should not make an API call if there is no oauth token", async () => {
-    const requestBody = {
+    const req = {
       body: {
         username: "tomnook42",
       },
@@ -334,7 +342,7 @@ describe("validateUsername", () => {
         message: "This username is available.",
       },
     });
-    await validateUsername(requestBody, mockRes, "url", {});
+    await validateUsername(req, mockRes, "url", {});
 
     expect(axios.post).toHaveBeenCalledTimes(0);
   });
@@ -344,9 +352,12 @@ describe("validateUsername", () => {
       tokenObject: { ["access_token"]: "token" },
       tokenExpTime: moment().add(4000, "s"),
     };
-    const requestBody = {
+    const req = {
       body: {
         username: "tomnook42",
+      },
+      cookies: {
+        "next-auth.csrf-token": "csrfToken",
       },
     };
     axios.post.mockResolvedValue({
@@ -358,7 +369,7 @@ describe("validateUsername", () => {
       },
     });
 
-    await validateUsername(requestBody, mockRes, "url", appObj);
+    await validateUsername(req, mockRes, "url", appObj);
 
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(
@@ -385,9 +396,12 @@ describe("validateUsername", () => {
       tokenObject: { ["access_token"]: "token" },
       tokenExpTime: moment().add(4000, "s"),
     };
-    const requestBody = {
+    const req = {
       body: {
         username: "tomnook42",
+      },
+      cookies: {
+        "next-auth.csrf-token": "csrfToken",
       },
     };
     axios.post.mockRejectedValue({
@@ -402,7 +416,7 @@ describe("validateUsername", () => {
       },
     });
 
-    await validateUsername(requestBody, mockRes, "url", appObj);
+    await validateUsername(req, mockRes, "url", appObj);
 
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(
@@ -432,11 +446,11 @@ describe("callPatronAPI", () => {
   });
 
   test("it should not make an API call if there is no oauth token", async () => {
-    const requestBody = {};
+    const req = {};
     axios.post.mockResolvedValue({});
 
     try {
-      await callPatronAPI(requestBody, "url", {});
+      await callPatronAPI(req, "url", {});
     } catch (error) {
       expect(error.type).toEqual("no-access-token");
       expect(error.detail).toEqual(
@@ -500,7 +514,7 @@ describe("callPatronAPI", () => {
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(
       "url",
-      // Note: the following is the result of passing `requestBody.body` into
+      // Note: the following is the result of passing `req.body` into
       // the `constructPatronObject` function which is tested in
       // `formDataUtils.test.ts`.
       {

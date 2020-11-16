@@ -33,7 +33,7 @@ function ReviewFormContainer() {
   const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit } = useFormContext();
   const { state, dispatch } = useFormDataContext();
-  const { formValues, errorObj } = state;
+  const { formValues, errorObj, csrfToken } = state;
   const router = useRouter();
 
   // Flags to set a section to editable or read-only.
@@ -127,7 +127,7 @@ function ReviewFormContainer() {
     });
 
     axios
-      .post("/library-card/api/create-patron", formValues)
+      .post("/library-card/api/create-patron", { ...formValues, csrfToken })
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
@@ -135,9 +135,23 @@ function ReviewFormContainer() {
         router.push("/congrats?newCard=true");
       })
       .catch((error) => {
-        // There are server-side errors! Display them to the user
-        // so they can be fixed.
-        dispatch({ type: "SET_FORM_ERRORS", value: error.response?.data });
+        // Catch any CSRF token issues and return a generic error message
+        // and redirect to the home page.
+        if (error.response.status == 403) {
+          dispatch({
+            type: "SET_FORM_ERRORS",
+            value: "A server error occurred validating a token.",
+          });
+          // After a while, remove the errors and redirect to the home page.
+          setTimeout(() => {
+            dispatch({ type: "SET_FORM_ERRORS", value: null });
+            router.push("/new");
+          }, 2500);
+        } else {
+          // There are server-side errors! Display them to the user
+          // so they can be fixed.
+          dispatch({ type: "SET_FORM_ERRORS", value: error.response?.data });
+        }
       })
       .finally(() => setIsLoading(false));
   };
