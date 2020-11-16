@@ -2,6 +2,7 @@ import isEmpty from "lodash/isEmpty";
 import { createHash, randomBytes } from "crypto";
 import { PageTitles } from "../interfaces";
 import cookie from "./CookieUtils";
+import appConfig from "../../appConfig";
 
 /**
  * getPageTitles
@@ -72,13 +73,13 @@ export const getCsrfToken = (req, res) => {
   let csrfToken;
   let csrfTokenValid = false;
   const csrfTokenFromPost = req.body?.csrfToken;
-  // Secret used salt cookies and tokens (e.g. for CSRF protection).
-  // If no secret option is specified then it creates one on the fly
-  // based on options passed here. A options contains unique data, such as
-  // oAuth provider secrets and database credentials it should be sufficent.
+  // Secret uses salt cookies and tokens (e.g. for CSRF protection).
+  const s1 = appConfig.clientSecret;
+  const s2 = new Date().getDate();
+  const s3 = new Date().getMonth();
   const secret = createHash("sha256")
-    // TODO: Update
-    .update(JSON.stringify({ data: "some piece of data" }))
+    // salt is based on a secret variable and date variables
+    .update(JSON.stringify({ s1, s2, s3 }))
     .digest("hex");
 
   // Use secure cookies if the site uses HTTPS
