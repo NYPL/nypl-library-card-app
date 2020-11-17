@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 import FormField from "../FormField";
@@ -13,6 +13,7 @@ function AccountInformationForm() {
   const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();
   const [showPin, setShowPin] = useState(false);
+  const [clientSide, setClientSide] = useState(false);
   const { formValues } = state;
   const originalPin = getValues("pin");
 
@@ -22,6 +23,16 @@ function AccountInformationForm() {
   };
   const update = () => setShowPin(!showPin);
   const pinType = showPin ? "text" : "password";
+
+  // When the component renders on the client-side, we want to turn the password
+  // "text" input into a "password" type so that the PIN is visible by default.
+  // Keep track when it's rendering on the client so that the "Show PIN"
+  // checkbox is rendered as well - it's not needed without javascript since
+  // you can't toggle without javascript.
+  useEffect(() => {
+    setClientSide(true);
+    setShowPin(false);
+  }, []);
 
   return (
     <>
@@ -59,16 +70,18 @@ function AccountInformationForm() {
         defaultValue={formValues.pin}
       />
 
-      <Checkbox
-        checkboxId="showPIN"
-        name="showPIN"
-        labelOptions={checkBoxLabelOptions}
-        isSelected={false}
-        attributes={{
-          defaultChecked: showPin,
-          onClick: update,
-        }}
-      />
+      {clientSide && (
+        <Checkbox
+          checkboxId="showPIN"
+          name="showPIN"
+          labelOptions={checkBoxLabelOptions}
+          isSelected={false}
+          attributes={{
+            defaultChecked: showPin,
+            onClick: update,
+          }}
+        />
+      )}
 
       <LibraryListFormFields libraryList={ilsLibraryList} />
     </>
