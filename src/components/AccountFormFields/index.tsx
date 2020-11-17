@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 import FormField from "../FormField";
@@ -9,13 +9,22 @@ import { Checkbox } from "@nypl/design-system-react-components";
 import ilsLibraryList from "../../data/ilsLibraryList";
 import LibraryListFormFields from "../LibraryListFormFields";
 
-function AccountInformationForm() {
+interface AccountFormFieldsProps {
+  showPinOnLoad: boolean;
+}
+
+function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
   const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();
   const [showPin, setShowPin] = useState(false);
   const { formValues } = state;
   const originalPin = getValues("pin");
 
+  useEffect(() => {
+    if (showPinOnLoad) {
+      setShowPin(true);
+    }
+  }, []);
   const checkBoxLabelOptions = {
     id: "showPinId",
     labelContent: <>Show PIN</>,
@@ -36,6 +45,9 @@ function AccountInformationForm() {
         isRequired
         errorState={errors}
         maxLength={4}
+        attributes={{
+          pattern: "[0-9]{4}",
+        }}
         ref={register({
           validate: (val) => val.length === 4 || errorMessages.pin,
         })}
@@ -51,12 +63,15 @@ function AccountInformationForm() {
         isRequired
         errorState={errors}
         maxLength={4}
+        attributes={{
+          pattern: "[0-9]{4}",
+        }}
         ref={register({
           validate: (val) =>
             (val.length === 4 && val === originalPin) ||
             errorMessages.verifyPin,
         })}
-        defaultValue={formValues.pin}
+        defaultValue={formValues.verifyPin}
       />
 
       <Checkbox
@@ -75,4 +90,4 @@ function AccountInformationForm() {
   );
 }
 
-export default AccountInformationForm;
+export default AccountFormFields;
