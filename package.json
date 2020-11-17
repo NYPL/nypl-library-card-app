@@ -34,7 +34,7 @@
   "dependencies": {
     "@axe-core/react": "^4.0.0",
     "@babel/preset-typescript": "^7.10.4",
-    "@nypl/design-system-react-components": "^0.18.2",
+    "@nypl/design-system-react-components": "^0.17.3",
     "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component#reactupdate",
     "@nypl/dgx-react-footer": "0.5.7",
     "@testing-library/jest-dom": "5.11.4",
