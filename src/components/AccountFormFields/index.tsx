@@ -12,7 +12,7 @@ import LibraryListFormFields from "../LibraryListFormFields";
 function AccountInformationForm() {
   const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();
-  const [showPin, setShowPin] = useState(false);
+  const [showPin, setShowPin] = useState(true);
   const [clientSide, setClientSide] = useState(false);
   const { formValues } = state;
   const originalPin = getValues("pin");
@@ -67,7 +67,7 @@ function AccountInformationForm() {
             (val.length === 4 && val === originalPin) ||
             errorMessages.verifyPin,
         })}
-        defaultValue={formValues.pin}
+        defaultValue={formValues.verifyPin}
       />
 
       {clientSide && (
