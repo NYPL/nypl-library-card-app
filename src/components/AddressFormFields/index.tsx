@@ -116,7 +116,6 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
             maxLength={MAXLENGTHZIP}
             instructionText="5 or 9-digit postal code"
             attributes={{
-              // eslint-disable-next-line prettier/prettier
               pattern: "([0-9]d{5})|([0-9]d{9})|([0-9]d{5}-[0-9]d{4})",
             }}
             ref={register({

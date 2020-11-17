@@ -20,6 +20,8 @@ function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
   const { formValues } = state;
   const originalPin = getValues("pin");
 
+  // When the component loads, if we want to show the PIN by default,
+  // show it.
   useEffect(() => {
     if (showPinOnLoad) {
       setShowPin(true);
