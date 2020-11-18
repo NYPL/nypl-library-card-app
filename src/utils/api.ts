@@ -318,7 +318,8 @@ export async function callPatronAPI(
   if (tokenObject && tokenObject.access_token) {
     const token = tokenObject.access_token;
     const patronData = constructPatronObject(data);
-    // Used for testing:
+    // Used for testing when we don't want to create real accounts,
+    // just return a mocked account data.
     // return Promise.resolve({
     //   status: 200,
     //   type: "card-granted",

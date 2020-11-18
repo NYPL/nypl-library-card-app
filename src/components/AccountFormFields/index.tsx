@@ -16,7 +16,8 @@ interface AccountFormFieldsProps {
 function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
   const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();
-  const [showPin, setShowPin] = useState(false);
+  const [showPin, setShowPin] = useState(true);
+  const [clientSide, setClientSide] = useState(false);
   const { formValues } = state;
   const originalPin = getValues("pin");
 
@@ -33,6 +34,16 @@ function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
   };
   const update = () => setShowPin(!showPin);
   const pinType = showPin ? "text" : "password";
+
+  // When the component renders on the client-side, we want to turn the password
+  // "text" input into a "password" type so that the PIN is visible by default.
+  // Keep track when it's rendering on the client so that the "Show PIN"
+  // checkbox is rendered as well - it's not needed without javascript since
+  // you can't toggle without javascript.
+  useEffect(() => {
+    setClientSide(true);
+    setShowPin(false);
+  }, []);
 
   return (
     <>
@@ -76,16 +87,18 @@ function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
         defaultValue={formValues.verifyPin}
       />
 
-      <Checkbox
-        checkboxId="showPIN"
-        name="showPIN"
-        labelOptions={checkBoxLabelOptions}
-        isSelected={false}
-        attributes={{
-          defaultChecked: showPin,
-          onClick: update,
-        }}
-      />
+      {clientSide && (
+        <Checkbox
+          checkboxId="showPIN"
+          name="showPIN"
+          labelOptions={checkBoxLabelOptions}
+          isSelected={false}
+          attributes={{
+            defaultChecked: showPin,
+            onClick: update,
+          }}
+        />
+      )}
 
       <LibraryListFormFields libraryList={ilsLibraryList} />
     </>
