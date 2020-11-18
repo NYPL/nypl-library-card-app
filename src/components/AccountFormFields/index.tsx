@@ -10,7 +10,7 @@ import ilsLibraryList from "../../data/ilsLibraryList";
 import LibraryListFormFields from "../LibraryListFormFields";
 
 interface AccountFormFieldsProps {
-  showPinOnLoad: boolean;
+  showPinOnLoad?: boolean;
 }
 
 function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
