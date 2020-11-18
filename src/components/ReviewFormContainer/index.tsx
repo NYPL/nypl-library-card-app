@@ -10,6 +10,7 @@ import {
   Label,
   InputTypes,
   Checkbox,
+  Heading,
 } from "@nypl/design-system-react-components";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import {
@@ -25,6 +26,7 @@ import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import Loader from "../Loader";
 import { lcaEvents } from "../../externals/gaUtils";
 import { createQueryParams } from "../../utils/utils";
+import FormField from "../FormField";
 
 /**
  * ReviewFormContainer
@@ -294,7 +296,7 @@ function ReviewFormContainer() {
           </fieldset>
         </div>
       )}
-      {formValues["work-line1"] && <h4>Home</h4>}
+      {formValues["work-line1"] && <Heading level={4}>Home</Heading>}
       <div className={styles.field}>
         <div className={styles.title}>Street Address</div>
         <div>{formValues["home-line1"]}</div>
@@ -319,7 +321,9 @@ function ReviewFormContainer() {
       </div>
       {formValues["work-line1"] && (
         <>
-          <h4 className={styles.workTitle}>Work</h4>
+          <Heading level={4} className={styles.workTitle}>
+            Work
+          </Heading>
           <div className={styles.field}>
             <div className={styles.title}>Street Address</div>
             <div>{formValues["work-line1"]}</div>
@@ -354,7 +358,7 @@ function ReviewFormContainer() {
       <Loader isLoading={isLoading} />
 
       <div className={styles.formSection}>
-        <h3>Personal Information</h3>
+        <Heading level={3}>Personal Information</Heading>
         {!editPersonalInfoFlag ? (
           renderPersonalInformationValues()
         ) : (
@@ -366,12 +370,12 @@ function ReviewFormContainer() {
       </div>
 
       <div className={styles.formSection}>
-        <h3>Address</h3>
+        <Heading level={3}>Address</Heading>
         {renderAddressValues()}
       </div>
 
       <div className={styles.formSection}>
-        <h3>Create Your Account</h3>
+        <Heading level={3}>Create Your Account</Heading>
         {!editAccountInfoFlag ? (
           renderAccountValues()
         ) : (
@@ -399,12 +403,11 @@ function ReviewFormContainer() {
       >
         {/* Not register to react-hook-form because we only want to
           use this value for the no-js scenario. */}
-        <input type="hidden" aria-hidden={true} name="page" value="review" />
-        <input
+        <FormField type="hidden" name="page" defaultValue="review" />
+        <FormField
           type="hidden"
-          aria-hidden={true}
           name="formValues"
-          value={JSON.stringify(formValues)}
+          defaultValue={JSON.stringify(formValues)}
         />
 
         <RoutingLinks next={{ submit: true, text: "Submit" }} />

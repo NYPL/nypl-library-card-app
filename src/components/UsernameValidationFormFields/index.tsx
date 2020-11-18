@@ -99,7 +99,7 @@ const UsernameValidationForm = ({
       <FormField
         id="username"
         label="Username"
-        fieldName="username"
+        name="username"
         instructionText="5-25 alphanumeric characters"
         isRequired
         errorState={errors}
@@ -115,9 +115,8 @@ const UsernameValidationForm = ({
           <div className={`${styles.usernameHelperText} ${availableClassname}`}>
             {usernameIsAvailable.message}
           </div>
-          <input
+          <FormField
             type="hidden"
-            aria-hidden={true}
             name="usernameHasBeenValidated"
             defaultValue={`${usernameIsAvailable.available}`}
             ref={register()}

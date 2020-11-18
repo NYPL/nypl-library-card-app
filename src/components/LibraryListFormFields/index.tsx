@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import Autosuggest from "react-autosuggest";
+import { Heading } from "@nypl/design-system-react-components";
 import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
 import { findLibraryName } from "../../utils/formDataUtils";
@@ -82,7 +83,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
     <FormField
       id="librarylist-autosuggest"
       label="Select a home library:"
-      fieldName="homeLibraryCode"
+      name="homeLibraryCode"
       isRequired={false}
       {...inputProps}
     />
@@ -100,7 +101,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
 
   return (
     <div className={styles.container}>
-      <h3>Home Library</h3>
+      <Heading level={3}>Home Library</Heading>
       <p>
         Choosing a home library will help us make sure you&apos;re getting
         everything you need from a branch that&apos;s most convenient for you.

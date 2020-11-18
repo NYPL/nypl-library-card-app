@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from "react";
+import { Heading, List, ListTypes } from "@nypl/design-system-react-components";
 import {
   renderErrorElements,
   createUsernameAnchor,
@@ -74,12 +75,18 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
         errorElements = <li>{defaultError}</li>;
       }
 
-      return <ul className={styles.errorList}>{errorElements}</ul>;
+      return (
+        <List type={ListTypes.Unordered} className={styles.errorList}>
+          {errorElements}
+        </List>
+      );
     };
 
     return (
       <div ref={ref} className={styles.container} tabIndex={0}>
-        <h3 className={styles.heading}>Form submission error</h3>
+        <Heading level={2} className={styles.heading}>
+          Form submission error
+        </Heading>
         {renderErrorByType(problemDetail)}
       </div>
     );

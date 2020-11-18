@@ -53,7 +53,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
       <FormField
         id={`line1-${type}`}
         label="Street Address"
-        fieldName={`${type}-line1`}
+        name={`${type}-line1`}
         isRequired={isRequired}
         errorState={errors}
         ref={register({
@@ -67,7 +67,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
       <FormField
         id={`line2-${type}`}
         label="Apartment / Suite"
-        fieldName={`${type}-line2`}
+        name={`${type}-line2`}
         ref={register()}
         defaultValue={formValues[`${type}-line2`]}
       />
@@ -76,7 +76,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
           <FormField
             id={`city-${type}`}
             label="City"
-            fieldName={`${type}-city`}
+            name={`${type}-city`}
             isRequired={isRequired}
             errorState={errors}
             ref={register({
@@ -93,7 +93,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
             id={`state-${type}`}
             instructionText="2-letter abbreviation"
             label="State"
-            fieldName={`${type}-state`}
+            name={`${type}-state`}
             isRequired={isRequired}
             errorState={errors}
             maxLength={STATELENGTH}
@@ -109,7 +109,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
           <FormField
             id={`zip-${type}`}
             label="Postal Code"
-            fieldName={`${type}-zip`}
+            name={`${type}-zip`}
             isRequired={isRequired}
             errorState={errors}
             minLength={MINLENGTHZIP}
