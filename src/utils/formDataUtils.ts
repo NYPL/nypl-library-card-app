@@ -218,11 +218,7 @@ const validateAddressFormData = (initErrorObj, addresses: Addresses) => {
       };
     }
 
-    if (
-      isEmpty(typeObj.zip) ||
-      !isNumeric(typeObj.zip) ||
-      !isLength(typeObj.zip, { min: 5, max: 9 })
-    ) {
+    if (isEmpty(typeObj.zip) || !isLength(typeObj.zip, { min: 5, max: 10 })) {
       addressErrors[addressType] = {
         ...addressErrors[addressType],
         zip: errorMessages.address.zip,
