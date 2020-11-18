@@ -103,8 +103,14 @@ const AddressContainer = () => {
 
       {/* Not register to react-hook-form because we only want to
           use this value for the no-js scenario. */}
-      <FormField type="hidden" name="page" defaultValue="location" />
       <FormField
+        id="hidden-location-page"
+        type="hidden"
+        name="page"
+        defaultValue="location"
+      />
+      <FormField
+        id="hidden-form-values"
         type="hidden"
         name="formValues"
         defaultValue={JSON.stringify(formValues)}

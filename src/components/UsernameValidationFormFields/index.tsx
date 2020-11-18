@@ -116,6 +116,7 @@ const UsernameValidationForm = ({
             {usernameIsAvailable.message}
           </div>
           <FormField
+            id="hidden-username-validated"
             type="hidden"
             name="usernameHasBeenValidated"
             defaultValue={`${usernameIsAvailable.available}`}

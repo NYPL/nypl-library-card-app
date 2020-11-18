@@ -64,6 +64,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
     if (type === "hidden") {
       return (
         <Input
+          id={id}
           type={typeToInputTypeMap[type]}
           attributes={{
             defaultValue,
