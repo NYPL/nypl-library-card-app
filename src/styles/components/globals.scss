@@ -1,6 +1,8 @@
-// Global rules
-
 // Override for DS layout class
+body {
+  width: 100%;
+}
+
 .content-primary {
   margin: 30px 0;
 }
@@ -23,33 +25,5 @@ fieldset {
       display: inline-block;
       margin: 0 20px;
     }
-  }
-}
-
-.checkbox {
-  margin-top: 20px;
-}
-
-.no-scroll {
-  position: inherit !important;
-}
-
-// Override for DS classes for mobile under 400px.
-@media only screen and (max-width: 400px) {
-  // Accordions used for addresses
-  .accordion {
-    .accordion__content {
-      padding: 10px;
-    }
-  }
-
-  // For input groups that are single column on mobile but two columns
-  // on desktop, such as the first and last name input fields.
-  .input-group {
-    display: inline;
-  }
-
-  .input-group > *:first-child {
-    margin-right: 0px;
   }
 }

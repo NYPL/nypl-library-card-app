@@ -38,7 +38,7 @@ const AgeForm = ({
       id="birthdate"
       instructionText="MM/DD/YYYY, including slashes"
       label="Date of Birth"
-      fieldName="birthdate"
+      name="birthdate"
       isRequired
       errorState={errors}
       maxLength={MAXLENGTHDATE}

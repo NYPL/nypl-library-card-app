@@ -8,6 +8,7 @@ import AccountFormFields from "../AccountFormFields";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import { findLibraryCode } from "../../utils/formDataUtils";
 import { lcaEvents } from "../../externals/gaUtils";
+import FormField from "../FormField";
 
 const AccountFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
@@ -46,12 +47,17 @@ const AccountFormContainer = () => {
 
       {/* Not register to react-hook-form because we only want to
           use this value for the no-js scenario. */}
-      <input type="hidden" aria-hidden={true} name="page" value="account" />
-      <input
+      <FormField
+        id="hidden-account-page"
         type="hidden"
-        aria-hidden={true}
+        name="page"
+        defaultValue="account"
+      />
+      <FormField
+        id="hidden-form-values"
+        type="hidden"
         name="formValues"
-        value={JSON.stringify(formValues)}
+        defaultValue={JSON.stringify(formValues)}
       />
 
       <RoutingLinks

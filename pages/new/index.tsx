@@ -1,4 +1,5 @@
 import React from "react";
+import { Heading } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 
 function HomePage({ policyType }) {
@@ -7,7 +8,7 @@ function HomePage({ policyType }) {
   const queryParam = policyType ? `&policyType=${policyType}` : "";
   return (
     <>
-      <h2>Apply for a Library Card Online</h2>
+      <Heading level={2}>Apply for a Library Card Online</Heading>
       <p>
         Complete this application in just a few quick and easy steps to receive
         a digital library card. With this card, you’ll gain access to a wide

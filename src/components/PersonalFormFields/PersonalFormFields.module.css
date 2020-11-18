@@ -1,9 +1,0 @@
-@media only screen and (max-width: 400px) {
-  .inputGroup {
-    display: inline;
-  }
-
-  .inputGroup > *:first-child {
-    margin-right: 0px;
-  }
-}

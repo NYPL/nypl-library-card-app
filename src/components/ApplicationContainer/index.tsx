@@ -25,7 +25,7 @@ const ApplicationContainer = ({ children, problemDetail }) => {
         skipNav={{ target: "main-content" }}
         navData={navConfig.current}
       />
-      <div className="nypl-library-card-app layout-container nypl-ds">
+      <div className="nypl-library-card-app nypl-ds">
         <main id="main-content" className="main main--with-sidebar">
           <div className="content-header">
             <Banner />
