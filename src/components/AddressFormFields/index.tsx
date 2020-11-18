@@ -2,6 +2,7 @@ import React from "react";
 import FormField from "../FormField";
 import { Address, AddressTypes } from "../../interfaces";
 import { useFormContext } from "react-hook-form";
+import { isNumeric } from "validator";
 import useFormDataContext from "../../context/FormDataContext";
 
 interface AddressFormProps {
@@ -23,7 +24,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
   const { register, errors } = useFormContext();
   const STATELENGTH = 2;
   const MINLENGTHZIP = 5;
-  const MAXLENGTHZIP = 10;
+  const MAXLENGTHZIP = 9;
   // Only the home address is required. The work address is optional.
   const isRequired = type === AddressTypes.Home;
   /**
@@ -33,8 +34,6 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
    * check is bypassed so that the error message doesn't display. If the field
    * is required, the value must have the appropriate length or else the
    * error message will display.
-   * @param length Max length of the field input.
-   * @param field The key name of the field.
    */
   const lengthValidation = (min, max, field) => (value) => {
     if (!min) {
@@ -46,6 +45,16 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
       value.length === max ||
       errorMessages[field]
     );
+  };
+  /**
+   * lengthValidation
+   * Make sure that the zip code is a numeric value, then check for its length.
+   */
+  const validateZip = () => (value) => {
+    if (!isNumeric(value)) {
+      return errorMessages.zip;
+    }
+    return lengthValidation(MINLENGTHZIP, MAXLENGTHZIP, "zip")(value);
   };
 
   return (
@@ -115,11 +124,8 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
             minLength={MINLENGTHZIP}
             maxLength={MAXLENGTHZIP}
             instructionText="5 or 9-digit postal code"
-            attributes={{
-              pattern: "([0-9]d{5})|([0-9]d{9})|([0-9]d{5}-[0-9]d{4})",
-            }}
             ref={register({
-              validate: lengthValidation(MINLENGTHZIP, MAXLENGTHZIP, "zip"),
+              validate: validateZip(),
             })}
             defaultValue={formValues[`${type}-zip`]}
           />
