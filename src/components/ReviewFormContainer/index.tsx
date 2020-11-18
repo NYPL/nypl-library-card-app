@@ -24,6 +24,7 @@ import styles from "./ReviewFormContainer.module.css";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import Loader from "../Loader";
 import { lcaEvents } from "../../externals/gaUtils";
+import { createQueryParams } from "../../utils/utils";
 
 /**
  * ReviewFormContainer
@@ -35,13 +36,14 @@ function ReviewFormContainer() {
   const { state, dispatch } = useFormDataContext();
   const { formValues, errorObj } = state;
   const router = useRouter();
-
+  // For routing when javascript is not enabled, we want to track the form
+  // values through the URL query params.
+  const queryValues = createQueryParams(formValues);
+  const [clientSide, setClientSide] = useState(false);
   // Flags to set a section to editable or read-only.
   const [editPersonalInfoFlag, setEditPersonalInfoFlag] = useState(false);
   const [editAccountInfoFlag, setEditAccountInfoFlag] = useState(false);
-
-  const [showPin, setShowPin] = useState(false);
-
+  const [showPin, setShowPin] = useState(true);
   const checkBoxLabelOptions = {
     id: "showPinId",
     labelContent: <>Show PIN</>,
@@ -51,6 +53,11 @@ function ReviewFormContainer() {
   // Will run whenever the `errorObj` has changes, specifically for
   // bad requests.
   useEffect(() => {
+    // The PIN is shown by default when javascript is not enabled. It is hidden
+    // once the component renders on the client side.
+    setClientSide(true);
+    setShowPin(false);
+
     if (errorObj) {
       document.title = "Form Submission Error | NYPL";
       // When we display errors, we want to go into the "Edit" state so
@@ -60,29 +67,59 @@ function ReviewFormContainer() {
     }
   }, [errorObj]);
 
-  // Shareable button for each editable section.
-  const editSectionButton = (editSectionFlag, sectionName) => (
-    <Button
-      buttonType={ButtonTypes.Primary}
-      onClick={() => {
-        lcaEvents("Edit", sectionName);
-        editSectionFlag(true);
-      }}
-    >
-      Edit
-    </Button>
-  );
-  const editAddressButton = () => (
-    <Button
-      buttonType={ButtonTypes.Primary}
-      onClick={() => {
-        lcaEvents("Edit", "Location/Address");
-        router.push("/location?newCard=true");
-      }}
-    >
-      Edit
-    </Button>
-  );
+  /**
+   * editSectionButton
+   * On initial load, render a simple link to the page where the section can be
+   * editted. On the client side when the page mounts, we want to be able to
+   * toggle between the "edit" and "view" mode, so render a button to do the
+   * toggling instead of an anchor element. This is for the Personal and the
+   * Account sections.
+   */
+  const editSectionButton = (editSectionFlag, sectionName, page) =>
+    clientSide ? (
+      <Button
+        buttonType={ButtonTypes.Primary}
+        onClick={() => {
+          lcaEvents("Edit", sectionName);
+          editSectionFlag(true);
+        }}
+      >
+        Edit
+      </Button>
+    ) : (
+      <a
+        href={`/library-card/${page}?${encodeURI(
+          `newCard=true${queryValues}`
+        )}`}
+      >
+        Edit
+      </a>
+    );
+  /**
+   * editAddressButton
+   * The logic from the `editSectionButton` is the same for this function,
+   * except that this component is for the Address section.
+   */
+  const editAddressButton = () =>
+    clientSide ? (
+      <Button
+        buttonType={ButtonTypes.Primary}
+        onClick={() => {
+          lcaEvents("Edit", "Location/Address");
+          router.push("/library-card/location?newCard=true");
+        }}
+      >
+        Edit
+      </Button>
+    ) : (
+      <a
+        href={`/library-card/location?${encodeURI(
+          `newCard=true${queryValues}`
+        )}`}
+      >
+        Edit
+      </a>
+    );
   const submitSectionButton = (
     <Button buttonType={ButtonTypes.Primary} onClick={() => {}} type="submit">
       Submit
@@ -170,7 +207,11 @@ function ReviewFormContainer() {
         </div>
         <div>{formValues.ecommunicationsPref ? "Yes" : "No"}</div>
       </div>
-      {editSectionButton(setEditPersonalInfoFlag, "Personal Information")}
+      {editSectionButton(
+        setEditPersonalInfoFlag,
+        "Personal Information",
+        "personal"
+      )}
     </div>
   );
   /**
@@ -185,23 +226,34 @@ function ReviewFormContainer() {
       </div>
       <div className={styles.field}>
         <div className={styles.title}>PIN</div>
-        <div>{showPin ? formValues.pin : "****"}</div>
-        <Checkbox
-          checkboxId="showPINReview"
-          name="showPINReview"
-          labelOptions={checkBoxLabelOptions}
-          isSelected={false}
-          attributes={{
-            defaultChecked: showPin,
-            onClick: updateShowPin,
-          }}
-        />
+        {/* Only render the toggleable PIN with javascript enabled. */}
+        {clientSide ? (
+          <>
+            <div>{showPin ? formValues.pin : "****"}</div>
+            <Checkbox
+              checkboxId="showPINReview"
+              name="showPINReview"
+              labelOptions={checkBoxLabelOptions}
+              isSelected={false}
+              attributes={{
+                defaultChecked: showPin,
+                onClick: updateShowPin,
+              }}
+            />
+          </>
+        ) : (
+          <div>{formValues.pin}</div>
+        )}
       </div>
       <div className={styles.field}>
         <div className={styles.title}>Home Library</div>
         <div>{findLibraryName(formValues.homeLibraryCode)}</div>
       </div>
-      {editSectionButton(setEditAccountInfoFlag, "Create Your Account")}
+      {editSectionButton(
+        setEditAccountInfoFlag,
+        "Create Your Account",
+        "account"
+      )}
     </div>
   );
   /**
