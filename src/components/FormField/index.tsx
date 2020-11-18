@@ -1,11 +1,9 @@
-/* eslint-disable */
 import React from "react";
 import {
   Label,
   Input,
   InputTypes,
   HelperErrorText,
-  Checkbox,
 } from "@nypl/design-system-react-components";
 import styles from "./FormField.module.css";
 
@@ -21,6 +19,7 @@ interface FormFieldProps {
   minLength?: number;
   maxLength?: number;
   defaultValue?: any;
+  attributes?: any;
 }
 
 /**
@@ -44,7 +43,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
       maxLength,
       defaultValue,
       // any extra input element attributes
-      ...rest
+      attributes,
     },
     ref
   ) => {
@@ -60,7 +59,6 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
       helperText = errorText.message;
     }
     const ariaLabelledby = helperText ? `${id}-helperText` : "";
-
     if (type === "hidden") {
       return (
         <input
@@ -93,7 +91,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
             name: fieldName,
             tabIndex: 0,
             defaultValue,
-            ...rest,
+            ...attributes,
           }}
           ref={ref}
         />

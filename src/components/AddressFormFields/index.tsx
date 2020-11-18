@@ -114,6 +114,10 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
             errorState={errors}
             minLength={MINLENGTHZIP}
             maxLength={MAXLENGTHZIP}
+            instructionText="5 or 9-digit postal code"
+            attributes={{
+              pattern: "([0-9]d{5})|([0-9]d{9})|([0-9]d{5}-[0-9]d{4})",
+            }}
             ref={register({
               validate: lengthValidation(MINLENGTHZIP, MAXLENGTHZIP, "zip"),
             })}
