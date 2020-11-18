@@ -134,7 +134,7 @@ function ReviewFormContainer() {
    * is not being manipulated, just updated, so they can all use the same
    * function to set the global data.
    */
-  const editSectionInfo = (formData) => {
+  const editSectionInfo = (formData, editSectionFlag) => {
     if (formData.homeLibraryCode) {
       formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
     }
@@ -145,9 +145,9 @@ function ReviewFormContainer() {
         ...formData,
       },
     });
-    // Set all to false even though not all are on.
-    setEditPersonalInfoFlag(false);
-    setEditAccountInfoFlag(false);
+    // Set the appropriate passed function section to false so it can close
+    // independently of the others.
+    editSectionFlag(false);
   };
 
   /**
@@ -362,7 +362,11 @@ function ReviewFormContainer() {
         {!editPersonalInfoFlag ? (
           renderPersonalInformationValues()
         ) : (
-          <form onSubmit={handleSubmit(editSectionInfo)}>
+          <form
+            onSubmit={handleSubmit((formData) =>
+              editSectionInfo(formData, setEditPersonalInfoFlag)
+            )}
+          >
             <PersonalFormFields />
             {submitSectionButton}
           </form>
@@ -379,8 +383,12 @@ function ReviewFormContainer() {
         {!editAccountInfoFlag ? (
           renderAccountValues()
         ) : (
-          <form onSubmit={handleSubmit(editSectionInfo)}>
-            <AccountFormFields />
+          <form
+            onSubmit={handleSubmit((formData) =>
+              editSectionInfo(formData, setEditPersonalInfoFlag)
+            )}
+          >
+            <AccountFormFields showPinOnLoad />
             <AcceptTermsFormFields />
             {submitSectionButton}
           </form>

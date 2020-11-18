@@ -85,7 +85,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
       label="Select a home library:"
       name="homeLibraryCode"
       isRequired={false}
-      {...inputProps}
+      attributes={{ ...inputProps }}
     />
   );
   /**

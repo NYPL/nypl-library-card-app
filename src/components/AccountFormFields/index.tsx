@@ -9,7 +9,11 @@ import { Checkbox } from "@nypl/design-system-react-components";
 import ilsLibraryList from "../../data/ilsLibraryList";
 import LibraryListFormFields from "../LibraryListFormFields";
 
-function AccountInformationForm() {
+interface AccountFormFieldsProps {
+  showPinOnLoad: boolean;
+}
+
+function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
   const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();
   const [showPin, setShowPin] = useState(true);
@@ -17,6 +21,13 @@ function AccountInformationForm() {
   const { formValues } = state;
   const originalPin = getValues("pin");
 
+  // When the component loads, if we want to show the PIN by default,
+  // show it.
+  useEffect(() => {
+    if (showPinOnLoad) {
+      setShowPin(true);
+    }
+  }, []);
   const checkBoxLabelOptions = {
     id: "showPinId",
     labelContent: <>Show PIN</>,
@@ -47,6 +58,9 @@ function AccountInformationForm() {
         isRequired
         errorState={errors}
         maxLength={4}
+        attributes={{
+          pattern: "[0-9]{4}",
+        }}
         ref={register({
           validate: (val) => val.length === 4 || errorMessages.pin,
         })}
@@ -62,6 +76,9 @@ function AccountInformationForm() {
         isRequired
         errorState={errors}
         maxLength={4}
+        attributes={{
+          pattern: "[0-9]{4}",
+        }}
         ref={register({
           validate: (val) =>
             (val.length === 4 && val === originalPin) ||
@@ -88,4 +105,4 @@ function AccountInformationForm() {
   );
 }
 
-export default AccountInformationForm;
+export default AccountFormFields;

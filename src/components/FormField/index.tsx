@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from "react";
 import {
   Label,
@@ -20,6 +19,7 @@ interface FormFieldProps {
   minLength?: number;
   maxLength?: number;
   defaultValue?: any;
+  attributes?: any;
 }
 
 /**
@@ -43,7 +43,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
       maxLength,
       defaultValue,
       // any extra input element attributes
-      ...rest
+      attributes,
     },
     ref
   ) => {
@@ -60,7 +60,6 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
       helperText = errorText.message;
     }
     const ariaLabelledby = helperText ? `${id}-helperText` : "";
-
     if (type === "hidden") {
       return (
         <Input
@@ -96,7 +95,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
             tabIndex: 0,
             defaultValue,
             name,
-            ...rest,
+            ...attributes,
           }}
           ref={ref}
         />
