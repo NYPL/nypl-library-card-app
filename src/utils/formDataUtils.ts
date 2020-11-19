@@ -344,6 +344,7 @@ const constructPatronObject = (
     pin,
     homeLibraryCode,
     acceptTerms,
+    location,
   } = object;
 
   const addresses: Addresses = constructAddresses(object);
@@ -376,6 +377,7 @@ const constructPatronObject = (
     policyType: policyType || "simplye",
     homeLibraryCode,
     acceptTerms,
+    location,
   };
 };
 

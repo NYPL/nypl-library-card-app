@@ -1,4 +1,5 @@
 import React from "react";
+import { Heading } from "@nypl/design-system-react-components";
 
 import ReviewFormContainer from "../../src/components/ReviewFormContainer";
 import { PageTitles } from "../../src/interfaces";
@@ -10,7 +11,7 @@ interface PageProps {
 function ReviewPage({ pageTitles }: PageProps) {
   return (
     <>
-      <h2>{pageTitles.review}</h2>
+      <Heading level={2}>{pageTitles.review}</Heading>
       <p>
         You can use your username or library card barcode along with your PIN to
         log into and manage your account.

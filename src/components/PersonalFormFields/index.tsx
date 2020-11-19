@@ -7,7 +7,6 @@ import FormField from "../FormField";
 import AgeFormFields from "../AgeFormFields";
 import useFormDataContext from "../../context/FormDataContext";
 import { errorMessages } from "../../utils/formDataUtils";
-import styles from "./PersonalFormFields.module.css";
 
 function PersonalForm({ agencyType = "" }) {
   const { register, errors } = useFormContext();
@@ -31,12 +30,12 @@ function PersonalForm({ agencyType = "" }) {
   );
   return (
     <>
-      <div className={`input-group ${styles.inputGroup}`}>
+      <div className={`input-group`}>
         <div style={{ flex: "1" }}>
           <FormField
             id="firstName"
             label="First Name"
-            fieldName="firstName"
+            name="firstName"
             isRequired
             // Every input field is registered to react-hook-form. If this
             // field is empty on blur or on submission, the error message will
@@ -52,7 +51,7 @@ function PersonalForm({ agencyType = "" }) {
           <FormField
             id="lastName"
             label="Last Name"
-            fieldName="lastName"
+            name="lastName"
             isRequired
             errorState={errors}
             ref={register({
@@ -71,7 +70,7 @@ function PersonalForm({ agencyType = "" }) {
       <FormField
         id="email"
         label="E-Mail Address"
-        fieldName="email"
+        name="email"
         errorState={errors}
         isRequired
         ref={register({

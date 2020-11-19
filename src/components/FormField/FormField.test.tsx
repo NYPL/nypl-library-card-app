@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import FormField from ".";
 
@@ -9,23 +9,18 @@ describe("FormField", () => {
   test("passes axe accessibility checks", async () => {
     const { container } = render(
       <>
-        <FormField
-          id="textField"
-          label="a text field"
-          fieldName="text"
-          isRequired
-        />
+        <FormField id="textField" label="a text field" name="text" isRequired />
         <FormField
           id="passwordField"
           label="a password field"
-          fieldName="password"
+          name="password"
           type="password"
           isRequired
         />
         <FormField
           id="radioField"
           label="a radio field"
-          fieldName="radio"
+          name="radio"
           type="radio"
         />
       </>
@@ -35,12 +30,7 @@ describe("FormField", () => {
 
   test("it renders a label and an input element", () => {
     const { container } = render(
-      <FormField
-        id="textField"
-        label="a text field"
-        fieldName="text"
-        isRequired
-      />
+      <FormField id="textField" label="a text field" name="text" isRequired />
     );
 
     expect(screen.getByLabelText(/a text field/i)).toBeInTheDocument();
@@ -49,12 +39,7 @@ describe("FormField", () => {
 
   test("it renders a required label", () => {
     render(
-      <FormField
-        id="textField"
-        label="a text field"
-        fieldName="text"
-        isRequired
-      />
+      <FormField id="textField" label="a text field" name="text" isRequired />
     );
 
     expect(screen.getByLabelText(/a text field/i)).toBeInTheDocument();
@@ -66,7 +51,7 @@ describe("FormField", () => {
       <FormField
         id="textField"
         label="a text field"
-        fieldName="text"
+        name="text"
         instructionText="Some instructional text"
       />
     );

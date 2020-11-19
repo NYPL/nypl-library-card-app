@@ -1,4 +1,5 @@
 import React from "react";
+import { Heading } from "@nypl/design-system-react-components";
 
 import AddressContainer from "../../src/components/AddressContainer";
 import { PageTitles } from "../../src/interfaces";
@@ -10,7 +11,7 @@ interface PageProps {
 function AddressPage({ pageTitles }: PageProps) {
   return (
     <>
-      <h2>{pageTitles.address}</h2>
+      <Heading level={2}>{pageTitles.address}</Heading>
       <p>
         The application process is slightly different depending on whether you
         live, work, go to school, or pay property taxes in New York City,

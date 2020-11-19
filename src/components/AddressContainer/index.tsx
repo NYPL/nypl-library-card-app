@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { Heading } from "@nypl/design-system-react-components";
 
 import useFormDataContext from "../../context/FormDataContext";
 import AddressFormFields from "../AddressFormFields";
@@ -14,6 +15,7 @@ import {
 } from "../../interfaces";
 import Loader from "../Loader";
 import { lcaEvents } from "../../externals/gaUtils";
+import FormField from "../FormField";
 
 const AddressContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -92,7 +94,7 @@ const AddressContainer = () => {
     >
       <Loader isLoading={isLoading} />
 
-      <h3>Home Address</h3>
+      <Heading level={3}>Home Address</Heading>
       <p>If you live in NYC, please fill out the home address form.</p>
       <AddressFormFields
         type={AddressTypes.Home}
@@ -101,12 +103,17 @@ const AddressContainer = () => {
 
       {/* Not register to react-hook-form because we only want to
           use this value for the no-js scenario. */}
-      <input type="hidden" aria-hidden={true} name="page" value="location" />
-      <input
+      <FormField
+        id="hidden-location-page"
         type="hidden"
-        aria-hidden={true}
+        name="page"
+        defaultValue="location"
+      />
+      <FormField
+        id="hidden-form-values"
+        type="hidden"
         name="formValues"
-        value={JSON.stringify(formValues)}
+        defaultValue={JSON.stringify(formValues)}
       />
 
       <RoutingLinks

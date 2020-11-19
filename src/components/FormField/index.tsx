@@ -8,10 +8,10 @@ import {
 import styles from "./FormField.module.css";
 
 interface FormFieldProps {
-  id: string;
-  label: string;
+  id?: string;
+  label?: string;
   type?: string;
-  fieldName: string;
+  name: string;
   errorState?: {};
   className?: string;
   isRequired?: boolean;
@@ -34,7 +34,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
       id,
       label,
       type = "text",
-      fieldName,
+      name,
       errorState = {},
       className = "",
       isRequired = false,
@@ -47,11 +47,12 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
     },
     ref
   ) => {
-    const errorText = errorState[fieldName];
+    const errorText = errorState[name];
     const typeToInputTypeMap = {
       text: InputTypes.text,
       password: InputTypes.password,
       radio: InputTypes.radio,
+      hidden: InputTypes.hidden,
     };
     let helperText = instructionText || null;
 
@@ -61,15 +62,18 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
     const ariaLabelledby = helperText ? `${id}-helperText` : "";
     if (type === "hidden") {
       return (
-        <input
-          type="hidden"
-          aria-hidden={true}
-          name={fieldName}
-          defaultValue={defaultValue}
+        <Input
+          id={id}
+          type={typeToInputTypeMap[type]}
+          attributes={{
+            defaultValue,
+            name,
+          }}
           ref={ref}
         />
       );
     }
+
     return (
       <div className={`${styles.formField} ${className}`}>
         <Label
@@ -88,9 +92,9 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
             ["aria-invalid"]: errorText ? "true" : "false",
             minLength: minLength || null,
             maxLength: maxLength || null,
-            name: fieldName,
             tabIndex: 0,
             defaultValue,
+            name,
             ...attributes,
           }}
           ref={ref}

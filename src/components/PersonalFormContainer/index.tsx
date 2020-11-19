@@ -6,6 +6,7 @@ import useFormDataContext from "../../context/FormDataContext";
 import PersonalFormFields from "../PersonalFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import { lcaEvents } from "../../externals/gaUtils";
+import FormField from "../FormField";
 
 const PersonalFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
@@ -38,9 +39,8 @@ const PersonalFormContainer = () => {
     >
       <PersonalFormFields agencyType={formValues.policyType} />
 
-      <input
+      <FormField
         type="hidden"
-        aria-hidden={true}
         name="policyType"
         defaultValue={formValues.policyType}
         ref={register()}
@@ -48,12 +48,17 @@ const PersonalFormContainer = () => {
 
       {/* Not register to react-hook-form because we only want to
           use this value for the no-js scenario. */}
-      <input type="hidden" aria-hidden={true} name="page" value="personal" />
-      <input
+      <FormField
+        id="hidden-personal-page"
         type="hidden"
-        aria-hidden={true}
+        name="page"
+        defaultValue="personal"
+      />
+      <FormField
+        id="hidden-form-values"
+        type="hidden"
         name="formValues"
-        value={JSON.stringify(formValues)}
+        defaultValue={JSON.stringify(formValues)}
       />
 
       <RoutingLinks

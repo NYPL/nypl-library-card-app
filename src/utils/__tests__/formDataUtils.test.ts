@@ -527,6 +527,7 @@ describe("constructPatronObject", () => {
       policyType: "webApplicant",
       homeLibraryCode: "ch",
       acceptTerms: true,
+      location: "nyc",
     };
 
     expect(constructPatronObject(patronFormValues)).toEqual(

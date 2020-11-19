@@ -53,7 +53,7 @@ function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
         id="pin"
         type={pinType}
         label="PIN"
-        fieldName="pin"
+        name="pin"
         instructionText="4 digits"
         isRequired
         errorState={errors}
@@ -71,7 +71,7 @@ function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
         id="verifyPin"
         type={pinType}
         label="Verify PIN"
-        fieldName="verifyPin"
+        name="verifyPin"
         instructionText="4 digits"
         isRequired
         errorState={errors}
