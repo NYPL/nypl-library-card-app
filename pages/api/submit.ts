@@ -16,6 +16,7 @@ import {
   createQueryParams,
   createNestedQueryParams,
 } from "../../src/utils/utils";
+import logger from "../../src/logger";
 
 /**
  * serverSubmit
@@ -55,15 +56,20 @@ async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
       }
       break;
     case "location":
+      logger.log("from location - newSubmittedValues", newSubmittedValues);
       addresses = constructAddresses(newSubmittedValues);
       errors = validateAddressFormData({}, addresses);
+      logger.log("from location - address", addresses);
+      logger.log("from location - errors", errors);
       if (isEmpty(errors)) {
+        logger.log("location", newSubmittedValues.location);
         if (newSubmittedValues.location !== "nyc") {
           page = "workAddress";
         } else {
           page = "account";
         }
       }
+      logger.log("from api location case - page", page);
       break;
     case "workAddress":
       // We need to add the existing home address values since

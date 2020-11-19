@@ -17,6 +17,7 @@ import enableAxe from "../src/utils/axe";
 import { getPageTitles } from "../src/utils/utils";
 import useRouterScroll from "../src/hooks/useRouterScroll";
 import { constructProblemDetail } from "../src/utils/formDataUtils";
+import logger from "../src/logger";
 
 interface MyAppProps {
   Component: any;
@@ -47,6 +48,7 @@ if (appConfig.useAxe === "true" && !isServerRendered()) {
 }
 
 function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
+  console.log("_app userLocation", userLocation);
   useRouterScroll({ top: 640 });
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
@@ -191,6 +193,7 @@ MyApp.getInitialProps = async ({ ctx }) => {
   if (ctx.req?.headers) {
     userLocation = await IPLocationAPI.getLocationFromIP(ctx);
   }
+  logger.log("_app userLocation", userLocation);
 
   // Send it to the component as a prop.
   return { userLocation, query: ctx.query };

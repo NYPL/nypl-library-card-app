@@ -9,6 +9,7 @@ interface PageProps {
 }
 
 function WorkAddressPage({ pageTitles }: PageProps) {
+  console.log("pageTitles", pageTitles);
   return (
     <>
       <Heading level={2}>{pageTitles.workAddress}</Heading>
