@@ -536,6 +536,7 @@ describe("callPatronAPI", () => {
         policyType: "webApplicant",
         homeLibraryCode: "ch",
         acceptTerms: true,
+        location: "nyc",
       },
       {
         headers: {
