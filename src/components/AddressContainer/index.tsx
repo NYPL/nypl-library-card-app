@@ -58,7 +58,6 @@ const AddressContainer = () => {
         // If the API call failed because the service is down and there is no
         // returned address data from the response, then display the initial
         // address that the user submitted which we already saved in `homeAddress`.
-        console.log("error response", error.response);
         if (isEmpty(home)) {
           home = {
             address: homeAddress,
@@ -66,7 +65,6 @@ const AddressContainer = () => {
             detail: "",
           };
         }
-        console.log("error home", home);
         dispatch({
           type: "SET_ADDRESSES_VALUE",
           value: { home },
