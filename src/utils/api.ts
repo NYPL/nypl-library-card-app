@@ -284,8 +284,8 @@ export async function validateUsername(
         });
       })
       .catch((err) => {
-        return res.status(err.response.status).json({
-          status: err.response.status,
+        return res.status(err.response?.status || 500).json({
+          status: err.response?.status || 500,
           ...err.response?.data,
         });
       });
@@ -347,13 +347,13 @@ export async function callPatronAPI(
         });
       })
       .catch((err) => {
-        const status = err.response?.status;
+        const status = err.response?.status || 500;
         let serverError = null;
 
         // If the response from the Patron Creator Service
         // does not include valid error details, we mark this result as
         // an internal server error.
-        if (status === 401 || status === 403) {
+        if (status === 401 || status === 403 || status === 500) {
           serverError = { type: "server" };
         }
 

@@ -17,7 +17,6 @@ import enableAxe from "../src/utils/axe";
 import { getPageTitles } from "../src/utils/utils";
 import useRouterScroll from "../src/hooks/useRouterScroll";
 import { constructProblemDetail } from "../src/utils/formDataUtils";
-import logger from "../src/logger";
 
 interface MyAppProps {
   Component: any;
@@ -48,7 +47,6 @@ if (appConfig.useAxe === "true" && !isServerRendered()) {
 }
 
 function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
-  console.log("_app userLocation", userLocation);
   useRouterScroll({ top: 640 });
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
@@ -189,11 +187,10 @@ MyApp.getInitialProps = async ({ ctx }) => {
   // Get the user's IP address and convert it to an object that tells us if
   // the user is in NYS/NYC. Will be `undefined` if the call to the IP/location
   // conversion API fails or if there is no IP address.
-  let userLocation = {};
+  let userLocation = "";
   if (ctx.req?.headers) {
     userLocation = await IPLocationAPI.getLocationFromIP(ctx);
   }
-  console.log("_app userLocation", userLocation);
 
   // Send it to the component as a prop.
   return { userLocation, query: ctx.query };

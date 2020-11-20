@@ -63,11 +63,19 @@ const UsernameValidationForm = ({
         });
       })
       .catch((error) => {
-        lcaEvents("Availability Checker", "Username - unavailable");
-        setUsernameIsAvailable({
-          available: false,
-          message: error.response?.data?.message,
-        });
+        // If the server is down, return a server error message.
+        if (error.response.status === 500) {
+          setUsernameIsAvailable({
+            available: false,
+            message: "Cannot validate usernames at this time.",
+          });
+        } else {
+          lcaEvents("Availability Checker", "Username - unavailable");
+          setUsernameIsAvailable({
+            available: false,
+            message: error.response?.data?.message,
+          });
+        }
       });
   };
   const inputValidation = (value = "") =>

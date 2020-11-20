@@ -24,7 +24,7 @@ export async function getServerSideProps({ res, query }) {
   // redirect to the form page.
   if (!query.newCard) {
     res.writeHead(301, {
-      Location: "/",
+      Location: "/library-card/new",
     });
     res.end();
   }

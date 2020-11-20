@@ -9,7 +9,6 @@ interface PageProps {
 }
 
 function WorkAddressPage({ pageTitles }: PageProps) {
-  console.log("pageTitles", pageTitles);
   return (
     <>
       <Heading level={2}>{pageTitles.workAddress}</Heading>
@@ -31,7 +30,7 @@ export async function getServerSideProps({ res, query }) {
   // redirect to the form page.
   if (!query.newCard) {
     res.writeHead(301, {
-      Location: "/",
+      Location: "/library-card/new",
     });
     res.end();
   }

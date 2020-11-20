@@ -55,20 +55,15 @@ async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
       }
       break;
     case "location":
-      console.log("from location - newSubmittedValues", newSubmittedValues);
       addresses = constructAddresses(newSubmittedValues);
       errors = validateAddressFormData({}, addresses);
-      console.log("from location - address", addresses);
-      console.log("from location - errors", errors);
       if (isEmpty(errors)) {
-        console.log("location", newSubmittedValues.location);
-        if (newSubmittedValues.location !== "nyc") {
+        if (existingValues.location !== "nyc") {
           page = "workAddress";
         } else {
           page = "account";
         }
       }
-      console.log("from api location case - page", page);
       break;
     case "workAddress":
       // We need to add the existing home address values since

@@ -3,6 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { Heading } from "@nypl/design-system-react-components";
+import isEmpty from "lodash/isEmpty";
 
 import useFormDataContext from "../../context/FormDataContext";
 import AddressFormFields from "../AddressFormFields";
@@ -57,13 +58,15 @@ const AddressContainer = () => {
         // If the API call failed because the service is down and there is no
         // returned address data from the response, then display the initial
         // address that the user submitted which we already saved in `homeAddress`.
-        if (!home) {
+        console.log("error response", error.response);
+        if (isEmpty(home)) {
           home = {
             address: homeAddress,
             addresses: [],
             detail: "",
           };
         }
+        console.log("error home", home);
         dispatch({
           type: "SET_ADDRESSES_VALUE",
           value: { home },
