@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { Input, Label, InputTypes } from "@nypl/design-system-react-components";
+import {
+  Input,
+  Label,
+  InputTypes,
+  Heading,
+  List,
+  ListTypes,
+} from "@nypl/design-system-react-components";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import { Address, AddressResponse } from "../../../src/interfaces";
 import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
 import styles from "./AddressVerificationContainer.module.css";
 import { lcaEvents } from "../../externals/gaUtils";
+import FormField from "../FormField";
 
 /**
  * AddressVerificationContainer
@@ -137,7 +145,7 @@ function AddressVerificationContainer() {
     }
     const addressesLength = addresses.length;
     return (
-      <ul className={styles.multipleAddressList}>
+      <List type={ListTypes.Unordered} className={styles.multipleAddressList}>
         {addresses.map((address, idx) => {
           const selected = `${addressType}-${idx}`;
           // If there's only one option, it's checked by default. Otherwise,
@@ -182,7 +190,7 @@ function AddressVerificationContainer() {
             </li>
           );
         })}
-      </ul>
+      </List>
     );
   };
 
@@ -192,7 +200,7 @@ function AddressVerificationContainer() {
       method="post"
       action="/library-card/api/submit"
     >
-      <h3>Home Address</h3>
+      <Heading level={3}>Home Address</Heading>
 
       {renderMultipleAddresses(
         homeAddress,
@@ -203,7 +211,7 @@ function AddressVerificationContainer() {
 
       {workAddress?.length > 0 && (
         <div className={styles.workAddressContainer}>
-          <h3>Work Address</h3>
+          <Heading level={3}>Work Address</Heading>
 
           {renderMultipleAddresses(
             workAddress,
@@ -216,17 +224,17 @@ function AddressVerificationContainer() {
 
       {/* Not register to react-hook-form because we only want to
           use this value for the no-js scenario. */}
-      <input
+      <FormField
+        id="hidden-verification-page"
         type="hidden"
-        aria-hidden={true}
         name="page"
-        value="addressVerification"
+        defaultValue="addressVerification"
       />
-      <input
+      <FormField
+        id="hidden-form-values"
         type="hidden"
-        aria-hidden={true}
         name="formValues"
-        value={JSON.stringify(formValues)}
+        defaultValue={JSON.stringify(formValues)}
       />
 
       <RoutingLinks

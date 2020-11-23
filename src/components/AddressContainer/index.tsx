@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { Heading } from "@nypl/design-system-react-components";
+import isEmpty from "lodash/isEmpty";
 
 import useFormDataContext from "../../context/FormDataContext";
 import AddressFormFields from "../AddressFormFields";
@@ -14,6 +16,7 @@ import {
 } from "../../interfaces";
 import Loader from "../Loader";
 import { lcaEvents } from "../../externals/gaUtils";
+import FormField from "../FormField";
 
 const AddressContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -66,7 +69,7 @@ const AddressContainer = () => {
         // If the API call failed because the service is down and there is no
         // returned address data from the response, then display the initial
         // address that the user submitted which we already saved in `homeAddress`.
-        if (!home) {
+        if (isEmpty(home)) {
           home = {
             address: homeAddress,
             addresses: [],
@@ -110,7 +113,7 @@ const AddressContainer = () => {
     >
       <Loader isLoading={isLoading} />
 
-      <h3>Home Address</h3>
+      <Heading level={3}>Home Address</Heading>
       <p>If you live in NYC, please fill out the home address form.</p>
       <AddressFormFields
         type={AddressTypes.Home}
@@ -119,12 +122,17 @@ const AddressContainer = () => {
 
       {/* Not register to react-hook-form because we only want to
           use this value for the no-js scenario. */}
-      <input type="hidden" aria-hidden={true} name="page" value="location" />
-      <input
+      <FormField
+        id="hidden-location-page"
         type="hidden"
-        aria-hidden={true}
+        name="page"
+        defaultValue="location"
+      />
+      <FormField
+        id="hidden-form-values"
+        type="hidden"
         name="formValues"
-        value={JSON.stringify(formValues)}
+        defaultValue={JSON.stringify(formValues)}
       />
 
       <RoutingLinks

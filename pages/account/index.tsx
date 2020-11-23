@@ -1,4 +1,5 @@
 import React from "react";
+import { Heading } from "@nypl/design-system-react-components";
 
 import AccountFormContainer from "../../src/components/AccountFormContainer";
 import { PageTitles } from "../../src/interfaces";
@@ -10,7 +11,7 @@ interface PageProps {
 function AccountPage({ pageTitles }: PageProps) {
   return (
     <>
-      <h2>{pageTitles.account}</h2>
+      <Heading level={2}>{pageTitles.account}</Heading>
       <p>
         You can use either your username or library card barcode along with your
         PIN to log into and manage your account.
@@ -26,7 +27,7 @@ export async function getServerSideProps({ res, query }) {
   // redirect to the form page.
   if (!query.newCard) {
     res.writeHead(301, {
-      Location: "/",
+      Location: "/library-card/new",
     });
     res.end();
   }

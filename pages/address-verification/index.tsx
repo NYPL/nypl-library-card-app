@@ -1,4 +1,5 @@
 import React from "react";
+import { Heading } from "@nypl/design-system-react-components";
 
 import AddressVerificationContainer from "../../src/components/AddressVerificationContainer";
 import { PageTitles } from "../../src/interfaces";
@@ -10,7 +11,7 @@ interface PageProps {
 function AddressVerificationPage({ pageTitles }: PageProps) {
   return (
     <>
-      <h2>{pageTitles.verification}</h2>
+      <Heading level={2}>{pageTitles.verification}</Heading>
       <p>Please select the correct address.</p>
       <AddressVerificationContainer />
     </>
@@ -23,7 +24,7 @@ export async function getServerSideProps({ res, query }) {
   // redirect to the form page.
   if (!query.newCard) {
     res.writeHead(301, {
-      Location: "/",
+      Location: "/library-card/new",
     });
     res.end();
   }

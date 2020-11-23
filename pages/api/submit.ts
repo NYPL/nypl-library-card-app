@@ -58,7 +58,7 @@ async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
       addresses = constructAddresses(newSubmittedValues);
       errors = validateAddressFormData({}, addresses);
       if (isEmpty(errors)) {
-        if (newSubmittedValues.location !== "nyc") {
+        if (existingValues.location !== "nyc") {
           page = "workAddress";
         } else {
           page = "account";

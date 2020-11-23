@@ -1,4 +1,5 @@
 import React from "react";
+import { Heading } from "@nypl/design-system-react-components";
 
 import PersonalFormContainer from "../../src/components/PersonalFormContainer";
 import { PageTitles } from "../../src/interfaces";
@@ -10,7 +11,7 @@ interface PageProps {
 function PersonalInformationPage({ pageTitles }: PageProps) {
   return (
     <>
-      <h2>{pageTitles.personal}</h2>
+      <Heading level={2}>{pageTitles.personal}</Heading>
       <PersonalFormContainer />
     </>
   );
@@ -22,7 +23,7 @@ export async function getServerSideProps({ res, query }) {
   // redirect to the form page.
   if (!query.newCard) {
     res.writeHead(301, {
-      Location: "/",
+      Location: "/library-card/new",
     });
     res.end();
   }

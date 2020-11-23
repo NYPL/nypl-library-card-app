@@ -57,19 +57,21 @@ const UsernameValidationForm = ({
         });
       })
       .catch((error) => {
+        let message = error.response?.data?.message;
         // Catch any CSRF token issues and return a generic error message.
         if (error.response.status == 403) {
-          setUsernameIsAvailable({
-            available: false,
-            message: "A server error occurred validating a token.",
-          });
-        } else {
-          lcaEvents("Availability Checker", "Username - unavailable");
-          setUsernameIsAvailable({
-            available: false,
-            message: error.response?.data?.message,
-          });
+          message = "A server error occurred validating a token.";
         }
+        // If the server is down, return a server error message.
+        if (error.response.status === 500) {
+          message = "Cannot validate usernames at this time.";
+        }
+
+        lcaEvents("Availability Checker", "Username - unavailable");
+        setUsernameIsAvailable({
+          available: false,
+          message,
+        });
       });
   };
   const inputValidation = (value = "") =>
@@ -101,7 +103,7 @@ const UsernameValidationForm = ({
       <FormField
         id="username"
         label="Username"
-        fieldName="username"
+        name="username"
         instructionText="5-25 alphanumeric characters"
         isRequired
         errorState={errors}
@@ -117,9 +119,9 @@ const UsernameValidationForm = ({
           <div className={`${styles.usernameHelperText} ${availableClassname}`}>
             {usernameIsAvailable.message}
           </div>
-          <input
+          <FormField
+            id="hidden-username-validated"
             type="hidden"
-            aria-hidden={true}
             name="usernameHasBeenValidated"
             defaultValue={`${usernameIsAvailable.available}`}
             ref={register()}

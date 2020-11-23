@@ -188,4 +188,5 @@ export interface FormAPISubmission {
   agencyType?: string;
   homeLibraryCode: string;
   acceptTerms: boolean;
+  location?: string;
 }

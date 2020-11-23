@@ -19,7 +19,8 @@ export function getPageTitles(userLocation: string): PageTitles {
     return {
       personal: "Step 1 of 5: Personal Information",
       address: "Step 2 of 5: Location",
-      workAddress: "",
+      // This step won't happen but the DS `Heading` component needs text.
+      workAddress: "Work Address",
       verification: "Step 3 of 5: Address Verification",
       account: "Step 4 of 5: Create Your Account",
       review: "Step 5 of 5: Review Your Information",
