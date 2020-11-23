@@ -134,6 +134,7 @@ describe("UsernameValidationFormFields", () => {
 
     expect(axios.post).toBeCalledWith("/library-card/api/username", {
       username: "notAvailableUsername",
+      csrfToken: null,
     });
     // Once we know that the error message _is_ in the document,
     // use `getByText`.
@@ -174,6 +175,7 @@ describe("UsernameValidationFormFields", () => {
 
     expect(axios.post).toBeCalledWith("/library-card/api/username", {
       username: "availableUsername",
+      csrfToken: null,
     });
 
     messageDisplay = screen.getByText(message);

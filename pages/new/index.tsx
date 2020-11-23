@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Heading } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
+import useFormDataContext from "../../src/context/FormDataContext";
+import { getCsrfToken } from "../../src/utils/utils";
 
-function HomePage({ policyType }) {
+function HomePage({ policyType, csrfToken }) {
+  const { dispatch } = useFormDataContext();
+  // When the app loads, get the CSRF token from the server and set it in
+  // the app's state.
+  useEffect(() => {
+    dispatch({
+      type: "SET_CSRF_TOKEN",
+      value: csrfToken,
+    });
+  }, []);
+
   // If we get a new policy type from the home page, make sure it gets to the
   // form on the next page. Used for the no-js scenario.
   const queryParam = policyType ? `&policyType=${policyType}` : "";
@@ -53,6 +65,13 @@ function HomePage({ policyType }) {
       />
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { csrfToken } = getCsrfToken(context.req, context.res);
+  return {
+    props: { csrfToken },
+  };
 }
 
 export default HomePage;

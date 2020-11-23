@@ -14,6 +14,7 @@ import {
   FormAPISubmission,
   AddressResponse,
 } from "../interfaces";
+import utils from "./utils";
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -216,11 +217,32 @@ export function axiosAddressPost(
 }
 
 /**
+ * invalidCsrfResponse
+ * If the CSRF token is invalid, return a 403 forbidden response.
+ */
+function invalidCsrfResponse(res) {
+  return res
+    .status(403)
+    .json(
+      constructProblemDetail(
+        403,
+        "invalid-csrf-token",
+        "Invalid-csrf-token",
+        "The form has been tampered with."
+      )
+    );
+}
+
+/**
  * validateAddress
  * Call the NYPL Platform API to validate an address.
  */
 export async function validateAddress(req, res, appObj = app) {
   const tokenObject = appObj["tokenObject"];
+  const { csrfTokenValid } = utils.getCsrfToken(req, res);
+  if (!csrfTokenValid) {
+    return invalidCsrfResponse(res);
+  }
   if (tokenObject && tokenObject?.access_token) {
     const token = tokenObject.access_token;
     const addressRequest: AddressAPIRequestData = {
@@ -272,6 +294,10 @@ export async function validateUsername(
   appObj = app
 ) {
   const tokenObject = appObj["tokenObject"];
+  const { csrfTokenValid } = utils.getCsrfToken(req, res);
+  if (!csrfTokenValid) {
+    return invalidCsrfResponse(res);
+  }
   if (tokenObject && tokenObject?.access_token) {
     const token = tokenObject.access_token;
     const username = req.body.username;
@@ -400,6 +426,10 @@ export async function createPatron(
   appObj = app
 ) {
   const data = req.body;
+  const { csrfTokenValid } = utils.getCsrfToken(req, res);
+  if (!csrfTokenValid) {
+    return invalidCsrfResponse(res);
+  }
 
   try {
     const response = await callPatronAPI(data, createPatronUrl, appObj);

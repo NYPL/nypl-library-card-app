@@ -31,7 +31,7 @@ const UsernameValidationForm = ({
   const { watch, getValues, register, errors } = useFormContext();
   const usernameWatch = watch("username");
   const { state } = useFormDataContext();
-  const { formValues } = state;
+  const { formValues, csrfToken } = state;
 
   // Whenever the username input changes, revert back to the default state.
   // This is to re-render the button after a patron tries a new username.
@@ -48,13 +48,7 @@ const UsernameValidationForm = ({
     e.preventDefault();
     const username = getValues("username");
     axios
-      .post(
-        "/library-card/api/username",
-        { username }
-        // {
-        // headers: { "csrf-token": csrfToken },
-        // }
-      )
+      .post("/library-card/api/username", { username, csrfToken })
       .then((response) => {
         lcaEvents("Availability Checker", "Username - available");
         setUsernameIsAvailable({
@@ -63,19 +57,21 @@ const UsernameValidationForm = ({
         });
       })
       .catch((error) => {
+        let message = error.response?.data?.message;
+        // Catch any CSRF token issues and return a generic error message.
+        if (error.response.status == 403) {
+          message = "A server error occurred validating a token.";
+        }
         // If the server is down, return a server error message.
         if (error.response.status === 500) {
-          setUsernameIsAvailable({
-            available: false,
-            message: "Cannot validate usernames at this time.",
-          });
-        } else {
-          lcaEvents("Availability Checker", "Username - unavailable");
-          setUsernameIsAvailable({
-            available: false,
-            message: error.response?.data?.message,
-          });
+          message = "Cannot validate usernames at this time.";
         }
+
+        lcaEvents("Availability Checker", "Username - unavailable");
+        setUsernameIsAvailable({
+          available: false,
+          message,
+        });
       });
   };
   const inputValidation = (value = "") =>

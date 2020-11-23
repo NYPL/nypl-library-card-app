@@ -1,51 +1,18 @@
-/**
- * encodeURI(sKey)
- * Encode the cookie response.
- *
- * @param {string} sKey -  The name of the cookie to be looked up.
- */
-function encodeURI(sKey) {
-  encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&");
-}
+import { serialize } from "cookie";
 
 /**
- * getCookie(sKey)
- * Get a cookie based on its name.
- *
- * @param {string} sKey - The name of the cookie to be looked up.
+ * set
+ * Function to set cookies on the server side based on with minor updates:
+ * https://github.com/vercel/next.js/blob/master/examples/api-routes-middleware/utils/cookies.js
  */
-function getCookie(sKey) {
-  if (!sKey) {
-    return null;
-  }
+const set = (res, name, value, options) => {
+  const stringValue =
+    typeof value === "object" ? "j:" + JSON.stringify(value) : String(value);
 
-  return (
-    decodeURIComponent(
-      document.cookie.replace(
-        new RegExp(
-          `(?:(?:^|.*;)\\s*${encodeURI(sKey)}\\s*\\=\\s*([^;]*).*$)|^.*$`
-        ),
-        "$1"
-      )
-    ) || null
+  return res.setHeader(
+    "Set-Cookie",
+    serialize(name, String(stringValue), options)
   );
-}
-
-/**
- * hasCookie(sKey)
- * See if a specific cookie.
- *
- * @param {string} sKey - The name of the cookie to be looked up.
- */
-function hasCookie(sKey) {
-  if (!sKey) {
-    return false;
-  }
-  const regExp = new RegExp(`(?:^|;\\s*)${encodeURI(sKey)}\\s*\\=`);
-  return regExp.test(document.cookie);
-}
-
-export default {
-  getCookie,
-  hasCookie,
 };
+
+export default { set };

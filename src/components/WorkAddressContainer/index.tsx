@@ -21,7 +21,7 @@ import FormField from "../FormField";
 const AddressContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
-  const { formValues, addressesResponse } = state;
+  const { formValues, addressesResponse, csrfToken } = state;
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
@@ -40,10 +40,12 @@ const AddressContainer = () => {
     });
 
     const workAddress = constructAddressType(formData, "work");
+    let nextUrl;
     axios
       .post("/library-card/api/address", {
         address: workAddress,
         isWorkAddress: true,
+        csrfToken,
       })
       .then((response) => {
         const work: AddressResponse = response.data;
@@ -55,6 +57,15 @@ const AddressContainer = () => {
         });
       })
       .catch((error) => {
+        // Catch any CSRF token issues and return a generic error message
+        // and redirect to the home page.
+        if (error.response.status == 403) {
+          dispatch({
+            type: "SET_FORM_ERRORS",
+            value: "A server error occurred validating a token.",
+          });
+          nextUrl = "/new";
+        }
         let work = error.response?.data;
         // If the API call failed because the service is down and there is no
         // returned address data from the response, then display the initial
@@ -75,10 +86,19 @@ const AddressContainer = () => {
       })
       // Go to the next page regardless if it's a correct or error response.
       .finally(() => {
-        setIsLoading(false);
-        const nextUrl = "/address-verification?newCard=true";
-        lcaEvents("Navigation", `Next button to ${nextUrl}`);
-        router.push(nextUrl);
+        // If there's a 403 error, wait a short while before removing the error
+        // and going to the home page. Otherwise, go to the next page.
+        if (nextUrl === "/new") {
+          setTimeout(() => {
+            dispatch({ type: "SET_FORM_ERRORS", value: null });
+            router.push(nextUrl);
+          }, 2500);
+        } else {
+          setIsLoading(false);
+          nextUrl = "/address-verification?newCard=true";
+          lcaEvents("Navigation", `Next button to ${nextUrl}`);
+          router.push(nextUrl);
+        }
       });
   };
 

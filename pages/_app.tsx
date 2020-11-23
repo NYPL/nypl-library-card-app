@@ -50,8 +50,6 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
   useRouterScroll({ top: 640 });
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
-  // TODO: Work on CSRF token auth.
-  const csrfToken = "";
   const { favIconPath, appTitle } = appConfig;
 
   let error;
@@ -147,7 +145,6 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
           name="twitter:image"
           content="https://www.nypl.org/sites/default/files/library_card-1200x800.jpg"
         />
-        <meta name="csrf-token" content={csrfToken} />
         {/* <!-- Google Analytics --> */}
         {/* We can't directly put the script into this component because React
             doesn't allow it, so we must add it through the
