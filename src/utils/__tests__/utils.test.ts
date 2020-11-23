@@ -11,7 +11,7 @@ describe("getPageTiles", () => {
     expect(getPageTitles(userLocation)).toEqual({
       personal: "Step 1 of 5: Personal Information",
       address: "Step 2 of 5: Location",
-      workAddress: "",
+      workAddress: "Work Address",
       verification: "Step 3 of 5: Address Verification",
       account: "Step 4 of 5: Create Your Account",
       review: "Step 5 of 5: Review Your Information",

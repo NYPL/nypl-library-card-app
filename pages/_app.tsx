@@ -187,7 +187,7 @@ MyApp.getInitialProps = async ({ ctx }) => {
   // Get the user's IP address and convert it to an object that tells us if
   // the user is in NYS/NYC. Will be `undefined` if the call to the IP/location
   // conversion API fails or if there is no IP address.
-  let userLocation = {};
+  let userLocation = "";
   if (ctx.req?.headers) {
     userLocation = await IPLocationAPI.getLocationFromIP(ctx);
   }
