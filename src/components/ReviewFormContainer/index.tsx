@@ -411,11 +411,8 @@ function ReviewFormContainer() {
 
       <div className={styles.formSection}>
         After you submit your application, you will see a confirmation page with
-        a temporary account number, and you will be able to log in and request
-        books and materials. To get your card, follow the confirmation page
-        instructions. You may also apply in person at any{" "}
-        <a href="#">library location</a> in the Bronx, Manhattan, or Staten
-        Island.
+        your account information, and you will be able to log in and request
+        books and materials.
       </div>
 
       <form

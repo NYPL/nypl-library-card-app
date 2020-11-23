@@ -12,13 +12,6 @@ function AddressPage({ pageTitles }: PageProps) {
   return (
     <>
       <Heading level={2}>{pageTitles.address}</Heading>
-      <p>
-        The application process is slightly different depending on whether you
-        live, work, go to school, or pay property taxes in New York City,
-        elsewhere in New York State, or elsewhere in the United States and
-        you&apos;re just visiting New York City. Please select one of the
-        following and fill out the required fields.
-      </p>
       <AddressContainer />
     </>
   );

@@ -13,8 +13,8 @@ function ReviewPage({ pageTitles }: PageProps) {
     <>
       <Heading level={2}>{pageTitles.review}</Heading>
       <p>
-        You can use your username or library card barcode along with your PIN to
-        log into and manage your account.
+        Make sure all the information you’ve entered is correct. If needed, you
+        can still make changes before you submit your application.
       </p>
       <ReviewFormContainer />
     </>

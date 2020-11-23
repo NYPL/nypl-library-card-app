@@ -20,25 +20,19 @@ function HomePage({ policyType, csrfToken }) {
   const queryParam = policyType ? `&policyType=${policyType}` : "";
   return (
     <>
-      <Heading level={2}>Apply for a Library Card Online</Heading>
+      <Heading level={2}>
+        Get a Digital Library Card Today in a Few Easy Steps
+      </Heading>
       <p>
-        Complete this application in just a few quick and easy steps to receive
-        a digital library card. With this card, you’ll gain access to a wide
-        array of digital resources—including e-books, databases, educational
-        resources, and more—plus borrow materials through our temporary
-        grab-and-go service. At this time, we are not issuing physical library
-        cards.
+        If you are 13 or older and live, work, attend school, or pay property
+        taxes in New York State, you can get a free digital library card right
+        now using this online form. Visitors to New York State can also use this
+        form to apply for a temporary card.
       </p>
       <p>
-        <b>Please note</b>: School groups, educators, patrons who need books by
-        mail, and organizational borrowers should download the appropriate
-        library card application form. Children who are 12 years old or younger
-        can be provided a digital library card by their parent or guardian via
-        our e-reader app{" "}
-        <a href="https://www.nypl.org/books-music-movies/ebookcentral/simplye">
-          SimplyE
-        </a>
-        .
+        With a digital library card you get free access to the Library’s wide
+        array digital resources—including e-books, databases, educational
+        resources, and more.
       </p>
       <p>
         By submitting an application, you understand and agree to our{" "}

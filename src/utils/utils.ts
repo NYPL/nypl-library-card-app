@@ -18,21 +18,21 @@ export function getPageTitles(userLocation: string): PageTitles {
   if (userLocation === "nyc") {
     return {
       personal: "Step 1 of 5: Personal Information",
-      address: "Step 2 of 5: Location",
+      address: "Step 2 of 5: Address",
       // This step won't happen but the DS `Heading` component needs text.
       workAddress: "Work Address",
       verification: "Step 3 of 5: Address Verification",
-      account: "Step 4 of 5: Create Your Account",
-      review: "Step 5 of 5: Review Your Information",
+      account: "Step 4 of 5: Customize Your Account",
+      review: "Step 5 of 5: Confirm Your Information",
     };
   }
   return {
     personal: "Step 1 of 6: Personal Information",
-    address: "Step 2 of 6: Location",
+    address: "Step 2 of 6: Address",
     workAddress: "Step 3 of 6: Work Address",
     verification: "Step 4 of 6: Address Verification",
-    account: "Step 5 of 6: Create Your Account",
-    review: "Step 6 of 6: Review Your Information",
+    account: "Step 5 of 6: Customize Your Account",
+    review: "Step 6 of 6: Confirm Your Information",
   };
 }
 

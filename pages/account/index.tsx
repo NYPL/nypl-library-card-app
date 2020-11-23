@@ -13,8 +13,9 @@ function AccountPage({ pageTitles }: PageProps) {
     <>
       <Heading level={2}>{pageTitles.account}</Heading>
       <p>
-        You can use either your username or library card barcode along with your
-        PIN to log into and manage your account.
+        Create a username and PIN so you can log in and manage your account or
+        access an array of our digital resources. Your username should be
+        unique.
       </p>
       <AccountFormContainer />
     </>

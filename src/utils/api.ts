@@ -357,6 +357,7 @@ export async function callPatronAPI(
     //   message: "The library card will be a standard library card.",
     //   patronId: 1234567,
     //   name: "Tom Nook",
+    //   ptype: 7,
     // });
     if ((patronData as ProblemDetail).status === 400) {
       logger.error("Invalid patron data");

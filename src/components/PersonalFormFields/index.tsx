@@ -25,7 +25,7 @@ function PersonalForm({ agencyType = "" }) {
   const instructionText = (
     <>
       If you do not wish to provide an email address, please use our{" "}
-      <a href="#something">alternate form</a>.
+      <a href="https://catalog.nypl.org/selfreg/patonsite">alternate form</a>.
     </>
   );
   return (
