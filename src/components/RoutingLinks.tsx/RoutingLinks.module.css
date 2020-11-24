@@ -1,0 +1,46 @@
+.container {
+  margin-top: 40px;
+}
+
+/*
+* This should eventually go into the Design System for the alternate `Link`
+* component styling but not until the functionality for that is working.
+*/
+.previous {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 8px 40px;
+  background-color: var(--ui-white);
+  color: var(--ui-black);
+  border: 1px solid var(--ui-gray-medium);
+  margin-right: 10px;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.previous:visited {
+  color: var(--ui-black);
+}
+
+.next {
+  width: 100%;
+  padding: 12px 40px;
+}
+
+@media only screen and (min-width: 400px) {
+  .container {
+    display: flex;
+  }
+
+  .previous {
+    display: inline-block;
+    width: auto;
+    margin-bottom: 0;
+  }
+  .next {
+    width: auto;
+    padding: 8px 40px;
+  }
+}

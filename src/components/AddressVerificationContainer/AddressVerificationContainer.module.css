@@ -1,0 +1,26 @@
+.multipleAddressList {
+  display: flex;
+  padding: 0;
+  list-style: none;
+}
+
+.label {
+  align-items: center;
+  padding: 30px;
+  cursor: pointer;
+}
+
+.input {
+  margin-right: 20px;
+}
+
+.workAddressContainer {
+  border-top: 1px solid var(--ui-gray-medium);
+  padding-top: 30px;
+}
+
+@media only screen and (max-width: 400px) {
+  .multipleAddressList {
+    display: inline-block;
+  }
+}

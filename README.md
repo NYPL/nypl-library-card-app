@@ -4,17 +4,18 @@ A Universal JavaScript Application that allows NYPL Patrons to request a library
 a patron record.
 
 ## URL
+
 https://www.nypl.org/library-card/new/
 
 ## Version
-> 0.4.27
 
-| Branch        | Status                                                                                                                                                   |
-|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `master`      | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=master)](https://travis-ci.org/NYPL/nypl-library-card-app)      |
+> 0.6.0
+
+| Branch       | Status                                                                                                                                      |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| `main`       | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=main)](https://travis-ci.org/NYPL/nypl-library-card-app)       |
 | `production` | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=production)](https://travis-ci.org/NYPL/nypl-library-card-app) |
-| `qa`  | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-library-card-app)  |
-
+| `qa`         | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-library-card-app)         |
 
 ## Installation & Configuration
 
@@ -26,43 +27,70 @@ For more information see [how `nvm use` works](https://github.com/creationix/nvm
 
 ### Install & Running Locally
 
-1. `cp .env.example .env` and fill out variables
-2. `npm install`  
-3. `npm start` and point browser to http://localhost:3001/library-card/new
+1. `cp .env.example .env.local` and fill out variables
+2. `npm install`
+3. `npm run dev` and point browser to http://localhost:3000/library-card/new
+
+#### Production build
+
+To build and run the app locally in production mode, run the following:
+
+1. `npm run build`
+2. `npm start`
+
+Make sure that `PORT=3001` and `NODE_ENV=production` is set in the `.env.local` file or run the commands as:
+
+1. `PORT=3001 NODE_ENV=production npm build`
+2. `PORT=3001 NODE_ENV=production npm start`
 
 ### Environment Variables
 
 See `.env.example` for a checklist of the environment variables the app
 needs to run.
 
+Note: Nextjs uses `.env.development` and `.env.production` for their respective platform environment variables. The keys are not encrypted in the repo and are therefore directly added/updated through the AWS Elastic Beanstalk UI.
+
 ## Deployment
+
+### Reverse Proxy and basePath
+
+NYPL.org serves many apps on separate subdomains through a reverse proxy. They all live in the nypl.org domain and typically this isn't an issue since each app has its own assets directory. But, for Nextjs apps, the `_next` directory is used for assets. In order to route the correct assets to the correct app, the app will be assigned a base path so all page routes and assets are fetched from there.
+
+The `basePath` value is set to `/library-card`.
 
 ### Git Workflow
 
 Our branches (in order of stability are):
 
-| Branch      | Environment | AWS Account     |
-|:------------|:------------|:----------------|
-| master      | development | aws-sandbox     |
-| qa          | qa          | aws-digital-dev |
-| production  | production  | aws-digital-dev |
-
+| Branch     | Environment | AWS Account     |
+| :--------- | :---------- | :-------------- |
+| main       | development | aws-sandbox     |
+| qa         | qa          | aws-digital-dev |
+| production | production  | aws-digital-dev |
 
 Notice that since QA is calling QA endpoint of Card Creator (via QA Patron Creator Service) and currently (April/2019) QA endpoint of Card Creator is down, any request from QA is not working and will return a 503 error.
 
 ### Cutting a feature branch
 
-1. Feature branches are cut off from `master`
-2. Once the feature branch is ready to be merged, file a pull request of the feature branch _into_ `master`.
+1. Feature branches are cut off from `main`
+2. Once the feature branch is ready to be merged, file a pull request of the feature branch _into_ `main`.
 
-`master` ==gets merged to==> `qa` ==gets merged into==> `production`.
+`main` ==gets merged to==> `qa` ==gets merged into==> `production`.
 
-The `master` branch should be what's running in the Development environment.
+The `main` branch should be what's running in the Development environment.
 
 The `qa` branch should be what's running in the QA environment.
 The `production` branch should be what's running in the production environment.
 
+### Accessibility
+
+There are two ways to use the `react-axe` package for accessibility review while developing. This is the package of choice used in a few NYPL React applications. Only turn it on when needed and not while developing all the time because it uses a lot of browser resouces.
+
+1. Run `NEXT_PUBLIC_USE_AXE=true npm run dev`
+2. or update the `NEXT_PUBLIC_USE_AXE` environment variable in your `.env` file.
+
 ### AWS Elastic Beanstalk
+
 1. `.ebextensions` directory needed at application's root directory
 2. `.ebextensions/environment.config` to store environment variables. For environment variables that needs to be hidden,
 3. `.ebextensions/nodecommand.config` to start node app after deployment.
