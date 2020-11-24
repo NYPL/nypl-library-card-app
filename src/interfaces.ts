@@ -136,6 +136,7 @@ export interface FormResults {
   temporary: boolean;
   message: string;
   patronId: number;
+  ptype: number;
 }
 
 export interface FormData {

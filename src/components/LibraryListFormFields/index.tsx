@@ -105,9 +105,10 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
       <p>
         Choosing a home library will help us make sure you&apos;re getting
         everything you need from a branch that&apos;s most convenient for you.
-        You can change your home library at any point through your account.
       </p>
-      <p>Skipping this step will automatically default a home library.</p>
+      <p>
+        You can skip this step and update it at any point through your account.
+      </p>
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
