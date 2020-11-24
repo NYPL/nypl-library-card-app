@@ -1,5 +1,8 @@
 const { NEXT_PUBLIC_USE_AXE, BUILD_ID } = process.env;
 
+const PROD_BUILD_ID =
+  BUILD_ID || "production-0.6.0-6b5b11baca1ead499bfef3c66d62f5aa8dd9b4dc";
+
 module.exports = {
   basePath: "/library-card",
   async redirects() {
@@ -11,7 +14,7 @@ module.exports = {
       },
     ];
   },
-  generateBuildId: async () => BUILD_ID,
+  generateBuildId: async () => `${PROD_BUILD_ID}`,
   webpack: (config, { isServer, webpack }) => {
     // react-axe should only be bundled when NEXT_PUBLIC_USE_AXE=true
     !NEXT_PUBLIC_USE_AXE &&
