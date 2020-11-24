@@ -10,7 +10,7 @@ function ConfirmationPage() {
   const formResults: FormResults = state.results;
   const { ptype } = formResults;
 
-  const temporary = parseInt(ptype, 10) === 7;
+  const temporary = ptype === 7;
 
   return (
     <div>
