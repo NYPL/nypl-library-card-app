@@ -42,9 +42,9 @@ describe("findLibraryCode", () => {
   test("it returns the value code for a library name", () => {
     // Spot checking random libraries. Check "/src/data/ilLibraryList.ts" for a
     // full mapping of library name to library code.
-    expect(findLibraryCode("Melrose Branch")).toEqual("me");
-    expect(findLibraryCode("Pelham Bay Branch")).toEqual("pm");
-    expect(findLibraryCode("West Farms Branch")).toEqual("wf");
+    expect(findLibraryCode("Melrose Library")).toEqual("me");
+    expect(findLibraryCode("Pelham Bay Library")).toEqual("pm");
+    expect(findLibraryCode("West Farms Library")).toEqual("wf");
   });
 });
 
@@ -57,9 +57,9 @@ describe("findLibraryName", () => {
   test("it returns the value code for a library name", () => {
     // Spot checking random libraries. Check "/src/data/ilLibraryList.ts" for a
     // full mapping of library code to library name.
-    expect(findLibraryName("ew")).toEqual("Edenwald Branch");
-    expect(findLibraryName("ht")).toEqual("Countee Cullen Branch");
-    expect(findLibraryName("se")).toEqual("Seward Park Branch");
+    expect(findLibraryName("ew")).toEqual("Edenwald Library");
+    expect(findLibraryName("ht")).toEqual("Countee Cullen Library");
+    expect(findLibraryName("se")).toEqual("Seward Park Library");
   });
 });
 

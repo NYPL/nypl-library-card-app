@@ -9,6 +9,7 @@
 - Updated the work address page to not be required.
 - Updated favicon.
 - Fixed "edit" button in Review page for the Address fields.
+- Updated the list of library names.
 
 ### v0.6.0
 
