@@ -68,7 +68,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   // Autosuggest will pass through all these props to the input.
 
   const inputProps = {
-    placeholder: "Type a library name, e.g. Stavros Niarchos",
+    placeholder: "Type a library name, such as Parkchester Library",
     value,
     onChange,
     // Pass in the `react-hook-form` register function so it can handle this

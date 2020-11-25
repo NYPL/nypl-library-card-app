@@ -33,7 +33,7 @@ const AcceptTermsForm = () => {
         <a href="https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations">
           Rules and Regulations
         </a>
-        . To learn more about The Library’s use of personal information, please
+        . To learn more about the Library’s use of personal information, please
         read our{" "}
         <a href="https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy">
           Privacy Policy
