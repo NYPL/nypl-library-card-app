@@ -119,8 +119,8 @@ const getLocationValue = (location: string): string => {
  * attribute, such as "home-line1" or "home-city". We need to remove the prefix
  * and create an object for address type that was passed.
  */
-const constructAddressType = (object = {}, type: string) => {
-  const address = {};
+const constructAddressType = (object = {}, type: string): Address => {
+  const address = {} as Address;
   Object.keys(object).forEach((key) => {
     if (key.indexOf(`${type}-`) !== -1) {
       // Remove the addresses field prefix and add to the proper object.

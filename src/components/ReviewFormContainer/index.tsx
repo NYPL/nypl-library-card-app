@@ -108,7 +108,7 @@ function ReviewFormContainer() {
         buttonType={ButtonTypes.Primary}
         onClick={() => {
           lcaEvents("Edit", "Location/Address");
-          router.push("/library-card/location?newCard=true");
+          router.push("/location?newCard=true");
         }}
       >
         Edit

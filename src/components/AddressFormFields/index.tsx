@@ -51,7 +51,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
    * Make sure that the zip code is a numeric value, then check for its length.
    */
   const validateZip = () => (value) => {
-    if (!isNumeric(value)) {
+    if (!isNumeric(value) && isRequired) {
       return errorMessages.zip;
     }
     return lengthValidation(MINLENGTHZIP, MAXLENGTHZIP, "zip")(value);

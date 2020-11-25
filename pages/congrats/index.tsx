@@ -8,8 +8,9 @@ import { FormResults } from "../../src/interfaces";
 function ConfirmationPage() {
   const { state } = useFormDataContext();
   const formResults: FormResults = state.results;
-  const { ptype } = formResults;
-
+  // Render the temporary message in case there's no ptype, but this
+  // shouldn't happen.
+  const ptype = formResults?.ptype || 7;
   const temporary = ptype === 7;
 
   return (

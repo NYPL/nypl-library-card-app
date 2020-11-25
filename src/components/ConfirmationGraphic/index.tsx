@@ -6,7 +6,7 @@ import useFormDataContext from "../../context/FormDataContext";
 
 const ConfirmationContainer: React.FC = () => {
   const { state } = useFormDataContext();
-  const formResults: FormResults = state.results;
+  const formResults = state.results || ({} as FormResults);
   const { barcode, pin, name } = formResults;
   let canvas;
   // What we want to do is render the HTML and then pick up the canvas element.

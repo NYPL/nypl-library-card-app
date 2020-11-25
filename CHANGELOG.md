@@ -1,5 +1,15 @@
 ## CHANGE LOG
 
+### v0.6.1
+
+#### Fixes
+
+- Added a temporary static BUILD_ID variable for Nextjs to build in production.
+- Removed CSRF token validation for now.
+- Updated the work address page to not be required.
+- Updated favicon.
+- Fixed "edit" button in Review page for the Address fields.
+
 ### v0.6.0
 
 #### Updated

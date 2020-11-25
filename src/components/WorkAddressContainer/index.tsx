@@ -33,73 +33,83 @@ const AddressContainer = () => {
   const submitForm = (formData) => {
     setIsLoading(true);
 
-    // Set the global form state...
-    dispatch({
-      type: "SET_FORM_DATA",
-      value: { ...formValues, ...formData },
-    });
-
     const workAddress = constructAddressType(formData, "work");
-    let nextUrl;
-    axios
-      .post("/library-card/api/address", {
-        address: workAddress,
-        isWorkAddress: true,
-        csrfToken,
-      })
-      .then((response) => {
-        const work: AddressResponse = response.data;
-        // Get the home address from the existing submission values
-        // and add it to the object along with the work address.
-        dispatch({
-          type: "SET_ADDRESSES_VALUE",
-          value: { ...addressesResponse, work } as AddressesResponse,
-        });
-      })
-      .catch((error) => {
-        // Catch any CSRF token issues and return a generic error message
-        // and redirect to the home page.
-        if (error.response.status == 403) {
-          dispatch({
-            type: "SET_FORM_ERRORS",
-            value: "A server error occurred validating a token.",
-          });
-          nextUrl = "/new";
-        }
-        let work = error.response?.data;
-        // If the API call failed because the service is down and there is no
-        // returned address data from the response, then display the initial
-        // address that the user submitted which is already saved as `workAddress`.
-        if (isEmpty(work)) {
-          work = {
-            address: workAddress,
-            addresses: [],
-            detail: "",
-          };
-        }
-        // Get the home address from the existing submission values
-        // and add it to the object along with the work address.
-        dispatch({
-          type: "SET_ADDRESSES_VALUE",
-          value: { ...addressesResponse, work } as AddressesResponse,
-        });
-      })
-      // Go to the next page regardless if it's a correct or error response.
-      .finally(() => {
-        // If there's a 403 error, wait a short while before removing the error
-        // and going to the home page. Otherwise, go to the next page.
-        if (nextUrl === "/new") {
-          setTimeout(() => {
-            dispatch({ type: "SET_FORM_ERRORS", value: null });
-            router.push(nextUrl);
-          }, 2500);
-        } else {
-          setIsLoading(false);
-          nextUrl = "/address-verification?newCard=true";
-          lcaEvents("Navigation", `Next button to ${nextUrl}`);
-          router.push(nextUrl);
-        }
+    // If the work address wasn't filled out, that's okay, proceed.
+    if (
+      !workAddress.line1 &&
+      !workAddress.city &&
+      !workAddress.state &&
+      !workAddress.zip
+    ) {
+      router.push("/address-verification?newCard=true");
+    } else {
+      // Set the global form state if there's a work address.
+      dispatch({
+        type: "SET_FORM_DATA",
+        value: { ...formValues, ...formData },
       });
+
+      let nextUrl;
+      axios
+        .post("/library-card/api/address", {
+          address: workAddress,
+          isWorkAddress: true,
+          csrfToken,
+        })
+        .then((response) => {
+          const work: AddressResponse = response.data;
+          // Get the home address from the existing submission values
+          // and add it to the object along with the work address.
+          dispatch({
+            type: "SET_ADDRESSES_VALUE",
+            value: { ...addressesResponse, work } as AddressesResponse,
+          });
+        })
+        .catch((error) => {
+          // Catch any CSRF token issues and return a generic error message
+          // and redirect to the home page.
+          if (error.response.status == 403) {
+            dispatch({
+              type: "SET_FORM_ERRORS",
+              value: "A server error occurred validating a token.",
+            });
+            nextUrl = "/new";
+          }
+          let work = error.response?.data;
+          // If the API call failed because the service is down and there is no
+          // returned address data from the response, then display the initial
+          // address that the user submitted which is already saved as `workAddress`.
+          if (isEmpty(work)) {
+            work = {
+              address: workAddress,
+              addresses: [],
+              detail: "",
+            };
+          }
+          // Get the home address from the existing submission values
+          // and add it to the object along with the work address.
+          dispatch({
+            type: "SET_ADDRESSES_VALUE",
+            value: { ...addressesResponse, work } as AddressesResponse,
+          });
+        })
+        // Go to the next page regardless if it's a correct or error response.
+        .finally(() => {
+          // If there's a 403 error, wait a short while before removing the error
+          // and going to the home page. Otherwise, go to the next page.
+          if (nextUrl === "/new") {
+            setTimeout(() => {
+              dispatch({ type: "SET_FORM_ERRORS", value: null });
+              router.push(nextUrl);
+            }, 2500);
+          } else {
+            setIsLoading(false);
+            nextUrl = "/address-verification?newCard=true";
+            lcaEvents("Navigation", `Next button to ${nextUrl}`);
+            router.push(nextUrl);
+          }
+        });
+    }
   };
 
   return (
