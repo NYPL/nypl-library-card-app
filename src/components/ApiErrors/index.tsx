@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from "react";
 import { Heading, List, ListTypes } from "@nypl/design-system-react-components";
+import isEmpty from "lodash/isEmpty";
 import {
   renderErrorElements,
   createUsernameAnchor,
@@ -44,7 +45,11 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
           // sending a request to the Card Creator API. The Card Creator API
           // can also return these types of errors based on its own validations.
           case "invalid-request":
-            errorElements = renderErrorElements(error);
+            if (isEmpty(error)) {
+              errorElements = <li>{detail}</li>;
+            } else {
+              errorElements = renderErrorElements(error);
+            }
             break;
           // All the errors are in the `error` property but for the `username`,
           // the error is in the `detail` property. This error is thrown in the

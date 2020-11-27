@@ -361,6 +361,7 @@ export async function callPatronAPI(
     // });
     if ((patronData as ProblemDetail).status === 400) {
       logger.error("Invalid patron data");
+      logger.error("Patron data", patronData);
       return Promise.reject(patronData);
     }
 

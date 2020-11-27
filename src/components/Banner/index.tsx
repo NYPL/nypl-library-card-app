@@ -1,8 +1,7 @@
 import React from "react";
 import { Heading, Hero, HeroTypes } from "@nypl/design-system-react-components";
 
-export const defaultImageSrc =
-  "https://www.nypl.org/sites/default/files/get-a-library-card-banner.png";
+export const defaultImageSrc = "/library-card/card-hero.png";
 export const defaultDescription =
   "Any person who lives, works, attends school or pays property taxes in New York State is eligible to receive a New York Public Library card free of charge. With a library card you get free access to resources and services across all New York Public Library locations.";
 export const defaultHeadingText = "Apply for a Library Card Online";
