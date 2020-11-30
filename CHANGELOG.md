@@ -11,6 +11,7 @@
 - Fixed "edit" button in Review page for the Address fields.
 - Updated the list of library names.
 - Fixed issue rendering non-object error messages in the `ApiErrors` component.
+- Fixed multiple calls for the IP address location lookup.
 
 ### v0.6.0
 

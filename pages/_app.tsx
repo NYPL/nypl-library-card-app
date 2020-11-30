@@ -12,7 +12,6 @@ import {
 import appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
 import ApplicationContainer from "../src/components/ApplicationContainer";
-import IPLocationAPI from "../src/utils/IPLocationAPI";
 import enableAxe from "../src/utils/axe";
 import { getPageTitles } from "../src/utils/utils";
 import useRouterScroll from "../src/hooks/useRouterScroll";
@@ -46,7 +45,7 @@ if (appConfig.useAxe === "true" && !isServerRendered()) {
   enableAxe();
 }
 
-function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
+function MyApp<MyAppProps>({ Component, pageProps, query }) {
   useRouterScroll({ top: 640 });
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
@@ -82,15 +81,14 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
     formInitialStateCopy.results = JSON.parse(query.results);
   }
 
-  // Update the form values state with the user's location value. We also want
-  // to store the initial url query params in the app's store state.
+  // Update the form values state with the initial url query params in
+  // the app's store state.
   formInitialStateCopy.formValues = {
     ...formInitialStateCopy.formValues,
     ...query,
-    location: userLocation,
   };
   const initState = { ...formInitialStateCopy };
-  const pageTitles = getPageTitles(userLocation);
+  const pageTitles = getPageTitles("nyc");
 
   return (
     <>
@@ -181,16 +179,8 @@ function MyApp<MyAppProps>({ Component, pageProps, userLocation, query }) {
 }
 
 MyApp.getInitialProps = async ({ ctx }) => {
-  // Get the user's IP address and convert it to an object that tells us if
-  // the user is in NYS/NYC. Will be `undefined` if the call to the IP/location
-  // conversion API fails or if there is no IP address.
-  let userLocation = "";
-  if (ctx.req?.headers) {
-    userLocation = await IPLocationAPI.getLocationFromIP(ctx);
-  }
-
   // Send it to the component as a prop.
-  return { userLocation, query: ctx.query };
+  return { query: ctx.query };
 };
 
 export default MyApp;
