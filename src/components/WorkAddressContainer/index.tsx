@@ -121,7 +121,7 @@ const AddressContainer = () => {
       <Loader isLoading={isLoading} />
 
       <Heading level={3}>Work Address</Heading>
-      <p>If you work in NYC, please fill out the work address form.</p>
+      <p>If you work or go to school in NYC please provide the address.</p>
       <AddressFormFields
         type={AddressTypes.Work}
         errorMessages={errorMessages.address}

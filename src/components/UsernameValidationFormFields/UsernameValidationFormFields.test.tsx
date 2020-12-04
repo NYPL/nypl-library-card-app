@@ -36,7 +36,9 @@ describe("UsernameValidationFormFields", () => {
     const label = screen.getByText("Username");
     const labelRequired = screen.getByText("Required");
     const input = screen.getByRole("textbox", { name: "Username Required" });
-    const helperText = screen.getByText("5-25 alphanumeric characters");
+    const helperText = screen.getByText(
+      "5-25 alphanumeric characters. No special characters."
+    );
     // `query*` return null rather than throw an error, so use this instead
     // of `getBy*` since we _don't_ expect the button to be there.
     const validateButton = screen.queryByRole("button");

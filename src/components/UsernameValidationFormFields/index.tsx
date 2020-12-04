@@ -104,7 +104,7 @@ const UsernameValidationForm = ({
         id="username"
         label="Username"
         name="username"
-        instructionText="5-25 alphanumeric characters"
+        instructionText="5-25 alphanumeric characters. No special characters."
         isRequired
         errorState={errors}
         maxLength={25}
