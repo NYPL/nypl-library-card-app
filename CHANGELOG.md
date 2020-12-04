@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.6.2
+
+#### Updated
+
+- Updated Design System to v0.18.6.
+
 ### v0.6.1
 
 #### Fixes
