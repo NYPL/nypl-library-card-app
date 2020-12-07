@@ -24,8 +24,13 @@ function PersonalForm({ agencyType = "" }) {
   };
   const instructionText = (
     <>
-      If you do not wish to provide an email address, please use our{" "}
+      An email address is required to use many of our digital resources, such as
+      e-books. If you do not wish to provide an email address, you can apply for
+      a physical card using our{" "}
       <a href="https://catalog.nypl.org/selfreg/patonsite">alternate form</a>.
+      Once filled out, please visit one of our{" "}
+      <a href="https://www.nypl.org/locations">locations</a> with proof of
+      identity and home address to pick up your card.
     </>
   );
   return (
@@ -69,7 +74,7 @@ function PersonalForm({ agencyType = "" }) {
 
       <FormField
         id="email"
-        label="E-Mail Address"
+        label="Email Address"
         name="email"
         errorState={errors}
         isRequired

@@ -26,7 +26,7 @@ describe("PersonalFormFields", () => {
       screen.getByRole("textbox", { name: "Date of Birth Required" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "E-Mail Address Required" })
+      screen.getByRole("textbox", { name: "Email Address Required" })
     ).toBeInTheDocument();
     expect(
       screen.getByLabelText(
