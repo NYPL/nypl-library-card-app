@@ -99,13 +99,14 @@ const AddressContainer = () => {
         // If we don't have a 403 error and need to start over, then do the
         // following check:
         // If the user is not in "nyc", then we ask the user for their
-        // work address information. If the user is in "nyc" and the home
+        // work address information. If the user is in "nys" and the home
         // address is not in "nyc", then we ask for their work address.
         // Otherwise, the home address is enough and we can go to the next step.
         if (nextUrl !== "/new") {
           if (
             formValues.location !== "nyc" ||
-            (formValues.location === "nyc" && !addressInNYC)
+            ((formValues.location === "nyc" || formValues.location === "nys") &&
+              !addressInNYC)
           ) {
             nextUrl = "/workAddress?newCard=true";
           } else {
