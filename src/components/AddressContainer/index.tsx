@@ -17,6 +17,7 @@ import {
 import Loader from "../Loader";
 import { lcaEvents } from "../../externals/gaUtils";
 import FormField from "../FormField";
+import { nyCounties, nyCities } from "../../utils/utils";
 
 const AddressContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +40,11 @@ const AddressContainer = () => {
       value: { ...formValues, ...formData },
     });
 
+    // This is the home address from the form fields.
     const homeAddress = constructAddressType(formData, "home");
+    // This is either the updated address from the API request or the address
+    // entered in the form.
+    let updatedHomeAddress;
     let nextUrl;
     axios
       .post("/library-card/api/address", {
@@ -48,7 +53,9 @@ const AddressContainer = () => {
         csrfToken,
       })
       .then((response) => {
+        // We got a response back so use the updated address response.
         const home: AddressResponse = response.data;
+        updatedHomeAddress = home.address;
         // Update the global address state values with ...
         dispatch({
           type: "SET_ADDRESSES_VALUE",
@@ -68,7 +75,9 @@ const AddressContainer = () => {
         let home = error.response?.data;
         // If the API call failed because the service is down and there is no
         // returned address data from the response, then display the initial
-        // address that the user submitted which we already saved in `homeAddress`.
+        // address that the user submitted which we already saved in
+        // `homeAddress`.
+        updatedHomeAddress = homeAddress;
         if (isEmpty(home)) {
           home = {
             address: homeAddress,
@@ -83,13 +92,21 @@ const AddressContainer = () => {
       })
       .finally(() => {
         setIsLoading(false);
+        // Check to see if the submitted address is in NYC.
+        const addressInNYC =
+          nyCities.includes(updatedHomeAddress.city.toLowerCase()) ||
+          nyCounties.includes(updatedHomeAddress.county.toLowerCase());
         // If we don't have a 403 error and need to start over, then do the
         // following check:
         // If the user is not in "nyc", then we ask the user for their
-        // work address information. Otherwise, the home address is enough
-        // and we can go to the next step.
+        // work address information. If the user is in "nyc" and the home
+        // address is not in "nyc", then we ask for their work address.
+        // Otherwise, the home address is enough and we can go to the next step.
         if (nextUrl !== "/new") {
-          if (formValues.location !== "nyc") {
+          if (
+            formValues.location !== "nyc" ||
+            (formValues.location === "nyc" && !addressInNYC)
+          ) {
             nextUrl = "/workAddress?newCard=true";
           } else {
             nextUrl = "/address-verification?newCard=true";
