@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.6.2
+
+#### Updated
+
+- Updated copy to clarify the Work Address page and form fields.
+
 ### v0.6.1
 
 #### Fixes
