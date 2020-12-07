@@ -4,6 +4,7 @@
 
 #### Updated
 
+- Updated Design System to v0.18.6.
 - Updated copy to clarify the Work Address page and form fields.
 
 ### v0.6.1
