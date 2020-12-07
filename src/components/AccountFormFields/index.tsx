@@ -8,7 +8,6 @@ import { errorMessages } from "../../utils/formDataUtils";
 import { Checkbox } from "@nypl/design-system-react-components";
 import ilsLibraryList from "../../data/ilsLibraryList";
 import LibraryListFormFields from "../LibraryListFormFields";
-import styles from "./AccountFormFields.module.css";
 
 interface AccountFormFieldsProps {
   showPinOnLoad?: boolean;
@@ -37,14 +36,9 @@ function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
   const pinType = showPin ? "text" : "password";
   const pinInstructionText = (
     <p>
-      4 digits. Your PIN must be 4 numbers and must <b>not</b> contain common
-      patterns:
-      <span className={styles.pinText}>
-        A number that is repeated 3 or more times (0001, 5555)
-      </span>
-      <span className={styles.pinText}>
-        A pair of numbers that is repeated (1212, 6363)
-      </span>
+      Your PIN must be 4 numbers and must <b>not</b> contain common patterns:
+      <br />A number that is repeated 3 or more times (0001, 5555)
+      <br />A pair of numbers that is repeated (1212, 6363)
     </p>
   );
 
