@@ -214,7 +214,7 @@ function ReviewFormContainer() {
         <div>{formValues.birthdate}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>E-Mail Address</div>
+        <div className={styles.title}>Email Address</div>
         <div>{formValues.email}</div>
       </div>
       <div className={styles.field}>

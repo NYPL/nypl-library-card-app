@@ -15,7 +15,7 @@ interface FormFieldProps {
   errorState?: {};
   className?: string;
   isRequired?: boolean;
-  instructionText?: string;
+  instructionText?: string | JSX.Element;
   minLength?: number;
   maxLength?: number;
   defaultValue?: any;

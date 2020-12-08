@@ -34,6 +34,13 @@ function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
   };
   const update = () => setShowPin(!showPin);
   const pinType = showPin ? "text" : "password";
+  const pinInstructionText = (
+    <p>
+      Your PIN must be 4 numbers and must <b>not</b> contain common patterns:
+      <br />A number that is repeated 3 or more times (0001, 5555)
+      <br />A pair of numbers that is repeated (1212, 6363)
+    </p>
+  );
 
   // When the component renders on the client-side, we want to turn the password
   // "text" input into a "password" type so that the PIN is visible by default.
@@ -54,7 +61,7 @@ function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
         type={pinType}
         label="PIN"
         name="pin"
-        instructionText="4 digits"
+        instructionText={pinInstructionText}
         isRequired
         errorState={errors}
         maxLength={4}

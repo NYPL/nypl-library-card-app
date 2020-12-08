@@ -211,7 +211,7 @@ function AddressVerificationContainer() {
 
       {workAddress?.length > 0 && (
         <div className={styles.workAddressContainer}>
-          <Heading level={3}>Work Address</Heading>
+          <Heading level={3}>Alternate Address</Heading>
 
           {renderMultipleAddresses(
             workAddress,

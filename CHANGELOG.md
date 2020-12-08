@@ -1,5 +1,13 @@
 ## CHANGE LOG
 
+### v0.6.2
+
+#### Updated
+
+- Updated the Work/Alternate Address page to appear if the device location is in NYS but the Home Address is not in NYC.
+- Updated Design System to v0.18.6.
+- Updated copy to clarify the Work Address page and form fields.
+
 ### v0.6.1
 
 #### Fixes
