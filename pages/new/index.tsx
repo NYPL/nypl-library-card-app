@@ -16,7 +16,6 @@ function HomePage({ policyType, csrfToken, location }) {
       type: "SET_CSRF_TOKEN",
       value: csrfToken,
     });
-    console.log("use effect", location);
     dispatch({
       type: "SET_FORM_DATA",
       value: { ...formValues, location },
