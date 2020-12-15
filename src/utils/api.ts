@@ -394,6 +394,9 @@ export async function callPatronAPI(
             status === 403 ? "bad API call" : err.response?.data?.message
           }`
         );
+        logger.error(
+          `More details - status: ${status}, patron: ${patronData}, data: ${err.response?.data}`
+        );
         return Promise.reject({
           status,
           ...restOfErrors,
