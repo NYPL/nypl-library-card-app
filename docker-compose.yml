@@ -1,0 +1,9 @@
+version: "2"
+services:
+  nypl-library-card-app:
+    container_name: nypl-library-card-app
+    build: ./
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
