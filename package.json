@@ -10,7 +10,8 @@
     "eb:start": "npm run build && npm run start",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "cypress:open": "cypress open"
   },
   "engines": {
     "node": "10.19.0"
@@ -30,7 +31,9 @@
   "bugs": {
     "url": "https://github.com/issues"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cypress": "^6.2.1"
+  },
   "dependencies": {
     "@axe-core/react": "^4.0.0",
     "@babel/preset-typescript": "^7.10.4",
