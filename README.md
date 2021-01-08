@@ -121,7 +121,7 @@ There are two ways to use the `react-axe` package for accessibility review while
 
 ## Docker
 
-_Note_: This application is use Docker only for production builds and not for local development. For local development, the `npm run dev` command is the way to go.
+_Note_: This application is using Docker only for production builds and not for local development. For local development, the `npm run dev` command is the way to go.
 
 ### Building Docker Images
 
