@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.6.3
+
+#### Added
+
+- Added Dockerfile and docker-compose.yml files to build this application using Docker. This update is the first step in the longer process to use AWS ECS to build and deploy this application.
+
 ### v0.6.2
 
 #### Updated

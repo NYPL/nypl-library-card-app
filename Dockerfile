@@ -1,4 +1,4 @@
-# build environment
+# Build the environment
 FROM node:12.2.0-alpine as builder
 
 # Copy the app files
@@ -13,9 +13,6 @@ ENV PORT=3000 \
     NODE_ENV=production
 EXPOSE $PORT
 
-# CMD will set the default command that
-# is run when running the docker container.
-# In this case, we run eb:start to
-# build the app with our env vars, delete
-# unnecessary files, and start the app.
+# CMD is the default command when running the docker container.
+# `eb:start` will internally run `npm run build` and `npm start`.
 CMD npm run eb:start

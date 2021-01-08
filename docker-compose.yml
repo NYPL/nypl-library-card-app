@@ -1,8 +1,11 @@
-version: "2"
+version: "3"
+
 services:
-  nypl-library-card-app:
+  web:
     container_name: nypl-library-card-app
-    build: ./
+    build:
+      context: ./
+      dockerfile: Dockerfile
     environment:
       NODE_ENV: production
     ports:
