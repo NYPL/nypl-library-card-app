@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.6.4
+
+#### Fixed
+
+- Fixed the styling for the confirmation page `/library-card/congrats` that allows patrons to be able to use the printed barcode graphic.
+
 ### v0.6.2
 
 #### Updated
