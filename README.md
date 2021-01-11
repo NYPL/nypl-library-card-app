@@ -204,4 +204,20 @@ $ docker-compose start
 
 ### Current Limitation
 
-The Library Card App makes use of cookies to create, store, send, and verify CSRF tokens to prevent malicious attacks through the app's forms. In production builds, the CSRF token is stored in a secure cookie. Secure cookies require the use of https so unless your localhost is set up to run https, the production Docker builds will not work locally. This is an existing issue as running `npm run build` and `npm start` also create secure cookies and require localhost to support https. Although this is a problem for testing the production build of the application locally, this is not an issue when deploying to NYPL's production server.
+The Library Card App makes use of cookies to create, store, send, and verify CSRF tokens to prevent malicious attacks through the app's forms. In production builds, the CSRF token is stored in a secure cookie. Secure cookies require the use of https so unless your localhost is set up to run https, the production Docker builds will not work locally. This is an issue since running `npm run build` and `npm start` also create secure cookies and require localhost to support https. Although this is a problem for testing the production build of the application locally, this is not an issue when deploying to NYPL's production server.
+
+To test https and secure cookies locally in a non-Docker environment, you need to create local SSL certificates and run a custom server that runs Nextjs. The following is for Mac users based on [this blog post](https://medium.com/responsetap-engineering/nextjs-https-for-a-local-dev-server-98bb441eabd7).
+
+Run the following to create local certificate files using OpenSSL in a `./certificates` directory:
+
+```
+openssl req -x509 -out localhost.crt -keyout localhost.key \
+  -days 365 \
+  -newkey rsa:2048 -nodes -sha256 \
+  -subj '/CN=localhost' -extensions EXT -config <( \
+   printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+```
+
+Then double-click on the `localhost.crt` file to add it to your keychain. Change the settings to "Always Trust".
+
+Now run `npm run local-prod` to build and run the Next.js app with https.
