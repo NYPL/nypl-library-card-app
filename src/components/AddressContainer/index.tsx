@@ -94,8 +94,8 @@ const AddressContainer = () => {
         setIsLoading(false);
         // Check to see if the submitted address is in NYC.
         const addressInNYC =
-          nyCities.includes(updatedHomeAddress.city.toLowerCase()) ||
-          nyCounties.includes(updatedHomeAddress.county.toLowerCase());
+          nyCities.includes(updatedHomeAddress.city?.toLowerCase()) ||
+          nyCounties.includes(updatedHomeAddress.county?.toLowerCase());
         // If we don't have a 403 error and need to start over, then do the
         // following check:
         // If the user is not in "nyc", then we ask the user for their
