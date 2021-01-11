@@ -6,6 +6,13 @@
 
 - Fixed the styling for the confirmation page `/library-card/congrats` that allows patrons to be able to use the printed barcode graphic.
 
+### v0.6.3
+
+#### Added
+
+- Added Dockerfile and docker-compose.yml files to build this application using Docker. This update is the first step in the longer process to use AWS ECS to build and deploy this application.
+- Added instructions for building and running the app with https on localhost.
+
 ### v0.6.2
 
 #### Updated

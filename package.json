@@ -7,6 +7,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start -p $PORT",
+    "local-prod": "next build && NODE_ENV=production node https-server.js",
     "eb:start": "npm run build && npm run start",
     "test": "jest",
     "test:watch": "jest --watch",
