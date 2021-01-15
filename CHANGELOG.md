@@ -1,5 +1,12 @@
 ## CHANGE LOG
 
+### v0.6.5
+
+#### Updated
+
+- Updated when the Location API, the service that converts an IP address into a geolocation object, is called in the application flow.
+- Updated NYPL Design System to v0.19.1.
+
 ### v0.6.4
 
 #### Fixed

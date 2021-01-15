@@ -7,32 +7,19 @@ import appConfig from "../../appConfig";
 /**
  * getPageTitles
  * Returns the page titles and updates the titles if the user is not in "nyc".
- * @param userLocation The user's location down to the most accurate detail.
- *  The default is an empty string.
  */
-export function getPageTitles(userLocation: string): PageTitles {
+export function getPageTitles(): PageTitles {
   // The "nyc" case is the only case when we don't need the work address from
   // users so we don't show it. The work address is needed for the empty,
   // "nys", and "us" cases. Now an extra page is added to the
   // form submission flow.
-  if (userLocation === "nyc") {
-    return {
-      personal: "Step 1 of 5: Personal Information",
-      address: "Step 2 of 5: Address",
-      // This step won't happen but the DS `Heading` component needs text.
-      workAddress: "Alternate Address",
-      verification: "Step 3 of 5: Address Verification",
-      account: "Step 4 of 5: Customize Your Account",
-      review: "Step 5 of 5: Confirm Your Information",
-    };
-  }
   return {
-    personal: "Step 1 of 6: Personal Information",
-    address: "Step 2 of 6: Address",
-    workAddress: "Step 3 of 6: Alternate Address",
-    verification: "Step 4 of 6: Address Verification",
-    account: "Step 5 of 6: Customize Your Account",
-    review: "Step 6 of 6: Confirm Your Information",
+    personal: "Step 1 of 5: Personal Information",
+    address: "Step 2 of 5: Address",
+    workAddress: "Alternate Address",
+    verification: "Step 3 of 5: Address Verification",
+    account: "Step 4 of 5: Customize Your Account",
+    review: "Step 5 of 5: Confirm Your Information",
   };
 }
 
