@@ -9,10 +9,8 @@ import cookieUtils from "../CookieUtils";
 jest.mock("../CookieUtils");
 
 describe("getPageTiles", () => {
-  test("it returns text saying there are 5 steps if the user is in nyc", () => {
-    const userLocation = "nyc";
-
-    expect(getPageTitles(userLocation)).toEqual({
+  test("it returns text saying there are 5 steps", () => {
+    expect(getPageTitles()).toEqual({
       personal: "Step 1 of 5: Personal Information",
       address: "Step 2 of 5: Address",
       workAddress: "Alternate Address",
@@ -20,24 +18,6 @@ describe("getPageTiles", () => {
       account: "Step 4 of 5: Customize Your Account",
       review: "Step 5 of 5: Confirm Your Information",
     });
-  });
-
-  test("it returns text saying there are 6 steps if the user is not in nyc", () => {
-    const sixStepTitles = {
-      personal: "Step 1 of 6: Personal Information",
-      address: "Step 2 of 6: Address",
-      workAddress: "Step 3 of 6: Alternate Address",
-      verification: "Step 4 of 6: Address Verification",
-      account: "Step 5 of 6: Customize Your Account",
-      review: "Step 6 of 6: Confirm Your Information",
-    };
-    const userLocationEmpty = "";
-    const userLocationUS = "us";
-    const userLocationNYS = "nys";
-
-    expect(getPageTitles(userLocationEmpty)).toEqual(sixStepTitles);
-    expect(getPageTitles(userLocationUS)).toEqual(sixStepTitles);
-    expect(getPageTitles(userLocationNYS)).toEqual(sixStepTitles);
   });
 });
 
