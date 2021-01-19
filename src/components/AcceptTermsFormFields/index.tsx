@@ -46,7 +46,6 @@ const AcceptTermsForm = () => {
         name="acceptTerms"
         labelOptions={acceptTermsLabelOptions}
         // Users must click the checkbox in order to submit.
-        isSelected={false}
         ref={register({
           required: "The Terms and Conditions must be checked.",
         })}

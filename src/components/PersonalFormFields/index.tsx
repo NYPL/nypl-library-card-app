@@ -90,8 +90,6 @@ function PersonalForm({ agencyType = "" }) {
         checkboxId="eCommunications"
         name="ecommunicationsPref"
         labelOptions={checkBoxLabelOptions}
-        // Users must opt-out.
-        isSelected={true}
         ref={register()}
         attributes={{ defaultChecked: formValues.ecommunicationsPref }}
       />
