@@ -57,7 +57,6 @@ const AgeForm = ({
         checkboxId="ageGateCheckbox"
         name="ageGate"
         labelOptions={ageGateLabelOptions}
-        isSelected={false}
         ref={register({
           required: errorMessages["ageGate"],
         })}

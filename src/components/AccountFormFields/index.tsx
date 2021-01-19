@@ -99,7 +99,6 @@ function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
           checkboxId="showPIN"
           name="showPIN"
           labelOptions={checkBoxLabelOptions}
-          isSelected={false}
           attributes={{
             defaultChecked: showPin,
             onClick: update,

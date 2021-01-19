@@ -250,7 +250,6 @@ function ReviewFormContainer() {
               checkboxId="showPINReview"
               name="showPINReview"
               labelOptions={checkBoxLabelOptions}
-              isSelected={false}
               attributes={{
                 defaultChecked: showPin,
                 onClick: updateShowPin,
