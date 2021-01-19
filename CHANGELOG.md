@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.6.6
+
+#### Updated
+
+- Updating version to fix AWS deployment.
+
 ### v0.6.5
 
 #### Updated
