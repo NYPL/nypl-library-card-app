@@ -1,5 +1,25 @@
 ## CHANGE LOG
 
+### v0.6.5
+
+#### Updated
+
+- Updated when the Location API, the service that converts an IP address into a geolocation object, is called in the application flow.
+- Updated NYPL Design System to v0.19.1.
+
+### v0.6.4
+
+#### Fixed
+
+- Fixed the styling for the confirmation page `/library-card/congrats` that allows patrons to be able to use the printed barcode graphic.
+
+### v0.6.3
+
+#### Added
+
+- Added Dockerfile and docker-compose.yml files to build this application using Docker. This update is the first step in the longer process to use AWS ECS to build and deploy this application.
+- Added instructions for building and running the app with https on localhost.
+
 ### v0.6.2
 
 #### Updated

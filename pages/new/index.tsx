@@ -1,24 +1,17 @@
 import React, { useEffect } from "react";
 import { Heading } from "@nypl/design-system-react-components";
-import IPLocationAPI from "../../src/utils/IPLocationAPI";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 import useFormDataContext from "../../src/context/FormDataContext";
 import { getCsrfToken } from "../../src/utils/utils";
 
-function HomePage({ policyType, csrfToken, location }) {
-  const { state, dispatch } = useFormDataContext();
-  const { formValues } = state;
+function HomePage({ policyType, csrfToken }) {
+  const { dispatch } = useFormDataContext();
   // When the app loads, get the CSRF token from the server and set it in
   // the app's state.
-  // Update the form values state with the user's location value.
   useEffect(() => {
     dispatch({
       type: "SET_CSRF_TOKEN",
       value: csrfToken,
-    });
-    dispatch({
-      type: "SET_FORM_DATA",
-      value: { ...formValues, location },
     });
   }, []);
 
@@ -69,16 +62,9 @@ function HomePage({ policyType, csrfToken, location }) {
 }
 
 export async function getServerSideProps(context) {
-  // Get the user's IP address and convert it to an object that tells us if
-  // the user is in NYS/NYC. Will be `undefined` if the call to the IP/location
-  // conversion API fails or if there is no IP address.
-  let location = "";
-  if (context.req?.headers) {
-    location = await IPLocationAPI.getLocationFromIP(context);
-  }
   const { csrfToken } = getCsrfToken(context.req, context.res);
   return {
-    props: { csrfToken, location },
+    props: { csrfToken },
   };
 }
 

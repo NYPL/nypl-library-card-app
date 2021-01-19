@@ -1,16 +1,18 @@
 {
   "name": "nypl-library-card-app",
-  "version": "0.6.2",
+  "version": "0.6.5",
   "description": "NYPL Get A Library Card App",
   "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start -p $PORT",
+    "local-prod": "next build && NODE_ENV=production node https-server.js",
     "eb:start": "npm run build && npm run start",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "cypress:open": "cypress open"
   },
   "engines": {
     "node": "10.19.0"
@@ -30,11 +32,13 @@
   "bugs": {
     "url": "https://github.com/issues"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cypress": "^6.2.1"
+  },
   "dependencies": {
     "@axe-core/react": "^4.0.0",
     "@babel/preset-typescript": "^7.10.4",
-    "@nypl/design-system-react-components": "^0.18.6",
+    "@nypl/design-system-react-components": "^0.19.1",
     "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component#reactupdate",
     "@nypl/dgx-react-footer": "0.5.7",
     "@testing-library/jest-dom": "5.11.4",

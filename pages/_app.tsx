@@ -88,7 +88,7 @@ function MyApp<MyAppProps>({ Component, pageProps, query }) {
     ...query,
   };
   const initState = { ...formInitialStateCopy };
-  const pageTitles = getPageTitles("nyc");
+  const pageTitles = getPageTitles();
 
   return (
     <>
