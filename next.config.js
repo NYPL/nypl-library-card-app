@@ -1,7 +1,7 @@
 const { NEXT_PUBLIC_USE_AXE } = process.env;
 
 const PROD_BUILD_ID =
-  "production-0.6.6-a21c01bbc5d229e098b67b806f5f8db57b986a78";
+  "production-0.6.7-0d15ce6bbb73bb95efd1efa20755f00310085c4c";
 
 module.exports = {
   basePath: "/library-card",

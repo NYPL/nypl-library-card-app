@@ -1,5 +1,12 @@
 ## CHANGE LOG
 
+### v0.6.7
+
+#### Updated
+
+- Updating how the first and last names are being sent to the Card Creator API so names include middle names and multiple (if any) last names.
+- Updating how and when react-axe is called to reduce bundle size.
+
 ### v0.6.6
 
 #### Updated

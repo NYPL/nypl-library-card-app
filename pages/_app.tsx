@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import React from "react";
 import "@nypl/design-system-react-components/dist/styles.css";
 import "../src/styles/main.scss";
@@ -12,7 +13,6 @@ import {
 import appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
 import ApplicationContainer from "../src/components/ApplicationContainer";
-import enableAxe from "../src/utils/axe";
 import { getPageTitles } from "../src/utils/utils";
 import useRouterScroll from "../src/hooks/useRouterScroll";
 import { constructProblemDetail } from "../src/utils/formDataUtils";
@@ -42,7 +42,9 @@ if (!isServerRendered()) {
 
 // Only run react-axe in the client-side and when the flag is set.
 if (appConfig.useAxe === "true" && !isServerRendered()) {
-  enableAxe();
+  const ReactDOM = require("react-dom");
+  const axe = require("react-axe");
+  axe(React, ReactDOM, 1000);
 }
 
 function MyApp<MyAppProps>({ Component, pageProps, query }) {
