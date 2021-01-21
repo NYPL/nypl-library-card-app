@@ -368,9 +368,12 @@ export async function callPatronAPI(
     return axios
       .post(createPatronUrl, patronData, constructApiHeaders(token))
       .then((result) => {
+        const fullName = `${(patronData as FormAPISubmission).firstName} ${
+          (patronData as FormAPISubmission).lastName
+        }`;
         return Promise.resolve({
           status: result.data.status,
-          name: (patronData as FormAPISubmission).name,
+          name: fullName,
           ...result.data,
         });
       })
