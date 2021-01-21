@@ -518,7 +518,8 @@ describe("callPatronAPI", () => {
       // the `constructPatronObject` function which is tested in
       // `formDataUtils.test.ts`.
       {
-        name: "Tom Nook",
+        firstName: "Tom",
+        lastName: "Nook",
         email: "tomnook@nypl.org",
         birthdate: "01/01/1988",
         ageGate: undefined,

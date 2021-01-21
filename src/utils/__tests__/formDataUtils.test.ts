@@ -495,7 +495,8 @@ describe("constructPatronObject", () => {
       acceptTerms: true,
     };
     const patronRequestObject: FormAPISubmission = {
-      name: "Tom Nook",
+      firstName: "Tom",
+      lastName: "Nook",
       email: "tomnook@nypl.org",
       birthdate: "01/01/1988",
       ageGate: undefined,

@@ -360,10 +360,9 @@ const constructPatronObject = (
     );
   }
 
-  const fullName = `${firstName.trim()} ${lastName.trim()}`;
-
   return {
-    name: fullName,
+    firstName: firstName.trim(),
+    lastName: lastName.trim(),
     email,
     birthdate,
     ageGate,
