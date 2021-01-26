@@ -114,7 +114,7 @@ Configuration can be adjusted via `.travis.yml`, located at the root directory o
 
 ## Accessibility
 
-There are two ways to use the `react-axe` package for accessibility review while developing. This is the package of choice used in a few NYPL React applications. Only turn it on when needed and not while developing all the time because it uses a lot of browser resouces.
+There are two ways to use the `@axe-core/react` package for accessibility review while developing. This is the package of choice used in a few NYPL React applications. Only turn it on when needed and not while developing all the time because it uses a lot of browser resouces.
 
 1. Run `NEXT_PUBLIC_USE_AXE=true npm run dev`
 2. or update the `NEXT_PUBLIC_USE_AXE` environment variable in your `.env` file.

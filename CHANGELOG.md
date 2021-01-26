@@ -6,6 +6,7 @@
 
 - Updated the Dockerfile in preparation to use with AWS ECS.
 - Updated location for correct installion of npm packages.
+- Updated the `react-axe` package to `@axe-core/react` since the former is deprecated.
 
 ### v0.6.7
 

@@ -16,9 +16,9 @@ module.exports = {
   },
   generateBuildId: async () => `${PROD_BUILD_ID}`,
   webpack: (config, { isServer, webpack }) => {
-    // react-axe should only be bundled when NEXT_PUBLIC_USE_AXE=true
-    !NEXT_PUBLIC_USE_AXE &&
-      config.plugins.push(new webpack.IgnorePlugin(/react-axe$/));
+    // @axe-core/react should only be bundled when NEXT_PUBLIC_USE_AXE=true
+    !(NEXT_PUBLIC_USE_AXE === "true") &&
+      config.plugins.push(new webpack.IgnorePlugin(/@axe-core\/react$/));
     // Fixes npm packages that depend on `fs` module since
     // we can't depend on this in the client-side code.
     if (!isServer) {
