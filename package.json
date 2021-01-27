@@ -33,6 +33,7 @@
     "url": "https://github.com/issues"
   },
   "devDependencies": {
+    "@axe-core/react": "^4.1.0",
     "@testing-library/jest-dom": "5.11.4",
     "@testing-library/react": "^10.4.7",
     "@testing-library/react-hooks": "^3.4.1",
@@ -48,11 +49,9 @@
     "husky": "^4.2.3",
     "jest": "^26.1.0",
     "jest-axe": "^3.5.0",
-    "react-axe": "^3.5.2",
     "react-test-renderer": "^16.13.1"
   },
   "dependencies": {
-    "@axe-core/react": "^4.0.0",
     "@babel/preset-typescript": "^7.10.4",
     "@nypl/design-system-react-components": "^0.19.1",
     "@nypl/dgx-header-component": "git+https://git@github.com/NYPL/dgx-header-component#reactupdate",
