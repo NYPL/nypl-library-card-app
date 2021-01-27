@@ -1,0 +1,12 @@
+node_modules
+log
+Dockerfile
+cypress
+.next
+.dockerignore
+# Don't pass in local credentials to the image!
+.env
+.env.local
+.elasticbeanstalk
+.certificates
+.eslintcache
