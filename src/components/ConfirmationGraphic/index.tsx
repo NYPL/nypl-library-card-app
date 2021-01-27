@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import bwipjs from "bwip-js";
+import Image from "next/image";
 import { FormResults } from "../../interfaces";
 import { Icon, LogoNames } from "@nypl/design-system-react-components";
 import useFormDataContext from "../../context/FormDataContext";
@@ -35,7 +36,13 @@ const ConfirmationContainer: React.FC = () => {
   return (
     <div className="confirmation-graphic">
       <div className="image-lion">
-        <img src="/library-card/cardbg.png" alt="" />
+        <Image
+          src="/library-card/cardbg.png"
+          role="presentation"
+          width="939"
+          height="727"
+          alt=""
+        />
         <div className="background-lion">
           <div className="grid-item">
             MEMBER NAME

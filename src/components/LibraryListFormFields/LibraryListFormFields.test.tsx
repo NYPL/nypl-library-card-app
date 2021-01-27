@@ -1,11 +1,9 @@
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { axe } from "jest-axe";
 import LibraryListFormFields from ".";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 import { LibraryListObject } from "../../interfaces";
-
-expect.extend(toHaveNoViolations);
 
 const libraryList: LibraryListObject[] = [
   { value: "eb", label: "SimplyE" },

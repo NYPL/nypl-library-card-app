@@ -1,10 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { axe } from "jest-axe";
 
 import ApplicationContainer from ".";
-
-expect.extend(toHaveNoViolations);
 
 describe.skip("ApplicationContainer", () => {
   test("passes axe accessibility test", async () => {

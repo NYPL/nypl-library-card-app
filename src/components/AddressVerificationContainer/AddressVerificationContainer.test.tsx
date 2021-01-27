@@ -1,22 +1,21 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { render, screen, act } from "@testing-library/react";
+import { axe } from "jest-axe";
 import AddressVerificationContainer from ".";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 import { formInitialState } from "../../context/FormDataContext";
 import { AddressResponse } from "../../interfaces";
 
-expect.extend(toHaveNoViolations);
-
 describe("AddressVerificationContainer accessibility", () => {
   test("passes axe accessibility test", async () => {
-    const { container } = render(
-      <TestProviderWrapper>
-        <AddressVerificationContainer />
-      </TestProviderWrapper>
-    );
-
-    expect(await axe(container)).toHaveNoViolations();
+    await act(async () => {
+      const { container } = render(
+        <TestProviderWrapper>
+          <AddressVerificationContainer />
+        </TestProviderWrapper>
+      );
+      expect(await axe(container)).toHaveNoViolations();
+    });
   });
 });
 

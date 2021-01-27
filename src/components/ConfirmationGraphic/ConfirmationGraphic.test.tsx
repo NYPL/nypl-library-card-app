@@ -1,6 +1,6 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { render, screen, act } from "@testing-library/react";
+import { axe } from "jest-axe";
 import ConfirmationContainer from ".";
 import {
   FormResults,
@@ -8,8 +8,6 @@ import {
   AddressesResponse,
 } from "../../interfaces";
 import { FormDataContextProvider } from "../../context/FormDataContext";
-
-expect.extend(toHaveNoViolations);
 
 const formResults: FormResults = {
   barcode: "12345678912345",
@@ -31,13 +29,14 @@ const formState = {
 
 describe("Confirmation", () => {
   test("passes axe accessibility test", async () => {
-    const { container } = render(
-      <FormDataContextProvider initState={formState}>
-        <ConfirmationContainer />
-      </FormDataContextProvider>
-    );
-
-    expect(await axe(container)).toHaveNoViolations();
+    await act(async () => {
+      const { container } = render(
+        <FormDataContextProvider initState={formState}>
+          <ConfirmationContainer />
+        </FormDataContextProvider>
+      );
+      expect(await axe(container)).toHaveNoViolations();
+    });
   });
 
   test("renders the NYPL card info", () => {

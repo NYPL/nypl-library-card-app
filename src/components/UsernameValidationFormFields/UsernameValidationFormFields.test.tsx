@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { axe } from "jest-axe";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 // `import` axios does not work so it must be required.
 const axios = require("axios");
 
-expect.extend(toHaveNoViolations);
 jest.mock("axios");
 
 import UsernameValidationFormFields from ".";

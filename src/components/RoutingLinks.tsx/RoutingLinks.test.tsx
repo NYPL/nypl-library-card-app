@@ -1,19 +1,20 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { render, screen, act } from "@testing-library/react";
+import { axe } from "jest-axe";
 import RoutingLinks from "./index";
-
-expect.extend(toHaveNoViolations);
 
 describe("RoutingLinks", () => {
   test("passes axe accessibility test", async () => {
-    const { container } = render(
-      <RoutingLinks
-        previous={{ url: "/previous", text: "Previous" }}
-        next={{ url: "/next", text: "Next" }}
-      />
-    );
-    expect(await axe(container)).toHaveNoViolations();
+    await act(async () => {
+      const { container } = render(
+        <RoutingLinks
+          previous={{ url: "/previous", text: "Previous" }}
+          next={{ url: "/next", text: "Next" }}
+        />
+      );
+
+      expect(await axe(container)).toHaveNoViolations();
+    });
   });
 
   test("only renders a 'next' link, 'previous' link is optional", () => {
