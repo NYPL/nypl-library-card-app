@@ -1,11 +1,9 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { axe } from "jest-axe";
 import AddressFormFields from ".";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 import { Address, AddressTypes } from "../../interfaces";
-
-expect.extend(toHaveNoViolations);
 
 const addressErrorMessages: Address = {
   line1: "Please enter a valid street address.",

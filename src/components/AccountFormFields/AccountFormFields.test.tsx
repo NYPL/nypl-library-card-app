@@ -1,10 +1,8 @@
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { axe } from "jest-axe";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 import AccountFormFields from ".";
-
-expect.extend(toHaveNoViolations);
 
 describe("AccountFormFields accessibility check", () => {
   test("passes axe accessibility test", async () => {

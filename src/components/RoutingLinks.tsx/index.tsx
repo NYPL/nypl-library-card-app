@@ -30,7 +30,7 @@ function RoutingLinks({ previous, next }: RoutingLinksType): JSX.Element {
   return (
     <div className={styles.container}>
       {previous?.url && (
-        <Link href={previous.url} passHref>
+        <Link href={previous.url}>
           <a
             className={styles.previous}
             onClick={() =>
@@ -42,7 +42,7 @@ function RoutingLinks({ previous, next }: RoutingLinksType): JSX.Element {
         </Link>
       )}
       {!next?.submit ? (
-        <Link href={next.url} passHref>
+        <Link href={next.url}>
           <a
             className="button"
             // Just track the "Get Started" or "Submit" clicks. Routing events

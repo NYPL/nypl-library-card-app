@@ -1,10 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { axe } from "jest-axe";
 import ApiErrors from ".";
 import { errorMessages } from "../../utils/formDataUtils";
-
-expect.extend(toHaveNoViolations);
 
 describe("ApiErrors", () => {
   test("it passes axe accessibility test", async () => {
