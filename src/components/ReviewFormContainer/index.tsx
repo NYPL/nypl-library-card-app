@@ -401,8 +401,11 @@ function ReviewFormContainer() {
               editSectionInfo(formData, setEditPersonalInfoFlag)
             )}
           >
-            <AccountFormFields showPinOnLoad />
-            <AcceptTermsFormFields />
+            <fieldset>
+              <legend>Account form fields</legend>
+              <AccountFormFields showPinOnLoad />
+              <AcceptTermsFormFields />
+            </fieldset>
             {submitSectionButton}
           </form>
         )}

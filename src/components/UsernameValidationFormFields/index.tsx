@@ -82,19 +82,18 @@ const UsernameValidationForm = ({
 
   /**
    * renderButton
-   * Render the button to validate a username only if there's an input and
-   * if there's no success or error message.
+   * Render the button to validate a username and enable it only if
+   * the input is valid and if the input has been updated after it
+   * was checked for availability.
    */
   const renderButton = () => {
     const username = getValues("username");
-    const canValidate = inputValidation(username);
+    const canValidate =
+      inputValidation(username) && !usernameIsAvailable.message;
     return (
-      canValidate &&
-      !usernameIsAvailable.message && (
-        <Button onClick={validateUsername} type="button">
-          Check if username is available
-        </Button>
-      )
+      <Button onClick={validateUsername} type="button" disabled={!canValidate}>
+        Check if username is available
+      </Button>
     );
   };
 
@@ -114,19 +113,21 @@ const UsernameValidationForm = ({
         defaultValue={formValues.username}
       />
       {renderButton()}
+      <div
+        className={`${styles.usernameHelperText} ${availableClassname}`}
+        aria-live="assertive"
+      >
+        {usernameIsAvailable.message}
+      </div>
+      {/* Only add this value to the form submission if there is a message. */}
       {usernameIsAvailable.message && (
-        <>
-          <div className={`${styles.usernameHelperText} ${availableClassname}`}>
-            {usernameIsAvailable.message}
-          </div>
-          <FormField
-            id="hidden-username-validated"
-            type="hidden"
-            name="usernameHasBeenValidated"
-            defaultValue={`${usernameIsAvailable.available}`}
-            ref={register()}
-          />
-        </>
+        <FormField
+          id="hidden-username-validated"
+          type="hidden"
+          name="usernameHasBeenValidated"
+          defaultValue={`${usernameIsAvailable.available}`}
+          ref={register()}
+        />
       )}
     </>
   );

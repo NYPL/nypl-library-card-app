@@ -1,3 +1,13 @@
+// Imported from DS
+@mixin screenreader-only() {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal;
+}
+
 // Override for DS layout class
 body {
   width: 100%;
@@ -25,5 +35,9 @@ fieldset {
       display: inline-block;
       margin: 0 20px;
     }
+  }
+
+  legend {
+    @include screenreader-only();
   }
 }

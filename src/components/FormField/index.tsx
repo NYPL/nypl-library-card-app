@@ -59,7 +59,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
     if (errorText?.message) {
       helperText = errorText.message;
     }
-    const ariaLabelledby = helperText ? `${id}-helperText` : "";
+    const ariaDescribedby = helperText ? `${id}-helperText` : null;
     if (type === "hidden") {
       return (
         <Input
@@ -77,7 +77,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
     return (
       <div className={`${styles.formField} ${className}`}>
         <Label
-          htmlFor={`input-${id}`}
+          htmlFor={id}
           id={`${id}-label`}
           optReqFlag={isRequired ? "Required" : ""}
         >
@@ -87,9 +87,9 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
           type={typeToInputTypeMap[type]}
           id={id}
           aria-required={isRequired}
-          aria-labelledby={`${id}-label ${ariaLabelledby}`}
           attributes={{
             ["aria-invalid"]: errorText ? "true" : "false",
+            ["aria-describedby"]: ariaDescribedby,
             minLength: minLength || null,
             maxLength: maxLength || null,
             tabIndex: 0,
@@ -99,7 +99,11 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
           }}
           ref={ref}
         />
-        <HelperErrorText id={`${id}-helperText`} isError={!!errorText}>
+        <HelperErrorText
+          id={`${id}-helperText`}
+          isError={!!errorText}
+          ariaLive="assertive"
+        >
           {helperText}
         </HelperErrorText>
       </div>

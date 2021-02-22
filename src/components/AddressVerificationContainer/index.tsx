@@ -154,10 +154,7 @@ function AddressVerificationContainer() {
             addressesLength === 1 ? true : selected === selectedValue;
           const checkedClass = checked ? "checked" : "";
           return (
-            <li
-              key={`${addressType}-${idx}`}
-              className={`radio-field ${checkedClass}`}
-            >
+            <li key={`${addressType}-${idx}`} className={checkedClass}>
               <Label
                 className={styles.label}
                 id={`${addressType}-${idx}-label`}
@@ -200,27 +197,30 @@ function AddressVerificationContainer() {
       method="post"
       action="/library-card/api/submit"
     >
-      <Heading level={3}>Home Address</Heading>
+      <fieldset>
+        <legend>Select the correct address</legend>
 
-      {renderMultipleAddresses(
-        homeAddress,
-        "home",
-        homeAddressSelect,
-        onChangeHome
-      )}
+        <Heading level={3}>Home Address</Heading>
+        {renderMultipleAddresses(
+          homeAddress,
+          "home",
+          homeAddressSelect,
+          onChangeHome
+        )}
 
-      {workAddress?.length > 0 && (
-        <div className={styles.workAddressContainer}>
-          <Heading level={3}>Alternate Address</Heading>
+        {workAddress?.length > 0 && (
+          <div className={styles.workAddressContainer}>
+            <Heading level={3}>Alternate Address</Heading>
 
-          {renderMultipleAddresses(
-            workAddress,
-            "work",
-            workAddressSelect,
-            onChangeWork
-          )}
-        </div>
-      )}
+            {renderMultipleAddresses(
+              workAddress,
+              "work",
+              workAddressSelect,
+              onChangeWork
+            )}
+          </div>
+        )}
+      </fieldset>
 
       {/* Not register to react-hook-form because we only want to
           use this value for the no-js scenario. */}
