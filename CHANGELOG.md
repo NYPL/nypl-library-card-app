@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.7.1
+
+#### Updated
+
+- Updated some components with accessibility enhancements.
+
 ### v0.7.0
 
 #### Updated
