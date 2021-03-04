@@ -40,11 +40,12 @@ if (!isServerRendered()) {
   gaUtils.setupAnalytics(isProduction);
 }
 
-// Only run react-axe in the client-side and when the flag is set.
-if (appConfig.useAxe === "true" && !isServerRendered()) {
+// Only run @axe-core/react in the client-side in production
+// and when the flag is set.
+if (appConfig.useAxe === "true" && !isProduction && !isServerRendered()) {
   const ReactDOM = require("react-dom");
-  const axe = require("react-axe");
-  axe(React, ReactDOM, 1000);
+  const axe = require("@axe-core/react");
+  axe(React, ReactDOM, 1000, {});
 }
 
 function MyApp<MyAppProps>({ Component, pageProps, query }) {

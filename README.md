@@ -114,7 +114,7 @@ Configuration can be adjusted via `.travis.yml`, located at the root directory o
 
 ## Accessibility
 
-There are two ways to use the `react-axe` package for accessibility review while developing. This is the package of choice used in a few NYPL React applications. Only turn it on when needed and not while developing all the time because it uses a lot of browser resouces.
+There are two ways to use the `@axe-core/react` package for accessibility review while developing. This is the package of choice used in a few NYPL React applications. Only turn it on when needed and not while developing all the time because it uses a lot of browser resouces.
 
 1. Run `NEXT_PUBLIC_USE_AXE=true npm run dev`
 2. or update the `NEXT_PUBLIC_USE_AXE` environment variable in your `.env` file.
@@ -154,13 +154,13 @@ This will be used to build and deploy images to Docker Hub in the future.
 
 #### docker run
 
-If you are using the `docker` CLI tool, use the following command to run an _existing_ image in a container called `mycontainer`:
+If you are using the `docker` CLI tool, use the following command to run an _existing_ image in a container called `mycontainer` locally:
 
 ```
-$ docker run -d --name mycontainer -p 3000:3000 lib-app
+$ docker run -d --name mycontainer -p 3000:3000 --env-file .env.local lib-app
 ```
 
-This will run an existing Docker image, such as the image built from the previous step, in the background. If you want to see the latest logs from the container, run `docker logs mycontainer`. If you want to see the full set of logs as the Docker image is being built and run, remove the detached `-d` flag.
+This will run an existing Docker image, such as the image built from the previous step, in the background. If you want to see the latest logs from the container, run `docker logs mycontainer`. If you want to see the full set of logs as the Docker image is being built and run, remove the detached `-d` flag. The `--env-file` flag configures the docker container to use the local `.env.local` file where your secret credentials to run the app should be located. This file is not used when building the image, only when running the container.
 
 To stop a Docker container, run:
 
@@ -206,6 +206,8 @@ $ docker-compose start
 
 The Library Card App makes use of cookies to create, store, send, and verify CSRF tokens to prevent malicious attacks through the app's forms. In production builds, the CSRF token is stored in a secure cookie. Secure cookies require the use of https so unless your localhost is set up to run https, the production Docker builds will not work locally. This is an issue since running `npm run build` and `npm start` also create secure cookies and require localhost to support https. Although this is a problem for testing the production build of the application locally, this is not an issue when deploying to NYPL's production server.
 
+1. HTTPs, Non-Docker, Local production build
+
 To test https and secure cookies locally in a non-Docker environment, you need to create local SSL certificates and run a custom server that runs Nextjs. The following is for Mac users based on [this blog post](https://medium.com/responsetap-engineering/nextjs-https-for-a-local-dev-server-98bb441eabd7).
 
 Run the following to create local certificate files using OpenSSL in a `./certificates` directory:
@@ -221,3 +223,15 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 Then double-click on the `localhost.crt` file to add it to your keychain. Change the settings to "Always Trust".
 
 Now run `npm run local-prod` to build and run the Next.js app with https.
+
+2. HTTP, Docker, Local production build
+
+To test the docker image locally, in `/src/utils/api.ts` temporary comment out
+
+```
+if (!csrfTokenValid) {
+  return invalidCsrfResponse(res);
+}
+```
+
+in three separate locations. Then, build the image and run a container for that image. This will allow you to run the docker image locally in production mode with HTTPS turned off so that. This should not be deployed to production so remember to uncomment the code for a qa or production deployment.

@@ -58,7 +58,8 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
   };
 
   return (
-    <>
+    <fieldset>
+      <legend>{type} address form fields</legend>
       <FormField
         id={`line1-${type}`}
         label="Street Address"
@@ -133,7 +134,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
         {/* Easier to align with an empty block. */}
         <div style={{ flex: "1" }}></div>
       </div>
-    </>
+    </fieldset>
   );
 };
 

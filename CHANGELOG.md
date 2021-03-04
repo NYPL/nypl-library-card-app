@@ -1,5 +1,20 @@
 ## CHANGE LOG
 
+### v0.7.1
+
+#### Updated
+
+- Updated some components with accessibility enhancements.
+
+### v0.7.0
+
+#### Updated
+
+- Updated Nextjs to version 10.
+- Updated the Dockerfile in preparation to use with AWS ECS.
+- Updated location for correct installation of npm packages.
+- Updated the `react-axe` package to `@axe-core/react` since the former is deprecated.
+
 ### v0.6.7
 
 #### Updated

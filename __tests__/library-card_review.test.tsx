@@ -1,11 +1,9 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { axe } from "jest-axe";
 import ReviewPage from "../pages/review";
 import { TestProviderWrapper } from "../testHelper/utils";
 import { getPageTitles } from "../src/utils/utils";
-
-expect.extend(toHaveNoViolations);
 
 describe("ReviewPage", () => {
   let container;

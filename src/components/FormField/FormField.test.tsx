@@ -1,9 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { axe } from "jest-axe";
 import FormField from ".";
-
-expect.extend(toHaveNoViolations);
 
 describe("FormField", () => {
   test("passes axe accessibility checks", async () => {

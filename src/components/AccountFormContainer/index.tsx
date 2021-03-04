@@ -41,9 +41,11 @@ const AccountFormContainer = () => {
       method="post"
       action="/library-card/api/submit"
     >
-      <AccountFormFields />
-
-      <AcceptTermsFormFields />
+      <fieldset>
+        <legend>Account form fields</legend>
+        <AccountFormFields />
+        <AcceptTermsFormFields />
+      </fieldset>
 
       {/* Not register to react-hook-form because we only want to
           use this value for the no-js scenario. */}

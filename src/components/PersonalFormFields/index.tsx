@@ -8,7 +8,7 @@ import AgeFormFields from "../AgeFormFields";
 import useFormDataContext from "../../context/FormDataContext";
 import { errorMessages } from "../../utils/formDataUtils";
 
-function PersonalForm({ agencyType = "" }) {
+function PersonalFormFields({ agencyType = "" }) {
   const { register, errors } = useFormContext();
   const { state } = useFormDataContext();
   const { formValues } = state;
@@ -34,7 +34,8 @@ function PersonalForm({ agencyType = "" }) {
     </>
   );
   return (
-    <>
+    <fieldset>
+      <legend>Personal form fields</legend>
       <div className={`input-group`}>
         <div style={{ flex: "1" }}>
           <FormField
@@ -93,8 +94,8 @@ function PersonalForm({ agencyType = "" }) {
         ref={register()}
         attributes={{ defaultChecked: formValues.ecommunicationsPref }}
       />
-    </>
+    </fieldset>
   );
 }
 
-export default PersonalForm;
+export default PersonalFormFields;

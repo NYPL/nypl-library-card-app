@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { axe } from "jest-axe";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 // `import` axios does not work so it must be required.
 const axios = require("axios");
 
-expect.extend(toHaveNoViolations);
 jest.mock("axios");
 
 import UsernameValidationFormFields from ".";
@@ -39,9 +38,7 @@ describe("UsernameValidationFormFields", () => {
     const helperText = screen.getByText(
       "5-25 alphanumeric characters. No special characters."
     );
-    // `query*` return null rather than throw an error, so use this instead
-    // of `getBy*` since we _don't_ expect the button to be there.
-    const validateButton = screen.queryByRole("button");
+    const validateButton = screen.getByText("Check if username is available");
     // Since this is hidden and the user does not see it, let's use the
     // querySelector function.
     const hiddenInput = container.querySelector(
@@ -52,7 +49,7 @@ describe("UsernameValidationFormFields", () => {
     expect(labelRequired).toBeInTheDocument();
     expect(input).toBeInTheDocument();
     expect(helperText).toBeInTheDocument();
-    expect(validateButton).not.toBeInTheDocument();
+    expect(validateButton).toBeInTheDocument();
     expect(hiddenInput).not.toBeInTheDocument();
   });
 
@@ -73,11 +70,11 @@ describe("UsernameValidationFormFields", () => {
         <UsernameValidationFormFields />
       </TestProviderWrapper>
     );
-    let validateButton = screen.queryByRole("button");
+    const validateButton = screen.getByText("Check if username is available");
 
     // On the first render, the `getValues` function will return "user" which
-    // is too short and the button won't render.
-    expect(validateButton).not.toBeInTheDocument();
+    // is too short and the button is disabled.
+    expect(validateButton).toBeDisabled();
 
     // Now let's mock another invalid value.
     mockGetValues = jest.fn().mockReturnValue(invalid);
@@ -89,9 +86,8 @@ describe("UsernameValidationFormFields", () => {
       </TestProviderWrapper>
     );
 
-    validateButton = screen.queryByRole("button");
-    // And the button should still not render.
-    expect(validateButton).not.toBeInTheDocument();
+    // And the button should still be disabled.
+    expect(validateButton).toBeDisabled();
 
     // Mock a valid value.
     mockGetValues = jest.fn().mockReturnValue(justRight);
@@ -103,9 +99,8 @@ describe("UsernameValidationFormFields", () => {
       </TestProviderWrapper>
     );
 
-    validateButton = screen.queryByRole("button");
-    // Now the button will render.
-    expect(validateButton).toBeInTheDocument();
+    // Now the button will be enabled.
+    expect(validateButton).toBeEnabled();
   });
 
   test("renders an error message from the API call and hidden input with value of false", async () => {
@@ -125,14 +120,12 @@ describe("UsernameValidationFormFields", () => {
       </TestProviderWrapper>
     );
 
-    const button = await screen.findByText("Check if username is available");
-    // `queryByText` returns null so it's useful to check that the error
-    // message is _not_ in the document.
+    const validateButton = screen.getByText("Check if username is available");
     let errorMessageDisplay = screen.queryByText(errorMessage);
-    expect(button).toBeInTheDocument();
+    expect(validateButton).toBeInTheDocument();
     expect(errorMessageDisplay).not.toBeInTheDocument();
 
-    await act(async () => fireEvent.click(button));
+    await act(async () => fireEvent.click(validateButton));
 
     expect(axios.post).toBeCalledWith("/library-card/api/username", {
       username: "notAvailableUsername",
@@ -143,7 +136,7 @@ describe("UsernameValidationFormFields", () => {
     errorMessageDisplay = screen.getByText(errorMessage);
     expect(errorMessageDisplay).toBeInTheDocument();
     // Since a message is displaying, the button does not render.
-    expect(button).not.toBeInTheDocument();
+    expect(validateButton).toBeDisabled();
 
     // Any response also renders a hidden input with the available value from
     // the API call. In this case it is false since it was an error response.
@@ -168,12 +161,12 @@ describe("UsernameValidationFormFields", () => {
       </TestProviderWrapper>
     );
 
-    const button = await screen.findByText("Check if username is available");
+    const validateButton = screen.getByText("Check if username is available");
     let messageDisplay = screen.queryByText(message);
-    expect(button).toBeInTheDocument();
+    expect(validateButton).toBeInTheDocument();
     expect(messageDisplay).not.toBeInTheDocument();
 
-    await act(async () => fireEvent.click(button));
+    await act(async () => fireEvent.click(validateButton));
 
     expect(axios.post).toBeCalledWith("/library-card/api/username", {
       username: "availableUsername",
@@ -183,9 +176,9 @@ describe("UsernameValidationFormFields", () => {
     messageDisplay = screen.getByText(message);
     expect(messageDisplay).toBeInTheDocument();
 
-    // The button to validate the username goes away since we got a
+    // The button to validate the username is now disabled since we got a
     // response from the API.
-    expect(button).not.toBeInTheDocument();
+    expect(validateButton).toBeDisabled();
 
     // The hidden input value is now "true".
     const hiddenInput = container.querySelector(

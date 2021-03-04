@@ -5,6 +5,18 @@ import cookie from "./CookieUtils";
 import appConfig from "../../appConfig";
 
 /**
+ * homePageRedirect
+ * Function that should be used in `getStaticProps` or `getServerSideProps`.
+ * This returns a redirect object that those functions understand.
+ */
+export const homePageRedirect = () => ({
+  redirect: {
+    destination: "/new",
+    permanent: false,
+  },
+});
+
+/**
  * getPageTitles
  * Returns the page titles and updates the titles if the user is not in "nyc".
  */
