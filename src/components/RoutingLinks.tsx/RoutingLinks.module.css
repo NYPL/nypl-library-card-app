@@ -13,7 +13,7 @@
   margin-bottom: 30px;
   padding: 8px 40px;
   background-color: var(--ui-white);
-  color: var(--ui-black);
+  color: var(--ui-black) !important;
   border: 1px solid var(--ui-gray-medium);
   margin-right: 10px;
   text-decoration: none;
@@ -22,6 +22,10 @@
 
 .previous:visited {
   color: var(--ui-black);
+}
+
+.button {
+  color: var(--ui-white) !important;
 }
 
 .next {

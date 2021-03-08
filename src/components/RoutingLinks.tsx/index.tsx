@@ -44,7 +44,7 @@ function RoutingLinks({ previous, next }: RoutingLinksType): JSX.Element {
       {!next?.submit ? (
         <Link href={next.url}>
           <a
-            className="button"
+            className={`button ${styles.button}`}
             // Just track the "Get Started" or "Submit" clicks. Routing events
             // are tracked at the component level in each "onSubmit".
             onClick={() => lcaEvents("Navigation", next.text)}
