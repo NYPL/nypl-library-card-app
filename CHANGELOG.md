@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.7.2
+
+#### Fixed
+
+- Fixed CSS issue where the colors on the "Get Started" and "Previous" buttons were not right. The larger issue might be CSS file ordering.
+
 ### v0.7.1
 
 #### Updated
