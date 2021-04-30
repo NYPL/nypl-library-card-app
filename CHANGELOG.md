@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.7.3
+
+#### Updated
+
+- Updated npm packages to fix security issues.
+
 ### v0.7.2
 
 #### Fixed
