@@ -85,7 +85,7 @@
     "save-dev": "0.0.1-security",
     "sinon": "9.0.2",
     "typescript": "3.9.5",
-    "underscore": "1.10.2",
+    "underscore": "1.12.1",
     "validator": "13.0.0",
     "webpack": "4.46.0",
     "winston": "3.3.3"
