@@ -1,0 +1,46 @@
+{
+  "uid" : "888793266b6bfcb9",
+  "name" : "it renders the generic message if there is no type in the problem detail",
+  "fullName" : "ApiErrors.it renders the generic message if there is no type in the problem detail",
+  "historyId" : "5dcff3838150ce00141807e4f8fb1edd",
+  "time" : {
+    "start" : 1622213791114,
+    "stop" : 1622213791119,
+    "duration" : 5
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testClass",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders the generic message if there is no type in the problem detail"
+  }, {
+    "name" : "package",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "888793266b6bfcb9.json",
+  "parameterValues" : [ ]
+}

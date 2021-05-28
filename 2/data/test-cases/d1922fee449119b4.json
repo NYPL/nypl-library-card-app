@@ -1,0 +1,46 @@
+{
+  "uid" : "d1922fee449119b4",
+  "name" : "it should return errors for all bad fields",
+  "fullName" : "validateAccountFormData.it should return errors for all bad fields",
+  "historyId" : "31aa9df45b89b2dd091cd77a3297f06d",
+  "time" : {
+    "start" : 1622213783772,
+    "stop" : 1622213783772,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "validateAccountFormData"
+  }, {
+    "name" : "testClass",
+    "value" : "validateAccountFormData"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return errors for all bad fields"
+  }, {
+    "name" : "package",
+    "value" : "validateAccountFormData"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d1922fee449119b4.json",
+  "parameterValues" : [ ]
+}

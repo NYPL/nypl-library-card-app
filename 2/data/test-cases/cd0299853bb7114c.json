@@ -1,0 +1,46 @@
+{
+  "uid" : "cd0299853bb7114c",
+  "name" : "it returns false if the input is a date but not in the year bounds",
+  "fullName" : "isDate.it returns false if the input is a date but not in the year bounds",
+  "historyId" : "a841287cd52d7473daa17e514e6f24cc",
+  "time" : {
+    "start" : 1622213783749,
+    "stop" : 1622213783750,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "isDate"
+  }, {
+    "name" : "testClass",
+    "value" : "isDate"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns false if the input is a date but not in the year bounds"
+  }, {
+    "name" : "package",
+    "value" : "isDate"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "cd0299853bb7114c.json",
+  "parameterValues" : [ ]
+}

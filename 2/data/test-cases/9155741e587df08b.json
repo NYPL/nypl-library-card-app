@@ -1,0 +1,46 @@
+{
+  "uid" : "9155741e587df08b",
+  "name" : "passes axe accessibility test",
+  "fullName" : "Confirmation.passes axe accessibility test",
+  "historyId" : "5ee6cfaa50fc87c7b151b8c6ab97fc1",
+  "time" : {
+    "start" : 1622213794207,
+    "stop" : 1622213794487,
+    "duration" : 280
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "Confirmation"
+  }, {
+    "name" : "testClass",
+    "value" : "Confirmation"
+  }, {
+    "name" : "testMethod",
+    "value" : "passes axe accessibility test"
+  }, {
+    "name" : "package",
+    "value" : "Confirmation"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "9155741e587df08b.json",
+  "parameterValues" : [ ]
+}

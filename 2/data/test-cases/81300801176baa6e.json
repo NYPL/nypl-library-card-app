@@ -1,0 +1,46 @@
+{
+  "uid" : "81300801176baa6e",
+  "name" : "it returns error for the work address if it was added",
+  "fullName" : "validateAddressFormData.it returns error for the work address if it was added",
+  "historyId" : "d2380cb90335b4584375efc1bd2e40e",
+  "time" : {
+    "start" : 1622213783768,
+    "stop" : 1622213783768,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "validateAddressFormData"
+  }, {
+    "name" : "testClass",
+    "value" : "validateAddressFormData"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns error for the work address if it was added"
+  }, {
+    "name" : "package",
+    "value" : "validateAddressFormData"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "81300801176baa6e.json",
+  "parameterValues" : [ ]
+}

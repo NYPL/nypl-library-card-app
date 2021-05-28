@@ -1,0 +1,46 @@
+{
+  "uid" : "8ba310d8810259da",
+  "name" : "renders the NYPL card info",
+  "fullName" : "Confirmation.renders the NYPL card info",
+  "historyId" : "62326f7a17841152ccce003104f7790c",
+  "time" : {
+    "start" : 1622213794487,
+    "stop" : 1622213794525,
+    "duration" : 38
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "Confirmation"
+  }, {
+    "name" : "testClass",
+    "value" : "Confirmation"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders the NYPL card info"
+  }, {
+    "name" : "package",
+    "value" : "Confirmation"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "8ba310d8810259da.json",
+  "parameterValues" : [ ]
+}

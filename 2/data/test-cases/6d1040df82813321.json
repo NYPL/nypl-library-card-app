@@ -1,0 +1,46 @@
+{
+  "uid" : "6d1040df82813321",
+  "name" : "it returns true if the input is a valid date",
+  "fullName" : "isDate.it returns true if the input is a valid date",
+  "historyId" : "56abc4c5eb596fb7bacc9aff0901bbb1",
+  "time" : {
+    "start" : 1622213783751,
+    "stop" : 1622213783751,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "isDate"
+  }, {
+    "name" : "testClass",
+    "value" : "isDate"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns true if the input is a valid date"
+  }, {
+    "name" : "package",
+    "value" : "isDate"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "6d1040df82813321.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "3048bf01e3a44b03",
+  "name" : "returns a string with an anchor element around username",
+  "fullName" : "createUsernameAnchor.returns a string with an anchor element around username",
+  "historyId" : "a34fc940592b9570c763c74f6942382c",
+  "time" : {
+    "start" : 1622213788907,
+    "stop" : 1622213788907,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "createUsernameAnchor"
+  }, {
+    "name" : "testClass",
+    "value" : "createUsernameAnchor"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns a string with an anchor element around username"
+  }, {
+    "name" : "package",
+    "value" : "createUsernameAnchor"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "3048bf01e3a44b03.json",
+  "parameterValues" : [ ]
+}

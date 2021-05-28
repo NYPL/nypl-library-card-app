@@ -1,0 +1,46 @@
+{
+  "uid" : "87f658ca13c8650e",
+  "name" : "it should add erros to the existing error object",
+  "fullName" : "validatePersonalFormData.it should add erros to the existing error object",
+  "historyId" : "23e1546f832f649c7304a324de7dd3f0",
+  "time" : {
+    "start" : 1622213783770,
+    "stop" : 1622213783771,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "validatePersonalFormData"
+  }, {
+    "name" : "testClass",
+    "value" : "validatePersonalFormData"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should add erros to the existing error object"
+  }, {
+    "name" : "package",
+    "value" : "validatePersonalFormData"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "87f658ca13c8650e.json",
+  "parameterValues" : [ ]
+}

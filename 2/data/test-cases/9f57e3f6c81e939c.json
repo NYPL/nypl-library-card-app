@@ -1,0 +1,46 @@
+{
+  "uid" : "9f57e3f6c81e939c",
+  "name" : "exposes a context `value` prop that has a function and a value object",
+  "fullName" : "FormDataContext.exposes a context `value` prop that has a function and a value object",
+  "historyId" : "f777cc39e2c9fe2f92e53a2d88976106",
+  "time" : {
+    "start" : 1622213798902,
+    "stop" : 1622213798915,
+    "duration" : 13
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "FormDataContext"
+  }, {
+    "name" : "testClass",
+    "value" : "FormDataContext"
+  }, {
+    "name" : "testMethod",
+    "value" : "exposes a context `value` prop that has a function and a value object"
+  }, {
+    "name" : "package",
+    "value" : "FormDataContext"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "9f57e3f6c81e939c.json",
+  "parameterValues" : [ ]
+}

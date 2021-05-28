@@ -1,0 +1,46 @@
+{
+  "uid" : "201edef176f01ade",
+  "name" : "it returns a false token validation",
+  "fullName" : "getCsrfToken.it returns a false token validation",
+  "historyId" : "7a72733ef637ef31bd572c2ee8b4b5c6",
+  "time" : {
+    "start" : 1622213791560,
+    "stop" : 1622213791562,
+    "duration" : 2
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "getCsrfToken"
+  }, {
+    "name" : "testClass",
+    "value" : "getCsrfToken"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns a false token validation"
+  }, {
+    "name" : "package",
+    "value" : "getCsrfToken"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "201edef176f01ade.json",
+  "parameterValues" : [ ]
+}

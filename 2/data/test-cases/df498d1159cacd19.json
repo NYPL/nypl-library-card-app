@@ -1,0 +1,48 @@
+{
+  "uid" : "df498d1159cacd19",
+  "name" : "renders a banner",
+  "fullName" : "ApplicationContainer.renders a banner",
+  "historyId" : "667f99a995db8094b793783d25ba26a",
+  "time" : {
+    "start" : 1622213798444,
+    "stop" : 1622213798444,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "skipped",
+  "statusMessage" : "",
+  "statusTrace" : "undefined",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ApplicationContainer"
+  }, {
+    "name" : "testClass",
+    "value" : "ApplicationContainer"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders a banner"
+  }, {
+    "name" : "package",
+    "value" : "ApplicationContainer"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "df498d1159cacd19.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "93dd35195268e83b",
+  "name" : "returns an updated work address object property",
+  "fullName" : "constructAddresses.returns an updated work address object property",
+  "historyId" : "1a8d07116def6042b4e6e9c17f42cf6d",
+  "time" : {
+    "start" : 1622213783764,
+    "stop" : 1622213783764,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "constructAddresses"
+  }, {
+    "name" : "testClass",
+    "value" : "constructAddresses"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns an updated work address object property"
+  }, {
+    "name" : "package",
+    "value" : "constructAddresses"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "93dd35195268e83b.json",
+  "parameterValues" : [ ]
+}

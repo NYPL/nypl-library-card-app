@@ -1,0 +1,46 @@
+{
+  "uid" : "ae411cbb26b594a3",
+  "name" : "returns updated home and work addresses objects",
+  "fullName" : "constructAddresses.returns updated home and work addresses objects",
+  "historyId" : "2fa23d4beb6a480668d250e9d2ce2e24",
+  "time" : {
+    "start" : 1622213783764,
+    "stop" : 1622213783764,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "constructAddresses"
+  }, {
+    "name" : "testClass",
+    "value" : "constructAddresses"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns updated home and work addresses objects"
+  }, {
+    "name" : "package",
+    "value" : "constructAddresses"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "ae411cbb26b594a3.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "469ecbcb4805e8ab",
+  "name" : "renders a home address",
+  "fullName" : "AddressVerificationContainer.renders a home address",
+  "historyId" : "ea5570151344766c2de709c8811637d2",
+  "time" : {
+    "start" : 1622213786559,
+    "stop" : 1622213786582,
+    "duration" : 23
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AddressVerificationContainer"
+  }, {
+    "name" : "testClass",
+    "value" : "AddressVerificationContainer"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders a home address"
+  }, {
+    "name" : "package",
+    "value" : "AddressVerificationContainer"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "469ecbcb4805e8ab.json",
+  "parameterValues" : [ ]
+}

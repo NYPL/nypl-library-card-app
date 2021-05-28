@@ -1,0 +1,46 @@
+{
+  "uid" : "866a5d3a407a482b",
+  "name" : "it should make an API call and return data from an unsuccessful call",
+  "fullName" : "validateUsername.it should make an API call and return data from an unsuccessful call",
+  "historyId" : "ceee8aecad49458bd41362e6fa9722cf",
+  "time" : {
+    "start" : 1622213783069,
+    "stop" : 1622213783070,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "validateUsername"
+  }, {
+    "name" : "testClass",
+    "value" : "validateUsername"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should make an API call and return data from an unsuccessful call"
+  }, {
+    "name" : "package",
+    "value" : "validateUsername"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "866a5d3a407a482b.json",
+  "parameterValues" : [ ]
+}

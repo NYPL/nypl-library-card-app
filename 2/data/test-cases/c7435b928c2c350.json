@@ -1,0 +1,46 @@
+{
+  "uid" : "c7435b928c2c350",
+  "name" : "it returns '198' as the default agency value",
+  "fullName" : "getPatronAgencyType.it returns '198' as the default agency value",
+  "historyId" : "239d20dd43e78efd915d8b3a110cdb84",
+  "time" : {
+    "start" : 1622213783758,
+    "stop" : 1622213783758,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "getPatronAgencyType"
+  }, {
+    "name" : "testClass",
+    "value" : "getPatronAgencyType"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns '198' as the default agency value"
+  }, {
+    "name" : "package",
+    "value" : "getPatronAgencyType"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "c7435b928c2c350.json",
+  "parameterValues" : [ ]
+}

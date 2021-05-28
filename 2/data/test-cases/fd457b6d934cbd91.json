@@ -1,0 +1,46 @@
+{
+  "uid" : "fd457b6d934cbd91",
+  "name" : "returns true if the expiration time will expire within 10 minutes",
+  "fullName" : "isTokenExpiring.returns true if the expiration time will expire within 10 minutes",
+  "historyId" : "8349ad9c1deaeb1113799dc238db4d4b",
+  "time" : {
+    "start" : 1622213783050,
+    "stop" : 1622213783050,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "isTokenExpiring"
+  }, {
+    "name" : "testClass",
+    "value" : "isTokenExpiring"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns true if the expiration time will expire within 10 minutes"
+  }, {
+    "name" : "package",
+    "value" : "isTokenExpiring"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "fd457b6d934cbd91.json",
+  "parameterValues" : [ ]
+}

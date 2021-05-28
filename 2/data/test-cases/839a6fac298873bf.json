@@ -1,0 +1,46 @@
+{
+  "uid" : "839a6fac298873bf",
+  "name" : "it renders an unavailable username detail",
+  "fullName" : "ApiErrors.it renders an unavailable username detail",
+  "historyId" : "a517452d0d39d1f71102b6c15d516809",
+  "time" : {
+    "start" : 1622213791134,
+    "stop" : 1622213791140,
+    "duration" : 6
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testClass",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders an unavailable username detail"
+  }, {
+    "name" : "package",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "839a6fac298873bf.json",
+  "parameterValues" : [ ]
+}

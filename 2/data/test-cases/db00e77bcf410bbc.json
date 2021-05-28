@@ -1,0 +1,46 @@
+{
+  "uid" : "db00e77bcf410bbc",
+  "name" : "renders two links when both 'previous' and 'next' props are passed",
+  "fullName" : "RoutingLinks.renders two links when both 'previous' and 'next' props are passed",
+  "historyId" : "ea7f9b8b80d4c703180bf0001c0601dd",
+  "time" : {
+    "start" : 1622213795670,
+    "stop" : 1622213795684,
+    "duration" : 14
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "testClass",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders two links when both 'previous' and 'next' props are passed"
+  }, {
+    "name" : "package",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "db00e77bcf410bbc.json",
+  "parameterValues" : [ ]
+}

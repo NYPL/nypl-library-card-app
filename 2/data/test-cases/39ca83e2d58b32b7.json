@@ -1,0 +1,46 @@
+{
+  "uid" : "39ca83e2d58b32b7",
+  "name" : "returns data on a successful response",
+  "fullName" : "IPLocationAPI callIpStackAPI.returns data on a successful response",
+  "historyId" : "fea7de94c38403e690b0ff6114446a16",
+  "time" : {
+    "start" : 1622213785663,
+    "stop" : 1622213785671,
+    "duration" : 8
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "IPLocationAPI callIpStackAPI"
+  }, {
+    "name" : "testClass",
+    "value" : "IPLocationAPI callIpStackAPI"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns data on a successful response"
+  }, {
+    "name" : "package",
+    "value" : "IPLocationAPI callIpStackAPI"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "39ca83e2d58b32b7.json",
+  "parameterValues" : [ ]
+}

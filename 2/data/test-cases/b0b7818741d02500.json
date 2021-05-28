@@ -1,0 +1,46 @@
+{
+  "uid" : "b0b7818741d02500",
+  "name" : "it should render a webApplicant error message",
+  "fullName" : "AgeFormFields.it should render a webApplicant error message",
+  "historyId" : "bba2c520040ef7fafd14c2951141be0e",
+  "time" : {
+    "start" : 1622213789628,
+    "stop" : 1622213789632,
+    "duration" : 4
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should render a webApplicant error message"
+  }, {
+    "name" : "package",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "b0b7818741d02500.json",
+  "parameterValues" : [ ]
+}

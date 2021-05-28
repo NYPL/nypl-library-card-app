@@ -1,0 +1,46 @@
+{
+  "uid" : "e94f06da34f05692",
+  "name" : "it should return an empty array if there are no errors",
+  "fullName" : "renderErrorElements.it should return an empty array if there are no errors",
+  "historyId" : "b6d40d4683202576052e0b410b114da9",
+  "time" : {
+    "start" : 1622213788908,
+    "stop" : 1622213788909,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "renderErrorElements"
+  }, {
+    "name" : "testClass",
+    "value" : "renderErrorElements"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return an empty array if there are no errors"
+  }, {
+    "name" : "package",
+    "value" : "renderErrorElements"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "e94f06da34f05692.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "b4ac10d8a3f25505",
+  "name" : "it should make an API call and return the data from a successful call",
+  "fullName" : "validateUsername.it should make an API call and return the data from a successful call",
+  "historyId" : "db99793a5cc4b090db1306f0c0273c20",
+  "time" : {
+    "start" : 1622213783068,
+    "stop" : 1622213783069,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "validateUsername"
+  }, {
+    "name" : "testClass",
+    "value" : "validateUsername"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should make an API call and return the data from a successful call"
+  }, {
+    "name" : "package",
+    "value" : "validateUsername"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "b4ac10d8a3f25505.json",
+  "parameterValues" : [ ]
+}

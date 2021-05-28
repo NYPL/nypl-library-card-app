@@ -1,0 +1,46 @@
+{
+  "uid" : "82565488d40dc43c",
+  "name" : "it should return the same hash href for all address related errors",
+  "fullName" : "createAnchorText.it should return the same hash href for all address related errors",
+  "historyId" : "fd93757a820222bb5b43f138b521781b",
+  "time" : {
+    "start" : 1622213788904,
+    "stop" : 1622213788904,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "createAnchorText"
+  }, {
+    "name" : "testClass",
+    "value" : "createAnchorText"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return the same hash href for all address related errors"
+  }, {
+    "name" : "package",
+    "value" : "createAnchorText"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "82565488d40dc43c.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "897385b63d662ff6",
+  "name" : "it should return whether the error is for a home or work address field",
+  "fullName" : "createAnchorText.it should return whether the error is for a home or work address field",
+  "historyId" : "c25b8e41f9f1a0a7d038797510e04fc4",
+  "time" : {
+    "start" : 1622213788903,
+    "stop" : 1622213788903,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "createAnchorText"
+  }, {
+    "name" : "testClass",
+    "value" : "createAnchorText"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return whether the error is for a home or work address field"
+  }, {
+    "name" : "package",
+    "value" : "createAnchorText"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "897385b63d662ff6.json",
+  "parameterValues" : [ ]
+}

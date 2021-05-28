@@ -1,0 +1,46 @@
+{
+  "uid" : "e12546beedbd91a1",
+  "name" : "makes an authenticated API call with the non-work address and gets a valid response",
+  "fullName" : "axiosAddressPost.makes an authenticated API call with the non-work address and gets a valid response",
+  "historyId" : "3977a2cda0d8c5a80ebe69c0c1d0cd05",
+  "time" : {
+    "start" : 1622213783061,
+    "stop" : 1622213783062,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "axiosAddressPost"
+  }, {
+    "name" : "testClass",
+    "value" : "axiosAddressPost"
+  }, {
+    "name" : "testMethod",
+    "value" : "makes an authenticated API call with the non-work address and gets a valid response"
+  }, {
+    "name" : "package",
+    "value" : "axiosAddressPost"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "e12546beedbd91a1.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "fe1636a36cae860",
+  "name" : "returns an object for users outside US",
+  "fullName" : "IPLocationAPI verifyLocation.returns an object for users outside US",
+  "historyId" : "db08b1dcaaf2dee3dba4a75d8ffeb83",
+  "time" : {
+    "start" : 1622213785657,
+    "stop" : 1622213785657,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "IPLocationAPI verifyLocation"
+  }, {
+    "name" : "testClass",
+    "value" : "IPLocationAPI verifyLocation"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns an object for users outside US"
+  }, {
+    "name" : "package",
+    "value" : "IPLocationAPI verifyLocation"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "fe1636a36cae860.json",
+  "parameterValues" : [ ]
+}

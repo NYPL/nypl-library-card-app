@@ -1,0 +1,46 @@
+{
+  "uid" : "cf330ecafbec0dc",
+  "name" : "it should return an empty object since there are no errors",
+  "fullName" : "validateAccountFormData.it should return an empty object since there are no errors",
+  "historyId" : "adba98f3ce5538185de4a93766a6e333",
+  "time" : {
+    "start" : 1622213783772,
+    "stop" : 1622213783772,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "validateAccountFormData"
+  }, {
+    "name" : "testClass",
+    "value" : "validateAccountFormData"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return an empty object since there are no errors"
+  }, {
+    "name" : "package",
+    "value" : "validateAccountFormData"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "cf330ecafbec0dc.json",
+  "parameterValues" : [ ]
+}

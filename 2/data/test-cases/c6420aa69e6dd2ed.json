@@ -1,0 +1,46 @@
+{
+  "uid" : "c6420aa69e6dd2ed",
+  "name" : "renders a title and decription",
+  "fullName" : "AddressVerificationPage.renders a title and decription",
+  "historyId" : "457733d7569984b3581410a535f12b64",
+  "time" : {
+    "start" : 1622213797439,
+    "stop" : 1622213797483,
+    "duration" : 44
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AddressVerificationPage"
+  }, {
+    "name" : "testClass",
+    "value" : "AddressVerificationPage"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders a title and decription"
+  }, {
+    "name" : "package",
+    "value" : "AddressVerificationPage"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "c6420aa69e6dd2ed.json",
+  "parameterValues" : [ ]
+}

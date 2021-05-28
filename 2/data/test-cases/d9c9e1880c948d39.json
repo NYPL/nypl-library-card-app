@@ -1,0 +1,46 @@
+{
+  "uid" : "d9c9e1880c948d39",
+  "name" : "should return an empty if the API call failed",
+  "fullName" : "IPLocationAPI getLocationFromIP.should return an empty if the API call failed",
+  "historyId" : "9e946cf26e9811de0f812b09211a680f",
+  "time" : {
+    "start" : 1622213785673,
+    "stop" : 1622213785673,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "IPLocationAPI getLocationFromIP"
+  }, {
+    "name" : "testClass",
+    "value" : "IPLocationAPI getLocationFromIP"
+  }, {
+    "name" : "testMethod",
+    "value" : "should return an empty if the API call failed"
+  }, {
+    "name" : "package",
+    "value" : "IPLocationAPI getLocationFromIP"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d9c9e1880c948d39.json",
+  "parameterValues" : [ ]
+}

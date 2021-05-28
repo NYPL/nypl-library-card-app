@@ -1,0 +1,46 @@
+{
+  "uid" : "db2aab9f43f974cf",
+  "name" : "returns a ProblemDetail with missing values in the details",
+  "fullName" : "constructPatronObject.returns a ProblemDetail with missing values in the details",
+  "historyId" : "9ac221840ceff607a83fb69222c72238",
+  "time" : {
+    "start" : 1622213783775,
+    "stop" : 1622213783776,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "constructPatronObject"
+  }, {
+    "name" : "testClass",
+    "value" : "constructPatronObject"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns a ProblemDetail with missing values in the details"
+  }, {
+    "name" : "package",
+    "value" : "constructPatronObject"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "db2aab9f43f974cf.json",
+  "parameterValues" : [ ]
+}

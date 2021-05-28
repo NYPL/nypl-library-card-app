@@ -1,0 +1,46 @@
+{
+  "uid" : "fb88b3352b2c5188",
+  "name" : "should render an error message if the input is invalid",
+  "fullName" : "UsernameValidationFormFields.should render an error message if the input is invalid",
+  "historyId" : "68e0b031a2996c4569e2f407ba004925",
+  "time" : {
+    "start" : 1622213785099,
+    "stop" : 1622213785122,
+    "duration" : 23
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "should render an error message if the input is invalid"
+  }, {
+    "name" : "package",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "fb88b3352b2c5188.json",
+  "parameterValues" : [ ]
+}

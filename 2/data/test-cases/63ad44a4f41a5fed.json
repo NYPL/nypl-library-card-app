@@ -1,0 +1,46 @@
+{
+  "uid" : "63ad44a4f41a5fed",
+  "name" : "it renders an input field with the default webApplicant policyType",
+  "fullName" : "AgeFormFields.it renders an input field with the default webApplicant policyType",
+  "historyId" : "fdf15bd32b65c62e7d5fe55b55441e5b",
+  "time" : {
+    "start" : 1622213789571,
+    "stop" : 1622213789594,
+    "duration" : 23
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders an input field with the default webApplicant policyType"
+  }, {
+    "name" : "package",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "63ad44a4f41a5fed.json",
+  "parameterValues" : [ ]
+}

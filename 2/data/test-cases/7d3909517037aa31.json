@@ -1,0 +1,46 @@
+{
+  "uid" : "7d3909517037aa31",
+  "name" : "it should internally call ga's event function to track events",
+  "fullName" : "gaUtils setDimensions.it should internally call ga's event function to track events",
+  "historyId" : "a3d2e94870e964b505b20fb725ecef09",
+  "time" : {
+    "start" : 1622213792727,
+    "stop" : 1622213792729,
+    "duration" : 2
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "gaUtils setDimensions"
+  }, {
+    "name" : "testClass",
+    "value" : "gaUtils setDimensions"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should internally call ga's event function to track events"
+  }, {
+    "name" : "package",
+    "value" : "gaUtils setDimensions"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "7d3909517037aa31.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "772bc5b9bd408598",
+  "name" : "returns 'nyc' if that's the true option",
+  "fullName" : "getLocationString.returns 'nyc' if that's the true option",
+  "historyId" : "e3f813fcf05f114dcf1dd11550e7d79d",
+  "time" : {
+    "start" : 1622213785676,
+    "stop" : 1622213785677,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "getLocationString"
+  }, {
+    "name" : "testClass",
+    "value" : "getLocationString"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns 'nyc' if that's the true option"
+  }, {
+    "name" : "package",
+    "value" : "getLocationString"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "772bc5b9bd408598.json",
+  "parameterValues" : [ ]
+}

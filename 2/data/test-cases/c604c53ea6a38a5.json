@@ -1,0 +1,46 @@
+{
+  "uid" : "c604c53ea6a38a5",
+  "name" : "it should add erros to the existing error object",
+  "fullName" : "validateAccountFormData.it should add erros to the existing error object",
+  "historyId" : "838486513225553126362b0bceebb10a",
+  "time" : {
+    "start" : 1622213783772,
+    "stop" : 1622213783773,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "validateAccountFormData"
+  }, {
+    "name" : "testClass",
+    "value" : "validateAccountFormData"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should add erros to the existing error object"
+  }, {
+    "name" : "package",
+    "value" : "validateAccountFormData"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "c604c53ea6a38a5.json",
+  "parameterValues" : [ ]
+}

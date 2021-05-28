@@ -1,0 +1,46 @@
+{
+  "uid" : "cf6cfaf203a1bba1",
+  "name" : "it should not make an API call if there is no oauth token",
+  "fullName" : "callPatronAPI.it should not make an API call if there is no oauth token",
+  "historyId" : "10bb4841846649bc8c2adbbb5db7fa34",
+  "time" : {
+    "start" : 1622213783071,
+    "stop" : 1622213783072,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "callPatronAPI"
+  }, {
+    "name" : "testClass",
+    "value" : "callPatronAPI"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should not make an API call if there is no oauth token"
+  }, {
+    "name" : "package",
+    "value" : "callPatronAPI"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "cf6cfaf203a1bba1.json",
+  "parameterValues" : [ ]
+}

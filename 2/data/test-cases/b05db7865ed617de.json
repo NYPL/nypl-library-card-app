@@ -1,0 +1,46 @@
+{
+  "uid" : "b05db7865ed617de",
+  "name" : "it renders an ILS integration detail",
+  "fullName" : "ApiErrors.it renders an ILS integration detail",
+  "historyId" : "eae21c37ca0236aab33e76f282728231",
+  "time" : {
+    "start" : 1622213791128,
+    "stop" : 1622213791131,
+    "duration" : 3
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testClass",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders an ILS integration detail"
+  }, {
+    "name" : "package",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "b05db7865ed617de.json",
+  "parameterValues" : [ ]
+}

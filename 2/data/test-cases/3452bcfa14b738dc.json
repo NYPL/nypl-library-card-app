@@ -1,0 +1,46 @@
+{
+  "uid" : "3452bcfa14b738dc",
+  "name" : "it should throw an error if the Auth endpoint returned bad data",
+  "fullName" : "initializeAppAuth.it should throw an error if the Auth endpoint returned bad data",
+  "historyId" : "520e4c0d3c514f22e389077384c9d39d",
+  "time" : {
+    "start" : 1622213783051,
+    "stop" : 1622213783056,
+    "duration" : 5
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "testClass",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should throw an error if the Auth endpoint returned bad data"
+  }, {
+    "name" : "package",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "3452bcfa14b738dc.json",
+  "parameterValues" : [ ]
+}

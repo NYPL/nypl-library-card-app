@@ -1,0 +1,46 @@
+{
+  "uid" : "394865c64cc92851",
+  "name" : "renders text with three links",
+  "fullName" : "AcceptTermsFormFields.renders text with three links",
+  "historyId" : "2b6f7f7db6afda4dc7fad409aae66e42",
+  "time" : {
+    "start" : 1622213795116,
+    "stop" : 1622213795124,
+    "duration" : 8
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AcceptTermsFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AcceptTermsFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders text with three links"
+  }, {
+    "name" : "package",
+    "value" : "AcceptTermsFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "394865c64cc92851.json",
+  "parameterValues" : [ ]
+}

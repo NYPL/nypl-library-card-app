@@ -1,0 +1,46 @@
+{
+  "uid" : "4decabd9c21f1cde",
+  "name" : "it passes axe accessibility test",
+  "fullName" : "AddressFormFields.it passes axe accessibility test",
+  "historyId" : "323c1fb1f1d8aac92f0859a3ab433ff9",
+  "time" : {
+    "start" : 1622213787404,
+    "stop" : 1622213787728,
+    "duration" : 324
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it passes axe accessibility test"
+  }, {
+    "name" : "package",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "4decabd9c21f1cde.json",
+  "parameterValues" : [ ]
+}

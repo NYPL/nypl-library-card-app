@@ -1,0 +1,46 @@
+{
+  "uid" : "5cfc82618b1fea07",
+  "name" : "should make an API call if there's an access token but it's about to expire",
+  "fullName" : "initializeAppAuth.should make an API call if there's an access token but it's about to expire",
+  "historyId" : "e2f93606f024530663dcaecb431ec76a",
+  "time" : {
+    "start" : 1622213783058,
+    "stop" : 1622213783059,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "testClass",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "testMethod",
+    "value" : "should make an API call if there's an access token but it's about to expire"
+  }, {
+    "name" : "package",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "5cfc82618b1fea07.json",
+  "parameterValues" : [ ]
+}

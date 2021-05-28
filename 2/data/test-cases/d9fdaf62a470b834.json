@@ -1,0 +1,46 @@
+{
+  "uid" : "d9fdaf62a470b834",
+  "name" : "it shows the suggestions",
+  "fullName" : "LibraryListFormFields.it shows the suggestions",
+  "historyId" : "85882a9ff14004af052c9b8fe0f05d09",
+  "time" : {
+    "start" : 1622213790565,
+    "stop" : 1622213790599,
+    "duration" : 34
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it shows the suggestions"
+  }, {
+    "name" : "package",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d9fdaf62a470b834.json",
+  "parameterValues" : [ ]
+}

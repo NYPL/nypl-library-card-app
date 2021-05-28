@@ -1,0 +1,46 @@
+{
+  "uid" : "44c77c21068e979b",
+  "name" : "it does not make an API call without an access token",
+  "fullName" : "validateAddress.it does not make an API call without an access token",
+  "historyId" : "2cd968ca1b0a2fb974739f4c871ea9c9",
+  "time" : {
+    "start" : 1622213783066,
+    "stop" : 1622213783067,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "validateAddress"
+  }, {
+    "name" : "testClass",
+    "value" : "validateAddress"
+  }, {
+    "name" : "testMethod",
+    "value" : "it does not make an API call without an access token"
+  }, {
+    "name" : "package",
+    "value" : "validateAddress"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "44c77c21068e979b.json",
+  "parameterValues" : [ ]
+}

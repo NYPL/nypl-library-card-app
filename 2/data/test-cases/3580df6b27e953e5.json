@@ -1,0 +1,46 @@
+{
+  "uid" : "3580df6b27e953e5",
+  "name" : "it should make an API call and return the data from a successful call",
+  "fullName" : "callPatronAPI.it should make an API call and return the data from a successful call",
+  "historyId" : "91cde4c6316c23c4591bce7aed5cf235",
+  "time" : {
+    "start" : 1622213783072,
+    "stop" : 1622213783088,
+    "duration" : 16
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "callPatronAPI"
+  }, {
+    "name" : "testClass",
+    "value" : "callPatronAPI"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should make an API call and return the data from a successful call"
+  }, {
+    "name" : "package",
+    "value" : "callPatronAPI"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "3580df6b27e953e5.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "27bf0c7c1f14cb04",
+  "name" : "renders a label, input, and description",
+  "fullName" : "LibraryListFormFields.renders a label, input, and description",
+  "historyId" : "8188600691ff8d92bcd7faf9d58cfa5e",
+  "time" : {
+    "start" : 1622213790494,
+    "stop" : 1622213790522,
+    "duration" : 28
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders a label, input, and description"
+  }, {
+    "name" : "package",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "27bf0c7c1f14cb04.json",
+  "parameterValues" : [ ]
+}

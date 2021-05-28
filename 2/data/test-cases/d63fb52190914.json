@@ -1,0 +1,46 @@
+{
+  "uid" : "d63fb52190914",
+  "name" : "it returns authorization headers object",
+  "fullName" : "constructApiHeaders.it returns authorization headers object",
+  "historyId" : "53b50c880d1026c5b62a3b77af99af2",
+  "time" : {
+    "start" : 1622213783037,
+    "stop" : 1622213783041,
+    "duration" : 4
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "constructApiHeaders"
+  }, {
+    "name" : "testClass",
+    "value" : "constructApiHeaders"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns authorization headers object"
+  }, {
+    "name" : "package",
+    "value" : "constructApiHeaders"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d63fb52190914.json",
+  "parameterValues" : [ ]
+}

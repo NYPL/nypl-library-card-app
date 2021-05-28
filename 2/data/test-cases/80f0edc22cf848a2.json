@@ -1,0 +1,46 @@
+{
+  "uid" : "80f0edc22cf848a2",
+  "name" : "it should return a list of li elements for every error",
+  "fullName" : "renderErrorElements.it should return a list of li elements for every error",
+  "historyId" : "f095c62e77488469a205a0154e5719d6",
+  "time" : {
+    "start" : 1622213788909,
+    "stop" : 1622213788910,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "renderErrorElements"
+  }, {
+    "name" : "testClass",
+    "value" : "renderErrorElements"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return a list of li elements for every error"
+  }, {
+    "name" : "package",
+    "value" : "renderErrorElements"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "80f0edc22cf848a2.json",
+  "parameterValues" : [ ]
+}

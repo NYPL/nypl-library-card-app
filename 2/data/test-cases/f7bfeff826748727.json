@@ -1,0 +1,46 @@
+{
+  "uid" : "f7bfeff826748727",
+  "name" : "it renders a validation button if the input is valid",
+  "fullName" : "UsernameValidationFormFields.it renders a validation button if the input is valid",
+  "historyId" : "408373fb40837f333761b826b1427395",
+  "time" : {
+    "start" : 1622213785044,
+    "stop" : 1622213785058,
+    "duration" : 14
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders a validation button if the input is valid"
+  }, {
+    "name" : "package",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "f7bfeff826748727.json",
+  "parameterValues" : [ ]
+}

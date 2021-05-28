@@ -1,0 +1,46 @@
+{
+  "uid" : "5be09b5a1e268ac4",
+  "name" : "renders a checkbox",
+  "fullName" : "AcceptTermsFormFields.renders a checkbox",
+  "historyId" : "663a15644e6854301bd17718385f16e",
+  "time" : {
+    "start" : 1622213795124,
+    "stop" : 1622213795140,
+    "duration" : 16
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AcceptTermsFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AcceptTermsFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders a checkbox"
+  }, {
+    "name" : "package",
+    "value" : "AcceptTermsFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "5be09b5a1e268ac4.json",
+  "parameterValues" : [ ]
+}

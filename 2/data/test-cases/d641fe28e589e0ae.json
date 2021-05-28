@@ -1,0 +1,46 @@
+{
+  "uid" : "d641fe28e589e0ae",
+  "name" : "calls the API with the IP address and secret key",
+  "fullName" : "IPLocationAPI callIpStackAPI.calls the API with the IP address and secret key",
+  "historyId" : "83ec3142143a5bbffa88e7cddcb10ace",
+  "time" : {
+    "start" : 1622213785659,
+    "stop" : 1622213785661,
+    "duration" : 2
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "IPLocationAPI callIpStackAPI"
+  }, {
+    "name" : "testClass",
+    "value" : "IPLocationAPI callIpStackAPI"
+  }, {
+    "name" : "testMethod",
+    "value" : "calls the API with the IP address and secret key"
+  }, {
+    "name" : "package",
+    "value" : "IPLocationAPI callIpStackAPI"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d641fe28e589e0ae.json",
+  "parameterValues" : [ ]
+}

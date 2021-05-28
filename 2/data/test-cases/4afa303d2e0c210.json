@@ -1,0 +1,48 @@
+{
+  "uid" : "4afa303d2e0c210",
+  "name" : "renders its child prop",
+  "fullName" : "ApplicationContainer.renders its child prop",
+  "historyId" : "48d26ba57338b311b913e6d6afc4d2ae",
+  "time" : {
+    "start" : 1622213798444,
+    "stop" : 1622213798444,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "skipped",
+  "statusMessage" : "",
+  "statusTrace" : "undefined",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ApplicationContainer"
+  }, {
+    "name" : "testClass",
+    "value" : "ApplicationContainer"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders its child prop"
+  }, {
+    "name" : "package",
+    "value" : "ApplicationContainer"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "4afa303d2e0c210.json",
+  "parameterValues" : [ ]
+}

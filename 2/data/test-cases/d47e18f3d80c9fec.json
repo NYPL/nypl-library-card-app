@@ -1,0 +1,46 @@
+{
+  "uid" : "d47e18f3d80c9fec",
+  "name" : "it passes axe accessibility checks for the field input",
+  "fullName" : "AgeFormFields.it passes axe accessibility checks for the field input",
+  "historyId" : "7e6d6750ea96a09dbfe16d60f9a773dd",
+  "time" : {
+    "start" : 1622213789454,
+    "stop" : 1622213789528,
+    "duration" : 74
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it passes axe accessibility checks for the field input"
+  }, {
+    "name" : "package",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d47e18f3d80c9fec.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "bdbf67a5ffcd19e",
+  "name" : "returns an object with expected structure for the Card Creator request",
+  "fullName" : "constructPatronObject.returns an object with expected structure for the Card Creator request",
+  "historyId" : "6d25767f91e2422a004555e6f41d7ed1",
+  "time" : {
+    "start" : 1622213783776,
+    "stop" : 1622213783776,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "constructPatronObject"
+  }, {
+    "name" : "testClass",
+    "value" : "constructPatronObject"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns an object with expected structure for the Card Creator request"
+  }, {
+    "name" : "package",
+    "value" : "constructPatronObject"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "bdbf67a5ffcd19e.json",
+  "parameterValues" : [ ]
+}

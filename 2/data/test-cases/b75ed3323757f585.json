@@ -1,0 +1,46 @@
+{
+  "uid" : "b75ed3323757f585",
+  "name" : "it renders instructional text",
+  "fullName" : "FormField.it renders instructional text",
+  "historyId" : "8fbd2db6e812cb6c3ea531887cb2c95c",
+  "time" : {
+    "start" : 1622213793357,
+    "stop" : 1622213793362,
+    "duration" : 5
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "FormField"
+  }, {
+    "name" : "testClass",
+    "value" : "FormField"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders instructional text"
+  }, {
+    "name" : "package",
+    "value" : "FormField"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "b75ed3323757f585.json",
+  "parameterValues" : [ ]
+}

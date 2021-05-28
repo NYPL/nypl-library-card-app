@@ -1,0 +1,46 @@
+{
+  "uid" : "ab2015ab48b15239",
+  "name" : "it should return a url query string",
+  "fullName" : "createQueryParams.it should return a url query string",
+  "historyId" : "92d0610c56d875476acb24d50ade5af7",
+  "time" : {
+    "start" : 1622213791554,
+    "stop" : 1622213791554,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "createQueryParams"
+  }, {
+    "name" : "testClass",
+    "value" : "createQueryParams"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return a url query string"
+  }, {
+    "name" : "package",
+    "value" : "createQueryParams"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "ab2015ab48b15239.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "4f6bbb535c690869",
+  "name" : "it renders a required label",
+  "fullName" : "FormField.it renders a required label",
+  "historyId" : "230257e06508bb96890ed9f5b56856b5",
+  "time" : {
+    "start" : 1622213793348,
+    "stop" : 1622213793357,
+    "duration" : 9
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "FormField"
+  }, {
+    "name" : "testClass",
+    "value" : "FormField"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders a required label"
+  }, {
+    "name" : "package",
+    "value" : "FormField"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "4f6bbb535c690869.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "d57b5f5af7b663b1",
+  "name" : "it updates the selected value from the dropdown",
+  "fullName" : "LibraryListFormFields.it updates the selected value from the dropdown",
+  "historyId" : "bc551219eba75f0708630b1812700cc6",
+  "time" : {
+    "start" : 1622213790522,
+    "stop" : 1622213790565,
+    "duration" : 43
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it updates the selected value from the dropdown"
+  }, {
+    "name" : "package",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d57b5f5af7b663b1.json",
+  "parameterValues" : [ ]
+}

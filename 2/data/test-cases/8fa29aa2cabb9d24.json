@@ -1,0 +1,46 @@
+{
+  "uid" : "8fa29aa2cabb9d24",
+  "name" : "it renders a missing required values detail",
+  "fullName" : "ApiErrors.it renders a missing required values detail",
+  "historyId" : "681120a2c267717bbb2562eff215b2d4",
+  "time" : {
+    "start" : 1622213791131,
+    "stop" : 1622213791134,
+    "duration" : 3
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testClass",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders a missing required values detail"
+  }, {
+    "name" : "package",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "8fa29aa2cabb9d24.json",
+  "parameterValues" : [ ]
+}

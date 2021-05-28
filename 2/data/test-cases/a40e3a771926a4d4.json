@@ -1,0 +1,46 @@
+{
+  "uid" : "a40e3a771926a4d4",
+  "name" : "it returns text saying there are 5 steps",
+  "fullName" : "getPageTiles.it returns text saying there are 5 steps",
+  "historyId" : "e57af776f66fad6f4d259a375aa9689b",
+  "time" : {
+    "start" : 1622213791551,
+    "stop" : 1622213791552,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "getPageTiles"
+  }, {
+    "name" : "testClass",
+    "value" : "getPageTiles"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns text saying there are 5 steps"
+  }, {
+    "name" : "package",
+    "value" : "getPageTiles"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "a40e3a771926a4d4.json",
+  "parameterValues" : [ ]
+}

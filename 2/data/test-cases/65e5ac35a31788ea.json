@@ -1,0 +1,46 @@
+{
+  "uid" : "65e5ac35a31788ea",
+  "name" : "returns the same string if username is not in the string",
+  "fullName" : "createUsernameAnchor.returns the same string if username is not in the string",
+  "historyId" : "88f7ed4188ad0553f5c8b0d20f427a54",
+  "time" : {
+    "start" : 1622213788906,
+    "stop" : 1622213788907,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "createUsernameAnchor"
+  }, {
+    "name" : "testClass",
+    "value" : "createUsernameAnchor"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns the same string if username is not in the string"
+  }, {
+    "name" : "package",
+    "value" : "createUsernameAnchor"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "65e5ac35a31788ea.json",
+  "parameterValues" : [ ]
+}

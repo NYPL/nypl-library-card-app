@@ -1,0 +1,46 @@
+{
+  "uid" : "b7943d2589dd2fe0",
+  "name" : "renders names, age, email, and newsletter fields",
+  "fullName" : "PersonalFormFields.renders names, age, email, and newsletter fields",
+  "historyId" : "b3366a92b7c5c53e68bb567e43039731",
+  "time" : {
+    "start" : 1622213796188,
+    "stop" : 1622213796525,
+    "duration" : 337
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "PersonalFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "PersonalFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders names, age, email, and newsletter fields"
+  }, {
+    "name" : "package",
+    "value" : "PersonalFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "b7943d2589dd2fe0.json",
+  "parameterValues" : [ ]
+}

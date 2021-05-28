@@ -1,0 +1,46 @@
+{
+  "uid" : "112bd161f9a29738",
+  "name" : "it should return a nested url query string",
+  "fullName" : "createNestedQueryParams.it should return a nested url query string",
+  "historyId" : "f40b5134c6c91273ccf6c39dec49296",
+  "time" : {
+    "start" : 1622213791557,
+    "stop" : 1622213791558,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "createNestedQueryParams"
+  }, {
+    "name" : "testClass",
+    "value" : "createNestedQueryParams"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return a nested url query string"
+  }, {
+    "name" : "package",
+    "value" : "createNestedQueryParams"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "112bd161f9a29738.json",
+  "parameterValues" : [ ]
+}

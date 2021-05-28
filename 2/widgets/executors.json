@@ -1,0 +1,10 @@
+[ {
+  "name" : "GitHub Actions",
+  "type" : "github",
+  "url" : "https://NYPL.github.io/nypl-library-card-app",
+  "buildOrder" : 2,
+  "buildName" : "GitHub Actions Run #885986378",
+  "buildUrl" : "https://github.com/NYPL/nypl-library-card-app/actions/runs/885986378",
+  "reportName" : "Allure Report with history",
+  "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2/"
+} ]

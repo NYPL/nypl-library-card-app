@@ -1,0 +1,46 @@
+{
+  "uid" : "9fad768fe927f89e",
+  "name" : "passes axe accessibility checks",
+  "fullName" : "FormField.passes axe accessibility checks",
+  "historyId" : "d2cd81f559f0801387faabb3cba553dc",
+  "time" : {
+    "start" : 1622213793191,
+    "stop" : 1622213793340,
+    "duration" : 149
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "FormField"
+  }, {
+    "name" : "testClass",
+    "value" : "FormField"
+  }, {
+    "name" : "testMethod",
+    "value" : "passes axe accessibility checks"
+  }, {
+    "name" : "package",
+    "value" : "FormField"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "9fad768fe927f89e.json",
+  "parameterValues" : [ ]
+}

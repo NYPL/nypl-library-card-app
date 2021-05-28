@@ -1,0 +1,46 @@
+{
+  "uid" : "752502a2073073e",
+  "name" : "returns an object along with details",
+  "fullName" : "constructProblemDetail.returns an object along with details",
+  "historyId" : "8eeb131fbc4dc971078ac057584a4919",
+  "time" : {
+    "start" : 1622213783766,
+    "stop" : 1622213783766,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "constructProblemDetail"
+  }, {
+    "name" : "testClass",
+    "value" : "constructProblemDetail"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns an object along with details"
+  }, {
+    "name" : "package",
+    "value" : "constructProblemDetail"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "752502a2073073e.json",
+  "parameterValues" : [ ]
+}

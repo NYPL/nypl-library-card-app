@@ -1,0 +1,46 @@
+{
+  "uid" : "792624c81466a432",
+  "name" : "it should render five fields",
+  "fullName" : "AddressFormFields.it should render five fields",
+  "historyId" : "540cd481a4257b6a43648adb4d5f61a",
+  "time" : {
+    "start" : 1622213787997,
+    "stop" : 1622213788392,
+    "duration" : 395
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should render five fields"
+  }, {
+    "name" : "package",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "792624c81466a432.json",
+  "parameterValues" : [ ]
+}

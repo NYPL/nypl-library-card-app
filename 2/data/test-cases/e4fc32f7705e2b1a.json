@@ -1,0 +1,46 @@
+{
+  "uid" : "e4fc32f7705e2b1a",
+  "name" : "renders a good message response from the API call",
+  "fullName" : "UsernameValidationFormFields.renders a good message response from the API call",
+  "historyId" : "7926a9e439aff989ea5060cc0587abe3",
+  "time" : {
+    "start" : 1622213785085,
+    "stop" : 1622213785099,
+    "duration" : 14
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders a good message response from the API call"
+  }, {
+    "name" : "package",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "e4fc32f7705e2b1a.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "5eae33f9557733c9",
+  "name" : "it should return an empty object since there are no errors",
+  "fullName" : "validateFormData.it should return an empty object since there are no errors",
+  "historyId" : "442d2d324f8ee8ae70f16432e5a2b567",
+  "time" : {
+    "start" : 1622213783774,
+    "stop" : 1622213783775,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "validateFormData"
+  }, {
+    "name" : "testClass",
+    "value" : "validateFormData"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return an empty object since there are no errors"
+  }, {
+    "name" : "package",
+    "value" : "validateFormData"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "5eae33f9557733c9.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "aef4304fd4e9e20f",
+  "name" : "should return true if the coordinates are outside NYC",
+  "fullName" : "IPLocationAPI inNYCBounds.should return true if the coordinates are outside NYC",
+  "historyId" : "ffac60b84bbd18dd4c4c0b6a8464fe7",
+  "time" : {
+    "start" : 1622213785654,
+    "stop" : 1622213785655,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "IPLocationAPI inNYCBounds"
+  }, {
+    "name" : "testClass",
+    "value" : "IPLocationAPI inNYCBounds"
+  }, {
+    "name" : "testMethod",
+    "value" : "should return true if the coordinates are outside NYC"
+  }, {
+    "name" : "package",
+    "value" : "IPLocationAPI inNYCBounds"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "aef4304fd4e9e20f.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,46 @@
+{
+  "uid" : "d1429d2e9e080f9d",
+  "name" : "returns true if the expiration time will expire soon",
+  "fullName" : "isTokenExpiring.returns true if the expiration time will expire soon",
+  "historyId" : "96d2a254810b0f6c39d479c63f3c6310",
+  "time" : {
+    "start" : 1622213783049,
+    "stop" : 1622213783050,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "isTokenExpiring"
+  }, {
+    "name" : "testClass",
+    "value" : "isTokenExpiring"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns true if the expiration time will expire soon"
+  }, {
+    "name" : "package",
+    "value" : "isTokenExpiring"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d1429d2e9e080f9d.json",
+  "parameterValues" : [ ]
+}

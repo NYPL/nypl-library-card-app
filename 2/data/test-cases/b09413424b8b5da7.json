@@ -1,0 +1,46 @@
+{
+  "uid" : "b09413424b8b5da7",
+  "name" : "it should initialize Google Analytics",
+  "fullName" : "gaUtils setupAnalytics.it should initialize Google Analytics",
+  "historyId" : "f6f78afd2cfbbb2fc5c5520da97bdd06",
+  "time" : {
+    "start" : 1622213792719,
+    "stop" : 1622213792721,
+    "duration" : 2
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "gaUtils setupAnalytics"
+  }, {
+    "name" : "testClass",
+    "value" : "gaUtils setupAnalytics"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should initialize Google Analytics"
+  }, {
+    "name" : "package",
+    "value" : "gaUtils setupAnalytics"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "b09413424b8b5da7.json",
+  "parameterValues" : [ ]
+}

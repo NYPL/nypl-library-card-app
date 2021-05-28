@@ -1,0 +1,46 @@
+{
+  "uid" : "c631b3e6cc333fde",
+  "name" : "it should return an empty string with an empty string or type argument",
+  "fullName" : "createNestedQueryParams.it should return an empty string with an empty string or type argument",
+  "historyId" : "ccb4eea5711f946f06e576b0e8c33ade",
+  "time" : {
+    "start" : 1622213791556,
+    "stop" : 1622213791557,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "createNestedQueryParams"
+  }, {
+    "name" : "testClass",
+    "value" : "createNestedQueryParams"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return an empty string with an empty string or type argument"
+  }, {
+    "name" : "package",
+    "value" : "createNestedQueryParams"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "c631b3e6cc333fde.json",
+  "parameterValues" : [ ]
+}

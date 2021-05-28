@@ -1,0 +1,46 @@
+{
+  "uid" : "bc03483ced1dfb74",
+  "name" : "it should not make an API call if there is no oauth token",
+  "fullName" : "validateUsername.it should not make an API call if there is no oauth token",
+  "historyId" : "b6d294e4037b278e73304cc839fae02b",
+  "time" : {
+    "start" : 1622213783068,
+    "stop" : 1622213783068,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "validateUsername"
+  }, {
+    "name" : "testClass",
+    "value" : "validateUsername"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should not make an API call if there is no oauth token"
+  }, {
+    "name" : "package",
+    "value" : "validateUsername"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "bc03483ced1dfb74.json",
+  "parameterValues" : [ ]
+}

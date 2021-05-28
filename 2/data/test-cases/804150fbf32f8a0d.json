@@ -1,0 +1,46 @@
+{
+  "uid" : "804150fbf32f8a0d",
+  "name" : "it passes axe accessibility test",
+  "fullName" : "ApiErrors.it passes axe accessibility test",
+  "historyId" : "5d807eef6e438abc12f6749b45e068f7",
+  "time" : {
+    "start" : 1622213791091,
+    "stop" : 1622213791114,
+    "duration" : 23
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testClass",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testMethod",
+    "value" : "it passes axe accessibility test"
+  }, {
+    "name" : "package",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "804150fbf32f8a0d.json",
+  "parameterValues" : [ ]
+}

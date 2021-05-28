@@ -1,0 +1,46 @@
+{
+  "uid" : "e4af28c3b9556621",
+  "name" : "passes axe accessibility test",
+  "fullName" : "RoutingLinks.passes axe accessibility test",
+  "historyId" : "feaf4b5a54255927d055a76282cc1dd",
+  "time" : {
+    "start" : 1622213795593,
+    "stop" : 1622213795665,
+    "duration" : 72
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "testClass",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "testMethod",
+    "value" : "passes axe accessibility test"
+  }, {
+    "name" : "package",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "e4af28c3b9556621.json",
+  "parameterValues" : [ ]
+}

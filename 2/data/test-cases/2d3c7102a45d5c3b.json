@@ -1,0 +1,46 @@
+{
+  "uid" : "2d3c7102a45d5c3b",
+  "name" : "it returns the value code for nys",
+  "fullName" : "getPatronAgencyType.it returns the value code for nys",
+  "historyId" : "a6016beba02656a2481c2ff1c4270d99",
+  "time" : {
+    "start" : 1622213783758,
+    "stop" : 1622213783759,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "getPatronAgencyType"
+  }, {
+    "name" : "testClass",
+    "value" : "getPatronAgencyType"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns the value code for nys"
+  }, {
+    "name" : "package",
+    "value" : "getPatronAgencyType"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "2d3c7102a45d5c3b.json",
+  "parameterValues" : [ ]
+}

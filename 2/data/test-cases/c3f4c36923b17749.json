@@ -1,0 +1,46 @@
+{
+  "uid" : "c3f4c36923b17749",
+  "name" : "updates the age gate checkbox",
+  "fullName" : "AgeFormFields.updates the age gate checkbox",
+  "historyId" : "14dfac8284c5237999e4b13225bc976a",
+  "time" : {
+    "start" : 1622213789612,
+    "stop" : 1622213789628,
+    "duration" : 16
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "updates the age gate checkbox"
+  }, {
+    "name" : "package",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "c3f4c36923b17749.json",
+  "parameterValues" : [ ]
+}

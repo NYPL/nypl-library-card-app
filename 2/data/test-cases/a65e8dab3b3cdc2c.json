@@ -1,0 +1,46 @@
+{
+  "uid" : "a65e8dab3b3cdc2c",
+  "name" : "it returns an empty Addresses object with no input",
+  "fullName" : "constructAddresses.it returns an empty Addresses object with no input",
+  "historyId" : "955a2fec17ddd7c5ba8a165fe0081893",
+  "time" : {
+    "start" : 1622213783763,
+    "stop" : 1622213783763,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "constructAddresses"
+  }, {
+    "name" : "testClass",
+    "value" : "constructAddresses"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns an empty Addresses object with no input"
+  }, {
+    "name" : "package",
+    "value" : "constructAddresses"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "a65e8dab3b3cdc2c.json",
+  "parameterValues" : [ ]
+}

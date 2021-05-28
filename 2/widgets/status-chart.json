@@ -1,0 +1,1471 @@
+[ {
+  "uid" : "49dfaff76978f4",
+  "name" : "renders username, pin, verify pin, and checkbox fields",
+  "time" : {
+    "start" : 1622213792153,
+    "stop" : 1622213792178,
+    "duration" : 25
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "fd457b6d934cbd91",
+  "name" : "returns true if the expiration time will expire within 10 minutes",
+  "time" : {
+    "start" : 1622213783050,
+    "stop" : 1622213783050,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b6c008551587665d",
+  "name" : "passes axe accessibility test",
+  "time" : {
+    "start" : 1622213800496,
+    "stop" : 1622213800752,
+    "duration" : 256
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "84c6431f7d127cb",
+  "name" : "passes axe accessibility test",
+  "time" : {
+    "start" : 1622213792055,
+    "stop" : 1622213792106,
+    "duration" : 51
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "ffcbb35a53498a9d",
+  "name" : "it returns validated address responses from the API calls",
+  "time" : {
+    "start" : 1622213783065,
+    "stop" : 1622213783066,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "319249f5043909fe",
+  "name" : "it returns the value code for a library name",
+  "time" : {
+    "start" : 1622213783756,
+    "stop" : 1622213783757,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "804150fbf32f8a0d",
+  "name" : "it passes axe accessibility test",
+  "time" : {
+    "start" : 1622213791091,
+    "stop" : 1622213791114,
+    "duration" : 23
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "929f3e7c55a7fd0a",
+  "name" : "should return false if the coordinates are outside NYC",
+  "time" : {
+    "start" : 1622213785653,
+    "stop" : 1622213785654,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "39ca83e2d58b32b7",
+  "name" : "returns data on a successful response",
+  "time" : {
+    "start" : 1622213785663,
+    "stop" : 1622213785671,
+    "duration" : 8
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ae62cafd802945f1",
+  "name" : "passes axe accessibility test",
+  "time" : {
+    "start" : 1622213795013,
+    "stop" : 1622213795115,
+    "duration" : 102
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "fb88b3352b2c5188",
+  "name" : "should render an error message if the input is invalid",
+  "time" : {
+    "start" : 1622213785099,
+    "stop" : 1622213785122,
+    "duration" : 23
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "af3d5a13f1f7e58b",
+  "name" : "renders a title and decription",
+  "time" : {
+    "start" : 1622213800753,
+    "stop" : 1622213800773,
+    "duration" : 20
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "469ecbcb4805e8ab",
+  "name" : "renders a home address",
+  "time" : {
+    "start" : 1622213786559,
+    "stop" : 1622213786582,
+    "duration" : 23
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "82565488d40dc43c",
+  "name" : "it should return the same hash href for all address related errors",
+  "time" : {
+    "start" : 1622213788904,
+    "stop" : 1622213788904,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d20afdcd8c327f29",
+  "name" : "renders multiple home addresses",
+  "time" : {
+    "start" : 1622213786582,
+    "stop" : 1622213786613,
+    "duration" : 31
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9e0e0eb18842ecf6",
+  "name" : "passes axe accessibility test",
+  "time" : {
+    "start" : 1622213796526,
+    "stop" : 1622213796798,
+    "duration" : 272
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e56b463e9c6420a",
+  "name" : "renders an error message from the API call and hidden input with value of false",
+  "time" : {
+    "start" : 1622213785058,
+    "stop" : 1622213785085,
+    "duration" : 27
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d9c9e1880c948d39",
+  "name" : "should return an empty if the API call failed",
+  "time" : {
+    "start" : 1622213785673,
+    "stop" : 1622213785673,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "58ec0cd7ae5688b4",
+  "name" : "it returns the specific address values requested",
+  "time" : {
+    "start" : 1622213783761,
+    "stop" : 1622213783762,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bfeacd88500c0a7b",
+  "name" : "it passes accessibilty checks with error messages",
+  "time" : {
+    "start" : 1622213787728,
+    "stop" : 1622213787997,
+    "duration" : 269
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "27bf0c7c1f14cb04",
+  "name" : "renders a label, input, and description",
+  "time" : {
+    "start" : 1622213790494,
+    "stop" : 1622213790522,
+    "duration" : 28
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "13d7e7e016740e5",
+  "name" : "has default values for the two link's text",
+  "time" : {
+    "start" : 1622213795684,
+    "stop" : 1622213795689,
+    "duration" : 5
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b75ed3323757f585",
+  "name" : "it renders instructional text",
+  "time" : {
+    "start" : 1622213793357,
+    "stop" : 1622213793362,
+    "duration" : 5
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "db00e77bcf410bbc",
+  "name" : "renders two links when both 'previous' and 'next' props are passed",
+  "time" : {
+    "start" : 1622213795670,
+    "stop" : 1622213795684,
+    "duration" : 14
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c6420aa69e6dd2ed",
+  "name" : "renders a title and decription",
+  "time" : {
+    "start" : 1622213797439,
+    "stop" : 1622213797483,
+    "duration" : 44
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b1ecfadf6f0cb1c8",
+  "name" : "renders with a header and footer",
+  "time" : {
+    "start" : 1622213798444,
+    "stop" : 1622213798444,
+    "duration" : 0
+  },
+  "status" : "skipped",
+  "severity" : "normal"
+}, {
+  "uid" : "9b5a30e78e04e0af",
+  "name" : "passes axe accessibility checks",
+  "time" : {
+    "start" : 1622213784807,
+    "stop" : 1622213784998,
+    "duration" : 191
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d4cd68e8a7171707",
+  "name" : "passes axe accessibility test",
+  "time" : {
+    "start" : 1622213786370,
+    "stop" : 1622213786558,
+    "duration" : 188
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cf330ecafbec0dc",
+  "name" : "it should return an empty object since there are no errors",
+  "time" : {
+    "start" : 1622213783772,
+    "stop" : 1622213783772,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "2d3c7102a45d5c3b",
+  "name" : "it returns the value code for nys",
+  "time" : {
+    "start" : 1622213783758,
+    "stop" : 1622213783759,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5a1dcdbfdd873641",
+  "name" : "it passes axe accessibility checks for the checkbox input",
+  "time" : {
+    "start" : 1622213789528,
+    "stop" : 1622213789571,
+    "duration" : 43
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b7943d2589dd2fe0",
+  "name" : "renders names, age, email, and newsletter fields",
+  "time" : {
+    "start" : 1622213796188,
+    "stop" : 1622213796525,
+    "duration" : 337
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7d3909517037aa31",
+  "name" : "it should internally call ga's event function to track events",
+  "time" : {
+    "start" : 1622213792727,
+    "stop" : 1622213792729,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f8bc2aa4cd6ca28e",
+  "name" : "it returns false on an empty input",
+  "time" : {
+    "start" : 1622213783748,
+    "stop" : 1622213783749,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b4ac10d8a3f25505",
+  "name" : "it should make an API call and return the data from a successful call",
+  "time" : {
+    "start" : 1622213783068,
+    "stop" : 1622213783069,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c631b3e6cc333fde",
+  "name" : "it should return an empty string with an empty string or type argument",
+  "time" : {
+    "start" : 1622213791556,
+    "stop" : 1622213791557,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b0b7818741d02500",
+  "name" : "it should render a webApplicant error message",
+  "time" : {
+    "start" : 1622213789628,
+    "stop" : 1622213789632,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "839a6fac298873bf",
+  "name" : "it renders an unavailable username detail",
+  "time" : {
+    "start" : 1622213791134,
+    "stop" : 1622213791140,
+    "duration" : 6
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9fad768fe927f89e",
+  "name" : "passes axe accessibility checks",
+  "time" : {
+    "start" : 1622213793191,
+    "stop" : 1622213793340,
+    "duration" : 149
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bfd8759157f035e0",
+  "name" : "it should return errors for all bad fields",
+  "time" : {
+    "start" : 1622213783770,
+    "stop" : 1622213783770,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "77b98ab1230a381e",
+  "name" : "it returns `eb` as the default value",
+  "time" : {
+    "start" : 1622213783753,
+    "stop" : 1622213783754,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cf04177fa68a85f0",
+  "name" : "returns false if the expiration time won't expire in the default time of 5 minutes",
+  "time" : {
+    "start" : 1622213783046,
+    "stop" : 1622213783049,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5b1de4ce2d0ed036",
+  "name" : "returns an updated home address object property",
+  "time" : {
+    "start" : 1622213783763,
+    "stop" : 1622213783764,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b05db7865ed617de",
+  "name" : "it renders an ILS integration detail",
+  "time" : {
+    "start" : 1622213791128,
+    "stop" : 1622213791131,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "54789bed647d7cda",
+  "name" : "should return the user's location",
+  "time" : {
+    "start" : 1622213785673,
+    "stop" : 1622213785674,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d1429d2e9e080f9d",
+  "name" : "returns true if the expiration time will expire soon",
+  "time" : {
+    "start" : 1622213783049,
+    "stop" : 1622213783050,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "326e2731abe18f61",
+  "name" : "renders the basic label, input, and helper text elements",
+  "time" : {
+    "start" : 1622213784998,
+    "stop" : 1622213785044,
+    "duration" : 46
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "747420b14eeb9af4",
+  "name" : "updates the checkbox",
+  "time" : {
+    "start" : 1622213795140,
+    "stop" : 1622213795154,
+    "duration" : 14
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e12546beedbd91a1",
+  "name" : "makes an authenticated API call with the non-work address and gets a valid response",
+  "time" : {
+    "start" : 1622213783061,
+    "stop" : 1622213783062,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "929be5975e5bfcf3",
+  "name" : "returns null if the API returned an error",
+  "time" : {
+    "start" : 1622213785662,
+    "stop" : 1622213785663,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e0456d99f4d9bbe4",
+  "name" : "renders multiple optional work addresses",
+  "time" : {
+    "start" : 1622213786673,
+    "stop" : 1622213786801,
+    "duration" : 128
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "93dd35195268e83b",
+  "name" : "returns an updated work address object property",
+  "time" : {
+    "start" : 1622213783764,
+    "stop" : 1622213783764,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "752502a2073073e",
+  "name" : "returns an object along with details",
+  "time" : {
+    "start" : 1622213783766,
+    "stop" : 1622213783766,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "2dd00c703ee3698c",
+  "name" : "it renders the generic message if the type isn't found",
+  "time" : {
+    "start" : 1622213791119,
+    "stop" : 1622213791128,
+    "duration" : 9
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "aef4304fd4e9e20f",
+  "name" : "should return true if the coordinates are outside NYC",
+  "time" : {
+    "start" : 1622213785654,
+    "stop" : 1622213785655,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b907046e352023b6",
+  "name" : "it should return an empty string with an empty object",
+  "time" : {
+    "start" : 1622213791553,
+    "stop" : 1622213791554,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7634e5c76d9b8c02",
+  "name" : "returns null if there's an error with the API",
+  "time" : {
+    "start" : 1622213785661,
+    "stop" : 1622213785662,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d716f5524b026ec0",
+  "name" : "it renders multiple errors for invalid requests",
+  "time" : {
+    "start" : 1622213791140,
+    "stop" : 1622213791145,
+    "duration" : 5
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "df498d1159cacd19",
+  "name" : "renders a banner",
+  "time" : {
+    "start" : 1622213798444,
+    "stop" : 1622213798444,
+    "duration" : 0
+  },
+  "status" : "skipped",
+  "severity" : "normal"
+}, {
+  "uid" : "5cfc82618b1fea07",
+  "name" : "should make an API call if there's an access token but it's about to expire",
+  "time" : {
+    "start" : 1622213783058,
+    "stop" : 1622213783059,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "2c876b4083f5c553",
+  "name" : "calls the Auth API once since there is no access token",
+  "time" : {
+    "start" : 1622213783056,
+    "stop" : 1622213783057,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ab2015ab48b15239",
+  "name" : "it should return a url query string",
+  "time" : {
+    "start" : 1622213791554,
+    "stop" : 1622213791554,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a65e8dab3b3cdc2c",
+  "name" : "it returns an empty Addresses object with no input",
+  "time" : {
+    "start" : 1622213783763,
+    "stop" : 1622213783763,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "562305bebdc5477e",
+  "name" : "shouldn't make an API call since there already is an access token",
+  "time" : {
+    "start" : 1622213783057,
+    "stop" : 1622213783058,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a40e3a771926a4d4",
+  "name" : "it returns text saying there are 5 steps",
+  "time" : {
+    "start" : 1622213791551,
+    "stop" : 1622213791552,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5eae33f9557733c9",
+  "name" : "it should return an empty object since there are no errors",
+  "time" : {
+    "start" : 1622213783774,
+    "stop" : 1622213783775,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ed34fab5eae962e6",
+  "name" : "passes axe accessibility test",
+  "time" : {
+    "start" : 1622213798444,
+    "stop" : 1622213798444,
+    "duration" : 0
+  },
+  "status" : "skipped",
+  "severity" : "normal"
+}, {
+  "uid" : "cd0299853bb7114c",
+  "name" : "it returns false if the input is a date but not in the year bounds",
+  "time" : {
+    "start" : 1622213783749,
+    "stop" : 1622213783750,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "63ad44a4f41a5fed",
+  "name" : "it renders an input field with the default webApplicant policyType",
+  "time" : {
+    "start" : 1622213789571,
+    "stop" : 1622213789594,
+    "duration" : 23
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d57b5f5af7b663b1",
+  "name" : "it updates the selected value from the dropdown",
+  "time" : {
+    "start" : 1622213790522,
+    "stop" : 1622213790565,
+    "duration" : 43
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4decabd9c21f1cde",
+  "name" : "it passes axe accessibility test",
+  "time" : {
+    "start" : 1622213787404,
+    "stop" : 1622213787728,
+    "duration" : 324
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ba2b8bbfea4aaab0",
+  "name" : "it should replace text in the error message with its equivalent anchor element string",
+  "time" : {
+    "start" : 1622213788902,
+    "stop" : 1622213788903,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4afa303d2e0c210",
+  "name" : "renders its child prop",
+  "time" : {
+    "start" : 1622213798444,
+    "stop" : 1622213798444,
+    "duration" : 0
+  },
+  "status" : "skipped",
+  "severity" : "normal"
+}, {
+  "uid" : "5cc4f050f96f6263",
+  "name" : "it returns the value code for a library name",
+  "time" : {
+    "start" : 1622213783754,
+    "stop" : 1622213783754,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d47e18f3d80c9fec",
+  "name" : "it passes axe accessibility checks for the field input",
+  "time" : {
+    "start" : 1622213789454,
+    "stop" : 1622213789528,
+    "duration" : 74
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "81300801176baa6e",
+  "name" : "it returns error for the work address if it was added",
+  "time" : {
+    "start" : 1622213783768,
+    "stop" : 1622213783768,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9f57e3f6c81e939c",
+  "name" : "exposes a context `value` prop that has a function and a value object",
+  "time" : {
+    "start" : 1622213798902,
+    "stop" : 1622213798915,
+    "duration" : 13
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ac9812f97b852843",
+  "name" : "returns null if the API returned a response with no data type",
+  "time" : {
+    "start" : 1622213785663,
+    "stop" : 1622213785663,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7158519a2f2b090a",
+  "name" : "it should internally call ga's event function to track events",
+  "time" : {
+    "start" : 1622213792726,
+    "stop" : 1622213792727,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e1724e3ebc3c1566",
+  "name" : "makes an authenticated API call with a work address and gets a non-valid response",
+  "time" : {
+    "start" : 1622213783062,
+    "stop" : 1622213783064,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9f3e189d802bee28",
+  "name" : "it returns the string value for the location code",
+  "time" : {
+    "start" : 1622213783760,
+    "stop" : 1622213783761,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "866a5d3a407a482b",
+  "name" : "it should make an API call and return data from an unsuccessful call",
+  "time" : {
+    "start" : 1622213783069,
+    "stop" : 1622213783070,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9155741e587df08b",
+  "name" : "passes axe accessibility test",
+  "time" : {
+    "start" : 1622213794207,
+    "stop" : 1622213794487,
+    "duration" : 280
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "6c02356d7987ba5b",
+  "name" : "it renders a checkbox with the simplye policyType",
+  "time" : {
+    "start" : 1622213789594,
+    "stop" : 1622213789612,
+    "duration" : 18
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5be09b5a1e268ac4",
+  "name" : "renders a checkbox",
+  "time" : {
+    "start" : 1622213795124,
+    "stop" : 1622213795140,
+    "duration" : 16
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5aa96c5d74112ef2",
+  "name" : "it returns the original error object if the address has no errors",
+  "time" : {
+    "start" : 1622213783767,
+    "stop" : 1622213783767,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "25b6da3060f2880e",
+  "name" : "renders the autosuggest dropdown",
+  "time" : {
+    "start" : 1622213792178,
+    "stop" : 1622213792197,
+    "duration" : 19
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "bc03483ced1dfb74",
+  "name" : "it should not make an API call if there is no oauth token",
+  "time" : {
+    "start" : 1622213783068,
+    "stop" : 1622213783068,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f51bed7c2940c7c5",
+  "name" : "it returns a new token which is not valid since it's new and not compared to an existing token",
+  "time" : {
+    "start" : 1622213791559,
+    "stop" : 1622213791560,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "87f658ca13c8650e",
+  "name" : "it should add erros to the existing error object",
+  "time" : {
+    "start" : 1622213783770,
+    "stop" : 1622213783771,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4db014d145f1ff0e",
+  "name" : "it returns `eb` as the default value",
+  "time" : {
+    "start" : 1622213783755,
+    "stop" : 1622213783756,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "40a945c779d8f5cf",
+  "name" : "it renders a label and an input element",
+  "time" : {
+    "start" : 1622213793341,
+    "stop" : 1622213793348,
+    "duration" : 7
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "940ba748f01f39ab",
+  "name" : "returns an object with default values",
+  "time" : {
+    "start" : 1622213783766,
+    "stop" : 1622213783766,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "792624c81466a432",
+  "name" : "it should render five fields",
+  "time" : {
+    "start" : 1622213787997,
+    "stop" : 1622213788392,
+    "duration" : 395
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "394865c64cc92851",
+  "name" : "renders text with three links",
+  "time" : {
+    "start" : 1622213795116,
+    "stop" : 1622213795124,
+    "duration" : 8
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c3f4c36923b17749",
+  "name" : "updates the age gate checkbox",
+  "time" : {
+    "start" : 1622213789612,
+    "stop" : 1622213789628,
+    "duration" : 16
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cf6cfaf203a1bba1",
+  "name" : "it should not make an API call if there is no oauth token",
+  "time" : {
+    "start" : 1622213783071,
+    "stop" : 1622213783072,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5ad6e085559eb17",
+  "name" : "it should return an empty object since there are no errors",
+  "time" : {
+    "start" : 1622213783770,
+    "stop" : 1622213783770,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cbac4b3968796ded",
+  "name" : "only renders a 'next' link, 'previous' link is optional",
+  "time" : {
+    "start" : 1622213795665,
+    "stop" : 1622213795670,
+    "duration" : 5
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d641fe28e589e0ae",
+  "name" : "calls the API with the IP address and secret key",
+  "time" : {
+    "start" : 1622213785659,
+    "stop" : 1622213785661,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1a8f6877af35b72",
+  "name" : "it should internally call ga's event function to track events",
+  "time" : {
+    "start" : 1622213792724,
+    "stop" : 1622213792725,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bdbf67a5ffcd19e",
+  "name" : "returns an object with expected structure for the Card Creator request",
+  "time" : {
+    "start" : 1622213783776,
+    "stop" : 1622213783776,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d63fb52190914",
+  "name" : "it returns authorization headers object",
+  "time" : {
+    "start" : 1622213783037,
+    "stop" : 1622213783041,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e9740bc517f1f67d",
+  "name" : "it should return errors for all bad fields",
+  "time" : {
+    "start" : 1622213783774,
+    "stop" : 1622213783774,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c604c53ea6a38a5",
+  "name" : "it should add erros to the existing error object",
+  "time" : {
+    "start" : 1622213783772,
+    "stop" : 1622213783773,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e94f06da34f05692",
+  "name" : "it should return an empty array if there are no errors",
+  "time" : {
+    "start" : 1622213788908,
+    "stop" : 1622213788909,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d9c9747eeb88b5a3",
+  "name" : "passes axe accessibility test",
+  "time" : {
+    "start" : 1622213797262,
+    "stop" : 1622213797436,
+    "duration" : 174
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d9fdaf62a470b834",
+  "name" : "it shows the suggestions",
+  "time" : {
+    "start" : 1622213790565,
+    "stop" : 1622213790599,
+    "duration" : 34
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "80f0edc22cf848a2",
+  "name" : "it should return a list of li elements for every error",
+  "time" : {
+    "start" : 1622213788909,
+    "stop" : 1622213788910,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "65e5ac35a31788ea",
+  "name" : "returns the same string if username is not in the string",
+  "time" : {
+    "start" : 1622213788906,
+    "stop" : 1622213788907,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b09413424b8b5da7",
+  "name" : "it should initialize Google Analytics",
+  "time" : {
+    "start" : 1622213792719,
+    "stop" : 1622213792721,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d1922fee449119b4",
+  "name" : "it should return errors for all bad fields",
+  "time" : {
+    "start" : 1622213783772,
+    "stop" : 1622213783772,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "76605267b8856c50",
+  "name" : "it should internally call ga's pageview function to track a url",
+  "time" : {
+    "start" : 1622213792722,
+    "stop" : 1622213792723,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c7435b928c2c350",
+  "name" : "it returns '198' as the default agency value",
+  "time" : {
+    "start" : 1622213783758,
+    "stop" : 1622213783758,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "772bc5b9bd408598",
+  "name" : "returns 'nyc' if that's the true option",
+  "time" : {
+    "start" : 1622213785676,
+    "stop" : 1622213785677,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "86648931eb9c4357",
+  "name" : "it should return undefined if the key does not exist in the list of properties",
+  "time" : {
+    "start" : 1622213788900,
+    "stop" : 1622213788901,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "976011697650bc44",
+  "name" : "returns an object for users in US but outside NYS",
+  "time" : {
+    "start" : 1622213785657,
+    "stop" : 1622213785658,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8ba310d8810259da",
+  "name" : "renders the NYPL card info",
+  "time" : {
+    "start" : 1622213794487,
+    "stop" : 1622213794525,
+    "duration" : 38
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3452bcfa14b738dc",
+  "name" : "it should throw an error if the Auth endpoint returned bad data",
+  "time" : {
+    "start" : 1622213783051,
+    "stop" : 1622213783056,
+    "duration" : 5
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "fe1636a36cae860",
+  "name" : "returns an object for users outside US",
+  "time" : {
+    "start" : 1622213785657,
+    "stop" : 1622213785657,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "112bd161f9a29738",
+  "name" : "it should return a nested url query string",
+  "time" : {
+    "start" : 1622213791557,
+    "stop" : 1622213791558,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "672db2626723b362",
+  "name" : "it should render a simplye error message",
+  "time" : {
+    "start" : 1622213789633,
+    "stop" : 1622213789637,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d60930759e9d589",
+  "name" : "returns 'us' if that's the true option",
+  "time" : {
+    "start" : 1622213785675,
+    "stop" : 1622213785676,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f38190bccf70d9e1",
+  "name" : "passes axe accessibility checks",
+  "time" : {
+    "start" : 1622213790272,
+    "stop" : 1622213790494,
+    "duration" : 222
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "201edef176f01ade",
+  "name" : "it returns a false token validation",
+  "time" : {
+    "start" : 1622213791560,
+    "stop" : 1622213791562,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e4fc32f7705e2b1a",
+  "name" : "renders a good message response from the API call",
+  "time" : {
+    "start" : 1622213785085,
+    "stop" : 1622213785099,
+    "duration" : 14
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b194269b61ffc60c",
+  "name" : "it should render five optional fields for the work address",
+  "time" : {
+    "start" : 1622213788392,
+    "stop" : 1622213788410,
+    "duration" : 18
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3580df6b27e953e5",
+  "name" : "it should make an API call and return the data from a successful call",
+  "time" : {
+    "start" : 1622213783072,
+    "stop" : 1622213783088,
+    "duration" : 16
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "888793266b6bfcb9",
+  "name" : "it renders the generic message if there is no type in the problem detail",
+  "time" : {
+    "start" : 1622213791114,
+    "stop" : 1622213791119,
+    "duration" : 5
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "44c77c21068e979b",
+  "name" : "it does not make an API call without an access token",
+  "time" : {
+    "start" : 1622213783066,
+    "stop" : 1622213783067,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "897385b63d662ff6",
+  "name" : "it should return whether the error is for a home or work address field",
+  "time" : {
+    "start" : 1622213788903,
+    "stop" : 1622213788903,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ae411cbb26b594a3",
+  "name" : "returns updated home and work addresses objects",
+  "time" : {
+    "start" : 1622213783764,
+    "stop" : 1622213783764,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "12d78e8c9a0b438b",
+  "name" : "it returns any errors from the address",
+  "time" : {
+    "start" : 1622213783767,
+    "stop" : 1622213783768,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c3c0e3d0b35600e8",
+  "name" : "it renders home address fields",
+  "time" : {
+    "start" : 1622213799840,
+    "stop" : 1622213799859,
+    "duration" : 19
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bfd4f9d9e18fa1c2",
+  "name" : "renders an optional work address",
+  "time" : {
+    "start" : 1622213786613,
+    "stop" : 1622213786673,
+    "duration" : 60
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "396712dcd8171faf",
+  "name" : "returns 'NYS' if that's the true option",
+  "time" : {
+    "start" : 1622213785676,
+    "stop" : 1622213785676,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "6d1040df82813321",
+  "name" : "it returns true if the input is a valid date",
+  "time" : {
+    "start" : 1622213783751,
+    "stop" : 1622213783751,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "acf4fcc4077b971c",
+  "name" : "it should render any error messages for required fields",
+  "time" : {
+    "start" : 1622213788410,
+    "stop" : 1622213788428,
+    "duration" : 18
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "dad73477371a321f",
+  "name" : "passes axe accessibility checks",
+  "time" : {
+    "start" : 1622213799458,
+    "stop" : 1622213799840,
+    "duration" : 382
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "50ff4e7e74beb076",
+  "name" : "returns an object for users in NYC",
+  "time" : {
+    "start" : 1622213785658,
+    "stop" : 1622213785658,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f7bfeff826748727",
+  "name" : "it renders a validation button if the input is valid",
+  "time" : {
+    "start" : 1622213785044,
+    "stop" : 1622213785058,
+    "duration" : 14
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8fa29aa2cabb9d24",
+  "name" : "it renders a missing required values detail",
+  "time" : {
+    "start" : 1622213791131,
+    "stop" : 1622213791134,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3048bf01e3a44b03",
+  "name" : "returns a string with an anchor element around username",
+  "time" : {
+    "start" : 1622213788907,
+    "stop" : 1622213788907,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8c7d907afd26ce2f",
+  "name" : "returns an empty string by default",
+  "time" : {
+    "start" : 1622213785675,
+    "stop" : 1622213785675,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "db2aab9f43f974cf",
+  "name" : "returns a ProblemDetail with missing values in the details",
+  "time" : {
+    "start" : 1622213783775,
+    "stop" : 1622213783776,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e4af28c3b9556621",
+  "name" : "passes axe accessibility test",
+  "time" : {
+    "start" : 1622213795593,
+    "stop" : 1622213795665,
+    "duration" : 72
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4f6bbb535c690869",
+  "name" : "it renders a required label",
+  "time" : {
+    "start" : 1622213793348,
+    "stop" : 1622213793357,
+    "duration" : 9
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

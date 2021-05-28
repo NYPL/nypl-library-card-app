@@ -1,0 +1,46 @@
+{
+  "uid" : "9b5a30e78e04e0af",
+  "name" : "passes axe accessibility checks",
+  "fullName" : "UsernameValidationFormFields.passes axe accessibility checks",
+  "historyId" : "780aa13feca927b9bf839021ca034048",
+  "time" : {
+    "start" : 1622213784807,
+    "stop" : 1622213784998,
+    "duration" : 191
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "passes axe accessibility checks"
+  }, {
+    "name" : "package",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "9b5a30e78e04e0af.json",
+  "parameterValues" : [ ]
+}

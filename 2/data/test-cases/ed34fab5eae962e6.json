@@ -1,0 +1,48 @@
+{
+  "uid" : "ed34fab5eae962e6",
+  "name" : "passes axe accessibility test",
+  "fullName" : "ApplicationContainer.passes axe accessibility test",
+  "historyId" : "1adb6e48528305a3f2ca477673622367",
+  "time" : {
+    "start" : 1622213798444,
+    "stop" : 1622213798444,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "skipped",
+  "statusMessage" : "",
+  "statusTrace" : "undefined",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ApplicationContainer"
+  }, {
+    "name" : "testClass",
+    "value" : "ApplicationContainer"
+  }, {
+    "name" : "testMethod",
+    "value" : "passes axe accessibility test"
+  }, {
+    "name" : "package",
+    "value" : "ApplicationContainer"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "ed34fab5eae962e6.json",
+  "parameterValues" : [ ]
+}

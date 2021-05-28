@@ -1,0 +1,46 @@
+{
+  "uid" : "dad73477371a321f",
+  "name" : "passes axe accessibility checks",
+  "fullName" : "AddressContainer.passes axe accessibility checks",
+  "historyId" : "9a7728bdae277d1784028e05560b4e3e",
+  "time" : {
+    "start" : 1622213799458,
+    "stop" : 1622213799840,
+    "duration" : 382
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AddressContainer"
+  }, {
+    "name" : "testClass",
+    "value" : "AddressContainer"
+  }, {
+    "name" : "testMethod",
+    "value" : "passes axe accessibility checks"
+  }, {
+    "name" : "package",
+    "value" : "AddressContainer"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "dad73477371a321f.json",
+  "parameterValues" : [ ]
+}

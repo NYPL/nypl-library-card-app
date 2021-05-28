@@ -1,0 +1,46 @@
+{
+  "uid" : "e56b463e9c6420a",
+  "name" : "renders an error message from the API call and hidden input with value of false",
+  "fullName" : "UsernameValidationFormFields.renders an error message from the API call and hidden input with value of false",
+  "historyId" : "187c6b2f932433465f3051d1b7af590a",
+  "time" : {
+    "start" : 1622213785058,
+    "stop" : 1622213785085,
+    "duration" : 27
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders an error message from the API call and hidden input with value of false"
+  }, {
+    "name" : "package",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "e56b463e9c6420a.json",
+  "parameterValues" : [ ]
+}

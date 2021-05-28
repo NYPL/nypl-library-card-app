@@ -1,0 +1,46 @@
+{
+  "uid" : "6c02356d7987ba5b",
+  "name" : "it renders a checkbox with the simplye policyType",
+  "fullName" : "AgeFormFields.it renders a checkbox with the simplye policyType",
+  "historyId" : "4d478844e03f3e6ef1e7ddbe277d615",
+  "time" : {
+    "start" : 1622213789594,
+    "stop" : 1622213789612,
+    "duration" : 18
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders a checkbox with the simplye policyType"
+  }, {
+    "name" : "package",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "6c02356d7987ba5b.json",
+  "parameterValues" : [ ]
+}

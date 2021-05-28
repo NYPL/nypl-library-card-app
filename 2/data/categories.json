@@ -1,0 +1,52 @@
+{
+  "uid" : "4b4757e66a1912dae1a509f688f20b0f",
+  "children" : [ {
+    "name" : "Product defects",
+    "children" : [ {
+      "name" : "TypeError: getPath(...).flat is not a function",
+      "children" : [ {
+        "name" : "passes axe accessibility test",
+        "uid" : "84c6431f7d127cb",
+        "parentUid" : "bc386ad2f1b47dff07092b21f8a59f68",
+        "status" : "failed",
+        "time" : {
+          "start" : 1622213792055,
+          "stop" : 1622213792106,
+          "duration" : 51
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "renders username, pin, verify pin, and checkbox fields",
+        "uid" : "49dfaff76978f4",
+        "parentUid" : "bc386ad2f1b47dff07092b21f8a59f68",
+        "status" : "failed",
+        "time" : {
+          "start" : 1622213792153,
+          "stop" : 1622213792178,
+          "duration" : 25
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "renders the autosuggest dropdown",
+        "uid" : "25b6da3060f2880e",
+        "parentUid" : "bc386ad2f1b47dff07092b21f8a59f68",
+        "status" : "failed",
+        "time" : {
+          "start" : 1622213792178,
+          "stop" : 1622213792197,
+          "duration" : 19
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "bc386ad2f1b47dff07092b21f8a59f68"
+    } ],
+    "uid" : "8fb3a91ba5aaf9de24cc8a92edc82b5d"
+  } ],
+  "name" : "categories"
+}

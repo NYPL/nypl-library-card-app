@@ -1,0 +1,48 @@
+{
+  "uid" : "b1ecfadf6f0cb1c8",
+  "name" : "renders with a header and footer",
+  "fullName" : "ApplicationContainer.renders with a header and footer",
+  "historyId" : "db44088357b0366099d4b8b6681c2a12",
+  "time" : {
+    "start" : 1622213798444,
+    "stop" : 1622213798444,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "skipped",
+  "statusMessage" : "",
+  "statusTrace" : "undefined",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ApplicationContainer"
+  }, {
+    "name" : "testClass",
+    "value" : "ApplicationContainer"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders with a header and footer"
+  }, {
+    "name" : "package",
+    "value" : "ApplicationContainer"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "b1ecfadf6f0cb1c8.json",
+  "parameterValues" : [ ]
+}

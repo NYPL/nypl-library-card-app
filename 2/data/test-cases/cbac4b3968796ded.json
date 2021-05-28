@@ -1,0 +1,46 @@
+{
+  "uid" : "cbac4b3968796ded",
+  "name" : "only renders a 'next' link, 'previous' link is optional",
+  "fullName" : "RoutingLinks.only renders a 'next' link, 'previous' link is optional",
+  "historyId" : "4c539b73219940258cb52ad5dfef431d",
+  "time" : {
+    "start" : 1622213795665,
+    "stop" : 1622213795670,
+    "duration" : 5
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "testClass",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "testMethod",
+    "value" : "only renders a 'next' link, 'previous' link is optional"
+  }, {
+    "name" : "package",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "cbac4b3968796ded.json",
+  "parameterValues" : [ ]
+}

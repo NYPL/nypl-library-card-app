@@ -1,0 +1,46 @@
+{
+  "uid" : "f38190bccf70d9e1",
+  "name" : "passes axe accessibility checks",
+  "fullName" : "LibraryListFormFields.passes axe accessibility checks",
+  "historyId" : "2d00608989c3534899b055c0633303f7",
+  "time" : {
+    "start" : 1622213790272,
+    "stop" : 1622213790494,
+    "duration" : 222
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "passes axe accessibility checks"
+  }, {
+    "name" : "package",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "f38190bccf70d9e1.json",
+  "parameterValues" : [ ]
+}

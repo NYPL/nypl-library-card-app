@@ -1,0 +1,46 @@
+{
+  "uid" : "b194269b61ffc60c",
+  "name" : "it should render five optional fields for the work address",
+  "fullName" : "AddressFormFields.it should render five optional fields for the work address",
+  "historyId" : "4b1c6dea4de5a8eb6fdd17de288d7a33",
+  "time" : {
+    "start" : 1622213788392,
+    "stop" : 1622213788410,
+    "duration" : 18
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should render five optional fields for the work address"
+  }, {
+    "name" : "package",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "b194269b61ffc60c.json",
+  "parameterValues" : [ ]
+}

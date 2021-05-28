@@ -1,0 +1,46 @@
+{
+  "uid" : "2c876b4083f5c553",
+  "name" : "calls the Auth API once since there is no access token",
+  "fullName" : "initializeAppAuth.calls the Auth API once since there is no access token",
+  "historyId" : "217cef21bef88fcbdb329c3590b4fc74",
+  "time" : {
+    "start" : 1622213783056,
+    "stop" : 1622213783057,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "testClass",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "testMethod",
+    "value" : "calls the Auth API once since there is no access token"
+  }, {
+    "name" : "package",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "2c876b4083f5c553.json",
+  "parameterValues" : [ ]
+}

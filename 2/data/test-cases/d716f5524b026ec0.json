@@ -1,0 +1,46 @@
+{
+  "uid" : "d716f5524b026ec0",
+  "name" : "it renders multiple errors for invalid requests",
+  "fullName" : "ApiErrors.it renders multiple errors for invalid requests",
+  "historyId" : "7c519009ee7fd94fcde5a99905cea149",
+  "time" : {
+    "start" : 1622213791140,
+    "stop" : 1622213791145,
+    "duration" : 5
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testClass",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders multiple errors for invalid requests"
+  }, {
+    "name" : "package",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d716f5524b026ec0.json",
+  "parameterValues" : [ ]
+}

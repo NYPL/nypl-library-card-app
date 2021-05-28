@@ -1,0 +1,46 @@
+{
+  "uid" : "b907046e352023b6",
+  "name" : "it should return an empty string with an empty object",
+  "fullName" : "createQueryParams.it should return an empty string with an empty object",
+  "historyId" : "fc2c6997c3a6d635e608255bc9b464e7",
+  "time" : {
+    "start" : 1622213791553,
+    "stop" : 1622213791554,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "createQueryParams"
+  }, {
+    "name" : "testClass",
+    "value" : "createQueryParams"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return an empty string with an empty object"
+  }, {
+    "name" : "package",
+    "value" : "createQueryParams"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "b907046e352023b6.json",
+  "parameterValues" : [ ]
+}

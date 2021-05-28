@@ -1,0 +1,46 @@
+{
+  "uid" : "c3c0e3d0b35600e8",
+  "name" : "it renders home address fields",
+  "fullName" : "AddressContainer.it renders home address fields",
+  "historyId" : "ddbc3d3d37452cba881c3f31a35b5ae3",
+  "time" : {
+    "start" : 1622213799840,
+    "stop" : 1622213799859,
+    "duration" : 19
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AddressContainer"
+  }, {
+    "name" : "testClass",
+    "value" : "AddressContainer"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders home address fields"
+  }, {
+    "name" : "package",
+    "value" : "AddressContainer"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "c3c0e3d0b35600e8.json",
+  "parameterValues" : [ ]
+}

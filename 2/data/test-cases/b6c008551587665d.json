@@ -1,0 +1,46 @@
+{
+  "uid" : "b6c008551587665d",
+  "name" : "passes axe accessibility test",
+  "fullName" : "ReviewPage.passes axe accessibility test",
+  "historyId" : "f3cb7564be89caeb250b1a6b74d0a6ff",
+  "time" : {
+    "start" : 1622213800496,
+    "stop" : 1622213800752,
+    "duration" : 256
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ReviewPage"
+  }, {
+    "name" : "testClass",
+    "value" : "ReviewPage"
+  }, {
+    "name" : "testMethod",
+    "value" : "passes axe accessibility test"
+  }, {
+    "name" : "package",
+    "value" : "ReviewPage"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "b6c008551587665d.json",
+  "parameterValues" : [ ]
+}

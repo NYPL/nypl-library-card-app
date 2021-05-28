@@ -1,0 +1,46 @@
+{
+  "uid" : "13d7e7e016740e5",
+  "name" : "has default values for the two link's text",
+  "fullName" : "RoutingLinks.has default values for the two link's text",
+  "historyId" : "188d93b1b15ff0be16a94f07acb0f11",
+  "time" : {
+    "start" : 1622213795684,
+    "stop" : 1622213795689,
+    "duration" : 5
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "testClass",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "testMethod",
+    "value" : "has default values for the two link's text"
+  }, {
+    "name" : "package",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "13d7e7e016740e5.json",
+  "parameterValues" : [ ]
+}

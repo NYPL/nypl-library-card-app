@@ -1,0 +1,46 @@
+{
+  "uid" : "acf4fcc4077b971c",
+  "name" : "it should render any error messages for required fields",
+  "fullName" : "AddressFormFields.it should render any error messages for required fields",
+  "historyId" : "64d3d9250c15bf1968fa3fbe4ebbcff",
+  "time" : {
+    "start" : 1622213788410,
+    "stop" : 1622213788428,
+    "duration" : 18
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should render any error messages for required fields"
+  }, {
+    "name" : "package",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "acf4fcc4077b971c.json",
+  "parameterValues" : [ ]
+}

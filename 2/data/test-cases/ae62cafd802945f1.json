@@ -1,0 +1,46 @@
+{
+  "uid" : "ae62cafd802945f1",
+  "name" : "passes axe accessibility test",
+  "fullName" : "AcceptTermsFormFields accessibility check.passes axe accessibility test",
+  "historyId" : "a1f17a263af033c7c91444c55757fcb6",
+  "time" : {
+    "start" : 1622213795013,
+    "stop" : 1622213795115,
+    "duration" : 102
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AcceptTermsFormFields accessibility check"
+  }, {
+    "name" : "testClass",
+    "value" : "AcceptTermsFormFields accessibility check"
+  }, {
+    "name" : "testMethod",
+    "value" : "passes axe accessibility test"
+  }, {
+    "name" : "package",
+    "value" : "AcceptTermsFormFields accessibility check"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "ae62cafd802945f1.json",
+  "parameterValues" : [ ]
+}

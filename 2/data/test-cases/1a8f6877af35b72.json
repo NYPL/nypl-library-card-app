@@ -1,0 +1,46 @@
+{
+  "uid" : "1a8f6877af35b72",
+  "name" : "it should internally call ga's event function to track events",
+  "fullName" : "gaUtils trackEvent.it should internally call ga's event function to track events",
+  "historyId" : "8e7f6a0cb3dea2e6e8bd19492cbbd205",
+  "time" : {
+    "start" : 1622213792724,
+    "stop" : 1622213792725,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "gaUtils trackEvent"
+  }, {
+    "name" : "testClass",
+    "value" : "gaUtils trackEvent"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should internally call ga's event function to track events"
+  }, {
+    "name" : "package",
+    "value" : "gaUtils trackEvent"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "1a8f6877af35b72.json",
+  "parameterValues" : [ ]
+}

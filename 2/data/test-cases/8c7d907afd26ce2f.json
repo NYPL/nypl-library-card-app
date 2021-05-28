@@ -1,0 +1,46 @@
+{
+  "uid" : "8c7d907afd26ce2f",
+  "name" : "returns an empty string by default",
+  "fullName" : "getLocationString.returns an empty string by default",
+  "historyId" : "2270b8a41ee14b772e7472d7b792f46d",
+  "time" : {
+    "start" : 1622213785675,
+    "stop" : 1622213785675,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "getLocationString"
+  }, {
+    "name" : "testClass",
+    "value" : "getLocationString"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns an empty string by default"
+  }, {
+    "name" : "package",
+    "value" : "getLocationString"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "8c7d907afd26ce2f.json",
+  "parameterValues" : [ ]
+}
