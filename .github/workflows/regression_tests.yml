@@ -30,6 +30,7 @@ jobs:
         run: npm install
       - name: NPM Test
         run: npm test
+        continue-on-error: true
       - name: Get Allure history
         uses: actions/checkout@v2
         if: always()
