@@ -1,0 +1,66 @@
+{
+  "uid" : "986657822501bf3f",
+  "name" : "should return the user's location",
+  "fullName" : "IPLocationAPI getLocationFromIP.should return the user's location",
+  "historyId" : "b7e19e9a8802975842d2655bf38addc9",
+  "time" : {
+    "start" : 1622214558074,
+    "stop" : 1622214558074,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "IPLocationAPI getLocationFromIP"
+  }, {
+    "name" : "testClass",
+    "value" : "IPLocationAPI getLocationFromIP"
+  }, {
+    "name" : "testMethod",
+    "value" : "should return the user's location"
+  }, {
+    "name" : "package",
+    "value" : "IPLocationAPI getLocationFromIP"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "54789bed647d7cda",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/54789bed647d7cda",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213785673,
+          "stop" : 1622213785674,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "986657822501bf3f.json",
+  "parameterValues" : [ ]
+}

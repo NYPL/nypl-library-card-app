@@ -1,0 +1,66 @@
+{
+  "uid" : "77a31ca44c304341",
+  "name" : "should return true if the coordinates are outside NYC",
+  "fullName" : "IPLocationAPI inNYCBounds.should return true if the coordinates are outside NYC",
+  "historyId" : "ffac60b84bbd18dd4c4c0b6a8464fe7",
+  "time" : {
+    "start" : 1622214558061,
+    "stop" : 1622214558062,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "IPLocationAPI inNYCBounds"
+  }, {
+    "name" : "testClass",
+    "value" : "IPLocationAPI inNYCBounds"
+  }, {
+    "name" : "testMethod",
+    "value" : "should return true if the coordinates are outside NYC"
+  }, {
+    "name" : "package",
+    "value" : "IPLocationAPI inNYCBounds"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "aef4304fd4e9e20f",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/aef4304fd4e9e20f",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213785654,
+          "stop" : 1622213785655,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "77a31ca44c304341.json",
+  "parameterValues" : [ ]
+}

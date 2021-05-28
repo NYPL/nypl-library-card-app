@@ -1,0 +1,66 @@
+{
+  "uid" : "54a069671900ca6f",
+  "name" : "returns null if there's an error with the API",
+  "fullName" : "IPLocationAPI callIpStackAPI.returns null if there's an error with the API",
+  "historyId" : "e23db83d95e12c8071d3d7cee927db2e",
+  "time" : {
+    "start" : 1622214558069,
+    "stop" : 1622214558070,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "IPLocationAPI callIpStackAPI"
+  }, {
+    "name" : "testClass",
+    "value" : "IPLocationAPI callIpStackAPI"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns null if there's an error with the API"
+  }, {
+    "name" : "package",
+    "value" : "IPLocationAPI callIpStackAPI"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "7634e5c76d9b8c02",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/7634e5c76d9b8c02",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213785661,
+          "stop" : 1622213785662,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "54a069671900ca6f.json",
+  "parameterValues" : [ ]
+}

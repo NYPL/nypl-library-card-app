@@ -1,0 +1,66 @@
+{
+  "uid" : "1347daca6213b3b",
+  "name" : "it does not make an API call without an access token",
+  "fullName" : "validateAddress.it does not make an API call without an access token",
+  "historyId" : "2cd968ca1b0a2fb974739f4c871ea9c9",
+  "time" : {
+    "start" : 1622214555551,
+    "stop" : 1622214555552,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "validateAddress"
+  }, {
+    "name" : "testClass",
+    "value" : "validateAddress"
+  }, {
+    "name" : "testMethod",
+    "value" : "it does not make an API call without an access token"
+  }, {
+    "name" : "package",
+    "value" : "validateAddress"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "44c77c21068e979b",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/44c77c21068e979b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213783066,
+          "stop" : 1622213783067,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "1347daca6213b3b.json",
+  "parameterValues" : [ ]
+}

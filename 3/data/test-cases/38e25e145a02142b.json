@@ -1,0 +1,66 @@
+{
+  "uid" : "38e25e145a02142b",
+  "name" : "returns a ProblemDetail with missing values in the details",
+  "fullName" : "constructPatronObject.returns a ProblemDetail with missing values in the details",
+  "historyId" : "9ac221840ceff607a83fb69222c72238",
+  "time" : {
+    "start" : 1622214556224,
+    "stop" : 1622214556224,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "constructPatronObject"
+  }, {
+    "name" : "testClass",
+    "value" : "constructPatronObject"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns a ProblemDetail with missing values in the details"
+  }, {
+    "name" : "package",
+    "value" : "constructPatronObject"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "db2aab9f43f974cf",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/db2aab9f43f974cf",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213783775,
+          "stop" : 1622213783776,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "38e25e145a02142b.json",
+  "parameterValues" : [ ]
+}

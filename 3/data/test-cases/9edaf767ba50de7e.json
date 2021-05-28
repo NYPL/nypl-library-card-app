@@ -1,0 +1,66 @@
+{
+  "uid" : "9edaf767ba50de7e",
+  "name" : "it returns false if the input is a date but not in the year bounds",
+  "fullName" : "isDate.it returns false if the input is a date but not in the year bounds",
+  "historyId" : "a841287cd52d7473daa17e514e6f24cc",
+  "time" : {
+    "start" : 1622214556198,
+    "stop" : 1622214556199,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "isDate"
+  }, {
+    "name" : "testClass",
+    "value" : "isDate"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns false if the input is a date but not in the year bounds"
+  }, {
+    "name" : "package",
+    "value" : "isDate"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "cd0299853bb7114c",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/cd0299853bb7114c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213783749,
+          "stop" : 1622213783750,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "9edaf767ba50de7e.json",
+  "parameterValues" : [ ]
+}

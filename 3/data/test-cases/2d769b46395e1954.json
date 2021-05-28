@@ -1,0 +1,66 @@
+{
+  "uid" : "2d769b46395e1954",
+  "name" : "calls the Auth API once since there is no access token",
+  "fullName" : "initializeAppAuth.calls the Auth API once since there is no access token",
+  "historyId" : "217cef21bef88fcbdb329c3590b4fc74",
+  "time" : {
+    "start" : 1622214555542,
+    "stop" : 1622214555543,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "testClass",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "testMethod",
+    "value" : "calls the Auth API once since there is no access token"
+  }, {
+    "name" : "package",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "2c876b4083f5c553",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/2c876b4083f5c553",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213783056,
+          "stop" : 1622213783057,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "2d769b46395e1954.json",
+  "parameterValues" : [ ]
+}

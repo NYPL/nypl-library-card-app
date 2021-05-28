@@ -1,0 +1,66 @@
+{
+  "uid" : "88b4e7511b7886bb",
+  "name" : "returns an object with expected structure for the Card Creator request",
+  "fullName" : "constructPatronObject.returns an object with expected structure for the Card Creator request",
+  "historyId" : "6d25767f91e2422a004555e6f41d7ed1",
+  "time" : {
+    "start" : 1622214556224,
+    "stop" : 1622214556225,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "constructPatronObject"
+  }, {
+    "name" : "testClass",
+    "value" : "constructPatronObject"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns an object with expected structure for the Card Creator request"
+  }, {
+    "name" : "package",
+    "value" : "constructPatronObject"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "bdbf67a5ffcd19e",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/bdbf67a5ffcd19e",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213783776,
+          "stop" : 1622213783776,
+          "duration" : 0
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "88b4e7511b7886bb.json",
+  "parameterValues" : [ ]
+}

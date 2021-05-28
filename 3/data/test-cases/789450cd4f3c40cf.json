@@ -1,0 +1,66 @@
+{
+  "uid" : "789450cd4f3c40cf",
+  "name" : "it returns a new token which is not valid since it's new and not compared to an existing token",
+  "fullName" : "getCsrfToken.it returns a new token which is not valid since it's new and not compared to an existing token",
+  "historyId" : "7c45fc540b6117e6039c05edfdf6b798",
+  "time" : {
+    "start" : 1622214563806,
+    "stop" : 1622214563808,
+    "duration" : 2
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "getCsrfToken"
+  }, {
+    "name" : "testClass",
+    "value" : "getCsrfToken"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns a new token which is not valid since it's new and not compared to an existing token"
+  }, {
+    "name" : "package",
+    "value" : "getCsrfToken"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "f51bed7c2940c7c5",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/f51bed7c2940c7c5",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213791559,
+          "stop" : 1622213791560,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "789450cd4f3c40cf.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,66 @@
+{
+  "uid" : "d16c0d80fb059f6a",
+  "name" : "it renders a validation button if the input is valid",
+  "fullName" : "UsernameValidationFormFields.it renders a validation button if the input is valid",
+  "historyId" : "408373fb40837f333761b826b1427395",
+  "time" : {
+    "start" : 1622214557452,
+    "stop" : 1622214557466,
+    "duration" : 14
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders a validation button if the input is valid"
+  }, {
+    "name" : "package",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "f7bfeff826748727",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/f7bfeff826748727",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213785044,
+          "stop" : 1622213785058,
+          "duration" : 14
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "d16c0d80fb059f6a.json",
+  "parameterValues" : [ ]
+}

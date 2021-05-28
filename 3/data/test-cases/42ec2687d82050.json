@@ -1,0 +1,66 @@
+{
+  "uid" : "42ec2687d82050",
+  "name" : "it passes axe accessibility test",
+  "fullName" : "ApiErrors.it passes axe accessibility test",
+  "historyId" : "5d807eef6e438abc12f6749b45e068f7",
+  "time" : {
+    "start" : 1622214563039,
+    "stop" : 1622214563071,
+    "duration" : 32
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testClass",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testMethod",
+    "value" : "it passes axe accessibility test"
+  }, {
+    "name" : "package",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "804150fbf32f8a0d",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/804150fbf32f8a0d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213791091,
+          "stop" : 1622213791114,
+          "duration" : 23
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "42ec2687d82050.json",
+  "parameterValues" : [ ]
+}

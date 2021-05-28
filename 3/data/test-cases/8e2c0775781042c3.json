@@ -1,0 +1,66 @@
+{
+  "uid" : "8e2c0775781042c3",
+  "name" : "it should return an empty object since there are no errors",
+  "fullName" : "validatePersonalFormData.it should return an empty object since there are no errors",
+  "historyId" : "5bf8169fad91570f8ed6cd19db260937",
+  "time" : {
+    "start" : 1622214556218,
+    "stop" : 1622214556219,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "validatePersonalFormData"
+  }, {
+    "name" : "testClass",
+    "value" : "validatePersonalFormData"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return an empty object since there are no errors"
+  }, {
+    "name" : "package",
+    "value" : "validatePersonalFormData"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "5ad6e085559eb17",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/5ad6e085559eb17",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213783770,
+          "stop" : 1622213783770,
+          "duration" : 0
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "8e2c0775781042c3.json",
+  "parameterValues" : [ ]
+}

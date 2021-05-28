@@ -1,0 +1,66 @@
+{
+  "uid" : "6f8222405e032a27",
+  "name" : "renders a home address",
+  "fullName" : "AddressVerificationContainer.renders a home address",
+  "historyId" : "ea5570151344766c2de709c8811637d2",
+  "time" : {
+    "start" : 1622214558920,
+    "stop" : 1622214558936,
+    "duration" : 16
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AddressVerificationContainer"
+  }, {
+    "name" : "testClass",
+    "value" : "AddressVerificationContainer"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders a home address"
+  }, {
+    "name" : "package",
+    "value" : "AddressVerificationContainer"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "469ecbcb4805e8ab",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/469ecbcb4805e8ab",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213786559,
+          "stop" : 1622213786582,
+          "duration" : 23
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "6f8222405e032a27.json",
+  "parameterValues" : [ ]
+}

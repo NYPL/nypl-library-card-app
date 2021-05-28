@@ -1,0 +1,66 @@
+{
+  "uid" : "37f394518af950ae",
+  "name" : "it should return an empty string with an empty string or type argument",
+  "fullName" : "createNestedQueryParams.it should return an empty string with an empty string or type argument",
+  "historyId" : "ccb4eea5711f946f06e576b0e8c33ade",
+  "time" : {
+    "start" : 1622214563803,
+    "stop" : 1622214563804,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "createNestedQueryParams"
+  }, {
+    "name" : "testClass",
+    "value" : "createNestedQueryParams"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return an empty string with an empty string or type argument"
+  }, {
+    "name" : "package",
+    "value" : "createNestedQueryParams"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "c631b3e6cc333fde",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/c631b3e6cc333fde",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213791556,
+          "stop" : 1622213791557,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "37f394518af950ae.json",
+  "parameterValues" : [ ]
+}

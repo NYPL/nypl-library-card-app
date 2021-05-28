@@ -1,0 +1,66 @@
+{
+  "uid" : "41d1628b9a2b9a63",
+  "name" : "it should initialize Google Analytics",
+  "fullName" : "gaUtils setupAnalytics.it should initialize Google Analytics",
+  "historyId" : "f6f78afd2cfbbb2fc5c5520da97bdd06",
+  "time" : {
+    "start" : 1622214564928,
+    "stop" : 1622214564931,
+    "duration" : 3
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "gaUtils setupAnalytics"
+  }, {
+    "name" : "testClass",
+    "value" : "gaUtils setupAnalytics"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should initialize Google Analytics"
+  }, {
+    "name" : "package",
+    "value" : "gaUtils setupAnalytics"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "b09413424b8b5da7",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/b09413424b8b5da7",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213792719,
+          "stop" : 1622213792721,
+          "duration" : 2
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "41d1628b9a2b9a63.json",
+  "parameterValues" : [ ]
+}

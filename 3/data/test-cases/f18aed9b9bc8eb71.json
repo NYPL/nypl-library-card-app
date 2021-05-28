@@ -1,0 +1,66 @@
+{
+  "uid" : "f18aed9b9bc8eb71",
+  "name" : "it passes axe accessibility checks for the field input",
+  "fullName" : "AgeFormFields.it passes axe accessibility checks for the field input",
+  "historyId" : "7e6d6750ea96a09dbfe16d60f9a773dd",
+  "time" : {
+    "start" : 1622214561654,
+    "stop" : 1622214561727,
+    "duration" : 73
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it passes axe accessibility checks for the field input"
+  }, {
+    "name" : "package",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "d47e18f3d80c9fec",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/d47e18f3d80c9fec",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213789454,
+          "stop" : 1622213789528,
+          "duration" : 74
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "f18aed9b9bc8eb71.json",
+  "parameterValues" : [ ]
+}

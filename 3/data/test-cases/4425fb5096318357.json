@@ -1,0 +1,66 @@
+{
+  "uid" : "4425fb5096318357",
+  "name" : "it should replace text in the error message with its equivalent anchor element string",
+  "fullName" : "createAnchorText.it should replace text in the error message with its equivalent anchor element string",
+  "historyId" : "4945bdad17e5264ade3e221686dd2b58",
+  "time" : {
+    "start" : 1622214561138,
+    "stop" : 1622214561140,
+    "duration" : 2
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "createAnchorText"
+  }, {
+    "name" : "testClass",
+    "value" : "createAnchorText"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should replace text in the error message with its equivalent anchor element string"
+  }, {
+    "name" : "package",
+    "value" : "createAnchorText"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "ba2b8bbfea4aaab0",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/ba2b8bbfea4aaab0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213788902,
+          "stop" : 1622213788903,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "4425fb5096318357.json",
+  "parameterValues" : [ ]
+}

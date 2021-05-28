@@ -1,0 +1,66 @@
+{
+  "uid" : "bfa9d9c74149f21e",
+  "name" : "renders the basic label, input, and helper text elements",
+  "fullName" : "UsernameValidationFormFields.renders the basic label, input, and helper text elements",
+  "historyId" : "8fb15b9841de79408e8d779486dd2cdb",
+  "time" : {
+    "start" : 1622214557413,
+    "stop" : 1622214557452,
+    "duration" : 39
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders the basic label, input, and helper text elements"
+  }, {
+    "name" : "package",
+    "value" : "UsernameValidationFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "326e2731abe18f61",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/326e2731abe18f61",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213784998,
+          "stop" : 1622213785044,
+          "duration" : 46
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "bfa9d9c74149f21e.json",
+  "parameterValues" : [ ]
+}

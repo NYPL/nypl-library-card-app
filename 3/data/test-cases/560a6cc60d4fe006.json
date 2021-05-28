@@ -1,0 +1,66 @@
+{
+  "uid" : "560a6cc60d4fe006",
+  "name" : "it should make an API call and return the data from a successful call",
+  "fullName" : "callPatronAPI.it should make an API call and return the data from a successful call",
+  "historyId" : "91cde4c6316c23c4591bce7aed5cf235",
+  "time" : {
+    "start" : 1622214555557,
+    "stop" : 1622214555572,
+    "duration" : 15
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "callPatronAPI"
+  }, {
+    "name" : "testClass",
+    "value" : "callPatronAPI"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should make an API call and return the data from a successful call"
+  }, {
+    "name" : "package",
+    "value" : "callPatronAPI"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "3580df6b27e953e5",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/3580df6b27e953e5",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213783072,
+          "stop" : 1622213783088,
+          "duration" : 16
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "560a6cc60d4fe006.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,73 @@
+{
+  "uid" : "a3de181c3e730ad8",
+  "name" : "renders the autosuggest dropdown",
+  "fullName" : "AccountFormFields.renders the autosuggest dropdown",
+  "historyId" : "8fd89d93f218169789beb851ea14030e",
+  "time" : {
+    "start" : 1622214564430,
+    "stop" : 1622214564449,
+    "duration" : 19
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "failed",
+  "statusMessage" : "TypeError: getPath(...).flat is not a function",
+  "statusTrace" : "TypeError: getPath(...).flat is not a function\n                    at getPath (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-hook-form/src/utils/getPath.ts:28:33)\n                    at assignWatchFields (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-hook-form/src/logic/assignWatchFields.ts:33:7)\n                    at React.useCallback (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-hook-form/src/useForm.ts:681:16)\n                    at watch (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-hook-form/src/useForm.ts:743:12)\n                    at UsernameValidationForm (/home/runner/work/nypl-library-card-app/nypl-library-card-app/src/components/UsernameValidationFormFields/index.tsx:32:25)\n                    at renderWithHooks (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:14803:18)\n                    at updateFunctionComponent (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:17034:20)\n                    at beginWork (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:18610:16)\n                    at HTMLUnknownElement.callCallback (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:188:14)\n                    at HTMLUnknownElement.callTheUserObjectsOperation (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)\n                    at innerInvokeEventListeners (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:318:25)\n                    at invokeEventListeners (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:274:3)\n                    at HTMLUnknownElementImpl._dispatch (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:221:9)\n                    at HTMLUnknownElementImpl.dispatchEvent (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:94:17)\n                    at HTMLUnknownElement.dispatchEvent (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:231:34)\n                    at Object.invokeGuardedCallbackDev (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:237:16)\n                    at invokeGuardedCallback (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:292:31)\n                    at beginWork$1 (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:23203:7)\n                    at performUnitOfWork (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:22157:12)\n                    at workLoopSync (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:22130:22)\n                    at performSyncWorkOnRoot (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:21756:9)\n                    at /home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:11089:24\n                    at unstable_runWithPriority (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/scheduler/cjs/scheduler.development.js:653:12)\n                    at runWithPriority$1 (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:11039:10)\n                    at flushSyncCallbackQueueImpl (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:11084:7)\n                    at flushSyncCallbackQueue (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:11072:3)\n                    at flushPassiveEffectsImpl (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:22883:3)\n                    at unstable_runWithPriority (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/scheduler/cjs/scheduler.development.js:653:12)\n                    at runWithPriority$1 (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:11039:10)\n                    at flushPassiveEffects (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom.development.js:22820:12)\n                    at Object.<anonymous>.flushWork (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom-test-utils.development.js:876:10)\n                    at act (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/react-dom/cjs/react-dom-test-utils.development.js:994:9)\n                    at render (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/@testing-library/react/dist/pure.js:95:26)\n                    at Object.beforeEach (/home/runner/work/nypl-library-card-app/nypl-library-card-app/src/components/AccountFormFields/AccountFormFields.test.tsx:21:19)\n                    at Object.asyncJestLifecycle (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:58:37)\n                    at resolve (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/jest-jasmine2/build/queueRunner.js:45:12)\n                    at new Promise (<anonymous>)\n                    at mapper (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/jest-jasmine2/build/queueRunner.js:28:19)\n                    at promise.then (/home/runner/work/nypl-library-card-app/nypl-library-card-app/node_modules/jest-jasmine2/build/queueRunner.js:75:41)",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AccountFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AccountFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders the autosuggest dropdown"
+  }, {
+    "name" : "package",
+    "value" : "AccountFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 2,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "25b6da3060f2880e",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/25b6da3060f2880e",
+        "status" : "failed",
+        "statusDetails" : "TypeError: getPath(...).flat is not a function",
+        "time" : {
+          "start" : 1622213792178,
+          "stop" : 1622213792197,
+          "duration" : 19
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "a3de181c3e730ad8.json",
+  "parameterValues" : [ ]
+}

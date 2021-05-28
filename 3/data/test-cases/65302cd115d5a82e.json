@@ -1,0 +1,66 @@
+{
+  "uid" : "65302cd115d5a82e",
+  "name" : "it renders an unavailable username detail",
+  "fullName" : "ApiErrors.it renders an unavailable username detail",
+  "historyId" : "a517452d0d39d1f71102b6c15d516809",
+  "time" : {
+    "start" : 1622214563090,
+    "stop" : 1622214563097,
+    "duration" : 7
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testClass",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders an unavailable username detail"
+  }, {
+    "name" : "package",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "839a6fac298873bf",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/839a6fac298873bf",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213791134,
+          "stop" : 1622213791140,
+          "duration" : 6
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "65302cd115d5a82e.json",
+  "parameterValues" : [ ]
+}

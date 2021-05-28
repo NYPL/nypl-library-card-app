@@ -1,0 +1,66 @@
+{
+  "uid" : "9c9951f4898ad9dd",
+  "name" : "it returns validated address responses from the API calls",
+  "fullName" : "validateAddress.it returns validated address responses from the API calls",
+  "historyId" : "3f651c2d807801d424f2e2f796115616",
+  "time" : {
+    "start" : 1622214555550,
+    "stop" : 1622214555551,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "validateAddress"
+  }, {
+    "name" : "testClass",
+    "value" : "validateAddress"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns validated address responses from the API calls"
+  }, {
+    "name" : "package",
+    "value" : "validateAddress"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "ffcbb35a53498a9d",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/ffcbb35a53498a9d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213783065,
+          "stop" : 1622213783066,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "9c9951f4898ad9dd.json",
+  "parameterValues" : [ ]
+}

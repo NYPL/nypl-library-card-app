@@ -1,0 +1,66 @@
+{
+  "uid" : "953ccdfa9653e048",
+  "name" : "it should return undefined if the key does not exist in the list of properties",
+  "fullName" : "createAnchorText.it should return undefined if the key does not exist in the list of properties",
+  "historyId" : "defc806d7dbd37f8cf60812d9f75200c",
+  "time" : {
+    "start" : 1622214561137,
+    "stop" : 1622214561138,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "createAnchorText"
+  }, {
+    "name" : "testClass",
+    "value" : "createAnchorText"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should return undefined if the key does not exist in the list of properties"
+  }, {
+    "name" : "package",
+    "value" : "createAnchorText"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "86648931eb9c4357",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/86648931eb9c4357",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213788900,
+          "stop" : 1622213788901,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "953ccdfa9653e048.json",
+  "parameterValues" : [ ]
+}

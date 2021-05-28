@@ -1,0 +1,114 @@
+{
+  "total" : 59,
+  "items" : [ {
+    "uid" : "631785dce3489bd56afb55f6630d6cd4",
+    "name" : "AccountFormFields",
+    "statistic" : {
+      "failed" : 2,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 2
+    }
+  }, {
+    "uid" : "eb3d979fda98038438b420ba4b3b10d1",
+    "name" : "AccountFormFields accessibility check",
+    "statistic" : {
+      "failed" : 1,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    }
+  }, {
+    "uid" : "be91ea3673926ca0ed40d93e7f1e883c",
+    "name" : "AgeFormFields",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 7,
+      "unknown" : 0,
+      "total" : 7
+    }
+  }, {
+    "uid" : "0957a51920eec5a08b48f4b6c0264a27",
+    "name" : "ApiErrors",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 7,
+      "unknown" : 0,
+      "total" : 7
+    }
+  }, {
+    "uid" : "1933b3c7dce6ff6969fec7281c0b18a1",
+    "name" : "UsernameValidationFormFields",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 6,
+      "unknown" : 0,
+      "total" : 6
+    }
+  }, {
+    "uid" : "9da3137cc4cf173df30d2e7ea7bcd392",
+    "name" : "IPLocationAPI callIpStackAPI",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 5,
+      "unknown" : 0,
+      "total" : 5
+    }
+  }, {
+    "uid" : "0e74aaf87301ad208f3671612bd72519",
+    "name" : "AddressFormFields",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 5,
+      "unknown" : 0,
+      "total" : 5
+    }
+  }, {
+    "uid" : "2f5b9dabea1aa7d18158cd5a9f03970a",
+    "name" : "initializeAppAuth",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 4,
+      "unknown" : 0,
+      "total" : 4
+    }
+  }, {
+    "uid" : "ab02e4b31867d3cea210a65b4d3191aa",
+    "name" : "constructAddresses",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 4,
+      "unknown" : 0,
+      "total" : 4
+    }
+  }, {
+    "uid" : "78c50dcf38e663c40a6768b259f30fc5",
+    "name" : "getLocationString",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 4,
+      "unknown" : 0,
+      "total" : 4
+    }
+  } ]
+}

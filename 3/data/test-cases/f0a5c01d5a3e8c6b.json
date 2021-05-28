@@ -1,0 +1,66 @@
+{
+  "uid" : "f0a5c01d5a3e8c6b",
+  "name" : "updates the age gate checkbox",
+  "fullName" : "AgeFormFields.updates the age gate checkbox",
+  "historyId" : "14dfac8284c5237999e4b13225bc976a",
+  "time" : {
+    "start" : 1622214561809,
+    "stop" : 1622214561822,
+    "duration" : 13
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "updates the age gate checkbox"
+  }, {
+    "name" : "package",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "c3f4c36923b17749",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/c3f4c36923b17749",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213789612,
+          "stop" : 1622213789628,
+          "duration" : 16
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "f0a5c01d5a3e8c6b.json",
+  "parameterValues" : [ ]
+}

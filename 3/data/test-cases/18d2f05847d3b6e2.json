@@ -1,0 +1,66 @@
+{
+  "uid" : "18d2f05847d3b6e2",
+  "name" : "makes an authenticated API call with a work address and gets a non-valid response",
+  "fullName" : "axiosAddressPost.makes an authenticated API call with a work address and gets a non-valid response",
+  "historyId" : "930a2738d8dbd6b7d66625fbda1fcad2",
+  "time" : {
+    "start" : 1622214555548,
+    "stop" : 1622214555549,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "axiosAddressPost"
+  }, {
+    "name" : "testClass",
+    "value" : "axiosAddressPost"
+  }, {
+    "name" : "testMethod",
+    "value" : "makes an authenticated API call with a work address and gets a non-valid response"
+  }, {
+    "name" : "package",
+    "value" : "axiosAddressPost"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "e1724e3ebc3c1566",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/e1724e3ebc3c1566",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213783062,
+          "stop" : 1622213783064,
+          "duration" : 2
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "18d2f05847d3b6e2.json",
+  "parameterValues" : [ ]
+}

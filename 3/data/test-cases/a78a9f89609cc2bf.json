@@ -1,0 +1,66 @@
+{
+  "uid" : "a78a9f89609cc2bf",
+  "name" : "it should render five fields",
+  "fullName" : "AddressFormFields.it should render five fields",
+  "historyId" : "540cd481a4257b6a43648adb4d5f61a",
+  "time" : {
+    "start" : 1622214560262,
+    "stop" : 1622214560627,
+    "duration" : 365
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should render five fields"
+  }, {
+    "name" : "package",
+    "value" : "AddressFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "792624c81466a432",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/792624c81466a432",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213787997,
+          "stop" : 1622213788392,
+          "duration" : 395
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "a78a9f89609cc2bf.json",
+  "parameterValues" : [ ]
+}

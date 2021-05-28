@@ -1,0 +1,66 @@
+{
+  "uid" : "4b47c36df6e991dd",
+  "name" : "updates the checkbox",
+  "fullName" : "AcceptTermsFormFields.updates the checkbox",
+  "historyId" : "ce63b09eea5aad79448a8d6b0bc7f498",
+  "time" : {
+    "start" : 1622214567326,
+    "stop" : 1622214567341,
+    "duration" : 15
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AcceptTermsFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AcceptTermsFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "updates the checkbox"
+  }, {
+    "name" : "package",
+    "value" : "AcceptTermsFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "747420b14eeb9af4",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/747420b14eeb9af4",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213795140,
+          "stop" : 1622213795154,
+          "duration" : 14
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "4b47c36df6e991dd.json",
+  "parameterValues" : [ ]
+}

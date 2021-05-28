@@ -1,0 +1,66 @@
+{
+  "uid" : "f9f94ea0f3a02eb6",
+  "name" : "it should throw an error if the Auth endpoint returned bad data",
+  "fullName" : "initializeAppAuth.it should throw an error if the Auth endpoint returned bad data",
+  "historyId" : "520e4c0d3c514f22e389077384c9d39d",
+  "time" : {
+    "start" : 1622214555538,
+    "stop" : 1622214555542,
+    "duration" : 4
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "testClass",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should throw an error if the Auth endpoint returned bad data"
+  }, {
+    "name" : "package",
+    "value" : "initializeAppAuth"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "3452bcfa14b738dc",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/3452bcfa14b738dc",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213783051,
+          "stop" : 1622213783056,
+          "duration" : 5
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "f9f94ea0f3a02eb6.json",
+  "parameterValues" : [ ]
+}

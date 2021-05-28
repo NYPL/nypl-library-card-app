@@ -1,0 +1,66 @@
+{
+  "uid" : "50c6feb8fb34ac42",
+  "name" : "it should internally call ga's event function to track events",
+  "fullName" : "gaUtils trackEvent.it should internally call ga's event function to track events",
+  "historyId" : "8e7f6a0cb3dea2e6e8bd19492cbbd205",
+  "time" : {
+    "start" : 1622214564934,
+    "stop" : 1622214564935,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "gaUtils trackEvent"
+  }, {
+    "name" : "testClass",
+    "value" : "gaUtils trackEvent"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should internally call ga's event function to track events"
+  }, {
+    "name" : "package",
+    "value" : "gaUtils trackEvent"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "1a8f6877af35b72",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/1a8f6877af35b72",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213792724,
+          "stop" : 1622213792725,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "50c6feb8fb34ac42.json",
+  "parameterValues" : [ ]
+}

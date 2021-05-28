@@ -1,0 +1,66 @@
+{
+  "uid" : "b118bda29e7c0fa0",
+  "name" : "it renders the generic message if the type isn't found",
+  "fullName" : "ApiErrors.it renders the generic message if the type isn't found",
+  "historyId" : "104ff0ee503f694d88b204f3e6c42eeb",
+  "time" : {
+    "start" : 1622214563076,
+    "stop" : 1622214563085,
+    "duration" : 9
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testClass",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders the generic message if the type isn't found"
+  }, {
+    "name" : "package",
+    "value" : "ApiErrors"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "2dd00c703ee3698c",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/2dd00c703ee3698c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213791119,
+          "stop" : 1622213791128,
+          "duration" : 9
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "b118bda29e7c0fa0.json",
+  "parameterValues" : [ ]
+}

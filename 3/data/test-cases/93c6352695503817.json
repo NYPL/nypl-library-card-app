@@ -1,0 +1,66 @@
+{
+  "uid" : "93c6352695503817",
+  "name" : "renders the NYPL card info",
+  "fullName" : "Confirmation.renders the NYPL card info",
+  "historyId" : "62326f7a17841152ccce003104f7790c",
+  "time" : {
+    "start" : 1622214566651,
+    "stop" : 1622214566678,
+    "duration" : 27
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "Confirmation"
+  }, {
+    "name" : "testClass",
+    "value" : "Confirmation"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders the NYPL card info"
+  }, {
+    "name" : "package",
+    "value" : "Confirmation"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "8ba310d8810259da",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/8ba310d8810259da",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213794487,
+          "stop" : 1622213794525,
+          "duration" : 38
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "93c6352695503817.json",
+  "parameterValues" : [ ]
+}

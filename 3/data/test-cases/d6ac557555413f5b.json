@@ -1,0 +1,66 @@
+{
+  "uid" : "d6ac557555413f5b",
+  "name" : "it should internally call ga's pageview function to track a url",
+  "fullName" : "gaUtils trackPageview.it should internally call ga's pageview function to track a url",
+  "historyId" : "ac51be1a10941b901e2aef89c678ce",
+  "time" : {
+    "start" : 1622214564932,
+    "stop" : 1622214564933,
+    "duration" : 1
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "gaUtils trackPageview"
+  }, {
+    "name" : "testClass",
+    "value" : "gaUtils trackPageview"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should internally call ga's pageview function to track a url"
+  }, {
+    "name" : "package",
+    "value" : "gaUtils trackPageview"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "76605267b8856c50",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/76605267b8856c50",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213792722,
+          "stop" : 1622213792723,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "d6ac557555413f5b.json",
+  "parameterValues" : [ ]
+}

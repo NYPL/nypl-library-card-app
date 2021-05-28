@@ -1,0 +1,66 @@
+{
+  "uid" : "633f26c1aec8fc4a",
+  "name" : "renders two links when both 'previous' and 'next' props are passed",
+  "fullName" : "RoutingLinks.renders two links when both 'previous' and 'next' props are passed",
+  "historyId" : "ea7f9b8b80d4c703180bf0001c0601dd",
+  "time" : {
+    "start" : 1622214567867,
+    "stop" : 1622214567880,
+    "duration" : 13
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "testClass",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders two links when both 'previous' and 'next' props are passed"
+  }, {
+    "name" : "package",
+    "value" : "RoutingLinks"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "db00e77bcf410bbc",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/db00e77bcf410bbc",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213795670,
+          "stop" : 1622213795684,
+          "duration" : 14
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "633f26c1aec8fc4a.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,66 @@
+{
+  "uid" : "f8c026950e34f287",
+  "name" : "it renders a checkbox with the simplye policyType",
+  "fullName" : "AgeFormFields.it renders a checkbox with the simplye policyType",
+  "historyId" : "4d478844e03f3e6ef1e7ddbe277d615",
+  "time" : {
+    "start" : 1622214561796,
+    "stop" : 1622214561809,
+    "duration" : 13
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it renders a checkbox with the simplye policyType"
+  }, {
+    "name" : "package",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "6c02356d7987ba5b",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/6c02356d7987ba5b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213789594,
+          "stop" : 1622213789612,
+          "duration" : 18
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "f8c026950e34f287.json",
+  "parameterValues" : [ ]
+}

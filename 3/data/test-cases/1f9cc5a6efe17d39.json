@@ -1,0 +1,66 @@
+{
+  "uid" : "1f9cc5a6efe17d39",
+  "name" : "it returns the specific address values requested",
+  "fullName" : "constructAddressType.it returns the specific address values requested",
+  "historyId" : "c29cf9d9ed5303592be50778c46df6cd",
+  "time" : {
+    "start" : 1622214556210,
+    "stop" : 1622214556210,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "constructAddressType"
+  }, {
+    "name" : "testClass",
+    "value" : "constructAddressType"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns the specific address values requested"
+  }, {
+    "name" : "package",
+    "value" : "constructAddressType"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "58ec0cd7ae5688b4",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/58ec0cd7ae5688b4",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213783761,
+          "stop" : 1622213783762,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "1f9cc5a6efe17d39.json",
+  "parameterValues" : [ ]
+}

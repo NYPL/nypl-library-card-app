@@ -1,0 +1,66 @@
+{
+  "uid" : "e4ef15666181160f",
+  "name" : "it returns authorization headers object",
+  "fullName" : "constructApiHeaders.it returns authorization headers object",
+  "historyId" : "53b50c880d1026c5b62a3b77af99af2",
+  "time" : {
+    "start" : 1622214555524,
+    "stop" : 1622214555528,
+    "duration" : 4
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "constructApiHeaders"
+  }, {
+    "name" : "testClass",
+    "value" : "constructApiHeaders"
+  }, {
+    "name" : "testMethod",
+    "value" : "it returns authorization headers object"
+  }, {
+    "name" : "package",
+    "value" : "constructApiHeaders"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "d63fb52190914",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/d63fb52190914",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213783037,
+          "stop" : 1622213783041,
+          "duration" : 4
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "e4ef15666181160f.json",
+  "parameterValues" : [ ]
+}

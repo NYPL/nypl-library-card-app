@@ -1,0 +1,66 @@
+{
+  "uid" : "8ce4313da9c637b2",
+  "name" : "it should render a webApplicant error message",
+  "fullName" : "AgeFormFields.it should render a webApplicant error message",
+  "historyId" : "bba2c520040ef7fafd14c2951141be0e",
+  "time" : {
+    "start" : 1622214561822,
+    "stop" : 1622214561827,
+    "duration" : 5
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it should render a webApplicant error message"
+  }, {
+    "name" : "package",
+    "value" : "AgeFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "b0b7818741d02500",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/b0b7818741d02500",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213789628,
+          "stop" : 1622213789632,
+          "duration" : 4
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "8ce4313da9c637b2.json",
+  "parameterValues" : [ ]
+}

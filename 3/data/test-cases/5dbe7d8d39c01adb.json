@@ -1,0 +1,66 @@
+{
+  "uid" : "5dbe7d8d39c01adb",
+  "name" : "it updates the selected value from the dropdown",
+  "fullName" : "LibraryListFormFields.it updates the selected value from the dropdown",
+  "historyId" : "bc551219eba75f0708630b1812700cc6",
+  "time" : {
+    "start" : 1622214562488,
+    "stop" : 1622214562526,
+    "duration" : 38
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "it updates the selected value from the dropdown"
+  }, {
+    "name" : "package",
+    "value" : "LibraryListFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "d57b5f5af7b663b1",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/d57b5f5af7b663b1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213790522,
+          "stop" : 1622213790565,
+          "duration" : 43
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "5dbe7d8d39c01adb.json",
+  "parameterValues" : [ ]
+}

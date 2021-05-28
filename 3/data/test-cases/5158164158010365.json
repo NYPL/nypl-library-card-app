@@ -1,0 +1,66 @@
+{
+  "uid" : "5158164158010365",
+  "name" : "returns true if the expiration time will expire soon",
+  "fullName" : "isTokenExpiring.returns true if the expiration time will expire soon",
+  "historyId" : "96d2a254810b0f6c39d479c63f3c6310",
+  "time" : {
+    "start" : 1622214555536,
+    "stop" : 1622214555536,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "isTokenExpiring"
+  }, {
+    "name" : "testClass",
+    "value" : "isTokenExpiring"
+  }, {
+    "name" : "testMethod",
+    "value" : "returns true if the expiration time will expire soon"
+  }, {
+    "name" : "package",
+    "value" : "isTokenExpiring"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "d1429d2e9e080f9d",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/d1429d2e9e080f9d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213783049,
+          "stop" : 1622213783050,
+          "duration" : 1
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "5158164158010365.json",
+  "parameterValues" : [ ]
+}

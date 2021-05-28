@@ -1,0 +1,66 @@
+{
+  "uid" : "26b07c6039e6789b",
+  "name" : "renders names, age, email, and newsletter fields",
+  "fullName" : "PersonalFormFields.renders names, age, email, and newsletter fields",
+  "historyId" : "b3366a92b7c5c53e68bb567e43039731",
+  "time" : {
+    "start" : 1622214568367,
+    "stop" : 1622214568691,
+    "duration" : 324
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "PersonalFormFields"
+  }, {
+    "name" : "testClass",
+    "value" : "PersonalFormFields"
+  }, {
+    "name" : "testMethod",
+    "value" : "renders names, age, email, and newsletter fields"
+  }, {
+    "name" : "package",
+    "value" : "PersonalFormFields"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 2
+      },
+      "items" : [ {
+        "uid" : "b7943d2589dd2fe0",
+        "reportUrl" : "https://NYPL.github.io/nypl-library-card-app/2//#testresult/b7943d2589dd2fe0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1622213796188,
+          "stop" : 1622213796525,
+          "duration" : 337
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "26b07c6039e6789b.json",
+  "parameterValues" : [ ]
+}
