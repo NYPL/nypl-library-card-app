@@ -31,9 +31,6 @@ const AddressContainer = () => {
    * @param formData - data object returned from react-hook-form
    */
   const submitForm = (formData) => {
-    console.log("work address container");
-    console.log("formValues", formValues);
-    console.log("formData", formData);
     setIsLoading(true);
 
     const workAddress = constructAddressType(formData, "work");
