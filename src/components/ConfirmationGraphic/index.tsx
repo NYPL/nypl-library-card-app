@@ -9,7 +9,7 @@ const ConfirmationContainer: React.FC = () => {
   const canvasArgs = { role: "img", ["aria-label"]: "Scannable barcode" };
   const { state } = useFormDataContext();
   const formResults = state.results || ({} as FormResults);
-  const { barcode, pin, name } = formResults;
+  const { barcode, password, name } = formResults;
   let canvas;
   // What we want to do is render the HTML and then pick up the canvas element.
   // We can then draw a barcode on it using `bwipjs`. The ILS uses `Codabar` as
@@ -61,8 +61,8 @@ const ConfirmationContainer: React.FC = () => {
             <div className="barcode">{barcode}</div>
           </div>
           <div className="grid-item">
-            PIN
-            <div className="content">{pin}</div>
+            PASSWORD
+            <div className="content">{password}</div>
           </div>
           <div className="grid-item">
             ISSUED

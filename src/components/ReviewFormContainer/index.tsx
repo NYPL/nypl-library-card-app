@@ -45,20 +45,20 @@ function ReviewFormContainer() {
   // Flags to set a section to editable or read-only.
   const [editPersonalInfoFlag, setEditPersonalInfoFlag] = useState(false);
   const [editAccountInfoFlag, setEditAccountInfoFlag] = useState(false);
-  const [showPin, setShowPin] = useState(true);
+  const [showPassword, setShowPassword] = useState(true);
   const checkBoxLabelOptions = {
-    id: "showPinId",
-    labelContent: <>Show PIN</>,
+    id: "showPasswordId",
+    labelContent: <>Show Password</>,
   };
-  const updateShowPin = () => setShowPin(!showPin);
+  const updateShowPassword = () => setShowPassword(!showPassword);
 
   // Will run whenever the `errorObj` has changes, specifically for
   // bad requests.
   useEffect(() => {
-    // The PIN is shown by default when javascript is not enabled. It is hidden
-    // once the component renders on the client side.
+    // The password is shown by default when javascript is not enabled. It is
+    // hidden once the component renders on the client side.
     setClientSide(true);
-    setShowPin(false);
+    setShowPassword(false);
 
     if (errorObj) {
       document.title = "Form Submission Error | NYPL";
@@ -241,23 +241,23 @@ function ReviewFormContainer() {
         <div>{formValues.username}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>PIN</div>
-        {/* Only render the toggleable PIN with javascript enabled. */}
+        <div className={styles.title}>Password</div>
+        {/* Only render the toggleable password with javascript enabled. */}
         {clientSide ? (
           <>
-            <div>{showPin ? formValues.pin : "****"}</div>
+            <div>{showPassword ? formValues.password : "****"}</div>
             <Checkbox
-              checkboxId="showPINReview"
-              name="showPINReview"
+              checkboxId="showPasswordReview"
+              name="showPasswordReview"
               labelOptions={checkBoxLabelOptions}
               attributes={{
-                defaultChecked: showPin,
-                onClick: updateShowPin,
+                defaultChecked: showPassword,
+                onClick: updateShowPassword,
               }}
             />
           </>
         ) : (
-          <div>{formValues.pin}</div>
+          <div>{formValues.password}</div>
         )}
       </div>
       <div className={styles.field}>
@@ -403,7 +403,7 @@ function ReviewFormContainer() {
           >
             <fieldset>
               <legend>Account form fields</legend>
-              <AccountFormFields showPinOnLoad />
+              <AccountFormFields showPasswordOnLoad />
               <AcceptTermsFormFields />
             </fieldset>
             {submitSectionButton}

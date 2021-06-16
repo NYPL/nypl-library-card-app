@@ -352,7 +352,7 @@ export async function callPatronAPI(
     //   link: "some-link",
     //   barcode: "12345678912345",
     //   username: "tomnook",
-    //   pin: "1234",
+    //   password: "1234",
     //   temporary: false,
     //   message: "The library card will be a standard library card.",
     //   patronId: 1234567,

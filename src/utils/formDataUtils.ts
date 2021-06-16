@@ -17,8 +17,11 @@ const errorMessages = {
   ageGate: "You must be 13 years or older to continue.",
   email: "Please enter a valid email address.",
   username: "Username must be between 5-25 alphanumeric characters.",
-  pin: "Please enter a 4-digit PIN.",
-  verifyPin: "The two PINs don't match.",
+  password:
+    "The password must be at least 8 characters, include a mixture of both " +
+    "uppercase and lowercase letters, include a mixture of letters and " +
+    "numbers, and have at least one special character.",
+  verifyPassword: "The two passwords don't match.",
   acceptTerms: "The terms and conditions were not accepted.",
   address: {
     line1: "Please enter a valid street address.",
@@ -275,11 +278,14 @@ const validatePersonalFormData = (initErrorObj, data) => {
 
 /**
  * validateAccountFormData
- * Validates the username, pin, verifyPin, and acceptTerms fields.
+ * Validates the username, password, verifyPassword, and acceptTerms fields.
  */
 const validateAccountFormData = (initErrorObj, data) => {
+  const passwordPattern =
+    // eslint-disable-next-line prettier/prettier
+    /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.+[~`!?@#$%^&*()_=+\[\]{};:.,"'<>|\\/-]).{8,32}/g;
   let errorObj = { ...initErrorObj };
-  const { username, pin, verifyPin, acceptTerms } = data;
+  const { username, password, verifyPassword, acceptTerms } = data;
 
   if (
     isEmpty(username) ||
@@ -292,12 +298,16 @@ const validateAccountFormData = (initErrorObj, data) => {
     };
   }
 
-  if (isEmpty(pin) || !isNumeric(pin) || !isLength(pin, { min: 4, max: 4 })) {
-    errorObj = { ...errorObj, pin: errorMessages.pin };
+  if (
+    isEmpty(password) ||
+    !isLength(password, { min: 8, max: 32 }) ||
+    !(password.match(passwordPattern)?.length === 1)
+  ) {
+    errorObj = { ...errorObj, password: errorMessages.password };
   }
 
-  if (isEmpty(verifyPin) || pin !== verifyPin) {
-    errorObj = { ...errorObj, verifyPin: errorMessages.verifyPin };
+  if (isEmpty(verifyPassword) || password !== verifyPassword) {
+    errorObj = { ...errorObj, verifyPassword: errorMessages.verifyPassword };
   }
   if (!acceptTerms) {
     errorObj = { ...errorObj, acceptTerms: errorMessages.acceptTerms };
@@ -341,7 +351,7 @@ const constructPatronObject = (
     policyType,
     username,
     usernameHasBeenValidated,
-    pin,
+    password,
     homeLibraryCode,
     acceptTerms,
     location,
@@ -369,7 +379,7 @@ const constructPatronObject = (
     address: addresses.home,
     workAddress: !isEmpty(addresses.work) ? addresses.work : null,
     username,
-    pin,
+    password,
     ecommunicationsPref,
     agencyType: agencyType || config.agencyType.default,
     usernameHasBeenValidated,

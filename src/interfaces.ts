@@ -23,8 +23,8 @@ export interface FormInputData {
   "work-county"?: string;
   username: string;
   usernameHasBeenValidated?: boolean;
-  pin: string;
-  verifyPin: string;
+  password: string;
+  verifyPassword: string;
   ecommunicationsPref: boolean;
   location?: string;
   homeLibraryCode: string;
@@ -49,7 +49,7 @@ export interface ErrorParams {
   "work-state"?: string;
   "work-zip"?: string;
   username?: string;
-  pin?: string;
+  password?: string;
   location?: string;
 }
 
@@ -132,7 +132,7 @@ export interface FormResults {
   name?: string;
   barcode: string;
   username: string;
-  pin: string;
+  password: string;
   temporary: boolean;
   message: string;
   patronId: number;
@@ -178,7 +178,7 @@ export interface FormAPISubmission {
   lastName?: string;
   username: string;
   usernameHasBeenValidated?: boolean;
-  pin: string;
+  password: string;
   address: Address;
   workAddress?: Address;
   email: string;
