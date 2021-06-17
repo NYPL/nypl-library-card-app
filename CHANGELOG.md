@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.7.5
+
+#### Updated
+
+- Updated npm packages to be stable and not point to bitbucket (for the NYPL Header).
+
 ### v0.7.4
 
 #### Updated
