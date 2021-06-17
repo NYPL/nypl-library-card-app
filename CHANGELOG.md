@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.7.7
+
+#### Fixed
+
+- Minor copy updates for pin/password update.
+
 ### v0.7.6
 
 #### Updated

@@ -32,8 +32,7 @@ function ConfirmationPage() {
       <p>
         <b>
           To borrow physical materials, please visit one of our{" "}
-          <a href="http://nypl.org/locations">location</a>
-          with a valid{" "}
+          <a href="http://nypl.org/locations">locations</a> with a valid{" "}
           <a href="https://www.nypl.org/help/library-card/terms-conditions#Eligibility">
             photo ID and proof of address
           </a>{" "}

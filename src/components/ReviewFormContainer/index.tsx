@@ -245,7 +245,11 @@ function ReviewFormContainer() {
         {/* Only render the toggleable password with javascript enabled. */}
         {clientSide ? (
           <>
-            <div>{showPassword ? formValues.password : "****"}</div>
+            <div>
+              {showPassword
+                ? formValues.password
+                : "*".repeat(formValues.password?.length)}
+            </div>
             <Checkbox
               checkboxId="showPasswordReview"
               name="showPasswordReview"
