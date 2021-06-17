@@ -1,5 +1,5 @@
 // Import styles from NYPL React components
-@import '~@nypl/dgx-header-component/dist/styles/main';
+// @import '~@nypl/dgx-header-component/dist/styles/main';
 @import '~@nypl/dgx-react-footer/dist/styles/styles';
 
 // Import Globals
@@ -12,3 +12,7 @@
 
 // For printing
 @import 'components/print';
+
+fieldset {
+  border: none !important;
+}

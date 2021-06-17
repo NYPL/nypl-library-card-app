@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.7.6
+
+#### Updated
+
+- Temporarily using the embedded NYPL Header.
+
 ### v0.7.5
 
 #### Updated
