@@ -11,7 +11,7 @@ describe("createAnchorText", () => {
   // These are the invalid/missing fields.
   const errors = {
     firstName: errorMessages.firstName,
-    pin: errorMessages.pin,
+    password: errorMessages.password,
     acceptTerms: errorMessages.acceptTerms,
     username: errorMessages.username,
     line1: errorMessages.address.line1,
@@ -20,13 +20,11 @@ describe("createAnchorText", () => {
 
   test("it should return undefined if the key does not exist in the list of properties", () => {
     const badKeys = {
-      password: "password",
       fullName: "fullName",
       streetAddress: "streetAddress",
     };
 
     // These keys don't exist in the error object we expect from the API.
-    expect(createAnchorText(badKeys.password, errors)).toEqual(undefined);
     expect(createAnchorText(badKeys.fullName, errors)).toEqual(undefined);
     expect(createAnchorText(badKeys.streetAddress, errors)).toEqual(undefined);
   });
@@ -86,7 +84,7 @@ describe("renderErrorElements", () => {
   test("it should return a list of li elements for every error", () => {
     const errors = {
       firstName: errorMessages.firstName,
-      pin: errorMessages.pin,
+      password: errorMessages.password,
       address: {
         home: {
           state: errorMessages.address.state,
@@ -108,9 +106,10 @@ describe("renderErrorElements", () => {
           }}
         />,
         <li
-          key="pin"
+          key="password"
           dangerouslySetInnerHTML={{
-            __html: 'Please enter a 4-digit <a href="#input-pin">PIN.</a>',
+            __html:
+              'The <a href="#input-password">password</a> must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character.',
           }}
         />,
         <li

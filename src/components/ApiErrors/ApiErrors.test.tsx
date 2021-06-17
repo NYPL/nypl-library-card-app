@@ -65,12 +65,12 @@ describe("ApiErrors", () => {
       status: 500,
       type: "missing-required-values",
       title: "Missing Required Values",
-      detail: "'firsName' and 'pin' are missing",
+      detail: "'firsName' and 'password' are missing",
     };
 
     render(<ApiErrors problemDetail={pd} />);
     expect(
-      screen.getByText("'firsName' and 'pin' are missing")
+      screen.getByText("'firsName' and 'password' are missing")
     ).toBeInTheDocument();
   });
 
@@ -96,7 +96,7 @@ describe("ApiErrors", () => {
       detail: "There was a problem with the submission",
       error: {
         username: errorMessages.username,
-        pin: errorMessages.pin,
+        password: errorMessages.password,
       },
     };
 
@@ -106,6 +106,8 @@ describe("ApiErrors", () => {
     expect(
       screen.getByText("must be between 5-25 alphanumeric characters.")
     ).toBeInTheDocument();
-    expect(screen.getByText("Please enter a 4-digit")).toBeInTheDocument();
+    expect(
+      screen.getByText(/must be at least 8 characters/)
+    ).toBeInTheDocument();
   });
 });

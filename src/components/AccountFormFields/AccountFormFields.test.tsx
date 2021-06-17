@@ -26,46 +26,46 @@ describe("AccountFormFields", () => {
     container = utils.container;
   });
 
-  test("renders username, pin, verify pin, and checkbox fields", () => {
+  test("renders username, password, verify password, and checkbox fields", () => {
     expect(
       screen.getByRole("textbox", { name: "Username Required" })
     ).toBeInTheDocument();
     // Password input types don't have roles so `getByRole` doesn't work.
-    // `getByLabelText(/PIN/i)` is too generic and gets both instances and
-    // `getByLabelText(/PIN Required/i)` doesn't find anything.
+    // `getByLabelText(/Password/i)` is too generic and gets both instances and
+    // `getByLabelText(/Password Required/i)` doesn't find anything.
     expect(
       container.querySelector("input[type='password']")
     ).toBeInTheDocument();
-    expect(screen.getByLabelText(/Verify PIN/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Verify Password/i)).toBeInTheDocument();
     expect(
-      screen.getByRole("checkbox", { name: "Show PIN" })
+      screen.getByRole("checkbox", { name: "Show Password" })
     ).toBeInTheDocument();
   });
 
-  test("renders username, pin, verify pin, and checkbox fields", async () => {
+  test("renders username, password, verify password, and checkbox fields", async () => {
     const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
 
     // Unchecked by default.
-    // By default, the PIN and verify PIN fields are "password" types.
+    // By default, the password and verify password fields are "password" types.
     expect(checkbox.checked).toEqual(false);
     expect(
       container.querySelector("input[type='password']")
     ).toBeInTheDocument();
-    expect(screen.getByLabelText(/Verify PIN/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Verify Password/i)).toBeInTheDocument();
 
     await act(async () => await fireEvent.click(checkbox));
 
-    // But once the checkbox is checked, the PIN fields before text fields
+    // But once the checkbox is checked, the password fields before text fields
     // so that users can see their values.
     expect(checkbox.checked).toEqual(true);
     expect(
       container.querySelector("input[type='password']")
     ).not.toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "PIN Required" })
+      screen.getByRole("textbox", { name: "Password Required" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Verify PIN Required" })
+      screen.getByRole("textbox", { name: "Verify Password Required" })
     ).toBeInTheDocument();
   });
 

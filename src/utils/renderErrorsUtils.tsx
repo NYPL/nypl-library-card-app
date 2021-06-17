@@ -10,8 +10,9 @@ import React from "react";
  * of allowing to edit the values in the review page.
  */
 export function createAnchorText(key, errors, addressType = "") {
-  // Each key points to a string of text that will be used as text
-  // inside an anchor element.
+  // Each key points to a string of text that will be used as text inside an
+  // anchor element. These strings MUST appear in the errorMessages object in
+  // src/utils/formDataUtils.ts
   const errorMessageHashMap = {
     firstName: "first name",
     lastName: "last name",
@@ -19,8 +20,8 @@ export function createAnchorText(key, errors, addressType = "") {
     ageGate: "13 years or older",
     email: "email",
     username: "Username",
-    pin: "PIN.",
-    verifyPin: "PINs",
+    password: "password",
+    verifyPassword: "passwords",
     location: "location option",
     line1: "street address",
     city: "city",

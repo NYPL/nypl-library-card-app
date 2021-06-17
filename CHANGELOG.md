@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.7.4
+
+#### Updated
+
+- Updated the "pin" name attribute to "password" throughout the codebase and UI.
+
 ### v0.7.3
 
 #### Updated

@@ -10,46 +10,62 @@ import ilsLibraryList from "../../data/ilsLibraryList";
 import LibraryListFormFields from "../LibraryListFormFields";
 
 interface AccountFormFieldsProps {
-  showPinOnLoad?: boolean;
+  showPasswordOnLoad?: boolean;
 }
 
-function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
+function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
   const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();
-  const [showPin, setShowPin] = useState(true);
+  const [showPassword, setShowPassword] = useState(true);
   const [clientSide, setClientSide] = useState(false);
   const { formValues } = state;
-  const originalPin = getValues("pin");
+  const originalPassword = getValues("password");
 
-  // When the component loads, if we want to show the PIN by default,
+  // When the component loads, if we want to show the password by default,
   // show it.
   useEffect(() => {
-    if (showPinOnLoad) {
-      setShowPin(true);
+    if (showPasswordOnLoad) {
+      setShowPassword(true);
     }
   }, []);
   const checkBoxLabelOptions = {
-    id: "showPinId",
-    labelContent: <>Show PIN</>,
+    id: "showPasswordId",
+    labelContent: <>Show Password</>,
   };
-  const update = () => setShowPin(!showPin);
-  const pinType = showPin ? "text" : "password";
-  const pinInstructionText = (
+  const minPasswordLength = 8;
+  const maxPasswordLength = 32;
+  const passwordPattern =
+    // eslint-disable-next-line prettier/prettier
+    /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.+[~`!?@#$%^&*()_=+\[\]{};:.,"'<>|\\/-]).{8,32}/g;
+  const update = () => setShowPassword(!showPassword);
+  const passwordType = showPassword ? "text" : "password";
+  const passwordInstructionText = (
     <p>
-      Your PIN must be 4 numbers and must <b>not</b> contain common patterns:
-      <br />A number that is repeated 3 or more times (0001, 5555)
-      <br />A pair of numbers that is repeated (1212, 6363)
+      For increased security we encourage you to select a strong password that
+      includes:
+      <br />
+      At least 8 characters
+      <br />A mixture of both uppercase and lowercase letters
+      <br />A mixture of letters and numbers
+      <br />
+      At least one special character.
+      <br />
+      Example: MyLib1731@!.
+      <br />
+      Password cannot contain common patterns such as consecutively repeating a
+      character three or more times, e.g. aaaatf54 or repeating a pattern, e.g.
+      abcabcab
     </p>
   );
 
   // When the component renders on the client-side, we want to turn the password
-  // "text" input into a "password" type so that the PIN is visible by default.
-  // Keep track when it's rendering on the client so that the "Show PIN"
+  // "text" input into a "password" type so that the password is visible by default.
+  // Keep track when it's rendering on the client so that the "Show Password"
   // checkbox is rendered as well - it's not needed without javascript since
   // you can't toggle without javascript.
   useEffect(() => {
     setClientSide(true);
-    setShowPin(false);
+    setShowPassword(false);
   }, []);
 
   return (
@@ -57,50 +73,49 @@ function AccountFormFields({ showPinOnLoad }: AccountFormFieldsProps) {
       <UsernameValidationFormFields errorMessage={errorMessages.username} />
 
       <FormField
-        id="pin"
-        type={pinType}
-        label="PIN"
-        name="pin"
-        instructionText={pinInstructionText}
+        id="password"
+        type={passwordType}
+        label="Password"
+        name="password"
+        instructionText={passwordInstructionText}
         isRequired
         errorState={errors}
-        maxLength={4}
-        attributes={{
-          pattern: "[0-9]{4}",
-        }}
+        minLength={minPasswordLength}
+        maxLength={maxPasswordLength}
         ref={register({
-          validate: (val) => val.length === 4 || errorMessages.pin,
+          validate: (val) =>
+            (val.length >= minPasswordLength &&
+              val.length <= maxPasswordLength &&
+              val.match(passwordPattern)?.length === 1) ||
+            errorMessages.password,
         })}
-        defaultValue={formValues.pin}
+        defaultValue={formValues.password}
       />
 
       <FormField
-        id="verifyPin"
-        type={pinType}
-        label="Verify PIN"
-        name="verifyPin"
-        instructionText="4 digits"
+        id="verifyPassword"
+        type={passwordType}
+        label="Verify Password"
+        name="verifyPassword"
+        instructionText="8-32 characters"
         isRequired
         errorState={errors}
-        maxLength={4}
-        attributes={{
-          pattern: "[0-9]{4}",
-        }}
+        minLength={minPasswordLength}
+        maxLength={maxPasswordLength}
         ref={register({
           validate: (val) =>
-            (val.length === 4 && val === originalPin) ||
-            errorMessages.verifyPin,
+            val === originalPassword || errorMessages.verifyPassword,
         })}
-        defaultValue={formValues.verifyPin}
+        defaultValue={formValues.verifyPassword}
       />
 
       {clientSide && (
         <Checkbox
-          checkboxId="showPIN"
-          name="showPIN"
+          checkboxId="showPassword"
+          name="showPassword"
           labelOptions={checkBoxLabelOptions}
           attributes={{
-            defaultChecked: showPin,
+            defaultChecked: showPassword,
             onClick: update,
           }}
         />
