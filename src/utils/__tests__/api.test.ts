@@ -492,8 +492,8 @@ describe("callPatronAPI", () => {
       "work-isResidential": false,
       "work-hasBeenValidated": true,
       username: "tomnook42",
-      pin: "1234",
-      verifyPin: "1234",
+      password: "MyLib1731@!",
+      verifyPassword: "MyLib1731@!",
       acceptTerms: true,
     };
     axios.post.mockResolvedValue({
@@ -503,7 +503,7 @@ describe("callPatronAPI", () => {
         link: "https://link.com/to/ils/1234567",
         barcode: "111122222222345",
         username: "tomnook42",
-        pin: "1234",
+        password: "MyLib1731@!",
         temporary: true,
         message: "The library card will be a standard library card.",
       },
@@ -544,7 +544,7 @@ describe("callPatronAPI", () => {
           hasBeenValidated: true,
         },
         username: "tomnook42",
-        pin: "1234",
+        password: "MyLib1731@!",
         ecommunicationsPref: true,
         agencyType: "198",
         usernameHasBeenValidated: undefined,
@@ -568,7 +568,7 @@ describe("callPatronAPI", () => {
       link: "https://link.com/to/ils/1234567",
       barcode: "111122222222345",
       username: "tomnook42",
-      pin: "1234",
+      password: "MyLib1731@!",
       temporary: true,
       message: "The library card will be a standard library card.",
     });

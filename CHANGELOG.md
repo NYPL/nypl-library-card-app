@@ -1,5 +1,29 @@
 ## CHANGE LOG
 
+### v0.7.7
+
+#### Fixed
+
+- Minor copy updates for pin/password update.
+
+### v0.7.6
+
+#### Updated
+
+- Temporarily using the embedded NYPL Header.
+
+### v0.7.5
+
+#### Updated
+
+- Updated npm packages to be stable and not point to bitbucket (for the NYPL Header).
+
+### v0.7.4
+
+#### Updated
+
+- Updated the "pin" name attribute to "password" throughout the codebase and UI.
+
 ### v0.7.3
 
 #### Updated

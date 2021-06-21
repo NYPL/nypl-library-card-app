@@ -12,7 +12,7 @@ import { FormDataContextProvider } from "../../context/FormDataContext";
 const formResults: FormResults = {
   barcode: "12345678912345",
   username: "tomnook",
-  pin: "1234",
+  password: "1234",
   temporary: false,
   message: "The library card will be a standard library card.",
   patronId: 1234567,
@@ -51,7 +51,7 @@ describe("Confirmation", () => {
 
     expect(screen.getByText("12345678912345")).toBeInTheDocument();
 
-    expect(screen.getByText("PIN")).toBeInTheDocument();
+    expect(screen.getByText("PASSWORD")).toBeInTheDocument();
     expect(screen.getByText("1234")).toBeInTheDocument();
 
     expect(screen.getByText("ISSUED")).toBeInTheDocument();

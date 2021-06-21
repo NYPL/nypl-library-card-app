@@ -166,6 +166,13 @@ function MyApp<MyAppProps>({ Component, pageProps, query }) {
         />
         {/* <!-- End Google Analytics --> */}
       </Head>
+      <div id="Header-Placeholder" style={{ minHeight: "230px" }}>
+        <script
+          type="text/javascript"
+          src="https://header.nypl.org/dgx-header.min.js?skipNav=mainContent"
+          async
+        ></script>
+      </div>
       <FormProvider {...formMethods}>
         <FormDataContextProvider initState={initState}>
           <ApplicationContainer problemDetail={error}>

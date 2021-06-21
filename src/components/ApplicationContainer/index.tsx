@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Header, navConfig } from "@nypl/dgx-header-component";
+// import { Header, navConfig } from "@nypl/dgx-header-component";
 import Footer from "@nypl/dgx-react-footer";
 import Banner from "../Banner";
 import ApiErrors from "../ApiErrors";
@@ -21,10 +21,10 @@ const ApplicationContainer = ({ children, problemDetail }) => {
 
   return (
     <>
-      <Header
+      {/* <Header
         skipNav={{ target: "main-content" }}
         navData={navConfig.current}
-      />
+      /> */}
       <div className="nypl-library-card-app nypl-ds">
         <main id="main-content" className="main main--with-sidebar">
           <div className="content-header">

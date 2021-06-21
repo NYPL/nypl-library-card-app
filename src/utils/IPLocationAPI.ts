@@ -52,7 +52,8 @@ const IPLocationAPI = () => {
   const callIpStackAPI = async (ipAddress: string) => {
     const { ipStackKey } = appConfig;
     if (!ipStackKey) {
-      throw new Error("No IP_STACK_KEY environment variable set");
+      console.warn("No IP_STACK_KEY environment variable set");
+      return null;
     }
 
     return axios

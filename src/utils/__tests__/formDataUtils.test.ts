@@ -332,15 +332,15 @@ describe("validateAccountFormData", () => {
   test("it should return errors for all bad fields", () => {
     const data = {
       username: "",
-      pin: "",
-      verifyPin: "",
+      password: "",
+      verifyPassword: "",
       acceptTerms: "",
     };
 
     expect(validateAccountFormData({}, data)).toEqual({
       username: errorMessages.username,
-      pin: errorMessages.pin,
-      verifyPin: errorMessages.verifyPin,
+      password: errorMessages.password,
+      verifyPassword: errorMessages.verifyPassword,
       acceptTerms: errorMessages.acceptTerms,
     });
   });
@@ -348,8 +348,8 @@ describe("validateAccountFormData", () => {
   test("it should return an empty object since there are no errors", () => {
     const data = {
       username: "tomnook",
-      pin: "1234",
-      verifyPin: "1234",
+      password: "MyLib1731@!",
+      verifyPassword: "MyLib1731@!",
       acceptTerms: true,
     };
 
@@ -360,8 +360,8 @@ describe("validateAccountFormData", () => {
     const errors = { someKey: "some value" };
     const data = {
       username: "",
-      pin: "1234",
-      verifyPin: "1234",
+      password: "MyLib1731@!",
+      verifyPassword: "MyLib1731@!",
       acceptTerms: true,
     };
 
@@ -386,8 +386,8 @@ describe("validateFormData", () => {
     birthdate: "01/01/1900",
     policyType: "webApplicant",
     username: "",
-    pin: "1234",
-    verifyPin: "1235",
+    password: "MyLib1731@!",
+    verifyPassword: "NotTheSamePassword",
     acceptTerms: false,
     location: "",
   };
@@ -400,7 +400,7 @@ describe("validateFormData", () => {
       email: errorMessages.email,
       birthdate: errorMessages.birthdate,
       username: errorMessages.username,
-      verifyPin: errorMessages.verifyPin,
+      verifyPassword: errorMessages.verifyPassword,
       acceptTerms: errorMessages.acceptTerms,
       address: {
         home: { city: errorMessages.address.city },
@@ -416,7 +416,7 @@ describe("validateFormData", () => {
       birthdate: "01/01/1999",
       email: "tomnook@acnh.com",
       username: "tomnook",
-      verifyPin: "1234",
+      verifyPassword: "MyLib1731@!",
       acceptTerms: true,
       location: "nyc",
     };
@@ -442,8 +442,8 @@ describe("constructPatronObject", () => {
       "home-state": "NY",
       "home-zip": "10018-2788",
       username: "tomnook42",
-      pin: "1234",
-      verifyPin: "1234",
+      password: "MyLib1731@!",
+      verifyPassword: "MyLib1731@!",
       acceptTerms: true,
     };
     expect(constructPatronObject(patronFormValuesMissingValues)).toEqual({
@@ -490,8 +490,8 @@ describe("constructPatronObject", () => {
       "work-isResidential": false,
       "work-hasBeenValidated": true,
       username: "tomnook42",
-      pin: "1234",
-      verifyPin: "1234",
+      password: "MyLib1731@!",
+      verifyPassword: "MyLib1731@!",
       acceptTerms: true,
     };
     const patronRequestObject: FormAPISubmission = {
@@ -521,7 +521,7 @@ describe("constructPatronObject", () => {
         hasBeenValidated: true,
       },
       username: "tomnook42",
-      pin: "1234",
+      password: "MyLib1731@!",
       ecommunicationsPref: true,
       agencyType: "198",
       usernameHasBeenValidated: undefined,

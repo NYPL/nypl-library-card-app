@@ -29,6 +29,17 @@ function ConfirmationPage() {
         </b>
       </p>
 
+      <p>
+        <b>
+          To borrow physical materials, please visit one of our{" "}
+          <a href="http://nypl.org/locations">locations</a> with a valid{" "}
+          <a href="https://www.nypl.org/help/library-card/terms-conditions#Eligibility">
+            photo ID and proof of address
+          </a>{" "}
+          to complete the application for a physical card.
+        </b>
+      </p>
+
       {temporary && (
         <p>
           This is a temporary card and will expire in 30 days. If you are a
