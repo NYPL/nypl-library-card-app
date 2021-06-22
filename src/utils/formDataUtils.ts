@@ -281,9 +281,6 @@ const validatePersonalFormData = (initErrorObj, data) => {
  * Validates the username, password, verifyPassword, and acceptTerms fields.
  */
 const validateAccountFormData = (initErrorObj, data) => {
-  const passwordPattern =
-    // eslint-disable-next-line prettier/prettier
-    /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.+[~`!?@#$%^&*()_=+\[\]{};:.,"'<>|\\/-]).{8,32}/g;
   let errorObj = { ...initErrorObj };
   const { username, password, verifyPassword, acceptTerms } = data;
 
@@ -298,11 +295,7 @@ const validateAccountFormData = (initErrorObj, data) => {
     };
   }
 
-  if (
-    isEmpty(password) ||
-    !isLength(password, { min: 8, max: 32 }) ||
-    !(password.match(passwordPattern)?.length === 1)
-  ) {
+  if (isEmpty(password) || !isLength(password, { min: 8, max: 32 })) {
     errorObj = { ...errorObj, password: errorMessages.password };
   }
 
