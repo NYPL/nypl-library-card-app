@@ -42,7 +42,7 @@ function ConfirmationPage() {
 
       {temporary && (
         <p>
-          This is a temporary card and will expire in 30 days. If you are a
+          This is a temporary card and will expire in 14 days. If you are a
           student in a New York–accredited college, an employee at a NYC company
           but not physically in the city or state, or a researcher who will be
           visiting one of our research centers, contact{" "}
