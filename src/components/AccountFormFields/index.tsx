@@ -34,9 +34,6 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
   };
   const minPasswordLength = 8;
   const maxPasswordLength = 32;
-  const passwordPattern =
-    // eslint-disable-next-line prettier/prettier
-    /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.+[~`!?@#$%^&*()_=+\[\]{};:.,"'<>|\\/-]).{8,32}/g;
   const update = () => setShowPassword(!showPassword);
   const passwordType = showPassword ? "text" : "password";
   const passwordInstructionText = (
@@ -85,8 +82,7 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
         ref={register({
           validate: (val) =>
             (val.length >= minPasswordLength &&
-              val.length <= maxPasswordLength &&
-              val.match(passwordPattern)?.length === 1) ||
+              val.length <= maxPasswordLength) ||
             errorMessages.password,
         })}
         defaultValue={formValues.password}
