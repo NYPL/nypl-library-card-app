@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.7.10
+
+#### Updated
+
+- Security Update: change CDN URL to point to ux-static.nypl.org.
+
 ### v0.7.9
 
 #### Updated
