@@ -1,6 +1,6 @@
 {
   "name": "nypl-library-card-app",
-  "version": "0.7.10",
+  "version": "0.7.11",
   "description": "NYPL Get A Library Card App",
   "main": "index.js",
   "scripts": {

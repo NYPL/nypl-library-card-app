@@ -65,6 +65,14 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
     setShowPassword(false);
   }, []);
 
+  const validatePassword = (val) => {
+    return (
+      val.length >= minPasswordLength &&
+      val.length <= maxPasswordLength &&
+      val.indexOf(".") === -1
+    );
+  };
+
   return (
     <>
       <UsernameValidationFormFields errorMessage={errorMessages.username} />
@@ -80,10 +88,7 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
         minLength={minPasswordLength}
         maxLength={maxPasswordLength}
         ref={register({
-          validate: (val) =>
-            (val.length >= minPasswordLength &&
-              val.length <= maxPasswordLength) ||
-            errorMessages.password,
+          validate: (val) => validatePassword(val) || errorMessages.password,
         })}
         defaultValue={formValues.password}
       />

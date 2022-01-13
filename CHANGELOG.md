@@ -4,6 +4,12 @@
 
 #### Updated
 
+- Updated the account page so that passwords no longer allow periods. Updated related messaging.
+
+### v0.7.10
+
+#### Updated
+
 - Security Update: change CDN URL to point to ux-static.nypl.org.
 
 ### v0.7.9
