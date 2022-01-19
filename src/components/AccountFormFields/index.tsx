@@ -61,6 +61,8 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
     setShowPassword(false);
   }, []);
 
+  // Note: As of 1/22, the password must not contain a period to allow
+  // patrons to log into Overdrive for digital reading.
   const validatePassword = (val) => {
     return (
       val.length >= minPasswordLength &&

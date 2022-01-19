@@ -17,6 +17,9 @@ const errorMessages = {
   ageGate: "You must be 13 years or older to continue.",
   email: "Please enter a valid email address.",
   username: "Username must be between 5-25 alphanumeric characters.",
+  // Technically, the ILS accepts periods but Overdrive does not. This means
+  // we can't allow patrons to add a period to their password or they won't
+  // be able to use Overdrive for digital reading.
   password:
     "Your password must be at least 8 characters, include a mixture of both " +
     "uppercase and lowercase letters, include a mixture of letters and " +
