@@ -1,10 +1,10 @@
 ## CHANGE LOG
 
-### v0.7.10
+### v0.7.11
 
 #### Updated
 
-- Updated the account page so that passwords no longer allow periods. Updated related messaging.
+- Updated the account page so that passwords no longer allow periods. Updated related messaging for information and errors.
 
 ### v0.7.10
 
