@@ -38,16 +38,12 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
   const passwordType = showPassword ? "text" : "password";
   const passwordInstructionText = (
     <p>
-      For increased security we encourage you to select a strong password that
-      includes:
+      We encourage you to select a strong password that includes: at least 8
+      characters, a mixture of uppercase and lowercase letters, a mixture of
+      letters and numbers, and at least one special character <i>except</i>{" "}
+      period (.)
       <br />
-      At least 8 characters
-      <br />A mixture of both uppercase and lowercase letters
-      <br />A mixture of letters and numbers
-      <br />
-      At least one special character.
-      <br />
-      Example: MyLib1731@!.
+      Example: MyLib1731@
       <br />
       Password cannot contain common patterns such as consecutively repeating a
       character three or more times, e.g. aaaatf54 or repeating a pattern, e.g.

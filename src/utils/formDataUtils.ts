@@ -1,5 +1,5 @@
 import isEmpty from "lodash/isEmpty";
-import { isEmail, isAlphanumeric, isNumeric, isLength } from "validator";
+import { isEmail, isAlphanumeric, isLength } from "validator";
 import ilsLibraryList from "../data/ilsLibraryList";
 import config from "../../appConfig";
 import {
@@ -18,9 +18,9 @@ const errorMessages = {
   email: "Please enter a valid email address.",
   username: "Username must be between 5-25 alphanumeric characters.",
   password:
-    "The password must be at least 8 characters, include a mixture of both " +
+    "Your password must be at least 8 characters, include a mixture of both " +
     "uppercase and lowercase letters, include a mixture of letters and " +
-    "numbers, and have at least one special character.",
+    "numbers, and have at least one special character except period (.)",
   verifyPassword: "The two passwords don't match.",
   acceptTerms: "The terms and conditions were not accepted.",
   address: {
