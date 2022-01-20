@@ -1,6 +1,6 @@
 {
   "name": "nypl-library-card-app",
-  "version": "0.7.10",
+  "version": "0.7.11",
   "description": "NYPL Get A Library Card App",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "cypress:open": "cypress open"
   },
   "engines": {
-    "node": ">=10.19.0"
+    "node": ">=10.24.0"
   },
   "repository": {
     "type": "git",
