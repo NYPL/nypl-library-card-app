@@ -1,5 +1,13 @@
 ## CHANGE LOG
 
+### v0.7.11
+
+- Adds LOG_LEVEL variable set to "warn" for qa and production
+- Reduces log retention to 14 days
+- Adds file system requirement of 16GB
+- Increases swap space to 4GB
+- Updates security suite to v6.33
+
 ### v0.7.10
 
 #### Updated
