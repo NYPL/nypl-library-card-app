@@ -9,8 +9,7 @@
 - Adds file system requirement of 16GB
 - Increases swap space to 4GB
 - Updates security suite to v6.33
-- Updated the account page so that passwords no longer allow periods.
-- - Updated related messaging for information and errors.
+- Updated the account page so that passwords no longer allow periods and related messaging for information and errors.
 
 ### v0.7.10
 
