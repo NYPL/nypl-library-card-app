@@ -15,7 +15,7 @@
     "cypress:open": "cypress open"
   },
   "engines": {
-    "node": ">=10.19.0"
+    "node": ">=10.24.0"
   },
   "repository": {
     "type": "git",
