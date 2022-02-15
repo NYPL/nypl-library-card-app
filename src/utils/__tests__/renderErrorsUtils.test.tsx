@@ -109,7 +109,7 @@ describe("renderErrorElements", () => {
           key="password"
           dangerouslySetInnerHTML={{
             __html:
-              'The <a href="#input-password">password</a> must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character.',
+              'Your <a href="#input-password">password</a> must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)',
           }}
         />,
         <li

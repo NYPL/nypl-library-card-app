@@ -1,5 +1,22 @@
 ## CHANGE LOG
 
+### v0.7.11
+
+#### Updated
+
+- Adds LOG_LEVEL variable set to "warn" for qa and production
+- Reduces log retention to 14 days
+- Adds file system requirement of 16GB
+- Increases swap space to 4GB
+- Updates security suite to v6.33
+- Updated the account page so that passwords no longer allow periods and related messaging for information and errors.
+
+### v0.7.10
+
+#### Updated
+
+- Security Update: change CDN URL to point to ux-static.nypl.org.
+
 ### v0.7.9
 
 #### Updated
