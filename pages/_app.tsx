@@ -16,6 +16,8 @@ import ApplicationContainer from "../src/components/ApplicationContainer";
 import { getPageTitles } from "../src/utils/utils";
 import useRouterScroll from "../src/hooks/useRouterScroll";
 import { constructProblemDetail } from "../src/utils/formDataUtils";
+import { Header, navConfig } from "@nypl/dgx-header-component";
+import { DSProvider } from "@nypl/design-system-react-components";
 
 interface MyAppProps {
   Component: any;
@@ -166,24 +168,30 @@ function MyApp<MyAppProps>({ Component, pageProps, query }) {
         />
         {/* <!-- End Google Analytics --> */}
       </Head>
-      <div id="Header-Placeholder" style={{ minHeight: "230px" }}>
+      {/* <div id="Header-Placeholder" style={{ minHeight: "230px" }}>
         <script
           type="text/javascript"
           src="https://header.nypl.org/dgx-header.min.js?skipNav=mainContent"
           async
         ></script>
-      </div>
-      <FormProvider {...formMethods}>
-        <FormDataContextProvider initState={initState}>
-          <ApplicationContainer problemDetail={error}>
-            <Component
-              {...pageProps}
-              pageTitles={pageTitles}
-              policyType={query.policyType}
-            />
-          </ApplicationContainer>
-        </FormDataContextProvider>
-      </FormProvider>
+      </div> */}
+      <Header
+        skipNav={{ target: "main-content" }}
+        navData={navConfig.current}
+      />
+      <DSProvider>
+        <FormProvider {...formMethods}>
+          <FormDataContextProvider initState={initState}>
+            <ApplicationContainer problemDetail={error}>
+              <Component
+                {...pageProps}
+                pageTitles={pageTitles}
+                policyType={query.policyType}
+              />
+            </ApplicationContainer>
+          </FormDataContextProvider>
+        </FormProvider>
+      </DSProvider>
     </>
   );
 }

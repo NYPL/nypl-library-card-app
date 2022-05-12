@@ -110,13 +110,11 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
 
       {clientSide && (
         <Checkbox
-          checkboxId="showPassword"
+          id="showPassword"
           name="showPassword"
-          labelOptions={checkBoxLabelOptions}
-          attributes={{
-            defaultChecked: showPassword,
-            onClick: update,
-          }}
+          labelText={checkBoxLabelOptions.labelContent}
+          isChecked={showPassword}
+          onChange={update}
         />
       )}
 

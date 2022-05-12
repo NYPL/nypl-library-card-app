@@ -91,7 +91,11 @@ const UsernameValidationForm = ({
     const canValidate =
       inputValidation(username) && !usernameIsAvailable.message;
     return (
-      <Button onClick={validateUsername} type="button" disabled={!canValidate}>
+      <Button
+        id="username-validation-button"
+        onClick={validateUsername}
+        isDisabled={!canValidate}
+      >
         Check if username is available
       </Button>
     );

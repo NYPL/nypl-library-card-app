@@ -16,7 +16,7 @@ function ConfirmationPage() {
 
   return (
     <div>
-      <Heading level={2}>
+      <Heading level="two">
         Congratulations! You now have a digital New York Public Library card.
       </Heading>
 
@@ -51,7 +51,9 @@ function ConfirmationPage() {
         </p>
       )}
 
-      <Heading level={2}>Get Started with The New York Public Library</Heading>
+      <Heading level="two">
+        Get Started with The New York Public Library
+      </Heading>
       <p>
         <b>Explore Library E-Books</b>
         <br />

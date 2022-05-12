@@ -1,9 +1,8 @@
 import React from "react";
 import {
-  Label,
-  Input,
-  InputTypes,
-  HelperErrorText,
+  TextInput,
+  TextInputRefType,
+  TextInputTypes,
 } from "@nypl/design-system-react-components";
 import styles from "./FormField.module.css";
 
@@ -12,7 +11,7 @@ interface FormFieldProps {
   label?: string;
   type?: string;
   name: string;
-  errorState?: {};
+  errorState?: any;
   className?: string;
   isRequired?: boolean;
   instructionText?: string | JSX.Element;
@@ -28,7 +27,7 @@ interface FormFieldProps {
  * which also renders errors. Internal components are rendered by the
  * NYPL Design System.
  */
-const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
+const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
   (
     {
       id,
@@ -49,10 +48,10 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
   ) => {
     const errorText = errorState[name];
     const typeToInputTypeMap = {
-      text: InputTypes.text,
-      password: InputTypes.password,
-      radio: InputTypes.radio,
-      hidden: InputTypes.hidden,
+      text: "text",
+      password: "password",
+      radio: "radio",
+      hidden: "hidden",
     };
     let helperText = instructionText || null;
 
@@ -62,50 +61,32 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
     const ariaDescribedby = helperText ? `${id}-helperText` : null;
     if (type === "hidden") {
       return (
-        <Input
+        <TextInput
           id={id}
-          type={typeToInputTypeMap[type]}
-          attributes={{
-            defaultValue,
-            name,
-          }}
+          type={typeToInputTypeMap[type] as TextInputTypes}
+          defaultValue={defaultValue}
+          name={name}
           ref={ref}
+          labelText="hidden"
         />
       );
     }
 
     return (
       <div className={`${styles.formField} ${className}`}>
-        <Label
-          htmlFor={id}
-          id={`${id}-label`}
-          optReqFlag={isRequired ? "Required" : ""}
-        >
-          {label}
-        </Label>
-        <Input
+        <TextInput
           type={typeToInputTypeMap[type]}
           id={id}
-          aria-required={isRequired}
-          attributes={{
-            ["aria-invalid"]: errorText ? "true" : "false",
-            ["aria-describedby"]: ariaDescribedby,
-            minLength: minLength || null,
-            maxLength: maxLength || null,
-            tabIndex: 0,
-            defaultValue,
-            name,
-            ...attributes,
-          }}
+          isRequired={isRequired}
+          isInvalid={errorText}
+          maxLength={maxLength || null}
+          defaultValue={defaultValue}
+          name={name}
+          {...attributes}
           ref={ref}
+          labelText={label}
+          invalidText={errorText?.message}
         />
-        <HelperErrorText
-          id={`${id}-helperText`}
-          isError={!!errorText}
-          ariaLive="assertive"
-        >
-          {helperText}
-        </HelperErrorText>
       </div>
     );
   }

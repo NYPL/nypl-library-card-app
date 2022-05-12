@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  Checkbox,
-  HelperErrorText,
-} from "@nypl/design-system-react-components";
+import { Checkbox } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
 import FormField from "../FormField";
 import { isDate } from "../../utils/formDataUtils";
@@ -10,7 +7,7 @@ import useFormDataContext from "../../context/FormDataContext";
 
 interface AgeFormProps {
   policyType?: string;
-  errorMessages: {};
+  errorMessages: any;
 }
 
 /**
@@ -54,17 +51,13 @@ const AgeForm = ({
   const ageGateField = (
     <>
       <Checkbox
-        checkboxId="ageGateCheckbox"
+        id="ageGateCheckbox"
         name="ageGate"
-        labelOptions={ageGateLabelOptions}
-        ref={register({
-          required: errorMessages["ageGate"],
-        })}
-        attributes={{ defaultChecked: formValues.ageGate }}
+        labelText={ageGateLabelOptions.labelContent}
+        isRequired={errorMessages["ageGate"]}
+        isChecked={formValues.ageGate}
+        invalidText={ageGateError}
       />
-      {!!ageGateError && (
-        <HelperErrorText isError={true}>{ageGateError}</HelperErrorText>
-      )}
     </>
   );
 

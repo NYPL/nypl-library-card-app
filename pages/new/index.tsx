@@ -20,7 +20,7 @@ function HomePage({ policyType, csrfToken }) {
   const queryParam = policyType ? `&policyType=${policyType}` : "";
   return (
     <>
-      <Heading level={2}>
+      <Heading level="two">
         Get a Digital Library Card Today in a Few Easy Steps
       </Heading>
       <p>

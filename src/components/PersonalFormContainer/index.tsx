@@ -40,6 +40,7 @@ const PersonalFormContainer = () => {
       <PersonalFormFields agencyType={formValues.policyType} />
 
       <FormField
+        id="hidden-policy"
         type="hidden"
         name="policyType"
         defaultValue={formValues.policyType}

@@ -131,7 +131,7 @@ const AddressContainer = () => {
     >
       <Loader isLoading={isLoading} />
 
-      <Heading level={3}>Home Address</Heading>
+      <Heading level="three">Home Address</Heading>
       <p>If you live in NYC, please fill out the home address form.</p>
       <AddressFormFields
         type={AddressTypes.Home}

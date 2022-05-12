@@ -42,23 +42,24 @@ const AcceptTermsForm = () => {
       </p>
 
       <Checkbox
-        checkboxId="input-acceptTerms"
+        id="input-acceptTerms"
         name="acceptTerms"
-        labelOptions={acceptTermsLabelOptions}
+        labelText={acceptTermsLabelOptions.labelContent}
         // Users must click the checkbox in order to submit.
         ref={register({
           required: "The Terms and Conditions must be checked.",
         })}
-        attributes={{ defaultChecked: formValues.acceptTerms }}
+        isChecked={formValues.acceptTerms}
+        invalidText={errors.acceptTerms?.message}
       />
 
       {/* Display errors if the user skips or attempts to submit
         without accepting the Terms and Conditions */}
-      {errors?.acceptTerms?.message && (
+      {/* {errors?.acceptTerms?.message && (
         <HelperErrorText id="checkbox-error" isError>
           {errors.acceptTerms.message}
         </HelperErrorText>
-      )}
+      )} */}
     </>
   );
 };

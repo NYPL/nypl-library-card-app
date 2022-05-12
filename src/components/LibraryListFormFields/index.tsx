@@ -101,7 +101,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
 
   return (
     <div className={styles.container}>
-      <Heading level={3}>Home Library</Heading>
+      <Heading level="three">Home Library</Heading>
       <p>
         Choosing a home library will help us make sure you&apos;re getting
         everything you need from a branch that&apos;s most convenient for you.

@@ -25,7 +25,7 @@ function AddressPage({ pageTitles, location }: PageProps) {
 
   return (
     <>
-      <Heading level={2}>{pageTitles.address}</Heading>
+      <Heading level="two">{pageTitles.address}</Heading>
       <AddressContainer />
     </>
   );

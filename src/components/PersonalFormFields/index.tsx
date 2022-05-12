@@ -88,11 +88,11 @@ function PersonalFormFields({ agencyType = "" }) {
       />
 
       <Checkbox
-        checkboxId="eCommunications"
+        id="eCommunications"
         name="ecommunicationsPref"
-        labelOptions={checkBoxLabelOptions}
+        labelText={checkBoxLabelOptions.labelContent}
         ref={register()}
-        attributes={{ defaultChecked: formValues.ecommunicationsPref }}
+        isChecked={formValues.ecommunicationsPref}
       />
     </fieldset>
   );
