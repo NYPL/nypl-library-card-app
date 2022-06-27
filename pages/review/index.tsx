@@ -12,7 +12,7 @@ interface PageProps {
 function ReviewPage({ pageTitles }: PageProps) {
   return (
     <>
-      <Heading level={2}>{pageTitles.review}</Heading>
+      <Heading level="two">{pageTitles.review}</Heading>
       <p>
         Make sure all the information you’ve entered is correct. If needed, you
         can still make changes before you submit your application.

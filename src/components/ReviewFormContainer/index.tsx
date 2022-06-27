@@ -5,10 +5,8 @@ import axios from "axios";
 import { useFormContext } from "react-hook-form";
 import {
   Button,
-  ButtonTypes,
   Input,
   Label,
-  InputTypes,
   Checkbox,
   Heading,
 } from "@nypl/design-system-react-components";
@@ -80,7 +78,8 @@ function ReviewFormContainer() {
   const editSectionButton = (editSectionFlag, sectionName, page) =>
     clientSide ? (
       <Button
-        buttonType={ButtonTypes.Primary}
+        id="editSectionButton"
+        buttonType="primary"
         onClick={() => {
           lcaEvents("Edit", sectionName);
           editSectionFlag(true);
@@ -105,7 +104,8 @@ function ReviewFormContainer() {
   const editAddressButton = () =>
     clientSide ? (
       <Button
-        buttonType={ButtonTypes.Primary}
+        id="editAddressButton"
+        buttonType="primary"
         onClick={() => {
           lcaEvents("Edit", "Location/Address");
           router.push("/location?newCard=true");
@@ -123,7 +123,12 @@ function ReviewFormContainer() {
       </a>
     );
   const submitSectionButton = (
-    <Button buttonType={ButtonTypes.Primary} onClick={() => {}} type="submit">
+    <Button
+      id="submitSectionButton"
+      buttonType="primary"
+      onClick={() => {}}
+      type="submit"
+    >
       Submit
     </Button>
   );
@@ -313,7 +318,7 @@ function ReviewFormContainer() {
           </fieldset>
         </div>
       )}
-      {formValues["work-line1"] && <Heading level={4}>Home</Heading>}
+      {formValues["work-line1"] && <Heading level="four">Home</Heading>}
       <div className={styles.field}>
         <div className={styles.title}>Street Address</div>
         <div>{formValues["home-line1"]}</div>
@@ -338,7 +343,7 @@ function ReviewFormContainer() {
       </div>
       {formValues["work-line1"] && (
         <>
-          <Heading level={4} className={styles.workTitle}>
+          <Heading level="four" className={styles.workTitle}>
             Work
           </Heading>
           <div className={styles.field}>
@@ -375,7 +380,7 @@ function ReviewFormContainer() {
       <Loader isLoading={isLoading} />
 
       <div className={styles.formSection}>
-        <Heading level={3}>Personal Information</Heading>
+        <Heading level="three">Personal Information</Heading>
         {!editPersonalInfoFlag ? (
           renderPersonalInformationValues()
         ) : (
@@ -391,12 +396,12 @@ function ReviewFormContainer() {
       </div>
 
       <div className={styles.formSection}>
-        <Heading level={3}>Address</Heading>
+        <Heading level="three">Address</Heading>
         {renderAddressValues()}
       </div>
 
       <div className={styles.formSection}>
-        <Heading level={3}>Create Your Account</Heading>
+        <Heading level="three">Create Your Account</Heading>
         {!editAccountInfoFlag ? (
           renderAccountValues()
         ) : (

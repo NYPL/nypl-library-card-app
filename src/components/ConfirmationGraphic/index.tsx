@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import bwipjs from "bwip-js";
 import Image from "next/image";
 import { FormResults } from "../../interfaces";
-import { Icon, LogoNames } from "@nypl/design-system-react-components";
+import { Logo } from "@nypl/design-system-react-components";
 import useFormDataContext from "../../context/FormDataContext";
 
 const ConfirmationContainer: React.FC = () => {
@@ -50,11 +50,7 @@ const ConfirmationContainer: React.FC = () => {
             <div className="content">{name}</div>
           </div>
           <div className="grid-item">
-            <Icon
-              decorative
-              className="nypl-svg"
-              name={LogoNames["logo_nypl_negative"]}
-            />
+            <Logo className="nypl-svg" name="nyplFullBlack" />
           </div>
           <div className="grid-item barcode-container">
             <canvas id="barcodeCanvas" {...canvasArgs}></canvas>

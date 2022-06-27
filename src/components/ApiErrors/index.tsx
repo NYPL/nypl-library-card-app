@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from "react";
-import { Heading, List, ListTypes } from "@nypl/design-system-react-components";
+import { Heading, List } from "@nypl/design-system-react-components";
 import isEmpty from "lodash/isEmpty";
 import {
   renderErrorElements,
@@ -81,7 +81,7 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
       }
 
       return (
-        <List type={ListTypes.Unordered} className={styles.errorList}>
+        <List type="ul" className={styles.errorList}>
           {errorElements}
         </List>
       );
@@ -89,7 +89,7 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
 
     return (
       <div ref={ref} className={styles.container} tabIndex={0}>
-        <Heading level={2} className={styles.heading}>
+        <Heading level="two" className={styles.heading}>
           Form submission error
         </Heading>
         {renderErrorByType(problemDetail)}

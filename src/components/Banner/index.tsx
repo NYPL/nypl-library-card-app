@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Hero, HeroTypes } from "@nypl/design-system-react-components";
+import { Heading, Hero } from "@nypl/design-system-react-components";
 
 export const defaultImageSrc = "/library-card/card-hero.png";
 export const defaultDescription =
@@ -20,9 +20,7 @@ const Banner = ({
   heroDescription = defaultDescription,
   headingText = defaultHeadingText,
 }: BannerProps) => {
-  const h1Heading = (
-    <Heading blockName="hero" id="hero-banner" level={1} text={headingText} />
-  );
+  const h1Heading = <Heading id="hero-banner" level="one" text={headingText} />;
   const subHeaderText = (
     <div className="hero__body-text">{heroDescription}</div>
   );
@@ -32,7 +30,7 @@ const Banner = ({
       foregroundColor="#ffffff"
       backgroundImageSrc={fullImageSrc}
       heading={h1Heading}
-      heroType={HeroTypes.Primary}
+      heroType="primary"
     />
   );
 };

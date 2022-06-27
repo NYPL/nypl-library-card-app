@@ -12,7 +12,7 @@ interface PageProps {
 function AddressVerificationPage({ pageTitles }: PageProps) {
   return (
     <>
-      <Heading level={2}>{pageTitles.verification}</Heading>
+      <Heading level="two">{pageTitles.verification}</Heading>
       <p>Please select the correct address.</p>
       <AddressVerificationContainer />
     </>
