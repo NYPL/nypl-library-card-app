@@ -17,6 +17,9 @@ import { getPageTitles } from "../src/utils/utils";
 import useRouterScroll from "../src/hooks/useRouterScroll";
 import { constructProblemDetail } from "../src/utils/formDataUtils";
 
+import { appWithTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+
 interface MyAppProps {
   Component: any;
   pageProps: any;
@@ -48,7 +51,8 @@ if (appConfig.useAxe === "true" && !isProduction && !isServerRendered()) {
   axe(React, ReactDOM, 1000, {});
 }
 
-function MyApp<MyAppProps>({ Component, pageProps, query }) {
+function MyApp<MyAppProps>({ Component, pageProps }) {
+  const { query } = useRouter();
   useRouterScroll({ top: 640 });
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
@@ -57,7 +61,7 @@ function MyApp<MyAppProps>({ Component, pageProps, query }) {
   let error;
   // These errors are from the server-side query string form submission.
   if (!isEmpty(query.errors)) {
-    const errorObject = JSON.parse(query.errors);
+    const errorObject = JSON.parse(query.errors as any);
     // If we already received a problem detail, just forward it. Problme
     // details get sent when a request is sent to the NYPL Platform API.
     // If we get simple errors from form field validation, create the problem
@@ -80,8 +84,8 @@ function MyApp<MyAppProps>({ Component, pageProps, query }) {
   // These are results specifically from the `/library-card/api/create-patron`
   // API endpoint, which makes a request to the NYPL Platform API. These are
   // results from the server-side form submission.
-  if (!isEmpty(query.results)) {
-    formInitialStateCopy.results = JSON.parse(query.results);
+  if (!isEmpty(query?.results)) {
+    formInitialStateCopy.results = JSON.parse(query.results as any);
   }
 
   // Update the form values state with the initial url query params in
@@ -188,9 +192,15 @@ function MyApp<MyAppProps>({ Component, pageProps, query }) {
   );
 }
 
-MyApp.getInitialProps = async ({ ctx }) => {
-  // Send it to the component as a prop.
-  return { query: ctx.query };
-};
+// MyApp.getInitialProps = async ({ ctx }) => {
+//   // Send it to the component as a prop.
+//   return { query: ctx.query };
+// };
 
-export default MyApp;
+export async function getServerSideProps(context) {
+  return {
+    props: { query: context.req },
+  };
+}
+
+export default appWithTranslation(MyApp as any);

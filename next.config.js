@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { i18n } = require("./next-i18next.config");
+
 const { NEXT_PUBLIC_USE_AXE } = process.env;
 
 const PROD_BUILD_ID =
@@ -29,4 +32,5 @@ module.exports = {
 
     return config;
   },
+  i18n,
 };
