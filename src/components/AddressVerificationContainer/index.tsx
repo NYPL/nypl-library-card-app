@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import {
-  Input,
-  Label,
-  InputTypes,
-  Heading,
-  List,
-  ListTypes,
-} from "@nypl/design-system-react-components";
+import { Heading, List, Radio } from "@nypl/design-system-react-components";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import { Address, AddressResponse } from "../../../src/interfaces";
 import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
@@ -145,7 +138,7 @@ function AddressVerificationContainer() {
     }
     const addressesLength = addresses.length;
     return (
-      <List type={ListTypes.Unordered} className={styles.multipleAddressList}>
+      <List type="ul" className={styles.multipleAddressList}>
         {addresses.map((address, idx) => {
           const selected = `${addressType}-${idx}`;
           // If there's only one option, it's checked by default. Otherwise,
@@ -155,35 +148,26 @@ function AddressVerificationContainer() {
           const checkedClass = checked ? "checked" : "";
           return (
             <li key={`${addressType}-${idx}`} className={checkedClass}>
-              <Label
-                className={styles.label}
-                id={`${addressType}-${idx}-label`}
-                htmlFor={`input-${addressType}-${idx}`}
-              >
-                <Input
-                  className={`radio-input ${styles.input}`}
-                  aria-labelledby={`${addressType}-${idx}-label`}
-                  id={`${addressType}-${idx}`}
-                  type={InputTypes.radio}
-                  attributes={{
-                    name: `${addressType}-address-select`,
-                    "aria-checked": checked,
-                    defaultChecked: checked,
-                    onChange,
-                  }}
-                  value={selected}
-                  ref={register({
-                    required: true,
-                  })}
-                />
-                <div>
-                  <div>{address.line1}</div>
-                  {address.line2 && <div>{address.line2}</div>}
+              <Radio
+                id={`${addressType}-${idx}`}
+                className={`radio-input ${styles.input}`}
+                name={`${addressType}-address-select`}
+                isChecked={checked}
+                onChange={onChange}
+                value={selected}
+                ref={register({
+                  required: true,
+                })}
+                labelText={
                   <div>
-                    {address.city}, {address.state} {address.zip}
+                    <div>{address.line1}</div>
+                    {address.line2 && <div>{address.line2}</div>}
+                    <div>
+                      {address.city}, {address.state} {address.zip}
+                    </div>
                   </div>
-                </div>
-              </Label>
+                }
+              />
             </li>
           );
         })}
@@ -200,7 +184,7 @@ function AddressVerificationContainer() {
       <fieldset>
         <legend>Select the correct address</legend>
 
-        <Heading level={3}>Home Address</Heading>
+        <Heading level="three">Home Address</Heading>
         {renderMultipleAddresses(
           homeAddress,
           "home",
@@ -210,7 +194,7 @@ function AddressVerificationContainer() {
 
         {workAddress?.length > 0 && (
           <div className={styles.workAddressContainer}>
-            <Heading level={3}>Alternate Address</Heading>
+            <Heading level="three">Alternate Address</Heading>
 
             {renderMultipleAddresses(
               workAddress,

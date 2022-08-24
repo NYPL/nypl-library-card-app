@@ -12,16 +12,6 @@ function PersonalFormFields({ agencyType = "" }) {
   const { register, errors } = useFormContext();
   const { state } = useFormDataContext();
   const { formValues } = state;
-
-  const checkBoxLabelOptions = {
-    id: "receiveEmails",
-    labelContent: (
-      <>
-        Yes, I would like to receive information about NYPL&apos;s programs and
-        services
-      </>
-    ),
-  };
   const instructionText = (
     <>
       An email address is required to use many of our digital resources, such as
@@ -88,11 +78,11 @@ function PersonalFormFields({ agencyType = "" }) {
       />
 
       <Checkbox
-        checkboxId="eCommunications"
+        id="eCommunications"
+        isChecked={formValues.ecommunicationsPref}
+        labelText="Yes, I would like to receive information about NYPL's programs and services"
         name="ecommunicationsPref"
-        labelOptions={checkBoxLabelOptions}
         ref={register()}
-        attributes={{ defaultChecked: formValues.ecommunicationsPref }}
       />
     </fieldset>
   );

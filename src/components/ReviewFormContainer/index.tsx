@@ -5,12 +5,9 @@ import axios from "axios";
 import { useFormContext } from "react-hook-form";
 import {
   Button,
-  ButtonTypes,
-  Input,
-  Label,
-  InputTypes,
   Checkbox,
   Heading,
+  Radio,
 } from "@nypl/design-system-react-components";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import {
@@ -46,10 +43,6 @@ function ReviewFormContainer() {
   const [editPersonalInfoFlag, setEditPersonalInfoFlag] = useState(false);
   const [editAccountInfoFlag, setEditAccountInfoFlag] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
-  const checkBoxLabelOptions = {
-    id: "showPasswordId",
-    labelContent: <>Show Password</>,
-  };
   const updateShowPassword = () => setShowPassword(!showPassword);
 
   // Will run whenever the `errorObj` has changes, specifically for
@@ -80,7 +73,8 @@ function ReviewFormContainer() {
   const editSectionButton = (editSectionFlag, sectionName, page) =>
     clientSide ? (
       <Button
-        buttonType={ButtonTypes.Primary}
+        buttonType="primary"
+        id="editSectionButton"
         onClick={() => {
           lcaEvents("Edit", sectionName);
           editSectionFlag(true);
@@ -105,7 +99,8 @@ function ReviewFormContainer() {
   const editAddressButton = () =>
     clientSide ? (
       <Button
-        buttonType={ButtonTypes.Primary}
+        buttonType="primary"
+        id="editAddressButton"
         onClick={() => {
           lcaEvents("Edit", "Location/Address");
           router.push("/location?newCard=true");
@@ -123,7 +118,12 @@ function ReviewFormContainer() {
       </a>
     );
   const submitSectionButton = (
-    <Button buttonType={ButtonTypes.Primary} onClick={() => {}} type="submit">
+    <Button
+      buttonType="primary"
+      id="submitSectionButton"
+      onClick={() => {}}
+      type="submit"
+    >
       Submit
     </Button>
   );
@@ -251,13 +251,11 @@ function ReviewFormContainer() {
                 : "*".repeat(formValues.password?.length)}
             </div>
             <Checkbox
-              checkboxId="showPasswordReview"
+              id="showPasswordReview"
               name="showPasswordReview"
-              labelOptions={checkBoxLabelOptions}
-              attributes={{
-                defaultChecked: showPassword,
-                onClick: updateShowPassword,
-              }}
+              labelText="Show Password"
+              isChecked={showPassword}
+              onChange={updateShowPassword}
             />
           </>
         ) : (
@@ -290,30 +288,19 @@ function ReviewFormContainer() {
             {/* For now until we have better tests. This needs a value or an
             empty input and label causes accessibility issues. */}
             <div className="radio-field">
-              <Input
+              <Radio
                 className="radio-input"
-                aria-labelledby="review-location-label"
                 id="review-location-id"
-                type={InputTypes.radio}
-                attributes={{
-                  name: "location",
-                  "aria-checked": true,
-                  checked: true,
-                  readOnly: true,
-                }}
+                isChecked={true}
+                labelText={getLocationValue(formValues.location)}
+                name={"location"}
                 value={formValues.location}
               />
-              <Label
-                id="review-location-label"
-                htmlFor="input-review-location-id"
-              >
-                {getLocationValue(formValues.location)}
-              </Label>
             </div>
           </fieldset>
         </div>
       )}
-      {formValues["work-line1"] && <Heading level={4}>Home</Heading>}
+      {formValues["work-line1"] && <Heading level="four">Home</Heading>}
       <div className={styles.field}>
         <div className={styles.title}>Street Address</div>
         <div>{formValues["home-line1"]}</div>
@@ -338,7 +325,7 @@ function ReviewFormContainer() {
       </div>
       {formValues["work-line1"] && (
         <>
-          <Heading level={4} className={styles.workTitle}>
+          <Heading level="four" className={styles.workTitle}>
             Work
           </Heading>
           <div className={styles.field}>
@@ -375,7 +362,7 @@ function ReviewFormContainer() {
       <Loader isLoading={isLoading} />
 
       <div className={styles.formSection}>
-        <Heading level={3}>Personal Information</Heading>
+        <Heading level="three">Personal Information</Heading>
         {!editPersonalInfoFlag ? (
           renderPersonalInformationValues()
         ) : (
@@ -391,12 +378,12 @@ function ReviewFormContainer() {
       </div>
 
       <div className={styles.formSection}>
-        <Heading level={3}>Address</Heading>
+        <Heading level="three">Address</Heading>
         {renderAddressValues()}
       </div>
 
       <div className={styles.formSection}>
-        <Heading level={3}>Create Your Account</Heading>
+        <Heading level="three">Create Your Account</Heading>
         {!editAccountInfoFlag ? (
           renderAccountValues()
         ) : (

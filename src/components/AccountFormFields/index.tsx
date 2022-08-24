@@ -28,10 +28,6 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
       setShowPassword(true);
     }
   }, []);
-  const checkBoxLabelOptions = {
-    id: "showPasswordId",
-    labelContent: <>Show Password</>,
-  };
   const minPasswordLength = 8;
   const maxPasswordLength = 32;
   const update = () => setShowPassword(!showPassword);
@@ -110,13 +106,11 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
 
       {clientSide && (
         <Checkbox
-          checkboxId="showPassword"
+          id="showPassword"
+          isChecked={showPassword}
+          labelText="Show Password"
           name="showPassword"
-          labelOptions={checkBoxLabelOptions}
-          attributes={{
-            defaultChecked: showPassword,
-            onClick: update,
-          }}
+          onChange={update}
         />
       )}
 
