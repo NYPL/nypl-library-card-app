@@ -1,7 +1,15 @@
+import {
+  Form,
+  FormField as DSFormField,
+  FormRow,
+  Heading,
+  List,
+  Radio,
+} from "@nypl/design-system-react-components";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { Heading, List, Radio } from "@nypl/design-system-react-components";
+
 import useFormDataContext from "../../../src/context/FormDataContext";
 import { Address, AddressResponse } from "../../../src/interfaces";
 import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
@@ -138,7 +146,7 @@ function AddressVerificationContainer() {
     }
     const addressesLength = addresses.length;
     return (
-      <List type="ul" className={styles.multipleAddressList}>
+      <List className={styles.multipleAddressList} noStyling type="ul">
         {addresses.map((address, idx) => {
           const selected = `${addressType}-${idx}`;
           // If there's only one option, it's checked by default. Otherwise,
@@ -176,56 +184,65 @@ function AddressVerificationContainer() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(submitForm)}
-      method="post"
+    <Form
       action="/library-card/api/submit"
+      id="address-verification-container"
+      method="post"
+      onSubmit={handleSubmit(submitForm)}
     >
-      <fieldset>
-        <legend>Select the correct address</legend>
+      <FormRow>
+        <DSFormField>
+          <Heading level="three">Home Address</Heading>
+          {renderMultipleAddresses(
+            homeAddress,
+            "home",
+            homeAddressSelect,
+            onChangeHome
+          )}
 
-        <Heading level="three">Home Address</Heading>
-        {renderMultipleAddresses(
-          homeAddress,
-          "home",
-          homeAddressSelect,
-          onChangeHome
-        )}
+          {workAddress?.length > 0 && (
+            <div className={styles.workAddressContainer}>
+              <Heading level="three">Alternate Address</Heading>
 
-        {workAddress?.length > 0 && (
-          <div className={styles.workAddressContainer}>
-            <Heading level="three">Alternate Address</Heading>
+              {renderMultipleAddresses(
+                workAddress,
+                "work",
+                workAddressSelect,
+                onChangeWork
+              )}
+            </div>
+          )}
+        </DSFormField>
+      </FormRow>
 
-            {renderMultipleAddresses(
-              workAddress,
-              "work",
-              workAddressSelect,
-              onChangeWork
-            )}
-          </div>
-        )}
-      </fieldset>
-
-      {/* Not register to react-hook-form because we only want to
+      <FormRow display="none">
+        <DSFormField>
+          {/* Not register to react-hook-form because we only want to
           use this value for the no-js scenario. */}
-      <FormField
-        id="hidden-verification-page"
-        type="hidden"
-        name="page"
-        defaultValue="addressVerification"
-      />
-      <FormField
-        id="hidden-form-values"
-        type="hidden"
-        name="formValues"
-        defaultValue={JSON.stringify(formValues)}
-      />
+          <FormField
+            id="hidden-verification-page"
+            type="hidden"
+            name="page"
+            defaultValue="addressVerification"
+          />
+          <FormField
+            id="hidden-form-values"
+            type="hidden"
+            name="formValues"
+            defaultValue={JSON.stringify(formValues)}
+          />
+        </DSFormField>
+      </FormRow>
 
-      <RoutingLinks
-        previous={{ url: "/location?newCard=true" }}
-        next={{ submit: true }}
-      />
-    </form>
+      <FormRow>
+        <DSFormField>
+          <RoutingLinks
+            previous={{ url: "/location?newCard=true" }}
+            next={{ submit: true }}
+          />
+        </DSFormField>
+      </FormRow>
+    </Form>
   );
 }
 

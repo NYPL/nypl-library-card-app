@@ -17,7 +17,7 @@
       rgba(255, 255, 255, 0.5) 50%,
       rgba(255, 255, 255, 0) 80%
     ),
-    linear-gradient(var(--ui-gray-medium) 33px, transparent 0);
+    linear-gradient(var(--nypl-colors-ui-gray-medium) 33px, transparent 0);
   background-repeat: repeat-y;
   background-size: 50px 230px, /* highlight */ 800px 830px;
   background-position: 0 0, /* highlight */ 0px 0px;

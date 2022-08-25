@@ -1,3 +1,8 @@
+import {
+  Checkbox,
+  FormRow,
+  FormField as DSFormField,
+} from "@nypl/design-system-react-components";
 import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -5,7 +10,6 @@ import FormField from "../FormField";
 import UsernameValidationFormFields from "../UsernameValidationFormFields";
 import useFormDataContext from "../../context/FormDataContext";
 import { errorMessages } from "../../utils/formDataUtils";
-import { Checkbox } from "@nypl/design-system-react-components";
 import ilsLibraryList from "../../data/ilsLibraryList";
 import LibraryListFormFields from "../LibraryListFormFields";
 
@@ -71,50 +75,67 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
     <>
       <UsernameValidationFormFields errorMessage={errorMessages.username} />
 
-      <FormField
-        id="password"
-        type={passwordType}
-        label="Password"
-        name="password"
-        instructionText={passwordInstructionText}
-        isRequired
-        errorState={errors}
-        minLength={minPasswordLength}
-        maxLength={maxPasswordLength}
-        ref={register({
-          validate: (val) => validatePassword(val) || errorMessages.password,
-        })}
-        defaultValue={formValues.password}
-      />
+      <FormRow>
+        <DSFormField>
+          <FormField
+            id="password"
+            type={passwordType}
+            label="Password"
+            name="password"
+            instructionText={passwordInstructionText}
+            isRequired
+            errorState={errors}
+            minLength={minPasswordLength}
+            maxLength={maxPasswordLength}
+            ref={register({
+              validate: (val) =>
+                validatePassword(val) || errorMessages.password,
+            })}
+            defaultValue={formValues.password}
+          />
+        </DSFormField>
+      </FormRow>
 
-      <FormField
-        id="verifyPassword"
-        type={passwordType}
-        label="Verify Password"
-        name="verifyPassword"
-        instructionText="8-32 characters"
-        isRequired
-        errorState={errors}
-        minLength={minPasswordLength}
-        maxLength={maxPasswordLength}
-        ref={register({
-          validate: (val) =>
-            val === originalPassword || errorMessages.verifyPassword,
-        })}
-        defaultValue={formValues.verifyPassword}
-      />
+      <FormRow>
+        <DSFormField>
+          <FormField
+            id="verifyPassword"
+            type={passwordType}
+            label="Verify Password"
+            name="verifyPassword"
+            instructionText="8-32 characters"
+            isRequired
+            errorState={errors}
+            minLength={minPasswordLength}
+            maxLength={maxPasswordLength}
+            ref={register({
+              validate: (val) =>
+                val === originalPassword || errorMessages.verifyPassword,
+            })}
+            defaultValue={formValues.verifyPassword}
+          />
+        </DSFormField>
+      </FormRow>
 
-      {clientSide && (
-        <Checkbox
-          id="showPassword"
-          isChecked={showPassword}
-          labelText="Show Password"
-          name="showPassword"
-          onChange={update}
-        />
-      )}
+      <FormRow>
+        <DSFormField>
+          {clientSide && (
+            <Checkbox
+              id="showPassword"
+              isChecked={showPassword}
+              labelText="Show Password"
+              name="showPassword"
+              onChange={update}
+            />
+          )}
+        </DSFormField>
+      </FormRow>
 
-      <LibraryListFormFields libraryList={ilsLibraryList} />
+      <FormRow>
+        <DSFormField>
+          <LibraryListFormFields libraryList={ilsLibraryList} />
+        </DSFormField>
+      </FormRow>
     </>
   );
 }

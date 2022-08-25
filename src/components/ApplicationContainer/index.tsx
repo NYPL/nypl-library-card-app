@@ -4,6 +4,7 @@ import Footer from "@nypl/dgx-react-footer";
 import Banner from "../Banner";
 import ApiErrors from "../ApiErrors";
 import useFormDataContext from "../../context/FormDataContext";
+import { TemplateAppContainer } from "@nypl/design-system-react-components";
 
 const ApplicationContainer = ({ children, problemDetail }) => {
   const errorSection = React.createRef<HTMLDivElement>();
@@ -20,25 +21,19 @@ const ApplicationContainer = ({ children, problemDetail }) => {
   }, [errorToDisplay]);
 
   return (
-    <>
-      {/* <Header
-        skipNav={{ target: "main-content" }}
-        navData={navConfig.current}
-      /> */}
-      <div className="nypl-library-card-app nypl-ds">
-        <main id="main-content" className="main main--with-sidebar">
-          <div className="content-header">
-            <Banner />
-          </div>
-          <div className="content-primary content-primary--with-sidebar-right">
-            <ApiErrors ref={errorSection} problemDetail={errorToDisplay} />
-            {children}
-          </div>
-          <div className="content-secondary content-secondary--with-sidebar-right" />
-        </main>
-      </div>
-      <Footer />
-    </>
+    <TemplateAppContainer
+      // className="nypl-library-card-app"
+      breakout={<Banner />}
+      contentPrimary={
+        <>
+          <ApiErrors ref={errorSection} problemDetail={errorToDisplay} />
+          {children}
+        </>
+      }
+      sidebar="right"
+      contentSidebar={<></>}
+      footer={<Footer />}
+    />
   );
 };
 

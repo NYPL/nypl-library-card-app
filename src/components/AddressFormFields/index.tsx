@@ -1,8 +1,13 @@
+import {
+  FormField as DSFormField,
+  FormRow,
+} from "@nypl/design-system-react-components";
 import React from "react";
-import FormField from "../FormField";
-import { Address, AddressTypes } from "../../interfaces";
 import { useFormContext } from "react-hook-form";
 import { isNumeric } from "validator";
+
+import FormField from "../FormField";
+import { Address, AddressTypes } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
 
 interface AddressFormProps {
@@ -58,31 +63,40 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
   };
 
   return (
-    <fieldset>
-      <legend>{type} address form fields</legend>
-      <FormField
-        id={`line1-${type}`}
-        label="Street Address"
-        name={`${type}-line1`}
-        isRequired={isRequired}
-        errorState={errors}
-        ref={register({
-          required: {
-            value: isRequired,
-            message: errorMessages.line1,
-          },
-        })}
-        defaultValue={formValues[`${type}-line1`]}
-      />
-      <FormField
-        id={`line2-${type}`}
-        label="Apartment / Suite"
-        name={`${type}-line2`}
-        ref={register()}
-        defaultValue={formValues[`${type}-line2`]}
-      />
-      <div className="input-group">
-        <div style={{ flex: "1" }}>
+    <>
+      <FormRow>
+        <DSFormField>
+          <FormField
+            id={`line1-${type}`}
+            label="Street Address"
+            name={`${type}-line1`}
+            isRequired={isRequired}
+            errorState={errors}
+            ref={register({
+              required: {
+                value: isRequired,
+                message: errorMessages.line1,
+              },
+            })}
+            defaultValue={formValues[`${type}-line1`]}
+          />
+        </DSFormField>
+      </FormRow>
+
+      <FormRow>
+        <DSFormField>
+          <FormField
+            id={`line2-${type}`}
+            label="Apartment / Suite"
+            name={`${type}-line2`}
+            ref={register()}
+            defaultValue={formValues[`${type}-line2`]}
+          />
+        </DSFormField>
+      </FormRow>
+
+      <FormRow>
+        <DSFormField>
           <FormField
             id={`city-${type}`}
             label="City"
@@ -97,8 +111,8 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
             })}
             defaultValue={formValues[`${type}-city`]}
           />
-        </div>
-        <div style={{ flex: "1" }}>
+        </DSFormField>
+        <DSFormField>
           <FormField
             id={`state-${type}`}
             instructionText="2-letter abbreviation"
@@ -112,10 +126,11 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
             })}
             defaultValue={formValues[`${type}-state`]}
           />
-        </div>
-      </div>
-      <div className="input-group">
-        <div style={{ flex: "1" }}>
+        </DSFormField>
+      </FormRow>
+
+      <FormRow>
+        <DSFormField>
           <FormField
             id={`zip-${type}`}
             label="Postal Code"
@@ -130,11 +145,10 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
             })}
             defaultValue={formValues[`${type}-zip`]}
           />
-        </div>
-        {/* Easier to align with an empty block. */}
-        <div style={{ flex: "1" }}></div>
-      </div>
-    </fieldset>
+        </DSFormField>
+        <DSFormField></DSFormField>
+      </FormRow>
+    </>
   );
 };
 

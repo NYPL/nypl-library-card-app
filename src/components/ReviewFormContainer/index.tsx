@@ -1,29 +1,34 @@
 /* eslint-disable */
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import axios from "axios";
-import { useFormContext } from "react-hook-form";
 import {
   Button,
+  ButtonGroup,
   Checkbox,
+  Form,
+  FormField as DSFormField,
+  FormRow,
   Heading,
   Radio,
 } from "@nypl/design-system-react-components";
-import useFormDataContext from "../../../src/context/FormDataContext";
-import {
-  getLocationValue,
-  findLibraryName,
-  findLibraryCode,
-} from "../../../src/utils/formDataUtils";
+import axios from "axios";
+import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
+import { useFormContext } from "react-hook-form";
+
 import PersonalFormFields from "../PersonalFormFields";
 import AccountFormFields from "../AccountFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import styles from "./ReviewFormContainer.module.css";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import Loader from "../Loader";
+import FormField from "../FormField";
 import { lcaEvents } from "../../externals/gaUtils";
 import { createQueryParams } from "../../utils/utils";
-import FormField from "../FormField";
+import useFormDataContext from "../../../src/context/FormDataContext";
+import {
+  getLocationValue,
+  findLibraryName,
+  findLibraryCode,
+} from "../../../src/utils/formDataUtils";
 
 /**
  * ReviewFormContainer
@@ -118,14 +123,16 @@ function ReviewFormContainer() {
       </a>
     );
   const submitSectionButton = (
-    <Button
-      buttonType="primary"
-      id="submitSectionButton"
-      onClick={() => {}}
-      type="submit"
-    >
-      Submit
-    </Button>
+    <ButtonGroup>
+      <Button
+        buttonType="primary"
+        id="submitSectionButton"
+        onClick={() => {}}
+        type="submit"
+      >
+        Submit
+      </Button>
+    </ButtonGroup>
   );
 
   /**
@@ -284,20 +291,14 @@ function ReviewFormContainer() {
       {formValues.location && (
         <div className={styles.field}>
           <div className={styles.title}>Location</div>
-          <fieldset>
-            {/* For now until we have better tests. This needs a value or an
-            empty input and label causes accessibility issues. */}
-            <div className="radio-field">
-              <Radio
-                className="radio-input"
-                id="review-location-id"
-                isChecked={true}
-                labelText={getLocationValue(formValues.location)}
-                name={"location"}
-                value={formValues.location}
-              />
-            </div>
-          </fieldset>
+          <Radio
+            className="radio-input"
+            id="review-location-id"
+            isChecked={true}
+            labelText={getLocationValue(formValues.location)}
+            name={"location"}
+            value={formValues.location}
+          />
         </div>
       )}
       {formValues["work-line1"] && <Heading level="four">Home</Heading>}
@@ -366,14 +367,15 @@ function ReviewFormContainer() {
         {!editPersonalInfoFlag ? (
           renderPersonalInformationValues()
         ) : (
-          <form
+          <Form
+            id="review-form-personal-fields"
             onSubmit={handleSubmit((formData) =>
               editSectionInfo(formData, setEditPersonalInfoFlag)
             )}
           >
             <PersonalFormFields />
             {submitSectionButton}
-          </form>
+          </Form>
         )}
       </div>
 
@@ -387,18 +389,16 @@ function ReviewFormContainer() {
         {!editAccountInfoFlag ? (
           renderAccountValues()
         ) : (
-          <form
+          <Form
+            id="review-form-account-fields"
             onSubmit={handleSubmit((formData) =>
               editSectionInfo(formData, setEditPersonalInfoFlag)
             )}
           >
-            <fieldset>
-              <legend>Account form fields</legend>
-              <AccountFormFields showPasswordOnLoad />
-              <AcceptTermsFormFields />
-            </fieldset>
+            <AccountFormFields showPasswordOnLoad />
+            <AcceptTermsFormFields />
             {submitSectionButton}
-          </form>
+          </Form>
         )}
       </div>
 
@@ -408,28 +408,37 @@ function ReviewFormContainer() {
         books and materials.
       </div>
 
-      <form
-        onSubmit={handleSubmit(submitForm)}
-        method="post"
+      <Form
         action="/library-card/api/submit"
+        id="review-submit"
+        method="post"
+        onSubmit={handleSubmit(submitForm)}
       >
-        {/* Not register to react-hook-form because we only want to
-          use this value for the no-js scenario. */}
-        <FormField
-          id="hidden-review-page"
-          type="hidden"
-          name="page"
-          defaultValue="review"
-        />
-        <FormField
-          id="hidden-form-values"
-          type="hidden"
-          name="formValues"
-          defaultValue={JSON.stringify(formValues)}
-        />
+        <FormRow display="none">
+          <DSFormField>
+            {/* Not register to react-hook-form because we only want to
+            use this value for the no-js scenario. */}
+            <FormField
+              id="hidden-review-page"
+              type="hidden"
+              name="page"
+              defaultValue="review"
+            />
+            <FormField
+              id="hidden-form-values"
+              type="hidden"
+              name="formValues"
+              defaultValue={JSON.stringify(formValues)}
+            />
+          </DSFormField>
+        </FormRow>
 
-        <RoutingLinks next={{ submit: true, text: "Submit" }} />
-      </form>
+        <FormRow>
+          <DSFormField>
+            <RoutingLinks next={{ submit: true, text: "Submit" }} />
+          </DSFormField>
+        </FormRow>
+      </Form>
     </>
   );
 }

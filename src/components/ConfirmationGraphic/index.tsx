@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import { Logo } from "@nypl/design-system-react-components";
 import bwipjs from "bwip-js";
 import Image from "next/image";
+import React, { useEffect } from "react";
+
 import { FormResults } from "../../interfaces";
-import { Logo } from "@nypl/design-system-react-components";
 import useFormDataContext from "../../context/FormDataContext";
 
 const ConfirmationContainer: React.FC = () => {

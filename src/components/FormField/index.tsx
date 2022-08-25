@@ -4,7 +4,6 @@ import {
   TextInputTypes,
   TextInputRefType,
 } from "@nypl/design-system-react-components";
-import styles from "./FormField.module.css";
 
 interface FormFieldProps {
   id?: string;
@@ -57,7 +56,6 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
     if (errorText?.message) {
       helperText = errorText.message;
     }
-    const ariaDescribedby = helperText ? `${id}-helperText` : null;
     if (type === "hidden") {
       return (
         <TextInput
@@ -72,11 +70,13 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
     }
 
     return (
-      <div className={`${styles.formField} ${className}`}>
+      <div className={className}>
         <TextInput
           type={typeToInputTypeMap[type] as TextInputTypes}
           id={id}
           isInvalid={!!errorText}
+          isRequired={isRequired}
+          helperText={helperText}
           invalidText={helperText}
           min={minLength || null}
           max={maxLength || null}

@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import ConfirmationGraphic from "../../src/components/ConfirmationGraphic";
 import { Heading } from "@nypl/design-system-react-components";
+import React from "react";
+
+import ConfirmationGraphic from "../../src/components/ConfirmationGraphic";
 import useFormDataContext from "../../src/context/FormDataContext";
 import { FormResults } from "../../src/interfaces";
 import { homePageRedirect } from "../../src/utils/utils";
@@ -16,7 +17,7 @@ function ConfirmationPage() {
 
   return (
     <div>
-      <Heading level={2}>
+      <Heading level="two">
         Congratulations! You now have a digital New York Public Library card.
       </Heading>
 

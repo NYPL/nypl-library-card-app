@@ -1,7 +1,11 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { isEmail } from "validator";
-import { Checkbox } from "@nypl/design-system-react-components";
+import {
+  Checkbox,
+  FormField as DSFormField,
+  FormRow,
+} from "@nypl/design-system-react-components";
 
 import FormField from "../FormField";
 import AgeFormFields from "../AgeFormFields";
@@ -24,10 +28,9 @@ function PersonalFormFields({ agencyType = "" }) {
     </>
   );
   return (
-    <fieldset>
-      <legend>Personal form fields</legend>
-      <div className={`input-group`}>
-        <div style={{ flex: "1" }}>
+    <>
+      <FormRow>
+        <DSFormField>
           <FormField
             id="firstName"
             label="First Name"
@@ -42,8 +45,8 @@ function PersonalFormFields({ agencyType = "" }) {
             errorState={errors}
             defaultValue={formValues.firstName}
           />
-        </div>
-        <div style={{ flex: "1" }}>
+        </DSFormField>
+        <DSFormField>
           <FormField
             id="lastName"
             label="Last Name"
@@ -55,36 +58,46 @@ function PersonalFormFields({ agencyType = "" }) {
             })}
             defaultValue={formValues.lastName}
           />
-        </div>
-      </div>
-
-      <AgeFormFields
-        policyType={agencyType || formValues.policyType}
-        errorMessages={errorMessages}
-      />
-
-      <FormField
-        id="email"
-        label="Email Address"
-        name="email"
-        errorState={errors}
-        isRequired
-        ref={register({
-          required: errorMessages.email,
-          validate: (val) => val === "" || isEmail(val) || errorMessages.email,
-        })}
-        defaultValue={formValues.email}
-        instructionText={instructionText as any}
-      />
-
-      <Checkbox
-        id="eCommunications"
-        isChecked={formValues.ecommunicationsPref}
-        labelText="Yes, I would like to receive information about NYPL's programs and services"
-        name="ecommunicationsPref"
-        ref={register()}
-      />
-    </fieldset>
+        </DSFormField>
+      </FormRow>
+      <FormRow>
+        <DSFormField>
+          <AgeFormFields
+            policyType={agencyType || formValues.policyType}
+            errorMessages={errorMessages}
+          />
+        </DSFormField>
+      </FormRow>
+      <FormRow>
+        <DSFormField>
+          <FormField
+            id="email"
+            label="Email Address"
+            name="email"
+            errorState={errors}
+            isRequired
+            ref={register({
+              required: errorMessages.email,
+              validate: (val) =>
+                val === "" || isEmail(val) || errorMessages.email,
+            })}
+            defaultValue={formValues.email}
+            instructionText={instructionText as any}
+          />
+        </DSFormField>
+      </FormRow>
+      <FormRow>
+        <DSFormField>
+          <Checkbox
+            id="eCommunications"
+            isChecked={formValues.ecommunicationsPref}
+            labelText="Yes, I would like to receive information about NYPL's programs and services"
+            name="ecommunicationsPref"
+            ref={register()}
+          />
+        </DSFormField>
+      </FormRow>
+    </>
   );
 }
 
