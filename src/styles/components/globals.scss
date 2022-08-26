@@ -7,37 +7,3 @@
   width: 1px;
   word-wrap: normal;
 }
-
-// Override for DS layout class
-// body {
-//   width: 100%;
-// }
-
-// .content-primary {
-//   margin: 30px 0;
-// }
-
-// fieldset {
-//   border: none;
-//   margin: 0;
-//   padding: 0;
-
-//   .radio-input {
-//     width: auto;
-//   }
-
-//   .radio-field {
-//     margin: 10px 0;
-//     border: 1px solid var(--nypl-colors-ui-gray-medium);
-//     padding: 20px;
-
-//     label {
-//       display: inline-block;
-//       margin: 0 20px;
-//     }
-//   }
-
-//   legend {
-//     @include screenreader-only();
-//   }
-// }

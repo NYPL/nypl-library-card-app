@@ -6,7 +6,7 @@ import {
 } from "@nypl/design-system-react-components";
 
 interface FormFieldProps {
-  id?: string;
+  id: string;
   label?: string;
   type?: string;
   name: string;
