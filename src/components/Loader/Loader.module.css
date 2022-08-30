@@ -3,6 +3,16 @@
   justify-content: center;
   align-items: center;
   opacity: 60%;
+  /* For modal */
+  padding: var(--nypl-space-s);
+  background-color: var(--nypl-colors-ui-gray-x-light-warm);
+  height: 100vh;
+  left: 0;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 999;
 }
 
 /* The following taken from the Skeleton component in NYPL Design System */
