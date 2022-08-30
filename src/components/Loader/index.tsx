@@ -5,7 +5,7 @@ interface LoaderProps {
   isLoading: boolean;
 }
 
-const Loader = ({ isLoading }: LoaderProps): React.ReactNode | null =>
+const Loader = ({ isLoading }: LoaderProps): any =>
   isLoading && (
     <div className={styles.loaderContainer}>
       <div className={styles.loader} />
