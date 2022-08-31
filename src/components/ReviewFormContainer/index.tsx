@@ -263,6 +263,7 @@ function ReviewFormContainer() {
               labelText="Show Password"
               isChecked={showPassword}
               onChange={updateShowPassword}
+              mt="s"
             />
           </>
         ) : (
@@ -416,6 +417,7 @@ function ReviewFormContainer() {
         id="review-submit"
         method="post"
         onSubmit={handleSubmit(submitForm)}
+        mt="20px"
       >
         <FormRow display="none">
           <DSFormField>
@@ -436,7 +438,7 @@ function ReviewFormContainer() {
           </DSFormField>
         </FormRow>
 
-        <FormRow>
+        <FormRow margin-top="20px">
           <DSFormField>
             <RoutingLinks next={{ submit: true, text: "Submit" }} />
           </DSFormField>

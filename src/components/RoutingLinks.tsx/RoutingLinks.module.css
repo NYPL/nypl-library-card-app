@@ -1,3 +1,6 @@
+.container a {
+  text-decoration: none !important;
+}
 /*
 * This should eventually go into the Design System for the alternate `Link`
 * component styling but not until the functionality for that is working.
@@ -12,7 +15,7 @@
   color: var(--nypl-colors-ui-black) !important;
   border: 1px solid var(--nypl-colors-ui-gray-medium);
   margin-right: 10px;
-  text-decoration: none;
+  text-decoration: none !important;
   border-radius: 2px;
 }
 
@@ -26,7 +29,6 @@
   color: var(--nypl-colors-ui-white);
   border: 1px solid var(--nypl-colors-ui-gray-medium);
   margin-right: 10px;
-  text-decoration: none;
   border-radius: 2px;
   padding: 8px 30px;
 }
@@ -39,7 +41,7 @@
   color: var(--nypl-colors-ui-white);
   border: 1px solid var(--nypl-colors-ui-gray-medium);
   margin-right: 10px;
-  text-decoration: none;
+  text-decoration: none !important;
   border-radius: 2px;
 }
 

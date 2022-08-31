@@ -139,10 +139,7 @@ const UsernameValidationForm = ({
       {usernameIsAvailable?.message ? (
         <FormRow id={`${id}-username-3`}>
           <DSFormField>
-            <div
-              className={`${styles.usernameHelperText} ${availableClassname}`}
-              aria-live="assertive"
-            >
+            <div className={availableClassname} aria-live="assertive">
               {usernameIsAvailable.message}
             </div>
           </DSFormField>

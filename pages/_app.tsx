@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React from "react";
+import "@nypl/design-system-react-components/dist/styles.css";
 import "../src/styles/main.scss";
 import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";

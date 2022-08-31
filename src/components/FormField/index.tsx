@@ -41,7 +41,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
       maxLength,
       defaultValue,
       // any extra input element attributes
-      attributes,
+      attributes = {},
     },
     ref
   ) => {
@@ -51,6 +51,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
       password: "password",
       hidden: "hidden",
     };
+    const updatedRef = ref || attributes?.ref ? ref || attributes?.ref : null;
     let helperText = instructionText || null;
 
     if (errorText?.message) {
@@ -84,7 +85,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
           name={name}
           labelText={label}
           {...attributes}
-          ref={ref}
+          ref={updatedRef}
         />
       </div>
     );

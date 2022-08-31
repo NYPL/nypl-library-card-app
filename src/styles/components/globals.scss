@@ -7,3 +7,13 @@
   width: 1px;
   word-wrap: normal;
 }
+
+.nypl-library-card-app {
+  a {
+    text-decoration: underline !important;
+  }
+
+  #footer a {
+    text-decoration: none !important;
+  }
+}

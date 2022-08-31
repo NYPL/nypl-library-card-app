@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import React, { useEffect } from "react";
 // import { Header, navConfig } from "@nypl/dgx-header-component";
 import Footer from "@nypl/dgx-react-footer";
@@ -22,7 +25,7 @@ const ApplicationContainer = ({ children, problemDetail }) => {
 
   return (
     <TemplateAppContainer
-      // className="nypl-library-card-app"
+      className="nypl-library-card-app"
       breakout={<Banner />}
       contentPrimary={
         <>

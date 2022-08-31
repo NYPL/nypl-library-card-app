@@ -1,7 +1,3 @@
-.usernameHelperText {
-  margin: 10px 0;
-}
-
 .usernameAvailable {
   color: var(--nypl-colors-ui-success-primary);
 }
