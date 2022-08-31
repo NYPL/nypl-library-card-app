@@ -39,11 +39,10 @@ const ConfirmationContainer: React.FC = () => {
     <div className="confirmation-graphic">
       <div className="image-lion">
         <Image
-          src="/library-card/cardbg.png"
-          role="presentation"
-          width="939"
+          alt="NYPL Library Barcode Background"
           height="727"
-          alt=""
+          src="/library-card/cardbg.png"
+          width="939"
         />
         <div className="background-lion">
           <div className="grid-item">
@@ -51,7 +50,7 @@ const ConfirmationContainer: React.FC = () => {
             <div className="content">{name}</div>
           </div>
           <div className="grid-item">
-            <Logo className="nypl-svg" name="nyplFullBlack" />
+            <Logo decorative className="nypl-svg" name="nyplFullBlack" />
           </div>
           <div className="grid-item barcode-container">
             <canvas id="barcodeCanvas" {...canvasArgs}></canvas>

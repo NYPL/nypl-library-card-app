@@ -79,7 +79,7 @@ function ReviewFormContainer() {
     clientSide ? (
       <Button
         buttonType="primary"
-        id="editSectionButton"
+        id={`editSectionButton-${sectionName}`}
         onClick={() => {
           lcaEvents("Edit", sectionName);
           editSectionFlag(true);
@@ -395,7 +395,10 @@ function ReviewFormContainer() {
               editSectionInfo(formData, setEditPersonalInfoFlag)
             )}
           >
-            <AccountFormFields showPasswordOnLoad />
+            <AccountFormFields
+              id="review-form-account-fields"
+              showPasswordOnLoad
+            />
             <AcceptTermsFormFields />
             {submitSectionButton}
           </Form>

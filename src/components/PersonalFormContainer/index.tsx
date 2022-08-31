@@ -43,15 +43,19 @@ const PersonalFormContainer = () => {
       method="post"
       action="/library-card/api/submit"
     >
-      <PersonalFormFields agencyType={formValues.policyType} />
+      <PersonalFormFields
+        agencyType={formValues.policyType}
+        id="perform-form-container"
+      />
 
       <FormRow display="none">
         <DSFormField>
           <FormField
-            type="hidden"
-            name="policyType"
+            id="hidden-policyType"
             defaultValue={formValues.policyType}
+            name="policyType"
             ref={register()}
+            type="hidden"
           />
         </DSFormField>
         <DSFormField>

@@ -14,10 +14,11 @@ import ilsLibraryList from "../../data/ilsLibraryList";
 import LibraryListFormFields from "../LibraryListFormFields";
 
 interface AccountFormFieldsProps {
+  id?: string;
   showPasswordOnLoad?: boolean;
 }
 
-function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
+function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
   const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();
   const [showPassword, setShowPassword] = useState(true);
@@ -73,9 +74,12 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
 
   return (
     <>
-      <UsernameValidationFormFields errorMessage={errorMessages.username} />
+      <UsernameValidationFormFields
+        id={`${id}-accountForm-1`}
+        errorMessage={errorMessages.username}
+      />
 
-      <FormRow>
+      <FormRow id={`${id}-accountForm-2`}>
         <DSFormField>
           <FormField
             id="password"
@@ -96,7 +100,7 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
         </DSFormField>
       </FormRow>
 
-      <FormRow>
+      <FormRow id={`${id}-accountForm-3`}>
         <DSFormField>
           <FormField
             id="verifyPassword"
@@ -117,7 +121,7 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
         </DSFormField>
       </FormRow>
 
-      <FormRow>
+      <FormRow id={`${id}-accountForm-4`}>
         <DSFormField>
           {clientSide && (
             <Checkbox
@@ -131,7 +135,7 @@ function AccountFormFields({ showPasswordOnLoad }: AccountFormFieldsProps) {
         </DSFormField>
       </FormRow>
 
-      <FormRow>
+      <FormRow id={`${id}-accountForm-5`}>
         <DSFormField>
           <LibraryListFormFields libraryList={ilsLibraryList} />
         </DSFormField>

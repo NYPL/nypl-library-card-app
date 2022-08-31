@@ -131,6 +131,7 @@ const AddressContainer = () => {
         onSubmit={handleSubmit(submitForm)}
       >
         <AddressFormFields
+          id="work-address-container"
           type={AddressTypes.Work}
           errorMessages={errorMessages.address}
         />

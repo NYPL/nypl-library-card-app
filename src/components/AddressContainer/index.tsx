@@ -142,6 +142,7 @@ const AddressContainer = () => {
         onSubmit={handleSubmit(submitForm)}
       >
         <AddressFormFields
+          id="address-container"
           type={AddressTypes.Home}
           errorMessages={errorMessages.address}
         />

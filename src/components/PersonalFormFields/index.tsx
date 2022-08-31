@@ -12,7 +12,7 @@ import AgeFormFields from "../AgeFormFields";
 import useFormDataContext from "../../context/FormDataContext";
 import { errorMessages } from "../../utils/formDataUtils";
 
-function PersonalFormFields({ agencyType = "" }) {
+function PersonalFormFields({ agencyType = "", id = "" }) {
   const { register, errors } = useFormContext();
   const { state } = useFormDataContext();
   const { formValues } = state;
@@ -29,7 +29,7 @@ function PersonalFormFields({ agencyType = "" }) {
   );
   return (
     <>
-      <FormRow>
+      <FormRow id={`${id}-personalForm-1`}>
         <DSFormField>
           <FormField
             id="firstName"
@@ -60,7 +60,7 @@ function PersonalFormFields({ agencyType = "" }) {
           />
         </DSFormField>
       </FormRow>
-      <FormRow>
+      <FormRow id={`${id}-personalForm-2`}>
         <DSFormField>
           <AgeFormFields
             policyType={agencyType || formValues.policyType}
@@ -68,7 +68,7 @@ function PersonalFormFields({ agencyType = "" }) {
           />
         </DSFormField>
       </FormRow>
-      <FormRow>
+      <FormRow id={`${id}-personalForm-3`}>
         <DSFormField>
           <FormField
             id="email"
@@ -86,7 +86,7 @@ function PersonalFormFields({ agencyType = "" }) {
           />
         </DSFormField>
       </FormRow>
-      <FormRow>
+      <FormRow id={`${id}-personalForm-4`}>
         <DSFormField>
           <Checkbox
             id="eCommunications"

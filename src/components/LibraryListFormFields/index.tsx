@@ -79,15 +79,21 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
    * renderInputComponent
    * This is the custom component we want to render for the form field.
    */
-  const renderInputComponent = (inputProps) => (
-    <FormField
-      id="librarylist-autosuggest"
-      label="Select a home library:"
-      name="homeLibraryCode"
-      isRequired={false}
-      attributes={{ ...inputProps }}
-    />
-  );
+  const renderInputComponent = (inputProps) => {
+    // According to axe, this is a bad aria label,
+    // so let's remove it.
+    delete inputProps["aria-autocomplete"];
+
+    return (
+      <FormField
+        id="librarylist-autosuggest"
+        label="Select a home library:"
+        name="homeLibraryCode"
+        isRequired={false}
+        attributes={{ ...inputProps }}
+      />
+    );
+  };
   /**
    * renderSuggestionsContainer
    * To solve an accessibility issue, we render the autosuggest container

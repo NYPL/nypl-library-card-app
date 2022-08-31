@@ -11,6 +11,7 @@ import { Address, AddressTypes } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
 
 interface AddressFormProps {
+  id?: string;
   type: AddressTypes;
   errorMessages: Address;
 }
@@ -21,7 +22,7 @@ interface AddressFormProps {
  * street address (line1), second street address (line2), city, state,
  * and zip code.
  */
-const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
+const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
   const { state } = useFormDataContext();
   const { formValues } = state;
   // This component must be used within the `react-hook-form` provider so that
@@ -64,7 +65,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
 
   return (
     <>
-      <FormRow>
+      <FormRow id={`${id}-addressForm-1`}>
         <DSFormField>
           <FormField
             id={`line1-${type}`}
@@ -83,7 +84,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
         </DSFormField>
       </FormRow>
 
-      <FormRow>
+      <FormRow id={`${id}-addressForm-2`}>
         <DSFormField>
           <FormField
             id={`line2-${type}`}
@@ -95,7 +96,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
         </DSFormField>
       </FormRow>
 
-      <FormRow>
+      <FormRow id={`${id}-addressForm-3`}>
         <DSFormField>
           <FormField
             id={`city-${type}`}
@@ -129,7 +130,7 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
         </DSFormField>
       </FormRow>
 
-      <FormRow>
+      <FormRow id={`${id}-addressForm-4`}>
         <DSFormField>
           <FormField
             id={`zip-${type}`}

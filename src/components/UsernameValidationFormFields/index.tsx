@@ -15,6 +15,7 @@ import styles from "./UsernameValidationFormFields.module.css";
 import { lcaEvents } from "../../externals/gaUtils";
 
 interface UsernameValidationFormProps {
+  id?: string;
   errorMessage?: string;
 }
 
@@ -27,6 +28,7 @@ interface UsernameValidationFormProps {
  * re-evaluate the username (and make one less request to the NYPL ILS).
  */
 const UsernameValidationForm = ({
+  id = "",
   errorMessage = "",
 }: UsernameValidationFormProps) => {
   const defaultState = {
@@ -112,7 +114,7 @@ const UsernameValidationForm = ({
 
   return (
     <>
-      <FormRow>
+      <FormRow id={`${id}-username-1`}>
         <DSFormField>
           <FormField
             id="username"
@@ -130,12 +132,12 @@ const UsernameValidationForm = ({
         </DSFormField>
       </FormRow>
 
-      <FormRow>
+      <FormRow id={`${id}-username-2`}>
         <DSFormField>{renderButton()}</DSFormField>
       </FormRow>
 
       {usernameIsAvailable?.message ? (
-        <FormRow>
+        <FormRow id={`${id}-username-3`}>
           <DSFormField>
             <div
               className={`${styles.usernameHelperText} ${availableClassname}`}
@@ -147,7 +149,7 @@ const UsernameValidationForm = ({
         </FormRow>
       ) : null}
 
-      <FormRow display="none">
+      <FormRow display="none" id={`${id}-username-4`}>
         <DSFormField>
           {/* Only add this value to the form submission if there is a message. */}
           {usernameIsAvailable.message && (

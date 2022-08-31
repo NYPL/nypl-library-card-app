@@ -47,7 +47,7 @@ const AccountFormContainer = () => {
       method="post"
       onSubmit={handleSubmit(submitForm)}
     >
-      <AccountFormFields />
+      <AccountFormFields id="account-form-container" />
       <AcceptTermsFormFields />
 
       <FormRow display="none">
