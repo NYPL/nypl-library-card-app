@@ -1,5 +1,12 @@
 ## CHANGE LOG
 
+### V0.8.0
+
+#### Updated
+
+- Updates React to version 17, and Nextjs to version 12.
+- Minor updates to other packages such as `react-hook-form`, `react-test-renderer`, `husky`, and `babel-jest`.
+
 ### v0.7.11
 
 #### Updated

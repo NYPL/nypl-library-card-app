@@ -8,8 +8,11 @@ module.exports = {
   ],
   setupFilesAfterEnv: ["<rootDir>/testHelper/browser.ts"],
   testPathIgnorePatterns: ["/node_modules/", "/.next/", ".spec"],
+  // A map from regular expressions to paths to transformers
   transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+    // Use babel-jest to transpile tests with the next/babel preset
+    // https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object
+    "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }],
   },
   transformIgnorePatterns: [
     "<rootDir>/node_modules/",
