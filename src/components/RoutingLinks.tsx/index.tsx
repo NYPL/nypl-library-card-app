@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { lcaEvents } from "../../externals/gaUtils";
 import styles from "./RoutingLinks.module.css";
+import { Button } from "@nypl/design-system-react-components";
 
 export interface LinkType {
   url: string;
@@ -54,11 +55,13 @@ function RoutingLinks({ previous, next }: RoutingLinksType): JSX.Element {
           </a>
         </Link>
       ) : (
-        <input
+        <Button
+          id="submit-form"
           className={`button ${styles.next}`}
           type="submit"
-          value={nextText}
-        />
+        >
+          {nextText}
+        </Button>
       )}
     </div>
   );
