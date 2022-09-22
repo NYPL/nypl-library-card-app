@@ -35,6 +35,7 @@
   "devDependencies": {},
   "dependencies": {
     "@axe-core/react": "4.1.0",
+    "@babel/eslint-parser": "7.19.1",
     "@babel/preset-typescript": "7.10.4",
     "@nypl/design-system-react-components": "1.0.8",
     "@nypl/dgx-react-footer": "0.5.7",
