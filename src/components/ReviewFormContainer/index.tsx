@@ -1,32 +1,34 @@
 /* eslint-disable */
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import axios from "axios";
-import { useFormContext } from "react-hook-form";
 import {
   Button,
-  ButtonTypes,
-  Input,
-  Label,
-  InputTypes,
+  ButtonGroup,
   Checkbox,
+  Form,
+  FormField as DSFormField,
+  FormRow,
   Heading,
+  Radio,
 } from "@nypl/design-system-react-components";
-import useFormDataContext from "../../../src/context/FormDataContext";
-import {
-  getLocationValue,
-  findLibraryName,
-  findLibraryCode,
-} from "../../../src/utils/formDataUtils";
+import axios from "axios";
+import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
+import { useFormContext } from "react-hook-form";
+
 import PersonalFormFields from "../PersonalFormFields";
 import AccountFormFields from "../AccountFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import styles from "./ReviewFormContainer.module.css";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import Loader from "../Loader";
+import FormField from "../FormField";
 import { lcaEvents } from "../../externals/gaUtils";
 import { createQueryParams } from "../../utils/utils";
-import FormField from "../FormField";
+import useFormDataContext from "../../../src/context/FormDataContext";
+import {
+  getLocationValue,
+  findLibraryName,
+  findLibraryCode,
+} from "../../../src/utils/formDataUtils";
 
 /**
  * ReviewFormContainer
@@ -46,10 +48,6 @@ function ReviewFormContainer() {
   const [editPersonalInfoFlag, setEditPersonalInfoFlag] = useState(false);
   const [editAccountInfoFlag, setEditAccountInfoFlag] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
-  const checkBoxLabelOptions = {
-    id: "showPasswordId",
-    labelContent: <>Show Password</>,
-  };
   const updateShowPassword = () => setShowPassword(!showPassword);
 
   // Will run whenever the `errorObj` has changes, specifically for
@@ -80,7 +78,8 @@ function ReviewFormContainer() {
   const editSectionButton = (editSectionFlag, sectionName, page) =>
     clientSide ? (
       <Button
-        buttonType={ButtonTypes.Primary}
+        buttonType="primary"
+        id={`editSectionButton-${sectionName}`}
         onClick={() => {
           lcaEvents("Edit", sectionName);
           editSectionFlag(true);
@@ -105,7 +104,8 @@ function ReviewFormContainer() {
   const editAddressButton = () =>
     clientSide ? (
       <Button
-        buttonType={ButtonTypes.Primary}
+        buttonType="primary"
+        id="editAddressButton"
         onClick={() => {
           lcaEvents("Edit", "Location/Address");
           router.push("/location?newCard=true");
@@ -123,9 +123,16 @@ function ReviewFormContainer() {
       </a>
     );
   const submitSectionButton = (
-    <Button buttonType={ButtonTypes.Primary} onClick={() => {}} type="submit">
-      Submit
-    </Button>
+    <ButtonGroup>
+      <Button
+        buttonType="primary"
+        id="submitSectionButton"
+        onClick={() => {}}
+        type="submit"
+      >
+        Submit
+      </Button>
+    </ButtonGroup>
   );
 
   /**
@@ -251,13 +258,12 @@ function ReviewFormContainer() {
                 : "*".repeat(formValues.password?.length)}
             </div>
             <Checkbox
-              checkboxId="showPasswordReview"
+              id="showPasswordReview"
               name="showPasswordReview"
-              labelOptions={checkBoxLabelOptions}
-              attributes={{
-                defaultChecked: showPassword,
-                onClick: updateShowPassword,
-              }}
+              labelText="Show Password"
+              isChecked={showPassword}
+              onChange={updateShowPassword}
+              mt="s"
             />
           </>
         ) : (
@@ -286,34 +292,17 @@ function ReviewFormContainer() {
       {formValues.location && (
         <div className={styles.field}>
           <div className={styles.title}>Location</div>
-          <fieldset>
-            {/* For now until we have better tests. This needs a value or an
-            empty input and label causes accessibility issues. */}
-            <div className="radio-field">
-              <Input
-                className="radio-input"
-                aria-labelledby="review-location-label"
-                id="review-location-id"
-                type={InputTypes.radio}
-                attributes={{
-                  name: "location",
-                  "aria-checked": true,
-                  checked: true,
-                  readOnly: true,
-                }}
-                value={formValues.location}
-              />
-              <Label
-                id="review-location-label"
-                htmlFor="input-review-location-id"
-              >
-                {getLocationValue(formValues.location)}
-              </Label>
-            </div>
-          </fieldset>
+          <Radio
+            className="radio-input"
+            id="review-location-id"
+            isChecked={true}
+            labelText={getLocationValue(formValues.location)}
+            name={"location"}
+            value={formValues.location}
+          />
         </div>
       )}
-      {formValues["work-line1"] && <Heading level={4}>Home</Heading>}
+      {formValues["work-line1"] && <Heading level="four">Home</Heading>}
       <div className={styles.field}>
         <div className={styles.title}>Street Address</div>
         <div>{formValues["home-line1"]}</div>
@@ -338,7 +327,7 @@ function ReviewFormContainer() {
       </div>
       {formValues["work-line1"] && (
         <>
-          <Heading level={4} className={styles.workTitle}>
+          <Heading level="four" className={styles.workTitle}>
             Work
           </Heading>
           <div className={styles.field}>
@@ -375,43 +364,45 @@ function ReviewFormContainer() {
       <Loader isLoading={isLoading} />
 
       <div className={styles.formSection}>
-        <Heading level={3}>Personal Information</Heading>
+        <Heading level="three">Personal Information</Heading>
         {!editPersonalInfoFlag ? (
           renderPersonalInformationValues()
         ) : (
-          <form
+          <Form
+            id="review-form-personal-fields"
             onSubmit={handleSubmit((formData) =>
               editSectionInfo(formData, setEditPersonalInfoFlag)
             )}
           >
             <PersonalFormFields />
             {submitSectionButton}
-          </form>
+          </Form>
         )}
       </div>
 
       <div className={styles.formSection}>
-        <Heading level={3}>Address</Heading>
+        <Heading level="three">Address</Heading>
         {renderAddressValues()}
       </div>
 
       <div className={styles.formSection}>
-        <Heading level={3}>Create Your Account</Heading>
+        <Heading level="three">Create Your Account</Heading>
         {!editAccountInfoFlag ? (
           renderAccountValues()
         ) : (
-          <form
+          <Form
+            id="review-form-account-fields"
             onSubmit={handleSubmit((formData) =>
               editSectionInfo(formData, setEditPersonalInfoFlag)
             )}
           >
-            <fieldset>
-              <legend>Account form fields</legend>
-              <AccountFormFields showPasswordOnLoad />
-              <AcceptTermsFormFields />
-            </fieldset>
+            <AccountFormFields
+              id="review-form-account-fields"
+              showPasswordOnLoad
+            />
+            <AcceptTermsFormFields />
             {submitSectionButton}
-          </form>
+          </Form>
         )}
       </div>
 
@@ -421,28 +412,38 @@ function ReviewFormContainer() {
         books and materials.
       </div>
 
-      <form
-        onSubmit={handleSubmit(submitForm)}
-        method="post"
+      <Form
         action="/library-card/api/submit"
+        id="review-submit"
+        method="post"
+        onSubmit={handleSubmit(submitForm)}
+        mt="20px"
       >
-        {/* Not register to react-hook-form because we only want to
-          use this value for the no-js scenario. */}
-        <FormField
-          id="hidden-review-page"
-          type="hidden"
-          name="page"
-          defaultValue="review"
-        />
-        <FormField
-          id="hidden-form-values"
-          type="hidden"
-          name="formValues"
-          defaultValue={JSON.stringify(formValues)}
-        />
+        <FormRow display="none">
+          <DSFormField>
+            {/* Not register to react-hook-form because we only want to
+            use this value for the no-js scenario. */}
+            <FormField
+              id="hidden-review-page"
+              type="hidden"
+              name="page"
+              defaultValue="review"
+            />
+            <FormField
+              id="hidden-form-values"
+              type="hidden"
+              name="formValues"
+              defaultValue={JSON.stringify(formValues)}
+            />
+          </DSFormField>
+        </FormRow>
 
-        <RoutingLinks next={{ submit: true, text: "Submit" }} />
-      </form>
+        <FormRow margin-top="20px">
+          <DSFormField>
+            <RoutingLinks next={{ submit: true, text: "Submit" }} />
+          </DSFormField>
+        </FormRow>
+      </Form>
     </>
   );
 }

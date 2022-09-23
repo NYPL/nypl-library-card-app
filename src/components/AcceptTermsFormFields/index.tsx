@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  Checkbox,
-  HelperErrorText,
-} from "@nypl/design-system-react-components";
+import { Checkbox } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
 import useFormDataContext from "../../context/FormDataContext";
 
@@ -17,10 +14,6 @@ const AcceptTermsForm = () => {
   const { state } = useFormDataContext();
   const { formValues } = state;
   const { register, errors } = useFormContext();
-  const acceptTermsLabelOptions = {
-    id: "acceptTerms",
-    labelContent: <>Yes, I accept the terms and conditions.</>,
-  };
 
   return (
     <>
@@ -42,23 +35,17 @@ const AcceptTermsForm = () => {
       </p>
 
       <Checkbox
-        checkboxId="input-acceptTerms"
+        id="acceptTerms"
+        invalidText={errors?.acceptTerms?.message}
+        isChecked={formValues.acceptTerms}
+        isInvalid={errors?.acceptTerms?.message}
         name="acceptTerms"
-        labelOptions={acceptTermsLabelOptions}
+        labelText="Yes, I accept the terms and conditions."
         // Users must click the checkbox in order to submit.
         ref={register({
           required: "The Terms and Conditions must be checked.",
         })}
-        attributes={{ defaultChecked: formValues.acceptTerms }}
       />
-
-      {/* Display errors if the user skips or attempts to submit
-        without accepting the Terms and Conditions */}
-      {errors?.acceptTerms?.message && (
-        <HelperErrorText id="checkbox-error" isError>
-          {errors.acceptTerms.message}
-        </HelperErrorText>
-      )}
     </>
   );
 };

@@ -1,7 +1,8 @@
+import { Heading } from "@nypl/design-system-react-components";
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import Autosuggest from "react-autosuggest";
-import { Heading } from "@nypl/design-system-react-components";
+
 import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
 import { findLibraryName } from "../../utils/formDataUtils";
@@ -79,15 +80,21 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
    * renderInputComponent
    * This is the custom component we want to render for the form field.
    */
-  const renderInputComponent = (inputProps) => (
-    <FormField
-      id="librarylist-autosuggest"
-      label="Select a home library:"
-      name="homeLibraryCode"
-      isRequired={false}
-      attributes={{ ...inputProps }}
-    />
-  );
+  const renderInputComponent = (inputProps) => {
+    // According to axe, this is a bad aria label,
+    // so let's remove it.
+    delete inputProps["aria-autocomplete"];
+
+    return (
+      <FormField
+        id="librarylist-autosuggest"
+        label="Select a home library:"
+        name="homeLibraryCode"
+        isRequired={false}
+        attributes={{ ...inputProps }}
+      />
+    );
+  };
   /**
    * renderSuggestionsContainer
    * To solve an accessibility issue, we render the autosuggest container
@@ -101,7 +108,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
 
   return (
     <div className={styles.container}>
-      <Heading level={3}>Home Library</Heading>
+      <Heading level="three">Home Library</Heading>
       <p>
         Choosing a home library will help us make sure you&apos;re getting
         everything you need from a branch that&apos;s most convenient for you.

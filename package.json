@@ -36,7 +36,7 @@
   "dependencies": {
     "@axe-core/react": "4.1.0",
     "@babel/preset-typescript": "7.10.4",
-    "@nypl/design-system-react-components": "0.20.1",
+    "@nypl/design-system-react-components": "1.0.8",
     "@nypl/dgx-react-footer": "0.5.7",
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.3",
@@ -83,7 +83,7 @@
     "sass": "1.26.9",
     "save-dev": "0.0.1-security",
     "sinon": "9.0.2",
-    "typescript": "3.9.5",
+    "typescript": "4.3.2",
     "underscore": "1.13.1",
     "validator": "13.0.0",
     "webpack": "4.46.0",

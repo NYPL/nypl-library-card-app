@@ -24,6 +24,7 @@ describe("AddressFormFields", () => {
     const { container } = render(
       <TestProviderWrapper>
         <AddressFormFields
+          id="address-test"
           type={AddressTypes.Home}
           errorMessages={addressErrorMessages}
         />
@@ -36,6 +37,7 @@ describe("AddressFormFields", () => {
     const { container } = render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
         <AddressFormFields
+          id="address-test"
           type={AddressTypes.Home}
           errorMessages={addressErrorMessages}
         />
@@ -49,6 +51,7 @@ describe("AddressFormFields", () => {
     render(
       <TestProviderWrapper>
         <AddressFormFields
+          id="address-test"
           type={AddressTypes.Home}
           errorMessages={addressErrorMessages}
         />
@@ -60,12 +63,12 @@ describe("AddressFormFields", () => {
     // is in a separate element inside the <label> element. But, getByRole
     // works just as well.
     const line1 = screen.getByRole("textbox", {
-      name: "Street Address Required",
+      name: "Street Address (Required)",
     });
     const line2 = screen.getByLabelText("Apartment / Suite");
-    const city = screen.getByRole("textbox", { name: "City Required" });
-    const state = screen.getByRole("textbox", { name: "State Required" });
-    const zip = screen.getByRole("textbox", { name: "Postal Code Required" });
+    const city = screen.getByRole("textbox", { name: "City (Required)" });
+    const state = screen.getByRole("textbox", { name: "State (Required)" });
+    const zip = screen.getByRole("textbox", { name: "Postal Code (Required)" });
 
     expect(line1).toBeInTheDocument();
     expect(line2).toBeInTheDocument();
@@ -78,6 +81,7 @@ describe("AddressFormFields", () => {
     render(
       <TestProviderWrapper>
         <AddressFormFields
+          id="address-test"
           type={AddressTypes.Work}
           errorMessages={addressErrorMessages}
         />
@@ -103,6 +107,7 @@ describe("AddressFormFields", () => {
     render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
         <AddressFormFields
+          id="address-test"
           type={AddressTypes.Home}
           errorMessages={addressErrorMessages}
         />

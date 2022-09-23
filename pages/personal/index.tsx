@@ -12,7 +12,7 @@ interface PageProps {
 function PersonalInformationPage({ pageTitles }: PageProps) {
   return (
     <>
-      <Heading level={2}>{pageTitles.personal}</Heading>
+      <Heading level="two">{pageTitles.personal}</Heading>
       <PersonalFormContainer />
     </>
   );

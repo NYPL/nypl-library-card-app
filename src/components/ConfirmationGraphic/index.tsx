@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import { Logo } from "@nypl/design-system-react-components";
 import bwipjs from "bwip-js";
 import Image from "next/image";
+import React, { useEffect } from "react";
+
 import { FormResults } from "../../interfaces";
-import { Icon, LogoNames } from "@nypl/design-system-react-components";
 import useFormDataContext from "../../context/FormDataContext";
 
 const ConfirmationContainer: React.FC = () => {
@@ -38,11 +39,10 @@ const ConfirmationContainer: React.FC = () => {
     <div className="confirmation-graphic">
       <div className="image-lion">
         <Image
-          src="/library-card/cardbg.png"
-          role="presentation"
-          width="939"
+          alt="NYPL Library Barcode Background"
           height="727"
-          alt=""
+          src="/library-card/cardbg.png"
+          width="939"
         />
         <div className="background-lion">
           <div className="grid-item">
@@ -50,11 +50,7 @@ const ConfirmationContainer: React.FC = () => {
             <div className="content">{name}</div>
           </div>
           <div className="grid-item">
-            <Icon
-              decorative
-              className="nypl-svg"
-              name={LogoNames["logo_nypl_negative"]}
-            />
+            <Logo decorative className="nypl-svg" name="nyplFullWhite" />
           </div>
           <div className="grid-item barcode-container">
             <canvas id="barcodeCanvas" {...canvasArgs}></canvas>

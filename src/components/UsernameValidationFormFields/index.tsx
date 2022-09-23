@@ -1,14 +1,21 @@
-import React, { useState, useEffect } from "react";
+import {
+  Button,
+  ButtonGroup,
+  FormField as DSFormField,
+  FormRow,
+} from "@nypl/design-system-react-components";
 import axios from "axios";
-import { isAlphanumeric } from "validator";
-import { Button } from "@nypl/design-system-react-components";
+import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
+import { isAlphanumeric } from "validator";
+
 import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
 import styles from "./UsernameValidationFormFields.module.css";
 import { lcaEvents } from "../../externals/gaUtils";
 
 interface UsernameValidationFormProps {
+  id?: string;
   errorMessage?: string;
 }
 
@@ -21,6 +28,7 @@ interface UsernameValidationFormProps {
  * re-evaluate the username (and make one less request to the NYPL ILS).
  */
 const UsernameValidationForm = ({
+  id = "",
   errorMessage = "",
 }: UsernameValidationFormProps) => {
   const defaultState = {
@@ -91,44 +99,67 @@ const UsernameValidationForm = ({
     const canValidate =
       inputValidation(username) && !usernameIsAvailable.message;
     return (
-      <Button onClick={validateUsername} type="button" disabled={!canValidate}>
-        Check if username is available
-      </Button>
+      <ButtonGroup>
+        <Button
+          id="username-check-button"
+          isDisabled={!canValidate}
+          onClick={validateUsername}
+          type="button"
+        >
+          Check if username is available
+        </Button>
+      </ButtonGroup>
     );
   };
 
   return (
     <>
-      <FormField
-        id="username"
-        label="Username"
-        name="username"
-        instructionText="5-25 alphanumeric characters. No special characters."
-        isRequired
-        errorState={errors}
-        maxLength={25}
-        ref={register({
-          validate: (val) => inputValidation(val) || errorMessage,
-        })}
-        defaultValue={formValues.username}
-      />
-      {renderButton()}
-      <div
-        className={`${styles.usernameHelperText} ${availableClassname}`}
-        aria-live="assertive"
-      >
-        {usernameIsAvailable.message}
-      </div>
-      {/* Only add this value to the form submission if there is a message. */}
-      {usernameIsAvailable.message && (
-        <FormField
-          id="hidden-username-validated"
-          type="hidden"
-          name="usernameHasBeenValidated"
-          defaultValue={`${usernameIsAvailable.available}`}
-          ref={register()}
-        />
-      )}
+      <FormRow id={`${id}-username-1`}>
+        <DSFormField>
+          <FormField
+            id="username"
+            label="Username"
+            name="username"
+            instructionText="5-25 alphanumeric characters. No special characters."
+            isRequired
+            errorState={errors}
+            maxLength={25}
+            ref={register({
+              validate: (val) => inputValidation(val) || errorMessage,
+            })}
+            defaultValue={formValues.username}
+          />
+        </DSFormField>
+      </FormRow>
+
+      <FormRow id={`${id}-username-2`}>
+        <DSFormField>{renderButton()}</DSFormField>
+      </FormRow>
+
+      {usernameIsAvailable?.message ? (
+        <FormRow id={`${id}-username-3`}>
+          <DSFormField>
+            <div className={availableClassname} aria-live="assertive">
+              {usernameIsAvailable.message}
+            </div>
+          </DSFormField>
+        </FormRow>
+      ) : null}
+
+      <FormRow display="none" id={`${id}-username-4`}>
+        <DSFormField>
+          {/* Only add this value to the form submission if there is a message. */}
+          {usernameIsAvailable.message && (
+            <FormField
+              id="hidden-username-validated"
+              type="hidden"
+              name="usernameHasBeenValidated"
+              defaultValue={`${usernameIsAvailable.available}`}
+              ref={register()}
+            />
+          )}
+        </DSFormField>
+      </FormRow>
     </>
   );
 };

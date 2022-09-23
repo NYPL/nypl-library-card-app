@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  Checkbox,
-  HelperErrorText,
-} from "@nypl/design-system-react-components";
+import { Checkbox } from "@nypl/design-system-react-components";
 import { useFormContext } from "react-hook-form";
 import FormField from "../FormField";
 import { isDate } from "../../utils/formDataUtils";
@@ -10,7 +7,7 @@ import useFormDataContext from "../../context/FormDataContext";
 
 interface AgeFormProps {
   policyType?: string;
-  errorMessages: {};
+  errorMessages: any;
 }
 
 /**
@@ -27,10 +24,6 @@ const AgeForm = ({
   const { register, errors } = useFormContext();
   const MAXLENGTHDATE = 10;
   const isWebApplicant = policyType === "webApplicant";
-  const ageGateLabelOptions = {
-    id: "ageGateLabel",
-    labelContent: <>Yes, I am over 13 years old.</>,
-  };
   const ageGateError = errors?.ageGate?.message;
 
   const birthdateField = (
@@ -54,17 +47,16 @@ const AgeForm = ({
   const ageGateField = (
     <>
       <Checkbox
-        checkboxId="ageGateCheckbox"
+        id="ageGateCheckbox"
+        invalidText={ageGateError}
+        isChecked={formValues.ageGate}
+        isInvalid={ageGateError}
         name="ageGate"
-        labelOptions={ageGateLabelOptions}
+        labelText="Yes, I am over 13 years old."
         ref={register({
           required: errorMessages["ageGate"],
         })}
-        attributes={{ defaultChecked: formValues.ageGate }}
       />
-      {!!ageGateError && (
-        <HelperErrorText isError={true}>{ageGateError}</HelperErrorText>
-      )}
     </>
   );
 

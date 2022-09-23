@@ -12,7 +12,7 @@ interface PageProps {
 function AccountPage({ pageTitles }: PageProps) {
   return (
     <>
-      <Heading level={2}>{pageTitles.account}</Heading>
+      <Heading level="two">{pageTitles.account}</Heading>
       <p>
         Create a username and password so you can log in and manage your account
         or access an array of our digital resources. Your username should be

@@ -1,18 +1,16 @@
 import React from "react";
 import {
-  Label,
-  Input,
-  InputTypes,
-  HelperErrorText,
+  TextInput,
+  TextInputTypes,
+  TextInputRefType,
 } from "@nypl/design-system-react-components";
-import styles from "./FormField.module.css";
 
 interface FormFieldProps {
-  id?: string;
+  id: string;
   label?: string;
   type?: string;
   name: string;
-  errorState?: {};
+  errorState?: any;
   className?: string;
   isRequired?: boolean;
   instructionText?: string | JSX.Element;
@@ -28,7 +26,7 @@ interface FormFieldProps {
  * which also renders errors. Internal components are rendered by the
  * NYPL Design System.
  */
-const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
+const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
   (
     {
       id,
@@ -43,69 +41,52 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
       maxLength,
       defaultValue,
       // any extra input element attributes
-      attributes,
+      attributes = {},
     },
     ref
   ) => {
     const errorText = errorState[name];
     const typeToInputTypeMap = {
-      text: InputTypes.text,
-      password: InputTypes.password,
-      radio: InputTypes.radio,
-      hidden: InputTypes.hidden,
+      text: "text",
+      password: "password",
+      hidden: "hidden",
     };
+    const updatedRef = ref || attributes?.ref ? ref || attributes?.ref : null;
     let helperText = instructionText || null;
 
     if (errorText?.message) {
       helperText = errorText.message;
     }
-    const ariaDescribedby = helperText ? `${id}-helperText` : null;
     if (type === "hidden") {
       return (
-        <Input
+        <TextInput
+          defaultValue={defaultValue}
           id={id}
-          type={typeToInputTypeMap[type]}
-          attributes={{
-            defaultValue,
-            name,
-          }}
+          name={name}
+          labelText={label}
           ref={ref}
+          type={typeToInputTypeMap[type] as TextInputTypes}
         />
       );
     }
 
     return (
-      <div className={`${styles.formField} ${className}`}>
-        <Label
-          htmlFor={id}
-          id={`${id}-label`}
-          optReqFlag={isRequired ? "Required" : ""}
-        >
-          {label}
-        </Label>
-        <Input
-          type={typeToInputTypeMap[type]}
+      <div className={className}>
+        <TextInput
+          type={typeToInputTypeMap[type] as TextInputTypes}
           id={id}
-          aria-required={isRequired}
-          attributes={{
-            ["aria-invalid"]: errorText ? "true" : "false",
-            ["aria-describedby"]: ariaDescribedby,
-            minLength: minLength || null,
-            maxLength: maxLength || null,
-            tabIndex: 0,
-            defaultValue,
-            name,
-            ...attributes,
-          }}
-          ref={ref}
+          isInvalid={!!errorText}
+          isRequired={isRequired}
+          helperText={helperText}
+          invalidText={helperText}
+          min={minLength || null}
+          max={maxLength || null}
+          defaultValue={defaultValue}
+          name={name}
+          labelText={label}
+          {...attributes}
+          ref={updatedRef}
         />
-        <HelperErrorText
-          id={`${id}-helperText`}
-          isError={!!errorText}
-          ariaLive="assertive"
-        >
-          {helperText}
-        </HelperErrorText>
       </div>
     );
   }

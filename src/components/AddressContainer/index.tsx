@@ -1,22 +1,27 @@
+import {
+  Form,
+  FormField as DSFormField,
+  FormRow,
+  Heading,
+} from "@nypl/design-system-react-components";
+import axios from "axios";
+import isEmpty from "lodash/isEmpty";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { useRouter } from "next/router";
-import axios from "axios";
-import { Heading } from "@nypl/design-system-react-components";
-import isEmpty from "lodash/isEmpty";
 
 import useFormDataContext from "../../context/FormDataContext";
 import AddressFormFields from "../AddressFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
-import { errorMessages, constructAddressType } from "../../utils/formDataUtils";
 import {
   AddressResponse,
   AddressesResponse,
   AddressTypes,
 } from "../../interfaces";
 import Loader from "../Loader";
-import { lcaEvents } from "../../externals/gaUtils";
 import FormField from "../FormField";
+import { errorMessages, constructAddressType } from "../../utils/formDataUtils";
+import { lcaEvents } from "../../externals/gaUtils";
 import { nyCounties, nyCities } from "../../utils/utils";
 
 const AddressContainer = () => {
@@ -124,40 +129,53 @@ const AddressContainer = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(submitForm)}
-      method="post"
-      action="/library-card/api/submit"
-    >
+    <>
+      <Heading level="three">Home Address</Heading>
+      <p>If you live in NYC, please fill out the home address form.</p>
+
       <Loader isLoading={isLoading} />
 
-      <Heading level={3}>Home Address</Heading>
-      <p>If you live in NYC, please fill out the home address form.</p>
-      <AddressFormFields
-        type={AddressTypes.Home}
-        errorMessages={errorMessages.address}
-      />
+      <Form
+        action="/library-card/api/submit"
+        id="address-container"
+        method="post"
+        onSubmit={handleSubmit(submitForm)}
+      >
+        <AddressFormFields
+          id="address-container"
+          type={AddressTypes.Home}
+          errorMessages={errorMessages.address}
+        />
 
-      {/* Not register to react-hook-form because we only want to
-          use this value for the no-js scenario. */}
-      <FormField
-        id="hidden-location-page"
-        type="hidden"
-        name="page"
-        defaultValue="location"
-      />
-      <FormField
-        id="hidden-form-values"
-        type="hidden"
-        name="formValues"
-        defaultValue={JSON.stringify(formValues)}
-      />
+        <FormRow display="none">
+          <DSFormField>
+            {/* Not register to react-hook-form because we only want to
+            use this value for the no-js scenario. */}
+            <FormField
+              id="hidden-location-page"
+              type="hidden"
+              name="page"
+              defaultValue="location"
+            />
+            <FormField
+              id="hidden-form-values"
+              type="hidden"
+              name="formValues"
+              defaultValue={JSON.stringify(formValues)}
+            />
+          </DSFormField>
+        </FormRow>
 
-      <RoutingLinks
-        previous={{ url: "/personal?newCard=true" }}
-        next={{ submit: true }}
-      />
-    </form>
+        <FormRow>
+          <DSFormField>
+            <RoutingLinks
+              previous={{ url: "/personal?newCard=true" }}
+              next={{ submit: true }}
+            />
+          </DSFormField>
+        </FormRow>
+      </Form>
+    </>
   );
 };
 

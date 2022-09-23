@@ -15,16 +15,16 @@ describe("PersonalFormFields", () => {
 
   test("renders names, age, email, and newsletter fields", () => {
     expect(
-      screen.getByRole("textbox", { name: "First Name Required" })
+      screen.getByRole("textbox", { name: "First Name (Required)" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Last Name Required" })
+      screen.getByRole("textbox", { name: "Last Name (Required)" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Date of Birth Required" })
+      screen.getByRole("textbox", { name: "Date of Birth (Required)" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Email Address Required" })
+      screen.getByRole("textbox", { name: "Email Address (Required)" })
     ).toBeInTheDocument();
     expect(
       screen.getByLabelText(

@@ -16,6 +16,7 @@ import ApplicationContainer from "../src/components/ApplicationContainer";
 import { getPageTitles } from "../src/utils/utils";
 import useRouterScroll from "../src/hooks/useRouterScroll";
 import { constructProblemDetail } from "../src/utils/formDataUtils";
+import { DSProvider } from "@nypl/design-system-react-components";
 
 interface MyAppProps {
   Component: any;
@@ -173,17 +174,19 @@ function MyApp<MyAppProps>({ Component, pageProps, query }) {
           async
         ></script>
       </div>
-      <FormProvider {...formMethods}>
-        <FormDataContextProvider initState={initState}>
-          <ApplicationContainer problemDetail={error}>
-            <Component
-              {...pageProps}
-              pageTitles={pageTitles}
-              policyType={query.policyType}
-            />
-          </ApplicationContainer>
-        </FormDataContextProvider>
-      </FormProvider>
+      <DSProvider>
+        <FormProvider {...formMethods}>
+          <FormDataContextProvider initState={initState}>
+            <ApplicationContainer problemDetail={error}>
+              <Component
+                {...pageProps}
+                pageTitles={pageTitles}
+                policyType={query.policyType}
+              />
+            </ApplicationContainer>
+          </FormDataContextProvider>
+        </FormProvider>
+      </DSProvider>
     </>
   );
 }

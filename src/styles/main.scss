@@ -1,18 +1,13 @@
 // Import styles from NYPL React components
-// @import '~@nypl/dgx-header-component/dist/styles/main';
-@import '~@nypl/dgx-react-footer/dist/styles/styles';
+@import "~@nypl/dgx-react-footer/dist/styles/styles";
 
 // Import Globals
-@import 'utils/variables';
+@import "utils/variables";
 
 // Components
-@import 'components/autosuggest';
-@import 'components/congrats_page';
-@import 'components/globals';
+@import "components/autosuggest";
+@import "components/congrats_page";
+@import "components/globals";
 
 // For printing
-@import 'components/print';
-
-fieldset {
-  border: none !important;
-}
+@import "components/print";

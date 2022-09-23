@@ -12,7 +12,7 @@ interface PageProps {
 function WorkAddressPage({ pageTitles }: PageProps) {
   return (
     <>
-      <Heading level={2}>{pageTitles.workAddress}</Heading>
+      <Heading level="two">{pageTitles.workAddress}</Heading>
       <p>
         The application process is slightly different depending on whether you
         live, work, go to school, or pay property taxes in New York City,
