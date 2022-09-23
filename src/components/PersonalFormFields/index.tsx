@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { isEmail } from "validator";
 import {
@@ -16,6 +16,9 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
   const { register, errors } = useFormContext();
   const { state } = useFormDataContext();
   const { formValues } = state;
+  const [ecommunicationsPref, setEcommunicationsPref] = useState<boolean>(
+    formValues.ecommunicationsPref
+  );
   const instructionText = (
     <>
       An email address is required to use many of our digital resources, such as
@@ -90,9 +93,10 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
         <DSFormField>
           <Checkbox
             id="eCommunications"
-            isChecked={formValues.ecommunicationsPref}
+            isChecked={ecommunicationsPref}
             labelText="Yes, I would like to receive information about NYPL's programs and services"
             name="ecommunicationsPref"
+            onChange={() => setEcommunicationsPref((prev) => !prev)}
             ref={register()}
           />
         </DSFormField>
