@@ -84,7 +84,7 @@
     "sinon": "9.0.2",
     "typescript": "4.3.2",
     "underscore": "1.13.1",
-    "validator": "13.0.0",
+    "validator": "13.7.0",
     "winston": "3.3.3"
   },
   "husky": {
