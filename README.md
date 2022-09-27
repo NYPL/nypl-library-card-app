@@ -112,13 +112,6 @@ Subsequent deployments are accomplished via pushing code into `qa` and `producti
 
 Configuration can be adjusted via `.travis.yml`, located at the root directory of this code repository. Travis CI is set to watch `qa` and `production` branches and waits for code push, e.g. `git push origin qa` will trigger Travis CI to build. When build and test are successful, Travis CI will deploy to specified Elastic Beanstalk instance.
 
-## Accessibility
-
-There are two ways to use the `@axe-core/react` package for accessibility review while developing. This is the package of choice used in a few NYPL React applications. Only turn it on when needed and not while developing all the time because it uses a lot of browser resouces.
-
-1. Run `NEXT_PUBLIC_USE_AXE=true npm run dev`
-2. or update the `NEXT_PUBLIC_USE_AXE` environment variable in your `.env` file.
-
 ## Docker
 
 _Note_: This application is using Docker only for production builds and not for local development. For local development, the `npm run dev` command is the way to go.

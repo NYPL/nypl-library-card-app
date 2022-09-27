@@ -10,7 +10,6 @@ export default {
   clientId: process.env.OAUTH_CLIENT_ID,
   clientSecret: process.env.OAUTH_CLIENT_SECRET,
   ipStackKey: process.env.IPSTACK_KEY,
-  useAxe: process.env.NEXT_PUBLIC_USE_AXE,
   nodeEnv: process.env.NODE_ENV,
   agencyType: {
     default: "198",
