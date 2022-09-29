@@ -1,0 +1,17 @@
+{
+  "home": {
+    "title": "Obtenga una tarjeta digital de la Biblioteca hoy con unos pocos pasos sencillos",
+    "description": {
+      "part1": "Si tiene 13 años de edad o más y vive, trabaja, va a la escuela o paga impuestos de propiedad en el estado de Nueva York, puede obtener una tarjeta digital gratuita de la Biblioteca ahora mismo utilizando este formulario en línea. Las personas que visitan el estado de Nueva York también pueden usar este formulario para solicitar una tarjeta temporal.",
+      "part2": "Con una tarjeta digital de la Biblioteca, tiene acceso gratuito a una amplia gama de recursos digitales incluyendo libros electrónicos, bases de datos, recursos educativos y más.",
+      "part3": "Al enviar una solicitud, comprende y acepta nuestros <a href='https://www.nypl.org/help/library-card/terms-conditions'>Términos y condiciones del titular de la tarjeta</a> (en inglés) y acepta nuestras <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Normas y reglamentos generales</a>. Para obtener más información sobre el uso de información personal por parte de la Biblioteca, lea nuestra <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Política de privacidad</a>."
+    },
+    "button": "Empieza"
+  },
+  "address": {},
+  "alternateAddress": {},
+  "verifyAddress": {},
+  "account": {},
+  "confirm": {},
+  "confirmation": {}
+}

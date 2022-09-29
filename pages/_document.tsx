@@ -13,6 +13,14 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head />
         <body>
+          <div id="Header-Placeholder" style={{ minHeight: "230px" }}>
+            <script
+              type="text/javascript"
+              src="https://header.nypl.org/dgx-header.min.js?skipNav=mainContent"
+              async
+            ></script>
+          </div>
+
           <Main />
           <NextScript />
 

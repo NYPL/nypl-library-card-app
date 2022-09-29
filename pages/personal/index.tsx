@@ -1,5 +1,6 @@
 import React from "react";
 import { Heading } from "@nypl/design-system-react-components";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import PersonalFormContainer from "../../src/components/PersonalFormContainer";
 import { PageTitles } from "../../src/interfaces";
@@ -24,7 +25,13 @@ export async function getServerSideProps({ query }) {
   if (!query.newCard) {
     return homePageRedirect();
   }
-  return { props: {} };
+  return {
+    props: {
+      // This allows this page to get the proper translations based
+      // on the `lang=...` URL query param. Default to "en".
+      ...(await serverSideTranslations(query?.lang || "en", ["common"])),
+    },
+  };
 }
 
 export default PersonalInformationPage;

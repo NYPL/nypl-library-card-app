@@ -4,7 +4,13 @@ import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 import useFormDataContext from "../../src/context/FormDataContext";
 import { getCsrfToken } from "../../src/utils/utils";
 
-function HomePage({ policyType, csrfToken }) {
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Link from "next/link";
+
+function HomePage({ policyType, csrfToken, lang }) {
+  const { t } = useTranslation("common");
+
   const { dispatch } = useFormDataContext();
   // When the app loads, get the CSRF token from the server and set it in
   // the app's state.
@@ -20,51 +26,41 @@ function HomePage({ policyType, csrfToken }) {
   const queryParam = policyType ? `&policyType=${policyType}` : "";
   return (
     <>
-      <Heading level="two">
-        Get a Digital Library Card Today in a Few Easy Steps
-      </Heading>
-      <p>
-        If you are 13 or older and live, work, attend school, or pay property
-        taxes in New York State, you can get a free digital library card right
-        now using this online form. Visitors to New York State can also use this
-        form to apply for a temporary card.
-      </p>
-      <p>
-        With a digital library card you get free access to the Library’s wide
-        array of digital resources—including e-books, databases, educational
-        resources, and more.
-      </p>
-      <p>
-        By submitting an application, you understand and agree to our{" "}
-        <a href="https://www.nypl.org/help/library-card/terms-conditions">
-          Cardholder Terms and Conditions
-        </a>{" "}
-        and agree to our{" "}
-        <a href="https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations">
-          Rules and Regulations
-        </a>
-        . To learn more about the Library’s use of personal information, please
-        read our{" "}
-        <a href="https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy">
-          Privacy Policy
-        </a>
-        .
-      </p>
+      <Heading level="two">{t("home.title")}</Heading>
+      <p>{t("home.description.part1")}</p>
+      <p>{t("home.description.part2")}</p>
+      <div dangerouslySetInnerHTML={{ __html: t("home.description.part3") }} />
 
       <RoutingLinks
         next={{
-          url: `/personal?newCard=true${queryParam}`,
-          text: "Get Started",
+          url: `/personal?newCard=true${queryParam}${
+            lang !== "en" ? `&lang=${lang}` : ""
+          }`,
+          text: t("home.button"),
         }}
       />
+
+      {/* TODO: This is temporary and there is a separate ticket to complete
+        this component with all ten language links. */}
+      <Link href="/new">English</Link>
+      <br />
+      <Link href="/new?lang=es">Spanish</Link>
     </>
   );
 }
 
 export async function getServerSideProps(context) {
   const { csrfToken } = getCsrfToken(context.req, context.res);
+  const { query } = context;
+
   return {
-    props: { csrfToken },
+    props: {
+      csrfToken,
+      lang: query?.lang || "en",
+      // This allows this page to get the proper translations based
+      // on the `lang=...` URL query param. Default to "en".
+      ...(await serverSideTranslations(query?.lang || "en", ["common"])),
+    },
   };
 }
 
