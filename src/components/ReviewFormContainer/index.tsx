@@ -42,6 +42,9 @@ function ReviewFormContainer() {
   const { state, dispatch } = useFormDataContext();
   const { formValues, errorObj, csrfToken } = state;
   const router = useRouter();
+  const {
+    query: { lang = "en" },
+  } = router;
   // For routing when javascript is not enabled, we want to track the form
   // values through the URL query params.
   const queryValues = createQueryParams(formValues);
@@ -145,7 +148,10 @@ function ReviewFormContainer() {
    */
   const editSectionInfo = (formData, editSectionFlag) => {
     if (formData.homeLibraryCode) {
-      formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
+      formData.homeLibraryCode = findLibraryCode(
+        formData.homeLibraryCode,
+        lang as string
+      );
     }
     dispatch({
       type: "SET_FORM_DATA",
@@ -274,7 +280,7 @@ function ReviewFormContainer() {
       </div>
       <div className={styles.field}>
         <div className={styles.title}>Home Library</div>
-        <div>{findLibraryName(formValues.homeLibraryCode)}</div>
+        <div>{findLibraryName(formValues.homeLibraryCode, lang as string)}</div>
       </div>
       {editSectionButton(
         setEditAccountInfoFlag,
