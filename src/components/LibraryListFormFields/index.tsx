@@ -1,4 +1,5 @@
 import { Heading } from "@nypl/design-system-react-components";
+import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import Autosuggest from "react-autosuggest";
@@ -22,6 +23,7 @@ interface LibraryListFormProps {
  * render suggestions when a patron starts to type a library name.
  */
 const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
+  const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
   const defaultValue = formValues?.homeLibraryCode
@@ -88,7 +90,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
     return (
       <FormField
         id="librarylist-autosuggest"
-        label="Select a home library:"
+        label={t("account.selectLibrary")}
         name="homeLibraryCode"
         isRequired={false}
         attributes={{ ...inputProps }}

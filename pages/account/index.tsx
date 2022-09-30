@@ -1,5 +1,6 @@
-import React from "react";
 import { Heading } from "@nypl/design-system-react-components";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import React from "react";
 
 import AccountFormContainer from "../../src/components/AccountFormContainer";
 import { PageTitles } from "../../src/interfaces";
@@ -29,7 +30,11 @@ export async function getServerSideProps({ query }) {
   if (!query.newCard) {
     return homePageRedirect();
   }
-  return { props: {} };
+  return {
+    props: {
+      ...(await serverSideTranslations(query?.lang || "en", ["common"])),
+    },
+  };
 }
 
 export default AccountPage;

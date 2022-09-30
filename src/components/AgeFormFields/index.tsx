@@ -1,6 +1,8 @@
-import React from "react";
 import { Checkbox } from "@nypl/design-system-react-components";
+import React from "react";
 import { useFormContext } from "react-hook-form";
+import { useTranslation } from "next-i18next";
+
 import FormField from "../FormField";
 import { isDate } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
@@ -19,6 +21,7 @@ const AgeForm = ({
   policyType = "webApplicant",
   errorMessages,
 }: AgeFormProps) => {
+  const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
   const { register, errors } = useFormContext();
@@ -29,8 +32,10 @@ const AgeForm = ({
   const birthdateField = (
     <FormField
       id="birthdate"
-      instructionText="MM/DD/YYYY, including slashes"
-      label="Date of Birth"
+      // instructionText="MM/DD/YYYY, including slashes"
+      instructionText={t("personal.dobInstruction")}
+      // label="Date of Birth"
+      label={t("personal.dob")}
       name="birthdate"
       isRequired
       errorState={errors}

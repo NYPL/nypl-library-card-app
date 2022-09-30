@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
 import { Heading } from "@nypl/design-system-react-components";
+import React, { useEffect } from "react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import AddressContainer from "../../src/components/AddressContainer";
 import { PageTitles } from "../../src/interfaces";
@@ -45,7 +46,12 @@ export async function getServerSideProps(context) {
   if (context.req?.headers) {
     location = await IPLocationAPI.getLocationFromIP(context);
   }
-  return { props: { location } };
+  return {
+    props: {
+      location,
+      ...(await serverSideTranslations(query?.lang || "en", ["common"])),
+    },
+  };
 }
 
 export default AddressPage;

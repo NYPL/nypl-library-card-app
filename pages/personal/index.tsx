@@ -1,5 +1,5 @@
-import React from "react";
 import { Heading } from "@nypl/design-system-react-components";
+import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import PersonalFormContainer from "../../src/components/PersonalFormContainer";

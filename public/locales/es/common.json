@@ -8,10 +8,44 @@
     },
     "button": "Empieza"
   },
-  "address": {},
+  "personal": {
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "dob": "Fecha de nacimiento",
+    "dobInstruction": "DD / MM / AAAA, incluyendo barras",
+    "email": "Correo Electrónico",
+    "emailInstruction": "Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos. Si no desea proporcionar una dirección de correo electrónico, puede solicitar una tarjeta física utilizando nuestro <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>formulario alterno (en inglés)</a>. Una vez que lo haya completado, por favor visite una de nuestras bibliotecas con un comprobante de identidad y domicilio para recoger su tarjeta física.",
+    "newsletter": "Sí, me gustaría recibir información sobre los programas y servicios que ofrece la NYPL"
+  },
+  "address": {
+    "line1": "Dirreción de domicilio",
+    "line2": "Apartamento / Unidad",
+    "city": "Ciudad",
+    "state": "Estado",
+    "stateInstruction": "Abreviatura de 2 letras",
+    "postalCode": "Código postal",
+    "postalCodeInstruction": "Código postal de 5 ó 9 dígitos"
+  },
   "alternateAddress": {},
   "verifyAddress": {},
-  "account": {},
-  "confirm": {},
+  "account": {
+    "username": "Nombre de usuario",
+    "usernameInstruction": "5-25 caracteres alfanuméricos. Sin caracteres especiales.",
+    "usernameCheckButton": "Compruebe si el nombre del usuario está disponible",
+    "password": "...",
+    "passwordInstruction": "...",
+    "verifyPassword": "...",
+    "verifyPasswordInstruction": "...",
+    "showPassword": "...",
+    "selectLibrary": "Seleccione una biblioteca local:",
+    "termsAndCondition": "Sí, acepto los términos y condiciones."
+  },
+  "review": {
+    "editButton": "Editar",
+    "submitButton": "Enviar",
+    "receiveNewsletter": "...",
+    "yes": "Si",
+    "no": "No"
+  },
   "confirmation": {}
 }
