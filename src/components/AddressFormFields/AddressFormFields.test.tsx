@@ -19,6 +19,26 @@ const reactHookFormErrors = {
   "home-zip": { message: addressErrorMessages.zip },
 };
 
+jest.mock("react-i18next", () => {
+  const en = {
+    address: {
+      line1: "Street Address",
+      line2: "Apartment / Suite",
+      city: "City",
+      state: "State",
+      stateInstruction: "2-letter abbreviation",
+      postalCode: "Postal Code",
+      postalCodeInstruction: "5 or 9-digit postal code",
+    },
+  };
+  return {
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => ({
+      t: (str) => en["address"][str.substr(str.indexOf(".") + 1)],
+    }),
+  };
+});
+
 describe("AddressFormFields", () => {
   test("it passes axe accessibility test", async () => {
     const { container } = render(

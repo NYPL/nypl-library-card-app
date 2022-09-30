@@ -5,6 +5,20 @@ import LibraryListFormFields from ".";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 import { LibraryListObject } from "../../interfaces";
 
+jest.mock("react-i18next", () => {
+  const en = {
+    account: {
+      selectLibrary: "Select a home library:",
+    },
+  };
+  return {
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => ({
+      t: (str) => en["account"][str.substr(str.indexOf(".") + 1)],
+    }),
+  };
+});
+
 const libraryList: LibraryListObject[] = [
   { value: "eb", label: "SimplyE" },
   { value: "sasb", label: "Schwarzman" },

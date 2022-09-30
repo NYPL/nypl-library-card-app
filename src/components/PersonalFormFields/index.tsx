@@ -40,6 +40,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
             id="firstName"
             label={t("personal.firstName")}
             name="firstName"
+            isRequired
             // Every input field is registered to react-hook-form. If this
             // field is empty on blur or on submission, the error message will
             // display below the input.

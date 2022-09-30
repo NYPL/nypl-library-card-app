@@ -32,9 +32,7 @@ const AgeForm = ({
   const birthdateField = (
     <FormField
       id="birthdate"
-      // instructionText="MM/DD/YYYY, including slashes"
-      instructionText={t("personal.dobInstruction")}
-      // label="Date of Birth"
+      instructionText="MM/DD/YYYY, including slashes"
       label={t("personal.dob")}
       name="birthdate"
       isRequired

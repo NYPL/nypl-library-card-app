@@ -7,6 +7,20 @@ import { TestProviderWrapper } from "../../../testHelper/utils";
 const axios = require("axios");
 
 jest.mock("axios");
+jest.mock("react-i18next", () => {
+  const en = {
+    account: {
+      username: "Username",
+      usernameCheckButton: "Check if username is available",
+    },
+  };
+  return {
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => ({
+      t: (str) => en["account"][str.substr(str.indexOf(".") + 1)],
+    }),
+  };
+});
 
 import UsernameValidationFormFields from ".";
 

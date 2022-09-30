@@ -4,6 +4,20 @@ import { axe } from "jest-axe";
 import AgeFormFields from ".";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 
+jest.mock("react-i18next", () => {
+  const en = {
+    personal: {
+      dob: "Date of Birth",
+    },
+  };
+  return {
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => ({
+      t: (str) => en["personal"][str.substr(str.indexOf(".") + 1)],
+    }),
+  };
+});
+
 const noHookFormErrors = {};
 const ageFormErrorMessages = {
   ageGate: "You must be 13 years or older to continue.",

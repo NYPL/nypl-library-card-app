@@ -120,10 +120,9 @@ const UsernameValidationForm = ({
         <DSFormField>
           <FormField
             id="username"
-            // label="Username"
             label={t("account.username")}
             name="username"
-            instructionText={t("account.usernameInstruction")}
+            instructionText="5-25 alphanumeric characters. No special characters."
             isRequired
             errorState={errors}
             maxLength={25}
