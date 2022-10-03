@@ -7,13 +7,28 @@ import { TestProviderWrapper } from "../../../testHelper/utils";
 jest.mock("react-i18next", () => {
   const en = {
     personal: {
-      dob: "Date of Birth",
+      birthdate: {
+        label: "Date of Birth",
+        instructionText: "MM/DD/YYYY, including slashes",
+      },
     },
   };
   return {
     // this mock makes sure any components using the translate hook can use it without a warning being shown
     useTranslation: () => ({
-      t: (str) => en["personal"][str.substr(str.indexOf(".") + 1)],
+      t: (str) => {
+        let value;
+        const keys = str.split(".");
+        value = en[keys[0]];
+        // The `str` value is a dot delimited string which we want to
+        // break up and get the right value from the deep object.
+        keys.forEach((k, index) => {
+          if (index !== 0) {
+            value = value[k];
+          }
+        });
+        return value;
+      },
     }),
   };
 });

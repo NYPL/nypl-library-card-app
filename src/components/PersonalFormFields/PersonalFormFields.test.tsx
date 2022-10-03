@@ -8,21 +8,50 @@ import PersonalFormFields from ".";
 jest.mock("react-i18next", () => {
   const en = {
     personal: {
-      firstName: "First Name",
-      lastName: "Last Name",
-      dob: "Date of Birth",
-      dobInstruction: "MM/DD/YYYY, including slashes",
-      email: "Email Address",
-      emailInstruction:
-        "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://catalog.nypl.org/selfreg/patonsite'>alternate form</a>.Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card.",
-      newsletter:
-        "Yes, I would like to receive information about NYPL's programs and services",
+      title: "Step 1 of 5: Personal Information",
+      firstName: {
+        label: "First Name",
+      },
+      lastName: {
+        label: "Last Name",
+      },
+      birthdate: {
+        label: "Date of Birth",
+        instructionText: "MM/DD/YYYY, including slashes",
+      },
+      email: {
+        label: "Email Address",
+        instructionText:
+          "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card.",
+      },
+      errorMessage: {
+        firstName: "",
+        lastName: "",
+        birthdate: "",
+        email: "",
+      },
+      eCommunications: {
+        labelText:
+          "Yes, I would like to receive information about NYPL's programs and services",
+      },
     },
   };
   return {
     // this mock makes sure any components using the translate hook can use it without a warning being shown
     useTranslation: () => ({
-      t: (str) => en["personal"][str.substr(str.indexOf(".") + 1)],
+      t: (str) => {
+        let value;
+        const keys = str.split(".");
+        value = en[keys[0]];
+        // The `str` value is a dot delimited string which we want to
+        // break up and get the right value from the deep object.
+        keys.forEach((k, index) => {
+          if (index !== 0) {
+            value = value[k];
+          }
+        });
+        return value;
+      },
     }),
   };
 });
