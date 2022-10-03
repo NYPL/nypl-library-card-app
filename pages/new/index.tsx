@@ -6,7 +6,7 @@ import { getCsrfToken } from "../../src/utils/utils";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Link from "next/link";
+import LanguageMenu from "../../src/components/LanguageMenu/LanguageMenu";
 
 function HomePage({ policyType, csrfToken, lang }) {
   const { t } = useTranslation("common");
@@ -40,11 +40,7 @@ function HomePage({ policyType, csrfToken, lang }) {
         }}
       />
 
-      {/* TODO: This is temporary and there is a separate ticket to complete
-        this component with all ten language links. */}
-      <Link href="/new">English</Link>
-      <br />
-      <Link href="/new?lang=es">Spanish</Link>
+      <LanguageMenu />
     </>
   );
 }
