@@ -5,9 +5,8 @@
       "part1": "If you are 13 or older and live, work, attend school, or pay property taxes in New York State, you can get a free digital library card right now using this online form. Visitors to New York State can also use this form to apply for a temporary card.",
       "part2": "With a digital library card you get free access to the Library’s wide array of digital resources—including e-books, databases, educational resources, and more.",
       "part3": "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
-    },
-    "button": "Get Started"
-  },
+    }
+   },
   "personal": {
     "title": "Step 1 of 5: Personal Information",
     "firstName": {
@@ -18,11 +17,11 @@
     },
     "birthdate": {
       "label": "Date of Birth",
-      "instructionText": "MM/DD/YYYY, including slashes"
+      "instruction": "MM/DD/YYYY, including slashes"
     },
     "email": {
       "label": "Email Address",
-      "instructionText": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
+      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
     },
     "errorMessage": {
       "firstName": "",
@@ -35,37 +34,44 @@
     }
   },
   "location": {
-    "title": ""
+    "title": "Step 2 of 5: Address",
+    "description": "If you live in NYC, please fill out the home address form.",
+    "address": {
+      "line1": {"label": "Street Address"},
+      "line2": {"label":"Apartment / Suite"},
+      "city": {"label": "City"},
+      "state": {"label": "State", "instruction": "2-letter abbreviation"},
+      "postalCode": {"label": "Postal Code", "instruction": "5 or 9-digit postal code"}
+    }
   },
-  "address": {
-    "line1": "Street Address",
-    "line2": "Apartment / Suite",
-    "city": "City",
-    "state": "State",
-    "stateInstruction": "2-letter abbreviation",
-    "postalCode": "Postal Code",
-    "postalCodeInstruction": "5 or 9-digit postal code"
+  "verifyAddress": {
+    "title": "Step 3 of 5: Address Verification",
+    "description": "Please select the correct address.",
+    "homeAddress": "Home Address",
+    "workAddress": "Alternate Address"
   },
-  "alternateAddress": {},
-  "verifyAddress": {},
   "account": {
-    "username": "Username",
-    "usernameInstruction": "5-25 alphanumeric characters. No special characters.",
-    "usernameCheckButton": "Check if username is available",
-    "password": "Password",
-    "passwordInstruction": "<p>We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab</p>",
-    "verifyPassword": "Verify Password",
-    "verifyPasswordInstruction": "8-32 characters",
+    "title": "Step 4 of 5: Customize Your Account",
+    "username": {"label": "Username", "instruction": "5-25 alphanumeric characters. No special characters.", "checkButton": "Check if username is available"},
+    "password": {"label": "Password", "instruction": "<p>We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab</p>"},
+    "verifyPassword": {"label": "Verify Password", "instruction": "8-32 characters"},
     "showPassword": "Show Password",
     "selectLibrary": "Select a home library:",
     "termsAndCondition": "Yes, I accept the terms and conditions."
   },
   "review": {
-    "editButton": "Edit",
-    "submitButton": "Submit",
+    "title": "Step 5 of 5: Confirm Your Information",
+    "description": "Make sure all the information you’ve entered is correct. If needed, you can still make changes before you submit your application.",
     "receiveNewsletter": "Receive information about NYPL's programs and services",
     "yes": "Yes",
     "no": "No"
+  },
+  "button": {
+    "start": "Get Started",
+    "edit": "Edit",
+    "submit": "Submit",
+    "next": "Next",
+    "previous": "Previous"
   },
   "confirmation": {}
 }
