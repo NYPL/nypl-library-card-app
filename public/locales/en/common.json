@@ -69,7 +69,7 @@
       "username": "Username must be between 5-25 alphanumeric characters.",
       "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
       "verifyPassword": "The two passwords don't match.",
-      "acceptTerms": "The terms and conditions were not accepted."
+      "acceptTerms": "The Terms and Conditions were not accepted."
     }
   },
   "review": {
@@ -79,5 +79,9 @@
     "yes": "Yes",
     "no": "No"
   },
-  "confirmation": {}
+  "confirmation": {},
+  "globalErrors": {
+    "title": "Form submission error",
+    "defaultError": "There was an error processing your submission. Please try again later."
+  }
 }

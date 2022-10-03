@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-import React from "react";
 import { Heading, List } from "@nypl/design-system-react-components";
 import isEmpty from "lodash/isEmpty";
+import { useTranslation } from "next-i18next";
+import React from "react";
+
 import {
   renderErrorElements,
   createUsernameAnchor,
@@ -11,6 +13,7 @@ import { ProblemDetail } from "../../interfaces";
 
 interface ApiErrorsProps {
   problemDetail: ProblemDetail | undefined;
+  lang?: string;
 }
 
 /**
@@ -20,7 +23,8 @@ interface ApiErrorsProps {
  * specific input element that is returning an error.
  */
 const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
-  ({ problemDetail }, ref) => {
+  ({ problemDetail, lang = "en" }, ref) => {
+    const { t } = useTranslation("common");
     // We expect problem details to have a status greater than or equal to 400.
     if (!problemDetail || problemDetail?.status < 400) {
       return null;
@@ -32,8 +36,7 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
      */
     const renderErrorByType = (pd) => {
       const { type, detail, error } = pd;
-      const defaultError =
-        "There was an error processing your submission. Please try again later.";
+      const defaultError = t("globalErrors.defaultError");
       let errorElements;
 
       // The following error types can be found in the wiki:
@@ -90,7 +93,7 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
     return (
       <div ref={ref} className={styles.container} tabIndex={0}>
         <Heading level="two" className={styles.heading}>
-          Form submission error
+          {t("globalErrors.title")}
         </Heading>
         {renderErrorByType(problemDetail)}
       </div>
