@@ -87,7 +87,7 @@ function ReviewFormContainer() {
           editSectionFlag(true);
         }}
       >
-        {t("review.editButton")}
+        {t("button.edit")}
       </Button>
     ) : (
       <a
@@ -95,7 +95,7 @@ function ReviewFormContainer() {
           `newCard=true${queryValues}`
         )}`}
       >
-        {t("review.editButton")}
+        {t("button.edit")}
       </a>
     );
   /**
@@ -113,7 +113,7 @@ function ReviewFormContainer() {
           router.push("/location?newCard=true");
         }}
       >
-        {t("review.editButton")}
+        {t("button.edit")}
       </Button>
     ) : (
       <a
@@ -121,7 +121,7 @@ function ReviewFormContainer() {
           `newCard=true${queryValues}`
         )}`}
       >
-        {t("review.editButton")}
+        {t("button.edit")}
       </a>
     );
   const submitSectionButton = (
@@ -132,7 +132,7 @@ function ReviewFormContainer() {
         onClick={() => {}}
         type="submit"
       >
-        {t("review.submitButton")}
+        {t("button.submit")}
       </Button>
     </ButtonGroup>
   );
@@ -246,11 +246,11 @@ function ReviewFormContainer() {
   const renderAccountValues = () => (
     <div className={styles.container}>
       <div className={styles.field}>
-        <div className={styles.title}>{t("account.username")}</div>
+        <div className={styles.title}>{t("account.usernamel.label")}</div>
         <div>{formValues.username}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>{t("account.password")}</div>
+        <div className={styles.title}>{t("account.password.label")}</div>
         {/* Only render the toggleable password with javascript enabled. */}
         {clientSide ? (
           <>
@@ -442,9 +442,7 @@ function ReviewFormContainer() {
 
         <FormRow margin-top="20px">
           <DSFormField>
-            <RoutingLinks
-              next={{ submit: true, text: t("review.submitButton") }}
-            />
+            <RoutingLinks next={{ submit: true, text: t("button.submit") }} />
           </DSFormField>
         </FormRow>
       </Form>

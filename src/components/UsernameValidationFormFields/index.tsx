@@ -108,7 +108,7 @@ const UsernameValidationForm = ({
           onClick={validateUsername}
           type="button"
         >
-          {t("account.usernameCheckButton")}
+          {t("account.username.checkButton")}
         </Button>
       </ButtonGroup>
     );
@@ -120,7 +120,7 @@ const UsernameValidationForm = ({
         <DSFormField>
           <FormField
             id="username"
-            label={t("account.username")}
+            label={t("account.username.label")}
             name="username"
             instructionText="5-25 alphanumeric characters. No special characters."
             isRequired

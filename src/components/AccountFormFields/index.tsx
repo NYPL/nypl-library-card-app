@@ -86,9 +86,9 @@ function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
           <FormField
             id="password"
             type={passwordType}
-            label={t("account.password")}
+            label={t("account.password.label")}
             name="password"
-            instructionText={t("account.passwordInstruction")}
+            instructionText={t("account.password.instruction")}
             isRequired
             errorState={errors}
             minLength={minPasswordLength}
@@ -107,9 +107,9 @@ function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
           <FormField
             id="verifyPassword"
             type={passwordType}
-            label={t("account.verifyPassword")}
+            label={t("account.verifyPassword.label")}
             name="verifyPassword"
-            instructionText={t("account.verifyPasswordInstruction")}
+            instructionText={t("account.verifyPassword.instruction")}
             isRequired
             errorState={errors}
             minLength={minPasswordLength}
