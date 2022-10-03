@@ -70,7 +70,7 @@ const libraryEs: LibraryListObject[] = [
   { label: "Biblioteca Roosevelt Island", value: "ri" },
   {
     label: "Centro Schomburg para la Investigación de la Cultura Negra",
-    value: "--",
+    value: "sc",
   },
   { label: "Biblioteca Sedgwick", value: "sd" },
   { label: "Biblioteca Seward Park", value: "se" },
@@ -83,12 +83,12 @@ const libraryEs: LibraryListObject[] = [
     value: "sn",
   },
   { label: "Biblioteca Stapleton", value: "st" },
-  { label: "Edificio Stephen A. Schwarzman", value: "--" },
+  { label: "Edificio Stephen A. Schwarzman", value: "ma" },
   { label: "Biblioteca Spuyten Duyvil", value: "dy" },
   { label: "Biblioteca Terence Cardinal Cooke–Cathedral", value: "ca" },
   {
     label: "The New York Public Library for the Performing Arts",
-    value: "--",
+    value: "my",
   },
   { label: "Throgs Neck Library", value: "tg" },
   { label: "Todt Hill-Westerleigh Library", value: "th" },
