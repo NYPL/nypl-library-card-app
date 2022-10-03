@@ -1,0 +1,17 @@
+{
+    "home": {
+      "title": "只需几个简单的步骤即可立即获得电子图书卡",
+      "description": {
+        "part1": "如果您是13岁以上，并且在纽约州生活，工作，上学或缴纳财产税，则可以立即使用此在线表格获得免费的电子图书卡。 纽约州的访客也可以使用此表格申请临时卡。",
+        "part2": "有了电子图书卡，您就可以免费访问图书馆的各种数字资源，包括电子书，数据库，教育资源等。",
+        "part3": "提交申请，即表示您理解并同意我们的<a href='https://www.nypl.org/help/library-card/terms-conditions'>持卡人条款和条件</a>，并同意我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>规范与法则</a>。要了解有关图书馆使用个人资料的更多信息，请阅读我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>隐私政策</a>。"
+      },
+      "button": "开始使用"
+    },
+    "address": {},
+    "alternateAddress": {},
+    "verifyAddress": {},
+    "account": {},
+    "confirm": {},
+    "confirmation": {}
+  }
