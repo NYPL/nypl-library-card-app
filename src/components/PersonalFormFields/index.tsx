@@ -45,7 +45,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
             // field is empty on blur or on submission, the error message will
             // display below the input.
             ref={register({
-              required: errorMessages.firstName,
+              required: t("personal.errorMessage.firstName"),
             })}
             errorState={errors}
             defaultValue={formValues.firstName}
@@ -59,7 +59,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
             isRequired
             errorState={errors}
             ref={register({
-              required: errorMessages.lastName,
+              required: t("personal.errorMessage.lastName"),
             })}
             defaultValue={formValues.lastName}
           />
@@ -77,13 +77,12 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
         <DSFormField>
           <FormField
             id="email"
-            // label="Email Address"
             label={t("personal.email.label")}
             name="email"
             errorState={errors}
             isRequired
             ref={register({
-              required: errorMessages.email,
+              required: t("personal.errorMessage.email"),
               validate: (val) =>
                 val === "" || isEmail(val) || errorMessages.email,
             })}

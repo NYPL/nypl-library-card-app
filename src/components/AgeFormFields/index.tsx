@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Checkbox } from "@nypl/design-system-react-components";
 import React from "react";
 import { useFormContext } from "react-hook-form";
@@ -26,7 +27,10 @@ const AgeForm = ({
   const { formValues } = state;
   const { register, errors } = useFormContext();
   const MAXLENGTHDATE = 10;
-  const isWebApplicant = policyType === "webApplicant";
+  // TODO: Right now, all applicants are web applications and
+  // this feature is not needed. Setting to true.
+  // const isWebApplicant = policyType === "webApplicant";
+  const isWebApplicant = true;
   const ageGateError = errors?.ageGate?.message;
 
   const birthdateField = (
@@ -42,7 +46,7 @@ const AgeForm = ({
       ref={register({
         validate: (val) =>
           (val.length <= MAXLENGTHDATE && isDate(val)) ||
-          errorMessages["birthdate"],
+          t("personal.errorMessage.birthdate"),
       })}
       defaultValue={formValues.birthdate}
     />

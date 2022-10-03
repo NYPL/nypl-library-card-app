@@ -45,13 +45,10 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
    */
   const lengthValidation = (min, max, field) => (value) => {
     if (!min) {
-      return !isRequired || value.length <= max || errorMessages[field];
+      return !isRequired || value.length <= max || t(field);
     }
     return (
-      !isRequired ||
-      value.length === min ||
-      value.length === max ||
-      errorMessages[field]
+      !isRequired || value.length === min || value.length === max || t(field)
     );
   };
   /**
@@ -60,9 +57,13 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
    */
   const validateZip = () => (value) => {
     if (!isNumeric(value) && isRequired) {
-      return errorMessages.zip;
+      return t("address.errorMessage.zip");
     }
-    return lengthValidation(MINLENGTHZIP, MAXLENGTHZIP, "zip")(value);
+    return lengthValidation(
+      MINLENGTHZIP,
+      MAXLENGTHZIP,
+      "address.errorMessage.zip"
+    )(value);
   };
 
   return (
@@ -78,7 +79,7 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
             ref={register({
               required: {
                 value: isRequired,
-                message: errorMessages.line1,
+                message: t("address.errorMessage.line1"),
               },
             })}
             defaultValue={formValues[`${type}-line1`]}
@@ -109,7 +110,7 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
             ref={register({
               required: {
                 value: isRequired,
-                message: errorMessages.city,
+                message: t("address.errorMessage.city"),
               },
             })}
             defaultValue={formValues[`${type}-city`]}
@@ -125,7 +126,11 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
             errorState={errors}
             maxLength={STATELENGTH}
             ref={register({
-              validate: lengthValidation(STATELENGTH, STATELENGTH, "state"),
+              validate: lengthValidation(
+                STATELENGTH,
+                STATELENGTH,
+                "address.errorMessage.state"
+              ),
             })}
             defaultValue={formValues[`${type}-state`]}
           />

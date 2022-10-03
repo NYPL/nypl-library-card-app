@@ -78,7 +78,7 @@ function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
     <>
       <UsernameValidationFormFields
         id={`${id}-accountForm-1`}
-        errorMessage={errorMessages.username}
+        errorMessage={t("account.errorMessage.username")}
       />
 
       <FormRow id={`${id}-accountForm-2`}>
@@ -95,7 +95,7 @@ function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
             maxLength={maxPasswordLength}
             ref={register({
               validate: (val) =>
-                validatePassword(val) || errorMessages.password,
+                validatePassword(val) || t("account.errorMessage.password"),
             })}
             defaultValue={formValues.password}
           />
@@ -116,7 +116,8 @@ function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
             maxLength={maxPasswordLength}
             ref={register({
               validate: (val) =>
-                val === originalPassword || errorMessages.verifyPassword,
+                val === originalPassword ||
+                t("account.errorMessage.verifyPassword"),
             })}
             defaultValue={formValues.verifyPassword}
           />

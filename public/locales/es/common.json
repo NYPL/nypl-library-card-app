@@ -15,7 +15,13 @@
     "dobInstruction": "DD / MM / AAAA, incluyendo barras",
     "email": "Correo Electrónico",
     "emailInstruction": "Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos. Si no desea proporcionar una dirección de correo electrónico, puede solicitar una tarjeta física utilizando nuestro <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>formulario alterno (en inglés)</a>. Una vez que lo haya completado, por favor visite una de nuestras bibliotecas con un comprobante de identidad y domicilio para recoger su tarjeta física.",
-    "newsletter": "Sí, me gustaría recibir información sobre los programas y servicios que ofrece la NYPL"
+    "newsletter": "Sí, me gustaría recibir información sobre los programas y servicios que ofrece la NYPL",
+    "errorMessage": {
+      "firstName": "Por favor, ingrese un nombre válido.",
+      "lastName": "Por favor ingrese un apellido válido.",
+      "birthdate": "Ingrese una fecha válida, MM/DD/AAAA, incluidas las barras.",
+      "email": "Por favor, introduce una dirección de correo electrónico válida."
+    }
   },
   "address": {
     "line1": "Dirreción de domicilio",
@@ -24,7 +30,13 @@
     "state": "Estado",
     "stateInstruction": "Abreviatura de 2 letras",
     "postalCode": "Código postal",
-    "postalCodeInstruction": "Código postal de 5 ó 9 dígitos"
+    "postalCodeInstruction": "Código postal de 5 ó 9 dígitos",
+    "errorMessage": {
+      "line1": "Ingrese una dirección postal válida.",
+      "city": "Por favor introduzca una ciudad válida.",
+      "state": "Ingrese una abreviatura de estado de 2 caracteres.",
+      "zip": "Ingrese un código postal de 5 o 9 dígitos."
+    }
   },
   "alternateAddress": {},
   "verifyAddress": {},
@@ -38,7 +50,13 @@
     "verifyPasswordInstruction": "...",
     "showPassword": "...",
     "selectLibrary": "Seleccione una biblioteca local:",
-    "termsAndCondition": "Sí, acepto los términos y condiciones."
+    "termsAndCondition": "Sí, acepto los términos y condiciones.",
+    "errorMessage": {
+      "username": "El nombre de usuario debe tener entre 5 y 25 caracteres alfanuméricos.",
+      "password": "Su contraseña debe tener al menos 8 caracteres, incluir una combinación de letras mayúsculas y minúsculas, incluir una combinación de letras y números, y tener al menos un carácter especial excepto el punto (.)",
+      "verifyPassword": "Las dos contraseñas no coinciden.",
+      "acceptTerms": "Los términos y condiciones no fueron aceptados."
+    }
   },
   "review": {
     "editButton": "Editar",

@@ -25,10 +25,10 @@
       "instructionText": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
     },
     "errorMessage": {
-      "firstName": "",
-      "lastName": "",
-      "birthdate": "",
-      "email": ""
+      "firstName": "Please enter a valid first name.",
+      "lastName": "Please enter a valid last name.",
+      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "email": "Please enter a valid email address."
     },
     "eCommunications": {
       "labelText": "Yes, I would like to receive information about NYPL's programs and services"
@@ -44,7 +44,13 @@
     "state": "State",
     "stateInstruction": "2-letter abbreviation",
     "postalCode": "Postal Code",
-    "postalCodeInstruction": "5 or 9-digit postal code"
+    "postalCodeInstruction": "5 or 9-digit postal code",
+    "errorMessage": {
+      "line1": "Please enter a valid street address.",
+      "city": "Please enter a valid city.",
+      "state": "Please enter a 2-character state abbreviation.",
+      "zip": "Please enter a 5 or 9-digit postal code."
+    }
   },
   "alternateAddress": {},
   "verifyAddress": {},
@@ -58,7 +64,13 @@
     "verifyPasswordInstruction": "8-32 characters",
     "showPassword": "Show Password",
     "selectLibrary": "Select a home library:",
-    "termsAndCondition": "Yes, I accept the terms and conditions."
+    "termsAndCondition": "Yes, I accept the terms and conditions.",
+    "errorMessage": {
+      "username": "Username must be between 5-25 alphanumeric characters.",
+      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
+      "verifyPassword": "The two passwords don't match.",
+      "acceptTerms": "The terms and conditions were not accepted."
+    }
   },
   "review": {
     "editButton": "Edit",
