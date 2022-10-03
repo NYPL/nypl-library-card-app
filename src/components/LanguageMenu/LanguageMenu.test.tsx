@@ -28,7 +28,7 @@ describe("LanguageMenu", () => {
     expect(links[1].textContent).toContain("Bengali");
     expect(links[1]).toHaveAttribute("href", "/new?lang=bn");
     expect(links[2].textContent).toContain("Chinese");
-    expect(links[2]).toHaveAttribute("href", "/new?lang=zh-cn");
+    expect(links[2]).toHaveAttribute("href", "/new?lang=zhcn");
     expect(links[3].textContent).toContain("English");
     expect(links[3]).toHaveAttribute("href", "/new?lang=en");
     expect(links[4].textContent).toContain("French");

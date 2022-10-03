@@ -33,7 +33,7 @@ const AgeForm = ({
     <FormField
       id="birthdate"
       instructionText="MM/DD/YYYY, including slashes"
-      label={t("personal.dob")}
+      label={t("personal.birthdate.label")}
       name="birthdate"
       isRequired
       errorState={errors}

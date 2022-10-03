@@ -9,7 +9,7 @@ export const languageData = [
     label: "Bengali | বাঙালি",
   },
   {
-    charCode: "zh-cn",
+    charCode: "zhcn",
     label: "Chinese (Simplified) | 简体中文",
   },
   {

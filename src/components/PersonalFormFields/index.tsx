@@ -38,7 +38,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
         <DSFormField>
           <FormField
             id="firstName"
-            label={t("personal.firstName")}
+            label={t("personal.firstName.label")}
             name="firstName"
             isRequired
             // Every input field is registered to react-hook-form. If this
@@ -54,7 +54,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
         <DSFormField>
           <FormField
             id="lastName"
-            label={t("personal.lastName")}
+            label={t("personal.lastName.label")}
             name="lastName"
             isRequired
             errorState={errors}
@@ -78,7 +78,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
           <FormField
             id="email"
             // label="Email Address"
-            label={t("personal.email")}
+            label={t("personal.email.label")}
             name="email"
             errorState={errors}
             isRequired
@@ -88,7 +88,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
                 val === "" || isEmail(val) || errorMessages.email,
             })}
             defaultValue={formValues.email}
-            instructionText={t("personal.emailInstruction")}
+            instructionText={t("personal.email.instructionText")}
           />
         </DSFormField>
       </FormRow>
@@ -97,7 +97,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
           <Checkbox
             id="eCommunications"
             isChecked={ecommunicationsPref}
-            labelText={t("personal.newsletter")}
+            labelText={t("personal.eCommunications.labelText")}
             name="ecommunicationsPref"
             onChange={() => setEcommunicationsPref((prev) => !prev)}
             ref={register()}

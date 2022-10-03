@@ -211,19 +211,19 @@ function ReviewFormContainer() {
   const renderPersonalInformationValues = () => (
     <div className={styles.container}>
       <div className={styles.multiField}>
-        <div className={styles.title}>{t("personal.firstName")}</div>
+        <div className={styles.title}>{t("personal.firstName.label")}</div>
         <div>{formValues.firstName}</div>
       </div>
       <div className={styles.multiField}>
-        <div className={styles.title}>{t("personal.lastName")}</div>
+        <div className={styles.title}>{t("personal.lastName.label")}</div>
         <div>{formValues.lastName}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>{t("personal.dob")}</div>
+        <div className={styles.title}>{t("personal.birthdate.label")}</div>
         <div>{formValues.birthdate}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>{t("personal.email")}</div>
+        <div className={styles.title}>{t("personal.email.label")}</div>
         <div>{formValues.email}</div>
       </div>
       <div className={styles.field}>
