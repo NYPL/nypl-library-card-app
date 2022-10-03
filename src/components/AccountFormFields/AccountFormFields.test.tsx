@@ -4,6 +4,31 @@ import { axe } from "jest-axe";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 import AccountFormFields from ".";
 
+jest.mock("react-i18next", () => {
+  const en = {
+    account: {
+      username: "Username",
+      usernameInstruction:
+        "5-25 alphanumeric characters. No special characters.",
+      usernameCheckButton: "Check if username is available",
+      password: "Password",
+      passwordInstruction:
+        "<p>We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab</p>",
+      verifyPassword: "Verify Password",
+      verifyPasswordInstruction: "8-32 characters",
+      showPassword: "Show Password",
+      selectLibrary: "Select a home library:",
+      termsAndCondition: "Yes, I accept the terms and conditions.",
+    },
+  };
+  return {
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => ({
+      t: (str) => en["account"][str.substr(str.indexOf(".") + 1)],
+    }),
+  };
+});
+
 describe("AccountFormFields accessibility check", () => {
   test("passes axe accessibility test", async () => {
     const { container } = render(

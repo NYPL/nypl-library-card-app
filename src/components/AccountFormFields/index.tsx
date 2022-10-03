@@ -3,6 +3,7 @@ import {
   FormRow,
   FormField as DSFormField,
 } from "@nypl/design-system-react-components";
+import { useTranslation } from "next-i18next";
 import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -19,6 +20,7 @@ interface AccountFormFieldsProps {
 }
 
 function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
+  const { t } = useTranslation("common");
   const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();
   const [showPassword, setShowPassword] = useState(true);
@@ -84,9 +86,9 @@ function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
           <FormField
             id="password"
             type={passwordType}
-            label="Password"
+            label={t("account.password")}
             name="password"
-            instructionText={passwordInstructionText}
+            instructionText={t("account.passwordInstruction")}
             isRequired
             errorState={errors}
             minLength={minPasswordLength}
@@ -105,9 +107,9 @@ function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
           <FormField
             id="verifyPassword"
             type={passwordType}
-            label="Verify Password"
+            label={t("account.verifyPassword")}
             name="verifyPassword"
-            instructionText="8-32 characters"
+            instructionText={t("account.verifyPasswordInstruction")}
             isRequired
             errorState={errors}
             minLength={minPasswordLength}
@@ -127,7 +129,7 @@ function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
             <Checkbox
               id="showPassword"
               isChecked={showPassword}
-              labelText="Show Password"
+              labelText={t("account.showPassword")}
               name="showPassword"
               onChange={update}
             />

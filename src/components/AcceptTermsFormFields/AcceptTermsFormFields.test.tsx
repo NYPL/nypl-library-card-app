@@ -4,6 +4,20 @@ import { axe } from "jest-axe";
 import { TestProviderWrapper } from "../../../testHelper/utils";
 import AcceptTermsFormFields from ".";
 
+jest.mock("react-i18next", () => {
+  const en = {
+    account: {
+      termsAndCondition: "Yes, I accept the terms and conditions.",
+    },
+  };
+  return {
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => ({
+      t: (str) => en["account"][str.substr(str.indexOf(".") + 1)],
+    }),
+  };
+});
+
 describe("AcceptTermsFormFields accessibility check", () => {
   test("passes axe accessibility test", async () => {
     const { container } = render(

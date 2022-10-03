@@ -2,6 +2,7 @@ import {
   FormField as DSFormField,
   FormRow,
 } from "@nypl/design-system-react-components";
+import { useTranslation } from "next-i18next";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { isNumeric } from "validator";
@@ -23,6 +24,7 @@ interface AddressFormProps {
  * and zip code.
  */
 const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
+  const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
   // This component must be used within the `react-hook-form` provider so that
@@ -69,7 +71,7 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`line1-${type}`}
-            label="Street Address"
+            label={t("address.line1")}
             name={`${type}-line1`}
             isRequired={isRequired}
             errorState={errors}
@@ -88,7 +90,7 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`line2-${type}`}
-            label="Apartment / Suite"
+            label={t("address.line2")}
             name={`${type}-line2`}
             ref={register()}
             defaultValue={formValues[`${type}-line2`]}
@@ -100,7 +102,7 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`city-${type}`}
-            label="City"
+            label={t("address.city")}
             name={`${type}-city`}
             isRequired={isRequired}
             errorState={errors}
@@ -116,8 +118,8 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`state-${type}`}
-            instructionText="2-letter abbreviation"
-            label="State"
+            instructionText={t("address.stateInstruction")}
+            label={t("address.state")}
             name={`${type}-state`}
             isRequired={isRequired}
             errorState={errors}
@@ -134,13 +136,13 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`zip-${type}`}
-            label="Postal Code"
+            label={t("address.postalCode")}
             name={`${type}-zip`}
             isRequired={isRequired}
             errorState={errors}
             minLength={MINLENGTHZIP}
             maxLength={MAXLENGTHZIP}
-            instructionText="5 or 9-digit postal code"
+            instructionText={t("address.postalCodeInstruction")}
             ref={register({
               validate: validateZip(),
             })}

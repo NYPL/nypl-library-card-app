@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
+
 import {
   FormDataContextProvider,
   formInitialState,
@@ -7,7 +8,7 @@ import {
 import { FormData, LocationResponse } from "../src/interfaces";
 
 interface MockMethods {
-  errors?: {};
+  errors?: any;
   // The types coming from `react-hook-form` for its functions.
   getValues?: () => { [x: string]: any };
   watch?: () => { [x: string]: any };

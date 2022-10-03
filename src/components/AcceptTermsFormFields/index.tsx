@@ -1,6 +1,8 @@
-import React from "react";
 import { Checkbox } from "@nypl/design-system-react-components";
+import { useTranslation } from "next-i18next";
+import React from "react";
 import { useFormContext } from "react-hook-form";
+
 import useFormDataContext from "../../context/FormDataContext";
 
 /**
@@ -11,6 +13,7 @@ import useFormDataContext from "../../context/FormDataContext";
  * to get the value and trigger updates.
  */
 const AcceptTermsForm = () => {
+  const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
   const { register, errors } = useFormContext();
@@ -40,7 +43,7 @@ const AcceptTermsForm = () => {
         isChecked={formValues.acceptTerms}
         isInvalid={errors?.acceptTerms?.message}
         name="acceptTerms"
-        labelText="Yes, I accept the terms and conditions."
+        labelText={t("account.termsAndCondition")}
         // Users must click the checkbox in order to submit.
         ref={register({
           required: "The Terms and Conditions must be checked.",

@@ -11,6 +11,7 @@ import {
 } from "@nypl/design-system-react-components";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -35,6 +36,7 @@ import {
  * Main page component for the "form submission review" page.
  */
 function ReviewFormContainer() {
+  const { t } = useTranslation("common");
   const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit } = useFormContext();
   const { state, dispatch } = useFormDataContext();
@@ -85,7 +87,7 @@ function ReviewFormContainer() {
           editSectionFlag(true);
         }}
       >
-        Edit
+        {t("review.editButton")}
       </Button>
     ) : (
       <a
@@ -93,7 +95,7 @@ function ReviewFormContainer() {
           `newCard=true${queryValues}`
         )}`}
       >
-        Edit
+        {t("review.editButton")}
       </a>
     );
   /**
@@ -111,7 +113,7 @@ function ReviewFormContainer() {
           router.push("/location?newCard=true");
         }}
       >
-        Edit
+        {t("review.editButton")}
       </Button>
     ) : (
       <a
@@ -119,7 +121,7 @@ function ReviewFormContainer() {
           `newCard=true${queryValues}`
         )}`}
       >
-        Edit
+        {t("review.editButton")}
       </a>
     );
   const submitSectionButton = (
@@ -130,7 +132,7 @@ function ReviewFormContainer() {
         onClick={() => {}}
         type="submit"
       >
-        Submit
+        {t("review.submitButton")}
       </Button>
     </ButtonGroup>
   );
@@ -209,26 +211,26 @@ function ReviewFormContainer() {
   const renderPersonalInformationValues = () => (
     <div className={styles.container}>
       <div className={styles.multiField}>
-        <div className={styles.title}>First Name</div>
+        <div className={styles.title}>{t("personal.firstName.label")}</div>
         <div>{formValues.firstName}</div>
       </div>
       <div className={styles.multiField}>
-        <div className={styles.title}>Last Name</div>
+        <div className={styles.title}>{t("personal.lastName.label")}</div>
         <div>{formValues.lastName}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>Date Of Birth</div>
+        <div className={styles.title}>{t("personal.birthdate.label")}</div>
         <div>{formValues.birthdate}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>Email Address</div>
+        <div className={styles.title}>{t("personal.email.label")}</div>
         <div>{formValues.email}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>
-          Receive information about NYPL&apos;s programs and services
+        <div className={styles.title}>{t("review.receiveNewsletter")}</div>
+        <div>
+          {formValues.ecommunicationsPref ? t("review.yes") : t("review.no")}
         </div>
-        <div>{formValues.ecommunicationsPref ? "Yes" : "No"}</div>
       </div>
       {editSectionButton(
         setEditPersonalInfoFlag,
@@ -244,11 +246,11 @@ function ReviewFormContainer() {
   const renderAccountValues = () => (
     <div className={styles.container}>
       <div className={styles.field}>
-        <div className={styles.title}>Username</div>
+        <div className={styles.title}>{t("account.username")}</div>
         <div>{formValues.username}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>Password</div>
+        <div className={styles.title}>{t("account.password")}</div>
         {/* Only render the toggleable password with javascript enabled. */}
         {clientSide ? (
           <>
@@ -260,7 +262,7 @@ function ReviewFormContainer() {
             <Checkbox
               id="showPasswordReview"
               name="showPasswordReview"
-              labelText="Show Password"
+              labelText={t("account.showPassword")}
               isChecked={showPassword}
               onChange={updateShowPassword}
               mt="s"
@@ -304,25 +306,25 @@ function ReviewFormContainer() {
       )}
       {formValues["work-line1"] && <Heading level="four">Home</Heading>}
       <div className={styles.field}>
-        <div className={styles.title}>Street Address</div>
+        <div className={styles.title}>{t("address.line1")}</div>
         <div>{formValues["home-line1"]}</div>
       </div>
       {formValues["home-line2"] && (
         <div className={styles.field}>
-          <div className={styles.title}>Apartment/Suite</div>
+          <div className={styles.title}>{t("address.line2")}</div>
           <div>{formValues["home-line2"]}</div>
         </div>
       )}
       <div className={styles.multiField}>
-        <div className={styles.title}>City</div>
+        <div className={styles.title}>{t("address.city")}</div>
         <div>{formValues["home-city"]}</div>
       </div>
       <div className={styles.multiField}>
-        <div className={styles.title}>State</div>
+        <div className={styles.title}>{t("address.state")}</div>
         <div>{formValues["home-state"]}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>Postal Code</div>
+        <div className={styles.title}>{t("address.postalCode")}</div>
         <div>{formValues["home-zip"]}</div>
       </div>
       {formValues["work-line1"] && (
@@ -331,25 +333,25 @@ function ReviewFormContainer() {
             Work
           </Heading>
           <div className={styles.field}>
-            <div className={styles.title}>Street Address</div>
+            <div className={styles.title}>{t("address.line1")}</div>
             <div>{formValues["work-line1"]}</div>
           </div>
           {formValues["work-line2"] && (
             <div className={styles.field}>
-              <div className={styles.title}>Apartment/Suite</div>
+              <div className={styles.title}>{t("address.line2")}</div>
               <div>{formValues["work-line2"]}</div>
             </div>
           )}
           <div className={styles.multiField}>
-            <div className={styles.title}>City</div>
+            <div className={styles.title}>{t("address.city")}</div>
             <div>{formValues["work-city"]}</div>
           </div>
           <div className={styles.multiField}>
-            <div className={styles.title}>State</div>
+            <div className={styles.title}>{t("address.state")}</div>
             <div>{formValues["work-state"]}</div>
           </div>
           <div className={styles.field}>
-            <div className={styles.title}>Postal Code</div>
+            <div className={styles.title}>{t("address.postalCode")}</div>
             <div>{formValues["work-zip"]}</div>
           </div>
         </>
@@ -440,7 +442,9 @@ function ReviewFormContainer() {
 
         <FormRow margin-top="20px">
           <DSFormField>
-            <RoutingLinks next={{ submit: true, text: "Submit" }} />
+            <RoutingLinks
+              next={{ submit: true, text: t("review.submitButton") }}
+            />
           </DSFormField>
         </FormRow>
       </Form>

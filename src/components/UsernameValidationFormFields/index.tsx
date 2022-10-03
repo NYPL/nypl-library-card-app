@@ -5,6 +5,7 @@ import {
   FormRow,
 } from "@nypl/design-system-react-components";
 import axios from "axios";
+import { useTranslation } from "next-i18next";
 import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { isAlphanumeric } from "validator";
@@ -31,6 +32,7 @@ const UsernameValidationForm = ({
   id = "",
   errorMessage = "",
 }: UsernameValidationFormProps) => {
+  const { t } = useTranslation("common");
   const defaultState = {
     available: false,
     message: "",
@@ -106,7 +108,7 @@ const UsernameValidationForm = ({
           onClick={validateUsername}
           type="button"
         >
-          Check if username is available
+          {t("account.usernameCheckButton")}
         </Button>
       </ButtonGroup>
     );
@@ -118,7 +120,7 @@ const UsernameValidationForm = ({
         <DSFormField>
           <FormField
             id="username"
-            label="Username"
+            label={t("account.username")}
             name="username"
             instructionText="5-25 alphanumeric characters. No special characters."
             isRequired

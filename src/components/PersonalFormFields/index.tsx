@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { useFormContext } from "react-hook-form";
-import { isEmail } from "validator";
 import {
   Checkbox,
   FormField as DSFormField,
   FormRow,
 } from "@nypl/design-system-react-components";
+import { useTranslation } from "next-i18next";
+import React, { useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { isEmail } from "validator";
 
 import FormField from "../FormField";
 import AgeFormFields from "../AgeFormFields";
@@ -13,6 +14,7 @@ import useFormDataContext from "../../context/FormDataContext";
 import { errorMessages } from "../../utils/formDataUtils";
 
 function PersonalFormFields({ agencyType = "", id = "" }) {
+  const { t } = useTranslation("common");
   const { register, errors } = useFormContext();
   const { state } = useFormDataContext();
   const { formValues } = state;
@@ -36,7 +38,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
         <DSFormField>
           <FormField
             id="firstName"
-            label="First Name"
+            label={t("personal.firstName.label")}
             name="firstName"
             isRequired
             // Every input field is registered to react-hook-form. If this
@@ -52,7 +54,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
         <DSFormField>
           <FormField
             id="lastName"
-            label="Last Name"
+            label={t("personal.lastName.label")}
             name="lastName"
             isRequired
             errorState={errors}
@@ -75,7 +77,8 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
         <DSFormField>
           <FormField
             id="email"
-            label="Email Address"
+            // label="Email Address"
+            label={t("personal.email.label")}
             name="email"
             errorState={errors}
             isRequired
@@ -85,7 +88,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
                 val === "" || isEmail(val) || errorMessages.email,
             })}
             defaultValue={formValues.email}
-            instructionText={instructionText as any}
+            instructionText={t("personal.email.instructionText")}
           />
         </DSFormField>
       </FormRow>
@@ -94,7 +97,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
           <Checkbox
             id="eCommunications"
             isChecked={ecommunicationsPref}
-            labelText="Yes, I would like to receive information about NYPL's programs and services"
+            labelText={t("personal.eCommunications.labelText")}
             name="ecommunicationsPref"
             onChange={() => setEcommunicationsPref((prev) => !prev)}
             ref={register()}
