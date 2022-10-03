@@ -246,7 +246,7 @@ function ReviewFormContainer() {
   const renderAccountValues = () => (
     <div className={styles.container}>
       <div className={styles.field}>
-        <div className={styles.title}>{t("account.usernamel.label")}</div>
+        <div className={styles.title}>{t("account.username.label")}</div>
         <div>{formValues.username}</div>
       </div>
       <div className={styles.field}>
