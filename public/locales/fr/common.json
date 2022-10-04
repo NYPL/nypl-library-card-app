@@ -5,13 +5,81 @@
         "part1": "Si vous avez plus de 13 ans et que vous habitez, travaillez, étudiez ou payez des impôts fonciers dans l’État de New York, vous pouvez obtenir immédiatement une carte de bibliothèque numérique gratuite en remplissant ce formulaire.",
         "part2": "Cette carte dématérialisée vous permet d’accéder gratuitement au vaste catalogue numérique de la Bibliothèque—y compris aux livres électroniques, aux bases de données, aux ressources pédagogiques, et bien plus encore.",
         "part3": "En soumettant cette demande, vous certifiez que vous avez lu et accepté les <a href='https://www.nypl.org/help/library-card/terms-conditions'>conditions générales des titulaires de la carte</a> ainsi que notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>règlement intérieur</a>. Pour en savoir plus sur l’utilisation de vos données personnelles par la Bibliothèque, veuillez lire notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>politique de confidentialité</a>."
-      },
-      "button": "Commencer"
+      }
     },
-    "address": {},
-    "alternateAddress": {},
-    "verifyAddress": {},
-    "account": {},
-    "confirm": {},
+    "personal": {
+      "title": "Étape 1/5 : Informations personnelles",
+      "firstName": {
+        "label": "Prénom"
+      },
+      "lastName": {
+        "label": "Nom de famille"
+      },
+      "birthdate": {
+        "label": "Date de naissance",
+        "instruction": "MM/JJ/AAAA, séparés par des barres"
+      },
+      "email": {
+        "label": "Email Address",
+        "instruction": "Une adresse e-mail vous sera demandée pour l’utilisation de nombreuses ressources numériques comme les livres électroniques. Si vous ne souhaitez pas renseigner votre adresse email, vous pouvez demander une carte physique en remplissant notre <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>autre formulaire</a>. Une fois que vous l’aurez rempli, rendez-vous dans l’une de nos <a href='https://www.nypl.org/locations'>bibliothèques</a> avec une pièce d’identité et un justificatif de domicile pour récupérer votre carte."
+      },
+      "errorMessage": {
+        "firstName": "",
+        "lastName": "",
+        "birthdate": "",
+        "email": ""
+      },
+      "eCommunications": {
+        "labelText": "Oui, je souhaite recevoir les informations sur les activités et les services de la NYPL."
+      }
+    },
+    "location": {
+      "title": "Étape 2/5 : Adresse",
+      "description": "Si vous habitez dans la ville de New York, merci d’indiquer l’adresse de votre domicile.",
+      "address": {
+        "line1": {"label": "Nom de la rue"},
+        "line2": {"label":"Apartment / Suite"},
+        "city": {"label": "Ville"},
+        "state": {"label": "État", "instruction": "Abréviation (2 lettres)"},
+        "postalCode": {"label": "Code postal", "instruction": "Code postal à 5 ou 9 chiffres"}
+      }
+    },
+    "verifyAddress": {
+      "title": "Étape 3/5 : Vérification de l’adresse",
+      "homeAddress": "Adresse de votre domicile",
+      "workAddress": "Alternate Address"
+    },
+    "account": {
+      "title": "Étape 4/5 : Personnalisation de votre compte",
+      "username": {
+        "label": "Nom d’utilisateur",
+        "instruction": "5 à 25 caractères alphanumériques, pas de caractères spéciaux",
+        "checkButton": "Vérification de la disponibilité du nom d’utilisateur."
+      },
+      "password": {
+        "label": "Code secret",
+        "instruction": "<p>We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab</p>"},
+      "verifyPassword": {
+        "label": "Vérification du code secret",
+        "instruction": "8-32 chiffres"
+      },
+      "showPassword": "Montrer le code secret",
+      "selectLibrary": "Sélectionnez une bibliothèque de rattachement:",
+      "termsAndCondition": "Oui, j’accepte les conditions générales."
+    },
+    "review": {
+      "title": "Étape 5/5 : Confirmation de vos informations",
+      "description":  "Assurez-vous que toutes les informations que vous avez fournies sont correctes. Si besoin, vous pouvez les modifier avant d’envoyer votre demande.",
+      "receiveNewsletter": "Receive information about NYPL's programs and services",
+      "yes": "Oui",
+      "no": "Non"
+    },
+    "button": {
+      "start": "Commencer",
+      "edit": "Modifier",
+      "submit": "Envoyer",
+      "next": "Suivant",
+      "previous": "Retour"
+    },
     "confirmation": {}
   }

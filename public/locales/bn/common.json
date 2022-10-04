@@ -5,13 +5,83 @@
         "part1": "আপনি যদি ১৩ বছর বা তার বেশী বয়সী হন এবং বসবাস করেন, কাজ করেন, স্কুলে যান, অথবা নিউ ইয়র্ক স্টেটে সম্পত্তি কর পরিশোধ করেন, তাহলে এই অনলাইন ফর্ম ব্যবহার করে আপনি এই মুহূর্তে একটি বিনামূল্যে ডিজিটাল লাইব্রেরী কার্ড পেতে পারেন। নিউ ইয়র্ক স্টেটে দর্শনার্থীরা ও অস্থায়ী কার্ডের জন্য আবেদন করতে এই ফর্ম ব্যবহার করতে পারেন।",
         "part2": "একটি ডিজিটাল লাইব্রেরী কার্ডের মাধ্যমে আপনি লাইব্রেরীর বিস্তৃত ডিজিটাল সম্পদে বিনামূল্যে প্রবেশাধিকার পাবেন- যার মধ্যে রয়েছে ই-বুক, ডাটাবেস, শিক্ষামূলক সম্পদ, এবং আরো অনেক কিছু।",
         "part3": "একটি আবেদন পত্র জমা দেওয়ার মাধ্যমে আপনি আমাদের <a href='https://www.nypl.org/help/library-card/terms-conditions'>কার্ডহোল্ডার শর্তাবলী</a> বুঝতে এবং সম্মত হন এবং আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>নিয়ম ও বিধিমালায়</a> সম্মত হন। লাইব্রেরীর ব্যক্তিগত তথ্যের ব্যবহার সম্পর্কে আরও জানতে, অনুগ্রহ করে আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>প্রাইভেসী নীতিমালা</a> পড়ুন।"
-      },
-      "button": "এবার শুরু করা যাক"
+      }
     },
-    "address": {},
-    "alternateAddress": {},
-    "verifyAddress": {},
-    "account": {},
-    "confirm": {},
+    "personal": {
+      "title": "পদক্ষেপ 1 of 5: ব্যক্তিগত তথ্য",
+      "firstName": {
+        "label": "প্রথম নাম"
+      },
+      "lastName": {
+        "label": "শেষ নাম"
+      },
+      "birthdate": {
+        "label": "জন্ম তারিখ",
+        "instruction": "মাস/ দিন /বছর , স্ল্যাশ সহ "
+      },
+      "email": {
+        "label": "ইমেইল ঠিকানা",
+        "instruction": "আমাদের অনেক ডিজিটাল সম্পদ, যেমন ই-বুক ব্যবহার করার জন্য একটি ইমেইল ঠিকানা প্রয়োজন। আপনি যদি একটি ইমেইল ঠিকানা প্রদান করতে না চান, আপনি আমাদের <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>বিকল্প ফর্ম</a>. ব্যবহার করে একটি ফিজিক্যাল কার্ডের জন্য আবেদন করতে পারেন। একবার পূরণ হয়ে গেলে, আপনার কার্ড তোলার জন্য পরিচয় এবং বাড়ির ঠিকানার প্রমাণ সহ অনুগ্রহ করে আমাদের যে কোন একটি <a href='https://www.nypl.org/locations'>স্থানে</a> যান।."
+      },
+      "errorMessage": {
+        "firstName": "",
+        "lastName": "",
+        "birthdate": "",
+        "email": ""
+      },
+      "eCommunications": {
+        "labelText": "হ্যাঁ, আমি এনওয়াইপিএল এর প্রোগ্রাম এবংসার্ভিসেস সম্পর্কে তথ্য পেতে চাই"
+      }
+    },
+    "location": {
+      "title": "5 এর ধাপ 2: ঠিকানা",
+      "description": "আপনি যদি NYC তে থাকেন তবে দয়া করে বাড়ির ঠিকানা ফর্মটি পূরণ করুন।",
+      "address": {
+        "line1": {"label": "রাস্তার ঠিকানা"},
+        "line2": {"label": "এপার্টমেন্ট / সুইট"},
+        "city": {"label": "শহর"},
+        "state":{"label": "স্টেট", "instruction": "২ অক্ষরের সংক্ষিপ্ত"},
+        "postalCode": {"label": "পোস্টাল কোড", "instruction": "৫ অথবা ৯ ডিজিটের পোস্টাল কোড"}
+      }
+    },
+    "verifyAddress": {
+      "title": "ধাপ 3 of 5: ঠিকানা ভেরিফিকেশন",
+      "description": "অনুগ্রহ করে সঠিক ঠিকানা নির্বাচন করুন।",
+      "homeAddress": "বাসার ঠিকানা",
+      "workAddress": "Alternate Address"
+    },
+    "account": {
+      "title": "5 এর ধাপ 4: আপনার অ্যাকাউন্ট কাস্টমাইজ করুন",
+      "username": {
+        "label": "ব্যবহারকারীর নাম",
+        "instruction": "৫-২৫ আলফানিউমেরিক অক্ষর। কোন বিশেষ অক্ষর নেই.",
+        "checkButton": "ব্যবহারকারীর নাম সুপ্রাপ্য কিনা পরীক্ষা করুন"
+      },
+      "password": {
+        "label": "পিন",
+        "instruction": "<p>We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab</p>"
+      },
+      "verifyPassword": {
+        "label": "প্রয়োজনীয় পিন",
+        "instruction": "8-32 টি সংখ্যা"
+      },
+      "showPassword": "পিন দেখাও",
+      "selectLibrary": "একটি হোম লাইব্রেরী নির্বাচন করুন:",
+      "termsAndCondition": "হ্যাঁ, আমি শর্তাবলী মেনে নিচ্ছি।"
+    },
+    "review": {
+      "title": "5 এর ধাপ 5: আপনার তথ্য নিশ্চিত করুন",
+      "description": "নিশ্চিত হয়ে নিন যে আপনি যে সব তথ্য প্রবেশ করিয়েছেন তা সঠিক। যদি প্রয়োজন হয়, আপনি আপনার আবেদন পত্র জমা করার আগে এখনও পরিবর্তন করতে পারেন।",
+      "receiveNewsletter": "Receive information about NYPL's programs and services",
+      "yes": "হ্যাঁ",
+      "no": "না"
+    },
+    "button": {
+      "start": "এবার শুরু করা যাক",
+      "edit": "সম্পাদনা করুন",
+      "submit": "জমা",
+      "next": "পরবর্তী",
+      "previous": "পূর্ববর্তী"
+    },
     "confirmation": {}
   }

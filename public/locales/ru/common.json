@@ -5,13 +5,83 @@
         "part1": "Если вы старше 13 лет, работаете , посещаете учебные заведения, или уплачиваете налоги в штате Нью Йорк, вы имеете право подать электронное заявление о получении библиотечной карточки. Лица временно находящиеся в штате Нью Йорк также имеют право  подать заявление на временное пользование библиотекой.",
         "part2": "При наличии цифровой карточки библиотеки вы сможете получить доступ к многочисленным электронным ресурсам, в том числе, к электронным книгам, базам данных, образовательным ресурсам, и многим другим источникам.",
         "part3": "Подача данного заявления является вашим согласием с установленными <a href='https://www.nypl.org/help/library-card/terms-conditions'>правилами и положениями пользователя Нью Йоркской Публичной Библиотекиs</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. Дополнительная информация о правилах пользования личными данными находится в <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Правилах Конфиденциальности.</a>"
-      },
-      "button": "Начать"
+      }
     },
-    "address": {},
-    "alternateAddress": {},
-    "verifyAddress": {},
-    "account": {},
-    "confirm": {},
+    "personal": {
+      "title": "Первый этап : Личные данные",
+      "firstName": {
+        "label": "Имя"
+      },
+      "lastName": {
+        "label": "Фамилия"
+      },
+      "birthdate": {
+        "label": "Дата рождения",
+        "instruction": "MM/DD/YYYY, including slashes"
+      },
+      "email": {
+        "label": "Email Address",
+        "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
+      },
+      "errorMessage": {
+        "firstName": "",
+        "lastName": "",
+        "birthdate": "",
+        "email": ""
+      },
+      "eCommunications": {
+        "labelText": " Да, я желаю получать информацию по электронной почте от Нью-Йоркской Публичной Библиотеки о новых услугах и программах"
+      }
+    },
+    "location": {
+      "title": "Второй этап: адрес",
+      "description": "Если вы проживаете в пределах города Нью Йорка, пожалуйста заполните нижеуказанные пункты",
+      "address": {
+        "line1": {"label": "Улица"},
+        "line2": {"label":"Квартира"},
+        "city": {"label": "Район"},
+        "state": {"label": "Штат", "instruction": "2-letter abbreviation"},
+        "postalCode": {"label": "Почтовый индекс", "instruction": "5 or 9-digit postal code"}
+      }
+    },
+    "verifyAddress": {
+      "title": "Третий этап: подтверждение места проживания",
+      "description": "Укажите правильный адрес",
+      "homeAddress": "Домашний адрес",
+      "workAddress": "Alternate Address"
+    },
+    "account": {
+      "title": "Шаг четвертый: Настройки учетной записи",
+      "username": {
+        "label": "Имя пользователя",
+        "instruction": "5-25 буквенно-цифровых знаков No special characters.",
+        "checkButton": "Проверьте, не используется ли данное имя пользователя."
+      },
+      "password": {
+        "label": "Пин код",
+        "instruction": "<p>We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab</p>"
+      },
+      "verifyPassword": {
+        "label": "Подтвердите пин код",
+        "instruction": "8-32 цифры"
+      },
+      "showPassword": "Показать пин код",
+      "selectLibrary": "Выбор близлежащего или удобно расположенного филиала",
+      "termsAndCondition": "Да , я подтверждаю согласие  с условиями и положениями пользования библиотекой."
+    },
+    "review": {
+      "title": "Шаг пятый. Подтверждение личных данных",
+      "description": "Проверьте правильность всех указанных вами данных. При необходимости вы можете внести исправления до отправки заявления.",
+      "receiveNewsletter": "Receive information about NYPL's programs and services",
+      "yes": "Да",
+      "no": "Нет"
+    },
+    "button": {
+      "start": "Начать",
+      "edit": "Корректировка",
+      "submit": "Отправить",
+      "next": "Следующее",
+      "previous": "Назад"
+    },
     "confirmation": {}
   }

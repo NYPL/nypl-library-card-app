@@ -36,7 +36,7 @@ function HomePage({ policyType, csrfToken, lang }) {
           url: `/personal?newCard=true${queryParam}${
             lang !== "en" ? `&lang=${lang}` : ""
           }`,
-          text: t("home.button"),
+          text: t("button.start"),
         }}
       />
 
