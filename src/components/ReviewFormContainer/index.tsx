@@ -42,6 +42,9 @@ function ReviewFormContainer() {
   const { state, dispatch } = useFormDataContext();
   const { formValues, errorObj, csrfToken } = state;
   const router = useRouter();
+  const {
+    query: { lang = "en" },
+  } = router;
   // For routing when javascript is not enabled, we want to track the form
   // values through the URL query params.
   const queryValues = createQueryParams(formValues);
@@ -87,7 +90,7 @@ function ReviewFormContainer() {
           editSectionFlag(true);
         }}
       >
-        {t("review.editButton")}
+        {t("button.edit")}
       </Button>
     ) : (
       <a
@@ -95,7 +98,7 @@ function ReviewFormContainer() {
           `newCard=true${queryValues}`
         )}`}
       >
-        {t("review.editButton")}
+        {t("button.edit")}
       </a>
     );
   /**
@@ -113,7 +116,7 @@ function ReviewFormContainer() {
           router.push("/location?newCard=true");
         }}
       >
-        {t("review.editButton")}
+        {t("button.edit")}
       </Button>
     ) : (
       <a
@@ -121,7 +124,7 @@ function ReviewFormContainer() {
           `newCard=true${queryValues}`
         )}`}
       >
-        {t("review.editButton")}
+        {t("button.edit")}
       </a>
     );
   const submitSectionButton = (
@@ -132,7 +135,7 @@ function ReviewFormContainer() {
         onClick={() => {}}
         type="submit"
       >
-        {t("review.submitButton")}
+        {t("button.submit")}
       </Button>
     </ButtonGroup>
   );
@@ -145,7 +148,10 @@ function ReviewFormContainer() {
    */
   const editSectionInfo = (formData, editSectionFlag) => {
     if (formData.homeLibraryCode) {
-      formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
+      formData.homeLibraryCode = findLibraryCode(
+        formData.homeLibraryCode,
+        lang as string
+      );
     }
     dispatch({
       type: "SET_FORM_DATA",
@@ -246,11 +252,11 @@ function ReviewFormContainer() {
   const renderAccountValues = () => (
     <div className={styles.container}>
       <div className={styles.field}>
-        <div className={styles.title}>{t("account.username")}</div>
+        <div className={styles.title}>{t("account.username.label")}</div>
         <div>{formValues.username}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>{t("account.password")}</div>
+        <div className={styles.title}>{t("account.password.label")}</div>
         {/* Only render the toggleable password with javascript enabled. */}
         {clientSide ? (
           <>
@@ -274,7 +280,7 @@ function ReviewFormContainer() {
       </div>
       <div className={styles.field}>
         <div className={styles.title}>Home Library</div>
-        <div>{findLibraryName(formValues.homeLibraryCode)}</div>
+        <div>{findLibraryName(formValues.homeLibraryCode, lang as string)}</div>
       </div>
       {editSectionButton(
         setEditAccountInfoFlag,
@@ -442,9 +448,7 @@ function ReviewFormContainer() {
 
         <FormRow margin-top="20px">
           <DSFormField>
-            <RoutingLinks
-              next={{ submit: true, text: t("review.submitButton") }}
-            />
+            <RoutingLinks next={{ submit: true, text: t("button.submit") }} />
           </DSFormField>
         </FormRow>
       </Form>

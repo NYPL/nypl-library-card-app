@@ -28,6 +28,16 @@ jest.mock("react-i18next", () => {
     }),
   };
 });
+jest.mock("next/router", () => ({
+  useRouter() {
+    return {
+      route: "/",
+      pathname: "",
+      query: { lang: "en" },
+      asPath: "",
+    };
+  },
+}));
 
 describe("AccountFormFields accessibility check", () => {
   test("passes axe accessibility test", async () => {

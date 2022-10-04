@@ -6,6 +6,17 @@ import ReviewPage from "../pages/review";
 import { TestProviderWrapper } from "../testHelper/utils";
 import { getPageTitles } from "../src/utils/utils";
 
+jest.mock("next/router", () => ({
+  useRouter() {
+    return {
+      route: "/",
+      pathname: "",
+      query: { lang: "en" },
+      asPath: "",
+    };
+  },
+}));
+
 describe("ReviewPage", () => {
   let container;
   beforeEach(() => {

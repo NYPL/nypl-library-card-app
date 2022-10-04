@@ -5,47 +5,59 @@
       "part1": "Si tiene 13 años de edad o más y vive, trabaja, va a la escuela o paga impuestos de propiedad en el estado de Nueva York, puede obtener una tarjeta digital gratuita de la Biblioteca ahora mismo utilizando este formulario en línea. Las personas que visitan el estado de Nueva York también pueden usar este formulario para solicitar una tarjeta temporal.",
       "part2": "Con una tarjeta digital de la Biblioteca, tiene acceso gratuito a una amplia gama de recursos digitales incluyendo libros electrónicos, bases de datos, recursos educativos y más.",
       "part3": "Al enviar una solicitud, comprende y acepta nuestros <a href='https://www.nypl.org/help/library-card/terms-conditions'>Términos y condiciones del titular de la tarjeta</a> (en inglés) y acepta nuestras <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Normas y reglamentos generales</a>. Para obtener más información sobre el uso de información personal por parte de la Biblioteca, lea nuestra <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Política de privacidad</a>."
-    },
-    "button": "Empieza"
+    }
   },
   "personal": {
-    "firstName": "Nombre",
-    "lastName": "Apellido",
-    "dob": "Fecha de nacimiento",
-    "dobInstruction": "DD / MM / AAAA, incluyendo barras",
-    "email": "Correo Electrónico",
-    "emailInstruction": "Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos. Si no desea proporcionar una dirección de correo electrónico, puede solicitar una tarjeta física utilizando nuestro <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>formulario alterno (en inglés)</a>. Una vez que lo haya completado, por favor visite una de nuestras bibliotecas con un comprobante de identidad y domicilio para recoger su tarjeta física.",
-    "newsletter": "Sí, me gustaría recibir información sobre los programas y servicios que ofrece la NYPL"
+    "title": "Paso 1 de 5: información personal",
+    "firstName": {"label": "Nombre"},
+    "lastName": {"label": "Apellido"},
+    "birthdate": {"label": "Fecha de nacimiento","instruction": "DD / MM / AAAA, incluyendo barras"},
+    "email": {"label": "Correo Electrónico", "instruction": "Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos. Si no desea proporcionar una dirección de correo electrónico, puede solicitar una tarjeta física utilizando nuestro <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>formulario alterno (en inglés)</a>. Una vez que lo haya completado, por favor visite una de nuestras bibliotecas con un comprobante de identidad y domicilio para recoger su tarjeta física."},
+    "eCommunications": {"labelText": "Sí, me gustaría recibir información sobre los programas y servicios que ofrece la NYPL"}
   },
-  "address": {
-    "line1": "Dirreción de domicilio",
-    "line2": "Apartamento / Unidad",
-    "city": "Ciudad",
-    "state": "Estado",
-    "stateInstruction": "Abreviatura de 2 letras",
-    "postalCode": "Código postal",
-    "postalCodeInstruction": "Código postal de 5 ó 9 dígitos"
+  "location": {
+    "title": "Paso 2 de 5: dirección",
+    "description": "Si vive en la ciudad de Nueva York, por favor complete el formulario de domicilio.",
+    "address": {
+      "line1": {"label": "Dirreción de domicilio"},
+      "line2": {"label": "Apartamento / Unidad"},
+      "city": {"label": "Ciudad"},
+      "state": {"label": "Estado", "instruction": "Abreviatura de 2 letras"},
+      "postalCode": {"label": "Código postal", "instruction": "Código postal de 5 ó 9 dígitos"}
+    }
   },
-  "alternateAddress": {},
-  "verifyAddress": {},
+  "verifyAddress": {
+    "title": "Paso 3 de 5: verificación de la dirección",
+    "description": "Seleccione la dirección correcta.",
+    "homeAddress": "Dirección de domicilio",
+    "workAddress": "Alternate Address"
+  },
   "account": {
-    "username": "Nombre de usuario",
-    "usernameInstruction": "5-25 caracteres alfanuméricos. Sin caracteres especiales.",
-    "usernameCheckButton": "Compruebe si el nombre del usuario está disponible",
-    "password": "...",
-    "passwordInstruction": "...",
-    "verifyPassword": "...",
-    "verifyPasswordInstruction": "...",
+    "title": "Paso 4 de 5: personalice su cuenta",
+    "username": {
+      "label": "Nombre de usuario",
+      "instruction": "5-25 caracteres alfanuméricos. Sin caracteres especiales.",
+      "checkButton": "Compruebe si el nombre del usuario está disponible"
+    },
+    "password": {"label": "...", "instruction": "..."},
+    "verifyPassword": {"label": "...", "instruction": "..."},
     "showPassword": "...",
     "selectLibrary": "Seleccione una biblioteca local:",
     "termsAndCondition": "Sí, acepto los términos y condiciones."
   },
   "review": {
-    "editButton": "Editar",
-    "submitButton": "Enviar",
+    "title": "Paso 5 de 5 : confirme su información",
+    "description": "Asegúrese de que toda la información que ingresó sea correcta. Si es necesario, aún puede realizar cambios al formulario antes de enviar su solicitud.",
     "receiveNewsletter": "...",
     "yes": "Si",
     "no": "No"
+  },
+  "button": {
+    "start": "Empieza",
+    "edit": "Editar",
+    "submit": "Enviar",
+    "next": "Próximo",
+    "previous": "Previo"
   },
   "confirmation": {}
 }

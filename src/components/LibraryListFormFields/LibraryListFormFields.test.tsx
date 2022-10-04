@@ -18,6 +18,16 @@ jest.mock("react-i18next", () => {
     }),
   };
 });
+jest.mock("next/router", () => ({
+  useRouter() {
+    return {
+      route: "/",
+      pathname: "",
+      query: { lang: "en" },
+      asPath: "",
+    };
+  },
+}));
 
 const libraryList: LibraryListObject[] = [
   { value: "eb", label: "SimplyE" },
