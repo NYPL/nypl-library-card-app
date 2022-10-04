@@ -18,7 +18,7 @@ import useRouterScroll from "../src/hooks/useRouterScroll";
 import { constructProblemDetail } from "../src/utils/formDataUtils";
 import { DSProvider } from "@nypl/design-system-react-components";
 
-import { appWithTranslation } from "next-i18next";
+import { appWithTranslation, useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
 interface MyAppProps {
@@ -50,6 +50,18 @@ function MyApp<MyAppProps>({ Component, pageProps }) {
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   const { favIconPath, appTitle } = appConfig;
+
+  // Setting the lang and teh dir attribute
+  const { i18n } = useTranslation("common");
+  React.useEffect(() => {
+    console.log("query.lang", query.lang);
+    const lang = query.lang !== undefined ? query.lang : "en";
+    document.documentElement.dir = `${i18n.dir()}`;
+    // @FIX: over language change the lang attrbute gets set to "en" and only upon rerender to thr correct language
+    // that issue has nothing to do with how here or in _document the lang attribut gets set to start of
+    console.log("lang varaible", lang);
+    document.documentElement.lang = `${lang}`;
+  });
 
   let error;
   // These errors are from the server-side query string form submission.
@@ -163,7 +175,6 @@ function MyApp<MyAppProps>({ Component, pageProps }) {
         />
         {/* <!-- End Google Analytics --> */}
       </Head>
-
       <DSProvider>
         <FormProvider {...formMethods}>
           <FormDataContextProvider initState={initState}>
