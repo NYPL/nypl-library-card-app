@@ -72,7 +72,7 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`line1-${type}`}
-            label={t("address.line1")}
+            label={t("location.address.line1")}
             name={`${type}-line1`}
             isRequired={isRequired}
             errorState={errors}
@@ -91,7 +91,7 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`line2-${type}`}
-            label={t("address.line2")}
+            label={t("location.address.line2")}
             name={`${type}-line2`}
             ref={register()}
             defaultValue={formValues[`${type}-line2`]}
@@ -103,7 +103,7 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`city-${type}`}
-            label={t("address.city")}
+            label={t("location.address.city")}
             name={`${type}-city`}
             isRequired={isRequired}
             errorState={errors}
@@ -119,8 +119,8 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`state-${type}`}
-            instructionText={t("address.stateInstruction")}
-            label={t("address.state")}
+            instructionText={t("location.address.state.instruction")}
+            label={t("location.address.state.label")}
             name={`${type}-state`}
             isRequired={isRequired}
             errorState={errors}
@@ -141,13 +141,13 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`zip-${type}`}
-            label={t("address.postalCode")}
+            label={t("location.address.postalCode.label")}
             name={`${type}-zip`}
             isRequired={isRequired}
             errorState={errors}
             minLength={MINLENGTHZIP}
             maxLength={MAXLENGTHZIP}
-            instructionText={t("address.postalCodeInstruction")}
+            instructionText={t("location.address.postalCode.instruction")}
             ref={register({
               validate: validateZip(),
             })}

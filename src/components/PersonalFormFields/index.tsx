@@ -87,7 +87,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
                 val === "" || isEmail(val) || errorMessages.email,
             })}
             defaultValue={formValues.email}
-            instructionText={t("personal.email.instructionText")}
+            instructionText={t("personal.email.instruction")}
           />
         </DSFormField>
       </FormRow>

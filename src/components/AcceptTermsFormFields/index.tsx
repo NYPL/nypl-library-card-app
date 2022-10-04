@@ -43,7 +43,7 @@ const AcceptTermsForm = () => {
         isChecked={formValues.acceptTerms}
         isInvalid={errors?.acceptTerms?.message}
         name="acceptTerms"
-        labelText={t("account.termsAndCondition")}
+        labelText={t("account.termsAndCondition.label")}
         // Users must click the checkbox in order to submit.
         ref={register({
           required: t("account.errorMessage.acceptTerms"),
