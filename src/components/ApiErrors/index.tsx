@@ -30,6 +30,8 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
       return null;
     }
 
+    problemDetail.detail = t("apiErrors.defaultError");
+
     /**
      * renderErrorByType
      * Returns list elements with detail errors.

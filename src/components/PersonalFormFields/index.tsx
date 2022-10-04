@@ -11,7 +11,6 @@ import { isEmail } from "validator";
 import FormField from "../FormField";
 import AgeFormFields from "../AgeFormFields";
 import useFormDataContext from "../../context/FormDataContext";
-import { errorMessages } from "../../utils/formDataUtils";
 
 function PersonalFormFields({ agencyType = "", id = "" }) {
   const { t } = useTranslation("common");
@@ -20,17 +19,6 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
   const { formValues } = state;
   const [ecommunicationsPref, setEcommunicationsPref] = useState<boolean>(
     formValues.ecommunicationsPref
-  );
-  const instructionText = (
-    <>
-      An email address is required to use many of our digital resources, such as
-      e-books. If you do not wish to provide an email address, you can apply for
-      a physical card using our{" "}
-      <a href="https://catalog.nypl.org/selfreg/patonsite">alternate form</a>.
-      Once filled out, please visit one of our{" "}
-      <a href="https://www.nypl.org/locations">locations</a> with proof of
-      identity and home address to pick up your card.
-    </>
   );
   return (
     <>
@@ -67,10 +55,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
       </FormRow>
       <FormRow id={`${id}-personalForm-2`}>
         <DSFormField>
-          <AgeFormFields
-            policyType={agencyType || formValues.policyType}
-            errorMessages={errorMessages}
-          />
+          <AgeFormFields policyType={agencyType || formValues.policyType} />
         </DSFormField>
       </FormRow>
       <FormRow id={`${id}-personalForm-3`}>
@@ -84,7 +69,7 @@ function PersonalFormFields({ agencyType = "", id = "" }) {
             ref={register({
               required: t("personal.errorMessage.email"),
               validate: (val) =>
-                val === "" || isEmail(val) || errorMessages.email,
+                val === "" || isEmail(val) || t("personal.errorMessage.email"),
             })}
             defaultValue={formValues.email}
             instructionText={t("personal.email.instruction")}

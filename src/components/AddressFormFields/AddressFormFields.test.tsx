@@ -43,11 +43,7 @@ describe("AddressFormFields", () => {
   test("it passes axe accessibility test", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <AddressFormFields
-          id="address-test"
-          type={AddressTypes.Home}
-          errorMessages={addressErrorMessages}
-        />
+        <AddressFormFields id="address-test" type={AddressTypes.Home} />
       </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
@@ -56,11 +52,7 @@ describe("AddressFormFields", () => {
   test("it passes accessibilty checks with error messages", async () => {
     const { container } = render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
-        <AddressFormFields
-          id="address-test"
-          type={AddressTypes.Home}
-          errorMessages={addressErrorMessages}
-        />
+        <AddressFormFields id="address-test" type={AddressTypes.Home} />
       </TestProviderWrapper>
     );
 
@@ -70,11 +62,7 @@ describe("AddressFormFields", () => {
   test("it should render five fields", () => {
     render(
       <TestProviderWrapper>
-        <AddressFormFields
-          id="address-test"
-          type={AddressTypes.Home}
-          errorMessages={addressErrorMessages}
-        />
+        <AddressFormFields id="address-test" type={AddressTypes.Home} />
       </TestProviderWrapper>
     );
 
@@ -100,11 +88,7 @@ describe("AddressFormFields", () => {
   test("it should render five optional fields for the work address", () => {
     render(
       <TestProviderWrapper>
-        <AddressFormFields
-          id="address-test"
-          type={AddressTypes.Work}
-          errorMessages={addressErrorMessages}
-        />
+        <AddressFormFields id="address-test" type={AddressTypes.Work} />
       </TestProviderWrapper>
     );
 
@@ -126,11 +110,7 @@ describe("AddressFormFields", () => {
   test("it should render any error messages for required fields", () => {
     render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
-        <AddressFormFields
-          id="address-test"
-          type={AddressTypes.Home}
-          errorMessages={addressErrorMessages}
-        />
+        <AddressFormFields id="address-test" type={AddressTypes.Home} />
       </TestProviderWrapper>
     );
 

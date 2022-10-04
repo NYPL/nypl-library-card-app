@@ -92,5 +92,8 @@
   "globalErrors": {
     "title": "Error de envío de formulario",
     "defaultError": "Hubo un error al procesar su envío. Por favor, inténtelo de nuevo más tarde."
+  },
+  "apiErrors": {
+    "defaultError": "..."
   }
 }

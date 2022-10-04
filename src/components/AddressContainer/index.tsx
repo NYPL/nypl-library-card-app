@@ -20,7 +20,7 @@ import {
 } from "../../interfaces";
 import Loader from "../Loader";
 import FormField from "../FormField";
-import { errorMessages, constructAddressType } from "../../utils/formDataUtils";
+import { constructAddressType } from "../../utils/formDataUtils";
 import { lcaEvents } from "../../externals/gaUtils";
 import { nyCounties, nyCities } from "../../utils/utils";
 
@@ -141,11 +141,7 @@ const AddressContainer = () => {
         method="post"
         onSubmit={handleSubmit(submitForm)}
       >
-        <AddressFormFields
-          id="address-container"
-          type={AddressTypes.Home}
-          errorMessages={errorMessages.address}
-        />
+        <AddressFormFields id="address-container" type={AddressTypes.Home} />
 
         <FormRow display="none">
           <DSFormField>

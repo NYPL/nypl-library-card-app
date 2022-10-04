@@ -25,7 +25,7 @@ const errorMessages = {
     "uppercase and lowercase letters, include a mixture of letters and " +
     "numbers, and have at least one special character except period (.)",
   verifyPassword: "The two passwords don't match.",
-  acceptTerms: "The terms and conditions were not accepted.",
+  acceptTerms: "The Terms and Conditions must be checked.",
   address: {
     line1: "Please enter a valid street address.",
     city: "Please enter a valid city.",

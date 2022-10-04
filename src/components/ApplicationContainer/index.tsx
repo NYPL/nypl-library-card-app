@@ -17,13 +17,13 @@ const ApplicationContainer = ({ children, problemDetail }) => {
   const errorSection = React.createRef<HTMLDivElement>();
   const { state } = useFormDataContext();
   const { errorObj } = state;
-  // const errorToDisplay = problemDetail ? problemDetail : errorObj;
-  const errorToDisplay = {
-    status: 400,
-    type: "unexpected-type",
-    title: "unexpected type",
-    detail: "uhoh",
-  };
+  const errorToDisplay = problemDetail ? problemDetail : errorObj;
+  // const errorToDisplay = {
+  //   status: 400,
+  //   type: "unexpected-type",
+  //   title: "unexpected type",
+  //   detail: "uhoh",
+  // };
 
   // If there are errors, focus on the element that displays those errors,
   // for client-side rendering.

@@ -32,7 +32,7 @@ describe("createAnchorText", () => {
   test("it should replace text in the error message with its equivalent anchor element string", () => {
     expect(errorMessages.firstName).toEqual("Please enter a valid first name.");
     expect(errorMessages.acceptTerms).toEqual(
-      "The terms and conditions were not accepted."
+      "The Terms and Conditions must be checked."
     );
 
     expect(createAnchorText("firstName", errors)).toEqual(

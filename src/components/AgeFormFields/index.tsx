@@ -10,7 +10,6 @@ import useFormDataContext from "../../context/FormDataContext";
 
 interface AgeFormProps {
   policyType?: string;
-  errorMessages: any;
 }
 
 /**
@@ -18,10 +17,7 @@ interface AgeFormProps {
  * Renders an input field for "webApplicant" policy types and a checkbox for
  * "simplye" policy types.
  */
-const AgeForm = ({
-  policyType = "webApplicant",
-  errorMessages,
-}: AgeFormProps) => {
+const AgeForm = ({ policyType = "webApplicant" }: AgeFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
@@ -61,7 +57,7 @@ const AgeForm = ({
         name="ageGate"
         labelText="Yes, I am over 13 years old."
         ref={register({
-          required: errorMessages["ageGate"],
+          required: t("personal.errorMessage.ageGate"),
         })}
       />
     </>

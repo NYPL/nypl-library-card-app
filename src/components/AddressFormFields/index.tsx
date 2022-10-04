@@ -14,7 +14,6 @@ import useFormDataContext from "../../context/FormDataContext";
 interface AddressFormProps {
   id?: string;
   type: AddressTypes;
-  errorMessages: Address;
 }
 
 /**
@@ -23,7 +22,7 @@ interface AddressFormProps {
  * street address (line1), second street address (line2), city, state,
  * and zip code.
  */
-const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
+const AddressForm = ({ id, type }: AddressFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
