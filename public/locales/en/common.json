@@ -76,19 +76,17 @@
     "no": "No",
     "nextStep": "After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials."
   },
-  "button": {
-    "start": "Get Started",
-    "edit": "Edit",
-    "submit": "Submit",
-    "next": "Next",
-    "previous": "Previous"
-  },
   "confirmation": {
     "title": "Congratulations! You now have a digital New York Public Library card.",
     "description": {
       "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
       "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
       "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
+    },
+    "graphic": {
+      "memberName": "Member Name",
+      "password": "Password",
+      "issued": "Issued"
     },
     "nextSteps": {
       "h2": "Get Started with The New York Public Library",
@@ -97,5 +95,16 @@
       "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
       "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
     }
+  },
+  "button": {
+    "start": "Get Started",
+    "edit": "Edit",
+    "submit": "Submit",
+    "next": "Next",
+    "previous": "Previous"
+  },
+  "ariaLabel": {
+    "librarySuggestions": "List of library name suggestions",
+    "barcode": "Scannable barcode"
   }
 }
