@@ -312,25 +312,29 @@ function ReviewFormContainer() {
       )}
       {formValues["work-line1"] && <Heading level="four">Home</Heading>}
       <div className={styles.field}>
-        <div className={styles.title}>{t("address.line1")}</div>
+        <div className={styles.title}>{t("location.address.line1.label")}</div>
         <div>{formValues["home-line1"]}</div>
       </div>
       {formValues["home-line2"] && (
         <div className={styles.field}>
-          <div className={styles.title}>{t("address.line2")}</div>
+          <div className={styles.title}>
+            {t("location.address.line2.label")}
+          </div>
           <div>{formValues["home-line2"]}</div>
         </div>
       )}
       <div className={styles.multiField}>
-        <div className={styles.title}>{t("address.city")}</div>
+        <div className={styles.title}>{t("location.address.city.label")}</div>
         <div>{formValues["home-city"]}</div>
       </div>
       <div className={styles.multiField}>
-        <div className={styles.title}>{t("address.state")}</div>
+        <div className={styles.title}>{t("location.address.state.label")}</div>
         <div>{formValues["home-state"]}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>{t("address.postalCode")}</div>
+        <div className={styles.title}>
+          {t("location.address.postalCode.label")}
+        </div>
         <div>{formValues["home-zip"]}</div>
       </div>
       {formValues["work-line1"] && (
@@ -339,25 +343,35 @@ function ReviewFormContainer() {
             Work
           </Heading>
           <div className={styles.field}>
-            <div className={styles.title}>{t("address.line1")}</div>
+            <div className={styles.title}>
+              {t("location.address.line1.label")}
+            </div>
             <div>{formValues["work-line1"]}</div>
           </div>
           {formValues["work-line2"] && (
             <div className={styles.field}>
-              <div className={styles.title}>{t("address.line2")}</div>
+              <div className={styles.title}>
+                {t("location.address.line2.label")}
+              </div>
               <div>{formValues["work-line2"]}</div>
             </div>
           )}
           <div className={styles.multiField}>
-            <div className={styles.title}>{t("address.city")}</div>
+            <div className={styles.title}>
+              {t("location.address.city.label")}
+            </div>
             <div>{formValues["work-city"]}</div>
           </div>
           <div className={styles.multiField}>
-            <div className={styles.title}>{t("address.state")}</div>
+            <div className={styles.title}>
+              {t("location.address.state.label")}
+            </div>
             <div>{formValues["work-state"]}</div>
           </div>
           <div className={styles.field}>
-            <div className={styles.title}>{t("address.postalCode")}</div>
+            <div className={styles.title}>
+              {t("location.address.postalCode.label")}
+            </div>
             <div>{formValues["work-zip"]}</div>
           </div>
         </>
