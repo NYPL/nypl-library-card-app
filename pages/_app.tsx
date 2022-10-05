@@ -51,15 +51,14 @@ function MyApp<MyAppProps>({ Component, pageProps }) {
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   const { favIconPath, appTitle } = appConfig;
 
-  // Setting the lang and teh dir attribute
+  // Setting the "lang" and the "dir" attribute
   const { i18n } = useTranslation("common");
   React.useEffect(() => {
-    console.log("query.lang", query.lang);
-    const lang = query.lang !== undefined ? query.lang : "en";
-    document.documentElement.dir = `${i18n.dir()}`;
-    // @FIX: over language change the lang attrbute gets set to "en" and only upon rerender to thr correct language
-    // that issue has nothing to do with how here or in _document the lang attribut gets set to start of
-    console.log("lang varaible", lang);
+    let lang = query.lang !== undefined ? query.lang : "en";
+    if (lang === "zhcn") {
+      lang = "zh-cn";
+    }
+    document.getElementById("__next").dir = `${i18n.dir()}`;
     document.documentElement.lang = `${lang}`;
   });
 
