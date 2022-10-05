@@ -3,7 +3,7 @@
 
 import React, { useEffect } from "react";
 // import { Header, navConfig } from "@nypl/dgx-header-component";
-import Footer from "@nypl/dgx-react-footer";
+// import Footer from "@nypl/dgx-react-footer";
 import Banner from "../Banner";
 import ApiErrors from "../ApiErrors";
 import useFormDataContext from "../../context/FormDataContext";
