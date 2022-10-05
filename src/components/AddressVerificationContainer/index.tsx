@@ -90,7 +90,7 @@ function AddressVerificationContainer() {
     // between multiple valid addresses returned from Service Objects.
 
     // Get the index of the object that was selected...
-    const idx = parseInt(home.split("-")[1], 10);
+    const idx = home.length > 0 ? parseInt(home.split("-")[1], 10) : 0;
     // ...and use the address of the selected object.
     const selectedHomeAddress = homeAddress[idx];
 

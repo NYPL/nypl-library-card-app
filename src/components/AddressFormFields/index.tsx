@@ -56,12 +56,12 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
    */
   const validateZip = () => (value) => {
     if (!isNumeric(value) && isRequired) {
-      return t("address.errorMessage.zip");
+      return t("location.errorMessage.zip");
     }
     return lengthValidation(
       MINLENGTHZIP,
       MAXLENGTHZIP,
-      "address.errorMessage.zip"
+      "location.errorMessage.zip"
     )(value);
   };
 
@@ -71,14 +71,14 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`line1-${type}`}
-            label={t("location.address.line1")}
+            label={t("location.address.line1.label")}
             name={`${type}-line1`}
             isRequired={isRequired}
             errorState={errors}
             ref={register({
               required: {
                 value: isRequired,
-                message: t("address.errorMessage.line1"),
+                message: t("location.errorMessage.line1"),
               },
             })}
             defaultValue={formValues[`${type}-line1`]}
@@ -90,7 +90,7 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`line2-${type}`}
-            label={t("location.address.line2")}
+            label={t("location.address.line2.label")}
             name={`${type}-line2`}
             ref={register()}
             defaultValue={formValues[`${type}-line2`]}
@@ -102,14 +102,14 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`city-${type}`}
-            label={t("location.address.city")}
+            label={t("location.address.city.label")}
             name={`${type}-city`}
             isRequired={isRequired}
             errorState={errors}
             ref={register({
               required: {
                 value: isRequired,
-                message: t("address.errorMessage.city"),
+                message: t("location.errorMessage.city"),
               },
             })}
             defaultValue={formValues[`${type}-city`]}
@@ -128,7 +128,7 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
               validate: lengthValidation(
                 STATELENGTH,
                 STATELENGTH,
-                "address.errorMessage.state"
+                "location.errorMessage.state"
               ),
             })}
             defaultValue={formValues[`${type}-state`]}

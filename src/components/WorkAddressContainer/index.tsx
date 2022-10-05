@@ -20,7 +20,7 @@ import {
 import Loader from "../Loader";
 import FormField from "../FormField";
 import { lcaEvents } from "../../externals/gaUtils";
-import { errorMessages, constructAddressType } from "../../utils/formDataUtils";
+import { constructAddressType } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
 
 const AddressContainer = () => {
@@ -133,7 +133,6 @@ const AddressContainer = () => {
         <AddressFormFields
           id="work-address-container"
           type={AddressTypes.Work}
-          errorMessages={errorMessages.address}
         />
 
         <FormRow display="none">

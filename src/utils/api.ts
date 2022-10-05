@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import axios from "axios";
 import qs from "qs";
 import moment from "moment";
@@ -346,19 +345,19 @@ export async function callPatronAPI(
     const patronData = constructPatronObject(data);
     // Used for testing when we don't want to create real accounts,
     // just return a mocked account data.
-    // return Promise.resolve({
-    //   status: 200,
-    //   type: "card-granted",
-    //   link: "some-link",
-    //   barcode: "12345678912345",
-    //   username: "tomnook",
-    //   password: "1234",
-    //   temporary: false,
-    //   message: "The library card will be a standard library card.",
-    //   patronId: 1234567,
-    //   name: "Tom Nook",
-    //   ptype: 7,
-    // });
+    return Promise.resolve({
+      status: 200,
+      type: "card-granted",
+      link: "some-link",
+      barcode: "12345678912345",
+      username: "tomnook",
+      password: "1234",
+      temporary: false,
+      message: "The library card will be a standard library card.",
+      patronId: 1234567,
+      name: "Tom Nook",
+      ptype: 7,
+    });
     if ((patronData as ProblemDetail).status === 400) {
       logger.error("Invalid patron data");
       logger.error("Patron data", patronData);

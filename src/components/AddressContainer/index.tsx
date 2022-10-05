@@ -31,6 +31,7 @@ const AddressContainer = () => {
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
+  console.log("AddressContainer router", router);
 
   /**
    * submitForm

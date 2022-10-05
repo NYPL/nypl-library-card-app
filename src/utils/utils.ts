@@ -83,6 +83,7 @@ export const createNestedQueryParams = (dataAsString = {}, key) => {
 export const getCsrfToken = (req, res) => {
   let csrfToken;
   let csrfTokenValid = false;
+  console.log("getCrsfToken", req.body);
   const csrfTokenFromPost = req.body?.csrfToken;
   // Secret uses salt cookies and tokens (e.g. for CSRF protection).
   const s1 = appConfig.clientSecret;

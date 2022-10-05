@@ -30,7 +30,9 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
       return null;
     }
 
-    problemDetail.detail = t("apiErrors.defaultError");
+    if (typeof problemDetail !== "string") {
+      problemDetail.detail = t("apiErrors.defaultError");
+    }
 
     /**
      * renderErrorByType
@@ -53,7 +55,7 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
             if (isEmpty(error)) {
               errorElements = <li>{detail}</li>;
             } else {
-              errorElements = renderErrorElements(error);
+              errorElements = renderErrorElements(error, lang);
             }
             break;
           // All the errors are in the `error` property but for the `username`,
@@ -64,7 +66,7 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
             errorElements = (
               <li
                 dangerouslySetInnerHTML={{
-                  __html: createUsernameAnchor(detail),
+                  __html: createUsernameAnchor(detail, lang),
                 }}
               />
             );
