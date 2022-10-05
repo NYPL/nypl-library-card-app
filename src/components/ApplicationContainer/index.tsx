@@ -34,7 +34,7 @@ const ApplicationContainer = ({ children, problemDetail }) => {
         </>
       }
       sidebar="right"
-      footer={<Footer />}
+      marginBottom="l"
     />
   );
 };
