@@ -21,20 +21,46 @@ const reactHookFormErrors = {
 
 jest.mock("react-i18next", () => {
   const en = {
-    address: {
-      line1: "Street Address",
-      line2: "Apartment / Suite",
-      city: "City",
-      state: "State",
-      stateInstruction: "2-letter abbreviation",
-      postalCode: "Postal Code",
-      postalCodeInstruction: "5 or 9-digit postal code",
+    location: {
+      title: "Step 2 of 5: Address",
+      description: "If you live in NYC, please fill out the home address form.",
+      address: {
+        line1: { label: "Street Address" },
+        line2: { label: "Apartment / Suite" },
+        city: { label: "City" },
+        state: { label: "State", instruction: "2-letter abbreviation" },
+        postalCode: {
+          label: "Postal Code",
+          instruction: "5 or 9-digit postal code",
+        },
+      },
+      errorMessage: {
+        line1: "Please enter a valid street address.",
+        city: "Please enter a valid city.",
+        state: "Please enter a 2-character state abbreviation.",
+        zip: "Please enter a 5 or 9-digit postal code.",
+      },
     },
   };
   return {
     // this mock makes sure any components using the translate hook can use it without a warning being shown
     useTranslation: () => ({
-      t: (str) => en["address"][str.substr(str.indexOf(".") + 1)],
+      t: (str) => {
+        let value = "";
+        // Split the string value, such as "account.username.label".
+        const keys = str.split(".");
+        // The first one we want is from the `en` object.
+        value = en[keys[0]];
+        // Then any object after that must be from the `value`
+        // object as we dig deeper.
+        keys.forEach((k, index) => {
+          if (index !== 0) {
+            value = value[k];
+          }
+        });
+
+        return value;
+      },
     }),
   };
 });

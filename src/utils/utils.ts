@@ -50,7 +50,7 @@ export const nyCities = [
  * createQueryParams
  * Converts an object into key/value pairs to be use as url query params.
  */
-export const createQueryParams = (obj) => {
+export const createQueryParams = (obj = {}) => {
   let query = "";
   for (const [key, value] of Object.entries(obj)) {
     query += `&${key}=${value}`;
@@ -83,7 +83,6 @@ export const createNestedQueryParams = (dataAsString = {}, key) => {
 export const getCsrfToken = (req, res) => {
   let csrfToken;
   let csrfTokenValid = false;
-  console.log("getCrsfToken", req.body);
   const csrfTokenFromPost = req.body?.csrfToken;
   // Secret uses salt cookies and tokens (e.g. for CSRF protection).
   const s1 = appConfig.clientSecret;

@@ -4,6 +4,40 @@ import { axe } from "jest-axe";
 import ApiErrors from ".";
 import { errorMessages } from "../../utils/formDataUtils";
 
+jest.mock("react-i18next", () => {
+  const en = {
+    globalErrors: {
+      title: "Form submission error",
+      defaultError:
+        "There was an error processing your submission. Please try again later.",
+    },
+    apiErrors: {
+      defaultError: "There were errors with your submission.",
+    },
+  };
+  return {
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => ({
+      t: (str) => {
+        let value = "";
+        // Split the string value, such as "account.username.label".
+        const keys = str.split(".");
+        // The first one we want is from the `en` object.
+        value = en[keys[0]];
+        // Then any object after that must be from the `value`
+        // object as we dig deeper.
+        keys.forEach((k, index) => {
+          if (index !== 0) {
+            value = value[k];
+          }
+        });
+
+        return value;
+      },
+    }),
+  };
+});
+
 describe("ApiErrors", () => {
   test("it passes axe accessibility test", async () => {
     const { container } = render(<ApiErrors problemDetail={undefined} />);

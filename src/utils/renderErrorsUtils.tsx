@@ -28,7 +28,7 @@ export function createAnchorText(key, errors, addressType = "", lang = "en") {
     city: "city",
     state: "state",
     zip: "postal code",
-    acceptTerms: "terms and conditions",
+    acceptTerms: "Terms and Conditions",
   };
 
   const message = errors[key];

@@ -28,7 +28,6 @@ async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
   // Get a token to be able to call the NYPL API.
   await initializeAppAuth(req, res);
 
-  console.log(req);
   let newSubmittedValues = { ...req.body };
   // All already submitted values are stored here so we dont run validations
   // on those values again.

@@ -14,6 +14,7 @@ import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import { findLibraryCode } from "../../utils/formDataUtils";
 import { lcaEvents } from "../../externals/gaUtils";
 import FormField from "../FormField";
+import { createQueryParams } from "../../utils/utils";
 
 const AccountFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
@@ -24,6 +25,8 @@ const AccountFormContainer = () => {
   } = router;
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
+  // Get the URL query params for `newCard` and `lang`.
+  const queryStr = createQueryParams(router?.query);
 
   /**
    * submitForm
@@ -41,7 +44,7 @@ const AccountFormContainer = () => {
       value: { ...formValues, ...formData },
     });
 
-    const nextUrl = "/review?newCard=true";
+    const nextUrl = `/review?${queryStr}`;
     lcaEvents("Navigation", `Next button to ${nextUrl}`);
     router.push(nextUrl);
   };
@@ -78,7 +81,7 @@ const AccountFormContainer = () => {
       <FormRow>
         <DSFormField>
           <RoutingLinks
-            previous={{ url: "/address-verification?newCard=true" }}
+            previous={{ url: `/address-verification?${queryStr}` }}
             next={{ submit: true }}
           />
         </DSFormField>

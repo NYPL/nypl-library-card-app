@@ -30,7 +30,7 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
       return null;
     }
 
-    if (typeof problemDetail !== "string") {
+    if (typeof problemDetail !== "string" && !problemDetail.detail) {
       problemDetail.detail = t("apiErrors.defaultError");
     }
 

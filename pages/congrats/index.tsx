@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Heading } from "@nypl/design-system-react-components";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 
 import ConfirmationGraphic from "../../src/components/ConfirmationGraphic";
@@ -99,7 +100,11 @@ export async function getServerSideProps({ query }) {
   if (!query.newCard) {
     return homePageRedirect();
   }
-  return { props: {} };
+  return {
+    props: {
+      ...(await serverSideTranslations(query?.lang || "en", ["common"])),
+    },
+  };
 }
 
 export default ConfirmationPage;

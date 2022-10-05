@@ -39,7 +39,7 @@ describe("createAnchorText", () => {
       'Please enter a valid <a href="#input-firstName">first name</a>.'
     );
     expect(createAnchorText("acceptTerms", errors)).toEqual(
-      'The <a href="#input-acceptTerms">terms and conditions</a> were not accepted.'
+      'The <a href="#input-acceptTerms">Terms and Conditions</a> must be checked.'
     );
   });
 
