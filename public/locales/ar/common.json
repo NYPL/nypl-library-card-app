@@ -57,14 +57,44 @@
       "verifyPassword": {"label": "التحقق من رقم التعريف الشخصي", "instruction": "8-32 characters"},
       "showPassword": "إظهار رقم التعريف الشخصي",
       "selectLibrary": "حدد مكتبة مفضلة:",
-      "termsAndCondition": "نعم ، أوافق على الشروط والأحكام."
+      "termsAndCondition": {
+        "label": "نعم ، أوافق على الشروط والأحكام.",
+        "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+      }
     },
     "review": {
       "title": "الخطوة ٥ من ٥: قم بتأكيد المعلومات",
       "description": "تأكد من صحة جميع المعلومات التي أدخلتها. إذا لزم الأمر ، لا يزال بإمكانك إجراء التغييرات قبل إرسال طلبك.",
+      "section": {
+        "personal": "Personal Information",
+        "address": {"label": "Address", "location": "Location", "home": "Home","work": "Work"}, 
+        "homeLibrary": "Home Library",
+        "createAccount": "Create Your Account"
+      },
       "receiveNewsletter": "Receive information about NYPL's programs and services",
       "yes": "نعم",
-      "no": "رقم"
+      "no": "رقم",
+      "nextStep": "After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials."
+    },
+    "confirmation": {
+      "title": "Congratulations! You now have a digital New York Public Library card.",
+      "description": {
+        "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
+        "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
+        "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
+      },
+      "graphic": {
+        "memberName": "Member Name",
+        "password": "Password",
+        "issued": "Issued"
+      },
+      "nextSteps": {
+        "h2": "Get Started with The New York Public Library",
+        "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
+        "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
+        "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
+        "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+      }
     },
     "button": {
       "start": "البدء",
@@ -73,5 +103,8 @@
       "next": "التالي",
       "previous": "السابق"
     },
-    "confirmation": {}
+    "ariaLabel": {
+      "librarySuggestions": "List of library name suggestions",
+      "barcode": "Scannable barcode"
+    }
   }
