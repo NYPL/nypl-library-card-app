@@ -53,28 +53,28 @@
     "account": {
       "title": "الخطوة ٤ من ٥: تخصيص حسابك",
       "username": {"label": "اسم المستخدم", "instruction": "٥-٢٥ حرفًا أبجديًا رقميًا. لا توجد حروفًا  خاصة.", "checkButton": "تحقق مما إذا كان اسم المستخدم متاحًا"},
-      "password": {"label": "رقم التعريف الشخصي", "instruction": "<p>We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab</p>"},
+      "password": {"label": "رقم التعريف الشخصي", "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"},
       "verifyPassword": {"label": "التحقق من رقم التعريف الشخصي", "instruction": "8-32 characters"},
       "showPassword": "إظهار رقم التعريف الشخصي",
       "selectLibrary": "حدد مكتبة مفضلة:",
       "termsAndCondition": {
         "label": "نعم ، أوافق على الشروط والأحكام.",
-        "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+        "text": " بتقديم هذا الطلب، أنا أفهم وأوافق على<a href='https://www.nypl.org/help/library-card/terms-conditions'> شروط وأحكام حامل البطاقة </a> ,  و أوافق على<a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'> قواعد ولوائح مكتبة نيويورك العامة</a>.  تعلم المزيد عن استخدام المكتبة للمعلومات الشخصية,يرجى القراءة <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'> سياسة الخصوصية</a>  الخاصة بنا."
       }
     },
     "review": {
       "title": "الخطوة ٥ من ٥: قم بتأكيد المعلومات",
       "description": "تأكد من صحة جميع المعلومات التي أدخلتها. إذا لزم الأمر ، لا يزال بإمكانك إجراء التغييرات قبل إرسال طلبك.",
       "section": {
-        "personal": "Personal Information",
+        "personal": "معلومات شخصية",
         "address": {"label": "Address", "location": "Location", "home": "Home","work": "Work"}, 
-        "homeLibrary": "Home Library",
+        "homeLibrary": "المكتبة المفضلة",
         "createAccount": "Create Your Account"
       },
       "receiveNewsletter": "Receive information about NYPL's programs and services",
       "yes": "نعم",
       "no": "رقم",
-      "nextStep": "After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials."
+      "nextStep": "بعد تقديم طلبك ، سترى صفحة تأكيد تحتوي على معلومات حسابك , و ستتمكن من تسجيل الدخول وطلب الكتب والمواد."
     },
     "confirmation": {
       "title": "Congratulations! You now have a digital New York Public Library card.",

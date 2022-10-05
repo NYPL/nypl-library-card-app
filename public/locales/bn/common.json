@@ -69,22 +69,22 @@
       "selectLibrary": "একটি হোম লাইব্রেরী নির্বাচন করুন:",
       "termsAndCondition": {
         "label": "হ্যাঁ, আমি শর্তাবলী মেনে নিচ্ছি।",
-        "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+        "text": "একটি আবেদন পত্র জমা দেওয়ার মাধ্যমে, আপনি আমাদের <a href='https://www.nypl.org/help/library-card/terms-conditions'>কার্ডহোল্ডার শর্তাবলী</a> বুঝতে এবং সম্মত হন এবং আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'> নিয়ম ও বিধিমালায়</a>সম্মত হন। লাইব্রেরীর ব্যক্তিগত তথ্যের ব্যবহার সম্পর্কে আরও জানতে, অনুগ্রহ করে আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>প্রাইভেসী নীতি</a> পড়ুন।"
       }
     },
     "review": {
       "title": "5 এর ধাপ 5: আপনার তথ্য নিশ্চিত করুন",
       "description": "নিশ্চিত হয়ে নিন যে আপনি যে সব তথ্য প্রবেশ করিয়েছেন তা সঠিক। যদি প্রয়োজন হয়, আপনি আপনার আবেদন পত্র জমা করার আগে এখনও পরিবর্তন করতে পারেন।",
       "section": {
-        "personal": "Personal Information",
+        "personal": "ব্যক্তিগত তথ্য",
         "address": {"label": "Address", "location": "Location", "home": "Home","work": "Work"}, 
-        "homeLibrary": "Home Library",
+        "homeLibrary": "হোম লাইব্রেরি",
         "createAccount": "Create Your Account"
       },
       "receiveNewsletter": "Receive information about NYPL's programs and services",
       "yes": "হ্যাঁ",
       "no": "না",
-      "nextStep": "After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials."
+      "nextStep": "আপনি আপনার আবেদন পত্র জমা দেওয়ার পর, আপনি আপনার অ্যাকাউন্ট তথ্য সহ একটি নিশ্চিতকরণ পৃষ্ঠা দেখতে পাবেন, এবং আপনি লগ ইন করতে পারবেন এবং বই এবং উপকরণ অনুরোধ করতে পারবেন"
     },
     "confirmation": {
       "title": "Congratulations! You now have a digital New York Public Library card.",

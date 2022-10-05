@@ -69,7 +69,7 @@
       "selectLibrary": "選一個您經常使用的圖書館：",
       "termsAndCondition": {
         "label": "是的，我接受这些条款和条件。",
-        "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+        "text": "提交申请，即表示您理解并同意我们的<a href='https://www.nypl.org/help/library-card/terms-conditions'>持卡人条款和条件</a>，并同意我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>规范与法则</a>。要了解有关图书馆使用个人资料的更多信息，请阅读我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>隐私政策</a>。"
       }
     },
     "review": {
@@ -84,7 +84,7 @@
       "receiveNewsletter": "Receive information about NYPL's programs and services",
       "yes": "是的",
       "no": "不",
-      "nextStep": "After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials."
+      "nextStep": "提交申请后，您将看到一个确认页面，其中包含您的帐户资料，您将能够登录并索取书籍和物料。"
     },
     "confirmation": {
       "title": "Congratulations! You now have a digital New York Public Library card.",

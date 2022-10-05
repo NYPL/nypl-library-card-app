@@ -59,7 +59,7 @@
       },
       "password": {
         "label": "Пин код",
-        "instruction": "<p>We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab</p>"
+        "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
       },
       "verifyPassword": {
         "label": "Подтвердите пин код",
@@ -76,15 +76,15 @@
       "title": "Шаг пятый. Подтверждение личных данных",
       "description": "Проверьте правильность всех указанных вами данных. При необходимости вы можете внести исправления до отправки заявления.",
       "section": {
-        "personal": "Personal Information",
-        "address": {"label": "Address", "location": "Location", "home": "Home","work": "Work"}, 
-        "homeLibrary": "Home Library",
+        "personal": "Личные данные",
+        "address": {"label": "Адрес", "location": "Location", "home": "Home","work": "Work"}, 
+        "homeLibrary": "Близлежащий или удобно расположенный филиал библиотеки",
         "createAccount": "Create Your Account"
       },
       "receiveNewsletter": "Receive information about NYPL's programs and services",
       "yes": "Да",
       "no": "Нет",
-      "nextStep": "After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials."
+      "nextStep": "После успешной подачи заявления, вы будете переведены на страницу с подтверждением данных вашей учетной записи. Теперь вы сможете входить в систему и заказывать книги и материалы."
     },
     "confirmation": {
       "title": "Congratulations! You now have a digital New York Public Library card.",

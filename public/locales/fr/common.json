@@ -57,32 +57,32 @@
         "checkButton": "Vérification de la disponibilité du nom d’utilisateur."
       },
       "password": {
-        "label": "Code secret",
-        "instruction": "<p>We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab</p>"},
+        "label": "Mot de passe",
+        "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"},
       "verifyPassword": {
-        "label": "Vérification du code secret",
+        "label": "Vérification du mot de passe",
         "instruction": "8-32 chiffres"
       },
-      "showPassword": "Montrer le code secret",
+      "showPassword": "Montrer le mot de passe",
       "selectLibrary": "Sélectionnez une bibliothèque de rattachement:",
       "termsAndCondition": {
         "label": "Oui, j’accepte les conditions générales.",
-        "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+        "text": " En soumettant cette demande, vous certifiez que vous avez lu et accepté les <a href='https://www.nypl.org/help/library-card/terms-conditions'>Conditions générales des titulaires de la carte</a> ainsi que notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>règlement intérieur</a>. Pour en savoir plus sur l’utilisation de vos données personnelles par la Bibliothèque, veuillez lire notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>politique de confidentialité</a>."
       }
     },
     "review": {
       "title": "Étape 5/5 : Confirmation de vos informations",
       "description":  "Assurez-vous que toutes les informations que vous avez fournies sont correctes. Si besoin, vous pouvez les modifier avant d’envoyer votre demande.",
       "section": {
-        "personal": "Personal Information",
-        "address": {"label": "Address", "location": "Location", "home": "Home","work": "Work"}, 
-        "homeLibrary": "Home Library",
+        "personal": "Informations personnelles",
+        "address": {"label": "Adresse", "location": "Location", "home": "Home","work": "Work"}, 
+        "homeLibrary": "Bibliothèque de rattachement",
         "createAccount": "Create Your Account"
       },
       "receiveNewsletter": "Receive information about NYPL's programs and services",
       "yes": "Oui",
       "no": "Non",
-      "nextStep": "After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials."
+      "nextStep": "Après l’envoi de votre demande, vous accéderez à une page de confirmation avec les informations de votre compte, et vous pourrez vous connecter pour réserver des livres et d’autres articles."
     },
     "confirmation": {
       "title": "Congratulations! You now have a digital New York Public Library card.",
