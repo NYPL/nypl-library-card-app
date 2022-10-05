@@ -1,5 +1,6 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import Footer from "@nypl/dgx-react-footer";
 
 /**
  * MyDocument
@@ -22,8 +23,8 @@ class MyDocument extends Document {
           </div>
 
           <Main />
+          <Footer />
           <NextScript />
-
           {/* <!-- Optimizely --> */}
           <script src="https://cdn.optimizely.com/js/284748925.js"></script>
           {/* <!-- OptinMonster --> */}

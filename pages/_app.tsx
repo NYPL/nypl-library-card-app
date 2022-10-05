@@ -18,7 +18,7 @@ import useRouterScroll from "../src/hooks/useRouterScroll";
 import { constructProblemDetail } from "../src/utils/formDataUtils";
 import { DSProvider } from "@nypl/design-system-react-components";
 
-import { appWithTranslation } from "next-i18next";
+import { appWithTranslation, useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
 interface MyAppProps {
@@ -50,6 +50,17 @@ function MyApp<MyAppProps>({ Component, pageProps }) {
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   const { favIconPath, appTitle } = appConfig;
+
+  // Setting the "lang" and the "dir" attribute
+  const { i18n } = useTranslation("common");
+  React.useEffect(() => {
+    let lang = query.lang || "en";
+    if (lang === "zhcn") {
+      lang = "zh-cn";
+    }
+    document.getElementById("__next").dir = `${i18n.dir()}`;
+    document.documentElement.lang = `${lang}`;
+  });
 
   let error;
   // These errors are from the server-side query string form submission.
@@ -163,7 +174,6 @@ function MyApp<MyAppProps>({ Component, pageProps }) {
         />
         {/* <!-- End Google Analytics --> */}
       </Head>
-
       <DSProvider>
         <FormProvider {...formMethods}>
           <FormDataContextProvider initState={initState}>

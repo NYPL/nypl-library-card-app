@@ -1,10 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-
 import { TemplateAppContainer } from "@nypl/design-system-react-components";
-import Footer from "@nypl/dgx-react-footer";
-import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
 import Banner from "../Banner";
 import ApiErrors from "../ApiErrors";
@@ -18,12 +16,6 @@ const ApplicationContainer = ({ children, problemDetail }) => {
   const { state } = useFormDataContext();
   const { errorObj } = state;
   const errorToDisplay = problemDetail ? problemDetail : errorObj;
-  // const errorToDisplay = {
-  //   status: 400,
-  //   type: "unexpected-type",
-  //   title: "unexpected type",
-  //   detail: "uhoh",
-  // };
 
   // If there are errors, focus on the element that displays those errors,
   // for client-side rendering.
@@ -48,7 +40,7 @@ const ApplicationContainer = ({ children, problemDetail }) => {
         </>
       }
       sidebar="right"
-      footer={<Footer />}
+      marginBottom="l"
     />
   );
 };
