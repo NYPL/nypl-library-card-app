@@ -1,7 +1,6 @@
 module.exports = {
   i18n: {
     defaultLocale: "en",
-    // TODO: Add more locales
     locales: [
       "ar",
       "bn",
@@ -13,7 +12,7 @@ module.exports = {
       "pl",
       "ru",
       "ur",
-      "zhcn",
+      "zh-cn",
     ],
   },
 };

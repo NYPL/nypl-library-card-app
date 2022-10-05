@@ -54,7 +54,7 @@ function MyApp<MyAppProps>({ Component, pageProps }) {
   // Setting the "lang" and the "dir" attribute
   const { i18n } = useTranslation("common");
   React.useEffect(() => {
-    let lang = query.lang !== undefined ? query.lang : "en";
+    let lang = query.lang || "en";
     if (lang === "zhcn") {
       lang = "zh-cn";
     }
