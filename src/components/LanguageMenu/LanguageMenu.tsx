@@ -1,5 +1,4 @@
 import { HorizontalRule, List } from "@nypl/design-system-react-components";
-import Link from "next/link";
 import React from "react";
 
 import { languageData } from "../../data/languages";
@@ -12,9 +11,12 @@ const LanguageMenu = (): JSX.Element => {
   // Every link item is separated by a dot.
   const languageElems = languageData.map((language) => {
     return [
-      <Link href={`/new?lang=${language.charCode}`} key={language.charCode}>
+      <a
+        href={`/library-card/new?lang=${language.charCode}`}
+        key={language.charCode}
+      >
         {language.label}
-      </Link>,
+      </a>,
       <span key={`span-${language.charCode}`}>·</span>,
     ];
   });
