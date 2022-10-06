@@ -35,13 +35,19 @@
     },
     "location": {
       "title": "第2步：地址",
-      "description": "如果您住在纽约市，请填写居住地址部分。",
       "address": {
+        "description": "如果您住在纽约市，请填写居住地址部分。",
         "line1": {"label": "街道地址"},
         "line2": {"label":"公寓號碼"},
         "city": {"label": "城市"},
         "state": {"label": "州", "instruction": "2个字母的缩写"},
         "postalCode": {"label": "邮政编码", "instruction": "5位或9位邮政编码"}
+      },
+      "workAddress": {
+        "description": {
+          "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
+          "part2": "If you work or go to school in NYC please provide the address."
+        }
       }
     },
     "verifyAddress": {
@@ -59,14 +65,22 @@
       },
       "password": {
         "label": "密码 (PIN)",
-        "instruction": "<p>We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab</p>"
+        "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
       },
       "verifyPassword": {
         "label": "验证密码 (PIN)",
         "instruction": "8-32 characters"
       },
       "showPassword": "显示密码 (PIN)",
-      "selectLibrary": "選一個您經常使用的圖書館：",
+      "library": {
+        "selectLibrary": "選一個您經常使用的圖書館：",
+        "placeHolder": "输入图书馆名称，例如 Parkchester Library",
+        "title": "您經常使用的圖書館",
+        "description": {
+          "part1": "選一個您經常使用的圖書館将帮助我们确保您从最方便您的分馆中获取所需的一切。",
+          "part2": "您可以跳过此步骤，并随时通过您的帐户进行更新。"
+        }
+      },
       "termsAndCondition": {
         "label": "是的，我接受这些条款和条件。",
         "text": "提交申请，即表示您理解并同意我们的<a href='https://www.nypl.org/help/library-card/terms-conditions'>持卡人条款和条件</a>，并同意我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>规范与法则</a>。要了解有关图书馆使用个人资料的更多信息，请阅读我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>隐私政策</a>。"
@@ -76,9 +90,9 @@
       "title": "第5步：确认您的资料",
       "description": "确保您输入的所有资料都是正确的。 如果需要，您仍然可以在提交申请之前进行更改。",
       "section": {
-        "personal": "Personal Information",
-        "address": {"label": "Address", "location": "Location", "home": "Home","work": "Work"}, 
-        "homeLibrary": "Home Library",
+        "personal": "个人资料",
+        "address": {"label": "地址", "location": "Location", "home": "Home","work": "Work"}, 
+        "homeLibrary": "您經常使用的圖書館",
         "createAccount": "Create Your Account"
       },
       "receiveNewsletter": "Receive information about NYPL's programs and services",

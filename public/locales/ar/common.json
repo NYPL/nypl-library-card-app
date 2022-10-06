@@ -35,13 +35,19 @@
     },
     "location": {
       "title": "الخطوة ٢ من ٥: العنوان ",
-      "description": "إذا كنت تعيش في مدينة نيويورك ، فيرجى إكمال نموذج عنوان المنزل.",
       "address": {
+        "description": "إذا كنت تعيش في مدينة نيويورك ، فيرجى إكمال نموذج عنوان المنزل.",
         "line1": {"label": "عنوان الشارع"},
         "line2": {"label":"الشقة / الجناح"},
         "city": {"label": "المدينة"},
         "state": {"label": "الولاية", "instruction": "اختصار مكون من حرفين"},
         "postalCode": {"label": "الرمز البريدي", "instruction": "٥ أو ٩ أرقام رمز بريدي"}
+      },
+      "workAddress": {
+        "description": {
+          "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
+          "part2": "If you work or go to school in NYC please provide the address."
+        }
       }
     },
     "verifyAddress": {
@@ -56,7 +62,15 @@
       "password": {"label": "رقم التعريف الشخصي", "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"},
       "verifyPassword": {"label": "التحقق من رقم التعريف الشخصي", "instruction": "8-32 characters"},
       "showPassword": "إظهار رقم التعريف الشخصي",
-      "selectLibrary": "حدد مكتبة مفضلة:",
+      "library": {
+        "selectLibrary": "حدد مكتبة مفضلة:",
+        "placeHolder": "اكتب اسم المكتبة ، مثل 'مكتبة باركشستر' (Parkchester)",
+        "title": "المكتبة المفضلة",
+        "description": {
+          "part1": "سيساعدنا اختيار مكتبة مفضلة على التأكد من حصولك على كل ما تحتاجه من الفرع الأكثر ملاءمة لك.",
+          "part2": "يمكنك تخطي هذه الخطوة وتحديثها في أي وقت من خلال حسابك."
+        }
+      },
       "termsAndCondition": {
         "label": "نعم ، أوافق على الشروط والأحكام.",
         "text": " بتقديم هذا الطلب، أنا أفهم وأوافق على<a href='https://www.nypl.org/help/library-card/terms-conditions'> شروط وأحكام حامل البطاقة </a> ,  و أوافق على<a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'> قواعد ولوائح مكتبة نيويورك العامة</a>.  تعلم المزيد عن استخدام المكتبة للمعلومات الشخصية,يرجى القراءة <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'> سياسة الخصوصية</a>  الخاصة بنا."

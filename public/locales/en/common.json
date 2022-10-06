@@ -35,13 +35,19 @@
   },
   "location": {
     "title": "Step 2 of 5: Address",
-    "description": "If you live in NYC, please fill out the home address form.",
     "address": {
+      "description": "If you live in NYC, please fill out the home address form.",
       "line1": {"label": "Street Address"},
       "line2": {"label":"Apartment / Suite"},
       "city": {"label": "City"},
       "state": {"label": "State", "instruction": "2-letter abbreviation"},
       "postalCode": {"label": "Postal Code", "instruction": "5 or 9-digit postal code"}
+    },
+    "workAddress": {
+      "description": {
+        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
+        "part2": "If you work or go to school in NYC please provide the address."
+      }
     }
   },
   "verifyAddress": {
@@ -52,6 +58,7 @@
   },
   "account": {
     "title": "Step 4 of 5: Customize Your Account",
+    "description": " Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
     "username": {
       "label": "Username",
       "instruction": "5-25 alphanumeric characters. No special characters.",
@@ -66,7 +73,15 @@
       "instruction": "8-32 characters"
     },
     "showPassword": "Show Password",
-    "selectLibrary": "Select a home library:",
+    "library": {
+      "selectLibrary": "Select a home library:",
+      "placeHolder": "Type a library name, such as Parkchester Library",
+      "title": "Home Library",
+      "description": {
+        "part1": "Choosing a home library will help us make sure you&apos;re getting everything you need from a branch that&apos;s most convenient for you.",
+        "part2": "You can skip this step and update it at any point through your account."
+      }
+    },
     "termsAndCondition": {
       "label": "Yes, I accept the terms and conditions.",
       "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
@@ -77,7 +92,12 @@
     "description": "Make sure all the information you’ve entered is correct. If needed, you can still make changes before you submit your application.",
     "section": {
       "personal": "Personal Information",
-      "address": {"label": "Address", "location": "Location", "home": "Home","work": "Work"}, 
+      "address": {
+        "label": "Address",
+        "location": "Location",
+        "home": "Home",
+        "work": "Work"
+      }, 
       "homeLibrary": "Home Library",
       "createAccount": "Create Your Account"
     },

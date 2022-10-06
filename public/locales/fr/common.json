@@ -35,13 +35,19 @@
     },
     "location": {
       "title": "Étape 2/5 : Adresse",
-      "description": "Si vous habitez dans la ville de New York, merci d’indiquer l’adresse de votre domicile.",
       "address": {
+        "description": "Si vous habitez dans la ville de New York, merci d’indiquer l’adresse de votre domicile.",
         "line1": {"label": "Nom de la rue"},
         "line2": {"label":"Apartment / Suite"},
         "city": {"label": "Ville"},
         "state": {"label": "État", "instruction": "Abréviation (2 lettres)"},
         "postalCode": {"label": "Code postal", "instruction": "Code postal à 5 ou 9 chiffres"}
+      },
+      "workAddress": {
+        "description": {
+          "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
+          "part2": "If you work or go to school in NYC please provide the address."
+        }
       }
     },
     "verifyAddress": {
@@ -64,7 +70,15 @@
         "instruction": "8-32 chiffres"
       },
       "showPassword": "Montrer le mot de passe",
-      "selectLibrary": "Sélectionnez une bibliothèque de rattachement:",
+      "library": {
+        "selectLibrary": "Sélectionnez une bibliothèque de rattachement:",
+        "placeHolder": "Tapez le nom d’une bibliothèque, par exemple Parkchester Library",
+        "title": "Bibliothèque de rattachement",
+        "description": {
+          "part1": "Votre choix d'une bibliothèque de rattachement nous permettra de nous assurer que vous trouverez tout ce dont vous avez besoin sur le site qui vous convient le mieux.",
+          "part2": "Vous pouvez passer cette étape et y revenir à tout moment à partir de votre compte."
+        }
+      },
       "termsAndCondition": {
         "label": "Oui, j’accepte les conditions générales.",
         "text": " En soumettant cette demande, vous certifiez que vous avez lu et accepté les <a href='https://www.nypl.org/help/library-card/terms-conditions'>Conditions générales des titulaires de la carte</a> ainsi que notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>règlement intérieur</a>. Pour en savoir plus sur l’utilisation de vos données personnelles par la Bibliothèque, veuillez lire notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>politique de confidentialité</a>."

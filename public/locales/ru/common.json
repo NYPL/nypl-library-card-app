@@ -35,13 +35,19 @@
     },
     "location": {
       "title": "Второй этап: адрес",
-      "description": "Если вы проживаете в пределах города Нью Йорка, пожалуйста заполните нижеуказанные пункты",
       "address": {
+        "description": "Если вы проживаете в пределах города Нью Йорка, пожалуйста заполните нижеуказанные пункты",
         "line1": {"label": "Улица"},
         "line2": {"label":"Квартира"},
         "city": {"label": "Район"},
         "state": {"label": "Штат", "instruction": "2-letter abbreviation"},
         "postalCode": {"label": "Почтовый индекс", "instruction": "5 or 9-digit postal code"}
+      },
+      "workAddress": {
+        "description": {
+          "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
+          "part2": "If you work or go to school in NYC please provide the address."
+        }
       }
     },
     "verifyAddress": {
@@ -66,7 +72,15 @@
         "instruction": "8-32 цифры"
       },
       "showPassword": "Показать пин код",
-      "selectLibrary": "Выбор близлежащего или удобно расположенного филиала",
+      "library": {
+        "selectLibrary": "Выбор близлежащего или удобно расположенного филиала",
+        "placeHolder": "Укажите название выбранного вами филиала,например 'Parkchester LIbrary'",
+        "title": "Близлежащий или удобно расположенный филиал библиотеки",
+        "description": {
+          "part1": "Выбор конкретного филиала обеспечит ваш доступ ко всем необходимым вам материалам. ",
+          "part2": "Вы можете пропустить этот шаг и обновить эту информацию и обновить вашу учетную запись в любое время "
+        }
+      },
       "termsAndCondition": {
         "label": "Да , я подтверждаю согласие  с условиями и положениями пользования библиотекой.",
         "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."

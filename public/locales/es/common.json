@@ -35,13 +35,19 @@
   },
   "location": {
     "title": "Paso 2 de 5: dirección",
-    "description": "Si vive en la ciudad de Nueva York, por favor complete el formulario de domicilio.",
     "address": {
+      "description": "Si vive en la ciudad de Nueva York, por favor complete el formulario de domicilio.",
       "line1": {"label": "Dirreción de domicilio"},
       "line2": {"label": "Apartamento / Unidad"},
       "city": {"label": "Ciudad"},
       "state": {"label": "Estado", "instruction": "Abreviatura de 2 letras"},
       "postalCode": {"label": "Código postal", "instruction": "Código postal de 5 ó 9 dígitos"}
+    },
+    "workAddress": {
+      "description": {
+        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
+        "part2": "If you work or go to school in NYC please provide the address."
+      }
     }
   },
   "verifyAddress": {
@@ -60,7 +66,15 @@
     "password": {"label": "...", "instruction": "..."},
     "verifyPassword": {"label": "...", "instruction": "..."},
     "showPassword": "...",
-    "selectLibrary": "Seleccione una biblioteca local:",
+    "library": {
+      "selectLibrary": "Seleccione una biblioteca local:",
+      "placeHolder": "Escriba un nombre de biblioteca, como Biblioteca de Parkchester",
+      "title": "Biblioteca local",
+      "description": {
+        "part1": "Elegir una biblioteca local, nos ayudará a asegurarnos de que usted obtenga todo lo que necesita de la biblioteca que le resulte más conveniente.",
+        "part2": "Puede omitir este paso y actualizarlo en cualquier momento a través de su cuenta."
+      }
+    },
     "termsAndCondition": {
       "label": "Sí, acepto los términos y condiciones.",
       "text": "Al enviar una solicitud, comprende y acepta nuestros <a href='https://www.nypl.org/help/library-card/terms-conditions'>Términos y condiciones del titular de la tarjeta</a> (en inglés) y acepta nuestras <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Normas y reglamentos generales</a>. Para obtener más información sobre el uso de información personal por parte de la Biblioteca, lea nuestra <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Política de privacidad</a>."
