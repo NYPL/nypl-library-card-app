@@ -6,6 +6,7 @@ import {
 } from "@nypl/design-system-react-components";
 import axios from "axios";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { isAlphanumeric } from "validator";
@@ -14,6 +15,8 @@ import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
 import styles from "./UsernameValidationFormFields.module.css";
 import { lcaEvents } from "../../externals/gaUtils";
+import { apiErrorTranslations } from "../../data/apiErrorMessageTranslations";
+import { apiTranslations } from "../../data/apiMessageTranslations";
 
 interface UsernameValidationFormProps {
   id?: string;
@@ -33,6 +36,9 @@ const UsernameValidationForm = ({
   errorMessage = "",
 }: UsernameValidationFormProps) => {
   const { t } = useTranslation("common");
+  const {
+    query: { lang = "en" },
+  } = useRouter();
   const defaultState = {
     available: false,
     message: "",
@@ -60,10 +66,16 @@ const UsernameValidationForm = ({
     axios
       .post("/library-card/api/username", { username, csrfToken })
       .then((response) => {
+        let message = response.data?.message;
+        // Translate the message if possible.
+        if (lang !== "en") {
+          message = apiTranslations[message][lang] || message;
+        }
+
         lcaEvents("Availability Checker", "Username - available");
         setUsernameIsAvailable({
           available: true,
-          message: response.data?.message,
+          message,
         });
       })
       .catch((error) => {
@@ -75,6 +87,11 @@ const UsernameValidationForm = ({
         // If the server is down, return a server error message.
         if (error.response.status === 500) {
           message = "Cannot validate usernames at this time.";
+        }
+
+        // Translate the message if possible.
+        if (lang !== "en") {
+          message = apiErrorTranslations[message][lang] || message;
         }
 
         lcaEvents("Availability Checker", "Username - unavailable");

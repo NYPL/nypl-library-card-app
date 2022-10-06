@@ -10,6 +10,7 @@ import {
 } from "../../utils/renderErrorsUtils";
 import styles from "./ApiErrors.module.css";
 import { ProblemDetail } from "../../interfaces";
+import { apiErrorTranslations } from "../../data/apiErrorMessageTranslations";
 
 interface ApiErrorsProps {
   problemDetail: ProblemDetail | undefined;
@@ -32,6 +33,13 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
 
     if (typeof problemDetail !== "string" && !problemDetail.detail) {
       problemDetail.detail = t("apiErrors.defaultError");
+    }
+    if (lang !== "en" && typeof problemDetail !== "string") {
+      const errorToTranslate = problemDetail?.detail;
+      const newErrorMessage = errorToTranslate
+        ? apiErrorTranslations[errorToTranslate][lang]
+        : t("apiErrors.defaultError");
+      problemDetail.detail = newErrorMessage;
     }
 
     /**
