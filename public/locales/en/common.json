@@ -1,4 +1,5 @@
 {
+  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
   "home": {
     "title": "Get a Digital Library Card Today in a Few Easy Steps",
     "description": {
@@ -6,7 +7,7 @@
       "part2": "With a digital library card you get free access to the Library’s wide array of digital resources—including e-books, databases, educational resources, and more.",
       "part3": "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
     }
-   },
+  },
   "personal": {
     "title": "Step 1 of 5: Personal Information",
     "firstName": {
@@ -17,7 +18,10 @@
     },
     "birthdate": {
       "label": "Date of Birth",
-      "instruction": "MM/DD/YYYY, including slashes"
+      "instruction": {
+        "part1": "MM/DD/YYYY, including slashes",
+        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
+      }
     },
     "email": {
       "label": "Email Address",
@@ -35,6 +39,11 @@
   },
   "location": {
     "title": "Step 2 of 5: Address",
+    "internationalInstructions": {
+      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
+      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
+      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
+    },
     "address": {
       "description": "If you live in NYC, please fill out the home address form.",
       "line1": {"label": "Street Address"},
