@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Checkbox } from "@nypl/design-system-react-components";
 import React from "react";
 import { useFormContext } from "react-hook-form";
@@ -9,7 +10,6 @@ import useFormDataContext from "../../context/FormDataContext";
 
 interface AgeFormProps {
   policyType?: string;
-  errorMessages: any;
 }
 
 /**
@@ -17,16 +17,16 @@ interface AgeFormProps {
  * Renders an input field for "webApplicant" policy types and a checkbox for
  * "simplye" policy types.
  */
-const AgeForm = ({
-  policyType = "webApplicant",
-  errorMessages,
-}: AgeFormProps) => {
+const AgeForm = ({ policyType = "webApplicant" }: AgeFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
   const { register, errors } = useFormContext();
   const MAXLENGTHDATE = 10;
-  const isWebApplicant = policyType === "webApplicant";
+  // TODO: Right now, all applicants are web applications and
+  // this feature is not needed. Setting to true.
+  // const isWebApplicant = policyType === "webApplicant";
+  const isWebApplicant = true;
   const ageGateError = errors?.ageGate?.message;
 
   const birthdateField = (
@@ -42,7 +42,7 @@ const AgeForm = ({
       ref={register({
         validate: (val) =>
           (val.length <= MAXLENGTHDATE && isDate(val)) ||
-          errorMessages["birthdate"],
+          t("personal.errorMessage.birthdate"),
       })}
       defaultValue={formValues.birthdate}
     />
@@ -57,7 +57,7 @@ const AgeForm = ({
         name="ageGate"
         labelText="Yes, I am over 13 years old."
         ref={register({
-          required: errorMessages["ageGate"],
+          required: t("personal.errorMessage.ageGate"),
         })}
       />
     </>

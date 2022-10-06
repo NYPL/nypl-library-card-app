@@ -20,8 +20,9 @@ import {
 import Loader from "../Loader";
 import FormField from "../FormField";
 import { lcaEvents } from "../../externals/gaUtils";
-import { errorMessages, constructAddressType } from "../../utils/formDataUtils";
+import { constructAddressType } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
+import { createQueryParams } from "../../utils/utils";
 
 const AddressContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,6 +31,8 @@ const AddressContainer = () => {
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
+  // Get the URL query params for `newCard` and `lang`.
+  const queryStr = createQueryParams(router?.query);
 
   /**
    * submitForm
@@ -37,7 +40,6 @@ const AddressContainer = () => {
    */
   const submitForm = (formData) => {
     setIsLoading(true);
-
     const workAddress = constructAddressType(formData, "work");
     // If the work address wasn't filled out, that's okay, proceed.
     if (
@@ -46,7 +48,7 @@ const AddressContainer = () => {
       !workAddress.state &&
       !workAddress.zip
     ) {
-      router.push("/address-verification?newCard=true");
+      router.push(`/address-verification?${queryStr}`);
     } else {
       // Set the global form state if there's a work address.
       dispatch({
@@ -109,7 +111,7 @@ const AddressContainer = () => {
             }, 2500);
           } else {
             setIsLoading(false);
-            nextUrl = "/address-verification?newCard=true";
+            nextUrl = `/address-verification?${queryStr}`;
             lcaEvents("Navigation", `Next button to ${nextUrl}`);
             router.push(nextUrl);
           }
@@ -133,7 +135,6 @@ const AddressContainer = () => {
         <AddressFormFields
           id="work-address-container"
           type={AddressTypes.Work}
-          errorMessages={errorMessages.address}
         />
 
         <FormRow display="none">
@@ -158,7 +159,7 @@ const AddressContainer = () => {
         <FormRow>
           <DSFormField>
             <RoutingLinks
-              previous={{ url: "/location?newCard=true" }}
+              previous={{ url: `/location?${queryStr}` }}
               next={{ submit: true }}
             />
           </DSFormField>

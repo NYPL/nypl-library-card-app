@@ -9,21 +9,44 @@
   },
   "personal": {
     "title": "Paso 1 de 5: información personal",
-    "firstName": {"label": "Nombre"},
-    "lastName": {"label": "Apellido"},
-    "birthdate": {"label": "Fecha de nacimiento","instruction": "DD / MM / AAAA, incluyendo barras"},
-    "email": {"label": "Correo Electrónico", "instruction": "Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos. Si no desea proporcionar una dirección de correo electrónico, puede solicitar una tarjeta física utilizando nuestro <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>formulario alterno (en inglés)</a>. Una vez que lo haya completado, por favor visite una de nuestras bibliotecas con un comprobante de identidad y domicilio para recoger su tarjeta física."},
-    "eCommunications": {"labelText": "Sí, me gustaría recibir información sobre los programas y servicios que ofrece la NYPL"}
+    "firstName": { "label": "Nombre" },
+    "lastName": { "label": "Apellido" },
+    "birthdate": {
+      "label": "Fecha de nacimiento",
+      "instruction": "DD / MM / AAAA, incluyendo barras"
+    },
+    "email": {
+      "label": "Correo Electrónico",
+      "instruction": "Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos. Si no desea proporcionar una dirección de correo electrónico, puede solicitar una tarjeta física utilizando nuestro <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>formulario alterno (en inglés)</a>. Una vez que lo haya completado, por favor visite una de nuestras bibliotecas con un comprobante de identidad y domicilio para recoger su tarjeta física."
+    },
+    "eCommunications": {
+      "labelText": "Sí, me gustaría recibir información sobre los programas y servicios que ofrece la NYPL"
+    },
+    "errorMessage": {
+      "firstName": "Por favor, ingrese un nombre válido.",
+      "lastName": "Por favor ingrese un apellido válido.",
+      "birthdate": "Ingrese una fecha válida, MM/DD/AAAA, incluidas las barras.",
+      "email": "Por favor, introduce una dirección de correo electrónico válida."
+    }
   },
   "location": {
     "title": "Paso 2 de 5: dirección",
     "description": "Si vive en la ciudad de Nueva York, por favor complete el formulario de domicilio.",
     "address": {
-      "line1": {"label": "Dirreción de domicilio"},
-      "line2": {"label": "Apartamento / Unidad"},
-      "city": {"label": "Ciudad"},
-      "state": {"label": "Estado", "instruction": "Abreviatura de 2 letras"},
-      "postalCode": {"label": "Código postal", "instruction": "Código postal de 5 ó 9 dígitos"}
+      "line1": { "label": "Dirreción de domicilio" },
+      "line2": { "label": "Apartamento / Unidad" },
+      "city": { "label": "Ciudad" },
+      "state": { "label": "Estado", "instruction": "Abreviatura de 2 letras" },
+      "postalCode": {
+        "label": "Código postal",
+        "instruction": "Código postal de 5 ó 9 dígitos"
+      }
+    },
+    "errorMessage": {
+      "line1": "Ingrese una dirección postal válida.",
+      "city": "Por favor introduzca una ciudad válida.",
+      "state": "Ingrese una abreviatura de estado de 2 caracteres.",
+      "zip": "Ingrese un código postal de 5 o 9 dígitos."
     }
   },
   "verifyAddress": {
@@ -39,11 +62,17 @@
       "instruction": "5-25 caracteres alfanuméricos. Sin caracteres especiales.",
       "checkButton": "Compruebe si el nombre del usuario está disponible"
     },
-    "password": {"label": "...", "instruction": "..."},
-    "verifyPassword": {"label": "...", "instruction": "..."},
+    "password": { "label": "...", "instruction": "..." },
+    "verifyPassword": { "label": "...", "instruction": "..." },
     "showPassword": "...",
     "selectLibrary": "Seleccione una biblioteca local:",
-    "termsAndCondition": "Sí, acepto los términos y condiciones."
+    "termsAndCondition": "Sí, acepto los términos y condiciones.",
+    "errorMessage": {
+      "username": "El nombre de usuario debe tener entre 5 y 25 caracteres alfanuméricos.",
+      "password": "Su contraseña debe tener al menos 8 caracteres, incluir una combinación de letras mayúsculas y minúsculas, incluir una combinación de letras y números, y tener al menos un carácter especial excepto el punto (.)",
+      "verifyPassword": "Las dos contraseñas no coinciden.",
+      "acceptTerms": "Los términos y condiciones no fueron aceptados."
+    }
   },
   "review": {
     "title": "Paso 5 de 5 : confirme su información",
@@ -52,6 +81,7 @@
     "yes": "Si",
     "no": "No"
   },
+  "confirmation": {},
   "button": {
     "start": "Empieza",
     "edit": "Editar",
@@ -59,5 +89,11 @@
     "next": "Próximo",
     "previous": "Previo"
   },
-  "confirmation": {}
+  "globalErrors": {
+    "title": "Error de envío de formulario",
+    "defaultError": "Hubo un error al procesar su envío. Por favor, inténtelo de nuevo más tarde."
+  },
+  "apiErrors": {
+    "defaultError": "..."
+  }
 }

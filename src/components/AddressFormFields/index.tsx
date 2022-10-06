@@ -14,7 +14,6 @@ import useFormDataContext from "../../context/FormDataContext";
 interface AddressFormProps {
   id?: string;
   type: AddressTypes;
-  errorMessages: Address;
 }
 
 /**
@@ -23,7 +22,7 @@ interface AddressFormProps {
  * street address (line1), second street address (line2), city, state,
  * and zip code.
  */
-const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
+const AddressForm = ({ id, type }: AddressFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
@@ -45,13 +44,10 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
    */
   const lengthValidation = (min, max, field) => (value) => {
     if (!min) {
-      return !isRequired || value.length <= max || errorMessages[field];
+      return !isRequired || value.length <= max || t(field);
     }
     return (
-      !isRequired ||
-      value.length === min ||
-      value.length === max ||
-      errorMessages[field]
+      !isRequired || value.length === min || value.length === max || t(field)
     );
   };
   /**
@@ -60,9 +56,13 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
    */
   const validateZip = () => (value) => {
     if (!isNumeric(value) && isRequired) {
-      return errorMessages.zip;
+      return t("location.errorMessage.zip");
     }
-    return lengthValidation(MINLENGTHZIP, MAXLENGTHZIP, "zip")(value);
+    return lengthValidation(
+      MINLENGTHZIP,
+      MAXLENGTHZIP,
+      "location.errorMessage.zip"
+    )(value);
   };
 
   return (
@@ -71,14 +71,14 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`line1-${type}`}
-            label={t("location.address.line1")}
+            label={t("location.address.line1.label")}
             name={`${type}-line1`}
             isRequired={isRequired}
             errorState={errors}
             ref={register({
               required: {
                 value: isRequired,
-                message: errorMessages.line1,
+                message: t("location.errorMessage.line1"),
               },
             })}
             defaultValue={formValues[`${type}-line1`]}
@@ -90,7 +90,7 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`line2-${type}`}
-            label={t("location.address.line2")}
+            label={t("location.address.line2.label")}
             name={`${type}-line2`}
             ref={register()}
             defaultValue={formValues[`${type}-line2`]}
@@ -102,14 +102,14 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
         <DSFormField>
           <FormField
             id={`city-${type}`}
-            label={t("location.address.city")}
+            label={t("location.address.city.label")}
             name={`${type}-city`}
             isRequired={isRequired}
             errorState={errors}
             ref={register({
               required: {
                 value: isRequired,
-                message: errorMessages.city,
+                message: t("location.errorMessage.city"),
               },
             })}
             defaultValue={formValues[`${type}-city`]}
@@ -125,7 +125,11 @@ const AddressForm = ({ id, type, errorMessages }: AddressFormProps) => {
             errorState={errors}
             maxLength={STATELENGTH}
             ref={register({
-              validate: lengthValidation(STATELENGTH, STATELENGTH, "state"),
+              validate: lengthValidation(
+                STATELENGTH,
+                STATELENGTH,
+                "location.errorMessage.state"
+              ),
             })}
             defaultValue={formValues[`${type}-state`]}
           />

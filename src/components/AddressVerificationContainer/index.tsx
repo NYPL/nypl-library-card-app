@@ -16,6 +16,7 @@ import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
 import styles from "./AddressVerificationContainer.module.css";
 import { lcaEvents } from "../../externals/gaUtils";
 import FormField from "../FormField";
+import { createQueryParams } from "../../utils/utils";
 
 /**
  * AddressVerificationContainer
@@ -34,6 +35,8 @@ function AddressVerificationContainer() {
   // The `formValues` object holds all the submitted user values.
   const { formValues, addressesResponse } = state;
   const router = useRouter();
+  // Get the URL query params for `newCard` and `lang`.
+  const queryStr = createQueryParams(router?.query);
 
   /**
    * getAddresses
@@ -124,7 +127,7 @@ function AddressVerificationContainer() {
     });
 
     // Finally, go to the acount page.
-    const nextUrl = "/account?newCard=true";
+    const nextUrl = `/account?${queryStr}`;
     lcaEvents("Navigation", `Next button to ${nextUrl}`);
     router.push(nextUrl);
   };
@@ -237,7 +240,7 @@ function AddressVerificationContainer() {
       <FormRow>
         <DSFormField>
           <RoutingLinks
-            previous={{ url: "/location?newCard=true" }}
+            previous={{ url: `/location?${queryStr}` }}
             next={{ submit: true }}
           />
         </DSFormField>

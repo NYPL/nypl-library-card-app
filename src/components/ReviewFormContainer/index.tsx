@@ -48,6 +48,8 @@ function ReviewFormContainer() {
   // For routing when javascript is not enabled, we want to track the form
   // values through the URL query params.
   const queryValues = createQueryParams(formValues);
+  // Get the URL query params for `newCard` and `lang`.
+  const queryStr = createQueryParams(router?.query);
   const [clientSide, setClientSide] = useState(false);
   // Flags to set a section to editable or read-only.
   const [editPersonalInfoFlag, setEditPersonalInfoFlag] = useState(false);
@@ -94,9 +96,7 @@ function ReviewFormContainer() {
       </Button>
     ) : (
       <a
-        href={`/library-card/${page}?${encodeURI(
-          `newCard=true${queryValues}`
-        )}`}
+        href={`/library-card/${page}?${encodeURI(`${queryStr}${queryValues}`)}`}
       >
         {t("button.edit")}
       </a>
@@ -113,7 +113,7 @@ function ReviewFormContainer() {
         id="editAddressButton"
         onClick={() => {
           lcaEvents("Edit", "Location/Address");
-          router.push("/location?newCard=true");
+          router.push(`/location?${queryStr}`);
         }}
       >
         {t("button.edit")}
@@ -121,7 +121,7 @@ function ReviewFormContainer() {
     ) : (
       <a
         href={`/library-card/location?${encodeURI(
-          `newCard=true${queryValues}`
+          `${queryStr}${queryValues}`
         )}`}
       >
         {t("button.edit")}
@@ -186,7 +186,7 @@ function ReviewFormContainer() {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
         lcaEvents("Submit", "Submit");
-        router.push("/congrats?newCard=true");
+        router.push(`/congrats?${queryStr}`);
       })
       .catch((error) => {
         // Catch any CSRF token issues and return a generic error message
@@ -312,25 +312,29 @@ function ReviewFormContainer() {
       )}
       {formValues["work-line1"] && <Heading level="four">Home</Heading>}
       <div className={styles.field}>
-        <div className={styles.title}>{t("address.line1")}</div>
+        <div className={styles.title}>{t("location.address.line1.label")}</div>
         <div>{formValues["home-line1"]}</div>
       </div>
       {formValues["home-line2"] && (
         <div className={styles.field}>
-          <div className={styles.title}>{t("address.line2")}</div>
+          <div className={styles.title}>
+            {t("location.address.line2.label")}
+          </div>
           <div>{formValues["home-line2"]}</div>
         </div>
       )}
       <div className={styles.multiField}>
-        <div className={styles.title}>{t("address.city")}</div>
+        <div className={styles.title}>{t("location.address.city.label")}</div>
         <div>{formValues["home-city"]}</div>
       </div>
       <div className={styles.multiField}>
-        <div className={styles.title}>{t("address.state")}</div>
+        <div className={styles.title}>{t("location.address.state.label")}</div>
         <div>{formValues["home-state"]}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>{t("address.postalCode")}</div>
+        <div className={styles.title}>
+          {t("location.address.postalCode.label")}
+        </div>
         <div>{formValues["home-zip"]}</div>
       </div>
       {formValues["work-line1"] && (
@@ -339,25 +343,35 @@ function ReviewFormContainer() {
             Work
           </Heading>
           <div className={styles.field}>
-            <div className={styles.title}>{t("address.line1")}</div>
+            <div className={styles.title}>
+              {t("location.address.line1.label")}
+            </div>
             <div>{formValues["work-line1"]}</div>
           </div>
           {formValues["work-line2"] && (
             <div className={styles.field}>
-              <div className={styles.title}>{t("address.line2")}</div>
+              <div className={styles.title}>
+                {t("location.address.line2.label")}
+              </div>
               <div>{formValues["work-line2"]}</div>
             </div>
           )}
           <div className={styles.multiField}>
-            <div className={styles.title}>{t("address.city")}</div>
+            <div className={styles.title}>
+              {t("location.address.city.label")}
+            </div>
             <div>{formValues["work-city"]}</div>
           </div>
           <div className={styles.multiField}>
-            <div className={styles.title}>{t("address.state")}</div>
+            <div className={styles.title}>
+              {t("location.address.state.label")}
+            </div>
             <div>{formValues["work-state"]}</div>
           </div>
           <div className={styles.field}>
-            <div className={styles.title}>{t("address.postalCode")}</div>
+            <div className={styles.title}>
+              {t("location.address.postalCode.label")}
+            </div>
             <div>{formValues["work-zip"]}</div>
           </div>
         </>

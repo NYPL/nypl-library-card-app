@@ -12,6 +12,7 @@ import {
   FormField as DSFormField,
   FormRow,
 } from "@nypl/design-system-react-components";
+import { createQueryParams } from "../../utils/utils";
 
 const PersonalFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
@@ -19,6 +20,8 @@ const PersonalFormContainer = () => {
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { register, handleSubmit } = useFormContext();
+  // Get the URL query params for `newCard` and `lang`.
+  const queryStr = createQueryParams(router?.query);
 
   /**
    * submitForm
@@ -31,7 +34,7 @@ const PersonalFormContainer = () => {
       value: { ...formValues, ...formData },
     });
 
-    const nextUrl = "/location?newCard=true";
+    const nextUrl = `/location?${queryStr}`;
     lcaEvents("Navigation", `Next button to ${nextUrl}`);
     router.push(nextUrl);
   };
@@ -81,7 +84,7 @@ const PersonalFormContainer = () => {
       <FormRow>
         <DSFormField>
           <RoutingLinks
-            previous={{ url: "/new?newCard=true" }}
+            previous={{ url: `/new?${queryStr}` }}
             next={{ submit: true }}
           />
         </DSFormField>

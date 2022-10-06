@@ -66,7 +66,7 @@ function MyApp<MyAppProps>({ Component, pageProps }) {
   // These errors are from the server-side query string form submission.
   if (!isEmpty(query?.errors)) {
     const errorObject = JSON.parse(query.errors as any);
-    // If we already received a problem detail, just forward it. Problme
+    // If we already received a problem detail, just forward it. Problem
     // details get sent when a request is sent to the NYPL Platform API.
     // If we get simple errors from form field validation, create the problem
     // detail for the errors.
@@ -77,7 +77,7 @@ function MyApp<MyAppProps>({ Component, pageProps }) {
         400,
         "invalid-request",
         "Invalid Request",
-        "There were errors with your submission.",
+        "",
         errorObject
       );
     }

@@ -20,9 +20,9 @@ import {
 } from "../../interfaces";
 import Loader from "../Loader";
 import FormField from "../FormField";
-import { errorMessages, constructAddressType } from "../../utils/formDataUtils";
+import { constructAddressType } from "../../utils/formDataUtils";
 import { lcaEvents } from "../../externals/gaUtils";
-import { nyCounties, nyCities } from "../../utils/utils";
+import { nyCounties, nyCities, createQueryParams } from "../../utils/utils";
 
 const AddressContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -31,6 +31,8 @@ const AddressContainer = () => {
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
+  // Get the URL query params for `newCard` and `lang`.
+  const queryStr = createQueryParams(router?.query);
 
   /**
    * submitForm
@@ -113,9 +115,9 @@ const AddressContainer = () => {
             ((formValues.location === "nyc" || formValues.location === "nys") &&
               !addressInNYC)
           ) {
-            nextUrl = "/workAddress?newCard=true";
+            nextUrl = `/workAddress?${queryStr}`;
           } else {
-            nextUrl = "/address-verification?newCard=true";
+            nextUrl = `/address-verification?${queryStr}`;
           }
           lcaEvents("Navigation", `Next button to ${nextUrl}`);
           router.push(nextUrl);
@@ -141,11 +143,7 @@ const AddressContainer = () => {
         method="post"
         onSubmit={handleSubmit(submitForm)}
       >
-        <AddressFormFields
-          id="address-container"
-          type={AddressTypes.Home}
-          errorMessages={errorMessages.address}
-        />
+        <AddressFormFields id="address-container" type={AddressTypes.Home} />
 
         <FormRow display="none">
           <DSFormField>
@@ -169,7 +167,7 @@ const AddressContainer = () => {
         <FormRow>
           <DSFormField>
             <RoutingLinks
-              previous={{ url: "/personal?newCard=true" }}
+              previous={{ url: `/personal?${queryStr}` }}
               next={{ submit: true }}
             />
           </DSFormField>
