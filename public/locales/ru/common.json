@@ -1,87 +1,143 @@
 {
-    "home": {
-      "title": "Быстрый способ получения цифровой карточки Нью-Йоркской Публичной Библиотеки Пошаговая инструкция",
-      "description": {
-        "part1": "Если вы старше 13 лет, работаете , посещаете учебные заведения, или уплачиваете налоги в штате Нью Йорк, вы имеете право подать электронное заявление о получении библиотечной карточки. Лица временно находящиеся в штате Нью Йорк также имеют право  подать заявление на временное пользование библиотекой.",
-        "part2": "При наличии цифровой карточки библиотеки вы сможете получить доступ к многочисленным электронным ресурсам, в том числе, к электронным книгам, базам данных, образовательным ресурсам, и многим другим источникам.",
-        "part3": "Подача данного заявления является вашим согласием с установленными <a href='https://www.nypl.org/help/library-card/terms-conditions'>правилами и положениями пользователя Нью Йоркской Публичной Библиотекиs</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. Дополнительная информация о правилах пользования личными данными находится в <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Правилах Конфиденциальности.</a>"
+  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "home": {
+    "title": "Быстрый способ получения цифровой карточки Нью-Йоркской Публичной Библиотеки Пошаговая инструкция",
+    "description": {
+      "part1": "Если вы старше 13 лет, работаете , посещаете учебные заведения, или уплачиваете налоги в штате Нью Йорк, вы имеете право подать электронное заявление о получении библиотечной карточки. Лица временно находящиеся в штате Нью Йорк также имеют право  подать заявление на временное пользование библиотекой.",
+      "part2": "При наличии цифровой карточки библиотеки вы сможете получить доступ к многочисленным электронным ресурсам, в том числе, к электронным книгам, базам данных, образовательным ресурсам, и многим другим источникам.",
+      "part3": "Подача данного заявления является вашим согласием с установленными <a href='https://www.nypl.org/help/library-card/terms-conditions'>правилами и положениями пользователя Нью Йоркской Публичной Библиотекиs</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. Дополнительная информация о правилах пользования личными данными находится в <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Правилах Конфиденциальности.</a>"
+    }
+  },
+  "personal": {
+    "title": "Первый этап : Личные данные",
+    "firstName": {
+      "label": "Имя"
+    },
+    "lastName": {
+      "label": "Фамилия"
+    },
+    "birthdate": {
+      "label": "Дата рождения",
+      "instruction": {
+        "part1": "MM/DD/YYYY, including slashes",
+        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
       }
     },
-    "personal": {
-      "title": "Первый этап : Личные данные",
-      "firstName": {
-        "label": "Имя"
-      },
-      "lastName": {
-        "label": "Фамилия"
-      },
-      "birthdate": {
-        "label": "Дата рождения",
-        "instruction": "MM/DD/YYYY, including slashes"
-      },
-      "email": {
-        "label": "Email Address",
-        "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
-      },
-      "errorMessage": {
-        "firstName": "",
-        "lastName": "",
-        "birthdate": "",
-        "email": ""
-      },
-      "eCommunications": {
-        "labelText": " Да, я желаю получать информацию по электронной почте от Нью-Йоркской Публичной Библиотеки о новых услугах и программах"
-      }
+    "email": {
+      "label": "Email Address",
+      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
     },
-    "location": {
-      "title": "Второй этап: адрес",
+    "errorMessage": {
+      "firstName": "",
+      "lastName": "",
+      "birthdate": "",
+      "email": ""
+    },
+    "eCommunications": {
+      "labelText": " Да, я желаю получать информацию по электронной почте от Нью-Йоркской Публичной Библиотеки о новых услугах и программах"
+    }
+  },
+  "location": {
+    "title": "Второй этап: адрес",
+    "internationalInstructions": {
+      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
+      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
+      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
+    },
+    "address": {
       "description": "Если вы проживаете в пределах города Нью Йорка, пожалуйста заполните нижеуказанные пункты",
-      "address": {
-        "line1": {"label": "Улица"},
-        "line2": {"label":"Квартира"},
-        "city": {"label": "Район"},
-        "state": {"label": "Штат", "instruction": "2-letter abbreviation"},
-        "postalCode": {"label": "Почтовый индекс", "instruction": "5 or 9-digit postal code"}
+      "line1": {"label": "Улица"},
+      "line2": {"label":"Квартира"},
+      "city": {"label": "Район"},
+      "state": {"label": "Штат", "instruction": "2-letter abbreviation"},
+      "postalCode": {"label": "Почтовый индекс", "instruction": "5 or 9-digit postal code"}
+    },
+    "workAddress": {
+      "description": {
+        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
+        "part2": "If you work or go to school in NYC please provide the address."
+      }
+    }
+  },
+  "verifyAddress": {
+    "title": "Третий этап: подтверждение места проживания",
+    "description": "Укажите правильный адрес",
+    "homeAddress": "Домашний адрес",
+    "workAddress": "Alternate Address"
+  },
+  "account": {
+    "title": "Шаг четвертый: Настройки учетной записи",
+    "username": {
+      "label": "Имя пользователя",
+      "instruction": "5-25 буквенно-цифровых знаков No special characters.",
+      "checkButton": "Проверьте, не используется ли данное имя пользователя."
+    },
+    "password": {
+      "label": "Пин код",
+      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
+    },
+    "verifyPassword": {
+      "label": "Подтвердите пин код",
+      "instruction": "8-32 цифры"
+    },
+    "showPassword": "Показать пин код",
+    "library": {
+      "selectLibrary": "Выбор близлежащего или удобно расположенного филиала",
+      "placeHolder": "Укажите название выбранного вами филиала,например 'Parkchester LIbrary'",
+      "title": "Близлежащий или удобно расположенный филиал библиотеки",
+      "description": {
+        "part1": "Выбор конкретного филиала обеспечит ваш доступ ко всем необходимым вам материалам. ",
+        "part2": "Вы можете пропустить этот шаг и обновить эту информацию и обновить вашу учетную запись в любое время "
       }
     },
-    "verifyAddress": {
-      "title": "Третий этап: подтверждение места проживания",
-      "description": "Укажите правильный адрес",
-      "homeAddress": "Домашний адрес",
-      "workAddress": "Alternate Address"
+    "termsAndCondition": {
+      "label": "Да , я подтверждаю согласие  с условиями и положениями пользования библиотекой.",
+      "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+    }
+  },
+  "review": {
+    "title": "Шаг пятый. Подтверждение личных данных",
+    "description": "Проверьте правильность всех указанных вами данных. При необходимости вы можете внести исправления до отправки заявления.",
+    "section": {
+      "personal": "Личные данные",
+      "address": {"label": "Адрес", "location": "Location", "home": "Home","work": "Work"}, 
+      "homeLibrary": "Близлежащий или удобно расположенный филиал библиотеки",
+      "createAccount": "Create Your Account"
     },
-    "account": {
-      "title": "Шаг четвертый: Настройки учетной записи",
-      "username": {
-        "label": "Имя пользователя",
-        "instruction": "5-25 буквенно-цифровых знаков No special characters.",
-        "checkButton": "Проверьте, не используется ли данное имя пользователя."
-      },
-      "password": {
-        "label": "Пин код",
-        "instruction": "<p>We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab</p>"
-      },
-      "verifyPassword": {
-        "label": "Подтвердите пин код",
-        "instruction": "8-32 цифры"
-      },
-      "showPassword": "Показать пин код",
-      "selectLibrary": "Выбор близлежащего или удобно расположенного филиала",
-      "termsAndCondition": "Да , я подтверждаю согласие  с условиями и положениями пользования библиотекой."
+    "receiveNewsletter": "Receive information about NYPL's programs and services",
+    "yes": "Да",
+    "no": "Нет",
+    "nextStep": "После успешной подачи заявления, вы будете переведены на страницу с подтверждением данных вашей учетной записи. Теперь вы сможете входить в систему и заказывать книги и материалы."
+  },
+  "confirmation": {
+    "title": "Congratulations! You now have a digital New York Public Library card.",
+    "description": {
+      "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
+      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
+      "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
     },
-    "review": {
-      "title": "Шаг пятый. Подтверждение личных данных",
-      "description": "Проверьте правильность всех указанных вами данных. При необходимости вы можете внести исправления до отправки заявления.",
-      "receiveNewsletter": "Receive information about NYPL's programs and services",
-      "yes": "Да",
-      "no": "Нет"
+    "graphic": {
+      "memberName": "Member Name",
+      "password": "Password",
+      "issued": "Issued"
     },
-    "button": {
-      "start": "Начать",
-      "edit": "Корректировка",
-      "submit": "Отправить",
-      "next": "Следующее",
-      "previous": "Назад"
-    },
-    "confirmation": {}
+    "nextSteps": {
+      "h2": "Get Started with The New York Public Library",
+      "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
+      "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
+      "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
+      "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+    }
+  },
+  "button": {
+    "start": "Начать",
+    "edit": "Корректировка",
+    "submit": "Отправить",
+    "next": "Следующее",
+    "previous": "Назад"
+  },
+  "ariaLabel": {
+    "librarySuggestions": "List of library name suggestions",
+    "barcode": "Scannable barcode"
   }
+}
