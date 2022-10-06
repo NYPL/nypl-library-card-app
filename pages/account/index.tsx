@@ -1,4 +1,5 @@
 import { Heading } from "@nypl/design-system-react-components";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 
@@ -10,15 +11,13 @@ interface PageProps {
   pageTitles: PageTitles;
 }
 
-function AccountPage({ pageTitles }: PageProps) {
+function AccountPage({ pageTitles }: PageProps): React.ReactElement {
+  const { t } = useTranslation("common");
+
   return (
     <>
-      <Heading level="two">{pageTitles.account}</Heading>
-      <p>
-        Create a username and password so you can log in and manage your account
-        or access an array of our digital resources. Your username should be
-        unique.
-      </p>
+      <Heading level="two">{t("account.title")}</Heading>
+      <p>{t("account.describtion")}</p>
       <AccountFormContainer />
     </>
   );

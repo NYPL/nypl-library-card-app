@@ -67,7 +67,7 @@
   },
   "account": {
     "title": "Step 4 of 5: Customize Your Account",
-    "description": " Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
+    "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
     "username": {
       "label": "Username",
       "instruction": "5-25 alphanumeric characters. No special characters.",
