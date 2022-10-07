@@ -23,7 +23,9 @@ interface LibraryListFormProps {
  * the select element and for form values. Also uses `react-autosuggest` to
  * render suggestions when a patron starts to type a library name.
  */
-const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
+const LibraryListForm = ({
+  libraryList = [],
+}: LibraryListFormProps): React.ReactElement => {
   const { t } = useTranslation("common");
   const {
     query: { lang = "en" },
@@ -75,7 +77,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   // Autosuggest will pass through all these props to the input.
 
   const inputProps = {
-    placeholder: "Type a library name, such as Parkchester Library",
+    placeholder: `${t("account.library.placeholder")}`,
     value,
     onChange,
     // Pass in the `react-hook-form` register function so it can handle this
@@ -94,7 +96,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
     return (
       <FormField
         id="librarylist-autosuggest"
-        label={t("account.selectLibrary")}
+        label={t("account.library.selectLibrary")}
         name="homeLibraryCode"
         isRequired={false}
         attributes={{ ...inputProps }}
@@ -114,14 +116,9 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
 
   return (
     <div className={styles.container}>
-      <Heading level="three">Home Library</Heading>
-      <p>
-        Choosing a home library will help us make sure you&apos;re getting
-        everything you need from a branch that&apos;s most convenient for you.
-      </p>
-      <p>
-        You can skip this step and update it at any point through your account.
-      </p>
+      <Heading level="three">{t("account.library.title")}</Heading>
+      <p>{t("account.library.description.part1")}</p>
+      <p>{t("account.library.description.part2")}</p>
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}

@@ -279,7 +279,7 @@ function ReviewFormContainer() {
         )}
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>Home Library</div>
+        <div className={styles.title}>{t("review.homeLibrary")}</div>
         <div>{findLibraryName(formValues.homeLibraryCode, lang as string)}</div>
       </div>
       {editSectionButton(
@@ -299,7 +299,9 @@ function ReviewFormContainer() {
           there's nothing to show and will just be confusing. */}
       {formValues.location && (
         <div className={styles.field}>
-          <div className={styles.title}>Location</div>
+          <div className={styles.title}>
+            {t("review.section.address.location")}
+          </div>
           <Radio
             className="radio-input"
             id="review-location-id"
@@ -310,7 +312,9 @@ function ReviewFormContainer() {
           />
         </div>
       )}
-      {formValues["work-line1"] && <Heading level="four">Home</Heading>}
+      {formValues["work-line1"] && (
+        <Heading level="four">{t("review.section.address.home")}</Heading>
+      )}
       <div className={styles.field}>
         <div className={styles.title}>{t("location.address.line1.label")}</div>
         <div>{formValues["home-line1"]}</div>
@@ -340,7 +344,7 @@ function ReviewFormContainer() {
       {formValues["work-line1"] && (
         <>
           <Heading level="four" className={styles.workTitle}>
-            Work
+            {t("review.section.address.work")}
           </Heading>
           <div className={styles.field}>
             <div className={styles.title}>
@@ -386,7 +390,7 @@ function ReviewFormContainer() {
       <Loader isLoading={isLoading} />
 
       <div className={styles.formSection}>
-        <Heading level="three">Personal Information</Heading>
+        <Heading level="three">{t("review.section.personal")}</Heading>
         {!editPersonalInfoFlag ? (
           renderPersonalInformationValues()
         ) : (
@@ -403,12 +407,12 @@ function ReviewFormContainer() {
       </div>
 
       <div className={styles.formSection}>
-        <Heading level="three">Address</Heading>
+        <Heading level="three">{t("review.section.address.label")}</Heading>
         {renderAddressValues()}
       </div>
 
       <div className={styles.formSection}>
-        <Heading level="three">Create Your Account</Heading>
+        <Heading level="three">{t("review.createAccount")}</Heading>
         {!editAccountInfoFlag ? (
           renderAccountValues()
         ) : (
@@ -428,11 +432,7 @@ function ReviewFormContainer() {
         )}
       </div>
 
-      <div className={styles.formSection}>
-        After you submit your application, you will see a confirmation page with
-        your account information, and you will be able to log in and request
-        books and materials.
-      </div>
+      <div className={styles.formSection}>{t("review.nextStep")}</div>
 
       <Form
         action="/library-card/api/submit"

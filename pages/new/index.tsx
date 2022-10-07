@@ -4,13 +4,23 @@ import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 import useFormDataContext from "../../src/context/FormDataContext";
 import { getCsrfToken } from "../../src/utils/utils";
 
+import { GetServerSideProps } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import LanguageMenu from "../../src/components/LanguageMenu/LanguageMenu";
 
-function HomePage({ policyType, csrfToken, lang }) {
-  const { t } = useTranslation("common");
+interface HomePageProps {
+  policyType: any;
+  csrfToken: any;
+  lang: string;
+}
 
+function HomePage({
+  policyType,
+  csrfToken,
+  lang,
+}: HomePageProps): React.ReactElement {
+  const { t } = useTranslation("common");
   const { dispatch } = useFormDataContext();
   // When the app loads, get the CSRF token from the server and set it in
   // the app's state.
@@ -45,7 +55,7 @@ function HomePage({ policyType, csrfToken, lang }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { csrfToken } = getCsrfToken(context.req, context.res);
   const { query } = context;
 
@@ -55,9 +65,11 @@ export async function getServerSideProps(context) {
       lang: query?.lang || "en",
       // This allows this page to get the proper translations based
       // on the `lang=...` URL query param. Default to "en".
-      ...(await serverSideTranslations(query?.lang || "en", ["common"])),
+      ...(await serverSideTranslations(query?.lang?.toString() || "en", [
+        "common",
+      ])),
     },
   };
-}
+};
 
 export default HomePage;

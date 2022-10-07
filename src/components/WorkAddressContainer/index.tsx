@@ -23,12 +23,14 @@ import { lcaEvents } from "../../externals/gaUtils";
 import { constructAddressType } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
 import { createQueryParams } from "../../utils/utils";
+import { useTranslation } from "next-i18next";
 
-const AddressContainer = () => {
+const AddressContainer: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
   const { formValues, addressesResponse, csrfToken } = state;
   const router = useRouter();
+  const { t } = useTranslation("common");
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
   // Get the URL query params for `newCard` and `lang`.
@@ -121,8 +123,8 @@ const AddressContainer = () => {
 
   return (
     <>
-      <Heading level="three">Alternate Address</Heading>
-      <p>If you work or go to school in NYC please provide the address.</p>
+      <Heading level="three">{t("location.workAddress.title")}</Heading>
+      <p>{t("location.workAddress.description.part2")}</p>
 
       <Loader isLoading={isLoading} />
 
