@@ -19,6 +19,7 @@
         "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
       }
     },
+    "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Correo Electrónico",
       "instruction": "Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos. Si no desea proporcionar una dirección de correo electrónico, puede solicitar una tarjeta física utilizando nuestro <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>formulario alterno (en inglés)</a>. Una vez que lo haya completado, por favor visite una de nuestras bibliotecas con un comprobante de identidad y domicilio para recoger su tarjeta física."
@@ -41,6 +42,7 @@
       "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
     },
     "address": {
+      "title": "Home Address",
       "description": "Si vive en la ciudad de Nueva York, por favor complete el formulario de domicilio.",
       "line1": { "label": "Dirreción de domicilio" },
       "line2": { "label": "Apartamento / Unidad" },
@@ -52,6 +54,7 @@
       }
     },
     "workAddress": {
+      "title": "Alternate Address",
       "description": {
         "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
         "part2": "If you work or go to school in NYC please provide the address."
@@ -72,6 +75,7 @@
   },
   "account": {
     "title": "Paso 4 de 5: personalice su cuenta",
+    "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
     "username": {
       "label": "Nombre de usuario",
       "instruction": "5-25 caracteres alfanuméricos. Sin caracteres especiales.",
@@ -105,10 +109,16 @@
     "description": "Asegúrese de que toda la información que ingresó sea correcta. Si es necesario, aún puede realizar cambios al formulario antes de enviar su solicitud.",
     "section": {
       "personal": "Información personal",
-      "address": {"label": "Address", "location": "Location", "home": "Home","work": "Work"}, 
-      "homeLibrary": "Biblioteca local",
-      "createAccount": "Create Your Account"
+      "address": 
+      {
+        "label": "Dirreción",
+        "location": "Location",
+        "home": "Home",
+        "work": "Work"
+      }, 
+      "homeLibrary": "Biblioteca local"
     },
+    "createAccount": "Create Your Account",
     "receiveNewsletter": "...",
     "yes": "Si",
     "no": "No",
@@ -127,7 +137,7 @@
       "issued": "Issued"
     },
     "nextSteps": {
-      "h2": "Get Started with The New York Public Library",
+      "title": "Get Started with The New York Public Library",
       "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
       "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
       "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",

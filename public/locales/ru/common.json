@@ -23,18 +23,20 @@
         "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
       }
     },
+    "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Email Address",
       "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
     },
-    "errorMessage": {
-      "firstName": "",
-      "lastName": "",
-      "birthdate": "",
-      "email": ""
-    },
     "eCommunications": {
       "labelText": " Да, я желаю получать информацию по электронной почте от Нью-Йоркской Публичной Библиотеки о новых услугах и программах"
+    },
+    "errorMessage": {
+      "firstName": "Please enter a valid first name.",
+      "lastName": "Please enter a valid last name.",
+      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "ageGate": "You must be 13 years or older to continue.",
+      "email": "Please enter a valid email address."
     }
   },
   "location": {
@@ -45,6 +47,7 @@
       "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
     },
     "address": {
+      "title": "Home Address",
       "description": "Если вы проживаете в пределах города Нью Йорка, пожалуйста заполните нижеуказанные пункты",
       "line1": {"label": "Улица"},
       "line2": {"label":"Квартира"},
@@ -53,10 +56,17 @@
       "postalCode": {"label": "Почтовый индекс", "instruction": "5 or 9-digit postal code"}
     },
     "workAddress": {
+      "title": "Alternate Address",
       "description": {
         "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
         "part2": "If you work or go to school in NYC please provide the address."
       }
+    },
+    "errorMessage": {
+      "line1": "Please enter a valid street address.",
+      "city": "Please enter a valid city.",
+      "state": "Please enter a 2-character state abbreviation.",
+      "zip": "Please enter a 5 or 9-digit postal code."
     }
   },
   "verifyAddress": {
@@ -93,6 +103,12 @@
     "termsAndCondition": {
       "label": "Да , я подтверждаю согласие  с условиями и положениями пользования библиотекой.",
       "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+    },
+    "errorMessage": {
+      "username": "Username must be between 5-25 alphanumeric characters.",
+      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
+      "verifyPassword": "The two passwords don't match.",
+      "acceptTerms": "The Terms and Conditions must be checked."
     }
   },
   "review": {
@@ -100,10 +116,15 @@
     "description": "Проверьте правильность всех указанных вами данных. При необходимости вы можете внести исправления до отправки заявления.",
     "section": {
       "personal": "Личные данные",
-      "address": {"label": "Адрес", "location": "Location", "home": "Home","work": "Work"}, 
-      "homeLibrary": "Близлежащий или удобно расположенный филиал библиотеки",
-      "createAccount": "Create Your Account"
+      "address": {
+        "label": "Адрес",
+        "location": "Location",
+        "home": "Home",
+        "work": "Work"
+      }, 
+      "homeLibrary": "Близлежащий или удобно расположенный филиал библиотеки"
     },
+    "createAccount": "Create Your Account",
     "receiveNewsletter": "Receive information about NYPL's programs and services",
     "yes": "Да",
     "no": "Нет",
@@ -122,7 +143,7 @@
       "issued": "Issued"
     },
     "nextSteps": {
-      "h2": "Get Started with The New York Public Library",
+      "title": "Get Started with The New York Public Library",
       "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
       "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
       "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
@@ -135,6 +156,13 @@
     "submit": "Отправить",
     "next": "Следующее",
     "previous": "Назад"
+  },
+  "globalErrors": {
+    "title": "Form submission error",
+    "defaultError": "There was an error processing your submission. Please try again later."
+  },
+  "apiErrors": {
+    "defaultError": "There were errors with your submission."
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",

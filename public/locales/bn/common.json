@@ -23,18 +23,20 @@
         "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
       }
     },
+    "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "ইমেইল ঠিকানা",
       "instruction": "আমাদের অনেক ডিজিটাল সম্পদ, যেমন ই-বুক ব্যবহার করার জন্য একটি ইমেইল ঠিকানা প্রয়োজন। আপনি যদি একটি ইমেইল ঠিকানা প্রদান করতে না চান, আপনি আমাদের <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>বিকল্প ফর্ম</a>. ব্যবহার করে একটি ফিজিক্যাল কার্ডের জন্য আবেদন করতে পারেন। একবার পূরণ হয়ে গেলে, আপনার কার্ড তোলার জন্য পরিচয় এবং বাড়ির ঠিকানার প্রমাণ সহ অনুগ্রহ করে আমাদের যে কোন একটি <a href='https://www.nypl.org/locations'>স্থানে</a> যান।."
     },
-    "errorMessage": {
-      "firstName": "",
-      "lastName": "",
-      "birthdate": "",
-      "email": ""
-    },
     "eCommunications": {
       "labelText": "হ্যাঁ, আমি এনওয়াইপিএল এর প্রোগ্রাম এবংসার্ভিসেস সম্পর্কে তথ্য পেতে চাই"
+    },
+    "errorMessage": {
+      "firstName": "Please enter a valid first name.",
+      "lastName": "Please enter a valid last name.",
+      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "ageGate": "You must be 13 years or older to continue.",
+      "email": "Please enter a valid email address."
     }
   },
   "location": {
@@ -45,6 +47,7 @@
       "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
     },
     "address": {
+      "title": "Home Address",
       "description": "আপনি যদি NYC তে থাকেন তবে দয়া করে বাড়ির ঠিকানা ফর্মটি পূরণ করুন।",
       "line1": {"label": "রাস্তার ঠিকানা"},
       "line2": {"label": "এপার্টমেন্ট / সুইট"},
@@ -53,10 +56,17 @@
       "postalCode": {"label": "পোস্টাল কোড", "instruction": "৫ অথবা ৯ ডিজিটের পোস্টাল কোড"}
     },
     "workAddress": {
+      "title": "Alternate Address",
       "description": {
         "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
         "part2": "If you work or go to school in NYC please provide the address."
       }
+    },
+    "errorMessage": {
+      "line1": "Please enter a valid street address.",
+      "city": "Please enter a valid city.",
+      "state": "Please enter a 2-character state abbreviation.",
+      "zip": "Please enter a 5 or 9-digit postal code."
     }
   },
   "verifyAddress": {
@@ -67,6 +77,7 @@
   },
   "account": {
     "title": "5 এর ধাপ 4: আপনার অ্যাকাউন্ট কাস্টমাইজ করুন",
+    "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
     "username": {
       "label": "ব্যবহারকারীর নাম",
       "instruction": "৫-২৫ আলফানিউমেরিক অক্ষর। কোন বিশেষ অক্ষর নেই.",
@@ -93,6 +104,12 @@
     "termsAndCondition": {
       "label": "হ্যাঁ, আমি শর্তাবলী মেনে নিচ্ছি।",
       "text": "একটি আবেদন পত্র জমা দেওয়ার মাধ্যমে, আপনি আমাদের <a href='https://www.nypl.org/help/library-card/terms-conditions'>কার্ডহোল্ডার শর্তাবলী</a> বুঝতে এবং সম্মত হন এবং আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'> নিয়ম ও বিধিমালায়</a>সম্মত হন। লাইব্রেরীর ব্যক্তিগত তথ্যের ব্যবহার সম্পর্কে আরও জানতে, অনুগ্রহ করে আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>প্রাইভেসী নীতি</a> পড়ুন।"
+    },
+    "errorMessage": {
+      "username": "Username must be between 5-25 alphanumeric characters.",
+      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
+      "verifyPassword": "The two passwords don't match.",
+      "acceptTerms": "The Terms and Conditions must be checked."
     }
   },
   "review": {
@@ -100,10 +117,15 @@
     "description": "নিশ্চিত হয়ে নিন যে আপনি যে সব তথ্য প্রবেশ করিয়েছেন তা সঠিক। যদি প্রয়োজন হয়, আপনি আপনার আবেদন পত্র জমা করার আগে এখনও পরিবর্তন করতে পারেন।",
     "section": {
       "personal": "ব্যক্তিগত তথ্য",
-      "address": {"label": "Address", "location": "Location", "home": "Home","work": "Work"}, 
-      "homeLibrary": "হোম লাইব্রেরি",
-      "createAccount": "Create Your Account"
+      "address": {
+        "label": "Address",
+        "location": "Location",
+        "home": "Home",
+        "work": "Work"
+      }, 
+      "homeLibrary": "হোম লাইব্রেরি"
     },
+    "createAccount": "Create Your Account",
     "receiveNewsletter": "Receive information about NYPL's programs and services",
     "yes": "হ্যাঁ",
     "no": "না",
@@ -122,7 +144,7 @@
       "issued": "Issued"
     },
     "nextSteps": {
-      "h2": "Get Started with The New York Public Library",
+      "title": "Get Started with The New York Public Library",
       "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
       "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
       "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
@@ -135,6 +157,13 @@
     "submit": "জমা",
     "next": "পরবর্তী",
     "previous": "পূর্ববর্তী"
+  },
+  "globalErrors": {
+    "title": "Form submission error",
+    "defaultError": "There was an error processing your submission. Please try again later."
+  },
+  "apiErrors": {
+    "defaultError": "There were errors with your submission."
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",
