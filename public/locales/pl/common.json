@@ -97,7 +97,7 @@
     "showPassword": "Show Password",
     "library": {
       "selectLibrary": "Select a home library:",
-      "placeHolder": "Type a library name, such as Parkchester Library",
+      "placeholder": "Type a library name, such as Parkchester Library",
       "title": "Home Library",
       "description": {
         "part1": "Choosing a home library will help us make sure you&apos;re getting everything you need from a branch that&apos;s most convenient for you.",

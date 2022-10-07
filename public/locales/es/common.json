@@ -86,7 +86,7 @@
     "showPassword": "...",
     "library": {
       "selectLibrary": "Seleccione una biblioteca local:",
-      "placeHolder": "Escriba un nombre de biblioteca, como Biblioteca de Parkchester",
+      "placeholder": "Escriba un nombre de biblioteca, como Biblioteca de Parkchester",
       "title": "Biblioteca local",
       "description": {
         "part1": "Elegir una biblioteca local, nos ayudará a asegurarnos de que usted obtenga todo lo que necesita de la biblioteca que le resulte más conveniente.",

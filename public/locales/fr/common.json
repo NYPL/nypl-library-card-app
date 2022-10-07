@@ -93,7 +93,7 @@
     "showPassword": "Montrer le mot de passe",
     "library": {
       "selectLibrary": "Sélectionnez une bibliothèque de rattachement:",
-      "placeHolder": "Tapez le nom d’une bibliothèque, par exemple Parkchester Library",
+      "placeholder": "Tapez le nom d’une bibliothèque, par exemple Parkchester Library",
       "title": "Bibliothèque de rattachement",
       "description": {
         "part1": "Votre choix d'une bibliothèque de rattachement nous permettra de nous assurer que vous trouverez tout ce dont vous avez besoin sur le site qui vous convient le mieux.",

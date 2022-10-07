@@ -94,7 +94,7 @@
     "showPassword": "显示密码 (PIN)",
     "library": {
       "selectLibrary": "選一個您經常使用的圖書館：",
-      "placeHolder": "输入图书馆名称，例如 Parkchester Library",
+      "placeholder": "输入图书馆名称，例如 Parkchester Library",
       "title": "您經常使用的圖書館",
       "description": {
         "part1": "選一個您經常使用的圖書館将帮助我们确保您从最方便您的分馆中获取所需的一切。",
