@@ -22,9 +22,10 @@ const reactHookFormErrors = {
 jest.mock("react-i18next", () => {
   const en = {
     location: {
-      title: "Step 2 of 5: Address",
-      description: "If you live in NYC, please fill out the home address form.",
       address: {
+        title: "Home Address",
+        description:
+          "If you live in NYC, please fill out the home address form.",
         line1: { label: "Street Address" },
         line2: { label: "Apartment / Suite" },
         city: { label: "City" },
@@ -32,6 +33,15 @@ jest.mock("react-i18next", () => {
         postalCode: {
           label: "Postal Code",
           instruction: "5 or 9-digit postal code",
+        },
+      },
+      workAddress: {
+        title: "Alternate Address",
+        description: {
+          part1:
+            "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
+          part2:
+            "If you work or go to school in NYC please provide the address.",
         },
       },
       errorMessage: {

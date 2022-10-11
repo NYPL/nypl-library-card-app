@@ -8,6 +8,8 @@ jest.mock("react-i18next", () => {
   const en = {
     account: {
       title: "Step 4 of 5: Customize Your Account",
+      description:
+        "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
       username: {
         label: "Username",
         instruction: "5-25 alphanumeric characters. No special characters.",
@@ -23,11 +25,21 @@ jest.mock("react-i18next", () => {
         instruction: "8-32 characters",
       },
       showPassword: "Show Password",
-      selectLibrary: "Select a home library:",
+      library: {
+        selectLibrary: "Select a home library:",
+        placeholder: "Type a library name, such as Parkchester Library",
+        title: "Home Library",
+        description: {
+          part1:
+            "Choosing a home library will help us make sure you&apos;re getting everything you need from a branch that&apos;s most convenient for you.",
+          part2:
+            "You can skip this step and update it at any point through your account.",
+        },
+      },
       termsAndCondition: {
-        label: "Yes, I accept the terms and conditions.",
+        labe: "Yes, I accept the terms and conditions.",
         text:
-          " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>.",
+          "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>.",
       },
       errorMessage: {
         username: "Username must be between 5-25 alphanumeric characters.",
@@ -38,6 +50,7 @@ jest.mock("react-i18next", () => {
       },
     },
   };
+
   return {
     // this mock makes sure any components using the translate hook can use it without a warning being shown
     useTranslation: () => ({
