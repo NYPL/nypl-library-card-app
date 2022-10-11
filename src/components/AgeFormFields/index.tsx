@@ -17,7 +17,9 @@ interface AgeFormProps {
  * Renders an input field for "webApplicant" policy types and a checkbox for
  * "simplye" policy types.
  */
-const AgeForm = ({ policyType = "webApplicant" }: AgeFormProps) => {
+const AgeForm = ({
+  policyType = "webApplicant",
+}: AgeFormProps): React.ReactElement => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
@@ -32,7 +34,8 @@ const AgeForm = ({ policyType = "webApplicant" }: AgeFormProps) => {
   const birthdateField = (
     <FormField
       id="birthdate"
-      instructionText="MM/DD/YYYY, including slashes"
+      instructionText={`${t("personal.birthdate.instruction.part1")} <br/>
+      ${t("personal.birthdate.instruction.part2")}`}
       label={t("personal.birthdate.label")}
       name="birthdate"
       isRequired
@@ -55,7 +58,7 @@ const AgeForm = ({ policyType = "webApplicant" }: AgeFormProps) => {
         isChecked={formValues.ageGate}
         isInvalid={ageGateError}
         name="ageGate"
-        labelText="Yes, I am over 13 years old."
+        labelText={t("personal.ageGate")}
         ref={register({
           required: t("personal.errorMessage.ageGate"),
         })}

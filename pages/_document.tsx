@@ -9,7 +9,7 @@ import Footer from "@nypl/dgx-react-footer";
  * they need to be at the end.
  */
 class MyDocument extends Document {
-  render() {
+  render(): React.ReactElement {
     return (
       <Html lang="en">
         <Head />
