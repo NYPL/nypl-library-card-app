@@ -136,6 +136,9 @@ const AddressContainer: React.FC = () => {
     <>
       <Heading level="three">{t("location.address.title")}</Heading>
       <p>{t("location.address.description")}</p>
+      <p>{t("location.internationalInstructions.part1")}</p>
+      <p>{t("location.internationalInstructions.part2")}</p>
+      <p>{t("location.internationalInstructions.part3")}</p>
 
       <Loader isLoading={isLoading} />
 

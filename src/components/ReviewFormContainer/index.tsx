@@ -279,7 +279,7 @@ function ReviewFormContainer() {
         )}
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>{t("review.homeLibrary")}</div>
+        <div className={styles.title}>{t("review.section.homeLibrary")}</div>
         <div>{findLibraryName(formValues.homeLibraryCode, lang as string)}</div>
       </div>
       {editSectionButton(
