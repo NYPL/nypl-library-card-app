@@ -12,7 +12,7 @@ import useFormDataContext from "../../context/FormDataContext";
  * the state of the checkbox. The parent component must use `react-hook-form`
  * to get the value and trigger updates.
  */
-const AcceptTermsForm = () => {
+const AcceptTermsForm: React.FC = () => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
@@ -20,22 +20,11 @@ const AcceptTermsForm = () => {
 
   return (
     <>
-      <p>
-        By submitting an application, you understand and agree to our{" "}
-        <a href="https://www.nypl.org/help/library-card/terms-conditions">
-          Cardholder Terms and Conditions
-        </a>{" "}
-        and agree to our{" "}
-        <a href="https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations">
-          Rules and Regulations
-        </a>
-        . To learn more about the Library’s use of personal information, please
-        read our{" "}
-        <a href="https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy">
-          Privacy Policy
-        </a>
-        .
-      </p>
+      <p
+        dangerouslySetInnerHTML={{
+          __html: t("account.termsAndCondition.text"),
+        }}
+      />
 
       <Checkbox
         id="acceptTerms"

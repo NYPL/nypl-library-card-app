@@ -18,11 +18,13 @@ import { lcaEvents } from "../../externals/gaUtils";
 import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
+import { useTranslation } from "next-i18next";
+
 /**
  * AddressVerificationContainer
  * Main page component for the "address review" page.
  */
-function AddressVerificationContainer() {
+function AddressVerificationContainer(): React.ReactElement {
   // Keep track of the user's selection of the preferred home
   // and/or work address.
   const [homeAddressSelect, setHomeAddressSelect] = useState("");
@@ -37,6 +39,7 @@ function AddressVerificationContainer() {
   const router = useRouter();
   // Get the URL query params for `newCard` and `lang`.
   const queryStr = createQueryParams(router?.query);
+  const { t } = useTranslation("common");
 
   /**
    * getAddresses
@@ -195,7 +198,7 @@ function AddressVerificationContainer() {
     >
       <FormRow>
         <DSFormField>
-          <Heading level="three">Home Address</Heading>
+          <Heading level="three">{t("verifyAddress.homeAddress")}</Heading>
           {renderMultipleAddresses(
             homeAddress,
             "home",
@@ -205,7 +208,7 @@ function AddressVerificationContainer() {
 
           {workAddress?.length > 0 && (
             <div className={styles.workAddressContainer}>
-              <Heading level="three">Alternate Address</Heading>
+              <Heading level="three">{t("verifyAddress.workAddress")}</Heading>
 
               {renderMultipleAddresses(
                 workAddress,

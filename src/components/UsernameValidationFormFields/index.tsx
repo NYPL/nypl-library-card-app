@@ -34,7 +34,7 @@ interface UsernameValidationFormProps {
 const UsernameValidationForm = ({
   id = "",
   errorMessage = "",
-}: UsernameValidationFormProps) => {
+}: UsernameValidationFormProps): React.ReactElement => {
   const { t } = useTranslation("common");
   const {
     query: { lang = "en" },

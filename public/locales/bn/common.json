@@ -1,87 +1,172 @@
 {
-    "home": {
-      "title": "কিছু সহজ ধাপে আজ একটি ডিজিটাল লাইব্রেরী কার্ড পান",
-      "description": {
-        "part1": "আপনি যদি ১৩ বছর বা তার বেশী বয়সী হন এবং বসবাস করেন, কাজ করেন, স্কুলে যান, অথবা নিউ ইয়র্ক স্টেটে সম্পত্তি কর পরিশোধ করেন, তাহলে এই অনলাইন ফর্ম ব্যবহার করে আপনি এই মুহূর্তে একটি বিনামূল্যে ডিজিটাল লাইব্রেরী কার্ড পেতে পারেন। নিউ ইয়র্ক স্টেটে দর্শনার্থীরা ও অস্থায়ী কার্ডের জন্য আবেদন করতে এই ফর্ম ব্যবহার করতে পারেন।",
-        "part2": "একটি ডিজিটাল লাইব্রেরী কার্ডের মাধ্যমে আপনি লাইব্রেরীর বিস্তৃত ডিজিটাল সম্পদে বিনামূল্যে প্রবেশাধিকার পাবেন- যার মধ্যে রয়েছে ই-বুক, ডাটাবেস, শিক্ষামূলক সম্পদ, এবং আরো অনেক কিছু।",
-        "part3": "একটি আবেদন পত্র জমা দেওয়ার মাধ্যমে আপনি আমাদের <a href='https://www.nypl.org/help/library-card/terms-conditions'>কার্ডহোল্ডার শর্তাবলী</a> বুঝতে এবং সম্মত হন এবং আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>নিয়ম ও বিধিমালায়</a> সম্মত হন। লাইব্রেরীর ব্যক্তিগত তথ্যের ব্যবহার সম্পর্কে আরও জানতে, অনুগ্রহ করে আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>প্রাইভেসী নীতিমালা</a> পড়ুন।"
+  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "home": {
+    "title": "কিছু সহজ ধাপে আজ একটি ডিজিটাল লাইব্রেরী কার্ড পান",
+    "description": {
+      "part1": "আপনি যদি ১৩ বছর বা তার বেশী বয়সী হন এবং বসবাস করেন, কাজ করেন, স্কুলে যান, অথবা নিউ ইয়র্ক স্টেটে সম্পত্তি কর পরিশোধ করেন, তাহলে এই অনলাইন ফর্ম ব্যবহার করে আপনি এই মুহূর্তে একটি বিনামূল্যে ডিজিটাল লাইব্রেরী কার্ড পেতে পারেন। নিউ ইয়র্ক স্টেটে দর্শনার্থীরা ও অস্থায়ী কার্ডের জন্য আবেদন করতে এই ফর্ম ব্যবহার করতে পারেন।",
+      "part2": "একটি ডিজিটাল লাইব্রেরী কার্ডের মাধ্যমে আপনি লাইব্রেরীর বিস্তৃত ডিজিটাল সম্পদে বিনামূল্যে প্রবেশাধিকার পাবেন- যার মধ্যে রয়েছে ই-বুক, ডাটাবেস, শিক্ষামূলক সম্পদ, এবং আরো অনেক কিছু।",
+      "part3": "একটি আবেদন পত্র জমা দেওয়ার মাধ্যমে আপনি আমাদের <a href='https://www.nypl.org/help/library-card/terms-conditions'>কার্ডহোল্ডার শর্তাবলী</a> বুঝতে এবং সম্মত হন এবং আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>নিয়ম ও বিধিমালায়</a> সম্মত হন। লাইব্রেরীর ব্যক্তিগত তথ্যের ব্যবহার সম্পর্কে আরও জানতে, অনুগ্রহ করে আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>প্রাইভেসী নীতিমালা</a> পড়ুন।"
+    }
+  },
+  "personal": {
+    "title": "পদক্ষেপ 1 of 5: ব্যক্তিগত তথ্য",
+    "firstName": {
+      "label": "প্রথম নাম"
+    },
+    "lastName": {
+      "label": "শেষ নাম"
+    },
+    "birthdate": {
+      "label": "জন্ম তারিখ",
+      "instruction": {
+        "part1": "মাস/ দিন /বছর , স্ল্যাশ সহ ",
+        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
       }
     },
-    "personal": {
-      "title": "পদক্ষেপ 1 of 5: ব্যক্তিগত তথ্য",
-      "firstName": {
-        "label": "প্রথম নাম"
-      },
-      "lastName": {
-        "label": "শেষ নাম"
-      },
-      "birthdate": {
-        "label": "জন্ম তারিখ",
-        "instruction": "মাস/ দিন /বছর , স্ল্যাশ সহ "
-      },
-      "email": {
-        "label": "ইমেইল ঠিকানা",
-        "instruction": "আমাদের অনেক ডিজিটাল সম্পদ, যেমন ই-বুক ব্যবহার করার জন্য একটি ইমেইল ঠিকানা প্রয়োজন। আপনি যদি একটি ইমেইল ঠিকানা প্রদান করতে না চান, আপনি আমাদের <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>বিকল্প ফর্ম</a>. ব্যবহার করে একটি ফিজিক্যাল কার্ডের জন্য আবেদন করতে পারেন। একবার পূরণ হয়ে গেলে, আপনার কার্ড তোলার জন্য পরিচয় এবং বাড়ির ঠিকানার প্রমাণ সহ অনুগ্রহ করে আমাদের যে কোন একটি <a href='https://www.nypl.org/locations'>স্থানে</a> যান।."
-      },
-      "errorMessage": {
-        "firstName": "",
-        "lastName": "",
-        "birthdate": "",
-        "email": ""
-      },
-      "eCommunications": {
-        "labelText": "হ্যাঁ, আমি এনওয়াইপিএল এর প্রোগ্রাম এবংসার্ভিসেস সম্পর্কে তথ্য পেতে চাই"
-      }
+    "ageGate": "Yes, I am over 13 years old.",
+    "email": {
+      "label": "ইমেইল ঠিকানা",
+      "instruction": "আমাদের অনেক ডিজিটাল সম্পদ, যেমন ই-বুক ব্যবহার করার জন্য একটি ইমেইল ঠিকানা প্রয়োজন। আপনি যদি একটি ইমেইল ঠিকানা প্রদান করতে না চান, আপনি আমাদের <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>বিকল্প ফর্ম</a>. ব্যবহার করে একটি ফিজিক্যাল কার্ডের জন্য আবেদন করতে পারেন। একবার পূরণ হয়ে গেলে, আপনার কার্ড তোলার জন্য পরিচয় এবং বাড়ির ঠিকানার প্রমাণ সহ অনুগ্রহ করে আমাদের যে কোন একটি <a href='https://www.nypl.org/locations'>স্থানে</a> যান।."
     },
-    "location": {
-      "title": "5 এর ধাপ 2: ঠিকানা",
+    "eCommunications": {
+      "labelText": "হ্যাঁ, আমি এনওয়াইপিএল এর প্রোগ্রাম এবংসার্ভিসেস সম্পর্কে তথ্য পেতে চাই"
+    },
+    "errorMessage": {
+      "firstName": "Please enter a valid first name.",
+      "lastName": "Please enter a valid last name.",
+      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "ageGate": "You must be 13 years or older to continue.",
+      "email": "Please enter a valid email address."
+    }
+  },
+  "location": {
+    "title": "5 এর ধাপ 2: ঠিকানা",
+    "internationalInstructions": {
+      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
+      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
+      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
+    },
+    "address": {
+      "title": "Home Address",
       "description": "আপনি যদি NYC তে থাকেন তবে দয়া করে বাড়ির ঠিকানা ফর্মটি পূরণ করুন।",
-      "address": {
-        "line1": {"label": "রাস্তার ঠিকানা"},
-        "line2": {"label": "এপার্টমেন্ট / সুইট"},
-        "city": {"label": "শহর"},
-        "state":{"label": "স্টেট", "instruction": "২ অক্ষরের সংক্ষিপ্ত"},
-        "postalCode": {"label": "পোস্টাল কোড", "instruction": "৫ অথবা ৯ ডিজিটের পোস্টাল কোড"}
+      "line1": {"label": "রাস্তার ঠিকানা"},
+      "line2": {"label": "এপার্টমেন্ট / সুইট"},
+      "city": {"label": "শহর"},
+      "state":{"label": "স্টেট", "instruction": "২ অক্ষরের সংক্ষিপ্ত"},
+      "postalCode": {"label": "পোস্টাল কোড", "instruction": "৫ অথবা ৯ ডিজিটের পোস্টাল কোড"}
+    },
+    "workAddress": {
+      "title": "Alternate Address",
+      "description": {
+        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
+        "part2": "If you work or go to school in NYC please provide the address."
       }
     },
-    "verifyAddress": {
-      "title": "ধাপ 3 of 5: ঠিকানা ভেরিফিকেশন",
-      "description": "অনুগ্রহ করে সঠিক ঠিকানা নির্বাচন করুন।",
-      "homeAddress": "বাসার ঠিকানা",
-      "workAddress": "Alternate Address"
+    "errorMessage": {
+      "line1": "Please enter a valid street address.",
+      "city": "Please enter a valid city.",
+      "state": "Please enter a 2-character state abbreviation.",
+      "zip": "Please enter a 5 or 9-digit postal code."
+    }
+  },
+  "verifyAddress": {
+    "title": "ধাপ 3 of 5: ঠিকানা ভেরিফিকেশন",
+    "description": "অনুগ্রহ করে সঠিক ঠিকানা নির্বাচন করুন।",
+    "homeAddress": "বাসার ঠিকানা",
+    "workAddress": "Alternate Address"
+  },
+  "account": {
+    "title": "5 এর ধাপ 4: আপনার অ্যাকাউন্ট কাস্টমাইজ করুন",
+    "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
+    "username": {
+      "label": "ব্যবহারকারীর নাম",
+      "instruction": "৫-২৫ আলফানিউমেরিক অক্ষর। কোন বিশেষ অক্ষর নেই.",
+      "checkButton": "ব্যবহারকারীর নাম সুপ্রাপ্য কিনা পরীক্ষা করুন"
     },
-    "account": {
-      "title": "5 এর ধাপ 4: আপনার অ্যাকাউন্ট কাস্টমাইজ করুন",
-      "username": {
-        "label": "ব্যবহারকারীর নাম",
-        "instruction": "৫-২৫ আলফানিউমেরিক অক্ষর। কোন বিশেষ অক্ষর নেই.",
-        "checkButton": "ব্যবহারকারীর নাম সুপ্রাপ্য কিনা পরীক্ষা করুন"
-      },
-      "password": {
-        "label": "পিন",
-        "instruction": "<p>We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab</p>"
-      },
-      "verifyPassword": {
-        "label": "প্রয়োজনীয় পিন",
-        "instruction": "8-32 টি সংখ্যা"
-      },
-      "showPassword": "পিন দেখাও",
+    "password": {
+      "label": "পিন",
+      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
+    },
+    "verifyPassword": {
+      "label": "প্রয়োজনীয় পিন",
+      "instruction": "8-32 টি সংখ্যা"
+    },
+    "showPassword": "পিন দেখাও",
+    "library": {
       "selectLibrary": "একটি হোম লাইব্রেরী নির্বাচন করুন:",
-      "termsAndCondition": "হ্যাঁ, আমি শর্তাবলী মেনে নিচ্ছি।"
+      "placeholder": "একটি লাইব্রেরীর নাম টাইপ করুন, যেমন পার্কচেস্টার লাইব্রেরী",
+      "title": "হোম লাইব্রেরি",
+      "description": {
+        "part1": "একটি হোম লাইব্রেরী পছন্দ আমাদের নিশ্চিত করতে সাহায্য করবে যে আপনি আপনার জন্য সবচেয়ে সুবিধাজনক একটি শাখা থেকে আপনার প্রয়োজনীয় সবকিছু পাচ্ছেন।",
+        "part2": "আপনি এই ধাপটি এড়িয়ে যেতে পারেন এবং আপনার অ্যাকাউন্টের মাধ্যমে যে কোন সময় এটি হালনাগাদ করতে পারেন।"
+      }
     },
-    "review": {
-      "title": "5 এর ধাপ 5: আপনার তথ্য নিশ্চিত করুন",
-      "description": "নিশ্চিত হয়ে নিন যে আপনি যে সব তথ্য প্রবেশ করিয়েছেন তা সঠিক। যদি প্রয়োজন হয়, আপনি আপনার আবেদন পত্র জমা করার আগে এখনও পরিবর্তন করতে পারেন।",
-      "receiveNewsletter": "Receive information about NYPL's programs and services",
-      "yes": "হ্যাঁ",
-      "no": "না"
+    "termsAndCondition": {
+      "label": "হ্যাঁ, আমি শর্তাবলী মেনে নিচ্ছি।",
+      "text": "একটি আবেদন পত্র জমা দেওয়ার মাধ্যমে, আপনি আমাদের <a href='https://www.nypl.org/help/library-card/terms-conditions'>কার্ডহোল্ডার শর্তাবলী</a> বুঝতে এবং সম্মত হন এবং আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'> নিয়ম ও বিধিমালায়</a>সম্মত হন। লাইব্রেরীর ব্যক্তিগত তথ্যের ব্যবহার সম্পর্কে আরও জানতে, অনুগ্রহ করে আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>প্রাইভেসী নীতি</a> পড়ুন।"
     },
-    "button": {
-      "start": "এবার শুরু করা যাক",
-      "edit": "সম্পাদনা করুন",
-      "submit": "জমা",
-      "next": "পরবর্তী",
-      "previous": "পূর্ববর্তী"
+    "errorMessage": {
+      "username": "Username must be between 5-25 alphanumeric characters.",
+      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
+      "verifyPassword": "The two passwords don't match.",
+      "acceptTerms": "The Terms and Conditions must be checked."
+    }
+  },
+  "review": {
+    "title": "5 এর ধাপ 5: আপনার তথ্য নিশ্চিত করুন",
+    "description": "নিশ্চিত হয়ে নিন যে আপনি যে সব তথ্য প্রবেশ করিয়েছেন তা সঠিক। যদি প্রয়োজন হয়, আপনি আপনার আবেদন পত্র জমা করার আগে এখনও পরিবর্তন করতে পারেন।",
+    "section": {
+      "personal": "ব্যক্তিগত তথ্য",
+      "address": {
+        "label": "Address",
+        "location": "Location",
+        "home": "Home",
+        "work": "Work"
+      }, 
+      "homeLibrary": "হোম লাইব্রেরি"
     },
-    "confirmation": {}
+    "createAccount": "Create Your Account",
+    "receiveNewsletter": "Receive information about NYPL's programs and services",
+    "yes": "হ্যাঁ",
+    "no": "না",
+    "nextStep": "আপনি আপনার আবেদন পত্র জমা দেওয়ার পর, আপনি আপনার অ্যাকাউন্ট তথ্য সহ একটি নিশ্চিতকরণ পৃষ্ঠা দেখতে পাবেন, এবং আপনি লগ ইন করতে পারবেন এবং বই এবং উপকরণ অনুরোধ করতে পারবেন"
+  },
+  "confirmation": {
+    "title": "Congratulations! You now have a digital New York Public Library card.",
+    "description": {
+      "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
+      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
+      "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
+    },
+    "graphic": {
+      "memberName": "Member Name",
+      "password": "Password",
+      "issued": "Issued"
+    },
+    "nextSteps": {
+      "title": "Get Started with The New York Public Library",
+      "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
+      "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
+      "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
+      "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+    }
+  },
+  "button": {
+    "start": "এবার শুরু করা যাক",
+    "edit": "সম্পাদনা করুন",
+    "submit": "জমা",
+    "next": "পরবর্তী",
+    "previous": "পূর্ববর্তী"
+  },
+  "globalErrors": {
+    "title": "Form submission error",
+    "defaultError": "There was an error processing your submission. Please try again later."
+  },
+  "apiErrors": {
+    "defaultError": "There were errors with your submission."
+  },
+  "ariaLabel": {
+    "librarySuggestions": "List of library name suggestions",
+    "barcode": "Scannable barcode"
   }
+}

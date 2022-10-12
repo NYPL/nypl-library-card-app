@@ -20,6 +20,7 @@ import { DSProvider } from "@nypl/design-system-react-components";
 
 import { appWithTranslation, useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
 
 interface MyAppProps {
   Component: any;
@@ -44,7 +45,7 @@ if (!isServerRendered()) {
   gaUtils.setupAnalytics(isProduction);
 }
 
-function MyApp<MyAppProps>({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: MyAppProps) {
   const { query } = useRouter();
   useRouterScroll({ top: 640 });
   const formInitialStateCopy = { ...formInitialState };
@@ -193,11 +194,11 @@ function MyApp<MyAppProps>({ Component, pageProps }) {
 
 // `getServerSideProps` required for the `appWithTranslation`
 // HOC for language translations.
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: { query: context.req },
   };
-}
+};
 
 // Allows the entire application to work with the `next-i18next` package.
 export default appWithTranslation(MyApp as any);

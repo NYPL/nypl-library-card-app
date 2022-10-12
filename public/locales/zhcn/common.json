@@ -1,87 +1,172 @@
-{
-    "home": {
-      "title": "只需几个简单的步骤即可立即获得电子图书卡",
-      "description": {
-        "part1": "如果您是13岁以上，并且在纽约州生活，工作，上学或缴纳财产税，则可以立即使用此在线表格获得免费的电子图书卡。 纽约州的访客也可以使用此表格申请临时卡。",
-        "part2": "有了电子图书卡，您就可以免费访问图书馆的各种数字资源，包括电子书，数据库，教育资源等。",
-        "part3": "提交申请，即表示您理解并同意我们的<a href='https://www.nypl.org/help/library-card/terms-conditions'>持卡人条款和条件</a>，并同意我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>规范与法则</a>。要了解有关图书馆使用个人资料的更多信息，请阅读我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>隐私政策</a>。"
+{  
+  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "home": {
+    "title": "只需几个简单的步骤即可立即获得电子图书卡",
+    "description": {
+      "part1": "如果您是13岁以上，并且在纽约州生活，工作，上学或缴纳财产税，则可以立即使用此在线表格获得免费的电子图书卡。 纽约州的访客也可以使用此表格申请临时卡。",
+      "part2": "有了电子图书卡，您就可以免费访问图书馆的各种数字资源，包括电子书，数据库，教育资源等。",
+      "part3": "提交申请，即表示您理解并同意我们的<a href='https://www.nypl.org/help/library-card/terms-conditions'>持卡人条款和条件</a>，并同意我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>规范与法则</a>。要了解有关图书馆使用个人资料的更多信息，请阅读我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>隐私政策</a>。"
+    }
+  },
+  "personal": {
+    "title": "第1步：个人资料",
+    "firstName": {
+      "label": "名字"
+    },
+    "lastName": {
+      "label": "姓氏"
+    },
+    "birthdate": {
+      "label": "出生日期",
+      "instruction": {
+        "part1": "月 / 日 / 年 (MM / DD / YYYY)，包括斜线",
+        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
       }
     },
-    "personal": {
-      "title": "第1步：个人资料",
-      "firstName": {
-        "label": "名字"
-      },
-      "lastName": {
-        "label": "姓氏"
-      },
-      "birthdate": {
-        "label": "出生日期",
-        "instruction": "月 / 日 / 年 (MM / DD / YYYY)，包括斜线"
-      },
-      "email": {
-        "label": "Email Address",
-        "instruction": "使用我们的许多数字资源（例如，电子书）都需要一个电子邮件地址。 如果您不希望提供电 子邮件地址，则可以使用我们 <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>另一个表格</a>来申请实体图书卡。 填写完毕后，请造访我们其中一个 <a href='https://www.nypl.org/locations'>分馆</a>，提供身份和家庭住址证明以领取您的卡。 "
-      },
-      "errorMessage": {
-        "firstName": "",
-        "lastName": "",
-        "birthdate": "",
-        "email": ""
-      },
-      "eCommunications": {
-        "labelText": "是的，我想收到有关NYPL活动和服务的信息"
-      }
+    "ageGate": "Yes, I am over 13 years old.",
+    "email": {
+      "label": "Email Address",
+      "instruction": "使用我们的许多数字资源（例如，电子书）都需要一个电子邮件地址。 如果您不希望提供电 子邮件地址，则可以使用我们 <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>另一个表格</a>来申请实体图书卡。 填写完毕后，请造访我们其中一个 <a href='https://www.nypl.org/locations'>分馆</a>，提供身份和家庭住址证明以领取您的卡。 "
     },
-    "location": {
-      "title": "第2步：地址",
+    "eCommunications": {
+      "labelText": "是的，我想收到有关NYPL活动和服务的信息"
+    },
+    "errorMessage": {
+      "firstName": "Please enter a valid first name.",
+      "lastName": "Please enter a valid last name.",
+      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "ageGate": "You must be 13 years or older to continue.",
+      "email": "Please enter a valid email address."
+    }
+  },
+  "location": {
+    "title": "第2步：地址",
+    "internationalInstructions": {
+      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
+      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
+      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
+    },
+    "address": {
+      "title": "Home Address",
       "description": "如果您住在纽约市，请填写居住地址部分。",
-      "address": {
-        "line1": {"label": "街道地址"},
-        "line2": {"label":"公寓號碼"},
-        "city": {"label": "城市"},
-        "state": {"label": "州", "instruction": "2个字母的缩写"},
-        "postalCode": {"label": "邮政编码", "instruction": "5位或9位邮政编码"}
+      "line1": {"label": "街道地址"},
+      "line2": {"label":"公寓號碼"},
+      "city": {"label": "城市"},
+      "state": {"label": "州", "instruction": "2个字母的缩写"},
+      "postalCode": {"label": "邮政编码", "instruction": "5位或9位邮政编码"}
+    },
+    "workAddress": {
+      "title": "Alternate Address",
+      "description": {
+        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
+        "part2": "If you work or go to school in NYC please provide the address."
       }
     },
-    "verifyAddress": {
-      "title": "第3步：地址验证",
-      "description": "请选择正确的地址",
-      "homeAddress": "居住地址",
-      "workAddress": "Alternate Address"
+    "errorMessage": {
+      "line1": "Please enter a valid street address.",
+      "city": "Please enter a valid city.",
+      "state": "Please enter a 2-character state abbreviation.",
+      "zip": "Please enter a 5 or 9-digit postal code."
+    }
+  },
+  "verifyAddress": {
+    "title": "第3步：地址验证",
+    "description": "请选择正确的地址",
+    "homeAddress": "居住地址",
+    "workAddress": "Alternate Address"
+  },
+  "account": {
+    "title": "第4步：自定制您的帐户",
+    "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
+    "username": {
+      "label": "用户名",
+      "instruction": "5-25个字母数字。没有特殊符号。",
+      "checkButton": "检查用户名是否可用"
     },
-    "account": {
-      "title": "第4步：自定制您的帐户",
-      "username": {
-        "label": "用户名",
-        "instruction": "5-25个字母数字。没有特殊符号。",
-        "checkButton": "检查用户名是否可用"
-      },
-      "password": {
-        "label": "密码 (PIN)",
-        "instruction": "<p>We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab</p>"
-      },
-      "verifyPassword": {
-        "label": "验证密码 (PIN)",
-        "instruction": "8-32 characters"
-      },
-      "showPassword": "显示密码 (PIN)",
+    "password": {
+      "label": "密码 (PIN)",
+      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
+    },
+    "verifyPassword": {
+      "label": "验证密码 (PIN)",
+      "instruction": "8-32 characters"
+    },
+    "showPassword": "显示密码 (PIN)",
+    "library": {
       "selectLibrary": "選一個您經常使用的圖書館：",
-      "termsAndCondition": "是的，我接受这些条款和条件。"
+      "placeholder": "输入图书馆名称，例如 Parkchester Library",
+      "title": "您經常使用的圖書館",
+      "description": {
+        "part1": "選一個您經常使用的圖書館将帮助我们确保您从最方便您的分馆中获取所需的一切。",
+        "part2": "您可以跳过此步骤，并随时通过您的帐户进行更新。"
+      }
     },
-    "review": {
-      "title": "第5步：确认您的资料",
-      "description": "确保您输入的所有资料都是正确的。 如果需要，您仍然可以在提交申请之前进行更改。",
-      "receiveNewsletter": "Receive information about NYPL's programs and services",
-      "yes": "是的",
-      "no": "不"
+    "termsAndCondition": {
+      "label": "是的，我接受这些条款和条件。",
+      "text": "提交申请，即表示您理解并同意我们的<a href='https://www.nypl.org/help/library-card/terms-conditions'>持卡人条款和条件</a>，并同意我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>规范与法则</a>。要了解有关图书馆使用个人资料的更多信息，请阅读我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>隐私政策</a>。"
     },
-    "button": {
-      "start": "开始使用",
-      "edit": "更改",
-      "submit": "提交",
-      "next": "下一步",
-      "previous": "上一步"
+    "errorMessage": {
+      "username": "Username must be between 5-25 alphanumeric characters.",
+      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
+      "verifyPassword": "The two passwords don't match.",
+      "acceptTerms": "The Terms and Conditions must be checked."
+    }
+  },
+  "review": {
+    "title": "第5步：确认您的资料",
+    "description": "确保您输入的所有资料都是正确的。 如果需要，您仍然可以在提交申请之前进行更改。",
+    "section": {
+      "personal": "个人资料",
+      "address": {
+        "label": "地址",
+        "location": "Location",
+        "home": "Home",
+        "work": "Work"
+      }, 
+      "homeLibrary": "您經常使用的圖書館"
     },
-    "confirmation": {}
+    "createAccount": "Create Your Account",
+    "receiveNewsletter": "Receive information about NYPL's programs and services",
+    "yes": "是的",
+    "no": "不",
+    "nextStep": "提交申请后，您将看到一个确认页面，其中包含您的帐户资料，您将能够登录并索取书籍和物料。"
+  },
+  "confirmation": {
+    "title": "Congratulations! You now have a digital New York Public Library card.",
+    "description": {
+      "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
+      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
+      "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
+    },
+    "graphic": {
+      "memberName": "Member Name",
+      "password": "Password",
+      "issued": "Issued"
+    },
+    "nextSteps": {
+      "title": "Get Started with The New York Public Library",
+      "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
+      "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
+      "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
+      "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+    }
+  },
+  "button": {
+    "start": "开始使用",
+    "edit": "更改",
+    "submit": "提交",
+    "next": "下一步",
+    "previous": "上一步"
+  },
+  "globalErrors": {
+    "title": "Form submission error",
+    "defaultError": "There was an error processing your submission. Please try again later."
+  },
+  "apiErrors": {
+    "defaultError": "There were errors with your submission."
+  },
+  "ariaLabel": {
+    "librarySuggestions": "List of library name suggestions",
+    "barcode": "Scannable barcode"
   }
+}
