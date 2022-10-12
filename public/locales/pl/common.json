@@ -1,35 +1,36 @@
 {
   "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "required": "Wymagane",
   "home": {
-    "title": "Get a Digital Library Card Today in a Few Easy Steps",
+    "title": "Uzyskaj cyfrową kartę biblioteczną już dziś — wystarczy kilka prostych kroków",
     "description": {
-      "part1": "If you are 13 or older and live, work, attend school, or pay property taxes in New York State, you can get a free digital library card right now using this online form. Visitors to New York State can also use this form to apply for a temporary card.",
-      "part2": "With a digital library card you get free access to the Library’s wide array of digital resources—including e-books, databases, educational resources, and more.",
-      "part3": "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+      "part1": "Jeśli masz co najmniej 13 lat i mieszkasz, pracujesz, uczysz się lub płacisz podatki od nieruchomości w stanie Nowy Jork, możesz uzyskać cyfrową kartę biblioteczną od razu — w tym celu skorzystaj z tego formularza online. Osoby odwiedzające stan Nowy Jork również mogą skorzystać z tego formularza, aby wystąpić o kartę tymczasową.",
+      "part2": "Cyfrowa karta biblioteczna zapewnia bezpłatny dostęp do bogatych zasobów cyfrowych Biblioteki, w tym e-booków, baz danych, materiałów edukacyjnych itd.",
+      "part3": "Składając wniosek, oświadczasz, że rozumiesz i akceptujesz <a href='https://www.nypl.org/help/library-card/terms-conditions'>Regulamin dla posiadaczy kart</a> oraz <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Zasady i przepisy</a>.Więcej informacji o tym, jak Biblioteka korzysta z danych osobowych, zawiera <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Polityka prywatności</a>."
     }
   },
   "personal": {
-    "title": "Step 1 of 5: Personal Information",
+    "title": "Krok 1 z 5: dane osobowe",
     "firstName": {
-      "label": "First Name"
+      "label": "Imię"
     },
     "lastName": {
-      "label": "Last Name"
+      "label": "Nazwisko"
     },
     "birthdate": {
-      "label": "Date of Birth",
+      "label": "Data urodzenia",
       "instruction": {
-        "part1": "MM/DD/YYYY, including slashes",
+        "part1": "MM/DD/RRRR, z ukośnikami",
         "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
       }
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
-      "label": "Email Address",
-      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
+      "label": "Adres e-mail",
+      "instruction": "Adres e-mail jest niezbędny, aby móc korzystać z wielu naszych zasobów cyfrowych, takich jak e-booki. Jeśli nie chcesz podać adresu e-mail, możesz wystąpić o fizyczną kartę biblioteczną, używając <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>innego formularza</a>. Wypełniony formularz złóż w jednym z naszych <a href='https://www.nypl.org/locations'>oddziałów</a>, okazując dokument tożsamości i podając adres zamieszkania, aby odebrać kartę."
     },
     "eCommunications": {
-      "labelText": "Yes, I would like to receive information about NYPL's programs and services"
+      "labelText": "Tak, chcę otrzymywać informacje o programach i usługach NYPL. "
     },
     "errorMessage": {
       "firstName": "Please enter a valid first name.",
@@ -40,22 +41,22 @@
     }
   },
   "location": {
-    "title": "Step 2 of 5: Address",
+    "title": "Krok 2 z 5: adres",
     "internationalInstructions": {
       "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
+      "part2": "If you are an international student, please provide the address of your institution. You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
       "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
     },
     "address": {
-      "title": "Home Address",
-      "description": "If you live in NYC, please fill out the home address form.",
-      "line1": { "label": "Street Address" },
-      "line2": { "label": "Apartment / Suite" },
-      "city": { "label": "City" },
-      "state": { "label": "State", "instruction": "2-letter abbreviation" },
+      "title": "Adres zamieszkania",
+      "description": "Jeżeli mieszkasz w NYC, wypełnij formularz adresu domowego.",
+      "line1": { "label": "Ulica i numer budynku" },
+      "line2": { "label": "Mieszkanie/lokal" },
+      "city": { "label": "Miejscowość" },
+      "state": { "label": "Stan", "instruction": "2-literowy skrót" },
       "postalCode": {
-        "label": "Postal Code",
-        "instruction": "5 or 9-digit postal code"
+        "label": "Kod pocztowy",
+        "instruction": "5- lub 9-znakowy kod pocztowy"
       }
     },
     "workAddress": {
@@ -73,18 +74,18 @@
     }
   },
   "verifyAddress": {
-    "title": "Step 3 of 5: Address Verification",
-    "description": "Please select the correct address.",
-    "homeAddress": "Home Address",
+    "title": "Krok 3 z 5: weryfikacja adresu",
+    "description": "Wybierz właściwy adres.",
+    "homeAddress": "Adres zamieszkania",
     "workAddress": "Alternate Address"
   },
   "account": {
-    "title": "Step 4 of 5: Customize Your Account",
-    "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
+    "title": "Krok 4 z 5: dostosowanie konta",
+    "description": "Utwórz nazwę użytkownika i kod PIN, aby móc się logować i zarządzać kontem oraz korzystać z szerokiej gamy zasobów cyfrowych. Nazwa użytkownika powinna być unikatowa.",
     "username": {
-      "label": "Username",
-      "instruction": "5-25 alphanumeric characters. No special characters.",
-      "checkButton": "Check if username is available"
+      "label": "Nazwa użytkownika",
+      "instruction": "5–25 liter i cyfr. Bez znaków specjalnych.",
+      "checkButton": "Sprawdź dostępność nazwy użytkownika"
     },
     "password": {
       "label": "Password",
@@ -96,17 +97,17 @@
     },
     "showPassword": "Show Password",
     "library": {
-      "selectLibrary": "Select a home library:",
-      "placeholder": "Type a library name, such as Parkchester Library",
-      "title": "Home Library",
+      "selectLibrary": "Wybierz lokalną bibliotekę:",
+      "placeholder": "Wpisz nazwę biblioteki, na przykład Parkchester Library",
+      "title": "Lokalna biblioteka",
       "description": {
-        "part1": "Choosing a home library will help us make sure you&apos;re getting everything you need from a branch that&apos;s most convenient for you.",
-        "part2": "You can skip this step and update it at any point through your account."
+        "part1": "Jeżeli wybierzesz lokalną bibliotekę, będziemy Ci dostarczać wszystkie potrzebne materiały z oddziału o najbardziej dogodnym dla Ciebie położeniu.",
+        "part2": "Krok ten możesz pominąć i zaktualizować informacje na swoim koncie w dowolnej chwili."
       }
     },
     "termsAndCondition": {
-      "label": "Yes, I accept the terms and conditions.",
-      "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+      "label": "Tak, akceptuję regulamin.",
+      "text": "Składając wniosek, oświadczasz, że rozumiesz i akceptujesz <a href='https://www.nypl.org/help/library-card/terms-conditions'>Regulamin dla posiadaczy kart</a> oraz <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Zasady i przepisy</a>. Więcej informacji o tym, jak Biblioteka korzysta z danych osobowych, zawiera <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Polityka prywatności</a>."
     },
     "errorMessage": {
       "username": "Username must be between 5-25 alphanumeric characters.",
@@ -116,23 +117,23 @@
     }
   },
   "review": {
-    "title": "Step 5 of 5: Confirm Your Information",
-    "description": "Make sure all the information you’ve entered is correct. If needed, you can still make changes before you submit your application.",
+    "title": "Krok 5 z 5: potwierdzenie informacji",
+    "description": "Sprawdź poprawność wszystkich wprowadzonych informacji. W razie potrzeby możesz jeszcze wprowadzić zmiany przed przesłaniem wniosku.",
     "section": {
-      "personal": "Personal Information",
+      "personal": "Dane osobowe",
       "address": {
-        "label": "Address",
+        "label": "Adres",
         "location": "Location",
-        "home": "Home",
-        "work": "Work"
+        "home": "Zamieszkania",
+        "work": "Adres pracy"
       },
-      "homeLibrary": "Home Library"
+      "homeLibrary": "Lokalna biblioteka"
     },
     "createAccount": "Create Your Account",
     "receiveNewsletter": "Receive information about NYPL's programs and services",
-    "yes": "Yes",
-    "no": "No",
-    "nextStep": "After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials."
+    "yes": "Tak",
+    "no": "Nie",
+    "nextStep": "Kiedy wyślesz wniosek, wyświetli się strona z potwierdzeniem i danymi konta. Możesz wówczas się zalogować i zamówić książki oraz inne materiały."
   },
   "confirmation": {
     "title": "Congratulations! You now have a digital New York Public Library card.",
@@ -142,9 +143,9 @@
       "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
     },
     "graphic": {
-      "memberName": "Member Name",
-      "password": "Password",
-      "issued": "Issued"
+      "memberName": "MEMBER NAME",
+      "password": "PASSWORD",
+      "issued": "ISSUED"
     },
     "nextSteps": {
       "title": "Get Started with The New York Public Library",
@@ -156,10 +157,10 @@
   },
   "button": {
     "start": "Get Started",
-    "edit": "Edit",
-    "submit": "Submit",
-    "next": "Next",
-    "previous": "Previous"
+    "edit": "Edytuj",
+    "submit": "Prześlij",
+    "next": "Dalej",
+    "previous": "Wstecz"
   },
   "globalErrors": {
     "title": "Form submission error",
