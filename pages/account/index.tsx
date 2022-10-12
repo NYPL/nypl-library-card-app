@@ -13,7 +13,8 @@ function AccountPage(): React.ReactElement {
   return (
     <>
       <Heading level="two">{t("account.title")}</Heading>
-      <p>{t("account.describtion")}</p>
+      <p>{t("account.description")}</p>
+      <p>{t("internationalInstructions")}</p>
       <AccountFormContainer />
     </>
   );

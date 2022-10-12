@@ -12,6 +12,7 @@ function PersonalInformationPage(): React.ReactElement {
   return (
     <>
       <Heading level="two">{t("personal.title")}</Heading>
+      <p>{t("internationalInstructions")}</p>
       <PersonalFormContainer />
     </>
   );

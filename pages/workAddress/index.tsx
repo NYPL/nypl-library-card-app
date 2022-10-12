@@ -13,6 +13,7 @@ function WorkAddressPage(): React.ReactElement {
     <>
       <Heading level="two">{t("location.workAddress.title")}</Heading>
       <p>{t("location.workAddress.description.part1")}</p>
+      <p>{t("internationalInstructions")}</p>
       <WorkAddressContainer />
     </>
   );

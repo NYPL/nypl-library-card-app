@@ -13,6 +13,7 @@ function ReviewPage(): React.ReactElement {
     <>
       <Heading level="two">{t("review.title")}</Heading>
       <p>{t("review.description")}</p>
+      <p>{t("internationalInstructions")}</p>
       <ReviewFormContainer />
     </>
   );

@@ -27,6 +27,7 @@ function AddressPage({ location }: PageProps): React.ReactElement {
   return (
     <>
       <Heading level="two">{t("location.title")}</Heading>
+      <p>{t("internationalInstructions")}</p>
       <AddressContainer />
     </>
   );
