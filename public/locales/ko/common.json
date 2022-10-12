@@ -1,5 +1,6 @@
 {
-  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "internationalInstructions": "양식 입력란은 반드시 영어 알파벳 등의 라틴 문자만 사용하여 기재해야 합니다.",
+  "required": "필수 항목",
   "home": {
     "title": "Get a Digital Library Card Today in a Few Easy Steps",
     "description": {
@@ -19,8 +20,8 @@
     "birthdate": {
       "label": "Date of Birth",
       "instruction": {
-        "part1": "MM/DD/YYYY, including slashes",
-        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
+        "part1": "월월/일일/년년년년(“/” 기호 포함)",
+        "part2": "외국인 이용자이신 분은 생년월일을 월월/일일/년년년년 형식으로 입력해주십시오."
       }
     },
     "ageGate": "Yes, I am over 13 years old.",
@@ -42,9 +43,9 @@
   "location": {
     "title": "Step 2 of 5: Address",
     "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
+      "part1": "주소가 성공적으로 확인되기 위해서는 미국 내의 유효한 거주 주소를 입력해야 합니다.",
+      "part2": "유학생인 경우에는 학교 주소를 입력해주십시오.유학생은 임시 카드만 발급 받게 되고 카드를 연장하려면 2주 이내에 NYPL로 연락해야 합니다.",
+      "part3": "이용자로서 외국인 연구자이신 분은 자택 주소로 Stephen A. Schwarzman 빌딩 주소를 사용해주시기 바랍니다. 임시 카드만 발급받게 되며, 카드를 연장하려면 2주 이내에 NYPL의 연구 부서로 연락하여 연구 카드라고 적절히 표시되도록 해야 합니다."
     },
     "address": {
       "title": "Home Address",

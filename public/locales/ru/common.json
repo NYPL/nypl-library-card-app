@@ -1,5 +1,6 @@
 {
-  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "internationalInstructions": "Поля формы необходимо заполнять только латинскими буквами.",
+  "required": "Обязательно",
   "home": {
     "title": "Быстрый способ получения цифровой карточки Нью-Йоркской Публичной Библиотеки Пошаговая инструкция",
     "description": {
@@ -20,12 +21,12 @@
       "label": "Дата рождения",
       "instruction": {
         "part1": "MM/DD/YYYY, including slashes",
-        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
+        "part2": "Если вы являетесь зарубежным пользователем, укажите дату вашего рождения в формате ММ/ДД/ГГГГ"
       }
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
-      "label": "Email Address",
+      "label": "Адрес электронной почты",
       "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
     },
     "eCommunications": {
@@ -42,12 +43,12 @@
   "location": {
     "title": "Второй этап: адрес",
     "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
+      "part1": "Для успешного подтверждения вашего адреса он должен быть действительным адресом проживания в США.",
+      "part2": "Если вы являетесь зарубежным студентом, укажите адрес своего учебного заведения.Вы получите только временную карточку и должны будете обратиться в NYPL в течение 2 недель для продления карточки.",
+      "part3": "Если вы являетесь зарубежным исследователем, укажите в качестве своего домашнего адреса адрес здания Стивена А. Шварцмана. Вы получите только временную карточку и должны будете обратиться в отдел исследований NYPL в течение 2 недель для переоформления вашей карточки в исследовательскую."
     },
     "address": {
-      "title": "Home Address",
+      "title": "Домашний адрес",
       "description": "Если вы проживаете в пределах города Нью Йорка, пожалуйста заполните нижеуказанные пункты",
       "line1": {"label": "Улица"},
       "line2": {"label":"Квартира"},

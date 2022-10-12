@@ -1,5 +1,6 @@
 {
-  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "internationalInstructions": "Los campos del formulario se deben completar únicamente con caracteres latinos.",
+  "required": "Requerido",
   "home": {
     "title": "Obtenga una tarjeta digital de la Biblioteca hoy con unos pocos pasos sencillos",
     "description": {
@@ -16,7 +17,7 @@
       "label": "Fecha de nacimiento",
       "instruction": {
         "part1": "DD / MM / AAAA, incluyendo barras",
-        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
+        "part2": "Si es un usuario internacional, ingrese su fecha de nacimiento en el formato MM/DD/AAAA. "
       }
     },
     "ageGate": "Yes, I am over 13 years old.",
@@ -37,12 +38,12 @@
   "location": {
     "title": "Paso 2 de 5: dirección",
     "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
+      "part1": "Para que su dirección sea verificada correctamente, debe ser una dirección postal válida en los Estados Unidos.",
+      "part2": "Si es un estudiante internacional, introduzca la dirección de su institución. Recibirá una tarjeta temporal únicamente y tendrá que ponerse en contacto con la NYPL en un plazo de 2 semanas para que le prorroguen la tarjeta.",
+      "part3": "Si es un usuario de investigación internacional, utilice la dirección del edificio Stephen A. Schwarzman como la dirección de su domicilio particular. Recibirá una tarjeta temporal únicamente y tendrá que ponerse en contacto con la división de investigación de la NYPL en un plazo de 2 semanas para que su tarjeta se marque como tarjeta de investigación."
     },
     "address": {
-      "title": "Home Address",
+      "title": "Dirección de domicilio",
       "description": "Si vive en la ciudad de Nueva York, por favor complete el formulario de domicilio.",
       "line1": { "label": "Dirreción de domicilio" },
       "line2": { "label": "Apartamento / Unidad" },

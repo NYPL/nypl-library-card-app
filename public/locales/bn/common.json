@@ -1,5 +1,6 @@
 {
-  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "internationalInstructions": "কেবলমাত্র ল্যাটিন অক্ষর ব্যবহার করে ফর্মের ক্ষেত্রগুলো পূরণ করতে হবে।",
+  "required": "প্রয়োজনীয়",
   "home": {
     "title": "কিছু সহজ ধাপে আজ একটি ডিজিটাল লাইব্রেরী কার্ড পান",
     "description": {
@@ -20,7 +21,7 @@
       "label": "জন্ম তারিখ",
       "instruction": {
         "part1": "মাস/ দিন /বছর , স্ল্যাশ সহ ",
-        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
+        "part2": "আপনি যদি আন্তর্জাতিক পৃষ্ঠপোষক হন, তাহলে অনুগ্রহ করে মাস/দিন/বছর ফরম্যাটে আপনার জন্ম তারিখ লিখুন"
       }
     },
     "ageGate": "Yes, I am over 13 years old.",
@@ -42,12 +43,12 @@
   "location": {
     "title": "5 এর ধাপ 2: ঠিকানা",
     "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
+      "part1": "কোনো ঠিকানাকে সঠিকভাবে ভেরিফাই করতে হলে, এটিকে অবশ্যই মার্কিন যুক্তরাষ্ট্রের একটি বৈধ আবাসিক ঠিকানা হতে হবে।",
+      "part2": "আপনি যদি একজন আন্তর্জাতিক শিক্ষার্থী হন, তাহলে অনুগ্রহ করে আপনার প্রতিষ্ঠানের নাম জানান।আপনি শুধুমাত্র একটি অস্থায়ী কার্ড পাবেন এবং আপনার কার্ডের বৈধতা বৃদ্ধি করতে 2 সপ্তাহের মধ্যে NYPL (নিউ ইয়র্ক পাবলিক লাইব্রেরি)-এর সাথে যোগাযোগ করতে হবে।",
+      "part3": "আপনি যদি একজন আন্তর্জাতিক গবেষণার পৃষ্ঠপোষক হন, তাহলে আপনার বাড়ির/বাসার ঠিকানা হিসাবে স্টিফেন এ. শোয়ার্জম্যান বিল্ডিংয়ের ঠিকানা ব্যবহার করুন। আপনি শুধুমাত্র একটি অস্থায়ী কার্ড পাবেন এবং আপনার কার্ডকে যথাযথভাবে একটি রিসার্চ কার্ড হিসাবে চিহ্নিত করার জন্য 2 সপ্তাহের মধ্যে NYPL-এর গবেষণা সাথে যোগাযোগ করতে হবে।"
     },
     "address": {
-      "title": "Home Address",
+      "title": "বাড়ির ঠিকানা",
       "description": "আপনি যদি NYC তে থাকেন তবে দয়া করে বাড়ির ঠিকানা ফর্মটি পূরণ করুন।",
       "line1": {"label": "রাস্তার ঠিকানা"},
       "line2": {"label": "এপার্টমেন্ট / সুইট"},
@@ -118,7 +119,7 @@
     "section": {
       "personal": "ব্যক্তিগত তথ্য",
       "address": {
-        "label": "Address",
+        "label": "ঠিকানা",
         "location": "Location",
         "home": "Home",
         "work": "Work"
