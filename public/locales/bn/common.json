@@ -9,7 +9,7 @@
     }
   },
   "personal": {
-    "title": "পদক্ষেপ 1 of 5: ব্যক্তিগত তথ্য",
+    "title": "ধাপ 5-এর মধ্যে 1: ব্যক্তিগত তথ্য",
     "firstName": {
       "label": "প্রথম নাম"
     },
@@ -32,15 +32,15 @@
       "labelText": "হ্যাঁ, আমি এনওয়াইপিএল এর প্রোগ্রাম এবংসার্ভিসেস সম্পর্কে তথ্য পেতে চাই"
     },
     "errorMessage": {
-      "firstName": "Please enter a valid first name.",
-      "lastName": "Please enter a valid last name.",
-      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "firstName": "অনুগ্রহ করে সঠিক নাম লিখুন।",
+      "lastName": "অনুগ্রহ করে পদবী লিখুন।",
+      "birthdate": "অনুগ্রহ করে সঠিক তারিখ লিখুন, যার মধ্যে মাস/দিন/বছর স্ল্যাশ থাকতে হবে।",
       "ageGate": "You must be 13 years or older to continue.",
-      "email": "Please enter a valid email address."
+      "email": "অনুগ্রহ করে একটি সঠিক ইমেল অ্যাড্রেস লিখুন।"
     }
   },
   "location": {
-    "title": "5 এর ধাপ 2: ঠিকানা",
+    "title": "ধাপ 5-এর মধ্যে 2: ঠিকানা",
     "internationalInstructions": {
       "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
       "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
@@ -49,11 +49,14 @@
     "address": {
       "title": "Home Address",
       "description": "আপনি যদি NYC তে থাকেন তবে দয়া করে বাড়ির ঠিকানা ফর্মটি পূরণ করুন।",
-      "line1": {"label": "রাস্তার ঠিকানা"},
-      "line2": {"label": "এপার্টমেন্ট / সুইট"},
-      "city": {"label": "শহর"},
-      "state":{"label": "স্টেট", "instruction": "২ অক্ষরের সংক্ষিপ্ত"},
-      "postalCode": {"label": "পোস্টাল কোড", "instruction": "৫ অথবা ৯ ডিজিটের পোস্টাল কোড"}
+      "line1": { "label": "রাস্তার ঠিকানা" },
+      "line2": { "label": "এপার্টমেন্ট / সুইট" },
+      "city": { "label": "শহর" },
+      "state": { "label": "স্টেট", "instruction": "২ অক্ষরের সংক্ষিপ্ত" },
+      "postalCode": {
+        "label": "পোস্টাল কোড",
+        "instruction": "৫ অথবা ৯ ডিজিটের পোস্টাল কোড"
+      }
     },
     "workAddress": {
       "title": "Alternate Address",
@@ -63,10 +66,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Please enter a valid street address.",
-      "city": "Please enter a valid city.",
-      "state": "Please enter a 2-character state abbreviation.",
-      "zip": "Please enter a 5 or 9-digit postal code."
+      "line1": "অনুগ্রহ করে সঠিক স্ট্রিট অ্যাড্রেস লিখুন।",
+      "city": "অনুগ্রহ করে সঠিক শহর লিখুন।",
+      "state": "অনুগ্রহ করে 2-টি অক্ষরে রাজ্যের সংক্ষিপ্ত নাম লিখুন।",
+      "zip": "অনুগ্রহ করে 5 থেকে 9 সংখ্যার পোস্টাল কোড লিখুন।"
     }
   },
   "verifyAddress": {
@@ -76,7 +79,7 @@
     "workAddress": "Alternate Address"
   },
   "account": {
-    "title": "5 এর ধাপ 4: আপনার অ্যাকাউন্ট কাস্টমাইজ করুন",
+    "title": "ধাপ 5-এর মধ্যে 4: আপনার অ্যাকাউন্ট কাস্টমাইজ করুন",
     "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
     "username": {
       "label": "ব্যবহারকারীর নাম",
@@ -106,14 +109,14 @@
       "text": "একটি আবেদন পত্র জমা দেওয়ার মাধ্যমে, আপনি আমাদের <a href='https://www.nypl.org/help/library-card/terms-conditions'>কার্ডহোল্ডার শর্তাবলী</a> বুঝতে এবং সম্মত হন এবং আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'> নিয়ম ও বিধিমালায়</a>সম্মত হন। লাইব্রেরীর ব্যক্তিগত তথ্যের ব্যবহার সম্পর্কে আরও জানতে, অনুগ্রহ করে আমাদের <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>প্রাইভেসী নীতি</a> পড়ুন।"
     },
     "errorMessage": {
-      "username": "Username must be between 5-25 alphanumeric characters.",
-      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
-      "verifyPassword": "The two passwords don't match.",
-      "acceptTerms": "The Terms and Conditions must be checked."
+      "username": "ব্যবহারকারীর নাম অবশ্যই 2-25টি অ্যালফানিউমেরিক অক্ষরের মধ্যে হতে হবে।",
+      "password": "আপনার পাসওয়ার্ডটি অবশ্যই কমপক্ষে 8টি অক্ষরের হতে হবে, যার মধ্যে ছোটহাতের এবং বড়হাতের অক্ষর সহ অক্ষর এবং সংখ্যা ও পিরিয়ড (.) ছাড়া কমপক্ষে একটি স্পেশাল ক্যারেক্টার থাকতে পারে।",
+      "verifyPassword": "দুটি পাসওয়ার্ড ম্যাচ করছে না।",
+      "acceptTerms": "নিয়ম ও শর্তাবলী অবশ্যই চেক করতে হবে।"
     }
   },
   "review": {
-    "title": "5 এর ধাপ 5: আপনার তথ্য নিশ্চিত করুন",
+    "title": "ধাপ 5-এর মধ্যে 5: আপনার তথ্য নিশ্চিত করুন",
     "description": "নিশ্চিত হয়ে নিন যে আপনি যে সব তথ্য প্রবেশ করিয়েছেন তা সঠিক। যদি প্রয়োজন হয়, আপনি আপনার আবেদন পত্র জমা করার আগে এখনও পরিবর্তন করতে পারেন।",
     "section": {
       "personal": "ব্যক্তিগত তথ্য",
@@ -122,7 +125,7 @@
         "location": "Location",
         "home": "Home",
         "work": "Work"
-      }, 
+      },
       "homeLibrary": "হোম লাইব্রেরি"
     },
     "createAccount": "Create Your Account",
@@ -159,11 +162,11 @@
     "previous": "পূর্ববর্তী"
   },
   "globalErrors": {
-    "title": "Form submission error",
-    "defaultError": "There was an error processing your submission. Please try again later."
+    "title": "ফর্ম জমা দেওয়ার সময় ত্রুটি হয়েছে",
+    "defaultError": "আপনার জমা প্রক্রিয়া করার সময় ত্রুটি হয়েছে। অনুগ্রহ করে পরে চেষ্টা করুন।"
   },
   "apiErrors": {
-    "defaultError": "There were errors with your submission."
+    "defaultError": "এই জমার সময় একটা ত্রুটি হয়েছে"
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",

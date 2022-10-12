@@ -9,7 +9,7 @@
     }
   },
   "personal": {
-    "title": "Step 1 of 5: Personal Information",
+    "title": "1/5단계: 개인 정보",
     "firstName": {
       "label": "First Name"
     },
@@ -32,15 +32,15 @@
       "labelText": "Yes, I would like to receive information about NYPL's programs and services"
     },
     "errorMessage": {
-      "firstName": "Please enter a valid first name.",
-      "lastName": "Please enter a valid last name.",
-      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "firstName": "유효한 이름을 입력해주십시오.",
+      "lastName": "유효한 성씨를 입력해주십시오.",
+      "birthdate": "유효한 날짜를 /를 포함하여 월월/일일/년년년년 형식으로 입력해주십시오.",
       "ageGate": "You must be 13 years or older to continue.",
-      "email": "Please enter a valid email address."
+      "email": "유효한 이메일 주소를 입력해 주십시오."
     }
   },
   "location": {
-    "title": "Step 2 of 5: Address",
+    "title": "2/5단계: 주소",
     "internationalInstructions": {
       "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
       "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
@@ -66,10 +66,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Please enter a valid street address.",
-      "city": "Please enter a valid city.",
-      "state": "Please enter a 2-character state abbreviation.",
-      "zip": "Please enter a 5 or 9-digit postal code."
+      "line1": "유효한 거리 주소를 입력해주십시오.",
+      "city": "유효한 도시명을 입력해주십시오.",
+      "state": "유효한 2자리 주 약어를 입력해주십시오.",
+      "zip": "5자리 또는 9자리 우편번호를 입력해주십시오."
     }
   },
   "verifyAddress": {
@@ -79,7 +79,7 @@
     "workAddress": "Alternate Address"
   },
   "account": {
-    "title": "Step 4 of 5: Customize Your Account",
+    "title": "4/5단계: 계정을 만드십시오.",
     "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
     "username": {
       "label": "Username",
@@ -109,14 +109,14 @@
       "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
     },
     "errorMessage": {
-      "username": "Username must be between 5-25 alphanumeric characters.",
-      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
-      "verifyPassword": "The two passwords don't match.",
-      "acceptTerms": "The Terms and Conditions must be checked."
+      "username": "사용자명은 5 내지 25자의 영숫자로 해야 합니다.",
+      "password": "비밀번호는 8자 이상이어야 하며, 대문자, 소문자, 숫자, 특수문자(마침표(.) 제외)를 혼합하여 만들어야 합니다.",
+      "verifyPassword": "두 개의 비밀번호가 일치하지 않습니다.",
+      "acceptTerms": "이용약관을 확인해야 합니다."
     }
   },
   "review": {
-    "title": "Step 5 of 5: Confirm Your Information",
+    "title": "5/5단계: 본인의 정보를 확인하십시오.",
     "description": "Make sure all the information you’ve entered is correct. If needed, you can still make changes before you submit your application.",
     "section": {
       "personal": "Personal Information",
@@ -162,11 +162,11 @@
     "previous": "Previous"
   },
   "globalErrors": {
-    "title": "Form submission error",
-    "defaultError": "There was an error processing your submission. Please try again later."
+    "title": "양식 제출 오류",
+    "defaultError": "제출 처리에 오류가 발생했습니다. 나중에 다시 시도해주십시오."
   },
   "apiErrors": {
-    "defaultError": "There were errors with your submission."
+    "defaultError": "제출한 정보에 문제가 있었습니다."
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",

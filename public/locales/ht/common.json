@@ -9,7 +9,7 @@
     }
   },
   "personal": {
-    "title": "Step 1 of 5: Personal Information",
+    "title": "Etap 1 sou 5: Enfomasyon Pèsonèl",
     "firstName": {
       "label": "First Name"
     },
@@ -32,15 +32,15 @@
       "labelText": "Yes, I would like to receive information about NYPL's programs and services"
     },
     "errorMessage": {
-      "firstName": "Please enter a valid first name.",
-      "lastName": "Please enter a valid last name.",
-      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "firstName": "Tanpri antre yon non ki valab.",
+      "lastName": "Tanpri antre yon siyati ki valab.",
+      "birthdate": "Tanpri antre yon dat ki valab, MM/DD/AAAA, ki gen ladan karaktè oblik yo.",
       "ageGate": "You must be 13 years or older to continue.",
-      "email": "Please enter a valid email address."
+      "email": "Tanpri antre yon adrès imèl ki valab."
     }
   },
   "location": {
-    "title": "Step 2 of 5: Address",
+    "title": "Etap 2 sou 5: Adrès",
     "internationalInstructions": {
       "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
       "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
@@ -66,10 +66,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Please enter a valid street address.",
-      "city": "Please enter a valid city.",
-      "state": "Please enter a 2-character state abbreviation.",
-      "zip": "Please enter a 5 or 9-digit postal code."
+      "line1": "Tanpri antre yon non ri ki valab.",
+      "city": "Tanpri antre non yon vil ki valab.",
+      "state": "Tanpri antre fòm abrevyasyon 2 karaktè yon eta.",
+      "zip": "Tanpri antre yon kòd postal ki genyen 5 oswa 9 chif."
     }
   },
   "verifyAddress": {
@@ -79,7 +79,7 @@
     "workAddress": "Alternate Address"
   },
   "account": {
-    "title": "Step 4 of 5: Customize Your Account",
+    "title": "Etap 4 sou 5: Pèsonalize Kont Ou",
     "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
     "username": {
       "label": "Username",
@@ -109,14 +109,14 @@
       "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
     },
     "errorMessage": {
-      "username": "Username must be between 5-25 alphanumeric characters.",
-      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
-      "verifyPassword": "The two passwords don't match.",
-      "acceptTerms": "The Terms and Conditions must be checked."
+      "username": "Non itilizatè a dwe genyen ant 5-25 karaktè alfanimerik.",
+      "password": "Modpas ou a dwe gen omwen 8 karaktè, sa gen ladan yon melanj lèt majiskil ak miniskil, ki enkli yon melanj lèt ak nimewo, epi li dwe gen omwen yon karaktè espesyal eksepte pwen (.)",
+      "verifyPassword": "De modpas yo pa koresponn.",
+      "acceptTerms": "Ou dwe tcheke seksyon Tèm ak Kondisyon yo."
     }
   },
   "review": {
-    "title": "Step 5 of 5: Confirm Your Information",
+    "title": "Etap 5 sou 5: Konfime Enfòmasyon W",
     "description": "Make sure all the information you’ve entered is correct. If needed, you can still make changes before you submit your application.",
     "section": {
       "personal": "Personal Information",
@@ -162,11 +162,11 @@
     "previous": "Previous"
   },
   "globalErrors": {
-    "title": "Form submission error",
-    "defaultError": "There was an error processing your submission. Please try again later."
+    "title": "Erè soumisyon fòmilè",
+    "defaultError": "Te gen yon erè nan tretman soumisyon w lan. Tanpri eseye ankò pita."
   },
   "apiErrors": {
-    "defaultError": "There were errors with your submission."
+    "defaultError": "Te gen yon pwoblèm ak soumisyon an"
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",

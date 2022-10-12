@@ -9,7 +9,7 @@
     }
   },
   "personal": {
-    "title": "Paso 1 de 5: información personal",
+    "title": "Paso 1 de 5: Información personal",
     "firstName": { "label": "Nombre" },
     "lastName": { "label": "Apellido" },
     "birthdate": {
@@ -28,14 +28,14 @@
       "labelText": "Sí, me gustaría recibir información sobre los programas y servicios que ofrece la NYPL"
     },
     "errorMessage": {
-      "firstName": "Por favor, ingrese un nombre válido.",
-      "lastName": "Por favor ingrese un apellido válido.",
-      "birthdate": "Ingrese una fecha válida, MM/DD/AAAA, incluidas las barras.",
-      "email": "Por favor, introduce una dirección de correo electrónico válida."
+      "firstName": "Ingrese un nombre válido.",
+      "lastName": "Ingrese un apellido válido.",
+      "birthdate": "Ingrese una fecha válida: MM/DD/AAAA, incluya las barras.",
+      "email": "Ingrese una dirección de correo electrónico válida."
     }
   },
   "location": {
-    "title": "Paso 2 de 5: dirección",
+    "title": "Paso 2 de 5: Dirección",
     "internationalInstructions": {
       "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
       "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
@@ -62,8 +62,8 @@
     },
     "errorMessage": {
       "line1": "Ingrese una dirección postal válida.",
-      "city": "Por favor introduzca una ciudad válida.",
-      "state": "Ingrese una abreviatura de estado de 2 caracteres.",
+      "city": "Ingrese una ciudad válida.",
+      "state": "Ingrese la abreviación de 2 caracteres del estado.",
       "zip": "Ingrese un código postal de 5 o 9 dígitos."
     }
   },
@@ -74,7 +74,7 @@
     "workAddress": "Alternate Address"
   },
   "account": {
-    "title": "Paso 4 de 5: personalice su cuenta",
+    "title": "Paso 4 de 5: Personalice su cuenta",
     "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
     "username": {
       "label": "Nombre de usuario",
@@ -99,23 +99,22 @@
     },
     "errorMessage": {
       "username": "El nombre de usuario debe tener entre 5 y 25 caracteres alfanuméricos.",
-      "password": "Su contraseña debe tener al menos 8 caracteres, incluir una combinación de letras mayúsculas y minúsculas, incluir una combinación de letras y números, y tener al menos un carácter especial excepto el punto (.)",
+      "password": "Su contraseña debe tener al menos 8 caracteres, incluyendo una combinación de letras mayúsculas y minúsculas, una combinación de letras y números, y al menos un carácter especial, excepto el punto (.).",
       "verifyPassword": "Las dos contraseñas no coinciden.",
-      "acceptTerms": "Los términos y condiciones no fueron aceptados."
+      "acceptTerms": "Debe aceptar los términos y condiciones."
     }
   },
   "review": {
-    "title": "Paso 5 de 5 : confirme su información",
+    "title": "Paso 5 de 5 : Confirme su información",
     "description": "Asegúrese de que toda la información que ingresó sea correcta. Si es necesario, aún puede realizar cambios al formulario antes de enviar su solicitud.",
     "section": {
       "personal": "Información personal",
-      "address": 
-      {
+      "address": {
         "label": "Dirreción",
         "location": "Location",
         "home": "Home",
         "work": "Work"
-      }, 
+      },
       "homeLibrary": "Biblioteca local"
     },
     "createAccount": "Create Your Account",
@@ -152,11 +151,11 @@
     "previous": "Previo"
   },
   "globalErrors": {
-    "title": "Error de envío de formulario",
-    "defaultError": "Hubo un error al procesar su envío. Por favor, inténtelo de nuevo más tarde."
+    "title": "Error de envío del formulario.",
+    "defaultError": "Ocurrió un error al procesar su envío. Inténtelo de nuevo más tarde."
   },
   "apiErrors": {
-    "defaultError": "..."
+    "defaultError": "Hubo un problema con el envío."
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",

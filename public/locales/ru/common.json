@@ -9,7 +9,7 @@
     }
   },
   "personal": {
-    "title": "Первый этап : Личные данные",
+    "title": "Шаг 1 из 5: персональные данные",
     "firstName": {
       "label": "Имя"
     },
@@ -32,15 +32,15 @@
       "labelText": " Да, я желаю получать информацию по электронной почте от Нью-Йоркской Публичной Библиотеки о новых услугах и программах"
     },
     "errorMessage": {
-      "firstName": "Please enter a valid first name.",
-      "lastName": "Please enter a valid last name.",
-      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "firstName": "Укажите действительное имя.",
+      "lastName": "Укажите действительную фамилию.",
+      "birthdate": "Укажите действительную дату в формате ММ/ДД/ГГГГ (через косую черту).",
       "ageGate": "You must be 13 years or older to continue.",
-      "email": "Please enter a valid email address."
+      "email": "Укажите действительный адрес электронной почты."
     }
   },
   "location": {
-    "title": "Второй этап: адрес",
+    "title": "Шаг 2 из 5: адрес",
     "internationalInstructions": {
       "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
       "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
@@ -49,11 +49,14 @@
     "address": {
       "title": "Home Address",
       "description": "Если вы проживаете в пределах города Нью Йорка, пожалуйста заполните нижеуказанные пункты",
-      "line1": {"label": "Улица"},
-      "line2": {"label":"Квартира"},
-      "city": {"label": "Район"},
-      "state": {"label": "Штат", "instruction": "2-letter abbreviation"},
-      "postalCode": {"label": "Почтовый индекс", "instruction": "5 or 9-digit postal code"}
+      "line1": { "label": "Улица" },
+      "line2": { "label": "Квартира" },
+      "city": { "label": "Район" },
+      "state": { "label": "Штат", "instruction": "2-letter abbreviation" },
+      "postalCode": {
+        "label": "Почтовый индекс",
+        "instruction": "5 or 9-digit postal code"
+      }
     },
     "workAddress": {
       "title": "Alternate Address",
@@ -63,10 +66,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Please enter a valid street address.",
-      "city": "Please enter a valid city.",
-      "state": "Please enter a 2-character state abbreviation.",
-      "zip": "Please enter a 5 or 9-digit postal code."
+      "line1": "Укажите действительную улицу и номер дома.",
+      "city": "Укажите действительный город.",
+      "state": "Укажите 2-значную аббревиатуру штата.",
+      "zip": "Укажите почтовый индекс из 5 или 9 цифр."
     }
   },
   "verifyAddress": {
@@ -76,7 +79,7 @@
     "workAddress": "Alternate Address"
   },
   "account": {
-    "title": "Шаг четвертый: Настройки учетной записи",
+    "title": "Шаг 4 из 5: настройка учетной записи",
     "username": {
       "label": "Имя пользователя",
       "instruction": "5-25 буквенно-цифровых знаков No special characters.",
@@ -105,14 +108,14 @@
       "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
     },
     "errorMessage": {
-      "username": "Username must be between 5-25 alphanumeric characters.",
-      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
-      "verifyPassword": "The two passwords don't match.",
-      "acceptTerms": "The Terms and Conditions must be checked."
+      "username": "Имя пользователя должно содержать 5-25 английских букв и цифр.",
+      "password": "Пароль должен содержать минимум 8 символов, включая комбинацию букв верхнего и нижнего регистра, комбинацию букв и цифр, а также как минимум один специальный символ, кроме точки (.)",
+      "verifyPassword": "Эти два пароля не совпадают.",
+      "acceptTerms": "Необходимо поставить отметку о принятии условий пользования."
     }
   },
   "review": {
-    "title": "Шаг пятый. Подтверждение личных данных",
+    "title": "Шаг 5 из 5: подтверждение ваших данных",
     "description": "Проверьте правильность всех указанных вами данных. При необходимости вы можете внести исправления до отправки заявления.",
     "section": {
       "personal": "Личные данные",
@@ -121,7 +124,7 @@
         "location": "Location",
         "home": "Home",
         "work": "Work"
-      }, 
+      },
       "homeLibrary": "Близлежащий или удобно расположенный филиал библиотеки"
     },
     "createAccount": "Create Your Account",
@@ -158,11 +161,11 @@
     "previous": "Назад"
   },
   "globalErrors": {
-    "title": "Form submission error",
-    "defaultError": "There was an error processing your submission. Please try again later."
+    "title": "Ошибка при отправке формы",
+    "defaultError": "При обработке ваших данных произошла ошибка. Повторите попытку позже."
   },
   "apiErrors": {
-    "defaultError": "There were errors with your submission."
+    "defaultError": "С отправкой данных возникла проблема"
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",
