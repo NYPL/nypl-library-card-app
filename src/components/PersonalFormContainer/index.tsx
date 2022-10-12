@@ -22,6 +22,10 @@ const PersonalFormContainer = () => {
   const { register, handleSubmit } = useFormContext();
   // Get the URL query params for `newCard` and `lang`.
   const queryStr = createQueryParams(router?.query);
+  // Pass the selected language as the "preferred language"
+  // to the submitted form values. This then gets sent to
+  // the ILS when creating a patron.
+  const preferredLanguage = router?.query?.lang || "en";
 
   /**
    * submitForm
@@ -31,7 +35,7 @@ const PersonalFormContainer = () => {
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",
-      value: { ...formValues, ...formData },
+      value: { ...formValues, ...formData, preferredLanguage },
     });
 
     const nextUrl = `/location?${queryStr}`;
