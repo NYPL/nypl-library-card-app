@@ -8,6 +8,14 @@ import { TestProviderWrapper } from "../../../testHelper/utils";
 jest.mock("react-i18next", () => {
   const en = {
     location: {
+      internationalInstructions: {
+        part1:
+          "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
+        part2:
+          "If you are an international student, please provide the address of your institution. You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
+        part3:
+          "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card.",
+      },
       address: {
         title: "Home Address",
         description:
