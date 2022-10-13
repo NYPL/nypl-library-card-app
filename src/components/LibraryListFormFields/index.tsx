@@ -9,7 +9,6 @@ import useFormDataContext from "../../context/FormDataContext";
 import { findLibraryName } from "../../utils/formDataUtils";
 import { LibraryListObject } from "../../interfaces";
 import styles from "./LibraryListFormFields.module.css";
-import { useRouter } from "next/router";
 
 interface LibraryListFormProps {
   libraryList: LibraryListObject[];
@@ -27,13 +26,10 @@ const LibraryListForm = ({
   libraryList = [],
 }: LibraryListFormProps): React.ReactElement => {
   const { t } = useTranslation("common");
-  const {
-    query: { lang = "en" },
-  } = useRouter();
   const { state } = useFormDataContext();
   const { formValues } = state;
   const defaultValue = formValues?.homeLibraryCode
-    ? findLibraryName(formValues?.homeLibraryCode, lang as string)
+    ? findLibraryName(formValues?.homeLibraryCode)
     : "";
   const [value, setValue] = useState(defaultValue);
   const [suggestions, setSuggestions] = useState([]);

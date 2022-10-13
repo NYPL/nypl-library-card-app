@@ -20,9 +20,6 @@ const AccountFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const router = useRouter();
-  const {
-    query: { lang = "en" },
-  } = router;
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
   // Get the URL query params for `newCard` and `lang`.
@@ -34,10 +31,7 @@ const AccountFormContainer = () => {
    */
   const submitForm = (formData) => {
     // Convert the home library name to its code value.
-    formData.homeLibraryCode = findLibraryCode(
-      formData.homeLibraryCode,
-      lang as string
-    );
+    formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",

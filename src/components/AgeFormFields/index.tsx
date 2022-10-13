@@ -34,8 +34,7 @@ const AgeForm = ({
   const birthdateField = (
     <FormField
       id="birthdate"
-      instructionText={`${t("personal.birthdate.instruction.part1")} <br/>
-      ${t("personal.birthdate.instruction.part2")}`}
+      instructionText={t("personal.birthdate.instruction")}
       label={t("personal.birthdate.label")}
       name="birthdate"
       isRequired

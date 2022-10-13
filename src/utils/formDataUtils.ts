@@ -72,10 +72,9 @@ function isDate(
  * array. If no object is found, return the default value of "eb" for
  * "e-branch" or "simplye" (interchangeable names);
  * @param libraryName Name of library to find in the list.
- * * @param lang Language.
  */
-function findLibraryCode(libraryName?: string, lang = "en"): string {
-  const library = ilsLibraryList[lang].find(
+function findLibraryCode(libraryName?: string): string {
+  const library = ilsLibraryList.find(
     (library) => library.label === libraryName
   );
   return library?.value || "eb";
@@ -87,10 +86,9 @@ function findLibraryCode(libraryName?: string, lang = "en"): string {
  * array. If no object is found, return the default value of "eb" for
  * "e-branch" or "simplye" (interchangeable names);
  * @param libraryCode Name of library to find in the list.
- * @param lang Language.
  */
-function findLibraryName(libraryCode?: string, lang = "en"): string {
-  const library = ilsLibraryList[lang].find(
+function findLibraryName(libraryCode?: string): string {
+  const library = ilsLibraryList.find(
     (library) => library.value === libraryCode
   );
   return library?.label || "SimplyE";

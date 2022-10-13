@@ -1,5 +1,6 @@
 {
-  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "internationalInstructions": "表单字段仅可使用拉丁字符填写。",
+  "required": "必须填写",
   "home": {
     "title": "只需几个简单的步骤即可立即获得电子图书卡",
     "description": {
@@ -18,14 +19,11 @@
     },
     "birthdate": {
       "label": "出生日期",
-      "instruction": {
-        "part1": "月 / 日 / 年 (MM / DD / YYYY)，包括斜线",
-        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
-      }
+      "instruction": "月 / 日 / 年 (MM / DD / YYYY)，包括斜线"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
-      "label": "Email Address",
+      "label": "电子邮件地址",
       "instruction": "使用我们的许多数字资源（例如，电子书）都需要一个电子邮件地址。 如果您不希望提供电 子邮件地址，则可以使用我们 <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>另一个表格</a>来申请实体图书卡。 填写完毕后，请造访我们其中一个 <a href='https://www.nypl.org/locations'>分馆</a>，提供身份和家庭住址证明以领取您的卡。 "
     },
     "eCommunications": {
@@ -41,13 +39,8 @@
   },
   "location": {
     "title": "第 2 步：地址",
-    "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
-    },
     "address": {
-      "title": "Home Address",
+      "title": "居住地址",
       "description": "如果您住在纽约市，请填写居住地址部分。",
       "line1": { "label": "街道地址" },
       "line2": { "label": "公寓號碼" },
@@ -84,14 +77,14 @@
       "checkButton": "检查用户名是否可用"
     },
     "password": {
-      "label": "密码 (PIN)",
+      "label": "Password",
       "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
     },
     "verifyPassword": {
-      "label": "验证密码 (PIN)",
+      "label": "Verify Password",
       "instruction": "8-32 characters"
     },
-    "showPassword": "显示密码 (PIN)",
+    "showPassword": "Show Password",
     "library": {
       "selectLibrary": "選一個您經常使用的圖書館：",
       "placeholder": "输入图书馆名称，例如 Parkchester Library",

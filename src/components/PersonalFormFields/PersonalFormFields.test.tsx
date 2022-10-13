@@ -17,11 +17,7 @@ jest.mock("react-i18next", () => {
       },
       birthdate: {
         label: "Date of Birth",
-        instruction: {
-          part1: "MM/DD/YYYY, including slashes",
-          part2:
-            "If you are an international patron, please enter your date of birth in MM/DD/YYYY format",
-        },
+        instruction: "MM/DD/YYYY, including slashes",
       },
       email: {
         label: "Email Address",

@@ -1,35 +1,33 @@
 {
-  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "internationalInstructions": "양식 입력란은 반드시 영어 알파벳 등의 라틴 문자만 사용하여 기재해야 합니다.",
+  "required": "필수 항목",
   "home": {
-    "title": "Get a Digital Library Card Today in a Few Easy Steps",
+    "title": "간단한 몇 가지 단계로 디지털 도서관 카드를 발급 받으세요.",
     "description": {
-      "part1": "If you are 13 or older and live, work, attend school, or pay property taxes in New York State, you can get a free digital library card right now using this online form. Visitors to New York State can also use this form to apply for a temporary card.",
-      "part2": "With a digital library card you get free access to the Library’s wide array of digital resources—including e-books, databases, educational resources, and more.",
-      "part3": "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+      "part1": "13세 이상이고, 뉴욕주에서 거주, 근무, 재학 중, 또는 재산세를 납부하시는 분은 이 온라인 양식을 사용하여 바로 디지털 도서관 카드를 무료로 발급받을 수 있습니다. 뉴욕주 방문자도 이 양식을 사용하여 임시 카드를 신청할 수 있습니다.",
+      "part2": "디지털 도서관 카드를 가지고 도서관의 다양한 디지털 자료들, 즉 전자책, 데이터베이스, 교육 자료 등을 무료로 이용하실 수 있습니다.",
+      "part3": "신청서를 제출하시면, 귀하는 <a href='https://www.nypl.org/help/library-card/terms-conditions'>카드소지자 이용약관</a> 에 동의하고, <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>R규칙과 규정</a> 에 동의하는 것으로 간주됩니다. 도서관의 개인정보 사용에 관해 자세히 알아보시려면 <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>개인정보 취급방침</a>을 읽어주십시오."
     }
   },
   "personal": {
     "title": "1/5단계: 개인 정보",
     "firstName": {
-      "label": "First Name"
+      "label": "이름"
     },
     "lastName": {
-      "label": "Last Name"
+      "label": "성씨"
     },
     "birthdate": {
-      "label": "Date of Birth",
-      "instruction": {
-        "part1": "MM/DD/YYYY, including slashes",
-        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
-      }
+      "label": "생년월일",
+      "instruction": "월월/일일/년년년년(“/” 기호 포함)"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
-      "label": "Email Address",
-      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
+      "label": "이메일 주소",
+      "instruction": "전자책과 같은 많은 디지털 자료를 이용하기 위해서는 이메일 주소가 필요합니다. 이메일 주소를 제공하기를 원치 않으시면 <a href='https://legacycatalog.nypl.org/selfreg/patonsite'> 대체 형식</a> 을 사용하는 실물 카드를 신청하실 수 있습니다. 신청서를 작성하셨으면, 신분증과 배송받을 집 주소를 가지고 저희 <a href='https://www.nypl.org/locations'>도서관</a> 중 한 곳을 방문해주십시오."
     },
     "eCommunications": {
-      "labelText": "Yes, I would like to receive information about NYPL's programs and services"
+      "labelText": "예, NYPL의 프로그램과 서비스에 대한 정보를 받기를 원합니다."
     },
     "errorMessage": {
       "firstName": "유효한 이름을 입력해주십시오.",
@@ -41,21 +39,16 @@
   },
   "location": {
     "title": "2/5단계: 주소",
-    "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
-    },
     "address": {
-      "title": "Home Address",
-      "description": "If you live in NYC, please fill out the home address form.",
-      "line1": { "label": "Street Address" },
-      "line2": { "label": "Apartment / Suite" },
-      "city": { "label": "City" },
-      "state": { "label": "State", "instruction": "2-letter abbreviation" },
+      "title": "집 주소",
+      "description": "뉴욕시에 거주하고 계시는 분은 집 주소 양식서에 기재해주십시오.",
+      "line1": { "label": "거리 주소" },
+      "line2": { "label": "아파트/ 호수" },
+      "city": { "label": "시" },
+      "state": { "label": "주", "instruction": "2자 약어" },
       "postalCode": {
-        "label": "Postal Code",
-        "instruction": "5 or 9-digit postal code"
+        "label": "우편번호",
+        "instruction": "5 또는 9자 우편번호"
       }
     },
     "workAddress": {
@@ -73,18 +66,18 @@
     }
   },
   "verifyAddress": {
-    "title": "Step 3 of 5: Address Verification",
-    "description": "Please select the correct address.",
-    "homeAddress": "Home Address",
+    "title": "3/5단계: 주소 확인",
+    "description": "정확한 주소를 선택해주십시오.",
+    "homeAddress": "집 주소",
     "workAddress": "Alternate Address"
   },
   "account": {
     "title": "4/5단계: 계정을 만드십시오.",
     "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
     "username": {
-      "label": "Username",
-      "instruction": "5-25 alphanumeric characters. No special characters.",
-      "checkButton": "Check if username is available"
+      "label": "사용자명 필수",
+      "instruction": "5-25자의 영숫자 특수문자 없음",
+      "checkButton": "사용자명이 사용 가능한지 확인하십시오."
     },
     "password": {
       "label": "Password",
@@ -96,17 +89,17 @@
     },
     "showPassword": "Show Password",
     "library": {
-      "selectLibrary": "Select a home library:",
-      "placeholder": "Type a library name, such as Parkchester Library",
-      "title": "Home Library",
+      "selectLibrary": "홈 라이브러리를 선택해주십시오:",
+      "placeholder": "도서관명을 입력해주십시오. 예: Parkchester Library",
+      "title": "홈 라이브러리",
       "description": {
-        "part1": "Choosing a home library will help us make sure you&apos;re getting everything you need from a branch that&apos;s most convenient for you.",
-        "part2": "You can skip this step and update it at any point through your account."
+        "part1": "홈 라이브러리란 내게 가장 가까운 도서관 지점을 말하며, 선택하시면 해당 지점에서 필요한 모든 것을 구하는 데 도움이 됩니다.",
+        "part2": "이 단계를 건너뛰고 계정을 통해 언제든지 업데이트할 수 있습니다."
       }
     },
     "termsAndCondition": {
-      "label": "Yes, I accept the terms and conditions.",
-      "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+      "label": "예, 이용약관에 동의합니다.",
+      "text": "신청서를 제출하시면, 귀하는 <a href='https://www.nypl.org/help/library-card/terms-conditions'>카드소지자 이용약관</a> 에 동의하고, <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>규칙과 규정</a> 에 동의하는 것으로 간주됩니다. 도서관의 개인정보 사용에 관해 자세히 알아보시려면 <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>개인정보 취급방침</a> 을 읽어주십시오."
     },
     "errorMessage": {
       "username": "사용자명은 5 내지 25자의 영숫자로 해야 합니다.",
@@ -117,22 +110,22 @@
   },
   "review": {
     "title": "5/5단계: 본인의 정보를 확인하십시오.",
-    "description": "Make sure all the information you’ve entered is correct. If needed, you can still make changes before you submit your application.",
+    "description": "입력하신 모든 정보가 정확한지 확인해주십시오. 필요하면 신청서를 제출하기 전에 변경하실 수 있습니다.",
     "section": {
-      "personal": "Personal Information",
+      "personal": "개인 정보",
       "address": {
-        "label": "Address",
-        "location": "Location",
-        "home": "Home",
-        "work": "Work"
+        "label": "주소",
+        "location": "위치",
+        "home": "집 위치",
+        "work": "근무지"
       },
-      "homeLibrary": "Home Library"
+      "homeLibrary": "홈 라이브러리"
     },
     "createAccount": "Create Your Account",
     "receiveNewsletter": "Receive information about NYPL's programs and services",
-    "yes": "Yes",
-    "no": "No",
-    "nextStep": "After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials."
+    "yes": "예",
+    "no": "아니요",
+    "nextStep": "신청서를 제출하고 나면 계정 정보가 담긴 확인 페이지를 보실 수 있고, 로그인하여 도서와 자료를 요청할 수 있습니다."
   },
   "confirmation": {
     "title": "Congratulations! You now have a digital New York Public Library card.",
@@ -156,10 +149,10 @@
   },
   "button": {
     "start": "Get Started",
-    "edit": "Edit",
-    "submit": "Submit",
-    "next": "Next",
-    "previous": "Previous"
+    "edit": "수정하기",
+    "submit": "제출",
+    "next": "다음",
+    "previous": "이전"
   },
   "globalErrors": {
     "title": "양식 제출 오류",

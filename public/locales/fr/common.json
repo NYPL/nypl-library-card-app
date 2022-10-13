@@ -1,5 +1,6 @@
 {
-  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "internationalInstructions": "Les champs du formulaire doivent être remplis en utilisant des caractères latins uniquement.",
+  "required": "Obligatoire",
   "home": {
     "title": "Obtenez votre carte de bibliothèque numérique en quelques étapes faciles",
     "description": {
@@ -18,10 +19,7 @@
     },
     "birthdate": {
       "label": "Date de naissance",
-      "instruction": {
-        "part1": "MM/JJ/AAAA, séparés par des barres",
-        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
-      }
+      "instruction": "MM/JJ/AAAA, séparés par des barres"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
@@ -41,13 +39,8 @@
   },
   "location": {
     "title": "Étape 2/5 : Adresse",
-    "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
-    },
     "address": {
-      "title": "Home Address",
+      "title": "Adresse de votre domicile",
       "description": "Si vous habitez dans la ville de New York, merci d’indiquer l’adresse de votre domicile.",
       "line1": { "label": "Nom de la rue" },
       "line2": { "label": "Apartment / Suite" },
@@ -74,7 +67,7 @@
   },
   "verifyAddress": {
     "title": "Étape 3/5 : Vérification de l’adresse",
-    "description": "Please select the correct address.",
+    "description": "Veuillez sélectionner la bonne adresse..",
     "homeAddress": "Adresse de votre domicile",
     "workAddress": "Alternate Address"
   },
@@ -123,8 +116,8 @@
       "address": {
         "label": "Adresse",
         "location": "Location",
-        "home": "Home",
-        "work": "Work"
+        "home": "Domicile",
+        "work": "Travaille"
       },
       "homeLibrary": "Bibliothèque de rattachement"
     },
