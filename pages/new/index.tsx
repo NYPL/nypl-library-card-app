@@ -36,7 +36,10 @@ function HomePage({
   const queryParam = policyType ? `&policyType=${policyType}` : "";
   return (
     <>
+      <LanguageMenu />
+
       <Heading level="two">{t("home.title")}</Heading>
+
       <p>{t("home.description.part1")}</p>
       <p>{t("home.description.part2")}</p>
       <div dangerouslySetInnerHTML={{ __html: t("home.description.part3") }} />
@@ -49,8 +52,6 @@ function HomePage({
           text: t("button.start"),
         }}
       />
-
-      <LanguageMenu />
     </>
   );
 }
