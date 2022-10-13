@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "next-i18next";
 import {
   TextInput,
   TextInputTypes,
@@ -53,6 +54,11 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
     };
     const updatedRef = ref || attributes?.ref ? ref || attributes?.ref : null;
     let helperText = instructionText || null;
+    const { t } = useTranslation("common");
+    // Test the requiredLabelText
+    if (isRequired) {
+      console.log(t("required"));
+    }
 
     if (errorText?.message) {
       helperText = errorText.message;
