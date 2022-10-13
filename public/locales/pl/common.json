@@ -30,11 +30,11 @@
       "labelText": "Tak, chcę otrzymywać informacje o programach i usługach NYPL. "
     },
     "errorMessage": {
-      "firstName": "Please enter a valid first name.",
-      "lastName": "Please enter a valid last name.",
-      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "firstName": "Wprowadź prawidłowe imię.",
+      "lastName": "Wprowadź prawidłowe nazwisko.",
+      "birthdate": "Wprowadź prawidłową datę w formacie MM/DD/RRRR, z ukośnikami.",
       "ageGate": "You must be 13 years or older to continue.",
-      "email": "Please enter a valid email address."
+      "email": "Wprowadź prawidłowy adres e-mail."
     }
   },
   "location": {
@@ -59,10 +59,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Please enter a valid street address.",
-      "city": "Please enter a valid city.",
-      "state": "Please enter a 2-character state abbreviation.",
-      "zip": "Please enter a 5 or 9-digit postal code."
+      "line1": "Wprowadź prawidłową nazwę ulicy i numer budynku.",
+      "city": "Wprowadź prawidłową miejscowość.",
+      "state": "Wprowadź 2-literowy skrót stanu.",
+      "zip": "Wprowadź 5- lub 9-znakowy kod pocztowy"
     }
   },
   "verifyAddress": {
@@ -102,10 +102,10 @@
       "text": "Składając wniosek, oświadczasz, że rozumiesz i akceptujesz <a href='https://www.nypl.org/help/library-card/terms-conditions'>Regulamin dla posiadaczy kart</a> oraz <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Zasady i przepisy</a>. Więcej informacji o tym, jak Biblioteka korzysta z danych osobowych, zawiera <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Polityka prywatności</a>."
     },
     "errorMessage": {
-      "username": "Username must be between 5-25 alphanumeric characters.",
-      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
-      "verifyPassword": "The two passwords don't match.",
-      "acceptTerms": "The Terms and Conditions must be checked."
+      "username": "Nazwa użytkownika musi się składać z 5–25 liter i cyfr.",
+      "password": "Hasło musi się składać z co najmniej 8 znaków, w tym wielkich i małych liter, cyfr oraz co najmniej jednego znaku specjalnego — z wyjątkiem kropki (.).",
+      "verifyPassword": "Te dwa hasła się różnią.",
+      "acceptTerms": "Należy potwierdzić akceptację Regulaminu."
     }
   },
   "review": {
@@ -155,11 +155,11 @@
     "previous": "Wstecz"
   },
   "globalErrors": {
-    "title": "Form submission error",
-    "defaultError": "There was an error processing your submission. Please try again later."
+    "title": "Błąd przesyłania formularza",
+    "defaultError": "Podczas przetwarzania wniosku wystąpił błąd. Spróbuj ponownie później."
   },
   "apiErrors": {
-    "defaultError": "There were errors with your submission."
+    "defaultError": "Wystąpił problem z przesłaniem wniosku."
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",

@@ -1,4 +1,4 @@
-{  
+{
   "internationalInstructions": "表单字段仅可使用拉丁字符填写。",
   "required": "必须填写",
   "home": {
@@ -10,7 +10,7 @@
     }
   },
   "personal": {
-    "title": "第1步：个人资料",
+    "title": "第 1 步：个人信息",
     "firstName": {
       "label": "名字"
     },
@@ -30,23 +30,23 @@
       "labelText": "是的，我想收到有关NYPL活动和服务的信息"
     },
     "errorMessage": {
-      "firstName": "Please enter a valid first name.",
-      "lastName": "Please enter a valid last name.",
-      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "firstName": "请输入有效的名字。",
+      "lastName": "请输入有效的姓氏。",
+      "birthdate": "请输入有效的日期（月/日/年，包括斜杠）。",
       "ageGate": "You must be 13 years or older to continue.",
-      "email": "Please enter a valid email address."
+      "email": "请输入有效的电子邮件地址。"
     }
   },
   "location": {
-    "title": "第2步：地址",
+    "title": "第 2 步：地址",
     "address": {
       "title": "居住地址",
       "description": "如果您住在纽约市，请填写居住地址部分。",
-      "line1": {"label": "街道地址"},
-      "line2": {"label":"公寓號碼"},
-      "city": {"label": "城市"},
-      "state": {"label": "州", "instruction": "2个字母的缩写"},
-      "postalCode": {"label": "邮政编码", "instruction": "5位或9位邮政编码"}
+      "line1": { "label": "街道地址" },
+      "line2": { "label": "公寓號碼" },
+      "city": { "label": "城市" },
+      "state": { "label": "州", "instruction": "2个字母的缩写" },
+      "postalCode": { "label": "邮政编码", "instruction": "5位或9位邮政编码" }
     },
     "workAddress": {
       "title": "Alternate Address",
@@ -56,10 +56,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Please enter a valid street address.",
-      "city": "Please enter a valid city.",
-      "state": "Please enter a 2-character state abbreviation.",
-      "zip": "Please enter a 5 or 9-digit postal code."
+      "line1": "请输入有效的街道地址。",
+      "city": "请输入有效的城市名称。",
+      "state": "请输入 2 个字符的州简称。",
+      "zip": "请输入 5 或 9 位邮政编码。"
     }
   },
   "verifyAddress": {
@@ -69,7 +69,7 @@
     "workAddress": "Alternate Address"
   },
   "account": {
-    "title": "第4步：自定制您的帐户",
+    "title": "第 4 步：自定义您的账户。",
     "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
     "username": {
       "label": "用户名",
@@ -99,14 +99,14 @@
       "text": "提交申请，即表示您理解并同意我们的<a href='https://www.nypl.org/help/library-card/terms-conditions'>持卡人条款和条件</a>，并同意我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>规范与法则</a>。要了解有关图书馆使用个人资料的更多信息，请阅读我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>隐私政策</a>。"
     },
     "errorMessage": {
-      "username": "Username must be between 5-25 alphanumeric characters.",
-      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
-      "verifyPassword": "The two passwords don't match.",
-      "acceptTerms": "The Terms and Conditions must be checked."
+      "username": "用户名需由 5-25 位英文字母数字字符组成。",
+      "password": "密码需包含至少 8 个字符，包括大小写字母、字母和数字并至少包含 1 个特殊字符，句号 (.) 除外。",
+      "verifyPassword": "密码不一致。",
+      "acceptTerms": "须查看条款和细则。"
     }
   },
   "review": {
-    "title": "第5步：确认您的资料",
+    "title": "第 5 步：请确认您的信息",
     "description": "确保您输入的所有资料都是正确的。 如果需要，您仍然可以在提交申请之前进行更改。",
     "section": {
       "personal": "个人资料",
@@ -115,7 +115,7 @@
         "location": "Location",
         "home": "Home",
         "work": "Work"
-      }, 
+      },
       "homeLibrary": "您經常使用的圖書館"
     },
     "createAccount": "Create Your Account",
@@ -152,11 +152,11 @@
     "previous": "上一步"
   },
   "globalErrors": {
-    "title": "Form submission error",
-    "defaultError": "There was an error processing your submission. Please try again later."
+    "title": "表单提交错误",
+    "defaultError": "处理您的提交时出现错误。请稍后再试。"
   },
   "apiErrors": {
-    "defaultError": "There were errors with your submission."
+    "defaultError": "提交时出现问题"
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",

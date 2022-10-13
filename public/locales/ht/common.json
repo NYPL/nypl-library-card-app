@@ -30,11 +30,11 @@
       "labelText": "Wi, mwen ta renmen resevwa enfòmasyon sou pwogram ak sèvis Bibliyotèk Piblik New York (NYPL) ofri yo."
     },
     "errorMessage": {
-      "firstName": "Please enter a valid first name.",
-      "lastName": "Please enter a valid last name.",
-      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "firstName": "Tanpri antre yon non ki valab.",
+      "lastName": "Tanpri antre yon siyati ki valab.",
+      "birthdate": "Tanpri antre yon dat ki valab, MM/DD/AAAA, ki gen ladan karaktè oblik yo.",
       "ageGate": "You must be 13 years or older to continue.",
-      "email": "Please enter a valid email address."
+      "email": "Tanpri antre yon adrès imèl ki valab."
     }
   },
   "location": {
@@ -59,10 +59,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Please enter a valid street address.",
-      "city": "Please enter a valid city.",
-      "state": "Please enter a 2-character state abbreviation.",
-      "zip": "Please enter a 5 or 9-digit postal code."
+      "line1": "Tanpri antre yon non ri ki valab.",
+      "city": "Tanpri antre non yon vil ki valab.",
+      "state": "Tanpri antre fòm abrevyasyon 2 karaktè yon eta.",
+      "zip": "Tanpri antre yon kòd postal ki genyen 5 oswa 9 chif."
     }
   },
   "verifyAddress": {
@@ -102,10 +102,10 @@
       "text": "Lè ou soumèt yon aplikasyon, ou konprann epi ou dakò ak <a href='https://www.nypl.org/help/library-card/terms-conditions'>Tèm ak Kondisyon pou moun ki gen kat</a> nou yo epi ou dakò ak <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Règ ak Règleman</a> nou yo. Pou aprann plis sou itilizasyon enfòmasyon pèsonèl Bibliyotèk la, tanpri li <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Règleman sou Vi Prive</a> nou an."
     },
     "errorMessage": {
-      "username": "Username must be between 5-25 alphanumeric characters.",
-      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
-      "verifyPassword": "The two passwords don't match.",
-      "acceptTerms": "The Terms and Conditions must be checked."
+      "username": "Non itilizatè a dwe genyen ant 5-25 karaktè alfanimerik.",
+      "password": "Modpas ou a dwe gen omwen 8 karaktè, sa gen ladan yon melanj lèt majiskil ak miniskil, ki enkli yon melanj lèt ak nimewo, epi li dwe gen omwen yon karaktè espesyal eksepte pwen (.)",
+      "verifyPassword": "De modpas yo pa koresponn.",
+      "acceptTerms": "Ou dwe tcheke seksyon Tèm ak Kondisyon yo."
     }
   },
   "review": {
@@ -155,11 +155,11 @@
     "previous": "Avan"
   },
   "globalErrors": {
-    "title": "Form submission error",
-    "defaultError": "There was an error processing your submission. Please try again later."
+    "title": "Erè soumisyon fòmilè",
+    "defaultError": "Te gen yon erè nan tretman soumisyon w lan. Tanpri eseye ankò pita."
   },
   "apiErrors": {
-    "defaultError": "There were errors with your submission."
+    "defaultError": "Te gen yon pwoblèm ak soumisyon an"
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",

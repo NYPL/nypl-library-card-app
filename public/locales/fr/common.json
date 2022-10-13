@@ -30,11 +30,11 @@
       "labelText": "Oui, je souhaite recevoir les informations sur les activités et les services de la NYPL."
     },
     "errorMessage": {
-      "firstName": "Please enter a valid first name.",
-      "lastName": "Please enter a valid last name.",
-      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "firstName": "Veuillez saisir un prénom valide.",
+      "lastName": "Veuillez saisir un nom de famille valide.",
+      "birthdate": "Veuillez saisir une date valide, MM/JJ/AAAA, séparée par des barres obliques.",
       "ageGate": "You must be 13 years or older to continue.",
-      "email": "Please enter a valid email address."
+      "email": "Veuillez saisir une adresse e-mail valide."
     }
   },
   "location": {
@@ -42,11 +42,14 @@
     "address": {
       "title": "Adresse de votre domicile",
       "description": "Si vous habitez dans la ville de New York, merci d’indiquer l’adresse de votre domicile.",
-      "line1": {"label": "Nom de la rue"},
-      "line2": {"label":"Apartment / Suite"},
-      "city": {"label": "Ville"},
-      "state": {"label": "État", "instruction": "Abréviation (2 lettres)"},
-      "postalCode": {"label": "Code postal", "instruction": "Code postal à 5 ou 9 chiffres"}
+      "line1": { "label": "Nom de la rue" },
+      "line2": { "label": "Apartment / Suite" },
+      "city": { "label": "Ville" },
+      "state": { "label": "État", "instruction": "Abréviation (2 lettres)" },
+      "postalCode": {
+        "label": "Code postal",
+        "instruction": "Code postal à 5 ou 9 chiffres"
+      }
     },
     "workAddress": {
       "title": "Alternate Address",
@@ -56,10 +59,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Please enter a valid street address.",
-      "city": "Please enter a valid city.",
-      "state": "Please enter a 2-character state abbreviation.",
-      "zip": "Please enter a 5 or 9-digit postal code."
+      "line1": "Veuillez saisir une adresse postale valide.",
+      "city": "Veuillez saisir une ville valide.",
+      "state": "Veuillez saisir l'abréviation à 2 lettres de l'état.",
+      "zip": "Veuillez saisir un code postal à 5 ou 9 chiffres."
     }
   },
   "verifyAddress": {
@@ -78,7 +81,8 @@
     },
     "password": {
       "label": "Mot de passe",
-      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"},
+      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
+    },
     "verifyPassword": {
       "label": "Vérification du mot de passe",
       "instruction": "8-32 chiffres"
@@ -98,15 +102,15 @@
       "text": " En soumettant cette demande, vous certifiez que vous avez lu et accepté les <a href='https://www.nypl.org/help/library-card/terms-conditions'>Conditions générales des titulaires de la carte</a> ainsi que notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>règlement intérieur</a>. Pour en savoir plus sur l’utilisation de vos données personnelles par la Bibliothèque, veuillez lire notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>politique de confidentialité</a>."
     },
     "errorMessage": {
-      "username": "Username must be between 5-25 alphanumeric characters.",
-      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
-      "verifyPassword": "The two passwords don't match.",
-      "acceptTerms": "The Terms and Conditions must be checked."
+      "username": "Votre nom d'utilisateur doit être composé de 5 à 25 caractères alphanumériques.",
+      "password": "Votre mot de passe doit être constitué d'au moins 8 caractères, notamment un mélange de minuscules et majuscules, y compris des lettres et des chiffres, et contenir au moins un caractère spécial à l'exception d'un point (.)",
+      "verifyPassword": "Les deux mots de passe ne correspondent pas.",
+      "acceptTerms": "Vous devez cocher les conditions générales."
     }
   },
   "review": {
     "title": "Étape 5/5 : Confirmation de vos informations",
-    "description":  "Assurez-vous que toutes les informations que vous avez fournies sont correctes. Si besoin, vous pouvez les modifier avant d’envoyer votre demande.",
+    "description": "Assurez-vous que toutes les informations que vous avez fournies sont correctes. Si besoin, vous pouvez les modifier avant d’envoyer votre demande.",
     "section": {
       "personal": "Informations personnelles",
       "address": {
@@ -114,7 +118,7 @@
         "location": "Location",
         "home": "Domicile",
         "work": "Travaille"
-      }, 
+      },
       "homeLibrary": "Bibliothèque de rattachement"
     },
     "createAccount": "Create Your Account",
@@ -151,11 +155,11 @@
     "previous": "Retour"
   },
   "globalErrors": {
-    "title": "Form submission error",
-    "defaultError": "There was an error processing your submission. Please try again later."
+    "title": "Erreur de soumission du formulaire",
+    "defaultError": "Une erreur s'est produite lors du traitement de votre soumission. Veuillez réessayer plus tard."
   },
   "apiErrors": {
-    "defaultError": "There were errors with your submission."
+    "defaultError": "Un problème est survenu lors de la soumission."
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",

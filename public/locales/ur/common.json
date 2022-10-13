@@ -30,11 +30,11 @@
       "labelText": "ہاں، میں NYPL (نیویارک پبلک لائبریری) کے پروگراموں اور خدمات کے بارے میں معلومات حاصل کرنا چاہوں گا/گی۔"
     },
     "errorMessage": {
-      "firstName": "Please enter a valid first name.",
-      "lastName": "Please enter a valid last name.",
-      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "firstName": "براہِ کرم ایک معتبر پہلا نام درج کریں۔",
+      "lastName": "براہِ کرم ایک معتبر آخری نام درج کریں۔",
+      "birthdate": "براہِ کرم ایک معتبر تاریخ درج کریں، س س س س/د د/م م، بشمول سلیشز۔",
       "ageGate": "You must be 13 years or older to continue.",
-      "email": "Please enter a valid email address."
+      "email": "براہِ کرم ایک معتبر ای میل ایڈریس لکھیں۔"
     }
   },
   "location": {
@@ -59,10 +59,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Please enter a valid street address.",
-      "city": "Please enter a valid city.",
-      "state": "Please enter a 2-character state abbreviation.",
-      "zip": "Please enter a 5 or 9-digit postal code."
+      "line1": "براہِ کرم ایک معتبر گلی کا پتہ درج کریں۔",
+      "city": "براہِ کرم ایک معتبر شہر درج کریں۔",
+      "state": "براہِ کرم ریاست کا 2-حروف والا مخفف درج کریں۔",
+      "zip": "براہِ کرم 5 یا 9 ہندسوں کا ڈاک کوڈ درج کریں۔"
     }
   },
   "verifyAddress": {
@@ -102,10 +102,10 @@
       "text": "درخواست جمع کروا کر، آپ ہمارے <a href='https://www.nypl.org/help/library-card/terms-conditions'>کارڈ ہولڈر کی شرائط و ضوابط</a> کو سمجھتے اور ان سے اتفاق کرتے ہیں اور ہمارے <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>قواعد و ضوابط</a> سے اتفاق کرتے ہیں۔ لائبریری کے ذاتی معلومات کے استعمال کے بارے میں مزید جاننے کے لیے، براہِ کرم ہماری <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>رازداری کی پالیسی</a> پڑھیں۔"
     },
     "errorMessage": {
-      "username": "Username must be between 5-25 alphanumeric characters.",
-      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
-      "verifyPassword": "The two passwords don't match.",
-      "acceptTerms": "The Terms and Conditions must be checked."
+      "username": "صارف کا نام 25-5 حروف کے درمیان ہونا لازمی ہے۔",
+      "password": "آپ کا پاس ورڈ کم از کم 8 حروف کا ہونا لازمی ہے، بشمول بڑے اور چھوٹے دونوں حروف کا مرکب، بشمول حروف اور اعداد کے مرکب ، اور اس میں وقفے (.) کے سوا کم از کم ایک خاص حرف ہو۔",
+      "verifyPassword": "دونوں پاس ورڈ آپس میں نہیں ملتے۔",
+      "acceptTerms": "شرائط و ضوابط کو چیک کرنا لازمی ہے۔"
     }
   },
   "review": {
@@ -155,11 +155,11 @@
     "previous": "پچھلا"
   },
   "globalErrors": {
-    "title": "Form submission error",
-    "defaultError": "There was an error processing your submission. Please try again later."
+    "title": "فارم جمع کرانے میں نقص",
+    "defaultError": "آپ کے معلومات بھیجنے پر کارروائی کرنے میں ایک نقص پڑ گیا تھا۔ براہِ کرم بعد میں دوبارہ کوشش کریں۔"
   },
   "apiErrors": {
-    "defaultError": "There were errors with your submission."
+    "defaultError": "جمع کرانے میں ایک مسئلہ تھا۔"
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",

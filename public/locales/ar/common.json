@@ -10,7 +10,7 @@
     }
   },
   "personal": {
-    "title": "الخطوة ١ من ٥: المعلومات الشخصية",
+    "title": "الخطوة 1 من 5: المعلومات الشخصية",
     "firstName": {
       "label": "الاسم الأول"
     },
@@ -30,23 +30,26 @@
       "labelText": "نعم، أرغب أن أتلقّي معلومات حول برامج وخدمات المكتبة عبر البريد الإلكتروني."
     },
     "errorMessage": {
-      "firstName": "Please enter a valid first name.",
-      "lastName": "Please enter a valid last name.",
-      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "firstName": "يرجى إدخال اسم أول صالح.",
+      "lastName": "يرجى إدخال اسم أخير صالح.",
+      "birthdate": "يرجى إدخال تاريخ صالح، شهر/يوم/سنة، بما في ذلك الخطوط المائلة.",
       "ageGate": "You must be 13 years or older to continue.",
-      "email": "Please enter a valid email address."
+      "email": "يرجى إدخال عنوان بريد إلكتروني صالح."
     }
   },
   "location": {
-    "title": "الخطوة ٢ من ٥: العنوان ",
+    "title": "الخطوة 2 من 5: العنوان ",
     "address": {
       "title": "عنوان المنزل",
       "description": "إذا كنت تعيش في مدينة نيويورك ، فيرجى إكمال نموذج عنوان المنزل.",
-      "line1": {"label": "عنوان الشارع"},
-      "line2": {"label":"الشقة / الجناح"},
-      "city": {"label": "المدينة"},
-      "state": {"label": "الولاية", "instruction": "اختصار مكون من حرفين"},
-      "postalCode": {"label": "الرمز البريدي", "instruction": "٥ أو ٩ أرقام رمز بريدي"}
+      "line1": { "label": "عنوان الشارع" },
+      "line2": { "label": "الشقة / الجناح" },
+      "city": { "label": "المدينة" },
+      "state": { "label": "الولاية", "instruction": "اختصار مكون من حرفين" },
+      "postalCode": {
+        "label": "الرمز البريدي",
+        "instruction": "٥ أو ٩ أرقام رمز بريدي"
+      }
     },
     "workAddress": {
       "title": "Alternate Address",
@@ -56,10 +59,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Please enter a valid street address.",
-      "city": "Please enter a valid city.",
-      "state": "Please enter a 2-character state abbreviation.",
-      "zip": "Please enter a 5 or 9-digit postal code."
+      "line1": "يرجى إدخال عنوان شارع صالح.",
+      "city": "يرجى إدخال مدينة صالحة.",
+      "state": "يرجى إدخال اختصار ولاية مكون من حرفين.",
+      "zip": "يرجى إدخال رمز بريدي مكون من 5 أو 9 أرقام."
     }
   },
   "verifyAddress": {
@@ -69,7 +72,7 @@
     "workAddress": "Alternate Address"
   },
   "account": {
-    "title": "الخطوة ٤ من ٥: تخصيص حسابك",
+    "title": "الخطوة 4 من 5: تخصيص حسابك",
     "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
     "username": {
       "label": "اسم المستخدم",
@@ -99,14 +102,14 @@
       "text": " بتقديم هذا الطلب، أنا أفهم وأوافق على<a href='https://www.nypl.org/help/library-card/terms-conditions'> شروط وأحكام حامل البطاقة </a> ,  و أوافق على<a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'> قواعد ولوائح مكتبة نيويورك العامة</a>.  تعلم المزيد عن استخدام المكتبة للمعلومات الشخصية,يرجى القراءة <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'> سياسة الخصوصية</a>  الخاصة بنا."
     },
     "errorMessage": {
-      "username": "Username must be between 5-25 alphanumeric characters.",
-      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
-      "verifyPassword": "The two passwords don't match.",
-      "acceptTerms": "The Terms and Conditions must be checked."
+      "username": "يجب أن يتكون اسم المستخدم من 5 إلى 25 حرفًا أبجديًا رقميًا.",
+      "password": "يجب أن تتكون كلمة المرور الخاصة بك من 8 أحرف إنجليزية على الأقل، بما في ذلك مزيج من الحروف الكبيرة والحروف الصغيرة، وبما يشمل مزيجًا من الحروف والأرقام، ويكون بها رمز خاص واحد على الأقل غير النقطة (.)",
+      "verifyPassword": "كلمتا المرور غير متطابقتين.",
+      "acceptTerms": "يجب التحقق من الشروط والأحكام."
     }
   },
   "review": {
-    "title": "الخطوة ٥ من ٥: قم بتأكيد المعلومات",
+    "title": "الخطوة 5 من 5: تأكيد معلوماتك",
     "description": "تأكد من صحة جميع المعلومات التي أدخلتها. إذا لزم الأمر ، لا يزال بإمكانك إجراء التغييرات قبل إرسال طلبك.",
     "section": {
       "personal": "معلومات شخصية",
@@ -115,7 +118,7 @@
         "location": "Location",
         "home": "Home",
         "work": "Work"
-      }, 
+      },
       "homeLibrary": "المكتبة المفضلة"
     },
     "createAccount": "Create Your Account",
@@ -152,11 +155,11 @@
     "previous": "السابق"
   },
   "globalErrors": {
-    "title": "Form submission error",
-    "defaultError": "There was an error processing your submission. Please try again later."
+    "title": "خطأ في إرسال النموذج",
+    "defaultError": "حدث خطأ في أثناء معالجة عملية الإرسال الخاصة بك. يرجى إعادة المحاولة لاحقًا."
   },
   "apiErrors": {
-    "defaultError": "There were errors with your submission."
+    "defaultError": "حدثت مشكلات تتعلق بعملية الإرسال"
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",

@@ -30,11 +30,11 @@
       "labelText": "예, NYPL의 프로그램과 서비스에 대한 정보를 받기를 원합니다."
     },
     "errorMessage": {
-      "firstName": "Please enter a valid first name.",
-      "lastName": "Please enter a valid last name.",
-      "birthdate": "Please enter a valid date, MM/DD/YYYY, including slashes.",
+      "firstName": "유효한 이름을 입력해주십시오.",
+      "lastName": "유효한 성씨를 입력해주십시오.",
+      "birthdate": "유효한 날짜를 /를 포함하여 월월/일일/년년년년 형식으로 입력해주십시오.",
       "ageGate": "You must be 13 years or older to continue.",
-      "email": "Please enter a valid email address."
+      "email": "유효한 이메일 주소를 입력해 주십시오."
     }
   },
   "location": {
@@ -59,10 +59,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Please enter a valid street address.",
-      "city": "Please enter a valid city.",
-      "state": "Please enter a 2-character state abbreviation.",
-      "zip": "Please enter a 5 or 9-digit postal code."
+      "line1": "유효한 거리 주소를 입력해주십시오.",
+      "city": "유효한 도시명을 입력해주십시오.",
+      "state": "유효한 2자리 주 약어를 입력해주십시오.",
+      "zip": "5자리 또는 9자리 우편번호를 입력해주십시오."
     }
   },
   "verifyAddress": {
@@ -102,10 +102,10 @@
       "text": "신청서를 제출하시면, 귀하는 <a href='https://www.nypl.org/help/library-card/terms-conditions'>카드소지자 이용약관</a> 에 동의하고, <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>규칙과 규정</a> 에 동의하는 것으로 간주됩니다. 도서관의 개인정보 사용에 관해 자세히 알아보시려면 <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>개인정보 취급방침</a> 을 읽어주십시오."
     },
     "errorMessage": {
-      "username": "Username must be between 5-25 alphanumeric characters.",
-      "password": "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
-      "verifyPassword": "The two passwords don't match.",
-      "acceptTerms": "The Terms and Conditions must be checked."
+      "username": "사용자명은 5 내지 25자의 영숫자로 해야 합니다.",
+      "password": "비밀번호는 8자 이상이어야 하며, 대문자, 소문자, 숫자, 특수문자(마침표(.) 제외)를 혼합하여 만들어야 합니다.",
+      "verifyPassword": "두 개의 비밀번호가 일치하지 않습니다.",
+      "acceptTerms": "이용약관을 확인해야 합니다."
     }
   },
   "review": {
@@ -155,11 +155,11 @@
     "previous": "이전"
   },
   "globalErrors": {
-    "title": "Form submission error",
-    "defaultError": "There was an error processing your submission. Please try again later."
+    "title": "양식 제출 오류",
+    "defaultError": "제출 처리에 오류가 발생했습니다. 나중에 다시 시도해주십시오."
   },
   "apiErrors": {
-    "defaultError": "There were errors with your submission."
+    "defaultError": "제출한 정보에 문제가 있었습니다."
   },
   "ariaLabel": {
     "librarySuggestions": "List of library name suggestions",
