@@ -1,35 +1,36 @@
 {
   "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "required": "درکار ہے",
   "home": {
-    "title": "Get a Digital Library Card Today in a Few Easy Steps",
+    "title": "چند آسان مراحل میں آج ہی ڈیجیٹل لائبریری کارڈ حاصل کریں۔",
     "description": {
-      "part1": "If you are 13 or older and live, work, attend school, or pay property taxes in New York State, you can get a free digital library card right now using this online form. Visitors to New York State can also use this form to apply for a temporary card.",
-      "part2": "With a digital library card you get free access to the Library’s wide array of digital resources—including e-books, databases, educational resources, and more.",
-      "part3": "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+      "part1": "اگر آپ کی عمر 13 سال یا اس سے زیادہ ہے اور آپ ریاست نیو یارک میں رہتے ہیں، کام کرتے ہیں، سکول جاتے ہیں، یا پراپرٹی ٹیکس ادا کرتے ہیں، تو آپ یہ آن لائن فارم استعمال کرکے ابھی ایک مفت ڈیجیٹل لائبریری کارڈ حاصل کر سکتے ہیں۔ ریاست نیو یارک میں آنے والے مہمان بھی عارضی کارڈ کے لیے درخواست دینے کے لیے یہ فارم استعمال کر سکتے ہیں۔",
+      "part2": "ڈیجیٹل لائبریری کارڈ کے ساتھ آپ لائبریری کے ڈیجیٹل وسائل کی وسیع صفوں تک مفت رسائی حاصل کرتے ہیں—بشمول ای بُکس، ڈیٹا بیس، تعلیمی وسائل، اور بہت کچھ۔",
+      "part3": "درخواست جمع کروا کر، آپ ہمارے <a href='https://www.nypl.org/help/library-card/terms-conditions'>کارڈ ہولڈر کی شرائط و ضوابط</a> کو سمجھتے اور ان سے اتفاق کرتے ہیں اور ہمارے <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'> قواعد و ضوابط</a> سے اتفاق کرتے ہیں۔ لائبریری کے ذاتی معلومات کے استعمال کے بارے میں مزید جاننے کے لیے، براہِ کرم ہماری <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>رازداری کی پالیسی</a> پڑھیں۔"
     }
   },
   "personal": {
-    "title": "Step 1 of 5: Personal Information",
+    "title": "مرحلہ 1 از 5: ذاتی معلومات",
     "firstName": {
-      "label": "First Name"
+      "label": "نام کا پہلا حصہ"
     },
     "lastName": {
-      "label": "Last Name"
+      "label": "نام کا آخری حصہ"
     },
     "birthdate": {
-      "label": "Date of Birth",
+      "label": "تاریخِ پیدائش",
       "instruction": {
-        "part1": "MM/DD/YYYY, including slashes",
+        "part1": "س س س س/د د/م م، بشمول سلیشز",
         "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
       }
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
-      "label": "Email Address",
-      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
+      "label": "ای میل اڈریس",
+      "instruction": "ہمارے بہت سے ڈیجیٹل وسائل، جیسے ای-بُکس استعمال کرنے کے لیے ایک ای میل ایڈریس درکار ہے۔ اگر آپ ای میل ایڈریس فراہم نہیں کرنا چاہتے، تو آپ ہمارا <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>متبادل فارم</a> استعمال کرتے ہوئے مادی کارڈ کے لیے درخواستدے سکتے ہیں۔ ایک بار پُر کرنے کے بعد، براہِ کرم اپنا کارڈ لینے کے لیے شناخت کے ثبوت اور گھر کے پتے کے ساتھ ہمارے<a href='https://www.nypl.org/locations'>مقامات</a> پر جائیں۔"
     },
     "eCommunications": {
-      "labelText": "Yes, I would like to receive information about NYPL's programs and services"
+      "labelText": "ہاں، میں NYPL (نیویارک پبلک لائبریری) کے پروگراموں اور خدمات کے بارے میں معلومات حاصل کرنا چاہوں گا/گی۔"
     },
     "errorMessage": {
       "firstName": "Please enter a valid first name.",
@@ -40,22 +41,22 @@
     }
   },
   "location": {
-    "title": "Step 2 of 5: Address",
+    "title": "مرحلہ 2 از 5: پتہ",
     "internationalInstructions": {
       "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
       "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
       "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
     },
     "address": {
-      "title": "Home Address",
-      "description": "If you live in NYC, please fill out the home address form.",
-      "line1": { "label": "Street Address" },
-      "line2": { "label": "Apartment / Suite" },
-      "city": { "label": "City" },
-      "state": { "label": "State", "instruction": "2-letter abbreviation" },
+      "title": "گھر کا پتہ",
+      "description": "اگر آپ NYC (نیویارک سٹی) میں رہتے ہیں، تو براہِ کرم گھر کے پتے کا فارم پُر کریں۔",
+      "line1": { "label": "گلی کا پتہ" },
+      "line2": { "label": "اپارٹمنٹ / سوٹ" },
+      "city": { "label": "شہر" },
+      "state": { "label": "ریاست", "instruction": "2 حرفی مخفف" },
       "postalCode": {
-        "label": "Postal Code",
-        "instruction": "5 or 9-digit postal code"
+        "label": "ڈاک کا کوڈ",
+        "instruction": "5 یا 9 ہندسوں کا ڈاک کا کوڈ"
       }
     },
     "workAddress": {
@@ -73,18 +74,18 @@
     }
   },
   "verifyAddress": {
-    "title": "Step 3 of 5: Address Verification",
-    "description": "Please select the correct address.",
-    "homeAddress": "Home Address",
+    "title": "مرحلہ 3 از 5: پتے کی تصدیق",
+    "description": "براہِ کرم درست پتہ منتخب کریں",
+    "homeAddress": "گھر کا پتہ",
     "workAddress": "Alternate Address"
   },
   "account": {
-    "title": "Step 4 of 5: Customize Your Account",
+    "title": "مرحلہ 4 از 5: اپنے اکاؤنٹ کو حسب ضرورت بنائیں",
     "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
     "username": {
-      "label": "Username",
-      "instruction": "5-25 alphanumeric characters. No special characters.",
-      "checkButton": "Check if username is available"
+      "label": "صارف کا نام",
+      "instruction": "5-25 حروف و ہندسوں پر مشتمل نام۔ مخصوص حروف کی اجازت نہیں ہے۔",
+      "checkButton": "دیکھیں کہ کیا یہ صارف کا نام دستیاب ہے"
     },
     "password": {
       "label": "Password",
@@ -96,17 +97,17 @@
     },
     "showPassword": "Show Password",
     "library": {
-      "selectLibrary": "Select a home library:",
-      "placeholder": "Type a library name, such as Parkchester Library",
-      "title": "Home Library",
+      "selectLibrary": "ایک ہوم لائبریری منتخب کریں:",
+      "placeholder": "لائبریری کا نام ٹائپ کریں، جیسے پارک چیسٹر لائبریری",
+      "title": "ہوم لائبریری",
       "description": {
-        "part1": "Choosing a home library will help us make sure you&apos;re getting everything you need from a branch that&apos;s most convenient for you.",
-        "part2": "You can skip this step and update it at any point through your account."
+        "part1": "ہوم لائبریری کا انتخاب کرنے سے ہمیں اس بات کو یقینی بنانے میں مدد ملے گی کہ آپ کو اپنی ضرورت کی ہر چیز اس شاخ سے مل رہی ہے جو آپ کے لیے آسان ترین ہو۔",
+        "part2": "آپ یہ مرحلہ پھلانگ سکتے ہیں اور اسے اپنے اکاؤنٹ کے ذریعے کسی بھی وقت اپ ڈیٹ کر سکتے ہیں۔"
       }
     },
     "termsAndCondition": {
-      "label": "Yes, I accept the terms and conditions.",
-      "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+      "label": "ہاں، مجھے شرائط و ضوابط قبول ہیں۔",
+      "text": "درخواست جمع کروا کر، آپ ہمارے <a href='https://www.nypl.org/help/library-card/terms-conditions'>کارڈ ہولڈر کی شرائط و ضوابط</a> کو سمجھتے اور ان سے اتفاق کرتے ہیں اور ہمارے <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>قواعد و ضوابط</a> سے اتفاق کرتے ہیں۔ لائبریری کے ذاتی معلومات کے استعمال کے بارے میں مزید جاننے کے لیے، براہِ کرم ہماری <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>رازداری کی پالیسی</a> پڑھیں۔"
     },
     "errorMessage": {
       "username": "Username must be between 5-25 alphanumeric characters.",
@@ -116,23 +117,23 @@
     }
   },
   "review": {
-    "title": "Step 5 of 5: Confirm Your Information",
-    "description": "Make sure all the information you’ve entered is correct. If needed, you can still make changes before you submit your application.",
+    "title": "مرحلہ 5 از 5: اپنی معلومات کی تصدیق کریں",
+    "description": "تسلی کر لیں کہ آپ نے جو بھی معلومات درج کی ہیں وہ درست ہیں۔ اگر ضرورت ہو تو، آپ اپنی درخواست جمع کرانے سے پہلے ابھی بھی تبدیلیاں کر سکتے ہیں۔",
     "section": {
-      "personal": "Personal Information",
+      "personal": "ذاتی معلومات",
       "address": {
-        "label": "Address",
-        "location": "Location",
-        "home": "Home",
-        "work": "Work"
+        "label": "پتہ",
+        "location": "مقام",
+        "home": "گھر کا پتہ",
+        "work": "کام کا پتہ"
       },
-      "homeLibrary": "Home Library"
+      "homeLibrary": "ہوم لائبریری"
     },
     "createAccount": "Create Your Account",
     "receiveNewsletter": "Receive information about NYPL's programs and services",
-    "yes": "Yes",
-    "no": "No",
-    "nextStep": "After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials."
+    "yes": "جی ہاں",
+    "no": "نہیں",
+    "nextStep": "اپنی درخواست جمع کروانے کے بعد، آپ کو اپنے اکاؤنٹ کی معلومات کے ساتھ ایک تصدیقی صفحہ نظر آئے گا، اور آپ لاگ ان کرنے اور کتب اور مواد کی درخواست کرنے کے قابل ہوں گے۔"
   },
   "confirmation": {
     "title": "Congratulations! You now have a digital New York Public Library card.",
@@ -156,10 +157,10 @@
   },
   "button": {
     "start": "Get Started",
-    "edit": "Edit",
-    "submit": "Submit",
-    "next": "Next",
-    "previous": "Previous"
+    "edit": "ترمیم کریں",
+    "submit": "جمع کروائیں",
+    "next": "اگلا",
+    "previous": "پچھلا"
   },
   "globalErrors": {
     "title": "Form submission error",
