@@ -4,18 +4,18 @@
   "home": {
     "title": "Jwenn yon Kat Bibliyotèk Nimerik Jodi a Menm nan Kèk Etap Byen Fasil",
     "description": {
-      "part1": "If you are 13 or older and live, work, attend school, or pay property taxes in New York State, you can get a free digital library card right now using this online form. Visitors to New York State can also use this form to apply for a temporary card.",
-      "part2": "With a digital library card you get free access to the Library’s wide array of digital resources—including e-books, databases, educational resources, and more.",
-      "part3": "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+      "part1": "Si w gen laj 13 lane oswa plis epi w ap viv, travay, ale lekòl, oswa peye taks sou pwopriyete nan Eta New York, ou ka jwenn yon kat bibliyotèk nimerik gratis kounye a lè w itilize fòm sou entènèt sa a. Vizitè nan Eta New York yo kapab itilize fòm sa a tou pou yo aplike pou yon kat tanporè.",
+      "part2": "Avèk yon kat bibliyotèk nimerik, ou jwenn aksè gratis ak yon pakèt resous nimerik Bibliyotèk la—ki gen ladan liv elektwonik, baz done, resous edikatif, ak plis ankò.",
+      "part3": "Lè ou soumèt yon aplikasyon, ou konprann epi ou dakò ak <a href='https://www.nypl.org/help/library-card/terms-conditions'>Tèm ak Kondisyon pou moun ki gen kat</a> nou yo epi ou dakò ak <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Règ ak Règleman</a>nou yo. Pou aprann plis sou itilizasyon enfòmasyon pèsonèl Bibliyotèk la, tanpri li <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Règleman sou Vi Prive</a> nou an."
     }
   },
   "personal": {
-    "title": "Step 1 of 5: Personal Information",
+    "title": "Etap 1 sou 5: Enfomasyon Pèsonèl",
     "firstName": {
-      "label": "First Name"
+      "label": "Premye non"
     },
     "lastName": {
-      "label": "Last Name"
+      "label": "Siyati"
     },
     "birthdate": {
       "label": "Date of Birth",
@@ -23,11 +23,11 @@
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
-      "label": "Email Address",
-      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
+      "label": "Adrès imèl",
+      "instruction": "Yon adrès imèl nesesè pou itilize plizyè nan resous nimerik nou yo, tankou liv elektwonik. Si w pa vle bay yon adrès imèl, ou ka aplike pou yon kat fizik lè w sèvi ak <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>lòt fòm</a> nou an. Yon fwa w ranpli l, tanpri vizite youn nan <a href='https://www.nypl.org/locations'>lokal</a> nou yo avèk prèv idantite ak adrès lakay ou pou w ka pran kat ou a."
     },
     "eCommunications": {
-      "labelText": "Yes, I would like to receive information about NYPL's programs and services"
+      "labelText": "Wi, mwen ta renmen resevwa enfòmasyon sou pwogram ak sèvis Bibliyotèk Piblik New York (NYPL) ofri yo."
     },
     "errorMessage": {
       "firstName": "Please enter a valid first name.",
@@ -38,17 +38,17 @@
     }
   },
   "location": {
-    "title": "Step 2 of 5: Address",
+    "title": "Etap 2 sou 5: Adrès",
     "address": {
-      "title": "Home Address",
-      "description": "If you live in NYC, please fill out the home address form.",
-      "line1": { "label": "Street Address" },
-      "line2": { "label": "Apartment / Suite" },
-      "city": { "label": "City" },
-      "state": { "label": "State", "instruction": "2-letter abbreviation" },
+      "title": "Adrès Lakay Ou",
+      "description": "Si ou abite NYC, tanpri ranpli fòm pou adrès lakay ou a.",
+      "line1": { "label": "Non Ri" },
+      "line2": { "label": "Apatman / Swit" },
+      "city": { "label": "Vil" },
+      "state": { "label": "Eta", "instruction": "Abrevyasyon 2 lèt" },
       "postalCode": {
-        "label": "Postal Code",
-        "instruction": "5 or 9-digit postal code"
+        "label": "Kòd Postal",
+        "instruction": "Kòd postal ki genyen 5 oswa 9 chif."
       }
     },
     "workAddress": {
@@ -66,18 +66,18 @@
     }
   },
   "verifyAddress": {
-    "title": "Step 3 of 5: Address Verification",
-    "description": "Please select the correct address.",
-    "homeAddress": "Home Address",
+    "title": "Etap 3 sou 5: Verifikasyon Adrès",
+    "description": "Tanpri chwazi adrès ki kòrèk la.",
+    "homeAddress": "Adrès Lakay Ou",
     "workAddress": "Alternate Address"
   },
   "account": {
-    "title": "Step 4 of 5: Customize Your Account",
-    "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
+    "title": "Etap 4 sou 5: Pèsonalize Kont Ou",
+    "description": "Kreye yon non itilizatè ak yon nimewo idantifikasyon pèsonèl (Personal Identification Number, PIN) pou w ka konekte w ak jere kont ou oswa pou jwenn aksè ak plizyè nan resous nimerik nou yo. Non itilizatè w la dwe inik.",
     "username": {
-      "label": "Username",
-      "instruction": "5-25 alphanumeric characters. No special characters.",
-      "checkButton": "Check if username is available"
+      "label": "Non Itilizatè",
+      "instruction": "5-25 karaktè alfanimerik. Okenn karaktè espesyal.",
+      "checkButton": "Tcheke si non itilizatè a disponib"
     },
     "password": {
       "label": "Password",
@@ -89,17 +89,17 @@
     },
     "showPassword": "Show Password",
     "library": {
-      "selectLibrary": "Select a home library:",
-      "placeholder": "Type a library name, such as Parkchester Library",
-      "title": "Home Library",
+      "selectLibrary": "Chwazi yon bibliyotèk adomisil:",
+      "placeholder": "Tape non yon bibliyotèk, tankou Parkchester Library",
+      "title": "Bibliyotèk Adomisil",
       "description": {
-        "part1": "Choosing a home library will help us make sure you&apos;re getting everything you need from a branch that&apos;s most convenient for you.",
-        "part2": "You can skip this step and update it at any point through your account."
+        "part1": "Chwazi yon bibliyotèk adomisil ap ede nou asire nou ke w jwenn tout sa w bezwen nan sikisal ki pi bon pou ou a.",
+        "part2": "Ou ka sote etap sa a ak mete l ajou nenpòt ki lè atravè kont ou a."
       }
     },
     "termsAndCondition": {
-      "label": "Yes, I accept the terms and conditions.",
-      "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+      "label": "Wi, mwen dakò ak tèm ak kondisyon yo.",
+      "text": "Lè ou soumèt yon aplikasyon, ou konprann epi ou dakò ak <a href='https://www.nypl.org/help/library-card/terms-conditions'>Tèm ak Kondisyon pou moun ki gen kat</a> nou yo epi ou dakò ak <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Règ ak Règleman</a> nou yo. Pou aprann plis sou itilizasyon enfòmasyon pèsonèl Bibliyotèk la, tanpri li <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Règleman sou Vi Prive</a> nou an."
     },
     "errorMessage": {
       "username": "Username must be between 5-25 alphanumeric characters.",
@@ -109,23 +109,23 @@
     }
   },
   "review": {
-    "title": "Step 5 of 5: Confirm Your Information",
-    "description": "Make sure all the information you’ve entered is correct. If needed, you can still make changes before you submit your application.",
+    "title": "Etap 5 sou 5: Konfime Enfòmasyon W",
+    "description": "Asire w ke tout enfòmasyon ou te antre yo kòrèk. Si sa nesesè, ou ka toujou fè chanjman anvan w soumèt aplikasyon w lan.",
     "section": {
-      "personal": "Personal Information",
+      "personal": "Enfomasyon Pèsonèl",
       "address": {
-        "label": "Address",
-        "location": "Location",
-        "home": "Home",
-        "work": "Work"
+        "label": "Adrès",
+        "location": "kote",
+        "home": "lakay ou",
+        "work": "Adrès travay la"
       },
-      "homeLibrary": "Home Library"
+      "homeLibrary": "Bibliyotèk Adomisil"
     },
     "createAccount": "Create Your Account",
     "receiveNewsletter": "Receive information about NYPL's programs and services",
-    "yes": "Yes",
-    "no": "No",
-    "nextStep": "After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials."
+    "yes": "Wi",
+    "no": "Non",
+    "nextStep": "Apre ou fin soumèt aplikasyon w lan, w ap wè yon paj konfimasyon ki genyen enfòmasyon sou kont ou an ladan, epi w ap kapab konekte w ak mande liv ak materyèl."
   },
   "confirmation": {
     "title": "Congratulations! You now have a digital New York Public Library card.",
@@ -149,10 +149,10 @@
   },
   "button": {
     "start": "Get Started",
-    "edit": "Edit",
-    "submit": "Submit",
-    "next": "Next",
-    "previous": "Previous"
+    "edit": "Chanjman",
+    "submit": "Soumèt",
+    "next": "Suivan",
+    "previous": "Avan"
   },
   "globalErrors": {
     "title": "Form submission error",
