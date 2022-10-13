@@ -19,10 +19,7 @@
     },
     "birthdate": {
       "label": "Date de naissance",
-      "instruction": {
-        "part1": "MM/JJ/AAAA, séparés par des barres",
-        "part2": "Si vous êtes un client international, veuillez saisir votre date de naissance dans le format suivant : MM/JJ/AAAA "
-      }
+      "instruction": "MM/JJ/AAAA, séparés par des barres"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
@@ -42,11 +39,6 @@
   },
   "location": {
     "title": "Étape 2/5 : Adresse",
-    "internationalInstructions": {
-      "part1": "Afin que votre adresse puisse être vérifiée, elle doit être une adresse résidentielle valide aux États-Unis.",
-      "part2": "Si vous êtes un étudiant international, veuillez fournir l'adresse de votre institution. Vous ne recevrez qu'une carte temporaire, et vous devrez contacter la NYPL dans un délai de 2 semaines pour en obtenir une extension.",
-      "part3": "Si vous êtes un client international effectuant de la recherche, veuillez utiliser l'adresse du bâtiment Stephen A. Schwarzman comme adresse personnelle. Vous ne recevrez qu'une carte temporaire, et vous devrez contacter la division de recherche à la NYPL dans un délai de 2 semaines pour que votre carte soit marquée comme carte de recherche."
-    },
     "address": {
       "title": "Adresse de votre domicile",
       "description": "Si vous habitez dans la ville de New York, merci d’indiquer l’adresse de votre domicile.",

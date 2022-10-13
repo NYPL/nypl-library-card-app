@@ -15,10 +15,7 @@
     "lastName": { "label": "Apellido" },
     "birthdate": {
       "label": "Fecha de nacimiento",
-      "instruction": {
-        "part1": "DD / MM / AAAA, incluyendo barras",
-        "part2": "Si es un usuario internacional, ingrese su fecha de nacimiento en el formato MM/DD/AAAA. "
-      }
+      "instruction": "DD / MM / AAAA, incluyendo barras"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
@@ -37,11 +34,6 @@
   },
   "location": {
     "title": "Paso 2 de 5: dirección",
-    "internationalInstructions": {
-      "part1": "Para que su dirección sea verificada correctamente, debe ser una dirección postal válida en los Estados Unidos.",
-      "part2": "Si es un estudiante internacional, introduzca la dirección de su institución. Recibirá una tarjeta temporal únicamente y tendrá que ponerse en contacto con la NYPL en un plazo de 2 semanas para que le prorroguen la tarjeta.",
-      "part3": "Si es un usuario de investigación internacional, utilice la dirección del edificio Stephen A. Schwarzman como la dirección de su domicilio particular. Recibirá una tarjeta temporal únicamente y tendrá que ponerse en contacto con la división de investigación de la NYPL en un plazo de 2 semanas para que su tarjeta se marque como tarjeta de investigación."
-    },
     "address": {
       "title": "Dirección de domicilio",
       "description": "Si vive en la ciudad de Nueva York, por favor complete el formulario de domicilio.",

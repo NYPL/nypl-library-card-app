@@ -19,10 +19,7 @@
     },
     "birthdate": {
       "label": "出生日期",
-      "instruction": {
-        "part1": "月 / 日 / 年 (MM / DD / YYYY)，包括斜线",
-        "part2": "如果您是国际顾客，请以月/日/年的形式输入您的出生日期。"
-      }
+      "instruction": "月 / 日 / 年 (MM / DD / YYYY)，包括斜线"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
@@ -42,11 +39,6 @@
   },
   "location": {
     "title": "第2步：地址",
-    "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
-    },
     "address": {
       "title": "居住地址",
       "description": "如果您住在纽约市，请填写居住地址部分。",

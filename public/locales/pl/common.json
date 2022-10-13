@@ -19,10 +19,7 @@
     },
     "birthdate": {
       "label": "Date of Birth",
-      "instruction": {
-        "part1": "MM/DD/RRRR, z ukośnikami",
-        "part2": "Jeśli jesteś klientem zagranicznym, wprowadź datę urodzenia w formacie MM/DD/RRRR."
-      }
+      "instruction": "MM/DD/RRRR, z ukośnikami"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
@@ -42,11 +39,6 @@
   },
   "location": {
     "title": "Step 2 of 5: Address",
-    "internationalInstructions": {
-      "part1": "Adres musi być prawidłowym adresem zamieszkania w USA.",
-      "part2": "Jeśli jesteś studentem zagranicznym, podaj adres swojej instytucji.Otrzymasz tylko kartę tymczasową i musisz w ciągu 2 tygodni skontaktować się z NYPL w celu jej przedłużenia.",
-      "part3": "Jeśli jesteś klientem zagranicznym prowadzącym badania, to jako adres zamieszkania podaj adres Budynku Stephena A. Schwarzmana. Otrzymasz tylko kartę tymczasową i musisz w ciągu 2 tygodni skontaktować się z działem badawczym NYPL w celu odpowiedniego oznaczenia karty jako karty do celów badawczych."
-    },
     "address": {
       "title": "Home Address",
       "description": "If you live in NYC, please fill out the home address form.",

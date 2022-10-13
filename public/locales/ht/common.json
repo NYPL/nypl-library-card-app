@@ -19,10 +19,7 @@
     },
     "birthdate": {
       "label": "Date of Birth",
-      "instruction": {
-        "part1": "MM/DD/AAAA, ki gen ladann karaktè oblik yo ",
-        "part2": "Si w se yon kliyan entènasyonal, tanpri antre dat nesans ou nan fòma MM/DD/AAAA"
-      }
+      "instruction": "MM/DD/AAAA, ki gen ladann karaktè oblik yo "
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
@@ -42,11 +39,6 @@
   },
   "location": {
     "title": "Step 2 of 5: Address",
-    "internationalInstructions": {
-      "part1": "Pou yo veriye adrès ou ak siksè, li dwe yon adrès rezidansyèl ki valab Ozetazini.",
-      "part2": "Si w se yon etidyan entènasyonal, tanpri bay adrès enstitisyon w lan.W ap resevwa sèlman yon kat tanporè epi w ap bezwen kontakte NYPL nan lespas 2 semèn pou yo pwolonje dire validite kat ou a.",
-      "part3": "Si w se yon kliyan entènasyonal nan domèn rechèch, tanpri itilize adrès Bilding Stephen A. Schwarzman lan kòm adrès lakay ou. W ap resevwa sèlman yon kat tanporè epi w ap bezwen kontakte depatman rechèch nan NYPL la nan lespas 2 semèn pou yo make kat ou a kòrèkteman kòm yon kat pou rechèch."
-    },
     "address": {
       "title": "Home Address",
       "description": "If you live in NYC, please fill out the home address form.",

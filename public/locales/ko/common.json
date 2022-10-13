@@ -19,10 +19,7 @@
     },
     "birthdate": {
       "label": "Date of Birth",
-      "instruction": {
-        "part1": "월월/일일/년년년년(“/” 기호 포함)",
-        "part2": "외국인 이용자이신 분은 생년월일을 월월/일일/년년년년 형식으로 입력해주십시오."
-      }
+      "instruction": "월월/일일/년년년년(“/” 기호 포함)"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
@@ -42,11 +39,6 @@
   },
   "location": {
     "title": "Step 2 of 5: Address",
-    "internationalInstructions": {
-      "part1": "주소가 성공적으로 확인되기 위해서는 미국 내의 유효한 거주 주소를 입력해야 합니다.",
-      "part2": "유학생인 경우에는 학교 주소를 입력해주십시오.유학생은 임시 카드만 발급 받게 되고 카드를 연장하려면 2주 이내에 NYPL로 연락해야 합니다.",
-      "part3": "이용자로서 외국인 연구자이신 분은 자택 주소로 Stephen A. Schwarzman 빌딩 주소를 사용해주시기 바랍니다. 임시 카드만 발급받게 되며, 카드를 연장하려면 2주 이내에 NYPL의 연구 부서로 연락하여 연구 카드라고 적절히 표시되도록 해야 합니다."
-    },
     "address": {
       "title": "Home Address",
       "description": "If you live in NYC, please fill out the home address form.",

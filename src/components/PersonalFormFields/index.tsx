@@ -12,7 +12,14 @@ import FormField from "../FormField";
 import AgeFormFields from "../AgeFormFields";
 import useFormDataContext from "../../context/FormDataContext";
 
-function PersonalFormFields({ agencyType = "", id = "" }) {
+interface PersonalFormFieldsProps {
+  agencyType?: string;
+  id?: string;
+}
+function PersonalFormFields({
+  agencyType = "",
+  id = "",
+}: PersonalFormFieldsProps): React.ReactElement {
   const { t } = useTranslation("common");
   const { register, errors } = useFormContext();
   const { state } = useFormDataContext();
