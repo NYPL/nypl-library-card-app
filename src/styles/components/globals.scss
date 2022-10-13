@@ -12,8 +12,8 @@
   a {
     text-decoration: underline !important;
   }
+}
 
-  #footer a {
-    text-decoration: none !important;
-  }
+#footer {
+  box-sizing: initial;
 }
