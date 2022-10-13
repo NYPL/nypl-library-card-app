@@ -12,7 +12,6 @@ import UsernameValidationFormFields from "../UsernameValidationFormFields";
 import useFormDataContext from "../../context/FormDataContext";
 import ilsLibraryList from "../../data/ilsLibraryList";
 import LibraryListFormFields from "../LibraryListFormFields";
-import { useRouter } from "next/router";
 
 interface AccountFormFieldsProps {
   id?: string;
@@ -21,10 +20,6 @@ interface AccountFormFieldsProps {
 
 function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
   const { t } = useTranslation("common");
-  const {
-    query: { lang = "en" },
-  } = useRouter();
-  const libraryList = ilsLibraryList[`${lang}`];
   const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();
   const [showPassword, setShowPassword] = useState(true);
@@ -130,7 +125,7 @@ function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
 
       <FormRow id={`${id}-accountForm-5`}>
         <DSFormField>
-          <LibraryListFormFields libraryList={libraryList} />
+          <LibraryListFormFields libraryList={ilsLibraryList} />
         </DSFormField>
       </FormRow>
     </>

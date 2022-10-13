@@ -5,17 +5,6 @@ import React from "react";
 import ReviewPage from "../pages/review";
 import { TestProviderWrapper } from "../testHelper/utils";
 
-jest.mock("next/router", () => ({
-  useRouter() {
-    return {
-      route: "/",
-      pathname: "",
-      query: { lang: "en" },
-      asPath: "",
-    };
-  },
-}));
-
 jest.mock("react-i18next", () => {
   const en = {
     personal: {
