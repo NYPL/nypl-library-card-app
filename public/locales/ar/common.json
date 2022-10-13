@@ -1,5 +1,6 @@
 {
-  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "internationalInstructions": "يجب ملء حقول النموذج باستخدام الحروف اللاتينية فقط.",
+  "required": "مطلوب",
   "home": {
     "title": "إحصل على بطاقة مكتبة رقمية اليوم في بضع خطوات سهلة",
     "description": {
@@ -18,14 +19,11 @@
     },
     "birthdate": {
       "label": "تاريخ الميلاد",
-      "instruction": {
-        "part1": "شهر/يوم/سنة, including slashes",
-        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
-      }
+      "instruction": "شهر/يوم/سنة, including slashes"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
-      "label": "Email Address",
+      "label": "عنوان البريد الالكترونى",
       "instruction": "مطلوب عنوان بريد إلكتروني لاستخدام العديد من مواردنا الرقمية ، مثل كتب الإلكترونية. إذا كنت لا ترغب أن تقديم عنوان بريد إلكتروني ،  فيمكنك تطبيق بطلب للحصول على بطاقة مادية باستخدام <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>استمارة البديل</a>. بمجرد ملئها ، يرجى زيارة أحد <a href='https://www.nypl.org/locations'>مواقعنا</a> مع إثبات الهوية وعنوان المنزل لاستلام بطاقتك."
     },
     "eCommunications": {
@@ -41,13 +39,8 @@
   },
   "location": {
     "title": "الخطوة ٢ من ٥: العنوان ",
-    "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
-    },
     "address": {
-      "title": "Home Address",
+      "title": "عنوان المنزل",
       "description": "إذا كنت تعيش في مدينة نيويورك ، فيرجى إكمال نموذج عنوان المنزل.",
       "line1": {"label": "عنوان الشارع"},
       "line2": {"label":"الشقة / الجناح"},

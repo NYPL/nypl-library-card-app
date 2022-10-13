@@ -1,11 +1,12 @@
 {
-  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "internationalInstructions": "Поля формы необходимо заполнять только латинскими буквами.",
+  "required": "Обязательно",
   "home": {
     "title": "Быстрый способ получения цифровой карточки Нью-Йоркской Публичной Библиотеки Пошаговая инструкция",
     "description": {
       "part1": "Если вы старше 13 лет, работаете , посещаете учебные заведения, или уплачиваете налоги в штате Нью Йорк, вы имеете право подать электронное заявление о получении библиотечной карточки. Лица временно находящиеся в штате Нью Йорк также имеют право  подать заявление на временное пользование библиотекой.",
       "part2": "При наличии цифровой карточки библиотеки вы сможете получить доступ к многочисленным электронным ресурсам, в том числе, к электронным книгам, базам данных, образовательным ресурсам, и многим другим источникам.",
-      "part3": "Подача данного заявления является вашим согласием с установленными <a href='https://www.nypl.org/help/library-card/terms-conditions'>правилами и положениями пользователя Нью Йоркской Публичной Библиотекиs</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. Дополнительная информация о правилах пользования личными данными находится в <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Правилах Конфиденциальности.</a>"
+      "part3": "Отправляя заявление, вы подтверждаете, что понимаете и соглашаетесь с <a href='https://www.nypl.org/help/library-card/terms-conditions'>Условиями пользования читательским билетом</a> и с нашими <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Правилами и требованиями</a>. Чтобы узнать подробнее о том, как библиотека использует персональные данные, прочитайте нашу <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Политику конфиденциальности (Privacy Policy)</a>."
     }
   },
   "personal": {
@@ -18,15 +19,12 @@
     },
     "birthdate": {
       "label": "Дата рождения",
-      "instruction": {
-        "part1": "MM/DD/YYYY, including slashes",
-        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
-      }
+      "instruction": "ММ/ДД/ГГГГ (через косую черту)"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
-      "label": "Email Address",
-      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
+      "label": "Адрес электронной почты",
+      "instruction": "Адрес электронной почты необходимо указать для того, чтобы иметь возможность пользоваться большинством наших цифровых ресурсов, например, электронными книгами. Если вы не хотите указывать адрес электронной почты, вы можете подать заявку на получение физического читательского билета, заполнив нашу <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>альтернативную форму</a>. После заполнения формы обратитесь в один из наших <a href='https://www.nypl.org/locations'>филиалов</a>, предъявите удостоверение личности и документ, подтверждающий домашний адрес, и получите свой читательский билет."
     },
     "eCommunications": {
       "labelText": " Да, я желаю получать информацию по электронной почте от Нью-Йоркской Публичной Библиотеки о новых услугах и программах"
@@ -41,19 +39,14 @@
   },
   "location": {
     "title": "Второй этап: адрес",
-    "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
-    },
     "address": {
-      "title": "Home Address",
+      "title": "Домашний адрес",
       "description": "Если вы проживаете в пределах города Нью Йорка, пожалуйста заполните нижеуказанные пункты",
       "line1": {"label": "Улица"},
       "line2": {"label":"Квартира"},
       "city": {"label": "Район"},
-      "state": {"label": "Штат", "instruction": "2-letter abbreviation"},
-      "postalCode": {"label": "Почтовый индекс", "instruction": "5 or 9-digit postal code"}
+      "state": {"label": "Штат", "instruction": "Аббревиатура из 2 букв"},
+      "postalCode": {"label": "Почтовый индекс", "instruction": "Почтовый индекс из 5 или 9 цифр"}
     },
     "workAddress": {
       "title": "Alternate Address",
@@ -102,7 +95,7 @@
     },
     "termsAndCondition": {
       "label": "Да , я подтверждаю согласие  с условиями и положениями пользования библиотекой.",
-      "text": " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+      "text": "Отправляя заявление, вы подтверждаете, что понимаете и соглашаетесь с <a href='https://www.nypl.org/help/library-card/terms-conditions'>Условиями пользования читательским билетом</a> и с нашими <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Правилами и требованиями</a>. Чтобы узнать подробнее о том, как библиотека использует персональные данные, прочитайте нашу <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Политику конфиденциальности</a>."
     },
     "errorMessage": {
       "username": "Username must be between 5-25 alphanumeric characters.",

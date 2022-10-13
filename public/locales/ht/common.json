@@ -1,8 +1,8 @@
 {
-  "internationalInstructions": "Jwenn yon Kat Bibliyotèk Nimerik Jodi a Menm nan Kèk Etap Byen Fasil",
+  "internationalInstructions": "Yo dwe ranpli seksyon yo ki nan Fòmilè a avèk karaktè Laten sèlman.",
   "required": "Obligatwa",
   "home": {
-    "title": "Get a Digital Library Card Today in a Few Easy Steps",
+    "title": "Jwenn yon Kat Bibliyotèk Nimerik Jodi a Menm nan Kèk Etap Byen Fasil",
     "description": {
       "part1": "Si w gen laj 13 lane oswa plis epi w ap viv, travay, ale lekòl, oswa peye taks sou pwopriyete nan Eta New York, ou ka jwenn yon kat bibliyotèk nimerik gratis kounye a lè w itilize fòm sou entènèt sa a. Vizitè nan Eta New York yo kapab itilize fòm sa a tou pou yo aplike pou yon kat tanporè.",
       "part2": "Avèk yon kat bibliyotèk nimerik, ou jwenn aksè gratis ak yon pakèt resous nimerik Bibliyotèk la—ki gen ladan liv elektwonik, baz done, resous edikatif, ak plis ankò.",
@@ -18,11 +18,8 @@
       "label": "Siyati"
     },
     "birthdate": {
-      "label": "Dat Nesans",
-      "instruction": {
-        "part1": "MM/DD/AAAA, ki gen ladann karaktè oblik yo ",
-        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
-      }
+      "label": "Date of Birth",
+      "instruction": "MM/DD/AAAA, ki gen ladann karaktè oblik yo "
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
@@ -42,11 +39,6 @@
   },
   "location": {
     "title": "Etap 2 sou 5: Adrès",
-    "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
-    },
     "address": {
       "title": "Adrès Lakay Ou",
       "description": "Si ou abite NYC, tanpri ranpli fòm pou adrès lakay ou a.",

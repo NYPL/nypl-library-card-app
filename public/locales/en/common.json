@@ -1,5 +1,6 @@
 {
   "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "required": "Required",
   "home": {
     "title": "Get a Digital Library Card Today in a Few Easy Steps",
     "description": {
@@ -18,10 +19,7 @@
     },
     "birthdate": {
       "label": "Date of Birth",
-      "instruction": {
-        "part1": "MM/DD/YYYY, including slashes",
-        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
-      }
+      "instruction": "MM/DD/YYYY, including slashes"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
@@ -41,11 +39,6 @@
   },
   "location": {
     "title": "Step 2 of 5: Address",
-    "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution. You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
-    },
     "address": {
       "title": "Home Address",
       "description": "If you live in NYC, please fill out the home address form.",
@@ -61,7 +54,7 @@
     "workAddress": {
       "title": "Alternate Address",
       "description": {
-        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
+        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you're just visiting New York City. Please select one of the following and fill out the required fields.",
         "part2": "If you work or go to school in NYC please provide the address."
       }
     },

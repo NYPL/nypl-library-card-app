@@ -1,5 +1,5 @@
 {
-  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "internationalInstructions": "양식 입력란은 반드시 영어 알파벳 등의 라틴 문자만 사용하여 기재해야 합니다.",
   "required": "필수 항목",
   "home": {
     "title": "간단한 몇 가지 단계로 디지털 도서관 카드를 발급 받으세요.",
@@ -19,10 +19,7 @@
     },
     "birthdate": {
       "label": "생년월일",
-      "instruction": {
-        "part1": "월월/일일/년년년년(“/” 기호 포함)",
-        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
-      }
+      "instruction": "월월/일일/년년년년(“/” 기호 포함)"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
@@ -42,11 +39,6 @@
   },
   "location": {
     "title": "2/5단계: 주소",
-    "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution.You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
-    },
     "address": {
       "title": "집 주소",
       "description": "뉴욕시에 거주하고 계시는 분은 집 주소 양식서에 기재해주십시오.",

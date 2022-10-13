@@ -1,5 +1,5 @@
 {
-  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
+  "internationalInstructions": "W polach formularza należy używać wyłącznie liter alfabetu łacińskiego.",
   "required": "Wymagane",
   "home": {
     "title": "Uzyskaj cyfrową kartę biblioteczną już dziś — wystarczy kilka prostych kroków",
@@ -19,10 +19,7 @@
     },
     "birthdate": {
       "label": "Data urodzenia",
-      "instruction": {
-        "part1": "MM/DD/RRRR, z ukośnikami",
-        "part2": "If you are an international patron, please enter your date of birth in MM/DD/YYYY format"
-      }
+      "instruction": "MM/DD/RRRR, z ukośnikami"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
@@ -42,11 +39,6 @@
   },
   "location": {
     "title": "Krok 2 z 5: adres",
-    "internationalInstructions": {
-      "part1": "In order for your address to be successfully verified, it must be a valid residential address in the United States.",
-      "part2": "If you are an international student, please provide the address of your institution. You will only receive a temporary card and will need to contact NYPL within 2 weeks to have your card extended.",
-      "part3": "If you are an international research patron, please use the Stephen A. Schwarzman Building address as your home address. You will only receive a temporary card and will need to contact the research division at NYPL within 2 weeks to have your card appropriately marked as a research card."
-    },
     "address": {
       "title": "Adres zamieszkania",
       "description": "Jeżeli mieszkasz w NYC, wypełnij formularz adresu domowego.",
