@@ -1,6 +1,20 @@
 ## CHANGE LOG
 
-### V0.8.0
+### v0.9.0 - Multilingual support
+
+#### Added
+
+- Added the `next-i18next` package for internationalization support in Nextjs and React.
+- Added ten (1) new languages to the app through translated JSON files: Arabic, Bengali, Chinese (Simplified), French, Haitian Creole, Korean, Polish, Russian, Spanish, and Urdu.
+
+#### Updated
+
+- Updated Nextjs configuration for multilingual support through its own `i18n` feature.
+- Updated all static text to use the `next-i18next` package's `useTranslation` hook to translate text in a selected language.
+- Updated the `html` element's `lang` attribute to be dynamic based on the selected language and the `dir` attribute to be dynamic based on the selected language's direction.
+- Moves the embedded NYPL Header from `_app` to `_document` for better rendering.
+
+### v0.8.0
 
 #### Updated
 
