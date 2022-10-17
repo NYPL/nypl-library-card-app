@@ -12,7 +12,7 @@
 - Updated Nextjs configuration for multilingual support through its own `i18n` feature.
 - Updated all static text to use the `next-i18next` package's `useTranslation` hook to translate text in a selected language.
 - Updated the `html` element's `lang` attribute to be dynamic based on the selected language and the `dir` attribute to be dynamic based on the selected language's direction.
-- Moves the embedded NYPL Header from `_app` to `_document` for better rendering.
+- Moves the embedded NYPL `Header` and the `Footer` component from `_app` to `_document` for better rendering.
 
 ### v0.8.0
 
