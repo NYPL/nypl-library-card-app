@@ -42,9 +42,9 @@
     "address": {
       "title": "Домашний адрес",
       "description": "Если вы проживаете в пределах города Нью Йорка, пожалуйста заполните нижеуказанные пункты",
-      "line1": { "label": "Улица" },
-      "line2": { "label": "Квартира" },
-      "city": { "label": "Район" },
+      "line1": { "label": "Улица и номер дома" },
+      "line2": { "label": "Квартира / апартаменты" },
+      "city": { "label": "Город" },
       "state": { "label": "Штат", "instruction": "Аббревиатура из 2 букв" },
       "postalCode": {
         "label": "Почтовый индекс",
@@ -75,18 +75,18 @@
     "title": "Шаг 4 из 5: настройка учетной записи",
     "username": {
       "label": "Имя пользователя",
-      "instruction": "5-25 буквенно-цифровых знаков No special characters.",
+      "instruction": "5-25 буквенно-цифровых символов. Не используйте специальные символы.",
       "checkButton": "Проверьте, не используется ли данное имя пользователя."
     },
     "password": {
-      "label": "Пин код",
-      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
+      "label": "Пароль",
+      "instruction": "Рекомендуем создать надежный пароль, содержащий как минимум 8 символов, включая сочетание букв верхнего и нижнего регистров, сочетание букв и цифр, а также как минимум один специальный символ, кроме точки (.)Рекомендуем создать надежный пароль, содержащий как минимум 8 символов, включая сочетание букв верхнего и нижнего регистров, сочетание букв и цифр, а также как минимум один специальный символ, кроме точки (.)Рекомендуем создать надежный пароль, содержащий как минимум 8 символов, включая сочетание букв верхнего и нижнего регистров, сочетание букв и цифр, а также как минимум один специальный символ, кроме точки (.)Рекомендуем создать надежный пароль, содержащий как минимум 8 символов, включая сочетание букв верхнего и нижнего регистров, сочетание букв и цифр, а также как минимум один специальный символ, кроме точки (.). <br />Пример: MyLib1731@br />Пароль не должен содержать распространенные комбинации, такие как повторяющийся три и более раз подряд символ (например, aaaatf54), или повторяющуюся комбинацию (например, abcabcab)."
     },
     "verifyPassword": {
-      "label": "Подтвердите пин код",
-      "instruction": "8-32 цифры"
+      "label": "Подтвердить пароль",
+      "instruction": "От 8 до 32 символов"
     },
-    "showPassword": "Показать пин код",
+    "showPassword": "Показать пароль",
     "library": {
       "selectLibrary": "Выбор близлежащего или удобно расположенного филиала",
       "placeholder": "Укажите название выбранного вами филиала,например 'Parkchester LIbrary'",
@@ -114,9 +114,9 @@
       "personal": "Личные данные",
       "address": {
         "label": "Адрес",
-        "location": "Location",
-        "home": "Home",
-        "work": "Work"
+        "location": "Расположение",
+        "home": "Дом",
+        "work": "Работа"
       },
       "homeLibrary": "Близлежащий или удобно расположенный филиал библиотеки"
     },
@@ -127,27 +127,27 @@
     "nextStep": "После успешной подачи заявления, вы будете переведены на страницу с подтверждением данных вашей учетной записи. Теперь вы сможете входить в систему и заказывать книги и материалы."
   },
   "confirmation": {
-    "title": "Congratulations! You now have a digital New York Public Library card.",
+    "title": "Поздравляем! Теперь у вас есть цифровой читательский билет Нью-Йоркской публичной библиотеки.",
     "description": {
-      "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
-      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
-      "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
+      "part1": "Распечатайте или сохраните эти данные. В течение 24 часов вы получите по электронной почте письмо с подробной информацией о вашей учетной записи.",
+      "part2": "Для заказа физических материалов посетите один из наших <a href='http://nypl.org/locations'>филиалов</a> и предъявите действительное <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>удостоверение личности с фотографией и документ, подтверждающий домашний адрес</a>, чтобы заполнить заявление на получение физического читательского билета.",
+      "part3": "Это временный читательский билет. Срок его действия истечет через 14 дней. Если вы являетесь студентом аккредитованного в Нью-Йорке колледжа, сотрудником нью-йоркской компании с фактическим местоположением за пределами города или штата или исследователем, посещающим один из наших исследовательских центров, обратитесь к нам, чтобы <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a>продлить действие вашего читательского билета."
     },
     "graphic": {
       "memberName": "Member Name",
-      "password": "Password",
+      "password": "Пароль",
       "issued": "Issued"
     },
     "nextSteps": {
-      "title": "Get Started with The New York Public Library",
-      "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
-      "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
-      "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
-      "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+      "title": "Начните пользоваться Нью-Йоркской публичной библиотекой",
+      "explore": "<b>Исследуйте коллекцию электронных книг библиотеки</b><br />Загрузите приложение SimplyE для <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> или <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
+      "borrow": "<b>Берите книги и многое другое</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'>Зайдите в свою учетную запись</a> и просмотрите каталог.",
+      "updates": "<b>Получайте новости</b><br /><a href='https://www.nypl.org/enews'>Узнайте обо всем, что предлагает библиотека.</a>",
+      "more": "<b>Подробнее</b><br /><a href='https://www.nypl.org/discover-library-card'>Узнайте обо всем, что можно получить с помощью читательского билета.</a>"
     }
   },
   "button": {
-    "start": "Начать",
+    "start": "Начинайте пользоваться",
     "edit": "Корректировка",
     "submit": "Отправить",
     "next": "Следующее",
@@ -161,7 +161,7 @@
     "defaultError": "С отправкой данных возникла проблема"
   },
   "ariaLabel": {
-    "librarySuggestions": "List of library name suggestions",
-    "barcode": "Scannable barcode"
+    "librarySuggestions": "Список предлагаемых названий библиотек",
+    "barcode": "Сканируемый штрихкодs"
   }
 }

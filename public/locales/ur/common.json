@@ -23,7 +23,7 @@
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
-      "label": "ای میل اڈریس",
+      "label": "ای میل ایڈریس",
       "instruction": "ہمارے بہت سے ڈیجیٹل وسائل، جیسے ای-بُکس استعمال کرنے کے لیے ایک ای میل ایڈریس درکار ہے۔ اگر آپ ای میل ایڈریس فراہم نہیں کرنا چاہتے، تو آپ ہمارا <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>متبادل فارم</a> استعمال کرتے ہوئے مادی کارڈ کے لیے درخواستدے سکتے ہیں۔ ایک بار پُر کرنے کے بعد، براہِ کرم اپنا کارڈ لینے کے لیے شناخت کے ثبوت اور گھر کے پتے کے ساتھ ہمارے<a href='https://www.nypl.org/locations'>مقامات</a> پر جائیں۔"
     },
     "eCommunications": {
@@ -80,14 +80,14 @@
       "checkButton": "دیکھیں کہ کیا یہ صارف کا نام دستیاب ہے"
     },
     "password": {
-      "label": "Password",
-      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
+      "label": "پاسورڈ",
+      "instruction": "ہم آپ کو ایک مضبوط پاس ورڈ منتخب کرنے کی ترغیب دیتے ہیں جس میں شامل ہوں: کم از کم 8 حروف، بڑے اور چھوٹے حروف کا مرکب، حروف اور اعداد کا مرکب، اور کم از کم ایک خاص حرف ماسوائے وقف (.)<br />مثال: MyLib1731@<br />پاس ورڈ میں عام ترتیبیں شامل نہیں ہو سکتیں جیسے کہ ایک حرف کو لگاتار تین یا زیادہ بار دوہرانا، جیسے کہ aaaatf54 یا ایک ترتیب کو دوہرانا، جیسے کہ abcabcab"
     },
     "verifyPassword": {
-      "label": "Verify Password",
-      "instruction": "8-32 characters"
+      "label": "پاس ورڈ کی تصدیق کریں",
+      "instruction": "8-32 حروف"
     },
-    "showPassword": "Show Password",
+    "showPassword": "پاسورڈ ظاہر کریں",
     "library": {
       "selectLibrary": "ایک ہوم لائبریری منتخب کریں:",
       "placeholder": "لائبریری کا نام ٹائپ کریں، جیسے پارک چیسٹر لائبریری",
@@ -128,27 +128,27 @@
     "nextStep": "اپنی درخواست جمع کروانے کے بعد، آپ کو اپنے اکاؤنٹ کی معلومات کے ساتھ ایک تصدیقی صفحہ نظر آئے گا، اور آپ لاگ ان کرنے اور کتب اور مواد کی درخواست کرنے کے قابل ہوں گے۔"
   },
   "confirmation": {
-    "title": "Congratulations! You now have a digital New York Public Library card.",
+    "title": "مبارکباد! آپ کو اب ایک ڈیجیٹل نیویارک پبلک لائبریری کا کارڈ مل گیا ہے۔",
     "description": {
-      "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
-      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
-      "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
+      "part1": "اس معلومات کو اپنے ریکارڈ کے لیے پرنٹ کر لیں یا محفوظ کر لیں۔ 24 گھنٹے کے اندر اندر، آپ کو اپنے اکاؤنٹ کی تفصیلات پر مشتمل ایک ای میل موصول ہو گی۔",
+      "part2": "مادی مواد مستعار لینے کے لیے، براہِ کرم مادی کارڈ کے لیے درخواست مکمل کرنے کے لیے ایک <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>معتبر تصویری شناخت اور پتے کے ثبوت</a> کے ساتھ ہمارے <a href='http://nypl.org/locations'>مقامات</a> میں سے کسی ایک پر تشریف لائیں۔",
+      "part3": "یہ ایک عارضی کارڈ ہے اور اس کی معیاد 14 دن میں ختم ہو جائے گی۔ اگر آپ نیویارک سے منظور شدہ کالج کے طالب علم ہیں، NYC کمپنی میں ملازم ہیں مگر جسمانی طور پر شہر یا ریاست میں موجود نہیں ہیں، یا کوئی محقق ہیں جو ہمارے کسی تحقیقی مرکز کا دورہ کرے گا، تو <a href='mailto:gethelp@nypl.org'اپنے کارڈ کی تجدید کرنے کے لیے</a> رابطہ کریں۔"
     },
     "graphic": {
       "memberName": "Member Name",
-      "password": "Password",
+      "password": "پاسورڈ",
       "issued": "Issued"
     },
     "nextSteps": {
-      "title": "Get Started with The New York Public Library",
-      "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
-      "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
-      "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
-      "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+      "title": "نیویارک پبلک لائبریری کے ساتھ آغاز کریں",
+      "explore": "<b>لائبریری کی ای-بُکس دریافت کریں</b><br />SimplyE برائے <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> یا <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a> ڈاؤن لوڈ کریں۔",
+      "borrow": "<b>کتابیں اور بہت کچھ مستعار لیں</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'>اپنے اکاؤنٹ میں لاگ ان کریں</a> اور فہرستِ باتصویر دیکھیں۔",
+      "updates": "<b>تازہ ترین معلومات حاصل کریں</b><br /><a href='https://www.nypl.org/enews'>لائبریری میں آپ کو پیش کرنے کے لیے جو کچھ بھی ہے وہ معلوم کریں۔</a>",
+      "more": "<b>مزید جانیں</b><br /><a href='https://www.nypl.org/discover-library-card'>ہر وہ چیز دریافت کریں جو آپ اپنے لائبریری کارڈ کے ساتھ کر سکتے ہیں۔</a>"
     }
   },
   "button": {
-    "start": "Get Started",
+    "start": "آغاز کریں",
     "edit": "ترمیم کریں",
     "submit": "جمع کروائیں",
     "next": "اگلا",
@@ -162,7 +162,7 @@
     "defaultError": "جمع کرانے میں ایک مسئلہ تھا۔"
   },
   "ariaLabel": {
-    "librarySuggestions": "List of library name suggestions",
-    "barcode": "Scannable barcode"
+    "librarySuggestions": "لائبریری کے نام کی تجاویز کی فہرست۔",
+    "barcode": "قابلِ سکین بارکوڈ"
   }
 }

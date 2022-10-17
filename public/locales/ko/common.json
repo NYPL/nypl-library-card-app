@@ -15,7 +15,7 @@
       "label": "이름"
     },
     "lastName": {
-      "label": "성씨"
+      "label": "성"
     },
     "birthdate": {
       "label": "생년월일",
@@ -73,21 +73,21 @@
   },
   "account": {
     "title": "4/5단계: 계정을 만드십시오.",
-    "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
+    "description": "사용자명과 비밀번호를 만들면 로그인하여 계정을 관리하거나 디지털 자료에 액세스할 수 있습니다. 사용자명은 고유한 것이어야 합니다.",
     "username": {
       "label": "사용자명 필수",
       "instruction": "5-25자의 영숫자 특수문자 없음",
       "checkButton": "사용자명이 사용 가능한지 확인하십시오."
     },
     "password": {
-      "label": "Password",
-      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
+      "label": "비밀번호",
+      "instruction": "다음과 같이 강력한 비밀번호를 생성하시기를 권합니다. 즉, 비밀번호는 8자 이상이어야 하며, 대문자, 소문자, 숫자, 특수문자(마침표(.) 제외)를 혼합하여 만들어야 합니다.<br />예:  MyLib1731@<br />비밀번호는 같은 문자를 3번 이상 연속적으로 반복하는 것이나(예: aaaatf54) 반복되는 패턴(예: abcabcab)이 포함돼서는 안 됩니다."
     },
     "verifyPassword": {
-      "label": "Verify Password",
-      "instruction": "8-32 characters"
+      "label": "비밀번호 확인",
+      "instruction": "8-32자"
     },
-    "showPassword": "Show Password",
+    "showPassword": "비밀번호 표시",
     "library": {
       "selectLibrary": "홈 라이브러리를 선택해주십시오:",
       "placeholder": "도서관명을 입력해주십시오. 예: Parkchester Library",
@@ -128,27 +128,27 @@
     "nextStep": "신청서를 제출하고 나면 계정 정보가 담긴 확인 페이지를 보실 수 있고, 로그인하여 도서와 자료를 요청할 수 있습니다."
   },
   "confirmation": {
-    "title": "Congratulations! You now have a digital New York Public Library card.",
+    "title": "축하드립니다! 이제 디지털 뉴욕 공공도서관 카드를 갖게 되셨습니다.",
     "description": {
-      "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
-      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
-      "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
+      "part1": "기록용으로 이 정보를 인쇄해두거나 보관해 두십시오. 24시간 이내로 귀하의 계정에 대한 자세한 정보와 함께 이메일을 받으시게 됩니다.",
+      "part2": "실제 자료를 대여하시려면 저희 <a href='http://nypl.org/locations'>지점</a> 중 한 곳에 유효한 <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>사진 부착 신분증과 주소지 증명</a> 을 지참하고 방문해 주십시오. 그리고 실제 카드를 받기 위한 신청을 마쳐 주십시오.",
+      "part3": "본 카드는 임시 카드이며 14일 후에 만료됩니다. 뉴욕주 인정 칼리지의 학생이거나 뉴욕시 소재 회사의 직원이지만 여기 시 또는 주에 실거주를 하지 않고 있거나 여기 연구소를 방문할 연구원인 경우 귀하의 카드를 <a href='mailto:gethelp@nypl.org'>업데이트하기 위해</a> 연락해 주십시오."
     },
     "graphic": {
       "memberName": "Member Name",
-      "password": "Password",
+      "password": "비밀번호",
       "issued": "Issued"
     },
     "nextSteps": {
-      "title": "Get Started with The New York Public Library",
-      "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
-      "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
-      "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
-      "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+      "title": "뉴욕 공공도서관 이용 시작하기",
+      "explore": "<b>도서관 전자책 탐색</b><br /><a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> 또는 <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>용 SimplyE 앱을 다운로드하십시오",
+      "borrow": "<b>책과 자료 대여</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'>계정에 로그인하여</a> 카탈로그를 탐색하십시오.",
+      "updates": "<b>업데이트 확인</b><br /><a href='https://www.nypl.org/enews'>도서관에서 이용할 수 있는 정보를 확인해 보십시오.</a>",
+      "more": "<b>자세히 알아보기</b><br /><a href='https://www.nypl.org/discover-library-card'>도서관 카드로 어떤 일을 할 수 있는지 알아 보십시오.</a>"
     }
   },
   "button": {
-    "start": "Get Started",
+    "start": "시작하기",
     "edit": "수정하기",
     "submit": "제출",
     "next": "다음",
@@ -162,7 +162,7 @@
     "defaultError": "제출한 정보에 문제가 있었습니다."
   },
   "ariaLabel": {
-    "librarySuggestions": "List of library name suggestions",
-    "barcode": "Scannable barcode"
+    "librarySuggestions": "도서관 이름 제안 목록",
+    "barcode": "스캔할 바코드"
   }
 }
