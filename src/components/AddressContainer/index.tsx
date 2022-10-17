@@ -7,10 +7,10 @@ import {
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-import useFormDataContext from "../../context/FormDataContext";
 import AddressFormFields from "../AddressFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import {
@@ -23,7 +23,8 @@ import FormField from "../FormField";
 import { constructAddressType } from "../../utils/formDataUtils";
 import { lcaEvents } from "../../externals/gaUtils";
 import { nyCounties, nyCities, createQueryParams } from "../../utils/utils";
-import { useTranslation } from "next-i18next";
+import useFormDataContext from "../../context/FormDataContext";
+import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 
 const AddressContainer: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -77,7 +78,7 @@ const AddressContainer: React.FC = () => {
         if (error.response.status == 403) {
           dispatch({
             type: "SET_FORM_ERRORS",
-            value: "A server error occurred validating a token.",
+            value: commonAPIErrors.errorValidatingToken,
           });
           nextUrl = "/new";
         }

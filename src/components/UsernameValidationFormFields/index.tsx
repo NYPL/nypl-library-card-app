@@ -15,7 +15,10 @@ import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
 import styles from "./UsernameValidationFormFields.module.css";
 import { lcaEvents } from "../../externals/gaUtils";
-import { apiErrorTranslations } from "../../data/apiErrorMessageTranslations";
+import {
+  apiErrorTranslations,
+  commonAPIErrors,
+} from "../../data/apiErrorMessageTranslations";
 import { apiTranslations } from "../../data/apiMessageTranslations";
 
 interface UsernameValidationFormProps {
@@ -82,11 +85,11 @@ const UsernameValidationForm = ({
         let message = error.response?.data?.message;
         // Catch any CSRF token issues and return a generic error message.
         if (error.response.status == 403) {
-          message = "A server error occurred validating a token.";
+          message = commonAPIErrors.errorValidatingToken;
         }
         // If the server is down, return a server error message.
         if (error.response.status === 500) {
-          message = "Cannot validate usernames at this time.";
+          message = commonAPIErrors.errorValidatingUsername;
         }
 
         // Translate the message if possible.

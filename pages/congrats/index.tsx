@@ -75,7 +75,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   }
   return {
     props: {
-      ...(await serverSideTranslations(query?.lang.toString() || "en", [
+      ...(await serverSideTranslations(query?.lang?.toString() || "en", [
         "common",
       ])),
     },

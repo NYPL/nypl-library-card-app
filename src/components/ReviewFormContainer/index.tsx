@@ -30,6 +30,7 @@ import {
   findLibraryName,
   findLibraryCode,
 } from "../../../src/utils/formDataUtils";
+import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 
 /**
  * ReviewFormContainer
@@ -188,7 +189,7 @@ function ReviewFormContainer() {
         if (error.response.status == 403) {
           dispatch({
             type: "SET_FORM_ERRORS",
-            value: "A server error occurred validating a token.",
+            value: commonAPIErrors.errorValidatingToken,
           });
           // After a while, remove the errors and redirect to the home page.
           setTimeout(() => {
