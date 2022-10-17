@@ -23,7 +23,7 @@
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
-      "label": "ইমেইল ঠিকানা",
+      "label": "ইমেইল অ্যাড্রেস",
       "instruction": "আমাদের অনেক ডিজিটাল সম্পদ, যেমন ই-বুক ব্যবহার করার জন্য একটি ইমেইল ঠিকানা প্রয়োজন। আপনি যদি একটি ইমেইল ঠিকানা প্রদান করতে না চান, আপনি আমাদের <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>বিকল্প ফর্ম</a>. ব্যবহার করে একটি ফিজিক্যাল কার্ডের জন্য আবেদন করতে পারেন। একবার পূরণ হয়ে গেলে, আপনার কার্ড তোলার জন্য পরিচয় এবং বাড়ির ঠিকানার প্রমাণ সহ অনুগ্রহ করে আমাদের যে কোন একটি <a href='https://www.nypl.org/locations'>স্থানে</a> যান।."
     },
     "eCommunications": {
@@ -45,10 +45,10 @@
       "line1": { "label": "রাস্তার ঠিকানা" },
       "line2": { "label": "এপার্টমেন্ট / সুইট" },
       "city": { "label": "শহর" },
-      "state": { "label": "স্টেট", "instruction": "২ অক্ষরের সংক্ষিপ্ত" },
+      "state": { "label": "রাজ্য", "instruction": "2-টি অক্ষরের অ্যাব্রিভিয়েশন" },
       "postalCode": {
         "label": "পোস্টাল কোড",
-        "instruction": "৫ অথবা ৯ ডিজিটের পোস্টাল কোড"
+        "instruction": "5 বা 9 সংখ্যার পোস্টাল কোড"
       }
     },
     "workAddress": {
@@ -73,21 +73,21 @@
   },
   "account": {
     "title": "ধাপ 5-এর মধ্যে 4: আপনার অ্যাকাউন্ট কাস্টমাইজ করুন",
-    "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
+    "description": "ব্যবহারকারীর নাম এবং পাসওয়ার্ড তৈরি করুন, যাতে আপনি লগ ইন করতে পারেন এবং আপনার অ্যাকাউন্ট পরিচালনা করতে পারেন ও আমাদের বিভিন্ন ধরনের ডিজিটাল পরিষেবা অ্যাক্সেস করতে পারেন। আপনার ব্যবহারকারীর নাম অনন্য হতে হবে।",
     "username": {
       "label": "ব্যবহারকারীর নাম",
       "instruction": "৫-২৫ আলফানিউমেরিক অক্ষর। কোন বিশেষ অক্ষর নেই.",
       "checkButton": "ব্যবহারকারীর নাম সুপ্রাপ্য কিনা পরীক্ষা করুন"
     },
     "password": {
-      "label": "পিন",
-      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
+      "label": "পাসওয়ার্ড",
+      "instruction": "এমন শক্তিশালী পাসওয়ার্ড বেছে নিন যার মধ্যে এগুলো যেন থাকে: কমপক্ষে 8টি অক্ষর, বড় হাতের এবং ছোট হাতের অক্ষর নিয়ে, অক্ষর এবং সংখ্যা নিয়ে এবং কমপক্ষে একটি স্পেশাল অক্ষর থাকতে হবে, পিরিয়ড (.)<br />যেমন: MyLib1731@<br />পাসওয়ার্ডের মধ্যে কোনো কমন প্যাটার্ন থাকা যাবে না, যেমন তিনবার বা তার বেশি কোনো অক্ষর ব্যবহার করা, যেমন aaaatf54 অথবা রিপিটিং প্যাটার্ন, যেমন abcabcab"
     },
     "verifyPassword": {
-      "label": "প্রয়োজনীয় পিন",
-      "instruction": "8-32 টি সংখ্যা"
+      "label": "পাসওয়ার্ড যাচাই করুন",
+      "instruction": "8-32টি অক্ষর"
     },
-    "showPassword": "পিন দেখাও",
+    "showPassword": "পাসওয়ার্ড দেখান",
     "library": {
       "selectLibrary": "একটি হোম লাইব্রেরী নির্বাচন করুন:",
       "placeholder": "একটি লাইব্রেরীর নাম টাইপ করুন, যেমন পার্কচেস্টার লাইব্রেরী",
@@ -115,9 +115,9 @@
       "personal": "ব্যক্তিগত তথ্য",
       "address": {
         "label": "ঠিকানা",
-        "location": "Location",
-        "home": "Home",
-        "work": "Work"
+        "location": "অবস্থান",
+        "home": "বাড়ি",
+        "work": "কাজ"
       },
       "homeLibrary": "হোম লাইব্রেরি"
     },
@@ -128,27 +128,27 @@
     "nextStep": "আপনি আপনার আবেদন পত্র জমা দেওয়ার পর, আপনি আপনার অ্যাকাউন্ট তথ্য সহ একটি নিশ্চিতকরণ পৃষ্ঠা দেখতে পাবেন, এবং আপনি লগ ইন করতে পারবেন এবং বই এবং উপকরণ অনুরোধ করতে পারবেন"
   },
   "confirmation": {
-    "title": "Congratulations! You now have a digital New York Public Library card.",
+    "title": "অভিনন্দন! এবার আপনার কাছে নিউ ইয়র্ক পাবলিক লাইব্রেরির একটি ডিজিটাল কার্ড আছে।",
     "description": {
-      "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
-      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
-      "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
+      "part1": "আপনার রেকর্ডের জন্য এই তথ্য প্রিন্ট করুন বা সেভ করে রাখুন। 24 ঘণ্টার মধ্যে আপনার অ্যাকাউন্টের বিশদ সহ আপনি একটি ইমেইল পাবেন।",
+      "part2": "ফিজিক্যাল মেটেরিয়াল নিতে হলে আমাদের <a href='http://nypl.org/locations'>লোকেশনে</a> যান, সাথে একটি বৈধ ফটো আইডি <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>এবং ঠিকানার প্রমাণ</a> নিয়ে যাবেন, যাতে ফিজিক্যাল কার্ডের জন্য আবেদন সম্পূর্ণ করা যায়।",
+      "part3": "এই কার্ডটা অস্থায়ী এবং 14 দিন পরে এর মেয়াদ শেষ হবে। আপনি যদি নিউ ইয়র্কের কোনো অনুমোদিত কলেজের শিক্ষার্থী, NYC-তে কর্মরত হলেও শহর বা রাজ্যের বাইরে থাকেন বা একজন গবেষক যিনি আমাদের রিসার্চ সেন্টার ভিজিট করবেন, তাহলে <a href='mailto:gethelp@nypl.org'>আপনার কার্ড আপডেট করার জন্য যোগাযোগ করুন।</a>"
     },
     "graphic": {
       "memberName": "Member Name",
-      "password": "Password",
+      "password": "পাসওয়ার্ড",
       "issued": "Issued"
     },
     "nextSteps": {
-      "title": "Get Started with The New York Public Library",
-      "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
-      "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
-      "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
-      "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+      "title": "নিউ ইয়র্ক পাবলিক লাইব্রেরির সাথে শুরু করুন",
+      "explore": "<b>লাইব্রেরির ই-বুক খুঁজে দেখুন</b><br />ডাউনলোড করুন SimplyE, যা <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> বা <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android-এর জন্য পাবেন।</a>.",
+      "borrow": "<b>বই এবং আরও অনেক কিছু পাবেন</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'>আপনার অ্যাকাউন্টে লগ ইন করুন</a> এবং ক্যাটালগ ব্রাউজ করুন।",
+      "updates": "<b>আপডেট পান</b><br /><a href='https://www.nypl.org/enews'>লাইব্রেরি থেকে কী কী পাওয়া যায় তা দেখুন।</a>",
+      "more": "<b>আরও জানুন</b><br /><a href='https://www.nypl.org/discover-library-card'>লাইব্রেরি কার্ড দিয়ে আপনি কী কী করতে পারেন তা জানুন।</a>"
     }
   },
   "button": {
-    "start": "এবার শুরু করা যাক",
+    "start": "শুরু করুন",
     "edit": "সম্পাদনা করুন",
     "submit": "জমা",
     "next": "পরবর্তী",
@@ -162,7 +162,7 @@
     "defaultError": "এই জমার সময় একটা ত্রুটি হয়েছে"
   },
   "ariaLabel": {
-    "librarySuggestions": "List of library name suggestions",
-    "barcode": "Scannable barcode"
+    "librarySuggestions": "লাইব্রেরির নামের প্রস্তাবের তালিকা।",
+    "barcode": "স্ক্যান করা যায় এমন বারকোড"
   }
 }

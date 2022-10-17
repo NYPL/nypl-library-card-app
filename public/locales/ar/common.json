@@ -10,7 +10,7 @@
     }
   },
   "personal": {
-    "title": "الخطوة 1 من 5: المعلومات الشخصية",
+    "title": "الخطوة ١ من ٥: المعلومات الشخصية",
     "firstName": {
       "label": "الاسم الأول"
     },
@@ -19,7 +19,7 @@
     },
     "birthdate": {
       "label": "تاريخ الميلاد",
-      "instruction": "شهر/يوم/سنة, including slashes"
+      "instruction": "شهر/يوم/سنة، تتوسط التاريخ خطوط مائلة"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
@@ -38,7 +38,7 @@
     }
   },
   "location": {
-    "title": "الخطوة 2 من 5: العنوان ",
+    "title": "الخطوة ٢ من ٥: العنوان",
     "address": {
       "title": "عنوان المنزل",
       "description": "إذا كنت تعيش في مدينة نيويورك ، فيرجى إكمال نموذج عنوان المنزل.",
@@ -72,22 +72,22 @@
     "workAddress": "Alternate Address"
   },
   "account": {
-    "title": "الخطوة 4 من 5: تخصيص حسابك",
-    "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
+    "title": "الخطوة ٤ من ٥: تخصيص حسابك",
+    "description": "أنشئ اسم مستخدم وكلمة مرور حتى تتمكن من تسجيل الدخول وإدارة حسابك أو الوصول إلى مجموعة من مواردنا الرقمية. يجب أن يكون اسم المستخدم الخاص بك فريدًا.",
     "username": {
       "label": "اسم المستخدم",
       "instruction": "٥-٢٥ حرفًا أبجديًا رقميًا. لا توجد حروفًا  خاصة.",
       "checkButton": "تحقق مما إذا كان اسم المستخدم متاحًا"
     },
     "password": {
-      "label": "رقم التعريف الشخصي",
-      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
+      "label": "كلمة المرور",
+      "instruction": "شجعك على اختيار كلمة مرور قوية تتضمن: ۸ أحرف إنجليزية على الأقل، ومزيجًا من الحروف الكبيرة والحروف الصغيرة، ومزيجًا من الحروف والأرقام، ورمزًا خاصًا واحدًا على الأقل غير النقطة (.) <br />على سبيل المثال: @MyLib1731<br />لا يمكن لكلمة المرور أن تحتوي على أنماط شائعة مثل تكرار حرف ثلاث مرات على التوالي أو أكثر، على سبيل المثال aaaatf54 أو تكرار نمط، على سبيل المثال abcabcab"
     },
     "verifyPassword": {
-      "label": "التحقق من رقم التعريف الشخصي",
-      "instruction": "8-32 characters"
+      "label": "التحقق من كلمة المرور",
+      "instruction": "من ۸ إلى ۳۲ حرفًا إنجليزيًا"
     },
-    "showPassword": "إظهار رقم التعريف الشخصي",
+    "showPassword": "إظهار كلمة المرور",
     "library": {
       "selectLibrary": "حدد مكتبة مفضلة:",
       "placeholder": "اكتب اسم المكتبة ، مثل 'مكتبة باركشستر' (Parkchester)",
@@ -109,15 +109,15 @@
     }
   },
   "review": {
-    "title": "الخطوة 5 من 5: تأكيد معلوماتك",
+    "title": "الخطوة ٥ من ٥: تأكيد معلوماتك",
     "description": "تأكد من صحة جميع المعلومات التي أدخلتها. إذا لزم الأمر ، لا يزال بإمكانك إجراء التغييرات قبل إرسال طلبك.",
     "section": {
       "personal": "معلومات شخصية",
       "address": {
-        "label": "Address",
-        "location": "Location",
-        "home": "Home",
-        "work": "Work"
+        "label": "العنوان",
+        "location": "موقع",
+        "home": "مسكن",
+        "work": "عمل"
       },
       "homeLibrary": "المكتبة المفضلة"
     },
@@ -128,23 +128,23 @@
     "nextStep": "بعد تقديم طلبك ، سترى صفحة تأكيد تحتوي على معلومات حسابك , و ستتمكن من تسجيل الدخول وطلب الكتب والمواد."
   },
   "confirmation": {
-    "title": "Congratulations! You now have a digital New York Public Library card.",
+    "title": "تهانينا! لديك الآن بطاقة رقمية لمكتبة نيويورك العامة.",
     "description": {
-      "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
-      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
-      "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
+      "part1": "اطبع هذه المعلومات أو احفظها لسجلاتك. ستتلقى بريدًا إلكترونيًا في غضون ۲٤ ساعة بتفاصيل حسابك",
+      "part2": "لاستعارة مواد مادية، يرجى زيارة أحد <a href='http://nypl.org/locations'>مواقعنا</a> مع <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'> بطاقة هوية صالحة تحمل صورة وإثبات للعنوان</a>لإكمال طلب الحصول على بطاقة مادية.",
+      "part3": "هذه بطاقة مؤقتة وستنتهي صلاحيتها خلال ۱٤ يومًا. إذا كنت طالبًا في كلية معتمدة في نيويورك أو موظفًا في إحدى شركات مدينة نيويورك، لكنك لست موجودًا في المدينة أو الولاية فعليًا، أو كنت باحثًا سيزور أحد مراكز البحوث الخاصة بنا، يرجى الاتصال <a href='mailto:gethelp@nypl.org'>لتحديث بطاقتك.</a>"
     },
     "graphic": {
       "memberName": "Member Name",
-      "password": "Password",
+      "password": "كلمة المرور",
       "issued": "Issued"
     },
     "nextSteps": {
-      "title": "Get Started with The New York Public Library",
-      "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
-      "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
-      "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
-      "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+      "title": "ابدأ مع مكتبة نيويورك العامة",
+      "explore": "<b>استكشف الكتب الإلكترونية الخاصة بالمكتبة</b><br />قم بتنزيل تطبيق SimplyE لأجهزة <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> أو أجهزة <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
+      "borrow": "<b>استعر الكتب والمزيد</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'>سجِّل الدخول إلى حسابك</a> وتصفح الفهرس.",
+      "updates": "<b>احصل على التحديثات</b><br /><a href='https://www.nypl.org/enews'>تعرَّف على كل ما تقدمه المكتبة.</a>",
+      "more": "<b>تعرَّف على المزيد</b><br /><a href='https://www.nypl.org/discover-library-card'>اكتشف كل ما يمكنك فعله ببطاقة المكتبة الخاصة بك.</a>"
     }
   },
   "button": {
@@ -162,7 +162,7 @@
     "defaultError": "حدثت مشكلات تتعلق بعملية الإرسال"
   },
   "ariaLabel": {
-    "librarySuggestions": "List of library name suggestions",
-    "barcode": "Scannable barcode"
+    "librarySuggestions": "قائمة باقتراحات اسم المكتبة",
+    "barcode": "رمز شريطي قابل للمسح الضوئي"
   }
 }

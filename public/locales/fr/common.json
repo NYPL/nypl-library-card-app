@@ -23,7 +23,7 @@
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
-      "label": "Email Address",
+      "label": "Adresse e-mail",
       "instruction": "Une adresse e-mail vous sera demandée pour l’utilisation de nombreuses ressources numériques comme les livres électroniques. Si vous ne souhaitez pas renseigner votre adresse email, vous pouvez demander une carte physique en remplissant notre <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>autre formulaire</a>. Une fois que vous l’aurez rempli, rendez-vous dans l’une de nos <a href='https://www.nypl.org/locations'>bibliothèques</a> avec une pièce d’identité et un justificatif de domicile pour récupérer votre carte."
     },
     "eCommunications": {
@@ -67,13 +67,13 @@
   },
   "verifyAddress": {
     "title": "Étape 3/5 : Vérification de l’adresse",
-    "description": "Veuillez sélectionner la bonne adresse..",
+    "description": "Veuillez sélectionner la bonne adresse.",
     "homeAddress": "Adresse de votre domicile",
     "workAddress": "Alternate Address"
   },
   "account": {
     "title": "Étape 4/5 : Personnalisation de votre compte",
-    "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
+    "description": "Créez un nom d’utilisateur et un mot de passe pour pouvoir vous connecter, gérer votre compte et accéder à un vaste éventail de nos ressources numériques. Votre nom d’utilisateur doit être unique.",
     "username": {
       "label": "Nom d’utilisateur",
       "instruction": "5 à 25 caractères alphanumériques, pas de caractères spéciaux",
@@ -81,13 +81,13 @@
     },
     "password": {
       "label": "Mot de passe",
-      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
+      "instruction": "Nous vous recommandons de choisir un mot de passe sécurisé qui serait constitué d'au moins 8 caractères, un mélange de minuscules et majuscules, de lettres et de chiffres, et d'au moins un caractère spécial à l'exception du point (.).<br />Exemple: MyLib1731@<br />Le mot de passe ne doit pas suivre une structure commune, comme la répétition d'un même caractère trois fois de suite ou plus, comme par exemple aaaatf54, ou un modèle répétitif, comme par exemple abcabcab."
     },
     "verifyPassword": {
       "label": "Vérification du mot de passe",
-      "instruction": "8-32 chiffres"
+      "instruction": "8 à 32 caractères"
     },
-    "showPassword": "Montrer le mot de passe",
+    "showPassword": "Affichage du mot de passe",
     "library": {
       "selectLibrary": "Sélectionnez une bibliothèque de rattachement:",
       "placeholder": "Tapez le nom d’une bibliothèque, par exemple Parkchester Library",
@@ -115,7 +115,7 @@
       "personal": "Informations personnelles",
       "address": {
         "label": "Adresse",
-        "location": "Location",
+        "location": "Emplacement",
         "home": "Domicile",
         "work": "Travaille"
       },
@@ -128,27 +128,27 @@
     "nextStep": "Après l’envoi de votre demande, vous accéderez à une page de confirmation avec les informations de votre compte, et vous pourrez vous connecter pour réserver des livres et d’autres articles."
   },
   "confirmation": {
-    "title": "Congratulations! You now have a digital New York Public Library card.",
+    "title": "Félicitations ! Vous êtes désormais en possession d'une carte numérique de la Bibliothèque publique de New York.",
     "description": {
-      "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
-      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
-      "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
+      "part1": "Imprimez ou sauvegardez ces informations pour vos dossiers. Dans les 24 heures qui suivent, vous recevrez un e-mail contenant les informations relatives à votre compte.",
+      "part2": "Pour emprunter des ouvrages physiques, veuillez vous rendre dans l'une de nos <a href='http://nypl.org/locations'>bibliothèques</a> avec une <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>pièce d'identité avec photo valide et un justificatif de domicile</a> pour remplir la demande de carte physique.",
+      "part3": "Il s'agit d'une carte temporaire qui expirera après 14 jours. Si vous êtes un(e) étudiant(e) dans une université accréditée de New York, un(e) employé(e) d'une entreprise new-yorkaise, mais que vous ne vous trouvez pas physiquement dans la ville ou l'État, ou un chercheur qui se rendra dans un de nos centres de recherche, contactez <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> pour mettre votre carte à jour."
     },
     "graphic": {
       "memberName": "Member Name",
-      "password": "Password",
+      "password": "Mot de passe",
       "issued": "Issued"
     },
     "nextSteps": {
-      "title": "Get Started with The New York Public Library",
-      "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
-      "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
-      "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
-      "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+      "title": "Lancez-vous à la découverte de la Bibliothèque publique de New York",
+      "explore": "<b>Explorer les livres électroniques de la Bibliothèque</b><br />Téléchargez SimplyE pour <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> ou <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
+      "borrow": "<b>Emprunter des livres et bien plus encore</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'>Connectez-vous à votre compte</a> et consultez le catalogue.",
+      "updates": "<b>Recevoir des mises à jour</b><br /><a href='https://www.nypl.org/enews'>Découvrez tout ce que la Bibliothèque a à offrir.</a>",
+      "more": "<b>En savoir plus</b><br /><a href='https://www.nypl.org/discover-library-card'>Découvrez tout ce que vous pouvez faire avec votre carte de bibliothèque.</a>"
     }
   },
   "button": {
-    "start": "Commencer",
+    "start": "Commencer le processus",
     "edit": "Modifier",
     "submit": "Envoyer",
     "next": "Suivant",
@@ -162,7 +162,7 @@
     "defaultError": "Un problème est survenu lors de la soumission."
   },
   "ariaLabel": {
-    "librarySuggestions": "List of library name suggestions",
-    "barcode": "Scannable barcode"
+    "librarySuggestions": "Liste de suggestions de nom de bibliothèque",
+    "barcode": "Code barre lisible"
   }
 }

@@ -19,7 +19,7 @@
     },
     "birthdate": {
       "label": "出生日期",
-      "instruction": "月 / 日 / 年 (MM / DD / YYYY)，包括斜线"
+      "instruction": "月/日/年，包括斜杠"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
@@ -70,21 +70,21 @@
   },
   "account": {
     "title": "第 4 步：自定义您的账户。",
-    "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
+    "description": "创建用户名和密码，以便您登录和管理您的帐户或访问我们的众多数字资源。您的用户名应该是唯一的。",
     "username": {
       "label": "用户名",
       "instruction": "5-25个字母数字。没有特殊符号。",
       "checkButton": "检查用户名是否可用"
     },
     "password": {
-      "label": "Password",
-      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
+      "label": "密码",
+      "instruction": "我们建议您选择包含以下内容的强密码：至少 8 个字符、大小写字母混合、字母和数字混合以及至少包含 1 个除句点 (.) 之外的特殊字符<br />例子：MyLib1731@<br />密码不能包含常见模式，如连续重复某一字符 3 次或以上（如 aaaatf54）或重复某一模式（如 abcabcab）。"
     },
     "verifyPassword": {
-      "label": "Verify Password",
-      "instruction": "8-32 characters"
+      "label": "验证密码",
+      "instruction": "8-32 个字符"
     },
-    "showPassword": "Show Password",
+    "showPassword": "显示密码",
     "library": {
       "selectLibrary": "選一個您經常使用的圖書館：",
       "placeholder": "输入图书馆名称，例如 Parkchester Library",
@@ -112,9 +112,9 @@
       "personal": "个人资料",
       "address": {
         "label": "地址",
-        "location": "Location",
-        "home": "Home",
-        "work": "Work"
+        "location": "地点",
+        "home": "家",
+        "work": "工作"
       },
       "homeLibrary": "您經常使用的圖書館"
     },
@@ -125,23 +125,23 @@
     "nextStep": "提交申请后，您将看到一个确认页面，其中包含您的帐户资料，您将能够登录并索取书籍和物料。"
   },
   "confirmation": {
-    "title": "Congratulations! You now have a digital New York Public Library card.",
+    "title": "恭喜！您现在已获取一张纽约公共图书馆电子图书卡。",
     "description": {
-      "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
-      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
-      "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
+      "part1": "请打印或保存此信息以作为记录。您将在 24 小时内收到一封包含您账户详细信息的电子邮件。",
+      "part2": "如要借阅实体材料，请携带有效的<a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>带照片身份证件和地址证明</a>前往我们的其中一个<a href='http://nypl.org/locations'>分馆地点</a>完成实体图书卡的申请。",
+      "part3": "这是一张临时图书卡，将在 14 天后到期失效。如您是在纽约认可的学院就读的学生、纽约市企业的员工（现在不在纽约市或纽约州）或即将访问我们研究中心的研究人员，请联系我们<a href='mailto:gethelp@nypl.org'>更新您的图书卡。</a>"
     },
     "graphic": {
       "memberName": "Member Name",
-      "password": "Password",
+      "password": "密码",
       "issued": "Issued"
     },
     "nextSteps": {
-      "title": "Get Started with The New York Public Library",
-      "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
-      "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
-      "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
-      "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+      "title": "开始使用纽约公共图书馆",
+      "explore": "<b>探索图书馆电子书</b><br />下载适用于 <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> 或 <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a> 的 SimplyE。",
+      "borrow": "<b>借阅书籍和其他物品</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'>登录您的帐户</a>并浏览目录。",
+      "updates": "<b>获取更新</b><br /><a href='https://www.nypl.org/enews'>发现图书馆提供的所有服务。</a>",
+      "more": "<b>了解更多</b><br /><a href='https://www.nypl.org/discover-library-card'>发现您可以用图书卡做些什么。</a>"
     }
   },
   "button": {
@@ -159,7 +159,7 @@
     "defaultError": "提交时出现问题"
   },
   "ariaLabel": {
-    "librarySuggestions": "List of library name suggestions",
-    "barcode": "Scannable barcode"
+    "librarySuggestions": "图书馆名称建议列表",
+    "barcode": "可扫描条形码"
   }
 }

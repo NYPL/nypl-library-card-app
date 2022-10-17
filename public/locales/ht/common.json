@@ -12,18 +12,18 @@
   "personal": {
     "title": "Etap 1 sou 5: Enfomasyon Pèsonèl",
     "firstName": {
-      "label": "Premye non"
+      "label": "Non"
     },
     "lastName": {
       "label": "Siyati"
     },
     "birthdate": {
-      "label": "Date of Birth",
+      "label": "Dat Nesans",
       "instruction": "MM/DD/AAAA, ki gen ladann karaktè oblik yo "
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
-      "label": "Adrès imèl",
+      "label": "Imèl",
       "instruction": "Yon adrès imèl nesesè pou itilize plizyè nan resous nimerik nou yo, tankou liv elektwonik. Si w pa vle bay yon adrès imèl, ou ka aplike pou yon kat fizik lè w sèvi ak <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>lòt fòm</a> nou an. Yon fwa w ranpli l, tanpri vizite youn nan <a href='https://www.nypl.org/locations'>lokal</a> nou yo avèk prèv idantite ak adrès lakay ou pou w ka pran kat ou a."
     },
     "eCommunications": {
@@ -42,10 +42,10 @@
     "address": {
       "title": "Adrès Lakay Ou",
       "description": "Si ou abite NYC, tanpri ranpli fòm pou adrès lakay ou a.",
-      "line1": { "label": "Non Ri" },
+      "line1": { "label": "Non Ri a" },
       "line2": { "label": "Apatman / Swit" },
       "city": { "label": "Vil" },
-      "state": { "label": "Eta", "instruction": "Abrevyasyon 2 lèt" },
+      "state": { "label": "Eta", "instruction": "Abrevyasyon ak 2 lèt" },
       "postalCode": {
         "label": "Kòd Postal",
         "instruction": "Kòd postal ki genyen 5 oswa 9 chif."
@@ -76,18 +76,18 @@
     "description": "Kreye yon non itilizatè ak yon nimewo idantifikasyon pèsonèl (Personal Identification Number, PIN) pou w ka konekte w ak jere kont ou oswa pou jwenn aksè ak plizyè nan resous nimerik nou yo. Non itilizatè w la dwe inik.",
     "username": {
       "label": "Non Itilizatè",
-      "instruction": "5-25 karaktè alfanimerik. Okenn karaktè espesyal.",
+      "instruction": "5 a 25 karaktè alfanimerik. Karaktè espesyal pa otorize.",
       "checkButton": "Tcheke si non itilizatè a disponib"
     },
     "password": {
-      "label": "Password",
-      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
+      "label": "Modpas",
+      "instruction": "Nou ankouraje w pou chwazi yon modpas ki solid ki gen ladann: omwen 8 karaktè, yon melanj lèt majiskil ak miniskil, yon melanj lèt ak chif, epi omwen yon karaktè espesyal, sòf pwen (.)<br />Egzanp: MyLib1731@<br /> Modpas la pa ka gen ladann karaktè komen tankou repete 3 fwa oswa plis menm karaktè a youn dèyè lòt; egzanp: aaaatf54 oswa repete yon karaktè, egzanp: abcabcab"
     },
     "verifyPassword": {
-      "label": "Verify Password",
-      "instruction": "8-32 characters"
+      "label": "Verifye Modpas ",
+      "instruction": "8 a 32 karaktè"
     },
-    "showPassword": "Show Password",
+    "showPassword": "Montre modpas la",
     "library": {
       "selectLibrary": "Chwazi yon bibliyotèk adomisil:",
       "placeholder": "Tape non yon bibliyotèk, tankou Parkchester Library",
@@ -128,27 +128,27 @@
     "nextStep": "Apre ou fin soumèt aplikasyon w lan, w ap wè yon paj konfimasyon ki genyen enfòmasyon sou kont ou an ladan, epi w ap kapab konekte w ak mande liv ak materyèl."
   },
   "confirmation": {
-    "title": "Congratulations! You now have a digital New York Public Library card.",
+    "title": "Felisitasyon! Kounye a, ou gen yon kat Bibliyotèk Piblik New York.",
     "description": {
-      "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
-      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
-      "part3": " This is a temporary card and will expire in 14 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
+      "part1": "Enprime oswa sovgade enfòmasyon sa yo pou dosye w. Nan 24 èdtan, ou pral resevwa yon imèl ak tout detay kont ou an.",
+      "part2": "Pou prete materyèl fizik, tanpri ale nan youn nan l <a href='http://nypl.org/locations'>lokal nou yo</a> ak yon <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>pyès idantite ki gen foto epi ki valab ak prèv adrès kote ou rete a</a> pou ranpli aplikasyon an pou jwenn yon kat fizik",
+      "part3": "Sa a se yon kat tanporè li ye epi li pral ekspire nan 14 jou. Si ou se yon elèv nan yon kolèj ki akredi New York, oubyen yon anplwaye nan yon konpayi nan Vil NY men ou pa fizikman nan vil oswa Eta New York, oubyen yon chèchè ki pral vizite youn nan sant rechèch nou yo, kontakte <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> pou mete kat ou ajou."
     },
     "graphic": {
       "memberName": "Member Name",
-      "password": "Password",
+      "password": "Modpas",
       "issued": "Issued"
     },
     "nextSteps": {
-      "title": "Get Started with The New York Public Library",
-      "explore": "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
-      "borrow": "<b>Borrow Books & More</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Log into your account</a> and browse the catalog.",
-      "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
-      "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+      "title": "Demare ak Bibliyotèk Piblik New York la",
+      "explore": "<b>Eksplore Liv Elektwonik Bibliyotèk la</b><br />Telechaje SimplyE pou <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> oswa <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
+      "borrow": "<b>Prete Liv ak Plis Bagay Toujou</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'> Konekte sou kont ou</a> epi konsilte katalòg la.",
+      "updates": "<b>Jwenn Mizajou yo</b><br /><a href='https://www.nypl.org/enews'>Dekouvri tout sa Bibliyotèk la kapab ofri w.</a>",
+      "more": "<b>Jwenn plis enfòmasyon.</b><br /><a href='https://www.nypl.org/discover-library-card'>Dekouvri tout bagay ou kapab fè ak kat Bibliyotèk ou an.</a>"
     }
   },
   "button": {
-    "start": "Get Started",
+    "start": "Demare",
     "edit": "Chanjman",
     "submit": "Soumèt",
     "next": "Suivan",
@@ -162,7 +162,7 @@
     "defaultError": "Te gen yon pwoblèm ak soumisyon an"
   },
   "ariaLabel": {
-    "librarySuggestions": "List of library name suggestions",
-    "barcode": "Scannable barcode"
+    "librarySuggestions": "Etabli lis tout sigjesyon pou non bibliyotèk yo",
+    "barcode": "Kòdbar eskann la kapab rekonèt9"
   }
 }
