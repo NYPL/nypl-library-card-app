@@ -121,8 +121,8 @@
       },
       "homeLibrary": "Bibliyotèk Adomisil"
     },
-    "createAccount": "Create Your Account",
-    "receiveNewsletter": "Receive information about NYPL's programs and services",
+    "createAccount": "Kreye kont ou",
+    "receiveNewsletter": "Resevwa enfòmasyon sou pwogram ak sèvis NYPL",
     "yes": "Wi",
     "no": "Non",
     "nextStep": "Apre ou fin soumèt aplikasyon w lan, w ap wè yon paj konfimasyon ki genyen enfòmasyon sou kont ou an ladan, epi w ap kapab konekte w ak mande liv ak materyèl."
@@ -135,9 +135,9 @@
       "part3": "Sa a se yon kat tanporè li ye epi li pral ekspire nan 14 jou. Si ou se yon elèv nan yon kolèj ki akredi New York, oubyen yon anplwaye nan yon konpayi nan Vil NY men ou pa fizikman nan vil oswa Eta New York, oubyen yon chèchè ki pral vizite youn nan sant rechèch nou yo, kontakte <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> pou mete kat ou ajou."
     },
     "graphic": {
-      "memberName": "Member Name",
+      "memberName": "Non manm",
       "password": "Modpas",
-      "issued": "Issued"
+      "issued": "Dat pibliye"
     },
     "nextSteps": {
       "title": "Demare ak Bibliyotèk Piblik New York la",

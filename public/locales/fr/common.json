@@ -121,8 +121,8 @@
       },
       "homeLibrary": "Bibliothèque de rattachement"
     },
-    "createAccount": "Create Your Account",
-    "receiveNewsletter": "Receive information about NYPL's programs and services",
+    "createAccount": "Créez votre compte",
+    "receiveNewsletter": "Recevoir des informations sur les programmes et services de NYPL",
     "yes": "Oui",
     "no": "Non",
     "nextStep": "Après l’envoi de votre demande, vous accéderez à une page de confirmation avec les informations de votre compte, et vous pourrez vous connecter pour réserver des livres et d’autres articles."
@@ -135,9 +135,9 @@
       "part3": "Il s'agit d'une carte temporaire qui expirera après 14 jours. Si vous êtes un(e) étudiant(e) dans une université accréditée de New York, un(e) employé(e) d'une entreprise new-yorkaise, mais que vous ne vous trouvez pas physiquement dans la ville ou l'État, ou un chercheur qui se rendra dans un de nos centres de recherche, contactez <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> pour mettre votre carte à jour."
     },
     "graphic": {
-      "memberName": "Member Name",
+      "memberName": "Nom de membre",
       "password": "Mot de passe",
-      "issued": "Issued"
+      "issued": "Date de publication"
     },
     "nextSteps": {
       "title": "Lancez-vous à la découverte de la Bibliothèque publique de New York",

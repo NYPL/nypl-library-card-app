@@ -121,8 +121,8 @@
       },
       "homeLibrary": "홈 라이브러리"
     },
-    "createAccount": "Create Your Account",
-    "receiveNewsletter": "Receive information about NYPL's programs and services",
+    "createAccount": "계정 만들기",
+    "receiveNewsletter": "NYPL의 프로그램 및 서비스에 대한 정보 수신",
     "yes": "예",
     "no": "아니요",
     "nextStep": "신청서를 제출하고 나면 계정 정보가 담긴 확인 페이지를 보실 수 있고, 로그인하여 도서와 자료를 요청할 수 있습니다."
@@ -135,9 +135,9 @@
       "part3": "본 카드는 임시 카드이며 14일 후에 만료됩니다. 뉴욕주 인정 칼리지의 학생이거나 뉴욕시 소재 회사의 직원이지만 여기 시 또는 주에 실거주를 하지 않고 있거나 여기 연구소를 방문할 연구원인 경우 귀하의 카드를 <a href='mailto:gethelp@nypl.org'>업데이트하기 위해</a> 연락해 주십시오."
     },
     "graphic": {
-      "memberName": "Member Name",
+      "memberName": "회원 이름",
       "password": "비밀번호",
-      "issued": "Issued"
+      "issued": "발행 날짜"
     },
     "nextSteps": {
       "title": "뉴욕 공공도서관 이용 시작하기",

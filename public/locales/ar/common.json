@@ -121,8 +121,8 @@
       },
       "homeLibrary": "المكتبة المفضلة"
     },
-    "createAccount": "Create Your Account",
-    "receiveNewsletter": "Receive information about NYPL's programs and services",
+    "createAccount": "أنشئ حسابك",
+    "receiveNewsletter": "تلقي معلومات حول برامج وخدمات NYPL",
     "yes": "نعم",
     "no": "رقم",
     "nextStep": "بعد تقديم طلبك ، سترى صفحة تأكيد تحتوي على معلومات حسابك , و ستتمكن من تسجيل الدخول وطلب الكتب والمواد."
@@ -135,9 +135,9 @@
       "part3": "هذه بطاقة مؤقتة وستنتهي صلاحيتها خلال ۱٤ يومًا. إذا كنت طالبًا في كلية معتمدة في نيويورك أو موظفًا في إحدى شركات مدينة نيويورك، لكنك لست موجودًا في المدينة أو الولاية فعليًا، أو كنت باحثًا سيزور أحد مراكز البحوث الخاصة بنا، يرجى الاتصال <a href='mailto:gethelp@nypl.org'>لتحديث بطاقتك.</a>"
     },
     "graphic": {
-      "memberName": "Member Name",
+      "memberName": "اسم عضو",
       "password": "كلمة المرور",
-      "issued": "Issued"
+      "issued": "صادر"
     },
     "nextSteps": {
       "title": "ابدأ مع مكتبة نيويورك العامة",
