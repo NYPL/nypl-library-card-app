@@ -35,7 +35,7 @@
   "devDependencies": {},
   "dependencies": {
     "@babel/preset-typescript": "7.10.4",
-    "@nypl/design-system-react-components": "1.0.8",
+    "@nypl/design-system-react-components": "1.2.0",
     "@nypl/dgx-react-footer": "0.5.7",
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.3",

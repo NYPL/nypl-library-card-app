@@ -55,10 +55,6 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
     const updatedRef = ref || attributes?.ref ? ref || attributes?.ref : null;
     let helperText = instructionText || null;
     const { t } = useTranslation("common");
-    // Test the requiredLabelText
-    if (isRequired) {
-      console.log(t("required"));
-    }
 
     if (errorText?.message) {
       helperText = errorText.message;
@@ -83,6 +79,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
           id={id}
           isInvalid={!!errorText}
           isRequired={isRequired}
+          requiredLabelText={t("required")}
           helperText={helperText}
           invalidText={helperText}
           min={minLength || null}
