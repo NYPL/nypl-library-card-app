@@ -52,10 +52,10 @@
       }
     },
     "workAddress": {
-      "title": "Alternate Address",
+      "title": "বিকল্প ঠিকানা",
       "description": {
-        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
-        "part2": "If you work or go to school in NYC please provide the address."
+        "part1": "আপনি নিউ ইয়র্ক সিটিতে, নিউ ইয়র্ক স্টেটের অন্য কোথাও, অথবা যুক্তরাষ্ট্রের অন্য কোথাও বসবাস করেন, চাকরি করেন, স্কুলে যান, বা প্রপার্টি ট্যাক্স পরিশোধ করেন কিনা এবং আপনি শুধু নিউ ইয়র্ক সিটিতে বেড়াতে এসেছেন কিনা তার উপর ভিত্তি করে আবেদন প্রক্রিয়া কিছুটা ভিন্ন হবে৷ অনুগ্রহ করে নিম্নলিখিতগুলির মধ্যে একটি নির্বাচন করুন এবং প্রয়োজনীয় ঘরগুলি পূরণ করুন৷",
+        "part2": "যদি আপনি NYC-তে চাকরি করেন বা স্কুলে যান তাহলে অনুগ্রহ করে ঠিকানা দিন।"
       }
     },
     "errorMessage": {
@@ -69,7 +69,7 @@
     "title": "ধাপ 3 of 5: ঠিকানা ভেরিফিকেশন",
     "description": "অনুগ্রহ করে সঠিক ঠিকানা নির্বাচন করুন।",
     "homeAddress": "বাসার ঠিকানা",
-    "workAddress": "Alternate Address"
+    "workAddress": "বিকল্প ঠিকানা"
   },
   "account": {
     "title": "ধাপ 5-এর মধ্যে 4: আপনার অ্যাকাউন্ট কাস্টমাইজ করুন",

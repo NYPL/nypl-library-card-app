@@ -52,10 +52,10 @@
       }
     },
     "workAddress": {
-      "title": "Alternate Address",
+      "title": "متبادل پتہ",
       "description": {
-        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
-        "part2": "If you work or go to school in NYC please provide the address."
+        "part1": "آپ کہاں رہتے ہیں، کام کرتے ہیں، سکول جاتے ہیں، یا نیو یارک سٹی میں، ریاست نیو یارک میں کسی اور جگہ، یا امریکہ میں کہیں اور پراپرٹی ٹیکس ادا کرتے ہیں اور آپ صرف نیو یارک سٹی سیر کرنے آئے ہیں ان باتوں کی بنیاد پر درخواست کا عمل تھوڑا سا مختلف ہے۔  براہِ کرم درج ذیل میں سے ایک کو منتخب کریں اور مطلوبہ خانوں کو پُر کریں۔",
+        "part2": "اگر آپ نیو یارک شہر (NYC) میں کام کرتے ہیں یا سکول جاتے ہیں تو براہِ کرم پتہ فراہم کریں۔"
       }
     },
     "errorMessage": {
@@ -69,11 +69,11 @@
     "title": "مرحلہ 3 از 5: پتے کی تصدیق",
     "description": "براہِ کرم درست پتہ منتخب کریں",
     "homeAddress": "گھر کا پتہ",
-    "workAddress": "Alternate Address"
+    "workAddress": "متبادل پتہ"
   },
   "account": {
     "title": "مرحلہ 4 از 5: اپنے اکاؤنٹ کو حسب ضرورت بنائیں",
-    "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
+    "description": "ایک صارف نام اور پاس ورڈ تخلیق کریں تاکہ آپ لاگ ان کر سکیں اور اپنے اکاؤنٹ کو سنبھال سکیں یا ہمارے ڈیجیٹل وسائل کی ایک صف تک رسائی حاصل کر سکیں۔ آپ کا صارف نام منفرد ہونا چاہیے۔",
     "username": {
       "label": "صارف کا نام",
       "instruction": "5-25 حروف و ہندسوں پر مشتمل نام۔ مخصوص حروف کی اجازت نہیں ہے۔",

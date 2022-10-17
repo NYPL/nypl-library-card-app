@@ -52,10 +52,10 @@
       }
     },
     "workAddress": {
-      "title": "Alternate Address",
+      "title": "대체 주소",
       "description": {
-        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
-        "part2": "If you work or go to school in NYC please provide the address."
+        "part1": "신청 절차는 뉴욕시에서 귀하의 거주 여부, 직장 또는 학교에 다니는지의 여부, 뉴욕시, 뉴욕주 또는 미국 내 다른 지역에서 재산세를 납부하는지의 여부, 또는 뉴욕시에 단순 방문인지의 여부에 따라 약간 다릅니다. 다음 중 해당하는 항목 하나를 선택하고 필수 항목을 기입해 주십시오.",
+        "part2": "뉴욕시에서 직장에 다니고 있거나 학교를 다니는 경우 주소를 제공해 주십시오."
       }
     },
     "errorMessage": {
@@ -69,7 +69,7 @@
     "title": "3/5단계: 주소 확인",
     "description": "정확한 주소를 선택해주십시오.",
     "homeAddress": "집 주소",
-    "workAddress": "Alternate Address"
+    "workAddress": "대체 주소"
   },
   "account": {
     "title": "4/5단계: 계정을 만드십시오.",

@@ -52,10 +52,10 @@
       }
     },
     "workAddress": {
-      "title": "Alternate Address",
+      "title": "Дополнительный адрес",
       "description": {
-        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
-        "part2": "If you work or go to school in NYC please provide the address."
+        "part1": "Процедура подачи заявления может отличаться в зависимости от того, где вы живете, работаете, посещаете школу или платите налоги на недвижимое имущество: в г. Нью-Йорке, в других городах штата Нью-Йорк или в других городах США, а в г. Нью-Йорк просто приехали на время. Выберите один из предложенных далее вариантов и заполните обязательные поля.",
+        "part2": "Если вы работаете или посещаете школу в г. Нью-Йорке, укажите свой адрес."
       }
     },
     "errorMessage": {
@@ -69,7 +69,7 @@
     "title": "Третий этап: подтверждение места проживания",
     "description": "Укажите правильный адрес",
     "homeAddress": "Домашний адрес",
-    "workAddress": "Alternate Address"
+    "workAddress": "Дополнительный адрес"
   },
   "account": {
     "title": "Шаг 4 из 5: настройка учетной записи",

@@ -49,10 +49,10 @@
       "postalCode": { "label": "邮政编码", "instruction": "5位或9位邮政编码" }
     },
     "workAddress": {
-      "title": "Alternate Address",
+      "title": "替代地址",
       "description": {
-        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
-        "part2": "If you work or go to school in NYC please provide the address."
+        "part1": "申请流程略有不同，具体取决于您是在纽约市或纽约州的其他地方生活、工作、上学或缴纳财产税，还是您在美国其他地方工作、上学或缴纳财产税，只是刚好来纽约市旅行。请选择以下选项之一并填写必填项。",
+        "part2": "如果您在纽约市工作或上学，请提供地址。"
       }
     },
     "errorMessage": {
@@ -66,7 +66,7 @@
     "title": "第3步：地址验证",
     "description": "请选择正确的地址",
     "homeAddress": "居住地址",
-    "workAddress": "Alternate Address"
+    "workAddress": "替代地址"
   },
   "account": {
     "title": "第 4 步：自定义您的账户。",
