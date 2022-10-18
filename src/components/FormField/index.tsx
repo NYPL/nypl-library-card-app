@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "next-i18next";
 import {
   TextInput,
   TextInputTypes,
@@ -53,6 +54,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
     };
     const updatedRef = ref || attributes?.ref ? ref || attributes?.ref : null;
     let helperText = instructionText || null;
+    const { t } = useTranslation("common");
 
     if (errorText?.message) {
       helperText = errorText.message;
@@ -77,6 +79,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
           id={id}
           isInvalid={!!errorText}
           isRequired={isRequired}
+          requiredLabelText={t("required")}
           helperText={helperText}
           invalidText={helperText}
           min={minLength || null}
