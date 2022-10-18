@@ -52,10 +52,10 @@
       }
     },
     "workAddress": {
-      "title": "Alternate Address",
+      "title": "বিকল্প ঠিকানা",
       "description": {
-        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
-        "part2": "If you work or go to school in NYC please provide the address."
+        "part1": "আপনি নিউ ইয়র্ক সিটিতে, নিউ ইয়র্ক স্টেটের অন্য কোথাও, অথবা যুক্তরাষ্ট্রের অন্য কোথাও বসবাস করেন, চাকরি করেন, স্কুলে যান, বা প্রপার্টি ট্যাক্স পরিশোধ করেন কিনা এবং আপনি শুধু নিউ ইয়র্ক সিটিতে বেড়াতে এসেছেন কিনা তার উপর ভিত্তি করে আবেদন প্রক্রিয়া কিছুটা ভিন্ন হবে৷ অনুগ্রহ করে নিম্নলিখিতগুলির মধ্যে একটি নির্বাচন করুন এবং প্রয়োজনীয় ঘরগুলি পূরণ করুন৷",
+        "part2": "যদি আপনি NYC-তে চাকরি করেন বা স্কুলে যান তাহলে অনুগ্রহ করে ঠিকানা দিন।"
       }
     },
     "errorMessage": {
@@ -69,7 +69,7 @@
     "title": "ধাপ 3 of 5: ঠিকানা ভেরিফিকেশন",
     "description": "অনুগ্রহ করে সঠিক ঠিকানা নির্বাচন করুন।",
     "homeAddress": "বাসার ঠিকানা",
-    "workAddress": "Alternate Address"
+    "workAddress": "বিকল্প ঠিকানা"
   },
   "account": {
     "title": "ধাপ 5-এর মধ্যে 4: আপনার অ্যাকাউন্ট কাস্টমাইজ করুন",
@@ -121,8 +121,8 @@
       },
       "homeLibrary": "হোম লাইব্রেরি"
     },
-    "createAccount": "Create Your Account",
-    "receiveNewsletter": "Receive information about NYPL's programs and services",
+    "createAccount": "আপনার একাউন্ট তৈরী করুন",
+    "receiveNewsletter": "NYPL এর প্রোগ্রাম এবং পরিষেবা সম্পর্কে তথ্য পান",
     "yes": "হ্যাঁ",
     "no": "না",
     "nextStep": "আপনি আপনার আবেদন পত্র জমা দেওয়ার পর, আপনি আপনার অ্যাকাউন্ট তথ্য সহ একটি নিশ্চিতকরণ পৃষ্ঠা দেখতে পাবেন, এবং আপনি লগ ইন করতে পারবেন এবং বই এবং উপকরণ অনুরোধ করতে পারবেন"
@@ -135,9 +135,9 @@
       "part3": "এই কার্ডটা অস্থায়ী এবং 14 দিন পরে এর মেয়াদ শেষ হবে। আপনি যদি নিউ ইয়র্কের কোনো অনুমোদিত কলেজের শিক্ষার্থী, NYC-তে কর্মরত হলেও শহর বা রাজ্যের বাইরে থাকেন বা একজন গবেষক যিনি আমাদের রিসার্চ সেন্টার ভিজিট করবেন, তাহলে <a href='mailto:gethelp@nypl.org'>আপনার কার্ড আপডেট করার জন্য যোগাযোগ করুন।</a>"
     },
     "graphic": {
-      "memberName": "Member Name",
+      "memberName": "সদস্যের নাম",
       "password": "পাসওয়ার্ড",
-      "issued": "Issued"
+      "issued": "ইস্যু করা হয়েছে"
     },
     "nextSteps": {
       "title": "নিউ ইয়র্ক পাবলিক লাইব্রেরির সাথে শুরু করুন",

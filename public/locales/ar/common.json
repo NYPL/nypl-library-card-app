@@ -52,10 +52,10 @@
       }
     },
     "workAddress": {
-      "title": "Alternate Address",
+      "title": "العنوان البديل",
       "description": {
-        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
-        "part2": "If you work or go to school in NYC please provide the address."
+        "part1": "تختلف عملية تقديم الطلبات اختلافًا طفيفًا استنادًا إلى المكان الذي تعيش فيه، أو تعمل به، أو تقع فيه المدرسة التي تذهب إليها، أو تدفع فيه ضرائب على الممتلكات، في مدينة نيويورك أو في أي مكان آخر في ولاية نيويورك أو في أي مكان آخر في الولايات المتحدة وأنت تزور مدينة نيويورك فقط. يرجى تحديد أحد الخيارات التالية وملء الحقول المطلوبة.",
+        "part2": "إذا كنت تعمل أو تذهب إلى المدرسة في مدينة نيويورك، يرجى إدراج العنوان."
       }
     },
     "errorMessage": {
@@ -69,7 +69,7 @@
     "title": "الخطوة ٣ من ٥: التحقق من العنوان",
     "description": "يرجى تحديد العنوان الصحيح.",
     "homeAddress": "عنوان المنزل",
-    "workAddress": "Alternate Address"
+    "workAddress": "العنوان البديل"
   },
   "account": {
     "title": "الخطوة ٤ من ٥: تخصيص حسابك",
@@ -121,8 +121,8 @@
       },
       "homeLibrary": "المكتبة المفضلة"
     },
-    "createAccount": "Create Your Account",
-    "receiveNewsletter": "Receive information about NYPL's programs and services",
+    "createAccount": "أنشئ حسابك",
+    "receiveNewsletter": "تلقي معلومات حول برامج وخدمات NYPL",
     "yes": "نعم",
     "no": "رقم",
     "nextStep": "بعد تقديم طلبك ، سترى صفحة تأكيد تحتوي على معلومات حسابك , و ستتمكن من تسجيل الدخول وطلب الكتب والمواد."
@@ -135,9 +135,9 @@
       "part3": "هذه بطاقة مؤقتة وستنتهي صلاحيتها خلال ۱٤ يومًا. إذا كنت طالبًا في كلية معتمدة في نيويورك أو موظفًا في إحدى شركات مدينة نيويورك، لكنك لست موجودًا في المدينة أو الولاية فعليًا، أو كنت باحثًا سيزور أحد مراكز البحوث الخاصة بنا، يرجى الاتصال <a href='mailto:gethelp@nypl.org'>لتحديث بطاقتك.</a>"
     },
     "graphic": {
-      "memberName": "Member Name",
+      "memberName": "اسم عضو",
       "password": "كلمة المرور",
-      "issued": "Issued"
+      "issued": "صادر"
     },
     "nextSteps": {
       "title": "ابدأ مع مكتبة نيويورك العامة",

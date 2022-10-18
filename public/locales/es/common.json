@@ -47,10 +47,10 @@
       }
     },
     "workAddress": {
-      "title": "Alternate Address",
+      "title": "Dirección alternativa",
       "description": {
-        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
-        "part2": "If you work or go to school in NYC please provide the address."
+        "part1": "El proceso de solicitud es un poco diferente dependiendo de si usted vive, trabaja, estudia o paga impuestos sobre la propiedad en la ciudad de Nueva York, en otro lugar del estado de Nueva York o en otro lugar de Estados Unidos, o si solo está de visita en la ciudad de Nueva York. Seleccione una de las siguientes opciones y complete los campos obligatorios.",
+        "part2": "Si trabaja o estudia en la ciudad de Nueva York, indique la dirección."
       }
     },
     "errorMessage": {
@@ -64,7 +64,7 @@
     "title": "Paso 3 de 5: verificación de la dirección",
     "description": "Seleccione la dirección correcta.",
     "homeAddress": "Dirección de domicilio",
-    "workAddress": "Alternate Address"
+    "workAddress": "Dirección alternativa"
   },
   "account": {
     "title": "Paso 4 de 5: Personalice su cuenta",
@@ -110,8 +110,8 @@
       },
       "homeLibrary": "Biblioteca local"
     },
-    "createAccount": "Create Your Account",
-    "receiveNewsletter": "...",
+    "createAccount": "Crea tu cuenta",
+    "receiveNewsletter": "Recibir información sobre los programas y servicios de la NYPL",
     "yes": "Si",
     "no": "No",
     "nextStep": "Después de enviar su solicitud, verá una página de confirmación con la información de su cuenta, y podrá iniciar sesión y solicitar libros y materiales."
@@ -124,9 +124,9 @@
       "part3": "Esta tarjeta es temporal y caducará en 14 días. Si estudia en una universidad acreditada en Nueva York, trabaja en una empresa de la ciudad de Nueva York pero no está físicamente en la ciudad o el estado, o se dedica a investigar y va a visitar uno de nuestros centros de investigación, comuníquese con nosotros <a href='mailto:gethelp@nypl.org'>para actualizar su tarjeta.</a>"
     },
     "graphic": {
-      "memberName": "Member Name",
+      "memberName": "Nombre de miembro",
       "password": "Contraseña",
-      "issued": "Issued"
+      "issued": "Fecha de emisión"
     },
     "nextSteps": {
       "title": "Comenzar con la Biblioteca Pública de Nueva York",

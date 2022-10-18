@@ -52,10 +52,10 @@
       }
     },
     "workAddress": {
-      "title": "Alternate Address",
+      "title": "Lòt adrès",
       "description": {
-        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
-        "part2": "If you work or go to school in NYC please provide the address."
+        "part1": "Pwosesis aplikasyon an lejèman diferan selon si ou abite, travay oswa ale lekòl oubyen si ou peye taks nan Vil Nouyòk, yon lòt kote nan Eta New York oswa yon lòt kote Ozetazini epi w ap senpman vizite Vil New York.  Tanpri chwazi youn nan sa ki annapre a epi bay enfòmasyon obligatwa yo.",
+        "part2": "Si ou travay oswa ou ale lekòl nan NYC, tanpri bay enfòmasyon yo mande yo."
       }
     },
     "errorMessage": {
@@ -69,7 +69,7 @@
     "title": "Etap 3 sou 5: Verifikasyon Adrès",
     "description": "Tanpri chwazi adrès ki kòrèk la.",
     "homeAddress": "Adrès Lakay Ou",
-    "workAddress": "Alternate Address"
+    "workAddress": "Lòt adrès"
   },
   "account": {
     "title": "Etap 4 sou 5: Pèsonalize Kont Ou",
@@ -121,8 +121,8 @@
       },
       "homeLibrary": "Bibliyotèk Adomisil"
     },
-    "createAccount": "Create Your Account",
-    "receiveNewsletter": "Receive information about NYPL's programs and services",
+    "createAccount": "Kreye kont ou",
+    "receiveNewsletter": "Resevwa enfòmasyon sou pwogram ak sèvis NYPL",
     "yes": "Wi",
     "no": "Non",
     "nextStep": "Apre ou fin soumèt aplikasyon w lan, w ap wè yon paj konfimasyon ki genyen enfòmasyon sou kont ou an ladan, epi w ap kapab konekte w ak mande liv ak materyèl."
@@ -135,9 +135,9 @@
       "part3": "Sa a se yon kat tanporè li ye epi li pral ekspire nan 14 jou. Si ou se yon elèv nan yon kolèj ki akredi New York, oubyen yon anplwaye nan yon konpayi nan Vil NY men ou pa fizikman nan vil oswa Eta New York, oubyen yon chèchè ki pral vizite youn nan sant rechèch nou yo, kontakte <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> pou mete kat ou ajou."
     },
     "graphic": {
-      "memberName": "Member Name",
+      "memberName": "Non manm",
       "password": "Modpas",
-      "issued": "Issued"
+      "issued": "Dat pibliye"
     },
     "nextSteps": {
       "title": "Demare ak Bibliyotèk Piblik New York la",

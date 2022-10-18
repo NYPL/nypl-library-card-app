@@ -52,10 +52,10 @@
       }
     },
     "workAddress": {
-      "title": "Alternate Address",
+      "title": "Adres alternatywny",
       "description": {
-        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
-        "part2": "If you work or go to school in NYC please provide the address."
+        "part1": "Sposób zgłaszania się różni się nieco w zależności od tego, czy mieszkasz, pracujesz, uczysz się lub płacisz podatki od nieruchomości w mieście Nowy Jork, w innych miejscowościach stanu Nowy Jork czy też w innej miejscowości Stanów Zjednoczonych i tylko odwiedzasz Nowy Jork. Wybierz jedną z poniższych opcji i wypełnij wymagane pola.",
+        "part2": "Jeżeli pracujesz lub chodzisz do szkoły w NYC, podaj adres szkoły lub miejsca pracy:"
       }
     },
     "errorMessage": {
@@ -69,7 +69,7 @@
     "title": "Krok 3 z 5: weryfikacja adresu",
     "description": "Wybierz właściwy adres.",
     "homeAddress": "Adres zamieszkania",
-    "workAddress": "Alternate Address"
+    "workAddress": "Adres alternatywny"
   },
   "account": {
     "title": "Krok 4 z 5: dostosowanie konta",
@@ -121,8 +121,8 @@
       },
       "homeLibrary": "Lokalna biblioteka"
     },
-    "createAccount": "Create Your Account",
-    "receiveNewsletter": "Receive information about NYPL's programs and services",
+    "createAccount": "Utwórz swoje konto",
+    "receiveNewsletter": "Otrzymuj informacje o programach i usługach NYPL",
     "yes": "Tak",
     "no": "Nie",
     "nextStep": "Kiedy wyślesz wniosek, wyświetli się strona z potwierdzeniem i danymi konta. Możesz wówczas się zalogować i zamówić książki oraz inne materiały."
@@ -135,9 +135,9 @@
       "part3": "Ta karta jest tymczasowa i wygaśnie po 14 dniach. Jeżeli jesteś studentem uczelni akredytowanej w Nowym Jorku, pracownikiem firmy z NYC, który nie przebywa w mieście ani stanie Nowy Jork, albo badaczem, który będzie odwiedzać jeden z naszych ośrodków badawczych, skontaktuj się z nami, <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> aby zaktualizować kartę"
     },
     "graphic": {
-      "memberName": "MEMBER NAME",
+      "memberName": "Nazwa członka",
       "password": "Hasło",
-      "issued": "ISSUED"
+      "issued": "Data wydania"
     },
     "nextSteps": {
       "title": "Zacznij korzystać z Nowojorskiej Biblioteki Publicznej",
