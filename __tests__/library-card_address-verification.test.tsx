@@ -12,6 +12,13 @@ jest.mock("react-i18next", () => {
       homeAddress: "Home Address",
       workAddress: "Alternate Address",
     },
+    button: {
+      start: "Get Started",
+      edit: "Edit",
+      submit: "Submit",
+      next: "Next",
+      previous: "Previous",
+    },
   };
 
   return {

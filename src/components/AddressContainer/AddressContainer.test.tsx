@@ -37,6 +37,13 @@ jest.mock("react-i18next", () => {
         zip: "Please enter a 5 or 9-digit postal code.",
       },
     },
+    button: {
+      start: "Get Started",
+      edit: "Edit",
+      submit: "Submit",
+      next: "Next",
+      previous: "Previous",
+    },
   };
 
   return {
