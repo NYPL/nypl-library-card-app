@@ -24,6 +24,7 @@ import { constructAddressType } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
 import { createQueryParams } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
+import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 
 const AddressContainer: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -80,7 +81,7 @@ const AddressContainer: React.FC = () => {
           if (error.response.status == 403) {
             dispatch({
               type: "SET_FORM_ERRORS",
-              value: "A server error occurred validating a token.",
+              value: commonAPIErrors.errorValidatingToken,
             });
             nextUrl = "/new";
           }
