@@ -43,6 +43,9 @@ function ReviewFormContainer() {
   const { state, dispatch } = useFormDataContext();
   const { formValues, errorObj, csrfToken } = state;
   const router = useRouter();
+  const {
+    query: { lang = "en" },
+  } = router;
   // For routing when javascript is not enabled, we want to track the form
   // values through the URL query params.
   const queryValues = createQueryParams(formValues);
@@ -301,7 +304,7 @@ function ReviewFormContainer() {
             className="radio-input"
             id="review-location-id"
             isChecked={true}
-            labelText={getLocationValue(formValues.location)}
+            labelText={getLocationValue(formValues.location, lang)}
             name={"location"}
             value={formValues.location}
           />
