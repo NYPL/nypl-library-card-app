@@ -304,7 +304,7 @@ function ReviewFormContainer() {
             className="radio-input"
             id="review-location-id"
             isChecked={true}
-            labelText={getLocationValue(formValues.location, lang)}
+            labelText={getLocationValue(formValues.location, lang as string)}
             name={"location"}
             value={formValues.location}
           />
