@@ -111,7 +111,7 @@ const getPatronAgencyType = (agencyTypeParam?) => {
  * getLocationValue
  * Map the location value from the form field into the string value.
  */
-const getLocationValue = (location = "en", lang = "en"): string => {
+const getLocationValue = (location = "us", lang = "en"): string => {
   const defaultLocation = ipLocationMessageTranslations[lang]["us"];
   const userLocation = ipLocationMessageTranslations[lang][location];
   return userLocation || defaultLocation;
