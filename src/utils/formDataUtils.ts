@@ -9,6 +9,7 @@ import {
   FormAPISubmission,
   FormInputData,
 } from "../interfaces";
+import { ipLocationMessageTranslations } from "../data/ipLocationMessageTranslations";
 
 const errorMessages = {
   firstName: "Please enter a valid first name.",
@@ -110,13 +111,10 @@ const getPatronAgencyType = (agencyTypeParam?) => {
  * getLocationValue
  * Map the location value from the form field into the string value.
  */
-const getLocationValue = (location: string): string => {
-  const locationMap = {
-    nyc: "New York City (All five boroughs)",
-    nys: "New York State (Outside NYC)",
-    us: "United States (Visiting NYC)",
-  };
-  return locationMap[location] || "United States (Visiting NYC)";
+const getLocationValue = (location = "en", lang = "en"): string => {
+  const defaultLocation = ipLocationMessageTranslations[lang]["us"];
+  const userLocation = ipLocationMessageTranslations[lang][location];
+  return userLocation || defaultLocation;
 };
 
 /**
