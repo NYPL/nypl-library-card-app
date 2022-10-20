@@ -142,7 +142,7 @@ const UsernameValidationForm = ({
             id="username"
             label={t("account.username.label")}
             name="username"
-            instructionText="5-25 alphanumeric characters. No special characters."
+            instructionText={t("account.username.instruction")}
             isRequired
             errorState={errors}
             maxLength={25}
