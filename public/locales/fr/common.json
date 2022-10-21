@@ -24,7 +24,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Adresse e-mail",
-      "instruction": "Une adresse e-mail vous sera demandée pour l’utilisation de nombreuses ressources numériques comme les livres électroniques. Si vous ne souhaitez pas renseigner votre adresse email, vous pouvez demander une carte physique en remplissant notre <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>autre formulaire</a>. Une fois que vous l’aurez rempli, rendez-vous dans l’une de nos <a href='https://www.nypl.org/locations'>bibliothèques</a> avec une pièce d’identité et un justificatif de domicile pour récupérer votre carte."
+      "instruction": "Une adresse e-mail vous sera demandée pour l’utilisation de nombreuses ressources numériques comme les livres électroniques. Si vous ne souhaitez pas renseigner votre adresse e-mail, vous pouvez demander une carte physique en remplissant notre <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>autre formulaire</a>. Une fois que vous l’aurez rempli, rendez-vous dans l’une de nos <a href='https://www.nypl.org/locations'>bibliothèques</a> avec une pièce d’identité et un justificatif de domicile pour récupérer votre carte."
     },
     "eCommunications": {
       "labelText": "Oui, je souhaite recevoir les informations sur les activités et les services de la NYPL."
@@ -76,7 +76,7 @@
     "description": "Créez un nom d’utilisateur et un mot de passe pour pouvoir vous connecter, gérer votre compte et accéder à un vaste éventail de nos ressources numériques. Votre nom d’utilisateur doit être unique.",
     "username": {
       "label": "Nom d’utilisateur",
-      "instruction": "5 à 25 caractères alphanumériques, pas de caractères spéciaux",
+      "instruction": "5-25 caractères alphanumériques. Aucun caractères spécial.",
       "checkButton": "Vérification de la disponibilité du nom d’utilisateur."
     },
     "password": {
@@ -99,7 +99,7 @@
     },
     "termsAndCondition": {
       "label": "Oui, j’accepte les conditions générales.",
-      "text": " En soumettant cette demande, vous certifiez que vous avez lu et accepté les <a href='https://www.nypl.org/help/library-card/terms-conditions'>Conditions générales des titulaires de la carte</a> ainsi que notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>règlement intérieur</a>. Pour en savoir plus sur l’utilisation de vos données personnelles par la Bibliothèque, veuillez lire notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>politique de confidentialité</a>."
+      "text": " En soumettant cette demande, vous certifiez que vous avez lu et accepté les <a href='https://www.nypl.org/help/library-card/terms-conditions'>conditions générales des titulaires de la carte</a> ainsi que notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>règlement intérieur</a>. Pour en savoir plus sur l’utilisation de vos données personnelles par la Bibliothèque, veuillez lire notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>politique de confidentialité</a>."
     },
     "errorMessage": {
       "username": "Votre nom d'utilisateur doit être composé de 5 à 25 caractères alphanumériques.",
