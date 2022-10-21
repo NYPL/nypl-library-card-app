@@ -2,7 +2,7 @@
 const { i18n } = require("./next-i18next.config");
 
 const PROD_BUILD_ID =
-  "production-0.7.11-d6c46f39fa469f7c3d7932e71d31f6c7e8742aad";
+  "production-0.9.0-946c11ea7345d81edd1bcb6b56c13b382206af1e";
 
 module.exports = {
   basePath: "/library-card",
