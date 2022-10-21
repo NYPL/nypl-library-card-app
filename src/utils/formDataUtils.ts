@@ -9,6 +9,7 @@ import {
   FormAPISubmission,
   FormInputData,
 } from "../interfaces";
+import { ipLocationMessageTranslations } from "../data/ipLocationMessageTranslations";
 
 const errorMessages = {
   firstName: "Please enter a valid first name.",
@@ -25,7 +26,7 @@ const errorMessages = {
     "uppercase and lowercase letters, include a mixture of letters and " +
     "numbers, and have at least one special character except period (.)",
   verifyPassword: "The two passwords don't match.",
-  acceptTerms: "The terms and conditions were not accepted.",
+  acceptTerms: "The Terms and Conditions must be checked.",
   address: {
     line1: "Please enter a valid street address.",
     city: "Please enter a valid city.",
@@ -73,7 +74,7 @@ function isDate(
  * "e-branch" or "simplye" (interchangeable names);
  * @param libraryName Name of library to find in the list.
  */
-function findLibraryCode(libraryName?: string) {
+function findLibraryCode(libraryName?: string): string {
   const library = ilsLibraryList.find(
     (library) => library.label === libraryName
   );
@@ -87,7 +88,7 @@ function findLibraryCode(libraryName?: string) {
  * "e-branch" or "simplye" (interchangeable names);
  * @param libraryCode Name of library to find in the list.
  */
-function findLibraryName(libraryCode?: string) {
+function findLibraryName(libraryCode?: string): string {
   const library = ilsLibraryList.find(
     (library) => library.value === libraryCode
   );
@@ -110,13 +111,8 @@ const getPatronAgencyType = (agencyTypeParam?) => {
  * getLocationValue
  * Map the location value from the form field into the string value.
  */
-const getLocationValue = (location: string): string => {
-  const locationMap = {
-    nyc: "New York City (All five boroughs)",
-    nys: "New York State (Outside NYC)",
-    us: "United States (Visiting NYC)",
-  };
-  return locationMap[location] || "United States (Visiting NYC)";
+const getLocationValue = (location = "us", lang = "en"): string => {
+  return ipLocationMessageTranslations[lang][location];
 };
 
 /**
@@ -341,6 +337,7 @@ const constructPatronObject = (
     lastName,
     email,
     birthdate,
+    preferredLanguage,
     ageGate,
     ecommunicationsPref,
     agencyType,
@@ -372,6 +369,7 @@ const constructPatronObject = (
     email,
     birthdate,
     ageGate,
+    preferredLanguage,
     address: addresses.home,
     workAddress: !isEmpty(addresses.work) ? addresses.work : null,
     username,

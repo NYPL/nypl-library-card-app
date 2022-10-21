@@ -1,13 +1,15 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Checkbox } from "@nypl/design-system-react-components";
+import React from "react";
 import { useFormContext } from "react-hook-form";
+import { useTranslation } from "next-i18next";
+
 import FormField from "../FormField";
 import { isDate } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
 
 interface AgeFormProps {
   policyType?: string;
-  errorMessages: any;
 }
 
 /**
@@ -17,20 +19,23 @@ interface AgeFormProps {
  */
 const AgeForm = ({
   policyType = "webApplicant",
-  errorMessages,
-}: AgeFormProps) => {
+}: AgeFormProps): React.ReactElement => {
+  const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
   const { register, errors } = useFormContext();
   const MAXLENGTHDATE = 10;
-  const isWebApplicant = policyType === "webApplicant";
-  const ageGateError = errors?.ageGate?.message;
+  // TODO: Right now, all applicants are web applications and
+  // this feature is not needed. Only rendering the `birthdateField`
+  // for now (11/1/22).
+  // const isWebApplicant = policyType === "webApplicant";
+  // const ageGateError = errors?.ageGate?.message;
 
   const birthdateField = (
     <FormField
       id="birthdate"
-      instructionText="MM/DD/YYYY, including slashes"
-      label="Date of Birth"
+      instructionText={t("personal.birthdate.instruction")}
+      label={t("personal.birthdate.label")}
       name="birthdate"
       isRequired
       errorState={errors}
@@ -39,28 +44,29 @@ const AgeForm = ({
       ref={register({
         validate: (val) =>
           (val.length <= MAXLENGTHDATE && isDate(val)) ||
-          errorMessages["birthdate"],
+          t("personal.errorMessage.birthdate"),
       })}
       defaultValue={formValues.birthdate}
     />
   );
-  const ageGateField = (
-    <>
-      <Checkbox
-        id="ageGateCheckbox"
-        invalidText={ageGateError}
-        isChecked={formValues.ageGate}
-        isInvalid={ageGateError}
-        name="ageGate"
-        labelText="Yes, I am over 13 years old."
-        ref={register({
-          required: errorMessages["ageGate"],
-        })}
-      />
-    </>
-  );
+  // TODO: Use this later for non-webApplicant policy types.
+  // const ageGateField = (
+  //   <>
+  //     <Checkbox
+  //       id="ageGateCheckbox"
+  //       invalidText={ageGateError}
+  //       isChecked={formValues.ageGate}
+  //       isInvalid={ageGateError}
+  //       name="ageGate"
+  //       labelText={t("personal.ageGate")}
+  //       ref={register({
+  //         required: t("personal.errorMessage.ageGate"),
+  //       })}
+  //     />
+  //   </>
+  // );
 
-  return isWebApplicant ? birthdateField : ageGateField;
+  return birthdateField;
 };
 
 export default AgeForm;

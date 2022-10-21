@@ -2,15 +2,39 @@ import React from "react";
 import { render, screen, act } from "@testing-library/react";
 import { axe } from "jest-axe";
 import AddressVerificationPage from "../pages/address-verification";
-import { TestProviderWrapper } from "../testHelper/utils";
-import { getPageTitles } from "../src/utils/utils";
+import { TestProviderWrapper, mockTFunction } from "../testHelper/utils";
+
+jest.mock("react-i18next", () => {
+  const en = {
+    verifyAddress: {
+      title: "Step 3 of 5: Address Verification",
+      description: "Please select the correct address.",
+      homeAddress: "Home Address",
+      workAddress: "Alternate Address",
+    },
+    button: {
+      start: "Get Started",
+      edit: "Edit",
+      submit: "Submit",
+      next: "Next",
+      previous: "Previous",
+    },
+  };
+
+  return {
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => ({
+      t: mockTFunction(en),
+    }),
+  };
+});
 
 describe("AddressVerificationPage accessibility", () => {
   test("passes axe accessibility test", async () => {
     await act(async () => {
       const { container } = render(
         <TestProviderWrapper>
-          <AddressVerificationPage pageTitles={getPageTitles("nyc")} />
+          <AddressVerificationPage />
         </TestProviderWrapper>
       );
 
@@ -20,10 +44,10 @@ describe("AddressVerificationPage accessibility", () => {
 });
 
 describe("AddressVerificationPage", () => {
-  test("renders a title and decription", () => {
+  test("renders a title and description", () => {
     render(
       <TestProviderWrapper>
-        <AddressVerificationPage pageTitles={getPageTitles("nyc")} />
+        <AddressVerificationPage />
       </TestProviderWrapper>
     );
     expect(

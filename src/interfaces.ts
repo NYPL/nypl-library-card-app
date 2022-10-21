@@ -5,6 +5,7 @@ export interface FormInputData {
   birthdate?: string;
   ageGate?: boolean;
   email: string;
+  preferredLanguage?: string;
   "home-line1": string;
   "home-line2": string;
   "home-city": string;
@@ -184,6 +185,7 @@ export interface FormAPISubmission {
   email: string;
   ageGate?: boolean;
   birthdate?: string;
+  preferredLanguage?: string;
   ecommunicationsPref: boolean;
   policyType: string;
   agencyType?: string;

@@ -7,10 +7,10 @@ import {
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-import useFormDataContext from "../../context/FormDataContext";
 import AddressFormFields from "../AddressFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import {
@@ -20,17 +20,22 @@ import {
 } from "../../interfaces";
 import Loader from "../Loader";
 import FormField from "../FormField";
-import { errorMessages, constructAddressType } from "../../utils/formDataUtils";
+import { constructAddressType } from "../../utils/formDataUtils";
 import { lcaEvents } from "../../externals/gaUtils";
-import { nyCounties, nyCities } from "../../utils/utils";
+import { nyCounties, nyCities, createQueryParams } from "../../utils/utils";
+import useFormDataContext from "../../context/FormDataContext";
+import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 
-const AddressContainer = () => {
+const AddressContainer: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
   const { formValues, csrfToken } = state;
   const router = useRouter();
+  const { t } = useTranslation("common");
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
+  // Get the URL query params for `newCard` and `lang`.
+  const queryStr = createQueryParams(router?.query);
 
   /**
    * submitForm
@@ -73,7 +78,7 @@ const AddressContainer = () => {
         if (error.response.status == 403) {
           dispatch({
             type: "SET_FORM_ERRORS",
-            value: "A server error occurred validating a token.",
+            value: commonAPIErrors.errorValidatingToken,
           });
           nextUrl = "/new";
         }
@@ -113,9 +118,9 @@ const AddressContainer = () => {
             ((formValues.location === "nyc" || formValues.location === "nys") &&
               !addressInNYC)
           ) {
-            nextUrl = "/workAddress?newCard=true";
+            nextUrl = `/workAddress?${queryStr}`;
           } else {
-            nextUrl = "/address-verification?newCard=true";
+            nextUrl = `/address-verification?${queryStr}`;
           }
           lcaEvents("Navigation", `Next button to ${nextUrl}`);
           router.push(nextUrl);
@@ -130,8 +135,8 @@ const AddressContainer = () => {
 
   return (
     <>
-      <Heading level="three">Home Address</Heading>
-      <p>If you live in NYC, please fill out the home address form.</p>
+      <Heading level="three">{t("location.address.title")}</Heading>
+      <p>{t("location.address.description")}</p>
 
       <Loader isLoading={isLoading} />
 
@@ -141,11 +146,7 @@ const AddressContainer = () => {
         method="post"
         onSubmit={handleSubmit(submitForm)}
       >
-        <AddressFormFields
-          id="address-container"
-          type={AddressTypes.Home}
-          errorMessages={errorMessages.address}
-        />
+        <AddressFormFields id="address-container" type={AddressTypes.Home} />
 
         <FormRow display="none">
           <DSFormField>
@@ -169,7 +170,7 @@ const AddressContainer = () => {
         <FormRow>
           <DSFormField>
             <RoutingLinks
-              previous={{ url: "/personal?newCard=true" }}
+              previous={{ url: `/personal?${queryStr}` }}
               next={{ submit: true }}
             />
           </DSFormField>

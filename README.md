@@ -1,15 +1,30 @@
 # NYPL Library Card App
 
-A Universal JavaScript Application that allows NYPL Patrons to request a library card and create an account. The front-end is built with React, the back-end uses Node/Express to communicates with other services, via the API gateway which handles validating & creating
-a patron record.
+A JavaScript Application that allows NYPL patrons to request a library card and create an account. The front-end is built with React, the back-end uses Node/Express to communicates with other services, via the API gateway which handles validating & creating a patron record.
 
-## URL
+| Table of Contents |                                                                   |
+| ----------------- | ----------------------------------------------------------------- |
+| 1.                | [Production Site and Version](#production-site-and-version)       |
+| 2.                | [Branch Statuses](#branch-statuses)                               |
+| 3.                | [Installation and Configuration](#installation-and-configuration) |
+| 4.                | [Deployment](#deployment)                                         |
+| 5.                | [Git Workflow](#git-workflow)                                     |
+| 6.                | [Internationalization](#internationalization)                     |
+| 7.                | [AWS Elastic Beanstalk](#aws-elastic-beanstalk)                   |
+| 8.                | [Travis CI](#travis-ci)                                           |
+| 9.                | [Docker](#docker)                                                 |
 
-https://www.nypl.org/library-card/new/
+## Production Site and Version
 
-## Version
+The production site on NYPL.org:
 
-> 0.7.11
+- https://www.nypl.org/library-card/new/
+
+The current production version:
+
+- 0.7.11
+
+## Branch Statuses
 
 | Branch       | Status                                                                                                                                      |
 | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -25,13 +40,22 @@ Developers can use [nvm](https://github.com/creationix/nvm) if they wish.
 This repo has a `.nvmrc` file that indicates which node version we development against.
 For more information see [how `nvm use` works](https://github.com/creationix/nvm#nvmrc).
 
+At the moment, this app is intended to be run on Node v10.x due to AWS deployments.
+
+### Environment Variables
+
+See `.env.example` for a checklist of the environment variables the app
+needs to run.
+
+Note: Nextjs uses `.env.development` and `.env.production` for their respective platform environment variables. The keys are not encrypted in the repo and are therefore directly added/updated through the AWS Elastic Beanstalk UI. These files are not not necessary to have to run the app locally.
+
 ### Install & Running Locally
 
 1. `cp .env.example .env.local` and fill out variables
 2. `npm install`
 3. `npm run dev` and point browser to http://localhost:3000/library-card/new
 
-#### Production build
+### Production build
 
 To build and run the app locally in production mode, run the following:
 
@@ -43,13 +67,6 @@ Make sure that `PORT=3001` and `NODE_ENV=production` is set in the `.env.local` 
 1. `NODE_ENV=production npm build`
 2. `PORT=3001 NODE_ENV=production npm start`
 
-### Environment Variables
-
-See `.env.example` for a checklist of the environment variables the app
-needs to run.
-
-Note: Nextjs uses `.env.development` and `.env.production` for their respective platform environment variables. The keys are not encrypted in the repo and are therefore directly added/updated through the AWS Elastic Beanstalk UI.
-
 ## Deployment
 
 ### Reverse Proxy and basePath
@@ -58,7 +75,7 @@ NYPL.org serves many apps on separate subdomains through a reverse proxy. They a
 
 The `basePath` value is set to `/library-card`.
 
-### Git Workflow
+## Git Workflow
 
 Our branches (in order of stability are):
 
@@ -68,7 +85,7 @@ Our branches (in order of stability are):
 | qa         | qa          | aws-digital-dev |
 | production | production  | aws-digital-dev |
 
-Notice that since QA is calling QA endpoint of Card Creator (via QA Patron Creator Service) and currently (April/2019) QA endpoint of Card Creator is down, any request from QA is not working and will return a 503 error.
+The `main` branch and the `development` environment on `aws-sandbox` is not currently being used. Only the deployments to `aws-digital-dev` are being used.
 
 ### Cutting a feature branch
 
@@ -77,12 +94,14 @@ Notice that since QA is calling QA endpoint of Card Creator (via QA Patron Creat
 
 `main` ==gets merged to==> `qa` ==gets merged into==> `production`.
 
-The `main` branch should be what's running in the Development environment.
-
 The `qa` branch should be what's running in the QA environment.
 The `production` branch should be what's running in the production environment.
 
-### AWS Elastic Beanstalk
+## Internationalization
+
+The application is internationalized using the `next-i18next` package. For more information, see the [MULTILINGUAL_FEATURE.md](./MULTILINGUAL_FEATURE.md) file.
+
+## AWS Elastic Beanstalk
 
 1. `.ebextensions` directory needed at application's root directory
 2. `.ebextensions/environment.config` to store environment variables. For environment variables that needs to be hidden,
@@ -106,7 +125,7 @@ eb create <<environment name>> --instance_type <<size of instance>> \
     --profile <<your AWS profile>>
 ```
 
-### Travis CI
+## Travis CI
 
 Subsequent deployments are accomplished via pushing code into `qa` and `production` branches, which triggers Travis CI to build, test, and deploy.
 
@@ -161,7 +180,7 @@ To stop a Docker container, run:
 $ docker stop mycontainer
 ```
 
-### docker-compose
+#### docker-compose
 
 The application can also be used with the `docker-compose` CLI tool. This command will read the local `docker-compose.yml` file and build the container using the local `Dockerfile` file. This is similar to running both `docker build ...` and `docker run ...` except it's all encapsulated in one command. `docker-compose` is typically used to orchestrate multiple containers running together. The Library Card App only needs one container for Next.js but the command is still useful since you only need to remember one command.
 

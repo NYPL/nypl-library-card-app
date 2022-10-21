@@ -1,5 +1,6 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import Footer from "@nypl/dgx-react-footer";
 
 /**
  * MyDocument
@@ -8,14 +9,22 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
  * they need to be at the end.
  */
 class MyDocument extends Document {
-  render() {
+  render(): React.ReactElement {
     return (
       <Html lang="en">
         <Head />
         <body>
-          <Main />
-          <NextScript />
+          <div id="Header-Placeholder" style={{ minHeight: "230px" }}>
+            <script
+              type="text/javascript"
+              src="https://header.nypl.org/dgx-header.min.js?skipNav=mainContent"
+              async
+            ></script>
+          </div>
 
+          <Main />
+          <Footer />
+          <NextScript />
           {/* <!-- Optimizely --> */}
           <script src="https://cdn.optimizely.com/js/284748925.js"></script>
           {/* <!-- OptinMonster --> */}

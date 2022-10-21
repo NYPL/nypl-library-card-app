@@ -1,0 +1,163 @@
+{
+  "internationalInstructions": "Los campos del formulario se deben completar únicamente con caracteres latinos.",
+  "required": "Requerido",
+  "home": {
+    "title": "Obtenga una tarjeta digital de la Biblioteca hoy con unos pocos pasos sencillos",
+    "description": {
+      "part1": "Si tiene 13 años de edad o más y vive, trabaja, va a la escuela o paga impuestos de propiedad en el estado de Nueva York, puede obtener una tarjeta digital gratuita de la Biblioteca ahora mismo utilizando este formulario en línea. Las personas que visitan el estado de Nueva York también pueden usar este formulario para solicitar una tarjeta temporal.",
+      "part2": "Con una tarjeta digital de la Biblioteca, tiene acceso gratuito a una amplia gama de recursos digitales incluyendo libros electrónicos, bases de datos, recursos educativos y más.",
+      "part3": "Al enviar una solicitud, comprende y acepta nuestros <a href='https://www.nypl.org/help/library-card/terms-conditions'>Términos y condiciones del titular de la tarjeta</a> (en inglés) y acepta nuestras <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Normas y reglamentos generales</a>. Para obtener más información sobre el uso de información personal por parte de la Biblioteca, lea nuestra <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Política de privacidad</a>."
+    }
+  },
+  "personal": {
+    "title": "Paso 1 de 5: Información personal",
+    "firstName": { "label": "Nombre" },
+    "lastName": { "label": "Apellido" },
+    "birthdate": {
+      "label": "Fecha de nacimiento",
+      "instruction": "DD / MM / AAAA, incluyendo barras"
+    },
+    "ageGate": "Yes, I am over 13 years old.",
+    "email": {
+      "label": "Dirección de correo electrónico",
+      "instruction": "Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos. Si no desea proporcionar una dirección de correo electrónico, puede solicitar una tarjeta física utilizando nuestro <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>formulario alterno (en inglés)</a>. Una vez que lo haya completado, por favor visite una de nuestras bibliotecas con un comprobante de identidad y domicilio para recoger su tarjeta física."
+    },
+    "eCommunications": {
+      "labelText": "Sí, me gustaría recibir información sobre los programas y servicios que ofrece la NYPL"
+    },
+    "errorMessage": {
+      "firstName": "Ingrese un nombre válido.",
+      "lastName": "Ingrese un apellido válido.",
+      "birthdate": "Ingrese una fecha válida: MM/DD/AAAA, incluya las barras.",
+      "email": "Ingrese una dirección de correo electrónico válida."
+    }
+  },
+  "location": {
+    "title": "Paso 2 de 5: Dirección",
+    "address": {
+      "title": "Dirección de domicilio",
+      "description": "Si vive en la ciudad de Nueva York, por favor complete el formulario de domicilio.",
+      "line1": { "label": "Calle" },
+      "line2": { "label": "Departamento/Suite" },
+      "city": { "label": "Ciudad" },
+      "state": { "label": "Estado", "instruction": "Abreviación de 2 letras" },
+      "postalCode": {
+        "label": "Código postal",
+        "instruction": "Código postal de 5 ó 9 dígitos"
+      }
+    },
+    "workAddress": {
+      "title": "Dirección alternativa",
+      "description": {
+        "part1": "El proceso de solicitud es un poco diferente dependiendo de si usted vive, trabaja, estudia o paga impuestos sobre la propiedad en la ciudad de Nueva York, en otro lugar del estado de Nueva York o en otro lugar de Estados Unidos, o si solo está de visita en la ciudad de Nueva York. Seleccione una de las siguientes opciones y complete los campos obligatorios.",
+        "part2": "Si trabaja o estudia en la ciudad de Nueva York, indique la dirección."
+      }
+    },
+    "errorMessage": {
+      "line1": "Ingrese una dirección postal válida.",
+      "city": "Ingrese una ciudad válida.",
+      "state": "Ingrese la abreviación de 2 caracteres del estado.",
+      "zip": "Ingrese un código postal de 5 o 9 dígitos."
+    }
+  },
+  "verifyAddress": {
+    "title": "Paso 3 de 5: verificación de la dirección",
+    "description": "Seleccione la dirección correcta.",
+    "homeAddress": "Dirección de domicilio",
+    "workAddress": "Dirección alternativa"
+  },
+  "account": {
+    "title": "Paso 4 de 5: Personalice su cuenta",
+    "description": "Cree un nombre de usuario y una contraseña para iniciar sesión y gestionar su cuenta, o para acceder a una amplia variedad de recursos digitales. Su nombre de usuario debe ser único",
+    "username": {
+      "label": "Nombre de usuario",
+      "instruction": "Entre 5 y 25 caracteres alfanuméricos. No use caracteres especiales.",
+      "checkButton": "Consultar si el nombre de usuario está disponible"
+    },
+    "password": {
+      "label": "Contraseña",
+      "instruction": "Le recomendamos elegir una contraseña segura que incluya al menos 8 caracteres, una combinación de letras mayúsculas y minúsculas, una combinación de letras y números, y al menos un carácter especial, excepto el punto (.).<br />Ejemplo: MyLib1731@<br />La contraseña no puede tener patrones comunes, como repetir consecutivamente un carácter tres o más veces (por ejemplo, aaaatf54) o repetir un patrón (por ejemplo, abcabcab)."
+    },
+    "verifyPassword": {
+      "label": "Verificar contraseña",
+      "instruction": "Entre 8 y 32 caracteres"
+    },
+    "showPassword": "Mostrar contraseña",
+    "library": {
+      "selectLibrary": "Seleccione una biblioteca local:",
+      "placeholder": "Escriba un nombre de biblioteca, como Biblioteca de Parkchester",
+      "title": "Biblioteca local",
+      "description": {
+        "part1": "Elegir una biblioteca local, nos ayudará a asegurarnos de que usted obtenga todo lo que necesita de la biblioteca que le resulte más conveniente.",
+        "part2": "Puede omitir este paso y actualizarlo en cualquier momento a través de su cuenta."
+      }
+    },
+    "termsAndCondition": {
+      "label": "Sí, acepto los términos y condiciones.",
+      "text": "Al enviar una solicitud, comprende y acepta nuestros <a href='https://www.nypl.org/help/library-card/terms-conditions'>Términos y condiciones del titular de la tarjeta</a> (en inglés) y acepta nuestras <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Normas y reglamentos generales</a>. Para obtener más información sobre el uso de información personal por parte de la Biblioteca, lea nuestra <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Política de privacidad</a>."
+    },
+    "errorMessage": {
+      "username": "El nombre de usuario debe tener entre 5 y 25 caracteres alfanuméricos.",
+      "password": "Su contraseña debe tener al menos 8 caracteres, incluyendo una combinación de letras mayúsculas y minúsculas, una combinación de letras y números, y al menos un carácter especial, excepto el punto (.).",
+      "verifyPassword": "Las dos contraseñas no coinciden.",
+      "acceptTerms": "Debe aceptar los términos y condiciones."
+    }
+  },
+  "review": {
+    "title": "Paso 5 de 5 : Confirme su información",
+    "description": "Asegúrese de que toda la información que ingresó sea correcta. Si es necesario, aún puede realizar cambios al formulario antes de enviar su solicitud.",
+    "section": {
+      "personal": "Información personal",
+      "address": {
+        "label": "Dirreción",
+        "location": "Ubicación",
+        "home": "Hogar",
+        "work": "Trabajo"
+      },
+      "homeLibrary": "Biblioteca local"
+    },
+    "createAccount": "Crea tu cuenta",
+    "receiveNewsletter": "Recibir información sobre los programas y servicios de la NYPL",
+    "yes": "Si",
+    "no": "No",
+    "nextStep": "Después de enviar su solicitud, verá una página de confirmación con la información de su cuenta, y podrá iniciar sesión y solicitar libros y materiales."
+  },
+  "confirmation": {
+    "title": "¡Felicitaciones! Ahora tiene una tarjeta digital de la Biblioteca Pública de Nueva York.",
+    "description": {
+      "part1": "Imprima o guarde esta información para su registro. En las próximas 24 horas, recibirá un correo electrónico con los detalles de su cuenta.",
+      "part2": "Para pedir prestados materiales físicos, visite una de nuestras <a href='http://nypl.org/locations'>localidades</a> con una <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>identificación válida con foto y prueba de domicilio particular</a> para completar la solicitud de una tarjeta física.",
+      "part3": "Esta tarjeta es temporal y caducará en 14 días. Si estudia en una universidad acreditada en Nueva York, trabaja en una empresa de la ciudad de Nueva York pero no está físicamente en la ciudad o el estado, o se dedica a investigar y va a visitar uno de nuestros centros de investigación, comuníquese con nosotros <a href='mailto:gethelp@nypl.org'>para actualizar su tarjeta.</a>"
+    },
+    "graphic": {
+      "memberName": "Nombre de miembro",
+      "password": "Contraseña",
+      "issued": "Fecha de emisión"
+    },
+    "nextSteps": {
+      "title": "Comenzar con la Biblioteca Pública de Nueva York",
+      "explore": "<b>Explore los libros electrónicos de la biblioteca</b><br />Descargue SimplyE para <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> o <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
+      "borrow": "<b>Pedir prestados libros y más</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'>Inicie sesión en su cuenta </a> y explore el catálogo.",
+      "updates": "<b>Reciba actualizaciones</b><br /><a href='https://www.nypl.org/enews'>Descubra todo lo que la Biblioteca tiene para ofrecer.</a>",
+      "more": "<b>Obtener más información</b><br /><a href='https://www.nypl.org/discover-library-card'>Descubra todo lo que puede hacer con su tarjeta de la Biblioteca.</a>"
+    }
+  },
+  "button": {
+    "start": "Comenzar",
+    "edit": "Editar",
+    "submit": "Enviar",
+    "next": "Próximo",
+    "previous": "Previo"
+  },
+  "globalErrors": {
+    "title": "Error de envío del formulario.",
+    "defaultError": "Ocurrió un error al procesar su envío. Inténtelo de nuevo más tarde."
+  },
+  "apiErrors": {
+    "defaultError": "Hubo un problema con el envío."
+  },
+  "ariaLabel": {
+    "librarySuggestions": "Lista de sugerencias de nombre de la biblioteca",
+    "barcode": "Código de barras escaneable"
+  }
+}

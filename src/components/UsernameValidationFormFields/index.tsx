@@ -5,6 +5,8 @@ import {
   FormRow,
 } from "@nypl/design-system-react-components";
 import axios from "axios";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { isAlphanumeric } from "validator";
@@ -13,6 +15,11 @@ import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
 import styles from "./UsernameValidationFormFields.module.css";
 import { lcaEvents } from "../../externals/gaUtils";
+import {
+  apiErrorTranslations,
+  commonAPIErrors,
+} from "../../data/apiErrorMessageTranslations";
+import { apiTranslations } from "../../data/apiMessageTranslations";
 
 interface UsernameValidationFormProps {
   id?: string;
@@ -30,7 +37,11 @@ interface UsernameValidationFormProps {
 const UsernameValidationForm = ({
   id = "",
   errorMessage = "",
-}: UsernameValidationFormProps) => {
+}: UsernameValidationFormProps): React.ReactElement => {
+  const { t } = useTranslation("common");
+  const {
+    query: { lang = "en" },
+  } = useRouter();
   const defaultState = {
     available: false,
     message: "",
@@ -58,21 +69,32 @@ const UsernameValidationForm = ({
     axios
       .post("/library-card/api/username", { username, csrfToken })
       .then((response) => {
+        let message = response.data?.message;
+        // Translate the message if possible.
+        if (lang !== "en") {
+          message = apiTranslations[message][lang] || message;
+        }
+
         lcaEvents("Availability Checker", "Username - available");
         setUsernameIsAvailable({
           available: true,
-          message: response.data?.message,
+          message,
         });
       })
       .catch((error) => {
         let message = error.response?.data?.message;
         // Catch any CSRF token issues and return a generic error message.
         if (error.response.status == 403) {
-          message = "A server error occurred validating a token.";
+          message = commonAPIErrors.errorValidatingToken;
         }
         // If the server is down, return a server error message.
         if (error.response.status === 500) {
-          message = "Cannot validate usernames at this time.";
+          message = commonAPIErrors.errorValidatingUsername;
+        }
+
+        // Translate the message if possible.
+        if (lang !== "en") {
+          message = apiErrorTranslations[message][lang] || message;
         }
 
         lcaEvents("Availability Checker", "Username - unavailable");
@@ -106,7 +128,7 @@ const UsernameValidationForm = ({
           onClick={validateUsername}
           type="button"
         >
-          Check if username is available
+          {t("account.username.checkButton")}
         </Button>
       </ButtonGroup>
     );
@@ -118,9 +140,9 @@ const UsernameValidationForm = ({
         <DSFormField>
           <FormField
             id="username"
-            label="Username"
+            label={t("account.username.label")}
             name="username"
-            instructionText="5-25 alphanumeric characters. No special characters."
+            instructionText={t("account.username.instruction")}
             isRequired
             errorState={errors}
             maxLength={25}

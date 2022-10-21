@@ -1,15 +1,17 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-
+import { TemplateAppContainer } from "@nypl/design-system-react-components";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-// import { Header, navConfig } from "@nypl/dgx-header-component";
-import Footer from "@nypl/dgx-react-footer";
+
 import Banner from "../Banner";
 import ApiErrors from "../ApiErrors";
 import useFormDataContext from "../../context/FormDataContext";
-import { TemplateAppContainer } from "@nypl/design-system-react-components";
 
 const ApplicationContainer = ({ children, problemDetail }) => {
+  const {
+    query: { lang = "en" },
+  } = useRouter();
   const errorSection = React.createRef<HTMLDivElement>();
   const { state } = useFormDataContext();
   const { errorObj } = state;
@@ -29,12 +31,16 @@ const ApplicationContainer = ({ children, problemDetail }) => {
       breakout={<Banner />}
       contentPrimary={
         <>
-          <ApiErrors ref={errorSection} problemDetail={errorToDisplay} />
+          <ApiErrors
+            lang={lang}
+            ref={errorSection}
+            problemDetail={errorToDisplay}
+          />
           {children}
         </>
       }
       sidebar="right"
-      footer={<Footer />}
+      marginBottom="l"
     />
   );
 };

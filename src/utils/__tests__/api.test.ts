@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase,
-@typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-var-requires */
 import {
   constructApiHeaders,
   isTokenExpiring,
@@ -473,6 +472,7 @@ describe("callPatronAPI", () => {
       lastName: "Nook",
       birthdate: "01/01/1988",
       email: "tomnook@nypl.org",
+      preferredLanguage: "en",
       location: "nyc",
       homeLibraryCode: "ch",
       "home-line1": "111 1st St",
@@ -523,6 +523,7 @@ describe("callPatronAPI", () => {
         email: "tomnook@nypl.org",
         birthdate: "01/01/1988",
         ageGate: undefined,
+        preferredLanguage: "en",
         address: {
           line1: "111 1st St",
           line2: "",

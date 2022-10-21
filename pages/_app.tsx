@@ -18,6 +18,10 @@ import useRouterScroll from "../src/hooks/useRouterScroll";
 import { constructProblemDetail } from "../src/utils/formDataUtils";
 import { DSProvider } from "@nypl/design-system-react-components";
 
+import { appWithTranslation, useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
+
 interface MyAppProps {
   Component: any;
   pageProps: any;
@@ -41,17 +45,29 @@ if (!isServerRendered()) {
   gaUtils.setupAnalytics(isProduction);
 }
 
-function MyApp<MyAppProps>({ Component, pageProps, query }) {
+function MyApp({ Component, pageProps }: MyAppProps) {
+  const { query } = useRouter();
   useRouterScroll({ top: 640 });
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   const { favIconPath, appTitle } = appConfig;
 
+  // Setting the "lang" and the "dir" attribute
+  const { i18n } = useTranslation("common");
+  React.useEffect(() => {
+    let lang = query.lang || "en";
+    if (lang === "zhcn") {
+      lang = "zh-cn";
+    }
+    document.getElementById("__next").dir = `${i18n.dir()}`;
+    document.documentElement.lang = `${lang}`;
+  });
+
   let error;
   // These errors are from the server-side query string form submission.
-  if (!isEmpty(query.errors)) {
-    const errorObject = JSON.parse(query.errors);
-    // If we already received a problem detail, just forward it. Problme
+  if (!isEmpty(query?.errors)) {
+    const errorObject = JSON.parse(query.errors as any);
+    // If we already received a problem detail, just forward it. Problem
     // details get sent when a request is sent to the NYPL Platform API.
     // If we get simple errors from form field validation, create the problem
     // detail for the errors.
@@ -62,7 +78,7 @@ function MyApp<MyAppProps>({ Component, pageProps, query }) {
         400,
         "invalid-request",
         "Invalid Request",
-        "There were errors with your submission.",
+        "",
         errorObject
       );
     }
@@ -73,8 +89,8 @@ function MyApp<MyAppProps>({ Component, pageProps, query }) {
   // These are results specifically from the `/library-card/api/create-patron`
   // API endpoint, which makes a request to the NYPL Platform API. These are
   // results from the server-side form submission.
-  if (!isEmpty(query.results)) {
-    formInitialStateCopy.results = JSON.parse(query.results);
+  if (!isEmpty(query?.results)) {
+    formInitialStateCopy.results = JSON.parse(query.results as any);
   }
 
   // Update the form values state with the initial url query params in
@@ -159,13 +175,6 @@ function MyApp<MyAppProps>({ Component, pageProps, query }) {
         />
         {/* <!-- End Google Analytics --> */}
       </Head>
-      <div id="Header-Placeholder" style={{ minHeight: "230px" }}>
-        <script
-          type="text/javascript"
-          src="https://header.nypl.org/dgx-header.min.js?skipNav=mainContent"
-          async
-        ></script>
-      </div>
       <DSProvider>
         <FormProvider {...formMethods}>
           <FormDataContextProvider initState={initState}>
@@ -183,9 +192,13 @@ function MyApp<MyAppProps>({ Component, pageProps, query }) {
   );
 }
 
-MyApp.getInitialProps = async ({ ctx }) => {
-  // Send it to the component as a prop.
-  return { query: ctx.query };
+// `getServerSideProps` required for the `appWithTranslation`
+// HOC for language translations.
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: { query: context.req },
+  };
 };
 
-export default MyApp;
+// Allows the entire application to work with the `next-i18next` package.
+export default appWithTranslation(MyApp as any);

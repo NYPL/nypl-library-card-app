@@ -1,6 +1,6 @@
 {
   "name": "nypl-library-card-app",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "NYPL Get A Library Card App",
   "main": "index.js",
   "scripts": {
@@ -35,7 +35,7 @@
   "devDependencies": {},
   "dependencies": {
     "@babel/preset-typescript": "7.10.4",
-    "@nypl/design-system-react-components": "1.0.8",
+    "@nypl/design-system-react-components": "1.2.0",
     "@nypl/dgx-react-footer": "0.5.7",
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.3",
@@ -68,6 +68,7 @@
     "lodash": "4.17.20",
     "moment": "2.24.0",
     "next": "10.1.0",
+    "next-i18next": "11.3.0",
     "prettier": "2.0.4",
     "qs": "6.9.3",
     "react": "17.0.2",

@@ -5,12 +5,17 @@ import React, { useEffect } from "react";
 
 import { FormResults } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
+import { useTranslation } from "next-i18next";
 
 const ConfirmationContainer: React.FC = () => {
-  const canvasArgs = { role: "img", ["aria-label"]: "Scannable barcode" };
   const { state } = useFormDataContext();
   const formResults = state.results || ({} as FormResults);
   const { barcode, password, name } = formResults;
+  const { t } = useTranslation("common");
+  const canvasArgs = {
+    role: "img",
+    ["aria-label"]: `${t("ariaLabel.barcode")}`,
+  };
   let canvas;
   // What we want to do is render the HTML and then pick up the canvas element.
   // We can then draw a barcode on it using `bwipjs`. The ILS uses `Codabar` as
@@ -46,7 +51,7 @@ const ConfirmationContainer: React.FC = () => {
         />
         <div className="background-lion">
           <div className="grid-item">
-            MEMBER NAME
+            {t("confirmation.graphic.memberName")}
             <div className="content">{name}</div>
           </div>
           <div className="grid-item">
@@ -57,11 +62,11 @@ const ConfirmationContainer: React.FC = () => {
             <div className="barcode">{barcode}</div>
           </div>
           <div className="grid-item">
-            PASSWORD
+            {t("confirmation.graphic.password")}
             <div className="content">{password}</div>
           </div>
           <div className="grid-item">
-            ISSUED
+            {t("confirmation.graphic.issued")}
             <div className="content">{new Date().toLocaleDateString()}</div>
           </div>
         </div>

@@ -1,3 +1,7 @@
+.container {
+  margin-top: 40px;
+}
+
 .container a {
   text-decoration: none !important;
 }
@@ -27,7 +31,6 @@
   display: inline-block;
   background-color: var(--nypl-colors-ui-link-primary) !important;
   color: var(--nypl-colors-ui-white);
-  border: 1px solid var(--nypl-colors-ui-gray-medium);
   margin-right: 10px;
   border-radius: 2px;
   padding: 8px 30px;
@@ -39,7 +42,6 @@
   display: inline-block;
   background-color: var(--nypl-colors-ui-link-primary) !important;
   color: var(--nypl-colors-ui-white);
-  border: 1px solid var(--nypl-colors-ui-gray-medium);
   margin-right: 10px;
   text-decoration: none !important;
   border-radius: 2px;

@@ -3,6 +3,26 @@ import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
 import ApiErrors from ".";
 import { errorMessages } from "../../utils/formDataUtils";
+import { mockTFunction } from "../../../testHelper/utils";
+
+jest.mock("react-i18next", () => {
+  const en = {
+    globalErrors: {
+      title: "Form submission error",
+      defaultError:
+        "There was an error processing your submission. Please try again later.",
+    },
+    apiErrors: {
+      defaultError: "There were errors with your submission.",
+    },
+  };
+  return {
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => ({
+      t: mockTFunction(en),
+    }),
+  };
+});
 
 describe("ApiErrors", () => {
   test("it passes axe accessibility test", async () => {

@@ -11,6 +11,7 @@ import {
 } from "@nypl/design-system-react-components";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -29,20 +30,27 @@ import {
   findLibraryName,
   findLibraryCode,
 } from "../../../src/utils/formDataUtils";
+import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 
 /**
  * ReviewFormContainer
  * Main page component for the "form submission review" page.
  */
 function ReviewFormContainer() {
+  const { t } = useTranslation("common");
   const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit } = useFormContext();
   const { state, dispatch } = useFormDataContext();
   const { formValues, errorObj, csrfToken } = state;
   const router = useRouter();
+  const {
+    query: { lang = "en" },
+  } = router;
   // For routing when javascript is not enabled, we want to track the form
   // values through the URL query params.
   const queryValues = createQueryParams(formValues);
+  // Get the URL query params for `newCard` and `lang`.
+  const queryStr = createQueryParams(router?.query);
   const [clientSide, setClientSide] = useState(false);
   // Flags to set a section to editable or read-only.
   const [editPersonalInfoFlag, setEditPersonalInfoFlag] = useState(false);
@@ -85,15 +93,13 @@ function ReviewFormContainer() {
           editSectionFlag(true);
         }}
       >
-        Edit
+        {t("button.edit")}
       </Button>
     ) : (
       <a
-        href={`/library-card/${page}?${encodeURI(
-          `newCard=true${queryValues}`
-        )}`}
+        href={`/library-card/${page}?${encodeURI(`${queryStr}${queryValues}`)}`}
       >
-        Edit
+        {t("button.edit")}
       </a>
     );
   /**
@@ -108,18 +114,18 @@ function ReviewFormContainer() {
         id="editAddressButton"
         onClick={() => {
           lcaEvents("Edit", "Location/Address");
-          router.push("/location?newCard=true");
+          router.push(`/location?${queryStr}`);
         }}
       >
-        Edit
+        {t("button.edit")}
       </Button>
     ) : (
       <a
         href={`/library-card/location?${encodeURI(
-          `newCard=true${queryValues}`
+          `${queryStr}${queryValues}`
         )}`}
       >
-        Edit
+        {t("button.edit")}
       </a>
     );
   const submitSectionButton = (
@@ -130,7 +136,7 @@ function ReviewFormContainer() {
         onClick={() => {}}
         type="submit"
       >
-        Submit
+        {t("button.submit")}
       </Button>
     </ButtonGroup>
   );
@@ -178,7 +184,7 @@ function ReviewFormContainer() {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
         lcaEvents("Submit", "Submit");
-        router.push("/congrats?newCard=true");
+        router.push(`/congrats?${queryStr}`);
       })
       .catch((error) => {
         // Catch any CSRF token issues and return a generic error message
@@ -186,7 +192,7 @@ function ReviewFormContainer() {
         if (error.response.status == 403) {
           dispatch({
             type: "SET_FORM_ERRORS",
-            value: "A server error occurred validating a token.",
+            value: commonAPIErrors.errorValidatingToken,
           });
           // After a while, remove the errors and redirect to the home page.
           setTimeout(() => {
@@ -209,26 +215,26 @@ function ReviewFormContainer() {
   const renderPersonalInformationValues = () => (
     <div className={styles.container}>
       <div className={styles.multiField}>
-        <div className={styles.title}>First Name</div>
+        <div className={styles.title}>{t("personal.firstName.label")}</div>
         <div>{formValues.firstName}</div>
       </div>
       <div className={styles.multiField}>
-        <div className={styles.title}>Last Name</div>
+        <div className={styles.title}>{t("personal.lastName.label")}</div>
         <div>{formValues.lastName}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>Date Of Birth</div>
+        <div className={styles.title}>{t("personal.birthdate.label")}</div>
         <div>{formValues.birthdate}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>Email Address</div>
+        <div className={styles.title}>{t("personal.email.label")}</div>
         <div>{formValues.email}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>
-          Receive information about NYPL&apos;s programs and services
+        <div className={styles.title}>{t("review.receiveNewsletter")}</div>
+        <div>
+          {formValues.ecommunicationsPref ? t("review.yes") : t("review.no")}
         </div>
-        <div>{formValues.ecommunicationsPref ? "Yes" : "No"}</div>
       </div>
       {editSectionButton(
         setEditPersonalInfoFlag,
@@ -244,11 +250,11 @@ function ReviewFormContainer() {
   const renderAccountValues = () => (
     <div className={styles.container}>
       <div className={styles.field}>
-        <div className={styles.title}>Username</div>
+        <div className={styles.title}>{t("account.username.label")}</div>
         <div>{formValues.username}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>Password</div>
+        <div className={styles.title}>{t("account.password.label")}</div>
         {/* Only render the toggleable password with javascript enabled. */}
         {clientSide ? (
           <>
@@ -260,7 +266,7 @@ function ReviewFormContainer() {
             <Checkbox
               id="showPasswordReview"
               name="showPasswordReview"
-              labelText="Show Password"
+              labelText={t("account.showPassword")}
               isChecked={showPassword}
               onChange={updateShowPassword}
               mt="s"
@@ -271,7 +277,7 @@ function ReviewFormContainer() {
         )}
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>Home Library</div>
+        <div className={styles.title}>{t("review.section.homeLibrary")}</div>
         <div>{findLibraryName(formValues.homeLibraryCode)}</div>
       </div>
       {editSectionButton(
@@ -291,65 +297,83 @@ function ReviewFormContainer() {
           there's nothing to show and will just be confusing. */}
       {formValues.location && (
         <div className={styles.field}>
-          <div className={styles.title}>Location</div>
+          <div className={styles.title}>
+            {t("review.section.address.location")}
+          </div>
           <Radio
             className="radio-input"
             id="review-location-id"
             isChecked={true}
-            labelText={getLocationValue(formValues.location)}
+            labelText={getLocationValue(formValues.location, lang as string)}
             name={"location"}
             value={formValues.location}
           />
         </div>
       )}
-      {formValues["work-line1"] && <Heading level="four">Home</Heading>}
+      {formValues["work-line1"] && (
+        <Heading level="four">{t("review.section.address.home")}</Heading>
+      )}
       <div className={styles.field}>
-        <div className={styles.title}>Street Address</div>
+        <div className={styles.title}>{t("location.address.line1.label")}</div>
         <div>{formValues["home-line1"]}</div>
       </div>
       {formValues["home-line2"] && (
         <div className={styles.field}>
-          <div className={styles.title}>Apartment/Suite</div>
+          <div className={styles.title}>
+            {t("location.address.line2.label")}
+          </div>
           <div>{formValues["home-line2"]}</div>
         </div>
       )}
       <div className={styles.multiField}>
-        <div className={styles.title}>City</div>
+        <div className={styles.title}>{t("location.address.city.label")}</div>
         <div>{formValues["home-city"]}</div>
       </div>
       <div className={styles.multiField}>
-        <div className={styles.title}>State</div>
+        <div className={styles.title}>{t("location.address.state.label")}</div>
         <div>{formValues["home-state"]}</div>
       </div>
       <div className={styles.field}>
-        <div className={styles.title}>Postal Code</div>
+        <div className={styles.title}>
+          {t("location.address.postalCode.label")}
+        </div>
         <div>{formValues["home-zip"]}</div>
       </div>
       {formValues["work-line1"] && (
         <>
           <Heading level="four" className={styles.workTitle}>
-            Work
+            {t("review.section.address.work")}
           </Heading>
           <div className={styles.field}>
-            <div className={styles.title}>Street Address</div>
+            <div className={styles.title}>
+              {t("location.address.line1.label")}
+            </div>
             <div>{formValues["work-line1"]}</div>
           </div>
           {formValues["work-line2"] && (
             <div className={styles.field}>
-              <div className={styles.title}>Apartment/Suite</div>
+              <div className={styles.title}>
+                {t("location.address.line2.label")}
+              </div>
               <div>{formValues["work-line2"]}</div>
             </div>
           )}
           <div className={styles.multiField}>
-            <div className={styles.title}>City</div>
+            <div className={styles.title}>
+              {t("location.address.city.label")}
+            </div>
             <div>{formValues["work-city"]}</div>
           </div>
           <div className={styles.multiField}>
-            <div className={styles.title}>State</div>
+            <div className={styles.title}>
+              {t("location.address.state.label")}
+            </div>
             <div>{formValues["work-state"]}</div>
           </div>
           <div className={styles.field}>
-            <div className={styles.title}>Postal Code</div>
+            <div className={styles.title}>
+              {t("location.address.postalCode.label")}
+            </div>
             <div>{formValues["work-zip"]}</div>
           </div>
         </>
@@ -364,7 +388,7 @@ function ReviewFormContainer() {
       <Loader isLoading={isLoading} />
 
       <div className={styles.formSection}>
-        <Heading level="three">Personal Information</Heading>
+        <Heading level="three">{t("review.section.personal")}</Heading>
         {!editPersonalInfoFlag ? (
           renderPersonalInformationValues()
         ) : (
@@ -381,12 +405,12 @@ function ReviewFormContainer() {
       </div>
 
       <div className={styles.formSection}>
-        <Heading level="three">Address</Heading>
+        <Heading level="three">{t("review.section.address.label")}</Heading>
         {renderAddressValues()}
       </div>
 
       <div className={styles.formSection}>
-        <Heading level="three">Create Your Account</Heading>
+        <Heading level="three">{t("review.createAccount")}</Heading>
         {!editAccountInfoFlag ? (
           renderAccountValues()
         ) : (
@@ -406,11 +430,7 @@ function ReviewFormContainer() {
         )}
       </div>
 
-      <div className={styles.formSection}>
-        After you submit your application, you will see a confirmation page with
-        your account information, and you will be able to log in and request
-        books and materials.
-      </div>
+      <div className={styles.formSection}>{t("review.nextStep")}</div>
 
       <Form
         action="/library-card/api/submit"
@@ -440,7 +460,7 @@ function ReviewFormContainer() {
 
         <FormRow margin-top="20px">
           <DSFormField>
-            <RoutingLinks next={{ submit: true, text: "Submit" }} />
+            <RoutingLinks next={{ submit: true, text: t("button.submit") }} />
           </DSFormField>
         </FormRow>
       </Form>
