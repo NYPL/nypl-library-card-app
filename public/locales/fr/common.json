@@ -76,7 +76,7 @@
     "description": "Créez un nom d’utilisateur et un mot de passe pour pouvoir vous connecter, gérer votre compte et accéder à un vaste éventail de nos ressources numériques. Votre nom d’utilisateur doit être unique.",
     "username": {
       "label": "Nom d’utilisateur",
-      "instruction": "5-25 caractères alphanumériques. Aucun caractères spécial.",
+      "instruction": "5-25 caractères alphanumériques. Aucun caractère spécial.",
       "checkButton": "Vérification de la disponibilité du nom d’utilisateur."
     },
     "password": {
