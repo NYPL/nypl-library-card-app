@@ -1,8 +1,49 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { axe } from "jest-axe";
-import { TestProviderWrapper } from "../../../testHelper/utils";
+
+import { mockTFunction, TestProviderWrapper } from "../../../testHelper/utils";
 import PersonalFormFields from ".";
+
+jest.mock("react-i18next", () => {
+  const en = {
+    personal: {
+      title: "Step 1 of 5: Personal Information",
+      firstName: {
+        label: "First Name",
+      },
+      lastName: {
+        label: "Last Name",
+      },
+      birthdate: {
+        label: "Date of Birth",
+        instruction: "MM/DD/YYYY, including slashes",
+      },
+      email: {
+        label: "Email Address",
+        instruction:
+          "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card.",
+      },
+      eCommunications: {
+        labelText:
+          "Yes, I would like to receive information about NYPL's programs and services",
+      },
+      errorMessage: {
+        firstName: "Please enter a valid first name.",
+        lastName: "Please enter a valid last name.",
+        birthdate: "Please enter a valid date, MM/DD/YYYY, including slashes.",
+        ageGate: "You must be 13 years or older to continue.",
+        email: "Please enter a valid email address.",
+      },
+    },
+  };
+  return {
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => ({
+      t: mockTFunction(en),
+    }),
+  };
+});
 
 describe("PersonalFormFields", () => {
   beforeEach(() => {
@@ -15,16 +56,16 @@ describe("PersonalFormFields", () => {
 
   test("renders names, age, email, and newsletter fields", () => {
     expect(
-      screen.getByRole("textbox", { name: "First Name Required" })
+      screen.getByRole("textbox", { name: "First Name (Required)" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Last Name Required" })
+      screen.getByRole("textbox", { name: "Last Name (Required)" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Date of Birth Required" })
+      screen.getByRole("textbox", { name: "Date of Birth (Required)" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Email Address Required" })
+      screen.getByRole("textbox", { name: "Email Address (Required)" })
     ).toBeInTheDocument();
     expect(
       screen.getByLabelText(

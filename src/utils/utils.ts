@@ -50,7 +50,7 @@ export const nyCities = [
  * createQueryParams
  * Converts an object into key/value pairs to be use as url query params.
  */
-export const createQueryParams = (obj) => {
+export const createQueryParams = (obj = {}) => {
   let query = "";
   for (const [key, value] of Object.entries(obj)) {
     query += `&${key}=${value}`;

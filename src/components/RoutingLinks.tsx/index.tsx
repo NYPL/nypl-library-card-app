@@ -3,6 +3,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
+
 import { lcaEvents } from "../../externals/gaUtils";
 import styles from "./RoutingLinks.module.css";
 
@@ -25,8 +27,10 @@ export interface RoutingLinksType {
  * approach to routing until submitting forms is integrated into routing.
  */
 function RoutingLinks({ previous, next }: RoutingLinksType): JSX.Element {
-  const nextText = next.text || "Next";
-  const previousText = previous?.text || "Previous";
+  const { t } = useTranslation("common");
+  const nextText = next.text || t("button.next");
+  const previousText = previous?.text || t("button.previous");
+
   return (
     <div className={styles.container}>
       {previous?.url && (

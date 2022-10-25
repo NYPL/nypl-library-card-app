@@ -1,30 +1,41 @@
+import {
+  Form,
+  FormField as DSFormField,
+  FormRow,
+  Heading,
+} from "@nypl/design-system-react-components";
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { Heading } from "@nypl/design-system-react-components";
 import isEmpty from "lodash/isEmpty";
 
-import useFormDataContext from "../../context/FormDataContext";
 import AddressFormFields from "../AddressFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
-import { errorMessages, constructAddressType } from "../../utils/formDataUtils";
 import {
   AddressResponse,
   AddressesResponse,
   AddressTypes,
 } from "../../interfaces";
 import Loader from "../Loader";
-import { lcaEvents } from "../../externals/gaUtils";
 import FormField from "../FormField";
+import { lcaEvents } from "../../externals/gaUtils";
+import { constructAddressType } from "../../utils/formDataUtils";
+import useFormDataContext from "../../context/FormDataContext";
+import { createQueryParams } from "../../utils/utils";
+import { useTranslation } from "next-i18next";
+import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 
-const AddressContainer = () => {
+const AddressContainer: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
   const { formValues, addressesResponse, csrfToken } = state;
   const router = useRouter();
+  const { t } = useTranslation("common");
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
+  // Get the URL query params for `newCard` and `lang`.
+  const queryStr = createQueryParams(router?.query);
 
   /**
    * submitForm
@@ -32,7 +43,6 @@ const AddressContainer = () => {
    */
   const submitForm = (formData) => {
     setIsLoading(true);
-
     const workAddress = constructAddressType(formData, "work");
     // If the work address wasn't filled out, that's okay, proceed.
     if (
@@ -41,7 +51,7 @@ const AddressContainer = () => {
       !workAddress.state &&
       !workAddress.zip
     ) {
-      router.push("/address-verification?newCard=true");
+      router.push(`/address-verification?${queryStr}`);
     } else {
       // Set the global form state if there's a work address.
       dispatch({
@@ -71,7 +81,7 @@ const AddressContainer = () => {
           if (error.response.status == 403) {
             dispatch({
               type: "SET_FORM_ERRORS",
-              value: "A server error occurred validating a token.",
+              value: commonAPIErrors.errorValidatingToken,
             });
             nextUrl = "/new";
           }
@@ -104,7 +114,7 @@ const AddressContainer = () => {
             }, 2500);
           } else {
             setIsLoading(false);
-            nextUrl = "/address-verification?newCard=true";
+            nextUrl = `/address-verification?${queryStr}`;
             lcaEvents("Navigation", `Next button to ${nextUrl}`);
             router.push(nextUrl);
           }
@@ -113,40 +123,52 @@ const AddressContainer = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(submitForm)}
-      method="post"
-      action="/library-card/api/submit"
-    >
+    <>
+      <Heading level="three">{t("location.workAddress.title")}</Heading>
+      <p>{t("location.workAddress.description.part2")}</p>
+
       <Loader isLoading={isLoading} />
 
-      <Heading level={3}>Alternate Address</Heading>
-      <p>If you work or go to school in NYC please provide the address.</p>
-      <AddressFormFields
-        type={AddressTypes.Work}
-        errorMessages={errorMessages.address}
-      />
+      <Form
+        action="/library-card/api/submit"
+        id="work-address-container"
+        method="post"
+        onSubmit={handleSubmit(submitForm)}
+      >
+        <AddressFormFields
+          id="work-address-container"
+          type={AddressTypes.Work}
+        />
 
-      {/* Not register to react-hook-form because we only want to
-          use this value for the no-js scenario. */}
-      <FormField
-        id="hidden-work-page"
-        type="hidden"
-        name="page"
-        defaultValue="workAddress"
-      />
-      <FormField
-        id="hidden-form-values"
-        type="hidden"
-        name="formValues"
-        defaultValue={JSON.stringify(formValues)}
-      />
+        <FormRow display="none">
+          <DSFormField>
+            {/* Not register to react-hook-form because we only want to
+                use this value for the no-js scenario. */}
+            <FormField
+              id="hidden-work-page"
+              type="hidden"
+              name="page"
+              defaultValue="workAddress"
+            />
+            <FormField
+              id="hidden-form-values"
+              type="hidden"
+              name="formValues"
+              defaultValue={JSON.stringify(formValues)}
+            />
+          </DSFormField>
+        </FormRow>
 
-      <RoutingLinks
-        previous={{ url: "/location?newCard=true" }}
-        next={{ submit: true }}
-      />
-    </form>
+        <FormRow>
+          <DSFormField>
+            <RoutingLinks
+              previous={{ url: `/location?${queryStr}` }}
+              next={{ submit: true }}
+            />
+          </DSFormField>
+        </FormRow>
+      </Form>
+    </>
   );
 };
 

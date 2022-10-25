@@ -1,13 +1,19 @@
+import {
+  FormField as DSFormField,
+  FormRow,
+} from "@nypl/design-system-react-components";
+import { useTranslation } from "next-i18next";
 import React from "react";
-import FormField from "../FormField";
-import { Address, AddressTypes } from "../../interfaces";
 import { useFormContext } from "react-hook-form";
 import { isNumeric } from "validator";
+
+import FormField from "../FormField";
+import { AddressTypes } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
 
 interface AddressFormProps {
+  id?: string;
   type: AddressTypes;
-  errorMessages: Address;
 }
 
 /**
@@ -16,7 +22,8 @@ interface AddressFormProps {
  * street address (line1), second street address (line2), city, state,
  * and zip code.
  */
-const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
+const AddressForm = ({ id, type }: AddressFormProps): React.ReactElement => {
+  const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
   // This component must be used within the `react-hook-form` provider so that
@@ -37,13 +44,10 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
    */
   const lengthValidation = (min, max, field) => (value) => {
     if (!min) {
-      return !isRequired || value.length <= max || errorMessages[field];
+      return !isRequired || value.length <= max || t(field);
     }
     return (
-      !isRequired ||
-      value.length === min ||
-      value.length === max ||
-      errorMessages[field]
+      !isRequired || value.length === min || value.length === max || t(field)
     );
   };
   /**
@@ -52,89 +56,106 @@ const AddressForm = ({ type, errorMessages }: AddressFormProps) => {
    */
   const validateZip = () => (value) => {
     if (!isNumeric(value) && isRequired) {
-      return errorMessages.zip;
+      return t("location.errorMessage.zip");
     }
-    return lengthValidation(MINLENGTHZIP, MAXLENGTHZIP, "zip")(value);
+    return lengthValidation(
+      MINLENGTHZIP,
+      MAXLENGTHZIP,
+      "location.errorMessage.zip"
+    )(value);
   };
 
   return (
-    <fieldset>
-      <legend>{type} address form fields</legend>
-      <FormField
-        id={`line1-${type}`}
-        label="Street Address"
-        name={`${type}-line1`}
-        isRequired={isRequired}
-        errorState={errors}
-        ref={register({
-          required: {
-            value: isRequired,
-            message: errorMessages.line1,
-          },
-        })}
-        defaultValue={formValues[`${type}-line1`]}
-      />
-      <FormField
-        id={`line2-${type}`}
-        label="Apartment / Suite"
-        name={`${type}-line2`}
-        ref={register()}
-        defaultValue={formValues[`${type}-line2`]}
-      />
-      <div className="input-group">
-        <div style={{ flex: "1" }}>
+    <>
+      <FormRow id={`${id}-addressForm-1`}>
+        <DSFormField>
+          <FormField
+            id={`line1-${type}`}
+            label={t("location.address.line1.label")}
+            name={`${type}-line1`}
+            isRequired={isRequired}
+            errorState={errors}
+            ref={register({
+              required: {
+                value: isRequired,
+                message: t("location.errorMessage.line1"),
+              },
+            })}
+            defaultValue={formValues[`${type}-line1`]}
+          />
+        </DSFormField>
+      </FormRow>
+
+      <FormRow id={`${id}-addressForm-2`}>
+        <DSFormField>
+          <FormField
+            id={`line2-${type}`}
+            label={t("location.address.line2.label")}
+            name={`${type}-line2`}
+            ref={register()}
+            defaultValue={formValues[`${type}-line2`]}
+          />
+        </DSFormField>
+      </FormRow>
+
+      <FormRow id={`${id}-addressForm-3`}>
+        <DSFormField>
           <FormField
             id={`city-${type}`}
-            label="City"
+            label={t("location.address.city.label")}
             name={`${type}-city`}
             isRequired={isRequired}
             errorState={errors}
             ref={register({
               required: {
                 value: isRequired,
-                message: errorMessages.city,
+                message: t("location.errorMessage.city"),
               },
             })}
             defaultValue={formValues[`${type}-city`]}
           />
-        </div>
-        <div style={{ flex: "1" }}>
+        </DSFormField>
+        <DSFormField>
           <FormField
             id={`state-${type}`}
-            instructionText="2-letter abbreviation"
-            label="State"
+            instructionText={t("location.address.state.instruction")}
+            label={t("location.address.state.label")}
             name={`${type}-state`}
             isRequired={isRequired}
             errorState={errors}
             maxLength={STATELENGTH}
             ref={register({
-              validate: lengthValidation(STATELENGTH, STATELENGTH, "state"),
+              validate: lengthValidation(
+                STATELENGTH,
+                STATELENGTH,
+                "location.errorMessage.state"
+              ),
             })}
             defaultValue={formValues[`${type}-state`]}
           />
-        </div>
-      </div>
-      <div className="input-group">
-        <div style={{ flex: "1" }}>
+        </DSFormField>
+      </FormRow>
+
+      <FormRow id={`${id}-addressForm-4`}>
+        <DSFormField>
           <FormField
             id={`zip-${type}`}
-            label="Postal Code"
+            label={t("location.address.postalCode.label")}
             name={`${type}-zip`}
             isRequired={isRequired}
             errorState={errors}
             minLength={MINLENGTHZIP}
             maxLength={MAXLENGTHZIP}
-            instructionText="5 or 9-digit postal code"
+            instructionText={t("location.address.postalCode.instruction")}
             ref={register({
               validate: validateZip(),
             })}
             defaultValue={formValues[`${type}-zip`]}
           />
-        </div>
-        {/* Easier to align with an empty block. */}
-        <div style={{ flex: "1" }}></div>
-      </div>
-    </fieldset>
+        </DSFormField>
+        <DSFormField></DSFormField>
+      </FormRow>
+    </>
   );
 };
 

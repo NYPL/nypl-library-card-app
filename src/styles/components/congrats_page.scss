@@ -1,5 +1,5 @@
 .confirmation-graphic {
-  background-color: var(--ui-gray-light);
+  background-color: var(--nypl-colors-ui-gray-light-cool);
   position: relative;
 }
 
@@ -47,18 +47,22 @@
   background-color: transparent;
 
   @media only screen and (min-width: $breakpoint-small) {
-    padding: 25px 0 0 30px;
+    padding-top: 25px;
+    padding-inline-start: 30px;
   }
 
   @media only screen and (min-width: $breakpoint-intermediate-2) {
-    padding: 35px 0 0 40px;
+    padding-top: 35px;
+    padding-inline-start: 40px;
   }
 
   @media only screen and (min-width: $breakpoint-medium) {
-    padding: 30px 0 0 40px;
+    padding-top: 30px;
+    padding-inline-start: 40px;
   }
   @media only screen and (min-width: $breakpoint-large) {
-    padding: 40px 0 0 50px;
+    padding-top: 40px;
+    padding-inline-start: 50px;
   }
 }
 
@@ -88,14 +92,14 @@
     fill: white;
 
     width: 90%;
-    margin-left: 15px;
+    margin-inline-start: 15px;
 
     @media only screen and (min-width: $breakpoint-small) {
       width: 80%;
     }
     @media only screen and (min-width: $breakpoint-intermediate-2) {
       width: 65%;
-      margin-left: 35px;
+      margin-inline-start: 35px;
     }
   }
 

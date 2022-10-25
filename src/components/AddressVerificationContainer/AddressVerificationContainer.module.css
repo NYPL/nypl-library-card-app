@@ -15,7 +15,7 @@
 }
 
 .workAddressContainer {
-  border-top: 1px solid var(--ui-gray-medium);
+  border-top: 1px solid var(--nypl-colors-ui-gray-medium);
   padding-top: 30px;
 }
 

@@ -1,5 +1,5 @@
 .addressSection {
   margin: 20px 0;
-  border-bottom: 1px solid var(--ui-gray-medium);
+  border-bottom: 1px solid var(--nypl-colors-ui-gray-medium);
   padding-bottom: 30px;
 }

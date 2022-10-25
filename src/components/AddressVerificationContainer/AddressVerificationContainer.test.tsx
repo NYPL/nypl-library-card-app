@@ -2,9 +2,65 @@ import React from "react";
 import { render, screen, act } from "@testing-library/react";
 import { axe } from "jest-axe";
 import AddressVerificationContainer from ".";
-import { TestProviderWrapper } from "../../../testHelper/utils";
+import { mockTFunction, TestProviderWrapper } from "../../../testHelper/utils";
 import { formInitialState } from "../../context/FormDataContext";
 import { AddressResponse } from "../../interfaces";
+
+jest.mock("react-i18next", () => {
+  const en = {
+    location: {
+      title: "Paso 2 de 5: Dirección",
+      address: {
+        title: "Dirección de domicilio",
+        description:
+          "Si vive en la ciudad de Nueva York, por favor complete el formulario de domicilio.",
+        line1: { label: "Calle" },
+        line2: { label: "Departamento/Suite" },
+        city: { label: "Ciudad" },
+        state: { label: "Estado", instruction: "Abreviación de 2 letras" },
+        postalCode: {
+          label: "Código postal",
+          instruction: "Código postal de 5 ó 9 dígitos",
+        },
+      },
+      workAddress: {
+        title: "Dirección alternativa",
+        description: {
+          part1:
+            "El proceso de solicitud es un poco diferente dependiendo de si usted vive, trabaja, estudia o paga impuestos sobre la propiedad en la ciudad de Nueva York, en otro lugar del estado de Nueva York o en otro lugar de Estados Unidos, o si solo está de visita en la ciudad de Nueva York. Seleccione una de las siguientes opciones y complete los campos obligatorios.",
+          part2:
+            "Si trabaja o estudia en la ciudad de Nueva York, indique la dirección.",
+        },
+      },
+      errorMessage: {
+        line1: "Ingrese una dirección postal válida.",
+        city: "Ingrese una ciudad válida.",
+        state: "Ingrese la abreviación de 2 caracteres del estado.",
+        zip: "Ingrese un código postal de 5 o 9 dígitos.",
+      },
+    },
+    verifyAddress: {
+      title: "Paso 3 de 5: verificación de la dirección",
+      description: "Seleccione la dirección correcta.",
+      homeAddress: "Dirección de domicilio",
+      workAddress: "Dirección alternativa",
+    },
+    button: {
+      start: "Get Started",
+      edit: "Edit",
+      submit: "Submit",
+      next: "Next",
+      previous: "Previous",
+    },
+  };
+
+  return {
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => ({
+      t: mockTFunction(en),
+    }),
+  };
+});
 
 describe("AddressVerificationContainer accessibility", () => {
   test("passes axe accessibility test", async () => {

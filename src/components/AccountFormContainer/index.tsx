@@ -1,3 +1,8 @@
+import {
+  Form,
+  FormField as DSFormField,
+  FormRow,
+} from "@nypl/design-system-react-components";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
@@ -9,6 +14,7 @@ import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import { findLibraryCode } from "../../utils/formDataUtils";
 import { lcaEvents } from "../../externals/gaUtils";
 import FormField from "../FormField";
+import { createQueryParams } from "../../utils/utils";
 
 const AccountFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
@@ -16,6 +22,8 @@ const AccountFormContainer = () => {
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
+  // Get the URL query params for `newCard` and `lang`.
+  const queryStr = createQueryParams(router?.query);
 
   /**
    * submitForm
@@ -30,43 +38,49 @@ const AccountFormContainer = () => {
       value: { ...formValues, ...formData },
     });
 
-    const nextUrl = "/review?newCard=true";
+    const nextUrl = `/review?${queryStr}`;
     lcaEvents("Navigation", `Next button to ${nextUrl}`);
     router.push(nextUrl);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(submitForm)}
-      method="post"
+    <Form
       action="/library-card/api/submit"
+      id="account-form-container"
+      method="post"
+      onSubmit={handleSubmit(submitForm)}
     >
-      <fieldset>
-        <legend>Account form fields</legend>
-        <AccountFormFields />
-        <AcceptTermsFormFields />
-      </fieldset>
+      <AccountFormFields id="account-form-container" />
+      <AcceptTermsFormFields />
 
-      {/* Not register to react-hook-form because we only want to
-          use this value for the no-js scenario. */}
-      <FormField
-        id="hidden-account-page"
-        type="hidden"
-        name="page"
-        defaultValue="account"
-      />
-      <FormField
-        id="hidden-form-values"
-        type="hidden"
-        name="formValues"
-        defaultValue={JSON.stringify(formValues)}
-      />
+      <FormRow display="none">
+        <DSFormField>
+          {/* Not register to react-hook-form because we only want to
+              use this value for the no-js scenario. */}
+          <FormField
+            id="hidden-account-page"
+            type="hidden"
+            name="page"
+            defaultValue="account"
+          />
+          <FormField
+            id="hidden-form-values"
+            type="hidden"
+            name="formValues"
+            defaultValue={JSON.stringify(formValues)}
+          />
+        </DSFormField>
+      </FormRow>
 
-      <RoutingLinks
-        previous={{ url: "/address-verification?newCard=true" }}
-        next={{ submit: true }}
-      />
-    </form>
+      <FormRow>
+        <DSFormField>
+          <RoutingLinks
+            previous={{ url: `/address-verification?${queryStr}` }}
+            next={{ submit: true }}
+          />
+        </DSFormField>
+      </FormRow>
+    </Form>
   );
 };
 

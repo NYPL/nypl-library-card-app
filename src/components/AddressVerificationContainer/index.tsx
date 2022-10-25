@@ -1,26 +1,30 @@
+import {
+  Form,
+  FormField as DSFormField,
+  FormRow,
+  Heading,
+  List,
+  Radio,
+} from "@nypl/design-system-react-components";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import {
-  Input,
-  Label,
-  InputTypes,
-  Heading,
-  List,
-  ListTypes,
-} from "@nypl/design-system-react-components";
+
 import useFormDataContext from "../../../src/context/FormDataContext";
 import { Address, AddressResponse } from "../../../src/interfaces";
 import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
 import styles from "./AddressVerificationContainer.module.css";
 import { lcaEvents } from "../../externals/gaUtils";
 import FormField from "../FormField";
+import { createQueryParams } from "../../utils/utils";
+
+import { useTranslation } from "next-i18next";
 
 /**
  * AddressVerificationContainer
  * Main page component for the "address review" page.
  */
-function AddressVerificationContainer() {
+function AddressVerificationContainer(): React.ReactElement {
   // Keep track of the user's selection of the preferred home
   // and/or work address.
   const [homeAddressSelect, setHomeAddressSelect] = useState("");
@@ -33,6 +37,9 @@ function AddressVerificationContainer() {
   // The `formValues` object holds all the submitted user values.
   const { formValues, addressesResponse } = state;
   const router = useRouter();
+  // Get the URL query params for `newCard` and `lang`.
+  const queryStr = createQueryParams(router?.query);
+  const { t } = useTranslation("common");
 
   /**
    * getAddresses
@@ -123,7 +130,7 @@ function AddressVerificationContainer() {
     });
 
     // Finally, go to the acount page.
-    const nextUrl = "/account?newCard=true";
+    const nextUrl = `/account?${queryStr}`;
     lcaEvents("Navigation", `Next button to ${nextUrl}`);
     router.push(nextUrl);
   };
@@ -145,7 +152,7 @@ function AddressVerificationContainer() {
     }
     const addressesLength = addresses.length;
     return (
-      <List type={ListTypes.Unordered} className={styles.multipleAddressList}>
+      <List className={styles.multipleAddressList} noStyling type="ul">
         {addresses.map((address, idx) => {
           const selected = `${addressType}-${idx}`;
           // If there's only one option, it's checked by default. Otherwise,
@@ -155,35 +162,26 @@ function AddressVerificationContainer() {
           const checkedClass = checked ? "checked" : "";
           return (
             <li key={`${addressType}-${idx}`} className={checkedClass}>
-              <Label
-                className={styles.label}
-                id={`${addressType}-${idx}-label`}
-                htmlFor={`input-${addressType}-${idx}`}
-              >
-                <Input
-                  className={`radio-input ${styles.input}`}
-                  aria-labelledby={`${addressType}-${idx}-label`}
-                  id={`${addressType}-${idx}`}
-                  type={InputTypes.radio}
-                  attributes={{
-                    name: `${addressType}-address-select`,
-                    "aria-checked": checked,
-                    defaultChecked: checked,
-                    onChange,
-                  }}
-                  value={selected}
-                  ref={register({
-                    required: true,
-                  })}
-                />
-                <div>
-                  <div>{address.line1}</div>
-                  {address.line2 && <div>{address.line2}</div>}
+              <Radio
+                id={`${addressType}-${idx}`}
+                className={`radio-input ${styles.input}`}
+                name={`${addressType}-address-select`}
+                isChecked={checked}
+                onChange={onChange}
+                value={selected}
+                ref={register({
+                  required: true,
+                })}
+                labelText={
                   <div>
-                    {address.city}, {address.state} {address.zip}
+                    <div>{address.line1}</div>
+                    {address.line2 && <div>{address.line2}</div>}
+                    <div>
+                      {address.city}, {address.state} {address.zip}
+                    </div>
                   </div>
-                </div>
-              </Label>
+                }
+              />
             </li>
           );
         })}
@@ -192,56 +190,65 @@ function AddressVerificationContainer() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(submitForm)}
-      method="post"
+    <Form
       action="/library-card/api/submit"
+      id="address-verification-container"
+      method="post"
+      onSubmit={handleSubmit(submitForm)}
     >
-      <fieldset>
-        <legend>Select the correct address</legend>
+      <FormRow>
+        <DSFormField>
+          <Heading level="three">{t("verifyAddress.homeAddress")}</Heading>
+          {renderMultipleAddresses(
+            homeAddress,
+            "home",
+            homeAddressSelect,
+            onChangeHome
+          )}
 
-        <Heading level={3}>Home Address</Heading>
-        {renderMultipleAddresses(
-          homeAddress,
-          "home",
-          homeAddressSelect,
-          onChangeHome
-        )}
+          {workAddress?.length > 0 && (
+            <div className={styles.workAddressContainer}>
+              <Heading level="three">{t("verifyAddress.workAddress")}</Heading>
 
-        {workAddress?.length > 0 && (
-          <div className={styles.workAddressContainer}>
-            <Heading level={3}>Alternate Address</Heading>
+              {renderMultipleAddresses(
+                workAddress,
+                "work",
+                workAddressSelect,
+                onChangeWork
+              )}
+            </div>
+          )}
+        </DSFormField>
+      </FormRow>
 
-            {renderMultipleAddresses(
-              workAddress,
-              "work",
-              workAddressSelect,
-              onChangeWork
-            )}
-          </div>
-        )}
-      </fieldset>
-
-      {/* Not register to react-hook-form because we only want to
+      <FormRow display="none">
+        <DSFormField>
+          {/* Not register to react-hook-form because we only want to
           use this value for the no-js scenario. */}
-      <FormField
-        id="hidden-verification-page"
-        type="hidden"
-        name="page"
-        defaultValue="addressVerification"
-      />
-      <FormField
-        id="hidden-form-values"
-        type="hidden"
-        name="formValues"
-        defaultValue={JSON.stringify(formValues)}
-      />
+          <FormField
+            id="hidden-verification-page"
+            type="hidden"
+            name="page"
+            defaultValue="addressVerification"
+          />
+          <FormField
+            id="hidden-form-values"
+            type="hidden"
+            name="formValues"
+            defaultValue={JSON.stringify(formValues)}
+          />
+        </DSFormField>
+      </FormRow>
 
-      <RoutingLinks
-        previous={{ url: "/location?newCard=true" }}
-        next={{ submit: true }}
-      />
-    </form>
+      <FormRow>
+        <DSFormField>
+          <RoutingLinks
+            previous={{ url: `/location?${queryStr}` }}
+            next={{ submit: true }}
+          />
+        </DSFormField>
+      </FormRow>
+    </Form>
   );
 }
 

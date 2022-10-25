@@ -3,6 +3,16 @@
   justify-content: center;
   align-items: center;
   opacity: 60%;
+  /* For modal */
+  padding: var(--nypl-space-s);
+  background-color: var(--nypl-colors-ui-gray-x-light-warm);
+  height: 100vh;
+  left: 0;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 999;
 }
 
 /* The following taken from the Skeleton component in NYPL Design System */
@@ -17,7 +27,7 @@
       rgba(255, 255, 255, 0.5) 50%,
       rgba(255, 255, 255, 0) 80%
     ),
-    linear-gradient(var(--ui-gray-medium) 33px, transparent 0);
+    linear-gradient(var(--nypl-colors-ui-gray-medium) 33px, transparent 0);
   background-repeat: repeat-y;
   background-size: 50px 230px, /* highlight */ 800px 830px;
   background-position: 0 0, /* highlight */ 0px 0px;

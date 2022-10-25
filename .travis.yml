@@ -1,38 +1,38 @@
 language: node_js
 node_js:
-- '11'
+  - "10"
 cache:
   directories:
-  - node_modules
+    - node_modules
 install: npm install
 script: npm test
 before_deploy: echo 'All unit tests passed;
   Preparing to deploy Get a Library Card to AWS'
 deploy:
-- provider: elasticbeanstalk
-  skip_cleanup: true
-  access_key_id: "$AWS_ACCESS_KEY_ID_PRODUCTION"
-  secret_access_key: "$AWS_SECRET_ACCESS_KEY_PRODUCTION"
-  region: us-east-1
-  app: nypl-library-card-app
-  env: nypl-library-card-app-production-2
-  bucket_name: elasticbeanstalk-us-east-1-946183545209
-  bucket_path: nypl-library-card-app-production
-  on:
-    repo: NYPL/nypl-library-card-app
-    branch: production
-- provider: elasticbeanstalk
-  skip_cleanup: true
-  access_key_id: "$AWS_ACCESS_KEY_ID_PRODUCTION"
-  secret_access_key: "$AWS_SECRET_ACCESS_KEY_PRODUCTION"
-  region: us-east-1
-  app: nypl-library-card-app
-  env: nypl-library-card-app-qa-18
-  bucket_name: elasticbeanstalk-us-east-1-946183545209
-  bucket_path: nypl-library-card-app-qa
-  on:
-    repo: NYPL/nypl-library-card-app
-    branch: qa
+  - provider: elasticbeanstalk
+    skip_cleanup: true
+    access_key_id: "$AWS_ACCESS_KEY_ID_PRODUCTION"
+    secret_access_key: "$AWS_SECRET_ACCESS_KEY_PRODUCTION"
+    region: us-east-1
+    app: nypl-library-card-app
+    env: nypl-library-card-app-production-2
+    bucket_name: elasticbeanstalk-us-east-1-946183545209
+    bucket_path: nypl-library-card-app-production
+    on:
+      repo: NYPL/nypl-library-card-app
+      branch: production
+  - provider: elasticbeanstalk
+    skip_cleanup: true
+    access_key_id: "$AWS_ACCESS_KEY_ID_PRODUCTION"
+    secret_access_key: "$AWS_SECRET_ACCESS_KEY_PRODUCTION"
+    region: us-east-1
+    app: nypl-library-card-app
+    env: nypl-library-card-app-qa-18
+    bucket_name: elasticbeanstalk-us-east-1-946183545209
+    bucket_path: nypl-library-card-app-qa
+    on:
+      repo: NYPL/nypl-library-card-app
+      branch: qa
 # Disabling development deploy for cost savings
 # - provider: elasticbeanstalk
 #  skip_cleanup: true
@@ -46,8 +46,9 @@ deploy:
 #  on:
 #    repo: NYPL/nypl-library-card-app
 #    branch: main
-after_deploy: echo 'Successfully executed deploy trigger for Get a Library Card on
+after_deploy:
+  echo 'Successfully executed deploy trigger for Get a Library Card on
   AWS'
 env:
   global:
-    secure: ZhfM2PS5VxJCdfIUQXwHUPuqgDMklKwFCSPK7qVcirOTmfvkV7LgA+QIiiB/g+1sxVtDwYId8H7qL7ckymJh4WstXzanyT2XkXmJ3d8NqVTgzMSZCmEsPEtmxow4xXQNadIljTIDN0iUp9NGQDrm3EN5Dd23hCttV/VzQzg1xlbdWK3RRBurwXefkqokgA8kawb4u/sjibCiXKgyz8nuscGHn4u9NSCdQNnIq600EmMnznDT8k5Tfojv29qz2+Vs6wEI8LCjZ+e9vYUDMTCAimVquVjDsMll+RgWPlpUasElFtalJybqGQhGgHspPDO7/yk882a9JRgk/iamXv7paKez+HoB1akZwVA7UDu3nZGfQuB/4mB6mN+ZzlZ/GjpVitvvFBu3ns/02DM6eVdCf8rCEm8JetydJ3Y0eIwjMKCN3VMxCyhYNzzvI3qCcK9emIxJOnQoSTUFB6xMAK/IDJs+2kVtzCzLUckjtWzWQFewN7Hz6Gq7sw6uK4TaEeMG495QY18VenXX+SJtyPVmQPhaABxnYjcwJCz1L5M2rUHrWDpXXIxndpefKudmXTFZ/RWU91YmNE87gWb0/fk2GauJLcXjYgr6rw+74R+MfVFTljqK9HB+x+8d0e9yZqo/c27IfnO90lUOvN2fx1uPS5sGLGxmNc+4ss3azubZIWg=
+    - secure: GkM3jfBDIHZo1JuWurHYtzDif5ePAVnTO/BukCkjZL6+Pi/i1itDUI6NeCtgJLshtzWz6Ys5ZdOjxP+Ky35/i6TN3gCy8rKpcP/DY+OhefzMQSiA7IlmZbNLvVbXQVr17A2kr/5eP6aEP6vR5lApJ1wkC78Iw/PDry1m/WT/LhZojKOF2Akbfbqjtt1qRNErHVdlcb2OGQCmCwEowOZRpNpM8O+h0SHmcWyA0+TqCCS6czMANOpkyK1Gfl8zWrsSe8F3T1fNjEkFaxp/seFy+e1MUsl9IvN2NVl05k7CZTOOjptcMVzR0sqz2SUKUM5WADIWgdMBpOzXQRzgLzKnqm7+mWUCTAjZZZN1scL2ggCxxZn6kf6HZsjTDltPuYHzU+FJeqGzPisvKlVW8it6KfBbJvIgJP+R9JrI9foPfZbH5nrdkkQSlLZIMJT7FeyPizMSdSZ6lTxJhtXAefchBkSeDknUo0qdfFdjTpjbcvNtnt7WUVTAWVI2NrzgXWq9mVJ52pSft9ShbiJKi3KvsXBcfoWb0ZxmKetEZU0XblIhTmGi7oiFdtdodWGowpNfvSVQX9mSHGysNyz+sJSAX8BDmn6D5HASgc/l2RI91rSUReUMoyKzAQ9+BI1Zav+5fLGDNmvyA4xsSth/WaJQPUUy95nyiIsXq72ViN1MDrE=

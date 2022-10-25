@@ -2,6 +2,26 @@ import React from "react";
 import { render, screen, act } from "@testing-library/react";
 import { axe } from "jest-axe";
 import RoutingLinks from "./index";
+import { mockTFunction } from "../../../testHelper/utils";
+
+jest.mock("react-i18next", () => {
+  const en = {
+    button: {
+      start: "Get Started",
+      edit: "Edit",
+      submit: "Submit",
+      next: "Next",
+      previous: "Previous",
+    },
+  };
+
+  return {
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => ({
+      t: mockTFunction(en),
+    }),
+  };
+});
 
 describe("RoutingLinks", () => {
   test("passes axe accessibility test", async () => {

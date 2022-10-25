@@ -2,6 +2,9 @@
   margin-top: 40px;
 }
 
+.container a {
+  text-decoration: none !important;
+}
 /*
 * This should eventually go into the Design System for the alternate `Link`
 * component styling but not until the functionality for that is working.
@@ -11,26 +14,37 @@
   display: inline-block;
   text-align: center;
   margin-bottom: 30px;
-  padding: 8px 40px;
-  background-color: var(--ui-white);
-  color: var(--ui-black) !important;
-  border: 1px solid var(--ui-gray-medium);
+  padding: 8px 30px;
+  background-color: var(--nypl-colors-ui-white);
+  color: var(--nypl-colors-ui-black) !important;
+  border: 1px solid var(--nypl-colors-ui-gray-medium);
   margin-right: 10px;
-  text-decoration: none;
+  text-decoration: none !important;
   border-radius: 2px;
 }
 
 .previous:visited {
-  color: var(--ui-black);
+  color: var(--nypl-colors-ui-black);
 }
 
 .button {
-  color: var(--ui-white) !important;
+  display: inline-block;
+  background-color: var(--nypl-colors-ui-link-primary) !important;
+  color: var(--nypl-colors-ui-white);
+  margin-right: 10px;
+  border-radius: 2px;
+  padding: 8px 30px;
 }
 
 .next {
   width: 100%;
-  padding: 12px 40px;
+  padding: 12px 30px;
+  display: inline-block;
+  background-color: var(--nypl-colors-ui-link-primary) !important;
+  color: var(--nypl-colors-ui-white);
+  margin-right: 10px;
+  text-decoration: none !important;
+  border-radius: 2px;
 }
 
 @media only screen and (min-width: 400px) {
@@ -45,6 +59,6 @@
   }
   .next {
     width: auto;
-    padding: 8px 40px;
+    padding: 8px 30px;
   }
 }

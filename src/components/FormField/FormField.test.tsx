@@ -15,12 +15,6 @@ describe("FormField", () => {
           type="password"
           isRequired
         />
-        <FormField
-          id="radioField"
-          label="a radio field"
-          name="radio"
-          type="radio"
-        />
       </>
     );
     expect(await axe(container)).toHaveNoViolations();
