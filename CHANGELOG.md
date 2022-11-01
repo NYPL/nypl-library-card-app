@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.9.1
+
+#### Updated
+
+- Updated Russian translations
+
 ### v0.9.0 - Multilingual support
 
 #### Added
