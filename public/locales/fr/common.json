@@ -1,6 +1,9 @@
 {
   "internationalInstructions": "Les champs du formulaire doivent être remplis en utilisant des caractères latins uniquement.",
   "required": "Obligatoire",
+  "banner": {
+    "title": "Demander une carte de bibliothèque en ligne"
+  },
   "home": {
     "title": "Obtenez votre carte de bibliothèque numérique en quelques étapes faciles",
     "description": {

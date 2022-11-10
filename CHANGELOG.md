@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v0.9.2
+
+#### Added
+
+- Banner text translations
+
 ### v0.9.1
 
 #### Updated

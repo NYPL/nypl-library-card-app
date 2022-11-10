@@ -1,14 +1,13 @@
 import React from "react";
+import { useTranslation } from "next-i18next";
 import { Heading, Hero } from "@nypl/design-system-react-components";
 
 export const defaultImageSrc = "/library-card/card-hero.png";
 export const defaultDescription =
   "Any person who lives, works, attends school or pays property taxes in New York State is eligible to receive a New York Public Library card free of charge. With a library card you get free access to resources and services across all New York Public Library locations.";
-export const defaultHeadingText = "Apply for a Library Card Online";
 interface BannerProps {
   fullImageSrc?: string;
   heroDescription?: string;
-  headingText?: string;
 }
 
 /**
@@ -18,9 +17,11 @@ interface BannerProps {
 const Banner = ({
   fullImageSrc = defaultImageSrc,
   heroDescription = defaultDescription,
-  headingText = defaultHeadingText,
-}: BannerProps) => {
-  const h1Heading = <Heading id="hero-banner" level="one" text={headingText} />;
+}: BannerProps): React.ReactElement => {
+  const { t } = useTranslation("common");
+  const h1Heading = (
+    <Heading id="hero-banner" level="one" text={t("banner.title")} />
+  );
   const subHeaderText = (
     <div className="hero__body-text">{heroDescription}</div>
   );
