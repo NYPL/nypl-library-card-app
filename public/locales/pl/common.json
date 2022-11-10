@@ -1,6 +1,9 @@
 {
   "internationalInstructions": "W polach formularza należy używać wyłącznie liter alfabetu łacińskiego.",
   "required": "Wymagane",
+  "banner": {
+    "title": "Złóż wniosek o kartę biblioteczną online"
+  },
   "home": {
     "title": "Uzyskaj cyfrową kartę biblioteczną już dziś — wystarczy kilka prostych kroków",
     "description": {
