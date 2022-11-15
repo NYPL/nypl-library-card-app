@@ -1,6 +1,9 @@
 {
   "internationalInstructions": "양식 입력란은 반드시 영어 알파벳 등의 라틴 문자만 사용하여 기재해야 합니다.",
   "required": "필수 항목",
+  "banner": {
+    "title": "도서관 카드를 온라인으로 신청하세요"
+  },
   "home": {
     "title": "간단한 몇 가지 단계로 디지털 도서관 카드를 발급 받으세요.",
     "description": {

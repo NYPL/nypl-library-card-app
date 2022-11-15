@@ -1,6 +1,9 @@
 {
   "internationalInstructions": "Los campos del formulario se deben completar únicamente con caracteres latinos.",
   "required": "Requerido",
+  "banner": {
+    "title": "Solicite una tarjeta de la Biblioteca en línea"
+  },
   "home": {
     "title": "Obtenga una tarjeta digital de la Biblioteca hoy con unos pocos pasos sencillos",
     "description": {

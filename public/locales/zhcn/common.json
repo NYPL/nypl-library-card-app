@@ -1,6 +1,9 @@
 {
   "internationalInstructions": "表单字段仅可使用拉丁字符填写。",
   "required": "必须填写",
+  "banner": {
+    "title": "在线申请图书卡"
+  },
   "home": {
     "title": "只需几个简单的步骤即可立即获得电子图书卡",
     "description": {

@@ -1,6 +1,9 @@
 {
   "internationalInstructions": "Yo dwe ranpli seksyon yo ki nan Fòmilè a avèk karaktè Laten sèlman.",
   "required": "Obligatwa",
+  "banner": {
+    "title": "Aplike pou yon Kat Bibliyotèk sou Entènèt"
+  },
   "home": {
     "title": "Jwenn yon Kat Bibliyotèk Nimerik Jodi a Menm nan Kèk Etap Byen Fasil",
     "description": {
