@@ -15,9 +15,10 @@ class MyDocument extends Document {
         <Head />
         <body>
           <div id="Header-Placeholder" style={{ minHeight: "230px" }}>
+            <div id="nypl-header"></div>
             <script
               type="text/javascript"
-              src="https://header.nypl.org/dgx-header.min.js?skipNav=mainContent"
+              src="https://qa-header.nypl.org/dgx-header.min.js?skipNav=main-content&containerId=nypl-header"
               async
             ></script>
           </div>
