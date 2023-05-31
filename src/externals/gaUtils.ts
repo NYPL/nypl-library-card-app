@@ -10,7 +10,7 @@ interface GaDimension {
  * Return the Google Analytics code for the production property if isProd is
  * true, or the dev property if isProd is false
  */
-export const getGoogleGACode = (isProd: boolean) => {
+export const getGoogleGACode = (isProd: boolean): string => {
   const codes = {
     production: "UA-1420324-3",
     dev: "UA-1420324-122",

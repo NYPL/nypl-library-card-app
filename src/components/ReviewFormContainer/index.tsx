@@ -23,6 +23,7 @@ import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import Loader from "../Loader";
 import FormField from "../FormField";
 import { lcaEvents } from "../../externals/gaUtils";
+import aaUtils from "../../externals/aaUtils";
 import { createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import {
@@ -150,6 +151,10 @@ function ReviewFormContainer() {
   const editSectionInfo = (formData, editSectionFlag) => {
     if (formData.homeLibraryCode) {
       formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
+      formData.location = findLibraryName(formData.homeLibraryCode);
+    }
+    if (formData.location) {
+      formData.homeLibraryCode = findLibraryCode(formData.location);
     }
     dispatch({
       type: "SET_FORM_DATA",
@@ -184,6 +189,14 @@ function ReviewFormContainer() {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
         lcaEvents("Submit", "Submit");
+
+        // Adobe Analytics
+        aaUtils.trackApplicationSubmitEvent({
+          id: formValues.username,
+          lang: formValues.preferredLanguage,
+          locationId: formValues.homeLibraryCode,
+          locationName: formValues.location,
+        });
         router.push(`/congrats?${queryStr}`);
       })
       .catch((error) => {
