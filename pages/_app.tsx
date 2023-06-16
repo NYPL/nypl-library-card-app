@@ -21,6 +21,7 @@ import { DSProvider } from "@nypl/design-system-react-components";
 import { appWithTranslation, useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
+import aaUtils from "../src/externals/aaUtils";
 
 interface MyAppProps {
   Component: any;
@@ -46,7 +47,7 @@ if (!isServerRendered()) {
 }
 
 function MyApp({ Component, pageProps }: MyAppProps) {
-  const { query } = useRouter();
+  const router = useRouter();
   useRouterScroll({ top: 640 });
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
@@ -55,7 +56,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   // Setting the "lang" and the "dir" attribute
   const { i18n } = useTranslation("common");
   React.useEffect(() => {
-    let lang = query.lang || "en";
+    let lang = router.query.lang || "en";
     if (lang === "zhcn") {
       lang = "zh-cn";
     }
@@ -63,10 +64,22 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     document.documentElement.lang = `${lang}`;
   });
 
+  React.useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      aaUtils.pageViewEvent(url);
+    };
+    router.events.on("routeChangeComplete", () => {
+      handleRouteChange(window.location.pathname);
+    });
+    return router.events.off("routeChangeComplete", () => {
+      handleRouteChange(window.location.pathname);
+    });
+  }, [router.events]);
+
   let error;
   // These errors are from the server-side query string form submission.
-  if (!isEmpty(query?.errors)) {
-    const errorObject = JSON.parse(query.errors as any);
+  if (!isEmpty(router.query?.errors)) {
+    const errorObject = JSON.parse(router.query.errors as any);
     // If we already received a problem detail, just forward it. Problem
     // details get sent when a request is sent to the NYPL Platform API.
     // If we get simple errors from form field validation, create the problem
@@ -84,20 +97,20 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     }
     // We don't want to keep the errors in this object since it's
     // going to go into the app's store.
-    delete query.errors;
+    delete router.query.errors;
   }
   // These are results specifically from the `/library-card/api/create-patron`
   // API endpoint, which makes a request to the NYPL Platform API. These are
   // results from the server-side form submission.
-  if (!isEmpty(query?.results)) {
-    formInitialStateCopy.results = JSON.parse(query.results as any);
+  if (!isEmpty(router.query?.results)) {
+    formInitialStateCopy.results = JSON.parse(router.query.results as any);
   }
 
   // Update the form values state with the initial url query params in
   // the app's store state.
   formInitialStateCopy.formValues = {
     ...formInitialStateCopy.formValues,
-    ...query,
+    ...router.query,
   };
   const initState = { ...formInitialStateCopy };
   const pageTitles = getPageTitles();
@@ -182,7 +195,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
               <Component
                 {...pageProps}
                 pageTitles={pageTitles}
-                policyType={query.policyType}
+                policyType={router.query.policyType}
               />
             </ApplicationContainer>
           </FormDataContextProvider>
