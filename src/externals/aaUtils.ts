@@ -1,5 +1,5 @@
 interface ApplicationSubmitProps {
-  id: string;
+  id: string | null;
   lang: string;
   locationId: string;
   locationName: string;

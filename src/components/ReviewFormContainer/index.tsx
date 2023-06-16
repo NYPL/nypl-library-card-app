@@ -192,7 +192,7 @@ function ReviewFormContainer() {
 
         // Adobe Analytics
         aaUtils.trackApplicationSubmitEvent({
-          id: formValues.username,
+          id: null,
           lang: formValues.preferredLanguage,
           locationId: formValues.homeLibraryCode,
           locationName: formValues.location,
