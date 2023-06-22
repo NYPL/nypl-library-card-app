@@ -1,7 +1,7 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import Footer from "@nypl/dgx-react-footer";
-const ADOBE_ANALYTICS_TAG = process.env.ADOBE_ANALYTICS_TAG;
+const ADOBE_ANALYTICS_TAG = process.env.NEXT_PUBLIC_ADOBE_ANALYTICS_TAG;
 
 /**
  * MyDocument
