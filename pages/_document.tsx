@@ -1,7 +1,8 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import Footer from "@nypl/dgx-react-footer";
-const ADOBE_ANALYTICS_TAG = process.env.NEXT_PUBLIC_ADOBE_ANALYTICS_TAG;
+import appConfig from "../appConfig";
+const { adobeAnalyticsTag } = appConfig;
 
 /**
  * MyDocument
@@ -26,7 +27,7 @@ class MyDocument extends Document {
             }}
           />
           {/* <!-- Tag Manager Library Script --> */}
-          <script src={ADOBE_ANALYTICS_TAG} async></script>
+          <script src={adobeAnalyticsTag} async></script>
         </Head>
         <body>
           <div id="Header-Placeholder" style={{ minHeight: "230px" }}>
