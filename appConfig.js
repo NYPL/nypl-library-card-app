@@ -16,4 +16,5 @@ export default {
     nys: "199",
   },
   scopes: "account:write account:read",
+  adobeAnalyticsTag: process.env.NEXT_PUBLIC_ADOBE_ANALYTICS_TAG,
 };
