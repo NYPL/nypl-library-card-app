@@ -34,7 +34,7 @@ class MyDocument extends Document {
             <div id="nypl-header"></div>
             <script
               type="text/javascript"
-              src="https://qa-header.nypl.org/dgx-header.min.js?skipNav=main-content&containerId=nypl-header"
+              src="https://header.nypl.org/dgx-header.min.js?skipNav=mainContent"
               async
             ></script>
           </div>
