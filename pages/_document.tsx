@@ -1,7 +1,7 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import appConfig from "../appConfig";
-const { adobeAnalyticsTag } = appConfig;
+const { adobeAnalyticsTag, dsHeader, dsFooter } = appConfig;
 
 /**
  * MyDocument
@@ -31,19 +31,11 @@ class MyDocument extends Document {
         <body>
           {/* <!-- NYPL Header Script --> */}
           <div id="nypl-header"></div>
-          <script
-            type="module"
-            src="https://nypl-header-fix3uj2y6-nypl.vercel.app/header.min.js?containerId=nypl-header"
-            async
-          ></script>
+          <script type="module" src={dsHeader} async></script>
           <Main />
           {/* <!-- NYPL Footer Script --> */}
           <div id="nypl-footer"></div>
-          <script
-            type="module"
-            src="https://ds-header.nypl.org/footer.min.js?containerId=nypl-footer"
-            async
-          ></script>
+          <script type="module" src={dsFooter} async></script>
           <NextScript />
           {/* <!-- Optimizely --> */}
           <script src="https://cdn.optimizely.com/js/284748925.js"></script>
