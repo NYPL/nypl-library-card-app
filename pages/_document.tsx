@@ -1,6 +1,5 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import Footer from "@nypl/dgx-react-footer";
 import appConfig from "../appConfig";
 const { adobeAnalyticsTag } = appConfig;
 
@@ -30,17 +29,21 @@ class MyDocument extends Document {
           <script src={adobeAnalyticsTag} async></script>
         </Head>
         <body>
-          <div id="Header-Placeholder" style={{ minHeight: "230px" }}>
-            <div id="nypl-header"></div>
-            <script
-              type="text/javascript"
-              src="https://qa-header.nypl.org/dgx-header.min.js?skipNav=main-content&containerId=nypl-header"
-              async
-            ></script>
-          </div>
-
+          {/* <!-- NYPL Header Script --> */}
+          <div id="nypl-header"></div>
+          <script
+            type="module"
+            src="https://nypl-header-fix3uj2y6-nypl.vercel.app/header.min.js?containerId=nypl-header"
+            async
+          ></script>
           <Main />
-          <Footer />
+          {/* <!-- NYPL Footer Script --> */}
+          <div id="nypl-footer"></div>
+          <script
+            type="module"
+            src="https://ds-header.nypl.org/footer.min.js?containerId=nypl-footer"
+            async
+          ></script>
           <NextScript />
           {/* <!-- Optimizely --> */}
           <script src="https://cdn.optimizely.com/js/284748925.js"></script>

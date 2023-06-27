@@ -14,6 +14,16 @@
   }
 }
 
+#nypl-header {
+  min-height: 70px;
+}
+
+@media screen and (min-width: 1024px) {
+  #nypl-header {
+    min-height: 230px;
+  }
+}
+
 #footer {
   box-sizing: initial;
 }
