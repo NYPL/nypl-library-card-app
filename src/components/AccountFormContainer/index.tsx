@@ -11,12 +11,12 @@ import useFormDataContext from "../../context/FormDataContext";
 import RoutingLinks from "../RoutingLinks.tsx";
 import AccountFormFields from "../AccountFormFields";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
-import { findLibraryCode } from "../../utils/formDataUtils";
+import { findLibraryCode, findLibraryName } from "../../utils/formDataUtils";
 import { lcaEvents } from "../../externals/gaUtils";
 import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
-const AccountFormContainer = () => {
+const AccountFormContainer = (): React.ReactElement => {
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const router = useRouter();
@@ -32,6 +32,7 @@ const AccountFormContainer = () => {
   const submitForm = (formData) => {
     // Convert the home library name to its code value.
     formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
+    formData.location = findLibraryName(formData.homeLibraryCode);
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",
