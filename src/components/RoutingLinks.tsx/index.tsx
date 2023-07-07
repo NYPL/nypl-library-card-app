@@ -5,7 +5,6 @@ import React from "react";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
-import { lcaEvents } from "../../externals/gaUtils";
 import aaUtils from "../../externals/aaUtils";
 import styles from "./RoutingLinks.module.css";
 
@@ -36,14 +35,7 @@ function RoutingLinks({ previous, next }: RoutingLinksType): JSX.Element {
     <div className={styles.container}>
       {previous?.url && (
         <Link href={previous.url}>
-          <a
-            className={styles.previous}
-            onClick={() =>
-              lcaEvents("Navigation", `Previous button to ${previous.url}`)
-            }
-          >
-            {previousText}
-          </a>
+          <a className={styles.previous}>{previousText}</a>
         </Link>
       )}
       {!next?.submit ? (
@@ -53,7 +45,6 @@ function RoutingLinks({ previous, next }: RoutingLinksType): JSX.Element {
             // Just track the "Get Started" or "Submit" clicks. Routing events
             // are tracked at the component level in each "onSubmit".
             onClick={() => {
-              lcaEvents("Navigation", next.text);
               aaUtils.trackCtaEvent("Start Application", next.text, next.url);
             }}
           >

@@ -12,7 +12,6 @@ import RoutingLinks from "../RoutingLinks.tsx";
 import AccountFormFields from "../AccountFormFields";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import { findLibraryCode, findLibraryName } from "../../utils/formDataUtils";
-import { lcaEvents } from "../../externals/gaUtils";
 import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
@@ -40,7 +39,6 @@ const AccountFormContainer = (): React.ReactElement => {
     });
 
     const nextUrl = `/review?${queryStr}`;
-    lcaEvents("Navigation", `Next button to ${nextUrl}`);
     router.push(nextUrl);
   };
 

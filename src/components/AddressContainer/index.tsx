@@ -21,7 +21,6 @@ import {
 import Loader from "../Loader";
 import FormField from "../FormField";
 import { constructAddressType } from "../../utils/formDataUtils";
-import { lcaEvents } from "../../externals/gaUtils";
 import { nyCounties, nyCities, createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../context/FormDataContext";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
@@ -122,7 +121,6 @@ const AddressContainer: React.FC = () => {
           } else {
             nextUrl = `/address-verification?${queryStr}`;
           }
-          lcaEvents("Navigation", `Next button to ${nextUrl}`);
           router.push(nextUrl);
         } else {
           setTimeout(() => {

@@ -14,7 +14,6 @@ import useFormDataContext from "../../../src/context/FormDataContext";
 import { Address, AddressResponse } from "../../../src/interfaces";
 import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
 import styles from "./AddressVerificationContainer.module.css";
-import { lcaEvents } from "../../externals/gaUtils";
 import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
@@ -131,7 +130,6 @@ function AddressVerificationContainer(): React.ReactElement {
 
     // Finally, go to the acount page.
     const nextUrl = `/account?${queryStr}`;
-    lcaEvents("Navigation", `Next button to ${nextUrl}`);
     router.push(nextUrl);
   };
 
