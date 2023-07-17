@@ -31,11 +31,11 @@ class MyDocument extends Document {
         <body>
           {/* <!-- NYPL Header Script --> */}
           <div id="nypl-header"></div>
-          <script type="module" src={dsHeader} async></script>
+          <script src={dsHeader} async></script>
           <Main />
           {/* <!-- NYPL Footer Script --> */}
           <div id="nypl-footer"></div>
-          <script type="module" src={dsFooter} async></script>
+          <script src={dsFooter} async></script>
           <NextScript />
           {/* <!-- Optimizely --> */}
           <script src="https://cdn.optimizely.com/js/284748925.js"></script>
