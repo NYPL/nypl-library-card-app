@@ -1,5 +1,18 @@
 ## CHANGE LOG
 
+### v0.9.4 - New DS Header/Footer
+
+#### Updated
+
+- Update the Header and Footer scripts to use the new Design System Header/Footer
+
+### v0.9.3 - Adobe Analytics
+
+#### Added
+
+- Added Adobe Analytics initial script
+- Added Adobe Analytics for event tracking
+
 ### v0.9.2
 
 #### Added
