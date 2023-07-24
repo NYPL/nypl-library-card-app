@@ -1,8 +1,8 @@
 ## CHANGE LOG
 
----
-
 ### v0.9.4 - New DS Header/Footer
+
+---
 
 - Update the Header and Footer scripts to use the new Design System Header/Footer: [#194](https://github.com/NYPL/nypl-library-card-app/pull/194)
 - Add new security provisioning script: [#197](https://github.com/NYPL/nypl-library-card-app/pull/197)
