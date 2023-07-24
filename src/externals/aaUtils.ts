@@ -30,7 +30,7 @@ class AaUtils {
   trackCtaEvent = (
     subsection: string,
     ctaText: string,
-    destination: string
+    destinationUrl: string
   ) => {
     window.adobeDataLayer.push({
       event_data: null,
@@ -42,8 +42,8 @@ class AaUtils {
         cta_section: "Library Card App",
         cta_subsection: subsection,
         cta_text: ctaText,
-        cta_position: "",
-        destination_url: destination,
+        cta_position: null,
+        destination_url: destinationUrl,
       },
     });
   };

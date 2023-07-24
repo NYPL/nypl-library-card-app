@@ -16,5 +16,7 @@ export default {
     nys: "199",
   },
   scopes: "account:write account:read",
+  dsHeader: process.env.NEXT_PUBLIC_DS_GLOBAL_HEADER,
+  dsFooter: process.env.NEXT_PUBLIC_DS_GLOBAL_FOOTER,
   adobeAnalyticsTag: process.env.NEXT_PUBLIC_ADOBE_ANALYTICS_TAG,
 };
