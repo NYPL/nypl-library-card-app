@@ -194,7 +194,7 @@ function ReviewFormContainer() {
           id: null,
           lang: formValues.preferredLanguage,
           locationId: formValues.homeLibraryCode,
-          locationName: formValues.location,
+          locationName: findLibraryName(formValues.homeLibraryCode),
         });
         router.push(`/congrats?${queryStr}`);
       })
