@@ -67,6 +67,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   React.useEffect(() => {
     const handleRouteChange = (url: string) => {
       aaUtils.pageViewEvent(url);
+      gaUtils.trackPageview(url);
     };
     router.events.on("routeChangeComplete", () => {
       handleRouteChange(window.location.pathname);
