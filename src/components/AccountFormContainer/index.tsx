@@ -32,7 +32,6 @@ const AccountFormContainer = (): React.ReactElement => {
   const submitForm = (formData) => {
     // Convert the home library name to its code value.
     formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
-    formData.location = findLibraryName(formData.homeLibraryCode);
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",

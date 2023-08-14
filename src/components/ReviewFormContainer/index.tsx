@@ -151,7 +151,6 @@ function ReviewFormContainer() {
   const editSectionInfo = (formData, editSectionFlag) => {
     if (formData.homeLibraryCode) {
       formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
-      formData.location = findLibraryName(formData.homeLibraryCode);
     }
     if (formData.location) {
       formData.homeLibraryCode = findLibraryCode(formData.location);
@@ -195,7 +194,7 @@ function ReviewFormContainer() {
           id: null,
           lang: formValues.preferredLanguage,
           locationId: formValues.homeLibraryCode,
-          locationName: formValues.location,
+          locationName: findLibraryName(formValues.homeLibraryCode),
         });
         router.push(`/congrats?${queryStr}`);
       })
