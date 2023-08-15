@@ -19,8 +19,9 @@ class MyDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: `
                 window.adobeDataLayer = [];
+                const pageName = window.location.pathname.replace("/", "nypl|").replaceAll("/", "|") + window.location.search;
                 window.adobeDataLayer.push({
-                  page_name: "Library Card App | " + window.location.pathname.split("/").pop(),
+                  page_name: pageName,
                   site_section: "Library Card Application Form"
                 });`,
             }}

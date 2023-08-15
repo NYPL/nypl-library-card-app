@@ -65,16 +65,12 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   });
 
   React.useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      aaUtils.pageViewEvent(url);
-      gaUtils.trackPageview(url);
+    const handleRouteChange = () => {
+      aaUtils.pageViewEvent(window.location);
+      gaUtils.trackPageview(window.location.pathname);
     };
-    router.events.on("routeChangeComplete", () => {
-      handleRouteChange(window.location.pathname);
-    });
-    return router.events.off("routeChangeComplete", () => {
-      handleRouteChange(window.location.pathname);
-    });
+    router.events.on("routeChangeComplete", () => handleRouteChange());
+    return router.events.off("routeChangeComplete", () => handleRouteChange());
   }, [router.events]);
 
   let error;
