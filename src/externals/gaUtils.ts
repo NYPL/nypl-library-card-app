@@ -1,4 +1,4 @@
-import ga from "react-ga";
+import ga from "react-ga4";
 
 interface GaDimension {
   index: string;
@@ -12,8 +12,8 @@ interface GaDimension {
  */
 export const getGoogleGACode = (isProd: boolean): string => {
   const codes = {
-    production: "UA-1420324-3",
-    dev: "UA-1420324-122",
+    production: "G-P03CNT7C31",
+    dev: "G-VEXBPRSL67",
   };
   return isProd ? codes.production : codes.dev;
 };
@@ -27,7 +27,7 @@ class GaUtils {
    * trackPageview
    * Track a GA pageview.
    */
-  trackPageview = (url: string) => ga.pageview(url);
+  trackPageview = (url: string) => ga.send({ hitType: "pageview", page: url });
 
   /**
    * trackEvent
@@ -76,9 +76,9 @@ class GaUtils {
    */
   setupAnalytics = (isProd = false) => {
     const gaOpts = { debug: !isProd, titleCase: false };
-    ga.initialize(getGoogleGACode(isProd), gaOpts);
+    ga.initialize(getGoogleGACode(isProd), { gaOptions: gaOpts });
 
-    this.trackPageview(window.location.pathname);
+    // this.trackPageview(window.location.pathname);
   };
 }
 

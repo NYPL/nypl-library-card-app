@@ -15,13 +15,14 @@ class AaUtils {
    * function values which don't change, don't have to be
    * added every time.
    */
-  pageViewEvent = (url: string) => {
+  pageViewEvent = (windowLocation: Location) => {
     window.adobeDataLayer.push({ page_name: null, site_section: null });
-    const pageName = url.split("/").pop();
-
+    const pageName =
+      windowLocation.pathname.replace(/^\//, "nypl|").replace(/\//g, "|") +
+      windowLocation.search;
     window.adobeDataLayer.push({
       event: "virtual_page_view",
-      page_name: `Library Card App | ${pageName}`,
+      page_name: pageName,
       site_section: "Library Card Application Form",
     });
   };

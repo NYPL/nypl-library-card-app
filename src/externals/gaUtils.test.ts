@@ -1,45 +1,45 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import gaUtils from "./gaUtils";
-const ga = require("react-ga");
-
-jest.mock("react-ga");
+import ga from "react-ga4";
+jest.mock("react-ga4");
 
 describe("gaUtils", () => {
   describe("setupAnalytics", () => {
     beforeEach(() => {
-      ga.initialize.mockClear();
+      ga.reset();
     });
 
     test("it should initialize Google Analytics", () => {
       const isProd = false;
-      ga.initialize.mockImplementation(() => "");
+      ga.initialize("G-VEXBPRSL67");
 
       gaUtils.setupAnalytics(isProd);
 
       expect(ga.initialize).toHaveBeenCalled();
-      expect(ga.initialize).toHaveBeenCalledWith("UA-1420324-122", {
-        debug: true,
-        titleCase: false,
+      expect(ga.initialize).toHaveBeenCalledWith("G-VEXBPRSL67", {
+        gaOptions: { debug: true, titleCase: false },
       });
     });
   });
 
   describe("trackPageview", () => {
     test("it should internally call ga's pageview function to track a url", () => {
-      ga.pageview.mockImplementation(() => "");
+      ga.initialize("G-VEXBPRSL67");
 
       gaUtils.trackPageview("url");
 
-      expect(ga.pageview).toHaveBeenCalled();
-      expect(ga.pageview).toHaveBeenCalledWith("url");
-
-      ga.pageview.mockClear();
+      expect(ga.send).toHaveBeenCalled();
+      expect(ga.send).toHaveBeenCalledWith({
+        hitType: "pageview",
+        page: "url",
+      });
+      ga.send.mockClear();
     });
   });
 
   describe("trackEvent", () => {
     test("it should internally call ga's event function to track events", () => {
-      ga.event.mockImplementation(() => "");
+      ga.initialize("G-VEXBPRSL67");
 
       const eventTracker = gaUtils.trackEvent("category");
 
