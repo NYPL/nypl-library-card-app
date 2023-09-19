@@ -15,12 +15,18 @@
 }
 
 #nypl-header {
-  min-height: 70px;
+  min-height: 62px;
+}
+
+@media screen and (min-width: 832px) {
+  #nypl-header {
+    min-height: 112px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
   #nypl-header {
-    min-height: 207px;
+    min-height: 130px;
   }
 }
 
