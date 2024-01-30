@@ -16,7 +16,6 @@ ENV PORT=3000 \
 
 # Install dependencies.
 COPY package.json ./app
-RUN cd ./app
 RUN npm install
 
 # Copy the app files.
@@ -25,9 +24,9 @@ COPY . ./app
 EXPOSE 3000
 
 # Build the app!
-RUN cd ./app
+
 RUN npm run build 
 
 # CMD is the default command when running the docker container.
-RUN cd ./app
+
 CMD npm start
