@@ -15,11 +15,11 @@ ENV PORT=3000 \
     NODE_ENV=production
 
 # Install dependencies.
-COPY package.json ./app
+COPY package.json /app
 RUN npm install
 
 # Copy the app files.
-COPY . ./app
+COPY . /app
 
 EXPOSE 3000
 
