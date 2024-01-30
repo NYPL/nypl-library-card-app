@@ -6,7 +6,7 @@ FROM node:10.2.0-alpine
 RUN apk update 
 RUN apk add git
 
-WORKDIR /
+WORKDIR /app
 
 # Set environment variables. NODE_ENV is set early because we
 # want to use it when running `npm install` and `npm run build`.
@@ -15,16 +15,19 @@ ENV PORT=3000 \
     NODE_ENV=production
 
 # Install dependencies.
-COPY package.json ./
+COPY package.json ./app
+RUN cd ./app
 RUN npm install
 
 # Copy the app files.
-COPY . ./
+COPY . ./app
 
 EXPOSE 3000
 
 # Build the app!
+RUN cd ./app
 RUN npm run build 
 
 # CMD is the default command when running the docker container.
+RUN cd ./app
 CMD npm start
