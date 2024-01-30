@@ -21,7 +21,7 @@ RUN npm install
 # Copy the app files.
 COPY . ./
 
-EXPOSE $PORT
+EXPOSE 3000
 
 # Build the app!
 RUN npm run build
