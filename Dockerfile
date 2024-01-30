@@ -24,7 +24,7 @@ COPY . ./
 EXPOSE 3000
 
 # Build the app!
-RUN npm run build
+RUN npm run next build 
 
 # CMD is the default command when running the docker container.
 CMD npm start
