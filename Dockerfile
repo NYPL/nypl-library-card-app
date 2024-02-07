@@ -16,10 +16,11 @@ ENV PORT=3000 \
 
 # Install dependencies.
 COPY package.json /app
+COPY package-lock.json /app
 RUN npm install
 
 # Copy the app files.
-COPY . /app
+COPY . .
 
 EXPOSE 3000
 
