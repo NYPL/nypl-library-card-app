@@ -33,6 +33,3 @@ deploy:
       repo: NYPL/nypl-library-card-app
       branch: qa
 after_deploy: echo "Successfully executed deploy trigger for Get a Library Card on AWS."
-env:
-  global:
-    - secure: "fMmw6u4nQp2MV4c9Z388l9AbnTRLFBa15qiq+4HCg01fDDsHSnafx5eAjkKNZWeQkbidA5J9ZLCzLo13ov8MpiEhhZQBE6ERPM6vIigxvSa6Oa/5fb8rVDWaj5vQM4N0bHYfF4tw+gwSpiRNEI0XPAM5sYCGbCz/gwrldEuEFJj8ph2ihr0AXh6KQl4+rGSbarMxtHTZGSbGaLLH1AejbcQgTKJBT7neKD/ZhnGwDV9y61hMxAieQZQ6X3nmJkyDCweTc6D1KSnGiBpYMkeYmDsx/ZF+gUbHm4s4LYkVZZWVAkHu+PFZ2J1ZAnTLFL2IuSHAkowavYtWup9uWjzUMFJedBiOrLTgRmyNlHv3iTjeGpViJr0NUfd2feyW6faIvBD2eBZVuosoth5ZeOkcD4r1v2y2MCsqE+A3xlfL0PP+z47JOPFw4GCzxw94k+ZeX16l1D9O6LuFGhhTHcjQxlpdCMKopdZ5XSbKLRMhAIwuV3lnHAeTYW/Z/Y9OwAGX91BWo2IQDZPS2CKEA6dajFdqtgFRd80M1O6q238jXgyb/t3Svq6GcTjcdrSYPJCBZndQDEPugDiVsY2nqddRCF5hmpTI87KBEV/96Twbz2yayUIEz+ejx1svlFPBYIdONdbnreQtB3dCVFe53GtmxQL6AmnFcvlgr1xJg4PHd5A="
