@@ -48,7 +48,8 @@ function HomePage({
 
       <p>{t("home.description.part1")}</p>
       <p>{t("home.description.part2")}</p>
-      <div dangerouslySetInnerHTML={{ __html: t("home.description.part3") }} />
+      <p dangerouslySetInnerHTML={{ __html: t("home.description.part3") }} />
+      <p dangerouslySetInnerHTML={{ __html: t("home.description.part4") }} />
 
       <RoutingLinks
         next={{
