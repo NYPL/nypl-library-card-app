@@ -5,11 +5,12 @@
     "title": "Solicite una tarjeta de la Biblioteca en línea"
   },
   "home": {
-    "title": "Obtenga una tarjeta digital de la Biblioteca hoy con unos pocos pasos sencillos",
+    "title": "Solicite hoy mismo una tarjeta de la biblioteca en tan solo unos pasos",
     "description": {
-      "part1": "Si tiene 13 años de edad o más y vive, trabaja, va a la escuela o paga impuestos de propiedad en el estado de Nueva York, puede obtener una tarjeta digital gratuita de la Biblioteca ahora mismo utilizando este formulario en línea. Las personas que visitan el estado de Nueva York también pueden usar este formulario para solicitar una tarjeta temporal.",
-      "part2": "Con una tarjeta digital de la Biblioteca, tiene acceso gratuito a una amplia gama de recursos digitales incluyendo libros electrónicos, bases de datos, recursos educativos y más.",
-      "part3": "Al enviar una solicitud, comprende y acepta nuestros <a href='https://www.nypl.org/help/library-card/terms-conditions'>Términos y condiciones del titular de la tarjeta</a> (en inglés) y acepta nuestras <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Normas y reglamentos generales</a>. Para obtener más información sobre el uso de información personal por parte de la Biblioteca, lea nuestra <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Política de privacidad</a>."
+      "part1": "Si es mayor de 13 años y vive, trabaja, estudia o paga impuestos a la propiedad en el estado de Nueva York, puede obtener una tarjeta gratis de la biblioteca ahora mismo completando esta solicitud en línea. Luego, visite la biblioteca de la NYPL más cercana para validar sus datos y recibir una tarjeta física de la NYPL. Si podemos confirmar su ubicación dentro del estado de Nueva York, recibirá ahora mismo una tarjeta digital gratis de la biblioteca. ",
+      "part2": "Los visitantes de fuera del estado de Nueva York también pueden utilizar este formulario para solicitar una tarjeta temporal que les permite reservar materiales físicos. Esta tarjeta se debe validar en persona en un plazo de 30 días y no brinda acceso a libros electrónicos, bases de datos ni al programa Culture Pass.",
+      "part3": "<a href='https://www.nypl.org/library-card'>Obtenga más información</a> sobre a qué puede acceder con su tarjeta de la biblioteca.",
+      "part4": "Al presentar una solicitud, usted entiende y est&aacute; de acuerdo con nuestros <a href=\"https://www.nypl.org/help/library-card/terms-conditions\">T&eacute;rminos y condiciones para titulares de tarjeta</a> y con nuestras <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/policies-and-rules/es\">Reglas y normas</a>. Para obtener m&aacute;s informaci&oacute;n sobre c&oacute;mo la Biblioteca usa la informaci&oacute;n personal, consulte nuestra <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy/es\">Pol&iacute;tica de privacidad</a>."
     }
   },
   "personal": {

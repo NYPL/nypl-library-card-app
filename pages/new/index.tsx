@@ -1,3 +1,9 @@
+/*
+ * You MUST point the browser to http://localhost:3000/library-card/new.
+ * Do NOT point the browser to http://localhost:3000 with no route.
+ * If you do, you will throw an error related to i18next.
+ * */
+
 import React, { useEffect } from "react";
 import { Heading } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
@@ -42,7 +48,8 @@ function HomePage({
 
       <p>{t("home.description.part1")}</p>
       <p>{t("home.description.part2")}</p>
-      <div dangerouslySetInnerHTML={{ __html: t("home.description.part3") }} />
+      <p dangerouslySetInnerHTML={{ __html: t("home.description.part3") }} />
+      <p dangerouslySetInnerHTML={{ __html: t("home.description.part4") }} />
 
       <RoutingLinks
         next={{
