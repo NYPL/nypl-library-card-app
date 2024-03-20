@@ -5,11 +5,12 @@
     "title": "Uzyskaj kartę biblioteczną online"
   },
   "home": {
-    "title": "Uzyskaj cyfrową kartę biblioteczną już dziś — wystarczy kilka prostych kroków",
+    "title": "Wystąp o kartę biblioteczną już dziś — wystarczy kilka prostych kroków",
     "description": {
-      "part1": "Jeśli masz co najmniej 13 lat i mieszkasz, pracujesz, uczysz się lub płacisz podatki od nieruchomości w stanie Nowy Jork, możesz uzyskać cyfrową kartę biblioteczną od razu — w tym celu skorzystaj z tego formularza online. Osoby odwiedzające stan Nowy Jork również mogą skorzystać z tego formularza, aby wystąpić o kartę tymczasową.",
-      "part2": "Cyfrowa karta biblioteczna zapewnia bezpłatny dostęp do bogatych zasobów cyfrowych Biblioteki, w tym e-booków, baz danych, materiałów edukacyjnych itd.",
-      "part3": "Składając wniosek, oświadczasz, że rozumiesz i akceptujesz <a href='https://www.nypl.org/help/library-card/terms-conditions'>Regulamin dla posiadaczy kart</a> oraz <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Zasady i przepisy</a>.Więcej informacji o tym, jak Biblioteka korzysta z danych osobowych, zawiera <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Polityka prywatności</a>."
+      "part1": "Jeśli masz co najmniej 13 lat i mieszkasz, pracujesz, uczysz się lub płacisz podatki od nieruchomości w stanie Nowy Jork, możesz wystąpić o bezpłatną kartę biblioteczną już teraz — w tym celu skorzystaj z tego formularza online. Następnie odwiedź najbliższą filię Nowojorskiej Biblioteki Publicznej (New York Public Library, NYPL), aby zweryfikować swoje dane i uzyskać fizyczną kartę NYPL. Jeżeli możesz potwierdzić swoje miejsce zamieszkania w stanie Nowy Jork, otrzymasz bezpłatną cyfrową kartę biblioteczną już teraz.",
+      "part2": "Osoby spoza stanu Nowy Jork również mogą skorzystać z tego formularza, aby wystąpić o kartę tymczasową, umożliwiającą rezerwację fizycznych pozycji z naszego katalogu. Kartę tę należy zweryfikować osobiście w ciągu 30 dni i nie daje ona dostępu do e-booków, baz danych ani programu Culture Pass.",
+      "part3": "<a href=\"https://www.nypl.org/library-card\" style=\"text-decoration:none\"><u><span style=\"color:#1155cc\">Dowiedz się więcej</span></u></a> o tym, do czego daje dostęp karta biblioteczna.",
+      "part4": "Składając wniosek, oświadczasz, że rozumiesz i akceptujesz <a href=\"https://www.nypl.org/help/library-card/terms-conditions\" style=\"text-decoration:none\"><u><span style=\"color:#1155cc\">Regulamin dla posiadaczy kart</span></u></a> oraz <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/policies-and-rules/pl\" style=\"text-decoration:none\"><u><span style=\"color:#1155cc\">Zasady i przepisy</span></u></a>. Więcej informacji o tym, jak Biblioteka korzysta z&#xa0;danych osobowych, zawiera <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy/pl\" style=\"text-decoration:none\"><u><span style=\"color:#1155cc\">Polityka prywatności</span></u></a>"
     }
   },
   "personal": {

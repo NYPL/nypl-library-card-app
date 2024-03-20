@@ -55,6 +55,13 @@ Note: Nextjs uses `.env.development` and `.env.production` for their respective 
 2. `npm install`
 3. `npm run dev` and point browser to http://localhost:3000/library-card/new
 
+#### NOTE
+
+When you type `npm run dev` the CLI will output a line:
+`react-i18next:: You will need to pass in an i18next instance by using initReactI18next`. This is safe to ignore.
+
+You MUST point the browser to http://localhost:3000/library-card/new. Do NOT point the browser to http://localhost:3000 with no route. If you do, you will throw an error related to i18next. It expects a `dir` prop in the same element as the `_next` prop.
+
 ### Production build
 
 To build and run the app locally in production mode, run the following:
