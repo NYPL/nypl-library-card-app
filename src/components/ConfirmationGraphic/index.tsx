@@ -24,6 +24,7 @@ const ConfirmationContainer: React.FC = () => {
     if (barcode && typeof document !== "undefined") {
       canvas = document.getElementById("barcodeCanvas") as HTMLCanvasElement;
       try {
+        // @ts-expect-error toCanvas type error is not regressive
         bwipjs.toCanvas(canvas, {
           // ILS Barcode type
           bcid: "rationalizedCodabar",

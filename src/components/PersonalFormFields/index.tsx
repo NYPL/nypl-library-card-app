@@ -39,6 +39,10 @@ function PersonalFormFields({
             // Every input field is registered to react-hook-form. If this
             // field is empty on blur or on submission, the error message will
             // display below the input.
+            // NOTE: If/when the react-hook-form module is upgraded to 7.x
+            // a refactor of the below line, and those like it, will be
+            // required. See https://legacy.react-hook-form.com/migrate-v6-to-v7/
+            // https://stackoverflow.com/questions/66927729/ref-register-inside-input-is-giving-me-a-path-split-error
             ref={register({
               required: t("personal.errorMessage.firstName"),
             })}

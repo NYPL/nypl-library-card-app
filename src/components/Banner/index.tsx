@@ -22,6 +22,7 @@ const Banner = ({
   const h1Heading = (
     <Heading id="hero-banner" level="one" text={t("banner.title")} />
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const subHeaderText = (
     <div className="hero__body-text">{heroDescription}</div>
   );

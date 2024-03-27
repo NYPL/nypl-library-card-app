@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import { NextPageContext } from "next";
 import requestIp from "request-ip";
 import axios from "axios";

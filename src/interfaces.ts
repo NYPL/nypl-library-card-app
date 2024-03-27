@@ -149,6 +149,7 @@ export interface FormData {
 }
 
 export interface FormDataContextType {
+  // @ts-expect-error type error(s) below are not regressive
   dispatch: ({ type: string, value: any }) => void;
   state: FormData;
 }

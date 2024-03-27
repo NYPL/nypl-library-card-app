@@ -6,7 +6,6 @@ module.exports = {
     "!**/*.d.ts",
     "!**/node_modules/**",
   ],
-  setupFilesAfterEnv: ["<rootDir>/testHelper/browser.ts"],
   testPathIgnorePatterns: ["/node_modules/", "/.next/", ".spec"],
   // A map from regular expressions to paths to transformers
   transform: {
@@ -21,4 +20,6 @@ module.exports = {
   moduleNameMapper: {
     "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
   },
+  testEnvironment: "jsdom",
+  setupFilesAfterEnv: ["<rootDir>/jest-setup.js"],
 };
