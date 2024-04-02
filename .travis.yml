@@ -6,8 +6,7 @@ cache:
     - node_modules
 install: npm install
 script: npm test
-before_deploy: echo 'All unit tests passed;
-  Preparing to deploy Get a Library Card to AWS'
+before_deploy: echo "All unit tests passed; Preparing to deploy Get a Library Card to AWS."
 deploy:
   - provider: elasticbeanstalk
     skip_cleanup: true
@@ -33,22 +32,4 @@ deploy:
     on:
       repo: NYPL/nypl-library-card-app
       branch: qa
-# Disabling development deploy for cost savings
-# - provider: elasticbeanstalk
-#  skip_cleanup: true
-#  access_key_id: "$AWS_ACCESS_KEY_ID_DEVELOPMENT"
-#  secret_access_key: "$AWS_SECRET_ACCESS_KEY_DEVELOPMENT"
-#  region: us-east-1
-#  app: nypl-library-card-app
-#  env: nypl-library-card-app-development
-#  bucket_name: elasticbeanstalk-us-east-1-224280085904
-#  bucket_path: nypl-library-card-app-development
-#  on:
-#    repo: NYPL/nypl-library-card-app
-#    branch: main
-after_deploy:
-  echo 'Successfully executed deploy trigger for Get a Library Card on
-  AWS'
-env:
-  global:
-    - secure: "vGos2FJIM/5ScnHG0nfNrH3ESjmvfVwtKFAE+gjsCjVY5IyboEfA2vSg6dV4KMrmTB/BvgEfqqQz7JZkklbKkppuuc01BBMEWwTSnsWjZ6bzJAKebVSK+raV6//Dkd/RNPDrVJ2h0B2bUjC31NYL0A85RPFVUWlJPXUCsVKFnEuhMAMPg+2pPrv+kiSjN2Ha9JCYljtF4ERHB9atJlhrLT4yQBb1zdAxI85rFVzplQb3CF/D/bnI866fs4BmURYdg55yAURmTi/l9Q3a6tu4UeZBH3VHnXzQC2isJkS+HrppWkJ0zO+BcEp/2ep8PQ2SbPeBSnjZj3o7/y+fm1mHDgneEmdiDdZItv+DGXB/5WoYROoz+MMXy9my83lD95DeIxv3bdlHDuYva0iy80tgKJPmajQwEq83Imz5DmowgRGrGxq6UvEwp0lDZRaEtv5Bd3khVyran4SKm0eEC5RoHbCqhCLJM0WMU221qn65jh9T+Cl3l4iPH/IbN6RVgSdVWNOMbQOMbFBX+ecVxSzX40s3MlOsnzqiGh3FzQxqA592EjheNQwq26MlccxulNXpYebWYcAeCEAQNcRSJRgXv8NR6gDTilU6epkXrwi9JCce5grXbKycJCkOjy3A49dQde/ve8YV6Jp+KH4kmteG4h7u/skp+xx+aMrMgWXZqQ8="
+after_deploy: echo "Successfully executed deploy trigger for Get a Library Card on AWS."
