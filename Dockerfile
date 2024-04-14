@@ -1,11 +1,12 @@
 # Build the environment.
-FROM node:12.2.0-alpine as production
+FROM node:15.2.0-alpine
 
 # Install git to resolve issues installing the
 # nypl/dgx-header-component package.
+RUN apk update 
 RUN apk add git
 
-WORKDIR /
+WORKDIR /app
 
 # Set environment variables. NODE_ENV is set early because we
 # want to use it when running `npm install` and `npm run build`.
@@ -14,16 +15,19 @@ ENV PORT=3000 \
     NODE_ENV=production
 
 # Install dependencies.
-COPY package.json ./
+COPY package.json /app
+COPY package-lock.json /app
 RUN npm install
 
 # Copy the app files.
-COPY . ./
+COPY . .
 
-EXPOSE $PORT
+EXPOSE 3000
 
 # Build the app!
-RUN npm run build
+
+RUN npm run build 
 
 # CMD is the default command when running the docker container.
+
 CMD npm start
