@@ -83,10 +83,10 @@
     "sass": "1.26.9",
     "save-dev": "0.0.1-security",
     "sinon": "9.0.2",
-    "typescript": "4.3.2",
+    "typescript": "4.4.2",
     "underscore": "1.13.1",
     "validator": "13.0.0",
-    "winston": "3.3.3"
+    "winston": "^3.7.1"
   },
   "husky": {
     "hooks": {
