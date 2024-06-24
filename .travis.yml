@@ -18,7 +18,6 @@ jobs:
     - stage: docker build
       if: (branch = DOPS-554/terraform)
       env:
-      - ENV=qa
       - ECR_URL=946183545209.dkr.ecr.us-east-1.amazonaws.com/nypl-library-card-app
       - AWS_DEFAULT_REGION=us-east-1
       - AWS_REGION=us-east-1
@@ -26,17 +25,11 @@ jobs:
       - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_PRODUCTION
       install:
         - pip install --user awscli
-        - export LOCAL_TAG_NAME="${ENV}-latest"
+        - export TAG="latest"
       script:
         - eval $(aws ecr get-login --no-include-email --region us-east-1)
-        - DOCKER_BUILDKIT=1 docker build -t "$LOCAL_TAG_NAME" --secret id=AWS_ACCESS_KEY_ID --secret id=AWS_SECRET_ACCESS_KEY --build-arg RAILS_ENV="${ENV}" .
-        - docker tag "$LOCAL_TAG_NAME" "$ECR_URL:$LOCAL_TAG_NAME"
-        # Re-tag last latest image just in case
-        - |
-            MANIFEST=$(aws ecr batch-get-image --repository-name my-library-nyc-app --image-ids imageTag="$ENV-latest" --output json | jq --raw-output --join-output '.images[0].imageManifest')
-            aws ecr batch-delete-image --repository-name my-library-nyc-app --image-ids imageTag="$ENV-previous" || true
-            aws ecr put-image --repository-name my-library-nyc-app --image-tag "$ENV-previous" --image-manifest "$MANIFEST"
-        - docker push "$ECR_URL:$LOCAL_TAG_NAME"
+        - docker build -t "$ECR_URL:$TAG" .
+        - docker push "$ECR_URL:$TAG"
 
 deploy:
   - provider: elasticbeanstalk
