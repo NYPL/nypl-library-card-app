@@ -14,10 +14,9 @@ jobs:
       script: npm test
 
     - stage: docker build
-      #if: (branch = qa or branch = production)
-      if: (branch = DOPS-554/terraform)
+      if: (branch = qa or branch = production)
       before_install:
-      - if [[ $TRAVIS_BRANCH == "DOPS-554/terraform" ]];
+      - if [[ $TRAVIS_BRANCH == "qa" ]];
         then
           export APP_ENV="qa";
         fi
@@ -41,7 +40,7 @@ jobs:
         - docker push "$ECR_URL:$LOCAL_TAG_NAME"
 
     - stage: deploy qa
-      if: branch IN (DOPS-554/terraform) AND type != pull_request
+      if: branch IN (qa) AND type != pull_request
       env:
       - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_PRODUCTION
       - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_PRODUCTION
