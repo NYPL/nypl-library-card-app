@@ -3,10 +3,6 @@ services:
 - docker
 node_js:
   - "10"
-branches:
-  only:
-  - qa
-  - DOPS-554/terraform
 cache:
   directories:
     - node_modules
@@ -43,7 +39,7 @@ jobs:
         - docker push "$ECR_URL:$LOCAL_TAG_NAME"
 
     - stage: deploy qa
-      if: branch IN (qa) AND type != pull_request
+      if: branch IN (DOPS-554/terraform) AND type != pull_request
       env:
       - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_PRODUCTION
       - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_PRODUCTION
