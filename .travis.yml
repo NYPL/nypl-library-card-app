@@ -6,11 +6,13 @@ node_js:
 cache:
   directories:
     - node_modules
-install: npm install
-script: npm test
 
 jobs:
   include:
+    - stage: test
+      install: npm install
+      script: npm test
+
     - stage: docker build
       #if: (branch = qa or branch = production)
       if: (branch = DOPS-554/terraform)
