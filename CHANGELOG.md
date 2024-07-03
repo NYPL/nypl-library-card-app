@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v1.0.0 Update to next 12
+
+- Update node version to 18
+- Update next version to 12
+- Updates to dependencies to match
+
 ### v0.9.4 - New DS Header/Footer
 
 ---
