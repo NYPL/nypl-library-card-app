@@ -2,19 +2,19 @@ name: CI
 
 on: push
 
-  jobs:
-    test:
-      name: Test
-      runs-on: ubuntu-latest
-      env:
-        CI: true
-      steps:
-        - uses: actions/checkout@v4
-        - name: Use Node.js 20
-          uses: actions/setup-node@v3
-          with:
-            node-version: 20
-        - name: Cache and install node modules
-          uses: bahmutov/npm-install@v1
-        - name: Test
-          run: npm run test
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Cache and install node modules
+        uses: bahmutov/npm-install@v1
+      - name: Test
+        run: npm run test
