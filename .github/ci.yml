@@ -1,6 +1,8 @@
 name: CI
 
-on: push
+on:
+  push:
+    branches: [NOREF/remediation]
 
   test:
     name: Test
