@@ -2,7 +2,7 @@
 
 ### v1.0.0 Update to next 12
 
-- Update node version to 18
+- Update node version to 20
 - Update next version to 12
 - Updates to dependencies to match
 
