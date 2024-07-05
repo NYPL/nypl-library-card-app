@@ -138,6 +138,10 @@ Subsequent deployments are accomplished via pushing code into `qa` and `producti
 
 Configuration can be adjusted via `.travis.yml`, located at the root directory of this code repository. Travis CI is set to watch `qa` and `production` branches and waits for code push, e.g. `git push origin qa` will trigger Travis CI to build. When build and test are successful, Travis CI will deploy to specified Elastic Beanstalk instance.
 
+## GitHub Actions
+
+GitHub actions is configured to run tests on push
+
 ## Docker
 
 _Note_: This application is using Docker only for production builds and not for local development. For local development, the `npm run dev` command is the way to go.
