@@ -18,23 +18,9 @@ jobs:
         uses: bahmutov/npm-install@v1
       - name: Test
         run: npm run test
-  check_qa_tag:
-    name: Check if the release is tagged as QA
-    runs-on: ubuntu-latest
-    outputs:
-      has_qa_tag: ${{ steps.check-qa-tag.outputs.run_jobs }}
-    steps:
-      - name: check qa tag ${{ github.ref }}
-        id: check-qa-tag
-        run: |
-          if [[ ${{ github.ref }} =~ refs\/tags\/qa ]]; then
-            echo "run_jobs=true" >> $GITHUB_OUTPUT
-          else
-            echo "run_jobs=false" >> $GITHUB_OUTPUT
-          fi
   publish_qa:
-    needs: [ check_qa_tag, test ]
-    if: needs.check_qa_tag.outputs.has_qa_tag == 'true'
+    needs: test
+    if: github.ref == 'refs/heads/tgr-qa'
     name: Publish image to ECR and update ECS stack
     runs-on: ubuntu-latest
     steps:
