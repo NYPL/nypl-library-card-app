@@ -2,6 +2,8 @@
 
 ### v1.0.0 Update to next 12
 
+- Switch deployment to GitHub Actions
+- Remove EB related code and language, move to ECS
 - Update node version to 20
 - Update next version to 12
 - Updates to dependencies to match
