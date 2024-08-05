@@ -149,7 +149,7 @@ export interface FormData {
 }
 
 export interface FormDataContextType {
-  dispatch: ({ type: string, value: any }) => void;
+  dispatch: ({ type, value }: { type: string; value: any }) => void;
   state: FormData;
 }
 

@@ -1,5 +1,19 @@
 ## CHANGE LOG
 
+### v1.0.0 Remediation Project (security) update
+
+- Switch deployment to GitHub Actions
+- Remove EB related code and language, move to ECS
+- Update node version to 20
+- Update next version to 12
+- Updates to dependencies to match
+- Add script to package.json for clearing the test cache (this is just a convenience since I was updating so frequently, can be removed)
+- Update a bunch of packages related to testing (@testing-library/jest-dom, @testing-library/react, @types/jest, @types/jest-axe, jest, jest-axe)
+- Specify the testEnvironment as jsdom
+- Add package jest-environment-jsdom since this is not included automatically anymore
+- Replace @testing-library/jest-dom/extend-expect with @testing-library/jest-dom since this is now included
+- The only real substantive change is updating next to 12, which is as high as it can go without breaking anything
+
 ### v0.9.4 - New DS Header/Footer
 
 ---
