@@ -79,7 +79,7 @@ const ilsLibraryList: LibraryListObject[] = [
   { label: "Terence Cardinal Cooke–Cathedral Library", value: "ca" },
   {
     label: "The New York Public Library for the Performing Arts",
-    value: "my",
+    value: "lp",
   },
   { label: "Throgs Neck Library", value: "tg" },
   { label: "Todt Hill-Westerleigh Library", value: "th" },
