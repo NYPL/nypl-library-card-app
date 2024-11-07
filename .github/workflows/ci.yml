@@ -20,7 +20,7 @@ jobs:
         run: npm run test
   publish_qa:
     needs: test
-    if: github.ref == 'refs/heads/tgr-qa'
+    if: github.ref == 'refs/heads/qa'
     name: Publish image to ECR and update ECS stack
     runs-on: ubuntu-latest
     permissions:
@@ -56,7 +56,7 @@ jobs:
           aws ecs update-service --cluster nypl-library-card-app-qa --service nypl-library-card-app-qa --force-new-deployment
   publish_production:
     needs: test
-    if: github.ref == 'refs/heads/tgr-production'
+    if: github.ref == 'refs/heads/production'
     name: Publish image to ECR and update ECS stack
     runs-on: ubuntu-latest
     permissions:
