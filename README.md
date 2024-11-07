@@ -10,9 +10,8 @@ A JavaScript Application that allows NYPL patrons to request a library card and 
 | 4.                | [Deployment](#deployment)                                         |
 | 5.                | [Git Workflow](#git-workflow)                                     |
 | 6.                | [Internationalization](#internationalization)                     |
-| 7.                | [AWS Elastic Beanstalk](#aws-elastic-beanstalk)                   |
-| 8.                | [Travis CI](#travis-ci)                                           |
-| 9.                | [Docker](#docker)                                                 |
+| 7.                | [CI/CD](#CI/CD)                                                   |
+| 8.                | [Docker](#docker)                                                 |
 
 ## Production Site and Version
 
@@ -22,7 +21,7 @@ The production site on NYPL.org:
 
 The current production version:
 
-- 0.7.11
+- 1.0.0
 
 ## Branch Statuses
 
@@ -47,7 +46,7 @@ At the moment, this app is intended to be run on Node v10.x due to AWS deploymen
 See `.env.example` for a checklist of the environment variables the app
 needs to run.
 
-Note: Nextjs uses `.env.development` and `.env.production` for their respective platform environment variables. The keys are not encrypted in the repo and are therefore directly added/updated through the AWS Elastic Beanstalk UI. These files are not not necessary to have to run the app locally.
+Note: Nextjs uses `.env.development` and `.env.production` for their respective platform environment variables. The keys are not encrypted in the repo and are therefore directly added/updated through Terraform. These files are not not necessary to have to run the app locally.
 
 ### Install & Running Locally
 
@@ -108,35 +107,11 @@ The `production` branch should be what's running in the production environment.
 
 The application is internationalized using the `next-i18next` package. For more information, see the [MULTILINGUAL_FEATURE.md](./MULTILINGUAL_FEATURE.md) file.
 
-## AWS Elastic Beanstalk
+## CI/CD
 
-1. `.ebextensions` directory needed at application's root directory
-2. `.ebextensions/environment.config` to store environment variables. For environment variables that needs to be hidden,
-3. `.ebextensions/nodecommand.config` to start node app after deployment.
-4. `eb init -i --profile <<your AWS profile>>`
-5. Initial creation of instance on Beanstalk:
+Subsequent deployments are accomplished via pushing code into `qa` and `production` branches, which triggers GitHub Actions to build, test, and deploy.
 
-Please use the instance profile of _cloudwatchable-beanstalk_.
-Which has all the permissions needed for a traditional or Docker-flavored Beanstalk
-machine that wants to log to CloudWatch.
-
-```bash
-eb create <<environment name>> --instance_type <<size of instance>> \
-    --instance_profile cloudwatchable-beanstalk \
-    --envvars FOO="bar",MYVAR="myval" \
-    --cname <<cname prefix (XXX.us-east-1.elasticbeanstalk.com)>> \
-    --vpc.id <<ask for custom vpc_id>> \
-    --vpc.ec2subnets <<privateSubnetId1,privateSubnetId2>> \
-    --vpc.elbsubnets <<publicSubnetId1,publicSubnetId2>> \
-    --vpc.elbpublic \
-    --profile <<your AWS profile>>
-```
-
-## Travis CI
-
-Subsequent deployments are accomplished via pushing code into `qa` and `production` branches, which triggers Travis CI to build, test, and deploy.
-
-Configuration can be adjusted via `.travis.yml`, located at the root directory of this code repository. Travis CI is set to watch `qa` and `production` branches and waits for code push, e.g. `git push origin qa` will trigger Travis CI to build. When build and test are successful, Travis CI will deploy to specified Elastic Beanstalk instance.
+Configuration can be adjusted via `.github/workflows/ci.yml`, located at the root directory of this code repository. GitHub Actions is set to watch `qa` and `production` branches and waits for code push, e.g. `git push origin qa` will trigger GitHub Actions to build. When build and test are successful, GitHub Actions will deploy to specified ECS instance.
 
 ## Docker
 
