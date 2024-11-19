@@ -32,7 +32,9 @@ async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
   // All already submitted values are stored here so we dont run validations
   // on those values again.
   console.log("serverSubmit - req.body.formValues: ", req.body.formValues);
-  const existingValues = !req.body.formValues ? {} : JSON.parse(req.body.formValues);
+  const existingValues = !req.body.formValues
+    ? {}
+    : JSON.parse(req.body.formValues);
   const currentPage = req.body.page;
   // We don't want these values when we do validation.
   delete newSubmittedValues.page;
