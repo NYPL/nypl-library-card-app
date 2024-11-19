@@ -32,6 +32,7 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
     }
 
     if (typeof problemDetail !== "string" && !problemDetail.detail) {
+      console.log("ApiErrors problemDetail: ", problemDetail);
       problemDetail.detail = t("apiErrors.defaultError");
     }
     if (lang !== "en" && typeof problemDetail !== "string") {
