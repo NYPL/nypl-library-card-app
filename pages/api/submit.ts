@@ -31,7 +31,8 @@ async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
   let newSubmittedValues = { ...req.body };
   // All already submitted values are stored here so we dont run validations
   // on those values again.
-  const existingValues = JSON.parse(req.body.formValues);
+  console.log("serverSubmit - req.body.formValues: ", req.body.formValues);
+  const existingValues = !req.body.formValues ? {} : JSON.parse(req.body.formValues);
   const currentPage = req.body.page;
   // We don't want these values when we do validation.
   delete newSubmittedValues.page;
@@ -101,6 +102,7 @@ async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
         results = await callPatronAPI(existingValues);
         page = "congrats";
       } catch (error) {
+        console.log("Error in serverSubmit", error);
         errors = error;
       }
       break;
