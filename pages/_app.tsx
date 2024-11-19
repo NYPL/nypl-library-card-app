@@ -92,6 +92,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
         errorObject
       );
     }
+    console.log("MyApp error: ", error);
     // We don't want to keep the errors in this object since it's
     // going to go into the app's store.
     delete router.query.errors;
