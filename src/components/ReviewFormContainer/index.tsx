@@ -472,7 +472,7 @@ function ReviewFormContainer() {
 
         <FormRow margin-top="20px">
           <DSFormField>
-            <RoutingLinks next={{ submit: true, text: t("button.submit") }} />
+            <RoutingLinks isDisabled={isLoading} next={{ submit: true, text: t("button.submit") }} />
           </DSFormField>
         </FormRow>
       </Form>
