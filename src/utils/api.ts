@@ -364,6 +364,11 @@ export async function callPatronAPI(
       return Promise.reject(patronData);
     }
 
+    logger.debug(
+      `POSTing patron data with username ${
+        patronData as FormAPISubmission.username
+      } to ${createPatronUrl}`
+    );
     return axios
       .post(createPatronUrl, patronData, constructApiHeaders(token))
       .then((result) => {
