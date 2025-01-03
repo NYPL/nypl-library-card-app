@@ -366,7 +366,7 @@ export async function callPatronAPI(
 
     logger.debug(
       `POSTing patron data with username ${
-        patronData as FormAPISubmission.username
+        (patronData as FormAPISubmission).username
       } to ${createPatronUrl}`
     );
     return axios
