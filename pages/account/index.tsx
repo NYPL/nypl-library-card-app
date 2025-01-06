@@ -8,7 +8,11 @@ import AccountFormContainer from "../../src/components/AccountFormContainer";
 import { homePageRedirect } from "../../src/utils/utils";
 import { useRouter } from "next/router";
 
-function AccountPage({ hasUserAlreadyRegistered }): React.ReactElement {
+interface AccountPageProps {
+  hasUserAlreadyRegistered: boolean
+}
+
+function AccountPage({ hasUserAlreadyRegistered }: AccountPageProps): React.ReactElement {
   const { t } = useTranslation("common");
   const router = useRouter();
   React.useEffect(() => {

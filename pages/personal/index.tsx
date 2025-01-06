@@ -8,7 +8,11 @@ import PersonalFormContainer from "../../src/components/PersonalFormContainer";
 import { homePageRedirect } from "../../src/utils/utils";
 import { useRouter } from "next/router";
 
-function PersonalInformationPage({hasUserAlreadyRegistered}): React.ReactElement {
+interface PersonalInformationProps {
+  hasUserAlreadyRegistered: boolean
+}
+
+function PersonalInformationPage({hasUserAlreadyRegistered}: PersonalInformationProps): React.ReactElement {
   const { t } = useTranslation("common");
   const router = useRouter(); 
   React.useEffect(() => {

@@ -8,7 +8,11 @@ import AddressVerificationContainer from "../../src/components/AddressVerificati
 import { homePageRedirect } from "../../src/utils/utils";
 import { useRouter } from "next/router";
 
-function AddressVerificationPage({ hasUserAlreadyRegistered }): JSX.Element {
+interface AddressVerificationPageProps {
+  hasUserAlreadyRegistered: boolean
+}
+
+function AddressVerificationPage({ hasUserAlreadyRegistered }: AddressVerificationPageProps): JSX.Element {
   const { t } = useTranslation("common");
   const router = useRouter();
   React.useEffect(() => {

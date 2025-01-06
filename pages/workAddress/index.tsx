@@ -8,7 +8,11 @@ import WorkAddressContainer from "../../src/components/WorkAddressContainer";
 import { homePageRedirect } from "../../src/utils/utils";
 import { useRouter } from "next/router";
 
-function WorkAddressPage({hasUserAlreadyRegistered}): React.ReactElement {
+interface WorkAddressPageProps {
+  hasUserAlreadyRegistered: boolean
+}
+
+function WorkAddressPage({hasUserAlreadyRegistered}: WorkAddressPageProps): React.ReactElement {
   const { t } = useTranslation("common");
   const router = useRouter();
   React.useEffect(() => {

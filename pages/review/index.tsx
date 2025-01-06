@@ -7,8 +7,11 @@ import { useRouter } from "next/router";
 import ReviewFormContainer from "../../src/components/ReviewFormContainer";
 import { homePageRedirect } from "../../src/utils/utils";
 
+interface ReviewProps {
+  hasUserAlreadyRegistered: boolean
+}
 
-function ReviewPage({ hasUserAlreadyRegistered }): React.ReactElement {
+function ReviewPage({ hasUserAlreadyRegistered }: ReviewProps): React.ReactElement {
   const { t } = useTranslation("common");
   const router = useRouter();
   React.useEffect(() => {
