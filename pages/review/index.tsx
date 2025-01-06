@@ -8,10 +8,12 @@ import ReviewFormContainer from "../../src/components/ReviewFormContainer";
 import { homePageRedirect } from "../../src/utils/utils";
 
 interface ReviewProps {
-  hasUserAlreadyRegistered: boolean
+  hasUserAlreadyRegistered: boolean;
 }
 
-function ReviewPage({ hasUserAlreadyRegistered }: ReviewProps): React.ReactElement {
+function ReviewPage({
+  hasUserAlreadyRegistered,
+}: ReviewProps): React.ReactElement {
   const { t } = useTranslation("common");
   const router = useRouter();
   React.useEffect(() => {
@@ -30,7 +32,10 @@ function ReviewPage({ hasUserAlreadyRegistered }: ReviewProps): React.ReactEleme
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query,req }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  req,
+}) => {
   // We only want to get to this page from a form submission flow. If the page
   // is hit directly, then redirect to the home page.
   if (!query.newCard) {

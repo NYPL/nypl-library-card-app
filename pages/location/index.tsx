@@ -11,10 +11,13 @@ import { useRouter } from "next/router";
 
 interface PageProps {
   location: string;
-  hasUserAlreadyRegistered: boolean
+  hasUserAlreadyRegistered: boolean;
 }
 
-function AddressPage({ location, hasUserAlreadyRegistered }: PageProps): React.ReactElement {
+function AddressPage({
+  location,
+  hasUserAlreadyRegistered,
+}: PageProps): React.ReactElement {
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const { t } = useTranslation("common");

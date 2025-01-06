@@ -9,10 +9,12 @@ import { homePageRedirect } from "../../src/utils/utils";
 import { useRouter } from "next/router";
 
 interface AddressVerificationPageProps {
-  hasUserAlreadyRegistered: boolean
+  hasUserAlreadyRegistered: boolean;
 }
 
-function AddressVerificationPage({ hasUserAlreadyRegistered }: AddressVerificationPageProps): JSX.Element {
+function AddressVerificationPage({
+  hasUserAlreadyRegistered,
+}: AddressVerificationPageProps): JSX.Element {
   const { t } = useTranslation("common");
   const router = useRouter();
   React.useEffect(() => {
@@ -29,13 +31,16 @@ function AddressVerificationPage({ hasUserAlreadyRegistered }: AddressVerificati
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  req,
+}) => {
   // We only want to get to this page from a form submission flow. If the page
   // is hit directly, then redirect to the home page.
   if (!query.newCard) {
     return homePageRedirect();
   }
-  const hasUserAlreadyRegistered = !!req.cookies["nyplUserRegistered"]
+  const hasUserAlreadyRegistered = !!req.cookies["nyplUserRegistered"];
   return {
     props: {
       hasUserAlreadyRegistered,
