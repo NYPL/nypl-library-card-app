@@ -5,7 +5,10 @@ import React from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import ReviewFormContainer from "../../src/components/ReviewFormContainer";
-import { homePageRedirect } from "../../src/utils/utils";
+import {
+  homePageRedirect,
+  redirectIfUserHasRegistered,
+} from "../../src/utils/utils";
 
 interface ReviewProps {
   hasUserAlreadyRegistered: boolean;
@@ -17,10 +20,7 @@ function ReviewPage({
   const { t } = useTranslation("common");
   const router = useRouter();
   React.useEffect(() => {
-    console.log(window.location.href);
-    if (hasUserAlreadyRegistered) {
-      router.push("http://localhost:3000/library-card/congrats?newCard=true");
-    }
+    redirectIfUserHasRegistered(hasUserAlreadyRegistered, router);
   });
   return (
     <>
@@ -42,6 +42,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     return homePageRedirect();
   }
   const hasUserAlreadyRegistered = !!req.cookies["nyplUserRegistered"];
+  console.log(req.cookies);
   return {
     props: {
       hasUserAlreadyRegistered,

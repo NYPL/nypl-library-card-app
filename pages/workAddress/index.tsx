@@ -5,20 +5,23 @@ import React from "react";
 import { GetServerSideProps } from "next";
 
 import WorkAddressContainer from "../../src/components/WorkAddressContainer";
-import { homePageRedirect } from "../../src/utils/utils";
+import {
+  homePageRedirect,
+  redirectIfUserHasRegistered,
+} from "../../src/utils/utils";
 import { useRouter } from "next/router";
 
 interface WorkAddressPageProps {
-  hasUserAlreadyRegistered: boolean
+  hasUserAlreadyRegistered: boolean;
 }
 
-function WorkAddressPage({hasUserAlreadyRegistered}: WorkAddressPageProps): React.ReactElement {
+function WorkAddressPage({
+  hasUserAlreadyRegistered,
+}: WorkAddressPageProps): React.ReactElement {
   const { t } = useTranslation("common");
   const router = useRouter();
   React.useEffect(() => {
-    if (hasUserAlreadyRegistered) {
-      router.push("http://localhost:3000/library-card/congrats?newCard=true");
-    }
+    redirectIfUserHasRegistered(hasUserAlreadyRegistered, router);
   });
   return (
     <>
@@ -30,7 +33,10 @@ function WorkAddressPage({hasUserAlreadyRegistered}: WorkAddressPageProps): Reac
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  req,
+}) => {
   // We only want to get to this page from a form submission flow. If the page
   // is hit directly, then redirect to the home page.
   if (!query.newCard) {

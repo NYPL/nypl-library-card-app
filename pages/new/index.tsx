@@ -9,7 +9,6 @@ import { Heading } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 import useFormDataContext from "../../src/context/FormDataContext";
 import { getCsrfToken } from "../../src/utils/utils";
-import { serialize } from "cookie";
 
 import { GetServerSideProps } from "next";
 import { useTranslation } from "next-i18next";
@@ -68,12 +67,10 @@ function HomePage({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { csrfToken } = getCsrfToken(context.req, context.res);
   const { query } = context;
-  context.res.setHeader("Set-Cookie", [
-    serialize("nyplUserRegistered", "", {
-      maxAge: -1,
-      path: cookieDomain,
-    })
-  ]);
+  context.res.setHeader(
+    "Set-Cookie",
+    `nyplUserRegistered=false; Max-Age=-1; path=/; domain=${cookieDomain};`
+  );
 
   return {
     props: {

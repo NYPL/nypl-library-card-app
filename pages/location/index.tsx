@@ -5,7 +5,10 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import AddressContainer from "../../src/components/AddressContainer";
 import useFormDataContext from "../../src/context/FormDataContext";
 import IPLocationAPI from "../../src/utils/IPLocationAPI";
-import { homePageRedirect } from "../../src/utils/utils";
+import {
+  homePageRedirect,
+  redirectIfUserHasRegistered,
+} from "../../src/utils/utils";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
@@ -30,9 +33,7 @@ function AddressPage({
   }, []);
   const router = useRouter();
   useEffect(() => {
-    if (hasUserAlreadyRegistered) {
-      router.push("http://localhost:3000/library-card/congrats?newCard=true");
-    }
+    redirectIfUserHasRegistered(hasUserAlreadyRegistered, router);
   });
   return (
     <>

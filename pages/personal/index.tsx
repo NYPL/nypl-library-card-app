@@ -5,7 +5,10 @@ import { useTranslation } from "next-i18next";
 import { GetServerSideProps } from "next";
 
 import PersonalFormContainer from "../../src/components/PersonalFormContainer";
-import { homePageRedirect } from "../../src/utils/utils";
+import {
+  homePageRedirect,
+  redirectIfUserHasRegistered,
+} from "../../src/utils/utils";
 import { useRouter } from "next/router";
 
 interface PersonalInformationProps {
@@ -18,9 +21,7 @@ function PersonalInformationPage({
   const { t } = useTranslation("common");
   const router = useRouter();
   React.useEffect(() => {
-    if (hasUserAlreadyRegistered) {
-      router.push("http://localhost:3000/library-card/congrats?newCard=true");
-    }
+    redirectIfUserHasRegistered(hasUserAlreadyRegistered, router);
   });
   return (
     <>

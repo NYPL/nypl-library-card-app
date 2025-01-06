@@ -5,7 +5,10 @@ import React from "react";
 import { GetServerSideProps } from "next";
 
 import AddressVerificationContainer from "../../src/components/AddressVerificationContainer";
-import { homePageRedirect } from "../../src/utils/utils";
+import {
+  homePageRedirect,
+  redirectIfUserHasRegistered,
+} from "../../src/utils/utils";
 import { useRouter } from "next/router";
 
 interface AddressVerificationPageProps {
@@ -18,9 +21,7 @@ function AddressVerificationPage({
   const { t } = useTranslation("common");
   const router = useRouter();
   React.useEffect(() => {
-    if (hasUserAlreadyRegistered) {
-      router.push("http://localhost:3000/library-card/congrats?newCard=true");
-    }
+    redirectIfUserHasRegistered(hasUserAlreadyRegistered, router);
   });
   return (
     <>
