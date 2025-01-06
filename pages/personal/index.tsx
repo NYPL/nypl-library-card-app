@@ -6,9 +6,16 @@ import { GetServerSideProps } from "next";
 
 import PersonalFormContainer from "../../src/components/PersonalFormContainer";
 import { homePageRedirect } from "../../src/utils/utils";
+import { useRouter } from "next/router";
 
-function PersonalInformationPage(): React.ReactElement {
+function PersonalInformationPage({hasUserAlreadyRegistered}): React.ReactElement {
   const { t } = useTranslation("common");
+  const router = useRouter(); 
+  React.useEffect(() => {
+    if (hasUserAlreadyRegistered) {
+      router.push("http://localhost:3000/library-card/congrats?newCard=true");
+    }
+  });
   return (
     <>
       <Heading level="two">{t("personal.title")}</Heading>
@@ -18,14 +25,16 @@ function PersonalInformationPage(): React.ReactElement {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
   // We only want to get to this page from a form submission flow. If the page
   // is hit directly, then redirect to the home page.
   if (!query.newCard) {
     return homePageRedirect();
   }
+  const hasUserAlreadyRegistered = !!req.cookies["nyplUserRegistered"]
   return {
     props: {
+      hasUserAlreadyRegistered,
       // This allows this page to get the proper translations based
       // on the `lang=...` URL query param. Default to "en".
       ...(await serverSideTranslations(query?.lang?.toString() || "en", [

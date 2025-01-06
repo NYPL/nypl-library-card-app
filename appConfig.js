@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   appTitle: "Library Card Application Form",
   appName: "NYPL Library Card App",
   favIconPath: "https://ux-static.nypl.org/images/favicon.ico",
@@ -19,4 +19,5 @@ export default {
   dsHeader: process.env.NEXT_PUBLIC_DS_GLOBAL_HEADER,
   dsFooter: process.env.NEXT_PUBLIC_DS_GLOBAL_FOOTER,
   adobeAnalyticsTag: process.env.NEXT_PUBLIC_ADOBE_ANALYTICS_TAG,
+  cookieDomain: process.env.COOKIE_DOMAIN,
 };

@@ -14,6 +14,7 @@ import { GetServerSideProps } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import LanguageMenu from "../../src/components/LanguageMenu/LanguageMenu";
+import { cookieDomain } from "../../appConfig.js";
 
 interface HomePageProps {
   policyType: any;
@@ -66,7 +67,6 @@ function HomePage({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { csrfToken } = getCsrfToken(context.req, context.res);
   const { query } = context;
-
   return {
     props: {
       csrfToken,
