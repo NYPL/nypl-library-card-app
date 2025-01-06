@@ -29,7 +29,6 @@ const ilsLibraryList: LibraryListObject[] = [
   { label: "Fort Washington Library", value: "fw" },
   { label: "Francis Martin Library", value: "fx" },
   { label: "George Bruce Library", value: "br" },
-  { label: "Grand Central Library", value: "gc" },
   { label: "Grand Concourse Library", value: "gd" },
   { label: "Great Kills Library", value: "gk" },
   { label: "Hamilton Fish Park Library", value: "hf" },
