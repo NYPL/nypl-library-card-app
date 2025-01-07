@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/router";
 
 interface AccountPageProps {
-  hasUserAlreadyRegistered: boolean;
+  hasUserAlreadyRegistered?: boolean;
 }
 
 function AccountPage({

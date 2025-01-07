@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/router";
 
 interface PersonalInformationProps {
-  hasUserAlreadyRegistered: boolean;
+  hasUserAlreadyRegistered?: boolean;
 }
 
 function PersonalInformationPage({

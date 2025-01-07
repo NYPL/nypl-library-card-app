@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/router";
 
 interface AddressVerificationPageProps {
-  hasUserAlreadyRegistered: boolean;
+  hasUserAlreadyRegistered?: boolean;
 }
 
 function AddressVerificationPage({

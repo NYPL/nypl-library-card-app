@@ -11,7 +11,7 @@ import {
 } from "../../src/utils/utils";
 
 interface ReviewProps {
-  hasUserAlreadyRegistered: boolean;
+  hasUserAlreadyRegistered?: boolean;
 }
 
 function ReviewPage({
@@ -21,7 +21,7 @@ function ReviewPage({
   const router = useRouter();
   React.useEffect(() => {
     redirectIfUserHasRegistered(hasUserAlreadyRegistered, router);
-  });
+  }, []);
   return (
     <>
       <Heading level="two">{t("review.title")}</Heading>
@@ -42,7 +42,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     return homePageRedirect();
   }
   const hasUserAlreadyRegistered = !!req.cookies["nyplUserRegistered"];
-  console.log(req.cookies);
   return {
     props: {
       hasUserAlreadyRegistered,

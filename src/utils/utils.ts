@@ -5,7 +5,6 @@ import cookie from "./CookieUtils";
 import appConfig from "../../appConfig";
 
 export const redirectIfUserHasRegistered = (hasRegistered: boolean, router) => {
-  console.log("spaghetti");
   if (hasRegistered) {
     router.push("/congrats?newCard=true");
   }

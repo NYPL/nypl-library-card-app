@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 
 interface PageProps {
   location: string;
-  hasUserAlreadyRegistered: boolean;
+  hasUserAlreadyRegistered?: boolean;
 }
 
 function AddressPage({

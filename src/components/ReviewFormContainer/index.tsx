@@ -32,6 +32,7 @@ import {
   findLibraryCode,
 } from "../../../src/utils/formDataUtils";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
+import logger from "../../logger";
 
 /**
  * ReviewFormContainer
@@ -472,7 +473,10 @@ function ReviewFormContainer() {
 
         <FormRow margin-top="20px">
           <DSFormField>
-            <RoutingLinks isDisabled={isLoading} next={{ submit: true, text: t("button.submit") }} />
+            <RoutingLinks
+              isDisabled={isLoading}
+              next={{ submit: true, text: t("button.submit") }}
+            />
           </DSFormField>
         </FormRow>
       </Form>

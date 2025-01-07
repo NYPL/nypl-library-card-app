@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/router";
 
 interface WorkAddressPageProps {
-  hasUserAlreadyRegistered: boolean;
+  hasUserAlreadyRegistered?: boolean;
 }
 
 function WorkAddressPage({
