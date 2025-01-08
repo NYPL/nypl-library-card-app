@@ -12,7 +12,6 @@ import { homePageRedirect } from "../../src/utils/utils";
 import { cookieDomain } from "../../appConfig";
 
 function ConfirmationPage(): JSX.Element {
-  console.log("render confirmation");
   const { state } = useFormDataContext();
   const formResults: FormResults = state.results;
   const { t } = useTranslation("common");
