@@ -16,7 +16,7 @@ import { lcaEvents } from "../../externals/gaUtils";
 import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
-const AccountFormContainer = (): React.ReactElement => {
+const AccountFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const router = useRouter();

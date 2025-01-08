@@ -1,7 +1,7 @@
 import { Heading } from "@nypl/design-system-react-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import React from "react";
+import { useEffect } from "react";
 import { GetServerSideProps } from "next";
 
 import WorkAddressContainer from "../../src/components/WorkAddressContainer";
@@ -15,12 +15,10 @@ interface WorkAddressPageProps {
   hasUserAlreadyRegistered?: boolean;
 }
 
-function WorkAddressPage({
-  hasUserAlreadyRegistered,
-}: WorkAddressPageProps): React.ReactElement {
+function WorkAddressPage({ hasUserAlreadyRegistered }: WorkAddressPageProps) {
   const { t } = useTranslation("common");
   const router = useRouter();
-  React.useEffect(() => {
+  useEffect(() => {
     redirectIfUserHasRegistered(hasUserAlreadyRegistered, router);
   });
   return (

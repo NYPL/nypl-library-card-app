@@ -1,5 +1,5 @@
 import { Heading } from "@nypl/design-system-react-components";
-import React from "react";
+import { useEffect } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { GetServerSideProps } from "next";
@@ -17,10 +17,10 @@ interface PersonalInformationProps {
 
 function PersonalInformationPage({
   hasUserAlreadyRegistered,
-}: PersonalInformationProps): React.ReactElement {
+}: PersonalInformationProps) {
   const { t } = useTranslation("common");
   const router = useRouter();
-  React.useEffect(() => {
+  useEffect(() => {
     redirectIfUserHasRegistered(hasUserAlreadyRegistered, router);
   });
   return (

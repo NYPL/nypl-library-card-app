@@ -1,7 +1,7 @@
 import { Heading } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import React from "react";
+import { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import ReviewFormContainer from "../../src/components/ReviewFormContainer";
@@ -14,12 +14,10 @@ interface ReviewProps {
   hasUserAlreadyRegistered?: boolean;
 }
 
-function ReviewPage({
-  hasUserAlreadyRegistered,
-}: ReviewProps): React.ReactElement {
+function ReviewPage({ hasUserAlreadyRegistered }: ReviewProps) {
   const { t } = useTranslation("common");
   const router = useRouter();
-  React.useEffect(() => {
+  useEffect(() => {
     redirectIfUserHasRegistered(hasUserAlreadyRegistered, router);
   }, []);
   return (
