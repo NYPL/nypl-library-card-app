@@ -4,6 +4,12 @@ import { PageTitles } from "../interfaces";
 import cookie from "./CookieUtils";
 import appConfig from "../../appConfig";
 
+export const redirectIfUserHasRegistered = (hasRegistered: boolean, router) => {
+  if (hasRegistered) {
+    router.push("/congrats?newCard=true");
+  }
+};
+
 /**
  * homePageRedirect
  * Function that should be used in `getStaticProps` or `getServerSideProps`.
