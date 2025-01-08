@@ -1,4 +1,3 @@
-import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import appConfig from "../appConfig";
 const { adobeAnalyticsTag, dsHeader, dsFooter } = appConfig;
@@ -10,7 +9,7 @@ const { adobeAnalyticsTag, dsHeader, dsFooter } = appConfig;
  * they need to be at the end.
  */
 class MyDocument extends Document {
-  render(): React.ReactElement {
+  render() {
     return (
       <Html lang="en">
         <Head>

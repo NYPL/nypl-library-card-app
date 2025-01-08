@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import React from "react";
+import { useEffect } from "react";
 import "@nypl/design-system-react-components/dist/styles.css";
 import "../src/styles/main.scss";
 import Head from "next/head";
@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 
   // Setting the "lang" and the "dir" attribute
   const { i18n } = useTranslation("common");
-  React.useEffect(() => {
+  useEffect(() => {
     let lang = router.query.lang || "en";
     if (lang === "zhcn") {
       lang = "zh-cn";
@@ -64,7 +64,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     document.documentElement.lang = `${lang}`;
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleRouteChange = () => {
       aaUtils.pageViewEvent(window.location);
       gaUtils.trackPageview(window.location.pathname);

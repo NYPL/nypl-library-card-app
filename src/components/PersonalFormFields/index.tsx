@@ -4,7 +4,7 @@ import {
   FormRow,
 } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { isEmail } from "validator";
 
@@ -19,7 +19,7 @@ interface PersonalFormFieldsProps {
 function PersonalFormFields({
   agencyType = "",
   id = "",
-}: PersonalFormFieldsProps): React.ReactElement {
+}: PersonalFormFieldsProps) {
   const { t } = useTranslation("common");
   const { register, errors } = useFormContext();
   const { state } = useFormDataContext();
