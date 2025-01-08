@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Checkbox } from "@nypl/design-system-react-components";
-import React from "react";
+
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 
@@ -17,9 +16,7 @@ interface AgeFormProps {
  * Renders an input field for "webApplicant" policy types and a checkbox for
  * "simplye" policy types.
  */
-const AgeForm = ({
-  policyType = "webApplicant",
-}: AgeFormProps): React.ReactElement => {
+const AgeForm = ({ policyType = "webApplicant" }: AgeFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;

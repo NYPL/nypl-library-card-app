@@ -1,7 +1,7 @@
 import { Heading } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import React from "react";
+import { useEffect } from "react";
 import { GetServerSideProps } from "next";
 
 import AddressVerificationContainer from "../../src/components/AddressVerificationContainer";
@@ -20,7 +20,7 @@ function AddressVerificationPage({
 }: AddressVerificationPageProps): JSX.Element {
   const { t } = useTranslation("common");
   const router = useRouter();
-  React.useEffect(() => {
+  useEffect(() => {
     redirectIfUserHasRegistered(hasUserAlreadyRegistered, router);
   });
   return (

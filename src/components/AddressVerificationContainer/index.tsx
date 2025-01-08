@@ -24,7 +24,7 @@ import { useTranslation } from "next-i18next";
  * AddressVerificationContainer
  * Main page component for the "address review" page.
  */
-function AddressVerificationContainer(): React.ReactElement {
+function AddressVerificationContainer() {
   // Keep track of the user's selection of the preferred home
   // and/or work address.
   const [homeAddressSelect, setHomeAddressSelect] = useState("");

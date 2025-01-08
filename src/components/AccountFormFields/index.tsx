@@ -18,10 +18,7 @@ interface AccountFormFieldsProps {
   showPasswordOnLoad?: boolean;
 }
 
-function AccountFormFields({
-  id,
-  showPasswordOnLoad,
-}: AccountFormFieldsProps): React.ReactElement {
+function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
   const { t } = useTranslation("common");
   const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();

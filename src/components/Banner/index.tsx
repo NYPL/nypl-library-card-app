@@ -1,4 +1,3 @@
-import React from "react";
 import { useTranslation } from "next-i18next";
 import { Heading, Hero } from "@nypl/design-system-react-components";
 
@@ -17,7 +16,7 @@ interface BannerProps {
 const Banner = ({
   fullImageSrc = defaultImageSrc,
   heroDescription = defaultDescription,
-}: BannerProps): React.ReactElement => {
+}: BannerProps) => {
   const { t } = useTranslation("common");
   const h1Heading = (
     <Heading id="hero-banner" level="one" text={t("banner.title")} />

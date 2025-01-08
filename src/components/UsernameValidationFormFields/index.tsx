@@ -7,7 +7,7 @@ import {
 import axios from "axios";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { isAlphanumeric } from "validator";
 
@@ -34,7 +34,7 @@ interface UsernameValidationFormProps {
 const UsernameValidationForm = ({
   id = "",
   errorMessage = "",
-}: UsernameValidationFormProps): React.ReactElement => {
+}: UsernameValidationFormProps) => {
   const { t } = useTranslation("common");
   const {
     query: { lang = "en" },

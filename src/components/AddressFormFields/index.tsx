@@ -22,7 +22,7 @@ interface AddressFormProps {
  * street address (line1), second street address (line2), city, state,
  * and zip code.
  */
-const AddressForm = ({ id, type }: AddressFormProps): React.ReactElement => {
+const AddressForm = ({ id, type }: AddressFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;

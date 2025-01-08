@@ -1,5 +1,5 @@
 import { Heading } from "@nypl/design-system-react-components";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import AddressContainer from "../../src/components/AddressContainer";
@@ -17,10 +17,7 @@ interface PageProps {
   hasUserAlreadyRegistered?: boolean;
 }
 
-function AddressPage({
-  location,
-  hasUserAlreadyRegistered,
-}: PageProps): React.ReactElement {
+function AddressPage({ location, hasUserAlreadyRegistered }: PageProps) {
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const { t } = useTranslation("common");

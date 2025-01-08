@@ -1,6 +1,6 @@
 import { Heading } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import Autosuggest from "react-autosuggest";
 
@@ -22,9 +22,7 @@ interface LibraryListFormProps {
  * the select element and for form values. Also uses `react-autosuggest` to
  * render suggestions when a patron starts to type a library name.
  */
-const LibraryListForm = ({
-  libraryList = [],
-}: LibraryListFormProps): React.ReactElement => {
+const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;

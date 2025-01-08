@@ -32,7 +32,6 @@ import {
   findLibraryCode,
 } from "../../../src/utils/formDataUtils";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
-import logger from "../../logger";
 
 /**
  * ReviewFormContainer
