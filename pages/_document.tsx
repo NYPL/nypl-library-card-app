@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import appConfig from "../appConfig";
+import * as appConfig from "../appConfig";
 const { adobeAnalyticsTag, dsHeader, dsFooter } = appConfig;
 
 /**

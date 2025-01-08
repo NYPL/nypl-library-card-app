@@ -1,7 +1,7 @@
 import { NextPageContext } from "next";
 import requestIp from "request-ip";
 import axios from "axios";
-import appConfig from "../../appConfig";
+import * as appConfig from "../../appConfig";
 import { LocationResponse } from "../interfaces";
 
 interface LocationPoint {

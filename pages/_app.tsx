@@ -10,7 +10,7 @@ import {
   FormDataContextProvider,
   formInitialState,
 } from "../src/context/FormDataContext";
-import appConfig from "../appConfig";
+import * as appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
 import ApplicationContainer from "../src/components/ApplicationContainer";
 import { getPageTitles } from "../src/utils/utils";
