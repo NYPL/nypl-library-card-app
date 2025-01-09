@@ -216,8 +216,8 @@ function ReviewFormContainer() {
           // so they can be fixed.
           dispatch({ type: "SET_FORM_ERRORS", value: error.response?.data });
         }
-      })
-      .finally(() => setIsLoading(false));
+        setIsLoading(false);
+      });
   };
 
   /**
