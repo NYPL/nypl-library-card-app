@@ -63,7 +63,7 @@ const ConfirmationContainer: React.FC = () => {
           </div>
           <div className="grid-item">
             {t("confirmation.graphic.password")}
-            <div className="content">{password}</div>
+            <div className="content">*******</div>
           </div>
           <div className="grid-item">
             {t("confirmation.graphic.issued")}
