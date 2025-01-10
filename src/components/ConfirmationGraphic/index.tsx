@@ -61,10 +61,7 @@ const ConfirmationContainer = () => {
             <canvas id="barcodeCanvas" {...canvasArgs}></canvas>
             <div className="barcode">{barcode}</div>
           </div>
-          <div className="grid-item">
-            {t("confirmation.graphic.password")}
-            <div className="content">*******</div>
-          </div>
+
           <div className="grid-item">
             {t("confirmation.graphic.issued")}
             <div className="content">{new Date().toLocaleDateString()}</div>
