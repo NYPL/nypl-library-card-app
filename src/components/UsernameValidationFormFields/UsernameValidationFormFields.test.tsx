@@ -77,7 +77,7 @@ describe("UsernameValidationFormFields", () => {
   });
 
   test("renders the basic label, input, and helper text elements", async () => {
-    const { container } = render(
+    render(
       <TestProviderWrapper>
         <UsernameValidationFormFields id="username-test" />
       </TestProviderWrapper>
@@ -90,18 +90,12 @@ describe("UsernameValidationFormFields", () => {
       "5-25 alphanumeric characters. No special characters."
     );
     const validateButton = screen.getByText("Check if username is available");
-    // Since this is hidden and the user does not see it, let's use the
-    // querySelector function.
-    const hiddenInput = container.querySelector(
-      "[name=usernameHasBeenValidated]"
-    );
 
     expect(label).toBeInTheDocument();
     expect(labelRequired).toBeInTheDocument();
     expect(input).toBeInTheDocument();
     expect(helperText).toBeInTheDocument();
     expect(validateButton).toBeInTheDocument();
-    expect(hiddenInput).not.toBeInTheDocument();
   });
 
   // Rendering the validation button depends on the `getValues` function from
@@ -163,7 +157,7 @@ describe("UsernameValidationFormFields", () => {
     const mockWatch = jest.fn().mockReturnValue(true);
     const mockGetValues = jest.fn().mockReturnValue("notAvailableUsername");
 
-    const { container } = render(
+    render(
       <TestProviderWrapper
         hookFormState={{ getValues: mockGetValues, watch: mockWatch }}
       >
@@ -188,15 +182,6 @@ describe("UsernameValidationFormFields", () => {
     expect(errorMessageDisplay).toBeInTheDocument();
     // Since a message is displaying, the button does not render.
     expect(validateButton).toBeDisabled();
-
-    // Any response also renders a hidden input with the available value from
-    // the API call. In this case it is false since it was an error response.
-    const hiddenInput = container.querySelector(
-      "[name=usernameHasBeenValidated]"
-    ) as HTMLInputElement;
-    expect(hiddenInput).toBeInTheDocument();
-    // TODO: Fixed in DS v1.1.1
-    // expect(hiddenInput.value).toEqual("false");
   });
 
   test("renders a good message response from the API call", async () => {
@@ -205,7 +190,7 @@ describe("UsernameValidationFormFields", () => {
     const mockWatch = jest.fn().mockReturnValue(true);
     const mockGetValues = jest.fn().mockReturnValue("availableUsername");
 
-    const { container } = render(
+    render(
       <TestProviderWrapper
         hookFormState={{ getValues: mockGetValues, watch: mockWatch }}
       >
@@ -231,14 +216,6 @@ describe("UsernameValidationFormFields", () => {
     // The button to validate the username is now disabled since we got a
     // response from the API.
     expect(validateButton).toBeDisabled();
-
-    // The hidden input value is now "true".
-    const hiddenInput = container.querySelector(
-      "[name=usernameHasBeenValidated]"
-    ) as HTMLInputElement;
-    expect(hiddenInput).toBeInTheDocument();
-    // TODO: Fixed in DS v1.1.1
-    // expect(hiddenInput.value).toEqual("true");
   });
 
   test("should render an error message if the input is invalid", async () => {

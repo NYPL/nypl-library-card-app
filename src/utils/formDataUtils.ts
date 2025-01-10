@@ -1,7 +1,7 @@
 import isEmpty from "lodash/isEmpty";
 import { isEmail, isAlphanumeric, isLength } from "validator";
 import ilsLibraryList from "../data/ilsLibraryList";
-import config from "../../appConfig";
+import * as config from "../../appConfig";
 import {
   Address,
   Addresses,
@@ -343,7 +343,6 @@ const constructPatronObject = (
     agencyType,
     policyType,
     username,
-    usernameHasBeenValidated,
     password,
     homeLibraryCode,
     acceptTerms,
@@ -376,7 +375,6 @@ const constructPatronObject = (
     password,
     ecommunicationsPref,
     agencyType: agencyType || config.agencyType.default,
-    usernameHasBeenValidated,
     policyType: policyType || "simplye",
     homeLibraryCode,
     acceptTerms,

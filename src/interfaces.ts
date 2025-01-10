@@ -23,7 +23,6 @@ export interface FormInputData {
   "work-isResidential"?: boolean;
   "work-county"?: string;
   username: string;
-  usernameHasBeenValidated?: boolean;
   password: string;
   verifyPassword: string;
   ecommunicationsPref: boolean;
@@ -178,7 +177,6 @@ export interface FormAPISubmission {
   firstName?: string;
   lastName?: string;
   username: string;
-  usernameHasBeenValidated?: boolean;
   password: string;
   address: Address;
   workAddress?: Address;

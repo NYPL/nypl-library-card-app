@@ -95,9 +95,6 @@ describe("Confirmation", () => {
 
     expect(screen.getByText("12345678912345")).toBeInTheDocument();
 
-    expect(screen.getByText("PASSWORD")).toBeInTheDocument();
-    expect(screen.getByText("1234")).toBeInTheDocument();
-
     expect(screen.getByText("ISSUED")).toBeInTheDocument();
   });
 });

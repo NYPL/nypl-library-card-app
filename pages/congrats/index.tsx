@@ -9,6 +9,7 @@ import ConfirmationGraphic from "../../src/components/ConfirmationGraphic";
 import useFormDataContext from "../../src/context/FormDataContext";
 import { FormResults } from "../../src/interfaces";
 import { homePageRedirect } from "../../src/utils/utils";
+import { cookieDomain } from "../../appConfig";
 
 function ConfirmationPage(): JSX.Element {
   const { state } = useFormDataContext();
@@ -67,12 +68,19 @@ function ConfirmationPage(): JSX.Element {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  res,
+}) => {
   // We only want to get to this page from a form submission flow. If the page
   // is hit directly, then redirect to the home page.
   if (!query.newCard) {
     return homePageRedirect();
   }
+  res.setHeader(
+    "Set-Cookie",
+    `nyplUserRegistered=true; Max-Age=10; path=/; domain=${cookieDomain};`
+  );
   return {
     props: {
       ...(await serverSideTranslations(query?.lang?.toString() || "en", [

@@ -548,7 +548,6 @@ describe("callPatronAPI", () => {
         password: "MyLib1731@!",
         ecommunicationsPref: true,
         agencyType: "198",
-        usernameHasBeenValidated: undefined,
         policyType: "webApplicant",
         homeLibraryCode: "ch",
         acceptTerms: true,

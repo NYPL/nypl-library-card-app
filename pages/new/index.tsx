@@ -4,7 +4,7 @@
  * If you do, you will throw an error related to i18next.
  * */
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Heading } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 import useFormDataContext from "../../src/context/FormDataContext";
@@ -14,6 +14,7 @@ import { GetServerSideProps } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import LanguageMenu from "../../src/components/LanguageMenu/LanguageMenu";
+import { cookieDomain } from "../../appConfig.js";
 
 interface HomePageProps {
   policyType: any;
@@ -21,11 +22,7 @@ interface HomePageProps {
   lang: string;
 }
 
-function HomePage({
-  policyType,
-  csrfToken,
-  lang,
-}: HomePageProps): React.ReactElement {
+function HomePage({ policyType, csrfToken, lang }: HomePageProps) {
   const { t } = useTranslation("common");
   const { dispatch } = useFormDataContext();
   // When the app loads, get the CSRF token from the server and set it in
@@ -66,6 +63,10 @@ function HomePage({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { csrfToken } = getCsrfToken(context.req, context.res);
   const { query } = context;
+  context.res.setHeader(
+    "Set-Cookie",
+    `nyplUserRegistered=false; Max-Age=-1; path=/; domain=${cookieDomain};`
+  );
 
   return {
     props: {

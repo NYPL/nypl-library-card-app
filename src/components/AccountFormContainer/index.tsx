@@ -11,12 +11,12 @@ import useFormDataContext from "../../context/FormDataContext";
 import RoutingLinks from "../RoutingLinks.tsx";
 import AccountFormFields from "../AccountFormFields";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
-import { findLibraryCode, findLibraryName } from "../../utils/formDataUtils";
+import { findLibraryCode } from "../../utils/formDataUtils";
 import { lcaEvents } from "../../externals/gaUtils";
 import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
-const AccountFormContainer = (): React.ReactElement => {
+const AccountFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const router = useRouter();
