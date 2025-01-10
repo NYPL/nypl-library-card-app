@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v1.1.0 Duplicate patron bug fixes
+- Add cookie-based redirect back to congrats page from any page after success
+- Remove hasUsernameBeenValidated flag and hidden input field
+- Update loading layer to remain until navigation away from submission page
+- Remove password display from congrats graphic
+
 ### v1.0.0 Remediation Project (security) update
 
 - Switch deployment to GitHub Actions
