@@ -2,13 +2,13 @@
 const { i18n } = require("./next-i18next.config");
 
 const PROD_BUILD_ID =
-  "production-0.9.2-946c11ea7345d81edd1bcb6b56c13b382206af1e";
+  "production-0.10.0-d3cf81314d70a3f30de3560098fb5465b50a6967";
 
 module.exports = {
   basePath: "/library-card",
   // Configures the app's locale settings.
   i18n,
-  async redirects() {
+  async redirects () {
     return [
       {
         source: "/library-card/",
