@@ -1,8 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { i18n } = require("./next-i18next.config");
 
-const PROD_BUILD_ID =
-  "production-0.10.0-d3cf81314d70a3f30de3560098fb5465b50a6967";
+const PROD_BUILD_ID = "production-0.10.1-bbf78d0";
 
 module.exports = {
   basePath: "/library-card",
