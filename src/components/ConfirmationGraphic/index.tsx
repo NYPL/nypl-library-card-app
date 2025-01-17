@@ -1,16 +1,16 @@
 import { Logo } from "@nypl/design-system-react-components";
 import bwipjs from "bwip-js";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { FormResults } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
 import { useTranslation } from "next-i18next";
 
-const ConfirmationContainer: React.FC = () => {
+const ConfirmationContainer = () => {
   const { state } = useFormDataContext();
   const formResults = state.results || ({} as FormResults);
-  const { barcode, password, name } = formResults;
+  const { barcode, name } = formResults;
   const { t } = useTranslation("common");
   const canvasArgs = {
     role: "img",
@@ -61,10 +61,7 @@ const ConfirmationContainer: React.FC = () => {
             <canvas id="barcodeCanvas" {...canvasArgs}></canvas>
             <div className="barcode">{barcode}</div>
           </div>
-          <div className="grid-item">
-            {t("confirmation.graphic.password")}
-            <div className="content">{password}</div>
-          </div>
+
           <div className="grid-item">
             {t("confirmation.graphic.issued")}
             <div className="content">{new Date().toLocaleDateString()}</div>

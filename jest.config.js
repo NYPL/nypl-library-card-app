@@ -7,7 +7,12 @@ module.exports = {
     "!**/node_modules/**",
   ],
   setupFilesAfterEnv: ["<rootDir>/testHelper/browser.ts"],
-  testPathIgnorePatterns: ["/node_modules/", "/.next/", ".spec"],
+  testPathIgnorePatterns: [
+    "/node_modules/",
+    "/.next/",
+    ".spec",
+    "/__tests__/fixtures/*",
+  ],
   // A map from regular expressions to paths to transformers
   transform: {
     // Use babel-jest to transpile tests with the next/babel preset

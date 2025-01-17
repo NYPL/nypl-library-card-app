@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import React from "react";
+import { useEffect } from "react";
 import "@nypl/design-system-react-components/dist/styles.css";
 import "../src/styles/main.scss";
 import Head from "next/head";
@@ -10,7 +10,7 @@ import {
   FormDataContextProvider,
   formInitialState,
 } from "../src/context/FormDataContext";
-import appConfig from "../appConfig";
+import * as appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
 import ApplicationContainer from "../src/components/ApplicationContainer";
 import { getPageTitles } from "../src/utils/utils";
@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 
   // Setting the "lang" and the "dir" attribute
   const { i18n } = useTranslation("common");
-  React.useEffect(() => {
+  useEffect(() => {
     let lang = router.query.lang || "en";
     if (lang === "zhcn") {
       lang = "zh-cn";
@@ -64,7 +64,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     document.documentElement.lang = `${lang}`;
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleRouteChange = () => {
       aaUtils.pageViewEvent(window.location);
       gaUtils.trackPageview(window.location.pathname);
@@ -177,7 +177,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
               (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+              })(document,'script','https://www.google-analytics.com/analytics.js','ga');
 
               ga('create', '${gaCode}', 'auto');
               ga('send', 'pageview');

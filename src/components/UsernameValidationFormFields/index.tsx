@@ -7,7 +7,7 @@ import {
 import axios from "axios";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { isAlphanumeric } from "validator";
 
@@ -29,15 +29,12 @@ interface UsernameValidationFormProps {
 /**
  * UsernameValidationForm
  * Renders the input field for the username value. It also renders a button for
- * optional request to check if the username is available. If available, a
- * hidden input is rendered with the `usernameHasBeenValidated` flag set to
- * true so that the Card Creator `/patrons` endpoint doesn't have to
- * re-evaluate the username (and make one less request to the NYPL ILS).
+ * optional request to check if the username is available.
  */
 const UsernameValidationForm = ({
   id = "",
   errorMessage = "",
-}: UsernameValidationFormProps): React.ReactElement => {
+}: UsernameValidationFormProps) => {
   const { t } = useTranslation("common");
   const {
     query: { lang = "en" },
@@ -167,21 +164,6 @@ const UsernameValidationForm = ({
           </DSFormField>
         </FormRow>
       ) : null}
-
-      <FormRow display="none" id={`${id}-username-4`}>
-        <DSFormField>
-          {/* Only add this value to the form submission if there is a message. */}
-          {usernameIsAvailable.message && (
-            <FormField
-              id="hidden-username-validated"
-              type="hidden"
-              name="usernameHasBeenValidated"
-              defaultValue={`${usernameIsAvailable.available}`}
-              ref={register()}
-            />
-          )}
-        </DSFormField>
-      </FormRow>
     </>
   );
 };

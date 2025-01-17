@@ -2,7 +2,13 @@ import isEmpty from "lodash/isEmpty";
 import { createHash, randomBytes } from "crypto";
 import { PageTitles } from "../interfaces";
 import cookie from "./CookieUtils";
-import appConfig from "../../appConfig";
+import * as appConfig from "../../appConfig";
+
+export const redirectIfUserHasRegistered = (hasRegistered: boolean, router) => {
+  if (hasRegistered) {
+    router.push("/congrats?newCard=true");
+  }
+};
 
 /**
  * homePageRedirect

@@ -3,7 +3,7 @@ import qs from "qs";
 import moment from "moment";
 import Cors from "cors";
 
-import config from "../../appConfig";
+import * as config from "../../appConfig";
 import logger from "../logger/index";
 import { constructPatronObject, constructProblemDetail } from "./formDataUtils";
 import {
@@ -364,6 +364,11 @@ export async function callPatronAPI(
       return Promise.reject(patronData);
     }
 
+    logger.debug(
+      `POSTing patron data with username ${
+        (patronData as FormAPISubmission).username
+      } to ${createPatronUrl}`
+    );
     return axios
       .post(createPatronUrl, patronData, constructApiHeaders(token))
       .then((result) => {
