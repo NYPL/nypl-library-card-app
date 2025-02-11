@@ -1,10 +1,10 @@
 import isEmpty from "lodash/isEmpty";
 import { createHash, randomBytes } from "crypto";
 import { PageTitles } from "../interfaces";
-import cookie from "./CookieUtils";
+import * as cookie from "./CookieUtils";
 import * as appConfig from "../../appConfig";
 
-export const redirectIfUserHasRegistered = (hasRegistered: boolean, router) => {
+const redirectIfUserHasRegistered = (hasRegistered: boolean, router) => {
   if (hasRegistered) {
     router.push("/congrats?newCard=true");
   }
@@ -15,7 +15,7 @@ export const redirectIfUserHasRegistered = (hasRegistered: boolean, router) => {
  * Function that should be used in `getStaticProps` or `getServerSideProps`.
  * This returns a redirect object that those functions understand.
  */
-export const homePageRedirect = () => ({
+const homePageRedirect = () => ({
   redirect: {
     destination: "/new",
     permanent: false,
@@ -26,7 +26,7 @@ export const homePageRedirect = () => ({
  * getPageTitles
  * Returns the page titles and updates the titles if the user is not in "nyc".
  */
-export function getPageTitles(): PageTitles {
+function getPageTitles(): PageTitles {
   // The "nyc" case is the only case when we don't need the work address from
   // users so we don't show it. The work address is needed for the empty,
   // "nys", and "us" cases. Now an extra page is added to the
@@ -41,8 +41,8 @@ export function getPageTitles(): PageTitles {
   };
 }
 
-export const nyCounties = ["richmond", "queens", "new york", "kings", "bronx"];
-export const nyCities = [
+const nyCounties = ["richmond", "queens", "new york", "kings", "bronx"];
+const nyCities = [
   "new york",
   "new york city",
   "nyc",
@@ -56,7 +56,7 @@ export const nyCities = [
  * createQueryParams
  * Converts an object into key/value pairs to be use as url query params.
  */
-export const createQueryParams = (obj = {}) => {
+const createQueryParams = (obj = {}) => {
   let query = "";
   for (const [key, value] of Object.entries(obj)) {
     query += `&${key}=${value}`;
@@ -71,7 +71,7 @@ export const createQueryParams = (obj = {}) => {
  * results and doesn't override any existing url queries if the same key name
  * appears more than once.
  */
-export const createNestedQueryParams = (dataAsString = {}, key) => {
+const createNestedQueryParams = (dataAsString = {}, key) => {
   let query = "";
   if (!isEmpty(dataAsString) && key) {
     query = `&${key}=${JSON.stringify(dataAsString)}`;
@@ -79,7 +79,7 @@ export const createNestedQueryParams = (dataAsString = {}, key) => {
   return query;
 };
 
-export const generateSecret = () => {
+const generateSecret = () => {
   // Secret uses salt cookies and tokens (e.g. for CSRF protection).
   const s1 = appConfig.clientSecret;
   const s2 = new Date().getDate();
@@ -99,11 +99,10 @@ export const generateSecret = () => {
  * https://github.com/nextauthjs/next-auth/blob/main/src/server/index.js
  * Most comments are kept in place but some were added for clarity.
  */
-export const validateCsrfToken = (req) => {
+const validateCsrfToken = (req) => {
   let csrfToken;
   let csrfTokenValid = false;
   const csrfTokenFromPost = req.body?.csrfToken;
-  const secret = generateSecret();
 
   // Ensure CSRF Token cookie is set for any subsequent requests.
   // Used as part of the strategy for mitigation for CSRF tokens.
@@ -117,9 +116,9 @@ export const validateCsrfToken = (req) => {
   // For more details, see the following OWASP links:
   // https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#double-submit-cookie
   // https://owasp.org/www-chapter-london/assets/slides/David_Johansson-Double_Defeat_of_Double-Submit_Cookie.pdf
-  if (req.cookies[cookie.metadata.csrfToken.name]) {
+  if (req.cookies[cookie.metadata().csrfToken.name]) {
     const [csrfTokenValue, csrfTokenHash] = req.cookies[
-      cookie.metadata.csrfToken.name
+      cookie.metadata().csrfToken.name
     ].split("|");
     if (tokenMatches(csrfTokenHash, csrfTokenValue)) {
       // If hash matches then we trust the CSRF token value
@@ -151,17 +150,17 @@ const setCsrfTokenCookie = (res, csrfToken) => {
   );
   cookie.set(
     res,
-    cookie.metadata.csrfToken.name,
+    cookie.metadata().csrfToken.name,
     newCsrfTokenCookie,
-    cookie.metadata.csrfToken.options
+    cookie.metadata().csrfToken.options
   );
 };
 
-export const generateNewToken = () => {
+const generateNewToken = () => {
   return randomBytes(32).toString("hex");
 };
 
-export const generateNewTokenCookie = (csrfToken, secret) => {
+const generateNewTokenCookie = (csrfToken, secret) => {
   // If there is no csrfToken because it's not been set yet or because
   // the hash doesn't match (e.g. because it's been modified or because the
   // secret has changed), then create a new token and create a cookie.
@@ -170,17 +169,18 @@ export const generateNewTokenCookie = (csrfToken, secret) => {
     .digest("hex")}`;
 };
 
-// // Used for mocking in tests.
-// export default {
-//   validateCsrfToken,
-//   tokenMatches,
-//   generateSecret,
-//   generateNewToken,
-//   generateNewTokenCookie,
-//   createQueryParams,
-//   createNestedQueryParams,
-//   getPageTitles,
-//   nyCities,
-//   nyCounties,
-//   setCsrfTokenCookie
-// };
+export {
+  redirectIfUserHasRegistered,
+  homePageRedirect,
+  nyCounties,
+  nyCities,
+  createQueryParams,
+  createNestedQueryParams,
+  generateSecret,
+  validateCsrfToken,
+  tokenMatches,
+  setCsrfTokenCookie,
+  generateNewToken,
+  generateNewTokenCookie,
+  getPageTitles,
+};

@@ -22,22 +22,25 @@ const set = (res, name, value, options) => {
 // non-HTTPS URLs like http://localhost which are used in development).
 // For more on prefixes see:
 // https://googlechrome.github.io/samples/cookie-prefixes/
-const useSecureCookies = process.env.NODE_ENV === "production";
 
-const metadata = {
-  // default cookie options
-  csrfToken: {
-    // Default to __Host- for CSRF token for additional protection if using
-    // useSecureCookies.
-    // NB: The `__Host-` prefix is stricter than the `__Secure-` prefix.
-    name: `${useSecureCookies ? "__Host-" : ""}next-auth.csrf-token`,
-    options: {
-      httpOnly: true,
-      sameSite: "lax",
-      path: "/",
-      secure: useSecureCookies,
+const metadata = () => {
+  const useSecureCookies = process.env.NODE_ENV === "production";
+  const name = `${useSecureCookies ? "__Host-" : ""}next-auth.csrf-token`
+  return {
+    // default cookie options
+    csrfToken: {
+      // Default to __Host- for CSRF token for additional protection if using
+      // useSecureCookies.
+      // NB: The `__Host-` prefix is stricter than the `__Secure-` prefix.
+      name,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: useSecureCookies,
+      },
     },
-  },
+  };
 };
 
-export default { set, metadata };
+export { set, metadata };

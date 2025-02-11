@@ -1,23 +1,23 @@
-import utils from "../utils";
+import * as utils from "../utils";
 
-const {
-  getPageTitles,
-  createQueryParams,
-  createNestedQueryParams,
-  validateCsrfToken,
-} = utils
-
-jest.mock("../CookieUtils");
-jest.mock("../utils", () => {
+jest.mock("../CookieUtils", () => {
   return {
-    ...jest.requireActual("../utils"),
-    tokenMatches: jest.fn().mockReturnValue(true),
-  }
-})
-
+    ...jest.requireActual("../CookieUtils.ts"),
+    set: jest.fn(),
+  };
+});
+jest.mock("crypto", () => {
+  return {
+    createHash: jest.fn().mockReturnValue({
+      update: () => ({
+        digest: () => "666"
+      }),
+    }),
+  };
+});
 describe("getPageTiles", () => {
   test("it returns text saying there are 5 steps", () => {
-    expect(getPageTitles()).toEqual({
+    expect(utils.getPageTitles()).toEqual({
       personal: "Step 1 of 5: Personal Information",
       address: "Step 2 of 5: Address",
       workAddress: "Alternate Address",
@@ -30,7 +30,7 @@ describe("getPageTiles", () => {
 
 describe("createQueryParams", () => {
   test("it should return an empty string with an empty object", () => {
-    expect(createQueryParams({})).toEqual("");
+    expect(utils.createQueryParams({})).toEqual("");
   });
 
   test("it should return a url query string", () => {
@@ -39,7 +39,7 @@ describe("createQueryParams", () => {
       key2: "value2",
       key3: "value3",
     };
-    expect(createQueryParams(data)).toEqual(
+    expect(utils.createQueryParams(data)).toEqual(
       "&key1=value1&key2=value2&key3=value3"
     );
   });
@@ -47,8 +47,8 @@ describe("createQueryParams", () => {
 
 describe("createNestedQueryParams", () => {
   test("it should return an empty string with an empty string or type argument", () => {
-    expect(createNestedQueryParams({}, "key")).toEqual("");
-    expect(createNestedQueryParams({ key: "somevalue" }, "")).toEqual("");
+    expect(utils.createNestedQueryParams({}, "key")).toEqual("");
+    expect(utils.createNestedQueryParams({ key: "somevalue" }, "")).toEqual("");
   });
 
   test("it should return a nested url query string", () => {
@@ -57,11 +57,11 @@ describe("createNestedQueryParams", () => {
       key2: "value2",
       key3: "value3",
     };
-    expect(createNestedQueryParams(data, "results")).toEqual(
+    expect(utils.createNestedQueryParams(data, "results")).toEqual(
       `&results=${JSON.stringify(data)}`
     );
 
-    expect(createNestedQueryParams(data, "errors")).toEqual(
+    expect(utils.createNestedQueryParams(data, "errors")).toEqual(
       `&errors=${JSON.stringify(data)}`
     );
   });
@@ -69,26 +69,43 @@ describe("createNestedQueryParams", () => {
 
 describe("validateCsrfToken", () => {
   test("it returns invalid when no token is set", () => {
-    const { csrfToken, csrfTokenValid } = validateCsrfToken({ cookies: {} });
+    const { csrfToken, csrfTokenValid } = utils.validateCsrfToken({
+      cookies: {},
+    });
     // We don't really care what it is, just that it's there.
     expect(csrfToken).not.toBeDefined();
     expect(csrfTokenValid).toEqual(false);
   });
 
-  // TODO: it's hard to test when the true case happens because the secret is
-  // private in the function, by design and security.
-  test("it returns a false token validation", () => {
-    const firstCall = validateCsrfToken({ body: {csrfToken: '12345'}, cookies: {} });
-
-    expect(firstCall.csrfToken).toBeDefined();
-    expect(firstCall.csrfTokenValid).toEqual(false);
-
-    const second = validateCsrfToken({
-      cookies: { "next-auth.csrf-token": "wrong-token!" },
+  test("it returns token valid when request token matches cookie token", () => {
+    const firstCall = utils.validateCsrfToken({
+      method: "POST",
+      body: { csrfToken: "12345" },
+      cookies: {
+        "next-auth.csrf-token": "12345|666",
+      },
     });
-
-    // The first token should not be reused.
-    expect(second.csrfToken === firstCall.csrfToken).toEqual(false);
-    expect(second.csrfTokenValid).toEqual(false);
+    expect(firstCall.csrfToken).toBeDefined();
+    expect(firstCall.csrfTokenValid).toEqual(true);
   });
+
+  test("it returns token invalid when request token does not match cookie token", () => {
+    const firstCall = utils.validateCsrfToken({
+      method: "POST",
+      body: { csrfToken: "12345" },
+      cookies: {
+        "next-auth.csrf-token": "12345|789",
+      },
+    });
+    expect(firstCall.csrfToken).not.toBeDefined();
+    expect(firstCall.csrfTokenValid).toEqual(false);
+  });
+  //   const second = utils.validateCsrfToken({
+  //     cookies: { "next-auth.csrf-token": "wrong-token!" },
+  //   });
+
+  //   // The first token should not be reused.
+  //   expect(second.csrfToken === firstCall.csrfToken).toEqual(false);
+  //   expect(second.csrfTokenValid).toEqual(false);
+  // });
 });

@@ -8,12 +8,19 @@ import {
   validateUsername,
   callPatronAPI,
 } from "../api";
-import utils from "../utils";
 const axios = require("axios");
 import moment from "moment";
 
 jest.mock("axios");
-jest.mock("../utils");
+jest.mock("../utils", () => {
+  return {
+    ...jest.requireActual("../utils"),
+    validateCsrfToken: jest.fn(() => ({
+      csrfToken: "csrfToken",
+      csrfTokenValid: true,
+    })),
+  };
+});
 let mockedReturnedJson = {};
 class MockRes {
   status() {
@@ -25,10 +32,6 @@ class MockRes {
   }
 }
 const mockRes = new MockRes();
-utils.validateCsrfToken = jest.fn(() => ({
-  csrfToken: "csrfToken",
-  csrfTokenValid: true,
-}));
 
 describe("constructApiHeaders", () => {
   test("it returns authorization headers object", () => {
