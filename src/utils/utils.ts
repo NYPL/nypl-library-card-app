@@ -79,6 +79,19 @@ export const createNestedQueryParams = (dataAsString = {}, key) => {
   return query;
 };
 
+export const generateSecret = () => {
+  // Secret uses salt cookies and tokens (e.g. for CSRF protection).
+  const s1 = appConfig.clientSecret;
+  const s2 = new Date().getDate();
+  const s3 = new Date().getMonth();
+  return (
+    createHash("sha256")
+      // salt is based on a secret variable and date variables
+      .update(JSON.stringify({ s1, s2, s3 }))
+      .digest("hex")
+  );
+};
+
 /**
  * getCsrfToken
  * Function to generate or verify a csrf token based on code from `next-auth`
@@ -90,39 +103,7 @@ export const getCsrfToken = (req, res) => {
   let csrfToken;
   let csrfTokenValid = false;
   const csrfTokenFromPost = req.body?.csrfToken;
-  // Secret uses salt cookies and tokens (e.g. for CSRF protection).
-  const s1 = appConfig.clientSecret;
-  const s2 = new Date().getDate();
-  const s3 = new Date().getMonth();
-  const secret = createHash("sha256")
-    // salt is based on a secret variable and date variables
-    .update(JSON.stringify({ s1, s2, s3 }))
-    .digest("hex");
-
-  // Use secure cookies if the site uses HTTPS
-  // This being conditional allows cookies to work non-HTTPS development URLs
-  // Honour secure cookie option, which sets 'secure' and also adds '__Secure-'
-  // prefix, but enable them by default if the site URL is HTTPS; but not for
-  // non-HTTPS URLs like http://localhost which are used in development).
-  // For more on prefixes see:
-  // https://googlechrome.github.io/samples/cookie-prefixes/
-  const useSecureCookies = process.env.NODE_ENV === "production";
-
-  const cookies = {
-    // default cookie options
-    csrfToken: {
-      // Default to __Host- for CSRF token for additional protection if using
-      // useSecureCookies.
-      // NB: The `__Host-` prefix is stricter than the `__Secure-` prefix.
-      name: `${useSecureCookies ? "__Host-" : ""}next-auth.csrf-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: useSecureCookies,
-      },
-    },
-  };
+  const secret = generateSecret();
 
   // Ensure CSRF Token cookie is set for any subsequent requests.
   // Used as part of the strategy for mitigation for CSRF tokens.
@@ -136,9 +117,9 @@ export const getCsrfToken = (req, res) => {
   // For more details, see the following OWASP links:
   // https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#double-submit-cookie
   // https://owasp.org/www-chapter-london/assets/slides/David_Johansson-Double_Defeat_of_Double-Submit_Cookie.pdf
-  if (req.cookies[cookies.csrfToken.name]) {
+  if (req.cookies[cookie.metadata.csrfToken.name]) {
     const [csrfTokenValue, csrfTokenHash] = req.cookies[
-      cookies.csrfToken.name
+      cookie.metadata.csrfToken.name
     ].split("|");
     if (
       csrfTokenHash ===
@@ -155,22 +136,30 @@ export const getCsrfToken = (req, res) => {
     }
   }
   if (!csrfToken) {
-    // If there is no csrfToken because it's not been set yet or because
-    // the hash doesn't match (e.g. because it's been modified or because the
-    // secret has changed), then create a new token and create a cookie.
-    csrfToken = randomBytes(32).toString("hex");
-    const newCsrfTokenCookie = `${csrfToken}|${createHash("sha256")
-      .update(`${csrfToken}${secret}`)
-      .digest("hex")}`;
+    csrfToken = generateNewToken()
+    const newCsrfTokenCookie = generateNewTokenCookie(csrfToken, secret);
     cookie.set(
       res,
-      cookies.csrfToken.name,
+      cookie.metadata.csrfToken.name,
       newCsrfTokenCookie,
-      cookies.csrfToken.options
+      cookie.metadata.csrfToken.options
     );
   }
 
-  return { csrfToken, csrfTokenValid };
+  return { csrfToken, csrfTokenValid, secret };
+};
+
+export const generateNewToken = () => {
+  return randomBytes(32).toString("hex");
+}
+
+export const generateNewTokenCookie = (csrfToken, secret) => {
+  // If there is no csrfToken because it's not been set yet or because
+  // the hash doesn't match (e.g. because it's been modified or because the
+  // secret has changed), then create a new token and create a cookie.
+  return `${csrfToken}|${createHash("sha256")
+    .update(`${csrfToken}${secret}`)
+    .digest("hex")}`;
 };
 
 // Used for mocking in tests.
