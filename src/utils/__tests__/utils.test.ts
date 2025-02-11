@@ -1,12 +1,19 @@
-import {
+import utils from "../utils";
+
+const {
   getPageTitles,
   createQueryParams,
   createNestedQueryParams,
-  getCsrfToken,
-} from "../utils";
-import cookieUtils from "../CookieUtils";
+  validateCsrfToken,
+} = utils
 
 jest.mock("../CookieUtils");
+jest.mock("../utils", () => {
+  return {
+    ...jest.requireActual("../utils"),
+    tokenMatches: jest.fn().mockReturnValue(true),
+  }
+})
 
 describe("getPageTiles", () => {
   test("it returns text saying there are 5 steps", () => {
@@ -60,33 +67,25 @@ describe("createNestedQueryParams", () => {
   });
 });
 
-describe("getCsrfToken", () => {
-  beforeAll(() => {
-    // We don't actually want to set any cookies so mock this.
-    cookieUtils.set = jest.fn(() => "ok");
-  });
-
-  test("it returns a new token which is not valid since it's new and not compared to an existing token", () => {
-    const { csrfToken, csrfTokenValid } = getCsrfToken({ cookies: {} }, {});
+describe("validateCsrfToken", () => {
+  test("it returns invalid when no token is set", () => {
+    const { csrfToken, csrfTokenValid } = validateCsrfToken({ cookies: {} });
     // We don't really care what it is, just that it's there.
-    expect(csrfToken).toBeDefined();
+    expect(csrfToken).not.toBeDefined();
     expect(csrfTokenValid).toEqual(false);
   });
 
   // TODO: it's hard to test when the true case happens because the secret is
   // private in the function, by design and security.
   test("it returns a false token validation", () => {
-    const firstCall = getCsrfToken({ cookies: {} }, {});
+    const firstCall = validateCsrfToken({ body: {csrfToken: '12345'}, cookies: {} });
 
     expect(firstCall.csrfToken).toBeDefined();
     expect(firstCall.csrfTokenValid).toEqual(false);
 
-    const second = getCsrfToken(
-      {
-        cookies: { "next-auth.csrf-token": "wrong-token!" },
-      },
-      {}
-    );
+    const second = validateCsrfToken({
+      cookies: { "next-auth.csrf-token": "wrong-token!" },
+    });
 
     // The first token should not be reused.
     expect(second.csrfToken === firstCall.csrfToken).toEqual(false);

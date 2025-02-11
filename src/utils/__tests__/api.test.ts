@@ -25,7 +25,7 @@ class MockRes {
   }
 }
 const mockRes = new MockRes();
-utils.getCsrfToken = jest.fn(() => ({
+utils.validateCsrfToken = jest.fn(() => ({
   csrfToken: "csrfToken",
   csrfTokenValid: true,
 }));

@@ -8,7 +8,11 @@ import { useEffect } from "react";
 import { Heading } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 import useFormDataContext from "../../src/context/FormDataContext";
-import { getCsrfToken } from "../../src/utils/utils";
+import {
+  validateCsrfToken,
+  generateNewTokenCookie,
+  generateNewToken,
+} from "../../src/utils/utils";
 
 import { GetServerSideProps } from "next";
 import { useTranslation } from "next-i18next";
@@ -61,12 +65,17 @@ function HomePage({ policyType, csrfToken, lang }: HomePageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { csrfToken } = getCsrfToken(context.req, context.res);
+  const { csrfToken } = validateCsrfToken(context.req);
   const { query } = context;
-  context.res.setHeader(
-    "Set-Cookie",
-    `nyplUserRegistered=false; Max-Age=-1; path=/; domain=${cookieDomain};`
-  );
+  let newTokenCookie;
+  if (!csrfToken) {
+    const newToken = generateNewToken();
+    newTokenCookie = generateNewTokenCookie(context.res, newToken);
+  }
+  context.res.setHeader("Set-Cookie", [
+    `nyplUserRegistered=false; Max-Age=-1; path=/; domain=${cookieDomain};`,
+    newTokenCookie,
+  ]);
 
   return {
     props: {

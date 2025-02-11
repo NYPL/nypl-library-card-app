@@ -13,7 +13,7 @@ import {
   FormAPISubmission,
   AddressResponse,
 } from "../interfaces";
-import utils from "./utils";
+import utils, { generateNewToken, setCsrfTokenCookie } from "./utils";
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -238,7 +238,11 @@ function invalidCsrfResponse(res) {
  */
 export async function validateAddress(req, res, appObj = app) {
   const tokenObject = appObj["tokenObject"];
-  const { csrfTokenValid } = utils.getCsrfToken(req, res);
+  const { csrfToken, csrfTokenValid } = utils.validateCsrfToken(req, res);
+  if (!csrfToken) {
+    const newToken = generateNewToken();
+    setCsrfTokenCookie(res, newToken);
+  }
   if (!csrfTokenValid) {
     return invalidCsrfResponse(res);
   }
@@ -293,7 +297,7 @@ export async function validateUsername(
   appObj = app
 ) {
   const tokenObject = appObj["tokenObject"];
-  const { csrfTokenValid } = utils.getCsrfToken(req, res);
+  const { csrfTokenValid } = utils.validateCsrfToken(req);
   if (!csrfTokenValid) {
     return invalidCsrfResponse(res);
   }
@@ -438,7 +442,7 @@ export async function createPatron(
   appObj = app
 ) {
   const data = req.body;
-  const { csrfTokenValid } = utils.getCsrfToken(req, res);
+  const { csrfTokenValid } = utils.validateCsrfToken(req, res);
   if (!csrfTokenValid) {
     return invalidCsrfResponse(res);
   }

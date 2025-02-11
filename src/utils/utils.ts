@@ -93,13 +93,13 @@ export const generateSecret = () => {
 };
 
 /**
- * getCsrfToken
- * Function to generate or verify a csrf token based on code from `next-auth`
+ * validateCsrfToken
+ * Function to verify a csrf token based on code from `next-auth`
  * and modified for our purposes:
  * https://github.com/nextauthjs/next-auth/blob/main/src/server/index.js
  * Most comments are kept in place but some were added for clarity.
  */
-export const getCsrfToken = (req, res) => {
+export const validateCsrfToken = (req) => {
   let csrfToken;
   let csrfTokenValid = false;
   const csrfTokenFromPost = req.body?.csrfToken;
@@ -121,10 +121,7 @@ export const getCsrfToken = (req, res) => {
     const [csrfTokenValue, csrfTokenHash] = req.cookies[
       cookie.metadata.csrfToken.name
     ].split("|");
-    if (
-      csrfTokenHash ===
-      createHash("sha256").update(`${csrfTokenValue}${secret}`).digest("hex")
-    ) {
+    if (tokenMatches(csrfTokenHash, csrfTokenValue)) {
       // If hash matches then we trust the CSRF token value
       csrfToken = csrfTokenValue;
       // If this is a POST request and the CSRF Token in the Post request
@@ -135,23 +132,34 @@ export const getCsrfToken = (req, res) => {
       }
     }
   }
-  if (!csrfToken) {
-    csrfToken = generateNewToken()
-    const newCsrfTokenCookie = generateNewTokenCookie(csrfToken, secret);
-    cookie.set(
-      res,
-      cookie.metadata.csrfToken.name,
-      newCsrfTokenCookie,
-      cookie.metadata.csrfToken.options
-    );
-  }
+  return { csrfToken, csrfTokenValid };
+};
 
-  return { csrfToken, csrfTokenValid, secret };
+const tokenMatches = (csrfTokenHash, csrfTokenValue) => {
+  return (
+    csrfTokenHash ===
+    createHash("sha256")
+      .update(`${csrfTokenValue}${generateSecret()}`)
+      .digest("hex")
+  );
+};
+
+const setCsrfTokenCookie = (res, csrfToken) => {
+  const newCsrfTokenCookie = generateNewTokenCookie(
+    csrfToken,
+    generateSecret()
+  );
+  cookie.set(
+    res,
+    cookie.metadata.csrfToken.name,
+    newCsrfTokenCookie,
+    cookie.metadata.csrfToken.options
+  );
 };
 
 export const generateNewToken = () => {
   return randomBytes(32).toString("hex");
-}
+};
 
 export const generateNewTokenCookie = (csrfToken, secret) => {
   // If there is no csrfToken because it's not been set yet or because
@@ -162,5 +170,17 @@ export const generateNewTokenCookie = (csrfToken, secret) => {
     .digest("hex")}`;
 };
 
-// Used for mocking in tests.
-export default { getCsrfToken };
+// // Used for mocking in tests.
+// export default {
+//   validateCsrfToken,
+//   tokenMatches,
+//   generateSecret,
+//   generateNewToken,
+//   generateNewTokenCookie,
+//   createQueryParams,
+//   createNestedQueryParams,
+//   getPageTitles,
+//   nyCities,
+//   nyCounties,
+//   setCsrfTokenCookie
+// };
