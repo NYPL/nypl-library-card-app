@@ -1,20 +1,5 @@
 import * as utils from "../utils";
 
-jest.mock("../CookieUtils", () => {
-  return {
-    ...jest.requireActual("../CookieUtils.ts"),
-    set: jest.fn(),
-  };
-});
-jest.mock("crypto", () => {
-  return {
-    createHash: jest.fn().mockReturnValue({
-      update: () => ({
-        digest: () => "666",
-      }),
-    }),
-  };
-});
 describe("getPageTiles", () => {
   test("it returns text saying there are 5 steps", () => {
     expect(utils.getPageTitles()).toEqual({
@@ -64,45 +49,5 @@ describe("createNestedQueryParams", () => {
     expect(utils.createNestedQueryParams(data, "errors")).toEqual(
       `&errors=${JSON.stringify(data)}`
     );
-  });
-});
-
-describe("validateCsrfToken", () => {
-  test("it returns invalid when no token is set", () => {
-    const csrfTokenValid = utils.validateCsrfToken({
-      cookies: {},
-    });
-    // We don't really care what it is, just that it's there.
-    expect(csrfTokenValid).toEqual(false);
-  });
-
-  test("it returns token valid when request token matches cookie token", () => {
-    const isValid = utils.validateCsrfToken({
-      method: "POST",
-      body: { csrfToken: "12345" },
-      cookies: {
-        "next-auth.csrf-token": "12345|666",
-      },
-    });
-
-    expect(isValid).toEqual(true);
-  });
-
-  test("it returns token invalid when request token does not match cookie token", () => {
-    const isValid = utils.validateCsrfToken(
-      {
-        method: "POST",
-        body: { csrfToken: "12345" },
-        cookies: {
-          "next-auth.csrf-token": "12345|789",
-        },
-      },
-      {
-        valueFromPostRequestCookies: "12345",
-        hashFromPostRequestCookies: "spaghetti",
-      }
-    );
-
-    expect(isValid).toEqual(false);
   });
 });

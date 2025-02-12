@@ -18,7 +18,7 @@ import {
   setCsrfTokenCookie,
   validateCsrfToken,
   parseTokenFromPostRequestCookies
-} from "./utils";
+} from "./csrfUtils";
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -303,7 +303,7 @@ export async function validateUsername(
   appObj = app
 ) {
   const tokenObject = appObj["tokenObject"];
-  const csrfTokenValid = utils.validateCsrfToken(req);
+  const csrfTokenValid = validateCsrfToken(req);
   if (!csrfTokenValid) {
     return invalidCsrfResponse(res);
   }
@@ -448,7 +448,7 @@ export async function createPatron(
   appObj = app
 ) {
   const data = req.body;
-  const csrfTokenValid = utils.validateCsrfToken(req, res);
+  const csrfTokenValid = validateCsrfToken(req);
   if (!csrfTokenValid) {
     return invalidCsrfResponse(res);
   }

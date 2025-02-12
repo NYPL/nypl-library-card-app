@@ -12,9 +12,9 @@ const axios = require("axios");
 import moment from "moment";
 
 jest.mock("axios");
-jest.mock("../utils", () => {
+jest.mock("../csrfUtils", () => {
   return {
-    ...jest.requireActual("../utils"),
+    ...jest.requireActual("../csrfUtils"),
     parseCsrfToken: jest.fn(() => "12345"),
     validateCsrfToken: jest.fn(() => ({
       csrfToken: "csrfToken",
