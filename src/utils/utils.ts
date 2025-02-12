@@ -138,7 +138,6 @@ const validateCsrfToken = (req, token) => {
 
 const postRequestHashMatchesServerHash = (token) => {
   const { hashFromPostRequestCookies, valueFromPostRequestCookies } = token;
-
   return (
     hashFromPostRequestCookies ===
     createHash("sha256")
