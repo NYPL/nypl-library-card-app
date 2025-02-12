@@ -9,10 +9,9 @@ import { Heading } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 import useFormDataContext from "../../src/context/FormDataContext";
 import {
-  validateCsrfToken,
   generateNewTokenCookie,
   generateNewToken,
-  parseCsrfToken,
+  parseTokenFromPostRequestCookies,
 } from "../../src/utils/utils";
 
 import { GetServerSideProps } from "next";
@@ -66,12 +65,13 @@ function HomePage({ policyType, csrfToken, lang }: HomePageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { csrfTokenValue: csrfToken } = parseCsrfToken(context.req);
+  const tokenFromRequestCookie = parseTokenFromPostRequestCookies(context.req);
   const { query } = context;
   let newTokenCookie;
+  let csrfToken = tokenFromRequestCookie.value
   if (!csrfToken) {
-    const newToken = generateNewToken();
-    newTokenCookie = generateNewTokenCookie(context.res, newToken);
+    csrfToken = generateNewToken();
+    newTokenCookie = generateNewTokenCookie(context.res, csrfToken);
   }
   context.res.setHeader("Set-Cookie", [
     `nyplUserRegistered=false; Max-Age=-1; path=/; domain=${cookieDomain};`,

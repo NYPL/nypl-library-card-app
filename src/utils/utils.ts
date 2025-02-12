@@ -92,14 +92,12 @@ const generateSecret = () => {
   );
 };
 
-const parsetokenValueFromPostRequestBodyRequest = (req) => {
-  let valueFromPostRequestCookies, hashFromPostRequestCookies;
+const parseTokenFromPostRequestCookies = (req) => {
+  let value, hash;
   if (req.cookies[cookie.metadata().csrfToken.name]) {
-    [valueFromPostRequestCookies, hashFromPostRequestCookies] = req.cookies[
-      cookie.metadata().csrfToken.name
-    ].split("|");
+    [value, hash] = req.cookies[cookie.metadata().csrfToken.name].split("|");
   }
-  return { valueFromPostRequestCookies, hashFromPostRequestCookies };
+  return { value, hash };
 };
 
 /**
@@ -109,8 +107,9 @@ const parsetokenValueFromPostRequestBodyRequest = (req) => {
  * https://github.com/nextauthjs/next-auth/blob/main/src/server/index.js
  * Most comments are kept in place but some were added for clarity.
  */
-const validateCsrfToken = (req, token) => {
+const validateCsrfToken = (req) => {
   const tokenValueFromPostRequestBody = req.body?.csrfToken;
+  const tokenFromRequestCookie = parseTokenFromPostRequestCookies(req);
   // Ensure CSRF Token cookie is set for any subsequent requests.
   // Used as part of the strategy for mitigation for CSRF tokens.
   //
@@ -124,24 +123,19 @@ const validateCsrfToken = (req, token) => {
   // https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#double-submit-cookie
   // https://owasp.org/www-chapter-london/assets/slides/David_Johansson-Double_Defeat_of_Double-Submit_Cookie.pdf
 
-  if (postRequestHashMatchesServerHash(token)) {
-    console.log(
-      token.valueFromPostRequestCookies,
-      tokenValueFromPostRequestBody
-    );
+  if (postRequestHashMatchesServerHash(tokenFromRequestCookie)) {
     return (
       req.method === "POST" &&
-      token.valueFromPostRequestCookies === tokenValueFromPostRequestBody
+      tokenFromRequestCookie.value === tokenValueFromPostRequestBody
     );
   } else return false;
 };
 
-const postRequestHashMatchesServerHash = (token) => {
-  const { hashFromPostRequestCookies, valueFromPostRequestCookies } = token;
+const postRequestHashMatchesServerHash = (tokenFromRequestCookie) => {
   return (
-    hashFromPostRequestCookies ===
+    tokenFromRequestCookie.hash ===
     createHash("sha256")
-      .update(`${valueFromPostRequestCookies}${generateSecret()}`)
+      .update(`${tokenFromRequestCookie.value}${generateSecret()}`)
       .digest("hex")
   );
 };
@@ -186,5 +180,5 @@ export {
   generateNewToken,
   generateNewTokenCookie,
   getPageTitles,
-  parsetokenValueFromPostRequestBodyRequest,
+  parseTokenFromPostRequestCookies,
 };

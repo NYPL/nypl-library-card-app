@@ -69,32 +69,21 @@ describe("createNestedQueryParams", () => {
 
 describe("validateCsrfToken", () => {
   test("it returns invalid when no token is set", () => {
-    const csrfTokenValid = utils.validateCsrfToken(
-      {
-        cookies: {},
-      },
-      { csrfTokenValue: "12345", csrfTokenHash: "666" }
-    );
+    const csrfTokenValid = utils.validateCsrfToken({
+      cookies: {},
+    });
     // We don't really care what it is, just that it's there.
     expect(csrfTokenValid).toEqual(false);
   });
 
   test("it returns token valid when request token matches cookie token", () => {
-    const isValid = utils.validateCsrfToken(
-      {
-        method: "POST",
-        body: { csrfToken: "12345" },
-        cookies: {
-          "next-auth.csrf-token": "12345|666",
-        },
+    const isValid = utils.validateCsrfToken({
+      method: "POST",
+      body: { csrfToken: "12345" },
+      cookies: {
+        "next-auth.csrf-token": "12345|666",
       },
-      // we are mocking the results of the hashing library, so this
-      // is just to appease the compiler
-      {
-        valueFromPostRequestCookies: "12345",
-        hashFromPostRequestCookies: "666",
-      }
-    );
+    });
 
     expect(isValid).toEqual(true);
   });
