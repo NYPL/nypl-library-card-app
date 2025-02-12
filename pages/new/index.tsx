@@ -74,11 +74,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!csrfToken) {
     csrfToken = generateNewToken();
     const newTokenCookieString = generateNewCookieTokenAndHash(csrfToken);
-    newTokenCookie = cookie.buildCookieHeader(
-      cookie.metadata().csrfToken.name,
-      newTokenCookieString,
-      cookie.metadata().csrfToken.options
-    );
+    newTokenCookie = cookie.buildCookieHeader(newTokenCookieString);
   }
 
   const headers = [
