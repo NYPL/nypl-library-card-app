@@ -1,7 +1,6 @@
 import isEmpty from "lodash/isEmpty";
 import { PageTitles } from "../interfaces";
 
-
 const redirectIfUserHasRegistered = (hasRegistered: boolean, router) => {
   if (hasRegistered) {
     router.push("/congrats?newCard=true");

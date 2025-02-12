@@ -71,6 +71,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { query } = context;
   let newTokenCookie;
   let csrfToken = tokenFromRequestCookie.value;
+
   if (!csrfToken) {
     csrfToken = generateNewToken();
     const newTokenCookieString = generateNewCookieTokenAndHash(csrfToken);

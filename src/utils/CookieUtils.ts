@@ -25,7 +25,7 @@ const set = (res, name, value, options) => {
 
 const metadata = () => {
   const useSecureCookies = process.env.NODE_ENV === "production";
-  const name = `${useSecureCookies ? "__Host-" : ""}nypl.csrf-token`
+  const name = `${useSecureCookies ? "__Host-" : ""}nypl.csrf-token`;
   return {
     // default cookie options
     csrfToken: {

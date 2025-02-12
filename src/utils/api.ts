@@ -17,7 +17,7 @@ import {
   generateNewToken,
   setCsrfTokenCookie,
   validateCsrfToken,
-  parseTokenFromPostRequestCookies
+  parseTokenFromPostRequestCookies,
 } from "./csrfUtils";
 
 // Initializing the cors middleware
