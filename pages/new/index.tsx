@@ -12,7 +12,7 @@ import {
   generateNewCookieTokenAndHash,
   generateNewToken,
   parseTokenFromPostRequestCookies,
-} from "../../src/utils/utils";
+} from "../../src/utils/csrfUtils";
 import * as cookie from "../../src/utils/CookieUtils";
 
 import { serialize } from "cookie";

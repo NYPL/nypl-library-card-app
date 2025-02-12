@@ -30,7 +30,7 @@ describe("validateCsrfToken", () => {
       method: "POST",
       body: { csrfToken: "12345" },
       cookies: {
-        "next-auth.csrf-token": "12345|666",
+        "nypl.csrf-token": "12345|666",
       },
     });
 
@@ -42,7 +42,7 @@ describe("validateCsrfToken", () => {
       method: "POST",
       body: { csrfToken: "12345" },
       cookies: {
-        "next-auth.csrf-token": "12345|789",
+        "nypl.csrf-token": "12345|789",
       },
     });
 

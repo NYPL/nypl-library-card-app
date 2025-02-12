@@ -270,7 +270,7 @@ describe("validateAddress", () => {
         isWorkAddress: false,
       },
       cookies: {
-        "next-auth.csrf-token": "csrfToken",
+        "nypl.csrf-token": "csrfToken",
       },
     };
     axios.post.mockResolvedValueOnce({
@@ -360,7 +360,7 @@ describe("validateUsername", () => {
         username: "tomnook42",
       },
       cookies: {
-        "next-auth.csrf-token": "csrfToken",
+        "nypl.csrf-token": "csrfToken",
       },
     };
     axios.post.mockResolvedValue({
@@ -404,7 +404,7 @@ describe("validateUsername", () => {
         username: "tomnook42",
       },
       cookies: {
-        "next-auth.csrf-token": "csrfToken",
+        "nypl.csrf-token": "csrfToken",
       },
     };
     axios.post.mockRejectedValue({

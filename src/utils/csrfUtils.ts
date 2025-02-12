@@ -2,7 +2,6 @@ import * as cookie from "./CookieUtils";
 import * as appConfig from "../../appConfig";
 import { createHash, randomBytes } from "crypto";
 
-
 const generateSecret = () => {
   // Secret uses salt cookies and tokens (e.g. for CSRF protection).
   const s1 = appConfig.clientSecret;
@@ -16,7 +15,7 @@ const generateSecret = () => {
   );
 };
 
-// Creates a cookie like 'next-auth.csrf-token' with the value 'token|hash',
+// Creates a cookie like 'nypl.csrf-token' with the value 'token|hash',
 // where 'token' is the CSRF token and 'hash' is a hash made of the token and
 // the secret, and the two values are joined by a pipe '|'. By storing the
 // value and the hash of the value (with the secret used as a salt) we can
