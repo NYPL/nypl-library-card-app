@@ -15,7 +15,6 @@ import {
 } from "../../src/utils/csrfUtils";
 import * as cookie from "../../src/utils/CookieUtils";
 
-import { serialize } from "cookie";
 import { GetServerSideProps } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -75,12 +74,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!csrfToken) {
     csrfToken = generateNewToken();
     const newTokenCookieString = generateNewCookieTokenAndHash(csrfToken);
-    newTokenCookie = serialize(
+    newTokenCookie = cookie.buildCookieHeader(
       cookie.metadata().csrfToken.name,
       newTokenCookieString,
       cookie.metadata().csrfToken.options
     );
   }
+
   const headers = [
     // reset cookie that would otherwise bump users out of the flow
     // to succcess page

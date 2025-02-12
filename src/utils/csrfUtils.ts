@@ -72,12 +72,7 @@ const postRequestHashMatchesServerHash = (tokenFromRequestCookie) => {
 // Used as part of the strategy for mitigation for CSRF tokens.
 const setCsrfTokenCookie = (res, csrfToken) => {
   const newCsrfTokenCookie = generateNewCookieTokenAndHash(csrfToken);
-  cookie.set(
-    res,
-    cookie.metadata().csrfToken.name,
-    newCsrfTokenCookie,
-    cookie.metadata().csrfToken.options
-  );
+  cookie.set(res, newCsrfTokenCookie);
 };
 
 const generateNewToken = () => {
