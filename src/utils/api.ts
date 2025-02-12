@@ -13,7 +13,12 @@ import {
   FormAPISubmission,
   AddressResponse,
 } from "../interfaces";
-import utils, { generateNewToken, setCsrfTokenCookie } from "./utils";
+import {
+  generateNewToken,
+  setCsrfTokenCookie,
+  validateCsrfToken,
+  parseTokenFromPostRequestCookies
+} from "./utils";
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -238,11 +243,8 @@ function invalidCsrfResponse(res) {
  */
 export async function validateAddress(req, res, appObj = app) {
   const tokenObject = appObj["tokenObject"];
-  const parsedTokenFromRequestBody = utils.parseCsrfToken(req);
-  const csrfTokenValid = utils.validateCsrfToken(
-    req,
-    parsedTokenFromRequestBody
-  );
+  const parsedTokenFromRequestBody = parseTokenFromPostRequestCookies(req);
+  const csrfTokenValid = validateCsrfToken(req, parsedTokenFromRequestBody);
   if (!parsedTokenFromRequestBody) {
     const newToken = generateNewToken();
     setCsrfTokenCookie(res, newToken);

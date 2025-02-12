@@ -141,10 +141,7 @@ const postRequestHashMatchesServerHash = (tokenFromRequestCookie) => {
 };
 
 const setCsrfTokenCookie = (res, csrfToken) => {
-  const newCsrfTokenCookie = generateNewTokenCookie(
-    csrfToken,
-    generateSecret()
-  );
+  const newCsrfTokenCookie = generateNewCookieToken(csrfToken);
   cookie.set(
     res,
     cookie.metadata().csrfToken.name,
@@ -157,12 +154,12 @@ const generateNewToken = () => {
   return randomBytes(32).toString("hex");
 };
 
-const generateNewTokenCookie = (csrfToken, secret) => {
+const generateNewCookieToken = (csrfToken) => {
   // If there is no csrfToken because it's not been set yet or because
   // the hash doesn't match (e.g. because it's been modified or because the
   // secret has changed), then create a new token and create a cookie.
   return `${csrfToken}|${createHash("sha256")
-    .update(`${csrfToken}${secret}`)
+    .update(`${csrfToken}${generateSecret()}`)
     .digest("hex")}`;
 };
 
@@ -178,7 +175,7 @@ export {
   postRequestHashMatchesServerHash,
   setCsrfTokenCookie,
   generateNewToken,
-  generateNewTokenCookie,
+  generateNewCookieToken,
   getPageTitles,
   parseTokenFromPostRequestCookies,
 };

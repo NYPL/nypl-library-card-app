@@ -9,11 +9,13 @@ import { Heading } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 import useFormDataContext from "../../src/context/FormDataContext";
 import {
-  generateNewTokenCookie,
+  generateNewCookieToken,
   generateNewToken,
   parseTokenFromPostRequestCookies,
 } from "../../src/utils/utils";
+import * as cookie from "../../src/utils/CookieUtils";
 
+import { serialize } from "cookie";
 import { GetServerSideProps } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -68,15 +70,23 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const tokenFromRequestCookie = parseTokenFromPostRequestCookies(context.req);
   const { query } = context;
   let newTokenCookie;
-  let csrfToken = tokenFromRequestCookie.value
+  let csrfToken = tokenFromRequestCookie.value;
   if (!csrfToken) {
     csrfToken = generateNewToken();
-    newTokenCookie = generateNewTokenCookie(context.res, csrfToken);
+    const newTokenCookieString = generateNewCookieToken(csrfToken);
+    newTokenCookie = serialize(
+      cookie.metadata().csrfToken.name,
+      newTokenCookieString,
+      cookie.metadata().csrfToken.options
+    );
   }
-  context.res.setHeader("Set-Cookie", [
+  const headers = [
+    // reset cookie that would otherwise bump users out of the flow
+    // to succcess page
     `nyplUserRegistered=false; Max-Age=-1; path=/; domain=${cookieDomain};`,
     newTokenCookie,
-  ]);
+  ];
+  context.res.setHeader("set-cookie", headers);
 
   return {
     props: {
