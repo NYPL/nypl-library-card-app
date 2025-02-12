@@ -9,7 +9,7 @@ import { Heading } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 import useFormDataContext from "../../src/context/FormDataContext";
 import {
-  generateNewCookieToken,
+  generateNewCookieTokenAndHash,
   generateNewToken,
   parseTokenFromPostRequestCookies,
 } from "../../src/utils/utils";
@@ -73,7 +73,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let csrfToken = tokenFromRequestCookie.value;
   if (!csrfToken) {
     csrfToken = generateNewToken();
-    const newTokenCookieString = generateNewCookieToken(csrfToken);
+    const newTokenCookieString = generateNewCookieTokenAndHash(csrfToken);
     newTokenCookie = serialize(
       cookie.metadata().csrfToken.name,
       newTokenCookieString,
