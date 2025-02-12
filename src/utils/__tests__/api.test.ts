@@ -15,6 +15,7 @@ jest.mock("axios");
 jest.mock("../utils", () => {
   return {
     ...jest.requireActual("../utils"),
+    parseCsrfToken: jest.fn(() => "12345"),
     validateCsrfToken: jest.fn(() => ({
       csrfToken: "csrfToken",
       csrfTokenValid: true,

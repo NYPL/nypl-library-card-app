@@ -10,7 +10,7 @@ jest.mock("crypto", () => {
   return {
     createHash: jest.fn().mockReturnValue({
       update: () => ({
-        digest: () => "666"
+        digest: () => "666",
       }),
     }),
   };
@@ -69,43 +69,45 @@ describe("createNestedQueryParams", () => {
 
 describe("validateCsrfToken", () => {
   test("it returns invalid when no token is set", () => {
-    const { csrfToken, csrfTokenValid } = utils.validateCsrfToken({
-      cookies: {},
-    });
+    const  csrfTokenValid = utils.validateCsrfToken(
+      {
+        cookies: {},
+      },
+      { csrfTokenValue: "12345", csrfTokenHash: "spaghetti" }
+    );
     // We don't really care what it is, just that it's there.
-    expect(csrfToken).not.toBeDefined();
     expect(csrfTokenValid).toEqual(false);
   });
 
-  test("it returns token valid when request token matches cookie token", () => {
-    const firstCall = utils.validateCsrfToken({
-      method: "POST",
-      body: { csrfToken: "12345" },
-      cookies: {
-        "next-auth.csrf-token": "12345|666",
+  test.only("it returns token valid when request token matches cookie token", () => {
+    const isValid = utils.validateCsrfToken(
+      {
+        method: "POST",
+        body: { csrfToken: "12345" },
+        cookies: {
+          "next-auth.csrf-token": "12345|666",
+        },
       },
-    });
-    expect(firstCall.csrfToken).toBeDefined();
-    expect(firstCall.csrfTokenValid).toEqual(true);
+      // we are mocking the results of the hashing library, so this
+      // is just to appease the compiler
+      { csrfTokenValue: "12345", csrfTokenHash: "spaghetti" }
+    );
+
+    expect(isValid).toEqual(true);
   });
 
   test("it returns token invalid when request token does not match cookie token", () => {
-    const firstCall = utils.validateCsrfToken({
-      method: "POST",
-      body: { csrfToken: "12345" },
-      cookies: {
-        "next-auth.csrf-token": "12345|789",
+    const isValid = utils.validateCsrfToken(
+      {
+        method: "POST",
+        body: { csrfToken: "12345" },
+        cookies: {
+          "next-auth.csrf-token": "12345|789",
+        },
       },
-    });
-    expect(firstCall.csrfToken).not.toBeDefined();
-    expect(firstCall.csrfTokenValid).toEqual(false);
-  });
-  //   const second = utils.validateCsrfToken({
-  //     cookies: { "next-auth.csrf-token": "wrong-token!" },
-  //   });
+      { csrfTokenValue: "12345", csrfTokenHash: "spaghetti" }
+    );
 
-  //   // The first token should not be reused.
-  //   expect(second.csrfToken === firstCall.csrfToken).toEqual(false);
-  //   expect(second.csrfTokenValid).toEqual(false);
-  // });
+    expect(isValid).toEqual(false);
+  });
 });

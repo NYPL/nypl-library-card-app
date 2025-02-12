@@ -92,6 +92,16 @@ const generateSecret = () => {
   );
 };
 
+const parsetokenValueFromPostRequestBodyRequest = (req) => {
+  let valueFromPostRequestCookies, hashFromPostRequestCookies;
+  if (req.cookies[cookie.metadata().csrfToken.name]) {
+    [valueFromPostRequestCookies, hashFromPostRequestCookies] = req.cookies[
+      cookie.metadata().csrfToken.name
+    ].split("|");
+  }
+  return { valueFromPostRequestCookies, hashFromPostRequestCookies };
+};
+
 /**
  * validateCsrfToken
  * Function to verify a csrf token based on code from `next-auth`
@@ -99,11 +109,8 @@ const generateSecret = () => {
  * https://github.com/nextauthjs/next-auth/blob/main/src/server/index.js
  * Most comments are kept in place but some were added for clarity.
  */
-const validateCsrfToken = (req) => {
-  let csrfToken;
-  let csrfTokenValid = false;
-  const csrfTokenFromPost = req.body?.csrfToken;
-
+const validateCsrfToken = (req, token) => {
+  const tokenValueFromPostRequestBody = req.body?.csrfToken;
   // Ensure CSRF Token cookie is set for any subsequent requests.
   // Used as part of the strategy for mitigation for CSRF tokens.
   //
@@ -116,29 +123,26 @@ const validateCsrfToken = (req) => {
   // For more details, see the following OWASP links:
   // https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#double-submit-cookie
   // https://owasp.org/www-chapter-london/assets/slides/David_Johansson-Double_Defeat_of_Double-Submit_Cookie.pdf
-  if (req.cookies[cookie.metadata().csrfToken.name]) {
-    const [csrfTokenValue, csrfTokenHash] = req.cookies[
-      cookie.metadata().csrfToken.name
-    ].split("|");
-    if (tokenMatches(csrfTokenHash, csrfTokenValue)) {
-      // If hash matches then we trust the CSRF token value
-      csrfToken = csrfTokenValue;
-      // If this is a POST request and the CSRF Token in the Post request
-      // matches the cookie we have already verified is one we have set,
-      // then token is verified!
-      if (req.method === "POST" && csrfToken === csrfTokenFromPost) {
-        csrfTokenValid = true;
-      }
-    }
-  }
-  return { csrfToken, csrfTokenValid };
+
+  if (postRequestHashMatchesServerHash(token)) {
+    console.log(
+      token.valueFromPostRequestCookies,
+      tokenValueFromPostRequestBody
+    );
+    return (
+      req.method === "POST" &&
+      token.valueFromPostRequestCookies === tokenValueFromPostRequestBody
+    );
+  } else return false;
 };
 
-const tokenMatches = (csrfTokenHash, csrfTokenValue) => {
+const postRequestHashMatchesServerHash = (token) => {
+  const { hashFromPostRequestCookies, valueFromPostRequestCookies } = token;
+
   return (
-    csrfTokenHash ===
+    hashFromPostRequestCookies ===
     createHash("sha256")
-      .update(`${csrfTokenValue}${generateSecret()}`)
+      .update(`${valueFromPostRequestCookies}${generateSecret()}`)
       .digest("hex")
   );
 };
@@ -178,9 +182,10 @@ export {
   createNestedQueryParams,
   generateSecret,
   validateCsrfToken,
-  tokenMatches,
+  postRequestHashMatchesServerHash,
   setCsrfTokenCookie,
   generateNewToken,
   generateNewTokenCookie,
   getPageTitles,
+  parsetokenValueFromPostRequestBodyRequest,
 };

@@ -12,6 +12,7 @@ import {
   validateCsrfToken,
   generateNewTokenCookie,
   generateNewToken,
+  parseCsrfToken,
 } from "../../src/utils/utils";
 
 import { GetServerSideProps } from "next";
@@ -65,7 +66,7 @@ function HomePage({ policyType, csrfToken, lang }: HomePageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { csrfToken } = validateCsrfToken(context.req);
+  const { csrfTokenValue: csrfToken } = parseCsrfToken(context.req);
   const { query } = context;
   let newTokenCookie;
   if (!csrfToken) {

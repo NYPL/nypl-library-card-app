@@ -238,8 +238,12 @@ function invalidCsrfResponse(res) {
  */
 export async function validateAddress(req, res, appObj = app) {
   const tokenObject = appObj["tokenObject"];
-  const { csrfToken, csrfTokenValid } = utils.validateCsrfToken(req, res);
-  if (!csrfToken) {
+  const parsedTokenFromRequestBody = utils.parseCsrfToken(req);
+  const csrfTokenValid = utils.validateCsrfToken(
+    req,
+    parsedTokenFromRequestBody
+  );
+  if (!parsedTokenFromRequestBody) {
     const newToken = generateNewToken();
     setCsrfTokenCookie(res, newToken);
   }
@@ -297,7 +301,7 @@ export async function validateUsername(
   appObj = app
 ) {
   const tokenObject = appObj["tokenObject"];
-  const { csrfTokenValid } = utils.validateCsrfToken(req);
+  const csrfTokenValid = utils.validateCsrfToken(req);
   if (!csrfTokenValid) {
     return invalidCsrfResponse(res);
   }
@@ -442,7 +446,7 @@ export async function createPatron(
   appObj = app
 ) {
   const data = req.body;
-  const { csrfTokenValid } = utils.validateCsrfToken(req, res);
+  const csrfTokenValid = utils.validateCsrfToken(req, res);
   if (!csrfTokenValid) {
     return invalidCsrfResponse(res);
   }
