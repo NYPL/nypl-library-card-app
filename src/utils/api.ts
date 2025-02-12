@@ -244,7 +244,7 @@ function invalidCsrfResponse(res) {
 export async function validateAddress(req, res, appObj = app) {
   const tokenObject = appObj["tokenObject"];
   const parsedTokenFromRequestBody = parseTokenFromPostRequestCookies(req);
-  const csrfTokenValid = validateCsrfToken(req, parsedTokenFromRequestBody);
+  const csrfTokenValid = validateCsrfToken(req);
   if (!parsedTokenFromRequestBody) {
     const newToken = generateNewToken();
     setCsrfTokenCookie(res, newToken);
