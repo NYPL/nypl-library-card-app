@@ -1,5 +1,9 @@
 ## CHANGE LOG
 
+### v1.1.1 Fix CSRF regression
+- Ensure that CSRF headers are not overwritten by nyplUserHasRegistered headers
+- Refactor CSRF utils
+
 ### v1.1.0 Duplicate patron bug fixes
 - Add cookie-based redirect back to congrats page from any page after success
 - Remove hasUsernameBeenValidated flag and hidden input field

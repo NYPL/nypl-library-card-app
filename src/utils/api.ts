@@ -13,7 +13,12 @@ import {
   FormAPISubmission,
   AddressResponse,
 } from "../interfaces";
-import utils from "./utils";
+import {
+  generateNewToken,
+  setCsrfTokenCookie,
+  validateCsrfToken,
+  parseTokenFromPostRequestCookies,
+} from "./csrfUtils";
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -238,7 +243,12 @@ function invalidCsrfResponse(res) {
  */
 export async function validateAddress(req, res, appObj = app) {
   const tokenObject = appObj["tokenObject"];
-  const { csrfTokenValid } = utils.getCsrfToken(req, res);
+  const parsedTokenFromRequestCookies = parseTokenFromPostRequestCookies(req);
+  const csrfTokenValid = validateCsrfToken(req);
+  if (!parsedTokenFromRequestCookies) {
+    const newToken = generateNewToken();
+    setCsrfTokenCookie(res, newToken);
+  }
   if (!csrfTokenValid) {
     return invalidCsrfResponse(res);
   }
@@ -293,7 +303,7 @@ export async function validateUsername(
   appObj = app
 ) {
   const tokenObject = appObj["tokenObject"];
-  const { csrfTokenValid } = utils.getCsrfToken(req, res);
+  const csrfTokenValid = validateCsrfToken(req);
   if (!csrfTokenValid) {
     return invalidCsrfResponse(res);
   }
@@ -438,7 +448,7 @@ export async function createPatron(
   appObj = app
 ) {
   const data = req.body;
-  const { csrfTokenValid } = utils.getCsrfToken(req, res);
+  const csrfTokenValid = validateCsrfToken(req);
   if (!csrfTokenValid) {
     return invalidCsrfResponse(res);
   }
