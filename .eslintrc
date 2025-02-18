@@ -36,7 +36,8 @@
     "react/display-name": 0,
     "@typescript-eslint/no-use-before-define": 0,
     "@typescript-eslint/camelcase": "off",
-    "react/react-in-jsx-scope": 0
+    "react/react-in-jsx-scope": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0
   },
   "settings": {
     "react": {

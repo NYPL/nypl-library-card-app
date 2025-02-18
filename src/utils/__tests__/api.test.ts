@@ -8,12 +8,20 @@ import {
   validateUsername,
   callPatronAPI,
 } from "../api";
-import utils from "../utils";
 const axios = require("axios");
 import moment from "moment";
 
 jest.mock("axios");
-jest.mock("../utils");
+jest.mock("../csrfUtils", () => {
+  return {
+    ...jest.requireActual("../csrfUtils"),
+    parseCsrfToken: jest.fn(() => "12345"),
+    validateCsrfToken: jest.fn(() => ({
+      csrfToken: "csrfToken",
+      csrfTokenValid: true,
+    })),
+  };
+});
 let mockedReturnedJson = {};
 class MockRes {
   status() {
@@ -25,10 +33,6 @@ class MockRes {
   }
 }
 const mockRes = new MockRes();
-utils.getCsrfToken = jest.fn(() => ({
-  csrfToken: "csrfToken",
-  csrfTokenValid: true,
-}));
 
 describe("constructApiHeaders", () => {
   test("it returns authorization headers object", () => {
@@ -266,7 +270,7 @@ describe("validateAddress", () => {
         isWorkAddress: false,
       },
       cookies: {
-        "next-auth.csrf-token": "csrfToken",
+        "nypl.csrf-token": "csrfToken",
       },
     };
     axios.post.mockResolvedValueOnce({
@@ -356,7 +360,7 @@ describe("validateUsername", () => {
         username: "tomnook42",
       },
       cookies: {
-        "next-auth.csrf-token": "csrfToken",
+        "nypl.csrf-token": "csrfToken",
       },
     };
     axios.post.mockResolvedValue({
@@ -400,7 +404,7 @@ describe("validateUsername", () => {
         username: "tomnook42",
       },
       cookies: {
-        "next-auth.csrf-token": "csrfToken",
+        "nypl.csrf-token": "csrfToken",
       },
     };
     axios.post.mockRejectedValue({
