@@ -115,7 +115,7 @@ const AddressContainer: React.FC = () => {
           } else {
             setIsLoading(false);
             nextUrl = `/address-verification?${queryStr}`;
-            
+
             router.push(nextUrl);
           }
         });

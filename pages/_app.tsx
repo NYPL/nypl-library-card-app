@@ -27,17 +27,6 @@ interface MyAppProps {
   pageProps: any;
 }
 
-/**
- * Determines if we are running on server or in the client.
- * @return {boolean} true if running on server
- */
-function isServerRendered(): boolean {
-  return typeof window === "undefined";
-}
-
-// Get the Google Analytics code for the HTML snippet below.
-const isProduction = appConfig.nodeEnv === "production";
-
 function MyApp({ Component, pageProps }: MyAppProps) {
   const router = useRouter();
   useRouterScroll({ top: 640 });

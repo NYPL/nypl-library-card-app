@@ -122,7 +122,6 @@ const AddressContainer: React.FC = () => {
           } else {
             nextUrl = `/address-verification?${queryStr}`;
           }
-          
           router.push(nextUrl);
         } else {
           setTimeout(() => {

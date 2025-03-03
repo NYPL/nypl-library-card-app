@@ -39,7 +39,6 @@ const PersonalFormContainer = () => {
     });
 
     const nextUrl = `/location?${queryStr}`;
-    
     router.push(nextUrl);
   };
 

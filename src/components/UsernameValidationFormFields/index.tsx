@@ -71,8 +71,6 @@ const UsernameValidationForm = ({
         if (lang !== "en") {
           message = apiTranslations[message][lang] || message;
         }
-
-        
         setUsernameIsAvailable({
           available: true,
           message,
@@ -94,7 +92,6 @@ const UsernameValidationForm = ({
           message = apiErrorTranslations[message][lang] || message;
         }
 
-        
         setUsernameIsAvailable({
           available: false,
           message,

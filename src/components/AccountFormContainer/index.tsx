@@ -39,7 +39,6 @@ const AccountFormContainer = () => {
     });
 
     const nextUrl = `/review?${queryStr}`;
-    
     router.push(nextUrl);
   };
 

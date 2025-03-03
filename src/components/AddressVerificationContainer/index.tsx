@@ -131,7 +131,7 @@ function AddressVerificationContainer() {
 
     // Finally, go to the acount page.
     const nextUrl = `/account?${queryStr}`;
-    
+
     router.push(nextUrl);
   };
 
