@@ -21,8 +21,8 @@ function ConfirmationPage(): JSX.Element {
   const temporary = ptype === 7;
   useEffect(() => {
     if (state.formValues.username) {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
         event: "library_card_submission",
         nypl_location: state.formValues.homeLibraryCode, // Example: "Simply E" This is just an example. This variable actually refers to the Preferred Location Name found on the current Adobe Data Layer
       });
