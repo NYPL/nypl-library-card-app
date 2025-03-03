@@ -2,7 +2,7 @@
 import { Heading } from "@nypl/design-system-react-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import React from "react";
+import React, { useEffect } from "react";
 import { GetServerSideProps } from "next";
 
 import ConfirmationGraphic from "../../src/components/ConfirmationGraphic";
@@ -19,6 +19,15 @@ function ConfirmationPage(): JSX.Element {
   // shouldn't happen.
   const ptype = formResults?.ptype || 7;
   const temporary = ptype === 7;
+  useEffect(() => {
+    if (state.formValues.username) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "library_card_submission",
+        nypl_location: state.formValues.homeLibraryCode, // Example: "Simply E" This is just an example. This variable actually refers to the Preferred Location Name found on the current Adobe Data Layer
+      });
+    }
+  }, []);
 
   return (
     <div>

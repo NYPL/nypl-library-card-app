@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import useFormDataContext from "../../context/FormDataContext";
 import PersonalFormFields from "../PersonalFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
-import { lcaEvents } from "../../externals/gaUtils";
+
 import FormField from "../FormField";
 import {
   Form,
@@ -39,7 +39,7 @@ const PersonalFormContainer = () => {
     });
 
     const nextUrl = `/location?${queryStr}`;
-    lcaEvents("Navigation", `Next button to ${nextUrl}`);
+    
     router.push(nextUrl);
   };
 
