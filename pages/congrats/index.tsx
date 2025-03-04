@@ -10,6 +10,7 @@ import useFormDataContext from "../../src/context/FormDataContext";
 import { FormResults } from "../../src/interfaces";
 import { homePageRedirect } from "../../src/utils/utils";
 import { cookieDomain } from "../../appConfig";
+import ilsLibraryList from "../../src/data/ilsLibraryList";
 
 function ConfirmationPage(): JSX.Element {
   const { state } = useFormDataContext();
@@ -24,7 +25,7 @@ function ConfirmationPage(): JSX.Element {
       (window as any).dataLayer = (window as any).dataLayer || [];
       (window as any).dataLayer.push({
         event: "library_card_submission",
-        nypl_location: state.formValues.homeLibraryCode, // Example: "Simply E" This is just an example. This variable actually refers to the Preferred Location Name found on the current Adobe Data Layer
+        nypl_location: ilsLibraryList[state.formValues.homeLibraryCode],
       });
     }
   }, []);
