@@ -17,7 +17,6 @@ class MyDocument extends Document {
           <script
             dangerouslySetInnerHTML={{
               __html: `
-                window.gaDataLayer = []
                 window.adobeDataLayer = [];
                 const pageName = window.location.pathname.replace("/", "nypl|").replaceAll("/", "|") + window.location.search;
                 window.adobeDataLayer.push({
