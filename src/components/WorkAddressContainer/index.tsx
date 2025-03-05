@@ -19,7 +19,7 @@ import {
 } from "../../interfaces";
 import Loader from "../Loader";
 import FormField from "../FormField";
-import { lcaEvents } from "../../externals/gaUtils";
+
 import { constructAddressType } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
 import { createQueryParams } from "../../utils/utils";
@@ -115,7 +115,7 @@ const AddressContainer: React.FC = () => {
           } else {
             setIsLoading(false);
             nextUrl = `/address-verification?${queryStr}`;
-            lcaEvents("Navigation", `Next button to ${nextUrl}`);
+
             router.push(nextUrl);
           }
         });

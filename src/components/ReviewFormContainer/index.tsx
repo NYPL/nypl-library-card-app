@@ -22,7 +22,7 @@ import styles from "./ReviewFormContainer.module.css";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import Loader from "../Loader";
 import FormField from "../FormField";
-import { lcaEvents } from "../../externals/gaUtils";
+
 import aaUtils from "../../externals/aaUtils";
 import { createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../../src/context/FormDataContext";
@@ -90,7 +90,6 @@ function ReviewFormContainer() {
         buttonType="primary"
         id={`editSectionButton-${sectionName}`}
         onClick={() => {
-          lcaEvents("Edit", sectionName);
           editSectionFlag(true);
         }}
       >
@@ -114,7 +113,6 @@ function ReviewFormContainer() {
         buttonType="primary"
         id="editAddressButton"
         onClick={() => {
-          lcaEvents("Edit", "Location/Address");
           router.push(`/location?${queryStr}`);
         }}
       >
@@ -134,7 +132,6 @@ function ReviewFormContainer() {
       <Button
         buttonType="primary"
         id="submitSectionButton"
-        onClick={() => {}}
         type="submit"
       >
         {t("button.submit")}
@@ -187,7 +184,7 @@ function ReviewFormContainer() {
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
-        lcaEvents("Submit", "Submit");
+        
 
         // Adobe Analytics
         aaUtils.trackApplicationSubmitEvent({

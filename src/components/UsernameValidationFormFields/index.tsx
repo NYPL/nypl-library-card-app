@@ -14,7 +14,7 @@ import { isAlphanumeric } from "validator";
 import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
 import styles from "./UsernameValidationFormFields.module.css";
-import { lcaEvents } from "../../externals/gaUtils";
+
 import {
   apiErrorTranslations,
   commonAPIErrors,
@@ -71,8 +71,6 @@ const UsernameValidationForm = ({
         if (lang !== "en") {
           message = apiTranslations[message][lang] || message;
         }
-
-        lcaEvents("Availability Checker", "Username - available");
         setUsernameIsAvailable({
           available: true,
           message,
@@ -94,7 +92,6 @@ const UsernameValidationForm = ({
           message = apiErrorTranslations[message][lang] || message;
         }
 
-        lcaEvents("Availability Checker", "Username - unavailable");
         setUsernameIsAvailable({
           available: false,
           message,
