@@ -29,6 +29,15 @@ class MyDocument extends Document {
           <script src={adobeAnalyticsTag} async></script>
         </Head>
         <body>
+          <noscript>
+            <iframe
+              title="Google-tag-name"
+              src="https://www.googletagmanager.com/ns.html?id=GTM-RKWC"
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            ></iframe>
+          </noscript>
           {/* <!-- NYPL Header Script --> */}
           <div id="nypl-header"></div>
           <script src={dsHeader} async></script>
