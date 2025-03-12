@@ -12,7 +12,6 @@ import {
 export const formInitialState: FormData = {
   results: undefined,
   errorObj: undefined,
-  csrfToken: null,
   formValues: {
     ecommunicationsPref: true,
     policyType: "webApplicant",

@@ -217,15 +217,3 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 Then double-click on the `localhost.crt` file to add it to your keychain. Change the settings to "Always Trust".
 
 Now run `npm run local-prod` to build and run the Next.js app with https.
-
-2. HTTP, Docker, Local production build
-
-To test the docker image locally, in `/src/utils/api.ts` temporary comment out
-
-```
-if (!csrfTokenValid) {
-  return invalidCsrfResponse(res);
-}
-```
-
-in three separate locations. Then, build the image and run a container for that image. This will allow you to run the docker image locally in production mode with HTTPS turned off so that. This should not be deployed to production so remember to uncomment the code for a qa or production deployment.

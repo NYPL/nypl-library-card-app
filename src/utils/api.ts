@@ -13,12 +13,6 @@ import {
   FormAPISubmission,
   AddressResponse,
 } from "../interfaces";
-import {
-  generateNewToken,
-  setCsrfTokenCookie,
-  validateCsrfToken,
-  parseTokenFromPostRequestCookies,
-} from "./csrfUtils";
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -221,37 +215,12 @@ export function axiosAddressPost(
 }
 
 /**
- * invalidCsrfResponse
- * If the CSRF token is invalid, return a 403 forbidden response.
- */
-function invalidCsrfResponse(res) {
-  return res
-    .status(403)
-    .json(
-      constructProblemDetail(
-        403,
-        "invalid-csrf-token",
-        "Invalid-csrf-token",
-        "The form has been tampered with."
-      )
-    );
-}
-
-/**
  * validateAddress
  * Call the NYPL Platform API to validate an address.
  */
 export async function validateAddress(req, res, appObj = app) {
   const tokenObject = appObj["tokenObject"];
-  const parsedTokenFromRequestCookies = parseTokenFromPostRequestCookies(req);
-  const csrfTokenValid = validateCsrfToken(req);
-  if (!parsedTokenFromRequestCookies) {
-    const newToken = generateNewToken();
-    setCsrfTokenCookie(res, newToken);
-  }
-  if (!csrfTokenValid) {
-    return invalidCsrfResponse(res);
-  }
+
   if (tokenObject && tokenObject?.access_token) {
     const token = tokenObject.access_token;
     const addressRequest: AddressAPIRequestData = {
@@ -303,10 +272,7 @@ export async function validateUsername(
   appObj = app
 ) {
   const tokenObject = appObj["tokenObject"];
-  const csrfTokenValid = validateCsrfToken(req);
-  if (!csrfTokenValid) {
-    return invalidCsrfResponse(res);
-  }
+
   if (tokenObject && tokenObject?.access_token) {
     const token = tokenObject.access_token;
     const username = req.body.username;
@@ -392,6 +358,15 @@ export async function callPatronAPI(
         });
       })
       .catch((err) => {
+        console.log(err.response)
+        console.log("-----------------")
+        console.log(err.response?.status)
+        console.log("patron data")
+        console.log(patronData)
+        console.log("-----------------")
+        console.log(err.response?.data)
+
+
         const status = err.response?.status || 500;
         let serverError = null;
 
@@ -405,6 +380,9 @@ export async function callPatronAPI(
         const restOfErrors = serverError
           ? { ...err.response?.data, ...serverError }
           : err.response?.data;
+
+        logger.error("Error calling Card Creator API: data object:");
+        logger.error(err.response?.data);
 
         logger.error(
           `Error calling Card Creator API: ${
@@ -448,13 +426,10 @@ export async function createPatron(
   appObj = app
 ) {
   const data = req.body;
-  const csrfTokenValid = validateCsrfToken(req);
-  if (!csrfTokenValid) {
-    return invalidCsrfResponse(res);
-  }
 
   try {
     const response = await callPatronAPI(data, createPatronUrl, appObj);
+    console.log("resonse", response);
     return res.json(response);
   } catch (error) {
     return res.status(error.status).json(error);
