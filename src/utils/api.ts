@@ -358,15 +358,6 @@ export async function callPatronAPI(
         });
       })
       .catch((err) => {
-        console.log(err.response)
-        console.log("-----------------")
-        console.log(err.response?.status)
-        console.log("patron data")
-        console.log(patronData)
-        console.log("-----------------")
-        console.log(err.response?.data)
-
-
         const status = err.response?.status || 500;
         let serverError = null;
 
