@@ -136,13 +136,12 @@ export interface FormResults {
   temporary: boolean;
   message: string;
   patronId: number;
-  ptype: number;
+  ptype?: number;
 }
 
 export interface FormData {
   results: FormResults | undefined;
   errorObj: ProblemDetail | undefined;
-  csrfToken: string;
   formValues: FormInputData;
   addressesResponse: AddressesResponse;
 }

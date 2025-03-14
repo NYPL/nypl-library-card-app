@@ -22,7 +22,6 @@ const formResults: FormResults = {
 const formState = {
   results: formResults,
   errorObj: undefined,
-  csrfToken: "",
   formValues: {} as FormInputData,
   addressesResponse: {} as AddressesResponse,
   query: {},

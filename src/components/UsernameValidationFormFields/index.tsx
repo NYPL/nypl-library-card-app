@@ -47,7 +47,7 @@ const UsernameValidationForm = ({
   const { watch, getValues, register, errors } = useFormContext();
   const usernameWatch = watch("username");
   const { state } = useFormDataContext();
-  const { formValues, csrfToken } = state;
+  const { formValues } = state;
 
   // Whenever the username input changes, revert back to the default state.
   // This is to re-render the button after a patron tries a new username.
@@ -64,7 +64,7 @@ const UsernameValidationForm = ({
     e.preventDefault();
     const username = getValues("username");
     axios
-      .post("/library-card/api/username", { username, csrfToken })
+      .post("/library-card/api/username", { username })
       .then((response) => {
         let message = response.data?.message;
         // Translate the message if possible.
@@ -78,7 +78,7 @@ const UsernameValidationForm = ({
       })
       .catch((error) => {
         let message = error.response?.data?.message;
-        // Catch any CSRF token issues and return a generic error message.
+        // Catch any and return a generic error message.
         if (error.response.status == 403) {
           message = commonAPIErrors.errorValidatingToken;
         }

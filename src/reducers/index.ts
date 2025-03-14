@@ -12,12 +12,6 @@ export function formReducer(state, action) {
         errorObj: action.value,
       };
     }
-    case "SET_CSRF_TOKEN": {
-      return {
-        ...state,
-        csrfToken: action.value,
-      };
-    }
     case "SET_FORM_RESULTS": {
       return {
         ...state,

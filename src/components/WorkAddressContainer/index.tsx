@@ -29,7 +29,7 @@ import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 const AddressContainer: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
-  const { formValues, addressesResponse, csrfToken } = state;
+  const { formValues, addressesResponse } = state;
   const router = useRouter();
   const { t } = useTranslation("common");
   // Specific functions and object from react-hook-form.
@@ -64,7 +64,6 @@ const AddressContainer: React.FC = () => {
         .post("/library-card/api/address", {
           address: workAddress,
           isWorkAddress: true,
-          csrfToken,
         })
         .then((response) => {
           const work: AddressResponse = response.data;
@@ -76,7 +75,7 @@ const AddressContainer: React.FC = () => {
           });
         })
         .catch((error) => {
-          // Catch any CSRF token issues and return a generic error message
+          // Catch any and return a generic error message
           // and redirect to the home page.
           if (error.response.status == 403) {
             dispatch({
