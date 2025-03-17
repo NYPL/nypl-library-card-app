@@ -405,13 +405,16 @@ export async function callPatronAPI(
       ...result.data,
     });
   } catch (err) {
-    const status = err.response?.status || 500;
+    const status = err.response?.status;
     let serverError = null;
-
-    // If the response from the Patron Creator Service
-    // does not include valid error details, we mark this result as
-    // an internal server error.
-    if (status === 401 || status === 403 || status === 500) {
+    if (!err.response || !status)
+      return res.status(500).json({
+        type: "api-error",
+        title: "API Error",
+        detail: `Bad response from Card Creator API`,
+        error: err,
+      });
+    if (status === 401 || status === 403) {
       serverError = { type: "internal" };
     }
 
