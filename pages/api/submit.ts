@@ -101,7 +101,7 @@ async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
         }
         // If the API call was successful and a patron account was created,
         // go to the congrats page and display the results.
-        results = await callPatronAPI(existingValues);
+        results = await callPatronAPI(res, existingValues);
         page = "congrats";
       } catch (error) {
         console.log("Error in serverSubmit", error);

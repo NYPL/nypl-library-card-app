@@ -444,6 +444,7 @@ describe("validateUsername", () => {
 });
 
 describe("callPatronAPI", () => {
+  const mockRes = new MockRes()
   beforeEach(() => {
     axios.post.mockClear();
   });
@@ -453,7 +454,7 @@ describe("callPatronAPI", () => {
     axios.post.mockResolvedValue({});
 
     try {
-      await callPatronAPI(req, "url", {});
+      await callPatronAPI(mockRes, req, "url", {});
     } catch (error) {
       expect(error.type).toEqual("no-access-token");
       expect(error.detail).toEqual(
@@ -513,7 +514,7 @@ describe("callPatronAPI", () => {
       },
     });
 
-    const response = await callPatronAPI(requestData, "url", appObj);
+    const response = await callPatronAPI(mockRes, requestData, "url", appObj);
 
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(
@@ -565,7 +566,8 @@ describe("callPatronAPI", () => {
         timeout: 10000,
       }
     );
-    expect(response).toEqual({
+
+    expect(mockedReturnedJson).toEqual({
       status: 200,
       name: "Tom Nook",
       type: "card-granted",
