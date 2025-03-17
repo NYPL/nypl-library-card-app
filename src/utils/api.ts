@@ -406,6 +406,7 @@ export async function callPatronAPI(
     });
   } catch (err) {
     const status = err.response?.status;
+    console.debug(`error response`, err.response);
     let serverError = null;
     if (!err.response || !status)
       return res.status(500).json({
