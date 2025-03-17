@@ -444,7 +444,7 @@ describe("validateUsername", () => {
 });
 
 describe("callPatronAPI", () => {
-  const mockRes = new MockRes()
+  const mockRes = new MockRes();
   beforeEach(() => {
     axios.post.mockClear();
   });
