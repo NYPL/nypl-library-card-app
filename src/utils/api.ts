@@ -397,6 +397,7 @@ export async function callPatronAPI(
       patronData,
       constructApiHeaders(token)
     );
+    if (!result.data?.status) throw result;
     const fullName = `${(patronData as FormAPISubmission).firstName} ${
       (patronData as FormAPISubmission).lastName
     }`;
@@ -407,16 +408,17 @@ export async function callPatronAPI(
     };
   } catch (err) {
     const status = err.response?.status;
-    console.debug(`error response`, err.response);
+    console.debug(`error response`, err);
     let serverError = null;
-    if (!err.response || !status)
+    if (err.message && (!err.response || !status)) {
       return {
         status: 500,
         type: "api-error",
         title: "API Error",
         detail: `Bad response from Card Creator API`,
-        error: err,
+        error: err.message,
       };
+    }
     if (status === 401 || status === 403) {
       serverError = { type: "internal" };
     }
