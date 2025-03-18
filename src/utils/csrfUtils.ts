@@ -1,6 +1,7 @@
 import * as cookie from "./CookieUtils";
 import * as appConfig from "../../appConfig";
 import { createHash, randomBytes } from "crypto";
+import logger from "../logger";
 
 const generateSecret = () => {
   // Secret uses salt cookies and tokens (e.g. for CSRF protection).
@@ -48,13 +49,18 @@ const parseTokenFromPostRequestCookies = (req) => {
 const validateCsrfToken = (req) => {
   const tokenFromRequestBody = req.body?.csrfToken;
   const tokenFromRequestCookie = parseTokenFromPostRequestCookies(req);
-
   if (postRequestHashMatchesServerHash(tokenFromRequestCookie)) {
     return (
       req.method === "POST" &&
       tokenFromRequestCookie.value === tokenFromRequestBody
     );
-  } else return false;
+  } else {
+    logger.debug("CSRF token validation failed.");
+    logger.debug(
+      `Request body token: ${tokenFromRequestBody}\nRequestCookie token: ${tokenFromRequestCookie}`
+    );
+    return false;
+  }
 };
 
 // Validate that the token value from the request cookies generates what the
