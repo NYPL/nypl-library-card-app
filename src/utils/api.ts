@@ -350,89 +350,93 @@ export async function callPatronAPI(
   appObj = app
 ) {
   const tokenObject = appObj["tokenObject"];
-  if (tokenObject && tokenObject.access_token) {
-    const token = tokenObject.access_token;
-    const patronData = constructPatronObject(data);
-    // Used for testing when we don't want to create real accounts,
-    // just return a mocked account data.
-    // return Promise.resolve({
-    //   status: 200,
-    //   type: "card-granted",
-    //   link: "some-link",
-    //   barcode: "12345678912345",
-    //   username: "tomnook",
-    //   password: "1234",
-    //   temporary: false,
-    //   message: "The library card will be a standard library card.",
-    //   patronId: 1234567,
-    //   name: "Tom Nook",
-    //   ptype: 7,
-    // });
-    if ((patronData as ProblemDetail).status === 400) {
-      logger.error("Invalid patron data");
-      logger.error("Patron data", patronData);
-      return Promise.reject(patronData);
+  if (!tokenObject || !tokenObject.access_token) {
+    const tokenGenerationError =
+      "The access token could not be generated before calling the Card Creator API.";
+
+    logger.error(tokenGenerationError);
+    return {
+      status: 500,
+      type: "no-access-token",
+      title: "No Access Token",
+      error: tokenGenerationError,
+    };
+  }
+
+  const token = tokenObject.access_token;
+  const patronData = constructPatronObject(data);
+  // Used for testing when we don't want to create real accounts,
+  // just return a mocked account data.
+  // return Promise.resolve({
+  //   status: 200,
+  //   type: "card-granted",
+  //   link: "some-link",
+  //   barcode: "12345678912345",
+  //   username: "tomnook",
+  //   password: "1234",
+  //   temporary: false,
+  //   message: "The library card will be a standard library card.",
+  //   patronId: 1234567,
+  //   name: "Tom Nook",
+  //   ptype: 7,
+  // });
+  if ((patronData as ProblemDetail).status === 400) {
+    logger.error("Invalid patron data");
+    logger.error("Patron data", patronData);
+    return Promise.reject(patronData);
+  }
+
+  logger.debug(
+    `POSTing patron data with username ${
+      (patronData as FormAPISubmission).username
+    } to ${createPatronUrl}`
+  );
+  try {
+    const result = await axios.post(
+      createPatronUrl,
+      patronData,
+      constructApiHeaders(token)
+    );
+    if (!result.data?.status) throw result;
+    const fullName = `${(patronData as FormAPISubmission).firstName} ${
+      (patronData as FormAPISubmission).lastName
+    }`;
+    return {
+      status: result.data.status,
+      name: fullName,
+      ...result.data,
+    };
+  } catch (err) {
+    const status = err.response?.status;
+    console.debug(`error response`, err);
+    let serverError = null;
+    if (err.message && (!err.response || !status)) {
+      return {
+        status: 500,
+        type: "api-error",
+        title: "API Error",
+        detail: `Bad response from Card Creator API`,
+        error: err.message,
+      };
+    }
+    if (status === 401 || status === 403) {
+      serverError = { type: "internal" };
     }
 
-    logger.debug(
-      `POSTing patron data with username ${
-        (patronData as FormAPISubmission).username
-      } to ${createPatronUrl}`
+    const restOfErrors = serverError
+      ? { ...err.response?.data, ...serverError }
+      : err.response?.data;
+
+    logger.error(
+      `Error calling Card Creator API: ${
+        status === 403 ? "bad API call" : err.response?.data?.message
+      }`
     );
-    return axios
-      .post(createPatronUrl, patronData, constructApiHeaders(token))
-      .then((result) => {
-        const fullName = `${(patronData as FormAPISubmission).firstName} ${
-          (patronData as FormAPISubmission).lastName
-        }`;
-        return Promise.resolve({
-          status: result.data.status,
-          name: fullName,
-          ...result.data,
-        });
-      })
-      .catch((err) => {
-        const status = err.response?.status || 500;
-        let serverError = null;
-
-        // If the response from the Patron Creator Service
-        // does not include valid error details, we mark this result as
-        // an internal server error.
-        if (status === 401 || status === 403 || status === 500) {
-          serverError = { type: "server" };
-        }
-
-        const restOfErrors = serverError
-          ? { ...err.response?.data, ...serverError }
-          : err.response?.data;
-
-        logger.error(
-          `Error calling Card Creator API: ${
-            status === 403 ? "bad API call" : err.response?.data?.message
-          }`
-        );
-        logger.error(
-          `More details - status: ${status}, patron: ${patronData}, data: ${err.response?.data}`
-        );
-        return Promise.reject({
-          status,
-          ...restOfErrors,
-        });
-      });
+    logger.error(
+      `More details - status: ${status}, patron: ${patronData}, data: ${err.response?.data}`
+    );
+    return { ...restOfErrors, status };
   }
-  // Else return a "no token generated" error.
-  const tokenGenerationError =
-    "The access token could not be generated before calling the Card Creator API.";
-
-  logger.error(tokenGenerationError);
-  return Promise.reject(
-    constructProblemDetail(
-      500,
-      "no-access-token",
-      "No Access Token",
-      tokenGenerationError
-    )
-  );
 }
 
 /**
@@ -454,8 +458,9 @@ export async function createPatron(
   }
 
   try {
-    const response = await callPatronAPI(data, createPatronUrl, appObj);
-    return res.json(response);
+    const results = await callPatronAPI(data, createPatronUrl, appObj);
+    res.status(results.status).json(results);
+    return res;
   } catch (error) {
     return res.status(error.status).json(error);
   }
