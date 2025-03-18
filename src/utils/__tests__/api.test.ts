@@ -454,7 +454,7 @@ describe("callPatronAPI", () => {
     axios.post.mockResolvedValue({});
 
     try {
-      await callPatronAPI(mockRes, req, "url", {});
+      await callPatronAPI(req, "url", {});
     } catch (error) {
       expect(error.type).toEqual("no-access-token");
       expect(error.detail).toEqual(
@@ -501,7 +501,7 @@ describe("callPatronAPI", () => {
       verifyPassword: "MyLib1731@!",
       acceptTerms: true,
     };
-    axios.post.mockResolvedValue({
+    const postResponse = {
       data: {
         status: 200,
         type: "card-granted",
@@ -512,10 +512,11 @@ describe("callPatronAPI", () => {
         temporary: true,
         message: "The library card will be a standard library card.",
       },
-    });
+    };
+    axios.post.mockResolvedValue(postResponse);
 
-    const response = await callPatronAPI(mockRes, requestData, "url", appObj);
-
+    const response = await callPatronAPI(requestData, "url", appObj);
+    expect(response).toEqual({ ...postResponse.data, name: "Tom Nook" });
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(
       "url",
@@ -566,17 +567,5 @@ describe("callPatronAPI", () => {
         timeout: 10000,
       }
     );
-
-    expect(mockedReturnedJson).toEqual({
-      status: 200,
-      name: "Tom Nook",
-      type: "card-granted",
-      link: "https://link.com/to/ils/1234567",
-      barcode: "111122222222345",
-      username: "tomnook42",
-      password: "MyLib1731@!",
-      temporary: true,
-      message: "The library card will be a standard library card.",
-    });
   });
 });

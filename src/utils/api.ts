@@ -345,7 +345,6 @@ export async function validateUsername(
  * ILS account.
  */
 export async function callPatronAPI(
-  res,
   data,
   createPatronUrl = config.api.patron,
   appObj = app
@@ -356,11 +355,12 @@ export async function callPatronAPI(
       "The access token could not be generated before calling the Card Creator API.";
 
     logger.error(tokenGenerationError);
-    return res.status(500).json({
+    return {
+      status: 500,
       type: "no-access-token",
       title: "No Access Token",
       error: tokenGenerationError,
-    });
+    };
   }
 
   const token = tokenObject.access_token;
@@ -400,21 +400,23 @@ export async function callPatronAPI(
     const fullName = `${(patronData as FormAPISubmission).firstName} ${
       (patronData as FormAPISubmission).lastName
     }`;
-    return res.status(result.data.status).json({
+    return {
+      status: result.data.status,
       name: fullName,
       ...result.data,
-    });
+    };
   } catch (err) {
     const status = err.response?.status;
     console.debug(`error response`, err.response);
     let serverError = null;
     if (!err.response || !status)
-      return res.status(500).json({
+      return {
+        status: 500,
         type: "api-error",
         title: "API Error",
         detail: `Bad response from Card Creator API`,
         error: err,
-      });
+      };
     if (status === 401 || status === 403) {
       serverError = { type: "internal" };
     }
@@ -431,7 +433,7 @@ export async function callPatronAPI(
     logger.error(
       `More details - status: ${status}, patron: ${patronData}, data: ${err.response?.data}`
     );
-    return res.status(status).json(restOfErrors);
+    return { ...restOfErrors, status };
   }
 }
 
@@ -454,7 +456,9 @@ export async function createPatron(
   }
 
   try {
-    return await callPatronAPI(res, data, createPatronUrl, appObj);
+    const results = await callPatronAPI(data, createPatronUrl, appObj);
+    res.status(results.status).json(results);
+    return res;
   } catch (error) {
     return res.status(error.status).json(error);
   }
