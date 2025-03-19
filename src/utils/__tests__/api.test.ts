@@ -496,7 +496,7 @@ describe("callPatronAPI", () => {
     expect(axios.post).toHaveBeenCalledTimes(0);
   });
 
-  test.only("it reports on timeout responses from the API", async () => {
+  test("it reports on timeout responses from the API", async () => {
     const timeoutResponse = {
       message: "Endpoint request timed out",
     };
