@@ -22,10 +22,13 @@ function ConfirmationPage(): JSX.Element {
   const temporary = ptype === 7;
   useEffect(() => {
     if (state.formValues.username) {
+      const libraryName: any = ilsLibraryList.filter(
+        (library) => library.value === state.formValues.homeLibraryCode
+      );
       (window as any).dataLayer = (window as any).dataLayer || [];
       (window as any).dataLayer.push({
         event: "library_card_submission",
-        nypl_location: ilsLibraryList[state.formValues.homeLibraryCode],
+        nypl_location: libraryName[0]?.label,
       });
     }
   }, []);
