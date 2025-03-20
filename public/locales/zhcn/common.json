@@ -28,7 +28,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "电子邮件地址",
-      "instruction": "使用我们的许多数字资源（例如，电子书）都需要一个电子邮件地址。 如果您不希望提供电 子邮件地址，则可以使用我们 <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>另一个表格</a>来申请实体图书卡。 填写完毕后，请造访我们其中一个 <a href='https://www.nypl.org/locations'>分馆</a>，提供身份和家庭住址证明以领取您的卡。 "
+      "instruction": "使用我们的许多数字资源（例如，电子书）都需要一个电子邮件地址。 如果您不希望提供电 子邮件地址，则可以使用我们 <a href='https://on.nypl.org/internationalresearch'>另一个表格</a>来申请实体图书卡。 填写完毕后，请造访我们其中一个 <a href='https://www.nypl.org/locations'>分馆</a>，提供身份和家庭住址证明以领取您的卡。 "
     },
     "eCommunications": {
       "labelText": "是的，我想收到有关NYPL活动和服务的信息"
