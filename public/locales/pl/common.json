@@ -28,7 +28,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Adres e-mail",
-      "instruction": "Adres e-mail jest niezbędny, aby móc korzystać z wielu naszych zasobów cyfrowych, takich jak e-booki. Jeśli nie chcesz podać adresu e-mail, możesz wystąpić o fizyczną kartę biblioteczną, używając <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>innego formularza</a>. Wypełniony formularz złóż w jednym z naszych <a href='https://www.nypl.org/locations'>oddziałów</a>, okazując dokument tożsamości i podając adres zamieszkania, aby odebrać kartę."
+      "instruction": "Adres e-mail jest niezbędny, aby móc korzystać z wielu naszych zasobów cyfrowych, takich jak e-booki. Jeśli nie chcesz podać adresu e-mail, możesz wystąpić o fizyczną kartę biblioteczną, używając <a href='https://on.nypl.org/internationalresearch'>innego formularza</a>. Wypełniony formularz złóż w jednym z naszych <a href='https://www.nypl.org/locations'>oddziałów</a>, okazując dokument tożsamości i podając adres zamieszkania, aby odebrać kartę."
     },
     "eCommunications": {
       "labelText": "Tak, chcę otrzymywać informacje o programach i usługach NYPL. "

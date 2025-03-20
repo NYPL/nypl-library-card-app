@@ -1,5 +1,9 @@
 ## CHANGE LOG
 
+### 1.1.2 Hot fix 3/20
+
+- Updating the legacy catalog library card form link to `https://on.nypl.org/internationalresearch`.
+
 ### v1.1.1 Fix CSRF regression
 - Ensure that CSRF headers are not overwritten by nyplUserHasRegistered headers
 - Refactor CSRF utils
