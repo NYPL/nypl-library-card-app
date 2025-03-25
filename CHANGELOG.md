@@ -1,10 +1,14 @@
 ## CHANGE LOG
 
-### v1.2.0 GTM Update
+### v1.2.0 GTM Update (DATE TBD)
 
 - Adds new GTM code snippet and removes older GA code.
 - Adds GTM event tracking for form submission.
 - More logs for debugging CSRF issues.
+
+### 1.1.2 Hot fix 3/20
+
+- Updating the legacy catalog library card form link to `https://on.nypl.org/internationalresearch`.
 
 ### v1.1.1 Fix CSRF regression
 - Ensure that CSRF headers are not overwritten by nyplUserHasRegistered headers

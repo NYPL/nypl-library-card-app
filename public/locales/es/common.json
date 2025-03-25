@@ -24,7 +24,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Dirección de correo electrónico",
-      "instruction": "Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos. Si no desea proporcionar una dirección de correo electrónico, puede solicitar una tarjeta física utilizando nuestro <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>formulario alterno (en inglés)</a>. Una vez que lo haya completado, por favor visite una de nuestras bibliotecas con un comprobante de identidad y domicilio para recoger su tarjeta física."
+      "instruction": "Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos. Si no desea proporcionar una dirección de correo electrónico, puede solicitar una tarjeta física utilizando nuestro <a href='https://on.nypl.org/internationalresearch'>formulario alterno (en inglés)</a>. Una vez que lo haya completado, por favor visite una de nuestras <a href='http://nypl.org/locations'>bibliotecas</a> con un comprobante de identidad y domicilio para recoger su tarjeta física."
     },
     "eCommunications": {
       "labelText": "Sí, me gustaría recibir información sobre los programas y servicios que ofrece la NYPL"
