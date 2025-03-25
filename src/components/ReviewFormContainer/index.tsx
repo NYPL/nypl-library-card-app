@@ -42,7 +42,7 @@ function ReviewFormContainer() {
   const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit } = useFormContext();
   const { state, dispatch } = useFormDataContext();
-  const { formValues, errorObj, csrfToken } = state;
+  const { formValues, errorObj } = state;
   const router = useRouter();
   const {
     query: { lang = "en" },
@@ -180,7 +180,7 @@ function ReviewFormContainer() {
     });
 
     axios
-      .post("/library-card/api/create-patron", { ...formValues, csrfToken })
+      .post("/library-card/api/create-patron", formValues)
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
@@ -196,7 +196,7 @@ function ReviewFormContainer() {
         router.push(`/congrats?${queryStr}`);
       })
       .catch((error) => {
-        // Catch any CSRF token issues and return a generic error message
+        // Catch any errors and return a generic error message
         // and redirect to the home page.
         if (error.response.status == 403) {
           dispatch({

@@ -8,7 +8,6 @@ import { FormData, FormInputData, AddressesResponse } from "../../interfaces";
 const initState: FormData = {
   results: undefined,
   errorObj: null,
-  csrfToken: null,
   formValues: {
     ecommunicationsPref: true,
     policyType: "webApplicant",

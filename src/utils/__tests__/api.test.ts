@@ -12,16 +12,6 @@ const axios = require("axios");
 import moment from "moment";
 
 jest.mock("axios");
-jest.mock("../csrfUtils", () => {
-  return {
-    ...jest.requireActual("../csrfUtils"),
-    parseCsrfToken: jest.fn(() => "12345"),
-    validateCsrfToken: jest.fn(() => ({
-      csrfToken: "csrfToken",
-      csrfTokenValid: true,
-    })),
-  };
-});
 let mockedReturnedJson = {};
 class MockRes {
   status() {
@@ -269,9 +259,6 @@ describe("validateAddress", () => {
         },
         isWorkAddress: false,
       },
-      cookies: {
-        "nypl.csrf-token": "csrfToken",
-      },
     };
     axios.post.mockResolvedValueOnce({
       data: {
@@ -359,9 +346,6 @@ describe("validateUsername", () => {
       body: {
         username: "tomnook42",
       },
-      cookies: {
-        "nypl.csrf-token": "csrfToken",
-      },
     };
     axios.post.mockResolvedValue({
       data: {
@@ -402,9 +386,6 @@ describe("validateUsername", () => {
     const req = {
       body: {
         username: "tomnook42",
-      },
-      cookies: {
-        "nypl.csrf-token": "csrfToken",
       },
     };
     axios.post.mockRejectedValue({
