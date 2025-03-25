@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### v1.2.0 GTM Update
+
+- Adds new GTM code snippet and removes older GA code.
+- Adds GTM event tracking for form submission.
+- More logs for debugging CSRF issues.
+
 ### v1.1.1 Fix CSRF regression
 - Ensure that CSRF headers are not overwritten by nyplUserHasRegistered headers
 - Refactor CSRF utils
