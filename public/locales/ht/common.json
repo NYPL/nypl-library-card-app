@@ -28,7 +28,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Imèl",
-      "instruction": "Yon adrès imèl nesesè pou itilize plizyè nan resous nimerik nou yo, tankou liv elektwonik. Si w pa vle bay yon adrès imèl, ou ka aplike pou yon kat fizik lè w sèvi ak <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>lòt fòm</a> nou an. Yon fwa w ranpli l, tanpri vizite youn nan <a href='https://www.nypl.org/locations'>lokal</a> nou yo avèk prèv idantite ak adrès lakay ou pou w ka pran kat ou a."
+      "instruction": "Yon adrès imèl nesesè pou itilize plizyè nan resous nimerik nou yo, tankou liv elektwonik. Si w pa vle bay yon adrès imèl, ou ka aplike pou yon kat fizik lè w sèvi ak <a href='https://on.nypl.org/internationalresearch'>lòt fòm</a> nou an. Yon fwa w ranpli l, tanpri vizite youn nan <a href='https://www.nypl.org/locations'>lokal</a> nou yo avèk prèv idantite ak adrès lakay ou pou w ka pran kat ou a."
     },
     "eCommunications": {
       "labelText": "Wi, mwen ta renmen resevwa enfòmasyon sou pwogram ak sèvis Bibliyotèk Piblik New York (NYPL) ofri yo."

@@ -28,7 +28,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Adresse e-mail",
-      "instruction": "Une adresse e-mail vous sera demandée pour l’utilisation de nombreuses ressources numériques comme les livres électroniques. Si vous ne souhaitez pas renseigner votre adresse e-mail, vous pouvez demander une carte physique en remplissant notre <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>autre formulaire</a>. Une fois que vous l’aurez rempli, rendez-vous dans l’une de nos <a href='https://www.nypl.org/locations'>bibliothèques</a> avec une pièce d’identité et un justificatif de domicile pour récupérer votre carte."
+      "instruction": "Une adresse e-mail vous sera demandée pour l’utilisation de nombreuses ressources numériques comme les livres électroniques. Si vous ne souhaitez pas renseigner votre adresse e-mail, vous pouvez demander une carte physique en remplissant notre <a href='https://on.nypl.org/internationalresearch'>autre formulaire</a>. Une fois que vous l’aurez rempli, rendez-vous dans l’une de nos <a href='https://www.nypl.org/locations'>bibliothèques</a> avec une pièce d’identité et un justificatif de domicile pour récupérer votre carte."
     },
     "eCommunications": {
       "labelText": "Oui, je souhaite recevoir les informations sur les activités et les services de la NYPL."

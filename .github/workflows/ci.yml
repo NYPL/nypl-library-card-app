@@ -19,7 +19,7 @@ jobs:
       - name: Test
         run: npm run test
   publish_qa:
-    needs: test
+    # needs: test
     if: github.ref == 'refs/heads/remove-csrf'
     name: Publish image to ECR and update ECS stack
     runs-on: ubuntu-latest

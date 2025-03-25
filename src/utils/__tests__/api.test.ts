@@ -425,6 +425,38 @@ describe("validateUsername", () => {
 });
 
 describe("callPatronAPI", () => {
+  const requestData = {
+    ecommunicationsPref: true,
+    policyType: "webApplicant",
+    firstName: "Tom",
+    lastName: "Nook",
+    birthdate: "01/01/1988",
+    email: "tomnook@nypl.org",
+    preferredLanguage: "en",
+    location: "nyc",
+    homeLibraryCode: "ch",
+    "home-line1": "111 1st St",
+    "home-line2": "",
+    "home-city": "New York",
+    "home-state": "NY",
+    "home-zip": "10018-2788",
+    "work-line1": "476 5th Ave",
+    "work-line2": "",
+    "work-city": "New York",
+    "work-state": "NY",
+    "work-zip": "10018-2788",
+    "home-county": "New York",
+    "home-isResidential": true,
+    "home-hasBeenValidated": true,
+    "work-county": "New York",
+    "work-isResidential": false,
+    "work-hasBeenValidated": true,
+    username: "tomnook42",
+    password: "MyLib1731@!",
+    verifyPassword: "MyLib1731@!",
+    acceptTerms: true,
+  };
+
   beforeEach(() => {
     axios.post.mockClear();
   });
@@ -445,43 +477,31 @@ describe("callPatronAPI", () => {
     expect(axios.post).toHaveBeenCalledTimes(0);
   });
 
+  test("it reports on timeout responses from the API", async () => {
+    const timeoutResponse = {
+      message: "Endpoint request timed out",
+    };
+    const appObj = {
+      tokenObject: { ["access_token"]: "token" },
+      tokenExpTime: moment().add(4000, "s"),
+    };
+    axios.post.mockResolvedValue(timeoutResponse);
+    const response = await callPatronAPI(requestData, "url", appObj);
+    expect(response).toEqual({
+      detail: "Bad response from Card Creator API",
+      error: "Endpoint request timed out",
+      status: 500,
+      title: "API Error",
+      type: "api-error",
+    });
+  });
+
   test("it should make an API call and return the data from a successful call", async () => {
     const appObj = {
       tokenObject: { ["access_token"]: "token" },
       tokenExpTime: moment().add(4000, "s"),
     };
-    const requestData = {
-      ecommunicationsPref: true,
-      policyType: "webApplicant",
-      firstName: "Tom",
-      lastName: "Nook",
-      birthdate: "01/01/1988",
-      email: "tomnook@nypl.org",
-      preferredLanguage: "en",
-      location: "nyc",
-      homeLibraryCode: "ch",
-      "home-line1": "111 1st St",
-      "home-line2": "",
-      "home-city": "New York",
-      "home-state": "NY",
-      "home-zip": "10018-2788",
-      "work-line1": "476 5th Ave",
-      "work-line2": "",
-      "work-city": "New York",
-      "work-state": "NY",
-      "work-zip": "10018-2788",
-      "home-county": "New York",
-      "home-isResidential": true,
-      "home-hasBeenValidated": true,
-      "work-county": "New York",
-      "work-isResidential": false,
-      "work-hasBeenValidated": true,
-      username: "tomnook42",
-      password: "MyLib1731@!",
-      verifyPassword: "MyLib1731@!",
-      acceptTerms: true,
-    };
-    axios.post.mockResolvedValue({
+    const postResponse = {
       data: {
         status: 200,
         type: "card-granted",
@@ -492,10 +512,11 @@ describe("callPatronAPI", () => {
         temporary: true,
         message: "The library card will be a standard library card.",
       },
-    });
+    };
+    axios.post.mockResolvedValue(postResponse);
 
     const response = await callPatronAPI(requestData, "url", appObj);
-
+    expect(response).toEqual({ ...postResponse.data, name: "Tom Nook" });
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(
       "url",
@@ -546,16 +567,5 @@ describe("callPatronAPI", () => {
         timeout: 10000,
       }
     );
-    expect(response).toEqual({
-      status: 200,
-      name: "Tom Nook",
-      type: "card-granted",
-      link: "https://link.com/to/ils/1234567",
-      barcode: "111122222222345",
-      username: "tomnook42",
-      password: "MyLib1731@!",
-      temporary: true,
-      message: "The library card will be a standard library card.",
-    });
   });
 });
