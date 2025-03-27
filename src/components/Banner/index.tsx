@@ -13,16 +13,10 @@ interface BannerProps {
  * Simple component that returns the NYPL Design System's Hero component but
  * with other necessary components
  */
-const Banner = ({
-  fullImageSrc = defaultImageSrc,
-  heroDescription = defaultDescription,
-}: BannerProps) => {
+const Banner = ({ fullImageSrc = defaultImageSrc }: BannerProps) => {
   const { t } = useTranslation("common");
   const h1Heading = (
     <Heading id="hero-banner" level="one" text={t("banner.title")} />
-  );
-  const subHeaderText = (
-    <div className="hero__body-text">{heroDescription}</div>
   );
   return (
     <Hero

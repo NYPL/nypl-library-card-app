@@ -5,7 +5,6 @@ import "../src/styles/main.scss";
 import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";
 import isEmpty from "lodash/isEmpty";
-import gaUtils, { getGoogleGACode } from "../src/externals/gaUtils";
 import {
   FormDataContextProvider,
   formInitialState,
@@ -26,24 +25,6 @@ import aaUtils from "../src/externals/aaUtils";
 interface MyAppProps {
   Component: any;
   pageProps: any;
-}
-
-/**
- * Determines if we are running on server or in the client.
- * @return {boolean} true if running on server
- */
-function isServerRendered(): boolean {
-  return typeof window === "undefined";
-}
-
-// Get the Google Analytics code for the HTML snippet below.
-const isProduction = appConfig.nodeEnv === "production";
-const gaCode = getGoogleGACode(isProduction);
-// Set up Google Analytics if it isn't already. There's an HTML snippet in the
-// DOM below that initializes GA. If it fails, this tries again. The HTML
-// snippet is better since it works without javascript.
-if (!isServerRendered()) {
-  gaUtils.setupAnalytics(isProduction);
 }
 
 function MyApp({ Component, pageProps }: MyAppProps) {
@@ -67,7 +48,6 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   useEffect(() => {
     const handleRouteChange = () => {
       aaUtils.pageViewEvent(window.location);
-      gaUtils.trackPageview(window.location.pathname);
     };
     router.events.on("routeChangeComplete", () => handleRouteChange());
     return router.events.off("routeChangeComplete", () => handleRouteChange());
@@ -174,14 +154,12 @@ function MyApp({ Component, pageProps }: MyAppProps) {
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-              })(document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-              ga('create', '${gaCode}', 'auto');
-              ga('send', 'pageview');
-            `,
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-RKWC');
+          `,
           }}
         />
         {/* <!-- End Google Analytics --> */}
