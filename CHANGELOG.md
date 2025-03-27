@@ -1,6 +1,6 @@
 ## CHANGE LOG
 
-### v1.2.0 GTM Update (DATE TBD)
+### v1.2.0 GTM Update (3/27)
 
 - Adds new GTM code snippet and removes older GA code.
 - Adds GTM event tracking for form submission.
