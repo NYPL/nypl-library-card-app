@@ -8,12 +8,7 @@ import { useEffect } from "react";
 import { Heading } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 import useFormDataContext from "../../src/context/FormDataContext";
-import {
-  generateNewCookieTokenAndHash,
-  generateNewToken,
-  parseTokenFromPostRequestCookies,
-} from "../../src/utils/csrfUtils";
-import * as cookie from "../../src/utils/CookieUtils";
+
 
 import { GetServerSideProps } from "next";
 import { useTranslation } from "next-i18next";
@@ -66,28 +61,17 @@ function HomePage({ policyType, csrfToken, lang }: HomePageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const tokenFromRequestCookie = parseTokenFromPostRequestCookies(context.req);
   const { query } = context;
-  let newTokenCookie;
-  let csrfToken = tokenFromRequestCookie.value;
-
-  if (!csrfToken) {
-    csrfToken = generateNewToken();
-    const newTokenCookieString = generateNewCookieTokenAndHash(csrfToken);
-    newTokenCookie = cookie.buildCookieHeader(newTokenCookieString);
-  }
 
   const headers = [
     // reset cookie that would otherwise bump users out of the flow
     // to succcess page
     `nyplUserRegistered=false; Max-Age=-1; path=/; domain=${cookieDomain};`,
-    newTokenCookie,
   ];
   context.res.setHeader("set-cookie", headers);
 
   return {
     props: {
-      csrfToken,
       lang: query?.lang || "en",
       // This allows this page to get the proper translations based
       // on the `lang=...` URL query param. Default to "en".

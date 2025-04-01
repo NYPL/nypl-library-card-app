@@ -40,6 +40,7 @@ const metadata = () => {
         sameSite: "lax",
         path: "/",
         secure: useSecureCookies,
+        maxAge: 60 * 15,
       },
     },
   };
