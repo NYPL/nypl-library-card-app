@@ -243,15 +243,7 @@ function invalidCsrfResponse(res) {
  */
 export async function validateAddress(req, res, appObj = app) {
   const tokenObject = appObj["tokenObject"];
-  const parsedTokenFromRequestCookies = parseTokenFromPostRequestCookies(req);
-  const csrfTokenValid = validateCsrfToken(req);
-  if (!parsedTokenFromRequestCookies) {
-    const newToken = generateNewToken();
-    setCsrfTokenCookie(res, newToken);
-  }
-  if (!csrfTokenValid) {
-    return invalidCsrfResponse(res);
-  }
+
   if (tokenObject && tokenObject?.access_token) {
     const token = tokenObject.access_token;
     const addressRequest: AddressAPIRequestData = {
@@ -303,10 +295,7 @@ export async function validateUsername(
   appObj = app
 ) {
   const tokenObject = appObj["tokenObject"];
-  const csrfTokenValid = validateCsrfToken(req);
-  if (!csrfTokenValid) {
-    return invalidCsrfResponse(res);
-  }
+
   if (tokenObject && tokenObject?.access_token) {
     const token = tokenObject.access_token;
     const username = req.body.username;
