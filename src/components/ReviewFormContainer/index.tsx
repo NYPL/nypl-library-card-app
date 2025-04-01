@@ -37,12 +37,13 @@ import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
  * ReviewFormContainer
  * Main page component for the "form submission review" page.
  */
-function ReviewFormContainer() {
+function ReviewFormContainer({ csrfToken }) {
   const { t } = useTranslation("common");
   const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit } = useFormContext();
   const { state, dispatch } = useFormDataContext();
-  const { formValues, errorObj, csrfToken } = state;
+
+  const { formValues, errorObj } = state;
   const router = useRouter();
   const {
     query: { lang = "en" },
@@ -129,11 +130,7 @@ function ReviewFormContainer() {
     );
   const submitSectionButton = (
     <ButtonGroup>
-      <Button
-        buttonType="primary"
-        id="submitSectionButton"
-        type="submit"
-      >
+      <Button buttonType="primary" id="submitSectionButton" type="submit">
         {t("button.submit")}
       </Button>
     </ButtonGroup>
@@ -178,13 +175,12 @@ function ReviewFormContainer() {
       type: "SET_FORM_DATA",
       value: formValues,
     });
-
+    console.log(csrfToken);
     axios
       .post("/library-card/api/create-patron", { ...formValues, csrfToken })
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
-        
 
         // Adobe Analytics
         aaUtils.trackApplicationSubmitEvent({
