@@ -74,13 +74,6 @@ const postRequestHashMatchesServerHash = (tokenFromRequestCookie) => {
   );
 };
 
-// Ensure CSRF Token cookie is set for any subsequent requests.
-// Used as part of the strategy for mitigation for CSRF tokens.
-const setCsrfTokenCookie = (res, csrfToken) => {
-  const newCsrfTokenCookie = generateNewCookieTokenAndHash(csrfToken);
-  cookie.set(res, newCsrfTokenCookie);
-};
-
 const generateNewToken = () => {
   return randomBytes(32).toString("hex");
 };
@@ -89,7 +82,6 @@ export {
   generateSecret,
   validateCsrfToken,
   postRequestHashMatchesServerHash,
-  setCsrfTokenCookie,
   generateNewToken,
   generateNewCookieTokenAndHash,
   parseTokenFromPostRequestCookies,
