@@ -95,6 +95,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const csrfTokenName = cookie.metadata().csrfToken.name;
   res.setHeader("Set-Cookie", [
     `nyplUserRegistered=true; Max-Age=600; path=/; domain=${cookieDomain};`,
+    // delete csrf token cookie after successful registration
     `${csrfTokenName}=; Max-Age=-1; path=/; domain=${cookieDomain};`,
   ]);
   return {
