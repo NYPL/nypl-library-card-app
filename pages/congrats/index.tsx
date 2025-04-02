@@ -93,7 +93,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     return homePageRedirect();
   }
   const csrfTokenName = cookie.metadata().csrfToken.name;
-  res.setHeader("set-cookie", [
+  res.setHeader("Set-Cookie", [
     `nyplUserRegistered=true; Max-Age=600; path=/; domain=${cookieDomain};`,
     `${csrfTokenName}=; Max-Age=-1; path=/; domain=${cookieDomain};`,
   ]);

@@ -83,7 +83,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     `nyplUserRegistered=false; Max-Age=-1; path=/; domain=${cookieDomain};`,
     newTokenCookie,
   ];
-  context.res.setHeader("set-cookie", headers);
+  context.res.setHeader("Set-Cookie", headers);
 
   return {
     props: {
