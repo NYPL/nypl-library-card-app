@@ -13,12 +13,7 @@ import {
   FormAPISubmission,
   AddressResponse,
 } from "../interfaces";
-import {
-  generateNewToken,
-  setCsrfTokenCookie,
-  validateCsrfToken,
-  parseTokenFromPostRequestCookies,
-} from "./csrfUtils";
+import { validateCsrfToken } from "./csrfUtils";
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -123,7 +118,7 @@ export async function initializeAppAuth(req, res, appObj = app) {
       .catch((error) => {
         // Oh no! Return the error.
         logger.error(error);
-        return res
+        res
           .status(400)
           .json(
             constructProblemDetail(
@@ -243,12 +238,7 @@ function invalidCsrfResponse(res) {
  */
 export async function validateAddress(req, res, appObj = app) {
   const tokenObject = appObj["tokenObject"];
-  const parsedTokenFromRequestCookies = parseTokenFromPostRequestCookies(req);
   const csrfTokenValid = validateCsrfToken(req);
-  if (!parsedTokenFromRequestCookies) {
-    const newToken = generateNewToken();
-    setCsrfTokenCookie(res, newToken);
-  }
   if (!csrfTokenValid) {
     return invalidCsrfResponse(res);
   }
