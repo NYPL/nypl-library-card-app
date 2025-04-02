@@ -409,6 +409,9 @@ export async function callPatronAPI(
         error: err.message,
       };
     }
+    if (err.response?.data.detail.includes("PIN is trivial"))
+      err.response.data.detail =
+        "Password cannot contain consecutively repeating characters three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab";
     if (status === 401 || status === 403) {
       serverError = { type: "internal" };
     }
