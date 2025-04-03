@@ -10,6 +10,8 @@ import useFormDataContext from "../../src/context/FormDataContext";
 import { FormResults } from "../../src/interfaces";
 import { homePageRedirect } from "../../src/utils/utils";
 import { cookieDomain } from "../../appConfig";
+import * as cookie from "../../src/utils/CookieUtils";
+
 import ilsLibraryList from "../../src/data/ilsLibraryList";
 
 function ConfirmationPage(): JSX.Element {
@@ -90,10 +92,12 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (!query.newCard) {
     return homePageRedirect();
   }
-  res.setHeader(
-    "Set-Cookie",
-    `nyplUserRegistered=true; Max-Age=600; path=/; domain=${cookieDomain};`
-  );
+  const csrfTokenName = cookie.metadata().csrfToken.name;
+  res.setHeader("Set-Cookie", [
+    `nyplUserRegistered=true; Max-Age=600; path=/; domain=${cookieDomain};`,
+    // delete csrf token cookie after successful registration
+    `${csrfTokenName}=; Max-Age=-1; path=/; domain=${cookieDomain};`,
+  ]);
   return {
     props: {
       ...(await serverSideTranslations(query?.lang?.toString() || "en", [
