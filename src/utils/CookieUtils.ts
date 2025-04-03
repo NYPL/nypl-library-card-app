@@ -1,15 +1,5 @@
 import { serialize } from "cookie";
 
-/**
- * set
- * Function to set cookies on the server side based on with minor updates:
- * https://github.com/vercel/next.js/blob/master/examples/api-routes-middleware/utils/cookies.js
- */
-const set = (res, value) => {
-  const cookie = buildCookieHeader(value);
-  return res.setHeader("Set-Cookie", cookie);
-};
-
 const buildCookieHeader = (value) => {
   const { name, options } = metadata().csrfToken;
   const stringValue =
@@ -45,4 +35,4 @@ const metadata = () => {
   };
 };
 
-export { set, metadata, buildCookieHeader };
+export { metadata, buildCookieHeader };

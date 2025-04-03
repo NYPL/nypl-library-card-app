@@ -66,24 +66,19 @@ function HomePage({ policyType, csrfToken, lang }: HomePageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const tokenFromRequestCookie = parseTokenFromPostRequestCookies(context.req);
   const { query } = context;
-  let newTokenCookie;
-  let csrfToken = tokenFromRequestCookie.value;
-
-  if (!csrfToken) {
-    csrfToken = generateNewToken();
-    const newTokenCookieString = generateNewCookieTokenAndHash(csrfToken);
-    newTokenCookie = cookie.buildCookieHeader(newTokenCookieString);
-  }
+  // always update csrf token on /new
+  const csrfToken = generateNewToken();
+  const newTokenCookieString = generateNewCookieTokenAndHash(csrfToken);
+  const tokenCookie = cookie.buildCookieHeader(newTokenCookieString);
 
   const headers = [
     // reset cookie that would otherwise bump users out of the flow
     // to succcess page
     `nyplUserRegistered=false; Max-Age=-1; path=/; domain=${cookieDomain};`,
-    newTokenCookie,
+    tokenCookie,
   ];
-  context.res.setHeader("set-cookie", headers);
+  context.res.setHeader("Set-Cookie", headers);
 
   return {
     props: {
