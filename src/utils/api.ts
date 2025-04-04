@@ -238,10 +238,10 @@ function invalidCsrfResponse(res) {
  */
 export async function validateAddress(req, res, appObj = app) {
   const tokenObject = appObj["tokenObject"];
-  const csrfTokenValid = validateCsrfToken(req);
-  if (!csrfTokenValid) {
-    return invalidCsrfResponse(res);
-  }
+  // const csrfTokenValid = validateCsrfToken(req);
+  // if (!csrfTokenValid) {
+  //   return invalidCsrfResponse(res);
+  // }
   if (tokenObject && tokenObject?.access_token) {
     const token = tokenObject.access_token;
     const addressRequest: AddressAPIRequestData = {
