@@ -51,6 +51,9 @@ const validateCsrfToken = (req) => {
   const tokenFromRequestCookie = parseTokenFromPostRequestCookies(req);
   if (!tokenFromRequestBody || !tokenFromRequestCookie) {
     logger.debug(`No csrf token missing in body or header}`);
+    logger.debug(`token from request body: `, tokenFromRequestBody)
+    logger.debug(`token from request cookie: `, tokenFromRequestCookie)
+
     return false;
   }
   const bodyAndCookieTokensMatch =
