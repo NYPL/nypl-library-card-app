@@ -30,6 +30,7 @@ const AddressContainer: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
   const { formValues, csrfToken } = state;
+  console.log("/address", csrfToken);
   const router = useRouter();
   const { t } = useTranslation("common");
   // Specific functions and object from react-hook-form.
