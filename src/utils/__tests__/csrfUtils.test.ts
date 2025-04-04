@@ -62,5 +62,5 @@ describe.only("validateCsrfToken", () => {
     });
 
     expect(isValid).toEqual(false);
-  })
+  });
 });

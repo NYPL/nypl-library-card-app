@@ -11,7 +11,6 @@ import useFormDataContext from "../../src/context/FormDataContext";
 import {
   generateNewCookieTokenAndHash,
   generateNewToken,
-  parseTokenFromPostRequestCookies,
 } from "../../src/utils/csrfUtils";
 import * as cookie from "../../src/utils/CookieUtils";
 
