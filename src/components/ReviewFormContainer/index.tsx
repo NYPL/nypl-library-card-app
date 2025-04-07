@@ -427,6 +427,7 @@ function ReviewFormContainer({ csrfToken }) {
             <AccountFormFields
               id="review-form-account-fields"
               showPasswordOnLoad
+              csrfToken={csrfToken}
             />
             <AcceptTermsFormFields />
             {submitSectionButton}
