@@ -40,7 +40,7 @@ import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 function ReviewFormContainer() {
   const { t } = useTranslation("common");
   const [isLoading, setIsLoading] = useState(false);
-  const { handleSubmit } = useFormContext();
+  const { handleSubmit, getValues } = useFormContext();
   const { state, dispatch } = useFormDataContext();
   const { formValues, errorObj, csrfToken } = state;
   const router = useRouter();
@@ -176,11 +176,11 @@ function ReviewFormContainer() {
     // Update the global state.
     dispatch({
       type: "SET_FORM_DATA",
-      value: formValues,
+      value: {...formValues, ...getValues()},
     });
 
     axios
-      .post("/library-card/api/create-patron", { ...formValues, csrfToken })
+      .post("/library-card/api/create-patron", { ...formValues, ...getValues(), csrfToken })
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
