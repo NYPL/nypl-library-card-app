@@ -38,7 +38,7 @@ export const FormDataContextProvider: React.FC<PropsWithChildren<
   // data in the app. It is exposed to the pages through context. Use
   // the `dispatch` function to update the state properties.
   const [state, dispatch] = useReducer(formReducer, initState);
-  console.log(state);
+  console.log(state)
   return (
     <FormDataContext.Provider value={{ state, dispatch }}>
       {children}
