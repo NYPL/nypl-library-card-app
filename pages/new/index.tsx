@@ -31,7 +31,6 @@ function HomePage({ policyType, csrfToken, lang }: HomePageProps) {
   const { dispatch } = useFormDataContext();
   // When the app loads, get the CSRF token from the server and set it in
   // the app's state.
-  console.log("/new", csrfToken);
   useEffect(() => {
     dispatch({
       type: "SET_CSRF_TOKEN",
