@@ -29,7 +29,7 @@ import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 const AddressContainer: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
-  const { formValues } = state;
+  const { formValues, csrfToken } = state;
   const router = useRouter();
   const { t } = useTranslation("common");
   // Specific functions and object from react-hook-form.
@@ -60,6 +60,7 @@ const AddressContainer: React.FC = () => {
       .post("/library-card/api/address", {
         address: homeAddress,
         isWorkAddress: false,
+        csrfToken,
       })
       .then((response) => {
         // We got a response back so use the updated address response.
