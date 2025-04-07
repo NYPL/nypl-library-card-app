@@ -48,14 +48,14 @@ const UsernameValidationForm = ({
   const usernameWatch = watch("username");
   const { state } = useFormDataContext();
   const { formValues, csrfToken } = state;
-  console.log("/username", csrfToken);
+
   // Whenever the username input changes, revert back to the default state.
   // This is to re-render the button after a patron tries a new username.
   useEffect(() => {
     setUsernameIsAvailable(defaultState);
   }, [usernameWatch]);
 
-  /**s
+  /**
    * validateUsername
    * Call the API to validate the username and either get an available username
    * response or an error response that the username is unavailable or invalid.
