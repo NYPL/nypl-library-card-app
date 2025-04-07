@@ -24,7 +24,7 @@ import { apiTranslations } from "../../data/apiMessageTranslations";
 interface UsernameValidationFormProps {
   id?: string;
   errorMessage?: string;
-  csrfToken: string
+  csrfToken: string;
 }
 
 /**
@@ -35,7 +35,7 @@ interface UsernameValidationFormProps {
 const UsernameValidationForm = ({
   id = "",
   errorMessage = "",
-  csrfToken
+  csrfToken,
 }: UsernameValidationFormProps) => {
   const { t } = useTranslation("common");
   const {

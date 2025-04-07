@@ -18,9 +18,13 @@ import * as cookie from "../../src/utils/CookieUtils";
 
 interface AccountPageProps {
   hasUserAlreadyRegistered?: boolean;
+  csrfToken: string;
 }
 
-function AccountPage({ hasUserAlreadyRegistered }: AccountPageProps) {
+function AccountPage({
+  hasUserAlreadyRegistered,
+  csrfToken,
+}: AccountPageProps) {
   const { t } = useTranslation("common");
   const router = useRouter();
   useEffect(() => {
@@ -31,7 +35,7 @@ function AccountPage({ hasUserAlreadyRegistered }: AccountPageProps) {
       <Heading level="two">{t("account.title")}</Heading>
       <p>{t("account.description")}</p>
       <p>{t("internationalInstructions")}</p>
-      <AccountFormContainer csrfToken={csrfToken}/>
+      <AccountFormContainer csrfToken={csrfToken} />
     </>
   );
 }
