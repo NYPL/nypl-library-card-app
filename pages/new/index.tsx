@@ -3,17 +3,8 @@
  * Do NOT point the browser to http://localhost:3000 with no route.
  * If you do, you will throw an error related to i18next.
  * */
-
-import { useEffect } from "react";
 import { Heading } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
-import useFormDataContext from "../../src/context/FormDataContext";
-import {
-  generateNewCookieTokenAndHash,
-  generateNewToken,
-  parseTokenFromPostRequestCookies,
-} from "../../src/utils/csrfUtils";
-import * as cookie from "../../src/utils/CookieUtils";
 
 import { GetServerSideProps } from "next";
 import { useTranslation } from "next-i18next";
@@ -23,7 +14,6 @@ import { cookieDomain } from "../../appConfig.js";
 
 interface HomePageProps {
   policyType: any;
-  csrfToken: any;
   lang: string;
 }
 

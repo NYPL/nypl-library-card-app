@@ -14,7 +14,7 @@ import {
   generateNewCookieTokenAndHash,
   generateNewToken,
 } from "../../src/utils/csrfUtils";
-import * as cookie from "../../src/utils/CookieUtils"
+import * as cookie from "../../src/utils/CookieUtils";
 interface WorkAddressPageProps {
   hasUserAlreadyRegistered?: boolean;
   csrfToken: string;
