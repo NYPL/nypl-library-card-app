@@ -127,17 +127,6 @@ function ReviewFormContainer() {
         {t("button.edit")}
       </a>
     );
-  const submitSectionButton = (
-    <ButtonGroup>
-      <Button
-        buttonType="primary"
-        id="submitSectionButton"
-        type="submit"
-      >
-        {t("button.submit")}
-      </Button>
-    </ButtonGroup>
-  );
 
   /**
    * editSectionInfo
@@ -408,7 +397,6 @@ function ReviewFormContainer() {
             )}
           >
             <PersonalFormFields />
-            {submitSectionButton}
           </Form>
         )}
       </div>
@@ -434,7 +422,6 @@ function ReviewFormContainer() {
               showPasswordOnLoad
             />
             <AcceptTermsFormFields />
-            {submitSectionButton}
           </Form>
         )}
       </div>
