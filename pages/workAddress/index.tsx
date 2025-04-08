@@ -56,6 +56,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const hasUserAlreadyRegistered = !!req.cookies["nyplUserRegistered"];
   return {
     props: {
+      csrfToken,
       hasUserAlreadyRegistered,
       ...(await serverSideTranslations(query?.lang?.toString() || "en", [
         "common",
