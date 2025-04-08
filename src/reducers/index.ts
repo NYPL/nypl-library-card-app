@@ -1,4 +1,6 @@
 export function formReducer(state, action) {
+  console.log(`dispatching ${action.type} with`);
+  console.dir(action.value, { depth: null });
   switch (action.type) {
     case "SET_FORM_DATA": {
       return {
