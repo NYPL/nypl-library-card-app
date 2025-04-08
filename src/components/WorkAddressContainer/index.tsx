@@ -40,7 +40,8 @@ const AddressContainer = ({ csrfToken }) => {
    * submitForm
    * @param formData - data object returned from react-hook-form
    */
-  const submitForm = (formData) => {
+  const submitForm = (formData, e) => {
+    e.preventDefault();
     setIsLoading(true);
     const workAddress = constructAddressType(formData, "work");
     // If the work address wasn't filled out, that's okay, proceed.
@@ -129,7 +130,7 @@ const AddressContainer = ({ csrfToken }) => {
       <Loader isLoading={isLoading} />
 
       <Form
-        action="/library-card/api/submit"
+        // action="/library-card/api/submit"
         id="work-address-container"
         method="post"
         onSubmit={handleSubmit(submitForm)}

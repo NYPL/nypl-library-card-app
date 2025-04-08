@@ -438,7 +438,7 @@ function ReviewFormContainer({ csrfToken }) {
       <div className={styles.formSection}>{t("review.nextStep")}</div>
 
       <Form
-        action="/library-card/api/submit"
+        // action="/library-card/api/submit"
         id="review-submit"
         method="post"
         onSubmit={handleSubmit(submitForm)}

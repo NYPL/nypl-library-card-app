@@ -82,7 +82,8 @@ function AddressVerificationContainer() {
     return updatedValues;
   };
 
-  const submitForm = (formData) => {
+  const submitForm = (formData, e) => {
+    e.preventDefault();
     // These are the values from the radio button inputs if they were rendered.
     const home = formData["home-address-select"];
     const work = formData["work-address-select"];
@@ -191,7 +192,7 @@ function AddressVerificationContainer() {
 
   return (
     <Form
-      action="/library-card/api/submit"
+      // action="/library-card/api/submit"
       id="address-verification-container"
       method="post"
       onSubmit={handleSubmit(submitForm)}
