@@ -16,7 +16,7 @@ jest.mock("crypto", () => {
   };
 });
 
-describe.only("validateCsrfToken", () => {
+describe("validateCsrfToken", () => {
   test("it returns invalid when no token is set", () => {
     const csrfTokenValid = csrfUtils.validateCsrfToken({
       cookies: {},
