@@ -16,7 +16,7 @@ import { findLibraryCode } from "../../utils/formDataUtils";
 import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
-const AccountFormContainer = () => {
+const AccountFormContainer = ({ csrfToken }) => {
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const router = useRouter();
@@ -49,7 +49,7 @@ const AccountFormContainer = () => {
       method="post"
       onSubmit={handleSubmit(submitForm)}
     >
-      <AccountFormFields id="account-form-container" />
+      <AccountFormFields csrfToken={csrfToken} id="account-form-container" />
       <AcceptTermsFormFields />
 
       <FormRow display="none">

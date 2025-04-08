@@ -9,12 +9,18 @@ import {
   homePageRedirect,
   redirectIfUserHasRegistered,
 } from "../../src/utils/utils";
+import {
+  generateNewToken,
+  generateNewCookieTokenAndHash,
+} from "../../src/utils/csrfUtils";
+import * as cookie from "../../src/utils/CookieUtils";
 
 interface ReviewProps {
   hasUserAlreadyRegistered?: boolean;
+  csrfToken: string;
 }
 
-function ReviewPage({ hasUserAlreadyRegistered }: ReviewProps) {
+function ReviewPage({ hasUserAlreadyRegistered, csrfToken }: ReviewProps) {
   const { t } = useTranslation("common");
   const router = useRouter();
   useEffect(() => {
@@ -25,7 +31,7 @@ function ReviewPage({ hasUserAlreadyRegistered }: ReviewProps) {
       <Heading level="two">{t("review.title")}</Heading>
       <p>{t("review.description")}</p>
       <p>{t("internationalInstructions")}</p>
-      <ReviewFormContainer />
+      <ReviewFormContainer csrfToken={csrfToken} />
     </>
   );
 }
@@ -33,6 +39,7 @@ function ReviewPage({ hasUserAlreadyRegistered }: ReviewProps) {
 export const getServerSideProps: GetServerSideProps = async ({
   query,
   req,
+  res,
 }) => {
   // We only want to get to this page from a form submission flow. If the page
   // is hit directly, then redirect to the home page.
@@ -40,8 +47,15 @@ export const getServerSideProps: GetServerSideProps = async ({
     return homePageRedirect();
   }
   const hasUserAlreadyRegistered = !!req.cookies["nyplUserRegistered"];
+
+  const csrfToken = generateNewToken();
+  const newTokenCookieString = generateNewCookieTokenAndHash(csrfToken);
+  const tokenCookie = cookie.buildCookieHeader(newTokenCookieString);
+  res.setHeader("Set-Cookie", [tokenCookie]);
+
   return {
     props: {
+      csrfToken,
       hasUserAlreadyRegistered,
       ...(await serverSideTranslations(query?.lang?.toString() || "en", [
         "common",

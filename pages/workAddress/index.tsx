@@ -10,12 +10,20 @@ import {
   redirectIfUserHasRegistered,
 } from "../../src/utils/utils";
 import { useRouter } from "next/router";
-
+import {
+  generateNewCookieTokenAndHash,
+  generateNewToken,
+} from "../../src/utils/csrfUtils";
+import * as cookie from "../../src/utils/CookieUtils";
 interface WorkAddressPageProps {
   hasUserAlreadyRegistered?: boolean;
+  csrfToken: string;
 }
 
-function WorkAddressPage({ hasUserAlreadyRegistered }: WorkAddressPageProps) {
+function WorkAddressPage({
+  hasUserAlreadyRegistered,
+  csrfToken,
+}: WorkAddressPageProps) {
   const { t } = useTranslation("common");
   const router = useRouter();
   useEffect(() => {
@@ -26,7 +34,7 @@ function WorkAddressPage({ hasUserAlreadyRegistered }: WorkAddressPageProps) {
       <Heading level="two">{t("location.workAddress.title")}</Heading>
       <p>{t("location.workAddress.description.part1")}</p>
       <p>{t("internationalInstructions")}</p>
-      <WorkAddressContainer />
+      <WorkAddressContainer csrfToken={csrfToken} />
     </>
   );
 }
@@ -34,7 +42,12 @@ function WorkAddressPage({ hasUserAlreadyRegistered }: WorkAddressPageProps) {
 export const getServerSideProps: GetServerSideProps = async ({
   query,
   req,
+  res,
 }) => {
+  const csrfToken = generateNewToken();
+  const newTokenCookieString = generateNewCookieTokenAndHash(csrfToken);
+  const tokenCookie = cookie.buildCookieHeader(newTokenCookieString);
+  res.setHeader("Set-Cookie", [tokenCookie]);
   // We only want to get to this page from a form submission flow. If the page
   // is hit directly, then redirect to the home page.
   if (!query.newCard) {

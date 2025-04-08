@@ -26,17 +26,16 @@ import { createQueryParams } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 
-const AddressContainer: React.FC = () => {
+const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
-  const { formValues, addressesResponse, csrfToken } = state;
+  const { formValues, addressesResponse } = state;
   const router = useRouter();
   const { t } = useTranslation("common");
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
   // Get the URL query params for `newCard` and `lang`.
   const queryStr = createQueryParams(router?.query);
-
   /**
    * submitForm
    * @param formData - data object returned from react-hook-form

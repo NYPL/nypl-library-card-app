@@ -24,6 +24,7 @@ import { apiTranslations } from "../../data/apiMessageTranslations";
 interface UsernameValidationFormProps {
   id?: string;
   errorMessage?: string;
+  csrfToken: string;
 }
 
 /**
@@ -34,6 +35,7 @@ interface UsernameValidationFormProps {
 const UsernameValidationForm = ({
   id = "",
   errorMessage = "",
+  csrfToken,
 }: UsernameValidationFormProps) => {
   const { t } = useTranslation("common");
   const {
@@ -47,7 +49,7 @@ const UsernameValidationForm = ({
   const { watch, getValues, register, errors } = useFormContext();
   const usernameWatch = watch("username");
   const { state } = useFormDataContext();
-  const { formValues, csrfToken } = state;
+  const { formValues } = state;
 
   // Whenever the username input changes, revert back to the default state.
   // This is to re-render the button after a patron tries a new username.
