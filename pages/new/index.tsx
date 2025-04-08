@@ -28,17 +28,16 @@ interface HomePageProps {
 
 function HomePage({ policyType, csrfToken, lang }: HomePageProps) {
   const { t } = useTranslation("common");
-  const { dispatch, state } = useFormDataContext();
+  const { dispatch } = useFormDataContext();
   // When the app loads, get the CSRF token from the server and set it in
   // the app's state.
-  console.log("/new", csrfToken);
   useEffect(() => {
     dispatch({
       type: "SET_CSRF_TOKEN",
       value: csrfToken,
     });
   }, []);
-  console.log(state);
+
   // If we get a new policy type from the home page, make sure it gets to the
   // form on the next page. Used for the no-js scenario.
   const queryParam = policyType ? `&policyType=${policyType}` : "";

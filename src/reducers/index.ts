@@ -13,7 +13,6 @@ export function formReducer(state, action) {
       };
     }
     case "SET_CSRF_TOKEN": {
-      console.log("setting csrf token", action.value);
       return {
         ...state,
         csrfToken: action.value,
