@@ -12,6 +12,9 @@ import {
  * @param res - Next response object
  */
 async function address(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== "POST") {
+    return res.json(405);
+  }
   // Run the request through the middleware.
   await runMiddleware(req, res, cors);
   // Initialize the authentication for the app.
