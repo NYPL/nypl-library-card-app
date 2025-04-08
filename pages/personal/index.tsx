@@ -10,7 +10,6 @@ import {
   redirectIfUserHasRegistered,
 } from "../../src/utils/utils";
 import { useRouter } from "next/router";
-import useFormDataContext from "../../src/context/FormDataContext";
 
 interface PersonalInformationProps {
   hasUserAlreadyRegistered?: boolean;
@@ -20,9 +19,6 @@ function PersonalInformationPage({
   hasUserAlreadyRegistered,
 }: PersonalInformationProps) {
   const { t } = useTranslation("common");
-  const { state } = useFormDataContext();
-  const { csrfToken } = state;
-  console.log("/personal", csrfToken);
   const router = useRouter();
   useEffect(() => {
     redirectIfUserHasRegistered(hasUserAlreadyRegistered, router);

@@ -57,7 +57,7 @@ const UsernameValidationForm = ({
     setUsernameIsAvailable(defaultState);
   }, [usernameWatch]);
 
-  /**s
+  /**
    * validateUsername
    * Call the API to validate the username and either get an available username
    * response or an error response that the username is unavailable or invalid.
