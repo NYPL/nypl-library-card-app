@@ -11,13 +11,23 @@ import {
 } from "../../src/utils/utils";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import {
+  generateNewToken,
+  generateNewCookieTokenAndHash,
+} from "../../src/utils/csrfUtils";
+import * as cookie from "../../src/utils/CookieUtils";
 
 interface PageProps {
   location: string;
   hasUserAlreadyRegistered?: boolean;
+  csrfToken: string;
 }
 
-function AddressPage({ location, hasUserAlreadyRegistered }: PageProps) {
+function AddressPage({
+  location,
+  hasUserAlreadyRegistered,
+  csrfToken,
+}: PageProps) {
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const { t } = useTranslation("common");
@@ -36,19 +46,23 @@ function AddressPage({ location, hasUserAlreadyRegistered }: PageProps) {
     <>
       <Heading level="two">{t("location.title")}</Heading>
       <p>{t("internationalInstructions")}</p>
-      <AddressContainer />
+      <AddressContainer csrfToken={csrfToken} />
     </>
   );
 }
 
 export async function getServerSideProps(context) {
-  const { query } = context;
+  const { query, res, req } = context;
   // We only want to get to this page from a form submission flow. If the page
   // is hit directly, then redirect to the home page.
   if (!query.newCard) {
     return homePageRedirect();
   }
-  const hasUserAlreadyRegistered = !!context.req.cookies["nyplUserRegistered"];
+  const hasUserAlreadyRegistered = !!req.cookies["nyplUserRegistered"];
+  const csrfToken = generateNewToken();
+  const newTokenCookieString = generateNewCookieTokenAndHash(csrfToken);
+  const tokenCookie = cookie.buildCookieHeader(newTokenCookieString);
+  res.setHeader("Set-Cookie", [tokenCookie]);
   // Get the user's IP address and convert it to an object that tells us if
   // the user is in NYS/NYC. Will be `undefined` if the call to the IP/location
   // conversion API fails or if there is no IP address.
@@ -58,6 +72,7 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
+      csrfToken,
       hasUserAlreadyRegistered,
       location,
       ...(await serverSideTranslations(query?.lang?.toString() || "en", [

@@ -16,9 +16,14 @@ import LibraryListFormFields from "../LibraryListFormFields";
 interface AccountFormFieldsProps {
   id?: string;
   showPasswordOnLoad?: boolean;
+  csrfToken: string;
 }
 
-function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
+function AccountFormFields({
+  id,
+  showPasswordOnLoad,
+  csrfToken,
+}: AccountFormFieldsProps) {
   const { t } = useTranslation("common");
   const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();
@@ -64,6 +69,7 @@ function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
       <UsernameValidationFormFields
         id={`${id}-accountForm-1`}
         errorMessage={t("account.errorMessage.username")}
+        csrfToken={csrfToken}
       />
 
       <FormRow id={`${id}-accountForm-2`}>
