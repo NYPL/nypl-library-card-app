@@ -5,6 +5,7 @@
 - add more descriptive server logs for csrf token debugging
 - use react-hook-form data in final post request
 - remove double submit buttons from form submission after error response. See [this pr description](https://github.com/NYPL/nypl-library-card-app/pull/289) for more info 
+- update next version
 
 ### 1.1.3 Mask PIN error message
 - Transform Sierra error message "PIN is trivial" to something more legible to users
