@@ -37,12 +37,12 @@ import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
  * ReviewFormContainer
  * Main page component for the "form submission review" page.
  */
-function ReviewFormContainer() {
+function ReviewFormContainer({ csrfToken }) {
   const { t } = useTranslation("common");
   const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit, getValues } = useFormContext();
   const { state, dispatch } = useFormDataContext();
-  const { formValues, errorObj, csrfToken } = state;
+  const { formValues, errorObj } = state;
   const router = useRouter();
   const {
     query: { lang = "en" },
@@ -173,7 +173,6 @@ function ReviewFormContainer() {
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
-        
 
         // Adobe Analytics
         aaUtils.trackApplicationSubmitEvent({
@@ -420,6 +419,7 @@ function ReviewFormContainer() {
             <AccountFormFields
               id="review-form-account-fields"
               showPasswordOnLoad
+              csrfToken={csrfToken}
             />
             <AcceptTermsFormFields />
           </Form>
@@ -429,7 +429,7 @@ function ReviewFormContainer() {
       <div className={styles.formSection}>{t("review.nextStep")}</div>
 
       <Form
-        action="/library-card/api/submit"
+        // action="/library-card/api/submit"
         id="review-submit"
         method="post"
         onSubmit={handleSubmit(submitForm)}

@@ -142,7 +142,6 @@ export interface FormResults {
 export interface FormData {
   results: FormResults | undefined;
   errorObj: ProblemDetail | undefined;
-  csrfToken: string;
   formValues: FormInputData;
   addressesResponse: AddressesResponse;
 }
