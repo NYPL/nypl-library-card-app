@@ -6,6 +6,7 @@
 - use react-hook-form data in final post request
 - remove double submit buttons from form submission after error response. See [this pr description](https://github.com/NYPL/nypl-library-card-app/pull/289) for more info 
 - update next version
+- fix passwords do not match bug in ReviewFormContainer
 
 ### 1.1.3 Mask PIN error message
 - Transform Sierra error message "PIN is trivial" to something more legible to users
