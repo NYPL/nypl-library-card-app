@@ -40,7 +40,7 @@ import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 function ReviewFormContainer({ csrfToken }) {
   const { t } = useTranslation("common");
   const [isLoading, setIsLoading] = useState(false);
-  const { handleSubmit } = useFormContext();
+  const { handleSubmit, getValues } = useFormContext();
   const { state, dispatch } = useFormDataContext();
   const { formValues, errorObj } = state;
   const router = useRouter();
@@ -127,13 +127,6 @@ function ReviewFormContainer({ csrfToken }) {
         {t("button.edit")}
       </a>
     );
-  const submitSectionButton = (
-    <ButtonGroup>
-      <Button buttonType="primary" id="submitSectionButton" type="submit">
-        {t("button.submit")}
-      </Button>
-    </ButtonGroup>
-  );
 
   /**
    * editSectionInfo
@@ -172,11 +165,11 @@ function ReviewFormContainer({ csrfToken }) {
     // Update the global state.
     dispatch({
       type: "SET_FORM_DATA",
-      value: formValues,
+      value: {...formValues, ...getValues()},
     });
 
     axios
-      .post("/library-card/api/create-patron", { ...formValues, csrfToken })
+      .post("/library-card/api/create-patron", { ...formValues, ...getValues(), csrfToken })
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
@@ -403,7 +396,6 @@ function ReviewFormContainer({ csrfToken }) {
             )}
           >
             <PersonalFormFields />
-            {submitSectionButton}
           </Form>
         )}
       </div>
@@ -430,7 +422,6 @@ function ReviewFormContainer({ csrfToken }) {
               csrfToken={csrfToken}
             />
             <AcceptTermsFormFields />
-            {submitSectionButton}
           </Form>
         )}
       </div>
