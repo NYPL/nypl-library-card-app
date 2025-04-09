@@ -31,7 +31,8 @@ const PersonalFormContainer = () => {
    * submitForm
    * @param formData - data object returned from react-hook-form
    */
-  const submitForm = (formData) => {
+  const submitForm = (formData, e) => {
+    e.preventDefault();
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",
@@ -47,7 +48,7 @@ const PersonalFormContainer = () => {
       id="perform-form-container"
       onSubmit={handleSubmit(submitForm)}
       method="post"
-      action="/library-card/api/submit"
+      // action="/library-card/api/submit"
     >
       <PersonalFormFields
         agencyType={formValues.policyType}
