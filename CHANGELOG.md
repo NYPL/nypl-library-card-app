@@ -1,5 +1,11 @@
 ## CHANGE LOG
 
+### 1.1.4 CSRF and resubmission bugs
+- remove csrf token from reducer state, instead pass in as prop
+- add more descriptive server logs for csrf token debugging
+- use react-hook-form data in final post request
+- remove double submit buttons from form submission after error response. See [this pr description](https://github.com/NYPL/nypl-library-card-app/pull/289) for more info 
+
 ### 1.1.3 Mask PIN error message
 - Transform Sierra error message "PIN is trivial" to something more legible to users
 
