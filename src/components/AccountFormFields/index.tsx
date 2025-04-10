@@ -30,7 +30,6 @@ function AccountFormFields({
   const [showPassword, setShowPassword] = useState(true);
   const [clientSide, setClientSide] = useState(false);
   const { formValues } = state;
-  const originalPassword = getValues("password");
 
   // When the component loads, if we want to show the password by default,
   // show it.
@@ -107,7 +106,7 @@ function AccountFormFields({
             maxLength={maxPasswordLength}
             ref={register({
               validate: (val) =>
-                val === originalPassword ||
+                val === getValues("password") ||
                 t("account.errorMessage.verifyPassword"),
             })}
             defaultValue={formValues.verifyPassword}
