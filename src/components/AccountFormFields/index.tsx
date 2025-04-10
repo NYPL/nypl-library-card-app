@@ -16,16 +16,20 @@ import LibraryListFormFields from "../LibraryListFormFields";
 interface AccountFormFieldsProps {
   id?: string;
   showPasswordOnLoad?: boolean;
+  csrfToken: string;
 }
 
-function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
+function AccountFormFields({
+  id,
+  showPasswordOnLoad,
+  csrfToken,
+}: AccountFormFieldsProps) {
   const { t } = useTranslation("common");
   const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();
   const [showPassword, setShowPassword] = useState(true);
   const [clientSide, setClientSide] = useState(false);
   const { formValues } = state;
-  const originalPassword = getValues("password");
 
   // When the component loads, if we want to show the password by default,
   // show it.
@@ -64,6 +68,7 @@ function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
       <UsernameValidationFormFields
         id={`${id}-accountForm-1`}
         errorMessage={t("account.errorMessage.username")}
+        csrfToken={csrfToken}
       />
 
       <FormRow id={`${id}-accountForm-2`}>
@@ -101,7 +106,7 @@ function AccountFormFields({ id, showPasswordOnLoad }: AccountFormFieldsProps) {
             maxLength={maxPasswordLength}
             ref={register({
               validate: (val) =>
-                val === originalPassword ||
+                val === getValues("password") ||
                 t("account.errorMessage.verifyPassword"),
             })}
             defaultValue={formValues.verifyPassword}

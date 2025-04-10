@@ -49,18 +49,31 @@ const parseTokenFromPostRequestCookies = (req) => {
 const validateCsrfToken = (req) => {
   const tokenFromRequestBody = req.body?.csrfToken;
   const tokenFromRequestCookie = parseTokenFromPostRequestCookies(req);
-  if (postRequestHashMatchesServerHash(tokenFromRequestCookie)) {
-    return (
-      req.method === "POST" &&
-      tokenFromRequestCookie.value === tokenFromRequestBody
-    );
-  } else {
+  if (!tokenFromRequestBody || !tokenFromRequestCookie) {
+    logger.debug(`No csrf token missing in body or header}`);
+    logger.debug(`token from request body: `, tokenFromRequestBody);
+    logger.debug(`token from request cookie: `, tokenFromRequestCookie.value);
+
+    return false;
+  }
+  const bodyAndCookieTokensMatch =
+    tokenFromRequestCookie.value === tokenFromRequestBody;
+  const requestHashMatchesServerHash = postRequestHashMatchesServerHash(
+    tokenFromRequestCookie
+  );
+  if (!requestHashMatchesServerHash) {
+    logger.debug("CSRF token validation failed.");
+    logger.debug(`Request hash does not match server hash`);
+    return false;
+  }
+  if (!bodyAndCookieTokensMatch) {
     logger.debug("CSRF token validation failed.");
     logger.debug(
-      `Request body token: ${tokenFromRequestBody}\nRequestCookie token: ${tokenFromRequestCookie}`
+      `Request body token: ${tokenFromRequestBody}\nRequestCookie token: ${tokenFromRequestCookie}\nNot a match.`
     );
     return false;
   }
+  return true;
 };
 
 // Validate that the token value from the request cookies generates what the
@@ -74,13 +87,6 @@ const postRequestHashMatchesServerHash = (tokenFromRequestCookie) => {
   );
 };
 
-// Ensure CSRF Token cookie is set for any subsequent requests.
-// Used as part of the strategy for mitigation for CSRF tokens.
-const setCsrfTokenCookie = (res, csrfToken) => {
-  const newCsrfTokenCookie = generateNewCookieTokenAndHash(csrfToken);
-  cookie.set(res, newCsrfTokenCookie);
-};
-
 const generateNewToken = () => {
   return randomBytes(32).toString("hex");
 };
@@ -89,7 +95,6 @@ export {
   generateSecret,
   validateCsrfToken,
   postRequestHashMatchesServerHash,
-  setCsrfTokenCookie,
   generateNewToken,
   generateNewCookieTokenAndHash,
   parseTokenFromPostRequestCookies,

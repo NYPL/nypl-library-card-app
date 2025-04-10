@@ -16,7 +16,7 @@ import { findLibraryCode } from "../../utils/formDataUtils";
 import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
-const AccountFormContainer = () => {
+const AccountFormContainer = ({ csrfToken }) => {
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const router = useRouter();
@@ -29,7 +29,8 @@ const AccountFormContainer = () => {
    * submitForm
    * @param formData - data object returned from react-hook-form
    */
-  const submitForm = (formData) => {
+  const submitForm = (formData, e) => {
+    e.preventDefault();
     // Convert the home library name to its code value.
     formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
     // Set the global form state...
@@ -44,12 +45,12 @@ const AccountFormContainer = () => {
 
   return (
     <Form
-      action="/library-card/api/submit"
+      // action="/library-card/api/submit"
       id="account-form-container"
       method="post"
       onSubmit={handleSubmit(submitForm)}
     >
-      <AccountFormFields id="account-form-container" />
+      <AccountFormFields csrfToken={csrfToken} id="account-form-container" />
       <AcceptTermsFormFields />
 
       <FormRow display="none">

@@ -37,12 +37,12 @@ import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
  * ReviewFormContainer
  * Main page component for the "form submission review" page.
  */
-function ReviewFormContainer() {
+function ReviewFormContainer({ csrfToken }) {
   const { t } = useTranslation("common");
   const [isLoading, setIsLoading] = useState(false);
-  const { handleSubmit } = useFormContext();
+  const { handleSubmit, getValues } = useFormContext();
   const { state, dispatch } = useFormDataContext();
-  const { formValues, errorObj, csrfToken } = state;
+  const { formValues, errorObj } = state;
   const router = useRouter();
   const {
     query: { lang = "en" },
@@ -127,17 +127,6 @@ function ReviewFormContainer() {
         {t("button.edit")}
       </a>
     );
-  const submitSectionButton = (
-    <ButtonGroup>
-      <Button
-        buttonType="primary"
-        id="submitSectionButton"
-        type="submit"
-      >
-        {t("button.submit")}
-      </Button>
-    </ButtonGroup>
-  );
 
   /**
    * editSectionInfo
@@ -176,15 +165,14 @@ function ReviewFormContainer() {
     // Update the global state.
     dispatch({
       type: "SET_FORM_DATA",
-      value: formValues,
+      value: {...formValues, ...getValues()},
     });
 
     axios
-      .post("/library-card/api/create-patron", { ...formValues, csrfToken })
+      .post("/library-card/api/create-patron", { ...formValues, ...getValues(), csrfToken })
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
-        
 
         // Adobe Analytics
         aaUtils.trackApplicationSubmitEvent({
@@ -408,7 +396,6 @@ function ReviewFormContainer() {
             )}
           >
             <PersonalFormFields />
-            {submitSectionButton}
           </Form>
         )}
       </div>
@@ -432,9 +419,9 @@ function ReviewFormContainer() {
             <AccountFormFields
               id="review-form-account-fields"
               showPasswordOnLoad
+              csrfToken={csrfToken}
             />
             <AcceptTermsFormFields />
-            {submitSectionButton}
           </Form>
         )}
       </div>
@@ -442,7 +429,7 @@ function ReviewFormContainer() {
       <div className={styles.formSection}>{t("review.nextStep")}</div>
 
       <Form
-        action="/library-card/api/submit"
+        // action="/library-card/api/submit"
         id="review-submit"
         method="post"
         onSubmit={handleSubmit(submitForm)}

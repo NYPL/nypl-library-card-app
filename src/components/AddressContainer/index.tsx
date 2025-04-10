@@ -26,10 +26,10 @@ import { nyCounties, nyCities, createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../context/FormDataContext";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 
-const AddressContainer: React.FC = () => {
+const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
-  const { formValues, csrfToken } = state;
+  const { formValues } = state;
   const router = useRouter();
   const { t } = useTranslation("common");
   // Specific functions and object from react-hook-form.
@@ -41,7 +41,8 @@ const AddressContainer: React.FC = () => {
    * submitForm
    * @param formData - data object returned from react-hook-form
    */
-  const submitForm = (formData) => {
+  const submitForm = (formData, e) => {
+    e.preventDefault();
     setIsLoading(true);
 
     // Set the global form state...
@@ -140,7 +141,7 @@ const AddressContainer: React.FC = () => {
       <Loader isLoading={isLoading} />
 
       <Form
-        action="/library-card/api/submit"
+        // action="/library-card/api/submit"
         id="address-container"
         method="post"
         onSubmit={handleSubmit(submitForm)}

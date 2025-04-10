@@ -10,12 +10,21 @@ import {
   redirectIfUserHasRegistered,
 } from "../../src/utils/utils";
 import { useRouter } from "next/router";
+import {
+  generateNewToken,
+  generateNewCookieTokenAndHash,
+} from "../../src/utils/csrfUtils";
+import * as cookie from "../../src/utils/CookieUtils";
 
 interface AccountPageProps {
   hasUserAlreadyRegistered?: boolean;
+  csrfToken: string;
 }
 
-function AccountPage({ hasUserAlreadyRegistered }: AccountPageProps) {
+function AccountPage({
+  hasUserAlreadyRegistered,
+  csrfToken,
+}: AccountPageProps) {
   const { t } = useTranslation("common");
   const router = useRouter();
   useEffect(() => {
@@ -26,7 +35,7 @@ function AccountPage({ hasUserAlreadyRegistered }: AccountPageProps) {
       <Heading level="two">{t("account.title")}</Heading>
       <p>{t("account.description")}</p>
       <p>{t("internationalInstructions")}</p>
-      <AccountFormContainer />
+      <AccountFormContainer csrfToken={csrfToken} />
     </>
   );
 }
@@ -34,6 +43,7 @@ function AccountPage({ hasUserAlreadyRegistered }: AccountPageProps) {
 export const getServerSideProps: GetServerSideProps = async ({
   query,
   req,
+  res,
 }) => {
   // We only want to get to this page from a form submission flow. If the page
   // is hit directly, then redirect to the home page.
@@ -42,8 +52,14 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
   const hasUserAlreadyRegistered = !!req.cookies["nyplUserRegistered"];
 
+  const csrfToken = generateNewToken();
+  const newTokenCookieString = generateNewCookieTokenAndHash(csrfToken);
+  const tokenCookie = cookie.buildCookieHeader(newTokenCookieString);
+  res.setHeader("Set-Cookie", [tokenCookie]);
+
   return {
     props: {
+      csrfToken,
       hasUserAlreadyRegistered,
       ...(await serverSideTranslations(query?.lang?.toString() || "en", [
         "common",
