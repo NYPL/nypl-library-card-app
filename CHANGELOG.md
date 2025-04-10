@@ -1,6 +1,6 @@
 ## CHANGE LOG
 
-### 1.1.4 CSRF and resubmission bugs
+### 1.2.2 CSRF and resubmission bugs
 - remove csrf token from reducer state, instead pass in as prop
 - add more descriptive server logs for csrf token debugging
 - use react-hook-form data in final post request
@@ -8,8 +8,14 @@
 - update next version
 - fix passwords do not match bug in ReviewFormContainer
 
-### 1.1.3 Mask PIN error message
+### 1.2.1 Mask PIN error message
 - Transform Sierra error message "PIN is trivial" to something more legible to users
+
+### v1.2.0 GTM Update (3/27)
+
+- Adds new GTM code snippet and removes older GA code.
+- Adds GTM event tracking for form submission.
+- More logs for debugging CSRF issues.
 
 ### 1.1.2 Hot fix 3/20
 - Updating the legacy catalog library card form link to `https://on.nypl.org/internationalresearch`.
