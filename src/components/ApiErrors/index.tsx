@@ -30,13 +30,13 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
     if (!problemDetail || problemDetail?.status < 400) {
       return null;
     }
-
     if (typeof problemDetail !== "string" && !problemDetail.detail) {
       console.log("ApiErrors problemDetail: ", problemDetail);
       problemDetail.detail = t("apiErrors.defaultError");
     }
     if (lang !== "en" && typeof problemDetail !== "string") {
       const errorToTranslate = problemDetail?.detail;
+      console.log({errorToTranslate})
       const newErrorMessage = errorToTranslate
         ? apiErrorTranslations[errorToTranslate][lang]
         : t("apiErrors.defaultError");

@@ -410,6 +410,7 @@ export async function callPatronAPI(
       };
     }
     if (err.response?.data.detail.includes("PIN is trivial"))
+      console.log("detail before transform", err.response?.data.detail)
       err.response.data.detail =
         "Password cannot contain consecutively repeating characters three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab";
     if (status === 401 || status === 403) {
