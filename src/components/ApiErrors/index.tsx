@@ -36,11 +36,17 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
     }
     if (lang !== "en" && typeof problemDetail !== "string") {
       const errorToTranslate = problemDetail?.detail;
-      console.log({errorToTranslate})
       const newErrorMessage = errorToTranslate
         ? apiErrorTranslations[errorToTranslate][lang]
         : t("apiErrors.defaultError");
       problemDetail.detail = newErrorMessage;
+    } else if (
+      lang === "en" &&
+      typeof problemDetail !== "string" &&
+      problemDetail.detail.includes("PIN is trivial")
+    ) {
+      problemDetail.detail =
+        "Password cannot contain consecutively repeating characters three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab";
     }
 
     /**
