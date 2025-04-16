@@ -30,7 +30,6 @@ function AccountFormFields({
   const [showPassword, setShowPassword] = useState(true);
   const [clientSide, setClientSide] = useState(false);
   const { formValues } = state;
-  const originalPassword = getValues("password");
 
   // When the component loads, if we want to show the password by default,
   // show it.
