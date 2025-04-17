@@ -26,7 +26,7 @@ function AddressVerificationPage({
   return (
     <>
       <Heading level="two">{t("verifyAddress.title")}</Heading>
-      <p>{t("verifyAddress.description")}</p>
+      <p id="select-address-heading">{t("verifyAddress.description")}</p>
       <AddressVerificationContainer />
     </>
   );

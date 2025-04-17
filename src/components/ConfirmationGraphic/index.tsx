@@ -50,7 +50,7 @@ const ConfirmationContainer = () => {
           width="939"
         />
         <div className="background-lion">
-          <div className="grid-item">
+          <div id="member-name" className="grid-item">
             {t("confirmation.graphic.memberName")}
             <div className="content">{name}</div>
           </div>
@@ -62,7 +62,7 @@ const ConfirmationContainer = () => {
             <div className="barcode">{barcode}</div>
           </div>
 
-          <div className="grid-item">
+          <div id="issued" className="grid-item">
             {t("confirmation.graphic.issued")}
             <div className="content">{new Date().toLocaleDateString()}</div>
           </div>

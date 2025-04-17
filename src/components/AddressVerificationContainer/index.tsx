@@ -199,7 +199,9 @@ function AddressVerificationContainer() {
     >
       <FormRow>
         <DSFormField>
-          <Heading level="three">{t("verifyAddress.homeAddress")}</Heading>
+          <Heading id="verify-address-heading" level="three">
+            {t("verifyAddress.homeAddress")}
+          </Heading>
           {renderMultipleAddresses(
             homeAddress,
             "home",
