@@ -21,7 +21,7 @@ The production site on NYPL.org:
 
 The current production version:
 
-- v1.1.5
+- v1.2.3
 
 ## Branch Statuses
 
