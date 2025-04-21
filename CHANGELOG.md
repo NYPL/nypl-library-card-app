@@ -2,6 +2,7 @@
 
 ### 1.1.3 Mask PIN error message
 - Transform Sierra error message "PIN is trivial" to something more legible to users
+- Remove period check from password validation
 
 ### 1.1.2 Hot fix 3/20
 - Updating the legacy catalog library card form link to `https://on.nypl.org/internationalresearch`.
