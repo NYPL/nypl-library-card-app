@@ -1,5 +1,9 @@
 ## CHANGE LOG
 
+### 1.2.3 Fix PIN translation errors
+- use password instructions for "PIN is trivial" error translation
+- add id's to facilitate QA testing in other languages
+
 ### 1.2.2 CSRF and resubmission bugs
 - remove csrf token from reducer state, instead pass in as prop
 - add more descriptive server logs for csrf token debugging
@@ -10,7 +14,6 @@
 
 ### 1.2.1 Mask PIN error message
 - Transform Sierra error message "PIN is trivial" to something more legible to users
-- Remove period check from password validation
 
 ### v1.2.0 GTM Update (3/27)
 
