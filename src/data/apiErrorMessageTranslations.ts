@@ -85,7 +85,9 @@ export const apiErrorTranslations = {
     ur: "سرپرست بنانے کی کوشش کرتے وقت ILS کی درخواست نہیں کی جا سکتی۔",
     zhcn: "尝试创建顾客时无法向 ILS 发送请求。",
   },
-  "Invalid request to ILS:": {
+  "Invalid request to ILS: PIN is not valid : PIN is trivial": {
+    en:
+      "Password cannot contain consecutively repeating characters three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab",
     ar: "طلب غير صالح إلى ILS:",
     bn: "ILS-এ ভুল অনুরোধ:",
     es: "Solicitud al ILS inválida:",

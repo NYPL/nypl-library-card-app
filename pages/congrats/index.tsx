@@ -36,7 +36,7 @@ function ConfirmationPage(): JSX.Element {
   }, []);
 
   return (
-    <div>
+    <div id="congratulations">
       <Heading level="two">{t("confirmation.title")}</Heading>
       <ConfirmationGraphic />
       <p>

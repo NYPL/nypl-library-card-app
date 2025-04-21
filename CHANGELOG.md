@@ -10,6 +10,7 @@
 
 ### 1.2.1 Mask PIN error message
 - Transform Sierra error message "PIN is trivial" to something more legible to users
+- Remove period check from password validation
 
 ### v1.2.0 GTM Update (3/27)
 
