@@ -30,7 +30,6 @@ function AccountFormFields({
   const [showPassword, setShowPassword] = useState(true);
   const [clientSide, setClientSide] = useState(false);
   const { formValues } = state;
-  const originalPassword = getValues("password");
 
   // When the component loads, if we want to show the password by default,
   // show it.
@@ -54,13 +53,16 @@ function AccountFormFields({
     setShowPassword(false);
   }, []);
 
-  // Note: As of 1/22, the password must not contain a period to allow
-  // patrons to log into Overdrive for digital reading.
-  const validatePassword = (val) => {
+  const validatePasswordLength = (val) => {
     return (
-      val.length >= minPasswordLength &&
-      val.length <= maxPasswordLength &&
-      val.indexOf(".") === -1
+      (val.length >= minPasswordLength && val.length <= maxPasswordLength) ||
+      t("account.errorMessage.password")
+    );
+  };
+  const verifyPasswordmatch = () => {
+    return (
+      getValues("password") === getValues("verifyPassword") ||
+      t("account.errorMessage.verifyPassword")
     );
   };
 
@@ -85,8 +87,10 @@ function AccountFormFields({
             minLength={minPasswordLength}
             maxLength={maxPasswordLength}
             ref={register({
-              validate: (val) =>
-                validatePassword(val) || t("account.errorMessage.password"),
+              validate: {
+                validatePasswordLength,
+                verifyPasswordmatch,
+              },
             })}
             defaultValue={formValues.password}
           />
@@ -106,9 +110,7 @@ function AccountFormFields({
             minLength={minPasswordLength}
             maxLength={maxPasswordLength}
             ref={register({
-              validate: (val) =>
-                val === originalPassword ||
-                t("account.errorMessage.verifyPassword"),
+              validate: verifyPasswordmatch,
             })}
             defaultValue={formValues.verifyPassword}
           />

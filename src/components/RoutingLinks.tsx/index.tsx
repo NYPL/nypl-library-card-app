@@ -40,12 +40,15 @@ function RoutingLinks({
     <div className={styles.container}>
       {previous?.url && (
         <Link href={previous.url}>
-          <a className={styles.previous}>{previousText}</a>
+          <a id="routing-links-previous" className={styles.previous}>
+            {previousText}
+          </a>
         </Link>
       )}
       {!next?.submit ? (
         <Link href={next.url}>
           <a
+            id="routing-links-next"
             className={`button ${styles.button}`}
             // Just track the "Get Started" or "Submit" clicks. Routing events
             // are tracked at the component level in each "onSubmit".
@@ -58,6 +61,7 @@ function RoutingLinks({
         </Link>
       ) : (
         <input
+          id="routing-links-next"
           className={`button ${styles.next}`}
           disabled={isDisabled}
           type="submit"
