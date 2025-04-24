@@ -47,7 +47,9 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
       typeof problemDetail !== "string" &&
       problemDetail.detail.includes("PIN is trivial")
     ) {
-      problemDetail.detail = t("account.password.instruction");
+      problemDetail.detail = t("account.password.instruction").split(
+        "<br />"
+      )[2];
     } else if (lang !== "en" && typeof problemDetail !== "string") {
       const errorToTranslate = problemDetail?.detail;
       const newErrorMessage = errorToTranslate
