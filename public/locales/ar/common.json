@@ -146,7 +146,7 @@
     "nextSteps": {
       "title": "ابدأ مع مكتبة نيويورك العامة",
       "explore": "<b>استكشف الكتب الإلكترونية الخاصة بالمكتبة</b><br />قم بتنزيل تطبيق SimplyE لأجهزة <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> أو أجهزة <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
-      "borrow": "<b>استعر الكتب والمزيد</b><br /><a href='https://ilsstaff.nypl.org/iii/cas/login?service=http%3A%2F%2Fauth.nypl.org%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3Dapp_myaccount%26scope%3Dopenid%2Boffline_access%2Bpatron%253Aread%26redirect_uri%3Dhttps%253A%252F%252Flogin.nypl.org%252Fauth%252Flogin%26state%3DeyJyZWRpcmVjdF91cmkiOiJodHRwczpcL1wvYnJvd3NlLm55cGwub3JnXC9paWlcL2VuY29yZVwvbXlhY2NvdW50In0%253D'>سجِّل الدخول إلى حسابك</a> وتصفح الفهرس.",
+      "borrow": "<b>استعر الكتب والمزيد</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'>سجِّل الدخول إلى حسابك</a> وتصفح الفهرس.",
       "updates": "<b>احصل على التحديثات</b><br /><a href='https://www.nypl.org/enews'>تعرَّف على كل ما تقدمه المكتبة.</a>",
       "more": "<b>تعرَّف على المزيد</b><br /><a href='https://www.nypl.org/discover-library-card'>اكتشف كل ما يمكنك فعله ببطاقة المكتبة الخاصة بك.</a>"
     }
