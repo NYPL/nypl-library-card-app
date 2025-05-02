@@ -1,5 +1,10 @@
 ## CHANGE LOG
 
+### 1.2.4 
+- revert verify password match to original state
+- update auth url [SCC-4657](https://newyorkpubliclibrary.atlassian.net/browse/SCC-4657)
+- replace SimplyE label with EBrowse [SCC-4659](https://newyorkpubliclibrary.atlassian.net/browse/SCC-4659)
+
 ### 1.2.3 Fix PIN translation errors
 - use password instructions for "PIN is trivial" error translation
 - add id's to facilitate QA testing in other languages
