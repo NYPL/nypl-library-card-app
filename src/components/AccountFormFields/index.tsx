@@ -89,7 +89,6 @@ function AccountFormFields({
             ref={register({
               validate: {
                 validatePasswordLength,
-                verifyPasswordmatch,
               },
             })}
             defaultValue={formValues.password}
