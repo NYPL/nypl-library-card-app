@@ -92,7 +92,7 @@ function findLibraryName(libraryCode?: string): string {
   const library = ilsLibraryList.find(
     (library) => library.value === libraryCode
   );
-  return library?.label || "SimplyE";
+  return library?.label || "E-Branch";
 }
 
 /**
