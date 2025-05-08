@@ -51,7 +51,7 @@ describe("findLibraryCode", () => {
 describe("findLibraryName", () => {
   // "SimplyE" library is the default.
   test("it returns `eb` as the default value", () => {
-    expect(findLibraryName()).toEqual("SimplyE");
+    expect(findLibraryName()).toEqual("E-Branch");
   });
 
   test("it returns the value code for a library name", () => {
