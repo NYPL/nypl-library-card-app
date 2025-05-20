@@ -4,7 +4,7 @@
 - revert verify password match to original state
 - update auth url [SCC-4657](https://newyorkpubliclibrary.atlassian.net/browse/SCC-4657)
 - replace SimplyE label with EBranch [SCC-4659](https://newyorkpubliclibrary.atlassian.net/browse/SCC-4659)
-- enforce EBranch default on form review submission
+- replace home library free text input with select drop down[SCC-4660](https://newyorkpubliclibrary.atlassian.net/browse/SCC-4660)
 
 ### 1.2.3 Fix PIN translation errors
 - use password instructions for "PIN is trivial" error translation
