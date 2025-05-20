@@ -28,7 +28,6 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
     ? findLibraryName(formValues?.homeLibraryCode)
     : "";
   const [value, setValue] = useState(defaultValue);
-  // const [suggestions, setSuggestions] = useState([]);
   const { register } = useFormContext();
 
   const onChange = (event) => {
