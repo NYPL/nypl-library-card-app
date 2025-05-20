@@ -136,9 +136,6 @@ function ReviewFormContainer({ csrfToken }) {
    * function to set the global data.
    */
   const editSectionInfo = (formData, editSectionFlag) => {
-    if (formData.homeLibraryCode) {
-      formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
-    }
     if (formData.location) {
       formData.homeLibraryCode = findLibraryCode(formData.location);
     }
