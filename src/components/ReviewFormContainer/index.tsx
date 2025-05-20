@@ -32,7 +32,6 @@ import {
   findLibraryCode,
 } from "../../../src/utils/formDataUtils";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
-import ilsLibraryList from "../../data/ilsLibraryList";
 
 /**
  * ReviewFormContainer
@@ -162,22 +161,15 @@ function ReviewFormContainer({ csrfToken }) {
     setIsLoading(true);
     // This is resetting any errors from previous submissions, if any.
     dispatch({ type: "SET_FORM_ERRORS", value: null });
-    // default to eb if user has managed to input something silly in the free text input
-    const homeLibraryCode = ilsLibraryList
-      .map(({ value }) => value)
-      .includes(getValues("homeLibraryCode")) ? getValues("homeLibraryCode") : "eb"
+
     // Update the global state.
     dispatch({
       type: "SET_FORM_DATA",
-      value: { ...formValues, ...getValues(), homeLibraryCode },
+      value: {...formValues, ...getValues()},
     });
 
     axios
-      .post("/library-card/api/create-patron", {
-        ...formValues,
-        ...getValues(),
-        csrfToken,
-      })
+      .post("/library-card/api/create-patron", { ...formValues, ...getValues(), csrfToken })
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
