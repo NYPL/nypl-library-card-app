@@ -33,7 +33,6 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   const onChange = (event) => {
     setValue(event.target.value);
   };
-  
   const inputProps = {
     value,
     onChange,

@@ -43,6 +43,7 @@ function ReviewFormContainer({ csrfToken }) {
   const { handleSubmit, getValues } = useFormContext();
   const { state, dispatch } = useFormDataContext();
   const { formValues, errorObj } = state;
+  console.log(state)
   const router = useRouter();
   const {
     query: { lang = "en" },

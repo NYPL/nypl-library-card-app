@@ -31,8 +31,6 @@ const AccountFormContainer = ({ csrfToken }) => {
    */
   const submitForm = (formData, e) => {
     e.preventDefault();
-    // Convert the home library name to its code value.
-    formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",
