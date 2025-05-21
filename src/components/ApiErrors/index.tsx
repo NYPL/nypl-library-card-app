@@ -52,9 +52,20 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
       )[2];
     } else if (lang !== "en" && typeof problemDetail !== "string") {
       const errorToTranslate = problemDetail?.detail;
-      const newErrorMessage = errorToTranslate
-        ? apiErrorTranslations[errorToTranslate][lang]
-        : t("apiErrors.defaultError");
+      let newErrorMessage;
+      try {
+        newErrorMessage = errorToTranslate
+          ? apiErrorTranslations[errorToTranslate][lang]
+          : t("apiErrors.defaultError");
+      } catch (e) {
+        console.log(
+          "Missing translation for error message: \n",
+          errorToTranslate
+        );
+        // if there is an error finding translations, default to the English
+        // error from the API
+        newErrorMessage = errorToTranslate;
+      }
       problemDetail.detail = newErrorMessage;
     }
 
