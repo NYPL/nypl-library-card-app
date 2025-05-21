@@ -11,6 +11,7 @@ import { FormResults } from "../../src/interfaces";
 import { homePageRedirect } from "../../src/utils/utils";
 import { cookieDomain } from "../../appConfig";
 import * as cookie from "../../src/utils/CookieUtils";
+import { nodeEnv } from "../../appConfig";
 
 import ilsLibraryList from "../../src/data/ilsLibraryList";
 
@@ -34,6 +35,11 @@ function ConfirmationPage(): JSX.Element {
       });
     }
   }, []);
+
+  const loginHtml =
+    nodeEnv !== "production"
+      ? t("confirmation.nextSteps.borrow").replace("https://", "https://dev-")
+      : t("confirmation.nextSteps.borrow");
 
   return (
     <div id="congratulations">
@@ -66,7 +72,7 @@ function ConfirmationPage(): JSX.Element {
       />
       <div
         dangerouslySetInnerHTML={{
-          __html: t("confirmation.nextSteps.borrow"),
+          __html: loginHtml,
         }}
       />
       <div
