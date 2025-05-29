@@ -59,7 +59,7 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
           ? apiErrorTranslations[errorToTranslate][lang]
           : t("apiErrors.defaultError");
       } catch (e) {
-        logger.error(
+        console.error(
           "Missing translation for error message: \n",
           errorToTranslate
         );
