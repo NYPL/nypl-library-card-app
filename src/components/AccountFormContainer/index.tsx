@@ -11,7 +11,6 @@ import useFormDataContext from "../../context/FormDataContext";
 import RoutingLinks from "../RoutingLinks.tsx";
 import AccountFormFields from "../AccountFormFields";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
-import { findLibraryCode } from "../../utils/formDataUtils";
 
 import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
@@ -31,8 +30,6 @@ const AccountFormContainer = ({ csrfToken }) => {
    */
   const submitForm = (formData, e) => {
     e.preventDefault();
-    // Convert the home library name to its code value.
-    formData.homeLibraryCode = findLibraryCode(formData.homeLibraryCode);
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",

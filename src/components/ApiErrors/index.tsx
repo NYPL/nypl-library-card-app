@@ -11,6 +11,7 @@ import {
 import styles from "./ApiErrors.module.css";
 import { ProblemDetail } from "../../interfaces";
 import { apiErrorTranslations } from "../../data/apiErrorMessageTranslations";
+import logger from "../../logger";
 
 interface ApiErrorsProps {
   problemDetail: ProblemDetail | undefined;
@@ -51,10 +52,19 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
         "<br />"
       )[2];
     } else if (lang !== "en" && typeof problemDetail !== "string") {
-      const errorToTranslate = problemDetail?.detail;
-      const newErrorMessage = errorToTranslate
-        ? apiErrorTranslations[errorToTranslate][lang]
-        : t("apiErrors.defaultError");
+      const errorToTranslate = problemDetail.detail;
+      let newErrorMessage;
+      try {
+        newErrorMessage = errorToTranslate
+          ? apiErrorTranslations[errorToTranslate][lang]
+          : t("apiErrors.defaultError");
+      } catch (e) {
+        console.error(
+          "Missing translation for error message: \n",
+          errorToTranslate
+        );
+        newErrorMessage = t("apiErrors.defaultError");
+      }
       problemDetail.detail = newErrorMessage;
     }
 
