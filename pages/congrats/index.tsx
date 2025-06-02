@@ -11,7 +11,7 @@ import { FormResults } from "../../src/interfaces";
 import { homePageRedirect } from "../../src/utils/utils";
 import { cookieDomain } from "../../appConfig";
 import * as cookie from "../../src/utils/CookieUtils";
-import { nodeEnv } from "../../appConfig";
+import { appEnv } from "../../appConfig";
 
 import ilsLibraryList from "../../src/data/ilsLibraryList";
 
@@ -31,14 +31,14 @@ function ConfirmationPage(): JSX.Element {
       (window as any).dataLayer = (window as any).dataLayer || [];
       (window as any).dataLayer.push({
         event: "library_card_submission",
-        nypl_location: libraryName[0]?.label,
+        nypl_location: libraryName[0]?.label || "E-branch default",
         location_id: state.formValues.homeLibraryCode,
       });
     }
   }, []);
 
   const loginHtml =
-    nodeEnv !== "production"
+    appEnv !== "production"
       ? t("confirmation.nextSteps.borrow").replace("https://", "https://dev-")
       : t("confirmation.nextSteps.borrow");
 
