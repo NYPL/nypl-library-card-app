@@ -10,6 +10,7 @@ export const clientId = process.env.OAUTH_CLIENT_ID
 export const clientSecret = process.env.OAUTH_CLIENT_SECRET
 export const ipStackKey = process.env.IPSTACK_KEY
 export const nodeEnv = process.env.NODE_ENV
+export const appEnv = process.env.APP_ENV
 export const agencyType = {
   default: "198",
   nys: "199",

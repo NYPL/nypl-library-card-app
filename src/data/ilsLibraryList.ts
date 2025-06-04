@@ -1,6 +1,7 @@
 import { LibraryListObject } from "../interfaces";
 
 const ilsLibraryList: LibraryListObject[] = [
+  { label: "Please select", value: "eb" },
   { label: "E-Branch", value: "eb" },
   { label: "Harry Belafonte 115th Street Library", value: "hu" },
   { label: "125th Street Library", value: "hd" },
