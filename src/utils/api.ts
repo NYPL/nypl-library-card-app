@@ -442,11 +442,14 @@ export async function createPatron(
   appObj = app
 ) {
   const data = req.body;
+  console.log(data);
+  console.log(data.homeLibraryCode);
+  // default to e branch
+  if (!data.homeLibraryCode) data.homeLibraryCode = "eb";
   const csrfTokenValid = validateCsrfToken(req);
   if (!csrfTokenValid) {
     return invalidCsrfResponse(res);
   }
-
   try {
     const results = await callPatronAPI(data, createPatronUrl, appObj);
     res.status(results.status).json(results);
