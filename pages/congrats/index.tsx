@@ -28,11 +28,16 @@ function ConfirmationPage(): JSX.Element {
       const libraryName: any = ilsLibraryList.filter(
         (library) => library.value === state.formValues.homeLibraryCode
       );
+      console.log({
+        event: "library_card_submission",
+        nypl_location: libraryName[0]?.label || "E-branch (default)",
+        location_id: state.formValues.homeLibraryCode || "eb",
+      });
       (window as any).dataLayer = (window as any).dataLayer || [];
       (window as any).dataLayer.push({
         event: "library_card_submission",
-        nypl_location: libraryName[0]?.label,
-        location_id: state.formValues.homeLibraryCode,
+        nypl_location: libraryName[0]?.label || "E-branch (default)",
+        location_id: state.formValues.homeLibraryCode || "eb",
       });
     }
   }, []);
