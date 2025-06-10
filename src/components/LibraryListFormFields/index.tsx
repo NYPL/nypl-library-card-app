@@ -47,6 +47,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
       <p>{t("account.library.description.part1")}</p>
       <p>{t("account.library.description.part2")}</p>
       <Select
+        placeholder="Please select"
         id="librarylist-select"
         labelText={t("account.library.selectLibrary")}
         name="homeLibraryCode"
