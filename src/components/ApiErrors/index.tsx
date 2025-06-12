@@ -11,6 +11,7 @@ import {
 import styles from "./ApiErrors.module.css";
 import { ProblemDetail } from "../../interfaces";
 import { apiErrorTranslations } from "../../data/apiErrorMessageTranslations";
+import logger from "../../logger";
 
 interface ApiErrorsProps {
   problemDetail: ProblemDetail | undefined;
@@ -30,16 +31,40 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
     if (!problemDetail || problemDetail?.status < 400) {
       return null;
     }
-
     if (typeof problemDetail !== "string" && !problemDetail.detail) {
       console.log("ApiErrors problemDetail: ", problemDetail);
       problemDetail.detail = t("apiErrors.defaultError");
     }
-    if (lang !== "en" && typeof problemDetail !== "string") {
-      const errorToTranslate = problemDetail?.detail;
-      const newErrorMessage = errorToTranslate
-        ? apiErrorTranslations[errorToTranslate][lang]
-        : t("apiErrors.defaultError");
+    if (
+      lang === "en" &&
+      typeof problemDetail !== "string" &&
+      problemDetail.detail.includes("PIN is trivial")
+    ) {
+      problemDetail.detail =
+        "Password cannot contain consecutively repeating characters three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab";
+    }
+    if (
+      lang !== "en" &&
+      typeof problemDetail !== "string" &&
+      problemDetail.detail.includes("PIN is trivial")
+    ) {
+      problemDetail.detail = t("account.password.instruction").split(
+        "<br />"
+      )[2];
+    } else if (lang !== "en" && typeof problemDetail !== "string") {
+      const errorToTranslate = problemDetail.detail;
+      let newErrorMessage;
+      try {
+        newErrorMessage = errorToTranslate
+          ? apiErrorTranslations[errorToTranslate][lang]
+          : t("apiErrors.defaultError");
+      } catch (e) {
+        console.error(
+          "Missing translation for error message: \n",
+          errorToTranslate
+        );
+        newErrorMessage = t("apiErrors.defaultError");
+      }
       problemDetail.detail = newErrorMessage;
     }
 

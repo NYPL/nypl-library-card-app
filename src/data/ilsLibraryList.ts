@@ -1,7 +1,7 @@
 import { LibraryListObject } from "../interfaces";
 
 const ilsLibraryList: LibraryListObject[] = [
-  { label: "SimplyE", value: "eb" },
+  { label: "E-Branch", value: "eb" },
   { label: "Harry Belafonte 115th Street Library", value: "hu" },
   { label: "125th Street Library", value: "hd" },
   { label: "58th Street Library", value: "fe" },
@@ -64,7 +64,6 @@ const ilsLibraryList: LibraryListObject[] = [
   { label: "Riverdale Library", value: "rd" },
   { label: "Riverside Library", value: "rs" },
   { label: "Roosevelt Island Library", value: "ri" },
-  { label: "Schomburg Center for Research in Black Culture", value: "sc" },
   { label: "Sedgwick Library", value: "sd" },
   { label: "Seward Park Library", value: "se" },
   { label: "Soundview Library", value: "sv" },
@@ -73,7 +72,6 @@ const ilsLibraryList: LibraryListObject[] = [
   { label: "St. George Library Center", value: "sg" },
   { label: "Stavros Niarchos Foundation Library (SNFL)", value: "sn" },
   { label: "Stapleton Library", value: "st" },
-  { label: "Stephen A. Schwarzman Building", value: "ma" },
   { label: "Spuyten Duyvil Library", value: "dy" },
   { label: "Terence Cardinal Cooke–Cathedral Library", value: "ca" },
   {

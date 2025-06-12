@@ -11,6 +11,7 @@ import { FormResults } from "../../src/interfaces";
 import { homePageRedirect } from "../../src/utils/utils";
 import { cookieDomain } from "../../appConfig";
 import * as cookie from "../../src/utils/CookieUtils";
+import { appEnv } from "../../appConfig";
 
 import ilsLibraryList from "../../src/data/ilsLibraryList";
 
@@ -30,13 +31,19 @@ function ConfirmationPage(): JSX.Element {
       (window as any).dataLayer = (window as any).dataLayer || [];
       (window as any).dataLayer.push({
         event: "library_card_submission",
-        nypl_location: libraryName[0]?.label,
+        nypl_location: libraryName[0]?.label || "E-branch (default)",
+        location_id: state.formValues.homeLibraryCode || "eb",
       });
     }
   }, []);
 
+  const loginHtml =
+    appEnv !== "production"
+      ? t("confirmation.nextSteps.borrow").replace("https://", "https://dev-")
+      : t("confirmation.nextSteps.borrow");
+
   return (
-    <div>
+    <div id="congratulations">
       <Heading level="two">{t("confirmation.title")}</Heading>
       <ConfirmationGraphic />
       <p>
@@ -66,7 +73,7 @@ function ConfirmationPage(): JSX.Element {
       />
       <div
         dangerouslySetInnerHTML={{
-          __html: t("confirmation.nextSteps.borrow"),
+          __html: loginHtml,
         }}
       />
       <div
