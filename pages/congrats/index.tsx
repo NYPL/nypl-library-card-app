@@ -38,7 +38,7 @@ function ConfirmationPage(): JSX.Element {
   }, []);
 
   const loginHtml =
-    appEnv !== "production"
+    appEnv === "qa"
       ? t("confirmation.nextSteps.borrow").replace("https://", "https://dev-")
       : t("confirmation.nextSteps.borrow");
 
