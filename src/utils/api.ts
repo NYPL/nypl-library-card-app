@@ -5,12 +5,10 @@ import Cors from "cors";
 
 import * as config from "../../appConfig";
 import logger from "../logger/index";
-import { constructPatronObject, constructProblemDetail } from "./formDataUtils";
+import { constructProblemDetail } from "./formDataUtils";
 import {
   AddressAPIResponseData,
   AddressAPIRequestData,
-  ProblemDetail,
-  FormAPISubmission,
   AddressResponse,
 } from "../interfaces";
 import { validateCsrfToken } from "./csrfUtils";
@@ -197,22 +195,15 @@ export function axiosAddressPost(
   token: string,
   validateUrl = `${config.api.validate}/address`
 ): Promise<AddressAPIResponseData> {
-  return axios
-    .post(validateUrl, addressRequest, constructApiHeaders(token))
-    .then((result) => {
-      return {
-        status: result.data.status,
-        success: true,
-        ...result.data,
-      };
-    })
-    .catch((err) => {
-      return {
-        status: err.response?.status,
-        success: false,
-        ...err.response?.data,
-      };
-    });
+  console.info(token, validateUrl);
+  return Promise.resolve({
+    status: "success",
+    success: true,
+    cardType: null,
+    type: "test-type",
+    title: "test-title",
+    ...addressRequest,
+  });
 }
 
 /**
@@ -339,6 +330,7 @@ export async function callPatronAPI(
   createPatronUrl = config.api.patron,
   appObj = app
 ) {
+  console.info(data, createPatronUrl);
   const tokenObject = appObj["tokenObject"];
   if (!tokenObject || !tokenObject.access_token) {
     const tokenGenerationError =
@@ -353,80 +345,21 @@ export async function callPatronAPI(
     };
   }
 
-  const token = tokenObject.access_token;
-  const patronData = constructPatronObject(data);
   // Used for testing when we don't want to create real accounts,
   // just return a mocked account data.
-  // return Promise.resolve({
-  //   status: 200,
-  //   type: "card-granted",
-  //   link: "some-link",
-  //   barcode: "12345678912345",
-  //   username: "tomnook",
-  //   password: "1234",
-  //   temporary: false,
-  //   message: "The library card will be a standard library card.",
-  //   patronId: 1234567,
-  //   name: "Tom Nook",
-  //   ptype: 7,
-  // });
-  if ((patronData as ProblemDetail).status === 400) {
-    logger.error("Invalid patron data");
-    logger.error("Patron data", patronData);
-    return Promise.reject(patronData);
-  }
-
-  logger.debug(
-    `POSTing patron data with username ${
-      (patronData as FormAPISubmission).username
-    } to ${createPatronUrl}`
-  );
-  try {
-    const result = await axios.post(
-      createPatronUrl,
-      patronData,
-      constructApiHeaders(token)
-    );
-    if (!result.data?.status) throw result;
-    const fullName = `${(patronData as FormAPISubmission).firstName} ${
-      (patronData as FormAPISubmission).lastName
-    }`;
-    return {
-      status: result.data.status,
-      name: fullName,
-      ...result.data,
-    };
-  } catch (err) {
-    const status = err.response?.status;
-    console.debug(`error response`, err);
-    let serverError = null;
-    if (err.message && (!err.response || !status)) {
-      return {
-        status: 500,
-        type: "api-error",
-        title: "API Error",
-        detail: `Bad response from Card Creator API`,
-        error: err.message,
-      };
-    }
-    if (status === 401 || status === 403) {
-      serverError = { type: "internal" };
-    }
-
-    const restOfErrors = serverError
-      ? { ...err.response?.data, ...serverError }
-      : err.response?.data;
-
-    logger.error(
-      `Error calling Card Creator API: ${
-        status === 403 ? "bad API call" : err.response?.data?.message
-      }`
-    );
-    logger.error(
-      `More details - status: ${status}, patron: ${patronData}, data: ${err.response?.data}`
-    );
-    return { ...restOfErrors, status };
-  }
+  return Promise.resolve({
+    status: 200,
+    type: "card-granted",
+    link: "some-link",
+    barcode: "12345678912345",
+    username: "tomnook",
+    password: "1234",
+    temporary: false,
+    message: "The library card will be a standard library card.",
+    patronId: 1234567,
+    name: "Tom Nook",
+    ptype: 7,
+  });
 }
 
 /**
