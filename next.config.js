@@ -7,7 +7,7 @@ module.exports = {
   basePath: "/library-card",
   // Configures the app's locale settings.
   i18n,
-  async redirects () {
+  async redirects() {
     return [
       {
         source: "/library-card/",

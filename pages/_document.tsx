@@ -1,15 +1,43 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  DocumentInitialProps,
+} from "next/document";
 import * as appConfig from "../appConfig";
 const { adobeAnalyticsTag, dsHeader, dsFooter } = appConfig;
+import newrelic from "newrelic";
+import Script from "next/script";
 
+type DocumentProps = {
+  browserTimingHeader: string;
+};
 /**
  * MyDocument
  * This component used just to include the Optimizely and OptinMonster scripts
  * at the end of the body tag. Including it in the _app file won't work since
  * they need to be at the end.
  */
-class MyDocument extends Document {
+class MyDocument extends Document<DocumentProps> {
+  static async getInitialProps(
+    ctx: DocumentContext
+  ): Promise<DocumentInitialProps & DocumentProps> {
+    const initialProps = await Document.getInitialProps(ctx);
+
+    const browserTimingHeader = newrelic.getBrowserTimingHeader({
+      hasToRemoveScriptWrapper: true,
+      allowTransactionlessInjection: true,
+    });
+
+    return {
+      ...initialProps,
+      browserTimingHeader,
+    };
+  }
   render() {
+    const { browserTimingHeader } = this.props;
     return (
       <Html lang="en">
         <Head>
@@ -50,6 +78,11 @@ class MyDocument extends Document {
           <script src="https://cdn.optimizely.com/js/284748925.js"></script>
           {/* <!-- OptinMonster --> */}
           <script src="https://assets.nypl.org/js/advocacy.js"></script>
+          {/* New Relic Browser Metric */}
+          <Script
+            dangerouslySetInnerHTML={{ __html: browserTimingHeader }}
+            strategy="beforeInteractive"
+          ></Script>
         </body>
       </Html>
     );
