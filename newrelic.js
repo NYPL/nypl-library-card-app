@@ -9,11 +9,11 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ["Library Card App"],
+  app_name: [process.env.NEW_RELIC_APP_NAME],
   /**
    * Your New Relic license key.
    */
-  license_key: "bdd522146ec8b0422c8cf002dc07549dFFFFNRAL",
+  license_key: process.env.NEW_RELIC_LICENSE_KEY,
   logging: {
     /**
      * Level at which to log. 'trace' is most useful to New Relic when diagnosing
