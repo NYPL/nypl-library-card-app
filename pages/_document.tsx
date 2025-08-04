@@ -81,6 +81,7 @@ class MyDocument extends Document<DocumentProps> {
           {/* New Relic Browser Metric */}
           <Script
             dangerouslySetInnerHTML={{ __html: browserTimingHeader }}
+            id="nr-browser-agent"
             strategy="beforeInteractive"
           ></Script>
         </body>

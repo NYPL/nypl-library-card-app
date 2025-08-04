@@ -25,6 +25,7 @@ import { constructAddressType } from "../../utils/formDataUtils";
 import { nyCounties, nyCities, createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../context/FormDataContext";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
+import { NRError } from "../../logger/newrelic";
 
 const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -96,6 +97,15 @@ const AddressContainer = ({ csrfToken }) => {
             detail: "",
           };
         }
+
+        NRError(
+          new Error(`Error Validating Address. ${JSON.stringify(error)}`),
+          {
+            customAttributes: {
+              contactForm: `Error Validating Address. ${JSON.stringify(error)}`,
+            },
+          }
+        );
         dispatch({
           type: "SET_ADDRESSES_VALUE",
           value: { home },

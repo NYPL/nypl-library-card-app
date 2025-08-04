@@ -8,7 +8,6 @@ export const NRError = (
     customAttributes?: CustomAttribute;
   } = {}
 ) => {
-  console.error(`Error:\n${e}`);
   customAttributes = {
     ...customAttributes,
     Error: JSON.stringify({
