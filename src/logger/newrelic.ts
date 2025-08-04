@@ -20,7 +20,13 @@ export const NRError = (
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const newrelic = require("newrelic");
     newrelic.noticeError(e, customAttributes);
-  } else {
+  } else if (
+    typeof window.newrelic !== "undefined" &&
+    typeof window.newrelic.noticeError !== "undefined"
+  ) {
     window.newrelic.noticeError(e, customAttributes);
+  } else {
+    // This should never happen, adding this for the test environments
+    console.info("New Relic Instance is missing.");
   }
 };
