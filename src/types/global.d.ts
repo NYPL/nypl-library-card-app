@@ -5,7 +5,7 @@ declare global {
     adobeDataLayer: Record<string, any>[];
     gtag: (...args: any[]) => void;
     newrelic: {
-      noticeError: any;
+      noticeError: (...args: any) => void;
     };
   }
 }
