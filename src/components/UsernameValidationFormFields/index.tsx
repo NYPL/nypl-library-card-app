@@ -20,6 +20,7 @@ import {
   commonAPIErrors,
 } from "../../data/apiErrorMessageTranslations";
 import { apiTranslations } from "../../data/apiMessageTranslations";
+import { NRError } from "../../logger/newrelic";
 
 interface UsernameValidationFormProps {
   id?: string;
@@ -93,6 +94,15 @@ const UsernameValidationForm = ({
         if (lang !== "en") {
           message = apiErrorTranslations[message][lang] || message;
         }
+
+        NRError(
+          new Error(`Error Validate Username. ${JSON.stringify(error)}`),
+          {
+            customAttributes: {
+              contactForm: `Error Validate Username. ${JSON.stringify(error)}`,
+            },
+          }
+        );
 
         setUsernameIsAvailable({
           available: false,
