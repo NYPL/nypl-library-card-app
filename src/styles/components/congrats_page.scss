@@ -52,12 +52,12 @@
   }
 
   @media only screen and (min-width: $breakpoint-intermediate-2) {
-    padding-top: 35px;
+    padding-top: 30px;
     padding-inline-start: 40px;
   }
 
   @media only screen and (min-width: $breakpoint-medium) {
-    padding-top: 30px;
+    padding-top: 35px;
     padding-inline-start: 40px;
   }
   @media only screen and (min-width: $breakpoint-large) {
@@ -113,6 +113,7 @@
     border-top-right-radius: 3px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    height: auto;
 
     #barcodeCanvas {
       width: 100%;
@@ -133,6 +134,10 @@
       position: relative;
       font-size: 2em;
       display: table;
+
+      @media only screen and (min-width: $breakpoint-intermediate-2) {
+        font-size: 1.6em;
+      }
 
       @media only screen and (min-width: $breakpoint-intermediate-2) {
         font-size: 1.7em;
