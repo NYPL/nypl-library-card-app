@@ -4,9 +4,6 @@ const { adobeAnalyticsTag, dsHeader, dsFooter } = appConfig;
 
 /**
  * MyDocument
- * This component used just to include the Optimizely and OptinMonster scripts
- * at the end of the body tag. Including it in the _app file won't work since
- * they need to be at the end.
  */
 class MyDocument extends Document {
   render() {
@@ -48,8 +45,6 @@ class MyDocument extends Document {
           <NextScript />
           {/* <!-- Optimizely --> */}
           <script src="https://cdn.optimizely.com/js/284748925.js"></script>
-          {/* <!-- OptinMonster --> */}
-          <script src="https://assets.nypl.org/js/advocacy.js"></script>
         </body>
       </Html>
     );
