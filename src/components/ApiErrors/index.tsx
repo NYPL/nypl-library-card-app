@@ -11,7 +11,6 @@ import {
 import styles from "./ApiErrors.module.css";
 import { ProblemDetail } from "../../interfaces";
 import { apiErrorTranslations } from "../../data/apiErrorMessageTranslations";
-import logger from "../../logger";
 
 interface ApiErrorsProps {
   problemDetail: ProblemDetail | undefined;

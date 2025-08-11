@@ -45,8 +45,9 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: nypl-library-card-app
           IMAGE_TAG: ${{ github.sha }}
+          NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg NEW_RELIC_APP_NAME="Library Card App Dev" --build-arg NEW_RELIC_LICENSE_KEY=$NEW_RELIC_LICENSE_KEY .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:qa-latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:qa-latest
@@ -81,8 +82,9 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: nypl-library-card-app
           IMAGE_TAG: ${{ github.sha }}
+          NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg NEW_RELIC_APP_NAME="Library Card App" --build-arg NEW_RELIC_LICENSE_KEY=$NEW_RELIC_LICENSE_KEY .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:production-latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:production-latest

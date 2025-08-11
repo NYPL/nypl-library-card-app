@@ -1,12 +1,40 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  DocumentInitialProps,
+} from "next/document";
 import * as appConfig from "../appConfig";
 const { adobeAnalyticsTag, dsHeader, dsFooter } = appConfig;
+import newrelic from "newrelic";
+import Script from "next/script";
 
+type DocumentProps = {
+  browserTimingHeader: string;
+};
 /**
  * MyDocument
  */
-class MyDocument extends Document {
+class MyDocument extends Document<DocumentProps> {
+  static async getInitialProps(
+    ctx: DocumentContext
+  ): Promise<DocumentInitialProps & DocumentProps> {
+    const initialProps = await Document.getInitialProps(ctx);
+
+    const browserTimingHeader = newrelic.getBrowserTimingHeader({
+      hasToRemoveScriptWrapper: true,
+      allowTransactionlessInjection: true,
+    });
+
+    return {
+      ...initialProps,
+      browserTimingHeader,
+    };
+  }
   render() {
+    const { browserTimingHeader } = this.props;
     return (
       <Html lang="en">
         <Head>
@@ -43,8 +71,12 @@ class MyDocument extends Document {
           <div id="nypl-footer"></div>
           <script src={dsFooter} async></script>
           <NextScript />
-          {/* <!-- Optimizely --> */}
-          <script src="https://cdn.optimizely.com/js/284748925.js"></script>
+          {/* New Relic Browser Metric */}
+          <Script
+            dangerouslySetInnerHTML={{ __html: browserTimingHeader }}
+            id="nr-browser-agent"
+            strategy="beforeInteractive"
+          ></Script>
         </body>
       </Html>
     );

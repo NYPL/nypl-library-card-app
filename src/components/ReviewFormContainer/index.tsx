@@ -32,6 +32,7 @@ import {
   findLibraryCode,
 } from "../../../src/utils/formDataUtils";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
+import { NRError } from "../../logger/newrelic";
 
 /**
  * ReviewFormContainer
@@ -162,11 +163,15 @@ function ReviewFormContainer({ csrfToken }) {
     // Update the global state.
     dispatch({
       type: "SET_FORM_DATA",
-      value: {...formValues, ...getValues()},
+      value: { ...formValues, ...getValues() },
     });
 
     axios
-      .post("/library-card/api/create-patron", { ...formValues, ...getValues(), csrfToken })
+      .post("/library-card/api/create-patron", {
+        ...formValues,
+        ...getValues(),
+        csrfToken,
+      })
       .then((response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
@@ -181,6 +186,16 @@ function ReviewFormContainer({ csrfToken }) {
         router.push(`/congrats?${queryStr}`);
       })
       .catch((error) => {
+        NRError(
+          new Error(`Error Creating New Account. ${JSON.stringify(error)}`),
+          {
+            customAttributes: {
+              contactForm: `Error Creating New Account. ${JSON.stringify(
+                error
+              )}`,
+            },
+          }
+        );
         // Catch any CSRF token issues and return a generic error message
         // and redirect to the home page.
         if (error.response.status == 403) {
