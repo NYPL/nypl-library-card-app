@@ -37,13 +37,20 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   // Setting the "lang" and the "dir" attribute
   const { i18n } = useTranslation("common");
   useEffect(() => {
-    let lang = router.query.lang || "en";
+    const langQuery = router.query.lang || router.locale || "en";
+    let lang = Array.isArray(langQuery) ? langQuery[0] : langQuery;
     if (lang === "zhcn") {
       lang = "zh-cn";
     }
     document.getElementById("__next").dir = `${i18n.dir()}`;
     document.documentElement.lang = `${lang}`;
-  });
+    if (i18n && typeof i18n.dir === "function") {
+      const direction = i18n.dir(lang);
+      if (document.getElementById("__next")) {
+        document.getElementById("__next")!.dir = direction;
+      }
+    }
+  }, [router.query.lang, router.locale, i18n]);
 
   useEffect(() => {
     const handleRouteChange = () => {
