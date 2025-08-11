@@ -17,7 +17,7 @@ import useRouterScroll from "../src/hooks/useRouterScroll";
 import { constructProblemDetail } from "../src/utils/formDataUtils";
 import { DSProvider } from "@nypl/design-system-react-components";
 
-import { appWithTranslation, useTranslation } from "next-i18next";
+import { appWithTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 import aaUtils from "../src/externals/aaUtils";
@@ -33,24 +33,6 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   const { favIconPath, appTitle } = appConfig;
-
-  // Setting the "lang" and the "dir" attribute
-  const { i18n } = useTranslation("common");
-  useEffect(() => {
-    const langQuery = router.query.lang || router.locale || "en";
-    let lang = Array.isArray(langQuery) ? langQuery[0] : langQuery;
-    if (lang === "zhcn") {
-      lang = "zh-cn";
-    }
-    document.getElementById("__next").dir = `${i18n.dir()}`;
-    document.documentElement.lang = `${lang}`;
-    if (i18n && typeof i18n.dir === "function") {
-      const direction = i18n.dir(lang);
-      if (document.getElementById("__next")) {
-        document.getElementById("__next")!.dir = direction;
-      }
-    }
-  }, [router.query.lang, router.locale, i18n]);
 
   useEffect(() => {
     const handleRouteChange = () => {
