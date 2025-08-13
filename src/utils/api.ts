@@ -230,9 +230,9 @@ function invalidCsrfResponse(res) {
 export async function validateAddress(req, res, appObj = app) {
   const tokenObject = appObj["tokenObject"];
   const csrfTokenValid = validateCsrfToken(req);
-  if (!csrfTokenValid) {
-    return invalidCsrfResponse(res);
-  }
+  // if (!csrfTokenValid) {
+  //   return invalidCsrfResponse(res);
+  // }
   if (tokenObject && tokenObject?.access_token) {
     const token = tokenObject.access_token;
     const addressRequest: AddressAPIRequestData = {
@@ -378,9 +378,9 @@ export async function createPatron(
   // default to e branch
   if (!data.homeLibraryCode) data.homeLibraryCode = "eb";
   const csrfTokenValid = validateCsrfToken(req);
-  if (!csrfTokenValid) {
-    return invalidCsrfResponse(res);
-  }
+  // if (!csrfTokenValid) {
+  //   return invalidCsrfResponse(res);
+  // }
   try {
     const results = await callPatronAPI(data, createPatronUrl, appObj);
     res.status(results.status).json(results);

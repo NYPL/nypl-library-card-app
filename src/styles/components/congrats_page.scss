@@ -113,14 +113,23 @@
     border-top-right-radius: 3px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    height: auto;
 
     #barcodeCanvas {
       width: 100%;
       height: 50px;
 
-      @media only screen and (min-width: $breakpoint-intermediate-2) {
+      //handles the shift for smaller phones
+      @media only screen and (min-width: 200px) and (max-width: $breakpoint-intermediate) {
+        height: 40px;
+      }
+
+      @media only screen and (min-width: $breakpoint-intermediate-2) and (max-width: $breakpoint-medium) {
         height: 75px;
+      }
+
+      //handles the shift for smaller tablets
+      @media only screen and (min-width: 600px) and (max-width: 700px) {
+        height: 40px;
       }
 
       @media only screen and (min-width: $breakpoint-xl) {
@@ -135,8 +144,8 @@
       font-size: 2em;
       display: table;
 
-      @media only screen and (min-width: $breakpoint-intermediate-2) {
-        font-size: 1.6em;
+      @media only screen and (min-width: 200px) and (max-width: $breakpoint-small) {
+        font-size: 1.7em;
       }
 
       @media only screen and (min-width: $breakpoint-intermediate-2) {
