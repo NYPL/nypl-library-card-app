@@ -3,15 +3,14 @@ import { Heading } from "@nypl/design-system-react-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import React, { useEffect } from "react";
-import { GetServerSideProps } from "next";
+import next, { GetServerSideProps } from "next";
 
 import ConfirmationGraphic from "../../src/components/ConfirmationGraphic";
 import useFormDataContext from "../../src/context/FormDataContext";
 import { FormResults } from "../../src/interfaces";
 import { homePageRedirect } from "../../src/utils/utils";
-import { cookieDomain } from "../../appConfig";
+import { cookieDomain, nextAppEnv } from "../../appConfig";
 import * as cookie from "../../src/utils/CookieUtils";
-import { appEnv } from "../../appConfig";
 
 import ilsLibraryList from "../../src/data/ilsLibraryList";
 
@@ -38,9 +37,11 @@ function ConfirmationPage(): JSX.Element {
   }, []);
 
   const loginHtml =
-    appEnv === "qa"
+    nextAppEnv === "qa"
       ? t("confirmation.nextSteps.borrow").replace("https://", "https://dev-")
       : t("confirmation.nextSteps.borrow");
+
+  console.info(nextAppEnv);
 
   return (
     <div id="congratulations">
