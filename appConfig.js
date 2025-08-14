@@ -11,7 +11,6 @@ export const clientSecret = process.env.OAUTH_CLIENT_SECRET;
 export const ipStackKey = process.env.IPSTACK_KEY;
 export const nodeEnv = process.env.NODE_ENV;
 export const appEnv = process.env.APP_ENV;
-export const nextAppEnv = process.env.NEXT_PUBLIC_APP_ENV;
 export const agencyType = {
   default: "198",
   nys: "199",
