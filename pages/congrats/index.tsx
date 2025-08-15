@@ -3,18 +3,18 @@ import { Heading } from "@nypl/design-system-react-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import React, { useEffect } from "react";
-import next, { GetServerSideProps } from "next";
+import { GetServerSideProps } from "next";
 
 import ConfirmationGraphic from "../../src/components/ConfirmationGraphic";
 import useFormDataContext from "../../src/context/FormDataContext";
 import { FormResults } from "../../src/interfaces";
 import { homePageRedirect } from "../../src/utils/utils";
-import { appEnv, cookieDomain, nextAppEnv } from "../../appConfig";
+import { appEnv, cookieDomain } from "../../appConfig";
 import * as cookie from "../../src/utils/CookieUtils";
 
 import ilsLibraryList from "../../src/data/ilsLibraryList";
 
-function ConfirmationPage(): JSX.Element {
+function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
   const { state } = useFormDataContext();
   const formResults: FormResults = state.results;
   const { t } = useTranslation("common");
@@ -122,6 +122,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       ...(await serverSideTranslations(query?.lang?.toString() || "en", [
         "common",
       ])),
+      nextAppEnv: process.env.NEXT_PUBLIC_APP_ENV,
     },
   };
 };
