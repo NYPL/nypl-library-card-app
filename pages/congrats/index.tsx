@@ -44,10 +44,14 @@ function ConfirmationPage(): JSX.Element {
   console.info(nextAppEnv);
   console.info(appEnv);
   console.info("NEXT_PUBLIC_ env vars:");
-  for (const [k, v] of Object.entries(process.env)) {
-    if (k.includes("NEXT_PUBLIC")) {
-      console.info(k, ": ", v);
+  try {
+    for (const [k, v] of Object.entries(process?.env)) {
+      if (k.includes("NEXT_PUBLIC")) {
+        console.info(k, ": ", v);
+      }
     }
+  } catch (e) {
+    console.log("process.env lookup crashed");
   }
 
   return (
