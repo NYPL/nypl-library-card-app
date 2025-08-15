@@ -42,8 +42,13 @@ function ConfirmationPage(): JSX.Element {
       : t("confirmation.nextSteps.borrow");
 
   console.info(nextAppEnv);
-  console.info(process.env.NEXT_PUBLIC_APP_ENV);
   console.info(appEnv);
+  for (const [k, v] of Object.entries(process.env)) {
+    if (k.includes("NEXT_PUBLIC")) {
+      console.info("NEXT_PUBLIC_ env vars:");
+      console.info(k, ": ", v);
+    }
+  }
 
   return (
     <div id="congratulations">
