@@ -9,7 +9,7 @@ import ConfirmationGraphic from "../../src/components/ConfirmationGraphic";
 import useFormDataContext from "../../src/context/FormDataContext";
 import { FormResults } from "../../src/interfaces";
 import { homePageRedirect } from "../../src/utils/utils";
-import { cookieDomain, nextAppEnv } from "../../appConfig";
+import { appEnv, cookieDomain, nextAppEnv } from "../../appConfig";
 import * as cookie from "../../src/utils/CookieUtils";
 
 import ilsLibraryList from "../../src/data/ilsLibraryList";
@@ -42,6 +42,8 @@ function ConfirmationPage(): JSX.Element {
       : t("confirmation.nextSteps.borrow");
 
   console.info(nextAppEnv);
+  console.info(process.env.NEXT_PUBLIC_APP_ENV);
+  console.info(appEnv);
 
   return (
     <div id="congratulations">
