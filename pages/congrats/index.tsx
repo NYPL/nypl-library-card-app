@@ -9,7 +9,7 @@ import ConfirmationGraphic from "../../src/components/ConfirmationGraphic";
 import useFormDataContext from "../../src/context/FormDataContext";
 import { FormResults } from "../../src/interfaces";
 import { homePageRedirect } from "../../src/utils/utils";
-import { appEnv, cookieDomain, nextAppEnv } from "../../appConfig";
+import { appEnv, cookieDomain } from "../../appConfig";
 import * as cookie from "../../src/utils/CookieUtils";
 
 import ilsLibraryList from "../../src/data/ilsLibraryList";
