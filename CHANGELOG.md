@@ -3,6 +3,7 @@
 ### Unreleased
 
 - Add New Relic setup [SWIS-13](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-13)
+- Install Playwright [SWIS-38](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-38)
 
 ### 1.2.4
 
