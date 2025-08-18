@@ -235,7 +235,7 @@ This project uses Playwright for functional, UI, and end-to-end (E2E) testing. P
 
 Follow the steps below to set up Playwright and run tests.
 
-Install Playwright locally by running the following commands:
+Install Playwright locally by running the following command:
 ```npx playwright install```
 
 Run all Playwright tests with
