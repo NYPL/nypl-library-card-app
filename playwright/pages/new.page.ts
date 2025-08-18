@@ -2,11 +2,16 @@ import { Page, Locator } from "@playwright/test";
 
 export class NewPage {
   readonly page: Page;
-  readonly applyHeading: Locator;
+  readonly mainHeading: Locator; // displays on each page
+  readonly applyHeading: Locator; // displays only on landing page
   readonly getStartedButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
+    this.applyHeading = page.getByRole("heading", {
+      name: "Apply for a Library Card Online",
+      level: 1,
+    });
     this.applyHeading = page.getByRole("heading", {
       name: "Apply for a Library Card Today in a Few Easy Steps",
       level: 2,

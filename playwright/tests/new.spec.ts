@@ -5,7 +5,12 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
-test("displays the heading", async ({ page }) => {
+test("displays the main heading", async ({ page }) => {
+  const newPage = new NewPage(page);
+  await expect(newPage.mainHeading).toBeVisible();
+});
+
+test("displays the apply heading", async ({ page }) => {
   const newPage = new NewPage(page);
   await expect(newPage.applyHeading).toBeVisible();
 });
