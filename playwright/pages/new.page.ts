@@ -8,7 +8,7 @@ export class NewPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.applyHeading = page.getByRole("heading", {
+    this.mainHeading = page.getByRole("heading", {
       name: "Apply for a Library Card Online",
       level: 1,
     });
