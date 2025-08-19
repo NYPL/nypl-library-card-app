@@ -4,6 +4,7 @@
 
 - Add New Relic setup [SWIS-13](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-13)
 - Install Playwright [SWIS-38](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-38)
+- Add Playwright tests to confirm elements on landing page [SWIS-39](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-39)
 
 ### 1.2.4
 
