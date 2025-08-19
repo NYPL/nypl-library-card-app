@@ -12,6 +12,7 @@ A JavaScript Application that allows NYPL patrons to request a library card and 
 | 6.                | [Internationalization](#internationalization)                     |
 | 7.                | [CI/CD](#CI/CD)                                                   |
 | 8.                | [Docker](#docker)                                                 |
+| 9.                | [Testing](#testing)                                               |
 
 ## Production Site and Version
 
@@ -36,7 +37,7 @@ The current production version:
 ### Node Version Manager (nvm)
 
 Developers can use [nvm](https://github.com/creationix/nvm) if they wish.
-This repo has a `.nvmrc` file that indicates which node version we development against.
+This repo has a `.nvmrc` file that indicates which node version we develop against.
 For more information see [how `nvm use` works](https://github.com/creationix/nvm#nvmrc).
 
 At the moment, this app is intended to be run on Node v10.x due to AWS deployments.
