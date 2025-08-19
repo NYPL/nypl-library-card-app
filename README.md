@@ -12,6 +12,7 @@ A JavaScript Application that allows NYPL patrons to request a library card and 
 | 6.                | [Internationalization](#internationalization)                     |
 | 7.                | [CI/CD](#CI/CD)                                                   |
 | 8.                | [Docker](#docker)                                                 |
+| 9.                | [Testing](#testing)                                               |
 
 ## Production Site and Version
 
@@ -36,7 +37,7 @@ The current production version:
 ### Node Version Manager (nvm)
 
 Developers can use [nvm](https://github.com/creationix/nvm) if they wish.
-This repo has a `.nvmrc` file that indicates which node version we development against.
+This repo has a `.nvmrc` file that indicates which node version we develop against.
 For more information see [how `nvm use` works](https://github.com/creationix/nvm#nvmrc).
 
 At the moment, this app is intended to be run on Node v10.x due to AWS deployments.
@@ -229,3 +230,30 @@ if (!csrfTokenValid) {
 ```
 
 in three separate locations. Then, build the image and run a container for that image. This will allow you to run the docker image locally in production mode with HTTPS turned off so that. This should not be deployed to production so remember to uncomment the code for a qa or production deployment.
+
+## Testing
+This project uses Playwright for functional, UI, and end-to-end (E2E) testing. Playwright allows you to write and run automated tests across multiple browsers to ensure the application works as expected.
+
+Follow the steps below to set up Playwright and run tests.
+
+Install Playwright locally by running the following command:
+```npx playwright install```
+
+Run all Playwright tests with
+```npm run playwright```
+
+Run specific Playwright tests with
+```npm run playwright -- new.spec.ts```
+or
+```npm run playwright -- -g "has title"```
+or
+```npm run playwright -- tests/new.spec.ts tests/personal.spec.ts```
+
+Run Playwright tests in headed mode with
+```npm run playwright -- --headed```
+
+Debug Playwright tests with the GUI tool that can be opened with
+```npm run playwright -- --ui```
+
+Update Playwright to the latest version with
+```npm install -D @playwright/test@latest```
