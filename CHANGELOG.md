@@ -1,7 +1,7 @@
 ## CHANGE LOG
 
 ### Unreleased
-
+- Updates to confirmation barcode layout [SWIS-12](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-12)
 - Add New Relic setup [SWIS-13](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-13)
 
 ### 1.2.4
