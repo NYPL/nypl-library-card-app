@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 
-export class NewPage {
+export class LandingPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
   readonly arabicLanguage: Locator;
