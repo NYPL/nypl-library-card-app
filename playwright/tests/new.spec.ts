@@ -19,3 +19,17 @@ test("displays get started button", async ({ page }) => {
   const newPage = new NewPage(page);
   await expect(newPage.getStartedButton).toBeVisible();
 });
+
+test("displays languages", async ({ page }) => {
+  const newPage = new NewPage(page);
+  await expect(newPage.arabicLanguage).toBeVisible();
+  // add more language checks
+});
+
+test("displays links", async ({ page }) => {
+  const newPage = new NewPage(page);
+  await expect(newPage.learnMore).toBeVisible();
+  await expect(newPage.cardholderTerms).toBeVisible();
+  await expect(newPage.rulesRegulations).toBeVisible();
+  await expect(newPage.privacyPolicy).toBeVisible(); // QA doesn't have header/footer so this will fail in prod
+});
