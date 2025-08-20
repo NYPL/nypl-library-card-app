@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { LandingPage } from "../pages/landing.page";
+import { LandingPage } from "../pageobjects/landing.page";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("");
