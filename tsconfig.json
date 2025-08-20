@@ -20,7 +20,8 @@
     "incremental": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "playwright.config.ts"
   ],
   "include": [
     "declarations.d.ts",
