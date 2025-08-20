@@ -20,8 +20,9 @@ jobs:
    - name: Run Playwright tests
      run: npx playwright test
 
-   - uses: actions/upload-artifact@v4
-     if: ${{ !cancelled() }}
+   - name: Upload Playwright reports on failure
+     if: ${{ failure() }}
+     uses: actions/upload-artifact@v4
      with:
        name: playwright-report
        path: playwright-report/
