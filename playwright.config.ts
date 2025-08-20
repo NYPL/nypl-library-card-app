@@ -70,10 +70,14 @@ export default defineConfig({
     // },
   ],
 
-  /* Run your local dev server before starting the tests */
-  webServer: {
-    command: "npm run dev",
-    url: "http://localhost:3000/library-card/new",
-    reuseExistingServer: !process.env.CI,
-  },
+    /* Run your local dev server before starting the tests */
+  webServer: !!process.env.CI
+    ? undefined
+    : {
+        // only run in local environment not CI
+        command: "npm run dev",
+        url: "http://localhost:3000/library-card/new",
+        reuseExistingServer: !process.env.CI,
+      },
 });
+  
