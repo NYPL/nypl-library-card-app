@@ -51,7 +51,9 @@ export class NewPage {
     this.rulesRegulations = page.getByRole("link", {
       name: "Rules and Regulations",
     });
-    this.privacyPolicy = page.getByRole("link", { name: "Privacy Policy" }); // QA doesn't have header/footer so this will fail in prod as is
+    this.privacyPolicy = page
+      .locator("#mainContent")
+      .getByRole("link", { name: "Privacy Policy" });
     this.getStartedButton = page.getByRole("link", { name: "Get Started" });
   }
 }
