@@ -8,6 +8,7 @@ import {
 import { FormData, LocationResponse } from "../src/interfaces";
 
 interface MockMethods {
+  children: React.ReactNode;
   errors?: any;
   // The types coming from `react-hook-form` for its functions.
   getValues?: () => { [x: string]: any };
@@ -15,6 +16,7 @@ interface MockMethods {
 }
 
 interface TestProviderType {
+  children: React.ReactNode;
   formDataState?: FormData;
   hookFormState?: MockMethods;
   userLocation?: LocationResponse;
