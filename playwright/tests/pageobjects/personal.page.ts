@@ -19,8 +19,8 @@ export class PersonalPage {
     this.dateOfBirthInput = this.page.locator('input[name="birthdate"]');
     this.emailInput = this.page.locator('input[name="email"]');
     this.checkBox = this.page.locator('input[type="checkbox"]');
-    this.previousButton = this.page.getByLabel("Previous");
-    this.nextButton = this.page.getByLabel("Next");
+    this.previousButton = this.page.getByText("Previous", { exact: true });
+    this.nextButton = this.page.getByText("Next", { exact: true });
 
 
 }
