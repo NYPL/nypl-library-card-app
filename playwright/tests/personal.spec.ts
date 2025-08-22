@@ -4,7 +4,7 @@ import {PersonalPage} from './pageobjects/personal.page';
 
 test.beforeEach(async ({page}) => {
   
-  await page.goto("https://www.nypl.org/library-card/personal?newCard=true");
+  await page.goto("http://localhost:3000/library-card/personal?newCard=true");
 });
 
 test('Personal information form', async ({page}) => {
