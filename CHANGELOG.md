@@ -5,7 +5,7 @@
 - Add New Relic setup [SWIS-13](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-13)
 - Install Playwright [SWIS-38](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-38)
 - Set up GitHub Actions workflow with Playwright tests [SWIS-41] (https://newyorkpubliclibrary.atlassian.net/browse/SWIS-41)
-- Playwright test for Step 1:Personal Information [SWIS-40]("https://newyorkpubliclibrary.atlassian.net/browse/SWIS-40)
+- Playwright test for Step 1:Personal Information [SWIS-40]("https://newyorkpubliclibrary.atlassian.net/browse/SWIS-40")
 
 ### 1.2.4
 

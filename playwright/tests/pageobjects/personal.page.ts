@@ -21,8 +21,6 @@ export class PersonalPage {
     this.checkBox = this.page.getByRole('checkbox', { name: "ecommunicationsPref" });
     this.previousButton = this.page.getByRole('link', { name: 'Previous' });
     this.nextButton = this.page.getByRole('button', { name: 'Next' });
-
-
-
 }
+
 }
