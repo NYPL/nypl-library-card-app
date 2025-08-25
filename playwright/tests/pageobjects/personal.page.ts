@@ -18,7 +18,7 @@ export class PersonalPage {
     this.lastNameInput = this.page.getByLabel(/Last Name/i);
     this.dateOfBirthInput = this.page.getByLabel(/Date of Birth/i);
     this.emailInput = this.page.getByLabel(/Email/i);
-    this.checkBox = this.page.getByRole('checkbox', { name: "ecommunicationsPref" });
+    this.checkBox = this.page.getByRole('checkbox', { name: "Yes, I would like to receive information about NYPL's programs and services" });
     this.previousButton = this.page.getByRole('link', { name: 'Previous' });
     this.nextButton = this.page.getByRole('button', { name: 'Next' });
 }
