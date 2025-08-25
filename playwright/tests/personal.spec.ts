@@ -4,8 +4,8 @@ import {PersonalPage} from './pageobjects/personal.page';
 
 test.beforeEach(async ({page}) => {
   
-  await page.goto("");
-  await page.getByRole('link', { name: 'Get Started' }).click();
+  await page.goto("http://localhost:3000/library-card/personal?newCard=true");
+
 });
 
 test('Personal information form', async ({page}) => {
