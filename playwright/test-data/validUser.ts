@@ -8,17 +8,17 @@ export interface UserData {
   city: string;
   state: string;
   postalCode: string;
-  alternateAddress: string;
-  alternateApartment: string;
-  alternateCity: string;
-  alternateState: string;
-  alternatePostalCode: string;
+  alternateAddress?: string;
+  alternateApartment?: string;
+  alternateCity?: string;
+  alternateState?: string;
+  alternatePostalCode?: string;
   username: string;
   password: string;
   homeLibrary: string;
 }
 
-export const validUser: UserData = {
+export const validUser: UserData [] = [{
   // step 1
   firstName: "Jane",
   lastName: "Doe",
@@ -40,4 +40,20 @@ export const validUser: UserData = {
   username: "janedoe",
   password: "securepassword123",
   homeLibrary: "E-Branch", // reference in drop down locator
-};
+},
+{
+  firstName: "John",
+  lastName: "Smith",
+  birthDate: "08/12/2000",
+  email: "johnsmith@example.com",
+  streetAddress: "456 Lexington Avenue",
+  apartment: "Apt 2A",
+  city: "New York",
+  state: "NY",
+  postalCode: "10021",
+  username: "johnsmith",
+  password: "anothersecurepassword456",
+  homeLibrary: "125th Street Library",
+},
+
+];
