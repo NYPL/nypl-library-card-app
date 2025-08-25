@@ -14,13 +14,14 @@ export class PersonalPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.firstNameInput = this.page.locator('input[name="firstName"]');
-    this.lastNameInput = this.page.locator('input[name="lastName"]');
-    this.dateOfBirthInput = this.page.locator('input[name="birthdate"]');
-    this.emailInput = this.page.locator('input[name="email"]');
-    this.checkBox = this.page.locator('input[type="checkbox"]');
-    this.previousButton = this.page.getByText("Previous", { exact: true });
-    this.nextButton = this.page.getByText("Next", { exact: true });
+    this.firstNameInput = this.page.getByLabel(/First Name/i);
+    this.lastNameInput = this.page.getByLabel(/Last Name/i);
+    this.dateOfBirthInput = this.page.getByLabel(/Date of Birth/i);
+    this.emailInput = this.page.getByLabel(/Email/i);
+    this.checkBox = this.page.getByRole('checkbox', { name: "ecommunicationsPref" });
+    this.previousButton = this.page.getByRole('link', { name: 'Previous' });
+    this.nextButton = this.page.getByRole('button', { name: 'Next' });
+
 
 
 }
