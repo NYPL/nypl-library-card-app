@@ -4,8 +4,10 @@
 - Updates to confirmation barcode layout [SWIS-12](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-12)
 - Add New Relic setup [SWIS-13](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-13)
 - Install Playwright [SWIS-38](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-38)
-- Set up GitHub Actions workflow with Playwright tests [SWIS-41](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-41)
 - Add Playwright tests to confirm elements on landing page [SWIS-39](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-39)
+- Playwright test for Step 1:Personal Information [SWIS-40](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-40)
+- Set up GitHub Actions workflow with Playwright tests [SWIS-41](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-41)
+
 
 ### 1.2.4
 
