@@ -3,6 +3,7 @@
 ### Unreleased
 
 - Add New Relic setup [SWIS-13](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-13)
+- Upgrade nextjs to v14 [SWIS-33](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-33)
 
 ### 1.2.4
 
