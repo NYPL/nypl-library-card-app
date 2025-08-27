@@ -419,11 +419,13 @@ export async function callPatronAPI(
 
     logger.error(
       `Error calling Card Creator API: ${
-        status === 403 ? "bad API call" : err.response?.data?.message
+        status === 403 ? "bad API call" : JSON.stringify(err)
       }`
     );
     logger.error(
-      `More details - status: ${status}, patron: ${patronData}, data: ${err.response?.data}`
+      `More details - status: ${status}, patron: ${JSON.stringify(
+        patronData
+      )}, data: ${JSON.stringify(err.response?.data)}`
     );
     return { ...restOfErrors, status };
   }

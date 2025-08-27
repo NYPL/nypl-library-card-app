@@ -2,7 +2,7 @@
 import { Heading } from "@nypl/design-system-react-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import React, { useEffect } from "react";
+import React, { JSX, useEffect } from "react";
 import { GetServerSideProps } from "next";
 
 import ConfirmationGraphic from "../../src/components/ConfirmationGraphic";
@@ -43,6 +43,7 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
 
   console.info(nextAppEnv);
   console.info(appEnv);
+  console.log(process.env.NEXT_PUBLIC_APP_ENV);
   console.info("NEXT_PUBLIC_ env vars:");
   try {
     for (const [k, v] of Object.entries(process?.env)) {
