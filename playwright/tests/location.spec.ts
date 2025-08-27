@@ -12,6 +12,15 @@ test("displays all headings", async ({ page }) => {
   await expect(locationPage.addressHeading).toBeVisible();
 });
 
+test("displays address form", async ({ page }) => {
+  const locationPage = new LocationPage(page);
+  await expect(locationPage.streetAddressInput).toBeVisible();
+  await expect(locationPage.apartmentSuiteInput).toBeVisible();
+  await expect(locationPage.cityInput).toBeVisible();
+  await expect(locationPage.stateInput).toBeVisible();
+  await expect(locationPage.postalCodeInput).toBeVisible();
+});
+
 test("displays next and previous buttons", async ({ page }) => {
   const locationPage = new LocationPage(page);
   await expect(locationPage.nextButton).toBeVisible();

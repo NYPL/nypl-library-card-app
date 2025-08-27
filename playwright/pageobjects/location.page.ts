@@ -5,6 +5,11 @@ export class LocationPage {
   readonly mainHeading: Locator; // displays on each page
   readonly stepHeading: Locator;
   readonly addressHeading: Locator;
+  readonly streetAddressInput: Locator;
+  readonly apartmentSuiteInput: Locator;
+  readonly cityInput: Locator;
+  readonly stateInput: Locator;
+  readonly postalCodeInput: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -22,6 +27,11 @@ export class LocationPage {
       name: "Home Address",
       level: 3,
     });
+    this.streetAddressInput = page.getByLabel(/Street Address/i);
+    this.apartmentSuiteInput = page.getByLabel(/Apartment \/ Suite/i);
+    this.cityInput = page.getByLabel(/City/i);
+    this.stateInput = page.getByLabel(/State/i);
+    this.postalCodeInput = page.getByLabel(/Postal Code/i);
     this.nextButton = page.getByRole("button", { name: "Next" });
     this.previousButton = page.getByRole("link", { name: "Previous" });
   }
