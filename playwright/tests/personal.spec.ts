@@ -19,7 +19,7 @@ test('Display personal information form', async ({page}) => {
   await expect(personalPage.nextButton).toBeVisible();
 });
 
-test('error validation for personal info form', async ({page}) => {
+test('error validation for empty personal info form', async ({page}) => {
   const personalPage = new PersonalPage(page);
   await personalPage.firstNameInput.fill('');
   await personalPage.lastNameInput.fill('');
