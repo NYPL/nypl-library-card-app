@@ -1,19 +1,20 @@
 {
   "name": "nypl-library-card-app",
-  "version": "1.1.5",
+  "version": "1.2.4",
   "description": "NYPL Get A Library Card App",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "NODE_OPTIONS='-r dotenv/config .env.local -r newrelic' next",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "NODE_OPTIONS='-r newrelic' next start -p $PORT",
     "local-prod": "next build && NODE_ENV=production node https-server.js",
     "eb:start": "npm run build && npm run start",
     "test": "jest",
     "clear": "jest --clearCache",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "playwright": "npx playwright test"
   },
   "engines": {
     "node": ">=10.24.0"
@@ -37,6 +38,7 @@
     "@babel/preset-typescript": "7.10.4",
     "@nypl/design-system-react-components": "1.2.0",
     "@nypl/dgx-react-footer": "0.5.7",
+    "@playwright/test": "^1.54.2",
     "@testing-library/jest-dom": "6.4.6",
     "@testing-library/react": "12.1.5",
     "@testing-library/react-hooks": "5.0.3",
@@ -53,6 +55,7 @@
     "cors": "2.8.5",
     "crypto": "1.0.1",
     "cypress": "6.2.1",
+    "dotenv": "^17.2.1",
     "eslint": "7.11.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-jsx-a11y": "6.3.0",
@@ -68,7 +71,8 @@
     "lint-staged": "10.1.3",
     "lodash": "4.17.21",
     "moment": "2.30.1",
-    "next": "12.3.5",
+    "newrelic": "^13.0.0",
+    "next": "^12.3.7",
     "next-i18next": "11.3.0",
     "prettier": "2.0.4",
     "qs": "6.10.4",

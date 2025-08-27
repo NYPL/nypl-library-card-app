@@ -1,24 +1,34 @@
 ## CHANGE LOG
 
-### 1.2.4 
+### Unreleased
+- Updates to confirmation barcode layout [SWIS-12](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-12)
+- Add New Relic setup [SWIS-13](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-13)
+- Install Playwright [SWIS-38](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-38)
+- Set up GitHub Actions workflow with Playwright tests [SWIS-41] (https://newyorkpubliclibrary.atlassian.net/browse/SWIS-41)
+
+### 1.2.4
+
 - replace home library free text input with select drop down[SCC-4660](https://newyorkpubliclibrary.atlassian.net/browse/SCC-4660)
 - revert verify password match to original state
 - update auth url [SCC-4657](https://newyorkpubliclibrary.atlassian.net/browse/SCC-4657)
 - replace SimplyE label with EBranch [SCC-4659](https://newyorkpubliclibrary.atlassian.net/browse/SCC-4659)
 
 ### 1.2.3 Fix PIN translation errors
+
 - use password instructions for "PIN is trivial" error translation
 - add id's to facilitate QA testing in other languages
 
 ### 1.2.2 CSRF and resubmission bugs
+
 - remove csrf token from reducer state, instead pass in as prop
 - add more descriptive server logs for csrf token debugging
 - use react-hook-form data in final post request
-- remove double submit buttons from form submission after error response. See [this pr description](https://github.com/NYPL/nypl-library-card-app/pull/289) for more info 
+- remove double submit buttons from form submission after error response. See [this pr description](https://github.com/NYPL/nypl-library-card-app/pull/289) for more info
 - update next version
 - fix passwords do not match bug in ReviewFormContainer
 
 ### 1.2.1 Mask PIN error message
+
 - Transform Sierra error message "PIN is trivial" to something more legible to users
 
 ### v1.2.0 GTM Update (3/27)
@@ -28,13 +38,16 @@
 - More logs for debugging CSRF issues.
 
 ### 1.1.2 Hot fix 3/20
+
 - Updating the legacy catalog library card form link to `https://on.nypl.org/internationalresearch`.
 
 ### v1.1.1 Fix CSRF regression
+
 - Ensure that CSRF headers are not overwritten by nyplUserHasRegistered headers
 - Refactor CSRF utils
 
 ### v1.1.0 Duplicate patron bug fixes
+
 - Add cookie-based redirect back to congrats page from any page after success
 - Remove hasUsernameBeenValidated flag and hidden input field
 - Update loading layer to remain until navigation away from submission page

@@ -9,13 +9,12 @@ import ConfirmationGraphic from "../../src/components/ConfirmationGraphic";
 import useFormDataContext from "../../src/context/FormDataContext";
 import { FormResults } from "../../src/interfaces";
 import { homePageRedirect } from "../../src/utils/utils";
-import { cookieDomain } from "../../appConfig";
+import { appEnv, cookieDomain } from "../../appConfig";
 import * as cookie from "../../src/utils/CookieUtils";
-import { appEnv } from "../../appConfig";
 
 import ilsLibraryList from "../../src/data/ilsLibraryList";
 
-function ConfirmationPage(): JSX.Element {
+function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
   const { state } = useFormDataContext();
   const formResults: FormResults = state.results;
   const { t } = useTranslation("common");
@@ -38,9 +37,22 @@ function ConfirmationPage(): JSX.Element {
   }, []);
 
   const loginHtml =
-    appEnv === "qa"
+    nextAppEnv === "qa"
       ? t("confirmation.nextSteps.borrow").replace("https://", "https://dev-")
       : t("confirmation.nextSteps.borrow");
+
+  console.info(nextAppEnv);
+  console.info(appEnv);
+  console.info("NEXT_PUBLIC_ env vars:");
+  try {
+    for (const [k, v] of Object.entries(process?.env)) {
+      if (k.includes("NEXT_PUBLIC")) {
+        console.info(k, ": ", v);
+      }
+    }
+  } catch (e) {
+    console.log("process.env lookup crashed");
+  }
 
   return (
     <div id="congratulations">
@@ -110,6 +122,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       ...(await serverSideTranslations(query?.lang?.toString() || "en", [
         "common",
       ])),
+      nextAppEnv: process.env.NEXT_PUBLIC_APP_ENV,
     },
   };
 };
