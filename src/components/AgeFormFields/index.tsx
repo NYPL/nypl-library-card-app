@@ -20,7 +20,10 @@ const AgeForm = ({ policyType = "webApplicant" }: AgeFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
-  const { register, errors } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   const MAXLENGTHDATE = 10;
   // TODO: Right now, all applicants are web applications and
   // this feature is not needed. Only rendering the `birthdateField`
@@ -33,16 +36,14 @@ const AgeForm = ({ policyType = "webApplicant" }: AgeFormProps) => {
       id="birthdate"
       instructionText={t("personal.birthdate.instruction")}
       label={t("personal.birthdate.label")}
-      name="birthdate"
-      isRequired
-      errorState={errors}
-      maxLength={MAXLENGTHDATE}
-      // This `validate` callback allows for specific validation
-      ref={register({
+      {...register("birthdate", {
         validate: (val) =>
           (val.length <= MAXLENGTHDATE && isDate(val)) ||
           t("personal.errorMessage.birthdate"),
       })}
+      isRequired
+      errorState={errors.birthdate}
+      maxLength={MAXLENGTHDATE}
       defaultValue={formValues.birthdate}
     />
   );

@@ -28,7 +28,10 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
   const { formValues } = state;
   // This component must be used within the `react-hook-form` provider so that
   // these functions are available to use.
-  const { register, errors } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   const STATELENGTH = 2;
   const MINLENGTHZIP = 5;
   const MAXLENGTHZIP = 9;
@@ -72,15 +75,14 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
           <FormField
             id={`line1-${type}`}
             label={t("location.address.line1.label")}
-            name={`${type}-line1`}
-            isRequired={isRequired}
-            errorState={errors}
-            ref={register({
+            {...register(`${type}-line1`, {
               required: {
                 value: isRequired,
                 message: t("location.errorMessage.line1"),
               },
             })}
+            isRequired={isRequired}
+            errorState={errors}
             defaultValue={formValues[`${type}-line1`]}
           />
         </DSFormField>
@@ -91,8 +93,7 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
           <FormField
             id={`line2-${type}`}
             label={t("location.address.line2.label")}
-            name={`${type}-line2`}
-            ref={register()}
+            {...register(`${type}-line2`)}
             defaultValue={formValues[`${type}-line2`]}
           />
         </DSFormField>
@@ -103,15 +104,14 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
           <FormField
             id={`city-${type}`}
             label={t("location.address.city.label")}
-            name={`${type}-city`}
-            isRequired={isRequired}
-            errorState={errors}
-            ref={register({
+            {...register(`${type}-city`, {
               required: {
                 value: isRequired,
                 message: t("location.errorMessage.city"),
               },
             })}
+            isRequired={isRequired}
+            errorState={errors}
             defaultValue={formValues[`${type}-city`]}
           />
         </DSFormField>
@@ -120,17 +120,16 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
             id={`state-${type}`}
             instructionText={t("location.address.state.instruction")}
             label={t("location.address.state.label")}
-            name={`${type}-state`}
-            isRequired={isRequired}
-            errorState={errors}
-            maxLength={STATELENGTH}
-            ref={register({
+            {...register(`${type}-state`, {
               validate: lengthValidation(
                 STATELENGTH,
                 STATELENGTH,
                 "location.errorMessage.state"
               ),
             })}
+            isRequired={isRequired}
+            errorState={errors}
+            maxLength={STATELENGTH}
             defaultValue={formValues[`${type}-state`]}
           />
         </DSFormField>
@@ -141,15 +140,14 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
           <FormField
             id={`zip-${type}`}
             label={t("location.address.postalCode.label")}
-            name={`${type}-zip`}
+            {...register(`${type}-zip`, {
+              validate: validateZip(),
+            })}
             isRequired={isRequired}
             errorState={errors}
             minLength={MINLENGTHZIP}
             maxLength={MAXLENGTHZIP}
             instructionText={t("location.address.postalCode.instruction")}
-            ref={register({
-              validate: validateZip(),
-            })}
             defaultValue={formValues[`${type}-zip`]}
           />
         </DSFormField>

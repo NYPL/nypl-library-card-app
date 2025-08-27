@@ -21,12 +21,16 @@ function PersonalFormFields({
   id = "",
 }: PersonalFormFieldsProps) {
   const { t } = useTranslation("common");
-  const { register, errors } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   const { state } = useFormDataContext();
   const { formValues } = state;
   const [ecommunicationsPref, setEcommunicationsPref] = useState<boolean>(
     formValues.ecommunicationsPref
   );
+
   return (
     <>
       <FormRow id={`${id}-personalForm-1`}>
@@ -34,14 +38,10 @@ function PersonalFormFields({
           <FormField
             id="firstName"
             label={t("personal.firstName.label")}
-            name="firstName"
-            isRequired
-            // Every input field is registered to react-hook-form. If this
-            // field is empty on blur or on submission, the error message will
-            // display below the input.
-            ref={register({
+            {...register("firstName", {
               required: t("personal.errorMessage.firstName"),
             })}
+            isRequired
             errorState={errors}
             defaultValue={formValues.firstName}
           />
@@ -50,12 +50,11 @@ function PersonalFormFields({
           <FormField
             id="lastName"
             label={t("personal.lastName.label")}
-            name="lastName"
+            {...register("lastName", {
+              required: "oh no",
+            })}
             isRequired
             errorState={errors}
-            ref={register({
-              required: t("personal.errorMessage.lastName"),
-            })}
             defaultValue={formValues.lastName}
           />
         </DSFormField>
@@ -70,14 +69,13 @@ function PersonalFormFields({
           <FormField
             id="email"
             label={t("personal.email.label")}
-            name="email"
-            errorState={errors}
-            isRequired
-            ref={register({
+            {...register("email", {
               required: t("personal.errorMessage.email"),
               validate: (val) =>
                 val === "" || isEmail(val) || t("personal.errorMessage.email"),
             })}
+            errorState={errors}
+            isRequired
             defaultValue={formValues.email}
             instructionText={t("personal.email.instruction")}
           />
@@ -89,9 +87,8 @@ function PersonalFormFields({
             id="eCommunications"
             isChecked={ecommunicationsPref}
             labelText={t("personal.eCommunications.labelText")}
-            name="ecommunicationsPref"
+            {...register("ecommunicationsPref")}
             onChange={() => setEcommunicationsPref((prev) => !prev)}
-            ref={register()}
           />
         </DSFormField>
       </FormRow>

@@ -25,7 +25,11 @@ function AccountFormFields({
   csrfToken,
 }: AccountFormFieldsProps) {
   const { t } = useTranslation("common");
-  const { register, errors, getValues } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+    getValues,
+  } = useFormContext();
   const { state } = useFormDataContext();
   const [showPassword, setShowPassword] = useState(true);
   const [clientSide, setClientSide] = useState(false);
@@ -80,17 +84,16 @@ function AccountFormFields({
             id="password"
             type={passwordType}
             label={t("account.password.label")}
-            name="password"
+            {...register("password", {
+              validate: {
+                validatePasswordLength,
+              },
+            })}
             instructionText={t("account.password.instruction")}
             isRequired
             errorState={errors}
             minLength={minPasswordLength}
             maxLength={maxPasswordLength}
-            ref={register({
-              validate: {
-                validatePasswordLength,
-              },
-            })}
             defaultValue={formValues.password}
           />
         </DSFormField>
@@ -102,15 +105,14 @@ function AccountFormFields({
             id="verifyPassword"
             type={passwordType}
             label={t("account.verifyPassword.label")}
-            name="verifyPassword"
+            {...register("verifyPassword", {
+              validate: verifyPasswordmatch,
+            })}
             instructionText={t("account.verifyPassword.instruction")}
             isRequired
             errorState={errors}
             minLength={minPasswordLength}
             maxLength={maxPasswordLength}
-            ref={register({
-              validate: verifyPasswordmatch,
-            })}
             defaultValue={formValues.verifyPassword}
           />
         </DSFormField>
