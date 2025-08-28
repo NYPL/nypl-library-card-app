@@ -20,7 +20,7 @@ export class LocationPage {
       level: 1,
     });
     this.stepHeading = page.getByRole("heading", {
-      name: /^Step \d of 5: .+$/,
+      name: "Step 2 of 5: Address",
       level: 2,
     });
     this.addressHeading = page.getByRole("heading", {
