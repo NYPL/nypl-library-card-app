@@ -26,3 +26,17 @@ test("displays next and previous buttons", async ({ page }) => {
   await expect(locationPage.nextButton).toBeVisible();
   await expect(locationPage.previousButton).toBeVisible();
 });
+
+test("displays errors for required fields", async ({ page }) => {
+  const locationPage = new LocationPage(page);
+  await locationPage.streetAddressInput.fill("");
+  await locationPage.apartmentSuiteInput.fill("");
+  await locationPage.cityInput.fill("");
+  await locationPage.stateInput.fill("");
+  await locationPage.postalCodeInput.fill("");
+  await locationPage.nextButton.click();
+  await expect(locationPage.streetAddressError).toBeVisible();
+  await expect(locationPage.cityError).toBeVisible();
+  await expect(locationPage.stateError).toBeVisible();
+  await expect(locationPage.postalCodeError).toBeVisible();
+});
