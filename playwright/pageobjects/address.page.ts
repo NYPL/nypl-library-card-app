@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 
-export class LocationPage {
+export class AddressPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
   readonly stepHeading: Locator;
