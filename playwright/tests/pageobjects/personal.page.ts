@@ -10,7 +10,11 @@ export class PersonalPage {
     readonly checkBox: Locator;
     readonly previousButton: Locator;
     readonly nextButton: Locator;
-    
+
+    readonly firstNameErrorMessage: Locator;
+    readonly lastNameErrorMessage: Locator;
+    readonly emailErrorMessage: Locator;
+    readonly dateOfBirthErrorMessage: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -21,6 +25,11 @@ export class PersonalPage {
     this.checkBox = this.page.getByRole('checkbox', { name: "Yes, I would like to receive information about NYPL's programs and services" });
     this.previousButton = this.page.getByRole('link', { name: 'Previous' });
     this.nextButton = this.page.getByRole('button', { name: 'Next' });
+
+    this.firstNameErrorMessage = this.page.getByText('Please enter a valid first name.');
+    this.lastNameErrorMessage = this.page.getByText('Please enter a valid last name.');
+    this.emailErrorMessage = this.page.getByText('Please enter a valid email address.');
+    this.dateOfBirthErrorMessage = this.page.getByText('Please enter a valid date, MM/DD/YYYY, including slashes.');
 }
 
 }
