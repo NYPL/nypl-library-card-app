@@ -45,7 +45,7 @@ At the moment, this app is intended to be run on Node v10.x due to AWS deploymen
 ### Environment Variables
 
 See `.env.example` for a checklist of the environment variables the app
-needs to run. Ask developer for credentials 
+needs to run. Ask developer for credentials or their .env.local file
 
 Note: Nextjs uses `.env.development` and `.env.production` for their respective platform environment variables. The keys are not encrypted in the repo and are therefore directly added/updated through Terraform. These files are not not necessary to have to run the app locally.
 
