@@ -162,7 +162,7 @@ function AddressVerificationContainer() {
             addressesLength === 1 ? true : selected === selectedValue;
           const checkedClass = checked ? "checked" : "";
           return (
-            <li key={`${addressType}-${idx}`} className={checkedClass}>
+            <li key={`${addressType}-${idx}`} className={styles.checkedClass}>
               <Radio
                 id={`${addressType}-${idx}`}
                 className={`radio-input ${styles.input}`}
