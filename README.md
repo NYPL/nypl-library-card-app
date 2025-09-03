@@ -45,7 +45,7 @@ At the moment, this app is intended to be run on Node v10.x due to AWS deploymen
 ### Environment Variables
 
 See `.env.example` for a checklist of the environment variables the app
-needs to run.
+needs to run. Ask developer for credentials or their .env.local file
 
 Note: Nextjs uses `.env.development` and `.env.production` for their respective platform environment variables. The keys are not encrypted in the repo and are therefore directly added/updated through Terraform. These files are not not necessary to have to run the app locally.
 
@@ -61,6 +61,19 @@ When you type `npm run dev` the CLI will output a line:
 `react-i18next:: You will need to pass in an i18next instance by using initReactI18next`. This is safe to ignore.
 
 You MUST point the browser to http://localhost:3000/library-card/new. Do NOT point the browser to http://localhost:3000 with no route. If you do, you will throw an error related to i18next. It expects a `dir` prop in the same element as the `_next` prop.
+
+### Local hosting
+
+Update your machine's /etc/hosts file.
+
+This will map your local host to a .nypl.org domain, allowing the authentication cookies to function properly.
+
+Add the following line to your /etc/hosts file:
+
+
+`127.0.0.1       local.nypl.org`
+
+
 
 ### Production build
 
