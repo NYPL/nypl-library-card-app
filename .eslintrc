@@ -27,7 +27,10 @@
   "rules": {
     "import/extensions": 0,
     "global-require": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
     "react/jsx-props-no-spreading": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "no-useless-escape": 0,
@@ -45,12 +48,7 @@
     },
     "import/resolver": {
       "node": {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
-        ]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
   }
