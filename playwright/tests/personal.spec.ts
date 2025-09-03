@@ -31,32 +31,34 @@ test("error validation for empty personal info form", async ({ page }) => {
   await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
 });
 
-test('error validation for invalid email format', async ({page}) => {
+test("error validation for invalid email format", async ({ page }) => {
   const personalPage = new PersonalPage(page);
-  await personalPage.emailInput.fill('testgmail.com');
+  await personalPage.emailInput.fill("testgmail.com");
   await personalPage.nextButton.click();
   await expect(personalPage.emailErrorMessage).toBeVisible();
 });
 
-test('error validation for missing email domain', async ({page}) => {
+test("error validation for missing email domain", async ({ page }) => {
   const personalPage = new PersonalPage(page);
-  await personalPage.emailInput.fill('test@.com');
+  await personalPage.emailInput.fill("test@.com");
   await personalPage.nextButton.click();
   await expect(personalPage.emailErrorMessage).toBeVisible();
 });
 
-test('error validation for missing email username', async ({page}) => {
+test("error validation for missing email username", async ({ page }) => {
   const personalPage = new PersonalPage(page);
-  await personalPage.emailInput.fill('@gmail.com');
+  await personalPage.emailInput.fill("@gmail.com");
   await personalPage.nextButton.click();
   await expect(personalPage.emailErrorMessage).toBeVisible();
 });
 
-test('error validation for birth date less than 13 years ago', async ({page}) => {
+test("error validation for birth date less than 13 years ago", async ({
+  page,
+}) => {
   const personalPage = new PersonalPage(page);
   const today = new Date();
   const minDate = new Date(today.setFullYear(today.getFullYear() - 13));
-  await personalPage.dateOfBirthInput.fill(minDate.toISOString().split('T')[0]);
+  await personalPage.dateOfBirthInput.fill(minDate.toISOString().split("T")[0]);
   await personalPage.nextButton.click();
   await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
 });
