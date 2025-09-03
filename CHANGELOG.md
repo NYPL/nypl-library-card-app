@@ -5,6 +5,7 @@
 - Playwright test for Step 1: Personal Information and error validation [SWIS-40](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-40)
 - Add Playwright tests to confirm elements on landing page [SWIS-39](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-39)
 - Add Playwright tests to confirm elements on location page [SWIS-42](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-42)
+- Add Prettier job to CI workflow [SWIS-61](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-61)
 
 ### 1.2.5
 
