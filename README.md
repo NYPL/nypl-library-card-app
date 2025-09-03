@@ -62,6 +62,19 @@ When you type `npm run dev` the CLI will output a line:
 
 You MUST point the browser to http://localhost:3000/library-card/new. Do NOT point the browser to http://localhost:3000 with no route. If you do, you will throw an error related to i18next. It expects a `dir` prop in the same element as the `_next` prop.
 
+### Local hosting
+
+Update your machine's /etc/hosts file.
+
+This will map your local host to a .nypl.org domain, allowing the authentication cookies to function properly.
+
+Add the following line to your /etc/hosts file:
+
+
+`127.0.0.1       local.nypl.org`
+
+
+
 ### Production build
 
 To build and run the app locally in production mode, run the following:
