@@ -8,7 +8,7 @@ import { useFormContext } from "react-hook-form";
 import { isNumeric } from "validator";
 
 import FormField from "../FormField";
-import { AddressTypes } from "../../interfaces";
+import { AddressTypes, FormInputData } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
 
 interface AddressFormProps {
@@ -31,7 +31,7 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
   const {
     register,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<FormInputData>();
   const STATELENGTH = 2;
   const MINLENGTHZIP = 5;
   const MAXLENGTHZIP = 9;

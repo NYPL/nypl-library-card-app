@@ -15,7 +15,6 @@ import useFormDataContext from "../../context/FormDataContext";
 const AcceptTermsForm: React.FC = () => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
-  const { formValues } = state;
   const {
     register,
     formState: { errors },
