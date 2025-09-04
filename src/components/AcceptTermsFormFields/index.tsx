@@ -3,8 +3,6 @@ import { useTranslation } from "next-i18next";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-import useFormDataContext from "../../context/FormDataContext";
-
 /**
  * AcceptTermsForm
  * Renders a checkbox that users must click on in order to submit the form.
@@ -14,7 +12,6 @@ import useFormDataContext from "../../context/FormDataContext";
  */
 const AcceptTermsForm: React.FC = () => {
   const { t } = useTranslation("common");
-  const { state } = useFormDataContext();
   const {
     register,
     formState: { errors },
