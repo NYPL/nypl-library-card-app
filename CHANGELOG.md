@@ -8,7 +8,6 @@
 - Add Prettier job to CI workflow [SWIS-61](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-61)
 - Clean up Playwright tests and folders [SWIS-56](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-56)
 
-
 ### 1.2.5
 
 - Updates to confirmation barcode layout [SWIS-12](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-12)
