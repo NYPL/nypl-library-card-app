@@ -70,10 +70,7 @@ This will map your local host to a .nypl.org domain, allowing the authentication
 
 Add the following line to your /etc/hosts file:
 
-
-`127.0.0.1       local.nypl.org`
-
-
+`127.0.0.1 local.nypl.org`
 
 ### Production build
 
@@ -245,28 +242,29 @@ if (!csrfTokenValid) {
 in three separate locations. Then, build the image and run a container for that image. This will allow you to run the docker image locally in production mode with HTTPS turned off so that. This should not be deployed to production so remember to uncomment the code for a qa or production deployment.
 
 ## Testing
+
 This project uses Playwright for functional, UI, and end-to-end (E2E) testing. Playwright allows you to write and run automated tests across multiple browsers to ensure the application works as expected.
 
 Follow the steps below to set up Playwright and run tests.
 
 Install Playwright locally by running the following command:
-```npx playwright install```
+`npx playwright install`
 
 Run all Playwright tests with
-```npm run playwright```
+`npm run playwright`
 
 Run specific Playwright tests with
-```npm run playwright -- new.spec.ts```
+`npm run playwright -- new.spec.ts`
 or
-```npm run playwright -- -g "has title"```
+`npm run playwright -- -g "has title"`
 or
-```npm run playwright -- tests/new.spec.ts tests/personal.spec.ts```
+`npm run playwright -- tests/new.spec.ts tests/personal.spec.ts`
 
 Run Playwright tests in headed mode with
-```npm run playwright -- --headed```
+`npm run playwright -- --headed`
 
 Debug Playwright tests with the GUI tool that can be opened with
-```npm run playwright -- --ui```
+`npm run playwright -- --ui`
 
 Update Playwright to the latest version with
-```npm install -D @playwright/test@latest```
+`npm install -D @playwright/test@latest`
