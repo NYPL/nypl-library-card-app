@@ -63,7 +63,7 @@ function AccountFormFields({
       t("account.errorMessage.password")
     );
   };
-  const verifyPasswordmatch = () => {
+  const verifyPasswordMatch = () => {
     return (
       getValues("password") === getValues("verifyPassword") ||
       t("account.errorMessage.verifyPassword")
@@ -106,7 +106,7 @@ function AccountFormFields({
             type={passwordType}
             label={t("account.verifyPassword.label")}
             {...register("verifyPassword", {
-              validate: verifyPasswordmatch,
+              validate: verifyPasswordMatch,
             })}
             instructionText={t("account.verifyPassword.instruction")}
             isRequired
