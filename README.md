@@ -90,8 +90,8 @@ The `basePath` value is set to `/library-card`.
 
 Our branches (in order of stability are):
 
-| Branch     | Environment | AWS Account     |
-| :--------- | :---------- | :-------------- |
+| Branch     | Environment | AWS Account      |
+| :--------- | :---------- | :--------------- |
 | main       | development | nypl-sandbox     |
 | qa         | qa          | nypl-digital-dev |
 | production | production  | nypl-digital-dev |
