@@ -29,6 +29,8 @@ jest.mock("react-i18next", () => {
   };
 });
 
+jest.mock("next/router", () => require("next-router-mock"));
+
 describe("AddressVerificationPage accessibility", () => {
   test("passes axe accessibility test", async () => {
     await act(async () => {

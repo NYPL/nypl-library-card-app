@@ -1,7 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { JSX } from "react";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
@@ -39,25 +36,26 @@ function RoutingLinks({
   return (
     <div className={styles.container}>
       {previous?.url && (
-        <Link href={previous.url}>
-          <a id="routing-links-previous" className={styles.previous}>
-            {previousText}
-          </a>
+        <Link
+          href={previous.url}
+          id="routing-links-previous"
+          className={styles.previous}
+        >
+          {previousText}
         </Link>
       )}
       {!next?.submit ? (
-        <Link href={next.url}>
-          <a
-            id="routing-links-next"
-            className={`button ${styles.button}`}
-            // Just track the "Get Started" or "Submit" clicks. Routing events
-            // are tracked at the component level in each "onSubmit".
-            onClick={() => {
-              aaUtils.trackCtaEvent("Start Application", next.text, next.url);
-            }}
-          >
-            {nextText}
-          </a>
+        <Link
+          href={next.url}
+          id="routing-links-next"
+          className={`button ${styles.button}`}
+          // Just track the "Get Started" or "Submit" clicks. Routing events
+          // are tracked at the component level in each "onSubmit".
+          onClick={() => {
+            aaUtils.trackCtaEvent("Start Application", next.text, next.url);
+          }}
+        >
+          {nextText}
         </Link>
       ) : (
         <input

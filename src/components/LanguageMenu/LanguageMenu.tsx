@@ -1,5 +1,5 @@
 import { HorizontalRule, List } from "@nypl/design-system-react-components";
-import React from "react";
+import React, { JSX } from "react";
 
 import { languageData } from "../../data/languages";
 

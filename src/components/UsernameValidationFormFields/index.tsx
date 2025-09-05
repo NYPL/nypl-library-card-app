@@ -47,7 +47,12 @@ const UsernameValidationForm = ({
     message: "",
   };
   const [usernameIsAvailable, setUsernameIsAvailable] = useState(defaultState);
-  const { watch, getValues, register, errors } = useFormContext();
+  const {
+    watch,
+    getValues,
+    register,
+    formState: { errors },
+  } = useFormContext();
   const usernameWatch = watch("username");
   const { state } = useFormDataContext();
   const { formValues } = state;
@@ -147,14 +152,13 @@ const UsernameValidationForm = ({
           <FormField
             id="username"
             label={t("account.username.label")}
-            name="username"
+            {...register("username", {
+              validate: (val) => inputValidation(val) || errorMessage,
+            })}
             instructionText={t("account.username.instruction")}
             isRequired
             errorState={errors}
             maxLength={25}
-            ref={register({
-              validate: (val) => inputValidation(val) || errorMessage,
-            })}
             defaultValue={formValues.username}
           />
         </DSFormField>

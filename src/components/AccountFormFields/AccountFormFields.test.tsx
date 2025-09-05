@@ -58,22 +58,14 @@ jest.mock("react-i18next", () => {
     }),
   };
 });
-jest.mock("next/router", () => ({
-  useRouter() {
-    return {
-      route: "/",
-      pathname: "",
-      query: { lang: "en" },
-      asPath: "",
-    };
-  },
-}));
+
+jest.mock("next/router", () => require("next-router-mock"));
 
 describe("AccountFormFields accessibility check", () => {
   test("passes axe accessibility test", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <AccountFormFields id="accountFormFields-test" />
+        <AccountFormFields id="accountFormFields-test" csrfToken="test-token" />
       </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
@@ -85,7 +77,7 @@ describe("AccountFormFields", () => {
   beforeEach(() => {
     const utils = render(
       <TestProviderWrapper>
-        <AccountFormFields id="accountFormFields-test" />
+        <AccountFormFields id="accountFormFields-test" csrfToken="test-token" />
       </TestProviderWrapper>
     );
     container = utils.container;

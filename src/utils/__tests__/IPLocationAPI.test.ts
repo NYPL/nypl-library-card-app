@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import IPLocationAPI from "../IPLocationAPI";
 const requestIp = require("request-ip");
 const axios = require("axios");

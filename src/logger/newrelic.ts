@@ -17,7 +17,6 @@ export const NRError = (
 
   // Send to new relic dashboard
   if (typeof window === "undefined") {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const newrelic = require("newrelic");
     newrelic.noticeError(e, customAttributes);
   } else if (
