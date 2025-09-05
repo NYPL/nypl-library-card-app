@@ -7,6 +7,7 @@
 - Add Playwright tests to confirm elements on location page and error validation [SWIS-42](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-42)
 - Add Prettier job to CI workflow [SWIS-61](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-61)
 - Clean up Playwright tests and folders [SWIS-56](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-56)
+- Add Playwright tests to confirm elements on alternate address page [SWIS-58](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-58)
 
 ### 1.2.5
 
