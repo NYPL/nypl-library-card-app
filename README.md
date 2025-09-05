@@ -45,14 +45,14 @@ Note: Nextjs uses `.env.development` and `.env.production` for their respective 
 
 1. `cp .env.example .env.local` and fill out variables
 2. `npm install`
-3. `npm run dev` and point browser to http://localhost:3001/library-card/new
+3. `npm run dev` and point browser to http://localhost:3000/library-card/new
 
 #### NOTE
 
 When you type `npm run dev` the CLI will output a line:
 `react-i18next:: You will need to pass in an i18next instance by using initReactI18next`. This is safe to ignore.
 
-You MUST point the browser to http://localhost:3001/library-card/new. Do NOT point the browser to http://localhost:3001 with no route. If you do, you will throw an error related to i18next. It expects a `dir` prop in the same element as the `_next` prop.
+You MUST point the browser to http://localhost:3000/library-card/new. Do NOT point the browser to http://localhost:3000 with no route. If you do, you will throw an error related to i18next. It expects a `dir` prop in the same element as the `_next` prop.
 
 ### Local hosting
 
@@ -156,7 +156,7 @@ This will be used to build and deploy images to Docker Hub in the future.
 If you are using the `docker` CLI tool, use the following command to run an _existing_ image in a container called `mycontainer` locally:
 
 ```
-$ docker run -d --name mycontainer -p 3001:3001 --env-file .env.local lib-app
+$ docker run -d --name mycontainer -p 3000:3000 --env-file .env.local lib-app
 ```
 
 This will run an existing Docker image, such as the image built from the previous step, in the background. If you want to see the latest logs from the container, run `docker logs mycontainer`. If you want to see the full set of logs as the Docker image is being built and run, remove the detached `-d` flag. The `--env-file` flag configures the docker container to use the local `.env.local` file where your secret credentials to run the app should be located. This file is not used when building the image, only when running the container.
@@ -183,7 +183,7 @@ To stop and remove the container run:
 $ docker-compose down
 ```
 
-If any changes are made to the application, the image needs to be built again. Stop the container and then run the following command:
+If any changes are made to the application, the image needs to be built again. Stop the container and delete the image, then run the following command:
 
 ```
 $ docker-compose up --build
@@ -200,8 +200,6 @@ and the following to restart the stopped container:
 ```
 $ docker-compose start
 ```
-
-To see changes reflected locally, you must stop both the container as well as the image. This will force a new image to be created when you start a fresh container.
 
 ### Current Limitation
 
