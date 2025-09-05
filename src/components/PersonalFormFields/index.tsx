@@ -51,7 +51,7 @@ function PersonalFormFields({
             id="lastName"
             label={t("personal.lastName.label")}
             {...register("lastName", {
-              required: "oh no",
+              required: "Please enter a valid last name.",
             })}
             isRequired
             errorState={errors}

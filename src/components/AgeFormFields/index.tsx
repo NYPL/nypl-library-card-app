@@ -37,12 +37,13 @@ const AgeForm = ({ policyType = "webApplicant" }: AgeFormProps) => {
       instructionText={t("personal.birthdate.instruction")}
       label={t("personal.birthdate.label")}
       {...register("birthdate", {
+        required: t("personal.errorMessage.birthdate"),
         validate: (val) =>
           (val.length <= MAXLENGTHDATE && isDate(val)) ||
           t("personal.errorMessage.birthdate"),
       })}
       isRequired
-      errorState={errors.birthdate}
+      errorState={errors}
       maxLength={MAXLENGTHDATE}
       defaultValue={formValues.birthdate}
     />
