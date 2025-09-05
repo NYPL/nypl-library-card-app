@@ -24,14 +24,6 @@ The current production version:
 
 - v1.2.4
 
-## Branch Statuses
-
-| Branch       | Status                                                                                                                                      |
-| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
-| `main`       | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=main)](https://travis-ci.org/NYPL/nypl-library-card-app)       |
-| `production` | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=production)](https://travis-ci.org/NYPL/nypl-library-card-app) |
-| `qa`         | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-library-card-app)         |
-
 ## Installation & Configuration
 
 ### Node Version Manager (nvm)
@@ -40,7 +32,7 @@ Developers can use [nvm](https://github.com/creationix/nvm) if they wish.
 This repo has a `.nvmrc` file that indicates which node version we develop against.
 For more information see [how `nvm use` works](https://github.com/creationix/nvm#nvmrc).
 
-At the moment, this app is intended to be run on Node v10.x due to AWS deployments.
+At the moment, this app is intended to be run on Node v20.x due to AWS deployments.
 
 ### Environment Variables
 
@@ -53,14 +45,14 @@ Note: Nextjs uses `.env.development` and `.env.production` for their respective 
 
 1. `cp .env.example .env.local` and fill out variables
 2. `npm install`
-3. `npm run dev` and point browser to http://localhost:3000/library-card/new
+3. `npm run dev` and point browser to http://localhost:3001/library-card/new
 
 #### NOTE
 
 When you type `npm run dev` the CLI will output a line:
 `react-i18next:: You will need to pass in an i18next instance by using initReactI18next`. This is safe to ignore.
 
-You MUST point the browser to http://localhost:3000/library-card/new. Do NOT point the browser to http://localhost:3000 with no route. If you do, you will throw an error related to i18next. It expects a `dir` prop in the same element as the `_next` prop.
+You MUST point the browser to http://localhost:3001/library-card/new. Do NOT point the browser to http://localhost:3001 with no route. If you do, you will throw an error related to i18next. It expects a `dir` prop in the same element as the `_next` prop.
 
 ### Local hosting
 
@@ -71,6 +63,8 @@ This will map your local host to a .nypl.org domain, allowing the authentication
 Add the following line to your /etc/hosts file:
 
 `127.0.0.1 local.nypl.org`
+
+See below for current limitations and follow steps listed under 1.
 
 ### Production build
 
@@ -98,11 +92,11 @@ Our branches (in order of stability are):
 
 | Branch     | Environment | AWS Account     |
 | :--------- | :---------- | :-------------- |
-| main       | development | aws-sandbox     |
-| qa         | qa          | aws-digital-dev |
-| production | production  | aws-digital-dev |
+| main       | development | nypl-sandbox     |
+| qa         | qa          | nypl-digital-dev |
+| production | production  | nypl-digital-dev |
 
-The `main` branch and the `development` environment on `aws-sandbox` is not currently being used. Only the deployments to `aws-digital-dev` are being used.
+The `main` branch and the `development` environment on `nypl-sandbox` is not currently being used. Only the deployments to `nypl-digital-dev` are being used.
 
 ### Cutting a feature branch
 
@@ -126,7 +120,7 @@ Configuration can be adjusted via `.github/workflows/ci.yml`, located at the roo
 
 ## Docker
 
-_Note_: This application is using Docker only for production builds and not for local development. For local development, the `npm run dev` command is the way to go.
+_Note_: This application is using Docker only for production builds and not for local development. For local development, the `npm run dev` command is the way to go. If that doesn't work (for example certain Macs) you are likely missing a step. Make sure you have gone through all steps of the setup. If you still are unable to run locally, ask another dev or use Docker for the interim.
 
 ### Building Docker Images
 
@@ -162,7 +156,7 @@ This will be used to build and deploy images to Docker Hub in the future.
 If you are using the `docker` CLI tool, use the following command to run an _existing_ image in a container called `mycontainer` locally:
 
 ```
-$ docker run -d --name mycontainer -p 3000:3000 --env-file .env.local lib-app
+$ docker run -d --name mycontainer -p 3001:3001 --env-file .env.local lib-app
 ```
 
 This will run an existing Docker image, such as the image built from the previous step, in the background. If you want to see the latest logs from the container, run `docker logs mycontainer`. If you want to see the full set of logs as the Docker image is being built and run, remove the detached `-d` flag. The `--env-file` flag configures the docker container to use the local `.env.local` file where your secret credentials to run the app should be located. This file is not used when building the image, only when running the container.
@@ -207,6 +201,8 @@ and the following to restart the stopped container:
 $ docker-compose start
 ```
 
+To see changes reflected locally, you must stop both the container as well as the image. This will force a new image to be created when you start a fresh container.
+
 ### Current Limitation
 
 The Library Card App makes use of cookies to create, store, send, and verify CSRF tokens to prevent malicious attacks through the app's forms. In production builds, the CSRF token is stored in a secure cookie. Secure cookies require the use of https so unless your localhost is set up to run https, the production Docker builds will not work locally. This is an issue since running `npm run build` and `npm start` also create secure cookies and require localhost to support https. Although this is a problem for testing the production build of the application locally, this is not an issue when deploying to NYPL's production server.
@@ -225,7 +221,7 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 ```
 
-Then double-click on the `localhost.crt` file to add it to your keychain. Change the settings to "Always Trust".
+Then double-click on the `localhost.crt` file to add it to your keychain under "System". Change the settings to "Always Trust".
 
 Now run `npm run local-prod` to build and run the Next.js app with https.
 
@@ -239,7 +235,7 @@ if (!csrfTokenValid) {
 }
 ```
 
-in three separate locations. Then, build the image and run a container for that image. This will allow you to run the docker image locally in production mode with HTTPS turned off so that. This should not be deployed to production so remember to uncomment the code for a qa or production deployment.
+in three separate locations. Then, build the image and run a container for that image. This will allow you to run the docker image locally in production mode with HTTPS turned off. This should not be deployed to production so remember to exclude this from the commit or uncomment the code for a qa or production deployment.
 
 ## Testing
 
