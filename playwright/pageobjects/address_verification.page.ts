@@ -5,7 +5,7 @@ export class AddressVerificationPage {
     readonly mainHeader: Locator;
     readonly subHeader: Locator;
     readonly homeAddressHeader: Locator;
-
+    readonly addressInput: Locator;
     readonly verifyButton: Locator;
     readonly nextButton: Locator;
     readonly previousButton: Locator;
