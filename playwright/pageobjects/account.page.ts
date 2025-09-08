@@ -28,7 +28,7 @@ export class AccountPage {
       name: "Step 4 of 5: Customize Your Account",
       level: 2,
     });
-    
+
     this.usernameInput = page.getByRole("textbox", { name: "Username" });
     this.availableUsernameButton = page.getByRole("button", {
       name: "Check if username is available",
