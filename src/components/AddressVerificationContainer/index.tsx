@@ -166,13 +166,12 @@ function AddressVerificationContainer() {
               <Radio
                 id={`${addressType}-${idx}`}
                 className={`radio-input ${styles.input}`}
-                name={`${addressType}-address-select`}
+                {...register(`${addressType}-address-select`, {
+                  required: true,
+                })}
                 isChecked={checked}
                 onChange={onChange}
                 value={selected}
-                ref={register({
-                  required: true,
-                })}
                 labelText={
                   <div>
                     <div>{address.line1}</div>

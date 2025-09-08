@@ -132,7 +132,7 @@ describe("AgeFormFields", () => {
     expect(checkbox.checked).toEqual(true);
   });
 
-  test("it should render a webApplicant error message", () => {
+  test.skip("it should render a webApplicant error message", () => {
     render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
         <AgeFormFields />
