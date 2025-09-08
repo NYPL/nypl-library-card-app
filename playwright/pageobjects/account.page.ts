@@ -6,8 +6,10 @@ export class AccountPage {
   readonly stepHeading: Locator;
   readonly homeLibraryHeading: Locator;
   readonly usernameInput: Locator;
-  readonly passwordInput: Locator
-  readonly verifyPasswordInput: Locator
+  readonly availableUsernameButton: Locator;
+  readonly passwordInput: Locator;
+  readonly verifyPasswordInput: Locator;
+  readonly showPasswordCheckbox: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -25,9 +27,20 @@ export class AccountPage {
       name: "Home Library",
       level: 3,
     });
-    this.usernameInput = page.getByLabel(/Username/i);
-    this.passwordInput = page.getByLabel(/Password/i);
-    this.verifyPasswordInput = page.getByLabel(/Verify Password/i);
+    this.usernameInput = page.getByRole("textbox", { name: "Username" });
+    this.availableUsernameButton = page.getByRole("button", {
+      name: "Check if username is available",
+    });
+    this.passwordInput = page.getByRole("textbox", {
+      name: "Password (Required)",
+      exact: true,
+    });
+    this.verifyPasswordInput = page.getByRole("textbox", {
+      name: "Verify Password (Required)",
+    });
+    this.showPasswordCheckbox = page.getByRole("checkbox", {
+      name: "Show Password",
+    });
     this.nextButton = page.getByRole("button", { name: "Next", exact: true });
     this.previousButton = page.getByRole("link", {
       name: "Previous",
