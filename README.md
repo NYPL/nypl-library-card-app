@@ -156,7 +156,7 @@ This will be used to build and deploy images to Docker Hub in the future.
 If you are using the `docker` CLI tool, use the following command to run an _existing_ image in a container called `mycontainer` locally:
 
 ```
-$ docker run -d --name mycontainer -p 3000:3000 --env-file .env.local lib-app
+$ docker run -d --name mycontainer -p 3000:3001 --env-file .env.local lib-app
 ```
 
 This will run an existing Docker image, such as the image built from the previous step, in the background. If you want to see the latest logs from the container, run `docker logs mycontainer`. If you want to see the full set of logs as the Docker image is being built and run, remove the detached `-d` flag. The `--env-file` flag configures the docker container to use the local `.env.local` file where your secret credentials to run the app should be located. This file is not used when building the image, only when running the container.
