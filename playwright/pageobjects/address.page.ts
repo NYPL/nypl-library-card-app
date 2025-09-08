@@ -46,7 +46,10 @@ export class AddressPage {
     this.postalCodeError = page.getByText(
       "Please enter a 5 or 9-digit postal code."
     );
-    this.nextButton = page.getByRole("button", { name: "Next" });
-    this.previousButton = page.getByRole("link", { name: "Previous" });
+    this.nextButton = page.getByRole("button", { name: "Next", exact: true });
+    this.previousButton = page.getByRole("link", {
+      name: "Previous",
+      exact: true,
+    });
   }
 }
