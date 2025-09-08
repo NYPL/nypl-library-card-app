@@ -9,6 +9,7 @@ export class PersonalPage {
   readonly checkBox: Locator;
   readonly previousButton: Locator;
   readonly nextButton: Locator;
+
   readonly firstNameErrorMessage: Locator;
   readonly lastNameErrorMessage: Locator;
   readonly emailErrorMessage: Locator;
@@ -24,10 +25,7 @@ export class PersonalPage {
       name:
         "Yes, I would like to receive information about NYPL's programs and services",
     });
-    this.previousButton = this.page.getByRole("link", {
-      name: "Previous",
-      exact: true,
-    });
+    this.previousButton = this.page.getByRole("link", { name: "Previous" });
     this.nextButton = this.page.getByRole("button", {
       name: "Next",
       exact: true,
