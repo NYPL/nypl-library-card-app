@@ -9,6 +9,7 @@
 - Clean up Playwright tests and folders [SWIS-56](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-56)
 - Upgrade nextjs to v14 [SWIS-33](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-33)
 - Upgrade nextjs to v15 [SWIS-55](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-55)
+- Remove SimplyE reference on Success Page [SWIS-68](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-68)
 
 ### 1.2.5
 

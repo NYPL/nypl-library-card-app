@@ -145,7 +145,6 @@
     },
     "nextSteps": {
       "title": "Lancez-vous à la découverte de la Bibliothèque publique de New York",
-      "explore": "<b>Explorer les livres électroniques de la Bibliothèque</b><br />Téléchargez SimplyE pour <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> ou <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
       "borrow": "<b>Emprunter des livres et bien plus encore</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'>Connectez-vous à votre compte</a> et consultez le catalogue.",
       "updates": "<b>Recevoir des mises à jour</b><br /><a href='https://www.nypl.org/enews'>Découvrez tout ce que la Bibliothèque a à offrir.</a>",
       "more": "<b>En savoir plus</b><br /><a href='https://www.nypl.org/discover-library-card'>Découvrez tout ce que vous pouvez faire avec votre carte de bibliothèque.</a>"
