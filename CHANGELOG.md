@@ -9,6 +9,7 @@
 - Clean up Playwright tests and folders [SWIS-56](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-56)
 - Upgrade nextjs to v14 [SWIS-33](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-33)
 - Upgrade nextjs to v15 [SWIS-55](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-55)
+- Add Playwright tests to confirm elements on alternate address page [SWIS-58](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-58)
 
 ### 1.2.5
 
