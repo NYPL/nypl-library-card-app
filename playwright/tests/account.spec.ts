@@ -12,13 +12,22 @@ test("displays all headings", async ({ page }) => {
   await expect(accountPage.homeLibraryHeading).toBeVisible();
 });
 
-test("displays account form", async ({ page }) => {
+test("displays username and password form", async ({ page }) => {
   const accountPage = new AccountPage(page);
   await expect(accountPage.usernameInput).toBeVisible();
   await expect(accountPage.availableUsernameButton).toBeVisible();
   await expect(accountPage.passwordInput).toBeVisible();
   await expect(accountPage.verifyPasswordInput).toBeVisible();
   await expect(accountPage.showPasswordCheckbox).toBeVisible();
+});
+
+test("displays home library form", async ({ page }) => {
+  const accountPage = new AccountPage(page);
+  await expect(accountPage.selectHomeLibrary).toBeVisible();
+  await expect(accountPage.cardholderTerms).toBeVisible();
+  await expect(accountPage.rulesRegulations).toBeVisible();
+  await expect(accountPage.privacyPolicy).toBeVisible();
+  await expect(accountPage.acceptTermsCheckbox).toBeVisible();
 });
 
 test("displays next and previous buttons", async ({ page }) => {
