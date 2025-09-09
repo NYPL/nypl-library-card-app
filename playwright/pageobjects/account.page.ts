@@ -29,9 +29,13 @@ export class AccountPage {
       level: 2,
     });
 
-    this.usernameInput = page.getByRole("textbox", { name: "Username" });
+    this.usernameInput = page.getByRole("textbox", {
+      name: "Username (Required)",
+      exact: true,
+    });
     this.availableUsernameButton = page.getByRole("button", {
       name: "Check if username is available",
+      exact: true,
     });
     this.passwordInput = page.getByRole("textbox", {
       name: "Password (Required)",
@@ -39,26 +43,32 @@ export class AccountPage {
     });
     this.verifyPasswordInput = page.getByRole("textbox", {
       name: "Verify Password (Required)",
+      exact: true,
     });
     this.showPasswordCheckbox = page.getByRole("checkbox", {
       name: "Show Password",
+      exact: true,
     });
     this.homeLibraryHeading = page.getByRole("heading", {
       name: "Home Library",
       level: 3,
+      exact: true,
     });
     this.selectHomeLibrary = page.getByLabel("Select a home library:");
     this.cardholderTerms = page.getByRole("link", {
       name: "Cardholder Terms and Conditions",
+      exact: true,
     });
     this.rulesRegulations = page.getByRole("link", {
       name: "Rules and Regulations",
+      exact: true,
     });
     this.privacyPolicy = page
       .locator("#mainContent")
-      .getByRole("link", { name: "Privacy Policy" });
+      .getByRole("link", { name: "Privacy Policy", exact: true });
     this.acceptTermsCheckbox = page.getByRole("checkbox", {
       name: "Yes, I accept the terms and conditions.",
+      exact: true,
     });
     this.nextButton = page.getByRole("button", { name: "Next", exact: true });
     this.previousButton = page.getByRole("link", {
