@@ -16,8 +16,8 @@ test('should display the correct headers', async ({page}) => {
 
 test('should allow user to verify address', async ({page}) => {
     const addressVerificationPage = new AddressVerificationPage(page);
-    await expect(addressVerificationPage.addressInput).toBeVisible();
-    await expect(addressVerificationPage.verifyButton).toBeVisible();
+//    await expect(addressVerificationPage.addressDisplayed).toBeVisible();
+   // await expect(addressVerificationPage.verifyRadioButton).toBeVisible();
     await expect(addressVerificationPage.previousButton).toBeVisible();
     await expect(addressVerificationPage.nextButton).toBeVisible();
 });

@@ -5,8 +5,8 @@ export class AddressVerificationPage {
     readonly mainHeader: Locator;
     readonly subHeader: Locator;
     readonly homeAddressHeader: Locator;
-    readonly addressInput: Locator;
-    readonly verifyButton: Locator;
+    readonly addressDisplayed: Locator;
+    readonly verifyRadioButton: Locator;
     readonly nextButton: Locator;
     readonly previousButton: Locator;
 
@@ -15,10 +15,10 @@ export class AddressVerificationPage {
         this.mainHeader = page.locator('h1');
         this.subHeader = page.locator('h2');
         this.homeAddressHeader = page.locator('h3');
-        this.addressInput = page.locator('#address');
-        this.verifyButton = page.getByRole('radio', { name: 'Verify Address' });
+        this.addressDisplayed = page.getByText(/^(\d+)\s+([A-Za-z0-9\s#.\-&,']{2,})\s+([A-Za-z\s]{2,}),\s+([A-Z]{2})\s+([0-9]{5}(?:-[0-9]{4})?)$/);
+        this.verifyRadioButton = page.locator('span.radio-input[aria-hidden="true"]');
         this.previousButton = this.page.getByRole('link', { name: 'Previous' });
-        this.nextButton = this.page.getByRole('button', { name: 'Next' });
+        this.nextButton =  this.page.getByRole('button', { name: 'Next', exact: true })
 
     }
 
