@@ -1,6 +1,6 @@
 ## CHANGE LOG
 
-### Unreleased
+### 1.2.6
 
 - Playwright test for Step 1: Personal Information and error validation [SWIS-40](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-40)
 - Add Playwright tests to confirm elements on landing page [SWIS-39](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-39)

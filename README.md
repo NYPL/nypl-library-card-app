@@ -22,7 +22,7 @@ The production site on NYPL.org:
 
 The current production version:
 
-- v1.2.4
+- v1.2.6
 
 ## Installation & Configuration
 
