@@ -145,7 +145,6 @@
     },
     "nextSteps": {
       "title": "Начните пользоваться Нью-Йоркской публичной библиотекой",
-      "explore": "<b>Исследуйте коллекцию электронных книг библиотеки</b><br />Загрузите приложение SimplyE для <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> или <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
       "borrow": "<b>Берите книги и многое другое</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'>Зайдите в свою учетную запись</a> и просмотрите каталог.",
       "updates": "<b>Получайте новости</b><br /><a href='https://www.nypl.org/enews'>Узнайте обо всем, что предлагает библиотека.</a>",
       "more": "<b>Подробнее</b><br /><a href='https://www.nypl.org/discover-library-card'>Узнайте обо всем, что можно получить с помощью читательского билета.</a>"
