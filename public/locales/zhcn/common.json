@@ -142,7 +142,6 @@
     },
     "nextSteps": {
       "title": "开始使用纽约公共图书馆",
-      "explore": "<b>探索图书馆电子书</b><br />下载适用于 <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> 或 <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a> 的 SimplyE。",
       "borrow": "<b>借阅书籍和其他物品</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'>登录您的帐户</a>并浏览目录。",
       "updates": "<b>获取更新</b><br /><a href='https://www.nypl.org/enews'>发现图书馆提供的所有服务。</a>",
       "more": "<b>了解更多</b><br /><a href='https://www.nypl.org/discover-library-card'>发现您可以用图书卡做些什么。</a>"

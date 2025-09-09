@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -19,10 +15,7 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "exclude": [
-    "node_modules",
-    "playwright.config.ts"
-  ],
+  "exclude": ["node_modules", "playwright.config.ts", "cypress"],
   "include": [
     "declarations.d.ts",
     "next-env.d.ts",

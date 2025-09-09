@@ -1,10 +1,23 @@
 ## CHANGE LOG
 
-### Unreleased
+### 1.2.6
+
+- Playwright test for Step 1: Personal Information and error validation [SWIS-40](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-40)
+- Add Playwright tests to confirm elements on landing page [SWIS-39](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-39)
+- Add Playwright tests to confirm elements on location page and error validation [SWIS-42](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-42)
+- Add Prettier job to CI workflow [SWIS-61](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-61)
+- Clean up Playwright tests and folders [SWIS-56](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-56)
+- Upgrade nextjs to v14 [SWIS-33](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-33)
+- Upgrade nextjs to v15 [SWIS-55](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-55)
+- Add Playwright tests to confirm elements on alternate address page [SWIS-58](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-58)
+- Remove SimplyE reference on Success Page [SWIS-68](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-68)
+
+### 1.2.5
+
 - Updates to confirmation barcode layout [SWIS-12](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-12)
 - Add New Relic setup [SWIS-13](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-13)
 - Install Playwright [SWIS-38](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-38)
-- Set up GitHub Actions workflow with Playwright tests [SWIS-41] (https://newyorkpubliclibrary.atlassian.net/browse/SWIS-41)
+- Set up GitHub Actions workflow with Playwright tests [SWIS-41](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-41)
 
 ### 1.2.4
 

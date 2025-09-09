@@ -1,0 +1,49 @@
+import { Page, Locator } from "@playwright/test";
+
+export class PersonalPage {
+  readonly page: Page;
+  readonly firstNameInput: Locator;
+  readonly lastNameInput: Locator;
+  readonly emailInput: Locator;
+  readonly dateOfBirthInput: Locator;
+  readonly checkBox: Locator;
+  readonly previousButton: Locator;
+  readonly nextButton: Locator;
+  readonly firstNameErrorMessage: Locator;
+  readonly lastNameErrorMessage: Locator;
+  readonly emailErrorMessage: Locator;
+  readonly dateOfBirthErrorMessage: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.firstNameInput = this.page.getByLabel(/First Name/i);
+    this.lastNameInput = this.page.getByLabel(/Last Name/i);
+    this.dateOfBirthInput = this.page.getByLabel(/Date of Birth/i);
+    this.emailInput = this.page.getByLabel(/Email/i);
+    this.checkBox = this.page.getByRole("checkbox", {
+      name:
+        "Yes, I would like to receive information about NYPL's programs and services",
+    });
+    this.previousButton = this.page.getByRole("link", {
+      name: "Previous",
+      exact: true,
+    });
+    this.nextButton = this.page.getByRole("button", {
+      name: "Next",
+      exact: true,
+    });
+
+    this.firstNameErrorMessage = this.page.getByText(
+      "Please enter a valid first name."
+    );
+    this.lastNameErrorMessage = this.page.getByText(
+      "Please enter a valid last name."
+    );
+    this.emailErrorMessage = this.page.getByText(
+      "Please enter a valid email address."
+    );
+    this.dateOfBirthErrorMessage = this.page.getByText(
+      "Please enter a valid date, MM/DD/YYYY, including slashes."
+    );
+  }
+}
