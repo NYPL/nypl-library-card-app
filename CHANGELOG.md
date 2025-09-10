@@ -1,6 +1,7 @@
 ## CHANGE LOG
 
 ### Unreleased
+- Add Playwright tests to confirm elements on account page [SWIS-69](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-69)
 
 ### 1.2.6
 
@@ -13,7 +14,6 @@
 - Upgrade nextjs to v15 [SWIS-55](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-55)
 - Add Playwright tests to confirm elements on alternate address page [SWIS-58](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-58)
 - Remove SimplyE reference on Success Page [SWIS-68](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-68)
-- Add Playwright tests to confirm elements on account page [SWIS-69](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-69)
 
 ### 1.2.5
 
