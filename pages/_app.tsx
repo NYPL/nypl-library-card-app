@@ -44,10 +44,9 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     }
     document.getElementById("__next").dir = `${i18n.dir()}`;
     document.documentElement.lang = `${lang}`;
-  });
+  }, [i18n, router.query]);
 
   useEffect(() => {
-    if (!window) return;
     const handleRouteChange = () => {
       aaUtils.pageViewEvent(window.location);
     };

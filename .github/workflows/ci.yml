@@ -33,11 +33,13 @@ jobs:
           node-version: 20
       - name: Cache and install node modules
         uses: bahmutov/npm-install@v1
+        with:
+          install-command: npm install
       - name: Test
         run: npm run test
   publish_qa:
     needs: test
-    if: github.ref == 'refs/heads/qa'
+    if: github.ref == 'refs/heads/qa-release-1.2.6'
     name: Publish image to ECR and update ECS stack
     runs-on: ubuntu-latest
     permissions:
