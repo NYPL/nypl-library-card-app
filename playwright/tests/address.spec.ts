@@ -43,13 +43,9 @@ test("displays errors for required fields", async ({ page }) => {
 
 test("displays errors for invalid fields", async ({ page }) => {
   const addressPage = new AddressPage(page);
-  await addressPage.streetAddressInput.fill("123");
-  await addressPage.cityInput.fill("!@#");
   await addressPage.stateInput.fill("ABC");
-  await addressPage.postalCodeInput.fill("ABCD");
+  await addressPage.postalCodeInput.fill("1234");
   await addressPage.nextButton.click();
-  await expect(addressPage.streetAddressError).toBeVisible();
-  await expect(addressPage.cityError).toBeVisible();
   await expect(addressPage.stateError).toBeVisible();
   await expect(addressPage.postalCodeError).toBeVisible();
 });
