@@ -24,14 +24,8 @@ export class PersonalPage {
       name:
         "Yes, I would like to receive information about NYPL's programs and services",
     });
-    this.previousButton = this.page.getByRole("link", {
-      name: "Previous",
-      exact: true,
-    });
-    this.nextButton = this.page.getByRole("button", {
-      name: "Next",
-      exact: true,
-    });
+    this.previousButton = this.page.getByRole("link", { name: "Previous" });
+    this.nextButton = this.page.getByRole("button", { name: "Next" });
 
     this.firstNameErrorMessage = this.page.getByText(
       "Please enter a valid first name."
