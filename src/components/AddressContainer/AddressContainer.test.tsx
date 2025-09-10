@@ -54,14 +54,12 @@ jest.mock("react-i18next", () => {
   };
 });
 
-jest.mock("next/router", () => require("next-router-mock"));
-
 describe("AddressContainer", () => {
   test("passes axe accessibility checks", async () => {
     await act(async () => {
       const { container } = render(
         <TestProviderWrapper>
-          <AddressContainer csrfToken="test-token" />
+          <AddressContainer />
         </TestProviderWrapper>
       );
       expect(await axe(container)).toHaveNoViolations();
@@ -71,7 +69,7 @@ describe("AddressContainer", () => {
   test("it renders home address fields", async () => {
     render(
       <TestProviderWrapper>
-        <AddressContainer csrfToken="test-token" />
+        <AddressContainer />
       </TestProviderWrapper>
     );
 

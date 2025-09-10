@@ -21,7 +21,6 @@ import { appWithTranslation, useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 import aaUtils from "../src/externals/aaUtils";
-import Script from "next/script";
 
 interface MyAppProps {
   Component: any;
@@ -101,7 +100,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
       <Head>
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-        <title>{`${appTitle} | NYPL`}</title>
+        <title>{appTitle} | NYPL</title>
         <link rel="icon" type="image/png" href={favIconPath} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
@@ -154,7 +153,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
             doesn't allow it, so we must add it through the
             `dangerouslySetInnerHTML` prop.
         */}
-        <Script
+        <script
           dangerouslySetInnerHTML={{
             __html: `
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

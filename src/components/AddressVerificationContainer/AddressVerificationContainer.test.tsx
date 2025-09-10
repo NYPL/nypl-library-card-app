@@ -1,5 +1,5 @@
 import React from "react";
-import { render, act, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import { axe } from "jest-axe";
 import AddressVerificationContainer from ".";
 import { mockTFunction, TestProviderWrapper } from "../../../testHelper/utils";
@@ -61,8 +61,6 @@ jest.mock("react-i18next", () => {
     }),
   };
 });
-
-jest.mock("next/router", () => require("next-router-mock"));
 
 describe("AddressVerificationContainer accessibility", () => {
   test("passes axe accessibility test", async () => {

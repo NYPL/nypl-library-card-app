@@ -33,8 +33,6 @@ jobs:
           node-version: 20
       - name: Cache and install node modules
         uses: bahmutov/npm-install@v1
-        with:
-          install-command: npm install --legacy-peer-deps
       - name: Test
         run: npm run test
   publish_qa:
