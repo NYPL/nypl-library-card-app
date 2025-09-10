@@ -1,6 +1,7 @@
 ## CHANGE LOG
 
 ### Unreleased
+
 - Add Playwright tests to confirm elements on account page [SWIS-69](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-69)
 
 ### 1.2.6
