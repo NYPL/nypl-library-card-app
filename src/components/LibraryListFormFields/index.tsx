@@ -36,6 +36,9 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   const inputProps = {
     value,
     onChange,
+    // Pass in the `react-hook-form` register function so it can handle this
+    // form element's state for us.
+    ref: register(),
   };
 
   return (
@@ -47,10 +50,8 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
         placeholder="Please select"
         id="librarylist-select"
         labelText={t("account.library.selectLibrary")}
+        name="homeLibraryCode"
         isRequired={false}
-        // Pass in the `react-hook-form` register function so it can handle this
-        // form element's state for us.
-        {...register("homeLibraryCode")}
         {...inputProps}
       >
         {libraryList.map(({ value, label }, i) => (

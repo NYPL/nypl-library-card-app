@@ -43,7 +43,6 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
       defaultValue,
       // any extra input element attributes
       attributes = {},
-      ...rest
     },
     ref
   ) => {
@@ -69,7 +68,6 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
           labelText={label}
           ref={ref}
           type={typeToInputTypeMap[type] as TextInputTypes}
-          {...rest}
         />
       );
     }
@@ -91,7 +89,6 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
           labelText={label}
           {...attributes}
           ref={updatedRef}
-          {...rest}
         />
       </div>
     );

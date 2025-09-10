@@ -8,7 +8,7 @@ import { useFormContext } from "react-hook-form";
 import { isNumeric } from "validator";
 
 import FormField from "../FormField";
-import { AddressTypes, FormInputData } from "../../interfaces";
+import { AddressTypes } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
 
 interface AddressFormProps {
@@ -28,10 +28,7 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
   const { formValues } = state;
   // This component must be used within the `react-hook-form` provider so that
   // these functions are available to use.
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<FormInputData>();
+  const { register, errors } = useFormContext();
   const STATELENGTH = 2;
   const MINLENGTHZIP = 5;
   const MAXLENGTHZIP = 9;
@@ -75,14 +72,15 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
           <FormField
             id={`line1-${type}`}
             label={t("location.address.line1.label")}
-            {...register(`${type}-line1`, {
+            name={`${type}-line1`}
+            isRequired={isRequired}
+            errorState={errors}
+            ref={register({
               required: {
                 value: isRequired,
                 message: t("location.errorMessage.line1"),
               },
             })}
-            isRequired={isRequired}
-            errorState={errors}
             defaultValue={formValues[`${type}-line1`]}
           />
         </DSFormField>
@@ -93,7 +91,8 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
           <FormField
             id={`line2-${type}`}
             label={t("location.address.line2.label")}
-            {...register(`${type}-line2`)}
+            name={`${type}-line2`}
+            ref={register()}
             defaultValue={formValues[`${type}-line2`]}
           />
         </DSFormField>
@@ -104,14 +103,15 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
           <FormField
             id={`city-${type}`}
             label={t("location.address.city.label")}
-            {...register(`${type}-city`, {
+            name={`${type}-city`}
+            isRequired={isRequired}
+            errorState={errors}
+            ref={register({
               required: {
                 value: isRequired,
                 message: t("location.errorMessage.city"),
               },
             })}
-            isRequired={isRequired}
-            errorState={errors}
             defaultValue={formValues[`${type}-city`]}
           />
         </DSFormField>
@@ -120,16 +120,17 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
             id={`state-${type}`}
             instructionText={t("location.address.state.instruction")}
             label={t("location.address.state.label")}
-            {...register(`${type}-state`, {
+            name={`${type}-state`}
+            isRequired={isRequired}
+            errorState={errors}
+            maxLength={STATELENGTH}
+            ref={register({
               validate: lengthValidation(
                 STATELENGTH,
                 STATELENGTH,
                 "location.errorMessage.state"
               ),
             })}
-            isRequired={isRequired}
-            errorState={errors}
-            maxLength={STATELENGTH}
             defaultValue={formValues[`${type}-state`]}
           />
         </DSFormField>
@@ -140,14 +141,15 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
           <FormField
             id={`zip-${type}`}
             label={t("location.address.postalCode.label")}
-            {...register(`${type}-zip`, {
-              validate: validateZip(),
-            })}
+            name={`${type}-zip`}
             isRequired={isRequired}
             errorState={errors}
             minLength={MINLENGTHZIP}
             maxLength={MAXLENGTHZIP}
             instructionText={t("location.address.postalCode.instruction")}
+            ref={register({
+              validate: validateZip(),
+            })}
             defaultValue={formValues[`${type}-zip`]}
           />
         </DSFormField>

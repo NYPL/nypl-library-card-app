@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  useForm,
-  FormProvider,
-  UseFormGetValues,
-  FieldValues,
-  UseFormWatch,
-} from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 
 import {
   FormDataContextProvider,
@@ -17,8 +11,8 @@ interface MockMethods {
   children: React.ReactNode;
   errors?: any;
   // The types coming from `react-hook-form` for its functions.
-  getValues?: UseFormGetValues<FieldValues>;
-  watch?: UseFormWatch<FieldValues>;
+  getValues?: () => { [x: string]: any };
+  watch?: () => { [x: string]: any };
 }
 
 interface TestProviderType {

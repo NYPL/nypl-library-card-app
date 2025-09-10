@@ -52,7 +52,7 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       }
     }
   } catch (e) {
-    console.log("process.env lookup crashed", e);
+    console.log("process.env lookup crashed");
   }
 
   return (

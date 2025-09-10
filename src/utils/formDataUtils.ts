@@ -1,3 +1,4 @@
+import isEmpty from "lodash/isEmpty";
 import { isEmail, isAlphanumeric, isLength } from "validator";
 import ilsLibraryList from "../data/ilsLibraryList";
 import * as config from "../../appConfig";
@@ -9,7 +10,6 @@ import {
   FormInputData,
 } from "../interfaces";
 import { ipLocationMessageTranslations } from "../data/ipLocationMessageTranslations";
-import { every, isEmpty } from "lodash";
 
 const errorMessages = {
   firstName: "Please enter a valid first name.",
@@ -147,7 +147,7 @@ const constructAddresses = (object = {}): Addresses => {
 
   // The work object is optional, so if it's completely empty, just remove it
   // or else we'll get false errors of work fields being empty.
-  if (every(addresses.work, isEmpty)) {
+  if (isEmpty(addresses.work)) {
     delete addresses.work;
   }
 
@@ -351,7 +351,6 @@ const constructPatronObject = (
 
   const addresses: Addresses = constructAddresses(object);
   const errors = validateFormData(object, addresses);
-  console.log("Errors", errors);
 
   if (!isEmpty(errors)) {
     return constructProblemDetail(
