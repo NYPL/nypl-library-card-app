@@ -25,11 +25,7 @@ function AccountFormFields({
   csrfToken,
 }: AccountFormFieldsProps) {
   const { t } = useTranslation("common");
-  const {
-    register,
-    formState: { errors },
-    getValues,
-  } = useFormContext();
+  const { register, errors, getValues } = useFormContext();
   const { state } = useFormDataContext();
   const [showPassword, setShowPassword] = useState(true);
   const [clientSide, setClientSide] = useState(false);
@@ -63,7 +59,7 @@ function AccountFormFields({
       t("account.errorMessage.password")
     );
   };
-  const verifyPasswordMatch = () => {
+  const verifyPasswordmatch = () => {
     return (
       getValues("password") === getValues("verifyPassword") ||
       t("account.errorMessage.verifyPassword")
@@ -84,16 +80,17 @@ function AccountFormFields({
             id="password"
             type={passwordType}
             label={t("account.password.label")}
-            {...register("password", {
-              validate: {
-                validatePasswordLength,
-              },
-            })}
+            name="password"
             instructionText={t("account.password.instruction")}
             isRequired
             errorState={errors}
             minLength={minPasswordLength}
             maxLength={maxPasswordLength}
+            ref={register({
+              validate: {
+                validatePasswordLength,
+              },
+            })}
             defaultValue={formValues.password}
           />
         </DSFormField>
@@ -105,14 +102,15 @@ function AccountFormFields({
             id="verifyPassword"
             type={passwordType}
             label={t("account.verifyPassword.label")}
-            {...register("verifyPassword", {
-              validate: verifyPasswordMatch,
-            })}
+            name="verifyPassword"
             instructionText={t("account.verifyPassword.instruction")}
             isRequired
             errorState={errors}
             minLength={minPasswordLength}
             maxLength={maxPasswordLength}
+            ref={register({
+              validate: verifyPasswordmatch,
+            })}
             defaultValue={formValues.verifyPassword}
           />
         </DSFormField>

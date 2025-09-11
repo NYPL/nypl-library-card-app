@@ -355,18 +355,6 @@ export async function callPatronAPI(
 
   const token = tokenObject.access_token;
   const patronData = constructPatronObject(data);
-  if ((patronData as ProblemDetail).status === 400) {
-    logger.error("Invalid patron data");
-    logger.error("Patron data", patronData);
-    return Promise.reject(patronData);
-  }
-
-  logger.debug(
-    `POSTing patron data with username ${
-      (patronData as FormAPISubmission).username
-    } to ${createPatronUrl}`
-  );
-
   // Used for testing when we don't want to create real accounts,
   // just return a mocked account data.
   // return Promise.resolve({
@@ -382,6 +370,17 @@ export async function callPatronAPI(
   //   name: "Tom Nook",
   //   ptype: 7,
   // });
+  if ((patronData as ProblemDetail).status === 400) {
+    logger.error("Invalid patron data");
+    logger.error("Patron data", patronData);
+    return Promise.reject(patronData);
+  }
+
+  logger.debug(
+    `POSTing patron data with username ${
+      (patronData as FormAPISubmission).username
+    } to ${createPatronUrl}`
+  );
   try {
     const result = await axios.post(
       createPatronUrl,
@@ -420,13 +419,11 @@ export async function callPatronAPI(
 
     logger.error(
       `Error calling Card Creator API: ${
-        status === 403 ? "bad API call" : JSON.stringify(err)
+        status === 403 ? "bad API call" : err.response?.data?.message
       }`
     );
     logger.error(
-      `More details - status: ${status}, patron: ${JSON.stringify(
-        patronData
-      )}, data: ${JSON.stringify(err.response?.data)}`
+      `More details - status: ${status}, patron: ${patronData}, data: ${err.response?.data}`
     );
     return { ...restOfErrors, status };
   }

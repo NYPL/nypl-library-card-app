@@ -32,10 +32,7 @@ export class LocationPage {
     this.cityInput = page.getByLabel(/City/i);
     this.stateInput = page.getByLabel(/State/i);
     this.postalCodeInput = page.getByLabel(/Postal Code/i);
-    this.nextButton = page.getByRole("button", { name: "Next", exact: true });
-    this.previousButton = page.getByRole("link", {
-      name: "Previous",
-      exact: true,
-    });
+    this.nextButton = page.getByRole("button", { name: "Next" });
+    this.previousButton = page.getByRole("link", { name: "Previous" });
   }
 }

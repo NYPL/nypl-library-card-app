@@ -1,7 +1,7 @@
 import { Heading } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { JSX, useEffect } from "react";
+import { useEffect } from "react";
 import { GetServerSideProps } from "next";
 
 import AddressVerificationContainer from "../../src/components/AddressVerificationContainer";

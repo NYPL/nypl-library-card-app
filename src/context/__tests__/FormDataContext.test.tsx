@@ -1,9 +1,9 @@
 import React from "react";
+import { renderHook } from "@testing-library/react-hooks";
 import useFormDataContext, {
   FormDataContextProvider,
 } from "../FormDataContext";
 import { FormData, FormInputData, AddressesResponse } from "../../interfaces";
-import { renderHook } from "@testing-library/react";
 
 const initState: FormData = {
   results: undefined,

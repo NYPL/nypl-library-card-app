@@ -60,8 +60,7 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
       } catch (e) {
         console.error(
           "Missing translation for error message: \n",
-          errorToTranslate,
-          e
+          errorToTranslate
         );
         newErrorMessage = t("apiErrors.defaultError");
       }

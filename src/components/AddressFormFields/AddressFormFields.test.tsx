@@ -128,7 +128,7 @@ describe("AddressFormFields", () => {
     expect(zip).toBeInTheDocument();
   });
 
-  test.skip("it should render any error messages for required fields", () => {
+  test("it should render any error messages for required fields", () => {
     render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
         <AddressFormFields id="address-test" type={AddressTypes.Home} />

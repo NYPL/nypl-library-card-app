@@ -1,7 +1,6 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugin:@next/next/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
@@ -28,10 +27,7 @@
   "rules": {
     "import/extensions": 0,
     "global-require": 0,
-    "react/jsx-filename-extension": [
-      1,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/jsx-props-no-spreading": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "no-useless-escape": 0,
@@ -41,8 +37,7 @@
     "@typescript-eslint/no-use-before-define": 0,
     "@typescript-eslint/camelcase": "off",
     "react/react-in-jsx-scope": 0,
-    "@typescript-eslint/explicit-module-boundary-types": 0,
-    "@typescript-eslint/no-require-imports": 0
+    "@typescript-eslint/explicit-module-boundary-types": 0
   },
   "settings": {
     "react": {
@@ -50,7 +45,12 @@
     },
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
       }
     }
   }

@@ -60,7 +60,8 @@ const PersonalFormContainer = () => {
           <FormField
             id="hidden-policyType"
             defaultValue={formValues.policyType}
-            {...register("policyType")}
+            name="policyType"
+            ref={register()}
             type="hidden"
           />
         </DSFormField>
