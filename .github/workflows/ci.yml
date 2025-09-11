@@ -21,7 +21,7 @@ jobs:
   #     - name: Run Prettier check
   #       run: npx prettier --check .
   publish_qa:
-    if: github.ref == 'refs/heads/qa-release-1.2.6'
+    if: github.ref == 'refs/heads/qa-release-1.2.6-1'
     name: Publish image to ECR and update ECS stack
     runs-on: ubuntu-latest
     permissions:
@@ -56,7 +56,7 @@ jobs:
         run: |
           aws ecs update-service --cluster nypl-library-card-app-qa --service nypl-library-card-app-qa --force-new-deployment
   publish_production:
-    if: github.ref == 'refs/heads/production'
+    if: github.ref == 'refs/heads/qa-release-1.2.6'
     name: Publish image to ECR and update ECS stack
     runs-on: ubuntu-latest
     permissions:
