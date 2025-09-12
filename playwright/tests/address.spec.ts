@@ -41,7 +41,7 @@ test("displays errors for required fields", async ({ page }) => {
   await expect(addressPage.postalCodeError).toBeVisible();
 });
 
-describe("displays errors for invalid fields", () => {
+test.describe("displays errors for invalid fields", () => {
   test("enter too many characters", async ({ page }) => {
     const addressPage = new AddressPage(page);
     await addressPage.stateInput.fill("ABC");
