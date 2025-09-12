@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { AddressVerificationPage } from "../pageobjects/address_verification.page";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("library-card/address-verification?&newCard=true");
+  await page.goto("/library-card/address-verification?&newCard=true");
 });
 
 test("should display the correct headers", async ({ page }) => {
