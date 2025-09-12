@@ -30,7 +30,6 @@ test("displays next and previous buttons", async ({ page }) => {
 test("displays errors for required fields", async ({ page }) => {
   const addressPage = new AddressPage(page);
   await addressPage.streetAddressInput.fill("");
-  await addressPage.apartmentSuiteInput.fill("");
   await addressPage.cityInput.fill("");
   await addressPage.stateInput.fill("");
   await addressPage.postalCodeInput.fill("");
