@@ -30,7 +30,6 @@ test("displays next and previous buttons", async ({ page }) => {
 test("displays errors for required fields", async ({ page }) => {
   const addressPage = new AddressPage(page);
   await addressPage.streetAddressInput.fill("");
-  await addressPage.apartmentSuiteInput.fill("");
   await addressPage.cityInput.fill("");
   await addressPage.stateInput.fill("");
   await addressPage.postalCodeInput.fill("");
@@ -39,4 +38,24 @@ test("displays errors for required fields", async ({ page }) => {
   await expect(addressPage.cityError).toBeVisible();
   await expect(addressPage.stateError).toBeVisible();
   await expect(addressPage.postalCodeError).toBeVisible();
+});
+
+test.describe("displays errors for invalid fields", () => {
+  test("enter too many characters", async ({ page }) => {
+    const addressPage = new AddressPage(page);
+    await addressPage.stateInput.fill("ABC");
+    await addressPage.postalCodeInput.fill("123456");
+    await addressPage.nextButton.click();
+    await expect(addressPage.stateError).toBeVisible();
+    await expect(addressPage.postalCodeError).toBeVisible();
+  });
+
+  test("enter too few characters", async ({ page }) => {
+    const addressPage = new AddressPage(page);
+    await addressPage.stateInput.fill("A");
+    await addressPage.postalCodeInput.fill("1234");
+    await addressPage.nextButton.click();
+    await expect(addressPage.stateError).toBeVisible();
+    await expect(addressPage.postalCodeError).toBeVisible();
+  });
 });
