@@ -41,11 +41,21 @@ test("displays errors for required fields", async ({ page }) => {
   await expect(addressPage.postalCodeError).toBeVisible();
 });
 
-test("displays errors for invalid fields", async ({ page }) => {
-  const addressPage = new AddressPage(page);
-  await addressPage.stateInput.fill("ABC");
-  await addressPage.postalCodeInput.fill("1234");
-  await addressPage.nextButton.click();
-  await expect(addressPage.stateError).toBeVisible();
-  await expect(addressPage.postalCodeError).toBeVisible();
+describe("displays errors for invalid fields", () => {
+  test("enter too many characters", async ({ page }) => {
+    const addressPage = new AddressPage(page);
+    await addressPage.stateInput.fill("ABC");
+    await addressPage.postalCodeInput.fill("123456");
+    await addressPage.nextButton.click();
+    await expect(addressPage.stateError).toBeVisible();
+    await expect(addressPage.postalCodeError).toBeVisible();
+  });
+  test("enter too few characters", async ({ page }) => {
+    const addressPage = new AddressPage(page);
+    await addressPage.stateInput.fill("A");
+    await addressPage.postalCodeInput.fill("1234");
+    await addressPage.nextButton.click();
+    await expect(addressPage.stateError).toBeVisible();
+    await expect(addressPage.postalCodeError).toBeVisible();
+  });
 });
