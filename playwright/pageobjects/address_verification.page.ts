@@ -20,7 +20,6 @@ export class AddressVerificationPage {
     this.homeAddressHeader = this.page.getByRole("heading", {
       name: "Home Address",
     });
-  
 
     this.verifyRadioButton = page.locator(
       'span.radio-input[aria-hidden="true"]'
