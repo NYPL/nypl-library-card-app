@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@babel/preset-typescript": "7.10.4",
-    "@nypl/design-system-react-components": "1.2.0",
+    "@nypl/design-system-react-components": "4.0",
     "@nypl/dgx-react-footer": "0.5.7",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.7.0",
