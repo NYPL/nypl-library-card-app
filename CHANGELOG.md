@@ -3,8 +3,10 @@
 ### Unreleased
 
 - Add Playwright tests to confirm elements on account page [SWIS-69](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-69)
+- Changed the baseUrl in playwright.config.ts [SWIS-87](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-87)
 - Add Playwright tests to confirm invalid value errors on address page [SWIS-63](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-63)
 - Add Playwright test to confirm address verification page [SWIS-54] (https://newyorkpubliclibrary.atlassian.net/browse/SWIS-54)
+
 
 ### 1.2.6
 
