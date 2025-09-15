@@ -10,4 +10,4 @@ public/locales/**
 .prettierignore
 
 # Ignore the Changelog file
-  CHANGELOG.md
+CHANGELOG.md
