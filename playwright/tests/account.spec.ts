@@ -35,3 +35,12 @@ test("displays next and previous buttons", async ({ page }) => {
   await expect(accountPage.nextButton).toBeVisible();
   await expect(accountPage.previousButton).toBeVisible();
 });
+
+test("displays errors for required fields", async ({ page }) => {
+  const accountPage = new AccountPage(page);
+  await accountPage.usernameInput.fill("");
+  await accountPage.passwordInput.fill("");
+  await accountPage.nextButton.click();
+  await expect(accountPage.usernameError).toBeVisible();
+  await expect(accountPage.passwordError).toBeVisible();
+});
