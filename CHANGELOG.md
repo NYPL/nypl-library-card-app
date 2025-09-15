@@ -3,6 +3,7 @@
 ### Unreleased
 
 - Add Playwright tests to confirm elements on account page [SWIS-69](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-69)
+- Changed the baseUrl in playwright.config.ts [SWIS-87](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-87)
 
 ### 1.2.6
 
