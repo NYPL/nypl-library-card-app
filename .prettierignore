@@ -8,3 +8,6 @@ public/locales/**
 .prettierrc
 .prettierrc.*
 .prettierignore
+
+# Ignore the Changelog file
+CHANGELOG.md
