@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+- `new` page Design system upgrade [SWIS-79](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-79)
+
 ### 1.2.6
 
 - Playwright test for Step 1: Personal Information and error validation [SWIS-40](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-40)
