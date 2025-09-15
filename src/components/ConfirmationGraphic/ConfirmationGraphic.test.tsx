@@ -54,7 +54,8 @@ jest.mock("react-i18next", () => {
           "<b>Borrow Books & More</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'> Log into your account</a> and browse the catalog.",
         updates:
           "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
-        more: "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>",
+        more:
+          "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>",
       },
     },
     ariaLabel: {

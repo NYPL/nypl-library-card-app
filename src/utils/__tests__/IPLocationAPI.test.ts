@@ -102,7 +102,8 @@ describe("IPLocationAPI", () => {
           error: {
             code: 101,
             type: "missing_access_key",
-            info: "You have not supplied an API Access Key. [Required format: access_key=YOUR_ACCESS_KEY]",
+            info:
+              "You have not supplied an API Access Key. [Required format: access_key=YOUR_ACCESS_KEY]",
           },
         })
       );
