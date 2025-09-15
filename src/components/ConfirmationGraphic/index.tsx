@@ -55,7 +55,7 @@ const ConfirmationContainer = () => {
             <div className="content">{name}</div>
           </div>
           <div className="grid-item">
-            <Logo decorative className="nypl-svg" name="nyplFullWhite" />
+            <Logo decorative name="nyplFullWhite" />
           </div>
           <div className="grid-item barcode-container">
             <canvas id="barcodeCanvas" {...canvasArgs}></canvas>

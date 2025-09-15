@@ -57,7 +57,7 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
 
   return (
     <div id="congratulations">
-      <Heading level="two">{t("confirmation.title")}</Heading>
+      <Heading>{t("confirmation.title")}</Heading>
       <ConfirmationGraphic />
       <p>
         <b>{t("confirmation.description.part1")}</b>
@@ -78,7 +78,7 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
         />
       )}
 
-      <Heading level="two">{t("confirmation.nextSteps.title")}</Heading>
+      <Heading>{t("confirmation.nextSteps.title")}</Heading>
       <div
         dangerouslySetInnerHTML={{
           __html: t("confirmation.nextSteps.explore"),
