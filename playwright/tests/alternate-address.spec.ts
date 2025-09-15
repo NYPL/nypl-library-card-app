@@ -26,3 +26,23 @@ test("displays next and previous buttons", async ({ page }) => {
   await expect(alternateAddressPage.nextButton).toBeVisible();
   await expect(alternateAddressPage.previousButton).toBeVisible();
 });
+
+test.describe("displays errors for invalid fields", () => {
+  test("enter too many characters", async ({ page }) => {
+    const alternateAddressPage = new AlternateAddressPage(page);
+    await alternateAddressPage.stateInput.fill("ABC");
+    await alternateAddressPage.postalCodeInput.fill("123456");
+    await alternateAddressPage.nextButton.click();
+    await expect(alternateAddressPage.stateError).toBeVisible();
+    await expect(alternateAddressPage.postalCodeError).toBeVisible();
+  });
+
+  test("enter too few characters", async ({ page }) => {
+    const alternateAddressPage = new AlternateAddressPage(page);
+    await alternateAddressPage.stateInput.fill("A");
+    await alternateAddressPage.postalCodeInput.fill("1234");
+    await alternateAddressPage.nextButton.click();
+    await expect(alternateAddressPage.stateError).toBeVisible();
+    await expect(alternateAddressPage.postalCodeError).toBeVisible();
+  });
+});

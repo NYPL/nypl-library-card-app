@@ -9,7 +9,9 @@ export class AlternateAddressPage {
   readonly apartmentSuiteInput: Locator;
   readonly cityInput: Locator;
   readonly stateInput: Locator;
+  readonly stateError: Locator;
   readonly postalCodeInput: Locator;
+  readonly postalCodeError: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -31,7 +33,13 @@ export class AlternateAddressPage {
     this.apartmentSuiteInput = page.getByLabel(/Apartment \/ Suite/i);
     this.cityInput = page.getByLabel(/City/i);
     this.stateInput = page.getByLabel(/State/i);
+    this.stateError = page.getByText(
+      "Please enter a 2-character state abbreviation."
+    );
     this.postalCodeInput = page.getByLabel(/Postal Code/i);
+    this.postalCodeError = page.getByText(
+      "Please enter a 5-digit postal code."
+    );
     this.nextButton = page.getByRole("button", { name: "Next", exact: true });
     this.previousButton = page.getByRole("link", {
       name: "Previous",
