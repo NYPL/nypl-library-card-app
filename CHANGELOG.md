@@ -2,6 +2,9 @@
 
 ### Unreleased
 
+- Add Playwright tests to confirm elements on account page [SWIS-69](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-69)
+- Add Playwright test for address verification [SWIS-] (https://newyorkpubliclibrary.atlassian.net/browse/SWIS-54)
+
 ### 1.2.6
 
 - Playwright test for Step 1: Personal Information and error validation [SWIS-40](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-40)
