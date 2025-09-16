@@ -44,3 +44,12 @@ test("displays errors for required fields", async ({ page }) => {
   await expect(accountPage.usernameError).toBeVisible();
   await expect(accountPage.passwordError).toBeVisible();
 });
+
+test("displays error when passwords do not match", async ({ page }) => {
+  const accountPage = new AccountPage(page);
+  await accountPage.usernameInput.fill("ValidUser1");
+  await accountPage.passwordInput.fill("ValidPass1!");
+  await accountPage.verifyPasswordInput.fill("DifferentPass1!");
+  await accountPage.nextButton.click();
+  await expect(accountPage.verifyPasswordError).toBeVisible();
+});
