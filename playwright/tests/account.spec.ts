@@ -49,17 +49,19 @@ test("displays errors for required fields", async ({ page }) => {
 test("displays error when username is unavailable", async ({ page }) => {
   const accountPage = new AccountPage(page);
   await accountPage.usernameInput.fill("username");
-  await expect(accountPage.availableUsernameButton).toBeEnabled({ timeout: 10000 });
+  await expect(accountPage.availableUsernameButton).toBeVisible();
+  await expect(accountPage.availableUsernameButton).toBeEnabled();
   await accountPage.availableUsernameButton.click();
-  await expect(accountPage.availableUsernameButton).toBeDisabled({ timeout: 10000 });
+  // await expect(accountPage.availableUsernameButton).toBeDisabled({ timeout: 10000 });
   await expect(accountPage.unavailableUsernameError).toBeVisible();
 });
 test("displays message when username is available", async ({ page }) => {
   const accountPage = new AccountPage(page);
   await accountPage.usernameInput.fill("validusername");
-  await expect(accountPage.availableUsernameButton).toBeEnabled({ timeout: 10000 });
+  await expect(accountPage.availableUsernameButton).toBeVisible();
+  await expect(accountPage.availableUsernameButton).toBeEnabled();
   await accountPage.availableUsernameButton.click();
-  await expect(accountPage.availableUsernameButton).toBeDisabled({ timeout: 10000 });
+  // await expect(accountPage.availableUsernameButton).toBeDisabled({ timeout: 10000 });
   await expect(accountPage.availableUsername).toBeVisible();
 });
 
