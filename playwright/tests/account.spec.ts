@@ -49,7 +49,8 @@ test("displays error when username is unavailable", async ({ page }) => {
   const accountPage = new AccountPage(page);
   await accountPage.usernameInput.fill("username");
   await accountPage.availableUsernameButton.click();
-  await expect(accountPage.unavailableUsername).toBeVisible();
+  await expect(accountPage.availableUsernameButton).toBeDisabled();
+  await expect(accountPage.unavailableUsernameError).toBeVisible();
 });
 test("displays message when username is available", async ({ page }) => {
   const accountPage = new AccountPage(page);
@@ -81,7 +82,7 @@ test.describe("displays errors for invalid fields", () => {
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
     await accountPage.passwordInput.fill("123456789012345678901234567890123");
-    // await accountPage.nextButton.click();
+    await accountPage.nextButton.click();
     await expect(accountPage.usernameError).toBeVisible();
     await expect(accountPage.passwordError).toBeVisible();
   });
@@ -89,8 +90,25 @@ test.describe("displays errors for invalid fields", () => {
   test("enter too few characters", async ({ page }) => {
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("A");
-    await accountPage.passwordInput.fill("1");
-    // await accountPage.nextButton.click();
+    await accountPage.passwordInput.fill("1!");
+    await accountPage.nextButton.click();
+    await expect(accountPage.usernameError).toBeVisible();
+    await expect(accountPage.passwordError).toBeVisible();
+  });
+
+  test("enter special characters in username", async ({ page }) => {
+    const accountPage = new AccountPage(page);
+    await accountPage.usernameInput.fill("User!@#");
+    await accountPage.nextButton.click();
+    await expect(accountPage.usernameError).toBeVisible();
+  });
+
+  // fill form with non latin characters
+  test("enter non-Latin characters", async ({ page }) => {
+    const accountPage = new AccountPage(page);
+    await accountPage.usernameInput.fill("用戶名用戶名"); // does display error
+    await accountPage.passwordInput.fill("密码密码密码密码"); // does not display error
+    await accountPage.nextButton.click();
     await expect(accountPage.usernameError).toBeVisible();
     await expect(accountPage.passwordError).toBeVisible();
   });
