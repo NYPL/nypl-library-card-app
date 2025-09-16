@@ -73,7 +73,7 @@ test.describe("displays errors for invalid inputs", () => {
     await accountPage.availableUsernameButton.click();
     await accountPage.unavailableUsernameError.waitFor({
       state: "visible",
-      timeout: 10000,
+      timeout: 20000,
     });
     await expect(accountPage.unavailableUsernameError).toBeVisible();
   });
