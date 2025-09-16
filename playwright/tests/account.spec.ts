@@ -75,3 +75,23 @@ test("displays error when terms are not accepted", async ({ page }) => {
   await accountPage.nextButton.click();
   await expect(accountPage.acceptTermsError).toBeVisible();
 });
+
+test.describe("displays errors for invalid fields", () => {
+  test("enter too many characters", async ({ page }) => {
+    const accountPage = new AccountPage(page);
+    await accountPage.usernameInput.fill("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    await accountPage.passwordInput.fill("123456789012345678901234567890123");
+    // await accountPage.nextButton.click();
+    await expect(accountPage.usernameError).toBeVisible();
+    await expect(accountPage.passwordError).toBeVisible();
+  });
+
+  test("enter too few characters", async ({ page }) => {
+    const accountPage = new AccountPage(page);
+    await accountPage.usernameInput.fill("A");
+    await accountPage.passwordInput.fill("1");
+    // await accountPage.nextButton.click();
+    await expect(accountPage.usernameError).toBeVisible();
+    await expect(accountPage.passwordError).toBeVisible();
+  });
+});
