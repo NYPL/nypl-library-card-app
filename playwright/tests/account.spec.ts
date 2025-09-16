@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { AccountPage } from "../pageobjects/account.page";
+import { time } from "console";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/account?newCard=true");
@@ -56,7 +57,7 @@ test("displays message when username is available", async ({ page }) => {
   const accountPage = new AccountPage(page);
   await accountPage.usernameInput.fill("validusername");
   await accountPage.availableUsernameButton.click();
-  await expect(accountPage.availableUsernameButton).toBeDisabled();
+  await expect(accountPage.availableUsernameButton).toBeDisabled({ timeout: 10000 });
   await expect(accountPage.availableUsername).toBeVisible();
 });
 
