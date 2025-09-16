@@ -9,5 +9,3 @@ public/locales/**
 .prettierrc.*
 .prettierignore
 
-# Ignore the Changelog file
-CHANGELOG.md
