@@ -7,6 +7,8 @@ export class AccountPage {
   readonly usernameInput: Locator;
   readonly usernameError: Locator;
   readonly availableUsernameButton: Locator;
+  readonly availableUsername: Locator;
+  readonly unavailableUsername: Locator;
   readonly passwordInput: Locator;
   readonly passwordError: Locator;
   readonly verifyPasswordInput: Locator;
@@ -41,6 +43,8 @@ export class AccountPage {
       name: "Check if username is available",
       exact: true,
     });
+    this.availableUsername = page.getByText("This username is available.");
+    this.unavailableUsername = page.getByText("This username is unavailable. Please try another.");
     this.passwordInput = page.getByRole("textbox", {
       name: "Password (Required)",
       exact: true,

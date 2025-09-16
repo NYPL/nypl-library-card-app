@@ -45,6 +45,19 @@ test("displays errors for required fields", async ({ page }) => {
   await expect(accountPage.passwordError).toBeVisible();
 });
 
+test("displays error when username is unavailable", async ({ page }) => {
+  const accountPage = new AccountPage(page);
+  await accountPage.usernameInput.fill("username");
+  await accountPage.availableUsernameButton.click();
+  await expect(accountPage.unavailableUsername).toBeVisible();
+});
+test("displays message when username is available", async ({ page }) => {
+  const accountPage = new AccountPage(page);
+  await accountPage.usernameInput.fill("validusername");
+  await accountPage.availableUsernameButton.click();
+  await expect(accountPage.availableUsername).toBeVisible();
+});
+
 test("displays error when passwords do not match", async ({ page }) => {
   const accountPage = new AccountPage(page);
   await accountPage.usernameInput.fill("ValidUser1");
