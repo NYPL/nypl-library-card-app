@@ -6,7 +6,6 @@
 - Changed the baseUrl in playwright.config.ts [SWIS-87](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-87)
 - Add Playwright tests to confirm invalid value errors on address page [SWIS-63](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-63)
 
-
 ### 1.2.6
 
 - Playwright test for Step 1: Personal Information and error validation [SWIS-40](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-40)
