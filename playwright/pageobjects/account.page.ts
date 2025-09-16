@@ -20,6 +20,7 @@ export class AccountPage {
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
   readonly acceptTermsCheckbox: Locator;
+  readonly acceptTermsError: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -80,6 +81,7 @@ export class AccountPage {
       name: "Yes, I accept the terms and conditions.",
       exact: true,
     });
+    this.acceptTermsError = page.getByText("The Terms and Conditions must be checked.");
     this.nextButton = page.getByRole("button", { name: "Next", exact: true });
     this.previousButton = page.getByRole("link", {
       name: "Previous",

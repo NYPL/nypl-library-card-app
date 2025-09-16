@@ -66,3 +66,12 @@ test("displays error when passwords do not match", async ({ page }) => {
   await accountPage.nextButton.click();
   await expect(accountPage.verifyPasswordError).toBeVisible();
 });
+
+test("displays error when terms are not accepted", async ({ page }) => {
+  const accountPage = new AccountPage(page);
+  await accountPage.usernameInput.fill("ValidUser1");
+  await accountPage.passwordInput.fill("ValidPass1!");
+  await accountPage.verifyPasswordInput.fill("ValidPass1!");
+  await accountPage.nextButton.click();
+  await expect(accountPage.acceptTermsError).toBeVisible();
+});
