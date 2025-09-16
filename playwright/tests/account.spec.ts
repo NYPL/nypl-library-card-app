@@ -56,6 +56,7 @@ test("displays message when username is available", async ({ page }) => {
   const accountPage = new AccountPage(page);
   await accountPage.usernameInput.fill("validusername");
   await accountPage.availableUsernameButton.click();
+  await expect(accountPage.availableUsernameButton).toBeDisabled();
   await expect(accountPage.availableUsername).toBeVisible();
 });
 
