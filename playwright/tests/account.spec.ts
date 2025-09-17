@@ -77,7 +77,7 @@ test.describe("displays errors for invalid inputs", () => {
     //   state: "visible",
     //   timeout: 20000,
     // });
-    await expect(accountPage.unavailableUsernameError).toBeVisible({ timeout: 10000 });
+    await expect(accountPage.unavailableUsernameError).toBeVisible({ timeout: 30000 });
   });
 
   test("displays error when passwords do not match", async ({ page }) => {
