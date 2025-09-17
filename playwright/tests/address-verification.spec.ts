@@ -12,7 +12,7 @@ test("should display the correct headers", async ({ page }) => {
   await expect(addressVerificationPage.homeAddressHeader).toBeVisible();
 });
 
-test("should allow user to verify address", async ({ page }) => {
+test("should display the next and previous buttons", async ({ page }) => {
   const addressVerificationPage = new AddressVerificationPage(page);
   await expect(addressVerificationPage.previousButton).toBeVisible();
   await expect(addressVerificationPage.nextButton).toBeVisible();

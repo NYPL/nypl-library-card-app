@@ -13,18 +13,17 @@ export class AddressVerificationPage {
     this.page = page;
     this.mainHeader = this.page.getByRole("heading", {
       name: "Apply for a Library Card Online",
+      level: 1,
     });
     this.subHeader = this.page.getByRole("heading", {
       name: "Step 3 of 5: Address Verification",
+      level: 2,
     });
     this.homeAddressHeader = this.page.getByRole("heading", {
       name: "Home Address",
     });
 
-    this.verifyRadioButton = page.locator(
-      'span.radio-input[aria-hidden="true"]'
-    );
-    this.previousButton = this.page.getByRole("link", { name: "Previous" });
+    this.previousButton = this.page.getByRole("link", { name: "Previous", exact: true });
     this.nextButton = this.page.getByRole("button", {
       name: "Next",
       exact: true,
