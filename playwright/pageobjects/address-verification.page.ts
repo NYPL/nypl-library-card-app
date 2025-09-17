@@ -23,7 +23,10 @@ export class AddressVerificationPage {
       name: "Home Address",
     });
 
-    this.previousButton = this.page.getByRole("link", { name: "Previous", exact: true });
+    this.previousButton = this.page.getByRole("link", {
+      name: "Previous",
+      exact: true,
+    });
     this.nextButton = this.page.getByRole("button", {
       name: "Next",
       exact: true,
