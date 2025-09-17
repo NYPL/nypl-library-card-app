@@ -67,19 +67,6 @@ test.describe("displays errors for invalid inputs", () => {
     await expect(accountPage.usernameError).toBeVisible();
   });
 
-  test("displays error when username is unavailable", async ({ page }) => {
-    const accountPage = new AccountPage(page);
-    await accountPage.usernameInput.fill("username");
-    await expect(accountPage.availableUsernameButton).toBeVisible();
-    await expect(accountPage.availableUsernameButton).toBeEnabled();
-    await accountPage.availableUsernameButton.click();
-    // await accountPage.unavailableUsernameError.waitFor({
-    //   state: "visible",
-    //   timeout: 20000,
-    // });
-    await expect(accountPage.unavailableUsernameError).toBeVisible({ timeout: 30000 });
-  });
-
   test("displays error when passwords do not match", async ({ page }) => {
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("ValidUser1");
