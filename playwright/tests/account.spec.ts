@@ -70,6 +70,8 @@ test.describe("displays errors for invalid inputs", () => {
   test("displays error when username is unavailable", async ({ page }) => {
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("username");
+    await expect(accountPage.availableUsernameButton).toBeVisible();
+    await expect(accountPage.availableUsernameButton).toBeEnabled();
     await accountPage.availableUsernameButton.click();
     await accountPage.unavailableUsernameError.waitFor({
       state: "visible",
