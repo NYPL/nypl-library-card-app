@@ -1,6 +1,5 @@
 import { test, expect } from "@playwright/test";
 import { AccountPage } from "../pageobjects/account.page";
-import { time } from "console";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/account?newCard=true");
