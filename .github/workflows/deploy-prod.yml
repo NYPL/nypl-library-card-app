@@ -1,0 +1,66 @@
+name: Deploy to Production
+
+on:
+  push:
+    tags:
+      - "production-*"
+
+jobs:
+  lint:
+    uses: ./.github/workflows/lint.yml
+
+  unit-tests:
+    uses: ./.github/workflows/unit-tests.yml
+
+  playwright-tests:
+    uses: ./.github/workflows/playwright-tests.yml
+
+  deploy-production:
+    runs-on: ubuntu-latest
+    environment: production
+    needs: [lint, unit-tests, playwright-tests]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js from .nvmrc
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+          cache-dependency-path: "package-lock.json"
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::946183545209:role/GithubActionsDeployerRole
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build Docker image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: nypl-library-card-app
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:production-latest
+
+      - name: Push image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: nypl-library-card-app
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:production-latest
+
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service \
+            --cluster nypl-library-card-app-production \
+            --service nypl-library-card-app-production \
+            --force-new-deployment

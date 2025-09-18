@@ -3,7 +3,7 @@ import useFormDataContext, {
   FormDataContextProvider,
 } from "../FormDataContext";
 import { FormData, FormInputData, AddressesResponse } from "../../interfaces";
-import { renderHook } from "@testing-library/react";
+import { renderHook } from "@testing-library/react-hooks";
 
 const initState: FormData = {
   results: undefined,
