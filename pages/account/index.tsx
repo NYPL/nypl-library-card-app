@@ -1,4 +1,4 @@
-import { Heading } from "@nypl/design-system-react-components";
+import { Box, Heading } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect } from "react";
@@ -15,6 +15,7 @@ import {
   generateNewCookieTokenAndHash,
 } from "../../src/utils/csrfUtils";
 import * as cookie from "../../src/utils/CookieUtils";
+import { Paragraph } from "../../src/components/Paragraph";
 
 interface AccountPageProps {
   hasUserAlreadyRegistered?: boolean;
@@ -32,9 +33,11 @@ function AccountPage({
   });
   return (
     <>
-      <Heading level="two">{t("account.title")}</Heading>
-      <p>{t("account.description")}</p>
-      <p>{t("internationalInstructions")}</p>
+      <Heading level="h2" mb="s">
+        {t("account.title")}
+      </Heading>
+      <Paragraph>{t("account.description")}</Paragraph>
+      <Paragraph>{t("internationalInstructions")}</Paragraph>
       <AccountFormContainer csrfToken={csrfToken} />
     </>
   );
