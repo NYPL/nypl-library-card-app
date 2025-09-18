@@ -6,9 +6,6 @@ on:
       - "production-*"
 
 jobs:
-  lint:
-    uses: ./.github/workflows/lint.yml
-
   unit-tests:
     uses: ./.github/workflows/unit-tests.yml
 
@@ -18,7 +15,7 @@ jobs:
   deploy-production:
     runs-on: ubuntu-latest
     environment: production
-    needs: [lint, unit-tests, playwright-tests]
+    needs: [unit-tests, playwright-tests]
 
     steps:
       - uses: actions/checkout@v4

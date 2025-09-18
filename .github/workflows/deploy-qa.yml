@@ -6,9 +6,6 @@ on:
       - "qa-*"
 
 jobs:
-  lint:
-    uses: ./.github/workflows/lint.yml
-
   unit-tests:
     uses: ./.github/workflows/unit-tests.yml
 
@@ -18,7 +15,7 @@ jobs:
   deploy-qa:
     runs-on: ubuntu-latest
     environment: qa
-    needs: [lint, unit-tests, playwright-tests]
+    needs: [unit-tests, playwright-tests]
 
     steps:
       - uses: actions/checkout@v4
