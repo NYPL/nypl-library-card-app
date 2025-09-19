@@ -8,6 +8,7 @@ import {
   Template,
   TemplateBreakout,
   TemplateFull,
+  TemplateHeader,
   TemplateMain,
 } from "@nypl/design-system-react-components";
 
@@ -31,10 +32,12 @@ const ApplicationContainer = ({ children, problemDetail }) => {
 
   return (
     <Template>
-      <TemplateMain>
+      <TemplateHeader>
         <TemplateBreakout>
           <Banner />
         </TemplateBreakout>
+      </TemplateHeader>
+      <TemplateMain id="mainContent">
         <TemplateFull>
           <>
             <ApiErrors
