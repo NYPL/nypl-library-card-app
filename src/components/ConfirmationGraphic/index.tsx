@@ -1,4 +1,4 @@
-import { Logo } from "@nypl/design-system-react-components";
+import { GridItem, Logo } from "@nypl/design-system-react-components";
 import bwipjs from "bwip-js";
 import Image from "next/image";
 import { useEffect } from "react";
@@ -50,22 +50,22 @@ const ConfirmationContainer = () => {
           width="939"
         />
         <div className="background-lion">
-          <div id="member-name" className="grid-item">
+          <GridItem id="member-name" color={"white"} fontSize={"0.6em"} $breakpoint-intermediate={{ fontsize: "0.8em" }} $breakpoint-large={{ fontsize: "0.7em" }}>
             {t("confirmation.graphic.memberName")}
             <div className="content">{name}</div>
-          </div>
-          <div className="grid-item">
-            <Logo decorative name="nyplFullWhite" />
-          </div>
+          </GridItem>
+          <GridItem color={"white"} fontSize={"0.6em"} $breakpoint-intermediate={{ fontsize: "0.8em" }} $breakpoint-large={{ fontsize: "0.7em" }}>
+            <Logo decorative className="nypl-svg" name="nyplFullWhite" />
+          </GridItem>
           <div className="grid-item barcode-container">
             <canvas id="barcodeCanvas" {...canvasArgs}></canvas>
             <div className="barcode">{barcode}</div>
           </div>
 
-          <div id="issued" className="grid-item">
+          <GridItem id="issued" color={"white"} fontSize={"0.6em"} $breakpoint-intermediate={{ fontsize: "0.8em" }} $breakpoint-large={{ fontsize: "0.7em" }}>
             {t("confirmation.graphic.issued")}
             <div className="content">{new Date().toLocaleDateString()}</div>
-          </div>
+          </GridItem>
         </div>
       </div>
     </div>
