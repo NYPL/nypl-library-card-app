@@ -1,4 +1,4 @@
-import { Box, Heading } from "@nypl/design-system-react-components";
+import { Heading } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect } from "react";
