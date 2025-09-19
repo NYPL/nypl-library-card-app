@@ -5,8 +5,9 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/congrats?&newCard=true");
 });
 
-
-test('headings and card details display on "Congrats" page', async ({ page }) => {
+test('headings and card details display on "Congrats" page', async ({
+  page,
+}) => {
   const congratsPage = new CongratsPage(page);
   await expect(congratsPage.mainHeading).toBeVisible();
   await expect(congratsPage.stepHeading).toBeVisible();
@@ -21,6 +22,3 @@ test('links display on "Congrats" page', async ({ page }) => {
   await expect(congratsPage.findOutLibraryLink).toBeVisible();
   await expect(congratsPage.discoverLink).toBeVisible();
 });
-
-
-

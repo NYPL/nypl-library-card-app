@@ -21,16 +21,23 @@ export class CongratsPage {
       name: "Congratulations! You now have a digital New York Public Library card.",
       level: 2,
     });
-  
-  
-    this.locationsLink = page.getByRole("link", { name: "locations", exact: true });
+
+    this.locationsLink = page.getByRole("link", {
+      name: "locations",
+      exact: true,
+    });
     this.photoIdAndProofOfAddressLink = page.getByRole("link", {
       name: "photo ID and proof of address",
     });
-    this.getHelpEmailLink = page.getByRole("link", { name: "gethelp@nypl.org" });
+    this.getHelpEmailLink = page.getByRole("link", {
+      name: "gethelp@nypl.org",
+    });
     this.loginLink = page.getByRole("link", { name: "Log into your account" });
-    this.findOutLibraryLink = page.getByRole("link", { name: "Find out about all the Library has to offer." });
-    this.discoverLink = page.getByRole("link", { name: "Discover everything you can do with your library card." });
+    this.findOutLibraryLink = page.getByRole("link", {
+      name: "Find out about all the Library has to offer.",
+    });
+    this.discoverLink = page.getByRole("link", {
+      name: "Discover everything you can do with your library card.",
+    });
   }
-
 }
