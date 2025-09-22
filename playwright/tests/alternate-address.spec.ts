@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
+import { AddressVerificationPage } from "../pageobjects/address-verification.page";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/workAddress?newCard=true");
@@ -36,4 +37,6 @@ test("enters alternate address information", async ({ page }) => {
   await alternateAddressPage.postalCodeInput.fill("10018");
   await alternateAddressPage.nextButton.click();
   await expect(page).toHaveURL(/\/library-card\/address-verification/);
+  const addressVerificationPage = new AddressVerificationPage(page);
+  await expect(addressVerificationPage.alternateAddressHeader).toBeVisible();
 });

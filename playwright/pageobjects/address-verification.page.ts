@@ -5,6 +5,7 @@ export class AddressVerificationPage {
   readonly mainHeader: Locator;
   readonly subHeader: Locator;
   readonly homeAddressHeader: Locator;
+  readonly alternateAddressHeader: Locator;
   readonly verifyRadioButton: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
@@ -22,7 +23,7 @@ export class AddressVerificationPage {
     this.homeAddressHeader = this.page.getByRole("heading", {
       name: "Home Address",
     });
-
+    this.alternateAddressHeader = this.page.getByRole("heading", { name: "Alternate Address", level: 3 });
     this.previousButton = this.page.getByRole("link", {
       name: "Previous",
       exact: true,
