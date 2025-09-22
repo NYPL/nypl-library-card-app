@@ -57,14 +57,14 @@ test("navigates to alternate address page from landing", async ({ page }) => {
   await personalPage.dateOfBirthInput.fill("01/01/1990");
   await personalPage.emailInput.fill("test@example.com");
   await personalPage.nextButton.click();
-  await page.goto("/library-card/location?newCard=true");
+  // await page.goto("/library-card/location?newCard=true");
   const addressPage = new AddressPage(page);
   await addressPage.streetAddressInput.fill("123 Main St");
   await addressPage.cityInput.fill("New York");
   await addressPage.stateInput.fill("NY");
   await addressPage.postalCodeInput.fill("10001");
   await addressPage.nextButton.click();
-  await page.goto("/library-card/workAddress?newCard=true");
+  // await page.goto("/library-card/workAddress?newCard=true");
   const alternateAddressPage = new AlternateAddressPage(page);
   await expect(alternateAddressPage.addressHeading).toBeVisible({timeout: 20000});
   await alternateAddressPage.streetAddressInput.fill("476 5th Ave");
