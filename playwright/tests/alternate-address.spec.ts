@@ -46,11 +46,11 @@ test.describe("displays elements on Alternate Address page", () => {
   });
 });
 test("navigates to alternate address page from landing", async ({ page }) => {
-  // const landingPage = new LandingPage(page);
-  // await page.goto("/library-card/new");
-  // await landingPage.getStartedButton.click();
+  const landingPage = new LandingPage(page);
+  await page.goto("/library-card/new");
+  await landingPage.getStartedButton.click();
 
-  await page.goto("/library-card/personal?newCard=true");
+  // await page.goto("/library-card/personal?newCard=true");
   const personalPage = new PersonalPage(page);
   await personalPage.firstNameInput.fill("Test");
   await personalPage.lastNameInput.fill("User");
