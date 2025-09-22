@@ -15,7 +15,8 @@
     "test:coverage": "jest --coverage",
     "cypress:open": "cypress open",
     "playwright": "npx playwright test",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint:check": "prettier --check ."
   },
   "engines": {
     "node": ">=10.24.0"
@@ -39,10 +40,10 @@
     "@babel/preset-typescript": "7.10.4",
     "@nypl/design-system-react-components": "1.2.0",
     "@nypl/dgx-react-footer": "0.5.7",
+    "@playwright/test": "^1.54.2",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.7.0",
     "@testing-library/react": "^16.3.0",
-    "@playwright/test": "^1.54.2",
     "@testing-library/react-hooks": "5.0.3",
     "@types/jest": "29.5.12",
     "@types/jest-axe": "^3.5.9",
