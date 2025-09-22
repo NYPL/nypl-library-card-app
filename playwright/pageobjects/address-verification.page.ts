@@ -23,7 +23,10 @@ export class AddressVerificationPage {
     this.homeAddressHeader = this.page.getByRole("heading", {
       name: "Home Address",
     });
-    this.alternateAddressHeader = this.page.getByRole("heading", { name: "Alternate Address", level: 3 });
+    this.alternateAddressHeader = this.page.getByRole("heading", {
+      name: "Alternate Address",
+      level: 3,
+    });
     this.previousButton = this.page.getByRole("link", {
       name: "Previous",
       exact: true,
