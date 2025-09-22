@@ -2,7 +2,7 @@ import { Page, Locator } from "@playwright/test";
 
 export class CongratsPage {
   readonly page: Page;
-  readonly mainHeading: Locator; // displays on each page
+  readonly mainHeading: Locator;
   readonly stepHeading: Locator;
   readonly locationsLink: Locator;
   readonly photoIdAndProofOfAddressLink: Locator;
