@@ -13,7 +13,7 @@ test('headings and card details display on "Congrats" page', async ({
   await expect(congratsPage.stepHeading).toBeVisible();
 });
 
-test('links display on "Congrats" page', async ({ page }) => {
+test("links display on Congrats page", async ({ page }) => {
   const congratsPage = new CongratsPage(page);
   await expect(congratsPage.locationsLink).toBeVisible();
   await expect(congratsPage.photoIdAndProofOfAddressLink).toBeVisible();
