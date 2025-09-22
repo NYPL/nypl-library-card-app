@@ -131,12 +131,13 @@ Our CI/CD pipeline uses GitHub Actions with multiple specialized workflows to en
 
 ### Workflow Overview
 
-| Workflow                 | Purpose                          | Triggers                                     |
-| ------------------------ | -------------------------------- | -------------------------------------------- |
-| **Unit Tests**           | Unit tests and linting           | PRs, pushes to `main`, called by deployments |
-| **Playwright Tests**     | End-to-end browser testing       | PRs, pushes to `main`, called by deployments |
-| **Deploy to QA**         | Deploy to QA environment         | `qa-*` tags                                  |
-| **Deploy to Production** | Deploy to production environment | `production-*` tags                          |
+| Workflow                 | Purpose                            | Triggers                                     |
+| ------------------------ | ---------------------------------- | -------------------------------------------- |
+| **Unit Tests**           | Unit tests and linting             | PRs, pushes to `main`, called by deployments |
+| **Playwright Tests**     | End-to-end browser testing         | PRs, pushes to `main`, called by deployments |
+| **Base Deploy**          | Deploys to a specified environment | Called by deployments                        |
+| **Deploy to QA**         | Deploy to QA environment           | `qa-*` tags                                  |
+| **Deploy to Production** | Deploy to production environment   | `production-*` tags                          |
 
 ## Internationalization
 
