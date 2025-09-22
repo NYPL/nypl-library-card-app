@@ -81,11 +81,14 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       <Heading>{t("confirmation.nextSteps.title")}</Heading>
       <Box
         dangerouslySetInnerHTML={{
+<<<<<<< HEAD
           __html: t("confirmation.nextSteps.explore"),
         }}
       />
       <Box
         dangerouslySetInnerHTML={{
+=======
+>>>>>>> design-system-v4
           __html: loginHtml,
         }}
       />

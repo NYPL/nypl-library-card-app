@@ -22,15 +22,7 @@ The production site on NYPL.org:
 
 The current production version:
 
-- v1.2.4
-
-## Branch Statuses
-
-| Branch       | Status                                                                                                                                      |
-| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
-| `main`       | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=main)](https://travis-ci.org/NYPL/nypl-library-card-app)       |
-| `production` | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=production)](https://travis-ci.org/NYPL/nypl-library-card-app) |
-| `qa`         | [![Build Status](https://travis-ci.org/NYPL/nypl-library-card-app.svg?branch=qa)](https://travis-ci.org/NYPL/nypl-library-card-app)         |
+- v1.2.6
 
 ## Installation & Configuration
 
@@ -40,7 +32,7 @@ Developers can use [nvm](https://github.com/creationix/nvm) if they wish.
 This repo has a `.nvmrc` file that indicates which node version we develop against.
 For more information see [how `nvm use` works](https://github.com/creationix/nvm#nvmrc).
 
-At the moment, this app is intended to be run on Node v10.x due to AWS deployments.
+At the moment, this app is intended to be run on Node v20.x due to AWS deployments.
 
 ### Environment Variables
 
@@ -72,6 +64,8 @@ Add the following line to your /etc/hosts file:
 
 `127.0.0.1 local.nypl.org`
 
+See below for current limitations and follow steps listed under 1.
+
 ### Production build
 
 To build and run the app locally in production mode, run the following:
@@ -96,13 +90,13 @@ The `basePath` value is set to `/library-card`.
 
 Our branches (in order of stability are):
 
-| Branch     | Environment | AWS Account     |
-| :--------- | :---------- | :-------------- |
-| main       | development | aws-sandbox     |
-| qa         | qa          | aws-digital-dev |
-| production | production  | aws-digital-dev |
+| Branch     | Environment | AWS Account      |
+| :--------- | :---------- | :--------------- |
+| main       | development | nypl-sandbox     |
+| qa         | qa          | nypl-digital-dev |
+| production | production  | nypl-digital-dev |
 
-The `main` branch and the `development` environment on `aws-sandbox` is not currently being used. Only the deployments to `aws-digital-dev` are being used.
+The `main` branch and the `development` environment on `nypl-sandbox` is not currently being used. Only the deployments to `nypl-digital-dev` are being used.
 
 ### Cutting a feature branch
 
@@ -126,7 +120,7 @@ Configuration can be adjusted via `.github/workflows/ci.yml`, located at the roo
 
 ## Docker
 
-_Note_: This application is using Docker only for production builds and not for local development. For local development, the `npm run dev` command is the way to go.
+_Note_: This application is using Docker only for production builds and not for local development. For local development, the `npm run dev` command is the way to go. If that doesn't work (for example certain Macs) you are likely missing a step. Make sure you have gone through all steps of the setup. If you still are unable to run locally, ask another dev or use Docker for the interim.
 
 ### Building Docker Images
 
@@ -162,7 +156,7 @@ This will be used to build and deploy images to Docker Hub in the future.
 If you are using the `docker` CLI tool, use the following command to run an _existing_ image in a container called `mycontainer` locally:
 
 ```
-$ docker run -d --name mycontainer -p 3000:3000 --env-file .env.local lib-app
+$ docker run -d --name mycontainer -p 3001:3001 --env-file .env.local lib-app
 ```
 
 This will run an existing Docker image, such as the image built from the previous step, in the background. If you want to see the latest logs from the container, run `docker logs mycontainer`. If you want to see the full set of logs as the Docker image is being built and run, remove the detached `-d` flag. The `--env-file` flag configures the docker container to use the local `.env.local` file where your secret credentials to run the app should be located. This file is not used when building the image, only when running the container.
@@ -189,7 +183,7 @@ To stop and remove the container run:
 $ docker-compose down
 ```
 
-If any changes are made to the application, the image needs to be built again. Stop the container and then run the following command:
+If any changes are made to the application, the image needs to be built again. Stop the container and delete the image, then run the following command:
 
 ```
 $ docker-compose up --build
@@ -225,7 +219,7 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 ```
 
-Then double-click on the `localhost.crt` file to add it to your keychain. Change the settings to "Always Trust".
+Then double-click on the `localhost.crt` file to add it to your keychain under "System". Change the settings to "Always Trust".
 
 Now run `npm run local-prod` to build and run the Next.js app with https.
 
@@ -239,7 +233,7 @@ if (!csrfTokenValid) {
 }
 ```
 
-in three separate locations. Then, build the image and run a container for that image. This will allow you to run the docker image locally in production mode with HTTPS turned off so that. This should not be deployed to production so remember to uncomment the code for a qa or production deployment.
+in three separate locations. Then, build the image and run a container for that image. This will allow you to run the docker image locally in production mode with HTTPS turned off. This should not be deployed to production so remember to exclude this from the commit or uncomment the code for a qa or production deployment.
 
 ## Testing
 
