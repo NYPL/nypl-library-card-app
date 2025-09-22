@@ -50,13 +50,13 @@ test("navigates to alternate address page from landing", async ({ page }) => {
   // await page.goto("/library-card/new");
   // await landingPage.getStartedButton.click();
 
-  // await page.goto("/library-card/personal?newCard=true");
-  // const personalPage = new PersonalPage(page);
-  // await personalPage.firstNameInput.fill("Test");
-  // await personalPage.lastNameInput.fill("User");
-  // await personalPage.dateOfBirthInput.fill("01/01/1990");
-  // await personalPage.emailInput.fill("test@example.com");
-  // await personalPage.nextButton.click();
+  await page.goto("/library-card/personal?newCard=true");
+  const personalPage = new PersonalPage(page);
+  await personalPage.firstNameInput.fill("Test");
+  await personalPage.lastNameInput.fill("User");
+  await personalPage.dateOfBirthInput.fill("01/01/1990");
+  await personalPage.emailInput.fill("test@example.com");
+  await personalPage.nextButton.click();
   await page.goto("/library-card/location?newCard=true");
   const addressPage = new AddressPage(page);
   await addressPage.streetAddressInput.fill("123 Main St");
