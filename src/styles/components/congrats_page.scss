@@ -66,31 +66,7 @@
   }
 }
 
-  .content {
-    margin-top: 2px;
-    font-size: 1.7em;
-
-    @media only screen and (min-width: $breakpoint-small) {
-      margin-top: 5px;
-      font-size: 1.6em;
-    }
-  }
-
-  .nypl-svg {
-    fill: white;
-
-    width: 90%;
-    margin-inline-start: 15px;
-
-    @media only screen and (min-width: $breakpoint-small) {
-      width: 80%;
-    }
-    @media only screen and (min-width: $breakpoint-intermediate-2) {
-      width: 65%;
-      margin-inline-start: 35px;
-    }
-  }
-
+.grid-item {
   &.barcode-container {
     background: white;
     padding: 15px 20px 0px;
@@ -145,3 +121,4 @@
       }
     }
   }
+}
