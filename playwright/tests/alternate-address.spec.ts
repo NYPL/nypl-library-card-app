@@ -35,7 +35,7 @@ test.describe("displays elements on Alternate Address page", () => {
   test("enters alternate address information", async ({ page }) => {
     const alternateAddressPage = new AlternateAddressPage(page);
     await alternateAddressPage.streetAddressInput.fill("476 5th Ave");
-    await alternateAddressPage.apartmentSuiteInput.fill("Room 200");
+    await alternateAddressPage.apartmentSuiteInput.fill("Room 201");
     await alternateAddressPage.cityInput.fill("New York");
     await alternateAddressPage.stateInput.fill("NY");
     await alternateAddressPage.postalCodeInput.fill("10018");
