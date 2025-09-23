@@ -17,6 +17,7 @@ export class CongratsPage {
       name: "Apply for a Library Card Online",
       level: 1,
     });
+
     this.stepHeading = page.getByRole("heading", {
       name: "Congratulations! You now have a digital New York Public Library card.",
       level: 2,
@@ -26,16 +27,20 @@ export class CongratsPage {
       name: "locations",
       exact: true,
     });
+
     this.photoIdAndProofOfAddressLink = page.getByRole("link", {
       name: "photo ID and proof of address",
     });
+
     this.getHelpEmailLink = page.getByRole("link", {
       name: "gethelp@nypl.org",
     });
+
     this.loginLink = page.getByRole("link", { name: "Log into your account" });
     this.findOutLibraryLink = page.getByRole("link", {
       name: "Find out about all the Library has to offer.",
     });
+
     this.discoverLink = page.getByRole("link", {
       name: "Discover everything you can do with your library card.",
     });
