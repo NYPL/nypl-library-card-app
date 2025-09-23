@@ -66,7 +66,9 @@ test("navigates to alternate address page from landing", async ({ page }) => {
   await addressPage.nextButton.click();
   // await page.goto("/library-card/workAddress?newCard=true");
   const alternateAddressPage = new AlternateAddressPage(page);
-  await expect(alternateAddressPage.addressHeading).toBeVisible({timeout: 20000});
+  await expect(alternateAddressPage.addressHeading).toBeVisible({
+    timeout: 20000,
+  });
   await alternateAddressPage.streetAddressInput.fill("476 5th Ave");
   await alternateAddressPage.apartmentSuiteInput.fill("Room 200");
   await alternateAddressPage.cityInput.fill("New York");
