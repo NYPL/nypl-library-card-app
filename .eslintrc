@@ -8,7 +8,6 @@
     "plugin:jsx-a11y/strict",
     "prettier",
     "prettier/@typescript-eslint",
-    "plugin:prettier/recommended",
     "prettier/react"
   ],
   "parser": "@typescript-eslint/parser",
