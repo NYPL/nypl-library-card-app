@@ -7,6 +7,7 @@
 - Add Playwright tests to confirm invalid value errors on address page [SWIS-63](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-63)
 - Add Playwright test to confirm address verification page [SWIS-54](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-54)
 - Add Playwright tests to confirm errors display on account page [SWIS-72](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-72)
+- Prettier updates [SWIS](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-96)
 
 ### 1.2.6
 
