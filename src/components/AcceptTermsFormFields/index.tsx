@@ -1,4 +1,4 @@
-import { Checkbox } from "@nypl/design-system-react-components";
+import { Box, Checkbox } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import React from "react";
 import { useFormContext } from "react-hook-form";
@@ -19,7 +19,8 @@ const AcceptTermsForm: React.FC = () => {
 
   return (
     <>
-      <p
+      <Box
+        my="s"
         dangerouslySetInnerHTML={{
           __html: t("account.termsAndCondition.text"),
         }}
