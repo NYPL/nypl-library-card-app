@@ -17,6 +17,10 @@ jobs:
     environment: production
     needs: [unit-tests, playwright-tests]
 
+    permissions:
+      id-token: write
+      contents: read
+
     steps:
       - uses: actions/checkout@v4
 
