@@ -33,6 +33,23 @@ test.describe("displays elements on Alternate Address page", () => {
   });
 });
 
+test.describe("enters alternate address", () => {
+  test("enters alternate address", async ({ page }) => {
+    await page.goto("/library-card/workAddress?newCard=true");
+    const alternateAddressPage = new AlternateAddressPage(page);
+    await expect(alternateAddressPage.addressHeading).toBeVisible();
+    await alternateAddressPage.streetAddressInput.fill("476 5th Ave");
+    await alternateAddressPage.apartmentSuiteInput.fill("Room 200");
+    await alternateAddressPage.cityInput.fill("New York");
+    await alternateAddressPage.stateInput.fill("NY");
+    await alternateAddressPage.postalCodeInput.fill("10018");
+    await alternateAddressPage.nextButton.click();
+
+    const addressVerificationPage = new AddressVerificationPage(page);
+    await expect(addressVerificationPage.alternateAddressHeader).toBeVisible();
+  });
+});
+
 test.describe(
   "navigates through the application flow to Alternate Address page",
   () => {
