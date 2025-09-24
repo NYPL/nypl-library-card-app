@@ -5,8 +5,9 @@ export class AddressVerificationPage {
   readonly mainHeader: Locator;
   readonly stepHeader: Locator;
   readonly homeAddressHeader: Locator;
+  readonly homeAddressOption: Locator;
   readonly alternateAddressHeader: Locator;
-  readonly verifyRadioButton: Locator;
+  readonly alternateAddressOption: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -24,9 +25,15 @@ export class AddressVerificationPage {
       name: "Home Address",
       level: 3,
     });
+    this.homeAddressOption = this.page.getByRole("radio", {
+      name: "123 Main St",
+    });
     this.alternateAddressHeader = this.page.getByRole("heading", {
       name: "Alternate Address",
       level: 3,
+    });
+    this.alternateAddressOption = this.page.getByRole("radio", {
+      name: "476 5th Ave",
     });
     this.previousButton = this.page.getByRole("link", {
       name: "Previous",
