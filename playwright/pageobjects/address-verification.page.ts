@@ -3,7 +3,7 @@ import { Page, Locator } from "@playwright/test";
 export class AddressVerificationPage {
   readonly page: Page;
   readonly mainHeader: Locator;
-  readonly subHeader: Locator;
+  readonly stepHeader: Locator;
   readonly homeAddressHeader: Locator;
   readonly alternateAddressHeader: Locator;
   readonly verifyRadioButton: Locator;
@@ -16,12 +16,13 @@ export class AddressVerificationPage {
       name: "Apply for a Library Card Online",
       level: 1,
     });
-    this.subHeader = this.page.getByRole("heading", {
+    this.stepHeader = this.page.getByRole("heading", {
       name: "Step 3 of 5: Address Verification",
       level: 2,
     });
     this.homeAddressHeader = this.page.getByRole("heading", {
       name: "Home Address",
+      level: 3,
     });
     this.alternateAddressHeader = this.page.getByRole("heading", {
       name: "Alternate Address",

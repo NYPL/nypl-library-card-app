@@ -9,8 +9,9 @@ test.describe("displays elements on Address Verification page", () => {
   test("should display the correct headers", async ({ page }) => {
     const addressVerificationPage = new AddressVerificationPage(page);
     await expect(addressVerificationPage.mainHeader).toBeVisible();
-    await expect(addressVerificationPage.subHeader).toBeVisible();
+    await expect(addressVerificationPage.stepHeader).toBeVisible();
     await expect(addressVerificationPage.homeAddressHeader).toBeVisible();
+    await expect(addressVerificationPage.alternateAddressHeader).toBeVisible();
   });
 
   test("should display the next and previous buttons", async ({ page }) => {
