@@ -45,7 +45,7 @@ test.describe(
       await landingPage.getStartedButton.click();
 
       const personalPage = new PersonalPage(page);
-      // await expect(personalPage.stepHeading).toBeVisible();
+      await expect(personalPage.stepHeading).toBeVisible();
       await personalPage.firstNameInput.fill("Test");
       await personalPage.lastNameInput.fill("User");
       await personalPage.dateOfBirthInput.fill("01/01/1990");
@@ -80,7 +80,7 @@ test.describe(
     }) => {
       await page.goto("/library-card/personal?newCard=true");
       const personalPage = new PersonalPage(page);
-      // await expect(personalPage.stepHeading).toBeVisible();
+      await expect(personalPage.stepHeading).toBeVisible();
       await personalPage.firstNameInput.fill("Test");
       await personalPage.lastNameInput.fill("User");
       await personalPage.dateOfBirthInput.fill("01/01/1990");
