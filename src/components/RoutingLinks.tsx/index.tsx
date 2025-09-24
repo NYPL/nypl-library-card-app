@@ -1,9 +1,10 @@
 import React, { JSX } from "react";
-import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
 import aaUtils from "../../externals/aaUtils";
 import styles from "./RoutingLinks.module.css";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 export interface LinkType {
   url: string;
@@ -30,6 +31,7 @@ function RoutingLinks({
   isDisabled = false,
 }: RoutingLinksType): JSX.Element {
   const { t } = useTranslation("common");
+  const router = useRouter();
   const nextText = next.text || t("button.next");
   const previousText = previous?.text || t("button.previous");
 
@@ -46,13 +48,14 @@ function RoutingLinks({
       )}
       {!next?.submit ? (
         <Link
-          href={next.url}
+          href={"#"}
           id="routing-links-next"
           className={`button ${styles.button}`}
           // Just track the "Get Started" or "Submit" clicks. Routing events
           // are tracked at the component level in each "onSubmit".
-          onClick={() => {
+          onClick={async () => {
             aaUtils.trackCtaEvent("Start Application", next.text, next.url);
+            await router.push(next.url);
           }}
         >
           {nextText}

@@ -28,7 +28,7 @@ const AccountFormContainer = ({ csrfToken }) => {
    * submitForm
    * @param formData - data object returned from react-hook-form
    */
-  const submitForm = (formData, e) => {
+  const submitForm = async (formData, e) => {
     e.preventDefault();
     // Set the global form state...
     dispatch({
@@ -37,7 +37,7 @@ const AccountFormContainer = ({ csrfToken }) => {
     });
 
     const nextUrl = `/review?${queryStr}`;
-    router.push(nextUrl);
+    await router.push(nextUrl);
   };
 
   return (
