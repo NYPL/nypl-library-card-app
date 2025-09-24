@@ -15,7 +15,8 @@ ENV PORT=3000 \
 
 # Install dependencies.
 COPY package.json ./
-RUN npm install --legacy-peer-deps
+COPY package-lock.json ./
+RUN npm ci --legacy-peer-deps
 
 # Copy the app files.
 COPY . ./
