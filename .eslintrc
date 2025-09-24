@@ -4,11 +4,11 @@
     "plugin:@next/next/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
     "plugin:react/recommended",
-    "plugin:jsx-a11y/strict",
-    "prettier",
-    "prettier/@typescript-eslint",
-    "prettier/react"
+    "plugin:jsx-a11y/strict"
+   
+   
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
