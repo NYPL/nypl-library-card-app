@@ -17,6 +17,10 @@ jobs:
     environment: production
     needs: [unit-tests, playwright-tests]
 
+    permissions:
+      id-token: write
+      contents: read
+
     steps:
       - uses: actions/checkout@v4
 
@@ -44,7 +48,7 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:production-latest
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:production-latest
 
       - name: Push image to Amazon ECR
         env:
