@@ -40,7 +40,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
 
   return (
     <div className={styles.container}>
-      <Heading level="three">{t("account.library.title")}</Heading>
+      <Heading level="h3">{t("account.library.title")}</Heading>
       <p>{t("account.library.description.part1")}</p>
       <p>{t("account.library.description.part2")}</p>
       <Select
