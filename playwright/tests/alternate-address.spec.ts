@@ -41,7 +41,7 @@ test.describe("displays elements on Alternate Address page", () => {
     await alternateAddressPage.postalCodeInput.fill("10018");
     await alternateAddressPage.nextButton.click();
     const addressVerificationPage = new AddressVerificationPage(page);
-    await expect(addressVerificationPage.subHeader).toBeVisible();
+    await expect(addressVerificationPage.stepHeader).toBeVisible();
     await expect(addressVerificationPage.alternateAddressHeader).toBeVisible();
   });
 });
@@ -76,6 +76,6 @@ test("navigates to alternate address page from landing", async ({ page }) => {
   await alternateAddressPage.postalCodeInput.fill("10018");
   await alternateAddressPage.nextButton.click();
   const addressVerificationPage = new AddressVerificationPage(page);
-  await expect(addressVerificationPage.subHeader).toBeVisible();
+  await expect(addressVerificationPage.stepHeader).toBeVisible();
   await expect(addressVerificationPage.alternateAddressHeader).toBeVisible();
 });
