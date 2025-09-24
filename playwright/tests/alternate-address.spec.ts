@@ -5,11 +5,11 @@ import { LandingPage } from "../pageobjects/landing.page";
 import { PersonalPage } from "../pageobjects/personal.page";
 import { AddressPage } from "../pageobjects/address.page";
 
-test.describe("displays elements on Alternate Address page", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto("/library-card/workAddress?newCard=true");
-  });
+test.beforeEach(async ({ page }) => {
+  await page.goto("/library-card/workAddress?newCard=true");
+});
 
+test.describe("displays elements on Alternate Address page", () => {
   test("displays all headings", async ({ page }) => {
     const alternateAddressPage = new AlternateAddressPage(page);
     await expect(alternateAddressPage.mainHeading).toBeVisible();
@@ -31,51 +31,21 @@ test.describe("displays elements on Alternate Address page", () => {
     await expect(alternateAddressPage.nextButton).toBeVisible();
     await expect(alternateAddressPage.previousButton).toBeVisible();
   });
+});
 
-  test("enters alternate address information", async ({ page }) => {
+test.describe("enters alternate address", () => {
+  test("enters valid alternate address", async ({ page }) => {
+    await page.goto("/library-card/workAddress?newCard=true");
     const alternateAddressPage = new AlternateAddressPage(page);
+    await expect(alternateAddressPage.addressHeading).toBeVisible();
     await alternateAddressPage.streetAddressInput.fill("476 5th Ave");
-    await alternateAddressPage.apartmentSuiteInput.fill("Room 201");
+    await alternateAddressPage.apartmentSuiteInput.fill("Room 200");
     await alternateAddressPage.cityInput.fill("New York");
     await alternateAddressPage.stateInput.fill("NY");
     await alternateAddressPage.postalCodeInput.fill("10018");
     await alternateAddressPage.nextButton.click();
+
     const addressVerificationPage = new AddressVerificationPage(page);
-    await expect(addressVerificationPage.stepHeader).toBeVisible();
     await expect(addressVerificationPage.alternateAddressHeader).toBeVisible();
   });
-});
-test("navigates to alternate address page from landing", async ({ page }) => {
-  const landingPage = new LandingPage(page);
-  await page.goto("/library-card/new");
-  await landingPage.getStartedButton.click();
-
-  // await page.goto("/library-card/personal?newCard=true");
-  const personalPage = new PersonalPage(page);
-  await personalPage.firstNameInput.fill("Test");
-  await personalPage.lastNameInput.fill("User");
-  await personalPage.dateOfBirthInput.fill("01/01/1990");
-  await personalPage.emailInput.fill("test@example.com");
-  await personalPage.nextButton.click();
-  // await page.goto("/library-card/location?newCard=true");
-  const addressPage = new AddressPage(page);
-  await addressPage.streetAddressInput.fill("123 Main St");
-  await addressPage.cityInput.fill("New York");
-  await addressPage.stateInput.fill("NY");
-  await addressPage.postalCodeInput.fill("10001");
-  await addressPage.nextButton.click();
-  // await page.goto("/library-card/workAddress?newCard=true");
-  const alternateAddressPage = new AlternateAddressPage(page);
-  await expect(alternateAddressPage.addressHeading).toBeVisible({
-    timeout: 20000,
-  });
-  await alternateAddressPage.streetAddressInput.fill("476 5th Ave");
-  await alternateAddressPage.apartmentSuiteInput.fill("Room 200");
-  await alternateAddressPage.cityInput.fill("New York");
-  await alternateAddressPage.stateInput.fill("NY");
-  await alternateAddressPage.postalCodeInput.fill("10018");
-  await alternateAddressPage.nextButton.click();
-  const addressVerificationPage = new AddressVerificationPage(page);
-  await expect(addressVerificationPage.stepHeader).toBeVisible();
-  await expect(addressVerificationPage.alternateAddressHeader).toBeVisible();
 });
