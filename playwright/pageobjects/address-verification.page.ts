@@ -8,7 +8,6 @@ export class AddressVerificationPage {
   readonly homeAddressHeader: Locator;
   readonly alternateAddressHeader: Locator;
   readonly alternateAddressOption: Locator;
-  readonly verifyRadioButton: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
