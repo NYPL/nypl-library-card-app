@@ -8,6 +8,8 @@
 - Add Playwright test to confirm address verification page [SWIS-54](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-54)
 - Add Playwright tests to confirm errors display on account page [SWIS-72](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-72)
 - Add Playwright test to confirm congrats page [SWIS-86](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-86)
+- Prettier updates [SWIS-96](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-96)
+- Remove duplicate Playwright files testing the address page
 
 ### 1.2.6
 
