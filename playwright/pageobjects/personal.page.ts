@@ -2,8 +2,6 @@ import { Page, Locator } from "@playwright/test";
 
 export class PersonalPage {
   readonly page: Page;
-  readonly mainHeading: Locator; // displays on each page
-  readonly stepHeading: Locator;
   readonly firstNameInput: Locator;
   readonly lastNameInput: Locator;
   readonly emailInput: Locator;
@@ -18,14 +16,6 @@ export class PersonalPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.mainHeading = this.page.getByRole("heading", {
-      name: "Apply for a Library Card Online",
-      level: 1,
-    });
-    this.stepHeading = this.page.getByRole("heading", {
-      name: "Step 1 of 5: Personal Information",
-      level: 2,
-    });
     this.firstNameInput = this.page.getByLabel(/First Name/i);
     this.lastNameInput = this.page.getByLabel(/Last Name/i);
     this.dateOfBirthInput = this.page.getByLabel(/Date of Birth/i);

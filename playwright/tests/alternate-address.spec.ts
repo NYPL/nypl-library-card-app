@@ -1,9 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
-import { LandingPage } from "../pageobjects/landing.page";
-import { PersonalPage } from "../pageobjects/personal.page";
-import { AddressPage } from "../pageobjects/address.page";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/workAddress?newCard=true");
@@ -35,7 +32,6 @@ test.describe("displays elements on Alternate Address page", () => {
 
 test.describe("enters alternate address", () => {
   test("enters valid alternate address", async ({ page }) => {
-    await page.goto("/library-card/workAddress?newCard=true");
     const alternateAddressPage = new AlternateAddressPage(page);
     await expect(alternateAddressPage.addressHeading).toBeVisible();
     await alternateAddressPage.streetAddressInput.fill("476 5th Ave");
@@ -47,5 +43,6 @@ test.describe("enters alternate address", () => {
 
     const addressVerificationPage = new AddressVerificationPage(page);
     await expect(addressVerificationPage.alternateAddressHeader).toBeVisible();
+    await expect(addressVerificationPage.alternateAddressOption).toBeVisible();
   });
 });
