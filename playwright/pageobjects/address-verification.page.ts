@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+import { TEST_ALTERNATE_ADDRESS } from "../utils/constants";
 
 export class AddressVerificationPage {
   readonly page: Page;
@@ -29,7 +30,7 @@ export class AddressVerificationPage {
       level: 3,
     });
     this.alternateAddressOption = this.page.getByRole("radio", {
-      name: "476 5th Ave",
+      name: TEST_ALTERNATE_ADDRESS.street,
     });
     this.previousButton = this.page.getByRole("link", {
       name: "Previous",
