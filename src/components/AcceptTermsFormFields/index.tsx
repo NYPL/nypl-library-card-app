@@ -2,6 +2,7 @@ import { Checkbox } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { Paragraph } from "../Paragraph";
 
 /**
  * AcceptTermsForm
@@ -19,7 +20,7 @@ const AcceptTermsForm: React.FC = () => {
 
   return (
     <>
-      <p
+      <Paragraph
         dangerouslySetInnerHTML={{
           __html: t("account.termsAndCondition.text"),
         }}

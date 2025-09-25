@@ -14,12 +14,13 @@ import {
 
 const ApplicationContainer = ({ children, problemDetail }) => {
   const {
-    query: { lang = "en" },
+    query: { lang },
   } = useRouter();
   const errorSection = React.createRef<HTMLDivElement>();
   const { state } = useFormDataContext();
   const { errorObj } = state;
   const errorToDisplay = problemDetail ? problemDetail : errorObj;
+  const finalLang = Array.isArray(lang) && lang.length > 0 ? lang[0] : "en";
 
   // If there are errors, focus on the element that displays those errors,
   // for client-side rendering.
@@ -40,7 +41,7 @@ const ApplicationContainer = ({ children, problemDetail }) => {
         <TemplateFull>
           <>
             <ApiErrors
-              lang={String(lang)}
+              lang={finalLang}
               ref={errorSection}
               problemDetail={errorToDisplay}
             />
