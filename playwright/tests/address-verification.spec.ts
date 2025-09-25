@@ -3,11 +3,10 @@ import { AddressPage } from "../pageobjects/address.page";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
 
-test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/address-verification?&newCard=true");
-});
-
 test.describe("displays elements on Address Verification page", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/library-card/address-verification?&newCard=true");
+  });
   test("should display the correct headers", async ({ page }) => {
     const addressVerificationPage = new AddressVerificationPage(page);
     await expect(addressVerificationPage.mainHeader).toBeVisible();
@@ -23,8 +22,10 @@ test.describe("displays elements on Address Verification page", () => {
 });
 
 test.describe("enters home address and alternate address", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/library-card/location?&newCard=true");
+  });
   test("enters valid addresses", async ({ page }) => {
-    await page.goto("/library-card/location?newCard=true");
     const addressPage = new AddressPage(page);
     await expect(addressPage.addressHeading).toBeVisible();
     await addressPage.streetAddressInput.fill("123 Main St");
