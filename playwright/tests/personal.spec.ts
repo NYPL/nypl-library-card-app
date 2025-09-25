@@ -62,3 +62,12 @@ test("error validation for birth date less than 13 years ago", async ({
   await personalPage.nextButton.click();
   await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
 });
+
+test("input patron data into personal information form", async ({ page }) => {
+  const personalPage = new PersonalPage(page);
+  await personalPage.firstNameInput.fill("Jane");
+  await personalPage.lastNameInput.fill("Doe");
+  await personalPage.emailInput.fill("test@example.com");
+  await personalPage.dateOfBirthInput.fill("2000-01-01");
+  await personalPage.checkBox.check();
+});
