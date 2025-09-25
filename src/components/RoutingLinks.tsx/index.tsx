@@ -1,9 +1,12 @@
 import React, { JSX } from "react";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
-
 import aaUtils from "../../externals/aaUtils";
-import styles from "./RoutingLinks.module.css";
+import {
+  Box,
+  Button,
+  Link as DSLink,
+} from "@nypl/design-system-react-components";
 
 export interface LinkType {
   url: string;
@@ -34,21 +37,25 @@ function RoutingLinks({
   const previousText = previous?.text || t("button.previous");
 
   return (
-    <div className={styles.container}>
+    <Box my="2rem" display="flex" gap="xs">
       {previous?.url && (
-        <Link
+        <DSLink
+          as={Link}
           href={previous.url}
           id="routing-links-previous"
-          className={styles.previous}
+          variant="buttonSecondary"
+          borderColor="ui.gray.medium"
+          color="black"
         >
           {previousText}
-        </Link>
+        </DSLink>
       )}
       {!next?.submit ? (
-        <Link
+        <DSLink
+          as={Link}
           href={next.url}
           id="routing-links-next"
-          className={`button ${styles.button}`}
+          variant="buttonPrimary"
           // Just track the "Get Started" or "Submit" clicks. Routing events
           // are tracked at the component level in each "onSubmit".
           onClick={() => {
@@ -56,17 +63,18 @@ function RoutingLinks({
           }}
         >
           {nextText}
-        </Link>
+        </DSLink>
       ) : (
-        <input
+        <Button
+          variant="primary"
           id="routing-links-next"
-          className={`button ${styles.next}`}
           disabled={isDisabled}
           type="submit"
-          value={nextText}
-        />
+        >
+          {nextText}
+        </Button>
       )}
-    </div>
+    </Box>
   );
 }
 
