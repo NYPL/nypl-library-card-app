@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
+import { TEST_ALTERNATE_ADDRESS } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/workAddress?newCard=true");
@@ -34,11 +35,17 @@ test.describe("enters alternate address", () => {
   test("enters valid alternate address", async ({ page }) => {
     const alternateAddressPage = new AlternateAddressPage(page);
     await expect(alternateAddressPage.addressHeading).toBeVisible();
-    await alternateAddressPage.streetAddressInput.fill("476 5th Ave");
-    await alternateAddressPage.apartmentSuiteInput.fill("Room 200");
-    await alternateAddressPage.cityInput.fill("New York");
-    await alternateAddressPage.stateInput.fill("NY");
-    await alternateAddressPage.postalCodeInput.fill("10018");
+    await alternateAddressPage.streetAddressInput.fill(
+      TEST_ALTERNATE_ADDRESS.street
+    );
+    await alternateAddressPage.apartmentSuiteInput.fill(
+      TEST_ALTERNATE_ADDRESS.apartmentSuite
+    );
+    await alternateAddressPage.cityInput.fill(TEST_ALTERNATE_ADDRESS.city);
+    await alternateAddressPage.stateInput.fill(TEST_ALTERNATE_ADDRESS.state);
+    await alternateAddressPage.postalCodeInput.fill(
+      TEST_ALTERNATE_ADDRESS.postalCode
+    );
     await alternateAddressPage.nextButton.click();
 
     const addressVerificationPage = new AddressVerificationPage(page);
