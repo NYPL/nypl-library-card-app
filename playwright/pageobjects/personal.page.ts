@@ -15,7 +15,7 @@ export class PersonalPage {
   readonly lastNameErrorMessage: Locator;
   readonly emailErrorMessage: Locator;
   readonly dateOfBirthErrorMessage: Locator;
-  readonly alternativeFormLink: Locator;
+  readonly alternateFormLink: Locator;
   readonly locationsLink: Locator;
 
   constructor(page: Page) {
@@ -58,7 +58,7 @@ export class PersonalPage {
       "Please enter a valid date, MM/DD/YYYY, including slashes."
     );
 
-    this.alternativeFormLink = this.page.getByRole("link", {
+    this.alternateFormLink = this.page.getByRole("link", {
       name: "alternate form",
       exact: true,
     });
