@@ -1,5 +1,5 @@
 import React, { act } from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { axe } from "jest-axe";
 import AgeFormFields from ".";
 import { mockTFunction, TestProviderWrapper } from "../../../testHelper/utils";
@@ -143,7 +143,9 @@ describe("AgeFormFields", () => {
 
     fireEvent.blur(input);
 
-    const inputError = screen.getByText(ageFormErrorMessages["birthdate"]);
-    expect(inputError).toBeInTheDocument();
+    await waitFor(() => {
+      const inputError = screen.getByText(ageFormErrorMessages["birthdate"]);
+      expect(inputError).toBeInTheDocument();
+    });
   });
 });
