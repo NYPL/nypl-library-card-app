@@ -14,7 +14,7 @@ test("Display personal information form", async ({ page }) => {
   await expect(personalPage.emailInput).toBeVisible();
   await expect(personalPage.dateOfBirthInput).toBeVisible();
   await expect(personalPage.checkBox).toBeVisible();
-  await expect(personalPage.alternativeFormatLink).toBeVisible();
+  await expect(personalPage.alternativeFormLink).toBeVisible();
   await expect(personalPage.locationsLink).toBeVisible();
   await expect(personalPage.previousButton).toBeVisible();
   await expect(personalPage.nextButton).toBeVisible();
