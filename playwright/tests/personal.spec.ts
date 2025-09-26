@@ -67,7 +67,7 @@ test("input patron data into personal information form", async ({ page }) => {
   const personalPage = new PersonalPage(page);
   await personalPage.firstNameInput.fill("Jane");
   await personalPage.lastNameInput.fill("Doe");
-  await personalPage.emailInput.fill("test@example.com");
-  await personalPage.dateOfBirthInput.fill("2000-01-01");
+  await personalPage.emailInput.fill("test@gmail.com");
+  await personalPage.dateOfBirthInput.fill("01-01-1990");
   await personalPage.checkBox.check();
 });
