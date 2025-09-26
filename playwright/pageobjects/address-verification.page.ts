@@ -1,11 +1,13 @@
 import { Page, Locator } from "@playwright/test";
+import { TEST_ALTERNATE_ADDRESS } from "../utils/constants";
 
 export class AddressVerificationPage {
   readonly page: Page;
   readonly mainHeader: Locator;
   readonly subHeader: Locator;
   readonly homeAddressHeader: Locator;
-  readonly verifyRadioButton: Locator;
+  readonly alternateAddressHeader: Locator;
+  readonly alternateAddressOption: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -22,7 +24,13 @@ export class AddressVerificationPage {
     this.homeAddressHeader = this.page.getByRole("heading", {
       name: "Home Address",
     });
-
+    this.alternateAddressHeader = this.page.getByRole("heading", {
+      name: "Alternate Address",
+      level: 3,
+    });
+    this.alternateAddressOption = this.page.getByRole("radio", {
+      name: TEST_ALTERNATE_ADDRESS.street,
+    });
     this.previousButton = this.page.getByRole("link", {
       name: "Previous",
       exact: true,
