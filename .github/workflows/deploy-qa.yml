@@ -1,9 +1,11 @@
 name: Deploy to QA
 
 on:
+  # push:
+  #   tags:
+  #     - "qa-*"
   push:
-    tags:
-      - "qa-*"
+    branches: [swis-84/nextjs-deploy-fix]
 
 jobs:
   unit-tests:
