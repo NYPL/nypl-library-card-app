@@ -16,6 +16,7 @@ import {
   generateNewCookieTokenAndHash,
 } from "../../src/utils/csrfUtils";
 import * as cookie from "../../src/utils/CookieUtils";
+import { Paragraph } from "../../src/components/Paragraph";
 
 interface PageProps {
   location: string;
@@ -44,8 +45,8 @@ function AddressPage({
   });
   return (
     <>
-      <Heading level="two">{t("location.title")}</Heading>
-      <p>{t("internationalInstructions")}</p>
+      <Heading level="h2">{t("location.title")}</Heading>
+      <Paragraph>{t("internationalInstructions")}</Paragraph>
       <AddressContainer csrfToken={csrfToken} />
     </>
   );

@@ -25,6 +25,7 @@ import useFormDataContext from "../../context/FormDataContext";
 import { createQueryParams } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
+import { Paragraph } from "../Paragraph";
 
 const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -124,8 +125,10 @@ const AddressContainer = ({ csrfToken }) => {
 
   return (
     <>
-      <Heading level="three">{t("location.workAddress.title")}</Heading>
-      <p>{t("location.workAddress.description.part2")}</p>
+      <Heading mb="s" level="h3">
+        {t("location.workAddress.title")}
+      </Heading>
+      <Paragraph>{t("location.workAddress.description.part2")}</Paragraph>
 
       <Loader isLoading={isLoading} />
 
