@@ -7,6 +7,8 @@ test.beforeEach(async ({ page }) => {
 
 test("Display personal information form", async ({ page }) => {
   const personalPage = new PersonalPage(page);
+  await expect(personalPage.mainHeading).toBeVisible();
+  await expect(personalPage.stepHeading).toBeVisible();
   await expect(personalPage.firstNameInput).toBeVisible();
   await expect(personalPage.lastNameInput).toBeVisible();
   await expect(personalPage.emailInput).toBeVisible();
