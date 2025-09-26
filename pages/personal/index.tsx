@@ -10,6 +10,7 @@ import {
   redirectIfUserHasRegistered,
 } from "../../src/utils/utils";
 import { useRouter } from "next/router";
+import { Paragraph } from "../../src/components/Paragraph";
 
 interface PersonalInformationProps {
   hasUserAlreadyRegistered?: boolean;
@@ -25,8 +26,8 @@ function PersonalInformationPage({
   });
   return (
     <>
-      <Heading level="two">{t("personal.title")}</Heading>
-      <p>{t("internationalInstructions")}</p>
+      <Heading level="h2">{t("personal.title")}</Heading>
+      <Paragraph>{t("internationalInstructions")}</Paragraph>
       <PersonalFormContainer />
     </>
   );

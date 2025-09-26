@@ -24,12 +24,7 @@ const AgeForm = ({ policyType = "webApplicant" }: AgeFormProps) => {
     register,
     formState: { errors },
   } = useFormContext();
-  const MAXLENGTHDATE = 10;
-  // TODO: Right now, all applicants are web applications and
-  // this feature is not needed. Only rendering the `birthdateField`
-  // for now (11/1/22).
-  // const isWebApplicant = policyType === "webApplicant";
-  // const ageGateError = errors?.ageGate?.message;
+  const DATE_MAX_LENGTH = 10;
 
   const birthdateField = (
     <FormField
@@ -39,31 +34,15 @@ const AgeForm = ({ policyType = "webApplicant" }: AgeFormProps) => {
       {...register("birthdate", {
         required: t("personal.errorMessage.birthdate"),
         validate: (val) =>
-          (val.length <= MAXLENGTHDATE && isDate(val)) ||
+          (val.length <= DATE_MAX_LENGTH && isDate(val)) ||
           t("personal.errorMessage.birthdate"),
       })}
       isRequired
       errorState={errors}
-      maxLength={MAXLENGTHDATE}
+      maxLength={DATE_MAX_LENGTH}
       defaultValue={formValues.birthdate}
     />
   );
-  // TODO: Use this later for non-webApplicant policy types.
-  // const ageGateField = (
-  //   <>
-  //     <Checkbox
-  //       id="ageGateCheckbox"
-  //       invalidText={ageGateError}
-  //       isChecked={formValues.ageGate}
-  //       isInvalid={ageGateError}
-  //       name="ageGate"
-  //       labelText={t("personal.ageGate")}
-  //       ref={register({
-  //         required: t("personal.errorMessage.ageGate"),
-  //       })}
-  //     />
-  //   </>
-  // );
 
   return birthdateField;
 };

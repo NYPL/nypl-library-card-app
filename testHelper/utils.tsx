@@ -14,11 +14,12 @@ import {
 import { FormData, LocationResponse } from "../src/interfaces";
 
 interface MockMethods {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   errors?: any;
   // The types coming from `react-hook-form` for its functions.
   getValues?: UseFormGetValues<FieldValues>;
   watch?: UseFormWatch<FieldValues>;
+  formOptions?: any;
 }
 
 interface TestProviderType {
@@ -39,8 +40,12 @@ export const TestHookFormProvider: React.FC<MockMethods> = ({
   errors,
   getValues,
   watch,
+  formOptions = {},
 }) => {
-  const formMethods = useForm();
+  const formMethods = useForm({
+    mode: "onSubmit",
+    ...formOptions,
+  });
   // `errors` is an object so it's okay to combine like this since it can
   // be empty.
   const updatedMethods = { ...formMethods, errors };
@@ -67,7 +72,7 @@ export const TestProviderWrapper: React.FC<TestProviderType> = ({
 }) => {
   return (
     <FormDataContextProvider initState={formDataState}>
-      <TestHookFormProvider {...hookFormState}>{children}</TestHookFormProvider>
+      <TestHookFormProvider {...hookFormState} children={children} />
     </FormDataContextProvider>
   );
 };
