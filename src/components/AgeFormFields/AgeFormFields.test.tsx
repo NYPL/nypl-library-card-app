@@ -86,7 +86,7 @@ describe("AgeFormFields", () => {
 
     const description = screen.getByText("MM/DD/YYYY, including slashes");
     const input = screen.getByRole("textbox", {
-      name: "Date of Birth (Required)",
+      name: "Date of Birth (required)",
     });
     const checkbox = screen.queryByRole("checkbox");
     const label = screen.queryByLabelText("Yes, I am over 13 years old.");
@@ -106,7 +106,7 @@ describe("AgeFormFields", () => {
 
     const description = screen.queryByText("MM/DD/YYYY, including slashes");
     const input = screen.queryByRole("textbox", {
-      name: "Date of Birth (Required)",
+      name: "Date of Birth (required)",
     });
     const checkbox = screen.getByRole("checkbox");
     const label = screen.getByLabelText("Yes, I am over 13 years old.");
