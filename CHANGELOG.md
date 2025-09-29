@@ -11,6 +11,7 @@
 - Remove duplicate Playwright files testing the address page
 - Add Playwright test to confirm user input on alternate address page [SWIS-91](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-91)
 - Add Playwright assertions to confirm headings display on personal information page [SWIS-99](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-99)
+- Add Playwright test to confirm user input for address verification page [SWIS-90](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-90)
 
 ### 1.2.6
 

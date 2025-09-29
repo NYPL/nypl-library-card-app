@@ -1,19 +1,62 @@
 import { test, expect } from "@playwright/test";
+import { AddressPage } from "../pageobjects/address.page";
+import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
+import { TEST_HOME_ADDRESS, TEST_ALTERNATE_ADDRESS } from "../utils/constants";
 
-test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/address-verification?&newCard=true");
+test.describe("displays elements on Address Verification page", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/library-card/address-verification?&newCard=true");
+  });
+  test("should display the correct headers", async ({ page }) => {
+    const addressVerificationPage = new AddressVerificationPage(page);
+    await expect(addressVerificationPage.mainHeader).toBeVisible();
+    await expect(addressVerificationPage.stepHeader).toBeVisible();
+    await expect(addressVerificationPage.homeAddressHeader).toBeVisible();
+  });
+
+  test("should display the next and previous buttons", async ({ page }) => {
+    const addressVerificationPage = new AddressVerificationPage(page);
+    await expect(addressVerificationPage.previousButton).toBeVisible();
+    await expect(addressVerificationPage.nextButton).toBeVisible();
+  });
 });
 
-test("should display the correct headers", async ({ page }) => {
-  const addressVerificationPage = new AddressVerificationPage(page);
-  await expect(addressVerificationPage.mainHeader).toBeVisible();
-  await expect(addressVerificationPage.subHeader).toBeVisible();
-  await expect(addressVerificationPage.homeAddressHeader).toBeVisible();
-});
+test.describe("enters home address and alternate address", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/library-card/location?&newCard=true");
+  });
+  test("enters valid addresses", async ({ page }) => {
+    const addressPage = new AddressPage(page);
+    await expect(addressPage.addressHeading).toBeVisible();
+    await addressPage.streetAddressInput.fill(TEST_HOME_ADDRESS.street);
+    await addressPage.apartmentSuiteInput.fill(
+      TEST_HOME_ADDRESS.apartmentSuite
+    );
+    await addressPage.cityInput.fill(TEST_HOME_ADDRESS.city);
+    await addressPage.stateInput.fill(TEST_HOME_ADDRESS.state);
+    await addressPage.postalCodeInput.fill(TEST_HOME_ADDRESS.postalCode);
+    await addressPage.nextButton.click();
 
-test("should display the next and previous buttons", async ({ page }) => {
-  const addressVerificationPage = new AddressVerificationPage(page);
-  await expect(addressVerificationPage.previousButton).toBeVisible();
-  await expect(addressVerificationPage.nextButton).toBeVisible();
+    const alternateAddressPage = new AlternateAddressPage(page);
+    await expect(alternateAddressPage.addressHeading).toBeVisible();
+    await alternateAddressPage.streetAddressInput.fill(
+      TEST_ALTERNATE_ADDRESS.street
+    );
+    await alternateAddressPage.apartmentSuiteInput.fill(
+      TEST_ALTERNATE_ADDRESS.apartmentSuite
+    );
+    await alternateAddressPage.cityInput.fill(TEST_ALTERNATE_ADDRESS.city);
+    await alternateAddressPage.stateInput.fill(TEST_ALTERNATE_ADDRESS.state);
+    await alternateAddressPage.postalCodeInput.fill(
+      TEST_ALTERNATE_ADDRESS.postalCode
+    );
+    await alternateAddressPage.nextButton.click();
+
+    const addressVerificationPage = new AddressVerificationPage(page);
+    await expect(addressVerificationPage.homeAddressHeader).toBeVisible();
+    await expect(addressVerificationPage.homeAddressOption).toBeVisible();
+    await expect(addressVerificationPage.alternateAddressHeader).toBeVisible();
+    await expect(addressVerificationPage.alternateAddressOption).toBeVisible();
+  });
 });
