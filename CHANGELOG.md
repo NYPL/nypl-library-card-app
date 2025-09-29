@@ -4,6 +4,7 @@
 
 - Add Playwright tests to confirm elements on account page [SWIS-69](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-69)
 - `new` page Design system upgrade [SWIS-79](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-79)
+- `review` page Design system upgrade [SWIS-81](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-81)
 
 ### 1.2.6
 
