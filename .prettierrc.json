@@ -3,7 +3,6 @@
   "semi": true,
   "singleQuote": false,
   "bracketSpacing": true,
-  "jsxBracketSameLine": false,
   "arrowParens": "always",
   "endOfLine": "lf",
   "printWidth": 80
