@@ -13,8 +13,6 @@ jobs:
           ref: ${{ github.ref_name }}
 
       - name: Create QA tag
-        env:
-          TAG: qa-${{ github.sha::7 }}
         run: |
-          git tag "${TAG}"
-          git push origin "${TAG}"
+          git tag "qa-${GITHUB_SHA:0:8}"
+          git push origin "qa-${GITHUB_SHA:0:8}"
