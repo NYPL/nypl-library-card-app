@@ -14,7 +14,7 @@ jobs:
 
       - name: Create QA tag
         env:
-          TAG: qa-${{ github.sha }}
+          TAG: qa-${{ github.sha::7 }}
         run: |
-          git tag "${TAG:0:11}"
-          git push origin "${TAG:0:11}"
+          git tag "${TAG}"
+          git push origin "${TAG}"
