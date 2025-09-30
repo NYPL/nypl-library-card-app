@@ -251,21 +251,14 @@ const validatePersonalFormData = (initErrorObj, data) => {
   if (isEmpty(lastName)) {
     errorObj = { ...errorObj, lastName: errorMessages.lastName };
   }
-  const MAXLENGTHDATE = 10;
-  if (policyType === "webApplicant") {
-    if (
-      isEmpty(birthdate) ||
-      (birthdate.length <= MAXLENGTHDATE && !isDate(birthdate))
-    ) {
-      errorObj = {
-        ...errorObj,
-        birthdate: errorMessages.birthdate,
-      };
-    }
-  } else if (policyType === "simplye" && !ageGate) {
+  const DATE_MAX_LENGTH = 10;
+  if (
+    isEmpty(birthdate) ||
+    (birthdate.length <= DATE_MAX_LENGTH && !isDate(birthdate))
+  ) {
     errorObj = {
       ...errorObj,
-      ageGate: errorMessages.ageGate,
+      birthdate: errorMessages.birthdate,
     };
   }
   if (isEmpty(email) || !isEmail(email)) {
