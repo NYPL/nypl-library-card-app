@@ -1,0 +1,20 @@
+name: Create QA Tag
+
+on:
+  workflow_dispatch:
+
+jobs:
+  tag-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Create QA tag
+        env:
+          TAG: qa-${{ github.sha }}
+        run: |
+          git tag "${TAG:0:11}"
+          git push origin "${TAG:0:11}"
