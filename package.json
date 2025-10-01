@@ -16,7 +16,7 @@
     "cypress:open": "cypress open",
     "playwright": "npx playwright test",
     "prepare": "husky install",
-    "lint:check": "prettier --check ."
+    "lint": "eslint --fix"
   },
   "engines": {
     "node": ">=10.24.0"
