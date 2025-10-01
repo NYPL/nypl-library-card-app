@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { AddressPage } from "../pageobjects/address.page";
+import { TEST_HOME_ADDRESS } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/location?newCard=true");
@@ -57,5 +58,19 @@ test.describe("displays errors for invalid fields", () => {
     await addressPage.nextButton.click();
     await expect(addressPage.stateError).toBeVisible();
     await expect(addressPage.postalCodeError).toBeVisible();
+  });
+});
+
+test.describe("enters home address", () => {
+  test("enters valid home address", async ({ page }) => {
+    const addressPage = new AddressPage(page);
+    await expect(addressPage.addressHeading).toBeVisible();
+    await addressPage.streetAddressInput.fill(TEST_HOME_ADDRESS.street);
+    await addressPage.apartmentSuiteInput.fill(
+      TEST_HOME_ADDRESS.apartmentSuite
+    );
+    await addressPage.cityInput.fill(TEST_HOME_ADDRESS.city);
+    await addressPage.stateInput.fill(TEST_HOME_ADDRESS.state);
+    await addressPage.postalCodeInput.fill(TEST_HOME_ADDRESS.postalCode);
   });
 });
