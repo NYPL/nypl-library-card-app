@@ -6,6 +6,7 @@ import {
   Heading,
   List,
   Radio,
+  RadioGroup,
 } from "@nypl/design-system-react-components";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
@@ -165,11 +166,12 @@ function AddressVerificationContainer() {
     }
     const addressesLength = addresses.length;
     return (
-      <List
-        noStyling
-        variant="ul"
-        display="flex"
-        maxWidth={{ display: "inline-block" }}
+      <RadioGroup
+        name="radio-group"
+        labelText="address-radio-group"
+        showLabel={false}
+        layout="row"
+        $breakpoint-intermediate={{ layout: "column" }}
       >
         {addresses.map((address, idx) => {
           const selected = `${addressType}-${idx}`;
@@ -179,30 +181,30 @@ function AddressVerificationContainer() {
             addressesLength === 1 ? true : selected === selectedValue;
           const checkedClass = checked ? "checked" : "";
           return (
-            <li key={`${addressType}-${idx}`} className={checkedClass}>
-              <Radio
-                id={`${addressType}-${idx}`}
-                sx={styles.input}
-                {...register(`${addressType}-address-select`, {
-                  required: true,
-                })}
-                isChecked={checked}
-                onChange={onChange}
-                value={selected}
-                labelText={
+            <Radio
+              className={checkedClass}
+              key={`${addressType}-${idx}`}
+              id={`${addressType}-${idx}`}
+              sx={styles.input}
+              {...register(`${addressType}-address-select`, {
+                required: true,
+              })}
+              isChecked={checked}
+              onChange={onChange}
+              value={selected}
+              labelText={
+                <Box>
+                  <Box>{address.line1}</Box>
+                  {address.line2 && <Box>{address.line2}</Box>}
                   <Box>
-                    <Box>{address.line1}</Box>
-                    {address.line2 && <Box>{address.line2}</Box>}
-                    <Box>
-                      {address.city}, {address.state} {address.zip}
-                    </Box>
+                    {address.city}, {address.state} {address.zip}
                   </Box>
-                }
-              />
-            </li>
+                </Box>
+              }
+            />
           );
         })}
-      </List>
+      </RadioGroup>
     );
   };
 
