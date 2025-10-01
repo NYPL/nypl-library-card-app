@@ -22,14 +22,14 @@ import { useTranslation } from "next-i18next";
 
 const styles = {
   input: {
-    marginRight: "20px"
+    marginRight: "20px",
   },
 
   workAddressContainer: {
     borderTop: "1px solid",
     borderColor: "ui.gray.medium",
     paddingTop: "30px",
-  }
+  },
 };
 
 /**
@@ -165,7 +165,12 @@ function AddressVerificationContainer() {
     }
     const addressesLength = addresses.length;
     return (
-      <List noStyling variant="ul" display="flex" $breakpoint-intermediate={{ display: "inline-block" }}>
+      <List
+        noStyling
+        variant="ul"
+        display="flex"
+        maxWidth={{ display: "inline-block" }}
+      >
         {addresses.map((address, idx) => {
           const selected = `${addressType}-${idx}`;
           // If there's only one option, it's checked by default. Otherwise,
@@ -222,7 +227,9 @@ function AddressVerificationContainer() {
 
           {workAddress?.length > 0 && (
             <Box sx={styles.workAddressContainer}>
-              <Heading level="h3">{t("verifyAddress.workAddress")}</Heading>
+              <Heading level="h3" mb="l">
+                {t("verifyAddress.workAddress")}
+              </Heading>
 
               {renderMultipleAddresses(
                 workAddress,
