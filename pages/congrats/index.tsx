@@ -118,7 +118,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       ...(await serverSideTranslations(query?.lang?.toString() || "en", [
         "common",
       ])),
-      nextAppEnv: process.env.NEXT_PUBLIC_APP_ENV,
+      nextAppEnv: process.env.NEXT_PUBLIC_APP_ENV || null,
     },
   };
 };
