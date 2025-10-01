@@ -2,6 +2,14 @@
 
 ### Unreleased
 
+- Add Playwright tests to confirm elements on account page [SWIS-69](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-69)
+- `new` page Design system upgrade [SWIS-79](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-79)
+- `personal` page Design system upgrade [SWIS-80](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-80)
+- `review` page Design system upgrade [SWIS-81](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-81)
+- `location` and `workAddress` page Design system upgrade [SWIS-78](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-78)
+
+### 1.2.6
+
 - Playwright test for Step 1: Personal Information and error validation [SWIS-40](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-40)
 - Add Playwright tests to confirm elements on landing page [SWIS-39](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-39)
 - Add Playwright tests to confirm elements on location page and error validation [SWIS-42](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-42)
@@ -9,6 +17,8 @@
 - Clean up Playwright tests and folders [SWIS-56](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-56)
 - Upgrade nextjs to v14 [SWIS-33](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-33)
 - Upgrade nextjs to v15 [SWIS-55](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-55)
+- Add Playwright tests to confirm elements on alternate address page [SWIS-58](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-58)
+- Remove SimplyE reference on Success Page [SWIS-68](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-68)
 
 ### 1.2.5
 

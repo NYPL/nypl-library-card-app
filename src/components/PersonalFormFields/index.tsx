@@ -61,7 +61,7 @@ function PersonalFormFields({
       </FormRow>
       <FormRow id={`${id}-personalForm-2`}>
         <DSFormField>
-          <AgeFormFields policyType={agencyType || formValues.policyType} />
+          <AgeFormFields />
         </DSFormField>
       </FormRow>
       <FormRow id={`${id}-personalForm-3`}>

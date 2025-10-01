@@ -145,7 +145,6 @@
     },
     "nextSteps": {
       "title": "Demare ak Bibliyotèk Piblik New York la",
-      "explore": "<b>Eksplore Liv Elektwonik Bibliyotèk la</b><br />Telechaje SimplyE pou <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> oswa <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
       "borrow": "<b>Prete Liv ak Plis Bagay Toujou</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'> Konekte sou kont ou</a> epi konsilte katalòg la.",
       "updates": "<b>Jwenn Mizajou yo</b><br /><a href='https://www.nypl.org/enews'>Dekouvri tout sa Bibliyotèk la kapab ofri w.</a>",
       "more": "<b>Jwenn plis enfòmasyon.</b><br /><a href='https://www.nypl.org/discover-library-card'>Dekouvri tout bagay ou kapab fè ak kat Bibliyotèk ou an.</a>"
