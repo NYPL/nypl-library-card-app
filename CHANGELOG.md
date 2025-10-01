@@ -3,11 +3,22 @@
 ### Unreleased
 
 - Add Playwright tests to confirm elements on account page [SWIS-69](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-69)
-- `new` page Design system upgrade [SWIS-79](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-79)
-- `personal` page Design system upgrade [SWIS-80](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-80)
-- `review` page Design system upgrade [SWIS-81](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-81)
-- `location` and `workAddress` page Design system upgrade [SWIS-78](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-78)
-- `congrats` page Design system upgrade [SWIS-77](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-77)
+- Changed the baseUrl in playwright.config.ts [SWIS-87](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-87)
+- Add Playwright tests to confirm invalid value errors on address page [SWIS-63](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-63)
+- Add Playwright test to confirm address verification page [SWIS-54](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-54)
+- Add Playwright tests to confirm errors display on account page [SWIS-72](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-72)
+- Add Playwright test to confirm congrats page [SWIS-86](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-86)
+- Prettier updates [SWIS-96](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-96)
+- Remove duplicate Playwright files testing the address page
+- Add Playwright test to confirm user input on alternate address page [SWIS-91](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-91)
+- Add Playwright assertions to confirm headings display on personal information page [SWIS-99](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-99)
+- Add Playwright test to confirm user input for address verification page [SWIS-90](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-90)
+- Update to design system v4
+  - `new` page Design system upgrade [SWIS-79](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-79)
+  - `personal` page Design system upgrade [SWIS-80](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-80)
+  - `review` page Design system upgrade [SWIS-81](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-81)
+  - `location` and `workAddress` page Design system upgrade [SWIS-78](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-78)
+  - `congrats` page Design system upgrade [SWIS-77](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-77)
 
 ### 1.2.6
 
