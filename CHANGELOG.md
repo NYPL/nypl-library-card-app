@@ -14,6 +14,12 @@
 - Add Playwright test to confirm user input on alternate address page [SWIS-91](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-91)
 - Add Playwright assertions to confirm headings display on personal information page [SWIS-99](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-99)
 - Add Playwright test to confirm user input for address verification page [SWIS-90](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-90)
+- Update to design system v4
+  - `new` page Design system upgrade [SWIS-79](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-79)
+  - `personal` page Design system upgrade [SWIS-80](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-80)
+  - `review` page Design system upgrade [SWIS-81](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-81)
+  - `location` and `workAddress` page Design system upgrade [SWIS-78](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-78)
+  - `congrats` page Design system upgrade [SWIS-77](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-77)
 
 ### 1.2.6
 

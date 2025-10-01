@@ -85,11 +85,8 @@ describe("AccountFormFields", () => {
 
   test("renders username, password, verify password, and checkbox fields", () => {
     expect(
-      screen.getByRole("textbox", { name: "Username (Required)" })
+      screen.getByRole("textbox", { name: /Username \(Required\)/i })
     ).toBeInTheDocument();
-    // Password input types don't have roles so `getByRole` doesn't work.
-    // `getByLabelText(/Password/i)` is too generic and gets both instances and
-    // `getByLabelText(/Password Required/i)` doesn't find anything.
     expect(
       container.querySelector("input[type='password']")
     ).toBeInTheDocument();
@@ -119,10 +116,10 @@ describe("AccountFormFields", () => {
       container.querySelector("input[type='password']")
     ).not.toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Password (Required)" })
+      screen.getByRole("textbox", { name: "Password (required)" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Verify Password (Required)" })
+      screen.getByRole("textbox", { name: "Verify Password (required)" })
     ).toBeInTheDocument();
   });
 

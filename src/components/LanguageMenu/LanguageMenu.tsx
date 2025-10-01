@@ -25,16 +25,16 @@ const LanguageMenu = (): JSX.Element => {
 
   return (
     <>
-      <HorizontalRule bg="ui.gray.xx-dark" />
+      <HorizontalRule bg="ui.gray.xx-dark" my="s" />
       <List
         inline
         listItems={listItems}
         noStyling
-        type="ul"
+        variant="ul"
         flexWrap="wrap"
         justifyContent="center"
       />
-      <HorizontalRule bg="ui.gray.xx-dark" />
+      <HorizontalRule bg="ui.gray.xx-dark" my="s" />
     </>
   );
 };

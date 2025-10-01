@@ -56,19 +56,19 @@ describe("PersonalFormFields", () => {
 
   test("renders names, age, email, and newsletter fields", () => {
     expect(
-      screen.getByRole("textbox", { name: "First Name (Required)" })
+      screen.getByRole("textbox", { name: "First Name (required)" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Last Name (Required)" })
+      screen.getByRole("textbox", { name: "Last Name (required)" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Date of Birth (Required)" })
+      screen.getByRole("textbox", { name: "Date of Birth (required)" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Email Address (Required)" })
+      screen.getByRole("textbox", { name: "Email Address (required)" })
     ).toBeInTheDocument();
     expect(
-      screen.getByLabelText(
+      screen.getByText(
         "Yes, I would like to receive information about NYPL's programs and services"
       )
     ).toBeInTheDocument();

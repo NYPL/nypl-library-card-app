@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Heading } from "@nypl/design-system-react-components";
+import { Box, Heading } from "@nypl/design-system-react-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import React, { JSX, useEffect } from "react";
@@ -56,45 +56,50 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
   }
 
   return (
-    <div id="congratulations">
-      <Heading level="two">{t("confirmation.title")}</Heading>
+    <Box id="congratulations" mb="s">
+      <Heading mb="s">{t("confirmation.title")}</Heading>
       <ConfirmationGraphic />
-      <p>
+      <Box mb="s">
         <b>{t("confirmation.description.part1")}</b>
-      </p>
-      <p>
+      </Box>
+      <Box mb="s">
         <b
           dangerouslySetInnerHTML={{
             __html: t("confirmation.description.part2"),
           }}
         />
-      </p>
+      </Box>
 
       {temporary && (
-        <div
+        <Box
           dangerouslySetInnerHTML={{
             __html: t("confirmation.description.part3"),
           }}
         />
       )}
 
-      <Heading level="two">{t("confirmation.nextSteps.title")}</Heading>
-      <div
+      <Heading>{t("confirmation.nextSteps.title")}</Heading>
+      <Box
+        dangerouslySetInnerHTML={{
+          __html: t("confirmation.nextSteps.explore"),
+        }}
+      />
+      <Box
         dangerouslySetInnerHTML={{
           __html: loginHtml,
         }}
       />
-      <div
+      <Box
         dangerouslySetInnerHTML={{
           __html: t("confirmation.nextSteps.updates"),
         }}
       />
-      <div
+      <Box
         dangerouslySetInnerHTML={{
           __html: t("confirmation.nextSteps.more"),
         }}
       />
-    </div>
+    </Box>
   );
 }
 

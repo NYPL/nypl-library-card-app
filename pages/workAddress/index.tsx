@@ -15,6 +15,7 @@ import {
   generateNewToken,
 } from "../../src/utils/csrfUtils";
 import * as cookie from "../../src/utils/CookieUtils";
+import { Paragraph } from "../../src/components/Paragraph";
 interface WorkAddressPageProps {
   hasUserAlreadyRegistered?: boolean;
   csrfToken: string;
@@ -31,9 +32,9 @@ function WorkAddressPage({
   });
   return (
     <>
-      <Heading level="two">{t("location.workAddress.title")}</Heading>
-      <p>{t("location.workAddress.description.part1")}</p>
-      <p>{t("internationalInstructions")}</p>
+      <Heading level="h2">{t("location.workAddress.title")}</Heading>
+      <Paragraph>{t("location.workAddress.description.part1")}</Paragraph>
+      <Paragraph>{t("internationalInstructions")}</Paragraph>
       <WorkAddressContainer csrfToken={csrfToken} />
     </>
   );
