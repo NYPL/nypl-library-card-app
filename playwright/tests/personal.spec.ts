@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { PersonalPage } from "../pageobjects/personal.page";
+import { TEST_PATRON_INFO } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/personal?newCard=true");
@@ -14,6 +15,8 @@ test("Display personal information form", async ({ page }) => {
   await expect(personalPage.emailInput).toBeVisible();
   await expect(personalPage.dateOfBirthInput).toBeVisible();
   await expect(personalPage.checkBox).toBeVisible();
+  await expect(personalPage.alternateFormLink).toBeVisible();
+  await expect(personalPage.locationsLink).toBeVisible();
   await expect(personalPage.previousButton).toBeVisible();
   await expect(personalPage.nextButton).toBeVisible();
 });
@@ -63,4 +66,15 @@ test("error validation for birth date less than 13 years ago", async ({
   await personalPage.dateOfBirthInput.fill(minDate.toISOString().split("T")[0]);
   await personalPage.nextButton.click();
   await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
+});
+
+test("input patron's personal info into personal information form", async ({
+  page,
+}) => {
+  const personalPage = new PersonalPage(page);
+  await personalPage.firstNameInput.fill(TEST_PATRON_INFO.firstName);
+  await personalPage.lastNameInput.fill(TEST_PATRON_INFO.lastName);
+  await personalPage.emailInput.fill(TEST_PATRON_INFO.email);
+  await personalPage.dateOfBirthInput.fill(TEST_PATRON_INFO.dateOfbirth);
+  await personalPage.checkBox.check();
 });
