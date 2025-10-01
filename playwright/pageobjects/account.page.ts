@@ -5,9 +5,14 @@ export class AccountPage {
   readonly mainHeading: Locator; // displays on each page
   readonly stepHeading: Locator;
   readonly usernameInput: Locator;
+  readonly usernameError: Locator;
   readonly availableUsernameButton: Locator;
+  readonly availableUsername: Locator;
+  readonly unavailableUsernameError: Locator;
   readonly passwordInput: Locator;
+  readonly passwordError: Locator;
   readonly verifyPasswordInput: Locator;
+  readonly verifyPasswordError: Locator;
   readonly showPasswordCheckbox: Locator;
   readonly homeLibraryHeading: Locator;
   readonly selectHomeLibrary: Locator;
@@ -15,6 +20,7 @@ export class AccountPage {
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
   readonly acceptTermsCheckbox: Locator;
+  readonly acceptTermsError: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -33,18 +39,29 @@ export class AccountPage {
       name: "Username (Required)",
       exact: true,
     });
+    this.usernameError = page.getByText(
+      "Username must be between 5-25 alphanumeric characters."
+    );
     this.availableUsernameButton = page.getByRole("button", {
       name: "Check if username is available",
       exact: true,
     });
+    this.availableUsername = page.getByText("This username is available.");
+    this.unavailableUsernameError = page.getByText(
+      "This username is unavailable. Please try another."
+    );
     this.passwordInput = page.getByRole("textbox", {
       name: "Password (Required)",
       exact: true,
     });
+    this.passwordError = page.getByText(
+      "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)"
+    );
     this.verifyPasswordInput = page.getByRole("textbox", {
       name: "Verify Password (Required)",
       exact: true,
     });
+    this.verifyPasswordError = page.getByText("The two passwords don't match.");
     this.showPasswordCheckbox = page.getByRole("checkbox", {
       name: "Show Password",
       exact: true,
@@ -70,6 +87,9 @@ export class AccountPage {
       name: "Yes, I accept the terms and conditions.",
       exact: true,
     });
+    this.acceptTermsError = page.getByText(
+      "The Terms and Conditions must be checked."
+    );
     this.nextButton = page.getByRole("button", { name: "Next", exact: true });
     this.previousButton = page.getByRole("link", {
       name: "Previous",

@@ -14,7 +14,9 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "cypress:open": "cypress open",
-    "playwright": "npx playwright test"
+    "playwright": "npx playwright test",
+    "prepare": "husky install",
+    "lint:check": "prettier --check ."
   },
   "engines": {
     "node": ">=10.24.0"

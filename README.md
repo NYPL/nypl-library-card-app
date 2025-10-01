@@ -5,14 +5,13 @@ A JavaScript Application that allows NYPL patrons to request a library card and 
 | Table of Contents |                                                                   |
 | ----------------- | ----------------------------------------------------------------- |
 | 1.                | [Production Site and Version](#production-site-and-version)       |
-| 2.                | [Branch Statuses](#branch-statuses)                               |
-| 3.                | [Installation and Configuration](#installation-and-configuration) |
-| 4.                | [Deployment](#deployment)                                         |
-| 5.                | [Git Workflow](#git-workflow)                                     |
+| 2.                | [Installation and Configuration](#installation-and-configuration) |
+| 3.                | [Deployment](#deployment)                                         |
+| 4.                | [Git Workflow](#git-workflow)                                     |
+| 5.                | [CI/CD](#CI/CD)                                                   |
 | 6.                | [Internationalization](#internationalization)                     |
-| 7.                | [CI/CD](#CI/CD)                                                   |
-| 8.                | [Docker](#docker)                                                 |
-| 9.                | [Testing](#testing)                                               |
+| 7.                | [Docker](#docker)                                                 |
+| 8.                | [Testing](#testing)                                               |
 
 ## Production Site and Version
 
@@ -88,35 +87,60 @@ The `basePath` value is set to `/library-card`.
 
 ## Git Workflow
 
-Our branches (in order of stability are):
+We use a simplified GitFlow process with a single development branch and tag-based deployments.
 
-| Branch     | Environment | AWS Account      |
-| :--------- | :---------- | :--------------- |
-| main       | development | nypl-sandbox     |
-| qa         | qa          | nypl-digital-dev |
-| production | production  | nypl-digital-dev |
+### Branch Strategy
 
-The `main` branch and the `development` environment on `nypl-sandbox` is not currently being used. Only the deployments to `nypl-digital-dev` are being used.
+| Branch | Purpose                    | Deployment              |
+| ------ | -------------------------- | ----------------------- |
+| `main` | Primary development branch | All features merge here |
 
-### Cutting a feature branch
+**Note**: The previous `qa` and `production` branches have been retired in favor of tag-based deployments.
 
-1. Feature branches are cut off from `main`
-2. Once the feature branch is ready to be merged, file a pull request of the feature branch _into_ `main`.
+For feature branch naming, we recommend using a relevant Jira ticket as a prefix, e.g.
+`JIRA-321/short-description`.
 
-`main` ==gets merged to==> `qa` ==gets merged into==> `production`.
+### Deployment Process
 
-The `qa` branch should be what's running in the QA environment.
-The `production` branch should be what's running in the production environment.
+Deployments are triggered by creating and pushing tags with specific naming conventions:
+
+#### Deploy to QA Environment
+
+```bash
+git tag qa-v1.2.3
+git push origin qa-v1.2.3
+```
+
+#### Deploy to Production Environment
+
+This tag should be created from a release branch, and only after QA validation is complete.
+
+```bash
+git tag production-v1.2.3
+git push origin production-v1.2.3
+```
+
+### Tag Naming Convention
+
+- **QA tags**: `qa-v1.2.3`, `qa-v1.2.3-hotfix`, `qa-v1.2.4-rc1`
+- **Production tags**: `production-v1.2.3`, `production-v1.2.3-hotfix`
+
+## CI/CD
+
+Our CI/CD pipeline uses GitHub Actions with multiple specialized workflows to ensure code quality and reliable deployments.
+
+### Workflow Overview
+
+| Workflow                 | Purpose                          | Triggers                                     |
+| ------------------------ | -------------------------------- | -------------------------------------------- |
+| **Unit Tests**           | Unit tests and linting           | PRs, pushes to `main`, called by deployments |
+| **Playwright Tests**     | End-to-end browser testing       | PRs, pushes to `main`, called by deployments |
+| **Deploy to QA**         | Deploy to QA environment         | `qa-*` tags                                  |
+| **Deploy to Production** | Deploy to production environment | `production-*` tags                          |
 
 ## Internationalization
 
 The application is internationalized using the `next-i18next` package. For more information, see the [MULTILINGUAL_FEATURE.md](./MULTILINGUAL_FEATURE.md) file.
-
-## CI/CD
-
-Subsequent deployments are accomplished via pushing code into `qa` and `production` branches, which triggers GitHub Actions to build, test, and deploy.
-
-Configuration can be adjusted via `.github/workflows/ci.yml`, located at the root directory of this code repository. GitHub Actions is set to watch `qa` and `production` branches and waits for code push, e.g. `git push origin qa` will trigger GitHub Actions to build. When build and test are successful, GitHub Actions will deploy to specified ECS instance.
 
 ## Docker
 
