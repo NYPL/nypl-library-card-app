@@ -50,11 +50,22 @@ const ConfirmationContainer = () => {
           width="939"
         />
         <div className="background-lion">
-          <GridItem id="member-name" color={"white"} fontSize={"0.6em"} $breakpoint-intermediate={{ fontsize: "0.8em" }} $breakpoint-large={{ fontsize: "0.7em" }}>
+          <GridItem
+            id="member-name"
+            color={"white"}
+            fontSize={"0.6em"}
+            $breakpoint-intermediate={{ fontsize: "0.8em" }}
+            $breakpoint-large={{ fontsize: "0.7em" }}
+          >
             {t("confirmation.graphic.memberName")}
             <div className="content">{name}</div>
           </GridItem>
-          <GridItem color={"white"} fontSize={"0.6em"} $breakpoint-intermediate={{ fontsize: "0.8em" }} $breakpoint-large={{ fontsize: "0.7em" }}>
+          <GridItem
+            color={"white"}
+            fontSize={"0.6em"}
+            $breakpoint-intermediate={{ fontsize: "0.8em" }}
+            $breakpoint-large={{ fontsize: "0.7em" }}
+          >
             <Logo decorative className="nypl-svg" name="nyplFullWhite" />
           </GridItem>
           <div className="grid-item barcode-container">
@@ -62,7 +73,13 @@ const ConfirmationContainer = () => {
             <div className="barcode">{barcode}</div>
           </div>
 
-          <GridItem id="issued" color={"white"} fontSize={"0.6em"} $breakpoint-intermediate={{ fontsize: "0.8em" }} $breakpoint-large={{ fontsize: "0.7em" }}>
+          <GridItem
+            id="issued"
+            color={"white"}
+            fontSize={"0.6em"}
+            $breakpoint-intermediate={{ fontsize: "0.8em" }}
+            $breakpoint-large={{ fontsize: "0.7em" }}
+          >
             {t("confirmation.graphic.issued")}
             <div className="content">{new Date().toLocaleDateString()}</div>
           </GridItem>

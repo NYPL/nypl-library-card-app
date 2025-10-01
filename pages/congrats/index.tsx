@@ -56,8 +56,8 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
   }
 
   return (
-    <Box id="congratulations" margin-bottom="10px">
-      <Heading margin-bottom="10px">{t("confirmation.title")}</Heading>
+    <Box id="congratulations" mb="s">
+      <Heading mb="s">{t("confirmation.title")}</Heading>
       <ConfirmationGraphic />
       <Box mb="s">
         <b>{t("confirmation.description.part1")}</b>
