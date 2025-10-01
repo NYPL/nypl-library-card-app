@@ -21,12 +21,6 @@ import { createQueryParams } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
 
 const styles = {
-  label: {
-    alignItems: "center",
-    padding: "30px",
-    cursor: "pointer",
-  },
-
   input: {
     marginRight: "20px"
   },
@@ -183,7 +177,7 @@ function AddressVerificationContainer() {
             <li key={`${addressType}-${idx}`} className={checkedClass}>
               <Radio
                 id={`${addressType}-${idx}`}
-                className={`radio-input ${styles.input}`}
+                sx={styles.input}
                 {...register(`${addressType}-address-select`, {
                   required: true,
                 })}
