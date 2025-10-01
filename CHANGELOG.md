@@ -7,12 +7,14 @@
 - Add Playwright tests to confirm invalid value errors on address page [SWIS-63](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-63)
 - Add Playwright test to confirm address verification page [SWIS-54](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-54)
 - Add Playwright tests to confirm errors display on account page [SWIS-72](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-72)
+- Add Playwright test to input patron's personal info [SWIS-85](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-85)
 - Add Playwright test to confirm congrats page [SWIS-86](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-86)
 - Prettier updates [SWIS-96](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-96)
 - Remove duplicate Playwright files testing the address page
 - Add Playwright test to confirm user input on alternate address page [SWIS-91](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-91)
 - Add Playwright assertions to confirm headings display on personal information page [SWIS-99](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-99)
 - Add Playwright test to confirm user input for address verification page [SWIS-90](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-90)
+- Add Playwright test to confirm alternative form and location link on personal page [SWIS-102](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-102)
 - Enable eslint 9 [SWIS-94](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-94)
 
 ### 1.2.6
