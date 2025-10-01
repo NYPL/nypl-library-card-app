@@ -1,4 +1,5 @@
 import {
+  Box,
   Form,
   FormField as DSFormField,
   FormRow,
@@ -13,12 +14,29 @@ import { useForm } from "react-hook-form";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import { Address, AddressResponse } from "../../../src/interfaces";
 import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
-import styles from "./AddressVerificationContainer.module.css";
 
 import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
 import { useTranslation } from "next-i18next";
+
+const styles = {
+  label: {
+    alignItems: "center",
+    padding: "30px",
+    cursor: "pointer",
+  },
+
+  input: {
+    marginRight: "20px"
+  },
+
+  workAddressContainer: {
+    borderTop: "1px solid",
+    borderColor: "ui.gray.medium",
+    paddingTop: "30px",
+  }
+};
 
 /**
  * AddressVerificationContainer
@@ -153,7 +171,7 @@ function AddressVerificationContainer() {
     }
     const addressesLength = addresses.length;
     return (
-      <List className={styles.multipleAddressList} noStyling type="ul">
+      <List noStyling variant="ul" display="flex" $breakpoint-intermediate={{ display: "inline-block" }}>
         {addresses.map((address, idx) => {
           const selected = `${addressType}-${idx}`;
           // If there's only one option, it's checked by default. Otherwise,
@@ -173,13 +191,13 @@ function AddressVerificationContainer() {
                 onChange={onChange}
                 value={selected}
                 labelText={
-                  <div>
-                    <div>{address.line1}</div>
-                    {address.line2 && <div>{address.line2}</div>}
-                    <div>
+                  <Box>
+                    <Box>{address.line1}</Box>
+                    {address.line2 && <Box>{address.line2}</Box>}
+                    <Box>
                       {address.city}, {address.state} {address.zip}
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
                 }
               />
             </li>
@@ -198,7 +216,7 @@ function AddressVerificationContainer() {
     >
       <FormRow>
         <DSFormField>
-          <Heading id="verify-address-heading" level="three">
+          <Heading id="verify-address-heading" level="h3">
             {t("verifyAddress.homeAddress")}
           </Heading>
           {renderMultipleAddresses(
@@ -209,8 +227,8 @@ function AddressVerificationContainer() {
           )}
 
           {workAddress?.length > 0 && (
-            <div className={styles.workAddressContainer}>
-              <Heading level="three">{t("verifyAddress.workAddress")}</Heading>
+            <Box sx={styles.workAddressContainer}>
+              <Heading level="h3">{t("verifyAddress.workAddress")}</Heading>
 
               {renderMultipleAddresses(
                 workAddress,
@@ -218,7 +236,7 @@ function AddressVerificationContainer() {
                 workAddressSelect,
                 onChangeWork
               )}
-            </div>
+            </Box>
           )}
         </DSFormField>
       </FormRow>
