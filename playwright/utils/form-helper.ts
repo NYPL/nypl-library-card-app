@@ -12,13 +12,13 @@ export async function fillPersonalInfo(page) {
   await page.checkBox.check();
 }
 
-// export async function fillHomeAddress(page, address) {
-//   await page.fill('input[name="streetAddress"]', address.street);
-//   await page.fill('input[name="apartmentSuite"]', address.apartmentSuite);
-//   await page.fill('input[name="city"]', address.city);
-//   await page.fill('input[name="state"]', address.state);
-//   await page.fill('input[name="postalCode"]', address.postalCode);
-// }
+export async function fillHomeAddress(page) {
+  await page.streetAddressInput.fill(TEST_HOME_ADDRESS.street);
+  await page.apartmentSuiteInput.fill(TEST_HOME_ADDRESS.apartmentSuite);
+  await page.cityInput.fill(TEST_HOME_ADDRESS.city);
+  await page.stateInput.fill(TEST_HOME_ADDRESS.state);
+  await page.postalCodeInput.fill(TEST_HOME_ADDRESS.postalCode);
+}
 
 export async function fillAlternateAddress(page) {
   await page.streetAddressInput.fill(TEST_ALTERNATE_ADDRESS.street);
