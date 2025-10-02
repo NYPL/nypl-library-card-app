@@ -27,6 +27,7 @@ test.describe("displays elements on Confirm Your Information page", () => {
 });
 
 test("displays patron information", async ({ page }) => {
+  await page.goto("/library-card/personal?newCard=true");
   const personalPage = new PersonalPage(page);
   await fillPersonalInfo(personalPage);
   personalPage.nextButton.click();
