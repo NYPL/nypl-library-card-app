@@ -11,7 +11,9 @@ export class ReviewPage {
   readonly lastNameHeading: Locator;
   readonly lastNameValue: Locator;
   readonly dateOfBirthHeading: Locator;
+  readonly dateOfBirthValue: Locator;
   readonly emailHeading: Locator;
+  readonly emailValue: Locator;
   readonly receiveInfoHeading: Locator;
   readonly receiveInfoChoice: Locator;
 
@@ -38,7 +40,11 @@ export class ReviewPage {
       exact: true,
     });
     this.dateOfBirthHeading = page.getByText("Date of Birth", { exact: true });
+    this.dateOfBirthValue = page.getByText(TEST_PATRON_INFO.dateOfBirth, {
+      exact: true,
+    });
     this.emailHeading = page.getByText("Email Address", { exact: true });
+    this.emailValue = page.getByText(TEST_PATRON_INFO.email, { exact: true });
     this.receiveInfoHeading = page.getByText(
       "Receive information about NYPL's programs and services",
       { exact: true }

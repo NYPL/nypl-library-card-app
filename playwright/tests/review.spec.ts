@@ -67,6 +67,8 @@ test.describe("enters patron information and addresses flow", () => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.firstNameValue).toBeVisible();
     await expect(reviewPage.lastNameValue).toBeVisible();
+    await expect(reviewPage.dateOfBirthValue).toBeVisible();
+    await expect(reviewPage.emailValue).toBeVisible();
     await expect(reviewPage.receiveInfoChoice).toBeVisible();
   });
 });
