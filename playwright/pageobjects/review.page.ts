@@ -5,6 +5,12 @@ export class ReviewPage {
   readonly mainHeading: Locator; // displays on each page
   readonly stepHeading: Locator;
   readonly personalInfoHeading: Locator;
+  readonly firstNameHeading: Locator;
+  readonly lastNameHeading: Locator;
+  readonly dateOfBirthHeading: Locator;
+  readonly emailHeading: Locator;
+  readonly receiveInfoHeading: Locator;
+  readonly receiveInfoChoice: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -20,5 +26,14 @@ export class ReviewPage {
       name: "Personal Information",
       level: 3,
     });
+    this.firstNameHeading = page.getByText("First Name", { exact: true });
+    this.lastNameHeading = page.getByText("Last Name", { exact: true });
+    this.dateOfBirthHeading = page.getByText("Date of Birth", { exact: true });
+    this.emailHeading = page.getByText("Email Address", { exact: true });
+    this.receiveInfoHeading = page.getByText(
+      "Receive information about NYPL's programs and services",
+      { exact: true }
+    );
+    this.receiveInfoChoice = page.getByText("Yes", { exact: true });
   }
 }
