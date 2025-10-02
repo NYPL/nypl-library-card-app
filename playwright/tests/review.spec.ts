@@ -5,7 +5,6 @@ import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
 import { AccountPage } from "../pageobjects/account.page";
 import { ReviewPage } from "../pageobjects/review.page";
-import { TEST_PATRON_INFO } from "../utils/constants";
 import {
   fillPersonalInfo,
   fillHomeAddress,
@@ -40,21 +39,21 @@ test.describe("enters patron information and addresses flow", () => {
     await page.goto("/library-card/personal?newCard=true");
     const personalPage = new PersonalPage(page);
     await fillPersonalInfo(personalPage);
-    personalPage.nextButton.click();
+    await personalPage.nextButton.click();
 
     const addressPage = new AddressPage(page);
     await expect(addressPage.addressHeading).toBeVisible();
     await fillHomeAddress(addressPage);
-    addressPage.nextButton.click();
+    await addressPage.nextButton.click();
 
     const alternateAddressPage = new AlternateAddressPage(page);
     await expect(alternateAddressPage.stepHeading).toBeVisible();
     await fillAlternateAddress(alternateAddressPage);
-    alternateAddressPage.nextButton.click();
+    await alternateAddressPage.nextButton.click();
 
     const addressVerificationPage = new AddressVerificationPage(page);
     await expect(addressVerificationPage.stepHeader).toBeVisible();
-    addressVerificationPage.nextButton.click();
+    await addressVerificationPage.nextButton.click();
 
     const accountPage = new AccountPage(page);
     await expect(accountPage.stepHeading).toBeVisible();
@@ -62,7 +61,7 @@ test.describe("enters patron information and addresses flow", () => {
     await accountPage.passwordInput.fill("TestPassword123!");
     await accountPage.verifyPasswordInput.fill("TestPassword123!");
     await accountPage.acceptTermsCheckbox.check();
-    accountPage.nextButton.click();
+    await accountPage.nextButton.click();
 
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.firstNameValue).toBeVisible();
