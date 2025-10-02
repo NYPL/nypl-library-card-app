@@ -1,8 +1,16 @@
 import { test, expect } from "@playwright/test";
 import { PersonalPage } from "../pageobjects/personal.page";
+import { AddressPage } from "../pageobjects/address.page";
+import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
+import { AddressVerificationPage } from "../pageobjects/address-verification.page";
+import { AccountPage } from "../pageobjects/account.page";
 import { ReviewPage } from "../pageobjects/review.page";
 import { TEST_PATRON_INFO } from "../utils/constants";
-import { fillPersonalInfo } from "../utils/form-helper";
+import {
+  fillPersonalInfo,
+  fillHomeAddress,
+  fillAlternateAddress,
+} from "../utils/form-helper";
 
 test.describe("displays elements on Confirm Your Information page", () => {
   test.beforeEach(async ({ page }) => {
@@ -26,14 +34,39 @@ test.describe("displays elements on Confirm Your Information page", () => {
   });
 });
 
-test("displays patron information", async ({ page }) => {
-  await page.goto("/library-card/personal?newCard=true");
-  const personalPage = new PersonalPage(page);
-  await fillPersonalInfo(personalPage);
-  personalPage.nextButton.click();
+test.describe("enters patron information and addresses flow", () => {
+  test("displays patron information", async ({ page }) => {
+    test.setTimeout(60000);
+    await page.goto("/library-card/personal?newCard=true");
+    const personalPage = new PersonalPage(page);
+    await fillPersonalInfo(personalPage);
+    personalPage.nextButton.click();
 
-  await page.goto("/library-card/review?newCard=true");
-  const reviewPage = new ReviewPage(page);
-  // await expect(page.TEST_PATRON_INFO.firstName).toBeVisible();
-  await expect(reviewPage.receiveInfoChoice).toBeVisible();
+    const addressPage = new AddressPage(page);
+    await expect(addressPage.addressHeading).toBeVisible();
+    await fillHomeAddress(addressPage);
+    addressPage.nextButton.click();
+
+    const alternateAddressPage = new AlternateAddressPage(page);
+    await expect(alternateAddressPage.stepHeading).toBeVisible();
+    await fillAlternateAddress(alternateAddressPage);
+    alternateAddressPage.nextButton.click();
+
+    const addressVerificationPage = new AddressVerificationPage(page);
+    await expect(addressVerificationPage.stepHeader).toBeVisible();
+    addressVerificationPage.nextButton.click();
+
+    const accountPage = new AccountPage(page);
+    await expect(accountPage.stepHeading).toBeVisible();
+    await accountPage.usernameInput.fill("TestUser10225");
+    await accountPage.passwordInput.fill("TestPassword123!");
+    await accountPage.verifyPasswordInput.fill("TestPassword123!");
+    await accountPage.acceptTermsCheckbox.check();
+    accountPage.nextButton.click();
+
+    const reviewPage = new ReviewPage(page);
+    await expect(reviewPage.firstNameValue).toBeVisible();
+    await expect(reviewPage.lastNameValue).toBeVisible();
+    await expect(reviewPage.receiveInfoChoice).toBeVisible();
+  });
 });
