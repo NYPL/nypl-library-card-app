@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PersonalPage } from "../pageobjects/personal.page";
 import { TEST_PATRON_INFO } from "../utils/constants";
+import { fillPersonalInfo } from "../utils/form-helper";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/personal?newCard=true");
@@ -72,9 +73,15 @@ test("input patron's personal info into personal information form", async ({
   page,
 }) => {
   const personalPage = new PersonalPage(page);
-  await personalPage.firstNameInput.fill(TEST_PATRON_INFO.firstName);
-  await personalPage.lastNameInput.fill(TEST_PATRON_INFO.lastName);
-  await personalPage.emailInput.fill(TEST_PATRON_INFO.email);
-  await personalPage.dateOfBirthInput.fill(TEST_PATRON_INFO.dateOfbirth);
-  await personalPage.checkBox.check();
+  await fillPersonalInfo(personalPage);
+  await expect(personalPage.firstNameInput).toHaveValue(
+    TEST_PATRON_INFO.firstName
+  );
+  await expect(personalPage.lastNameInput).toHaveValue(
+    TEST_PATRON_INFO.lastName
+  );
+  await expect(personalPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
+  await expect(personalPage.dateOfBirthInput).toHaveValue(
+    TEST_PATRON_INFO.dateOfBirth
+  );
 });
