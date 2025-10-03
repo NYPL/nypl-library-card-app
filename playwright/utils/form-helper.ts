@@ -1,4 +1,3 @@
-import { Locator } from "@playwright/test";
 import { PersonalPage } from "../pageobjects/personal.page";
 import { AddressPage } from "../pageobjects/address.page";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
@@ -7,6 +6,7 @@ import {
   TEST_HOME_ADDRESS,
   TEST_ALTERNATE_ADDRESS,
 } from "./constants";
+import { AddressFormPage, AddressData } from "./types";
 
 export async function fillPersonalInfo(page: PersonalPage) {
   await page.firstNameInput.fill(TEST_PATRON_INFO.firstName);
@@ -14,22 +14,6 @@ export async function fillPersonalInfo(page: PersonalPage) {
   await page.emailInput.fill(TEST_PATRON_INFO.email);
   await page.dateOfBirthInput.fill(TEST_PATRON_INFO.dateOfBirth);
   await page.checkBox.check();
-}
-
-interface AddressFormPage {
-  streetAddressInput: Locator;
-  apartmentSuiteInput: Locator;
-  cityInput: Locator;
-  stateInput: Locator;
-  postalCodeInput: Locator;
-}
-
-interface AddressData {
-  street: string;
-  apartmentSuite: string;
-  city: string;
-  state: string;
-  postalCode: string;
 }
 
 async function fillAddress(page: AddressFormPage, addressData: AddressData) {
