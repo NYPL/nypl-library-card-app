@@ -20,3 +20,8 @@ export const TEST_ALTERNATE_ADDRESS = {
   state: "NY",
   postalCode: "10018",
 };
+
+export const TEST_CUSTOMIZE_ACCOUNT = {
+  username: "testuser3000",
+  password: "Test@1234",
+};
