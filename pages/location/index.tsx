@@ -41,7 +41,7 @@ function AddressPage({
   const router = useRouter();
   useEffect(() => {
     redirectIfUserHasRegistered(hasUserAlreadyRegistered, router);
-  });
+  }, [router]);
   return (
     <>
       <Heading level="two">{t("location.title")}</Heading>

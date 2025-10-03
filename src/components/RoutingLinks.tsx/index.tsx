@@ -1,9 +1,9 @@
 import React, { JSX } from "react";
-import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
 import aaUtils from "../../externals/aaUtils";
 import styles from "./RoutingLinks.module.css";
+import Link from "next/link";
 
 export interface LinkType {
   url: string;

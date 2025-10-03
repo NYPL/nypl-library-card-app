@@ -113,8 +113,8 @@ function ReviewFormContainer({ csrfToken }) {
       <Button
         buttonType="primary"
         id="editAddressButton"
-        onClick={() => {
-          router.push(`/location?${queryStr}`);
+        onClick={async () => {
+          await router.push(`/location?${queryStr}`);
         }}
       >
         {t("button.edit")}
@@ -172,7 +172,7 @@ function ReviewFormContainer({ csrfToken }) {
         ...getValues(),
         csrfToken,
       })
-      .then((response) => {
+      .then(async (response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
 
@@ -183,7 +183,7 @@ function ReviewFormContainer({ csrfToken }) {
           locationId: formValues.homeLibraryCode,
           locationName: findLibraryName(formValues.homeLibraryCode),
         });
-        router.push(`/congrats?${queryStr}`);
+        await router.push(`/congrats?${queryStr}`);
       })
       .catch((error) => {
         NRError(
@@ -204,9 +204,9 @@ function ReviewFormContainer({ csrfToken }) {
             value: commonAPIErrors.errorValidatingToken,
           });
           // After a while, remove the errors and redirect to the home page.
-          setTimeout(() => {
+          setTimeout(async () => {
             dispatch({ type: "SET_FORM_ERRORS", value: null });
-            router.push("/new");
+            await router.push("/new");
           }, 2500);
         } else {
           // There are server-side errors! Display them to the user
