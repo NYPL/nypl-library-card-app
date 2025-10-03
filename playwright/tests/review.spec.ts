@@ -35,7 +35,7 @@ test.describe("displays elements on Confirm Your Information page", () => {
 
 test.describe("enters patron information and addresses flow", () => {
   test("displays patron information", async ({ page }) => {
-    test.setTimeout(60000);
+    // test.setTimeout(60000);
     await page.goto("/library-card/personal?newCard=true");
     const personalPage = new PersonalPage(page);
     await fillPersonalInfo(personalPage);
