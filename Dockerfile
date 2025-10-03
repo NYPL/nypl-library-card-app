@@ -1,4 +1,3 @@
-# Install dependencies only when needed
 FROM node:20-alpine AS builder
 RUN apk add --no-cache libc6-compat
 
@@ -17,13 +16,10 @@ COPY . .
 # expose the git SHA and branch as env vars
 # we use the same names that vercel uses for cross-compatibility in deployment
 ARG NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
-ARG NEXT_PUBLIC_CM_URL
 ARG NEXT_PUBLIC_ADOBE_ANALYTICS_URL
-ARG SENDGRID_API_KEY
 ARG NEW_RELIC_API_KEY
 ARG NEW_RELIC_APP_NAME
 ARG NEW_RELIC_LICENSE_KEY
-ARG RELEASE_STAGE
 
 RUN npm run build
 

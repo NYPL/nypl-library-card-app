@@ -22,11 +22,13 @@ import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 import aaUtils from "../src/externals/aaUtils";
 import Script from "next/script";
-
+import pkg from "../package.json";
 interface MyAppProps {
   Component: any;
   pageProps: any;
 }
+
+console.info("App Version: ", pkg.version);
 
 function MyApp({ Component, pageProps }: MyAppProps) {
   const router = useRouter();

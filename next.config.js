@@ -2,7 +2,9 @@ require("newrelic");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { i18n } = require("./next-i18next.config");
 
-const PROD_BUILD_ID = "production-1.2.6-1";
+const PROD_BUILD_ID = "production-1.2.6-2";
+
+console.info("PROD_BUILD_ID: ", PROD_BUILD_ID);
 
 module.exports = {
   basePath: "/library-card",
