@@ -14,11 +14,13 @@ const initState: FormData = {
   } as FormInputData,
   addressesResponse: {} as AddressesResponse,
 };
-const contextWrapper = () => ({ children }) => (
-  <FormDataContextProvider initState={initState}>
-    {children}
-  </FormDataContextProvider>
-);
+const contextWrapper =
+  () =>
+  ({ children }) => (
+    <FormDataContextProvider initState={initState}>
+      {children}
+    </FormDataContextProvider>
+  );
 
 describe("FormDataContext", () => {
   test("exposes a context `value` prop that has a function and a value object", () => {

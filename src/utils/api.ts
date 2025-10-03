@@ -358,6 +358,7 @@ export async function callPatronAPI(
   if ((patronData as ProblemDetail).status === 400) {
     logger.error("Invalid patron data");
     logger.error("Patron data", patronData);
+    // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
     return Promise.reject(patronData);
   }
 

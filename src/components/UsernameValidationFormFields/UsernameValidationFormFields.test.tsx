@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { axe } from "jest-axe";
@@ -29,8 +28,7 @@ jest.mock("react-i18next", () => {
       selectLibrary: "Select a home library:",
       termsAndCondition: {
         label: "Yes, I accept the terms and conditions.",
-        text:
-          " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>.",
+        text: " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>.",
       },
       errorMessage: {
         username: "Username must be between 5-25 alphanumeric characters.",
@@ -167,6 +165,7 @@ describe("UsernameValidationFormFields", () => {
     const errorMessage = "This username is not available.";
     // The API will return a 400 error.
     axios.post.mockImplementation(() =>
+      // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
       Promise.reject({ response: { data: { message: errorMessage } } })
     );
     const mockWatch = jest.fn().mockReturnValue(true);
@@ -262,7 +261,7 @@ describe("UsernameValidationFormFields", () => {
       </TestProviderWrapper>
     );
     // Casting the returned value so we can access `value`.
-    const input = screen.getByRole("textbox") as HTMLInputElement;
+    const input = screen.getByRole("textbox");
     expect(input).toBeInTheDocument();
     await act(async () =>
       fireEvent.change(input, { target: { value: invalid } })

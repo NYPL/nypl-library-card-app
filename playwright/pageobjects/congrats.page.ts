@@ -18,8 +18,7 @@ export class CongratsPage {
       level: 1,
     });
     this.stepHeading = page.getByRole("heading", {
-      name:
-        "Congratulations! You now have a digital New York Public Library card.",
+      name: "Congratulations! You now have a digital New York Public Library card.",
       level: 2,
     });
 

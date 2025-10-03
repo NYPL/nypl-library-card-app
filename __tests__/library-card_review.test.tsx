@@ -64,7 +64,7 @@ describe("ReviewPage", () => {
   });
 
   describe("redirects", () => {
-    test("redirects if user has already logged in", async () => {
+    test("redirects if user has already logged in", () => {
       render(
         <TestProviderWrapper>
           <ReviewPage hasUserAlreadyRegistered={true} />

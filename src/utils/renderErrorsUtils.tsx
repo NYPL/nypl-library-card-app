@@ -69,7 +69,7 @@ export function createUsernameAnchor(detail, lang = "en") {
  * Returns all the messages as an array.
  */
 export function renderErrorElements(errorObj, lang = "en") {
-  const errorMessages = [];
+  const errorMessages: React.JSX.Element[] = [];
   const { address, ...errors } = errorObj;
 
   Object.keys(errors).forEach((key) => {

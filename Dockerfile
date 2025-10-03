@@ -5,7 +5,7 @@ FROM node:20-alpine as production
 # nypl/dgx-header-component package.
 RUN apk add git
 
-WORKDIR /
+WORKDIR /app
 
 # Set environment variables. NODE_ENV is set early because we
 # want to use it when running `npm install` and `npm run build`.
@@ -19,7 +19,7 @@ COPY package-lock.json ./
 RUN npm ci --legacy-peer-deps
 
 # Copy the app files.
-COPY . ./
+COPY . .
 
 EXPOSE $PORT
 
