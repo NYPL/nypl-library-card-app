@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
-import { AddressVerificationPage } from "../pageobjects/address-verification.page";
 import { TEST_ALTERNATE_ADDRESS } from "../utils/constants";
+import { fillAlternateAddress } from "../utils/form-helper";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/workAddress?newCard=true");
@@ -34,22 +34,21 @@ test.describe("displays elements on Alternate Address page", () => {
 test.describe("enters alternate address", () => {
   test("enters valid alternate address", async ({ page }) => {
     const alternateAddressPage = new AlternateAddressPage(page);
-    await expect(alternateAddressPage.addressHeading).toBeVisible();
-    await alternateAddressPage.streetAddressInput.fill(
+    await fillAlternateAddress(alternateAddressPage);
+    await expect(alternateAddressPage.streetAddressInput).toHaveValue(
       TEST_ALTERNATE_ADDRESS.street
     );
-    await alternateAddressPage.apartmentSuiteInput.fill(
+    await expect(alternateAddressPage.apartmentSuiteInput).toHaveValue(
       TEST_ALTERNATE_ADDRESS.apartmentSuite
     );
-    await alternateAddressPage.cityInput.fill(TEST_ALTERNATE_ADDRESS.city);
-    await alternateAddressPage.stateInput.fill(TEST_ALTERNATE_ADDRESS.state);
-    await alternateAddressPage.postalCodeInput.fill(
+    await expect(alternateAddressPage.cityInput).toHaveValue(
+      TEST_ALTERNATE_ADDRESS.city
+    );
+    await expect(alternateAddressPage.stateInput).toHaveValue(
+      TEST_ALTERNATE_ADDRESS.state
+    );
+    await expect(alternateAddressPage.postalCodeInput).toHaveValue(
       TEST_ALTERNATE_ADDRESS.postalCode
     );
-    await alternateAddressPage.nextButton.click();
-
-    const addressVerificationPage = new AddressVerificationPage(page);
-    await expect(addressVerificationPage.alternateAddressHeader).toBeVisible();
-    await expect(addressVerificationPage.alternateAddressOption).toBeVisible();
   });
 });

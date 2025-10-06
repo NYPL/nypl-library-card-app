@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { useEffect } from "react";
 import "@nypl/design-system-react-components/dist/styles.css";
 import "../src/styles/main.scss";
@@ -42,6 +41,10 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   useEffect(() => {
     if (!i18n || !i18n.dir) return;
     let lang = router.query.lang || "en";
+    if (Array.isArray(lang) && lang.length > 0) {
+      lang = lang[0];
+    }
+
     if (lang === "zhcn") {
       lang = "zh-cn";
     }

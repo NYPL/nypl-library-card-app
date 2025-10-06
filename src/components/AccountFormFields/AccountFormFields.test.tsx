@@ -38,8 +38,7 @@ jest.mock("react-i18next", () => {
       },
       termsAndCondition: {
         label: "Yes, I accept the terms and conditions.",
-        text:
-          "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>.",
+        text: "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>.",
       },
       errorMessage: {
         username: "Username must be between 5-25 alphanumeric characters.",
@@ -100,7 +99,7 @@ describe("AccountFormFields", () => {
   });
 
   test("renders username, password, verify password, and checkbox fields", async () => {
-    const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
+    const checkbox = screen.getByRole("checkbox");
 
     // Unchecked by default.
     // By default, the password and verify password fields are "password" types.
@@ -110,7 +109,7 @@ describe("AccountFormFields", () => {
     ).toBeInTheDocument();
     expect(screen.getByLabelText(/Verify Password/i)).toBeInTheDocument();
 
-    await act(async () => await fireEvent.click(checkbox));
+    await act(() => fireEvent.click(checkbox));
 
     // But once the checkbox is checked, the password fields before text fields
     // so that users can see their values.

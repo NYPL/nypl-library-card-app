@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { AddressPage } from "../pageobjects/address.page";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
-import { TEST_HOME_ADDRESS, TEST_ALTERNATE_ADDRESS } from "../utils/constants";
+import { fillHomeAddress, fillAlternateAddress } from "../utils/form-helper";
 
 test.describe("displays elements on Address Verification page", () => {
   test.beforeEach(async ({ page }) => {
@@ -29,28 +29,12 @@ test.describe("enters home address and alternate address", () => {
   test("enters valid addresses", async ({ page }) => {
     const addressPage = new AddressPage(page);
     await expect(addressPage.addressHeading).toBeVisible();
-    await addressPage.streetAddressInput.fill(TEST_HOME_ADDRESS.street);
-    await addressPage.apartmentSuiteInput.fill(
-      TEST_HOME_ADDRESS.apartmentSuite
-    );
-    await addressPage.cityInput.fill(TEST_HOME_ADDRESS.city);
-    await addressPage.stateInput.fill(TEST_HOME_ADDRESS.state);
-    await addressPage.postalCodeInput.fill(TEST_HOME_ADDRESS.postalCode);
+    await fillHomeAddress(addressPage);
     await addressPage.nextButton.click();
 
     const alternateAddressPage = new AlternateAddressPage(page);
     await expect(alternateAddressPage.addressHeading).toBeVisible();
-    await alternateAddressPage.streetAddressInput.fill(
-      TEST_ALTERNATE_ADDRESS.street
-    );
-    await alternateAddressPage.apartmentSuiteInput.fill(
-      TEST_ALTERNATE_ADDRESS.apartmentSuite
-    );
-    await alternateAddressPage.cityInput.fill(TEST_ALTERNATE_ADDRESS.city);
-    await alternateAddressPage.stateInput.fill(TEST_ALTERNATE_ADDRESS.state);
-    await alternateAddressPage.postalCodeInput.fill(
-      TEST_ALTERNATE_ADDRESS.postalCode
-    );
+    await fillAlternateAddress(alternateAddressPage);
     await alternateAddressPage.nextButton.click();
 
     const addressVerificationPage = new AddressVerificationPage(page);
