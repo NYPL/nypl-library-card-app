@@ -11,7 +11,7 @@ import {
   fillAlternateAddress,
 } from "../utils/form-helper";
 
-test.describe("displays elements on Confirm Your Information page", () => {
+test.describe("displays elements on review page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/library-card/review?newCard=true");
   });
@@ -33,41 +33,55 @@ test.describe("displays elements on Confirm Your Information page", () => {
   });
 });
 
-test.describe("enters patron information and addresses flow", () => {
-  test("displays patron information", async ({ page }) => {
-    test.setTimeout(60000);
-    await page.goto("/library-card/personal?newCard=true");
-    const personalPage = new PersonalPage(page);
-    await fillPersonalInfo(personalPage);
-    await personalPage.nextButton.click();
+test.describe("verifies patron information on review page", () => {
+  test("displays Personal Information entered", async ({ page }) => {
+    await test.step("enters personal information", async () => {
+      await page.goto("/library-card/personal?newCard=true");
+      const personalPage = new PersonalPage(page);
+      await fillPersonalInfo(personalPage);
+      await personalPage.nextButton.click();
+    });
 
-    const addressPage = new AddressPage(page);
-    await expect(addressPage.addressHeading).toBeVisible();
-    await fillHomeAddress(addressPage);
-    await addressPage.nextButton.click();
+    await test.step("enters home address", async () => {
+      const addressPage = new AddressPage(page);
+      await expect(addressPage.addressHeading).toBeVisible();
+      await fillHomeAddress(addressPage);
+      await addressPage.nextButton.click();
+    });
 
-    const alternateAddressPage = new AlternateAddressPage(page);
-    await expect(alternateAddressPage.stepHeading).toBeVisible();
-    await fillAlternateAddress(alternateAddressPage);
-    await alternateAddressPage.nextButton.click();
+    await test.step("enters alternate address", async () => {
+      const alternateAddressPage = new AlternateAddressPage(page);
+      await expect(alternateAddressPage.stepHeading).toBeVisible();
+      await fillAlternateAddress(alternateAddressPage);
+      await alternateAddressPage.nextButton.click();
+    });
 
-    const addressVerificationPage = new AddressVerificationPage(page);
-    await expect(addressVerificationPage.stepHeader).toBeVisible();
-    await addressVerificationPage.nextButton.click();
+    await test.step("confirms address verification", async () => {
+      const addressVerificationPage = new AddressVerificationPage(page);
+      await expect(addressVerificationPage.stepHeader).toBeVisible();
+      await addressVerificationPage.nextButton.click();
+    });
 
-    const accountPage = new AccountPage(page);
-    await expect(accountPage.stepHeading).toBeVisible();
-    await accountPage.usernameInput.fill("TestUser10225");
-    await accountPage.passwordInput.fill("TestPassword123!");
-    await accountPage.verifyPasswordInput.fill("TestPassword123!");
-    await accountPage.acceptTermsCheckbox.check();
-    await accountPage.nextButton.click();
+    await test.step("enters account information", async () => {
+      const accountPage = new AccountPage(page);
+      await expect(accountPage.stepHeading).toBeVisible();
+      await accountPage.usernameInput.fill("TestUser10225");
+      await accountPage.passwordInput.fill("TestPassword123!");
+      await accountPage.verifyPasswordInput.fill("TestPassword123!");
+      await accountPage.acceptTermsCheckbox.check();
+      await accountPage.nextButton.click();
+    });
 
-    const reviewPage = new ReviewPage(page);
-    await expect(reviewPage.firstNameValue).toBeVisible();
-    await expect(reviewPage.lastNameValue).toBeVisible();
-    await expect(reviewPage.dateOfBirthValue).toBeVisible();
-    await expect(reviewPage.emailValue).toBeVisible();
-    await expect(reviewPage.receiveInfoChoice).toBeVisible();
+    await test.step(
+      "displays Personal Information on review page",
+      async () => {
+        const reviewPage = new ReviewPage(page);
+        await expect(reviewPage.firstNameValue).toBeVisible();
+        await expect(reviewPage.lastNameValue).toBeVisible();
+        await expect(reviewPage.dateOfBirthValue).toBeVisible();
+        await expect(reviewPage.emailValue).toBeVisible();
+        await expect(reviewPage.receiveInfoChoice).toBeVisible();
+      }
+    );
   });
 });
