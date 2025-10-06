@@ -69,7 +69,7 @@ const validateCsrfToken = (req) => {
   if (!bodyAndCookieTokensMatch) {
     logger.debug("CSRF token validation failed.");
     logger.debug(
-      `Request body token: ${tokenFromRequestBody}\nRequestCookie token: ${tokenFromRequestCookie}\nNot a match.`
+      `Request body token: ${tokenFromRequestBody}\nRequestCookie token: ${JSON.stringify(tokenFromRequestCookie)}\nNot a match.`
     );
     return false;
   }
