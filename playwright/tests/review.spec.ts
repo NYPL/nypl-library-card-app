@@ -84,6 +84,10 @@ test.describe("verifies patron information on review page", () => {
 });
 
 test.describe("edits patron information on review page", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/library-card/review?newCard=true");
+  });
+
   test("edits Personal Information section", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.editPersonalInfoButton).toBeVisible();
@@ -92,5 +96,6 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.lastNameInput).toBeVisible();
     await expect(reviewPage.dateOfBirthInput).toBeVisible();
     await expect(reviewPage.emailInput).toBeVisible();
+    await expect(reviewPage.receiveInfoCheckbox).toBeVisible();
   });
 });

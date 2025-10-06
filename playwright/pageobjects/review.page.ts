@@ -21,6 +21,7 @@ export class ReviewPage {
   readonly lastNameInput: Locator;
   readonly dateOfBirthInput: Locator;
   readonly emailInput: Locator;
+  readonly receiveInfoCheckbox: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -77,5 +78,8 @@ export class ReviewPage {
       name: "Email Address (Required)",
       exact: true,
     });
+    this.receiveInfoCheckbox = page.getByLabel(
+      "Yes, I would like to receive information about NYPL's programs and services"
+    );
   }
 }
