@@ -16,6 +16,7 @@ export class ReviewPage {
   readonly emailValue: Locator;
   readonly receiveInfoHeading: Locator;
   readonly receiveInfoChoice: Locator;
+  readonly editPersonalInfoButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -50,5 +51,11 @@ export class ReviewPage {
       { exact: true }
     );
     this.receiveInfoChoice = page.getByText("Yes", { exact: true });
+    this.editPersonalInfoButton = page
+      .getByRole("button", {
+        name: "Edit",
+        exact: true,
+      })
+      .first();
   }
 }
