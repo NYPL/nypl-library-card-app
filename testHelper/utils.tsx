@@ -15,7 +15,7 @@ import { FormData, LocationResponse } from "../src/interfaces";
 
 interface MockMethods {
   children: React.ReactNode;
-  errors?: any;
+  errors?: Error;
   // The types coming from `react-hook-form` for its functions.
   getValues?: UseFormGetValues<FieldValues>;
   watch?: UseFormWatch<FieldValues>;
@@ -77,18 +77,18 @@ export const TestProviderWrapper: React.FC<TestProviderType> = ({
  * @param en Object that contains English translations for testing
  *   specific components.
  */
-export const mockTFunction = (en = {}): any => {
-  return (str) => {
+export const mockTFunction = (en = {}) => {
+  return (str: string) => {
     let value = "";
     // Split the string value, such as "account.username.label".
     const keys = str.split(".");
     // The first one we want is from the `en` object.
-    value = en[keys[0]];
+    value = (en[keys[0]] as string) ?? "";
     // Then any object after that must be from the `value`
     // object as we dig deeper.
     keys.forEach((k, index) => {
       if (index !== 0) {
-        value = value[k];
+        value = (value[k] as string) ?? "";
       }
     });
 

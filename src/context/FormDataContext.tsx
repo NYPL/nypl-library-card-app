@@ -30,9 +30,9 @@ const FormDataContext = React.createContext<FormDataContextType | undefined>(
   undefined
 );
 
-export const FormDataContextProvider: React.FC<PropsWithChildren<
-  FormDataContextProps
->> = ({ initState = formInitialState, children }) => {
+export const FormDataContextProvider: React.FC<
+  PropsWithChildren<FormDataContextProps>
+> = ({ initState = formInitialState, children }) => {
   // Keep track of the API results and errors from a form submission as global
   // data in the app. It is exposed to the pages through context. Use
   // the `dispatch` function to update the state properties.
@@ -51,9 +51,8 @@ export const FormDataContextProvider: React.FC<PropsWithChildren<
  * function and data.
  */
 export default function useFormDataContext() {
-  const { state, dispatch } = React.useContext<FormDataContextType>(
-    FormDataContext
-  );
+  const { state, dispatch } =
+    React.useContext<FormDataContextType>(FormDataContext);
   if (typeof dispatch === "undefined") {
     throw new Error(
       "useFormDataContext must be used within a FormDataContextProvider"
