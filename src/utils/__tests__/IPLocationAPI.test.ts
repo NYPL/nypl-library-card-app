@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable camelcase */
 import IPLocationAPI from "../IPLocationAPI";
 const requestIp = require("request-ip");
 const axios = require("axios");
@@ -89,6 +93,7 @@ describe("IPLocationAPI", () => {
 
     test("returns null if there's an error with the API", async () => {
       axios.get.mockImplementation(() =>
+        // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
         Promise.reject({ response: "some error" })
       );
 
@@ -141,9 +146,10 @@ describe("IPLocationAPI", () => {
 
     test("should return an empty if the API call failed", async () => {
       requestIp.getClientIp.mockImplementation(() => "ip-address");
-      axios.get.mockImplementation(() =>
-        Promise.reject({ response: "some error" })
-      );
+      axios.get.mockImplementation(() => {
+        // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+        return Promise.reject({ response: "some error" });
+      });
 
       const userLocation = await getLocationFromIP({ req: {} } as any);
       expect(userLocation).toEqual("");

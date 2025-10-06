@@ -1,4 +1,13 @@
-export const TEST_HOME_ADDRESS = {
+import { AddressData } from "./types";
+
+export const TEST_PATRON_INFO = {
+  firstName: "Test",
+  lastName: "User",
+  email: "test@gmail.com",
+  dateOfBirth: "12/25/1984",
+};
+
+export const TEST_HOME_ADDRESS: AddressData = {
   street: "123 Main St",
   apartmentSuite: "Apartment 201",
   city: "New York",
@@ -6,14 +15,7 @@ export const TEST_HOME_ADDRESS = {
   postalCode: "10001",
 };
 
-export const TEST_PATRON_INFO = {
-  firstName: "Test",
-  lastName: "User",
-  email: "test@gmail.com",
-  dateOfbirth: "12/25/1984",
-};
-
-export const TEST_ALTERNATE_ADDRESS = {
+export const TEST_ALTERNATE_ADDRESS: AddressData = {
   street: "476 5th Ave",
   apartmentSuite: "Room 200",
   city: "New York",

@@ -64,11 +64,11 @@ describe("AcceptTermsFormFields", () => {
   });
 
   test("updates the checkbox", async () => {
-    const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
+    const checkbox = screen.getByRole("checkbox");
 
     // Unchecked by default.
     expect(checkbox.checked).toEqual(false);
-    await act(async () => await fireEvent.click(checkbox));
+    await act(() => fireEvent.click(checkbox));
     expect(checkbox.checked).toEqual(true);
   });
 });

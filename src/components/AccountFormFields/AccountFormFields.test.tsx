@@ -100,7 +100,7 @@ describe("AccountFormFields", () => {
   });
 
   test("renders username, password, verify password, and checkbox fields", async () => {
-    const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
+    const checkbox = screen.getByRole("checkbox");
 
     // Unchecked by default.
     // By default, the password and verify password fields are "password" types.
@@ -110,7 +110,7 @@ describe("AccountFormFields", () => {
     ).toBeInTheDocument();
     expect(screen.getByLabelText(/Verify Password/i)).toBeInTheDocument();
 
-    await act(async () => await fireEvent.click(checkbox));
+    await act(() => fireEvent.click(checkbox));
 
     // But once the checkbox is checked, the password fields before text fields
     // so that users can see their values.
