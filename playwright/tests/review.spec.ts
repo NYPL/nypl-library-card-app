@@ -72,16 +72,25 @@ test.describe("verifies patron information on review page", () => {
       await accountPage.nextButton.click();
     });
 
-    await test.step(
-      "displays Personal Information on review page",
-      async () => {
-        const reviewPage = new ReviewPage(page);
-        await expect(reviewPage.firstNameValue).toBeVisible();
-        await expect(reviewPage.lastNameValue).toBeVisible();
-        await expect(reviewPage.dateOfBirthValue).toBeVisible();
-        await expect(reviewPage.emailValue).toBeVisible();
-        await expect(reviewPage.receiveInfoChoice).toBeVisible();
-      }
-    );
+    await test.step("displays Personal Information on review page", async () => {
+      const reviewPage = new ReviewPage(page);
+      await expect(reviewPage.firstNameValue).toBeVisible();
+      await expect(reviewPage.lastNameValue).toBeVisible();
+      await expect(reviewPage.dateOfBirthValue).toBeVisible();
+      await expect(reviewPage.emailValue).toBeVisible();
+      await expect(reviewPage.receiveInfoChoice).toBeVisible();
+    });
+  });
+});
+
+test.describe("edits patron information on review page", () => {
+  test("edits Personal Information section", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await expect(reviewPage.editPersonalInfoButton).toBeVisible();
+    await reviewPage.editPersonalInfoButton.click();
+    await expect(reviewPage.firstNameInput).toBeVisible();
+    await expect(reviewPage.lastNameInput).toBeVisible();
+    await expect(reviewPage.dateOfBirthInput).toBeVisible();
+    await expect(reviewPage.emailInput).toBeVisible();
   });
 });

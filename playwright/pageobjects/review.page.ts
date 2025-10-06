@@ -17,6 +17,10 @@ export class ReviewPage {
   readonly receiveInfoHeading: Locator;
   readonly receiveInfoChoice: Locator;
   readonly editPersonalInfoButton: Locator;
+  readonly firstNameInput: Locator;
+  readonly lastNameInput: Locator;
+  readonly dateOfBirthInput: Locator;
+  readonly emailInput: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -57,5 +61,21 @@ export class ReviewPage {
         exact: true,
       })
       .first();
+    this.firstNameInput = page.getByRole("textbox", {
+      name: "First Name (Required)",
+      exact: true,
+    });
+    this.lastNameInput = page.getByRole("textbox", {
+      name: "Last Name (Required)",
+      exact: true,
+    });
+    this.dateOfBirthInput = page.getByRole("textbox", {
+      name: "Date of Birth (Required)",
+      exact: true,
+    });
+    this.emailInput = page.getByRole("textbox", {
+      name: "Email Address (Required)",
+      exact: true,
+    });
   }
 }
