@@ -106,24 +106,23 @@ Deployments are triggered by creating and pushing tags with specific naming conv
 
 #### Deploy to QA Environment
 
+A QA compatible tag can be created by manually triggering the `tag-qa` workflow from the project's [Github actions dashboard](https://github.com/NYPL/nypl-library-card-app/actions/workflows/tag-qa.yml).
+
+Alternatively, tags can be created manually from any branch, and must be of this format: `qa-*`
+
 ```bash
-git tag qa-v1.2.3
-git push origin qa-v1.2.3
+git tag qa-123abc456
+git push origin qa-123abc456
 ```
 
 #### Deploy to Production Environment
 
-This tag should be created from a release branch, and only after QA validation is complete.
+This tag should be created from a release branch, and only after QA validation is complete, and must be in the form of `production-*`
 
 ```bash
 git tag production-v1.2.3
 git push origin production-v1.2.3
 ```
-
-### Tag Naming Convention
-
-- **QA tags**: `qa-v1.2.3`, `qa-v1.2.3-hotfix`, `qa-v1.2.4-rc1`
-- **Production tags**: `production-v1.2.3`, `production-v1.2.3-hotfix`
 
 ## CI/CD
 
@@ -135,6 +134,7 @@ Our CI/CD pipeline uses GitHub Actions with multiple specialized workflows to en
 | ------------------------ | -------------------------------- | -------------------------------------------- |
 | **Unit Tests**           | Unit tests and linting           | PRs, pushes to `main`, called by deployments |
 | **Playwright Tests**     | End-to-end browser testing       | PRs, pushes to `main`, called by deployments |
+| **Tag QA**               | Tags a branch with `qa-*`        | Manual                                       |
 | **Deploy to QA**         | Deploy to QA environment         | `qa-*` tags                                  |
 | **Deploy to Production** | Deploy to production environment | `production-*` tags                          |
 

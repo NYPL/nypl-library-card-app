@@ -15,6 +15,7 @@
 - Add Playwright assertions to confirm headings display on personal information page [SWIS-99](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-99)
 - Add Playwright test to confirm user input for address verification page [SWIS-90](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-90)
 - Add Playwright test to confirm alternative form and location link on personal page [SWIS-102](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-102)
+- Add Playwright test to confirm user input on home address page [SWIS-89](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-89)
 
 ### 1.2.6
 
