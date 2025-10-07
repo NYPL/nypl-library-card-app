@@ -104,19 +104,23 @@ const AddressContainer = ({ csrfToken }) => {
           });
         })
         // Go to the next page regardless if it's a correct or error response.
-        .finally(async () => {
+        .finally(() => {
           // If there's a 403 error, wait a short while before removing the error
           // and going to the home page. Otherwise, go to the next page.
           if (nextUrl === "/new") {
-            setTimeout(async () => {
-              dispatch({ type: "SET_FORM_ERRORS", value: null });
-              await router.push(nextUrl);
+            setTimeout(() => {
+              (async () => {
+                dispatch({ type: "SET_FORM_ERRORS", value: null });
+                await router.push(nextUrl);
+              })();
             }, 2500);
           } else {
-            setIsLoading(false);
-            nextUrl = `/address-verification?${queryStr}`;
+            (async () => {
+              setIsLoading(false);
+              nextUrl = `/address-verification?${queryStr}`;
 
-            await router.push(nextUrl);
+              await router.push(nextUrl);
+            })();
           }
         });
     }

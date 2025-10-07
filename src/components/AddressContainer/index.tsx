@@ -111,7 +111,7 @@ const AddressContainer = ({ csrfToken }) => {
           value: { home },
         });
       })
-      .finally(async () => {
+      .finally(() => {
         setIsLoading(false);
         // Check to see if the submitted address is in NYC.
         const addressInNYC =
@@ -133,11 +133,15 @@ const AddressContainer = ({ csrfToken }) => {
           } else {
             nextUrl = `/address-verification?${queryStr}`;
           }
-          await router.push(nextUrl);
-        } else {
-          setTimeout(async () => {
-            dispatch({ type: "SET_FORM_ERRORS", value: null });
+          (async () => {
             await router.push(nextUrl);
+          })();
+        } else {
+          setTimeout(() => {
+            (async () => {
+              dispatch({ type: "SET_FORM_ERRORS", value: null });
+              await router.push(nextUrl);
+            })();
           }, 2500);
         }
       });
