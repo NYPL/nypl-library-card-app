@@ -22,6 +22,7 @@ import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 import aaUtils from "../src/externals/aaUtils";
 import Script from "next/script";
+import { theme } from "../src/theme";
 
 interface MyAppProps {
   Component: any;
@@ -166,7 +167,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
           `,
         }}
       />
-      <DSProvider>
+      <DSProvider theme={theme}>
         <FormProvider {...formMethods}>
           <FormDataContextProvider initState={initState}>
             <ApplicationContainer problemDetail={error}>
