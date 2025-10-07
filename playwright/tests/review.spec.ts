@@ -65,23 +65,20 @@ test.describe("verifies patron information on review page", () => {
     await test.step("enters account information", async () => {
       const accountPage = new AccountPage(page);
       await expect(accountPage.stepHeading).toBeVisible();
-      await accountPage.usernameInput.fill("TestUser10225");
-      await accountPage.passwordInput.fill("TestPassword123!");
-      await accountPage.verifyPasswordInput.fill("TestPassword123!");
+      await accountPage.usernameInput.fill("User10225");
+      await accountPage.passwordInput.fill("Password123!");
+      await accountPage.verifyPasswordInput.fill("Password123!");
       await accountPage.acceptTermsCheckbox.check();
       await accountPage.nextButton.click();
     });
 
-    await test.step(
-      "displays Personal Information on review page",
-      async () => {
-        const reviewPage = new ReviewPage(page);
-        await expect(reviewPage.firstNameValue).toBeVisible();
-        await expect(reviewPage.lastNameValue).toBeVisible();
-        await expect(reviewPage.dateOfBirthValue).toBeVisible();
-        await expect(reviewPage.emailValue).toBeVisible();
-        await expect(reviewPage.receiveInfoChoice).toBeVisible();
-      }
-    );
+    await test.step("displays Personal Information on review page", async () => {
+      const reviewPage = new ReviewPage(page);
+      await expect(reviewPage.firstNameValue).toBeVisible();
+      await expect(reviewPage.lastNameValue).toBeVisible();
+      await expect(reviewPage.dateOfBirthValue).toBeVisible();
+      await expect(reviewPage.emailValue).toBeVisible();
+      await expect(reviewPage.receiveInfoChoice).toBeVisible();
+    });
   });
 });
