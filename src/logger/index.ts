@@ -51,6 +51,7 @@ const nyplFormat = printf((options) => {
     timestamp: options.timestamp,
     levelCode: getLogLevelCode(options.level),
     level: options.level.toUpperCase(),
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string
     message: options.message.toString(),
     // This is specific to this app to make searching easy.
     appTag: "library-card-app",
