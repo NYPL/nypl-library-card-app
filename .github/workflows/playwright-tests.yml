@@ -2,7 +2,7 @@ name: Playwright Tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, swis-121/debug-verification-address-bug]
   pull_request:
   workflow_call:
 
@@ -31,6 +31,28 @@ jobs:
 
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
+
+      - name: Verify Secrets and Create .env file
+        run: |
+          echo "Verifying that secrets are available..."
+          if [ -n "$OAUTH_CLIENT_ID" ]; then echo "OAUTH_CLIENT_ID is set."; else echo "OAUTH_CLIENT_ID is NOT set or is empty."; fi
+          if [ -n "$OAUTH_CLIENT_SECRET" ]; then echo "OAUTH_CLIENT_SECRET is set."; else echo "OAUTH_CLIENT_SECRET is NOT set or is empty."; fi
+          if [ -n "$IPSTACK_KEY" ]; then echo "IPSTACK_KEY is set."; else echo "IPSTACK_KEY is NOT set or is empty."; fi
+
+          echo "---"
+          echo "Creating .env.local.debug file"
+          
+          echo "OAUTH_CLIENT_ID=${OAUTH_CLIENT_ID}" >> .env.local.debug
+          echo "OAUTH_CLIENT_SECRET=${OAUTH_CLIENT_SECRET}" >> .env.local.debug
+          echo "IPSTACK_KEY=${IPSTACK_KEY}" >> .env.local.debug
+          echo "PATRON_CREATION_URL=${PATRON_CREATION_URL}" >> .env.local.debug
+          echo "PATRON_VALIDATION_URL=${PATRON_VALIDATION_URL}" >> .env.local.debug
+          echo "OAUTH_PROVIDER_URL=${OAUTH_PROVIDER_URL}" >> .env.local.debug
+
+          echo ".env.local.debug file created successfully."
+
+          # This command prints the file content but masks the values for security
+          awk -F= '{print $1"=***"}' .env.local.debug
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
