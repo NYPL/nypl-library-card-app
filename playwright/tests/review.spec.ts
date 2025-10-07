@@ -10,6 +10,7 @@ import {
   fillHomeAddress,
   fillAlternateAddress,
 } from "../utils/form-helper";
+import { TEST_PATRON_INFO } from "../utils/constants";
 
 test.describe("displays elements on review page", () => {
   test.beforeEach(async ({ page }) => {
@@ -74,11 +75,17 @@ test.describe("verifies patron information on review page", () => {
 
     await test.step("displays Personal Information on review page", async () => {
       const reviewPage = new ReviewPage(page);
-      await expect(reviewPage.firstNameValue).toBeVisible();
-      await expect(reviewPage.lastNameValue).toBeVisible();
-      await expect(reviewPage.dateOfBirthValue).toBeVisible();
-      await expect(reviewPage.emailValue).toBeVisible();
-      await expect(reviewPage.receiveInfoChoice).toBeVisible();
+      await expect(reviewPage.firstNameValue).toHaveText(
+        TEST_PATRON_INFO.firstName
+      );
+      await expect(reviewPage.lastNameValue).toHaveText(
+        TEST_PATRON_INFO.lastName
+      );
+      await expect(reviewPage.dateOfBirthValue).toHaveText(
+        TEST_PATRON_INFO.dateOfBirth
+      );
+      await expect(reviewPage.emailValue).toHaveText(TEST_PATRON_INFO.email);
+      await expect(reviewPage.receiveInfoChoice).toHaveText("Yes");
     });
   });
 });
