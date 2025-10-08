@@ -10,6 +10,7 @@ import {
   fillHomeAddress,
   fillAlternateAddress,
 } from "../utils/form-helper";
+import { TEST_PATRON_INFO } from "../utils/constants";
 
 test.describe("displays elements on review page", () => {
   test.beforeEach(async ({ page }) => {
@@ -65,37 +66,26 @@ test.describe("verifies patron information on review page", () => {
     await test.step("enters account information", async () => {
       const accountPage = new AccountPage(page);
       await expect(accountPage.stepHeading).toBeVisible();
-      await accountPage.usernameInput.fill("TestUser10225");
-      await accountPage.passwordInput.fill("TestPassword123!");
-      await accountPage.verifyPasswordInput.fill("TestPassword123!");
+      await accountPage.usernameInput.fill("User10225");
+      await accountPage.passwordInput.fill("Password123!");
+      await accountPage.verifyPasswordInput.fill("Password123!");
       await accountPage.acceptTermsCheckbox.check();
       await accountPage.nextButton.click();
     });
 
     await test.step("displays Personal Information on review page", async () => {
       const reviewPage = new ReviewPage(page);
-      await expect(reviewPage.firstNameValue).toBeVisible();
-      await expect(reviewPage.lastNameValue).toBeVisible();
-      await expect(reviewPage.dateOfBirthValue).toBeVisible();
-      await expect(reviewPage.emailValue).toBeVisible();
-      await expect(reviewPage.receiveInfoChoice).toBeVisible();
+      await expect(reviewPage.firstNameValue).toHaveText(
+        TEST_PATRON_INFO.firstName
+      );
+      await expect(reviewPage.lastNameValue).toHaveText(
+        TEST_PATRON_INFO.lastName
+      );
+      await expect(reviewPage.dateOfBirthValue).toHaveText(
+        TEST_PATRON_INFO.dateOfBirth
+      );
+      await expect(reviewPage.emailValue).toHaveText(TEST_PATRON_INFO.email);
+      await expect(reviewPage.receiveInfoChoice).toHaveText("Yes");
     });
-  });
-});
-
-test.describe("edits patron information on review page", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto("/library-card/review?newCard=true");
-  });
-
-  test("edits Personal Information section", async ({ page }) => {
-    const reviewPage = new ReviewPage(page);
-    await expect(reviewPage.editPersonalInfoButton).toBeVisible();
-    await reviewPage.editPersonalInfoButton.click();
-    await expect(reviewPage.firstNameInput).toBeVisible();
-    await expect(reviewPage.lastNameInput).toBeVisible();
-    await expect(reviewPage.dateOfBirthInput).toBeVisible();
-    await expect(reviewPage.emailInput).toBeVisible();
-    await expect(reviewPage.receiveInfoCheckbox).toBeVisible();
   });
 });

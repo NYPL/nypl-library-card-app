@@ -133,11 +133,15 @@ const AddressContainer = ({ csrfToken }) => {
           } else {
             nextUrl = `/address-verification?${queryStr}`;
           }
-          router.push(nextUrl);
+          (async () => {
+            await router.push(nextUrl);
+          })();
         } else {
           setTimeout(() => {
-            dispatch({ type: "SET_FORM_ERRORS", value: null });
-            router.push(nextUrl);
+            (async () => {
+              dispatch({ type: "SET_FORM_ERRORS", value: null });
+              await router.push(nextUrl);
+            })();
           }, 2500);
         }
       });
