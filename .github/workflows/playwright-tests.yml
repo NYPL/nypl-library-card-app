@@ -6,20 +6,19 @@ on:
   pull_request:
   workflow_call:
 
-env:
-  NODE_ENV: development
-  NEW_RELIC_ENABLED: false
-  PATRON_CREATION_URL: ${{ vars.PATRON_CREATION_URL_QA }}
-  PATRON_VALIDATION_URL: ${{ vars.PATRON_VALIDATION_URL_QA }}
-  OAUTH_PROVIDER_URL: ${{ vars.OAUTH_PROVIDER_URL }}
-  OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
-  OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
-  IPSTACK_KEY: ${{ secrets.IPSTACK_KEY }}
-
 jobs:
   playwright-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: development
+      NEW_RELIC_ENABLED: false
+      PATRON_CREATION_URL: ${{ vars.PATRON_CREATION_URL_QA }}
+      PATRON_VALIDATION_URL: ${{ vars.PATRON_VALIDATION_URL_QA }}
+      OAUTH_PROVIDER_URL: ${{ vars.OAUTH_PROVIDER_URL }}
+      OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+      OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
+      IPSTACK_KEY: ${{ secrets.IPSTACK_KEY }}
     steps:
       - uses: actions/checkout@v4
 
