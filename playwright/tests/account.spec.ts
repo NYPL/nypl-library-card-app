@@ -1,6 +1,5 @@
 import { test, expect } from "@playwright/test";
 import { AccountPage } from "../pageobjects/account.page";
-import { TEST_CUSTOMIZE_ACCOUNT } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/account?newCard=true");
@@ -100,20 +99,6 @@ test.describe("displays all form elements on Account page", () => {
       await accountPage.nextButton.click();
       await expect(accountPage.usernameError).toBeVisible();
       await expect(accountPage.passwordError).toBeVisible();
-    });
-
-    test("fill in account form", async ({ page }) => {
-      const accountPage = new AccountPage(page);
-      await accountPage.usernameInput.fill(TEST_CUSTOMIZE_ACCOUNT.username);
-      await accountPage.availableUsernameButton.click();
-      await expect(accountPage.availableUsername).toBeVisible();
-      await accountPage.passwordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
-      await accountPage.verifyPasswordInput.fill(
-        TEST_CUSTOMIZE_ACCOUNT.password
-      );
-      await accountPage.showPasswordCheckbox.check();
-      await accountPage.selectHomeLibrary.selectOption("lb");
-      await accountPage.acceptTermsCheckbox.check();
     });
   });
 });

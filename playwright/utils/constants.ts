@@ -24,6 +24,6 @@ export const TEST_ALTERNATE_ADDRESS: AddressData = {
 };
 
 export const TEST_CUSTOMIZE_ACCOUNT = {
-  username: "testuser3000",
+  username: "qauser3000",
   password: "Test@1234",
 };
