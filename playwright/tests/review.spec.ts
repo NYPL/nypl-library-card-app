@@ -89,3 +89,42 @@ test.describe("verifies patron information on review page", () => {
     });
   });
 });
+
+test.describe("edits patron information on review page", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/library-card/review?newCard=true");
+  });
+
+  test("displays editable Personal Information section", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await expect(reviewPage.editPersonalInfoButton).toBeVisible();
+    await reviewPage.editPersonalInfoButton.click();
+    await expect(reviewPage.firstNameInput).toBeVisible();
+    await expect(reviewPage.lastNameInput).toBeVisible();
+    await expect(reviewPage.dateOfBirthInput).toBeVisible();
+    await expect(reviewPage.emailInput).toBeVisible();
+    await expect(reviewPage.receiveInfoCheckbox).toBeVisible();
+  });
+
+  // does not replace patron info since there's no existing text
+  test("enters Personal Information", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.firstNameInput.fill(TEST_PATRON_INFO.firstName);
+    await reviewPage.lastNameInput.fill(TEST_PATRON_INFO.lastName);
+    await reviewPage.dateOfBirthInput.fill(TEST_PATRON_INFO.dateOfBirth);
+    await reviewPage.emailInput.fill(TEST_PATRON_INFO.email);
+
+    await expect(reviewPage.firstNameValue).toHaveText(
+      TEST_PATRON_INFO.firstName
+    );
+    await expect(reviewPage.lastNameValue).toHaveText(
+      TEST_PATRON_INFO.lastName
+    );
+    await expect(reviewPage.dateOfBirthValue).toHaveText(
+      TEST_PATRON_INFO.dateOfBirth
+    );
+    await expect(reviewPage.emailValue).toHaveText(TEST_PATRON_INFO.email);
+    await expect(reviewPage.receiveInfoCheckbox).toBeChecked();
+  });
+});
