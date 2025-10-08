@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "NODE_OPTIONS='-r newrelic' next start -p $PORT",
+    "start": "next start -p $PORT",
     "local-prod": "next build && NODE_ENV=production node https-server.js",
     "eb:start": "npm run build && npm run start",
     "test": "jest",

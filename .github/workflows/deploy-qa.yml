@@ -8,9 +8,11 @@ on:
 jobs:
   unit-tests:
     uses: ./.github/workflows/unit-tests.yml
+    secrets: inherit
 
   playwright-tests:
     uses: ./.github/workflows/playwright-tests.yml
+    secrets: inherit
 
   deploy-qa:
     runs-on: ubuntu-latest

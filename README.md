@@ -106,7 +106,7 @@ Deployments are triggered by creating and pushing tags with specific naming conv
 
 #### Deploy to QA Environment
 
-A QA compatible tag can be created by manually triggering the `tag-qa` workflow from the project's [Github actions dashboard](https://github.com/NYPL/nypl-library-card-app/actions/workflows/tag-qa.yml).
+A QA deploy can be started by manually creating a qa compatible tag in the project releases dashboard.
 
 Alternatively, tags can be created manually from any branch, and must be of this format: `qa-*`
 
@@ -134,7 +134,6 @@ Our CI/CD pipeline uses GitHub Actions with multiple specialized workflows to en
 | ------------------------ | -------------------------------- | -------------------------------------------- |
 | **Unit Tests**           | Unit tests and linting           | PRs, pushes to `main`, called by deployments |
 | **Playwright Tests**     | End-to-end browser testing       | PRs, pushes to `main`, called by deployments |
-| **Tag QA**               | Tags a branch with `qa-*`        | Manual                                       |
 | **Deploy to QA**         | Deploy to QA environment         | `qa-*` tags                                  |
 | **Deploy to Production** | Deploy to production environment | `production-*` tags                          |
 
