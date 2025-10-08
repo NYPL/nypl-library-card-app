@@ -65,5 +65,11 @@ test.describe("verifies patron information on review page", () => {
       await expect(reviewPage.emailValue).toHaveText(TEST_PATRON_INFO.email);
       await expect(reviewPage.receiveInfoChoice).toHaveText("Yes");
     });
+
+    // await test.step("displays Address on review page", async () => {});
+
+    // await test.step("displays Alternate Address on review page", async () => {});
+
+    // await test.step("displays Create Your Account on review page", async () => {});
   });
 });
