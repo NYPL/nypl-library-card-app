@@ -115,16 +115,16 @@ test.describe("edits patron information on review page", () => {
     await reviewPage.dateOfBirthInput.fill(TEST_PATRON_INFO.dateOfBirth);
     await reviewPage.emailInput.fill(TEST_PATRON_INFO.email);
 
-    await expect(reviewPage.firstNameValue).toHaveText(
+    await expect(reviewPage.firstNameInput).toHaveValue(
       TEST_PATRON_INFO.firstName
     );
-    await expect(reviewPage.lastNameValue).toHaveText(
+    await expect(reviewPage.lastNameInput).toHaveValue(
       TEST_PATRON_INFO.lastName
     );
-    await expect(reviewPage.dateOfBirthValue).toHaveText(
+    await expect(reviewPage.dateOfBirthInput).toHaveValue(
       TEST_PATRON_INFO.dateOfBirth
     );
-    await expect(reviewPage.emailValue).toHaveText(TEST_PATRON_INFO.email);
+    await expect(reviewPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
     await expect(reviewPage.receiveInfoCheckbox).toBeChecked();
   });
 });
