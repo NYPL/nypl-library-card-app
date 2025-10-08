@@ -75,6 +75,7 @@ test.describe("verifies patron information on review page", () => {
 });
 
 // test.describe: submits application
-// test: displays elements on success page
+// test: displays static elements on success page
+// test: displays variable elements on success page (e.g., member name, current date)
 
 // test.describe: navigates back to previous pages from account page
