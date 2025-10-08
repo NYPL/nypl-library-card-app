@@ -73,3 +73,8 @@ test.describe("verifies patron information on review page", () => {
     // await test.step("displays Create Your Account on review page", async () => {});
   });
 });
+
+// test.describe: submits application
+// test: displays elements on success page
+
+// test.describe: navigates back to previous pages from account page
