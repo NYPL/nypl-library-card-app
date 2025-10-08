@@ -78,4 +78,8 @@ test.describe("verifies patron information on review page", () => {
 // test: displays static elements on success page
 // test: displays variable elements on success page (e.g., member name, current date)
 
+// test.describe: navigates from get started page to success page
+// test: confirms user exists in Sierra database
+// test: deletes user from Sierra database
+
 // test.describe: navigates back to previous pages from account page
