@@ -78,8 +78,9 @@ export class ReviewPage {
       name: "Email Address (Required)",
       exact: true,
     });
-    this.receiveInfoCheckbox = page.getByLabel(
-      "Yes, I would like to receive information about NYPL's programs and services"
+    this.receiveInfoCheckbox = page.getByText(
+      "Yes, I would like to receive information about NYPL's programs and services",
+      { exact: true }
     );
   }
 }

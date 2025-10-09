@@ -114,7 +114,7 @@ test.describe("edits patron information on review page", () => {
     await reviewPage.lastNameInput.fill(TEST_PATRON_INFO.lastName);
     await reviewPage.dateOfBirthInput.fill(TEST_PATRON_INFO.dateOfBirth);
     await reviewPage.emailInput.fill(TEST_PATRON_INFO.email);
-    await reviewPage.receiveInfoCheckbox.check();
+    await reviewPage.receiveInfoCheckbox.click();
 
     await expect(reviewPage.firstNameInput).toHaveValue(
       TEST_PATRON_INFO.firstName
