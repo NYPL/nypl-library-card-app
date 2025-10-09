@@ -104,6 +104,8 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.dateOfBirthInput).toBeVisible();
     await expect(reviewPage.emailInput).toBeVisible();
     await expect(reviewPage.receiveInfoCheckbox).toBeVisible();
+    await expect(reviewPage.alternateFormLink).toBeVisible();
+    await expect(reviewPage.locationsLink).toBeVisible();
   });
 
   // does not replace patron info since there's no existing text

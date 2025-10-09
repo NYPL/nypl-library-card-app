@@ -22,6 +22,8 @@ export class ReviewPage {
   readonly dateOfBirthInput: Locator;
   readonly emailInput: Locator;
   readonly receiveInfoCheckbox: Locator;
+  readonly alternateFormLink: Locator;
+  readonly locationsLink: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -82,5 +84,13 @@ export class ReviewPage {
       "Yes, I would like to receive information about NYPL's programs and services",
       { exact: true }
     );
+    this.alternateFormLink = this.page.getByRole("link", {
+      name: "alternate form",
+      exact: true,
+    });
+    this.locationsLink = this.page.getByRole("link", {
+      name: "locations",
+      exact: true,
+    });
   }
 }
