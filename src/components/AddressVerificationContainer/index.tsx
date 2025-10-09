@@ -167,11 +167,16 @@ function AddressVerificationContainer() {
     const addressesLength = addresses.length;
     return (
       <RadioGroup
-        name="radio-group"
+        className="address-container"
+        name="address-select-container"
         labelText="address-radio-group"
         showLabel={false}
-        layout="row"
-        $breakpoint-intermediate={{ layout: "column" }}
+        sx={{
+          "& .ds-radioGroup-stack": {
+            display: { base: "flex" },
+            flexDirection: { base: "column", sm: "row" },
+          },
+        }}
       >
         {addresses.map((address, idx) => {
           const selected = `${addressType}-${idx}`;
@@ -182,24 +187,22 @@ function AddressVerificationContainer() {
           const checkedClass = checked ? "checked" : "";
           return (
             <Radio
-              className={checkedClass}
-              key={`${addressType}-${idx}`}
               id={`${addressType}-${idx}`}
-              sx={styles.input}
+              className={`radio-input ${styles.input}`}
               {...register(`${addressType}-address-select`, {
                 required: true,
+                onChange: onChange,
               })}
               isChecked={checked}
-              onChange={onChange}
               value={selected}
               labelText={
-                <Box>
-                  <Box>{address.line1}</Box>
-                  {address.line2 && <Box>{address.line2}</Box>}
-                  <Box>
+                <div>
+                  <div>{address.line1}</div>
+                  {address.line2 && <div>{address.line2}</div>}
+                  <div>
                     {address.city}, {address.state} {address.zip}
-                  </Box>
-                </Box>
+                  </div>
+                </div>
               }
             />
           );
