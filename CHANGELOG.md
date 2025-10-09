@@ -18,6 +18,7 @@
 - Add Playwright test to confirm user input on home address page [SWIS-89](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-89)
 - Enable eslint 9 [SWIS-94](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-94)
 - Add Playwright util to fill in forms [SWIS-115](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-115)
+- Add Playwright test for Page manager page [SWIS-132](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-132)
 
 ### 1.2.6
 
