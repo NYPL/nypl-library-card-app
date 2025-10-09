@@ -14,7 +14,10 @@ export const TEST_HOME_ADDRESS: AddressData = {
   state: "NY",
   postalCode: "10001",
 };
-
+export const TEST_CUSTOMIZE_ACCOUNT = {
+  username: "qauser3000",
+  password: "Test@1234",
+};
 export const TEST_ALTERNATE_ADDRESS: AddressData = {
   street: "476 5th Ave",
   apartmentSuite: "Room 200",
