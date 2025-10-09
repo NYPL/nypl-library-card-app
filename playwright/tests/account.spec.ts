@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { AccountPage } from "../pageobjects/account.page";
+import { fillAccountInfo } from "../utils/form-helper";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/account?newCard=true");
@@ -100,5 +101,15 @@ test.describe("displays errors for invalid inputs", () => {
     await accountPage.nextButton.click();
     await expect(accountPage.usernameError).toBeVisible();
     await expect(accountPage.passwordError).toBeVisible();
+  });
+
+  test("verify patron's account info into customize your account form", async ({
+    page,
+  }) => {
+    const accountPage = new AccountPage(page);
+    await fillAccountInfo(accountPage);
+    await expect(accountPage.usernameInput).toHaveValue("qauser3000");
+    await expect(accountPage.passwordInput).toHaveValue("Test@1234");
+    await expect(accountPage.verifyPasswordInput).toHaveValue("Test@1234");
   });
 });
