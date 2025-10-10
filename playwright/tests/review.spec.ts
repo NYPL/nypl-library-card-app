@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { ReviewPage } from "../pageobjects/review.page";
+import { TEST_PATRON_INFO } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/review?newCard=true");
@@ -36,7 +37,7 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.locationsLink).toBeVisible();
   });
 
-  // does not replace patron info since there's no existing text
+  // does not replace personal info since there's no existing text
   test("enters Personal Information", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editPersonalInfoButton.click();
