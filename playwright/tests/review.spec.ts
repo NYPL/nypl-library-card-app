@@ -1,11 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { ReviewPage } from "../pageobjects/review.page";
 
+test.beforeEach(async ({ page }) => {
+  await page.goto("/library-card/review?newCard=true");
+});
 test.describe("displays elements on review page", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto("/library-card/review?newCard=true");
-  });
-
   test("displays headings", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.mainHeading).toBeVisible();
