@@ -5,6 +5,7 @@ import { AddressPage } from "./address.page";
 import { AddressVerificationPage } from "./address-verification.page";
 import { AlternateAddressPage } from "./alternate-address.page";
 import { AccountPage } from "./account.page";
+import { ReviewPage } from "./review.page";
 import { CongratsPage } from "./congrats.page";
 
 export class PageManager {
@@ -35,6 +36,10 @@ export class PageManager {
 
   get accountPage(): AccountPage {
     return new AccountPage(this.page);
+  }
+
+  get reviewPage(): ReviewPage {
+    return new ReviewPage(this.page);
   }
 
   get congratsPage(): CongratsPage {
