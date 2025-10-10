@@ -4,7 +4,6 @@ import {
   FormField as DSFormField,
   FormRow,
   Heading,
-  List,
   Radio,
   RadioGroup,
 } from "@nypl/design-system-react-components";
@@ -187,6 +186,7 @@ function AddressVerificationContainer() {
           const checkedClass = checked ? "checked" : "";
           return (
             <Radio
+              key={`${addressType}-${idx}`}
               id={`${addressType}-${idx}`}
               className={`radio-input ${styles.input}`}
               {...register(`${addressType}-address-select`, {
@@ -196,13 +196,13 @@ function AddressVerificationContainer() {
               isChecked={checked}
               value={selected}
               labelText={
-                <div>
-                  <div>{address.line1}</div>
-                  {address.line2 && <div>{address.line2}</div>}
-                  <div>
+                <Box>
+                  <Box>{address.line1}</Box>
+                  {address.line2 && <Box>{address.line2}</Box>}
+                  <Box>
                     {address.city}, {address.state} {address.zip}
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               }
             />
           );
