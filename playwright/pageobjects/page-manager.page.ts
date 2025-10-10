@@ -2,6 +2,7 @@ import { Page } from "@playwright/test";
 import { LandingPage } from "./landing.page";
 import { PersonalPage } from "./personal.page";
 import { AddressPage } from "./address.page";
+import { AddressVerificationPage } from "./address-verification.page";
 import { AlternateAddressPage } from "./alternate-address.page";
 import { AccountPage } from "./account.page";
 import { CongratsPage } from "./congrats.page";
@@ -27,6 +28,9 @@ export class PageManager {
 
   get alternateAddressPage(): AlternateAddressPage {
     return new AlternateAddressPage(this.page);
+  }
+  get addressVerificationPage(): AddressVerificationPage {
+    return new AddressVerificationPage(this.page);
   }
 
   get accountPage(): AccountPage {
