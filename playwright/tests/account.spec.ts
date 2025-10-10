@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { AccountPage } from "../pageobjects/account.page";
 import { fillAccountInfo } from "../utils/form-helper";
+import { TEST_CUSTOMIZE_ACCOUNT } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/account?newCard=true");
@@ -108,8 +109,18 @@ test.describe("displays errors for invalid inputs", () => {
   }) => {
     const accountPage = new AccountPage(page);
     await fillAccountInfo(accountPage);
-    await expect(accountPage.usernameInput).toHaveValue("qauser3000");
-    await expect(accountPage.passwordInput).toHaveValue("Test@1234");
-    await expect(accountPage.verifyPasswordInput).toHaveValue("Test@1234");
+    await expect(accountPage.usernameInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.username
+    );
+    await expect(accountPage.passwordInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.password
+    );
+    await expect(accountPage.verifyPasswordInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.password
+    );
+    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
+    await expect(accountPage.selectHomeLibrary).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.homeLibrary
+    );
   });
 });
