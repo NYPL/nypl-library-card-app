@@ -119,6 +119,8 @@ test.describe("displays errors for invalid inputs", () => {
       TEST_CUSTOMIZE_ACCOUNT.password
     );
     await expect(accountPage.acceptTermsCheckbox).toBeChecked();
+    await accountPage.showPasswordCheckbox.click();
+    await expect(accountPage.showPasswordCheckbox).toBeChecked();
     await expect(accountPage.selectHomeLibrary).toHaveValue(
       TEST_CUSTOMIZE_ACCOUNT.homeLibrary
     );
