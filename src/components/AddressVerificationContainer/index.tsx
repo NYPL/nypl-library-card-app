@@ -183,7 +183,6 @@ function AddressVerificationContainer() {
           // the user can choose between the two options.
           const checked =
             addressesLength === 1 ? true : selected === selectedValue;
-          const checkedClass = checked ? "checked" : "";
           return (
             <Radio
               key={`${addressType}-${idx}`}
