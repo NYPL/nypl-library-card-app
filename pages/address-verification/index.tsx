@@ -3,6 +3,7 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { JSX, useEffect } from "react";
 import { GetServerSideProps } from "next";
+import { Paragraph } from "../../src/components/Paragraph";
 
 import AddressVerificationContainer from "../../src/components/AddressVerificationContainer";
 import {
@@ -25,8 +26,10 @@ function AddressVerificationPage({
   });
   return (
     <>
-      <Heading level="two">{t("verifyAddress.title")}</Heading>
-      <p id="select-address-heading">{t("verifyAddress.description")}</p>
+      <Heading level="h2">{t("verifyAddress.title")}</Heading>
+      <Paragraph id="select-address-heading">
+        {t("verifyAddress.description")}
+      </Paragraph>
       <AddressVerificationContainer />
     </>
   );

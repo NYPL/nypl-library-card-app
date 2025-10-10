@@ -19,6 +19,7 @@
   - `review` page Design system upgrade [SWIS-81](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-81)
   - `location` and `workAddress` page Design system upgrade [SWIS-78](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-78)
   - `congrats` page Design system upgrade [SWIS-77](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-77)
+  - `address verification` page Design system upgrade [SWIS-76](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-76)
 
 ### 1.2.6
 
