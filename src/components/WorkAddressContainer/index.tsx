@@ -41,7 +41,7 @@ const AddressContainer = ({ csrfToken }) => {
    * submitForm
    * @param formData - data object returned from react-hook-form
    */
-  const submitForm = (formData, e) => {
+  const submitForm = async (formData, e) => {
     e.preventDefault();
     setIsLoading(true);
     const workAddress = constructAddressType(formData, "work");
@@ -52,7 +52,7 @@ const AddressContainer = ({ csrfToken }) => {
       !workAddress.state &&
       !workAddress.zip
     ) {
-      router.push(`/address-verification?${queryStr}`);
+      await router.push(`/address-verification?${queryStr}`);
     } else {
       // Set the global form state if there's a work address.
       dispatch({
@@ -110,14 +110,18 @@ const AddressContainer = ({ csrfToken }) => {
           // and going to the home page. Otherwise, go to the next page.
           if (nextUrl === "/new") {
             setTimeout(() => {
-              dispatch({ type: "SET_FORM_ERRORS", value: null });
-              router.push(nextUrl);
+              (async () => {
+                dispatch({ type: "SET_FORM_ERRORS", value: null });
+                await router.push(nextUrl);
+              })();
             }, 2500);
           } else {
-            setIsLoading(false);
-            nextUrl = `/address-verification?${queryStr}`;
+            (async () => {
+              setIsLoading(false);
+              nextUrl = `/address-verification?${queryStr}`;
 
-            router.push(nextUrl);
+              await router.push(nextUrl);
+            })();
           }
         });
     }

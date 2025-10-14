@@ -1,9 +1,13 @@
 import isEmpty from "lodash/isEmpty";
 import { PageTitles } from "../interfaces";
+import { NextRouter } from "next/router";
 
-const redirectIfUserHasRegistered = (hasRegistered: boolean, router) => {
+const redirectIfUserHasRegistered = async (
+  hasRegistered: boolean,
+  router: NextRouter
+) => {
   if (hasRegistered) {
-    router.push("/congrats?newCard=true");
+    await router.push("/congrats?newCard=true");
   }
 };
 
@@ -56,7 +60,7 @@ const nyCities = [
 const createQueryParams = (obj = {}) => {
   let query = "";
   for (const [key, value] of Object.entries(obj)) {
-    query += `&${key}=${value}`;
+    query += `&${key}=${value as string}`;
   }
   return query;
 };

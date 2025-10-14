@@ -1,7 +1,7 @@
 import React, { JSX } from "react";
-import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import aaUtils from "../../externals/aaUtils";
+import Link from "next/link";
 import {
   Box,
   Button,
