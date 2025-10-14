@@ -21,6 +21,7 @@
 - Add Page Manager class to Playwright tests [SWIS-132](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-132)
 - Add Playwright test to confirm personal information on review page [SWIS-100](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-100)
 - Add Playwright test to edit personal information on review page [SWIS-111](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-111)
+- Automate build ID for QA and PROD builds [SWIS-34](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-34)
 - Update to design system v4
   - `new` page Design system upgrade [SWIS-79](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-79)
   - `personal` page Design system upgrade [SWIS-80](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-80)
