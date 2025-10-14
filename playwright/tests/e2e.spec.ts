@@ -47,18 +47,18 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
     });
 
     await test.step("displays Personal Information on review page", async () => {
-      await expect(pageManager.reviewPage.firstNameInput).toHaveValue(
-        TEST_PATRON_INFO.firstName
-      );
-      await expect(pageManager.reviewPage.lastNameInput).toHaveValue(
-        TEST_PATRON_INFO.lastName
-      );
-      await expect(pageManager.reviewPage.dateOfBirthInput).toHaveValue(
-        TEST_PATRON_INFO.dateOfBirth
-      );
-      await expect(pageManager.reviewPage.emailInput).toHaveValue(
-        TEST_PATRON_INFO.email
-      );
+      await expect(
+        pageManager.reviewPage.getText(TEST_PATRON_INFO.firstName)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_PATRON_INFO.lastName)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_PATRON_INFO.dateOfBirth)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_PATRON_INFO.email)
+      ).toBeVisible();
       await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
     });
   });

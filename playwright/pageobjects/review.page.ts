@@ -1,5 +1,4 @@
 import { Page, Locator } from "@playwright/test";
-import { TEST_PATRON_INFO } from "../utils/constants";
 
 export class ReviewPage {
   readonly page: Page;
@@ -8,16 +7,12 @@ export class ReviewPage {
   readonly personalInfoHeading: Locator;
   readonly firstNameHeading: Locator;
   readonly firstNameInput: Locator;
-  readonly firstNameValue: Locator;
   readonly lastNameHeading: Locator;
   readonly lastNameInput: Locator;
-  readonly lastNameValue: Locator;
   readonly dateOfBirthHeading: Locator;
   readonly dateOfBirthInput: Locator;
-  readonly dateOfBirthValue: Locator;
   readonly emailHeading: Locator;
   readonly emailInput: Locator;
-  readonly emailValue: Locator;
   readonly receiveInfoHeading: Locator;
   readonly receiveInfoChoice: Locator;
   readonly receiveInfoCheckbox: Locator;
@@ -44,15 +39,9 @@ export class ReviewPage {
       name: "First Name (Required)",
       exact: true,
     });
-    this.firstNameValue = page.getByText(TEST_PATRON_INFO.firstName, {
-      exact: true,
-    });
     this.lastNameHeading = page.getByText("Last Name", { exact: true });
     this.lastNameInput = page.getByRole("textbox", {
       name: "Last Name (Required)",
-      exact: true,
-    });
-    this.lastNameValue = page.getByText(TEST_PATRON_INFO.lastName, {
       exact: true,
     });
     this.dateOfBirthHeading = page.getByText("Date of Birth", { exact: true });
@@ -60,15 +49,11 @@ export class ReviewPage {
       name: "Date of Birth (Required)",
       exact: true,
     });
-    this.dateOfBirthValue = page.getByText(TEST_PATRON_INFO.dateOfBirth, {
-      exact: true,
-    });
     this.emailHeading = page.getByText("Email Address", { exact: true });
     this.emailInput = page.getByRole("textbox", {
       name: "Email Address (Required)",
       exact: true,
     });
-    this.emailValue = page.getByText(TEST_PATRON_INFO.email, { exact: true });
     this.receiveInfoHeading = page.getByText(
       "Receive information about NYPL's programs and services",
       { exact: true }
@@ -92,5 +77,9 @@ export class ReviewPage {
       name: "locations",
       exact: true,
     });
+  }
+
+  getText(expected: string) {
+    return this.page.getByText(expected, { exact: true });
   }
 }
