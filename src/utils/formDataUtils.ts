@@ -243,7 +243,7 @@ const validateAddressFormData = (initErrorObj, addresses: Addresses) => {
  */
 const validatePersonalFormData = (initErrorObj, data) => {
   let errorObj = { ...initErrorObj };
-  const { firstName, lastName, birthdate, ageGate, email, policyType } = data;
+  const { firstName, lastName, birthdate, email } = data;
 
   if (isEmpty(firstName)) {
     errorObj = { ...errorObj, firstName: errorMessages.firstName };

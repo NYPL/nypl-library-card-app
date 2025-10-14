@@ -16,10 +16,7 @@ interface PersonalFormFieldsProps {
   agencyType?: string;
   id?: string;
 }
-function PersonalFormFields({
-  agencyType = "",
-  id = "",
-}: PersonalFormFieldsProps) {
+function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
   const { t } = useTranslation("common");
   const {
     register,

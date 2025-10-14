@@ -187,7 +187,8 @@ function AddressVerificationContainer() {
             <Radio
               key={`${addressType}-${idx}`}
               id={`${addressType}-${idx}`}
-              className={`radio-input ${styles.input}`}
+              sx={styles.input}
+              className={`radio-input`}
               {...register(`${addressType}-address-select`, {
                 required: true,
                 onChange: onChange,

@@ -1,4 +1,4 @@
-import React, { act } from "react";
+import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { axe } from "jest-axe";
 import AgeFormFields from ".";
@@ -50,6 +50,7 @@ const ageFormErrorMessages = {
 // The `errors` object shape from `react-hook-form`.
 const reactHookFormErrors = {
   birthdate: {
+    name: "birthdate",
     message: "Please enter a valid date, MM/DD/YYYY, including slashes.",
   },
 };
@@ -91,7 +92,7 @@ describe("AgeFormFields", () => {
           },
         }}
         hookFormState={{
-          errors: reactHookFormErrors,
+          errors: reactHookFormErrors.birthdate,
           formOptions: {
             mode: "onBlur",
             reValidateMode: "onBlur",
@@ -126,7 +127,7 @@ describe("AgeFormFields", () => {
           },
         }}
         hookFormState={{
-          errors: reactHookFormErrors,
+          errors: reactHookFormErrors.birthdate,
           formOptions: {
             mode: "onBlur",
             reValidateMode: "onBlur",
