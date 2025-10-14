@@ -10,6 +10,14 @@ export class ReviewPage {
   readonly dateOfBirthHeading: Locator;
   readonly emailHeading: Locator;
   readonly receiveInfoHeading: Locator;
+  readonly editPersonalInfoButton: Locator;
+  readonly firstNameInput: Locator;
+  readonly lastNameInput: Locator;
+  readonly dateOfBirthInput: Locator;
+  readonly emailInput: Locator;
+  readonly receiveInfoCheckbox: Locator;
+  readonly alternateFormLink: Locator;
+  readonly locationsLink: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -33,5 +41,39 @@ export class ReviewPage {
       "Receive information about NYPL's programs and services",
       { exact: true }
     );
+    this.editPersonalInfoButton = page
+      .getByRole("button", {
+        name: "Edit",
+        exact: true,
+      })
+      .first();
+    this.firstNameInput = page.getByRole("textbox", {
+      name: "First Name (Required)",
+      exact: true,
+    });
+    this.lastNameInput = page.getByRole("textbox", {
+      name: "Last Name (Required)",
+      exact: true,
+    });
+    this.dateOfBirthInput = page.getByRole("textbox", {
+      name: "Date of Birth (Required)",
+      exact: true,
+    });
+    this.emailInput = page.getByRole("textbox", {
+      name: "Email Address (Required)",
+      exact: true,
+    });
+    this.receiveInfoCheckbox = page.getByText(
+      "Yes, I would like to receive information about NYPL's programs and services",
+      { exact: true }
+    );
+    this.alternateFormLink = this.page.getByRole("link", {
+      name: "alternate form",
+      exact: true,
+    });
+    this.locationsLink = this.page.getByRole("link", {
+      name: "locations",
+      exact: true,
+    });
   }
 }
