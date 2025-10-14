@@ -167,7 +167,7 @@ function AddressVerificationContainer() {
     return (
       <RadioGroup
         className="address-container"
-        name="address-select-container"
+        name=""
         labelText="address-radio-group"
         showLabel={false}
         sx={{
