@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { ReviewPage } from "../pageobjects/review.page";
+import { TEST_PATRON_INFO } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/review?newCard=true");
@@ -21,11 +22,6 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.emailHeading).toBeVisible();
     await expect(reviewPage.receiveInfoHeading).toBeVisible();
   });
-
-  // test: displays home address section headings
-  // test: displays alternate address section headings
-  // test: displays create your account section headings
-  // test: displays submit button
 });
 
 test.describe("edits patron information on review page", () => {
