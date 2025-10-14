@@ -1,10 +1,9 @@
 require("newrelic");
 
 const { i18n } = require("./next-i18next.config");
+const pkg = require("./package.json");
 
-const PROD_BUILD_ID = "production-1.2.6-2";
-
-console.info("PROD_BUILD_ID: ", PROD_BUILD_ID);
+const BUILD_ID = pkg.version;
 
 module.exports = {
   basePath: "/library-card",
@@ -20,5 +19,14 @@ module.exports = {
       },
     ];
   },
-  generateBuildId: async () => `${PROD_BUILD_ID}`,
+  generateBuildId: async () => {
+    if (process.env.NEXT_BUILD_ID) {
+      console.info(`NEXT_BUILD_ID: ${process.env.NEXT_BUILD_ID}`);
+      return process.env.NEXT_BUILD_ID;
+    }
+    console.warn(
+      `Warning: NEXT_BUILD_ID is missing in env, using package.json ${BUILD_ID} version as build ID\n`
+    );
+    return BUILD_ID;
+  },
 };

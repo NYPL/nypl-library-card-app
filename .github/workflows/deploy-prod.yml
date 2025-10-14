@@ -48,8 +48,12 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: nypl-library-card-app
           IMAGE_TAG: ${{ github.sha }}
+          NEXT_BUILD_ID: ${{ github.sha }}-${{ github.run_number }}-prod
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build \
+           --build-arg NEXT_BUILD_ID="${NEXT_BUILD_ID}" \
+           -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG  \
+           .
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:production-latest
 
       - name: Push image to Amazon ECR
