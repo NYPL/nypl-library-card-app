@@ -5,7 +5,6 @@ import { TEST_PATRON_INFO } from "../utils/constants";
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/review?newCard=true");
 });
-
 test.describe("displays elements on review page", () => {
   test("displays headings", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
