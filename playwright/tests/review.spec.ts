@@ -59,4 +59,16 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
   });
+
+  test("displays Create Your Account section headings", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await expect(reviewPage.createYourAccountHeading).toBeVisible();
+    await expect(reviewPage.usernameHeading).toBeVisible();
+    await expect(reviewPage.passwordHeading).toBeVisible();
+    await expect(reviewPage.showPassword).toBeVisible();
+    await expect(reviewPage.homeLibraryHeading).toBeVisible();
+    await expect(reviewPage.ebranchHeading).toBeVisible();
+    await expect(reviewPage.createYourAccountEditButton).toBeVisible();
+    await expect(reviewPage.submitButton).toBeVisible();
+  });
 });

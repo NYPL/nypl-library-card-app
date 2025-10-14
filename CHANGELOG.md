@@ -21,6 +21,7 @@
 - Add Page Manager class to Playwright tests [SWIS-132](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-132)
 - Add Playwright test to confirm personal information on review page [SWIS-100](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-100)
 - Add Playwright test to edit personal information on review page [SWIS-111](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-111)
+- Add Playwright test to confirm create your account section on review page [SWIS-104](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-104)
 
 ### 1.2.6
 

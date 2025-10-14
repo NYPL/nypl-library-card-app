@@ -18,6 +18,14 @@ export class ReviewPage {
   readonly receiveInfoCheckbox: Locator;
   readonly alternateFormLink: Locator;
   readonly locationsLink: Locator;
+  readonly createYourAccountHeading: Locator;
+  readonly usernameHeading: Locator;
+  readonly showPassword: Locator;
+  readonly passwordHeading: Locator;
+  readonly homeLibraryHeading: Locator;
+  readonly ebranchHeading: Locator;
+  readonly createYourAccountEditButton: Locator;
+  readonly submitButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -73,6 +81,27 @@ export class ReviewPage {
     });
     this.locationsLink = this.page.getByRole("link", {
       name: "locations",
+      exact: true,
+    });
+
+    this.createYourAccountHeading = page.getByRole("heading", {
+      name: "Create Your Account",
+      level: 3,
+    });
+    this.usernameHeading = page.getByText("Username", { exact: true });
+    this.passwordHeading = page.getByText("Password", { exact: true });
+    this.showPassword = page.getByText("Show Password", { exact: true });
+    this.homeLibraryHeading = page.getByText("Home Library", { exact: true });
+    this.ebranchHeading = page.getByText("E-Branch", { exact: true });
+    this.createYourAccountEditButton = page
+      .getByRole("button", {
+        name: "Edit",
+        exact: true,
+      })
+      .nth(1);
+
+    this.submitButton = page.getByRole("button", {
+      name: "Submit",
       exact: true,
     });
   }
