@@ -20,6 +20,7 @@
 - Add Playwright util to fill in forms [SWIS-115](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-115)
 - Add Page Manager class to Playwright tests [SWIS-132](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-132)
 - Add Playwright test to confirm personal information on review page [SWIS-100](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-100)
+- Add Playwright test to edit personal information on review page [SWIS-111](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-111)
 
 ### 1.2.6
 
