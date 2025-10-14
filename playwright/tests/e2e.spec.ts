@@ -61,21 +61,5 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
       );
       await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
     });
-
-    // await test.step("displays Address on review page", async () => {});
-
-    // await test.step("displays Alternate Address on review page", async () => {});
-
-    // await test.step("displays Create Your Account on review page", async () => {});
   });
 });
-
-// test.describe: submits application
-// test: displays static elements on success page
-// test: displays variable elements on success page (e.g., member name, current date)
-
-// test.describe: navigates from get started page to success page
-// test: confirms user exists in Sierra database
-// test: deletes user from Sierra database
-
-// test.describe: navigates back to previous pages from account page
