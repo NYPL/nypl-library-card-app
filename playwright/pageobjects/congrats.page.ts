@@ -4,6 +4,11 @@ export class CongratsPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
   readonly stepHeading: Locator;
+  readonly getStartedHeading: Locator;
+  readonly memberNameHeading: Locator;
+  readonly issuedDateHeading: Locator;
+  readonly issuedDate: Locator;
+  readonly libraryCardLogo: Locator;
   readonly locationsLink: Locator;
   readonly photoIdAndProofOfAddressLink: Locator;
   readonly getHelpEmailLink: Locator;
@@ -21,7 +26,16 @@ export class CongratsPage {
       name: "Congratulations! You now have a digital New York Public Library card.",
       level: 2,
     });
-
+    this.getStartedHeading = page.getByRole("heading", {
+      name: "Get Started with The New York Public Library",
+      level: 2,
+    });
+    this.memberNameHeading = page.getByText("MEMBER NAME", {
+      exact: true,
+    });
+    this.issuedDateHeading = page.getByText("ISSUED");
+    this.issuedDate = page.getByText(this.getDate(), { exact: true });
+    this.libraryCardLogo = page.locator(".background-lion");
     this.locationsLink = page.getByRole("link", {
       name: "locations",
       exact: true,
@@ -39,5 +53,14 @@ export class CongratsPage {
     this.discoverLink = page.getByRole("link", {
       name: "Discover everything you can do with your library card.",
     });
+  }
+
+  getDate() {
+    const today = new Date();
+    const formattedDate = `${(today.getMonth() + 1).toString().padStart(2, "0")}/${today
+      .getDate()
+      .toString()
+      .padStart(2, "0")}/${today.getFullYear()}`;
+    return formattedDate; // MM/DD/YYYY
   }
 }
