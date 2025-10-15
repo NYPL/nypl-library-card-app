@@ -17,7 +17,7 @@ test("displays library card on Congrats page", async ({ page }) => {
   await expect(congratsPage.memberNameHeading).toBeVisible();
   await expect(congratsPage.issuedDateHeading).toBeVisible();
   await expect(congratsPage.issuedDate).toBeVisible();
-  await expect(congratsPage.libraryCardLogo).toBeVisible();
+  await expect(congratsPage.libraryCardBackground).toBeVisible();
 });
 
 test("displays links on Congrats page", async ({ page }) => {

@@ -8,7 +8,7 @@ export class CongratsPage {
   readonly memberNameHeading: Locator;
   readonly issuedDateHeading: Locator;
   readonly issuedDate: Locator;
-  readonly libraryCardLogo: Locator;
+  readonly libraryCardBackground: Locator;
   readonly locationsLink: Locator;
   readonly photoIdAndProofOfAddressLink: Locator;
   readonly getHelpEmailLink: Locator;
@@ -37,7 +37,7 @@ export class CongratsPage {
     this.issuedDate = page.locator("#issued").getByText(this.getDate(), {
       exact: true,
     });
-    this.libraryCardLogo = page.locator(".background-lion");
+    this.libraryCardBackground = page.locator(".background-lion");
     this.locationsLink = page.getByRole("link", {
       name: "locations",
       exact: true,
