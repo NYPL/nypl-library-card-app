@@ -57,7 +57,7 @@ export class CongratsPage {
     });
   }
 
-  getDate() {
+  public getDate(): string {
     const today = new Date();
     const formattedDate = `${(today.getMonth() + 1).toString().padStart(2, "0")}/${today
       .getDate()
