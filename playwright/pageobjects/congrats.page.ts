@@ -30,11 +30,13 @@ export class CongratsPage {
       name: "Get Started with The New York Public Library",
       level: 2,
     });
-    this.memberNameHeading = page.getByText("MEMBER NAME", {
+    this.memberNameHeading = page
+      .locator("#member-name")
+      .getByText("MEMBER NAME");
+    this.issuedDateHeading = page.locator("#issued").getByText("ISSUED");
+    this.issuedDate = page.locator("#issued").getByText(this.getDate(), {
       exact: true,
     });
-    this.issuedDateHeading = page.getByText("ISSUED");
-    this.issuedDate = page.getByText(this.getDate(), { exact: true });
     this.libraryCardLogo = page.locator(".background-lion");
     this.locationsLink = page.getByRole("link", {
       name: "locations",
