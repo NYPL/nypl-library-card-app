@@ -23,6 +23,7 @@
 - Add Playwright test to confirm Address section headings on review page [SWIS-103](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-103)
 - Add Playwright test to edit personal information on review page [SWIS-111](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-111)
 - Automate build ID for QA and PROD builds [SWIS-34](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-34)
+- Add Playwright test to confirm remaining static elements on congrats page [SWIS-101](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-101)
 
 ### 1.2.6
 
