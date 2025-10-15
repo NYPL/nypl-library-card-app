@@ -10,6 +10,12 @@ export class ReviewPage {
   readonly dateOfBirthHeading: Locator;
   readonly emailHeading: Locator;
   readonly receiveInfoHeading: Locator;
+  readonly addressHeading: Locator;
+  readonly streetHeading: Locator;
+  readonly cityHeading: Locator;
+  readonly stateHeading: Locator;
+  readonly postalCodeHeading: Locator;
+  readonly addressEditButton: Locator;
   readonly editPersonalInfoButton: Locator;
   readonly firstNameInput: Locator;
   readonly lastNameInput: Locator;
@@ -34,6 +40,13 @@ export class ReviewPage {
       name: "Personal Information",
       level: 3,
     });
+
+    this.addressHeading = page.getByRole("heading", {
+      name: "Address",
+      level: 3,
+      exact: true,
+    });
+
     this.firstNameHeading = page.getByText("First Name", { exact: true });
     this.lastNameHeading = page.getByText("Last Name", { exact: true });
     this.dateOfBirthHeading = page.getByText("Date of Birth", { exact: true });
@@ -42,6 +55,13 @@ export class ReviewPage {
       "Receive information about NYPL's programs and services",
       { exact: true }
     );
+
+    this.streetHeading = page.getByText("Street Address", { exact: true });
+    this.cityHeading = page.getByText("City", { exact: true });
+    this.stateHeading = page.getByText("State", { exact: true });
+    this.postalCodeHeading = page.getByText("Postal Code", { exact: true });
+    this.addressEditButton = page.locator("#editAddressButton");
+
     this.editPersonalInfoButton = page
       .getByRole("button", {
         name: "Edit",

@@ -21,6 +21,16 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.emailHeading).toBeVisible();
     await expect(reviewPage.receiveInfoHeading).toBeVisible();
   });
+  test("displays Address section headings", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await expect(reviewPage.addressHeading).toBeVisible();
+    await expect(reviewPage.streetHeading).toBeVisible();
+    await expect(reviewPage.cityHeading).toBeVisible();
+    await expect(reviewPage.stateHeading).toBeVisible();
+    await expect(reviewPage.postalCodeHeading).toBeVisible();
+    await expect(reviewPage.addressEditButton).toBeVisible();
+    await expect(reviewPage.addressEditButton).toBeEnabled();
+  });
 });
 
 test.describe("edits patron information on review page", () => {
