@@ -1,4 +1,8 @@
 import { Page, Locator } from "@playwright/test";
+import {
+  USERNAME_AVAILABLE_MESSAGE,
+  USERNAME_UNAVAILABLE_MESSAGE,
+} from "../utils/constants";
 
 export class AccountPage {
   readonly page: Page;
@@ -46,11 +50,9 @@ export class AccountPage {
       name: "Check if username is available",
       exact: true,
     });
-    this.availableUsernameMessage = page.getByText(
-      "This username is available."
-    );
+    this.availableUsernameMessage = page.getByText(USERNAME_AVAILABLE_MESSAGE);
     this.unavailableUsernameError = page.getByText(
-      "This username is unavailable. Please try another."
+      USERNAME_UNAVAILABLE_MESSAGE
     );
     this.passwordInput = page.getByRole("textbox", {
       name: "Password (Required)",

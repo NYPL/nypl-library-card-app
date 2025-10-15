@@ -1,5 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { AccountPage } from "../pageobjects/account.page";
+import { mockUsernameApi } from "../utils/mock-api";
+import {
+  USERNAME_AVAILABLE_MESSAGE,
+  USERNAME_UNAVAILABLE_MESSAGE,
+} from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/account?newCard=true");
@@ -106,13 +111,7 @@ test.describe("displays errors for invalid inputs on Account page", () => {
 test.describe("mock API responses on Account page", () => {
   test("displays username available message", async ({ page }) => {
     // mock the API call for username availability
-    await page.route("**/library-card/api/username", async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        body: JSON.stringify({ message: "This username is available." }),
-      });
-    });
+    await mockUsernameApi(page, USERNAME_AVAILABLE_MESSAGE);
 
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("AvailableUsername");
@@ -122,15 +121,7 @@ test.describe("mock API responses on Account page", () => {
 
   test("displays username unavailable error message", async ({ page }) => {
     // mock the API call for username unavailability
-    await page.route("**/library-card/api/username", async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        body: JSON.stringify({
-          message: "This username is unavailable. Please try another.",
-        }),
-      });
-    });
+    await mockUsernameApi(page, USERNAME_UNAVAILABLE_MESSAGE);
 
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("UnavailableUsername");
