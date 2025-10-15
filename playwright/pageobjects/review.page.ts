@@ -21,6 +21,7 @@ export class ReviewPage {
   readonly lastNameInput: Locator;
   readonly dateOfBirthInput: Locator;
   readonly emailInput: Locator;
+  readonly receiveInfoChoice: Locator;
   readonly receiveInfoCheckbox: Locator;
   readonly alternateFormLink: Locator;
   readonly locationsLink: Locator;
@@ -83,6 +84,7 @@ export class ReviewPage {
       name: "Email Address (Required)",
       exact: true,
     });
+    this.receiveInfoChoice = page.getByText("Yes", { exact: true });
     this.receiveInfoCheckbox = page.getByText(
       "Yes, I would like to receive information about NYPL's programs and services",
       { exact: true }
@@ -95,5 +97,9 @@ export class ReviewPage {
       name: "locations",
       exact: true,
     });
+  }
+
+  getText(expected: string) {
+    return this.page.getByText(expected, { exact: true });
   }
 }
