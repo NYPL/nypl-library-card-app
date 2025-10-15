@@ -2,6 +2,7 @@ import {
   Checkbox,
   FormRow,
   FormField as DSFormField,
+  HorizontalRule,
 } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import React, { useState, useEffect } from "react";
@@ -44,7 +45,7 @@ function AccountFormFields({
   }, []);
   const minPasswordLength = 8;
   const maxPasswordLength = 32;
-  const update = () => setShowPassword(!showPassword);
+  const update = () => setShowPassword(() => !showPassword);
   const passwordType = showPassword ? "text" : "password";
 
   // When the component renders on the client-side, we want to turn the password
@@ -131,6 +132,8 @@ function AccountFormFields({
           )}
         </DSFormField>
       </FormRow>
+
+      <HorizontalRule />
 
       <FormRow id={`${id}-accountForm-5`}>
         <DSFormField>

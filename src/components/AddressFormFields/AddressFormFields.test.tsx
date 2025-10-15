@@ -92,12 +92,12 @@ describe("AddressFormFields", () => {
     // is in a separate element inside the <label> element. But, getByRole
     // works just as well.
     const line1 = screen.getByRole("textbox", {
-      name: "Street Address (Required)",
+      name: "Street Address (required)",
     });
     const line2 = screen.getByLabelText("Apartment / Suite");
-    const city = screen.getByRole("textbox", { name: "City (Required)" });
-    const state = screen.getByRole("textbox", { name: "State (Required)" });
-    const zip = screen.getByRole("textbox", { name: "Postal Code (Required)" });
+    const city = screen.getByRole("textbox", { name: "City (required)" });
+    const state = screen.getByRole("textbox", { name: "State (required)" });
+    const zip = screen.getByRole("textbox", { name: "Postal Code (required)" });
 
     expect(line1).toBeInTheDocument();
     expect(line2).toBeInTheDocument();

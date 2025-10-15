@@ -23,6 +23,13 @@
 - Add Playwright test to confirm Address section headings on review page [SWIS-103](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-103)
 - Add Playwright test to edit personal information on review page [SWIS-111](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-111)
 - Automate build ID for QA and PROD builds [SWIS-34](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-34)
+- Update to design system v4
+  - `new` page Design system upgrade [SWIS-79](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-79)
+  - `personal` page Design system upgrade [SWIS-80](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-80)
+  - `review` page Design system upgrade [SWIS-81](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-81)
+  - `location` and `workAddress` page Design system upgrade [SWIS-78](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-78)
+  - `congrats` page Design system upgrade [SWIS-77](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-77)
+  - `address verification` page Design system upgrade [SWIS-76](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-76)
 
 ### 1.2.6
 

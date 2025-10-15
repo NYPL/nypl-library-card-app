@@ -1,4 +1,4 @@
-import { Heading } from "@nypl/design-system-react-components";
+import { Box, Heading } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect } from "react";
@@ -28,9 +28,9 @@ function ReviewPage({ hasUserAlreadyRegistered, csrfToken }: ReviewProps) {
   }, []);
   return (
     <>
-      <Heading level="two">{t("review.title")}</Heading>
-      <p>{t("review.description")}</p>
-      <p>{t("internationalInstructions")}</p>
+      <Heading level="h2">{t("review.title")}</Heading>
+      <Box mt="s">{t("review.description")}</Box>
+      <Box mt="s">{t("internationalInstructions")}</Box>
       <ReviewFormContainer csrfToken={csrfToken} />
     </>
   );
