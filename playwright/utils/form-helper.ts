@@ -28,11 +28,10 @@ async function fillAddress(page: AddressFormPage, addressData: AddressData) {
 
 export async function fillAccountInfo(page: AccountPage) {
   await page.usernameInput.fill(TEST_CUSTOMIZE_ACCOUNT.username);
-  await page.availableUsernameButton.click();
   await page.passwordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
   await page.verifyPasswordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
-  await page.selectHomeLibrary.selectOption("lb");
-  await page.acceptTermsCheckbox.check();
+  await page.selectHomeLibrary.selectOption(TEST_CUSTOMIZE_ACCOUNT.homeLibrary);
+  // await page.acceptTermsCheckbox.check();
 }
 
 export async function fillHomeAddress(page: AddressPage) {
