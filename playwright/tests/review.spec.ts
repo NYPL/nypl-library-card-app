@@ -67,7 +67,7 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.passwordHeading).toBeVisible();
     await expect(reviewPage.showPassword).toBeVisible();
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
-    await expect(reviewPage.ebranchHeading).toBeVisible();
+    await expect(reviewPage.ebranchOption).toBeVisible();
     await expect(reviewPage.createYourAccountEditButton).toBeVisible();
     await expect(reviewPage.submitButton).toBeVisible();
   });
