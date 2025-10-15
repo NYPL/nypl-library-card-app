@@ -38,7 +38,7 @@ test.describe("displays all form elements on Account page", () => {
   });
 });
 
-test.describe("displays errors for invalid inputs", () => {
+test.describe("displays errors for invalid inputs on Account page", () => {
   test("displays errors for required fields", async ({ page }) => {
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("");
@@ -100,5 +100,41 @@ test.describe("displays errors for invalid inputs", () => {
     await accountPage.nextButton.click();
     await expect(accountPage.usernameError).toBeVisible();
     await expect(accountPage.passwordError).toBeVisible();
+  });
+});
+
+test.describe("mock API responses on Account page", () => {
+  test("displays username available message", async ({ page }) => {
+    // mock the API call for username availability
+    await page.route("**/library-card/api/username", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ message: "This username is available." }),
+      });
+    });
+
+    const accountPage = new AccountPage(page);
+    await accountPage.usernameInput.fill("AvailableUsername");
+    await accountPage.availableUsernameButton.click();
+    await expect(accountPage.availableUsernameMessage).toBeVisible();
+  });
+
+  test("displays username unavailable error message", async ({ page }) => {
+    // mock the API call for username unavailability
+    await page.route("**/library-card/api/username", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          message: "This username is unavailable. Please try another.",
+        }),
+      });
+    });
+
+    const accountPage = new AccountPage(page);
+    await accountPage.usernameInput.fill("UnavailableUsername");
+    await accountPage.availableUsernameButton.click();
+    await expect(accountPage.unavailableUsernameError).toBeVisible();
   });
 });

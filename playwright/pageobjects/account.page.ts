@@ -7,7 +7,7 @@ export class AccountPage {
   readonly usernameInput: Locator;
   readonly usernameError: Locator;
   readonly availableUsernameButton: Locator;
-  readonly availableUsername: Locator;
+  readonly availableUsernameMessage: Locator;
   readonly unavailableUsernameError: Locator;
   readonly passwordInput: Locator;
   readonly passwordError: Locator;
@@ -46,7 +46,9 @@ export class AccountPage {
       name: "Check if username is available",
       exact: true,
     });
-    this.availableUsername = page.getByText("This username is available.");
+    this.availableUsernameMessage = page.getByText(
+      "This username is available."
+    );
     this.unavailableUsernameError = page.getByText(
       "This username is unavailable. Please try another."
     );
@@ -62,8 +64,7 @@ export class AccountPage {
       exact: true,
     });
     this.verifyPasswordError = page.getByText("The two passwords don't match.");
-    this.showPasswordCheckbox = page.getByRole("checkbox", {
-      name: "Show Password",
+    this.showPasswordCheckbox = page.getByText("Show Password", {
       exact: true,
     });
     this.homeLibraryHeading = page.getByRole("heading", {
