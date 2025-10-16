@@ -63,3 +63,25 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
     });
   });
 });
+
+test.describe("navigates from Review page to Congrats page", () => {
+  test("mocks create patron API", async ({ page }) => {
+    const pageManager = new PageManager(page);
+
+    test.step("submits application", async () => {
+      await page.goto("/library-card/review?newCard=true");
+      await mockCreatePatronApi(page, {
+        names: "Test User",
+        barcodes: "1234567890",
+      });
+
+      await expect(pageManager.reviewPage.submitButton).toBeVisible();
+      pageManager.reviewPage.submitButton.click();
+    });
+
+    test.step("displays variable elements on Congrats page", async () => {
+      await expect(pageManager.congratsPage.memberName).toBeVisible();
+      await expect(pageManager.congratsPage.barcodeNumber).toBeVisible();
+    });
+  });
+});
