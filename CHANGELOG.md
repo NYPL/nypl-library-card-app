@@ -24,6 +24,7 @@
 - Add Playwright test to edit personal information on review page [SWIS-111](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-111)
 - Automate build ID for QA and PROD builds [SWIS-34](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-34)
 - Add Playwright test to confirm personal page user input displays on review page [SWIS-130](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-130)
+- Update Values in Home Library field [SWIS-95](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-95)
 
 ### 1.2.6
 
