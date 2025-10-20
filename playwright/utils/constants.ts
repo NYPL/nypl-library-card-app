@@ -1,8 +1,8 @@
 import { AddressData } from "./types";
 
 export const TEST_PATRON_INFO = {
-  firstName: "Test",
-  lastName: "User",
+  firstName: "Jane",
+  lastName: "Doe",
   email: "test@gmail.com",
   dateOfBirth: "12/25/1984",
 };
