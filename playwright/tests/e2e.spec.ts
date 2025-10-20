@@ -34,6 +34,8 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
       await expect(
         pageManager.addressVerificationPage.stepHeader
       ).toBeVisible();
+      await pageManager.addressVerificationPage.homeAddressOption.click();
+      await pageManager.addressVerificationPage.alternateAddressOption.click();
       await pageManager.addressVerificationPage.nextButton.click();
     });
 
