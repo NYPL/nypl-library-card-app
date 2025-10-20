@@ -31,7 +31,7 @@ export async function fillAccountInfo(page: AccountPage) {
   await page.passwordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
   await page.verifyPasswordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
   await page.selectHomeLibrary.selectOption(TEST_CUSTOMIZE_ACCOUNT.homeLibrary);
-  // await page.acceptTermsCheckbox.check();
+  await page.acceptTermsCheckbox.check();
 }
 
 export async function fillHomeAddress(page: AddressPage) {
