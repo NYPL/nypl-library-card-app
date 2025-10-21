@@ -21,6 +21,16 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.emailHeading).toBeVisible();
     await expect(reviewPage.receiveInfoHeading).toBeVisible();
   });
+  test("displays Address section headings", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await expect(reviewPage.addressHeading).toBeVisible();
+    await expect(reviewPage.streetHeading).toBeVisible();
+    await expect(reviewPage.cityHeading).toBeVisible();
+    await expect(reviewPage.stateHeading).toBeVisible();
+    await expect(reviewPage.postalCodeHeading).toBeVisible();
+    await expect(reviewPage.addressEditButton).toBeVisible();
+    await expect(reviewPage.addressEditButton).toBeEnabled();
+  });
 });
 
 test.describe("edits patron information on review page", () => {
@@ -58,5 +68,17 @@ test.describe("edits patron information on review page", () => {
     );
     await expect(reviewPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
+  });
+
+  test("displays Create Your Account section headings", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await expect(reviewPage.createYourAccountHeading).toBeVisible();
+    await expect(reviewPage.usernameHeading).toBeVisible();
+    await expect(reviewPage.passwordHeading).toBeVisible();
+    await expect(reviewPage.showPassword).toBeVisible();
+    await expect(reviewPage.homeLibraryHeading).toBeVisible();
+    await expect(reviewPage.ebranchValue).toBeVisible();
+    await expect(reviewPage.createYourAccountEditButton).toBeVisible();
+    await expect(reviewPage.submitButton).toBeVisible();
   });
 });
