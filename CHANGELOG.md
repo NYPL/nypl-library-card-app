@@ -28,6 +28,7 @@
 - Add Playwright test to confirm personal page user input displays on review page [SWIS-130](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-130)
 - Update Values in Home Library field [SWIS-95](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-95)
 - Add Playwright test to confirm remaining static elements on congrats page [SWIS-101](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-101)
+- Fix Playwright test and click addresses on address verification page [SWIS-141](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-141)
 
 ### 1.2.6
 
