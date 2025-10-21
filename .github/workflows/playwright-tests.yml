@@ -5,6 +5,10 @@ on:
     branches: [main]
   pull_request:
   workflow_call:
+    inputs:
+      PLAYWRIGHT_BASE_URL:
+        required: false
+        type: string
 
 jobs:
   playwright-tests:
@@ -19,6 +23,7 @@ jobs:
       OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
       OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
       IPSTACK_KEY: ${{ secrets.IPSTACK_KEY }}
+      PLAYWRIGHT_BASE_URL: ${{ inputs.PLAYWRIGHT_BASE_URL }}
     steps:
       - uses: actions/checkout@v4
 
