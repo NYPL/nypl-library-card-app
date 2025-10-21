@@ -13,6 +13,8 @@ jobs:
   playwright-tests:
     uses: ./.github/workflows/playwright-tests.yml
     secrets: inherit
+    with:
+      PLAYWRIGHT_BASE_URL: https://qa-www.nypl.org/library-card/new
 
   deploy-qa:
     runs-on: ubuntu-latest
