@@ -29,6 +29,7 @@
 - Add Playwright test to confirm remaining static elements on congrats page [SWIS-101](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-101)
 - Fix Playwright test and click addresses on address verification page [SWIS-141](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-141)
 - Configure Sierra API authorization into github actions and .env.local [SWIS-125](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-125)
+- Run Playwright tests on QA environment [SWIS-113](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-113)
 
 ### 1.2.6
 
