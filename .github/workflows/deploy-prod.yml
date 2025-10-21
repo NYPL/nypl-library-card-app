@@ -4,11 +4,11 @@ on:
   push:
     tags:
       - "production-*"
-  workflow_call:
-    inputs:
-      PLAYWRIGHT_BASE_URL:
-        required: false
-        type: string
+  # workflow_call:
+  #   inputs:
+  #     PLAYWRIGHT_BASE_URL:
+  #       required: false
+  #       type: string
 
 jobs:
   unit-tests:
