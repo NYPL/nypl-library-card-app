@@ -1,0 +1,18 @@
+name: Playwright Tests on QA
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_call:
+    inputs:
+      PLAYWRIGHT_BASE_URL:
+        required: false
+        type: string
+
+jobs:
+  playwright-tests:
+    uses: ./.github/workflows/playwright-tests.yml
+    secrets: inherit
+    with:
+      PLAYWRIGHT_BASE_URL: https://qa-www.nypl.org/library-card/new
