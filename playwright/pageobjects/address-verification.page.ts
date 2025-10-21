@@ -26,16 +26,14 @@ export class AddressVerificationPage {
       name: "Home Address",
       level: 3,
     });
-    this.homeAddressOption = this.page.getByRole("radio", {
-      name: TEST_HOME_ADDRESS.street,
-    });
+    this.homeAddressOption = this.page.getByText(TEST_HOME_ADDRESS.street);
     this.alternateAddressHeader = this.page.getByRole("heading", {
       name: "Alternate Address",
       level: 3,
     });
-    this.alternateAddressOption = this.page.getByRole("radio", {
-      name: TEST_ALTERNATE_ADDRESS.street,
-    });
+    this.alternateAddressOption = this.page.getByText(
+      TEST_ALTERNATE_ADDRESS.street
+    );
     this.previousButton = this.page.getByRole("link", {
       name: "Previous",
       exact: true,
