@@ -1,4 +1,8 @@
 import { Page, Locator } from "@playwright/test";
+import {
+  USERNAME_AVAILABLE_MESSAGE,
+  USERNAME_UNAVAILABLE_MESSAGE,
+} from "../utils/constants";
 
 export class ReviewPage {
   readonly page: Page;
@@ -32,6 +36,10 @@ export class ReviewPage {
   readonly homeLibraryHeading: Locator;
   readonly ebranchValue: Locator;
   readonly createYourAccountEditButton: Locator;
+  readonly usernameInput: Locator;
+  readonly availableUsernameButton: Locator;
+  readonly availableUsernameMessage: Locator;
+  readonly unavailableUsernameError: Locator;
   readonly submitButton: Locator;
 
   constructor(page: Page) {
@@ -48,13 +56,11 @@ export class ReviewPage {
       name: "Personal Information",
       level: 3,
     });
-
     this.addressHeading = page.getByRole("heading", {
       name: "Address",
       level: 3,
       exact: true,
     });
-
     this.firstNameHeading = page.getByText("First Name", { exact: true });
     this.lastNameHeading = page.getByText("Last Name", { exact: true });
     this.dateOfBirthHeading = page.getByText("Date of Birth", { exact: true });
@@ -63,13 +69,11 @@ export class ReviewPage {
       "Receive information about NYPL's programs and services",
       { exact: true }
     );
-
     this.streetHeading = page.getByText("Street Address", { exact: true });
     this.cityHeading = page.getByText("City", { exact: true });
     this.stateHeading = page.getByText("State", { exact: true });
     this.postalCodeHeading = page.getByText("Postal Code", { exact: true });
     this.addressEditButton = page.locator("#editAddressButton");
-
     this.editPersonalInfoButton = page
       .getByRole("button", {
         name: "Edit",
@@ -105,7 +109,6 @@ export class ReviewPage {
       name: "locations",
       exact: true,
     });
-
     this.createYourAccountHeading = page.getByRole("heading", {
       name: "Create Your Account",
       level: 3,
@@ -121,7 +124,18 @@ export class ReviewPage {
         exact: true,
       })
       .nth(1);
-
+    this.usernameInput = page.getByRole("textbox", {
+      name: "Username (Required)",
+      exact: true,
+    });
+    this.availableUsernameButton = page.getByRole("button", {
+      name: "Check if username is available",
+      exact: true,
+    });
+    this.availableUsernameMessage = page.getByText(USERNAME_AVAILABLE_MESSAGE);
+    this.unavailableUsernameError = page.getByText(
+      USERNAME_UNAVAILABLE_MESSAGE
+    );
     this.submitButton = page.getByRole("button", {
       name: "Submit",
       exact: true,
