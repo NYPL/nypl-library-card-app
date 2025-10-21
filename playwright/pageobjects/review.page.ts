@@ -123,7 +123,7 @@ export class ReviewPage {
         name: "Edit",
         exact: true,
       })
-      .nth(1);
+      .nth(2);
     this.usernameInput = page.getByRole("textbox", {
       name: "Username (Required)",
       exact: true,
