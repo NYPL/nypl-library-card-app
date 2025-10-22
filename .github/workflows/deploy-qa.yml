@@ -10,14 +10,10 @@ jobs:
     uses: ./.github/workflows/unit-tests.yml
     secrets: inherit
 
-  playwright-tests:
-    uses: ./.github/workflows/playwright-tests.yml
-    secrets: inherit
-
   deploy-qa:
     runs-on: ubuntu-latest
     environment: qa
-    needs: [unit-tests, playwright-tests]
+    needs: [unit-tests]
 
     permissions:
       id-token: write
@@ -71,3 +67,9 @@ jobs:
             --cluster nypl-library-card-app-qa \
             --service nypl-library-card-app-qa \
             --force-new-deployment
+
+  playwright-tests:
+    uses: ./.github/workflows/playwright-tests.yml
+    secrets: inherit
+    with:
+      PLAYWRIGHT_BASE_URL: https://qa-www.nypl.org/library-card/new # run on QA after deploy
