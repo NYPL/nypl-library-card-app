@@ -17,7 +17,7 @@ export const TEST_HOME_ADDRESS: AddressData = {
 export const TEST_CUSTOMIZE_ACCOUNT = {
   username: "qauser3000",
   password: "Test@1234",
-  homeLibrary: "E-Branch",
+  homeLibrary: "eb",
 };
 export const TEST_ALTERNATE_ADDRESS: AddressData = {
   street: "476 5th Ave",

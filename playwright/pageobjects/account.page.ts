@@ -62,10 +62,7 @@ export class AccountPage {
       exact: true,
     });
     this.verifyPasswordError = page.getByText("The two passwords don't match.");
-    this.showPasswordCheckbox = page.getByRole("checkbox", {
-      name: "Show Password",
-      exact: true,
-    });
+    this.showPasswordCheckbox = page.getByText("Show Password");
 
     this.homeLibraryHeading = page.getByRole("heading", {
       name: "Home Library",
@@ -84,10 +81,9 @@ export class AccountPage {
     this.privacyPolicy = page
       .locator("#mainContent")
       .getByRole("link", { name: "Privacy Policy", exact: true });
-    this.acceptTermsCheckbox = page.getByRole("checkbox", {
-      name: "Yes, I accept the terms and conditions.",
-      exact: true,
-    });
+    this.acceptTermsCheckbox = page.getByText(
+      "Yes, I accept the terms and conditions."
+    );
 
     this.acceptTermsError = page.getByText(
       "The Terms and Conditions must be checked."
