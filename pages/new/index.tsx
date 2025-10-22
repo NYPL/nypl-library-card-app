@@ -3,7 +3,7 @@
  * Do NOT point the browser to http://localhost:3000 with no route.
  * If you do, you will throw an error related to i18next.
  * */
-import { Heading } from "@nypl/design-system-react-components";
+import { Box, Heading } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 
 import { GetServerSideProps } from "next";
@@ -26,13 +26,20 @@ function HomePage({ policyType, lang }: HomePageProps) {
     <>
       <LanguageMenu />
 
-      <Heading level="two">{t("home.title")}</Heading>
+      <Heading level="h2" mb="s" fontSize="4">
+        {t("home.title")}
+      </Heading>
 
-      <p>{t("home.description.part1")}</p>
-      <p>{t("home.description.part2")}</p>
-      <p dangerouslySetInnerHTML={{ __html: t("home.description.part3") }} />
-      <p dangerouslySetInnerHTML={{ __html: t("home.description.part4") }} />
-
+      <Box mb="s">{t("home.description.part1")}</Box>
+      <Box mb="s">{t("home.description.part2")}</Box>
+      <Box
+        mb="s"
+        dangerouslySetInnerHTML={{ __html: t("home.description.part3") }}
+      />
+      <Box
+        mb="s"
+        dangerouslySetInnerHTML={{ __html: t("home.description.part4") }}
+      />
       <RoutingLinks
         next={{
           url: `/personal?newCard=true${queryParam}${

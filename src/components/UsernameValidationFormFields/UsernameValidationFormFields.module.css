@@ -1,7 +1,0 @@
-.usernameAvailable {
-  color: var(--nypl-colors-ui-success-primary);
-}
-
-.usernameUnavailable {
-  color: var(--nypl-colors-ui-error-primary);
-}

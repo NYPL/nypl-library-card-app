@@ -16,7 +16,7 @@ interface BannerProps {
 const Banner = ({ fullImageSrc = defaultImageSrc }: BannerProps) => {
   const { t } = useTranslation("common");
   const h1Heading = (
-    <Heading id="hero-banner" level="one" text={t("banner.title")} />
+    <Heading id="hero-banner" level="h1" text={t("banner.title")} />
   );
   return (
     <Hero
@@ -24,7 +24,7 @@ const Banner = ({ fullImageSrc = defaultImageSrc }: BannerProps) => {
       foregroundColor="#ffffff"
       backgroundImageSrc={fullImageSrc}
       heading={h1Heading}
-      heroType="primary"
+      variant="primary"
     />
   );
 };

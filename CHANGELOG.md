@@ -29,6 +29,13 @@
 - Add Playwright test to confirm remaining static elements on congrats page [SWIS-101](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-101)
 - Fix Playwright test and click addresses on address verification page [SWIS-141](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-141)
 - Configure Sierra API authorization into github actions and .env.local [SWIS-125](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-125)
+- Update to design system v4
+  - `new` page Design system upgrade [SWIS-79](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-79)
+  - `personal` page Design system upgrade [SWIS-80](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-80)
+  - `review` page Design system upgrade [SWIS-81](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-81)
+  - `location` and `workAddress` page Design system upgrade [SWIS-78](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-78)
+  - `congrats` page Design system upgrade [SWIS-77](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-77)
+  - `address verification` page Design system upgrade [SWIS-76](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-76)
 
 ### 1.2.6
 
