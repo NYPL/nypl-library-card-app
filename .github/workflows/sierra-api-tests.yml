@@ -1,0 +1,24 @@
+name: Sierra API Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run my code
+
+        run: node sierra_api_tests/auth_token.js
+
+        env:
+          NODE_ENV: production
+          SIERRA_BASIC_AUTH_BASE64: ${{ secrets.SIERRA_BASIC_AUTH_BASE64 }}
