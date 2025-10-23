@@ -87,9 +87,9 @@ export class AccountPage {
       .locator("#mainContent")
       .getByRole("link", { name: "Privacy Policy", exact: true });
     this.acceptTermsCheckbox = page.getByText(
-      "Yes, I accept the terms and conditions.",
-      { exact: true }
+      "Yes, I accept the terms and conditions."
     );
+
     this.acceptTermsError = page.getByText(
       "The Terms and Conditions must be checked."
     );
