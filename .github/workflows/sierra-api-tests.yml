@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Sierra API Tests
+      - name: Run Sierra API Tests
 
         run: node sierra_api_tests/auth_token.js
 
