@@ -26,3 +26,7 @@ export const TEST_ALTERNATE_ADDRESS: AddressData = {
   state: "NY",
   postalCode: "10018",
 };
+
+export const USERNAME_AVAILABLE_MESSAGE = "This username is available.";
+export const USERNAME_UNAVAILABLE_MESSAGE =
+  "This username is unavailable. Please try another.";
