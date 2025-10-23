@@ -20,5 +20,5 @@ jobs:
         run: node sierra_api_tests/auth_token.js
 
         env:
-          NODE_ENV: production
+          NODE_ENV: development
           SIERRA_BASIC_AUTH_BASE64: ${{ secrets.SIERRA_BASIC_AUTH_BASE64 }}
