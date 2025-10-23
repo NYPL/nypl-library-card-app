@@ -104,7 +104,7 @@ test.describe("displays errors for invalid inputs", () => {
     await expect(accountPage.passwordError).toBeVisible();
   });
 
-  test("verify patron's account info into customize your account form", async ({
+  test("verify patron's account info is entered into customize your account form", async ({
     page,
   }) => {
     const accountPage = new AccountPage(page);
@@ -120,9 +120,9 @@ test.describe("displays errors for invalid inputs", () => {
     );
 
     await accountPage.showPasswordCheckbox.click();
-    await expect(accountPage.showPasswordCheckbox).toBeEnabled();
+    await expect(accountPage.showPasswordCheckbox).toBeChecked();
     await accountPage.acceptTermsCheckbox.click();
-    await expect(accountPage.acceptTermsCheckbox).toBeEnabled();
+    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
     await expect(accountPage.selectHomeLibrary).toHaveValue(
       TEST_CUSTOMIZE_ACCOUNT.homeLibrary
     );
