@@ -14,32 +14,23 @@ async function getAuthToken() {
   return response;
 }
 
-getAuthToken()
-  .then((response) => {
+(async () => {
+  try {
+    const response = await getAuthToken();
     if (!response.ok) {
       console.error(
         `Failed to get auth token: ${response.status} ${response.statusText}`
       );
       return;
     }
-    response
-      .json()
-      .then((data) => {
-        const authToken = data.access_token;
-
-        if (authToken) {
-          console.log("Auth Token:", authToken);
-        } else {
-          console.error(
-            "Auth token not found in response, received data:",
-            data
-          );
-        }
-      })
-      .catch((err) => {
-        console.error("Error parsing JSON response:", err);
-      });
-  })
-  .catch((err) => {
-    console.error("Error fetching auth token:", err);
-  });
+    const data = await response.json();
+    const authToken = data.access_token;
+    if (authToken) {
+      console.log("Auth Token:", authToken);
+    } else {
+      console.error("Auth token not found in response, received data:", data);
+    }
+  } catch (err) {
+    console.error("Error fetching or parsing auth token:", err);
+  }
+})();
