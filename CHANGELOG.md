@@ -30,6 +30,7 @@
 - Fix Playwright test and click addresses on address verification page [SWIS-141](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-141)
 - Configure Sierra API authorization into github actions and .env.local [SWIS-125](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-125)
 - Add Playwright tests to mock username availability button on account and review page [SWIS-137](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-137)
+- Sierra API tests Github Workflow [SWIS-155](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-155)
 
 ### 1.2.6
 
