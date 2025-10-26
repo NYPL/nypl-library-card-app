@@ -2,7 +2,6 @@ import {
   Form,
   FormField as DSFormField,
   FormRow,
-  Heading,
 } from "@nypl/design-system-react-components";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
@@ -27,6 +26,7 @@ import useFormDataContext from "../../context/FormDataContext";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 import { NRError } from "../../logger/newrelic";
 import { Paragraph } from "../Paragraph";
+import { PageSubHeading } from "../PageSubHeading";
 
 const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -150,7 +150,7 @@ const AddressContainer = ({ csrfToken }) => {
 
   return (
     <>
-      <Heading level="h3">{t("location.address.title")}</Heading>
+      <PageSubHeading>{t("location.address.title")}</PageSubHeading>
       <Paragraph>{t("location.address.description")}</Paragraph>
 
       <Loader isLoading={isLoading} />
