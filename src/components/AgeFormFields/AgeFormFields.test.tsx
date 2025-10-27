@@ -8,19 +8,19 @@ import { formInitialState } from "../../context/FormDataContext";
 jest.mock("react-i18next", () => {
   const en = {
     personal: {
-      title: "Step 1 of 5: Personal Information",
+      title: "Step 1 of 5: Personal information",
       firstName: {
-        label: "First Name",
+        label: "First name",
       },
       lastName: {
-        label: "Last Name",
+        label: "Last name",
       },
       birthdate: {
-        label: "Date of Birth",
+        label: "Date of birth",
         instruction: "MM/DD/YYYY, including slashes",
       },
       email: {
-        label: "Email Address",
+        label: "Email address",
         instruction:
           "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://on.nypl.org/internationalresearch'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card.",
       },
@@ -74,7 +74,7 @@ describe("AgeFormFields", () => {
 
     const description = screen.getByText("MM/DD/YYYY, including slashes");
     const input = screen.getByRole("textbox", {
-      name: "Date of Birth (required)",
+      name: "Date of birth (required)",
     });
 
     expect(description).toBeInTheDocument();
@@ -104,7 +104,7 @@ describe("AgeFormFields", () => {
     );
 
     const input = screen.getByRole("textbox", {
-      name: "Date of Birth (required)",
+      name: "Date of birth (required)",
     });
 
     fireEvent.blur(input);
@@ -139,7 +139,7 @@ describe("AgeFormFields", () => {
     );
 
     const input = screen.getByRole("textbox", {
-      name: "Date of Birth (required)",
+      name: "Date of birth (required)",
     });
 
     fireEvent.blur(input);

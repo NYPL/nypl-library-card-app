@@ -1,4 +1,3 @@
-import { Heading } from "@nypl/design-system-react-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { useEffect } from "react";
@@ -16,6 +15,7 @@ import {
 } from "../../src/utils/csrfUtils";
 import * as cookie from "../../src/utils/CookieUtils";
 import { Paragraph } from "../../src/components/Paragraph";
+import { PageHeading } from "../../src/components/PageHeading";
 interface WorkAddressPageProps {
   hasUserAlreadyRegistered?: boolean;
   csrfToken: string;
@@ -32,7 +32,7 @@ function WorkAddressPage({
   });
   return (
     <>
-      <Heading level="h2">{t("location.workAddress.title")}</Heading>
+      <PageHeading>{t("location.workAddress.title")}</PageHeading>
       <Paragraph>{t("location.workAddress.description.part1")}</Paragraph>
       <Paragraph>{t("internationalInstructions")}</Paragraph>
       <WorkAddressContainer csrfToken={csrfToken} />

@@ -47,7 +47,7 @@ jest.mock("react-i18next", () => {
         issued: "ISSUED",
       },
       nextSteps: {
-        title: "Get Started with The New York Public Library",
+        title: "Get started with The New York Public Library",
         explore:
           "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
         borrow:

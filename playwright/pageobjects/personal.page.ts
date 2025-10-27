@@ -25,12 +25,12 @@ export class PersonalPage {
       level: 1,
     });
     this.stepHeading = this.page.getByRole("heading", {
-      name: "Step 1 of 5: Personal Information",
+      name: "Step 1 of 5: Personal information",
       level: 2,
     });
-    this.firstNameInput = this.page.getByLabel(/First Name/i);
-    this.lastNameInput = this.page.getByLabel(/Last Name/i);
-    this.dateOfBirthInput = this.page.getByLabel(/Date of Birth/i);
+    this.firstNameInput = this.page.getByLabel(/First name/i);
+    this.lastNameInput = this.page.getByLabel(/Last name/i);
+    this.dateOfBirthInput = this.page.getByLabel(/Date of birth/i);
     this.emailInput = this.page.getByLabel(/Email/i);
     this.checkBox = this.page.getByRole("checkbox", {
       name: "Yes, I would like to receive information about NYPL's programs and services",

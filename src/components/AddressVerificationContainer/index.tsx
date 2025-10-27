@@ -3,7 +3,6 @@ import {
   Form,
   FormField as DSFormField,
   FormRow,
-  Heading,
   Radio,
   RadioGroup,
 } from "@nypl/design-system-react-components";
@@ -19,6 +18,7 @@ import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
 import { useTranslation } from "next-i18next";
+import { PageSubHeading } from "../PageSubHeading";
 
 const styles = {
   input: {
@@ -220,9 +220,9 @@ function AddressVerificationContainer() {
     >
       <FormRow>
         <DSFormField>
-          <Heading id="verify-address-heading" level="h3">
+          <PageSubHeading id="verify-address-heading">
             {t("verifyAddress.homeAddress")}
-          </Heading>
+          </PageSubHeading>
           {renderMultipleAddresses(
             homeAddress,
             "home",
@@ -232,9 +232,7 @@ function AddressVerificationContainer() {
 
           {workAddress?.length > 0 && (
             <Box sx={styles.workAddressContainer}>
-              <Heading level="h3" mb="l">
-                {t("verifyAddress.workAddress")}
-              </Heading>
+              <PageSubHeading>{t("verifyAddress.workAddress")}</PageSubHeading>
 
               {renderMultipleAddresses(
                 workAddress,

@@ -59,7 +59,7 @@ const styles = {
     flex: { base: "1 1 100%", md: "1 1 50%" },
   },
   title: {
-    fontWeight: "regular",
+    fontWeight: "bold",
     marginBottom: "xs",
   },
   workTitle: {
@@ -283,7 +283,7 @@ function ReviewFormContainer({ csrfToken }) {
       </Box>
       {editSectionButton(
         setEditPersonalInfoFlag,
-        "Personal Information",
+        "Personal information",
         "personal"
       )}
     </Box>
@@ -327,7 +327,7 @@ function ReviewFormContainer({ csrfToken }) {
       </Box>
       {editSectionButton(
         setEditAccountInfoFlag,
-        "Create Your Account",
+        "Create your account",
         "account"
       )}
     </Box>

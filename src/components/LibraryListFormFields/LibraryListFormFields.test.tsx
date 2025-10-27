@@ -8,7 +8,7 @@ import { LibraryListObject } from "../../interfaces";
 jest.mock("react-i18next", () => {
   const en = {
     account: {
-      title: "Step 4 of 5: Customize Your Account",
+      title: "Step 4 of 5: Customize your account",
       description:
         "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
       username: {
@@ -22,14 +22,14 @@ jest.mock("react-i18next", () => {
           "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab",
       },
       verifyPassword: {
-        label: "Verify Password",
+        label: "Verify password",
         instruction: "8-32 characters",
       },
-      showPassword: "Show Password",
+      showPassword: "Show password",
       library: {
         selectLibrary: "Select a home library:",
         placeholder: "Type a library name, such as Parkchester Library",
-        title: "Home Library",
+        title: "Home library",
         description: {
           part1:
             "Choosing a home library will help us make sure you&apos;re getting everything you need from a branch that&apos;s most convenient for you.",

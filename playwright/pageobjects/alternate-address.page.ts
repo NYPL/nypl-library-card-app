@@ -20,18 +20,18 @@ export class AlternateAddressPage {
       level: 1,
     });
     this.stepHeading = page.getByRole("heading", {
-      name: "Alternate Address",
+      name: "Alternate address",
       level: 2,
     });
     this.addressHeading = page.getByRole("heading", {
-      name: "Alternate Address",
+      name: "Alternate address",
       level: 3,
     });
-    this.streetAddressInput = page.getByLabel(/Street Address/i);
+    this.streetAddressInput = page.getByLabel(/Street address/i);
     this.apartmentSuiteInput = page.getByLabel(/Apartment \/ Suite/i);
     this.cityInput = page.getByLabel(/City/i);
     this.stateInput = page.getByLabel(/State/i);
-    this.postalCodeInput = page.getByLabel(/Postal Code/i);
+    this.postalCodeInput = page.getByLabel(/Postal code/i);
     this.nextButton = page.getByRole("button", { name: "Next", exact: true });
     this.previousButton = page.getByRole("link", {
       name: "Previous",

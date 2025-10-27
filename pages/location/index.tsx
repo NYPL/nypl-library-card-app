@@ -1,4 +1,3 @@
-import { Heading } from "@nypl/design-system-react-components";
 import { useEffect } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -17,6 +16,7 @@ import {
 } from "../../src/utils/csrfUtils";
 import * as cookie from "../../src/utils/CookieUtils";
 import { Paragraph } from "../../src/components/Paragraph";
+import { PageHeading } from "../../src/components/PageHeading";
 
 interface PageProps {
   location: string;
@@ -45,7 +45,7 @@ function AddressPage({
   }, [router]);
   return (
     <>
-      <Heading level="h2">{t("location.title")}</Heading>
+      <PageHeading>{t("location.title")}</PageHeading>
       <Paragraph>{t("internationalInstructions")}</Paragraph>
       <AddressContainer csrfToken={csrfToken} />
     </>

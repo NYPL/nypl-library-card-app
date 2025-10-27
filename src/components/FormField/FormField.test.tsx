@@ -35,7 +35,7 @@ describe("FormField", () => {
     );
 
     expect(screen.getByLabelText(/a text field/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Required/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/required/i)).toBeInTheDocument();
   });
 
   test("it renders instructional text", () => {
