@@ -8,7 +8,6 @@ export const theme = {
         textDecoration: "underline",
         _hover: {
           color: "ui.link.secondary",
-          textDecoration: "underline",
           textDecorationStyle: "dotted !important",
           textDecorationThickness: "1px !important",
           textUnderlineOffset: "2px",

@@ -77,7 +77,9 @@ test.describe("displays errors for invalid inputs", () => {
 
   test("displays error when terms are not accepted", async ({ page }) => {
     const accountPage = new AccountPage(page);
+    await expect(accountPage.usernameInput).toBeVisible();
     await accountPage.usernameInput.fill("ValidUser1");
+    await expect(accountPage.passwordInput).toBeVisible();
     await accountPage.passwordInput.fill("ValidPass1!");
     await accountPage.verifyPasswordInput.fill("ValidPass1!");
     await accountPage.nextButton.click();
