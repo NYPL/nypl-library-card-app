@@ -41,11 +41,11 @@ export class ReviewPage {
       level: 1,
     });
     this.stepHeading = page.getByRole("heading", {
-      name: "Step 5 of 5: Confirm Your Information",
+      name: "Step 5 of 5: Confirm your information",
       level: 2,
     });
     this.personalInfoHeading = page.getByRole("heading", {
-      name: "Personal Information",
+      name: "Personal information",
       level: 3,
     });
 
@@ -55,19 +55,19 @@ export class ReviewPage {
       exact: true,
     });
 
-    this.firstNameHeading = page.getByText("First Name", { exact: true });
-    this.lastNameHeading = page.getByText("Last Name", { exact: true });
-    this.dateOfBirthHeading = page.getByText("Date of Birth", { exact: true });
-    this.emailHeading = page.getByText("Email Address", { exact: true });
+    this.firstNameHeading = page.getByText("First name", { exact: true });
+    this.lastNameHeading = page.getByText("Last name", { exact: true });
+    this.dateOfBirthHeading = page.getByText("Date of birth", { exact: true });
+    this.emailHeading = page.getByText("Email address", { exact: true });
     this.receiveInfoHeading = page.getByText(
       "Receive information about NYPL's programs and services",
       { exact: true }
     );
 
-    this.streetHeading = page.getByText("Street Address", { exact: true });
+    this.streetHeading = page.getByText("Street address", { exact: true });
     this.cityHeading = page.getByText("City", { exact: true });
     this.stateHeading = page.getByText("State", { exact: true });
-    this.postalCodeHeading = page.getByText("Postal Code", { exact: true });
+    this.postalCodeHeading = page.getByText("Postal code", { exact: true });
     this.addressEditButton = page.locator("#editAddressButton");
 
     this.editPersonalInfoButton = page
@@ -77,19 +77,19 @@ export class ReviewPage {
       })
       .first();
     this.firstNameInput = page.getByRole("textbox", {
-      name: "First Name (Required)",
+      name: "First name (required)",
       exact: true,
     });
     this.lastNameInput = page.getByRole("textbox", {
-      name: "Last Name (Required)",
+      name: "Last name (required)",
       exact: true,
     });
     this.dateOfBirthInput = page.getByRole("textbox", {
-      name: "Date of Birth (Required)",
+      name: "Date of birth (required)",
       exact: true,
     });
     this.emailInput = page.getByRole("textbox", {
-      name: "Email Address (Required)",
+      name: "Email address (required)",
       exact: true,
     });
     this.receiveInfoChoice = page.getByText("Yes", { exact: true });
@@ -107,13 +107,13 @@ export class ReviewPage {
     });
 
     this.createYourAccountHeading = page.getByRole("heading", {
-      name: "Create Your Account",
+      name: "Create your account",
       level: 3,
     });
     this.usernameHeading = page.getByText("Username", { exact: true });
     this.passwordHeading = page.getByText("Password", { exact: true });
-    this.showPassword = page.getByText("Show Password", { exact: true });
-    this.homeLibraryHeading = page.getByText("Home Library", { exact: true });
+    this.showPassword = page.getByText("Show password", { exact: true });
+    this.homeLibraryHeading = page.getByText("Home library", { exact: true });
     this.ebranchValue = page.getByText("E-Branch", { exact: true });
     this.createYourAccountEditButton = page
       .getByRole("button", {

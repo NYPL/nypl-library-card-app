@@ -7,7 +7,7 @@ context("Home", () => {
   });
 
   it("fill out the first two form pages", () => {
-    // Click the Get Started button.
+    // Click the Get started button.
     cy.get(".content-primary .button").click();
 
     // Verifying the URL.

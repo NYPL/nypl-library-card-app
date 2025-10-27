@@ -7,7 +7,7 @@ import AccountFormFields from ".";
 jest.mock("react-i18next", () => {
   const en = {
     account: {
-      title: "Step 4 of 5: Customize Your Account",
+      title: "Step 4 of 5: Customize your account",
       description:
         "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
       username: {
@@ -21,14 +21,14 @@ jest.mock("react-i18next", () => {
           "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab",
       },
       verifyPassword: {
-        label: "Verify Password",
+        label: "Verify password",
         instruction: "8-32 characters",
       },
-      showPassword: "Show Password",
+      showPassword: "Show password",
       library: {
         selectLibrary: "Select a home library:",
         placeholder: "Type a library name, such as Parkchester Library",
-        title: "Home Library",
+        title: "Home library",
         description: {
           part1:
             "Choosing a home library will help us make sure you&apos;re getting everything you need from a branch that&apos;s most convenient for you.",
@@ -84,14 +84,14 @@ describe("AccountFormFields", () => {
 
   test("renders username, password, verify password, and checkbox fields", () => {
     expect(
-      screen.getByRole("textbox", { name: /Username \(Required\)/i })
+      screen.getByRole("textbox", { name: /Username \(required\)/i })
     ).toBeInTheDocument();
     expect(
       container.querySelector("input[type='password']")
     ).toBeInTheDocument();
-    expect(screen.getByLabelText(/Verify Password/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Verify password/i)).toBeInTheDocument();
     expect(
-      screen.getByRole("checkbox", { name: "Show Password" })
+      screen.getByRole("checkbox", { name: "Show password" })
     ).toBeInTheDocument();
   });
 
@@ -104,7 +104,7 @@ describe("AccountFormFields", () => {
     expect(
       container.querySelector("input[type='password']")
     ).toBeInTheDocument();
-    expect(screen.getByLabelText(/Verify Password/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Verify password/i)).toBeInTheDocument();
 
     await act(() => fireEvent.click(checkbox));
 
@@ -118,12 +118,12 @@ describe("AccountFormFields", () => {
       screen.getByRole("textbox", { name: "Password (required)" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Verify Password (required)" })
+      screen.getByRole("textbox", { name: "Verify password (required)" })
     ).toBeInTheDocument();
   });
 
   test("renders the autosuggest dropdown", () => {
-    expect(screen.getByText("Home Library")).toBeInTheDocument();
+    expect(screen.getByText("Home library")).toBeInTheDocument();
     expect(screen.getByLabelText("Select a home library:")).toBeInTheDocument();
   });
 });
