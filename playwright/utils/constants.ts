@@ -30,3 +30,5 @@ export const TEST_ALTERNATE_ADDRESS: AddressData = {
 export const USERNAME_AVAILABLE_MESSAGE = "This username is available.";
 export const USERNAME_UNAVAILABLE_MESSAGE =
   "This username is unavailable. Please try another.";
+
+export const TEST_BARCODE_NUMBER = "12341234123412";

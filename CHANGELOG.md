@@ -32,6 +32,7 @@
 - Configure Sierra API authorization into github actions and .env.local [SWIS-125](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-125)
 - Add Playwright tests to mock username availability button on account and review page [SWIS-137](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-137)
 - Run Playwright tests on QA environment [SWIS-113](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-113)
+- Add Playwright test to mock create patron API endpoint [SWIS-140](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-140)
 
 ### 1.2.6
 

@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+import { TEST_PATRON_INFO, TEST_BARCODE_NUMBER } from "../utils/constants";
 
 export class CongratsPage {
   readonly page: Page;
@@ -6,8 +7,10 @@ export class CongratsPage {
   readonly stepHeading: Locator;
   readonly getStartedHeading: Locator;
   readonly memberNameHeading: Locator;
+  readonly memberName: Locator;
   readonly issuedDateHeading: Locator;
   readonly issuedDate: Locator;
+  readonly barcodeNumber: Locator;
   readonly libraryCardBackground: Locator;
   readonly locationsLink: Locator;
   readonly photoIdAndProofOfAddressLink: Locator;
@@ -33,8 +36,15 @@ export class CongratsPage {
     this.memberNameHeading = page
       .locator("#member-name")
       .getByText("MEMBER NAME");
+    this.memberName = page.getByText(
+      `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`,
+      { exact: true }
+    );
     this.issuedDateHeading = page.locator("#issued").getByText("ISSUED");
     this.issuedDate = page.locator("#issued").getByText(this.getDate(), {
+      exact: true,
+    });
+    this.barcodeNumber = page.getByText(TEST_BARCODE_NUMBER, {
       exact: true,
     });
     this.libraryCardBackground = page.locator(".background-lion");
