@@ -6,6 +6,7 @@ import {
   fillAlternateAddress,
 } from "../utils/form-helper";
 import { TEST_PATRON_INFO } from "../utils/constants";
+import { mockCreatePatronApi } from "../utils/mock-api";
 
 test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", () => {
   test("displays patron information on review page", async ({ page }) => {
@@ -70,20 +71,20 @@ test.describe("navigates from Review page to Congrats page", () => {
   test("mocks create patron API", async ({ page }) => {
     const pageManager = new PageManager(page);
 
-    test.step("submits application", async () => {
+    await test.step("submits application", async () => {
+      await mockCreatePatronApi(page, "Test User", "1234567890");
       await page.goto("/library-card/review?newCard=true");
-      await mockCreatePatronApi(page, {
-        names: "Test User",
-        barcodes: "1234567890",
-      });
 
       await expect(pageManager.reviewPage.submitButton).toBeVisible();
-      pageManager.reviewPage.submitButton.click();
+      await pageManager.reviewPage.submitButton.click();
     });
 
-    test.step("displays variable elements on Congrats page", async () => {
-      await expect(pageManager.congratsPage.memberName).toBeVisible();
-      await expect(pageManager.congratsPage.barcodeNumber).toBeVisible();
+    await test.step("displays variable elements on Congrats page", async () => {
+      await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
+      await expect(pageManager.congratsPage.memberName).toHaveText("Test User");
+      await expect(pageManager.congratsPage.barcodeNumber).toHaveText(
+        "1234567890"
+      );
     });
   });
 });
