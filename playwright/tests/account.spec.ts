@@ -5,6 +5,8 @@ import {
   USERNAME_AVAILABLE_MESSAGE,
   USERNAME_UNAVAILABLE_MESSAGE,
 } from "../utils/constants";
+import { fillAccountInfo } from "../utils/form-helper";
+import { TEST_CUSTOMIZE_ACCOUNT } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/account?newCard=true");
@@ -127,5 +129,30 @@ test.describe("mock API responses on Account page", () => {
     await accountPage.usernameInput.fill("UnavailableUsername");
     await accountPage.availableUsernameButton.click();
     await expect(accountPage.unavailableUsernameError).toBeVisible();
+  });
+
+  test("verify patron's account info is entered into customize your account form", async ({
+    page,
+  }) => {
+    const accountPage = new AccountPage(page);
+    await fillAccountInfo(accountPage);
+    await expect(accountPage.usernameInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.username
+    );
+    await expect(accountPage.availableUsernameButton).toBeVisible();
+    await expect(accountPage.passwordInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.password
+    );
+    await expect(accountPage.verifyPasswordInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.password
+    );
+
+    await accountPage.showPasswordCheckbox.check();
+    await expect(accountPage.showPasswordCheckbox).toBeChecked();
+    await accountPage.acceptTermsCheckbox.check();
+    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
+    await expect(accountPage.selectHomeLibrary).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.homeLibrary
+    );
   });
 });

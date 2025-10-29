@@ -16,15 +16,22 @@
 - Add Playwright test to confirm user input for address verification page [SWIS-90](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-90)
 - Add Playwright test to confirm alternative form and location link on personal page [SWIS-102](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-102)
 - Add Playwright test to confirm user input on home address page [SWIS-89](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-89)
+- Add playwright test to confirm user input on customize your account page [SWIS-92](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-92)
 - Enable eslint 9 [SWIS-94](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-94)
 - Add Playwright util to fill in forms [SWIS-115](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-115)
 - Add Page Manager class to Playwright tests [SWIS-132](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-132)
 - Add Playwright test to confirm personal information on review page [SWIS-100](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-100)
 - Add Playwright test to confirm Address section headings on review page [SWIS-103](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-103)
 - Add Playwright test to edit personal information on review page [SWIS-111](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-111)
+- Add Playwright test to confirm create your account section on review page [SWIS-104](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-104)
 - Automate build ID for QA and PROD builds [SWIS-34](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-34)
 - Add Playwright test to confirm personal page user input displays on review page [SWIS-130](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-130)
-- Add Playwright tests to mock username availability button on account page [SWIS-137](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-137)
+- Update Values in Home Library field [SWIS-95](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-95)
+- Add Playwright test to confirm remaining static elements on congrats page [SWIS-101](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-101)
+- Fix Playwright test and click addresses on address verification page [SWIS-141](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-141)
+- Configure Sierra API authorization into github actions and .env.local [SWIS-125](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-125)
+- Add Playwright tests to mock username availability button on account and review page [SWIS-137](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-137)
+- Run Playwright tests on QA environment [SWIS-113](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-113)
 
 ### 1.2.6
 
