@@ -16,6 +16,7 @@
 - Add Playwright test to confirm user input for address verification page [SWIS-90](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-90)
 - Add Playwright test to confirm alternative form and location link on personal page [SWIS-102](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-102)
 - Add Playwright test to confirm user input on home address page [SWIS-89](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-89)
+- Add playwright test to confirm user input on customize your account page [SWIS-92](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-92)
 - Enable eslint 9 [SWIS-94](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-94)
 - Add Playwright util to fill in forms [SWIS-115](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-115)
 - Add Page Manager class to Playwright tests [SWIS-132](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-132)
@@ -31,6 +32,7 @@
 - Configure Sierra API authorization into github actions and .env.local [SWIS-125](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-125)
 - Add Playwright tests to mock username availability button on account and review page [SWIS-137](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-137)
 - Fetch Sierra API Auth Token [SWIS-126](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-126)
+- Run Playwright tests on QA environment [SWIS-113](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-113)
 
 ### 1.2.6
 
