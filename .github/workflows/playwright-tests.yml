@@ -24,6 +24,7 @@ jobs:
       OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
       IPSTACK_KEY: ${{ secrets.IPSTACK_KEY }}
       PLAYWRIGHT_BASE_URL: ${{ inputs.PLAYWRIGHT_BASE_URL }}
+      SIERRA_BASIC_AUTH_BASE64: ${{ secrets.SIERRA_BASIC_AUTH_BASE64 }}
     steps:
       - uses: actions/checkout@v4
 
