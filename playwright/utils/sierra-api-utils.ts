@@ -4,7 +4,7 @@ export interface SierraTokenResponse {
   expires_in: number;
 }
 
-const sierraTestURL = "https://nypl-sierra-test.nypl.org";
+const SIERRA_API_BASE_URL_QA = "https://nypl-sierra-test.nypl.org";
 
 export async function getToken(): Promise<string | null> {
   const basicAuth = process.env.SIERRA_BASIC_AUTH_BASE64;
@@ -14,15 +14,18 @@ export async function getToken(): Promise<string | null> {
     return null;
   }
 
-  const request = new Request(`${sierraTestURL}/iii/sierra-api/v6/token`, {
-    method: "POST",
-    headers: {
-      Authorization: `Basic ${basicAuth}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
+  const request = new Request(
+    `${SIERRA_API_BASE_URL_QA}/iii/sierra-api/v6/token`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${basicAuth}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
 
-    body: "grant_type=client_credentials",
-  });
+      body: "grant_type=client_credentials",
+    }
+  );
 
   try {
     const response = await fetch(request);

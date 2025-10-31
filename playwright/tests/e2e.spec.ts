@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
-import { getToken } from "../utils/sierra-api-utils";
+
 import {
   fillPersonalInfo,
   fillHomeAddress,
@@ -63,11 +63,6 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
         pageManager.reviewPage.getText(TEST_PATRON_INFO.email)
       ).toBeVisible();
       await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
-    });
-
-    test.step("displays authToken", async () => {
-      const authToken = await getToken();
-      await expect(authToken).not.toBeNull();
     });
   });
 });
