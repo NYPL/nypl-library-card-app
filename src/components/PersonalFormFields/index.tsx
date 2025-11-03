@@ -48,7 +48,7 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
             id="lastName"
             label={t("personal.lastName.label")}
             {...register("lastName", {
-              required: "Please enter a valid last name.",
+              required: t("personal.errorMessage.lastName"),
             })}
             isRequired
             errorState={errors}
