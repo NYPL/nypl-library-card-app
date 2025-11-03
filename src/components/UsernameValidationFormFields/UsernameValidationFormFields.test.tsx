@@ -31,11 +31,13 @@ jest.mock("react-i18next", () => {
         text: " By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>.",
       },
       errorMessage: {
-        username: "Username must be between 5-25 alphanumeric characters.",
+        username:
+          "There was a problem. Username must be between 5-25 alphanumeric characters.",
         password:
-          "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
-        verifyPassword: "The two passwords don't match.",
-        acceptTerms: "The Terms and Conditions must be checked.",
+          "There was a problem. Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
+        verifyPassword: "There was a problem. The two passwords don't match.",
+        acceptTerms:
+          "There was a problem. The Terms and Conditions must be checked.",
       },
     },
   };

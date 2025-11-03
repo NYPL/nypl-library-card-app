@@ -29,11 +29,13 @@ jest.mock("react-i18next", () => {
           "Yes, I would like to receive information about NYPL's programs and services",
       },
       errorMessage: {
-        firstName: "Please enter a valid first name.",
-        lastName: "Please enter a valid last name.",
-        birthdate: "Please enter a valid date, MM/DD/YYYY, including slashes.",
-        ageGate: "You must be 13 years or older to continue.",
-        email: "Please enter a valid email address.",
+        firstName: "There was a problem. Please enter a valid first name.",
+        lastName: "There was a problem. Please enter a valid last name.",
+        birthdate:
+          "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
+        ageGate:
+          "There was a problem. You must be 13 years or older to continue.",
+        email: "There was a problem. Please enter a valid email address.",
       },
     },
   };

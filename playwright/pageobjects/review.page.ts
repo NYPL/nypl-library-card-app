@@ -72,7 +72,7 @@ export class ReviewPage {
 
     this.editPersonalInfoButton = page
       .getByRole("button", {
-        name: "Edit",
+        name: "Edit Personal Information",
         exact: true,
       })
       .first();
@@ -115,12 +115,10 @@ export class ReviewPage {
     this.showPassword = page.getByText("Show Password", { exact: true });
     this.homeLibraryHeading = page.getByText("Home Library", { exact: true });
     this.ebranchValue = page.getByText("E-Branch", { exact: true });
-    this.createYourAccountEditButton = page
-      .getByRole("button", {
-        name: "Edit",
-        exact: true,
-      })
-      .nth(1);
+    this.createYourAccountEditButton = page.getByRole("button", {
+      name: "Edit Create Your Account",
+      exact: true,
+    });
 
     this.submitButton = page.getByRole("button", {
       name: "Submit",
