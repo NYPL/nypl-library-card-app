@@ -56,9 +56,9 @@ export default defineConfig([
       ],
       "react/jsx-props-no-spreading": "off",
       // NOTE: turn the following errors into warn for now so we don't block anything, need to turn this back on
-      "@typescript-eslint/no-unsafe-assignment": "off",
-      "@typescript-eslint/no-unsafe-return": "off",
-      "@typescript-eslint/no-unsafe-argument": "off",
+      "@typescript-eslint/no-unsafe-assignment": "warn",
+      "@typescript-eslint/no-unsafe-return": "warn",
+      "@typescript-eslint/no-unsafe-argument": "warn",
       "no-useless-escape": "warn",
       "@typescript-eslint/no-redundant-type-constituents": "warn",
       "@typescript-eslint/no-explicit-any": "off",
