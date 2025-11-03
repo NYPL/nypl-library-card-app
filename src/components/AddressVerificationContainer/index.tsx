@@ -164,11 +164,16 @@ function AddressVerificationContainer() {
       return null;
     }
     const addressesLength = addresses.length;
+    const labelText =
+      addressType === "home"
+        ? t("verifyAddress.homeAddress")
+        : t("verifyAddress.workAddress");
     return (
       <RadioGroup
         className="address-container"
         name=""
-        labelText="address-radio-group"
+        id={addressType.replace(/[^0-9a-zA-Z]/g, "-")}
+        labelText={labelText}
         showLabel={false}
         sx={{
           "& .ds-radioGroup-stack": {
