@@ -17,7 +17,8 @@ test.describe("displays elements on Congrats page", () => {
     const congratsPage = new CongratsPage(page);
     await expect(congratsPage.memberNameHeading).toBeVisible();
     await expect(congratsPage.issuedDateHeading).toBeVisible();
-    await expect(congratsPage.issuedDate).toBeVisible();
+    const DATE_FORMAT_REGEX = /\d{1,2}\/\d{1,2}\/\d{4}/;
+    await expect(congratsPage.issuedDate).toHaveText(DATE_FORMAT_REGEX);
     await expect(congratsPage.libraryCardBackground).toBeVisible();
   });
 
