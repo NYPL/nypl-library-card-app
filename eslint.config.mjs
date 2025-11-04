@@ -61,7 +61,7 @@ export default defineConfig([
       "@typescript-eslint/no-unsafe-argument": "warn",
       "no-useless-escape": "warn",
       "@typescript-eslint/no-redundant-type-constituents": "warn",
-      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/restrict-template-expressions": "warn",
 
       camelcase: "warn",
