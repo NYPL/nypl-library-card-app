@@ -62,10 +62,15 @@ export class CongratsPage {
 
   public getDate(): string {
     const today = new Date();
-    const formattedDate = `${(today.getMonth() + 1).toString().padStart(2, "0")}/${today
-      .getDate()
-      .toString()
-      .padStart(2, "0")}/${today.getFullYear()}`;
-    return formattedDate; // MM/DD/YYYY
+
+    // NOTE: .toString() is sufficient as it doesn't add leading zeros.
+    const month = today.getMonth() + 1; // Month is 1-indexed
+    const day = today.getDate(); // Day is 1-31
+    const year = today.getFullYear();
+
+    // Concatenates without padding, matching the 11/4/2025 format
+    const formattedDate = `${month}/${day}/${year}`;
+
+    return formattedDate; // Example output: 11/4/2025
   }
 }
