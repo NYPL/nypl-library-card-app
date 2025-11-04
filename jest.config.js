@@ -1,6 +1,7 @@
 process.env.IPSTACK_KEY = "some-key";
 
 module.exports = {
+  prettierPath: null,
   collectCoverageFrom: [
     "**/*.{js,jsx,ts,tsx}",
     "!**/*.d.ts",
