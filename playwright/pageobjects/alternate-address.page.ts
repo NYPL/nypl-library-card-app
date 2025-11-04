@@ -22,10 +22,12 @@ export class AlternateAddressPage {
     this.stepHeading = page.getByRole("heading", {
       name: "Alternate Address",
       level: 2,
+      exact: true,
     });
     this.addressHeading = page.getByRole("heading", {
       name: "Alternate Address",
       level: 3,
+      exact: true,
     });
     this.streetAddressInput = page.getByLabel(/Street Address/i);
     this.apartmentSuiteInput = page.getByLabel(/Apartment \/ Suite/i);

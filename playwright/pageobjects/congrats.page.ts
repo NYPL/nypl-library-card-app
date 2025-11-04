@@ -8,6 +8,7 @@ export class CongratsPage {
   readonly memberNameHeading: Locator;
   readonly issuedDateHeading: Locator;
   readonly issuedDate: Locator;
+  readonly barcodeNumber: Locator;
   readonly libraryCardBackground: Locator;
   readonly locationsLink: Locator;
   readonly photoIdAndProofOfAddressLink: Locator;
@@ -55,6 +56,8 @@ export class CongratsPage {
     this.discoverLink = page.getByRole("link", {
       name: "Discover everything you can do with your library card.",
     });
+
+    this.barcodeNumber = page.locator(".barcode");
   }
 
   public getDate(): string {

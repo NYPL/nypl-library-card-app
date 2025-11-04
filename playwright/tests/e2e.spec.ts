@@ -62,6 +62,24 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
         pageManager.reviewPage.getText(TEST_PATRON_INFO.email)
       ).toBeVisible();
       await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
+      await pageManager.reviewPage.submitButton.click();
+
+      if (
+        await pageManager.reviewPage.formSubmissionUserNameError.isVisible()
+      ) {
+        const changeUserName =
+          "qaTester" + Math.floor(Math.random() * 10000000);
+        pageManager.reviewPage.usernameInput.clear();
+        pageManager.reviewPage.usernameInput.fill(changeUserName);
+        await pageManager.reviewPage.submitButton.click();
+      }
+    });
+
+    await test.step("displays Congrats page", async () => {
+      await expect(pageManager.congratsPage.barcodeNumber).toContainText(
+        "255",
+        { timeout: 15000 }
+      );
     });
   });
 });
