@@ -67,6 +67,10 @@ function RoutingLinks({
         </DSLink>
       ) : (
         <Button
+          _hover={{
+            textDecoration: "underline dotted",
+            backgroundColor: "ui.link.secondary",
+          }}
           variant="primary"
           id="routing-links-next"
           disabled={isDisabled}
