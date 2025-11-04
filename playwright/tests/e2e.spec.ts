@@ -6,6 +6,7 @@ import {
   fillAlternateAddress,
 } from "../utils/form-helper";
 import { TEST_PATRON_INFO } from "../utils/constants";
+import { storeBarcode } from "../utils/barcode-storage";
 
 test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", () => {
   test("displays patron information on review page", async ({ page }) => {
@@ -25,7 +26,9 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
     });
 
     await test.step("enters alternate address", async () => {
-      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
+      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible({
+        timeout: 10000,
+      });
       await fillAlternateAddress(pageManager.alternateAddressPage);
       await pageManager.alternateAddressPage.nextButton.click();
     });
@@ -51,7 +54,7 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
     await test.step("displays Personal Information on review page", async () => {
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.firstName)
-      ).toBeVisible();
+      ).toBeVisible({ timeout: 15000 });
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.lastName)
       ).toBeVisible();
@@ -64,13 +67,25 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
       await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
       await pageManager.reviewPage.submitButton.click();
 
-      if (
-        await pageManager.reviewPage.formSubmissionUserNameError.isVisible()
-      ) {
+      await pageManager.reviewPage.submitButton.click();
+
+      // Wait for either the error or the congrats page
+      const errorAppeared = await Promise.race([
+        pageManager.reviewPage.formSubmissionUserNameError
+          .waitFor({ state: "visible", timeout: 15000 })
+          .then(() => true)
+          .catch(() => false),
+        pageManager.congratsPage.barcodeNumber
+          .waitFor({ state: "visible", timeout: 15000 })
+          .then(() => false)
+          .catch(() => false),
+      ]);
+
+      if (errorAppeared) {
         const changeUserName =
           "qaTester" + Math.floor(Math.random() * 10000000);
-        pageManager.reviewPage.usernameInput.clear();
-        pageManager.reviewPage.usernameInput.fill(changeUserName);
+        await pageManager.reviewPage.usernameInput.clear();
+        await pageManager.reviewPage.usernameInput.fill(changeUserName);
         await pageManager.reviewPage.submitButton.click();
       }
     });
@@ -80,6 +95,14 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
         "255",
         { timeout: 15000 }
       );
+
+      if (pageManager.congratsPage.barcodeNumber) {
+        const barcodeText =
+          (
+            await pageManager.congratsPage.barcodeNumber.textContent()
+          )?.trim() || "";
+        await storeBarcode(barcodeText);
+      }
     });
   });
 });

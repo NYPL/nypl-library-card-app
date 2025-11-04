@@ -42,6 +42,7 @@ export class ReviewPage {
   readonly unavailableUsernameError: Locator;
   readonly submitButton: Locator;
   readonly formSubmissionUserNameError: Locator;
+  readonly unavailableUsernameMessage: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -114,9 +115,7 @@ export class ReviewPage {
       name: "Create Your Account",
       level: 3,
     });
-    this.formSubmissionUserNameError = page.getByText(
-      "This username is unavailable"
-    );
+
     this.usernameHeading = page.getByText("Username", { exact: true });
     this.passwordHeading = page.getByText("Password", { exact: true });
     this.showPassword = page.getByText("Show Password", { exact: true });
@@ -144,6 +143,13 @@ export class ReviewPage {
       name: "Submit",
       exact: true,
     });
+
+    this.formSubmissionUserNameError = page.getByRole("heading", {
+      name: "Form submission error",
+    });
+    this.unavailableUsernameMessage = page.getByText(
+      "This username is unavailable"
+    );
   }
 
   getText(expected: string) {
