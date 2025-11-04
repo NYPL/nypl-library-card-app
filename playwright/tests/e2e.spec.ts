@@ -67,8 +67,6 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
       await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
       await pageManager.reviewPage.submitButton.click();
 
-      await pageManager.reviewPage.submitButton.click();
-
       // Wait for either the error or the congrats page
       const errorAppeared = await Promise.race([
         pageManager.reviewPage.formSubmissionUserNameError
@@ -96,7 +94,7 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
         { timeout: 15000 }
       );
 
-      if (pageManager.congratsPage.barcodeNumber) {
+      if (await pageManager.congratsPage.barcodeNumber.isVisible()) {
         const barcodeText =
           (
             await pageManager.congratsPage.barcodeNumber.textContent()
