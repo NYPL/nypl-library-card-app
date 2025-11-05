@@ -69,10 +69,9 @@ export class CongratsPage {
 
   public getDate(): string {
     const today = new Date();
-    const formattedDate = `${(today.getMonth() + 1).toString().padStart(2, "0")}/${today
+    const formattedDate = `${(today.getMonth() + 1).toString()}/${today
       .getDate()
-      .toString()
-      .padStart(2, "0")}/${today.getFullYear()}`;
-    return formattedDate; // MM/DD/YYYY
+      .toString()}/${today.getFullYear()}`;
+    return formattedDate; // M/D/YYYY
   }
 }
