@@ -8,6 +8,7 @@ import {
   Heading,
   Radio,
   Box,
+  ProgressIndicator
 } from "@nypl/design-system-react-components";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -19,7 +20,6 @@ import PersonalFormFields from "../PersonalFormFields";
 import AccountFormFields from "../AccountFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
-import Loader from "../Loader";
 import FormField from "../FormField";
 
 import aaUtils from "../../externals/aaUtils";
@@ -416,7 +416,7 @@ function ReviewFormContainer({ csrfToken }) {
 
   return (
     <>
-      <Loader isLoading={isLoading} />
+      <ProgressIndicator isIndeterminate={true} indicatorType="circular" labelText="Loading Indicator" showLabel={false} />
 
       <Box sx={styles.formSection}>
         <Heading level="h3" mb="s">

@@ -3,6 +3,7 @@ import {
   FormField as DSFormField,
   FormRow,
   Heading,
+  ProgressIndicator
 } from "@nypl/design-system-react-components";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
@@ -18,7 +19,6 @@ import {
   AddressesResponse,
   AddressTypes,
 } from "../../interfaces";
-import Loader from "../Loader";
 import FormField from "../FormField";
 import { constructAddressType } from "../../utils/formDataUtils";
 
@@ -153,7 +153,7 @@ const AddressContainer = ({ csrfToken }) => {
       <Heading level="h3">{t("location.address.title")}</Heading>
       <Paragraph>{t("location.address.description")}</Paragraph>
 
-      <Loader isLoading={isLoading} />
+      <ProgressIndicator isIndeterminate={true} indicatorType="circular" labelText="Loading Indicator" showLabel={false} />
 
       <Form
         // action="/library-card/api/submit"
