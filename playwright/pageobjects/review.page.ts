@@ -1,4 +1,8 @@
 import { Page, Locator } from "@playwright/test";
+import {
+  USERNAME_AVAILABLE_MESSAGE,
+  USERNAME_UNAVAILABLE_MESSAGE,
+} from "../utils/constants";
 
 export class ReviewPage {
   readonly page: Page;
@@ -32,6 +36,10 @@ export class ReviewPage {
   readonly homeLibraryHeading: Locator;
   readonly ebranchValue: Locator;
   readonly createYourAccountEditButton: Locator;
+  readonly usernameInput: Locator;
+  readonly availableUsernameButton: Locator;
+  readonly availableUsernameMessage: Locator;
+  readonly unavailableUsernameError: Locator;
   readonly submitButton: Locator;
 
   constructor(page: Page) {
@@ -48,7 +56,6 @@ export class ReviewPage {
       name: "Personal information",
       level: 3,
     });
-
     this.addressHeading = page.getByRole("heading", {
       name: "Address",
       level: 3,
@@ -69,7 +76,6 @@ export class ReviewPage {
     this.stateHeading = page.getByText("State", { exact: true });
     this.postalCodeHeading = page.getByText("Postal code", { exact: true });
     this.addressEditButton = page.locator("#editAddressButton");
-
     this.editPersonalInfoButton = page
       .getByRole("button", {
         name: "Edit",
@@ -105,7 +111,6 @@ export class ReviewPage {
       name: "locations",
       exact: true,
     });
-
     this.createYourAccountHeading = page.getByRole("heading", {
       name: "Create your account",
       level: 3,
@@ -120,8 +125,19 @@ export class ReviewPage {
         name: "Edit",
         exact: true,
       })
-      .nth(1);
-
+      .nth(2);
+    this.usernameInput = page.getByRole("textbox", {
+      name: "Username (Required)",
+      exact: true,
+    });
+    this.availableUsernameButton = page.getByRole("button", {
+      name: "Check if username is available",
+      exact: true,
+    });
+    this.availableUsernameMessage = page.getByText(USERNAME_AVAILABLE_MESSAGE);
+    this.unavailableUsernameError = page.getByText(
+      USERNAME_UNAVAILABLE_MESSAGE
+    );
     this.submitButton = page.getByRole("button", {
       name: "Submit",
       exact: true,

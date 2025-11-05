@@ -1,4 +1,8 @@
 import { Page, Locator } from "@playwright/test";
+import {
+  USERNAME_AVAILABLE_MESSAGE,
+  USERNAME_UNAVAILABLE_MESSAGE,
+} from "../utils/constants";
 
 export class AccountPage {
   readonly page: Page;
@@ -7,7 +11,7 @@ export class AccountPage {
   readonly usernameInput: Locator;
   readonly usernameError: Locator;
   readonly availableUsernameButton: Locator;
-  readonly availableUsername: Locator;
+  readonly availableUsernameMessage: Locator;
   readonly unavailableUsernameError: Locator;
   readonly passwordInput: Locator;
   readonly passwordError: Locator;
@@ -46,9 +50,9 @@ export class AccountPage {
       name: "Check if username is available",
       exact: true,
     });
-    this.availableUsername = page.getByText("This username is available.");
+    this.availableUsernameMessage = page.getByText(USERNAME_AVAILABLE_MESSAGE);
     this.unavailableUsernameError = page.getByText(
-      "This username is unavailable. Please try another."
+      USERNAME_UNAVAILABLE_MESSAGE
     );
     this.passwordInput = page.getByRole("textbox", {
       name: "Password (required)",
@@ -62,8 +66,7 @@ export class AccountPage {
       exact: true,
     });
     this.verifyPasswordError = page.getByText("The two passwords don't match.");
-    this.showPasswordCheckbox = page.getByRole("checkbox", {
-      name: "Show password",
+    this.showPasswordCheckbox = page.getByText("Show Password", {
       exact: true,
     });
     this.homeLibraryHeading = page.getByRole("heading", {
@@ -84,9 +87,9 @@ export class AccountPage {
       .locator("#mainContent")
       .getByRole("link", { name: "Privacy Policy", exact: true });
     this.acceptTermsCheckbox = page.getByText(
-      "Yes, I accept the terms and conditions.",
-      { exact: true }
+      "Yes, I accept the terms and conditions."
     );
+
     this.acceptTermsError = page.getByText(
       "The Terms and Conditions must be checked."
     );
