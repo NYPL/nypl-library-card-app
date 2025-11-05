@@ -36,6 +36,7 @@
   - `location` and `workAddress` page Design system upgrade [SWIS-78](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-78)
   - `congrats` page Design system upgrade [SWIS-77](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-77)
   - `address verification` page Design system upgrade [SWIS-76](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-76)
+  - Switches over from using custom Loader to ProgressIndicator [SWIS-146](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-146)
 
 ### 1.2.6
 
