@@ -126,7 +126,7 @@ function ReviewFormContainer({ csrfToken }) {
     return clientSide ? (
       <Button
         variant="primary"
-        id={`editSectionButton-${sectionName}`}
+        id={`editSectionButton-${sectionName.replace(/\s+/g, "")}`}
         onClick={() => {
           editSectionFlag(true);
         }}

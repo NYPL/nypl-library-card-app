@@ -118,12 +118,10 @@ export class ReviewPage {
     this.showPassword = page.getByText("Show Password", { exact: true });
     this.homeLibraryHeading = page.getByText("Home Library", { exact: true });
     this.ebranchValue = page.getByText("E-Branch", { exact: true });
-    this.createYourAccountEditButton = page
-      .getByRole("button", {
-        name: "Edit Create Your Account",
-        exact: true,
-      })
-      .nth(2);
+    this.createYourAccountEditButton = page.getByRole("button", {
+      name: "Edit Create Your Account",
+      exact: true,
+    });
     this.usernameInput = page.getByRole("textbox", {
       name: "Username (Required)",
       exact: true,
