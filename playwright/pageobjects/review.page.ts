@@ -127,7 +127,7 @@ export class ReviewPage {
       })
       .nth(2);
     this.usernameInput = page.getByRole("textbox", {
-      name: "Username (Required)",
+      name: "Username (required)",
       exact: true,
     });
     this.availableUsernameButton = page.getByRole("button", {

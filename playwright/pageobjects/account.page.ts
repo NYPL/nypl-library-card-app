@@ -66,7 +66,7 @@ export class AccountPage {
       exact: true,
     });
     this.verifyPasswordError = page.getByText("The two passwords don't match.");
-    this.showPasswordCheckbox = page.getByText("Show Password", {
+    this.showPasswordCheckbox = page.getByText("Show password", {
       exact: true,
     });
     this.homeLibraryHeading = page.getByRole("heading", {
