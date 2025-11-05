@@ -32,6 +32,7 @@ import {
 } from "../../../src/utils/formDataUtils";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 import { NRError } from "../../logger/newrelic";
+import { PageSubHeading } from "../PageSubHeading";
 
 const styles = {
   formSection: {
@@ -419,9 +420,7 @@ function ReviewFormContainer({ csrfToken }) {
       <Loader isLoading={isLoading} />
 
       <Box sx={styles.formSection}>
-        <Heading level="h3" mb="s">
-          {t("review.section.personal")}
-        </Heading>
+        <PageSubHeading mb="s">{t("review.section.personal")}</PageSubHeading>
         {!editPersonalInfoFlag ? (
           renderPersonalInformationValues()
         ) : (
@@ -437,14 +436,14 @@ function ReviewFormContainer({ csrfToken }) {
       </Box>
 
       <Box sx={styles.formSection}>
-        <Heading level="h3">{t("review.section.address.label")}</Heading>
+        <PageSubHeading mb="s">
+          {t("review.section.address.label")}
+        </PageSubHeading>
         {renderAddressValues()}
       </Box>
 
       <Box sx={styles.formSection}>
-        <Heading level="h3" mb="s">
-          {t("review.createAccount")}
-        </Heading>
+        <PageSubHeading mb="s">{t("review.createAccount")}</PageSubHeading>
         {!editAccountInfoFlag ? (
           renderAccountValues()
         ) : (
