@@ -2,8 +2,7 @@ import {
   Form,
   FormField as DSFormField,
   FormRow,
-  Heading,
-  ProgressIndicator
+  Heading
 } from "@nypl/design-system-react-components";
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -19,6 +18,7 @@ import {
   AddressTypes,
 } from "../../interfaces";
 import FormField from "../FormField";
+import LoadingIndicator from "../LoadingIndicator";
 
 import { constructAddressType } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
@@ -134,7 +134,7 @@ const AddressContainer = ({ csrfToken }) => {
       </Heading>
       <Paragraph>{t("location.workAddress.description.part2")}</Paragraph>
 
-      <ProgressIndicator isIndeterminate={true} indicatorType="circular" labelText="Loading Indicator" showLabel={false} />
+      <LoadingIndicator />
 
       <Form
         // action="/library-card/api/submit"
