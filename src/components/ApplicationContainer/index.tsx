@@ -31,7 +31,7 @@ const ApplicationContainer = ({ children, problemDetail }) => {
   }, [errorToDisplay]);
 
   return (
-    <Template>
+    <Template variant="narrow">
       <TemplateHeader>
         <TemplateBreakout>
           <Banner />

@@ -71,24 +71,30 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
 
       {temporary && (
         <Box
+          mb="s"
           dangerouslySetInnerHTML={{
             __html: t("confirmation.description.part3"),
           }}
         />
       )}
 
-      <Heading>{t("confirmation.nextSteps.title")}</Heading>
+      <Heading mb="s" mt="l">
+        {t("confirmation.nextSteps.title")}
+      </Heading>
       <Box
+        mb="s"
         dangerouslySetInnerHTML={{
           __html: loginHtml,
         }}
       />
       <Box
+        mb="s"
         dangerouslySetInnerHTML={{
           __html: t("confirmation.nextSteps.updates"),
         }}
       />
       <Box
+        mb="s"
         dangerouslySetInnerHTML={{
           __html: t("confirmation.nextSteps.more"),
         }}

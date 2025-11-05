@@ -1,4 +1,4 @@
-import { GridItem, Logo } from "@nypl/design-system-react-components";
+import { Box, GridItem, Logo } from "@nypl/design-system-react-components";
 import bwipjs from "bwip-js";
 import Image from "next/image";
 import { useEffect } from "react";
@@ -41,7 +41,7 @@ const ConfirmationContainer = () => {
   }, [canvas]);
 
   return (
-    <div className="confirmation-graphic">
+    <Box className="confirmation-graphic" mb="s">
       <div className="image-lion">
         <Image
           alt="NYPL Library Barcode Background"
@@ -53,12 +53,14 @@ const ConfirmationContainer = () => {
           <GridItem
             id="member-name"
             color={"white"}
-            fontSize={"0.6em"}
+            fontSize={"0.8em"}
             $breakpoint-intermediate={{ fontsize: "0.8em" }}
             $breakpoint-large={{ fontsize: "0.7em" }}
           >
             {t("confirmation.graphic.memberName")}
-            <div className="content">{name}</div>
+            <Box className="content" fontSize={"1.6em"}>
+              {name}
+            </Box>
           </GridItem>
           <GridItem
             color={"white"}
@@ -66,7 +68,12 @@ const ConfirmationContainer = () => {
             $breakpoint-intermediate={{ fontsize: "0.8em" }}
             $breakpoint-large={{ fontsize: "0.7em" }}
           >
-            <Logo decorative className="nypl-svg" name="nyplFullWhite" />
+            <Logo
+              decorative
+              className="nypl-svg"
+              name="nyplFullWhite"
+              size="small"
+            />
           </GridItem>
           <div className="grid-item barcode-container">
             <canvas id="barcodeCanvas" {...canvasArgs}></canvas>
@@ -76,16 +83,19 @@ const ConfirmationContainer = () => {
           <GridItem
             id="issued"
             color={"white"}
-            fontSize={"0.6em"}
-            $breakpoint-intermediate={{ fontsize: "0.8em" }}
-            $breakpoint-large={{ fontsize: "0.7em" }}
+            fontSize={"1em"}
+            $breakpoint-intermediate={{ fontsize: "1.25em" }}
+            $breakpoint-large={{ fontsize: "1.5em" }}
+            mb="s"
           >
             {t("confirmation.graphic.issued")}
-            <div className="content">{new Date().toLocaleDateString()}</div>
+            <Box className="content" fontSize={"1.6em"}>
+              {new Date().toLocaleDateString()}
+            </Box>
           </GridItem>
         </div>
       </div>
-    </div>
+    </Box>
   );
 };
 
