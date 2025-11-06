@@ -15,7 +15,7 @@ export class LandingPage {
   readonly spanishLanguage: Locator;
   readonly urduLanguage: Locator;
   readonly applyHeading: Locator; // displays only on landing page
-  readonly learnMore: Locator;
+  readonly whatYouCanAccess: Locator;
   readonly cardholderTerms: Locator;
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
@@ -44,7 +44,9 @@ export class LandingPage {
       name: "Apply for a library card today in a few easy steps",
       level: 2,
     });
-    this.learnMore = page.getByRole("link", { name: "Learn more" });
+    this.whatYouCanAccess = page.getByRole("link", {
+      name: "what you can access",
+    });
     this.cardholderTerms = page.getByRole("link", {
       name: "Cardholder Terms and Conditions",
     });
