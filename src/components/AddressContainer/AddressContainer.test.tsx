@@ -8,20 +8,20 @@ jest.mock("react-i18next", () => {
   const en = {
     location: {
       address: {
-        title: "Home Address",
+        title: "Home address",
         description:
           "If you live in NYC, please fill out the home address form.",
-        line1: { label: "Street Address" },
+        line1: { label: "Street address" },
         line2: { label: "Apartment / Suite" },
         city: { label: "City" },
         state: { label: "State", instruction: "2-letter abbreviation" },
         postalCode: {
-          label: "Postal Code",
+          label: "Postal code",
           instruction: "5 or 9-digit postal code",
         },
       },
       workAddress: {
-        title: "Alternate Address",
+        title: "Alternate address",
         description: {
           part1:
             "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
@@ -37,7 +37,7 @@ jest.mock("react-i18next", () => {
       },
     },
     button: {
-      start: "Get Started",
+      start: "Get started",
       edit: "Edit",
       submit: "Submit",
       next: "Next",
@@ -74,6 +74,6 @@ describe("AddressContainer", () => {
       </TestProviderWrapper>
     );
 
-    expect(screen.getByText("Home Address")).toBeInTheDocument();
+    expect(screen.getByText("Home address")).toBeInTheDocument();
   });
 });

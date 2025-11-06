@@ -1,11 +1,11 @@
 {
-  "internationalInstructions": "Form Fields must be filled out using only Latin characters.",
-  "required": "Required",
+  "internationalInstructions": "Form fields must be filled out using only Latin characters.",
+  "required": "required",
   "banner": {
     "title": "Apply for a Library Card Online"
   },
   "home": {
-    "title": "Apply for a Library Card Today in a Few Easy Steps",
+    "title": "Apply for a library card today in a few easy steps",
     "description": {
       "part1": "If you are 13 or older and live, work, attend school, or pay property taxes in New York State, you can apply for a free library card right now using this online application—then visit your nearest NYPL location to validate your information and receive a physical NYPL card. If your location within New York State can be confirmed, you will receive a free digital library card right now.",
       "part2": "Visitors from outside of New York State can also use this form to apply for a temporary card that allows them to place holds for physical items. This card must be validated in person within 30 days, and does not provide access to e-books, databases, or the Culture Pass program.",
@@ -14,20 +14,20 @@
     }
   },
   "personal": {
-    "title": "Step 1 of 5: Personal Information",
+    "title": "Step 1 of 5: Personal information",
     "firstName": {
-      "label": "First Name"
+      "label": "First name"
     },
     "lastName": {
-      "label": "Last Name"
+      "label": "Last name"
     },
     "birthdate": {
-      "label": "Date of Birth",
+      "label": "Date of birth",
       "instruction": "MM/DD/YYYY, including slashes"
     },
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
-      "label": "Email Address",
+      "label": "Email address",
       "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://on.nypl.org/internationalresearch'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
     },
     "eCommunications": {
@@ -44,19 +44,19 @@
   "location": {
     "title": "Step 2 of 5: Address",
     "address": {
-      "title": "Home Address",
+      "title": "Home address",
       "description": "If you live in NYC, please fill out the home address form.",
-      "line1": { "label": "Street Address" },
+      "line1": { "label": "Street address" },
       "line2": { "label": "Apartment / Suite" },
       "city": { "label": "City" },
       "state": { "label": "State", "instruction": "2-letter abbreviation" },
       "postalCode": {
-        "label": "Postal Code",
+        "label": "Postal code",
         "instruction": "5 or 9-digit postal code"
       }
     },
     "workAddress": {
-      "title": "Alternate Address",
+      "title": "Alternate address",
       "description": {
         "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you're just visiting New York City. Please select one of the following and fill out the required fields.",
         "part2": "If you work or go to school in NYC please provide the address."
@@ -70,13 +70,13 @@
     }
   },
   "verifyAddress": {
-    "title": "Step 3 of 5: Address Verification",
+    "title": "Step 3 of 5: Address verification",
     "description": "Please select the correct address.",
-    "homeAddress": "Home Address",
-    "workAddress": "Alternate Address"
+    "homeAddress": "Home address",
+    "workAddress": "Alternate address"
   },
   "account": {
-    "title": "Step 4 of 5: Customize Your Account",
+    "title": "Step 4 of 5: Customize your account",
     "description": "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
     "username": {
       "label": "Username",
@@ -88,14 +88,14 @@
       "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
     },
     "verifyPassword": {
-      "label": "Verify Password",
+      "label": "Verify password",
       "instruction": "8-32 characters"
     },
-    "showPassword": "Show Password",
+    "showPassword": "Show password",
     "library": {
       "selectLibrary": "Select a home library:",
       "placeholder": "Type a library name, such as Parkchester Library",
-      "title": "Home Library",
+      "title": "Home library",
       "description": {
         "part1": "Choosing a home library will help us make sure you're getting everything you need from a branch that's most convenient for you.",
         "part2": "You can skip this step and update it at any point through your account."
@@ -113,19 +113,19 @@
     }
   },
   "review": {
-    "title": "Step 5 of 5: Confirm Your Information",
+    "title": "Step 5 of 5: Confirm your information",
     "description": "Make sure all the information you’ve entered is correct. If needed, you can still make changes before you submit your application.",
     "section": {
-      "personal": "Personal Information",
+      "personal": "Personal information",
       "address": {
         "label": "Address",
         "location": "Location",
         "home": "Home",
         "work": "Work"
       },
-      "homeLibrary": "Home Library"
+      "homeLibrary": "Home library"
     },
-    "createAccount": "Create Your Account",
+    "createAccount": "Create your account",
     "receiveNewsletter": "Receive information about NYPL's programs and services",
     "yes": "Yes",
     "no": "No",
@@ -144,14 +144,14 @@
       "issued": "ISSUED"
     },
     "nextSteps": {
-      "title": "Get Started with The New York Public Library",
-      "borrow": "<b>Borrow Books & More</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'> Log into your account</a> and browse the catalog.",
-      "updates": "<b>Get Updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
-      "more": "<b>Learn More</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+      "title": "Get started with The New York Public Library",
+      "borrow": "<b>Borrow books &amp; more</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'> Log into your account</a> and browse the catalog.",
+      "updates": "<b>Get updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
+      "more": "<b>Learn more</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
     }
   },
   "button": {
-    "start": "Get Started",
+    "start": "Get started",
     "edit": "Edit",
     "submit": "Submit",
     "next": "Next",

@@ -7,7 +7,7 @@ import { mockTFunction } from "../../../testHelper/utils";
 jest.mock("react-i18next", () => {
   const en = {
     button: {
-      start: "Get Started",
+      start: "Get started",
       edit: "Edit",
       submit: "Submit",
       next: "Next",

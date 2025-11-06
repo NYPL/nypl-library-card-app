@@ -1,4 +1,3 @@
-import { Heading } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { JSX, useEffect } from "react";
@@ -11,6 +10,7 @@ import {
   redirectIfUserHasRegistered,
 } from "../../src/utils/utils";
 import { useRouter } from "next/router";
+import { PageHeading } from "../../src/components/PageHeading";
 
 interface AddressVerificationPageProps {
   hasUserAlreadyRegistered?: boolean;
@@ -26,7 +26,7 @@ function AddressVerificationPage({
   });
   return (
     <>
-      <Heading level="h2">{t("verifyAddress.title")}</Heading>
+      <PageHeading>{t("verifyAddress.title")}</PageHeading>
       <Paragraph id="select-address-heading">
         {t("verifyAddress.description")}
       </Paragraph>

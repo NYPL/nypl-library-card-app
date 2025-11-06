@@ -35,12 +35,12 @@ export class AccountPage {
       level: 1,
     });
     this.stepHeading = page.getByRole("heading", {
-      name: "Step 4 of 5: Customize Your Account",
+      name: "Step 4 of 5: Customize your account",
       level: 2,
     });
 
     this.usernameInput = page.getByRole("textbox", {
-      name: "Username (Required)",
+      name: "Username (required)",
       exact: true,
     });
     this.usernameError = page.getByText(
@@ -55,22 +55,22 @@ export class AccountPage {
       USERNAME_UNAVAILABLE_MESSAGE
     );
     this.passwordInput = page.getByRole("textbox", {
-      name: "Password (Required)",
+      name: "Password (required)",
       exact: true,
     });
     this.passwordError = page.getByText(
       "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)"
     );
     this.verifyPasswordInput = page.getByRole("textbox", {
-      name: "Verify Password (Required)",
+      name: "Verify password (required)",
       exact: true,
     });
     this.verifyPasswordError = page.getByText("The two passwords don't match.");
-    this.showPasswordCheckbox = page.getByText("Show Password", {
+    this.showPasswordCheckbox = page.getByText("Show password", {
       exact: true,
     });
     this.homeLibraryHeading = page.getByRole("heading", {
-      name: "Home Library",
+      name: "Home library",
       level: 3,
       exact: true,
     });

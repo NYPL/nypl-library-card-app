@@ -9,7 +9,7 @@ jest.mock("axios");
 jest.mock("react-i18next", () => {
   const en = {
     account: {
-      title: "Step 4 of 5: Customize Your Account",
+      title: "Step 4 of 5: Customize your account",
       username: {
         label: "Username",
         instruction: "5-25 alphanumeric characters. No special characters.",
@@ -21,10 +21,10 @@ jest.mock("react-i18next", () => {
           "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab",
       },
       verifyPassword: {
-        label: "Verify Password",
+        label: "Verify password",
         instruction: "8-32 characters",
       },
-      showPassword: "Show Password",
+      showPassword: "Show password",
       selectLibrary: "Select a home library:",
       termsAndCondition: {
         label: "Yes, I accept the terms and conditions.",
@@ -88,7 +88,7 @@ describe("UsernameValidationFormFields", () => {
     );
 
     const label = screen.getByLabelText(/Username/i);
-    const labelRequired = screen.getByText(/Required/i);
+    const labelRequired = screen.getByText(/required/i);
     const input = screen.getByRole("textbox", { name: /Username/i });
     const helperText = screen.getByText(
       "5-25 alphanumeric characters. No special characters."

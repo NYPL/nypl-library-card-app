@@ -84,7 +84,7 @@ describe("ApiErrors", () => {
     const pd = {
       status: 500,
       type: "missing-required-values",
-      title: "Missing Required Values",
+      title: "Missing required Values",
       detail: "'firsName' and 'password' are missing",
     };
 
