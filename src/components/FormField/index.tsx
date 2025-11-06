@@ -19,6 +19,8 @@ interface FormFieldProps {
   maxLength?: number;
   defaultValue?: any;
   attributes?: any;
+  // NOTE: This type needs to be fixed from Chakra/DS side
+  autoComplete?: any;
 }
 
 /**

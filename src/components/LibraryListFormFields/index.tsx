@@ -52,6 +52,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
         // form element's state for us.
         {...register("homeLibraryCode")}
         {...inputProps}
+        autoComplete="on"
       >
         {libraryList.map(({ value, label }, i) => (
           <option key={i} value={value}>

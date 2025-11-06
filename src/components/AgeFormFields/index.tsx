@@ -35,6 +35,7 @@ const AgeForm = () => {
       errorState={errors}
       maxLength={DATE_MAX_LENGTH}
       defaultValue={formValues.birthdate}
+      autoComplete="bday"
     />
   );
 

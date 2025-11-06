@@ -13,7 +13,7 @@ export const formInitialState: FormData = {
   results: undefined,
   errorObj: undefined,
   formValues: {
-    ecommunicationsPref: true,
+    ecommunicationsPref: false,
     policyType: "webApplicant",
   } as FormInputData,
   addressesResponse: {

@@ -41,6 +41,7 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
             isRequired
             errorState={errors}
             defaultValue={formValues.firstName}
+            autoComplete="given-name"
           />
         </DSFormField>
         <DSFormField>
@@ -53,6 +54,7 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
             isRequired
             errorState={errors}
             defaultValue={formValues.lastName}
+            autoComplete="family-name"
           />
         </DSFormField>
       </FormRow>
@@ -75,6 +77,7 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
             isRequired
             defaultValue={formValues.email}
             instructionText={t("personal.email.instruction")}
+            autoComplete="email"
           />
         </DSFormField>
       </FormRow>
