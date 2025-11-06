@@ -19,16 +19,16 @@ export class AddressVerificationPage {
       level: 1,
     });
     this.stepHeader = this.page.getByRole("heading", {
-      name: "Step 3 of 5: Address Verification",
+      name: "Step 3 of 5: Address verification",
       level: 2,
     });
     this.homeAddressHeader = this.page.getByRole("heading", {
-      name: "Home Address",
+      name: "Home address",
       level: 3,
     });
     this.homeAddressOption = this.page.getByText(TEST_HOME_ADDRESS.street);
     this.alternateAddressHeader = this.page.getByRole("heading", {
-      name: "Alternate Address",
+      name: "Alternate address",
       level: 3,
     });
     this.alternateAddressOption = this.page.getByText(

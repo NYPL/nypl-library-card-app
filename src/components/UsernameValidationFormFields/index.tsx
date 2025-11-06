@@ -165,22 +165,27 @@ const UsernameValidationForm = ({
         <DSFormField>{renderButton()}</DSFormField>
       </FormRow>
 
-      {usernameIsAvailable?.message ? (
-        <FormRow id={`${id}-username-3`}>
-          <DSFormField>
+      <FormRow
+        id={`${id}-username-3`}
+        display={usernameIsAvailable?.message ? "block" : "contents"}
+      >
+        <DSFormField
+          aria-live="assertive"
+          display={usernameIsAvailable?.message ? "block" : "contents"}
+        >
+          {usernameIsAvailable?.message ? (
             <Box
               color={
                 usernameIsAvailable.available
                   ? "var(--nypl-colors-ui-success-primary)"
                   : "var(--nypl-colors-ui-error-primary)"
               }
-              aria-live="assertive"
             >
               {usernameIsAvailable.message}
             </Box>
-          </DSFormField>
-        </FormRow>
-      ) : null}
+          ) : null}
+        </DSFormField>
+      </FormRow>
     </>
   );
 };

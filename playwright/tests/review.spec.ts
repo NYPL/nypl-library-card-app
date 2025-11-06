@@ -18,7 +18,7 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.stepHeading).toBeVisible();
   });
 
-  test("displays Personal Information section headings", async ({ page }) => {
+  test("displays Personal information section headings", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.personalInfoHeading).toBeVisible();
     await expect(reviewPage.firstNameHeading).toBeVisible();
@@ -41,7 +41,7 @@ test.describe("displays elements on review page", () => {
 });
 
 test.describe("edits patron information on review page", () => {
-  test("displays editable Personal Information section", async ({ page }) => {
+  test("displays editable Personal information section", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.editPersonalInfoButton).toBeVisible();
     await reviewPage.editPersonalInfoButton.click();
@@ -55,7 +55,7 @@ test.describe("edits patron information on review page", () => {
   });
 
   // does not replace personal info since there's no existing text
-  test("enters Personal Information", async ({ page }) => {
+  test("enters Personal information", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.firstNameInput.fill(TEST_PATRON_INFO.firstName);
@@ -77,7 +77,7 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
   });
 
-  test("displays Create Your Account section headings", async ({ page }) => {
+  test("displays Create your account section headings", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.createYourAccountHeading).toBeVisible();
     await expect(reviewPage.usernameHeading).toBeVisible();
