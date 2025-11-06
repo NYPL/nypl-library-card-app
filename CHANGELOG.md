@@ -33,6 +33,8 @@
 - Add Playwright tests to mock username availability button on account and review page [SWIS-137](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-137)
 - Fetch Sierra API Auth Token [SWIS-126](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-126)
 - Run Playwright tests on QA environment [SWIS-113](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-113)
+- Add Playwright test to mock create patron API endpoint [SWIS-140](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-140)
+- Fix issued date in Playwright test [SWIS-162](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-162)
 
 ### 1.2.6
 
