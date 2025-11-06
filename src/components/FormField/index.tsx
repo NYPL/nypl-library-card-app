@@ -4,6 +4,7 @@ import {
   TextInput,
   TextInputTypes,
   TextInputRefType,
+  AutoCompleteValues,
 } from "@nypl/design-system-react-components";
 
 interface FormFieldProps {
@@ -19,8 +20,18 @@ interface FormFieldProps {
   maxLength?: number;
   defaultValue?: any;
   attributes?: any;
-  // NOTE: This type needs to be fixed from Chakra/DS side
-  autoComplete?: any;
+  autoComplete?:
+    | AutoCompleteValues
+    | "section-home address-line1"
+    | "section-home address-line2"
+    | "section-home address-level2"
+    | "section-home address-level1"
+    | "section-home postal-code"
+    | "section-work address-line1"
+    | "section-work address-line2"
+    | "section-work address-level2"
+    | "section-work address-level1"
+    | "section-work postal-code";
 }
 
 /**
@@ -43,6 +54,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
       minLength,
       maxLength,
       defaultValue,
+      autoComplete,
       // any extra input element attributes
       attributes = {},
       ...rest
@@ -71,6 +83,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
           labelText={label}
           ref={ref}
           type={typeToInputTypeMap[type] as TextInputTypes}
+          autoComplete={autoComplete as AutoCompleteValues}
           {...rest}
         />
       );
@@ -93,6 +106,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
           labelText={label}
           {...attributes}
           ref={updatedRef}
+          autoComplete={autoComplete}
           {...rest}
         />
       </div>
