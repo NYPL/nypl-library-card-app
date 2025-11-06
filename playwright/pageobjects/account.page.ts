@@ -59,7 +59,7 @@ export class AccountPage {
       exact: true,
     });
     this.passwordError = page.getByText(
-      "Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)"
+      "There was a problem. Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)"
     );
     this.verifyPasswordInput = page.getByRole("textbox", {
       name: "Verify password (required)",

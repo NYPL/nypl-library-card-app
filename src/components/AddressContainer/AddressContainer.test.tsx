@@ -30,10 +30,11 @@ jest.mock("react-i18next", () => {
         },
       },
       errorMessage: {
-        line1: "Please enter a valid street address.",
-        city: "Please enter a valid city.",
-        state: "Please enter a 2-character state abbreviation.",
-        zip: "Please enter a 5 or 9-digit postal code.",
+        line1: "There was a problem. Please enter a valid street address.",
+        city: "There was a problem. Please enter a valid city.",
+        state:
+          "There was a problem. Please enter a 2-character state abbreviation.",
+        zip: "There was a problem. Please enter a 5 or 9-digit postal code.",
       },
     },
     button: {

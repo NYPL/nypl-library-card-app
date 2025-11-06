@@ -45,16 +45,16 @@ export class PersonalPage {
     });
 
     this.firstNameErrorMessage = this.page.getByText(
-      "Please enter a valid first name."
+      "There was a problem. Please enter a valid first name."
     );
     this.lastNameErrorMessage = this.page.getByText(
-      "Please enter a valid last name."
+      "There was a problem. Please enter a valid last name."
     );
     this.emailErrorMessage = this.page.getByText(
-      "Please enter a valid email address."
+      "There was a problem. Please enter a valid email address."
     );
     this.dateOfBirthErrorMessage = this.page.getByText(
-      "Please enter a valid date, MM/DD/YYYY, including slashes."
+      "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes."
     );
 
     this.alternateFormLink = this.page.getByRole("link", {

@@ -122,42 +122,49 @@ function ReviewFormContainer({ csrfToken }) {
    * toggling instead of an anchor element. This is for the Personal and the
    * Account sections.
    */
-  const editSectionButton = (editSectionFlag, sectionName, page) =>
-    clientSide ? (
+  const editSectionButton = (editSectionFlag, sectionName, page) => {
+    const label = `${t("button.edit")} ${page === "personal" ? t(`review.section.personal`) : t("review.createAccount")}`;
+    return clientSide ? (
       <Button
         variant="primary"
-        id={`editSectionButton-${sectionName}`}
+        id={`editSectionButton-${sectionName.replace(/\s+/g, "")}`}
         onClick={() => {
           editSectionFlag(true);
         }}
+        aria-label={label}
       >
         {t("button.edit")}
       </Button>
     ) : (
       <a
+        aria-label={label}
         href={`/library-card/${page}?${encodeURI(`${queryStr}${queryValues}`)}`}
       >
         {t("button.edit")}
       </a>
     );
+  };
   /**
    * editAddressButton
    * The logic from the `editSectionButton` is the same for this function,
    * except that this component is for the Address section.
    */
-  const editAddressButton = () =>
-    clientSide ? (
+  const editAddressButton = () => {
+    const label = `${t("button.edit")} ${t("review.section.address.label")}`;
+    return clientSide ? (
       <Button
         variant="primary"
         id="editAddressButton"
         onClick={async () => {
           await router.push(`/location?${queryStr}`);
         }}
+        aria-label={label}
       >
         {t("button.edit")}
       </Button>
     ) : (
       <a
+        aria-label={label}
         href={`/library-card/location?${encodeURI(
           `${queryStr}${queryValues}`
         )}`}
@@ -165,6 +172,7 @@ function ReviewFormContainer({ csrfToken }) {
         {t("button.edit")}
       </a>
     );
+  };
 
   /**
    * editSectionInfo

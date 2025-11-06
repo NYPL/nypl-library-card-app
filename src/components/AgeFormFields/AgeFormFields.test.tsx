@@ -29,10 +29,11 @@ jest.mock("react-i18next", () => {
           "Yes, I would like to receive information about NYPL's programs and services",
       },
       errorMessage: {
-        firstName: "Please enter a valid first name.",
-        lastName: "Please enter a valid last name.",
-        birthdate: "Please enter a valid date, MM/DD/YYYY, including slashes.",
-        email: "Please enter a valid email address.",
+        firstName: "There was a problem. Please enter a valid first name.",
+        lastName: "There was a problem. Please enter a valid last name.",
+        birthdate:
+          "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
+        email: "There was a problem. Please enter a valid email address.",
       },
     },
   };
@@ -45,13 +46,15 @@ jest.mock("react-i18next", () => {
 });
 
 const ageFormErrorMessages = {
-  birthdate: "Please enter a valid date, MM/DD/YYYY, including slashes.",
+  birthdate:
+    "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
 };
 // The `errors` object shape from `react-hook-form`.
 const reactHookFormErrors = {
   birthdate: {
     name: "birthdate",
-    message: "Please enter a valid date, MM/DD/YYYY, including slashes.",
+    message:
+      "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
   },
 };
 
