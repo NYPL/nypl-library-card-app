@@ -74,20 +74,16 @@ const ConfirmationContainer = () => {
         />
         <Grid
           className="background-lion"
-          top={0}
-          left={0}
+          top="6"
           width="100%"
           position="absolute"
           backgroundSize="cover"
           backgroundRepeat="no-repeat"
           height="100%"
           p="0 40px 0 25px"
-          m={0}
           gap="10px 5px"
           gridTemplateColumns="58% 30%"
           gridTemplateRows="20% 40% 20%"
-          bg="transparent"
-          display="grid"
           justifyContent="center"
           alignItems="center"
         >
