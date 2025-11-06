@@ -1,4 +1,9 @@
-import { Box, GridItem, Logo } from "@nypl/design-system-react-components";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Logo,
+} from "@nypl/design-system-react-components";
 import bwipjs from "bwip-js";
 import Image from "next/image";
 import { useEffect } from "react";
@@ -41,60 +46,97 @@ const ConfirmationContainer = () => {
   }, [canvas]);
 
   return (
-    <Box className="confirmation-graphic" mb="s">
-      <div className="image-lion">
+    <Box
+      mb="s"
+      bg="var(--nypl-colors-ui-gray-light-cool)"
+      position="relative"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      width="100%"
+    >
+      <Box
+        className="image-lion"
+        position="relative"
+        fontSize="1em"
+        mx="0 auto"
+        width={{ base: "100%", md: "80%", lg: "60%" }}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
         <Image
           alt="NYPL Library Barcode Background"
           height="727"
           src="/library-card/cardbg.png"
           width="939"
         />
-        <div className="background-lion">
-          <GridItem
-            id="member-name"
-            color={"white"}
-            fontSize={"0.8em"}
-            $breakpoint-intermediate={{ fontsize: "0.8em" }}
-            $breakpoint-large={{ fontsize: "0.7em" }}
-          >
+        <Grid
+          className="background-lion"
+          top={0}
+          left={0}
+          width="100%"
+          position="absolute"
+          backgroundSize="cover"
+          backgroundRepeat="no-repeat"
+          height="100%"
+          p="0 40px 0 25px"
+          m={0}
+          gap="10px 5px"
+          gridTemplateColumns="58% 30%"
+          gridTemplateRows="20% 40% 20%"
+          bg="transparent"
+          display="grid"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <GridItem id="member-name" color="white" fontSize="0.8em">
             {t("confirmation.graphic.memberName")}
-            <Box className="content" fontSize={"1.6em"}>
+            <Box className="content" fontSize="1.6em">
               {name}
             </Box>
           </GridItem>
-          <GridItem
-            color={"white"}
-            fontSize={"0.6em"}
-            $breakpoint-intermediate={{ fontsize: "0.8em" }}
-            $breakpoint-large={{ fontsize: "0.7em" }}
-          >
-            <Logo
-              decorative
-              className="nypl-svg"
-              name="nyplFullWhite"
-              size="small"
-            />
+          <GridItem color="white" fontSize="0.6em" mt="20px">
+            <Logo decorative name="nyplFullWhite" size="small" mb="xs" />
           </GridItem>
-          <div className="grid-item barcode-container">
-            <canvas id="barcodeCanvas" {...canvasArgs}></canvas>
-            <div className="barcode">{barcode}</div>
-          </div>
-
-          <GridItem
-            id="issued"
-            color={"white"}
-            fontSize={"1em"}
-            $breakpoint-intermediate={{ fontsize: "1.25em" }}
-            $breakpoint-large={{ fontsize: "1.5em" }}
-            mb="s"
+          <Box
+            className="grid-item barcode-container"
+            bg="white"
+            p="15px 20px 0px"
+            display="inline-block"
+            gridColumn="1/3"
+            gridRow="2/2"
+            borderTopLeftRadius="3px"
+            borderTopRightRadius="3px"
+            borderBottomLeftRadius="5px"
+            borderBottomRightRadius="5px"
           >
+            <canvas
+              id="barcodeCanvas"
+              {...canvasArgs}
+              style={{ width: "100%", height: "50px" }}
+            ></canvas>
+            <Box
+              className="barcode"
+              color="black"
+              mx="auto"
+              position="relative"
+              fontSize="2em"
+              display="table"
+            >
+              {barcode}
+            </Box>
+          </Box>
+
+          <GridItem id="issued" color="white" fontSize="1em" mb="s">
             {t("confirmation.graphic.issued")}
             <Box className="content" fontSize={"1.6em"}>
               {new Date().toLocaleDateString()}
             </Box>
           </GridItem>
-        </div>
-      </div>
+        </Grid>
+      </Box>
     </Box>
   );
 };

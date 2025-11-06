@@ -7,7 +7,7 @@ import useFormDataContext from "../../context/FormDataContext";
 import {
   Template,
   TemplateBreakout,
-  TemplateFull,
+  TemplateContent,
   TemplateHeader,
   TemplateMain,
 } from "@nypl/design-system-react-components";
@@ -38,7 +38,7 @@ const ApplicationContainer = ({ children, problemDetail }) => {
         </TemplateBreakout>
       </TemplateHeader>
       <TemplateMain id="mainContent">
-        <TemplateFull>
+        <TemplateContent>
           <>
             <ApiErrors
               lang={finalLang}
@@ -47,7 +47,7 @@ const ApplicationContainer = ({ children, problemDetail }) => {
             />
             {children}
           </>
-        </TemplateFull>
+        </TemplateContent>
       </TemplateMain>
     </Template>
   );
