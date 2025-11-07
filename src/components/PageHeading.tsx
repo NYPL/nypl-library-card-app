@@ -21,14 +21,7 @@ export const PageHeading = ({ children, ...rest }) => {
   }, []);
 
   return (
-    <Heading
-      ref={headingRef}
-      tabIndex={-1}
-      level="h2"
-      mb="s"
-      size="heading3"
-      {...rest}
-    >
+    <Heading ref={headingRef} level="h2" mb="s" size="heading3" {...rest}>
       {children}
     </Heading>
   );
