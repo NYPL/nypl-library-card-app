@@ -34,14 +34,14 @@ export async function getToken(): Promise<string | null> {
         `API Error ${response.status}: ${response.statusText}`,
         errorText
       );
-      throw new Error("Failed to get auth token from API server.");
+      throw new Error(
+        `Failed to get auth token from API server. Status: ${response.status} ${response.statusText}. Response: ${errorText}`
+      );
     }
 
     const data: SierraTokenResponse = await response.json();
 
     const authToken = data.access_token;
-
-    console.log("Auth Token (Success):");
 
     return authToken;
   } catch (error) {
