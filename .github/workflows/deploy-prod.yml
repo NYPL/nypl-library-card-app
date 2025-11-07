@@ -51,9 +51,12 @@ jobs:
           ECR_REPOSITORY: nypl-library-card-app
           IMAGE_TAG: ${{ github.sha }}
           NEXT_BUILD_ID: ${{ github.sha }}-${{ github.run_number }}-prod
+          NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
         run: |
           docker build \
            --build-arg NEXT_BUILD_ID="${NEXT_BUILD_ID}" \
+           --build-arg NEW_RELIC_APP_NAME="Library Card App" \
+           --build-arg NEW_RELIC_LICENSE_KEY=$NEW_RELIC_LICENSE_KEY \
            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG  \
            .
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:production-latest
