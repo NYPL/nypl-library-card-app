@@ -8,8 +8,8 @@ export const PageHeading = ({ children, ...rest }) => {
   const headingRef = useRef(null);
 
   useEffect(() => {
-    // Delay scroll to ensure new content is rendered before scrolling
-    const timer = setTimeout(() => {
+    // Delay forced scroll to ensure new content is rendered before scrolling
+    const scrollDelay = setTimeout(() => {
       if (headingRef.current) {
         headingRef.current.scrollIntoView({
           behavior: "smooth",
@@ -17,7 +17,7 @@ export const PageHeading = ({ children, ...rest }) => {
         });
       }
     }, 100);
-    return () => clearTimeout(timer);
+    return () => clearTimeout(scrollDelay);
   }, []);
 
   return (
