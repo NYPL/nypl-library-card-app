@@ -33,6 +33,8 @@
 - Add Playwright tests to mock username availability button on account and review page [SWIS-137](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-137)
 - Run Playwright tests on QA environment [SWIS-113](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-113)
 - Add test to scrape the barcode on the Congrats page[SWIS-127] (https://newyorkpubliclibrary.atlassian.net/browse/SWIS-127)
+- Add Playwright test to mock create patron API endpoint [SWIS-140](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-140)
+- Fix issued date in Playwright test [SWIS-162](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-162)
 
 ### 1.2.6
 

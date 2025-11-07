@@ -5,7 +5,8 @@ import {
   fillHomeAddress,
   fillAlternateAddress,
 } from "../utils/form-helper";
-import { TEST_PATRON_INFO } from "../utils/constants";
+import { TEST_BARCODE_NUMBER, TEST_PATRON_INFO } from "../utils/constants";
+import { mockCreatePatronApi } from "../utils/mock-api";
 
 test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", () => {
   test("displays patron information on review page", async ({ page }) => {
@@ -91,6 +92,29 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
       await expect(pageManager.congratsPage.barcodeNumber).toContainText(
         "255",
         { timeout: 15000 }
+      );
+    });
+  });
+});
+
+test.describe("navigates from Review page to Congrats page", () => {
+  test("mocks create patron API", async ({ page }) => {
+    const pageManager = new PageManager(page);
+    const fullName = `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`;
+
+    await test.step("submits application", async () => {
+      await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER);
+      await page.goto("/library-card/review?newCard=true");
+
+      await expect(pageManager.reviewPage.submitButton).toBeVisible();
+      await pageManager.reviewPage.submitButton.click();
+    });
+
+    await test.step("displays variable elements on Congrats page", async () => {
+      await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
+      await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
+      await expect(pageManager.congratsPage.barcodeNumber).toHaveText(
+        TEST_BARCODE_NUMBER
       );
     });
   });
