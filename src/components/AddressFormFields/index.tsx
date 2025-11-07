@@ -84,6 +84,7 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
             isRequired={isRequired}
             errorState={errors}
             defaultValue={formValues[`${type}-line1`]}
+            autoComplete={`section-${type} address-line1`}
           />
         </DSFormField>
       </FormRow>
@@ -95,6 +96,7 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
             label={t("location.address.line2.label")}
             {...register(`${type}-line2`)}
             defaultValue={formValues[`${type}-line2`]}
+            autoComplete={`section-${type} address-line2`}
           />
         </DSFormField>
       </FormRow>
@@ -113,6 +115,7 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
             isRequired={isRequired}
             errorState={errors}
             defaultValue={formValues[`${type}-city`]}
+            autoComplete={`section-${type} address-level2`}
           />
         </DSFormField>
         <DSFormField>
@@ -131,6 +134,7 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
             errorState={errors}
             maxLength={STATELENGTH}
             defaultValue={formValues[`${type}-state`]}
+            autoComplete={`section-${type} address-level1`}
           />
         </DSFormField>
       </FormRow>
@@ -149,6 +153,7 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
             maxLength={MAXLENGTHZIP}
             instructionText={t("location.address.postalCode.instruction")}
             defaultValue={formValues[`${type}-zip`]}
+            autoComplete={`section-${type} postal-code`}
           />
         </DSFormField>
         <DSFormField></DSFormField>

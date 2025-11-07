@@ -32,6 +32,7 @@ import {
 } from "../../../src/utils/formDataUtils";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 import { NRError } from "../../logger/newrelic";
+import { PageSubHeading } from "../PageSubHeading";
 
 const styles = {
   formSection: {
@@ -59,7 +60,7 @@ const styles = {
     flex: { base: "1 1 100%", md: "1 1 50%" },
   },
   title: {
-    fontWeight: "regular",
+    fontWeight: "bold",
     marginBottom: "xs",
   },
   workTitle: {
@@ -121,42 +122,49 @@ function ReviewFormContainer({ csrfToken }) {
    * toggling instead of an anchor element. This is for the Personal and the
    * Account sections.
    */
-  const editSectionButton = (editSectionFlag, sectionName, page) =>
-    clientSide ? (
+  const editSectionButton = (editSectionFlag, sectionName, page) => {
+    const label = `${t("button.edit")} ${page === "personal" ? t(`review.section.personal`) : t("review.createAccount")}`;
+    return clientSide ? (
       <Button
         variant="primary"
-        id={`editSectionButton-${sectionName}`}
+        id={`editSectionButton-${sectionName.replace(/\s+/g, "")}`}
         onClick={() => {
           editSectionFlag(true);
         }}
+        aria-label={label}
       >
         {t("button.edit")}
       </Button>
     ) : (
       <a
+        aria-label={label}
         href={`/library-card/${page}?${encodeURI(`${queryStr}${queryValues}`)}`}
       >
         {t("button.edit")}
       </a>
     );
+  };
   /**
    * editAddressButton
    * The logic from the `editSectionButton` is the same for this function,
    * except that this component is for the Address section.
    */
-  const editAddressButton = () =>
-    clientSide ? (
+  const editAddressButton = () => {
+    const label = `${t("button.edit")} ${t("review.section.address.label")}`;
+    return clientSide ? (
       <Button
         variant="primary"
         id="editAddressButton"
         onClick={async () => {
           await router.push(`/location?${queryStr}`);
         }}
+        aria-label={label}
       >
         {t("button.edit")}
       </Button>
     ) : (
       <a
+        aria-label={label}
         href={`/library-card/location?${encodeURI(
           `${queryStr}${queryValues}`
         )}`}
@@ -164,6 +172,7 @@ function ReviewFormContainer({ csrfToken }) {
         {t("button.edit")}
       </a>
     );
+  };
 
   /**
    * editSectionInfo
@@ -283,7 +292,7 @@ function ReviewFormContainer({ csrfToken }) {
       </Box>
       {editSectionButton(
         setEditPersonalInfoFlag,
-        "Personal Information",
+        "Personal information",
         "personal"
       )}
     </Box>
@@ -327,7 +336,7 @@ function ReviewFormContainer({ csrfToken }) {
       </Box>
       {editSectionButton(
         setEditAccountInfoFlag,
-        "Create Your Account",
+        "Create your account",
         "account"
       )}
     </Box>
@@ -337,7 +346,7 @@ function ReviewFormContainer({ csrfToken }) {
    * and address form section.
    */
   const renderAddressValues = () => (
-    <Box sx={styles.container} id="address-section" tabIndex={0}>
+    <Box sx={styles.container} id="address-section">
       {/* If there is no location value, don't render this at all -
           there's nothing to show and will just be confusing. */}
       {formValues.location && (
@@ -419,9 +428,7 @@ function ReviewFormContainer({ csrfToken }) {
       <Loader isLoading={isLoading} />
 
       <Box sx={styles.formSection}>
-        <Heading level="h3" mb="s">
-          {t("review.section.personal")}
-        </Heading>
+        <PageSubHeading mb="s">{t("review.section.personal")}</PageSubHeading>
         {!editPersonalInfoFlag ? (
           renderPersonalInformationValues()
         ) : (
@@ -437,14 +444,14 @@ function ReviewFormContainer({ csrfToken }) {
       </Box>
 
       <Box sx={styles.formSection}>
-        <Heading level="h3">{t("review.section.address.label")}</Heading>
+        <PageSubHeading mb="s">
+          {t("review.section.address.label")}
+        </PageSubHeading>
         {renderAddressValues()}
       </Box>
 
       <Box sx={styles.formSection}>
-        <Heading level="h3" mb="s">
-          {t("review.createAccount")}
-        </Heading>
+        <PageSubHeading mb="s">{t("review.createAccount")}</PageSubHeading>
         {!editAccountInfoFlag ? (
           renderAccountValues()
         ) : (
