@@ -6,7 +6,6 @@ import {
   fillAlternateAddress,
 } from "../utils/form-helper";
 import { TEST_PATRON_INFO } from "../utils/constants";
-import { storeBarcode } from "../utils/barcode-storage";
 
 test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", () => {
   test("displays patron information on review page", async ({ page }) => {
@@ -93,14 +92,6 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
         "255",
         { timeout: 15000 }
       );
-
-      if (await pageManager.congratsPage.barcodeNumber.isVisible()) {
-        const barcodeText =
-          (
-            await pageManager.congratsPage.barcodeNumber.textContent()
-          )?.trim() || "";
-        await storeBarcode(barcodeText);
-      }
     });
   });
 });
