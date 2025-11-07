@@ -156,6 +156,7 @@ const UsernameValidationForm = ({
             errorState={errors}
             maxLength={25}
             defaultValue={formValues.username}
+            autoComplete="username"
           />
         </DSFormField>
       </FormRow>

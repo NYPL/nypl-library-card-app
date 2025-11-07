@@ -96,6 +96,7 @@ function AccountFormFields({
             minLength={minPasswordLength}
             maxLength={maxPasswordLength}
             defaultValue={formValues.password}
+            autoComplete="new-password"
           />
         </DSFormField>
       </FormRow>
@@ -115,6 +116,7 @@ function AccountFormFields({
             minLength={minPasswordLength}
             maxLength={maxPasswordLength}
             defaultValue={formValues.verifyPassword}
+            autoComplete="new-password"
           />
         </DSFormField>
       </FormRow>

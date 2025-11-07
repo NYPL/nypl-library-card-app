@@ -346,7 +346,7 @@ function ReviewFormContainer({ csrfToken }) {
    * and address form section.
    */
   const renderAddressValues = () => (
-    <Box sx={styles.container} id="address-section" tabIndex={0}>
+    <Box sx={styles.container} id="address-section">
       {/* If there is no location value, don't render this at all -
           there's nothing to show and will just be confusing. */}
       {formValues.location && (

@@ -78,7 +78,7 @@ export class ReviewPage {
     this.addressEditButton = page.locator("#editAddressButton");
     this.editPersonalInfoButton = page
       .getByRole("button", {
-        name: "Edit Personal Information",
+        name: "Edit Personal information",
         exact: true,
       })
       .first();
@@ -121,7 +121,7 @@ export class ReviewPage {
     this.homeLibraryHeading = page.getByText("Home library", { exact: true });
     this.ebranchValue = page.getByText("E-Branch", { exact: true });
     this.createYourAccountEditButton = page.getByRole("button", {
-      name: "Edit Create Your Account",
+      name: "Edit Create your account",
       exact: true,
     });
     this.usernameInput = page.getByRole("textbox", {
