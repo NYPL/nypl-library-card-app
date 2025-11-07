@@ -24,12 +24,6 @@ const styles = {
   input: {
     marginRight: "20px",
   },
-
-  workAddressContainer: {
-    borderTop: "1px solid",
-    borderColor: "ui.gray.medium",
-    paddingTop: "30px",
-  },
 };
 
 /**
@@ -224,8 +218,8 @@ function AddressVerificationContainer() {
       onSubmit={handleSubmit(submitForm)}
     >
       <FormRow>
-        <DSFormField>
-          <PageSubHeading id="verify-address-heading">
+        <DSFormField gridGap="0">
+          <PageSubHeading id="verify-address-heading" mb="s">
             {t("verifyAddress.homeAddress")}
           </PageSubHeading>
           {renderMultipleAddresses(
@@ -236,8 +230,10 @@ function AddressVerificationContainer() {
           )}
 
           {workAddress?.length > 0 && (
-            <Box sx={styles.workAddressContainer}>
-              <PageSubHeading>{t("verifyAddress.workAddress")}</PageSubHeading>
+            <Box mt="l">
+              <PageSubHeading id="verify-work-address-heading" mb="s">
+                {t("verifyAddress.workAddress")}
+              </PageSubHeading>
 
               {renderMultipleAddresses(
                 workAddress,
