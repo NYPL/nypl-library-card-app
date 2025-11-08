@@ -36,6 +36,15 @@ jest.mock("react-i18next", () => {
   };
 });
 
+beforeAll(() => {
+  // Mock scrollIntoView since jsdom doesn't implement it
+  window.HTMLElement.prototype.scrollIntoView = jest.fn();
+});
+
+afterAll(() => {
+  jest.restoreAllMocks();
+});
+
 describe("ReviewPage", () => {
   describe("general tests", () => {
     let container;
