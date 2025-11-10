@@ -65,8 +65,6 @@ const styles = {
   },
   workTitle: {
     width: "100%",
-    borderTop: "1px solid",
-    borderColor: "ui.border.default",
     paddingTop: "s",
   },
 };
@@ -363,7 +361,9 @@ function ReviewFormContainer({ csrfToken }) {
         </Box>
       )}
       {formValues["work-line1"] && (
-        <Heading level="h4">{t("review.section.address.home")}</Heading>
+        <Heading level="h4" size="heading7">
+          {t("review.section.address.home")}
+        </Heading>
       )}
       <Box sx={styles.field}>
         <Box sx={styles.title}>{t("location.address.line1.label")}</Box>
@@ -389,7 +389,7 @@ function ReviewFormContainer({ csrfToken }) {
       </Box>
       {formValues["work-line1"] && (
         <>
-          <Heading level="h4" sx={styles.workTitle}>
+          <Heading level="h4" sx={styles.workTitle} size="heading7">
             {t("review.section.address.work")}
           </Heading>
           <Box sx={styles.field}>
