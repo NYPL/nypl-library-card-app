@@ -4,12 +4,12 @@ export interface SierraTokenResponse {
   expires_in: number;
 }
 
-export async function getToken(): Promise<string | null> {
+export async function getToken(): Promise<string> {
   const basicAuth = process.env.SIERRA_BASIC_AUTH_BASE64;
 
   if (!basicAuth) {
     console.error("SIERRA_BASIC_AUTH_BASE64 environment variable is missing.");
-    return null;
+    return "There's an error";
   }
 
   const request = new Request(
@@ -45,7 +45,6 @@ export async function getToken(): Promise<string | null> {
 
     return authToken;
   } catch (error) {
-    console.error("Error fetching auth token:", error);
-    return null;
+    return `There's an error fetching the token  ${error}`;
   }
 }
