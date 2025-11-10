@@ -13,6 +13,7 @@ import { useFormContext } from "react-hook-form";
 import { isAlphanumeric } from "validator";
 
 import FormField from "../FormField";
+import LoadingIndicator from "../LoadingIndicator";
 import useFormDataContext from "../../context/FormDataContext";
 
 import {
@@ -46,6 +47,7 @@ const UsernameValidationForm = ({
     available: false,
     message: "",
   };
+  const [isLoading, setIsLoading] = useState(false);
   const [usernameIsAvailable, setUsernameIsAvailable] = useState(defaultState);
   const {
     watch,
@@ -70,6 +72,7 @@ const UsernameValidationForm = ({
    */
   const validateUsername = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const username = getValues("username");
     axios
       .post("/library-card/api/username", { username, csrfToken })
@@ -113,6 +116,9 @@ const UsernameValidationForm = ({
           available: false,
           message,
         });
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
   const inputValidation = (value = "") =>
@@ -132,11 +138,14 @@ const UsernameValidationForm = ({
         <Button
           id="username-check-button"
           isDisabled={!canValidate}
-          onClick={validateUsername}
+          onClick={
+            validateUsername
+          }
           type="button"
         >
           {t("account.username.checkButton")}
         </Button>
+        <LoadingIndicator isLoading={isLoading} size="small" />
       </ButtonGroup>
     );
   };
