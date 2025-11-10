@@ -32,7 +32,9 @@ function WorkAddressPage({
   });
   return (
     <>
-      <PageHeading>{t("location.workAddress.title")}</PageHeading>
+      <PageHeading autoScrollOnMount>
+        {t("location.workAddress.title")}
+      </PageHeading>
       <Paragraph>{t("location.workAddress.description.part1")}</Paragraph>
       <Paragraph>{t("internationalInstructions")}</Paragraph>
       <WorkAddressContainer csrfToken={csrfToken} />
