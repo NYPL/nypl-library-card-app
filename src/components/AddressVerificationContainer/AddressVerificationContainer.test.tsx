@@ -46,7 +46,7 @@ jest.mock("react-i18next", () => {
       workAddress: "Dirección alternativa",
     },
     button: {
-      start: "Get Started",
+      start: "Get started",
       edit: "Edit",
       submit: "Submit",
       next: "Next",

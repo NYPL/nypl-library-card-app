@@ -12,26 +12,29 @@ import { ipLocationMessageTranslations } from "../data/ipLocationMessageTranslat
 import { every, isEmpty } from "lodash";
 
 const errorMessages = {
-  firstName: "Please enter a valid first name.",
-  lastName: "Please enter a valid last name.",
-  birthdate: "Please enter a valid date, MM/DD/YYYY, including slashes.",
-  ageGate: "You must be 13 years or older to continue.",
-  email: "Please enter a valid email address.",
-  username: "Username must be between 5-25 alphanumeric characters.",
+  firstName: "There was a problem. Please enter a valid first name.",
+  lastName: "There was a problem. Please enter a valid last name.",
+  birthdate:
+    "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
+  ageGate: "There was a problem. You must be 13 years or older to continue.",
+  email: "There was a problem. Please enter a valid email address.",
+  username:
+    "There was a problem. Username must be between 5-25 alphanumeric characters.",
   // Technically, the ILS accepts periods but Overdrive does not. This means
   // we can't allow patrons to add a period to their password or they won't
   // be able to use Overdrive for digital reading.
   password:
-    "Your password must be at least 8 characters, include a mixture of both " +
+    "There was a problem. Your password must be at least 8 characters, include a mixture of both " +
     "uppercase and lowercase letters, include a mixture of letters and " +
     "numbers, and have at least one special character except period (.)",
-  verifyPassword: "The two passwords don't match.",
-  acceptTerms: "The Terms and Conditions must be checked.",
+  verifyPassword: "There was a problem. The two passwords don't match.",
+  acceptTerms: "There was a problem. The Terms and Conditions must be checked.",
   address: {
-    line1: "Please enter a valid street address.",
-    city: "Please enter a valid city.",
-    state: "Please enter a 2-character state abbreviation.",
-    zip: "Please enter a 5 or 9-digit postal code.",
+    line1: "There was a problem. Please enter a valid street address.",
+    city: "There was a problem. Please enter a valid city.",
+    state:
+      "There was a problem. Please enter a 2-character state abbreviation.",
+    zip: "There was a problem. Please enter a 5 or 9-digit postal code.",
   } as Address,
 };
 

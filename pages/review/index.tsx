@@ -1,4 +1,4 @@
-import { Box, Heading } from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect } from "react";
@@ -14,6 +14,7 @@ import {
   generateNewCookieTokenAndHash,
 } from "../../src/utils/csrfUtils";
 import * as cookie from "../../src/utils/CookieUtils";
+import { PageHeading } from "../../src/components/PageHeading";
 
 interface ReviewProps {
   hasUserAlreadyRegistered?: boolean;
@@ -28,7 +29,7 @@ function ReviewPage({ hasUserAlreadyRegistered, csrfToken }: ReviewProps) {
   }, []);
   return (
     <>
-      <Heading level="h2">{t("review.title")}</Heading>
+      <PageHeading autoScrollOnMount>{t("review.title")}</PageHeading>
       <Box mt="s">{t("review.description")}</Box>
       <Box mt="s">{t("internationalInstructions")}</Box>
       <ReviewFormContainer csrfToken={csrfToken} />

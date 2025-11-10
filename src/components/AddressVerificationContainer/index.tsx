@@ -3,7 +3,6 @@ import {
   Form,
   FormField as DSFormField,
   FormRow,
-  Heading,
   Radio,
   RadioGroup,
 } from "@nypl/design-system-react-components";
@@ -19,16 +18,11 @@ import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
 import { useTranslation } from "next-i18next";
+import { PageSubHeading } from "../PageSubHeading";
 
 const styles = {
   input: {
     marginRight: "20px",
-  },
-
-  workAddressContainer: {
-    borderTop: "1px solid",
-    borderColor: "ui.gray.medium",
-    paddingTop: "30px",
   },
 };
 
@@ -164,11 +158,16 @@ function AddressVerificationContainer() {
       return null;
     }
     const addressesLength = addresses.length;
+    const labelText =
+      addressType === "home"
+        ? t("verifyAddress.homeAddress")
+        : t("verifyAddress.workAddress");
     return (
       <RadioGroup
         className="address-container"
         name=""
-        labelText="address-radio-group"
+        id={addressType.replace(/[^0-9a-zA-Z]/g, "-")}
+        labelText={labelText}
         showLabel={false}
         sx={{
           "& .ds-radioGroup-stack": {
@@ -219,10 +218,10 @@ function AddressVerificationContainer() {
       onSubmit={handleSubmit(submitForm)}
     >
       <FormRow>
-        <DSFormField>
-          <Heading id="verify-address-heading" level="h3">
+        <DSFormField gridGap="0">
+          <PageSubHeading id="verify-address-heading" mb="s">
             {t("verifyAddress.homeAddress")}
-          </Heading>
+          </PageSubHeading>
           {renderMultipleAddresses(
             homeAddress,
             "home",
@@ -231,10 +230,10 @@ function AddressVerificationContainer() {
           )}
 
           {workAddress?.length > 0 && (
-            <Box sx={styles.workAddressContainer}>
-              <Heading level="h3" mb="l">
+            <Box mt="l">
+              <PageSubHeading id="verify-work-address-heading" mb="s">
                 {t("verifyAddress.workAddress")}
-              </Heading>
+              </PageSubHeading>
 
               {renderMultipleAddresses(
                 workAddress,

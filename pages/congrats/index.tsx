@@ -1,4 +1,4 @@
-import { Box, Heading } from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import React, { JSX, useEffect } from "react";
@@ -12,6 +12,7 @@ import { appEnv, cookieDomain } from "../../appConfig";
 import * as cookie from "../../src/utils/CookieUtils";
 
 import ilsLibraryList from "../../src/data/ilsLibraryList";
+import { PageHeading } from "../../src/components/PageHeading";
 
 function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
   const { state } = useFormDataContext();
@@ -56,7 +57,7 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
 
   return (
     <Box id="congratulations" mb="s">
-      <Heading mb="s">{t("confirmation.title")}</Heading>
+      <PageHeading autoScrollOnMount>{t("confirmation.title")}</PageHeading>
       <ConfirmationGraphic />
       <Box mb="s">
         <b>{t("confirmation.description.part1")}</b>
@@ -71,24 +72,28 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
 
       {temporary && (
         <Box
+          mb="s"
           dangerouslySetInnerHTML={{
             __html: t("confirmation.description.part3"),
           }}
         />
       )}
 
-      <Heading>{t("confirmation.nextSteps.title")}</Heading>
+      <PageHeading mt="l">{t("confirmation.nextSteps.title")}</PageHeading>
       <Box
+        mb="s"
         dangerouslySetInnerHTML={{
           __html: loginHtml,
         }}
       />
       <Box
+        mb="s"
         dangerouslySetInnerHTML={{
           __html: t("confirmation.nextSteps.updates"),
         }}
       />
       <Box
+        mb="s"
         dangerouslySetInnerHTML={{
           __html: t("confirmation.nextSteps.more"),
         }}

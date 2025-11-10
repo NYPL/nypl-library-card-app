@@ -1,8 +1,7 @@
 import {
   Form,
   FormField as DSFormField,
-  FormRow,
-  Heading
+  FormRow
 } from "@nypl/design-system-react-components";
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -26,6 +25,7 @@ import { createQueryParams } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 import { Paragraph } from "../Paragraph";
+import { PageSubHeading } from "../PageSubHeading";
 
 const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -129,9 +129,7 @@ const AddressContainer = ({ csrfToken }) => {
 
   return (
     <>
-      <Heading mb="s" level="h3">
-        {t("location.workAddress.title")}
-      </Heading>
+      <PageSubHeading>{t("location.workAddress.title")}</PageSubHeading>
       <Paragraph>{t("location.workAddress.description.part2")}</Paragraph>
 
       <LoadingIndicator isLoading={isLoading} />

@@ -12,7 +12,6 @@ import * as appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
 import ApplicationContainer from "../src/components/ApplicationContainer";
 import { getPageTitles } from "../src/utils/utils";
-import useRouterScroll from "../src/hooks/useRouterScroll";
 import { constructProblemDetail } from "../src/utils/formDataUtils";
 import { DSProvider } from "@nypl/design-system-react-components";
 
@@ -33,7 +32,6 @@ console.info("App Version: ", pkg.version);
 
 function MyApp({ Component, pageProps }: MyAppProps) {
   const router = useRouter();
-  useRouterScroll({ top: 640 });
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   const { favIconPath, appTitle } = appConfig;

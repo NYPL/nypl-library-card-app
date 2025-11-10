@@ -4,7 +4,7 @@ import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
 import { fillHomeAddress, fillAlternateAddress } from "../utils/form-helper";
 
-test.describe("displays elements on Address Verification page", () => {
+test.describe("displays elements on Address verification page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/library-card/address-verification?&newCard=true");
   });

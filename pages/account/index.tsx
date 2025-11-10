@@ -1,4 +1,3 @@
-import { Heading } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect } from "react";
@@ -16,6 +15,7 @@ import {
 } from "../../src/utils/csrfUtils";
 import * as cookie from "../../src/utils/CookieUtils";
 import { Paragraph } from "../../src/components/Paragraph";
+import { PageHeading } from "../../src/components/PageHeading";
 
 interface AccountPageProps {
   hasUserAlreadyRegistered?: boolean;
@@ -33,9 +33,7 @@ function AccountPage({
   });
   return (
     <>
-      <Heading level="h2" mb="s">
-        {t("account.title")}
-      </Heading>
+      <PageHeading autoScrollOnMount>{t("account.title")}</PageHeading>
       <Paragraph>{t("account.description")}</Paragraph>
       <Paragraph>{t("internationalInstructions")}</Paragraph>
       <AccountFormContainer csrfToken={csrfToken} />
