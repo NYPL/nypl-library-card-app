@@ -416,7 +416,7 @@ function ReviewFormContainer({ csrfToken }) {
 
   return (
     <>
-      <LoadingIndicator />
+      <LoadingIndicator isLoading={isLoading} />
 
       <Box sx={styles.formSection}>
         <Heading level="h3" mb="s">

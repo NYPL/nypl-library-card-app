@@ -153,7 +153,7 @@ const AddressContainer = ({ csrfToken }) => {
       <Heading level="h3">{t("location.address.title")}</Heading>
       <Paragraph>{t("location.address.description")}</Paragraph>
 
-      <LoadingIndicator />
+      <LoadingIndicator isLoading={isLoading} />
 
       <Form
         // action="/library-card/api/submit"

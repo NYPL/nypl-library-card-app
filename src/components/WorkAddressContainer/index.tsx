@@ -28,7 +28,7 @@ import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 import { Paragraph } from "../Paragraph";
 
 const AddressContainer = ({ csrfToken }) => {
-  const [setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useFormDataContext();
   const { formValues, addressesResponse } = state;
   const router = useRouter();
@@ -134,7 +134,7 @@ const AddressContainer = ({ csrfToken }) => {
       </Heading>
       <Paragraph>{t("location.workAddress.description.part2")}</Paragraph>
 
-      <LoadingIndicator />
+      <LoadingIndicator isLoading={isLoading} />
 
       <Form
         // action="/library-card/api/submit"
