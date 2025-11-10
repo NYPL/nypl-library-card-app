@@ -57,7 +57,7 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
 
   return (
     <Box id="congratulations" mb="s">
-      <PageHeading>{t("confirmation.title")}</PageHeading>
+      <PageHeading autoScrollOnMount>{t("confirmation.title")}</PageHeading>
       <ConfirmationGraphic />
       <Box mb="s">
         <b>{t("confirmation.description.part1")}</b>

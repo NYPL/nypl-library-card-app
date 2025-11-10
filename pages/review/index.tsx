@@ -29,7 +29,7 @@ function ReviewPage({ hasUserAlreadyRegistered, csrfToken }: ReviewProps) {
   }, []);
   return (
     <>
-      <PageHeading>{t("review.title")}</PageHeading>
+      <PageHeading autoScrollOnMount>{t("review.title")}</PageHeading>
       <Box mt="s">{t("review.description")}</Box>
       <Box mt="s">{t("internationalInstructions")}</Box>
       <ReviewFormContainer csrfToken={csrfToken} />

@@ -26,7 +26,7 @@ function AddressVerificationPage({
   });
   return (
     <>
-      <PageHeading>{t("verifyAddress.title")}</PageHeading>
+      <PageHeading autoScrollOnMount>{t("verifyAddress.title")}</PageHeading>
       <Paragraph id="select-address-heading">
         {t("verifyAddress.description")}
       </Paragraph>
