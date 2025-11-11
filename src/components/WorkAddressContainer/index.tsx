@@ -129,10 +129,10 @@ const AddressContainer = ({ csrfToken }) => {
 
   return (
     <>
+      <LoadingIndicator isLoading={isLoading} />
+
       <PageSubHeading>{t("location.workAddress.title")}</PageSubHeading>
       <Paragraph>{t("location.workAddress.description.part2")}</Paragraph>
-
-      <LoadingIndicator isLoading={isLoading} />
 
       <Form
         // action="/library-card/api/submit"

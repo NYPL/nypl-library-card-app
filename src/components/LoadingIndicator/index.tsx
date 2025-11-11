@@ -1,18 +1,31 @@
 import React from "react";
-import { ProgressIndicator } from "@nypl/design-system-react-components";
+import { Box, ProgressIndicator } from "@nypl/design-system-react-components";
 
-interface LoaderProps {
+interface LoadingIndicatorProps {
   isLoading: boolean;
 }
 
-const LoadingIndicator = ({ isLoading }: LoaderProps) =>
+const LoadingIndicator = ({ isLoading }: LoadingIndicatorProps) =>
   isLoading && (
-  <ProgressIndicator
-    isIndeterminate={true}
-    indicatorType="circular"
-    labelText="Loading Indicator"
-    showLabel={false}
-  />
+    <Box
+        position="fixed"
+        top="0"
+        left="0"
+        width="100vw" // 100% of viewport width
+        height="100vh" // 100% of viewport height
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        bg="rgba(255, 255, 255, 0.8)" // Semi-transparent background
+        zIndex="9999"
+      >
+        <ProgressIndicator
+          isIndeterminate={true}
+          indicatorType="circular"
+          labelText="Loading Indicator"
+          showLabel={false}
+        />
+      </Box>
   );
 
 export default LoadingIndicator;
