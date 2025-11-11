@@ -3,7 +3,6 @@ import { Box, ProgressIndicator } from "@nypl/design-system-react-components";
 
 interface LoadingIndicatorProps {
   isLoading: boolean;
-  size?: string;
 }
 
 const LoadingIndicator = ({ isLoading }: LoadingIndicatorProps) =>

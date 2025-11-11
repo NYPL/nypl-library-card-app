@@ -13,7 +13,7 @@ import { useFormContext } from "react-hook-form";
 import { isAlphanumeric } from "validator";
 
 import FormField from "../FormField";
-import LoadingIndicator from "../LoadingIndicator";
+import SmallLoadingIndicator from "../SmallLoadingIndicator";
 import useFormDataContext from "../../context/FormDataContext";
 
 import {
@@ -134,7 +134,7 @@ const UsernameValidationForm = ({
     const canValidate =
       inputValidation(username) && !usernameIsAvailable.message;
     return (
-      <ButtonGroup>
+      <ButtonGroup alignItems={"center"}>
         <Button
           id="username-check-button"
           isDisabled={!canValidate}
@@ -145,7 +145,7 @@ const UsernameValidationForm = ({
         >
           {t("account.username.checkButton")}
         </Button>
-        <LoadingIndicator isLoading={isLoading} size="small" />
+        <SmallLoadingIndicator isLoading={isLoading} />
       </ButtonGroup>
     );
   };
