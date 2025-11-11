@@ -138,9 +138,7 @@ const UsernameValidationForm = ({
         <Button
           id="username-check-button"
           isDisabled={!canValidate}
-          onClick={
-            validateUsername
-          }
+          onClick={validateUsername}
           type="button"
         >
           {t("account.username.checkButton")}
