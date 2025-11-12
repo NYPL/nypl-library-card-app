@@ -1,8 +1,9 @@
 import { test, expect } from "@playwright/test";
 
-test("test", async ({ page }) => {
+test("displays snapshot of landing page", async ({ page }) => {
   await page.goto("/library-card/new?&newCard=true");
-  await expect(page.locator("header")).toMatchAriaSnapshot(`
+  await expect(page.locator("header").filter({ hasText: "Apply" }))
+    .toMatchAriaSnapshot(`
     - banner:
       - heading "Apply for a Library Card Online" [level=1]
   `);
