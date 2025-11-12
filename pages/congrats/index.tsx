@@ -1,4 +1,4 @@
-import { Heading } from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import React, { JSX, useEffect } from "react";
@@ -12,6 +12,7 @@ import { appEnv, cookieDomain } from "../../appConfig";
 import * as cookie from "../../src/utils/CookieUtils";
 
 import ilsLibraryList from "../../src/data/ilsLibraryList";
+import { PageHeading } from "../../src/components/PageHeading";
 
 function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
   const { state } = useFormDataContext();
@@ -55,45 +56,49 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
   }
 
   return (
-    <div id="congratulations">
-      <Heading level="two">{t("confirmation.title")}</Heading>
+    <Box id="congratulations" mb="s">
+      <PageHeading autoScrollOnMount>{t("confirmation.title")}</PageHeading>
       <ConfirmationGraphic />
-      <p>
+      <Box mb="s">
         <b>{t("confirmation.description.part1")}</b>
-      </p>
-      <p>
+      </Box>
+      <Box mb="s">
         <b
           dangerouslySetInnerHTML={{
             __html: t("confirmation.description.part2"),
           }}
         />
-      </p>
+      </Box>
 
       {temporary && (
-        <div
+        <Box
+          mb="s"
           dangerouslySetInnerHTML={{
             __html: t("confirmation.description.part3"),
           }}
         />
       )}
 
-      <Heading level="two">{t("confirmation.nextSteps.title")}</Heading>
-      <div
+      <PageHeading mt="l">{t("confirmation.nextSteps.title")}</PageHeading>
+      <Box
+        mb="s"
         dangerouslySetInnerHTML={{
           __html: loginHtml,
         }}
       />
-      <div
+      <Box
+        mb="s"
         dangerouslySetInnerHTML={{
           __html: t("confirmation.nextSteps.updates"),
         }}
       />
-      <div
+      <Box
+        mb="s"
         dangerouslySetInnerHTML={{
           __html: t("confirmation.nextSteps.more"),
         }}
       />
-    </div>
+    </Box>
   );
 }
 

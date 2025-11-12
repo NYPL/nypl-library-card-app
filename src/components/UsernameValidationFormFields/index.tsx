@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   ButtonGroup,
   FormField as DSFormField,
@@ -13,7 +14,6 @@ import { isAlphanumeric } from "validator";
 
 import FormField from "../FormField";
 import useFormDataContext from "../../context/FormDataContext";
-import styles from "./UsernameValidationFormFields.module.css";
 
 import {
   apiErrorTranslations,
@@ -117,10 +117,6 @@ const UsernameValidationForm = ({
   };
   const inputValidation = (value = "") =>
     value.length >= 5 && value.length <= 25 && isAlphanumeric(value);
-  const availableClassname = usernameIsAvailable.available
-    ? styles.usernameAvailable
-    : styles.usernameUnavailable;
-
   /**
    * renderButton
    * Render the button to validate a username and enable it only if
@@ -160,6 +156,7 @@ const UsernameValidationForm = ({
             errorState={errors}
             maxLength={25}
             defaultValue={formValues.username}
+            autoComplete="username"
           />
         </DSFormField>
       </FormRow>
@@ -168,15 +165,27 @@ const UsernameValidationForm = ({
         <DSFormField>{renderButton()}</DSFormField>
       </FormRow>
 
-      {usernameIsAvailable?.message ? (
-        <FormRow id={`${id}-username-3`}>
-          <DSFormField>
-            <div className={availableClassname} aria-live="assertive">
+      <FormRow
+        id={`${id}-username-3`}
+        display={usernameIsAvailable?.message ? "block" : "contents"}
+      >
+        <DSFormField
+          aria-live="assertive"
+          display={usernameIsAvailable?.message ? "block" : "contents"}
+        >
+          {usernameIsAvailable?.message ? (
+            <Box
+              color={
+                usernameIsAvailable.available
+                  ? "var(--nypl-colors-ui-success-primary)"
+                  : "var(--nypl-colors-ui-error-primary)"
+              }
+            >
               {usernameIsAvailable.message}
-            </div>
-          </DSFormField>
-        </FormRow>
-      ) : null}
+            </Box>
+          ) : null}
+        </DSFormField>
+      </FormRow>
     </>
   );
 };

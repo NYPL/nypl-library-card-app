@@ -1,4 +1,4 @@
-import { Heading, Select } from "@nypl/design-system-react-components";
+import { Box, Select } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -6,7 +6,8 @@ import { useFormContext } from "react-hook-form";
 import useFormDataContext from "../../context/FormDataContext";
 import { findLibraryName } from "../../utils/formDataUtils";
 import { LibraryListObject } from "../../interfaces";
-import styles from "./LibraryListFormFields.module.css";
+import { Paragraph } from "../Paragraph";
+import { PageSubHeading } from "../PageSubHeading";
 
 interface LibraryListFormProps {
   libraryList: LibraryListObject[];
@@ -39,10 +40,10 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   };
 
   return (
-    <div className={styles.container}>
-      <Heading level="three">{t("account.library.title")}</Heading>
-      <p>{t("account.library.description.part1")}</p>
-      <p>{t("account.library.description.part2")}</p>
+    <Box>
+      <PageSubHeading>{t("account.library.title")}</PageSubHeading>
+      <Paragraph>{t("account.library.description.part1")}</Paragraph>
+      <Paragraph>{t("account.library.description.part2")}</Paragraph>
       <Select
         placeholder="Please select"
         id="librarylist-select"
@@ -52,6 +53,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
         // form element's state for us.
         {...register("homeLibraryCode")}
         {...inputProps}
+        autoComplete="on"
       >
         {libraryList.map(({ value, label }, i) => (
           <option key={i} value={value}>
@@ -59,7 +61,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
           </option>
         ))}
       </Select>
-    </div>
+    </Box>
   );
 };
 

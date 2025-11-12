@@ -49,7 +49,7 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
       await pageManager.accountPage.nextButton.click();
     });
 
-    await test.step("displays Personal Information on review page", async () => {
+    await test.step("displays Personal information on review page", async () => {
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.firstName)
       ).toBeVisible();

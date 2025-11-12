@@ -13,19 +13,19 @@ export const mockConfirmation = {
   },
 };
 export const mockPersonal = {
-  title: "Step 1 of 5: Personal Information",
+  title: "Step 1 of 5: Personal information",
   firstName: {
-    label: "First Name",
+    label: "First name",
   },
   lastName: {
-    label: "Last Name",
+    label: "Last name",
   },
   birthdate: {
-    label: "Date of Birth",
+    label: "Date of birth",
   },
   ageGate: "Yes, I am over 13 years old.",
   email: {
-    label: "Email Address",
+    label: "Email address",
   },
   eCommunications: {
     labelText:
@@ -34,19 +34,19 @@ export const mockPersonal = {
 };
 export const mockLocation = {
   address: {
-    title: "Home Address",
-    line1: { label: "Street Address" },
+    title: "Home address",
+    line1: { label: "Street address" },
     line2: { label: "Apartment / Suite" },
     city: { label: "City" },
     state: { label: "State", instruction: "2-letter abbreviation" },
     postalCode: {
-      label: "Postal Code",
+      label: "Postal code",
       instruction: "5 or 9-digit postal code",
     },
   },
 };
 export const mockAccount = {
-  title: "Step 4 of 5: Customize Your Account",
+  title: "Step 4 of 5: Customize your account",
   description:
     "Create a username and password so you can log in and manage your account or access an array of our digital resources. Your username should be unique.",
   username: {
@@ -60,14 +60,14 @@ export const mockAccount = {
       "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab",
   },
   verifyPassword: {
-    label: "Verify Password",
+    label: "Verify password",
     instruction: "8-32 characters",
   },
-  showPassword: "Show Password",
+  showPassword: "Show password",
   library: {
     selectLibrary: "Select a home library:",
     placeholder: "Type a library name, such as Parkchester Library",
-    title: "Home Library",
+    title: "Home library",
     description: {
       part1:
         "Choosing a home library will help us make sure you&apos;re getting everything you need from a branch that&apos;s most convenient for you.",
@@ -77,20 +77,20 @@ export const mockAccount = {
   },
 };
 export const mockReview = {
-  title: "Step 5 of 5: Confirm Your Information",
+  title: "Step 5 of 5: Confirm your information",
   description:
     "Make sure all the information you’ve entered is correct. If needed, you can still make changes before you submit your application.",
   section: {
-    personal: "Personal Information",
+    personal: "Personal information",
     address: {
       label: "Address",
       location: "Location",
       home: "Home",
       work: "Work",
     },
-    homeLibrary: "Home Library",
+    homeLibrary: "Home library",
   },
-  createAccount: "Create Your Account",
+  createAccount: "Create your account",
   receiveNewsletter: "Receive information about NYPL's programs and services",
   yes: "Yes",
   no: "No",
@@ -98,7 +98,7 @@ export const mockReview = {
     "After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials.",
 };
 export const mockButton = {
-  start: "Get Started",
+  start: "Get started",
   edit: "Edit",
   submit: "Submit",
   next: "Next",

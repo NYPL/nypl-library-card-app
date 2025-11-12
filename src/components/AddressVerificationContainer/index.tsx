@@ -1,10 +1,10 @@
 import {
+  Box,
   Form,
   FormField as DSFormField,
   FormRow,
-  Heading,
-  List,
   Radio,
+  RadioGroup,
 } from "@nypl/design-system-react-components";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
@@ -13,12 +13,18 @@ import { useForm } from "react-hook-form";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import { Address, AddressResponse } from "../../../src/interfaces";
 import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
-import styles from "./AddressVerificationContainer.module.css";
 
 import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
 import { useTranslation } from "next-i18next";
+import { PageSubHeading } from "../PageSubHeading";
+
+const styles = {
+  input: {
+    marginRight: "20px",
+  },
+};
 
 /**
  * AddressVerificationContainer
@@ -152,40 +158,55 @@ function AddressVerificationContainer() {
       return null;
     }
     const addressesLength = addresses.length;
+    const labelText =
+      addressType === "home"
+        ? t("verifyAddress.homeAddress")
+        : t("verifyAddress.workAddress");
     return (
-      <List className={styles.multipleAddressList} noStyling type="ul">
+      <RadioGroup
+        className="address-container"
+        name=""
+        id={addressType.replace(/[^0-9a-zA-Z]/g, "-")}
+        labelText={labelText}
+        showLabel={false}
+        sx={{
+          "& .ds-radioGroup-stack": {
+            display: { base: "flex" },
+            flexDirection: { base: "column", sm: "row" },
+          },
+        }}
+      >
         {addresses.map((address, idx) => {
           const selected = `${addressType}-${idx}`;
           // If there's only one option, it's checked by default. Otherwise,
           // the user can choose between the two options.
           const checked =
             addressesLength === 1 ? true : selected === selectedValue;
-          const checkedClass = checked ? "checked" : "";
           return (
-            <li key={`${addressType}-${idx}`} className={checkedClass}>
-              <Radio
-                id={`${addressType}-${idx}`}
-                className={`radio-input ${styles.input}`}
-                {...register(`${addressType}-address-select`, {
-                  required: true,
-                })}
-                isChecked={checked}
-                onChange={onChange}
-                value={selected}
-                labelText={
-                  <div>
-                    <div>{address.line1}</div>
-                    {address.line2 && <div>{address.line2}</div>}
-                    <div>
-                      {address.city}, {address.state} {address.zip}
-                    </div>
-                  </div>
-                }
-              />
-            </li>
+            <Radio
+              key={`${addressType}-${idx}`}
+              id={`${addressType}-${idx}`}
+              sx={styles.input}
+              className={`radio-input`}
+              {...register(`${addressType}-address-select`, {
+                required: true,
+                onChange: onChange,
+              })}
+              isChecked={checked}
+              value={selected}
+              labelText={
+                <Box>
+                  <Box>{address.line1}</Box>
+                  {address.line2 && <Box>{address.line2}</Box>}
+                  <Box>
+                    {address.city}, {address.state} {address.zip}
+                  </Box>
+                </Box>
+              }
+            />
           );
         })}
-      </List>
+      </RadioGroup>
     );
   };
 
@@ -197,10 +218,10 @@ function AddressVerificationContainer() {
       onSubmit={handleSubmit(submitForm)}
     >
       <FormRow>
-        <DSFormField>
-          <Heading id="verify-address-heading" level="three">
+        <DSFormField gridGap="0">
+          <PageSubHeading id="verify-address-heading" mb="s">
             {t("verifyAddress.homeAddress")}
-          </Heading>
+          </PageSubHeading>
           {renderMultipleAddresses(
             homeAddress,
             "home",
@@ -209,8 +230,10 @@ function AddressVerificationContainer() {
           )}
 
           {workAddress?.length > 0 && (
-            <div className={styles.workAddressContainer}>
-              <Heading level="three">{t("verifyAddress.workAddress")}</Heading>
+            <Box mt="l">
+              <PageSubHeading id="verify-work-address-heading" mb="s">
+                {t("verifyAddress.workAddress")}
+              </PageSubHeading>
 
               {renderMultipleAddresses(
                 workAddress,
@@ -218,7 +241,7 @@ function AddressVerificationContainer() {
                 workAddressSelect,
                 onChangeWork
               )}
-            </div>
+            </Box>
           )}
         </DSFormField>
       </FormRow>
