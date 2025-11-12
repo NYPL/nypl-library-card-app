@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("displays snapshot of landing page", async ({ page }) => {
-  await page.goto("/library-card/new?&newCard=true");
+  await page.goto("https://qa-www.nypl.org/library-card/new?&newCard=true");
   await expect(page.locator("header").filter({ hasText: "Apply" }))
     .toMatchAriaSnapshot(`
     - banner:
