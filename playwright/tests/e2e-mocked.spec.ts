@@ -8,8 +8,8 @@ import {
   fillPersonalInfo,
 } from "../utils/form-helper";
 
-test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", () => {
-  test("displays patron information on review page", async ({ page }) => {
+test.describe("E2E Flow: Complete application using mocked submit", () => {
+  test("displays patron information on congrats page", async ({ page }) => {
     const pageManager = new PageManager(page);
     const fullName = `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`;
 
