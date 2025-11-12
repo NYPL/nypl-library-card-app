@@ -17,7 +17,7 @@ const LoadingIndicator = ({ isLoading }: LoadingIndicatorProps) =>
         alignItems="center"
         justifyContent="center"
         bg="rgba(255, 255, 255, 0.8)" // Semi-transparent background
-        zIndex="9999"
+        zIndex="99999"
       >
         <ProgressIndicator
           isIndeterminate={true}
