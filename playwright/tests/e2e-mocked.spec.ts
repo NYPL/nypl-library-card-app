@@ -2,11 +2,62 @@ import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import { TEST_BARCODE_NUMBER, TEST_PATRON_INFO } from "../utils/constants";
 import { mockCreatePatronApi } from "../utils/mock-api";
+import {
+  fillAlternateAddress,
+  fillHomeAddress,
+  fillPersonalInfo,
+} from "../utils/form-helper";
 
-test.describe("navigates from Review page to Congrats page", () => {
-  test("mocks create patron API", async ({ page }) => {
+test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", () => {
+  test("displays patron information on review page", async ({ page }) => {
     const pageManager = new PageManager(page);
     const fullName = `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`;
+
+    await test.step("begins at landing", async () => {
+      await page.goto("/library-card/new?newCard=true");
+      await expect(pageManager.landingPage.applyHeading).toBeVisible();
+      await pageManager.landingPage.getStartedButton.click();
+    });
+
+    await test.step("enters personal information", async () => {
+      await expect(pageManager.personalPage.stepHeading).toBeVisible();
+      await fillPersonalInfo(pageManager.personalPage);
+      await pageManager.personalPage.nextButton.click();
+    });
+
+    await test.step("enters home address", async () => {
+      await expect(pageManager.addressPage.stepHeading).toBeVisible();
+      await fillHomeAddress(pageManager.addressPage);
+      await pageManager.addressPage.nextButton.click();
+    });
+
+    await test.step("enters alternate address", async () => {
+      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
+      await fillAlternateAddress(pageManager.alternateAddressPage);
+      await pageManager.alternateAddressPage.nextButton.click();
+    });
+
+    await test.step("confirms address verification", async () => {
+      await expect(
+        pageManager.addressVerificationPage.stepHeader
+      ).toBeVisible();
+      await pageManager.addressVerificationPage.homeAddressOption.check();
+      await pageManager.addressVerificationPage.alternateAddressOption.check();
+      await pageManager.addressVerificationPage.nextButton.click();
+    });
+
+    await test.step("enters account information", async () => {
+      await expect(pageManager.accountPage.stepHeading).toBeVisible();
+      await pageManager.accountPage.usernameInput.fill("User10225");
+      await pageManager.accountPage.passwordInput.fill("Password123!");
+      await pageManager.accountPage.verifyPasswordInput.fill("Password123!");
+      await pageManager.accountPage.acceptTermsCheckbox.check();
+      await pageManager.accountPage.nextButton.click();
+    });
+
+    await test.step("displays review page", async () => {
+      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+    });
 
     await test.step("submits application", async () => {
       await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER);
