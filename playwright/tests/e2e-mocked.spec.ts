@@ -61,8 +61,6 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
 
     await test.step("submits application", async () => {
       await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER);
-      await page.goto("/library-card/review?newCard=true");
-
       await expect(pageManager.reviewPage.submitButton).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
     });
