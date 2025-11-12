@@ -1,23 +1,8 @@
 const sierraApiBaseUrl = process.env.SIERRA_API_BASE_URL;
 const basicAuth = process.env.SIERRA_BASIC_AUTH_BASE64;
 
-if (!sierraApiBaseUrl) {
-  throw new Error(
-    "Environment variable SIERRA_API_BASE_URL is required but not set."
-  );
-}
-if (!basicAuth) {
-  throw new Error(
-    "Environment variable SIERRA_BASIC_AUTH_BASE64 is required but not set."
-  );
-}
-
 export interface SierraToken {
   access_token: string;
-}
-
-export interface SierraSearchByBarcode {
-  id: number;
 }
 
 export async function getAuthToken(): Promise<string> {
