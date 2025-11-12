@@ -2,9 +2,11 @@ import { test, expect } from "@playwright/test";
 
 test("test", async ({ page }) => {
   await page.goto("/library-card/new?&newCard=true");
-  await expect(page.locator('[id="__next"]')).toMatchAriaSnapshot(`
+  await expect(page.locator("header")).toMatchAriaSnapshot(`
     - banner:
       - heading "Apply for a Library Card Online" [level=1]
+  `);
+  await expect(page.locator("main")).toMatchAriaSnapshot(`
     - main:
       - separator
       - list:
