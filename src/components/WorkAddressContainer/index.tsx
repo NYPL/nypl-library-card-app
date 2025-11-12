@@ -16,8 +16,8 @@ import {
   AddressesResponse,
   AddressTypes,
 } from "../../interfaces";
-import Loader from "../Loader";
 import FormField from "../FormField";
+import LoadingIndicator from "../LoadingIndicator";
 
 import { constructAddressType } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
@@ -129,10 +129,10 @@ const AddressContainer = ({ csrfToken }) => {
 
   return (
     <>
+      <LoadingIndicator isLoading={isLoading} />
+
       <PageSubHeading>{t("location.workAddress.title")}</PageSubHeading>
       <Paragraph>{t("location.workAddress.description.part2")}</Paragraph>
-
-      <Loader isLoading={isLoading} />
 
       <Form
         // action="/library-card/api/submit"

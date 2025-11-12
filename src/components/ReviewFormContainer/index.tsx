@@ -1,5 +1,6 @@
 /* eslint-disable */
 import {
+  Box,
   Button,
   Checkbox,
   Form,
@@ -7,7 +8,6 @@ import {
   FormRow,
   Heading,
   Radio,
-  Box,
 } from "@nypl/design-system-react-components";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -19,8 +19,8 @@ import PersonalFormFields from "../PersonalFormFields";
 import AccountFormFields from "../AccountFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
-import Loader from "../Loader";
 import FormField from "../FormField";
+import LoadingIndicator from "../LoadingIndicator";
 
 import aaUtils from "../../externals/aaUtils";
 import { createQueryParams } from "../../utils/utils";
@@ -121,7 +121,11 @@ function ReviewFormContainer({ csrfToken }) {
    * Account sections.
    */
   const editSectionButton = (editSectionFlag, sectionName, page) => {
-    const label = `${t("button.edit")} ${page === "personal" ? t(`review.section.personal`) : t("review.createAccount")}`;
+    const label = `${t("button.edit")} ${
+      page === "personal"
+        ? t(`review.section.personal`)
+        : t("review.createAccount")
+    }`;
     return clientSide ? (
       <Button
         variant="primary"
@@ -425,7 +429,7 @@ function ReviewFormContainer({ csrfToken }) {
 
   return (
     <>
-      <Loader isLoading={isLoading} />
+      <LoadingIndicator isLoading={isLoading} />
 
       <Box sx={styles.formSection}>
         <PageSubHeading mb="s">{t("review.section.personal")}</PageSubHeading>
