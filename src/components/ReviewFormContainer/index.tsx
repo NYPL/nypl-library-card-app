@@ -121,7 +121,11 @@ function ReviewFormContainer({ csrfToken }) {
    * Account sections.
    */
   const editSectionButton = (editSectionFlag, sectionName, page) => {
-    const label = `${t("button.edit")} ${page === "personal" ? t(`review.section.personal`) : t("review.createAccount")}`;
+    const label = `${t("button.edit")} ${
+      page === "personal"
+        ? t(`review.section.personal`)
+        : t("review.createAccount")
+    }`;
     return clientSide ? (
       <Button
         variant="primary"
