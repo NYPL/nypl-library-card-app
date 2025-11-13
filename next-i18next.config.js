@@ -1,5 +1,5 @@
 const path = require("path");
-const localePath = path.resolve("./locales");
+const localePath = path.resolve("./public/locales");
 
 console.log("Loading locales from:", localePath);
 
