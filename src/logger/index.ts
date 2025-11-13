@@ -47,14 +47,16 @@ const getLogLevelCode = (levelString) => {
  * in the console and in a local file.
  */
 const nyplFormat = printf((options) => {
-  const result: any = {
-    timestamp: options.timestamp,
+  const result = {
+    timestamp: JSON.stringify(options.timestamp),
     levelCode: getLogLevelCode(options.level),
     level: options.level.toUpperCase(),
 
-    message: options.message.toString(),
+    message: JSON.stringify(options.message),
     // This is specific to this app to make searching easy.
     appTag: "library-card-app",
+    pid: undefined,
+    meta: undefined,
   };
 
   if (process.pid) {
@@ -88,9 +90,9 @@ const consoleTransport = new Console({
   ),
 });
 
-const loggerTransports: any[] = [consoleTransport];
+const loggerTransports: winston.transport[] = [consoleTransport];
 
-if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
+if (process.env.NODE_ENV !== "test" && !process.env.NEXT_PUBLIC_VERCEL_BUILD) {
   loggerTransports.push(fileTransport);
 }
 
