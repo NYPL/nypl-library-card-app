@@ -21,6 +21,10 @@ exports.config = {
      * production applications.
      */
     level: "info",
+    /**
+     * Stops NR from creating a newrelic.log file
+     */
+    filepath: "stdout",
   },
   /**
    * When true, all request headers except for those listed in attributes.exclude
