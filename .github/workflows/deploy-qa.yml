@@ -73,6 +73,7 @@ jobs:
 
   playwright-tests:
     uses: ./.github/workflows/playwright-tests.yml
+    needs: [deploy-qa]
     secrets: inherit
     with:
       PLAYWRIGHT_BASE_URL: https://qa-www.nypl.org/library-card/new # run on QA after deploy
