@@ -3,6 +3,7 @@ import { PageManager } from "../pageobjects/page-manager.page";
 import { TEST_BARCODE_NUMBER, TEST_PATRON_INFO } from "../utils/constants";
 import { mockCreatePatronApi } from "../utils/mock-api";
 import {
+  fillAccountInfo,
   fillAlternateAddress,
   fillHomeAddress,
   fillPersonalInfo,
@@ -48,10 +49,7 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
 
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await pageManager.accountPage.usernameInput.fill("User10225");
-      await pageManager.accountPage.passwordInput.fill("Password123!");
-      await pageManager.accountPage.verifyPasswordInput.fill("Password123!");
-      await pageManager.accountPage.acceptTermsCheckbox.check();
+      await fillAccountInfo(pageManager.accountPage);
       await pageManager.accountPage.nextButton.click();
     });
 
