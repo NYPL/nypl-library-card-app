@@ -51,7 +51,7 @@ const nyplFormat = printf((options) => {
     timestamp: options.timestamp,
     levelCode: getLogLevelCode(options.level),
     level: options.level.toUpperCase(),
-    // eslint-disable-next-line @typescript-eslint/no-base-to-string
+
     message: options.message.toString(),
     // This is specific to this app to make searching easy.
     appTag: "library-card-app",
@@ -90,7 +90,7 @@ const consoleTransport = new Console({
 
 const loggerTransports: any[] = [consoleTransport];
 
-if (process.env.NODE_ENV !== "test") {
+if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
   loggerTransports.push(fileTransport);
 }
 

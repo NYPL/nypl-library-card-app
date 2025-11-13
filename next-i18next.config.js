@@ -1,6 +1,10 @@
 const path = require("path");
+const localePath = path.resolve("./locales");
+
+console.log("Loading locales from:", localePath);
+
 module.exports = {
-  localePath: path.resolve("./locales"),
+  localePath: localePath,
   i18n: {
     defaultLocale: "en",
     locales: [
