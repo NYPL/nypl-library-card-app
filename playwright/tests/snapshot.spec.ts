@@ -63,3 +63,38 @@ test("displays snapshot of landing page", async ({ page }) => {
         - /url: /library-card/personal?newCard=true
     `);
 });
+
+test("displays snapshot of personal page", async ({ page }) => {
+  await page.goto(
+    "https://qa-www.nypl.org/library-card/personal?&newCard=true"
+  );
+  await expect(page.locator("header").filter({ hasText: "Apply" }))
+    .toMatchAriaSnapshot(`
+    - banner:
+      - heading "Apply for a Library Card Online" [level=1]
+  `);
+  await expect(page.locator("main")).toMatchAriaSnapshot(`
+    - main:
+      - 'heading "Step 1 of 5: Personal information" [level=2]'
+      - text: Form fields must be filled out using only Latin characters. First name (required)
+      - textbox "First name (required)"
+      - text: Last name (required)
+      - textbox "Last name (required)"
+      - text: Date of birth (required)
+      - textbox "Date of birth (required)"
+      - text: MM/DD/YYYY, including slashes Email address (required)
+      - textbox "Email address (required)"
+      - text: An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our
+      - link "alternate form":
+        - /url: https://on.nypl.org/internationalresearch
+      - text: . Once filled out, please visit one of our
+      - link "locations":
+        - /url: https://www.nypl.org/locations
+      - text: with proof of identity and home address to pick up your card.
+      - checkbox "Yes, I would like to receive information about NYPL's programs and services" [checked]
+      - text: Yes, I would like to receive information about NYPL's programs and services
+      - link "Previous":
+        - /url: /library-card/new?&newCard=true
+      - button "Next"
+    `);
+});
