@@ -89,7 +89,7 @@ test.describe("Full User Journey with Sierra API Integration", () => {
 
     await test.step("Congrats page displays", async () => {
       await pageManager.reviewPage.submitButton.click();
-      await pageManager.congratsPage.stepHeading.isVisible();
+      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
     });
 
     await test.step("scrape barcode on Congrats page", async () => {
