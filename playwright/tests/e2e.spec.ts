@@ -9,16 +9,20 @@ import { TEST_CUSTOMIZE_ACCOUNT, TEST_PATRON_INFO } from "../utils/constants";
 
 import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 
-test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", () => {
+test.describe("Full User Journey with Sierra API Integration", () => {
   let scrapedBarcode: string | null = null;
 
   test.afterAll("patron deletion", async () => {
     // Implementation for patron deletion after all tests
     if (scrapedBarcode) {
-      const patronID = await getPatronID(scrapedBarcode);
+      try {
+        const patronID = await getPatronID(scrapedBarcode);
 
-      if (patronID) {
-        await deletePatron(patronID);
+        if (patronID) {
+          await deletePatron(patronID);
+        }
+      } catch (error) {
+        console.error("Error during patron deletion:", error);
       }
     }
   });
@@ -67,7 +71,7 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
     });
 
     await test.step("displays Personal Information on review page", async () => {
-      await expect(pageManager.reviewPage.mainHeading).toBeVisible();
+      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.firstName)
       ).toBeVisible({ timeout: 10000 });
@@ -83,8 +87,9 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
       await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
     });
 
-    await test.step("clicks submit button on Review page", async () => {
+    await test.step("Congrats page displays", async () => {
       await pageManager.reviewPage.submitButton.click();
+      await pageManager.congratsPage.stepHeading.isVisible();
     });
 
     await test.step("scrape barcode on Congrats page", async () => {
@@ -96,6 +101,7 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
       );
       scrapedBarcode =
         await pageManager.congratsPage.displayBarcodeNumber.textContent();
+      expect(scrapedBarcode).not.toBeNull();
     });
   });
 });

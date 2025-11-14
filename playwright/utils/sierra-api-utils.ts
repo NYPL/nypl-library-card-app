@@ -35,8 +35,8 @@ export async function getPatronID(barcode: string): Promise<number> {
     );
 
   const data = await response.json();
-  const patronId: number = data.id;
   if (!data.id) throw new Error(`No patron found for barcode ${barcode}`);
+  const patronId: number = data.id;
   return patronId;
 }
 
