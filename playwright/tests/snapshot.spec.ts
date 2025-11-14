@@ -98,3 +98,34 @@ test("displays snapshot of personal page", async ({ page }) => {
       - button "Next"
     `);
 });
+
+test("displays snapshot of location page", async ({ page }) => {
+  await page.goto(
+    "https://qa-www.nypl.org/library-card/location?&newCard=true"
+  );
+  await expect(page.locator("header").filter({ hasText: "Apply" }))
+    .toMatchAriaSnapshot(`
+    - banner:
+      - heading "Apply for a Library Card Online" [level=1]
+  `);
+  await expect(page.locator("main")).toMatchAriaSnapshot(`
+    - main:
+      - 'heading "Step 2 of 5: Address" [level=2]'
+      - text: Form fields must be filled out using only Latin characters.
+      - heading "Home address" [level=3]
+      - text: If you live in NYC, please fill out the home address form. Street address (required)
+      - textbox "Street address (required)"
+      - text: Apartment / Suite
+      - textbox "Apartment / Suite"
+      - text: City (required)
+      - textbox "City (required)"
+      - text: State (required)
+      - textbox "State (required)"
+      - text: 2-letter abbreviation Postal code (required)
+      - textbox "Postal code (required)"
+      - text: 5 or 9-digit postal code
+      - link "Previous":
+        - /url: /library-card/personal?&newCard=true
+      - button "Next"
+    `);
+});
