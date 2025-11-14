@@ -1,3 +1,6 @@
+require("dotenv").config({
+  path: "/Users/bridgetterose/Desktop/nypl-library-card-app/.env.local",
+});
 const sierraApiBaseUrl = process.env.SIERRA_API_BASE_URL_QA;
 const basicAuth = process.env.SIERRA_BASIC_AUTH_BASE64;
 

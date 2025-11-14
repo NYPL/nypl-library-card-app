@@ -5,7 +5,7 @@ import {
   fillHomeAddress,
   fillAlternateAddress,
 } from "../utils/form-helper";
-import { TEST_PATRON_INFO } from "../utils/constants";
+import { TEST_CUSTOMIZE_ACCOUNT, TEST_PATRON_INFO } from "../utils/constants";
 
 import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 
@@ -57,7 +57,9 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
 
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await pageManager.accountPage.usernameInput.fill("User10225");
+      await pageManager.accountPage.usernameInput.fill(
+        TEST_CUSTOMIZE_ACCOUNT.username
+      );
       await pageManager.accountPage.passwordInput.fill("Password123!");
       await pageManager.accountPage.verifyPasswordInput.fill("Password123!");
       await pageManager.accountPage.acceptTermsCheckbox.check();
@@ -83,25 +85,17 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
 
     await test.step("clicks submit button on Review page", async () => {
       await pageManager.reviewPage.submitButton.click();
+    });
 
-      if (
-        await pageManager.reviewPage.formSubmissionUserNameError.isVisible()
-      ) {
-        const changeUserName =
-          "qaTester" + Math.floor(Math.random() * 10000000);
-        await pageManager.reviewPage.usernameInput.clear();
-        await pageManager.reviewPage.usernameInput.fill(changeUserName);
-        await pageManager.reviewPage.submitButton.click();
-      }
-      await test.step("scrape barcode on Congrats page", async () => {
-        await expect(
-          pageManager.congratsPage.displayBarcodeNumber
-        ).toContainText(pageManager.congratsPage.EXPECTED_BARCODE_PREFIX, {
+    await test.step("scrape barcode on Congrats page", async () => {
+      await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
+        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
+        {
           timeout: 15000,
-        });
-        scrapedBarcode =
-          await pageManager.congratsPage.displayBarcodeNumber.textContent();
-      });
+        }
+      );
+      scrapedBarcode =
+        await pageManager.congratsPage.displayBarcodeNumber.textContent();
     });
   });
 });

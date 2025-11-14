@@ -1,5 +1,9 @@
 import { AddressData } from "./types";
 
+const uniqueSuffix = Date.now().toString().slice(-6);
+
+// 2. Combine with a prefix to meet the 5-20 character length and use only alphanumeric characters
+const UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
 export const TEST_PATRON_INFO = {
   firstName: "Jane",
   lastName: "Doe",
@@ -15,7 +19,7 @@ export const TEST_HOME_ADDRESS: AddressData = {
   postalCode: "10001",
 };
 export const TEST_CUSTOMIZE_ACCOUNT = {
-  username: "qauser3000",
+  username: UNIQUE_USERNAME,
   password: "Test@1234",
   homeLibrary: "eb",
 };
