@@ -187,3 +187,41 @@ test("displays snapshot of review page", async ({ page }) => {
       - button "Submit"
     `);
 });
+
+test("displays snapshot of congrats page", async ({ page }) => {
+  await page.goto(
+    "https://qa-www.nypl.org/library-card/congrats?&newCard=true"
+  );
+  await expect(page.locator("header").filter({ hasText: "Apply" }))
+    .toMatchAriaSnapshot(`
+    - banner:
+      - heading "Apply for a Library Card Online" [level=1]
+  `);
+  await expect(page.locator("main")).toMatchAriaSnapshot(`
+    - main:
+      - heading "Congratulations! You now have a digital New York Public Library card." [level=2]
+      - img "NYPL Library Barcode Background"
+      - text: MEMBER NAME
+      - img "Scannable barcode"
+      - text: /ISSUED \\d+\\/\\d+\\/\\d+ Print or save this information for your records\\. Within \\d+ hours, you will receive an email with the details of your account\\. To borrow physical materials, please visit one of our/
+      - link "locations":
+        - /url: http://nypl.org/locations
+      - text: with a valid
+      - link "photo ID and proof of address":
+        - /url: https://www.nypl.org/help/library-card/terms-conditions#Eligibility
+      - text: /to complete the application for a physical card\\. This is a temporary card and will expire in \\d+ days\\. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact/
+      - link "gethelp@nypl.org":
+        - /url: mailto:gethelp@nypl.org
+      - text: to update your card.
+      - heading "Get started with The New York Public Library" [level=2]
+      - text: Borrow books & more
+      - link "Log into your account":
+        - /url: https://dev-login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile
+      - text: and browse the catalog. Get updates
+      - link "Find out about all the Library has to offer.":
+        - /url: https://www.nypl.org/enews
+      - text: Learn more
+      - link "Discover everything you can do with your library card.":
+        - /url: https://www.nypl.org/discover-library-card
+    `);
+});
