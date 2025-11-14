@@ -41,6 +41,7 @@ export class ReviewPage {
   readonly availableUsernameMessage: Locator;
   readonly unavailableUsernameError: Locator;
   readonly submitButton: Locator;
+  readonly formSubmissionUserNameError: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -51,6 +52,7 @@ export class ReviewPage {
     this.stepHeading = page.getByRole("heading", {
       name: "Step 5 of 5: Confirm Your Information",
       level: 2,
+      exact: true,
     });
     this.personalInfoHeading = page.getByRole("heading", {
       name: "Personal Information",
@@ -139,6 +141,9 @@ export class ReviewPage {
     this.submitButton = page.getByRole("button", {
       name: "Submit",
       exact: true,
+    });
+    this.formSubmissionUserNameError = page.getByRole("heading", {
+      name: "Form submission error",
     });
   }
 
