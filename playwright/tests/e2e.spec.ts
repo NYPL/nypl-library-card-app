@@ -4,8 +4,9 @@ import {
   fillPersonalInfo,
   fillHomeAddress,
   fillAlternateAddress,
+  fillAccountInfo,
 } from "../utils/form-helper";
-import { TEST_CUSTOMIZE_ACCOUNT, TEST_PATRON_INFO } from "../utils/constants";
+import { TEST_PATRON_INFO } from "../utils/constants";
 
 import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 
@@ -61,11 +62,7 @@ test.describe("Full User Journey with Sierra API Integration", () => {
 
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await pageManager.accountPage.usernameInput.fill(
-        TEST_CUSTOMIZE_ACCOUNT.username
-      );
-      await pageManager.accountPage.passwordInput.fill("Password123!");
-      await pageManager.accountPage.verifyPasswordInput.fill("Password123!");
+      await fillAccountInfo(pageManager.accountPage);
       await pageManager.accountPage.acceptTermsCheckbox.check();
       await pageManager.accountPage.nextButton.click();
     });
