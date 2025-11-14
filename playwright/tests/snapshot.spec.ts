@@ -160,3 +160,30 @@ test("displays snapshot of alternate address page", async ({ page }) => {
       - button "Next"
     `);
 });
+
+test("displays snapshot of review page", async ({ page }) => {
+  await page.goto("https://qa-www.nypl.org/library-card/review?&newCard=true");
+  await expect(page.locator("header").filter({ hasText: "Apply" }))
+    .toMatchAriaSnapshot(`
+    - banner:
+      - heading "Apply for a Library Card Online" [level=1]
+  `);
+  await expect(page.locator("main")).toMatchAriaSnapshot(`
+    - main:
+      - 'heading "Step 5 of 5: Confirm your information" [level=2]'
+      - text: Make sure all the information you’ve entered is correct. If needed, you can still make changes before you submit your application. Form fields must be filled out using only Latin characters.
+      - heading "Personal information" [level=3]
+      - text: First name Last name Date of birth Email address Receive information about NYPL's programs and services Yes
+      - button "Edit Personal information"
+      - heading "Address" [level=3]
+      - text: Street address City State Postal code
+      - button "Edit Address"
+      - heading "Create your account" [level=3]
+      - text: Username Password
+      - checkbox "Show password"
+      - text: Show password Home library E-Branch
+      - button "Edit Create your account"
+      - text: After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials.
+      - button "Submit"
+    `);
+});
