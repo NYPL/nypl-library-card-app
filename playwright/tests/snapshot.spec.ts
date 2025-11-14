@@ -161,6 +161,27 @@ test("displays snapshot of alternate address page", async ({ page }) => {
     `);
 });
 
+// partial snapshot does not display alternate address heading or options
+test("displays snapshot of address verification page", async ({ page }) => {
+  await page.goto(
+    "https://qa-www.nypl.org/library-card/address-verification?&newCard=true"
+  );
+  await expect(page.locator("header").filter({ hasText: "Apply" }))
+    .toMatchAriaSnapshot(`
+    - banner:
+      - heading "Apply for a Library Card Online" [level=1]
+  `);
+  await expect(page.locator("main")).toMatchAriaSnapshot(`
+    - main:
+      - 'heading "Step 3 of 5: Address verification" [level=2]'
+      - text: Please select the correct address.
+      - heading "Home address" [level=3]
+      - link "Previous":
+        - /url: /library-card/location?&newCard=true
+      - button "Next"
+    `);
+});
+
 test("displays snapshot of review page", async ({ page }) => {
   await page.goto("https://qa-www.nypl.org/library-card/review?&newCard=true");
   await expect(page.locator("header").filter({ hasText: "Apply" }))
