@@ -99,7 +99,7 @@ test("displays snapshot of personal page", async ({ page }) => {
     `);
 });
 
-test("displays snapshot of location page", async ({ page }) => {
+test("displays snapshot of address page", async ({ page }) => {
   await page.goto(
     "https://qa-www.nypl.org/library-card/location?&newCard=true"
   );
@@ -126,6 +126,37 @@ test("displays snapshot of location page", async ({ page }) => {
       - text: 5 or 9-digit postal code
       - link "Previous":
         - /url: /library-card/personal?&newCard=true
+      - button "Next"
+    `);
+});
+
+test("displays snapshot of alternate address page", async ({ page }) => {
+  await page.goto(
+    "https://qa-www.nypl.org/library-card/workAddress?&newCard=true"
+  );
+  await expect(page.locator("header").filter({ hasText: "Apply" }))
+    .toMatchAriaSnapshot(`
+    - banner:
+      - heading "Apply for a Library Card Online" [level=1]
+  `);
+  await expect(page.locator("main")).toMatchAriaSnapshot(`
+    - main:
+      - heading "Alternate address" [level=2]
+      - text: The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you're just visiting New York City. Please select one of the following and fill out the required fields. Form fields must be filled out using only Latin characters.
+      - heading "Alternate address" [level=3]
+      - text: If you work or go to school in NYC please provide the address. Street address
+      - textbox "Street address"
+      - text: Apartment / Suite
+      - textbox "Apartment / Suite"
+      - text: City
+      - textbox "City"
+      - text: State
+      - textbox "State"
+      - text: 2-letter abbreviation Postal code
+      - textbox "Postal code"
+      - text: 5 or 9-digit postal code
+      - link "Previous":
+        - /url: /library-card/location?&newCard=true
       - button "Next"
     `);
 });
