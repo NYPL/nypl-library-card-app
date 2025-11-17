@@ -23,6 +23,7 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
     await test.step("enters personal information", async () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage);
+      await expect(pageManager.personalPage.checkBox).toBeChecked();
       await pageManager.personalPage.nextButton.click();
     });
 
