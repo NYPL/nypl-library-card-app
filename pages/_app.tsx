@@ -38,7 +38,6 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 
   // Setting the "lang" and the "dir" attribute
   const { i18n } = useTranslation("common");
-  console.info("i18n info:", i18n);
   useEffect(() => {
     if (!i18n || !i18n.dir) return;
     let lang = router.query.lang || "en";
