@@ -31,13 +31,6 @@ class MyDocument extends Document<DocumentProps> {
       allowTransactionlessInjection: true,
     });
 
-    console.info("New Relic Browser Timing Header:", browserTimingHeader);
-    try {
-      console.info("Environment Variables:", JSON.stringify(process.env));
-    } catch (error) {
-      console.error("Error stringifying environment variables:", error);
-    }
-
     return {
       ...initialProps,
       browserTimingHeader,
