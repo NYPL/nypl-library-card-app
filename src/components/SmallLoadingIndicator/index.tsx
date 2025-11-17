@@ -16,4 +16,4 @@ export const SmallLoadingIndicator = ({ isLoading }: LoadingIndicatorProps) =>
     />
   );
 
-  export default SmallLoadingIndicator;
+export default SmallLoadingIndicator;
