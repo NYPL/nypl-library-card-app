@@ -185,6 +185,7 @@ const AddressContainer = ({ csrfToken }) => {
         <FormRow>
           <DSFormField>
             <RoutingLinks
+              isDisabled={isLoading}
               previous={{ url: `/personal?${queryStr}` }}
               next={{ submit: true }}
             />

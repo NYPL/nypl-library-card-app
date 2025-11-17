@@ -61,7 +61,6 @@ function RoutingLinks({
           // are tracked at the component level in each "onSubmit".
           onClick={() => {
             aaUtils.trackCtaEvent("Start Application", next.text, next.url);
-            this.isDisabled = true
           }}
         >
           {nextText}
