@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/library-card/new",
+      "permanent": false
+    }
+  ]
+}
