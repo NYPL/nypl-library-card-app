@@ -15,7 +15,7 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "exclude": ["node_modules", "playwright.config.ts", "cypress"],
+  "exclude": ["node_modules", "playwright.config.ts"],
   "include": [
     "declarations.d.ts",
     "next-env.d.ts",
