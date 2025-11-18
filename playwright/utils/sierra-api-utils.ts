@@ -14,7 +14,7 @@ export async function getAuthToken(): Promise<string> {
     throw new Error(
       `Failed to fetch auth token: ${response.status} ${response.statusText}`
     );
-  const data = await response.json();
+  const data = (await response.json()) as { access_token: string };
   const token: string = data.access_token;
   return token;
 }
@@ -34,7 +34,7 @@ export async function getPatronID(barcode: string): Promise<number> {
       `Failed to fetch patron ID for barcode ${barcode}: ${response.status} ${response.statusText}`
     );
 
-  const data = await response.json();
+  const data = (await response.json()) as { id?: number };
   if (!data.id) throw new Error(`No patron found for barcode ${barcode}`);
   const patronId: number = data.id;
   return patronId;
