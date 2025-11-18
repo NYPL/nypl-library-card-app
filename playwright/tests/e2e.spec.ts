@@ -14,7 +14,6 @@ test.describe("Full User Journey with Sierra API Integration", () => {
   let scrapedBarcode: string | null = null;
 
   test.afterAll("patron deletion", async () => {
-    // Implementation for patron deletion after all tests
     if (scrapedBarcode) {
       try {
         const patronID = await getPatronID(scrapedBarcode);
@@ -84,12 +83,12 @@ test.describe("Full User Journey with Sierra API Integration", () => {
       await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
     });
 
-    await test.step("Congrats page displays", async () => {
+    await test.step("displays Congrats page", async () => {
       await pageManager.reviewPage.submitButton.click();
       await expect(pageManager.congratsPage.stepHeading).toBeVisible();
     });
 
-    await test.step("scrape barcode on Congrats page", async () => {
+    await test.step("retrieve barcode from Congrats page", async () => {
       await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
         pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
         {
