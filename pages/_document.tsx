@@ -36,6 +36,7 @@ class MyDocument extends Document<DocumentProps> {
       browserTimingHeader,
     };
   }
+
   render() {
     const { browserTimingHeader } = this.props;
     return (
