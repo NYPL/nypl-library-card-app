@@ -49,3 +49,4 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 3
+          if-no-files-found: ignore
