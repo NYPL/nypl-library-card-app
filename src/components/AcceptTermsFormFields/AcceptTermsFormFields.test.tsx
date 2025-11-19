@@ -70,4 +70,14 @@ describe("AcceptTermsFormFields", () => {
     await act(() => fireEvent.click(checkbox));
     expect(checkbox.checked).toEqual(true);
   });
+
+  test("it renders snapshot correctly", () => {
+    const acceptTermsFormFields = screen.getByTestId(
+      "accept-terms-form-fields"
+    );
+    const created = new Date();
+    expect(acceptTermsFormFields).toMatchSnapshot(
+      `snapshot-${created.getTime()}`
+    );
+  });
 });
