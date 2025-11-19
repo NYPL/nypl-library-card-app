@@ -1,4 +1,6 @@
 import { test, expect } from "@playwright/test";
+// import { fillPersonalInfo } from "../utils/form-helper";
+// import { PersonalPage } from "../pageobjects/personal.page";
 
 test("displays snapshot of landing page", async ({ page }) => {
   await page.goto("https://qa-www.nypl.org/library-card/new?&newCard=true");
@@ -245,4 +247,17 @@ test("displays snapshot of congrats page", async ({ page }) => {
       - link "Discover everything you can do with your library card.":
         - /url: https://www.nypl.org/discover-library-card
     `);
+});
+
+test("matches landing page screenshot", async ({ page }) => {
+  await page.goto("https://qa-www.nypl.org/library-card/new?&newCard=true");
+  await expect(page).toHaveScreenshot();
+});
+
+test("matches personal info page screenshot", async ({ page }) => {
+  await page.goto(
+    "https://qa-www.nypl.org/library-card/personal?&newCard=true"
+  );
+  // await fillPersonalInfo(new PersonalPage(page)); // will fail screenshot assertion
+  await expect(page).toHaveScreenshot();
 });
