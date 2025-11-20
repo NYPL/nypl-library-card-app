@@ -47,14 +47,16 @@ const getLogLevelCode = (levelString) => {
  * in the console and in a local file.
  */
 const nyplFormat = printf((options) => {
-  const result: any = {
-    timestamp: options.timestamp,
+  const result = {
+    timestamp: JSON.stringify(options.timestamp),
     levelCode: getLogLevelCode(options.level),
     level: options.level.toUpperCase(),
-    // eslint-disable-next-line @typescript-eslint/no-base-to-string
-    message: options.message.toString(),
+
+    message: JSON.stringify(options.message),
     // This is specific to this app to make searching easy.
     appTag: "library-card-app",
+    pid: undefined,
+    meta: undefined,
   };
 
   if (process.pid) {
@@ -68,14 +70,6 @@ const nyplFormat = printf((options) => {
   return JSON.stringify(result);
 });
 
-// The transport function that logs to a file.
-const fileTransport = new File({
-  filename: "./log/library-card-app.log",
-  handleExceptions: true,
-  maxsize: 5242880, // 5MB
-  maxFiles: 5,
-  format: combine(timestamp(), nyplFormat),
-});
 // The transport function that logs to the console.
 const consoleTransport = new Console({
   handleExceptions: true,
@@ -88,10 +82,19 @@ const consoleTransport = new Console({
   ),
 });
 
-const loggerTransports: any[] = [consoleTransport];
+const loggerTransports: winston.transport[] = [consoleTransport];
 
-if (process.env.NODE_ENV !== "test") {
-  loggerTransports.push(fileTransport);
+if (process.env.NODE_ENV !== "test" && !process.env.NEXT_PUBLIC_VERCEL_BUILD) {
+  // The transport function that logs to a file.
+  loggerTransports.push(
+    new File({
+      filename: "./log/library-card-app.log",
+      handleExceptions: true,
+      maxsize: 5242880, // 5MB
+      maxFiles: 5,
+      format: combine(timestamp(), nyplFormat),
+    })
+  );
 }
 
 // Create the logger that will be used in the app now that the
