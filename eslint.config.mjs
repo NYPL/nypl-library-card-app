@@ -102,7 +102,6 @@ export default defineConfig([
     "node_modules/**",
     "__tests__/**",
     "playwright-report/**",
-    "cypress/**",
     "public/**",
     "https-server.js",
     "next-env.d.ts",
