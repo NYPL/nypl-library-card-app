@@ -67,6 +67,7 @@ const styles = {
     width: "100%",
     paddingTop: "s",
   },
+  editButton: { width: { base: "100%", md: "auto" } },
 };
 
 /**
@@ -128,12 +129,13 @@ function ReviewFormContainer({ csrfToken }) {
     }`;
     return clientSide ? (
       <Button
-        variant="primary"
+        variant="secondary"
         id={`editSectionButton-${sectionName.replace(/\s+/g, "")}`}
         onClick={() => {
           editSectionFlag(true);
         }}
         aria-label={label}
+        sx={styles.editButton}
       >
         {t("button.edit")}
       </Button>
@@ -155,12 +157,13 @@ function ReviewFormContainer({ csrfToken }) {
     const label = `${t("button.edit")} ${t("review.section.address.label")}`;
     return clientSide ? (
       <Button
-        variant="primary"
+        variant="secondary"
         id="editAddressButton"
         onClick={async () => {
           await router.push(`/location?${queryStr}`);
         }}
         aria-label={label}
+        sx={styles.editButton}
       >
         {t("button.edit")}
       </Button>
