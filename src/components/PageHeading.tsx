@@ -21,13 +21,21 @@ export const PageHeading = ({
           behavior: "smooth",
           block: "start",
         });
+        headingRef.current.focus();
       }
     }, 100);
     return () => clearTimeout(scrollDelay);
   }, [autoScrollOnMount]);
 
   return (
-    <Heading ref={headingRef} level="h2" mb="s" size="heading3" {...rest}>
+    <Heading
+      ref={headingRef}
+      level="h2"
+      mb="s"
+      size="heading3"
+      tabIndex={-1}
+      {...rest}
+    >
       {children}
     </Heading>
   );
