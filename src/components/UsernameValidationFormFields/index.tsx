@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   ButtonGroup,
+  Center,
   FormField as DSFormField,
   FormRow,
 } from "@nypl/design-system-react-components";
@@ -134,16 +135,25 @@ const UsernameValidationForm = ({
     const canValidate =
       inputValidation(username) && !usernameIsAvailable.message;
     return (
-      <ButtonGroup alignItems={"center"}>
+      <ButtonGroup>
         <Button
           id="username-check-button"
-          isDisabled={!canValidate}
+          isDisabled={isLoading || !canValidate}
+          aria-busy={isLoading}
           onClick={validateUsername}
           type="button"
+          backgroundColor={isLoading ? "#99C3E5!" : undefined}
+          position="relative"
         >
-          {t("account.username.checkButton")}
+          {isLoading && (
+            <Center position="absolute" inset={0} aria-hidden="true">
+              <SmallLoadingIndicator isLoading={isLoading} />
+            </Center>
+          )}
+          <Box visibility={isLoading ? "hidden" : "visible"}>
+            {t("account.username.checkButton")}
+          </Box>
         </Button>
-        <SmallLoadingIndicator isLoading={isLoading} />
       </ButtonGroup>
     );
   };
