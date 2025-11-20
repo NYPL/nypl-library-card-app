@@ -95,7 +95,9 @@ describe("UsernameValidationFormFields", () => {
     const helperText = screen.getByText(
       "5-25 alphanumeric characters. No special characters."
     );
-    const validateButton = screen.getByText("Check if username is available");
+    const validateButton = screen.getByRole("button", {
+      name: "Check if username is available",
+    });
 
     expect(label).toBeInTheDocument();
     expect(labelRequired).toBeInTheDocument();
@@ -124,7 +126,9 @@ describe("UsernameValidationFormFields", () => {
         />
       </TestProviderWrapper>
     );
-    const validateButton = screen.getByText("Check if username is available");
+    const validateButton = screen.getByRole("button", {
+      name: "Check if username is available",
+    });
 
     // On the first render, the `getValues` function will return "user" which
     // is too short and the button is disabled.
@@ -184,7 +188,9 @@ describe("UsernameValidationFormFields", () => {
       </TestProviderWrapper>
     );
 
-    const validateButton = screen.getByText("Check if username is available");
+    const validateButton = screen.getByRole("button", {
+      name: "Check if username is available",
+    });
     let errorMessageDisplay = screen.queryByText(errorMessage);
     expect(validateButton).toBeInTheDocument();
     expect(errorMessageDisplay).not.toBeInTheDocument();
@@ -220,7 +226,9 @@ describe("UsernameValidationFormFields", () => {
       </TestProviderWrapper>
     );
 
-    const validateButton = screen.getByText("Check if username is available");
+    const validateButton = screen.getByRole("button", {
+      name: "Check if username is available",
+    });
     let messageDisplay = screen.queryByText(message);
     expect(validateButton).toBeInTheDocument();
     expect(messageDisplay).not.toBeInTheDocument();
