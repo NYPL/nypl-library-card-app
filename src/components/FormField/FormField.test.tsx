@@ -50,4 +50,31 @@ describe("FormField", () => {
 
     expect(screen.getByText("Some instructional text")).toBeInTheDocument();
   });
+
+  test("snapshot form field", () => {
+    const { asFragment } = render(
+      <FormField
+        id="textField"
+        label="a text field"
+        name="text"
+        instructionText="Some instructional text"
+      />
+    );
+
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  test("snapshot form field with error", () => {
+    const { asFragment } = render(
+      <FormField
+        id="textField"
+        label="a text field"
+        name="text"
+        instructionText="Some instructional text"
+        errorState={{ text: { message: "This field has an error." } }}
+      />
+    );
+
+    expect(asFragment()).toMatchSnapshot();
+  });
 });

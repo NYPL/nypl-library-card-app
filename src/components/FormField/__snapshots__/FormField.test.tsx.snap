@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormField snapshot form field 1`] = `
+<DocumentFragment>
+  <div
+    class=""
+  >
+    <div
+      class="css-1u8qly9"
+      id="textField-wrapper"
+    >
+      <label
+        class="css-1xdhyk6"
+        for="textField"
+        id="textField-label"
+      >
+        a text field
+      </label>
+      <input
+        aria-describedby="textField-helperText"
+        class="chakra-input css-0"
+        id="textField"
+        name="text"
+        type="text"
+        value=""
+      />
+      <div
+        aria-atomic="true"
+        aria-live="off"
+        class="css-1xdhyk6"
+        data-isinvalid="false"
+        id="textField-helperText"
+      >
+        Some instructional text
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FormField snapshot form field with error 1`] = `
+<DocumentFragment>
+  <div
+    class=""
+  >
+    <div
+      class="css-1u8qly9"
+      id="textField-wrapper"
+    >
+      <label
+        class="css-1xdhyk6"
+        for="textField"
+        id="textField-label"
+      >
+        a text field
+      </label>
+      <input
+        aria-describedby="textField-helperText"
+        aria-invalid="true"
+        class="chakra-input css-0"
+        id="textField"
+        name="text"
+        type="text"
+        value=""
+      />
+      <div
+        aria-atomic="true"
+        aria-live="polite"
+        class="css-1xdhyk6"
+        data-isinvalid="true"
+        id="textField-helperText"
+      >
+        This field has an error.
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
