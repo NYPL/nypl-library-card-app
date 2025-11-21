@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LanguageMenu snapshot renders multiple languages correctly 1`] = `
+<DocumentFragment>
+  <hr
+    class="css-lh4cdn"
+  />
+  <ul
+    class="css-gg9opa"
+  >
+    <li>
+      <a
+        href="/library-card/new?lang=ar"
+      >
+        Arabic | العَرَبِية
+      </a>
+    </li>
+    <li>
+      <span>
+        ·
+      </span>
+    </li>
+    <li>
+      <a
+        href="/library-card/new?lang=bn"
+      >
+        Bengali | বাঙালি
+      </a>
+    </li>
+    <li>
+      <span>
+        ·
+      </span>
+    </li>
+    <li>
+      <a
+        href="/library-card/new?lang=zhcn"
+      >
+        Chinese (Simplified) | 简体中文
+      </a>
+    </li>
+    <li>
+      <span>
+        ·
+      </span>
+    </li>
+    <li>
+      <a
+        href="/library-card/new?lang=en"
+      >
+        English
+      </a>
+    </li>
+    <li>
+      <span>
+        ·
+      </span>
+    </li>
+    <li>
+      <a
+        href="/library-card/new?lang=fr"
+      >
+        French | Français
+      </a>
+    </li>
+    <li>
+      <span>
+        ·
+      </span>
+    </li>
+    <li>
+      <a
+        href="/library-card/new?lang=ht"
+      >
+        Haitian Creole | Kreyòl Ayisyen
+      </a>
+    </li>
+    <li>
+      <span>
+        ·
+      </span>
+    </li>
+    <li>
+      <a
+        href="/library-card/new?lang=ko"
+      >
+        Korean | 한국어
+      </a>
+    </li>
+    <li>
+      <span>
+        ·
+      </span>
+    </li>
+    <li>
+      <a
+        href="/library-card/new?lang=pl"
+      >
+        Polish | Polski
+      </a>
+    </li>
+    <li>
+      <span>
+        ·
+      </span>
+    </li>
+    <li>
+      <a
+        href="/library-card/new?lang=ru"
+      >
+        Russian | Русский
+      </a>
+    </li>
+    <li>
+      <span>
+        ·
+      </span>
+    </li>
+    <li>
+      <a
+        href="/library-card/new?lang=es"
+      >
+        Spanish | Español
+      </a>
+    </li>
+    <li>
+      <span>
+        ·
+      </span>
+    </li>
+    <li>
+      <a
+        href="/library-card/new?lang=ur"
+      >
+        Urdu | اُردُو
+      </a>
+    </li>
+    <li>
+      <span>
+        ·
+      </span>
+    </li>
+  </ul>
+  <hr
+    class="css-lh4cdn"
+  />
+</DocumentFragment>
+`;

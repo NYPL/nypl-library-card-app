@@ -46,4 +46,10 @@ describe("LanguageMenu", () => {
     expect(links[10].textContent).toContain("Urdu");
     expect(links[10]).toHaveAttribute("href", "/library-card/new?lang=ur");
   });
+
+  test("snapshot renders multiple languages correctly", () => {
+    const { asFragment } = render(<LanguageMenu />);
+    const tree = asFragment();
+    expect(tree).toMatchSnapshot();
+  });
 });
