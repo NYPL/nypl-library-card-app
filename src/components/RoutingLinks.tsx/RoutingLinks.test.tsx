@@ -4,6 +4,15 @@ import { axe } from "jest-axe";
 import RoutingLinks from "./index";
 import { mockTFunction } from "../../../testHelper/utils";
 
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: jest.fn(() => ({
+    matches: false,
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+  })),
+});
+
 jest.mock("react-i18next", () => {
   const en = {
     button: {
