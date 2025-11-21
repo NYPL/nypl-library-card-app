@@ -178,6 +178,7 @@ function AddressVerificationContainer() {
             flexDirection: { base: "column", sm: "row" },
           },
         }}
+        // If there's only one option, it's checked by default.
         defaultValue={addressesLength === 1 ? `${addressType}-0` : undefined}
       >
         {addresses.map((address, idx) => {
