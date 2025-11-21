@@ -6,6 +6,15 @@ import { mockTFunction, TestProviderWrapper } from "../../../testHelper/utils";
 import { formInitialState } from "../../context/FormDataContext";
 import { AddressResponse } from "../../interfaces";
 
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: jest.fn(() => ({
+    matches: false,
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+  })),
+});
+
 jest.mock("react-i18next", () => {
   const en = {
     location: {
@@ -46,7 +55,7 @@ jest.mock("react-i18next", () => {
       workAddress: "Dirección alternativa",
     },
     button: {
-      start: "Get Started",
+      start: "Get started",
       edit: "Edit",
       submit: "Submit",
       next: "Next",

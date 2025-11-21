@@ -1,8 +1,8 @@
-import { Heading } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { JSX, useEffect } from "react";
 import { GetServerSideProps } from "next";
+import { Paragraph } from "../../src/components/Paragraph";
 
 import AddressVerificationContainer from "../../src/components/AddressVerificationContainer";
 import {
@@ -10,6 +10,7 @@ import {
   redirectIfUserHasRegistered,
 } from "../../src/utils/utils";
 import { useRouter } from "next/router";
+import { PageHeading } from "../../src/components/PageHeading";
 
 interface AddressVerificationPageProps {
   hasUserAlreadyRegistered?: boolean;
@@ -25,8 +26,10 @@ function AddressVerificationPage({
   });
   return (
     <>
-      <Heading level="two">{t("verifyAddress.title")}</Heading>
-      <p id="select-address-heading">{t("verifyAddress.description")}</p>
+      <PageHeading autoScrollOnMount>{t("verifyAddress.title")}</PageHeading>
+      <Paragraph id="select-address-heading">
+        {t("verifyAddress.description")}
+      </Paragraph>
       <AddressVerificationContainer />
     </>
   );

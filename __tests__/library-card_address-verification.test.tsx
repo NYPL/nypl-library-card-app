@@ -4,16 +4,25 @@ import { axe } from "jest-axe";
 import AddressVerificationPage from "../pages/address-verification";
 import { TestProviderWrapper, mockTFunction } from "../testHelper/utils";
 
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: jest.fn(() => ({
+    matches: false,
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+  })),
+});
+
 jest.mock("react-i18next", () => {
   const en = {
     verifyAddress: {
-      title: "Step 3 of 5: Address Verification",
+      title: "Step 3 of 5: Address verification",
       description: "Please select the correct address.",
-      homeAddress: "Home Address",
-      workAddress: "Alternate Address",
+      homeAddress: "Home address",
+      workAddress: "Alternate address",
     },
     button: {
-      start: "Get Started",
+      start: "Get started",
       edit: "Edit",
       submit: "Submit",
       next: "Next",
@@ -53,7 +62,7 @@ describe("AddressVerificationPage", () => {
       </TestProviderWrapper>
     );
     expect(
-      screen.getByText("Step 3 of 5: Address Verification")
+      screen.getByText("Step 3 of 5: Address verification")
     ).toBeInTheDocument();
   });
 });

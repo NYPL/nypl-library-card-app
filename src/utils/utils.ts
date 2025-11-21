@@ -33,12 +33,12 @@ function getPageTitles(): PageTitles {
   // "nys", and "us" cases. Now an extra page is added to the
   // form submission flow.
   return {
-    personal: "Step 1 of 5: Personal Information",
+    personal: "Step 1 of 5: Personal information",
     address: "Step 2 of 5: Address",
-    workAddress: "Alternate Address",
-    verification: "Step 3 of 5: Address Verification",
-    account: "Step 4 of 5: Customize Your Account",
-    review: "Step 5 of 5: Confirm Your Information",
+    workAddress: "Alternate address",
+    verification: "Step 3 of 5: Address verification",
+    account: "Step 4 of 5: Customize your account",
+    review: "Step 5 of 5: Confirm your information",
   };
 }
 

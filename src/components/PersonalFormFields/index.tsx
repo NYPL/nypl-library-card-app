@@ -16,10 +16,7 @@ interface PersonalFormFieldsProps {
   agencyType?: string;
   id?: string;
 }
-function PersonalFormFields({
-  agencyType = "",
-  id = "",
-}: PersonalFormFieldsProps) {
+function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
   const { t } = useTranslation("common");
   const {
     register,
@@ -44,6 +41,7 @@ function PersonalFormFields({
             isRequired
             errorState={errors}
             defaultValue={formValues.firstName}
+            autoComplete="given-name"
           />
         </DSFormField>
         <DSFormField>
@@ -51,17 +49,18 @@ function PersonalFormFields({
             id="lastName"
             label={t("personal.lastName.label")}
             {...register("lastName", {
-              required: "Please enter a valid last name.",
+              required: t("personal.errorMessage.lastName"),
             })}
             isRequired
             errorState={errors}
             defaultValue={formValues.lastName}
+            autoComplete="family-name"
           />
         </DSFormField>
       </FormRow>
       <FormRow id={`${id}-personalForm-2`}>
         <DSFormField>
-          <AgeFormFields policyType={agencyType || formValues.policyType} />
+          <AgeFormFields />
         </DSFormField>
       </FormRow>
       <FormRow id={`${id}-personalForm-3`}>
@@ -78,6 +77,7 @@ function PersonalFormFields({
             isRequired
             defaultValue={formValues.email}
             instructionText={t("personal.email.instruction")}
+            autoComplete="email"
           />
         </DSFormField>
       </FormRow>

@@ -66,7 +66,7 @@ test.describe("Full User Journey with Sierra API Integration", () => {
       await pageManager.accountPage.nextButton.click();
     });
 
-    await test.step("displays Personal Information on review page", async () => {
+    await test.step("displays Personal information on review page", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.firstName)

@@ -14,6 +14,16 @@ import router from "next/router";
 import ReviewPage from "../pages/review";
 import { TestProviderWrapper, mockTFunction } from "../testHelper/utils";
 
+// fix window.matchMedia type error, we don't really need this method for our unit tests
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: jest.fn(() => ({
+    matches: false,
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+  })),
+});
+
 jest.mock("next/router", () => {
   const mockRouter = jest.requireActual("next-router-mock");
   return { ...mockRouter, push: jest.fn() };
@@ -36,6 +46,15 @@ jest.mock("react-i18next", () => {
   };
 });
 
+beforeAll(() => {
+  // Mock scrollIntoView since jsdom doesn't implement it
+  window.HTMLElement.prototype.scrollIntoView = jest.fn();
+});
+
+afterAll(() => {
+  jest.restoreAllMocks();
+});
+
 describe("ReviewPage", () => {
   describe("general tests", () => {
     let container;
@@ -55,7 +74,7 @@ describe("ReviewPage", () => {
 
     test("renders a title and description", () => {
       expect(
-        screen.getByText("Step 5 of 5: Confirm Your Information")
+        screen.getByText("Step 5 of 5: Confirm your information")
       ).toBeInTheDocument();
     });
     test("defaults to EBranch if no home library is selected", () => {

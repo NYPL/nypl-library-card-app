@@ -122,7 +122,7 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
       }
 
       return (
-        <List type="ul" className={styles.errorList}>
+        <List variant="ul" className={styles.errorList}>
           {errorElements}
         </List>
       );
@@ -130,7 +130,7 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
 
     return (
       <div ref={ref} className={styles.container} tabIndex={0}>
-        <Heading level="two" className={styles.heading}>
+        <Heading level="h2" className={styles.heading}>
           {t("globalErrors.title")}
         </Heading>
         {renderErrorByType(problemDetail)}

@@ -3,7 +3,7 @@
  * Do NOT point the browser to http://localhost:3000 with no route.
  * If you do, you will throw an error related to i18next.
  * */
-import { Heading } from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 
 import { GetServerSideProps } from "next";
@@ -11,6 +11,7 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import LanguageMenu from "../../src/components/LanguageMenu/LanguageMenu";
 import { cookieDomain } from "../../appConfig.js";
+import { PageHeading } from "../../src/components/PageHeading";
 
 interface HomePageProps {
   policyType: any;
@@ -26,13 +27,18 @@ function HomePage({ policyType, lang }: HomePageProps) {
     <>
       <LanguageMenu />
 
-      <Heading level="two">{t("home.title")}</Heading>
+      <PageHeading>{t("home.title")}</PageHeading>
 
-      <p>{t("home.description.part1")}</p>
-      <p>{t("home.description.part2")}</p>
-      <p dangerouslySetInnerHTML={{ __html: t("home.description.part3") }} />
-      <p dangerouslySetInnerHTML={{ __html: t("home.description.part4") }} />
-
+      <Box mb="s">{t("home.description.part1")}</Box>
+      <Box mb="s">{t("home.description.part2")}</Box>
+      <Box
+        mb="s"
+        dangerouslySetInnerHTML={{ __html: t("home.description.part3") }}
+      />
+      <Box
+        mb="s"
+        dangerouslySetInnerHTML={{ __html: t("home.description.part4") }}
+      />
       <RoutingLinks
         next={{
           url: `/personal?newCard=true${queryParam}${

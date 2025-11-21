@@ -1,6 +1,8 @@
 import {
+  Box,
   Button,
   ButtonGroup,
+  Center,
   FormField as DSFormField,
   FormRow,
 } from "@nypl/design-system-react-components";
@@ -12,8 +14,8 @@ import { useFormContext } from "react-hook-form";
 import { isAlphanumeric } from "validator";
 
 import FormField from "../FormField";
+import SmallLoadingIndicator from "../SmallLoadingIndicator";
 import useFormDataContext from "../../context/FormDataContext";
-import styles from "./UsernameValidationFormFields.module.css";
 
 import {
   apiErrorTranslations,
@@ -46,6 +48,7 @@ const UsernameValidationForm = ({
     available: false,
     message: "",
   };
+  const [isLoading, setIsLoading] = useState(false);
   const [usernameIsAvailable, setUsernameIsAvailable] = useState(defaultState);
   const {
     watch,
@@ -70,6 +73,7 @@ const UsernameValidationForm = ({
    */
   const validateUsername = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const username = getValues("username");
     axios
       .post("/library-card/api/username", { username, csrfToken })
@@ -113,14 +117,13 @@ const UsernameValidationForm = ({
           available: false,
           message,
         });
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
   const inputValidation = (value = "") =>
     value.length >= 5 && value.length <= 25 && isAlphanumeric(value);
-  const availableClassname = usernameIsAvailable.available
-    ? styles.usernameAvailable
-    : styles.usernameUnavailable;
-
   /**
    * renderButton
    * Render the button to validate a username and enable it only if
@@ -135,11 +138,21 @@ const UsernameValidationForm = ({
       <ButtonGroup>
         <Button
           id="username-check-button"
-          isDisabled={!canValidate}
+          isDisabled={isLoading || !canValidate}
+          aria-busy={isLoading}
           onClick={validateUsername}
           type="button"
+          backgroundColor={isLoading ? "#99C3E5!" : undefined}
+          position="relative"
         >
-          {t("account.username.checkButton")}
+          {isLoading && (
+            <Center position="absolute" inset={0} aria-hidden="true">
+              <SmallLoadingIndicator isLoading={isLoading} />
+            </Center>
+          )}
+          <Box visibility={isLoading ? "hidden" : "visible"}>
+            {t("account.username.checkButton")}
+          </Box>
         </Button>
       </ButtonGroup>
     );
@@ -160,6 +173,7 @@ const UsernameValidationForm = ({
             errorState={errors}
             maxLength={25}
             defaultValue={formValues.username}
+            autoComplete="username"
           />
         </DSFormField>
       </FormRow>
@@ -168,15 +182,27 @@ const UsernameValidationForm = ({
         <DSFormField>{renderButton()}</DSFormField>
       </FormRow>
 
-      {usernameIsAvailable?.message ? (
-        <FormRow id={`${id}-username-3`}>
-          <DSFormField>
-            <div className={availableClassname} aria-live="assertive">
+      <FormRow
+        id={`${id}-username-3`}
+        display={usernameIsAvailable?.message ? "block" : "contents"}
+      >
+        <DSFormField
+          aria-live="assertive"
+          display={usernameIsAvailable?.message ? "block" : "contents"}
+        >
+          {usernameIsAvailable?.message ? (
+            <Box
+              color={
+                usernameIsAvailable.available
+                  ? "var(--nypl-colors-ui-success-primary)"
+                  : "var(--nypl-colors-ui-error-primary)"
+              }
+            >
               {usernameIsAvailable.message}
-            </div>
-          </DSFormField>
-        </FormRow>
-      ) : null}
+            </Box>
+          ) : null}
+        </DSFormField>
+      </FormRow>
     </>
   );
 };
