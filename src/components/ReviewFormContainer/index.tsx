@@ -47,6 +47,7 @@ const styles = {
     flexDirection: "row",
     "@media (max-width: 400px)": {
       display: "inline-block",
+      width: "100%",
     },
   },
   field: {
