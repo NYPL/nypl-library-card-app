@@ -4,10 +4,28 @@ import {
   fillPersonalInfo,
   fillHomeAddress,
   fillAlternateAddress,
+  fillAccountInfo,
 } from "../utils/form-helper";
 import { TEST_PATRON_INFO } from "../utils/constants";
 
-test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", () => {
+import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
+
+test.describe("Full User Journey with Sierra API Integration", () => {
+  let scrapedBarcode: string | null = null;
+
+  test.afterAll("patron deletion", async () => {
+    if (scrapedBarcode) {
+      try {
+        const patronID = await getPatronID(scrapedBarcode);
+
+        if (patronID) {
+          await deletePatron(patronID);
+        }
+      } catch (error) {
+        console.error("Error during patron deletion:", error);
+      }
+    }
+  });
   test("displays patron information on review page", async ({ page }) => {
     const pageManager = new PageManager(page);
 
@@ -25,7 +43,9 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
     });
 
     await test.step("enters alternate address", async () => {
-      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
+      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible({
+        timeout: 10000,
+      });
       await fillAlternateAddress(pageManager.alternateAddressPage);
       await pageManager.alternateAddressPage.nextButton.click();
     });
@@ -41,17 +61,16 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
 
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await pageManager.accountPage.usernameInput.fill("User10225");
-      await pageManager.accountPage.passwordInput.fill("Password123!");
-      await pageManager.accountPage.verifyPasswordInput.fill("Password123!");
+      await fillAccountInfo(pageManager.accountPage);
       await pageManager.accountPage.acceptTermsCheckbox.check();
       await pageManager.accountPage.nextButton.click();
     });
 
     await test.step("displays Personal Information on review page", async () => {
+      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.firstName)
-      ).toBeVisible();
+      ).toBeVisible({ timeout: 10000 });
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.lastName)
       ).toBeVisible();
@@ -62,6 +81,23 @@ test.describe("E2E Flow: Complete Application Data Input to Reach Review Page", 
         pageManager.reviewPage.getText(TEST_PATRON_INFO.email)
       ).toBeVisible();
       await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
+    });
+
+    await test.step("displays Congrats page", async () => {
+      await pageManager.reviewPage.submitButton.click();
+      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
+    });
+
+    await test.step("retrieve barcode from Congrats page", async () => {
+      await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
+        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
+        {
+          timeout: 15000,
+        }
+      );
+      scrapedBarcode =
+        await pageManager.congratsPage.displayBarcodeNumber.textContent();
+      expect(scrapedBarcode).not.toBeNull();
     });
   });
 });
