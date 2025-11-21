@@ -2,13 +2,16 @@ import { test, expect } from "@playwright/test";
 // import { fillPersonalInfo } from "../utils/form-helper";
 // import { PersonalPage } from "../pageobjects/personal.page";
 
+const HEADER_SNAPSHOT = `
+  - banner:
+    - heading "Apply for a Library Card Online" [level=1]
+`;
+
 test("displays snapshot of landing page", async ({ page }) => {
   await page.goto("https://qa-www.nypl.org/library-card/new?&newCard=true");
-  await expect(page.locator("header").filter({ hasText: "Apply" }))
-    .toMatchAriaSnapshot(`
-    - banner:
-      - heading "Apply for a Library Card Online" [level=1]
-  `);
+  await expect(
+    page.locator("header").filter({ hasText: "Apply" })
+  ).toMatchAriaSnapshot(HEADER_SNAPSHOT);
   await expect(page.locator("main")).toMatchAriaSnapshot(`
     - main:
       - separator
@@ -63,6 +66,7 @@ test("displays snapshot of landing page", async ({ page }) => {
       - text: .
       - link "Get started":
         - /url: /library-card/personal?newCard=true
+       - separator
     `);
 });
 
@@ -70,11 +74,9 @@ test("displays snapshot of personal page", async ({ page }) => {
   await page.goto(
     "https://qa-www.nypl.org/library-card/personal?&newCard=true"
   );
-  await expect(page.locator("header").filter({ hasText: "Apply" }))
-    .toMatchAriaSnapshot(`
-    - banner:
-      - heading "Apply for a Library Card Online" [level=1]
-  `);
+  await expect(
+    page.locator("header").filter({ hasText: "Apply" })
+  ).toMatchAriaSnapshot(HEADER_SNAPSHOT);
   await expect(page.locator("main")).toMatchAriaSnapshot(`
     - main:
       - 'heading "Step 1 of 5: Personal information" [level=2]'
@@ -105,11 +107,9 @@ test("displays snapshot of address page", async ({ page }) => {
   await page.goto(
     "https://qa-www.nypl.org/library-card/location?&newCard=true"
   );
-  await expect(page.locator("header").filter({ hasText: "Apply" }))
-    .toMatchAriaSnapshot(`
-    - banner:
-      - heading "Apply for a Library Card Online" [level=1]
-  `);
+  await expect(
+    page.locator("header").filter({ hasText: "Apply" })
+  ).toMatchAriaSnapshot(HEADER_SNAPSHOT);
   await expect(page.locator("main")).toMatchAriaSnapshot(`
     - main:
       - 'heading "Step 2 of 5: Address" [level=2]'
@@ -136,11 +136,9 @@ test("displays snapshot of alternate address page", async ({ page }) => {
   await page.goto(
     "https://qa-www.nypl.org/library-card/workAddress?&newCard=true"
   );
-  await expect(page.locator("header").filter({ hasText: "Apply" }))
-    .toMatchAriaSnapshot(`
-    - banner:
-      - heading "Apply for a Library Card Online" [level=1]
-  `);
+  await expect(
+    page.locator("header").filter({ hasText: "Apply" })
+  ).toMatchAriaSnapshot(HEADER_SNAPSHOT);
   await expect(page.locator("main")).toMatchAriaSnapshot(`
     - main:
       - heading "Alternate address" [level=2]
@@ -168,11 +166,9 @@ test("displays snapshot of address verification page", async ({ page }) => {
   await page.goto(
     "https://qa-www.nypl.org/library-card/address-verification?&newCard=true"
   );
-  await expect(page.locator("header").filter({ hasText: "Apply" }))
-    .toMatchAriaSnapshot(`
-    - banner:
-      - heading "Apply for a Library Card Online" [level=1]
-  `);
+  await expect(
+    page.locator("header").filter({ hasText: "Apply" })
+  ).toMatchAriaSnapshot(HEADER_SNAPSHOT);
   await expect(page.locator("main")).toMatchAriaSnapshot(`
     - main:
       - 'heading "Step 3 of 5: Address verification" [level=2]'
@@ -186,11 +182,9 @@ test("displays snapshot of address verification page", async ({ page }) => {
 
 test("displays snapshot of review page", async ({ page }) => {
   await page.goto("https://qa-www.nypl.org/library-card/review?&newCard=true");
-  await expect(page.locator("header").filter({ hasText: "Apply" }))
-    .toMatchAriaSnapshot(`
-    - banner:
-      - heading "Apply for a Library Card Online" [level=1]
-  `);
+  await expect(
+    page.locator("header").filter({ hasText: "Apply" })
+  ).toMatchAriaSnapshot(HEADER_SNAPSHOT);
   await expect(page.locator("main")).toMatchAriaSnapshot(`
     - main:
       - 'heading "Step 5 of 5: Confirm your information" [level=2]'
@@ -215,11 +209,9 @@ test("displays snapshot of congrats page", async ({ page }) => {
   await page.goto(
     "https://qa-www.nypl.org/library-card/congrats?&newCard=true"
   );
-  await expect(page.locator("header").filter({ hasText: "Apply" }))
-    .toMatchAriaSnapshot(`
-    - banner:
-      - heading "Apply for a Library Card Online" [level=1]
-  `);
+  await expect(
+    page.locator("header").filter({ hasText: "Apply" })
+  ).toMatchAriaSnapshot(HEADER_SNAPSHOT);
   await expect(page.locator("main")).toMatchAriaSnapshot(`
     - main:
       - heading "Congratulations! You now have a digital New York Public Library card." [level=2]
