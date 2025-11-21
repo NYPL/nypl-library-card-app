@@ -178,13 +178,12 @@ function AddressVerificationContainer() {
             flexDirection: { base: "column", sm: "row" },
           },
         }}
+        // If there's only one option, it's checked by default.
+        defaultValue={addressesLength === 1 ? `${addressType}-0` : undefined}
       >
         {addresses.map((address, idx) => {
           const selected = `${addressType}-${idx}`;
-          // If there's only one option, it's checked by default. Otherwise,
-          // the user can choose between the two options.
-          const checked =
-            addressesLength === 1 ? true : selected === selectedValue;
+          const checked = selected === selectedValue;
           return (
             <Radio
               key={`${addressType}-${idx}`}
