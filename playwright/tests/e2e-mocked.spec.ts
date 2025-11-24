@@ -67,7 +67,7 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
     await test.step("displays variable elements on Congrats page", async () => {
       await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
-      await expect(pageManager.congratsPage.barcodeNumber).toHaveText(
+      await expect(pageManager.congratsPage.mockedBarcodeNumber).toHaveText(
         TEST_BARCODE_NUMBER
       );
     });
