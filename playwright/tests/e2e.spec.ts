@@ -59,7 +59,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await pageManager.alternateAddressPage.nextButton.click();
     });
 
-    await test.step("confirms address verification", async () => {
+    await test.step("selects home and alternate addresses", async () => {
       await expect(
         pageManager.addressVerificationPage.stepHeader
       ).toBeVisible();
@@ -71,11 +71,10 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage);
-      await pageManager.accountPage.acceptTermsCheckbox.check();
       await pageManager.accountPage.nextButton.click();
     });
 
-    await test.step("displays Personal Information on review page", async () => {
+    await test.step("displays personal information on review page", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.firstName)
@@ -134,10 +133,11 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     });
 
     await test.step("submits application", async () => {
+      await expect(pageManager.reviewPage.submitButton).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
     });
 
-    await test.step("retrieves barcode from Congrats page", async () => {
+    await test.step("retrieves barcode from congrats page", async () => {
       await expect(pageManager.congratsPage.stepHeading).toBeVisible();
       await expect(pageManager.congratsPage.displayBarcodeNumber).toBeVisible();
       await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
