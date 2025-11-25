@@ -6,7 +6,11 @@ import {
   fillAlternateAddress,
   fillAccountInfo,
 } from "../utils/form-helper";
-import { TEST_PATRON_INFO } from "../utils/constants";
+import {
+  TEST_ALTERNATE_ADDRESS,
+  TEST_HOME_ADDRESS,
+  TEST_PATRON_INFO,
+} from "../utils/constants";
 
 import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 
@@ -81,6 +85,33 @@ test.describe("Full User Journey with Sierra API Integration", () => {
         pageManager.reviewPage.getText(TEST_PATRON_INFO.email)
       ).toBeVisible();
       await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
+    });
+
+    await test.step("displays home and alternate addresses on review page", async () => {
+      await expect(
+        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.street)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.city)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.state)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.postalCode)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.street)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.city)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.state)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.postalCode)
+      ).toBeVisible();
     });
 
     await test.step("displays Congrats page", async () => {
