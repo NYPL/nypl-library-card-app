@@ -15,10 +15,10 @@ import {
 
 import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 
-test.describe("Full User Journey with Sierra API Integration", () => {
-  const scrapedBarcode: string | null = null;
+test.describe("E2E: Complete application with Sierra API integration", () => {
+  let scrapedBarcode: string | null = null;
 
-  test.afterAll("patron deletion", async () => {
+  test.afterAll("deletes patron", async () => {
     if (scrapedBarcode) {
       try {
         const patronID = await getPatronID(scrapedBarcode);
@@ -31,11 +31,10 @@ test.describe("Full User Journey with Sierra API Integration", () => {
       }
     }
   });
-  test("displays patron information on review page", async ({ page }) => {
-    // rename
+
+  test("displays patron information on congrats page", async ({ page }) => {
     const pageManager = new PageManager(page);
 
-    // fill out and submit each form page to reach review page
     await test.step("enters personal information", async () => {
       await page.goto("/library-card/personal?newCard=true");
       await fillPersonalInfo(pageManager.personalPage);
@@ -49,9 +48,7 @@ test.describe("Full User Journey with Sierra API Integration", () => {
     });
 
     await test.step("enters alternate address", async () => {
-      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible({
-        timeout: 10000,
-      });
+      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await fillAlternateAddress(pageManager.alternateAddressPage);
       await pageManager.alternateAddressPage.nextButton.click();
     });
@@ -76,7 +73,7 @@ test.describe("Full User Journey with Sierra API Integration", () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.firstName)
-      ).toBeVisible({ timeout: 10000 });
+      ).toBeVisible();
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.lastName)
       ).toBeVisible();
@@ -130,21 +127,22 @@ test.describe("Full User Journey with Sierra API Integration", () => {
       ).toBeVisible();
     });
 
-    // await test.step("displays Congrats page", async () => {
-    //   await pageManager.reviewPage.submitButton.click();
-    //   await expect(pageManager.congratsPage.stepHeading).toBeVisible();
-    // });
+    await test.step("submits application", async () => {
+      await expect(pageManager.reviewPage.submitButton).toBeVisible();
+      await pageManager.reviewPage.submitButton.click();
+      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
+    });
 
-    // await test.step("retrieve barcode from Congrats page", async () => {
-    //   await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
-    //     pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
-    //     {
-    //       timeout: 15000,
-    //     }
-    //   );
-    //   scrapedBarcode =
-    //     await pageManager.congratsPage.displayBarcodeNumber.textContent();
-    //   expect(scrapedBarcode).not.toBeNull();
-    // });
+    await test.step("retrieves barcode from Congrats page", async () => {
+      await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
+        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
+        {
+          timeout: 15000,
+        }
+      );
+      scrapedBarcode =
+        await pageManager.congratsPage.displayBarcodeNumber.textContent();
+      expect(scrapedBarcode).not.toBeNull();
+    });
   });
 });
