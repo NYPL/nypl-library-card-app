@@ -18,7 +18,7 @@ export class CongratsPage {
   readonly loginLink: Locator;
   readonly findOutLibraryLink: Locator;
   readonly discoverLink: Locator;
-  readonly displayBarcodeNumber: Locator;
+  // readonly displayBarcodeNumber: Locator;
   readonly EXPECTED_BARCODE_PREFIX = "255";
 
   constructor(page: Page) {
@@ -47,9 +47,9 @@ export class CongratsPage {
       exact: true,
     });
     this.barcodeNumber = page.getByLabel("Barcode number");
-    this.displayBarcodeNumber = page.locator(
-      "#congratulations > div.confirmation-graphic > div > div > div.grid-item.barcode-container > div"
-    );
+    // this.displayBarcodeNumber = page.locator(
+    //   "#congratulations > div.confirmation-graphic > div > div > div.grid-item.barcode-container > div"
+    // );
     this.libraryCardBackground = page.locator(".background-lion");
     this.locationsLink = page.getByRole("link", {
       name: "locations",
