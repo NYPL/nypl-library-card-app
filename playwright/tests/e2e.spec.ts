@@ -15,7 +15,7 @@ import {
 import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 
 test.describe("Full User Journey with Sierra API Integration", () => {
-  const scrapedBarcode: string | null = null;
+  let scrapedBarcode: string | null = null;
 
   test.afterAll("patron deletion", async () => {
     if (scrapedBarcode) {
@@ -114,21 +114,21 @@ test.describe("Full User Journey with Sierra API Integration", () => {
       ).toBeVisible();
     });
 
-    // await test.step("displays Congrats page", async () => {
-    //   await pageManager.reviewPage.submitButton.click();
-    //   await expect(pageManager.congratsPage.stepHeading).toBeVisible();
-    // });
+    await test.step("displays Congrats page", async () => {
+      await pageManager.reviewPage.submitButton.click();
+      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
+    });
 
-    // await test.step("retrieve barcode from Congrats page", async () => {
-    //   await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
-    //     pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
-    //     {
-    //       timeout: 15000,
-    //     }
-    //   );
-    //   scrapedBarcode =
-    //     await pageManager.congratsPage.displayBarcodeNumber.textContent();
-    //   expect(scrapedBarcode).not.toBeNull();
-    // });
+    await test.step("retrieve barcode from Congrats page", async () => {
+      await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
+        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
+        {
+          timeout: 15000,
+        }
+      );
+      scrapedBarcode =
+        await pageManager.congratsPage.displayBarcodeNumber.textContent();
+      expect(scrapedBarcode).not.toBeNull();
+    });
   });
 });
