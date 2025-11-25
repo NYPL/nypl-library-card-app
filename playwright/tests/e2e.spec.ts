@@ -134,7 +134,6 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     });
 
     await test.step("submits application", async () => {
-      await expect(pageManager.reviewPage.submitButton).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
     });
 
