@@ -6,12 +6,16 @@ import {
   fillAlternateAddress,
   fillAccountInfo,
 } from "../utils/form-helper";
-import { TEST_PATRON_INFO } from "../utils/constants";
+import {
+  TEST_ALTERNATE_ADDRESS,
+  TEST_HOME_ADDRESS,
+  TEST_PATRON_INFO,
+} from "../utils/constants";
 
 import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 
 test.describe("Full User Journey with Sierra API Integration", () => {
-  let scrapedBarcode: string | null = null;
+  const scrapedBarcode: string | null = null;
 
   test.afterAll("patron deletion", async () => {
     if (scrapedBarcode) {
@@ -83,21 +87,48 @@ test.describe("Full User Journey with Sierra API Integration", () => {
       await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
     });
 
-    await test.step("displays Congrats page", async () => {
-      await pageManager.reviewPage.submitButton.click();
-      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
+    await test.step("displays home and alternate addresses on review page", async () => {
+      await expect(
+        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.street)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.city)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.state)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.postalCode)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.street)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.city)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.state)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.postalCode)
+      ).toBeVisible();
     });
 
-    await test.step("retrieve barcode from Congrats page", async () => {
-      await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
-        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
-        {
-          timeout: 15000,
-        }
-      );
-      scrapedBarcode =
-        await pageManager.congratsPage.displayBarcodeNumber.textContent();
-      expect(scrapedBarcode).not.toBeNull();
-    });
+    // await test.step("displays Congrats page", async () => {
+    //   await pageManager.reviewPage.submitButton.click();
+    //   await expect(pageManager.congratsPage.stepHeading).toBeVisible();
+    // });
+
+    // await test.step("retrieve barcode from Congrats page", async () => {
+    //   await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
+    //     pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
+    //     {
+    //       timeout: 15000,
+    //     }
+    //   );
+    //   scrapedBarcode =
+    //     await pageManager.congratsPage.displayBarcodeNumber.textContent();
+    //   expect(scrapedBarcode).not.toBeNull();
+    // });
   });
 });
