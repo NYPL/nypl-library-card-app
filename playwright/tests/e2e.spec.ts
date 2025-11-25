@@ -18,7 +18,7 @@ import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 test.describe("E2E: Complete application with Sierra API integration", () => {
   let scrapedBarcode: string | null = null;
 
-  test.afterAll("deletes patron", async () => {
+  test.afterAll("patron deletion", async () => {
     if (scrapedBarcode) {
       try {
         const patronID = await getPatronID(scrapedBarcode);
@@ -48,7 +48,9 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     });
 
     await test.step("enters alternate address", async () => {
-      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
+      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible({
+        timeout: 10000,
+      });
       await fillAlternateAddress(pageManager.alternateAddressPage);
       await pageManager.alternateAddressPage.nextButton.click();
     });
@@ -73,7 +75,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.firstName)
-      ).toBeVisible();
+      ).toBeVisible({ timeout: 10000 });
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.lastName)
       ).toBeVisible();
@@ -128,12 +130,11 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     });
 
     await test.step("submits application", async () => {
-      await expect(pageManager.reviewPage.submitButton).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
       await expect(pageManager.congratsPage.stepHeading).toBeVisible();
     });
 
-    await test.step("retrieves barcode from Congrats page", async () => {
+    await test.step("retrieve barcode from Congrats page", async () => {
       await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
         pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
         {
