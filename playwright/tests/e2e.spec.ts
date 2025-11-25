@@ -35,14 +35,20 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
   test("displays patron information on congrats page", async ({ page }) => {
     const pageManager = new PageManager(page);
 
+    await test.step("begins at landing", async () => {
+      await page.goto("/library-card/new?newCard=true");
+      await expect(pageManager.landingPage.applyHeading).toBeVisible();
+      await pageManager.landingPage.getStartedButton.click();
+    });
+
     await test.step("enters personal information", async () => {
-      await page.goto("/library-card/personal?newCard=true");
+      await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage);
       await pageManager.personalPage.nextButton.click();
     });
 
     await test.step("enters home address", async () => {
-      await expect(pageManager.addressPage.addressHeading).toBeVisible();
+      await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillHomeAddress(pageManager.addressPage);
       await pageManager.addressPage.nextButton.click();
     });
@@ -130,15 +136,13 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     await test.step("submits application", async () => {
       await expect(pageManager.reviewPage.submitButton).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
-      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
     });
 
     await test.step("retrieves barcode from Congrats page", async () => {
+      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
+      await expect(pageManager.congratsPage.displayBarcodeNumber).toBeVisible();
       await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
-        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
-        {
-          timeout: 15000,
-        }
+        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX
       );
       scrapedBarcode =
         await pageManager.congratsPage.displayBarcodeNumber.textContent();
