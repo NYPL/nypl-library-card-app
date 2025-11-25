@@ -1,5 +1,5 @@
 import { Page, Locator } from "@playwright/test";
-import { TEST_PATRON_INFO, TEST_BARCODE_NUMBER } from "../utils/constants";
+import { TEST_PATRON_INFO } from "../utils/constants";
 
 export class CongratsPage {
   readonly page: Page;
@@ -46,9 +46,7 @@ export class CongratsPage {
     this.issuedDate = page.locator("#issued").getByText(this.getDate(), {
       exact: true,
     });
-    this.barcodeNumber = page.getByText(TEST_BARCODE_NUMBER, {
-      exact: true,
-    });
+    this.barcodeNumber = page.getByLabel("Barcode number");
     this.displayBarcodeNumber = page.locator(
       "#congratulations > div.confirmation-graphic > div > div > div.grid-item.barcode-container > div"
     );
