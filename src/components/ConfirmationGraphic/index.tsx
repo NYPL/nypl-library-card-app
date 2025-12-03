@@ -59,7 +59,11 @@ const ConfirmationContainer = () => {
           </div>
           <div className="grid-item barcode-container">
             <canvas id="barcodeCanvas" {...canvasArgs}></canvas>
-            <div className="barcode" aria-label={`Barcode number: ${barcode}`}>
+            <div
+              className="barcode"
+              role="region"
+              aria-label={`Barcode number: ${barcode}`}
+            >
               {barcode}
             </div>
           </div>
