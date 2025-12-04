@@ -1,4 +1,5 @@
-import { test, expect } from "@playwright/test";
+// Becomes:
+import { test, expect } from "./fixtures";
 import { PersonalPage } from "../pageobjects/personal.page";
 import { TEST_PATRON_INFO } from "../utils/constants";
 import { fillPersonalInfo } from "../utils/form-helper";
