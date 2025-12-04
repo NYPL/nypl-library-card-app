@@ -89,12 +89,11 @@ test.describe("Full User Journey with Sierra API Integration", () => {
     });
 
     await test.step("retrieve barcode from Congrats page", async () => {
-      await pageManager.congratsPage.displayBarcodeNumber.waitFor();
+      await pageManager.congratsPage.displayBarcodeNumber.waitFor({
+        timeout: 15000,
+      });
       await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
-        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
-        {
-          timeout: 15000,
-        }
+        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX
       );
       scrapedBarcode =
         await pageManager.congratsPage.displayBarcodeNumber.textContent();
