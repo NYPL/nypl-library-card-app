@@ -66,7 +66,7 @@ test.describe("Full User Journey with Sierra API Integration", () => {
       await pageManager.accountPage.nextButton.click();
     });
 
-    await test.step("displays Personal information on review page", async () => {
+    await test.step("displays Personal Information on review page", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.firstName)
@@ -89,11 +89,11 @@ test.describe("Full User Journey with Sierra API Integration", () => {
     });
 
     await test.step("retrieve barcode from Congrats page", async () => {
-      await pageManager.congratsPage.displayBarcodeNumber.waitFor({
-        timeout: 15000,
-      });
       await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
-        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX
+        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
+        {
+          timeout: 15000,
+        }
       );
       scrapedBarcode =
         await pageManager.congratsPage.displayBarcodeNumber.textContent();
