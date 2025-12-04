@@ -1,6 +1,6 @@
 import { playwrightTest } from "@axe-core/watcher";
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.AXE_API_KEY || "";
 
 const { test, expect } = playwrightTest({
   axe: {
