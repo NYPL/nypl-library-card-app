@@ -1,6 +1,5 @@
 import React, { JSX } from "react";
 import { useTranslation } from "next-i18next";
-import aaUtils from "../../externals/aaUtils";
 import Link from "next/link";
 import {
   Box,
@@ -44,11 +43,6 @@ function RoutingLinks({
       href={next.url}
       id="routing-links-next"
       variant="buttonPrimary"
-      // Just track the "Get Started" or "Submit" clicks. Routing events
-      // are tracked at the component level in each "onSubmit".
-      onClick={() => {
-        aaUtils.trackCtaEvent("Start Application", next.text, next.url);
-      }}
       width={{ base: "100%", md: "auto" }}
     >
       {nextText}
