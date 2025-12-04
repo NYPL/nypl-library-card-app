@@ -3,10 +3,16 @@ import { AddressPage } from "../pageobjects/address.page";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
 import { fillHomeAddress, fillAlternateAddress } from "../utils/form-helper";
+import AxeBuilder from "@axe-core/playwright";
 
 test.describe("displays elements on Address Verification page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/library-card/address-verification?&newCard=true");
+  });
+
+  test("should have no accessibility violations", async ({ page }) => {
+    const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
+    expect(accessibilityScanResults.violations).toEqual([]);
   });
   test("should display the correct headers", async ({ page }) => {
     const addressVerificationPage = new AddressVerificationPage(page);
