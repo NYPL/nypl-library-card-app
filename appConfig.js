@@ -18,5 +18,4 @@ export const agencyType = {
 export const scopes = "account:write account:read";
 export const dsHeader = process.env.NEXT_PUBLIC_DS_GLOBAL_HEADER;
 export const dsFooter = process.env.NEXT_PUBLIC_DS_GLOBAL_FOOTER;
-export const adobeAnalyticsTag = process.env.NEXT_PUBLIC_ADOBE_ANALYTICS_TAG;
 export const cookieDomain = process.env.COOKIE_DOMAIN;
