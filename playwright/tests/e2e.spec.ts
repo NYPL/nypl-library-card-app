@@ -89,6 +89,7 @@ test.describe("Full User Journey with Sierra API Integration", () => {
     });
 
     await test.step("retrieve barcode from Congrats page", async () => {
+      await pageManager.congratsPage.displayBarcodeNumber.waitFor();
       await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
         pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
         {
