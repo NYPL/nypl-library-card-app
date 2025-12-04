@@ -1,7 +1,6 @@
 /* eslint-disable */
 import {
   Button,
-  ButtonGroup,
   Checkbox,
   Form,
   FormField as DSFormField,
@@ -23,7 +22,6 @@ import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import Loader from "../Loader";
 import FormField from "../FormField";
 
-import aaUtils from "../../externals/aaUtils";
 import { createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import {
@@ -175,14 +173,6 @@ function ReviewFormContainer({ csrfToken }) {
       .then(async (response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
-
-        // Adobe Analytics
-        aaUtils.trackApplicationSubmitEvent({
-          id: null,
-          lang: formValues.preferredLanguage,
-          locationId: formValues.homeLibraryCode,
-          locationName: findLibraryName(formValues.homeLibraryCode),
-        });
         await router.push(`/congrats?${queryStr}`);
       })
       .catch((error) => {
