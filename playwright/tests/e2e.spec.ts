@@ -1,5 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
+import AxeBuilder from "@axe-core/playwright";
+
 import {
   fillPersonalInfo,
   fillHomeAddress,
@@ -86,6 +88,9 @@ test.describe("Full User Journey with Sierra API Integration", () => {
     await test.step("displays Congrats page", async () => {
       await pageManager.reviewPage.submitButton.click();
       await expect(pageManager.congratsPage.stepHeading).toBeVisible();
+
+      const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
+      expect(accessibilityScanResults.violations).toEqual([]);
     });
 
     await test.step("retrieve barcode from Congrats page", async () => {
