@@ -37,7 +37,7 @@ test("displays available languages", async ({ page }) => {
 
 test("displays informational links", async ({ page }) => {
   const landingPage = new LandingPage(page);
-  await expect(landingPage.learnMore).toBeVisible();
+  await expect(landingPage.whatYouCanAccess).toBeVisible();
   await expect(landingPage.cardholderTerms).toBeVisible();
   await expect(landingPage.rulesRegulations).toBeVisible();
   await expect(landingPage.privacyPolicy).toBeVisible();

@@ -84,7 +84,7 @@ describe("ApiErrors", () => {
     const pd = {
       status: 500,
       type: "missing-required-values",
-      title: "Missing Required Values",
+      title: "Missing required Values",
       detail: "'firsName' and 'password' are missing",
     };
 
@@ -124,7 +124,7 @@ describe("ApiErrors", () => {
 
     // Text is broken up by the anchor elements so only checking for the text:
     expect(
-      screen.getByText("must be between 5-25 alphanumeric characters.")
+      screen.getByText(/must be between 5-25 alphanumeric characters./)
     ).toBeInTheDocument();
     expect(
       screen.getByText(/must be at least 8 characters/)

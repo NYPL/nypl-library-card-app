@@ -5,7 +5,7 @@ import { AddressVerificationPage } from "../pageobjects/address-verification.pag
 import { fillHomeAddress, fillAlternateAddress } from "../utils/form-helper";
 import AxeBuilder from "@axe-core/playwright";
 
-test.describe("displays elements on Address Verification page", () => {
+test.describe("displays elements on Address verification page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/library-card/address-verification?&newCard=true");
   });

@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/workAddress?newCard=true");
 });
 
-test.describe("displays elements on Alternate Address page", () => {
+test.describe("displays elements on Alternate address page", () => {
   test("displays all headings", async ({ page }) => {
     const alternateAddressPage = new AlternateAddressPage(page);
     await expect(alternateAddressPage.mainHeading).toBeVisible();
