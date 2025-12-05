@@ -49,9 +49,7 @@ export class CongratsPage {
     this.barcodeNumber = page.getByText(TEST_BARCODE_NUMBER, {
       exact: true,
     });
-    this.displayBarcodeNumber = page.locator(
-      "#congratulations > div.confirmation-graphic > div > div > div.grid-item.barcode-container > div"
-    );
+    this.displayBarcodeNumber = page.locator(".barcode-container > div");
     this.libraryCardBackground = page.locator(".background-lion");
     this.locationsLink = page.getByRole("link", {
       name: "locations",
