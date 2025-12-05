@@ -2,6 +2,7 @@ import {
   Checkbox,
   FormRow,
   FormField as DSFormField,
+  HorizontalRule,
 } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import React, { useState, useEffect } from "react";
@@ -44,12 +45,12 @@ function AccountFormFields({
   }, []);
   const minPasswordLength = 8;
   const maxPasswordLength = 32;
-  const update = () => setShowPassword(!showPassword);
+  const update = () => setShowPassword(() => !showPassword);
   const passwordType = showPassword ? "text" : "password";
 
   // When the component renders on the client-side, we want to turn the password
   // "text" input into a "password" type so that the password is visible by default.
-  // Keep track when it's rendering on the client so that the "Show Password"
+  // Keep track when it's rendering on the client so that the "Show password"
   // checkbox is rendered as well - it's not needed without javascript since
   // you can't toggle without javascript.
   useEffect(() => {
@@ -95,6 +96,7 @@ function AccountFormFields({
             minLength={minPasswordLength}
             maxLength={maxPasswordLength}
             defaultValue={formValues.password}
+            autoComplete="new-password"
           />
         </DSFormField>
       </FormRow>
@@ -114,6 +116,7 @@ function AccountFormFields({
             minLength={minPasswordLength}
             maxLength={maxPasswordLength}
             defaultValue={formValues.verifyPassword}
+            autoComplete="new-password"
           />
         </DSFormField>
       </FormRow>
@@ -131,6 +134,8 @@ function AccountFormFields({
           )}
         </DSFormField>
       </FormRow>
+
+      <HorizontalRule />
 
       <FormRow id={`${id}-accountForm-5`}>
         <DSFormField>

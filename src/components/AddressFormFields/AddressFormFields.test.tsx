@@ -23,20 +23,20 @@ jest.mock("react-i18next", () => {
   const en = {
     location: {
       address: {
-        title: "Home Address",
+        title: "Home address",
         description:
           "If you live in NYC, please fill out the home address form.",
-        line1: { label: "Street Address" },
+        line1: { label: "Street address" },
         line2: { label: "Apartment / Suite" },
         city: { label: "City" },
         state: { label: "State", instruction: "2-letter abbreviation" },
         postalCode: {
-          label: "Postal Code",
+          label: "Postal code",
           instruction: "5 or 9-digit postal code",
         },
       },
       workAddress: {
-        title: "Alternate Address",
+        title: "Alternate address",
         description: {
           part1:
             "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you&apos;re just visiting New York City. Please select one of the following and fill out the required fields.",
@@ -45,10 +45,11 @@ jest.mock("react-i18next", () => {
         },
       },
       errorMessage: {
-        line1: "Please enter a valid street address.",
-        city: "Please enter a valid city.",
-        state: "Please enter a 2-character state abbreviation.",
-        zip: "Please enter a 5 or 9-digit postal code.",
+        line1: "There was a problem. Please enter a valid street address.",
+        city: "There was a problem. Please enter a valid city.",
+        state:
+          "There was a problem. Please enter a 2-character state abbreviation.",
+        zip: "There was a problem. Please enter a 5 or 9-digit postal code.",
       },
     },
   };
@@ -88,16 +89,16 @@ describe("AddressFormFields", () => {
     );
 
     // Unfortunately, getByLabelText doesn't work for these label since the
-    // label text is broken up by different elements, e.g. the "Required" text
+    // label text is broken up by different elements, e.g. the "required" text
     // is in a separate element inside the <label> element. But, getByRole
     // works just as well.
     const line1 = screen.getByRole("textbox", {
-      name: "Street Address (Required)",
+      name: "Street address (required)",
     });
     const line2 = screen.getByLabelText("Apartment / Suite");
-    const city = screen.getByRole("textbox", { name: "City (Required)" });
-    const state = screen.getByRole("textbox", { name: "State (Required)" });
-    const zip = screen.getByRole("textbox", { name: "Postal Code (Required)" });
+    const city = screen.getByRole("textbox", { name: "City (required)" });
+    const state = screen.getByRole("textbox", { name: "State (required)" });
+    const zip = screen.getByRole("textbox", { name: "Postal code (required)" });
 
     expect(line1).toBeInTheDocument();
     expect(line2).toBeInTheDocument();
@@ -115,11 +116,11 @@ describe("AddressFormFields", () => {
 
     // Since none of the fields are required for the work address, we can
     // use the getByLabelText function.
-    const line1 = screen.getByLabelText("Street Address");
+    const line1 = screen.getByLabelText("Street address");
     const line2 = screen.getByLabelText("Apartment / Suite");
     const city = screen.getByLabelText("City");
     const state = screen.getByLabelText("State");
-    const zip = screen.getByLabelText("Postal Code");
+    const zip = screen.getByLabelText("Postal code");
 
     expect(line1).toBeInTheDocument();
     expect(line2).toBeInTheDocument();

@@ -1,8 +1,12 @@
 import React, { JSX } from "react";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
-
-import styles from "./RoutingLinks.module.css";
+import {
+  Box,
+  Button,
+  Link as DSLink,
+  useNYPLBreakpoints,
+} from "@nypl/design-system-react-components";
 
 export interface LinkType {
   url: string;
@@ -29,38 +33,69 @@ function RoutingLinks({
   isDisabled = false,
 }: RoutingLinksType): JSX.Element {
   const { t } = useTranslation("common");
+  const { isLargerThanLargeMobile } = useNYPLBreakpoints();
   const nextText = next.text || t("button.next");
   const previousText = previous?.text || t("button.previous");
 
+  const GetStartedButton = () => (
+    <DSLink
+      as={Link}
+      href={next.url}
+      id="routing-links-next"
+      variant="buttonPrimary"
+      width={{ base: "100%", md: "auto" }}
+    >
+      {nextText}
+    </DSLink>
+  );
+
+  const PreviousLink = () => (
+    <DSLink
+      as={Link}
+      href={previous.url}
+      id="routing-links-previous"
+      variant="buttonSecondary"
+      borderColor="ui.gray.medium"
+      _visited={{ color: "ui.gray.dark" }}
+      _hover={{ color: "ui.gray.dark" }}
+    >
+      {previousText}
+    </DSLink>
+  );
+
+  const NextButton = () => (
+    <Button
+      variant="primary"
+      id="routing-links-next"
+      disabled={isDisabled}
+      type="submit"
+    >
+      {nextText}
+    </Button>
+  );
+
+  const nextElement = !next?.submit ? <GetStartedButton /> : <NextButton />;
+
   return (
-    <div className={styles.container}>
-      {previous?.url && (
-        <Link
-          href={previous.url}
-          id="routing-links-previous"
-          className={styles.previous}
-        >
-          {previousText}
-        </Link>
-      )}
-      {!next?.submit ? (
-        <Link
-          href={next.url}
-          id="routing-links-next"
-          className={`button ${styles.button}`}
-        >
-          {nextText}
-        </Link>
+    <Box
+      my="2rem"
+      display="flex"
+      gap="xs"
+      flexDir={{ base: "column", md: "row" }}
+    >
+      {/* Next button will be placed on top on mobile view */}
+      {isLargerThanLargeMobile ? (
+        <>
+          {previous?.url && <PreviousLink />}
+          {nextElement}
+        </>
       ) : (
-        <input
-          id="routing-links-next"
-          className={`button ${styles.next}`}
-          disabled={isDisabled}
-          type="submit"
-          value={nextText}
-        />
+        <>
+          {nextElement}
+          {previous?.url && <PreviousLink />}
+        </>
       )}
-    </div>
+    </Box>
   );
 }
 
