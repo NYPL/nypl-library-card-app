@@ -13,9 +13,9 @@ export const TEST_PATRON_INFO = {
 export const TEST_HOME_ADDRESS: AddressData = {
   street: "123 Main St",
   apartmentSuite: "Apartment 201",
-  city: "New York",
-  state: "NY",
-  postalCode: "10001",
+  city: "Stamford",
+  state: "CT",
+  postalCode: "06902",
 };
 export const TEST_CUSTOMIZE_ACCOUNT = {
   username: UNIQUE_USERNAME,
