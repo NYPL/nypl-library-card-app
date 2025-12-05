@@ -2,7 +2,6 @@ import {
   Form,
   FormField as DSFormField,
   FormRow,
-  Heading,
 } from "@nypl/design-system-react-components";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
@@ -18,7 +17,7 @@ import {
   AddressesResponse,
   AddressTypes,
 } from "../../interfaces";
-import Loader from "../Loader";
+import LoadingIndicator from "../LoadingIndicator";
 import FormField from "../FormField";
 import { constructAddressType } from "../../utils/formDataUtils";
 
@@ -26,6 +25,8 @@ import { nyCounties, nyCities, createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../context/FormDataContext";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 import { NRError } from "../../logger/newrelic";
+import { Paragraph } from "../Paragraph";
+import { PageSubHeading } from "../PageSubHeading";
 
 const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -149,10 +150,10 @@ const AddressContainer = ({ csrfToken }) => {
 
   return (
     <>
-      <Heading level="three">{t("location.address.title")}</Heading>
-      <p>{t("location.address.description")}</p>
+      <LoadingIndicator isLoading={isLoading} />
 
-      <Loader isLoading={isLoading} />
+      <PageSubHeading>{t("location.address.title")}</PageSubHeading>
+      <Paragraph>{t("location.address.description")}</Paragraph>
 
       <Form
         // action="/library-card/api/submit"
@@ -184,6 +185,7 @@ const AddressContainer = ({ csrfToken }) => {
         <FormRow>
           <DSFormField>
             <RoutingLinks
+              isDisabled={isLoading}
               previous={{ url: `/personal?${queryStr}` }}
               next={{ submit: true }}
             />
