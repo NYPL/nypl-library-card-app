@@ -145,7 +145,12 @@ const ConfirmationContainer = () => {
               {...canvasArgs}
               style={{ width: "100%", height: "50px" }}
             ></canvas>
-            <Box className="barcode" sx={styles.barcode}>
+            <Box
+              className="barcode"
+              role="region"
+              aria-label={`Barcode number: ${barcode}`}
+              sx={styles.barcode}
+            >
               {barcode}
             </Box>
           </Box>
