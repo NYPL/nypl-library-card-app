@@ -26,7 +26,7 @@ test.describe("displays all form elements on Account page", () => {
     await expect(accountPage.availableUsernameButton).toBeVisible();
     await expect(accountPage.passwordInput).toBeVisible();
     await expect(accountPage.verifyPasswordInput).toBeVisible();
-    await expect(accountPage.showPasswordCheckbox).toBeVisible();
+    await expect(accountPage.showPassword).toBeVisible();
   });
 
   test("displays home library form", async ({ page }) => {
@@ -149,8 +149,8 @@ test.describe("mock API responses on Account page", () => {
       TEST_CUSTOMIZE_ACCOUNT.password
     );
 
-    await accountPage.showPasswordCheckbox.check();
-    await expect(accountPage.showPasswordCheckbox).toBeChecked();
+    await accountPage.showPassword.check();
+    await expect(accountPage.showPassword).toBeChecked();
     await accountPage.acceptTermsCheckbox.check();
     await expect(accountPage.acceptTermsCheckbox).toBeChecked();
     await expect(accountPage.selectHomeLibrary).toHaveValue(

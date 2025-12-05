@@ -31,15 +31,22 @@ export class ReviewPage {
   readonly locationsLink: Locator;
   readonly createYourAccountHeading: Locator;
   readonly usernameHeading: Locator;
-  readonly showPassword: Locator;
+  readonly showPasswordCheckbox: Locator;
   readonly passwordHeading: Locator;
   readonly homeLibraryHeading: Locator;
-  readonly ebranchValue: Locator;
-  readonly createYourAccountEditButton: Locator;
+  readonly defaultHomeLibrary: Locator;
+  readonly accountEditButton: Locator;
   readonly usernameInput: Locator;
+  readonly passwordInput: Locator;
+  readonly verifyPasswordInput: Locator;
   readonly availableUsernameButton: Locator;
   readonly availableUsernameMessage: Locator;
   readonly unavailableUsernameError: Locator;
+  readonly homeLibraryDropdown: Locator;
+  readonly cardholderTermsLink: Locator;
+  readonly rulesRegulationsLink: Locator;
+  readonly privacyPolicyLink: Locator;
+  readonly acceptTermsCheckbox: Locator;
   readonly submitButton: Locator;
   readonly formSubmissionUserNameError: Locator;
 
@@ -119,15 +126,25 @@ export class ReviewPage {
     });
     this.usernameHeading = page.getByText("Username", { exact: true });
     this.passwordHeading = page.getByText("Password", { exact: true });
-    this.showPassword = page.getByText("Show password", { exact: true });
-    this.homeLibraryHeading = page.getByText("Home library", { exact: true });
-    this.ebranchValue = page.getByText("E-Branch", { exact: true });
-    this.createYourAccountEditButton = page.getByRole("button", {
+    this.showPasswordCheckbox = page.getByText("Show Password", {
+      exact: true,
+    });
+    this.homeLibraryHeading = page.getByText("Home Library", { exact: true });
+    this.defaultHomeLibrary = page.getByText("E-Branch", { exact: true });
+    this.accountEditButton = page.getByRole("button", {
       name: "Edit Create your account",
       exact: true,
     });
     this.usernameInput = page.getByRole("textbox", {
       name: "Username (required)",
+      exact: true,
+    });
+    this.passwordInput = page.getByRole("textbox", {
+      name: "Password (Required)",
+      exact: true,
+    });
+    this.verifyPasswordInput = page.getByRole("textbox", {
+      name: "Verify Password (Required)",
       exact: true,
     });
     this.availableUsernameButton = page.getByRole("button", {
@@ -138,11 +155,27 @@ export class ReviewPage {
     this.unavailableUsernameError = page.getByText(
       USERNAME_UNAVAILABLE_MESSAGE
     );
+    this.homeLibraryDropdown = page.getByLabel("Select a home library:");
+    this.cardholderTermsLink = page.getByRole("link", {
+      name: "Cardholder Terms and Conditions",
+      exact: true,
+    });
+    this.rulesRegulationsLink = page.getByRole("link", {
+      name: "Rules and Regulations",
+      exact: true,
+    });
+    this.privacyPolicyLink = page
+      .locator("#mainContent")
+      .getByRole("link", { name: "Privacy Policy", exact: true });
+    this.acceptTermsCheckbox = page.getByText(
+      "Yes, I accept the terms and conditions."
+    );
     this.submitButton = page.getByRole("button", {
       name: "Submit",
       exact: true,
     });
     this.formSubmissionUserNameError = page.getByRole("heading", {
+      // remove?
       name: "Form submission error",
     });
   }
