@@ -34,7 +34,7 @@ export class ReviewPage {
   readonly showPassword: Locator;
   readonly passwordHeading: Locator;
   readonly homeLibraryHeading: Locator;
-  readonly ebranchValue: Locator;
+  readonly defaultHomeLibrary: Locator;
   readonly createYourAccountEditButton: Locator;
   readonly usernameInput: Locator;
   readonly availableUsernameButton: Locator;
@@ -119,7 +119,7 @@ export class ReviewPage {
     this.passwordHeading = page.getByText("Password", { exact: true });
     this.showPassword = page.getByText("Show Password", { exact: true });
     this.homeLibraryHeading = page.getByText("Home Library", { exact: true });
-    this.ebranchValue = page.getByText("E-Branch", { exact: true });
+    this.defaultHomeLibrary = page.getByText("E-Branch", { exact: true });
     this.createYourAccountEditButton = page
       .getByRole("button", {
         name: "Edit",
