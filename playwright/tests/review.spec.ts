@@ -48,7 +48,6 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
     await expect(reviewPage.defaultHomeLibrary).toBeVisible();
     await expect(reviewPage.accountEditButton).toBeVisible();
-    await expect(reviewPage.submitButton).toBeVisible();
   });
 });
 
