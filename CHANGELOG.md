@@ -34,6 +34,14 @@
 - Run Playwright tests on QA environment [SWIS-113](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-113)
 - Add Playwright test to mock create patron API endpoint [SWIS-140](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-140)
 - Fix issued date in Playwright test [SWIS-162](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-162)
+- Update to design system v4
+  - `new` page Design system upgrade [SWIS-79](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-79)
+  - `personal` page Design system upgrade [SWIS-80](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-80)
+  - `review` page Design system upgrade [SWIS-81](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-81)
+  - `location` and `workAddress` page Design system upgrade [SWIS-78](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-78)
+  - `congrats` page Design system upgrade [SWIS-77](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-77)
+  - `address verification` page Design system upgrade [SWIS-76](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-76)
+  - Switches over from using custom Loader to ProgressIndicator [SWIS-146](https://newyorkpubliclibrary.atlassian.net/browse/SWIS-146)
 
 ### 1.2.6
 

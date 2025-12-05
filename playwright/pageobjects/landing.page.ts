@@ -15,7 +15,7 @@ export class LandingPage {
   readonly spanishLanguage: Locator;
   readonly urduLanguage: Locator;
   readonly applyHeading: Locator; // displays only on landing page
-  readonly learnMore: Locator;
+  readonly whatYouCanAccess: Locator;
   readonly cardholderTerms: Locator;
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
@@ -41,10 +41,12 @@ export class LandingPage {
     this.spanishLanguage = page.getByRole("link", { name: "Spanish" });
     this.urduLanguage = page.getByRole("link", { name: "Urdu" });
     this.applyHeading = page.getByRole("heading", {
-      name: "Apply for a Library Card Today in a Few Easy Steps",
+      name: "Apply for a library card today in a few easy steps",
       level: 2,
     });
-    this.learnMore = page.getByRole("link", { name: "Learn more" });
+    this.whatYouCanAccess = page.getByRole("link", {
+      name: "what you can access",
+    });
     this.cardholderTerms = page.getByRole("link", {
       name: "Cardholder Terms and Conditions",
     });
@@ -54,6 +56,6 @@ export class LandingPage {
     this.privacyPolicy = page
       .locator("#mainContent")
       .getByRole("link", { name: "Privacy Policy" });
-    this.getStartedButton = page.getByRole("link", { name: "Get Started" });
+    this.getStartedButton = page.getByRole("link", { name: "Get started" });
   }
 }

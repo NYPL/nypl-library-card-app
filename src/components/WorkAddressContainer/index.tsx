@@ -2,7 +2,6 @@ import {
   Form,
   FormField as DSFormField,
   FormRow,
-  Heading,
 } from "@nypl/design-system-react-components";
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -17,14 +16,16 @@ import {
   AddressesResponse,
   AddressTypes,
 } from "../../interfaces";
-import Loader from "../Loader";
 import FormField from "../FormField";
+import LoadingIndicator from "../LoadingIndicator";
 
 import { constructAddressType } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
 import { createQueryParams } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
+import { Paragraph } from "../Paragraph";
+import { PageSubHeading } from "../PageSubHeading";
 
 const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -128,10 +129,10 @@ const AddressContainer = ({ csrfToken }) => {
 
   return (
     <>
-      <Heading level="three">{t("location.workAddress.title")}</Heading>
-      <p>{t("location.workAddress.description.part2")}</p>
+      <LoadingIndicator isLoading={isLoading} />
 
-      <Loader isLoading={isLoading} />
+      <PageSubHeading>{t("location.workAddress.title")}</PageSubHeading>
+      <Paragraph>{t("location.workAddress.description.part2")}</Paragraph>
 
       <Form
         // action="/library-card/api/submit"
@@ -166,6 +167,7 @@ const AddressContainer = ({ csrfToken }) => {
         <FormRow>
           <DSFormField>
             <RoutingLinks
+              isDisabled={isLoading}
               previous={{ url: `/location?${queryStr}` }}
               next={{ submit: true }}
             />
