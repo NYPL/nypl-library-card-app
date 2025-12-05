@@ -26,6 +26,7 @@ jobs:
       PLAYWRIGHT_BASE_URL: ${{ inputs.PLAYWRIGHT_BASE_URL }}
       SIERRA_BASIC_AUTH_BASE64: ${{ secrets.SIERRA_BASIC_AUTH_BASE64 }}
       SIERRA_API_BASE_URL_QA: ${{ vars.SIERRA_API_BASE_URL_QA }}
+      AXE_API_KEY: ${{ secrets.AXE_API_KEY }} 
     steps:
       - uses: actions/checkout@v4
 
