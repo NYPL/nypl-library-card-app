@@ -47,7 +47,7 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.showPassword).toBeVisible();
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
     await expect(reviewPage.defaultHomeLibrary).toBeVisible();
-    await expect(reviewPage.createYourAccountEditButton).toBeVisible();
+    await expect(reviewPage.accountEditButton).toBeVisible();
     await expect(reviewPage.submitButton).toBeVisible();
   });
 });
@@ -98,7 +98,7 @@ test.describe("mock API responses on Review page", () => {
     await mockUsernameApi(page, USERNAME_AVAILABLE_MESSAGE);
 
     const reviewPage = new ReviewPage(page);
-    await reviewPage.createYourAccountEditButton.click();
+    await reviewPage.accountEditButton.click();
     await reviewPage.usernameInput.fill("AvailableUsername");
     await reviewPage.availableUsernameButton.click();
     await expect(reviewPage.availableUsernameMessage).toBeVisible();
@@ -109,7 +109,7 @@ test.describe("mock API responses on Review page", () => {
     await mockUsernameApi(page, USERNAME_UNAVAILABLE_MESSAGE);
 
     const reviewPage = new ReviewPage(page);
-    await reviewPage.createYourAccountEditButton.click();
+    await reviewPage.accountEditButton.click();
     await reviewPage.usernameInput.fill("UnavailableUsername");
     await reviewPage.availableUsernameButton.click();
     await expect(reviewPage.unavailableUsernameError).toBeVisible();
