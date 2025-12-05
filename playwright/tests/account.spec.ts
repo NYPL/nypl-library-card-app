@@ -18,6 +18,7 @@ test.describe("displays all form elements on Account page", () => {
     await expect(accountPage.mainHeading).toBeVisible();
     await expect(accountPage.stepHeading).toBeVisible();
     await expect(accountPage.homeLibraryHeading).toBeVisible();
+    /*This meets Accesibility requirment WCAG 2.4.6 Headings and Labels */
   });
 
   test("displays username and password form", async ({ page }) => {

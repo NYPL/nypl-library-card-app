@@ -1,10 +1,15 @@
 import { test, expect } from "@playwright/test";
 import { CongratsPage } from "../pageobjects/congrats.page";
+import AxeBuilder from "@axe-core/playwright";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/congrats?&newCard=true");
 });
 
+test("should have no accessibility violations", async ({ page }) => {
+  const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
+  expect(accessibilityScanResults.violations).toEqual([]);
+});
 test.describe("displays elements on Congrats page", () => {
   test("displays headings on Congrats page", async ({ page }) => {
     const congratsPage = new CongratsPage(page);
