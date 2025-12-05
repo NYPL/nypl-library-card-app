@@ -131,12 +131,10 @@ export class ReviewPage {
     });
     this.homeLibraryHeading = page.getByText("Home Library", { exact: true });
     this.defaultHomeLibrary = page.getByText("E-Branch", { exact: true });
-    this.accountEditButton = page
-      .getByRole("button", {
-        name: "Edit",
-        exact: true,
-      })
-      .nth(2);
+    this.accountEditButton = page.getByRole("button", {
+      name: "Edit Create your account",
+      exact: true,
+    });
     this.usernameInput = page.getByRole("textbox", {
       name: "Username (required)",
       exact: true,
