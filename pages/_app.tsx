@@ -12,16 +12,16 @@ import * as appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
 import ApplicationContainer from "../src/components/ApplicationContainer";
 import { getPageTitles } from "../src/utils/utils";
-import useRouterScroll from "../src/hooks/useRouterScroll";
 import { constructProblemDetail } from "../src/utils/formDataUtils";
 import { DSProvider } from "@nypl/design-system-react-components";
 
 import { appWithTranslation, useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
-import aaUtils from "../src/externals/aaUtils";
 import Script from "next/script";
+import { theme } from "../src/theme";
 import pkg from "../package.json";
+
 interface MyAppProps {
   Component: any;
   pageProps: any;
@@ -31,7 +31,6 @@ console.info("App Version: ", pkg.version);
 
 function MyApp({ Component, pageProps }: MyAppProps) {
   const router = useRouter();
-  useRouterScroll({ top: 640 });
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({ mode: "onBlur" });
   const { favIconPath, appTitle } = appConfig;
@@ -52,14 +51,6 @@ function MyApp({ Component, pageProps }: MyAppProps) {
       document.getElementById("__next").dir = `${i18n.dir()}`;
     document.documentElement.lang = `${lang}`;
   }, [i18n]);
-
-  useEffect(() => {
-    const handleRouteChange = () => {
-      aaUtils.pageViewEvent(window.location);
-    };
-    router.events.on("routeChangeComplete", () => handleRouteChange());
-    return router.events.off("routeChangeComplete", () => handleRouteChange());
-  }, [router.events]);
 
   let error;
   // These errors are from the server-side query string form submission.
@@ -173,7 +164,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
           `,
         }}
       />
-      <DSProvider>
+      <DSProvider theme={theme}>
         <FormProvider {...formMethods}>
           <FormDataContextProvider initState={initState}>
             <ApplicationContainer problemDetail={error}>

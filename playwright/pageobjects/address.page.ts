@@ -28,14 +28,14 @@ export class AddressPage {
       level: 2,
     });
     this.addressHeading = page.getByRole("heading", {
-      name: "Home Address",
+      name: "Home address",
       level: 3,
     });
-    this.streetAddressInput = page.getByLabel(/Street Address/i);
+    this.streetAddressInput = page.getByLabel(/Street address/i);
     this.apartmentSuiteInput = page.getByLabel(/Apartment \/ Suite/i);
     this.cityInput = page.getByLabel(/City/i);
     this.stateInput = page.getByLabel(/State/i);
-    this.postalCodeInput = page.getByLabel(/Postal Code/i);
+    this.postalCodeInput = page.getByLabel(/Postal code/i);
     this.streetAddressError = page.getByText(
       "Please enter a valid street address."
     );

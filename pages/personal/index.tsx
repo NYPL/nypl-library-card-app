@@ -1,4 +1,3 @@
-import { Heading } from "@nypl/design-system-react-components";
 import { useEffect } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
@@ -10,6 +9,8 @@ import {
   redirectIfUserHasRegistered,
 } from "../../src/utils/utils";
 import { useRouter } from "next/router";
+import { Paragraph } from "../../src/components/Paragraph";
+import { PageHeading } from "../../src/components/PageHeading";
 
 interface PersonalInformationProps {
   hasUserAlreadyRegistered?: boolean;
@@ -25,8 +26,8 @@ function PersonalInformationPage({
   });
   return (
     <>
-      <Heading level="two">{t("personal.title")}</Heading>
-      <p>{t("internationalInstructions")}</p>
+      <PageHeading autoScrollOnMount>{t("personal.title")}</PageHeading>
+      <Paragraph>{t("internationalInstructions")}</Paragraph>
       <PersonalFormContainer />
     </>
   );

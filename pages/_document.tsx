@@ -7,7 +7,7 @@ import Document, {
   DocumentInitialProps,
 } from "next/document";
 import * as appConfig from "../appConfig";
-const { adobeAnalyticsTag, dsHeader, dsFooter } = appConfig;
+const { dsHeader, dsFooter } = appConfig;
 import newrelic from "newrelic";
 import Script from "next/script";
 
@@ -41,22 +41,7 @@ class MyDocument extends Document<DocumentProps> {
     const { browserTimingHeader } = this.props;
     return (
       <Html lang="en">
-        <Head>
-          {/* <!-- Initial Data Layer Definition --> */}
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.adobeDataLayer = [];
-                const pageName = window.location.pathname.replace("/", "nypl|").replaceAll("/", "|") + window.location.search;
-                window.adobeDataLayer.push({
-                  page_name: pageName,
-                  site_section: "Library Card Application Form"
-                });`,
-            }}
-          />
-          {/* <!-- Tag Manager Library Script --> */}
-          <script src={adobeAnalyticsTag} async></script>
-        </Head>
+        <Head />
         <body>
           <noscript>
             <iframe
