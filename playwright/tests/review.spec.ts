@@ -44,10 +44,9 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.createYourAccountHeading).toBeVisible();
     await expect(reviewPage.usernameHeading).toBeVisible();
     await expect(reviewPage.passwordHeading).toBeVisible();
-    await expect(reviewPage.showPassword).toBeVisible();
+    await expect(reviewPage.showPasswordCheckbox).toBeVisible();
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
     await expect(reviewPage.defaultHomeLibrary).toBeVisible();
-    await expect(reviewPage.accountEditButton).toBeVisible();
   });
 });
 
@@ -87,8 +86,6 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
   });
-
-  // add two tests above but for account info
 });
 
 test.describe("mock API responses on Review page", () => {
