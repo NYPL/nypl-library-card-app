@@ -20,7 +20,8 @@ export const TEST_HOME_ADDRESS: AddressData = {
 export const TEST_CUSTOMIZE_ACCOUNT = {
   username: UNIQUE_USERNAME,
   password: "Test@1234",
-  homeLibrary: "E-Branch",
+  homeLibrary: "eb", // used to confirm dropdown selection
+  defaultLibrary: "E-Branch", // used to confirm text displays on page
 };
 export const TEST_ALTERNATE_ADDRESS: AddressData = {
   street: "476 5th Ave",
