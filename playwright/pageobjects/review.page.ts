@@ -126,8 +126,7 @@ export class ReviewPage {
     });
     this.usernameHeading = page.getByText("Username", { exact: true });
     this.passwordHeading = page.getByText("Password", { exact: true });
-    this.showPasswordCheckbox = page.getByRole("checkbox", {
-      name: "Show password",
+    this.showPasswordCheckbox = page.getByText("Show password", {
       exact: true,
     });
     this.homeLibraryHeading = page.getByText("Home library", { exact: true });

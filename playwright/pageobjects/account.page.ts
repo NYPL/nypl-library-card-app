@@ -17,7 +17,7 @@ export class AccountPage {
   readonly passwordError: Locator;
   readonly verifyPasswordInput: Locator;
   readonly verifyPasswordError: Locator;
-  readonly showPassword: Locator;
+  readonly showPasswordCheckbox: Locator;
   readonly homeLibraryHeading: Locator;
   readonly selectHomeLibrary: Locator;
   readonly cardholderTerms: Locator;
@@ -66,7 +66,7 @@ export class AccountPage {
       exact: true,
     });
     this.verifyPasswordError = page.getByText("The two passwords don't match.");
-    this.showPassword = page.getByText("Show password", {
+    this.showPasswordCheckbox = page.getByText("Show password", {
       exact: true,
     });
     this.homeLibraryHeading = page.getByRole("heading", {
