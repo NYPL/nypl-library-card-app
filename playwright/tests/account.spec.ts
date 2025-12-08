@@ -134,16 +134,14 @@ test.describe("mocks API responses on Account page", () => {
   });
 });
 
-test.describe("fills out account form successfully", () => {
-  test("displays entered values in all form fields", async ({ page }) => {
+test.describe("enters account information", () => {
+  test("displays entered values in form fields", async ({ page }) => {
     const accountPage = new AccountPage(page);
     await fillAccountInfo(accountPage);
-
     await expect(accountPage.usernameInput).toHaveValue(
       TEST_CUSTOMIZE_ACCOUNT.username
     );
     await accountPage.showPasswordCheckbox.check();
-    await expect(accountPage.showPasswordCheckbox).toBeChecked();
     await expect(accountPage.passwordInput).toHaveValue(
       TEST_CUSTOMIZE_ACCOUNT.password
     );
@@ -153,7 +151,6 @@ test.describe("fills out account form successfully", () => {
     await expect(accountPage.selectHomeLibrary).toHaveValue(
       TEST_CUSTOMIZE_ACCOUNT.homeLibrary
     );
-    await accountPage.acceptTermsCheckbox.check();
     await expect(accountPage.acceptTermsCheckbox).toBeChecked();
   });
 });

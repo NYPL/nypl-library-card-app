@@ -19,7 +19,7 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.stepHeading).toBeVisible();
   });
 
-  test("displays Personal information section headings", async ({ page }) => {
+  test("displays Personal Information section", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.personalInfoHeading).toBeVisible();
     await expect(reviewPage.firstNameHeading).toBeVisible();
@@ -29,7 +29,7 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.receiveInfoHeading).toBeVisible();
   });
 
-  test("displays Address section headings", async ({ page }) => {
+  test("displays Address section", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.addressHeading).toBeVisible();
     await expect(reviewPage.streetHeading).toBeVisible();
@@ -40,7 +40,7 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.addressEditButton).toBeEnabled();
   });
 
-  test("displays Create Your Account section headings", async ({ page }) => {
+  test("displays Create Your Account section", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.createYourAccountHeading).toBeVisible();
     await expect(reviewPage.usernameHeading).toBeVisible();
