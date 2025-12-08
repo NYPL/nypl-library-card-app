@@ -91,7 +91,7 @@ test.describe("edits patron information on review page", () => {
   });
 });
 
-test.describe("mock API responses on Review page", () => {
+test.describe("mocks API responses on Review page", () => {
   test("displays username available message", async ({ page }) => {
     // mock the API call for username availability
     await mockUsernameApi(page, USERNAME_AVAILABLE_MESSAGE);
