@@ -112,7 +112,7 @@ test.describe("displays errors for invalid inputs on Account page", () => {
   });
 });
 
-test.describe("mock API responses on Account page", () => {
+test.describe("mocks API responses on Account page", () => {
   test("displays username available message", async ({ page }) => {
     // mock the API call for username availability
     await mockUsernameApi(page, USERNAME_AVAILABLE_MESSAGE);
@@ -132,29 +132,28 @@ test.describe("mock API responses on Account page", () => {
     await accountPage.availableUsernameButton.click();
     await expect(accountPage.unavailableUsernameError).toBeVisible();
   });
+});
 
-  test("verify patron's account info is entered into customize your account form", async ({
-    page,
-  }) => {
+test.describe("fills out account form successfully", () => {
+  test("displays entered values in all form fields", async ({ page }) => {
     const accountPage = new AccountPage(page);
     await fillAccountInfo(accountPage);
+
     await expect(accountPage.usernameInput).toHaveValue(
       TEST_CUSTOMIZE_ACCOUNT.username
     );
-    await expect(accountPage.availableUsernameButton).toBeVisible();
+    await accountPage.showPasswordCheckbox.check();
+    await expect(accountPage.showPasswordCheckbox).toBeChecked();
     await expect(accountPage.passwordInput).toHaveValue(
       TEST_CUSTOMIZE_ACCOUNT.password
     );
     await expect(accountPage.verifyPasswordInput).toHaveValue(
       TEST_CUSTOMIZE_ACCOUNT.password
     );
-
-    await accountPage.showPasswordCheckbox.check();
-    await expect(accountPage.showPasswordCheckbox).toBeChecked();
-    await accountPage.acceptTermsCheckbox.check();
-    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
     await expect(accountPage.selectHomeLibrary).toHaveValue(
       TEST_CUSTOMIZE_ACCOUNT.homeLibrary
     );
+    await accountPage.acceptTermsCheckbox.check();
+    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
   });
 });

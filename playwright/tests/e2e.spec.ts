@@ -120,12 +120,12 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
         pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.username)
       ).toBeVisible();
       await expect(pageManager.reviewPage.showPasswordCheckbox).toBeVisible();
-      await pageManager.reviewPage.showPasswordCheckbox.click();
+      await pageManager.reviewPage.showPasswordCheckbox.check();
       await expect(
         pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.password)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.homeLibrary)
+        pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.defaultLibrary)
       ).toBeVisible();
     });
 

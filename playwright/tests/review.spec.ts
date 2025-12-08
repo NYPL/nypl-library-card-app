@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { ReviewPage } from "../pageobjects/review.page";
 import {
+  TEST_CUSTOMIZE_ACCOUNT,
   TEST_PATRON_INFO,
   USERNAME_AVAILABLE_MESSAGE,
   USERNAME_UNAVAILABLE_MESSAGE,
@@ -46,7 +47,9 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.passwordHeading).toBeVisible();
     await expect(reviewPage.showPasswordCheckbox).toBeVisible();
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
-    await expect(reviewPage.defaultHomeLibrary).toBeVisible();
+    await expect(
+      reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.defaultLibrary)
+    ).toBeVisible();
   });
 });
 
