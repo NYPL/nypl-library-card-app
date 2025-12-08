@@ -40,7 +40,7 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.addressEditButton).toBeEnabled();
   });
 
-  test("displays Create Your Account section", async ({ page }) => {
+  test("displays Account section", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.createYourAccountHeading).toBeVisible();
     await expect(reviewPage.usernameHeading).toBeVisible();

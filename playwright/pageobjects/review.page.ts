@@ -31,15 +31,14 @@ export class ReviewPage {
   readonly locationsLink: Locator;
   readonly createYourAccountHeading: Locator;
   readonly usernameHeading: Locator;
-  readonly usernameInput: Locator;
   readonly showPasswordCheckbox: Locator;
   readonly passwordHeading: Locator;
   readonly homeLibraryHeading: Locator;
   readonly accountEditButton: Locator;
+  readonly usernameInput: Locator;
   readonly availableUsernameButton: Locator;
   readonly availableUsernameMessage: Locator;
   readonly unavailableUsernameError: Locator;
-  readonly acceptTermsCheckbox: Locator;
   readonly submitButton: Locator;
 
   constructor(page: Page) {
@@ -137,9 +136,6 @@ export class ReviewPage {
     this.availableUsernameMessage = page.getByText(USERNAME_AVAILABLE_MESSAGE);
     this.unavailableUsernameError = page.getByText(
       USERNAME_UNAVAILABLE_MESSAGE
-    );
-    this.acceptTermsCheckbox = page.getByText(
-      "Yes, I accept the terms and conditions."
     );
     this.submitButton = page.getByRole("button", {
       name: "Submit",
