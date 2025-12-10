@@ -32,7 +32,7 @@ export class CongratsPage {
       level: 2,
     });
     this.getStartedHeading = page.getByRole("heading", {
-      name: "Get Started with The New York Public Library",
+      name: "Get started with The New York Public Library",
       level: 2,
     });
     this.memberNameHeading = page

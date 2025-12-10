@@ -1,7 +1,7 @@
 /* eslint-disable */
 import {
+  Box,
   Button,
-  ButtonGroup,
   Checkbox,
   Form,
   FormField as DSFormField,
@@ -18,12 +18,10 @@ import { useFormContext } from "react-hook-form";
 import PersonalFormFields from "../PersonalFormFields";
 import AccountFormFields from "../AccountFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
-import styles from "./ReviewFormContainer.module.css";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
-import Loader from "../Loader";
 import FormField from "../FormField";
+import LoadingIndicator from "../LoadingIndicator";
 
-import aaUtils from "../../externals/aaUtils";
 import { createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../../src/context/FormDataContext";
 import {
@@ -33,6 +31,44 @@ import {
 } from "../../../src/utils/formDataUtils";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 import { NRError } from "../../logger/newrelic";
+import { PageSubHeading } from "../PageSubHeading";
+
+const styles = {
+  formSection: {
+    borderTop: "1px solid",
+    borderColor: "ui.gray.medium",
+    marginTop: "l",
+    paddingTop: "l",
+  },
+  container: {
+    display: "flex",
+    flexWrap: "wrap",
+    flexDirection: "row",
+    "@media (max-width: 400px)": {
+      display: "inline-block",
+      width: "100%",
+    },
+  },
+  field: {
+    marginY: "s",
+    marginX: 0,
+    flex: "1 1 100%",
+  },
+  multiField: {
+    marginY: "s",
+    marginX: 0,
+    flex: { base: "1 1 100%", md: "1 1 50%" },
+  },
+  title: {
+    fontWeight: "bold",
+    marginBottom: "xs",
+  },
+  workTitle: {
+    width: "100%",
+    paddingTop: "s",
+  },
+  editButton: { width: { base: "100%", md: "auto" } },
+};
 
 /**
  * ReviewFormContainer
@@ -85,42 +121,55 @@ function ReviewFormContainer({ csrfToken }) {
    * toggling instead of an anchor element. This is for the Personal and the
    * Account sections.
    */
-  const editSectionButton = (editSectionFlag, sectionName, page) =>
-    clientSide ? (
+  const editSectionButton = (editSectionFlag, sectionName, page) => {
+    const label = `${t("button.edit")} ${
+      page === "personal"
+        ? t(`review.section.personal`)
+        : t("review.createAccount")
+    }`;
+    return clientSide ? (
       <Button
-        buttonType="primary"
-        id={`editSectionButton-${sectionName}`}
+        variant="secondary"
+        id={`editSectionButton-${sectionName.replace(/\s+/g, "")}`}
         onClick={() => {
           editSectionFlag(true);
         }}
+        aria-label={label}
+        sx={styles.editButton}
       >
         {t("button.edit")}
       </Button>
     ) : (
       <a
+        aria-label={label}
         href={`/library-card/${page}?${encodeURI(`${queryStr}${queryValues}`)}`}
       >
         {t("button.edit")}
       </a>
     );
+  };
   /**
    * editAddressButton
    * The logic from the `editSectionButton` is the same for this function,
    * except that this component is for the Address section.
    */
-  const editAddressButton = () =>
-    clientSide ? (
+  const editAddressButton = () => {
+    const label = `${t("button.edit")} ${t("review.section.address.label")}`;
+    return clientSide ? (
       <Button
-        buttonType="primary"
+        variant="secondary"
         id="editAddressButton"
         onClick={async () => {
           await router.push(`/location?${queryStr}`);
         }}
+        aria-label={label}
+        sx={styles.editButton}
       >
         {t("button.edit")}
       </Button>
     ) : (
       <a
+        aria-label={label}
         href={`/library-card/location?${encodeURI(
           `${queryStr}${queryValues}`
         )}`}
@@ -128,6 +177,7 @@ function ReviewFormContainer({ csrfToken }) {
         {t("button.edit")}
       </a>
     );
+  };
 
   /**
    * editSectionInfo
@@ -175,14 +225,6 @@ function ReviewFormContainer({ csrfToken }) {
       .then(async (response) => {
         // Update the global state with a successful form submission data.
         dispatch({ type: "SET_FORM_RESULTS", value: response.data });
-
-        // Adobe Analytics
-        aaUtils.trackApplicationSubmitEvent({
-          id: null,
-          lang: formValues.preferredLanguage,
-          locationId: formValues.homeLibraryCode,
-          locationName: findLibraryName(formValues.homeLibraryCode),
-        });
         await router.push(`/congrats?${queryStr}`);
       })
       .catch((error) => {
@@ -222,56 +264,56 @@ function ReviewFormContainer({ csrfToken }) {
    * information form section.
    */
   const renderPersonalInformationValues = () => (
-    <div className={styles.container}>
-      <div className={styles.multiField}>
-        <div className={styles.title}>{t("personal.firstName.label")}</div>
-        <div>{formValues.firstName}</div>
-      </div>
-      <div className={styles.multiField}>
-        <div className={styles.title}>{t("personal.lastName.label")}</div>
-        <div>{formValues.lastName}</div>
-      </div>
-      <div className={styles.field}>
-        <div className={styles.title}>{t("personal.birthdate.label")}</div>
-        <div>{formValues.birthdate}</div>
-      </div>
-      <div className={styles.field}>
-        <div className={styles.title}>{t("personal.email.label")}</div>
-        <div>{formValues.email}</div>
-      </div>
-      <div className={styles.field}>
-        <div className={styles.title}>{t("review.receiveNewsletter")}</div>
-        <div>
+    <Box sx={styles.container}>
+      <Box sx={styles.multiField}>
+        <Box sx={styles.title}>{t("personal.firstName.label")}</Box>
+        <Box>{formValues.firstName}</Box>
+      </Box>
+      <Box sx={styles.multiField}>
+        <Box sx={styles.title}>{t("personal.lastName.label")}</Box>
+        <Box>{formValues.lastName}</Box>
+      </Box>
+      <Box sx={styles.field}>
+        <Box sx={styles.title}>{t("personal.birthdate.label")}</Box>
+        <Box>{formValues.birthdate}</Box>
+      </Box>
+      <Box sx={styles.field}>
+        <Box sx={styles.title}>{t("personal.email.label")}</Box>
+        <Box>{formValues.email}</Box>
+      </Box>
+      <Box sx={styles.field}>
+        <Box sx={styles.title}>{t("review.receiveNewsletter")}</Box>
+        <Box>
           {formValues.ecommunicationsPref ? t("review.yes") : t("review.no")}
-        </div>
-      </div>
+        </Box>
+      </Box>
       {editSectionButton(
         setEditPersonalInfoFlag,
-        "Personal Information",
+        "Personal information",
         "personal"
       )}
-    </div>
+    </Box>
   );
   /**
    * Render a read-only display of all the submitted values from the account
    * form section.
    */
   const renderAccountValues = () => (
-    <div className={styles.container}>
-      <div className={styles.field}>
-        <div className={styles.title}>{t("account.username.label")}</div>
-        <div>{formValues.username}</div>
-      </div>
-      <div className={styles.field}>
-        <div className={styles.title}>{t("account.password.label")}</div>
+    <Box sx={styles.container}>
+      <Box sx={styles.field}>
+        <Box sx={styles.title}>{t("account.username.label")}</Box>
+        <Box>{formValues.username}</Box>
+      </Box>
+      <Box sx={styles.field}>
+        <Box sx={styles.title}>{t("account.password.label")}</Box>
         {/* Only render the toggleable password with javascript enabled. */}
         {clientSide ? (
           <>
-            <div>
+            <Box>
               {showPassword
                 ? formValues.password
                 : "*".repeat(formValues.password?.length)}
-            </div>
+            </Box>
             <Checkbox
               id="showPasswordReview"
               name="showPasswordReview"
@@ -282,33 +324,31 @@ function ReviewFormContainer({ csrfToken }) {
             />
           </>
         ) : (
-          <div>{formValues.password}</div>
+          <Box>{formValues.password}</Box>
         )}
-      </div>
-      <div className={styles.field}>
-        <div className={styles.title}>{t("review.section.homeLibrary")}</div>
-        <div>{findLibraryName(formValues.homeLibraryCode)}</div>
-      </div>
+      </Box>
+      <Box sx={styles.field}>
+        <Box sx={styles.title}>{t("review.section.homeLibrary")}</Box>
+        <Box>{findLibraryName(formValues.homeLibraryCode)}</Box>
+      </Box>
       {editSectionButton(
         setEditAccountInfoFlag,
-        "Create Your Account",
+        "Create your account",
         "account"
       )}
-    </div>
+    </Box>
   );
   /**
    * Render a read-only display of all the submitted values from the location
    * and address form section.
    */
   const renderAddressValues = () => (
-    <div className={styles.container} id="address-section" tabIndex={0}>
+    <Box sx={styles.container} id="address-section">
       {/* If there is no location value, don't render this at all -
           there's nothing to show and will just be confusing. */}
       {formValues.location && (
-        <div className={styles.field}>
-          <div className={styles.title}>
-            {t("review.section.address.location")}
-          </div>
+        <Box sx={styles.field}>
+          <Box sx={styles.title}>{t("review.section.address.location")}</Box>
           <Radio
             className="radio-input"
             id="review-location-id"
@@ -317,87 +357,77 @@ function ReviewFormContainer({ csrfToken }) {
             name={"location"}
             value={formValues.location}
           />
-        </div>
+        </Box>
       )}
       {formValues["work-line1"] && (
-        <Heading level="four">{t("review.section.address.home")}</Heading>
+        <Heading level="h4" size="heading7">
+          {t("review.section.address.home")}
+        </Heading>
       )}
-      <div className={styles.field}>
-        <div className={styles.title}>{t("location.address.line1.label")}</div>
-        <div>{formValues["home-line1"]}</div>
-      </div>
+      <Box sx={styles.field}>
+        <Box sx={styles.title}>{t("location.address.line1.label")}</Box>
+        <Box>{formValues["home-line1"]}</Box>
+      </Box>
       {formValues["home-line2"] && (
-        <div className={styles.field}>
-          <div className={styles.title}>
-            {t("location.address.line2.label")}
-          </div>
-          <div>{formValues["home-line2"]}</div>
-        </div>
+        <Box sx={styles.field}>
+          <Box sx={styles.title}>{t("location.address.line2.label")}</Box>
+          <Box>{formValues["home-line2"]}</Box>
+        </Box>
       )}
-      <div className={styles.multiField}>
-        <div className={styles.title}>{t("location.address.city.label")}</div>
-        <div>{formValues["home-city"]}</div>
-      </div>
-      <div className={styles.multiField}>
-        <div className={styles.title}>{t("location.address.state.label")}</div>
-        <div>{formValues["home-state"]}</div>
-      </div>
-      <div className={styles.field}>
-        <div className={styles.title}>
-          {t("location.address.postalCode.label")}
-        </div>
-        <div>{formValues["home-zip"]}</div>
-      </div>
+      <Box sx={styles.multiField}>
+        <Box sx={styles.title}>{t("location.address.city.label")}</Box>
+        <Box>{formValues["home-city"]}</Box>
+      </Box>
+      <Box sx={styles.multiField}>
+        <Box sx={styles.title}>{t("location.address.state.label")}</Box>
+        <Box>{formValues["home-state"]}</Box>
+      </Box>
+      <Box sx={styles.field}>
+        <Box sx={styles.title}>{t("location.address.postalCode.label")}</Box>
+        <Box>{formValues["home-zip"]}</Box>
+      </Box>
       {formValues["work-line1"] && (
         <>
-          <Heading level="four" className={styles.workTitle}>
+          <Heading level="h4" sx={styles.workTitle} size="heading7">
             {t("review.section.address.work")}
           </Heading>
-          <div className={styles.field}>
-            <div className={styles.title}>
-              {t("location.address.line1.label")}
-            </div>
-            <div>{formValues["work-line1"]}</div>
-          </div>
+          <Box sx={styles.field}>
+            <Box sx={styles.title}>{t("location.address.line1.label")}</Box>
+            <Box>{formValues["work-line1"]}</Box>
+          </Box>
           {formValues["work-line2"] && (
-            <div className={styles.field}>
-              <div className={styles.title}>
-                {t("location.address.line2.label")}
-              </div>
-              <div>{formValues["work-line2"]}</div>
-            </div>
+            <Box sx={styles.field}>
+              <Box sx={styles.title}>{t("location.address.line2.label")}</Box>
+              <Box>{formValues["work-line2"]}</Box>
+            </Box>
           )}
-          <div className={styles.multiField}>
-            <div className={styles.title}>
-              {t("location.address.city.label")}
-            </div>
-            <div>{formValues["work-city"]}</div>
-          </div>
-          <div className={styles.multiField}>
-            <div className={styles.title}>
-              {t("location.address.state.label")}
-            </div>
-            <div>{formValues["work-state"]}</div>
-          </div>
-          <div className={styles.field}>
-            <div className={styles.title}>
+          <Box sx={styles.multiField}>
+            <Box sx={styles.title}>{t("location.address.city.label")}</Box>
+            <Box>{formValues["work-city"]}</Box>
+          </Box>
+          <Box sx={styles.multiField}>
+            <Box sx={styles.title}>{t("location.address.state.label")}</Box>
+            <Box>{formValues["work-state"]}</Box>
+          </Box>
+          <Box sx={styles.field}>
+            <Box sx={styles.title}>
               {t("location.address.postalCode.label")}
-            </div>
-            <div>{formValues["work-zip"]}</div>
-          </div>
+            </Box>
+            <Box>{formValues["work-zip"]}</Box>
+          </Box>
         </>
       )}
 
       {editAddressButton()}
-    </div>
+    </Box>
   );
 
   return (
     <>
-      <Loader isLoading={isLoading} />
+      <LoadingIndicator isLoading={isLoading} />
 
-      <div className={styles.formSection}>
-        <Heading level="three">{t("review.section.personal")}</Heading>
+      <Box sx={styles.formSection}>
+        <PageSubHeading mb="s">{t("review.section.personal")}</PageSubHeading>
         {!editPersonalInfoFlag ? (
           renderPersonalInformationValues()
         ) : (
@@ -410,15 +440,17 @@ function ReviewFormContainer({ csrfToken }) {
             <PersonalFormFields />
           </Form>
         )}
-      </div>
+      </Box>
 
-      <div className={styles.formSection}>
-        <Heading level="three">{t("review.section.address.label")}</Heading>
+      <Box sx={styles.formSection}>
+        <PageSubHeading mb="s">
+          {t("review.section.address.label")}
+        </PageSubHeading>
         {renderAddressValues()}
-      </div>
+      </Box>
 
-      <div className={styles.formSection}>
-        <Heading level="three">{t("review.createAccount")}</Heading>
+      <Box sx={styles.formSection}>
+        <PageSubHeading mb="s">{t("review.createAccount")}</PageSubHeading>
         {!editAccountInfoFlag ? (
           renderAccountValues()
         ) : (
@@ -436,9 +468,9 @@ function ReviewFormContainer({ csrfToken }) {
             <AcceptTermsFormFields />
           </Form>
         )}
-      </div>
+      </Box>
 
-      <div className={styles.formSection}>{t("review.nextStep")}</div>
+      <Box sx={styles.formSection}>{t("review.nextStep")}</Box>
 
       <Form
         // action="/library-card/api/submit"

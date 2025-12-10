@@ -30,16 +30,18 @@ describe("createAnchorText", () => {
   });
 
   test("it should replace text in the error message with its equivalent anchor element string", () => {
-    expect(errorMessages.firstName).toEqual("Please enter a valid first name.");
+    expect(errorMessages.firstName).toEqual(
+      "There was a problem. Please enter a valid first name."
+    );
     expect(errorMessages.acceptTerms).toEqual(
-      "The Terms and Conditions must be checked."
+      "There was a problem. The Terms and Conditions must be checked."
     );
 
     expect(createAnchorText("firstName", errors)).toEqual(
-      'Please enter a valid <a href="#input-firstName">first name</a>.'
+      'There was a problem. Please enter a valid <a href="#input-firstName">first name</a>.'
     );
     expect(createAnchorText("acceptTerms", errors)).toEqual(
-      'The <a href="#input-acceptTerms">Terms and Conditions</a> must be checked.'
+      'There was a problem. The <a href="#input-acceptTerms">Terms and Conditions</a> must be checked.'
     );
   });
 
@@ -47,19 +49,19 @@ describe("createAnchorText", () => {
     const home = createAnchorText("line1", errors, "home");
     const work = createAnchorText("line1", errors, "work");
     expect(home).toEqual(
-      'Please enter a valid home <a href="#address-section">street address</a>.'
+      'There was a problem. Please enter a valid home <a href="#address-section">street address</a>.'
     );
     expect(work).toEqual(
-      'Please enter a valid work <a href="#address-section">street address</a>.'
+      'There was a problem. Please enter a valid work <a href="#address-section">street address</a>.'
     );
   });
 
   test("it should return the same hash href for all address related errors", () => {
     expect(createAnchorText("line1", errors, "home")).toEqual(
-      'Please enter a valid home <a href="#address-section">street address</a>.'
+      'There was a problem. Please enter a valid home <a href="#address-section">street address</a>.'
     );
     expect(createAnchorText("state", errors, "work")).toEqual(
-      'Please enter a 2-character work <a href="#address-section">state</a> abbreviation.'
+      'There was a problem. Please enter a 2-character work <a href="#address-section">state</a> abbreviation.'
     );
   });
 });
@@ -102,21 +104,21 @@ describe("renderErrorElements", () => {
           key="firstName"
           dangerouslySetInnerHTML={{
             __html:
-              'Please enter a valid <a href="#input-firstName">first name</a>.',
+              'There was a problem. Please enter a valid <a href="#input-firstName">first name</a>.',
           }}
         />,
         <li
           key="password"
           dangerouslySetInnerHTML={{
             __html:
-              'Your <a href="#input-password">password</a> must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)',
+              'There was a problem. Your <a href="#input-password">password</a> must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)',
           }}
         />,
         <li
           key="home-state"
           dangerouslySetInnerHTML={{
             __html:
-              'Please enter a 2-character home <a href="#address-section">state</a> abbreviation.',
+              'There was a problem. Please enter a 2-character home <a href="#address-section">state</a> abbreviation.',
           }}
         />,
       ])
