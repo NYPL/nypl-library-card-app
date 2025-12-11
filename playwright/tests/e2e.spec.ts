@@ -8,13 +8,14 @@ import {
 } from "../utils/form-helper";
 import {
   TEST_ALTERNATE_ADDRESS,
+  TEST_CUSTOMIZE_ACCOUNT,
   TEST_HOME_ADDRESS,
   TEST_PATRON_INFO,
 } from "../utils/constants";
 
 import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 
-test.describe("Full User Journey with Sierra API Integration", () => {
+test.describe("E2E: Complete application with Sierra API integration", () => {
   let scrapedBarcode: string | null = null;
 
   test.afterAll("patron deletion", async () => {
@@ -30,10 +31,10 @@ test.describe("Full User Journey with Sierra API Integration", () => {
       }
     }
   });
-  test("displays patron information on review page", async ({ page }) => {
+
+  test("displays patron information on congrats page", async ({ page }) => {
     const pageManager = new PageManager(page);
 
-    // fill out and submit each form page to reach review page
     await test.step("enters personal information", async () => {
       await page.goto("/library-card/personal?newCard=true");
       await fillPersonalInfo(pageManager.personalPage);
@@ -114,7 +115,21 @@ test.describe("Full User Journey with Sierra API Integration", () => {
       ).toBeVisible();
     });
 
-    await test.step("displays Congrats page", async () => {
+    await test.step("displays account information on review page", async () => {
+      await expect(
+        pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.username)
+      ).toBeVisible();
+      await expect(pageManager.reviewPage.showPasswordCheckbox).toBeVisible();
+      await pageManager.reviewPage.showPasswordCheckbox.check();
+      await expect(
+        pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.password)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.defaultLibrary)
+      ).toBeVisible();
+    });
+
+    await test.step("submits application", async () => {
       await pageManager.reviewPage.submitButton.click();
       await expect(pageManager.congratsPage.stepHeading).toBeVisible();
     });

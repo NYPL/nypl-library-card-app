@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { ReviewPage } from "../pageobjects/review.page";
 import {
+  TEST_CUSTOMIZE_ACCOUNT,
   TEST_PATRON_INFO,
   USERNAME_AVAILABLE_MESSAGE,
   USERNAME_UNAVAILABLE_MESSAGE,
@@ -18,7 +19,7 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.stepHeading).toBeVisible();
   });
 
-  test("displays Personal information section headings", async ({ page }) => {
+  test("displays Personal Information section", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.personalInfoHeading).toBeVisible();
     await expect(reviewPage.firstNameHeading).toBeVisible();
@@ -28,7 +29,7 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.receiveInfoHeading).toBeVisible();
   });
 
-  test("displays Address section headings", async ({ page }) => {
+  test("displays Address section", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.addressHeading).toBeVisible();
     await expect(reviewPage.streetHeading).toBeVisible();
@@ -37,6 +38,18 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.postalCodeHeading).toBeVisible();
     await expect(reviewPage.addressEditButton).toBeVisible();
     await expect(reviewPage.addressEditButton).toBeEnabled();
+  });
+
+  test("displays Account section", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await expect(reviewPage.createYourAccountHeading).toBeVisible();
+    await expect(reviewPage.usernameHeading).toBeVisible();
+    await expect(reviewPage.passwordHeading).toBeVisible();
+    await expect(reviewPage.showPasswordCheckbox).toBeVisible();
+    await expect(reviewPage.homeLibraryHeading).toBeVisible();
+    await expect(
+      reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.defaultLibrary)
+    ).toBeVisible();
   });
 });
 
@@ -76,27 +89,15 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
   });
-
-  test("displays Create your account section headings", async ({ page }) => {
-    const reviewPage = new ReviewPage(page);
-    await expect(reviewPage.createYourAccountHeading).toBeVisible();
-    await expect(reviewPage.usernameHeading).toBeVisible();
-    await expect(reviewPage.passwordHeading).toBeVisible();
-    await expect(reviewPage.showPassword).toBeVisible();
-    await expect(reviewPage.homeLibraryHeading).toBeVisible();
-    await expect(reviewPage.ebranchValue).toBeVisible();
-    await expect(reviewPage.createYourAccountEditButton).toBeVisible();
-    await expect(reviewPage.submitButton).toBeVisible();
-  });
 });
 
-test.describe("mock API responses on Review page", () => {
+test.describe("mocks API responses on Review page", () => {
   test("displays username available message", async ({ page }) => {
     // mock the API call for username availability
     await mockUsernameApi(page, USERNAME_AVAILABLE_MESSAGE);
 
     const reviewPage = new ReviewPage(page);
-    await reviewPage.createYourAccountEditButton.click();
+    await reviewPage.accountEditButton.click();
     await reviewPage.usernameInput.fill("AvailableUsername");
     await reviewPage.availableUsernameButton.click();
     await expect(reviewPage.availableUsernameMessage).toBeVisible();
@@ -107,7 +108,7 @@ test.describe("mock API responses on Review page", () => {
     await mockUsernameApi(page, USERNAME_UNAVAILABLE_MESSAGE);
 
     const reviewPage = new ReviewPage(page);
-    await reviewPage.createYourAccountEditButton.click();
+    await reviewPage.accountEditButton.click();
     await reviewPage.usernameInput.fill("UnavailableUsername");
     await reviewPage.availableUsernameButton.click();
     await expect(reviewPage.unavailableUsernameError).toBeVisible();

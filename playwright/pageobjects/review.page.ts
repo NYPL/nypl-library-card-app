@@ -31,17 +31,15 @@ export class ReviewPage {
   readonly locationsLink: Locator;
   readonly createYourAccountHeading: Locator;
   readonly usernameHeading: Locator;
-  readonly showPassword: Locator;
+  readonly showPasswordCheckbox: Locator;
   readonly passwordHeading: Locator;
   readonly homeLibraryHeading: Locator;
-  readonly ebranchValue: Locator;
-  readonly createYourAccountEditButton: Locator;
+  readonly accountEditButton: Locator;
   readonly usernameInput: Locator;
   readonly availableUsernameButton: Locator;
   readonly availableUsernameMessage: Locator;
   readonly unavailableUsernameError: Locator;
   readonly submitButton: Locator;
-  readonly formSubmissionUserNameError: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -119,10 +117,11 @@ export class ReviewPage {
     });
     this.usernameHeading = page.getByText("Username", { exact: true });
     this.passwordHeading = page.getByText("Password", { exact: true });
-    this.showPassword = page.getByText("Show password", { exact: true });
+    this.showPasswordCheckbox = page.getByText("Show password", {
+      exact: true,
+    });
     this.homeLibraryHeading = page.getByText("Home library", { exact: true });
-    this.ebranchValue = page.getByText("E-Branch", { exact: true });
-    this.createYourAccountEditButton = page.getByRole("button", {
+    this.accountEditButton = page.getByRole("button", {
       name: "Edit Create your account",
       exact: true,
     });
@@ -141,9 +140,6 @@ export class ReviewPage {
     this.submitButton = page.getByRole("button", {
       name: "Submit",
       exact: true,
-    });
-    this.formSubmissionUserNameError = page.getByRole("heading", {
-      name: "Form submission error",
     });
   }
 
