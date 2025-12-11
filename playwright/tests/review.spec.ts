@@ -89,6 +89,13 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
   });
+
+  test("displays editable Account section", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await expect(reviewPage.accountEditButton).toBeVisible();
+    await reviewPage.accountEditButton.click();
+    await expect(reviewPage.usernameInput).toBeVisible();
+  });
 });
 
 test.describe("mocks API responses on Review page", () => {
