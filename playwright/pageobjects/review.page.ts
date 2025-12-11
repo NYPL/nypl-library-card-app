@@ -165,10 +165,12 @@ export class ReviewPage {
       name: "Privacy Policy",
       exact: true,
     });
-    this.acceptTermsCheckbox = page.getByRole("checkbox", {
-      name: "Yes, I accept the terms and conditions.",
-      exact: true,
-    });
+    this.acceptTermsCheckbox = page.getByText(
+      "Yes, I accept the terms and conditions.",
+      {
+        exact: true,
+      }
+    );
     this.submitButton = page.getByRole("button", {
       name: "Submit",
       exact: true,
