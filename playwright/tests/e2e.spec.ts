@@ -137,12 +137,20 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await pageManager.reviewPage.submitButton.click();
     });
 
-    await test.step("retrieves barcode from congrats page", async () => {
+    await test.step("displays generated library card on congrats page", async () => {
+      const fullName = `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`;
       await expect(pageManager.congratsPage.stepHeading).toBeVisible();
+      await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
+      await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
+      await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
+      await expect(pageManager.congratsPage.issuedDate).toBeVisible();
       await expect(pageManager.congratsPage.displayBarcodeNumber).toBeVisible();
       await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
         pageManager.congratsPage.EXPECTED_BARCODE_PREFIX
       );
+    });
+
+    await test.step("retrieves barcode from congrats page", async () => {
       scrapedBarcode =
         await pageManager.congratsPage.displayBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();
