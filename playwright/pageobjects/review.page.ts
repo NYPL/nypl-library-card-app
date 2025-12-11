@@ -39,6 +39,13 @@ export class ReviewPage {
   readonly availableUsernameButton: Locator;
   readonly availableUsernameMessage: Locator;
   readonly unavailableUsernameError: Locator;
+  readonly passwordInput: Locator;
+  readonly verifyPasswordInput: Locator;
+  readonly selectHomeLibrary: Locator;
+  readonly cardholderTermsLink: Locator;
+  readonly rulesRegulationsLink: Locator;
+  readonly privacyPolicyLink: Locator;
+  readonly acceptTermsCheckbox: Locator;
   readonly submitButton: Locator;
 
   constructor(page: Page) {
@@ -137,6 +144,31 @@ export class ReviewPage {
     this.unavailableUsernameError = page.getByText(
       USERNAME_UNAVAILABLE_MESSAGE
     );
+    this.passwordInput = page.getByRole("textbox", {
+      name: "Password (required)",
+      exact: true,
+    });
+    this.verifyPasswordInput = page.getByRole("textbox", {
+      name: "Verify password (required)",
+      exact: true,
+    });
+    this.selectHomeLibrary = page.getByLabel("Select a home library:");
+    this.cardholderTermsLink = page.getByRole("link", {
+      name: "Cardholder Terms and Conditions",
+      exact: true,
+    });
+    this.rulesRegulationsLink = page.getByRole("link", {
+      name: "Rules and Regulations",
+      exact: true,
+    });
+    this.privacyPolicyLink = page.locator("#mainContent").getByRole("link", {
+      name: "Privacy Policy",
+      exact: true,
+    });
+    this.acceptTermsCheckbox = page.getByRole("checkbox", {
+      name: "Yes, I accept the terms and conditions.",
+      exact: true,
+    });
     this.submitButton = page.getByRole("button", {
       name: "Submit",
       exact: true,

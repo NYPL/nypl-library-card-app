@@ -95,6 +95,14 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.accountEditButton).toBeVisible();
     await reviewPage.accountEditButton.click();
     await expect(reviewPage.usernameInput).toBeVisible();
+    await expect(reviewPage.passwordInput).toBeVisible();
+    await expect(reviewPage.verifyPasswordInput).toBeVisible();
+    await expect(reviewPage.showPasswordCheckbox).toBeVisible();
+    await expect(reviewPage.selectHomeLibrary).toBeVisible();
+    await expect(reviewPage.cardholderTermsLink).toBeVisible();
+    await expect(reviewPage.rulesRegulationsLink).toBeVisible();
+    await expect(reviewPage.privacyPolicyLink).toBeVisible();
+    await expect(reviewPage.acceptTermsCheckbox).toBeVisible();
   });
 });
 
