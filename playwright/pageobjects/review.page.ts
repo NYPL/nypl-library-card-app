@@ -84,11 +84,11 @@ export class ReviewPage {
     this.postalCodeHeading = page.getByText("Postal code", { exact: true });
 
     // options for address edit button
-    // this.addressEditButton = page.getByRole("button", {
-    //   name: "Edit Address",
-    //   exact: true,
-    // });
-    this.addressEditButton = page.getByLabel("Edit Address", { exact: true });
+    this.addressEditButton = page.getByRole("button", {
+       name: "Edit Address",
+       exact: true,
+    });
+    // this.addressEditButton = page.getByLabel("Edit Address", { exact: true });
     // this.addressEditButton = page.locator("#editAddressButton");
 
     this.editPersonalInfoButton = page
