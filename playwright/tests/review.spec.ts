@@ -90,6 +90,13 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
   });
 
+  test("navigates to Address page", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await expect(reviewPage.addressEditButton).toBeVisible();
+    await reviewPage.addressEditButton.click();
+    await expect(page).toHaveURL("/library-card/location?&newCard=true"); // sufficient?
+  });
+
   test("displays editable Account section", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.accountEditButton).toBeVisible();
