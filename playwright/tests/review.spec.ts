@@ -89,6 +89,49 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
   });
+
+  test("displays editable Account section", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await expect(reviewPage.accountEditButton).toBeVisible();
+    await reviewPage.accountEditButton.click();
+    await expect(reviewPage.usernameInput).toBeVisible();
+    await expect(reviewPage.passwordInput).toBeVisible();
+    await expect(reviewPage.verifyPasswordInput).toBeVisible();
+    await expect(reviewPage.showPasswordCheckbox).toBeVisible();
+    await expect(reviewPage.selectHomeLibrary).toBeVisible();
+    await expect(reviewPage.cardholderTermsLink).toBeVisible();
+    await expect(reviewPage.rulesRegulationsLink).toBeVisible();
+    await expect(reviewPage.privacyPolicyLink).toBeVisible();
+    await expect(reviewPage.acceptTermsCheckbox).toBeVisible();
+  });
+
+  // does not replace account info since there's no existing text
+  test("enters Account information", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.accountEditButton.click();
+    await reviewPage.usernameInput.fill(TEST_CUSTOMIZE_ACCOUNT.username);
+    await reviewPage.passwordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
+    await reviewPage.verifyPasswordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
+    await reviewPage.selectHomeLibrary.selectOption(
+      TEST_CUSTOMIZE_ACCOUNT.homeLibrary
+    );
+    await reviewPage.acceptTermsCheckbox.check();
+
+    await expect(reviewPage.usernameInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.username
+    );
+    await reviewPage.showPasswordCheckbox.check();
+    await expect(reviewPage.passwordInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.password
+    );
+    await expect(reviewPage.verifyPasswordInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.password
+    );
+    await expect(reviewPage.selectHomeLibrary).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.homeLibrary
+    );
+    await expect(reviewPage.acceptTermsCheckbox).toBeChecked();
+  });
 });
 
 test.describe("mocks API responses on Review page", () => {
