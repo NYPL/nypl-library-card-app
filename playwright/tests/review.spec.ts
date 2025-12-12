@@ -7,6 +7,7 @@ import {
   USERNAME_UNAVAILABLE_MESSAGE,
 } from "../utils/constants";
 import { mockUsernameApi } from "../utils/mock-api";
+// import { AddressPage } from "../pageobjects/address.page";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/review?newCard=true");
@@ -88,6 +89,65 @@ test.describe("edits patron information on review page", () => {
     );
     await expect(reviewPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
+  });
+
+  test("navigates to Address page", async ({ page }) => {
+    test.step("clicks Edit button in Address section", async () => {
+      const reviewPage = new ReviewPage(page);
+      // await expect(reviewPage.stepHeading).toBeVisible();
+      await expect(reviewPage.addressEditButton).toBeVisible();
+      // await expect(reviewPage.addressEditButton).toBeEnabled();
+      await reviewPage.addressEditButton.click({ timeout: 20000 });
+      await expect(page).toHaveURL("/library-card/location?newCard=true");
+    });
+
+    // test.step("verifies Address page elements", async () => {
+    //   const addressPage = new AddressPage(page);
+    //   await expect(addressPage.stepHeading).toBeVisible();
+    // });
+  });
+
+  test("displays editable Account section", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await expect(reviewPage.accountEditButton).toBeVisible();
+    await reviewPage.accountEditButton.click();
+    await expect(reviewPage.usernameInput).toBeVisible();
+    await expect(reviewPage.passwordInput).toBeVisible();
+    await expect(reviewPage.verifyPasswordInput).toBeVisible();
+    await expect(reviewPage.showPasswordCheckbox).toBeVisible();
+    await expect(reviewPage.selectHomeLibrary).toBeVisible();
+    await expect(reviewPage.cardholderTermsLink).toBeVisible();
+    await expect(reviewPage.rulesRegulationsLink).toBeVisible();
+    await expect(reviewPage.privacyPolicyLink).toBeVisible();
+    await expect(reviewPage.acceptTermsCheckbox).toBeVisible();
+  });
+
+  // does not replace account info since there's no existing text
+  test("enters Account information", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.accountEditButton.click();
+    await reviewPage.usernameInput.fill(TEST_CUSTOMIZE_ACCOUNT.username);
+    await reviewPage.passwordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
+    await reviewPage.verifyPasswordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
+    await reviewPage.selectHomeLibrary.selectOption(
+      TEST_CUSTOMIZE_ACCOUNT.homeLibrary
+    );
+    await reviewPage.acceptTermsCheckbox.check();
+
+    await expect(reviewPage.usernameInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.username
+    );
+    await reviewPage.showPasswordCheckbox.check();
+    await expect(reviewPage.passwordInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.password
+    );
+    await expect(reviewPage.verifyPasswordInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.password
+    );
+    await expect(reviewPage.selectHomeLibrary).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.homeLibrary
+    );
+    await expect(reviewPage.acceptTermsCheckbox).toBeChecked();
   });
 });
 
