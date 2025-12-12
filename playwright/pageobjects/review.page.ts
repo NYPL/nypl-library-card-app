@@ -88,8 +88,8 @@ export class ReviewPage {
     //   name: "Edit Address",
     //   exact: true,
     // });
-    // this.addressEditButton = page.getByLabel("Edit Address", { exact: true });
-    this.addressEditButton = page.locator("#editAddressButton");
+    this.addressEditButton = page.getByLabel("Edit Address", { exact: true });
+    // this.addressEditButton = page.locator("#editAddressButton");
 
     this.editPersonalInfoButton = page
       .getByRole("button", {
