@@ -92,7 +92,7 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
   });
 
-  test("navigates to Address page", async ({ page }) => {
+  test("clicks edit button and navigates to Address page", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.editAddressButton).toBeVisible();
     await reviewPage.editAddressButton.click();
