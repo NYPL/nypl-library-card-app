@@ -51,7 +51,7 @@ export class ReviewPage {
   readonly rulesRegulationsLink: Locator;
   readonly privacyPolicyLink: Locator;
   readonly acceptTermsCheckbox: Locator;
-  readonly accountEditButton: Locator;
+  readonly editAccountButton: Locator;
   readonly submitButton: Locator;
 
   constructor(page: Page) {
@@ -180,7 +180,7 @@ export class ReviewPage {
         exact: true,
       }
     );
-    this.accountEditButton = page.getByRole("button", {
+    this.editAccountButton = page.getByRole("button", {
       name: "Edit Create your account",
       exact: true,
     });

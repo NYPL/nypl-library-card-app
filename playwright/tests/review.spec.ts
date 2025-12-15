@@ -8,6 +8,7 @@ import {
 } from "../utils/constants";
 import { mockUsernameApi } from "../utils/mock-api";
 import { AddressPage } from "../pageobjects/address.page";
+// import { fillPersonalInfo } from "../utils/form-helper";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/review?newCard=true");
@@ -28,6 +29,7 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.dateOfBirthHeading).toBeVisible();
     await expect(reviewPage.emailHeading).toBeVisible();
     await expect(reviewPage.receiveInfoHeading).toBeVisible();
+    await expect(reviewPage.receiveInfoChoice).toBeVisible();
   });
 
   test("displays Address section", async ({ page }) => {
@@ -37,8 +39,6 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.cityHeading).toBeVisible();
     await expect(reviewPage.stateHeading).toBeVisible();
     await expect(reviewPage.postalCodeHeading).toBeVisible();
-    await expect(reviewPage.addressEditButton).toBeVisible();
-    await expect(reviewPage.addressEditButton).toBeEnabled();
   });
 
   test("displays Account section", async ({ page }) => {
@@ -72,11 +72,12 @@ test.describe("edits patron information on review page", () => {
   test("enters Personal information", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editPersonalInfoButton.click();
+    // await fillPersonalInfo(reviewPage);
     await reviewPage.firstNameInput.fill(TEST_PATRON_INFO.firstName);
     await reviewPage.lastNameInput.fill(TEST_PATRON_INFO.lastName);
     await reviewPage.dateOfBirthInput.fill(TEST_PATRON_INFO.dateOfBirth);
     await reviewPage.emailInput.fill(TEST_PATRON_INFO.email);
-    await reviewPage.receiveInfoCheckbox.click();
+    await reviewPage.receiveInfoCheckbox.check();
 
     await expect(reviewPage.firstNameInput).toHaveValue(
       TEST_PATRON_INFO.firstName
@@ -93,9 +94,8 @@ test.describe("edits patron information on review page", () => {
 
   test("navigates to Address page", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
-    await expect(reviewPage.addressEditButton).toBeVisible();
-    await reviewPage.addressEditButton.click();
-
+    await expect(reviewPage.editAddressButton).toBeVisible();
+    await reviewPage.editAddressButton.click();
     await page.waitForURL(/\/location/);
 
     const addressPage = new AddressPage(page);
@@ -104,8 +104,8 @@ test.describe("edits patron information on review page", () => {
 
   test("displays editable Account section", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
-    await expect(reviewPage.accountEditButton).toBeVisible();
-    await reviewPage.accountEditButton.click();
+    await expect(reviewPage.editAccountButton).toBeVisible();
+    await reviewPage.editAccountButton.click();
     await expect(reviewPage.usernameInput).toBeVisible();
     await expect(reviewPage.passwordInput).toBeVisible();
     await expect(reviewPage.verifyPasswordInput).toBeVisible();
@@ -120,7 +120,7 @@ test.describe("edits patron information on review page", () => {
   // does not replace account info since there's no existing text
   test("enters Account information", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
-    await reviewPage.accountEditButton.click();
+    await reviewPage.editAccountButton.click();
     await reviewPage.usernameInput.fill(TEST_CUSTOMIZE_ACCOUNT.username);
     await reviewPage.passwordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
     await reviewPage.verifyPasswordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
@@ -152,7 +152,7 @@ test.describe("mocks API responses on Review page", () => {
     await mockUsernameApi(page, USERNAME_AVAILABLE_MESSAGE);
 
     const reviewPage = new ReviewPage(page);
-    await reviewPage.accountEditButton.click();
+    await reviewPage.editAccountButton.click();
     await reviewPage.usernameInput.fill("AvailableUsername");
     await reviewPage.availableUsernameButton.click();
     await expect(reviewPage.availableUsernameMessage).toBeVisible();
@@ -163,7 +163,7 @@ test.describe("mocks API responses on Review page", () => {
     await mockUsernameApi(page, USERNAME_UNAVAILABLE_MESSAGE);
 
     const reviewPage = new ReviewPage(page);
-    await reviewPage.accountEditButton.click();
+    await reviewPage.editAccountButton.click();
     await reviewPage.usernameInput.fill("UnavailableUsername");
     await reviewPage.availableUsernameButton.click();
     await expect(reviewPage.unavailableUsernameError).toBeVisible();
