@@ -85,9 +85,8 @@ export class ReviewPage {
 
     // options for address edit button
     this.addressEditButton = page.getByRole("button", {
-       name: "Edit",
-       exact: true,
-    }).nth(1);
+      name: "Edit Address",
+    });
     // this.addressEditButton = page.getByLabel("Edit Address", { exact: true });
     // this.addressEditButton = page.locator("#editAddressButton");
 
