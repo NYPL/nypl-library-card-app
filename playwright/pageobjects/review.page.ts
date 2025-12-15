@@ -108,12 +108,10 @@ export class ReviewPage {
       name: "locations",
       exact: true,
     });
-    this.editPersonalInfoButton = page
-      .getByRole("button", {
-        name: "Edit Personal information",
-        exact: true,
-      })
-      .first();
+    this.editPersonalInfoButton = page.getByRole("button", {
+      name: "Edit Personal information",
+      exact: true,
+    });
 
     // Address section
     this.addressHeading = page.getByRole("heading", {
