@@ -61,7 +61,7 @@ const IPLocationAPI = () => {
       .then((response) => {
         // Successful call but no response was returned.
         if (!response.data.type) {
-          logger.warn("IP Stack returned no data.");
+          logger.warning("IP Stack returned no data.");
           return null;
         }
         // The API returned an invalid request error response. It returns this
@@ -140,15 +140,17 @@ const IPLocationAPI = () => {
     const ipAddress: string = requestIp.getClientIp(ctx.req);
 
     if (!ipAddress) {
-      logger.warn(`No IP address found in request. ${ipAddress}`);
+      logger.warning(`No IP address found in request. ${ipAddress}`);
       return "";
     }
+
+    logger.info(`Checking IP address: ${ipAddress}`);
 
     // This is specifically calling IP Stack but any other API can
     // be used here instead.
     const locationResponse = await callIpStackAPI(ipAddress);
     if (!locationResponse) {
-      logger.warn(
+      logger.warning(
         `No location response from IP Stack API for IP: ${ipAddress}`
       );
       return "";
@@ -164,7 +166,7 @@ const IPLocationAPI = () => {
     // accurate location in a string form.
     const userLocation = getLocationString(userLocationObject);
 
-    logger.info(`User location from IP Stack: ${userLocation}`);
+    logger.info(`Returning User location from IP Stack: ${userLocation}`);
     return userLocation;
   };
 

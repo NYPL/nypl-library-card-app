@@ -85,6 +85,7 @@ const consoleTransport = new Console({
 const loggerTransports: winston.transport[] = [consoleTransport];
 
 if (process.env.NODE_ENV !== "test" && !process.env.NEXT_PUBLIC_VERCEL_BUILD) {
+  console.info("Logging to file enabled.");
   // The transport function that logs to a file.
   loggerTransports.push(
     new File({
