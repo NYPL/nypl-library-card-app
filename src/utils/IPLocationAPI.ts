@@ -3,6 +3,7 @@ import requestIp from "request-ip";
 import axios from "axios";
 import * as appConfig from "../../appConfig";
 import { LocationResponse } from "../interfaces";
+import logger from "../logger";
 
 interface LocationPoint {
   lat: number;
@@ -60,19 +61,24 @@ const IPLocationAPI = () => {
       .then((response) => {
         // Successful call but no response was returned.
         if (!response.data.type) {
+          logger.warn("IP Stack returned no data.");
           return null;
         }
         // The API returned an invalid request error response. It returns this
         // instead of returning 404s.
         if (response.data?.success === false) {
-          console.log("IP Stack error. Returning `null`.");
+          logger.error("IP Stack error. Returning `null`.");
+          logger.error(`Error info: ${response.data?.error.info}`);
           console.log(`Error info: ${response.data?.error.info}`);
           return null;
         }
         return response.data;
       })
       .catch((error) => {
-        console.log(`There was an error with the API: ${error.response}`);
+        console.log(
+          `There was an error with the IP Stack API: ${error.response}`
+        );
+        logger.error(`There was an error with the IP Stack API: ${error}`);
         return null;
       });
   };
@@ -130,23 +136,35 @@ const IPLocationAPI = () => {
    * app-friendly object.
    */
   const getLocationFromIP = async (ctx: NextPageContext): Promise<string> => {
+    logger.info("Getting location from IP");
     const ipAddress: string = requestIp.getClientIp(ctx.req);
-    let userLocation = "";
 
-    if (ipAddress) {
-      // This is specifically calling IP Stack but any other API can
-      // be used here instead.
-      const locationResponse = await callIpStackAPI(ipAddress);
-      // We received a valid response from the IP/geolocation API but let's
-      // condense the response and check that the user is in NYC/NYS.
-      if (locationResponse) {
-        const userLocationObject = verifyLocation(locationResponse);
-        // From the responses of where the user is, get the most
-        // accurate location in a string form.
-        userLocation = getLocationString(userLocationObject);
-      }
+    if (!ipAddress) {
+      logger.warn(`No IP address found in request. ${ipAddress}`);
+      return "";
     }
 
+    // This is specifically calling IP Stack but any other API can
+    // be used here instead.
+    const locationResponse = await callIpStackAPI(ipAddress);
+    if (!locationResponse) {
+      logger.warn(
+        `No location response from IP Stack API for IP: ${ipAddress}`
+      );
+      return "";
+    }
+
+    logger.info("Received location response from IP Stack API");
+    logger.info(locationResponse);
+
+    // We received a valid response from the IP/geolocation API but let's
+    // condense the response and check that the user is in NYC/NYS.
+    const userLocationObject = verifyLocation(locationResponse);
+    // From the responses of where the user is, get the most
+    // accurate location in a string form.
+    const userLocation = getLocationString(userLocationObject);
+
+    logger.info(`User location from IP Stack: ${userLocation}`);
     return userLocation;
   };
 
