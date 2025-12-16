@@ -70,9 +70,9 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.lastNameInput).toBeVisible();
     await expect(reviewPage.dateOfBirthInput).toBeVisible();
     await expect(reviewPage.emailInput).toBeVisible();
-    await expect(reviewPage.receiveInfoCheckbox).toBeVisible();
     await expect(reviewPage.alternateFormLink).toBeVisible();
     await expect(reviewPage.locationsLink).toBeVisible();
+    await expect(reviewPage.receiveInfoCheckbox).toBeVisible();
   });
 
   // does not replace personal info since there's no existing text
@@ -161,13 +161,7 @@ test.describe("edits patron information on review page", () => {
   test("enters Account information", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
-    await reviewPage.usernameInput.fill(TEST_CUSTOMIZE_ACCOUNT.username);
-    await reviewPage.passwordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
-    await reviewPage.verifyPasswordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
-    await reviewPage.selectHomeLibrary.selectOption(
-      TEST_CUSTOMIZE_ACCOUNT.homeLibrary
-    );
-    await reviewPage.acceptTermsCheckbox.check();
+    await fillAccountInfo(reviewPage);
 
     await expect(reviewPage.usernameInput).toHaveValue(
       TEST_CUSTOMIZE_ACCOUNT.username

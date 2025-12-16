@@ -26,7 +26,7 @@ async function fillAddress(page: AddressFormPage, addressData: AddressData) {
   await page.postalCodeInput.fill(addressData.postalCode);
 }
 
-export async function fillAccountInfo(page: AccountPage) {
+export async function fillAccountInfo(page: AccountPage | ReviewPage) {
   await page.usernameInput.fill(TEST_CUSTOMIZE_ACCOUNT.username);
   await page.passwordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
   await page.verifyPasswordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
