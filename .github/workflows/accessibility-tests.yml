@@ -41,11 +41,8 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Install Axe Core 
-        run: npm install --save-dev @axe-core/playwright
-
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Run Accessibility tests
+        run: npx playwright test playwright/tests/accessibility-tests/
 
       - name: Upload Playwright reports on failure
         if: ${{ failure() }}
