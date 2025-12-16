@@ -13,6 +13,7 @@ import {
   fillAccountInfo,
   fillAlternateAddress,
   fillHomeAddress,
+  fillPersonalInfo,
 } from "../utils/form-helper";
 import { mockUsernameApi } from "../utils/mock-api";
 
@@ -78,11 +79,7 @@ test.describe("edits patron information on review page", () => {
   test("enters Personal information", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editPersonalInfoButton.click();
-    // await fillPersonalInfo(reviewPage);
-    await reviewPage.firstNameInput.fill(TEST_PATRON_INFO.firstName);
-    await reviewPage.lastNameInput.fill(TEST_PATRON_INFO.lastName);
-    await reviewPage.dateOfBirthInput.fill(TEST_PATRON_INFO.dateOfBirth);
-    await reviewPage.emailInput.fill(TEST_PATRON_INFO.email);
+    await fillPersonalInfo(reviewPage);
     await reviewPage.receiveInfoCheckbox.click(); // unable to check()
 
     await expect(reviewPage.firstNameInput).toHaveValue(
