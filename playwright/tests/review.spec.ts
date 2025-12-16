@@ -102,8 +102,8 @@ test.describe("edits patron information on review page", () => {
     const pageManager = new PageManager(page);
 
     await test.step("clicks edit button", async () => {
-      await expect(pageManager.reviewPage.addressEditButton).toBeVisible();
-      await pageManager.reviewPage.addressEditButton.click();
+      await expect(pageManager.reviewPage.editAddressButton).toBeVisible();
+      await pageManager.reviewPage.editAddressButton.click();
       await page.waitForURL(/\/location/);
     });
 
