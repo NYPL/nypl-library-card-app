@@ -91,15 +91,18 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
   });
 
-  test("clicks edit button and navigates to Address page", async ({ page }) => {
-    const reviewPage = new ReviewPage(page);
-    await expect(reviewPage.addressEditButton).toBeVisible();
-    await reviewPage.addressEditButton.click();
+  test("displays editable Address page", async ({ page }) => {
+    await test.step("clicks edit button", async () => {
+      const reviewPage = new ReviewPage(page);
+      await expect(reviewPage.addressEditButton).toBeVisible();
+      await reviewPage.addressEditButton.click();
+      await page.waitForURL(/\/location/);
+    });
 
-    await page.waitForURL(/\/location/);
-
-    const addressPage = new AddressPage(page);
-    await expect(addressPage.stepHeading).toBeVisible();
+    await test.step("navigates to address page", async () => {
+      const addressPage = new AddressPage(page);
+      await expect(addressPage.stepHeading).toBeVisible();
+    });
   });
 
   test("displays editable Account section", async ({ page }) => {
