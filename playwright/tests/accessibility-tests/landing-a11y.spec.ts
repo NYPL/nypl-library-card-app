@@ -58,29 +58,25 @@ test.describe("Accessibility tests on Landing Page", () => {
     browserName,
   }) => {
     const landingPage = new LandingPage(page);
+    const languageLinks = [
+      landingPage.arabicLanguage,
+      landingPage.bengaliLanguage,
+      landingPage.chineseLanguage,
+      landingPage.englishLanguage,
+      landingPage.frenchLanguage,
+      landingPage.haitianCreoleLanguage,
+      landingPage.koreanLanguage,
+      landingPage.polishLanguage,
+      landingPage.russianLanguage,
+      landingPage.spanishLanguage,
+      landingPage.urduLanguage,
+    ];
     const tabKey = browserName === "webkit" ? "Alt+Tab" : "Tab";
 
     await landingPage.arabicLanguage.focus();
-    await page.keyboard.press(tabKey);
-    await expect(landingPage.bengaliLanguage).toBeFocused();
-    await page.keyboard.press(tabKey);
-    await expect(landingPage.chineseLanguage).toBeFocused();
-    await page.keyboard.press(tabKey);
-    await expect(landingPage.englishLanguage).toBeFocused();
-    await page.keyboard.press(tabKey);
-    await expect(landingPage.frenchLanguage).toBeFocused();
-    await page.keyboard.press(tabKey);
-    await expect(landingPage.haitianCreoleLanguage).toBeFocused();
-    await page.keyboard.press(tabKey);
-    await expect(landingPage.koreanLanguage).toBeFocused();
-    await page.keyboard.press(tabKey);
-    await expect(landingPage.polishLanguage).toBeFocused();
-    await page.keyboard.press(tabKey);
-    await expect(landingPage.russianLanguage).toBeFocused();
-    await page.keyboard.press(tabKey);
-    await expect(landingPage.spanishLanguage).toBeFocused();
-    await page.keyboard.press(tabKey);
-    await expect(landingPage.urduLanguage).toBeFocused();
-    await page.keyboard.press(tabKey);
+    for (const link of languageLinks) {
+      await expect(link).toBeFocused();
+      await page.keyboard.press(tabKey);
+    }
   });
 });
