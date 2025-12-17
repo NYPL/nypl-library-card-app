@@ -12,12 +12,16 @@ export class ReviewPage {
   // Personal Information section
   readonly personalInfoHeading: Locator;
   readonly firstNameHeading: Locator;
+  readonly firstNameInputHeading: Locator;
   readonly firstNameInput: Locator;
   readonly lastNameHeading: Locator;
+  readonly lastNameInputHeading: Locator;
   readonly lastNameInput: Locator;
   readonly dateOfBirthHeading: Locator;
+  readonly dateOfBirthInputHeading: Locator;
   readonly dateOfBirthInput: Locator;
   readonly emailHeading: Locator;
+  readonly emailInputHeading: Locator;
   readonly emailInput: Locator;
   readonly receiveInfoHeading: Locator;
   readonly receiveInfoChoice: Locator;
@@ -37,12 +41,15 @@ export class ReviewPage {
   // Account section
   readonly createYourAccountHeading: Locator;
   readonly usernameHeading: Locator;
+  readonly usernameInputHeading: Locator;
   readonly usernameInput: Locator;
   readonly availableUsernameButton: Locator;
   readonly availableUsernameMessage: Locator;
   readonly unavailableUsernameError: Locator;
   readonly passwordHeading: Locator;
+  readonly passwordInputHeading: Locator;
   readonly passwordInput: Locator;
+  readonly verifyPasswordInputHeading: Locator;
   readonly verifyPasswordInput: Locator;
   readonly showPasswordCheckbox: Locator;
   readonly homeLibraryHeading: Locator;
@@ -72,21 +79,33 @@ export class ReviewPage {
       level: 3,
     });
     this.firstNameHeading = page.getByText("First name", { exact: true });
+    this.firstNameInputHeading = page.getByText("First name (required)", {
+      exact: true,
+    });
     this.firstNameInput = page.getByRole("textbox", {
       name: "First name (required)",
       exact: true,
     });
     this.lastNameHeading = page.getByText("Last name", { exact: true });
+    this.lastNameInputHeading = page.getByText("Last name (required)", {
+      exact: true,
+    });
     this.lastNameInput = page.getByRole("textbox", {
       name: "Last name (required)",
       exact: true,
     });
     this.dateOfBirthHeading = page.getByText("Date of birth", { exact: true });
+    this.dateOfBirthInputHeading = page.getByText("Date of birth (required)", {
+      exact: true,
+    });
     this.dateOfBirthInput = page.getByRole("textbox", {
       name: "Date of birth (required)",
       exact: true,
     });
     this.emailHeading = page.getByText("Email address", { exact: true });
+    this.emailInputHeading = page.getByText("Email address (required)", {
+      exact: true,
+    });
     this.emailInput = page.getByRole("textbox", {
       name: "Email address (required)",
       exact: true,
@@ -134,6 +153,9 @@ export class ReviewPage {
       level: 3,
     });
     this.usernameHeading = page.getByText("Username", { exact: true });
+    this.usernameInputHeading = page.getByText("Username (required)", {
+      exact: true,
+    });
     this.usernameInput = page.getByRole("textbox", {
       name: "Username (required)",
       exact: true,
@@ -147,10 +169,17 @@ export class ReviewPage {
       USERNAME_UNAVAILABLE_MESSAGE
     );
     this.passwordHeading = page.getByText("Password", { exact: true });
+    this.passwordInputHeading = page.getByText("Password (required)", {
+      exact: true,
+    });
     this.passwordInput = page.getByRole("textbox", {
       name: "Password (required)",
       exact: true,
     });
+    this.verifyPasswordInputHeading = page.getByText(
+      "Verify password (required)",
+      { exact: true }
+    );
     this.verifyPasswordInput = page.getByRole("textbox", {
       name: "Verify password (required)",
       exact: true,

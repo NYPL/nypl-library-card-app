@@ -66,9 +66,13 @@ test.describe("edits patron information on review page", () => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.editPersonalInfoButton).toBeVisible();
     await reviewPage.editPersonalInfoButton.click();
+    await expect(reviewPage.firstNameInputHeading).toBeVisible();
     await expect(reviewPage.firstNameInput).toBeVisible();
+    await expect(reviewPage.lastNameInputHeading).toBeVisible();
     await expect(reviewPage.lastNameInput).toBeVisible();
+    await expect(reviewPage.dateOfBirthInputHeading).toBeVisible();
     await expect(reviewPage.dateOfBirthInput).toBeVisible();
+    await expect(reviewPage.emailInputHeading).toBeVisible();
     await expect(reviewPage.emailInput).toBeVisible();
     await expect(reviewPage.alternateFormLink).toBeVisible();
     await expect(reviewPage.locationsLink).toBeVisible();
@@ -146,8 +150,11 @@ test.describe("edits patron information on review page", () => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.editAccountButton).toBeVisible();
     await reviewPage.editAccountButton.click();
+    await expect(reviewPage.usernameInputHeading).toBeVisible();
     await expect(reviewPage.usernameInput).toBeVisible();
+    await expect(reviewPage.passwordInputHeading).toBeVisible();
     await expect(reviewPage.passwordInput).toBeVisible();
+    await expect(reviewPage.verifyPasswordInputHeading).toBeVisible();
     await expect(reviewPage.verifyPasswordInput).toBeVisible();
     await expect(reviewPage.showPasswordCheckbox).toBeVisible();
     await expect(reviewPage.selectHomeLibrary).toBeVisible();
