@@ -285,3 +285,21 @@ Debug Playwright tests with the GUI tool that can be opened with
 
 Update Playwright to the latest version with
 `npm install -D @playwright/test@latest`
+
+## Accessibility testing
+
+This project integrates @axe-core/playwright to automatically scan for accessibility violations and ensure our application meets WCAG standards.
+
+Installation
+
+If you are setting up the project for the first time, install the accessibility testing plugin:
+
+`npm install --save-dev @axe-core/playwright`
+
+Run a specific accessibility test
+
+`npx playwright test accessibility-landing.spec.ts`
+
+Run a specific test by its description
+
+`npx playwright test -g "should have no accessibility violations"`
