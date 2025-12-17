@@ -3,7 +3,6 @@ import { Page, Locator } from "@playwright/test";
 export class LandingPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
-  readonly searchBox: Locator;
   readonly arabicLanguage: Locator;
   readonly bengaliLanguage: Locator;
   readonly chineseLanguage: Locator;
@@ -28,7 +27,6 @@ export class LandingPage {
       name: "Apply for a Library Card Online",
       level: 1,
     });
-    this.searchBox = page.getByRole("button", { name: "Open Search" });
     this.arabicLanguage = page.getByRole("link", { name: "Arabic" });
     this.bengaliLanguage = page.getByRole("link", { name: "Bengali" });
     this.chineseLanguage = page.getByRole("link", { name: "Chinese" });
