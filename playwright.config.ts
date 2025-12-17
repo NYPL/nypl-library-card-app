@@ -50,7 +50,13 @@ export default defineConfig({
 
     {
       name: "webkit",
-      use: { ...devices["Desktop Safari"] },
+      use: {
+        ...devices["Desktop Safari"],
+        launchOptions: {
+          // This allows links to receive focus via Tab in Webkit
+          args: ["--enable-focus-ring"],
+        },
+      },
     },
 
     /* Test against mobile viewports. */
