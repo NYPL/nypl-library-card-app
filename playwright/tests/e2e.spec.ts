@@ -135,14 +135,11 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     });
 
     await test.step("retrieve barcode from Congrats page", async () => {
-      await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
-        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX,
-        {
-          timeout: 15000,
-        }
+      await expect(pageManager.congratsPage.patronBarcodeNumber).toContainText(
+        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX
       );
       scrapedBarcode =
-        await pageManager.congratsPage.displayBarcodeNumber.textContent();
+        await pageManager.congratsPage.patronBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();
     });
   });
