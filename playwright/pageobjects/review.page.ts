@@ -82,6 +82,30 @@ export class ReviewPage {
     this.firstNameInputHeading = page.getByText("First name (required)", {
       exact: true,
     });
+
+    this.firstNameHeading = page.getByText("First name", { exact: true });
+    this.lastNameHeading = page.getByText("Last name", { exact: true });
+    this.dateOfBirthHeading = page.getByText("Date of birth", { exact: true });
+    this.emailHeading = page.getByText("Email address", { exact: true });
+    this.receiveInfoHeading = page.getByText(
+      "Receive information about NYPL's programs and services",
+      { exact: true }
+    );
+
+    this.streetHeading = page.getByText("Street address", { exact: true });
+    this.cityHeading = page.getByText("City", { exact: true });
+    this.stateHeading = page.getByText("State", { exact: true });
+    this.postalCodeHeading = page.getByText("Postal code", { exact: true });
+    this.addressEditButton = page.getByRole("button", {
+      name: "Edit Address",
+      exact: true,
+    });
+    this.editPersonalInfoButton = page
+      .getByRole("button", {
+        name: "Edit Personal information",
+        exact: true,
+      })
+      .first();
     this.firstNameInput = page.getByRole("textbox", {
       name: "First name (required)",
       exact: true,
