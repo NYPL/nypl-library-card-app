@@ -144,8 +144,8 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
       await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
       await expect(pageManager.congratsPage.issuedDate).toBeVisible();
-      await expect(pageManager.congratsPage.displayBarcodeNumber).toBeVisible();
-      await expect(pageManager.congratsPage.displayBarcodeNumber).toContainText(
+      await expect(pageManager.congratsPage.patronBarcodeNumber).toBeVisible();
+      await expect(pageManager.congratsPage.patronBarcodeNumber).toContainText(
         pageManager.congratsPage.EXPECTED_BARCODE_PREFIX
       );
     });
