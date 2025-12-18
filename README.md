@@ -289,9 +289,3 @@ Update Playwright to the latest version with
 ## Accessibility testing
 
 This project integrates @axe-core/playwright to automatically scan for accessibility violations and ensure our application meets WCAG standards.
-
-### Installation
-
-If you are setting up the project for the first time, install the accessibility testing plugin:
-
-`npm install --save-dev @axe-core/playwright`
