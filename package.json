@@ -14,6 +14,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "playwright": "npx playwright test",
+    "playwright:qa": "npx playwright test --project=qa",
     "prepare": "husky install",
     "lint": "eslint --fix"
   },
