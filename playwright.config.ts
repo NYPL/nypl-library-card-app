@@ -45,15 +45,6 @@ export default defineConfig({
       use: { ...devices["Desktop Safari"] },
     },
 
-    {
-      name: "qa",
-      use: {
-        baseURL: "https://qa-www.nypl.org",
-        ...devices["Desktop Chrome"],
-        ...devices["Desktop Firefox"],
-        ...devices["Desktop Safari"],
-      },
-    },
     /* Test against mobile viewports. */
     // {
     //   name: "Mobile Chrome",

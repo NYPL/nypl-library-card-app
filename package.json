@@ -14,7 +14,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "playwright": "npx playwright test",
-    "playwright:qa": "npx playwright test --project=qa",
+    "playwright:qa": "PLAYWRIGHT_BASE_URL=https://qa-www.nypl.org npx playwright test",
     "prepare": "husky install",
     "lint": "eslint --fix"
   },
