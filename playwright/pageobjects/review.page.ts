@@ -82,7 +82,10 @@ export class ReviewPage {
     this.cityHeading = page.getByText("City", { exact: true });
     this.stateHeading = page.getByText("State", { exact: true });
     this.postalCodeHeading = page.getByText("Postal code", { exact: true });
-    this.addressEditButton = page.locator("#editAddressButton");
+    this.addressEditButton = page.getByRole("button", {
+      name: "Edit Address",
+      exact: true,
+    });
     this.editPersonalInfoButton = page
       .getByRole("button", {
         name: "Edit Personal information",

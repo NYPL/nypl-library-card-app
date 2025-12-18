@@ -1,11 +1,19 @@
 import { test, expect } from "@playwright/test";
+import { PageManager } from "../pageobjects/page-manager.page";
 import { ReviewPage } from "../pageobjects/review.page";
 import {
+  TEST_ALTERNATE_ADDRESS,
   TEST_CUSTOMIZE_ACCOUNT,
+  TEST_HOME_ADDRESS,
   TEST_PATRON_INFO,
   USERNAME_AVAILABLE_MESSAGE,
   USERNAME_UNAVAILABLE_MESSAGE,
 } from "../utils/constants";
+import {
+  fillAccountInfo,
+  fillAlternateAddress,
+  fillHomeAddress,
+} from "../utils/form-helper";
 import { mockUsernameApi } from "../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
@@ -88,6 +96,53 @@ test.describe("edits patron information on review page", () => {
     );
     await expect(reviewPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
+  });
+
+  test("edits addresses", async ({ page }) => {
+    const pageManager = new PageManager(page);
+
+    await test.step("clicks edit button", async () => {
+      await expect(pageManager.reviewPage.addressEditButton).toBeVisible();
+      await pageManager.reviewPage.addressEditButton.click();
+      await page.waitForURL(/\/location/);
+    });
+
+    await test.step("navigates to address page and enters address", async () => {
+      await expect(pageManager.addressPage.stepHeading).toBeVisible();
+      await fillHomeAddress(pageManager.addressPage);
+      await pageManager.addressPage.nextButton.click();
+    });
+
+    await test.step("enters alternate address", async () => {
+      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
+      await fillAlternateAddress(pageManager.alternateAddressPage);
+      await pageManager.alternateAddressPage.nextButton.click();
+    });
+
+    await test.step("confirms addresses", async () => {
+      await expect(
+        pageManager.addressVerificationPage.stepHeader
+      ).toBeVisible();
+      await pageManager.addressVerificationPage.homeAddressOption.check();
+      await pageManager.addressVerificationPage.alternateAddressOption.check();
+      await pageManager.addressVerificationPage.nextButton.click();
+    });
+
+    await test.step("enters account information", async () => {
+      await expect(pageManager.accountPage.stepHeading).toBeVisible();
+      await fillAccountInfo(pageManager.accountPage);
+      await pageManager.accountPage.nextButton.click();
+    });
+
+    await test.step("displays addresses on review page", async () => {
+      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.street)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.street)
+      ).toBeVisible();
+    });
   });
 
   test("displays editable Account section", async ({ page }) => {
