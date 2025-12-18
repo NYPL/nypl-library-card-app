@@ -1,5 +1,5 @@
 import { Page, Locator } from "@playwright/test";
-import { TEST_PATRON_INFO, TEST_BARCODE_NUMBER } from "../utils/constants";
+import { TEST_PATRON_INFO } from "../utils/constants";
 
 export class CongratsPage {
   readonly page: Page;
@@ -10,7 +10,6 @@ export class CongratsPage {
   readonly memberName: Locator;
   readonly issuedDateHeading: Locator;
   readonly issuedDate: Locator;
-  readonly barcodeNumber: Locator;
   readonly libraryCardBackground: Locator;
   readonly locationsLink: Locator;
   readonly photoIdAndProofOfAddressLink: Locator;
@@ -18,7 +17,7 @@ export class CongratsPage {
   readonly loginLink: Locator;
   readonly findOutLibraryLink: Locator;
   readonly discoverLink: Locator;
-  readonly displayBarcodeNumber: Locator;
+  readonly patronBarcodeNumber: Locator;
   readonly EXPECTED_BARCODE_PREFIX = "255";
 
   constructor(page: Page) {
@@ -46,10 +45,8 @@ export class CongratsPage {
     this.issuedDate = page.locator("#issued").getByText(this.getDate(), {
       exact: true,
     });
-    this.barcodeNumber = page.getByText(TEST_BARCODE_NUMBER, {
-      exact: true,
-    });
-    this.displayBarcodeNumber = page.locator(".barcode-container > div");
+
+    this.patronBarcodeNumber = page.locator(".barcode");
     this.libraryCardBackground = page.locator(".background-lion");
     this.locationsLink = page.getByRole("link", {
       name: "locations",
