@@ -54,10 +54,8 @@ test.describe("Accessibility tests on Landing Page", () => {
 
   test("should have keyboard focus indicators for language links", async ({
     page,
-    browserName,
   }) => {
     const landingPage = new LandingPage(page);
-    const tabKey = browserName === "webkit" ? "Alt+Tab" : "Tab";
 
     const languageLocators = [
       landingPage.arabicLanguage,
@@ -76,7 +74,7 @@ test.describe("Accessibility tests on Landing Page", () => {
     await languageLocators[0].focus();
 
     for (let i = 1; i < languageLocators.length; i++) {
-      await page.keyboard.press(tabKey);
+      await page.keyboard.press("Tab");
       await expect(languageLocators[i]).toBeFocused();
     }
   });
