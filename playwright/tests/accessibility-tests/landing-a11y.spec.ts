@@ -37,7 +37,9 @@ test.describe("Accessibility tests on Landing Page", () => {
 
     for (let i = 0; i < languageLocators.length; i++) {
       await expect(languageLocators[i]).toBeFocused();
-      await page.keyboard.press("Tab");
+      if (i < languageLocators.length - 1) {
+        await page.keyboard.press("Tab");
+      }
     }
   });
 });
