@@ -34,12 +34,10 @@ test.describe("Accessibility tests on Landing Page", () => {
     ];
 
     await languageLocators[0].focus();
-
-    for (let i = 0; i < languageLocators.length; i++) {
+    await expect(languageLocators[0]).toBeFocused();
+    for (let i = 1; i < languageLocators.length; i++) {
+      await page.keyboard.press("Tab");
       await expect(languageLocators[i]).toBeFocused();
-      if (i < languageLocators.length - 1) {
-        await page.keyboard.press("Tab");
-      }
     }
   });
 });

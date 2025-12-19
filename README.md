@@ -288,4 +288,4 @@ Update Playwright to the latest version with
 
 ## Accessibility testing
 
-This project integrates @axe-core/playwright to automatically scan for accessibility violations and ensure our application meets WCAG standards which are 2.1 AA and 2.2 AA
+This project integrates @axe-core/playwright to automatically scan for accessibility violations and ensure our application meets the 2.1 AA and 2.2 AA WCAG success criteria.
