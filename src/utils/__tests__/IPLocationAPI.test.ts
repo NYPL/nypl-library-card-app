@@ -8,6 +8,13 @@ const axios = require("axios");
 
 jest.mock("axios");
 jest.mock("request-ip");
+jest.mock("../../logger", () => {
+  return {
+    warning: jest.fn(),
+    info: jest.fn(),
+    error: jest.fn(),
+  };
+});
 
 describe("IPLocationAPI", () => {
   beforeEach(() => {

@@ -14,6 +14,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "playwright": "npx playwright test",
+    "playwright:qa": "PLAYWRIGHT_BASE_URL=https://qa-www.nypl.org npx playwright test",
     "prepare": "husky install",
     "lint": "eslint --fix"
   },
@@ -75,7 +76,7 @@
     "lodash": "4.17.21",
     "moment": "2.30.1",
     "newrelic": "^13.0.0",
-    "next": "15.5.7",
+    "next": "15.5.9",
     "next-i18next": "11.3.0",
     "prettier": "^3.6.2",
     "qs": "6.10.4",
