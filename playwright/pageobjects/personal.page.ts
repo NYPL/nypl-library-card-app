@@ -8,7 +8,7 @@ export class PersonalPage {
   readonly lastNameInput: Locator;
   readonly emailInput: Locator;
   readonly dateOfBirthInput: Locator;
-  readonly checkBox: Locator;
+  readonly receiveInfoCheckbox: Locator;
   readonly previousButton: Locator;
   readonly nextButton: Locator;
   readonly firstNameErrorMessage: Locator;
@@ -32,9 +32,9 @@ export class PersonalPage {
     this.lastNameInput = this.page.getByLabel(/Last name/i);
     this.dateOfBirthInput = this.page.getByLabel(/Date of birth/i);
     this.emailInput = this.page.getByLabel(/Email/i);
-    this.checkBox = this.page.getByRole("checkbox", {
-      name: "Yes, I would like to receive information about NYPL's programs and services",
-    });
+    this.receiveInfoCheckbox = this.page.getByText(
+      "Yes, I would like to receive information about NYPL's programs and services"
+    );
     this.previousButton = this.page.getByRole("link", {
       name: "Previous",
       exact: true,
