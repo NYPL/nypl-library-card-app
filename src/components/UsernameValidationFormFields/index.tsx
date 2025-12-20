@@ -66,12 +66,20 @@ const UsernameValidationForm = ({
     setUsernameIsAvailable(defaultState);
   }, [usernameWatch]);
 
+  useEffect(() => {
+    // Check if the New Relic browser agent is available
+    if (window.newrelic) {
+      console.log("New Relic agent available on window object");
+    }
+  }, []);
+
   /**
    * validateUsername
    * Call the API to validate the username and either get an available username
    * response or an error response that the username is unavailable or invalid.
    */
   const validateUsername = (e) => {
+    const interactionHandle = window.newrelic.interaction();
     e.preventDefault();
     setIsLoading(true);
     const username = getValues("username");
@@ -120,6 +128,7 @@ const UsernameValidationForm = ({
       })
       .finally(() => {
         setIsLoading(false);
+        interactionHandle.end();
       });
   };
   const inputValidation = (value = "") =>
