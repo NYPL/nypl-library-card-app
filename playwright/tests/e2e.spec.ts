@@ -18,7 +18,7 @@ import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 test.describe("E2E: Complete application with Sierra API integration", () => {
   let scrapedBarcode: string | null = null;
 
-  test.afterAll("patron deletion", async () => {
+  test.afterAll("deletes patron", async () => {
     if (scrapedBarcode) {
       try {
         const patronID = await getPatronID(scrapedBarcode);
@@ -35,27 +35,31 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
   test("displays patron information on congrats page", async ({ page }) => {
     const pageManager = new PageManager(page);
 
+    await test.step("begins at landing", async () => {
+      await page.goto("/library-card/new?newCard=true");
+      await expect(pageManager.landingPage.applyHeading).toBeVisible();
+      await pageManager.landingPage.getStartedButton.click();
+    });
+
     await test.step("enters personal information", async () => {
-      await page.goto("/library-card/personal?newCard=true");
+      await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage);
       await pageManager.personalPage.nextButton.click();
     });
 
     await test.step("enters home address", async () => {
-      await expect(pageManager.addressPage.addressHeading).toBeVisible();
+      await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillHomeAddress(pageManager.addressPage);
       await pageManager.addressPage.nextButton.click();
     });
 
     await test.step("enters alternate address", async () => {
-      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible({
-        timeout: 10000,
-      });
+      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await fillAlternateAddress(pageManager.alternateAddressPage);
       await pageManager.alternateAddressPage.nextButton.click();
     });
 
-    await test.step("confirms address verification", async () => {
+    await test.step("selects home and alternate addresses", async () => {
       await expect(
         pageManager.addressVerificationPage.stepHeader
       ).toBeVisible();
@@ -67,15 +71,14 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage);
-      await pageManager.accountPage.acceptTermsCheckbox.check();
       await pageManager.accountPage.nextButton.click();
     });
 
-    await test.step("displays Personal Information on review page", async () => {
+    await test.step("displays personal information on review page", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.firstName)
-      ).toBeVisible({ timeout: 10000 });
+      ).toBeVisible();
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON_INFO.lastName)
       ).toBeVisible();
@@ -130,14 +133,24 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     });
 
     await test.step("submits application", async () => {
+      await expect(pageManager.reviewPage.submitButton).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
-      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
     });
 
-    await test.step("retrieve barcode from Congrats page", async () => {
+    await test.step("displays generated library card on congrats page", async () => {
+      const fullName = `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`;
+      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
+      await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
+      await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
+      await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
+      await expect(pageManager.congratsPage.issuedDate).toBeVisible();
+      await expect(pageManager.congratsPage.patronBarcodeNumber).toBeVisible();
       await expect(pageManager.congratsPage.patronBarcodeNumber).toContainText(
         pageManager.congratsPage.EXPECTED_BARCODE_PREFIX
       );
+    });
+
+    await test.step("retrieves barcode from congrats page", async () => {
       scrapedBarcode =
         await pageManager.congratsPage.patronBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();
