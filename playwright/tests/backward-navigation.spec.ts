@@ -48,7 +48,9 @@ test.describe("E2E: Navigate backward in application", () => {
     });
   });
 
-  test("navigates backward after entering info", async ({ page }) => {
+  test("retains user-entered info when navigating backward", async ({
+    page,
+  }) => {
     const pageManager = new PageManager(page);
 
     await test.step("enters personal information", async () => {
@@ -86,7 +88,7 @@ test.describe("E2E: Navigate backward in application", () => {
       await pageManager.accountPage.previousButton.click();
     });
 
-    await test.step("displays address verification page", async () => {
+    await test.step("displays user-entered info on address verification page", async () => {
       await expect(
         pageManager.addressVerificationPage.stepHeader
       ).toBeVisible();
@@ -99,7 +101,7 @@ test.describe("E2E: Navigate backward in application", () => {
       await pageManager.addressVerificationPage.previousButton.click();
     });
 
-    await test.step("displays address page", async () => {
+    await test.step("displays user-entered info on address page", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await expect(pageManager.addressPage.streetAddressInput).toHaveValue(
         TEST_HOME_ADDRESS.street
@@ -116,7 +118,7 @@ test.describe("E2E: Navigate backward in application", () => {
       await pageManager.addressPage.previousButton.click();
     });
 
-    await test.step("displays personal information page", async () => {
+    await test.step("displays user-entered info on personal information page", async () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await expect(pageManager.personalPage.firstNameInput).toHaveValue(
         TEST_PATRON_INFO.firstName
@@ -133,7 +135,6 @@ test.describe("E2E: Navigate backward in application", () => {
       await expect(
         pageManager.personalPage.receiveInfoCheckbox
       ).not.toBeChecked();
-      await pageManager.personalPage.previousButton.click();
     });
   });
 });
