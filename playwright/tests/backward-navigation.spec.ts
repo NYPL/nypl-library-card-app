@@ -106,6 +106,9 @@ test.describe("E2E: Navigate backward in application", () => {
       await expect(pageManager.addressPage.streetAddressInput).toHaveValue(
         TEST_HOME_ADDRESS.street
       );
+      await expect(pageManager.addressPage.apartmentSuiteInput).toHaveValue(
+        TEST_HOME_ADDRESS.apartmentSuite
+      );
       await expect(pageManager.addressPage.cityInput).toHaveValue(
         TEST_HOME_ADDRESS.city
       );
@@ -126,11 +129,11 @@ test.describe("E2E: Navigate backward in application", () => {
       await expect(pageManager.personalPage.lastNameInput).toHaveValue(
         TEST_PATRON_INFO.lastName
       );
-      await expect(pageManager.personalPage.emailInput).toHaveValue(
-        TEST_PATRON_INFO.email
-      );
       await expect(pageManager.personalPage.dateOfBirthInput).toHaveValue(
         TEST_PATRON_INFO.dateOfBirth
+      );
+      await expect(pageManager.personalPage.emailInput).toHaveValue(
+        TEST_PATRON_INFO.email
       );
       await expect(
         pageManager.personalPage.receiveInfoCheckbox
