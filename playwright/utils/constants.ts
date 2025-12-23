@@ -31,6 +31,14 @@ export const TEST_ALTERNATE_ADDRESS: AddressData = {
   postalCode: "10018",
 };
 
+export const TEST_ADDRESS_OPTIONS: AddressData = {
+  street: "123 34th Street",
+  apartmentSuite: "Suite 100",
+  city: "New York",
+  state: "NY",
+  postalCode: "10000",
+};
+
 export const USERNAME_AVAILABLE_MESSAGE = "This username is available.";
 export const USERNAME_UNAVAILABLE_MESSAGE =
   "This username is unavailable. Please try another.";
