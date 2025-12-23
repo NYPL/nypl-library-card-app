@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import {
-  fillAccountInfo,
   fillAlternateAddress,
   fillHomeAddress,
   fillPersonalInfo,
@@ -82,9 +81,8 @@ test.describe("E2E: Navigate backward in application", () => {
       await pageManager.addressVerificationPage.nextButton.click();
     });
 
-    await test.step("enters account information", async () => {
+    await test.step("displays account page", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await fillAccountInfo(pageManager.accountPage); // unable to confirm this remains filled out
       await pageManager.accountPage.previousButton.click();
     });
 
