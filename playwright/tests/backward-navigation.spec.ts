@@ -54,7 +54,7 @@ test.describe("E2E: Navigate backward in application", () => {
     const pageManager = new PageManager(page);
 
     await test.step("enters personal information", async () => {
-      await page.goto("/library-card/personal?&newCard=true");
+      await page.goto("/library-card/personal?newCard=true");
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage);
       await pageManager.personalPage.receiveInfoCheckbox.click();
