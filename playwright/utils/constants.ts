@@ -38,6 +38,20 @@ export const TEST_ADDRESS_OPTIONS: AddressData = {
   state: "NY",
   postalCode: "10000",
 };
+export const TEST_EAST_ADDRESS: AddressData = {
+  street: "123 E 34th St STE 100",
+  apartmentSuite: "",
+  city: "New York",
+  state: "NY",
+  postalCode: "10016-4601",
+};
+export const TEST_WEST_ADDRESS: AddressData = {
+  street: "123 W 34th St STE 100",
+  apartmentSuite: "",
+  city: "New York",
+  state: "NY",
+  postalCode: "10001-2101",
+};
 
 export const USERNAME_AVAILABLE_MESSAGE = "This username is available.";
 export const USERNAME_UNAVAILABLE_MESSAGE =

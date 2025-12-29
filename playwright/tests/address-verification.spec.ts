@@ -6,7 +6,9 @@ import { fillAddress } from "../utils/form-helper";
 import {
   TEST_ADDRESS_OPTIONS,
   TEST_ALTERNATE_ADDRESS,
+  TEST_EAST_ADDRESS,
   TEST_HOME_ADDRESS,
+  TEST_WEST_ADDRESS,
 } from "../utils/constants";
 
 test.describe("displays elements on Address verification page", () => {
@@ -73,43 +75,36 @@ test.describe("enters home address and alternate address", () => {
 
     await test.step("displays address options on address verification page", async () => {
       await expect(addressVerificationPage.homeAddressHeader).toBeVisible();
-      // await expect(page.getByLabel("Home address")).toBeVisible();
       await expect(
-        addressVerificationPage
-          .getHomeAddressOption("123 W 34th St STE 100")
-          .first()
+        addressVerificationPage.getHomeAddressOption(TEST_WEST_ADDRESS.street)
       ).toBeVisible();
       await expect(
         addressVerificationPage.alternateAddressHeader
       ).toBeVisible();
       await expect(
-        addressVerificationPage
-          .getAlternateAddressOption("123 E 34th St STE 100")
-          .last()
+        addressVerificationPage.getAlternateAddressOption(
+          TEST_EAST_ADDRESS.street
+        )
       ).toBeVisible();
     });
 
     await test.step("selects address options", async () => {
       await addressVerificationPage
-        .getHomeAddressOption("123 W 34th St STE 100")
-        .first()
+        .getHomeAddressOption(TEST_WEST_ADDRESS.street)
         .check();
       await addressVerificationPage
-        .getAlternateAddressOption("123 E 34th St STE 100")
-        .last()
+        .getAlternateAddressOption(TEST_EAST_ADDRESS.street)
         .check();
     });
 
     await test.step("confirms addresses are selected", async () => {
       await expect(
-        addressVerificationPage
-          .getHomeAddressOption("123 W 34th St STE 100")
-          .first()
+        addressVerificationPage.getHomeAddressOption(TEST_WEST_ADDRESS.street)
       ).toBeChecked();
       await expect(
-        addressVerificationPage
-          .getAlternateAddressOption("123 E 34th St STE 100")
-          .last()
+        addressVerificationPage.getAlternateAddressOption(
+          TEST_EAST_ADDRESS.street
+        )
       ).toBeChecked();
     });
   });

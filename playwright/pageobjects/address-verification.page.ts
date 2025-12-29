@@ -38,10 +38,10 @@ export class AddressVerificationPage {
   }
 
   getHomeAddressOption(street: string): Locator {
-    return this.page.getByText(street);
+    return this.page.getByLabel("Home address").getByText(street);
   }
 
   getAlternateAddressOption(street: string): Locator {
-    return this.page.getByText(street);
+    return this.page.getByLabel("Alternate address").getByText(street);
   }
 }
