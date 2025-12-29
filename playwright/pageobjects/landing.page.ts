@@ -27,19 +27,27 @@ export class LandingPage {
       name: "Apply for a Library Card Online",
       level: 1,
     });
-    this.arabicLanguage = page.getByRole("link", { name: "Arabic" });
-    this.bengaliLanguage = page.getByRole("link", { name: "Bengali" });
-    this.chineseLanguage = page.getByRole("link", { name: "Chinese" });
-    this.englishLanguage = page.getByRole("link", { name: "English" });
-    this.frenchLanguage = page.getByRole("link", { name: "French" });
-    this.haitianCreoleLanguage = page.getByRole("link", {
-      name: "Haitian Creole",
+    this.arabicLanguage = page.getByRole("link", {
+      name: "Arabic | العَرَبِية",
     });
-    this.koreanLanguage = page.getByRole("link", { name: "Korean" });
-    this.polishLanguage = page.getByRole("link", { name: "Polish" });
-    this.russianLanguage = page.getByRole("link", { name: "Russian" });
-    this.spanishLanguage = page.getByRole("link", { name: "Spanish" });
-    this.urduLanguage = page.getByRole("link", { name: "Urdu" });
+    this.bengaliLanguage = page.getByRole("link", { name: "Bengali | বাঙালি" });
+    this.chineseLanguage = page.getByRole("link", {
+      name: "Chinese (Simplified) | 简体中文",
+    });
+    this.englishLanguage = page.getByRole("link", { name: "English" });
+    this.frenchLanguage = page.getByRole("link", { name: "French | Français" });
+    this.haitianCreoleLanguage = page.getByRole("link", {
+      name: "Haitian Creole | Kreyòl Ayisyen",
+    });
+    this.koreanLanguage = page.getByRole("link", { name: "Korean | 한국어" });
+    this.polishLanguage = page.getByRole("link", { name: "Polish | Polski" });
+    this.russianLanguage = page.getByRole("link", {
+      name: "Russian | Русский",
+    });
+    this.spanishLanguage = page.getByRole("link", {
+      name: "Spanish | Español",
+    });
+    this.urduLanguage = page.getByText("Urdu | اُردُو");
     this.applyHeading = page.getByRole("heading", {
       name: "Apply for a library card today in a few easy steps",
       level: 2,
