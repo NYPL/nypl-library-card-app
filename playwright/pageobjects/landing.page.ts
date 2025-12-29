@@ -47,7 +47,7 @@ export class LandingPage {
     this.spanishLanguage = page.getByRole("link", {
       name: "Spanish | Español",
     });
-    this.urduLanguage = page.getByText("Urdu | اُردُو");
+    this.urduLanguage = page.getByRole("link", { name: "Urdu | اُردُو" });
     this.applyHeading = page.getByRole("heading", {
       name: "Apply for a library card today in a few easy steps",
       level: 2,
