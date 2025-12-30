@@ -18,7 +18,10 @@ export async function fillPersonalInfo(page: PersonalPage | ReviewPage) {
   await page.dateOfBirthInput.fill(TEST_PATRON_INFO.dateOfBirth);
 }
 
-async function fillAddress(page: AddressFormPage, addressData: AddressData) {
+export async function fillAddress(
+  page: AddressFormPage,
+  addressData: AddressData
+) {
   await page.streetAddressInput.fill(addressData.street);
   await page.apartmentSuiteInput.fill(addressData.apartmentSuite);
   await page.cityInput.fill(addressData.city);
