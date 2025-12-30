@@ -17,9 +17,9 @@ test.describe("displays elements on Address verification page", () => {
   });
   test("should display the correct headers", async ({ page }) => {
     const addressVerificationPage = new AddressVerificationPage(page);
-    await expect(addressVerificationPage.mainHeader).toBeVisible();
-    await expect(addressVerificationPage.stepHeader).toBeVisible();
-    await expect(addressVerificationPage.homeAddressHeader).toBeVisible();
+    await expect(addressVerificationPage.mainHeading).toBeVisible();
+    await expect(addressVerificationPage.stepHeading).toBeVisible();
+    await expect(addressVerificationPage.homeAddressHeading).toBeVisible();
   });
 
   test("should display the next and previous buttons", async ({ page }) => {
@@ -46,11 +46,11 @@ test.describe("enters home address and alternate address", () => {
     await alternateAddressPage.nextButton.click();
 
     const addressVerificationPage = new AddressVerificationPage(page);
-    await expect(addressVerificationPage.homeAddressHeader).toBeVisible();
+    await expect(addressVerificationPage.homeAddressHeading).toBeVisible();
     await expect(
       addressVerificationPage.getHomeAddressOption(TEST_HOME_ADDRESS.street)
     ).toBeVisible();
-    await expect(addressVerificationPage.alternateAddressHeader).toBeVisible();
+    await expect(addressVerificationPage.alternateAddressHeading).toBeVisible();
     await expect(
       addressVerificationPage.getAlternateAddressOption(
         TEST_ALTERNATE_ADDRESS.street
@@ -74,14 +74,14 @@ test.describe("enters home address and alternate address", () => {
     });
 
     await test.step("displays address options on address verification page", async () => {
-      await expect(addressVerificationPage.homeAddressHeader).toBeVisible();
+      await expect(addressVerificationPage.homeAddressHeading).toBeVisible();
       await expect(
         addressVerificationPage.getHomeAddressOption(
           TEST_MULTIMATCH_ADDRESS_WEST.street
         )
       ).toBeVisible();
       await expect(
-        addressVerificationPage.alternateAddressHeader
+        addressVerificationPage.alternateAddressHeading
       ).toBeVisible();
       await expect(
         addressVerificationPage.getAlternateAddressOption(

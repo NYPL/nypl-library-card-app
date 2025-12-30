@@ -46,7 +46,7 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
 
     await test.step("confirms address verification", async () => {
       await expect(
-        pageManager.addressVerificationPage.stepHeader
+        pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_HOME_ADDRESS.street)
