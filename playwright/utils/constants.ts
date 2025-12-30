@@ -31,21 +31,21 @@ export const TEST_ALTERNATE_ADDRESS: AddressData = {
   postalCode: "10018",
 };
 
-export const TEST_ADDRESS_OPTIONS: AddressData = {
+export const TEST_MULTIMATCH_ADDRESS: AddressData = {
   street: "123 34th Street",
   apartmentSuite: "Suite 100",
   city: "New York",
   state: "NY",
   postalCode: "10000",
 };
-export const TEST_EAST_ADDRESS: AddressData = {
+export const TEST_MULTIMATCH_ADDRESS_EAST: AddressData = {
   street: "123 E 34th St STE 100",
   apartmentSuite: "",
   city: "New York",
   state: "NY",
   postalCode: "10016-4601",
 };
-export const TEST_WEST_ADDRESS: AddressData = {
+export const TEST_MULTIMATCH_ADDRESS_WEST: AddressData = {
   street: "123 W 34th St STE 100",
   apartmentSuite: "",
   city: "New York",

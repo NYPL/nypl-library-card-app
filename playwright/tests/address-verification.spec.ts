@@ -4,11 +4,11 @@ import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
 import { fillAddress } from "../utils/form-helper";
 import {
-  TEST_ADDRESS_OPTIONS,
   TEST_ALTERNATE_ADDRESS,
-  TEST_EAST_ADDRESS,
   TEST_HOME_ADDRESS,
-  TEST_WEST_ADDRESS,
+  TEST_MULTIMATCH_ADDRESS,
+  TEST_MULTIMATCH_ADDRESS_EAST,
+  TEST_MULTIMATCH_ADDRESS_WEST,
 } from "../utils/constants";
 
 test.describe("displays elements on Address verification page", () => {
@@ -65,45 +65,49 @@ test.describe("enters home address and alternate address", () => {
 
     await test.step("enters home and alternate addresses", async () => {
       await expect(addressPage.addressHeading).toBeVisible();
-      await fillAddress(addressPage, TEST_ADDRESS_OPTIONS);
+      await fillAddress(addressPage, TEST_MULTIMATCH_ADDRESS);
       await addressPage.nextButton.click();
 
       await expect(alternateAddressPage.addressHeading).toBeVisible();
-      await fillAddress(alternateAddressPage, TEST_ADDRESS_OPTIONS);
+      await fillAddress(alternateAddressPage, TEST_MULTIMATCH_ADDRESS);
       await alternateAddressPage.nextButton.click();
     });
 
     await test.step("displays address options on address verification page", async () => {
       await expect(addressVerificationPage.homeAddressHeader).toBeVisible();
       await expect(
-        addressVerificationPage.getHomeAddressOption(TEST_WEST_ADDRESS.street)
+        addressVerificationPage.getHomeAddressOption(
+          TEST_MULTIMATCH_ADDRESS_WEST.street
+        )
       ).toBeVisible();
       await expect(
         addressVerificationPage.alternateAddressHeader
       ).toBeVisible();
       await expect(
         addressVerificationPage.getAlternateAddressOption(
-          TEST_EAST_ADDRESS.street
+          TEST_MULTIMATCH_ADDRESS_EAST.street
         )
       ).toBeVisible();
     });
 
     await test.step("selects address options", async () => {
       await addressVerificationPage
-        .getHomeAddressOption(TEST_WEST_ADDRESS.street)
+        .getHomeAddressOption(TEST_MULTIMATCH_ADDRESS_WEST.street)
         .check();
       await addressVerificationPage
-        .getAlternateAddressOption(TEST_EAST_ADDRESS.street)
+        .getAlternateAddressOption(TEST_MULTIMATCH_ADDRESS_EAST.street)
         .check();
     });
 
     await test.step("confirms addresses are selected", async () => {
       await expect(
-        addressVerificationPage.getHomeAddressOption(TEST_WEST_ADDRESS.street)
+        addressVerificationPage.getHomeAddressOption(
+          TEST_MULTIMATCH_ADDRESS_WEST.street
+        )
       ).toBeChecked();
       await expect(
         addressVerificationPage.getAlternateAddressOption(
-          TEST_EAST_ADDRESS.street
+          TEST_MULTIMATCH_ADDRESS_EAST.street
         )
       ).toBeChecked();
     });
