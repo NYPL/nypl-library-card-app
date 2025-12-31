@@ -11,18 +11,18 @@ import {
   TEST_MULTIMATCH_ADDRESS_WEST,
 } from "../utils/constants";
 
-test.describe("displays elements on Address verification page", () => {
+test.describe("displays elements on address verification page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/library-card/address-verification?newCard=true");
   });
-  test("should display the correct headers", async ({ page }) => {
+  test("displays headings", async ({ page }) => {
     const addressVerificationPage = new AddressVerificationPage(page);
     await expect(addressVerificationPage.mainHeading).toBeVisible();
     await expect(addressVerificationPage.stepHeading).toBeVisible();
     await expect(addressVerificationPage.homeAddressHeading).toBeVisible();
   });
 
-  test("should display the next and previous buttons", async ({ page }) => {
+  test("displays next and previous buttons", async ({ page }) => {
     const addressVerificationPage = new AddressVerificationPage(page);
     await expect(addressVerificationPage.previousButton).toBeVisible();
     await expect(addressVerificationPage.nextButton).toBeVisible();
@@ -67,7 +67,7 @@ test.describe("enters home address and alternate address", () => {
     });
   });
 
-  test("prompts multiple addresses", async ({ page }) => {
+  test("prompts multiple address options", async ({ page }) => {
     const addressPage = new AddressPage(page);
     const alternateAddressPage = new AlternateAddressPage(page);
     const addressVerificationPage = new AddressVerificationPage(page);
@@ -82,7 +82,7 @@ test.describe("enters home address and alternate address", () => {
       await alternateAddressPage.nextButton.click();
     });
 
-    await test.step("displays address options on address verification page", async () => {
+    await test.step("displays address options", async () => {
       await expect(addressVerificationPage.homeAddressHeading).toBeVisible();
       await expect(
         addressVerificationPage.getHomeAddressOption(
