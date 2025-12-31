@@ -36,26 +36,35 @@ test.describe("enters home address and alternate address", () => {
 
   test("enters valid addresses", async ({ page }) => {
     const addressPage = new AddressPage(page);
-    await expect(addressPage.addressHeading).toBeVisible();
-    await fillAddress(addressPage, TEST_HOME_ADDRESS);
-    await addressPage.nextButton.click();
-
     const alternateAddressPage = new AlternateAddressPage(page);
-    await expect(alternateAddressPage.addressHeading).toBeVisible();
-    await fillAddress(alternateAddressPage, TEST_ALTERNATE_ADDRESS);
-    await alternateAddressPage.nextButton.click();
-
     const addressVerificationPage = new AddressVerificationPage(page);
-    await expect(addressVerificationPage.homeAddressHeading).toBeVisible();
-    await expect(
-      addressVerificationPage.getHomeAddressOption(TEST_HOME_ADDRESS.street)
-    ).toBeVisible();
-    await expect(addressVerificationPage.alternateAddressHeading).toBeVisible();
-    await expect(
-      addressVerificationPage.getAlternateAddressOption(
-        TEST_ALTERNATE_ADDRESS.street
-      )
-    ).toBeVisible();
+
+    await test.step("enters home address", async () => {
+      await expect(addressPage.addressHeading).toBeVisible();
+      await fillAddress(addressPage, TEST_HOME_ADDRESS);
+      await addressPage.nextButton.click();
+    });
+
+    await test.step("enters alternate address", async () => {
+      await expect(alternateAddressPage.addressHeading).toBeVisible();
+      await fillAddress(alternateAddressPage, TEST_ALTERNATE_ADDRESS);
+      await alternateAddressPage.nextButton.click();
+    });
+
+    await test.step("displays home and alternate addresses", async () => {
+      await expect(addressVerificationPage.homeAddressHeading).toBeVisible();
+      await expect(
+        addressVerificationPage.getHomeAddressOption(TEST_HOME_ADDRESS.street)
+      ).toBeVisible();
+      await expect(
+        addressVerificationPage.alternateAddressHeading
+      ).toBeVisible();
+      await expect(
+        addressVerificationPage.getAlternateAddressOption(
+          TEST_ALTERNATE_ADDRESS.street
+        )
+      ).toBeVisible();
+    });
   });
 
   test("prompts multiple addresses", async ({ page }) => {
