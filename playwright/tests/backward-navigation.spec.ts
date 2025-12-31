@@ -26,7 +26,7 @@ test.describe("E2E: Navigate backward in application", () => {
 
     await test.step("displays address verification page", async () => {
       await expect(
-        pageManager.addressVerificationPage.stepHeader
+        pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
       await expect(
         pageManager.addressVerificationPage.previousButton
@@ -78,7 +78,7 @@ test.describe("E2E: Navigate backward in application", () => {
 
     await test.step("confirms address verification", async () => {
       await expect(
-        pageManager.addressVerificationPage.stepHeader
+        pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_HOME_ADDRESS.street)
@@ -96,7 +96,7 @@ test.describe("E2E: Navigate backward in application", () => {
 
     await test.step("displays user-entered info on address verification page", async () => {
       await expect(
-        pageManager.addressVerificationPage.stepHeader
+        pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
       await expect(
         pageManager.addressVerificationPage.getHomeAddressOption(
