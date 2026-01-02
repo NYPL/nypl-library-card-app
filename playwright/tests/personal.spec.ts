@@ -7,19 +7,33 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/personal?newCard=true");
 });
 
-test("Display personal information form", async ({ page }) => {
-  const personalPage = new PersonalPage(page);
-  await expect(personalPage.mainHeading).toBeVisible();
-  await expect(personalPage.stepHeading).toBeVisible();
-  await expect(personalPage.firstNameInput).toBeVisible();
-  await expect(personalPage.lastNameInput).toBeVisible();
-  await expect(personalPage.emailInput).toBeVisible();
-  await expect(personalPage.dateOfBirthInput).toBeVisible();
-  await expect(personalPage.receiveInfoCheckbox).toBeVisible();
-  await expect(personalPage.alternateFormLink).toBeVisible();
-  await expect(personalPage.locationsLink).toBeVisible();
-  await expect(personalPage.previousButton).toBeVisible();
-  await expect(personalPage.nextButton).toBeVisible();
+test.describe("displays elements on personal information page", () => {
+  test("displays headings", async ({ page }) => {
+    const personalPage = new PersonalPage(page);
+    await expect(personalPage.mainHeading).toBeVisible();
+    await expect(personalPage.stepHeading).toBeVisible();
+  });
+
+  test("displays personal info form", async ({ page }) => {
+    const personalPage = new PersonalPage(page);
+    await expect(personalPage.firstNameInput).toBeVisible();
+    await expect(personalPage.lastNameInput).toBeVisible();
+    await expect(personalPage.emailInput).toBeVisible();
+    await expect(personalPage.dateOfBirthInput).toBeVisible();
+    await expect(personalPage.receiveInfoCheckbox).toBeVisible();
+  });
+
+  test("displays links", async ({ page }) => {
+    const personalPage = new PersonalPage(page);
+    await expect(personalPage.alternateFormLink).toBeVisible();
+    await expect(personalPage.locationsLink).toBeVisible();
+  });
+
+  test("displays next and previous buttons", async ({ page }) => {
+    const personalPage = new PersonalPage(page);
+    await expect(personalPage.previousButton).toBeVisible();
+    await expect(personalPage.nextButton).toBeVisible();
+  });
 });
 
 test("error validation for empty personal info form", async ({ page }) => {
