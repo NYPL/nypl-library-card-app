@@ -5,7 +5,11 @@ import {
   fillHomeAddress,
   fillPersonalInfo,
 } from "../utils/form-helper";
-import { TEST_HOME_ADDRESS, TEST_PATRON_INFO } from "../utils/constants";
+import {
+  TEST_ALTERNATE_ADDRESS,
+  TEST_HOME_ADDRESS,
+  TEST_PATRON_INFO,
+} from "../utils/constants";
 
 test.describe("E2E: Navigate backward in application", () => {
   test("navigates backward to landing without entering info", async ({
@@ -76,8 +80,12 @@ test.describe("E2E: Navigate backward in application", () => {
       await expect(
         pageManager.addressVerificationPage.stepHeader
       ).toBeVisible();
-      await pageManager.addressVerificationPage.homeAddressOption.check();
-      await pageManager.addressVerificationPage.alternateAddressOption.check();
+      await pageManager.addressVerificationPage
+        .getHomeAddressOption(TEST_HOME_ADDRESS.street)
+        .check();
+      await pageManager.addressVerificationPage
+        .getAlternateAddressOption(TEST_ALTERNATE_ADDRESS.street)
+        .check();
       await pageManager.addressVerificationPage.nextButton.click();
     });
 
@@ -91,10 +99,14 @@ test.describe("E2E: Navigate backward in application", () => {
         pageManager.addressVerificationPage.stepHeader
       ).toBeVisible();
       await expect(
-        pageManager.addressVerificationPage.homeAddressOption
+        pageManager.addressVerificationPage.getHomeAddressOption(
+          TEST_HOME_ADDRESS.street
+        )
       ).toBeChecked();
       await expect(
-        pageManager.addressVerificationPage.alternateAddressOption
+        pageManager.addressVerificationPage.getAlternateAddressOption(
+          TEST_ALTERNATE_ADDRESS.street
+        )
       ).toBeChecked();
       await pageManager.addressVerificationPage.previousButton.click();
     });
