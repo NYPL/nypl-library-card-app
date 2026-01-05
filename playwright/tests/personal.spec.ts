@@ -88,4 +88,13 @@ test.describe("displays error messages", () => {
     await personalPage.nextButton.click();
     await expect(personalPage.emailErrorMessage).toBeVisible();
   });
+
+  test("displays error for missing email top-level domain", async ({
+    page,
+  }) => {
+    const personalPage = new PersonalPage(page);
+    await personalPage.emailInput.fill("user@gmail");
+    await personalPage.nextButton.click();
+    await expect(personalPage.emailErrorMessage).toBeVisible();
+  });
 });
