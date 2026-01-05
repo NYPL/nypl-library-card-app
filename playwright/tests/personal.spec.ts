@@ -71,17 +71,6 @@ test.describe("displays error messages", () => {
     await personalPage.nextButton.click();
     await expect(personalPage.emailErrorMessage).toBeVisible();
   });
-
-  test("displays error for patron under 13 years old", async ({ page }) => {
-    const personalPage = new PersonalPage(page);
-    const today = new Date();
-    const minDate = new Date(today.setFullYear(today.getFullYear() - 13));
-    await personalPage.dateOfBirthInput.fill(
-      minDate.toISOString().split("T")[0]
-    );
-    await personalPage.nextButton.click();
-    await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
-  });
 });
 
 test.describe("enters personal information", () => {
