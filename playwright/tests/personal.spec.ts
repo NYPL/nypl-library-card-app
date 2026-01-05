@@ -18,8 +18,8 @@ test.describe("displays elements on personal information page", () => {
     const personalPage = new PersonalPage(page);
     await expect(personalPage.firstNameInput).toBeVisible();
     await expect(personalPage.lastNameInput).toBeVisible();
-    await expect(personalPage.emailInput).toBeVisible();
     await expect(personalPage.dateOfBirthInput).toBeVisible();
+    await expect(personalPage.emailInput).toBeVisible();
     await expect(personalPage.receiveInfoCheckbox).toBeVisible();
   });
 
@@ -41,14 +41,14 @@ test.describe("displays error messages", () => {
     const personalPage = new PersonalPage(page);
     await personalPage.firstNameInput.fill("");
     await personalPage.lastNameInput.fill("");
-    await personalPage.emailInput.fill("");
     await personalPage.dateOfBirthInput.fill("");
+    await personalPage.emailInput.fill("");
     await personalPage.nextButton.click();
 
     await expect(personalPage.firstNameErrorMessage).toBeVisible();
     await expect(personalPage.lastNameErrorMessage).toBeVisible();
-    await expect(personalPage.emailErrorMessage).toBeVisible();
     await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
+    await expect(personalPage.emailErrorMessage).toBeVisible();
   });
 
   test("displays error for missing email symbol", async ({ page }) => {
@@ -83,9 +83,9 @@ test.describe("enters personal information", () => {
     await expect(personalPage.lastNameInput).toHaveValue(
       TEST_PATRON_INFO.lastName
     );
-    await expect(personalPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
     await expect(personalPage.dateOfBirthInput).toHaveValue(
       TEST_PATRON_INFO.dateOfBirth
     );
+    await expect(personalPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
   });
 });
