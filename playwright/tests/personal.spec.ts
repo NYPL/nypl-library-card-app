@@ -36,6 +36,23 @@ test.describe("displays elements on personal information page", () => {
   });
 });
 
+test.describe("enters personal information", () => {
+  test("enters valid personal information", async ({ page }) => {
+    const personalPage = new PersonalPage(page);
+    await fillPersonalInfo(personalPage);
+    await expect(personalPage.firstNameInput).toHaveValue(
+      TEST_PATRON_INFO.firstName
+    );
+    await expect(personalPage.lastNameInput).toHaveValue(
+      TEST_PATRON_INFO.lastName
+    );
+    await expect(personalPage.dateOfBirthInput).toHaveValue(
+      TEST_PATRON_INFO.dateOfBirth
+    );
+    await expect(personalPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
+  });
+});
+
 test.describe("displays error messages", () => {
   test("displays errors for required fields", async ({ page }) => {
     const personalPage = new PersonalPage(page);
@@ -70,22 +87,5 @@ test.describe("displays error messages", () => {
     await personalPage.emailInput.fill("@gmail.com");
     await personalPage.nextButton.click();
     await expect(personalPage.emailErrorMessage).toBeVisible();
-  });
-});
-
-test.describe("enters personal information", () => {
-  test("enters valid personal information", async ({ page }) => {
-    const personalPage = new PersonalPage(page);
-    await fillPersonalInfo(personalPage);
-    await expect(personalPage.firstNameInput).toHaveValue(
-      TEST_PATRON_INFO.firstName
-    );
-    await expect(personalPage.lastNameInput).toHaveValue(
-      TEST_PATRON_INFO.lastName
-    );
-    await expect(personalPage.dateOfBirthInput).toHaveValue(
-      TEST_PATRON_INFO.dateOfBirth
-    );
-    await expect(personalPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
   });
 });
