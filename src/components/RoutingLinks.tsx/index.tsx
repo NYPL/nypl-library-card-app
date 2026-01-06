@@ -68,7 +68,11 @@ function RoutingLinks({
       variant="primary"
       id="routing-links-next"
       disabled={isDisabled}
+      aria-disabled={isDisabled}
       type="submit"
+      onClick={() => {
+        isDisabled = true;
+      }}
     >
       {nextText}
     </Button>
