@@ -19,6 +19,7 @@ const AccountFormContainer = ({ csrfToken }) => {
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const [isLoading, setIsLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { handleSubmit } = useFormContext();
@@ -32,6 +33,7 @@ const AccountFormContainer = ({ csrfToken }) => {
   const submitForm = async (formData, e) => {
     e.preventDefault();
     setIsLoading(true);
+    setDisabled(true);
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",
@@ -41,6 +43,7 @@ const AccountFormContainer = ({ csrfToken }) => {
     const nextUrl = `/review?${queryStr}`;
     await router.push(nextUrl);
     setIsLoading(false);
+    setDisabled(false);
   };
 
   return (
@@ -77,7 +80,7 @@ const AccountFormContainer = ({ csrfToken }) => {
           <RoutingLinks
             isDisabled={isLoading}
             previous={{ url: `/address-verification?${queryStr}` }}
-            next={{ submit: true }}
+            next={{ submit: true, disabled: disabled }}
           />
         </DSFormField>
       </FormRow>

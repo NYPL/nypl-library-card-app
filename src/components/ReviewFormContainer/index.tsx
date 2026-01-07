@@ -77,6 +77,7 @@ const styles = {
 function ReviewFormContainer({ csrfToken }) {
   const { t } = useTranslation("common");
   const [isLoading, setIsLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const { handleSubmit, getValues } = useFormContext();
   const { state, dispatch } = useFormDataContext();
   const { formValues, errorObj } = state;
@@ -207,6 +208,7 @@ function ReviewFormContainer({ csrfToken }) {
    */
   const submitForm = () => {
     setIsLoading(true);
+    setDisabled(true);
     // This is resetting any errors from previous submissions, if any.
     dispatch({ type: "SET_FORM_ERRORS", value: null });
 
@@ -256,6 +258,7 @@ function ReviewFormContainer({ csrfToken }) {
           dispatch({ type: "SET_FORM_ERRORS", value: error.response?.data });
         }
         setIsLoading(false);
+        setDisabled(false);
       });
   };
 
@@ -502,7 +505,11 @@ function ReviewFormContainer({ csrfToken }) {
           <DSFormField>
             <RoutingLinks
               isDisabled={isLoading}
-              next={{ submit: true, text: t("button.submit") }}
+              next={{
+                submit: true,
+                text: t("button.submit"),
+                disabled: disabled,
+              }}
             />
           </DSFormField>
         </FormRow>

@@ -39,6 +39,7 @@ function AddressVerificationContainer() {
   const { handleSubmit, register } = useForm();
   const { state, dispatch } = useFormDataContext();
   const [isLoading, setIsLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   // The `addressesResponse` is the value from Service Objects through the NYPL
   // Platform API.
   // The `formValues` object holds all the submitted user values.
@@ -92,6 +93,7 @@ function AddressVerificationContainer() {
   const submitForm = (formData, e) => {
     e.preventDefault();
     setIsLoading(true);
+    setDisabled(true);
     // These are the values from the radio button inputs if they were rendered.
     const home = formData["home-address-select"];
     const work = formData["work-address-select"];
@@ -143,6 +145,7 @@ function AddressVerificationContainer() {
 
     router.push(nextUrl);
     setIsLoading(false);
+    setDisabled(false);
   };
 
   /**
@@ -272,7 +275,7 @@ function AddressVerificationContainer() {
           <RoutingLinks
             isDisabled={isLoading}
             previous={{ url: `/location?${queryStr}` }}
-            next={{ submit: true }}
+            next={{ submit: true, disabled: disabled }}
           />
         </DSFormField>
       </FormRow>

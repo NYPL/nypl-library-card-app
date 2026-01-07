@@ -18,6 +18,7 @@ const PersonalFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const [isLoading, setIsLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const router = useRouter();
   // Specific functions and object from react-hook-form.
   const { register, handleSubmit } = useFormContext();
@@ -35,6 +36,7 @@ const PersonalFormContainer = () => {
   const submitForm = async (formData, e) => {
     e.preventDefault();
     setIsLoading(true);
+    setDisabled(true);
     // Set the global form state...
     dispatch({
       type: "SET_FORM_DATA",
@@ -44,6 +46,7 @@ const PersonalFormContainer = () => {
     const nextUrl = `/location?${queryStr}`;
     await router.push(nextUrl);
     setIsLoading(false);
+    setDisabled(false);
   };
 
   return (
@@ -92,7 +95,7 @@ const PersonalFormContainer = () => {
           <RoutingLinks
             isDisabled={isLoading}
             previous={{ url: `/new?${queryStr}` }}
-            next={{ submit: true }}
+            next={{ submit: true, disabled: disabled }}
           />
         </DSFormField>
       </FormRow>

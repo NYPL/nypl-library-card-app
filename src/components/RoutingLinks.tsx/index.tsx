@@ -17,7 +17,7 @@ export interface RoutingLinksType {
   previous?: LinkType;
   // We only want an optional "submit" property for the next prop.
   // The "url" and "text" props are not needed if "submit" is passed.
-  next: Partial<LinkType> & { submit?: boolean };
+  next: Partial<LinkType> & { submit?: boolean; disabled?: boolean };
   isDisabled?: boolean;
 }
 
@@ -68,11 +68,8 @@ function RoutingLinks({
       variant="primary"
       id="routing-links-next"
       disabled={isDisabled}
-      aria-disabled={isDisabled}
+      aria-disabled={next?.disabled}
       type="submit"
-      onClick={() => {
-        isDisabled = true;
-      }}
     >
       {nextText}
     </Button>
