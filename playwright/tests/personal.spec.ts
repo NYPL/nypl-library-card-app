@@ -93,7 +93,9 @@ test.describe("displays error messages", () => {
     await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
   });
 
-  test("displays error for incomplete date of birth", async ({ page }) => {
+  test("displays error for M/D/YY format in date of birth", async ({
+    page,
+  }) => {
     const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("1/1/84");
     await personalPage.nextButton.click();
