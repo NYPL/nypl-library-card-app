@@ -1,6 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
-import { TEST_BARCODE_NUMBER, TEST_PATRON_INFO } from "../utils/constants";
+import {
+  TEST_ALTERNATE_ADDRESS,
+  TEST_BARCODE_NUMBER,
+  TEST_HOME_ADDRESS,
+  TEST_PATRON_INFO,
+} from "../utils/constants";
 import { mockCreatePatronApi } from "../utils/mock-api";
 import {
   fillAccountInfo,
@@ -41,10 +46,14 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
 
     await test.step("confirms address verification", async () => {
       await expect(
-        pageManager.addressVerificationPage.stepHeader
+        pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
-      await pageManager.addressVerificationPage.homeAddressOption.check();
-      await pageManager.addressVerificationPage.alternateAddressOption.check();
+      await pageManager.addressVerificationPage
+        .getHomeAddressOption(TEST_HOME_ADDRESS.street)
+        .check();
+      await pageManager.addressVerificationPage
+        .getAlternateAddressOption(TEST_ALTERNATE_ADDRESS.street)
+        .check();
       await pageManager.addressVerificationPage.nextButton.click();
     });
 

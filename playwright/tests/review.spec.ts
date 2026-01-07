@@ -122,10 +122,14 @@ test.describe("edits patron information on review page", () => {
 
     await test.step("confirms addresses", async () => {
       await expect(
-        pageManager.addressVerificationPage.stepHeader
+        pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
-      await pageManager.addressVerificationPage.homeAddressOption.check();
-      await pageManager.addressVerificationPage.alternateAddressOption.check();
+      await pageManager.addressVerificationPage
+        .getHomeAddressOption(TEST_HOME_ADDRESS.street)
+        .check();
+      await pageManager.addressVerificationPage
+        .getAlternateAddressOption(TEST_ALTERNATE_ADDRESS.street)
+        .check();
       await pageManager.addressVerificationPage.nextButton.click();
     });
 
