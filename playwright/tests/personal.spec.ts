@@ -68,24 +68,40 @@ test.describe("displays error messages", () => {
     await expect(personalPage.emailErrorMessage).toBeVisible();
   });
 
-  test("displays error for invalid date of birth format", async ({ page }) => {
+  test("displays error for dashes in date of birth", async ({ page }) => {
     const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("12-25-1984");
     await personalPage.nextButton.click();
     await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
+  });
 
+  test("displays error for YYYY/MM/DD format in date of birth", async ({
+    page,
+  }) => {
+    const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("1984/12/25");
     await personalPage.nextButton.click();
     await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
+  });
 
+  test("displays error for DD/MM/YYYY format in date of birth", async ({
+    page,
+  }) => {
+    const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("25/12/1984");
     await personalPage.nextButton.click();
     await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
+  });
 
+  test("displays error for incomplete date of birth", async ({ page }) => {
+    const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("1/1/84");
     await personalPage.nextButton.click();
     await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
+  });
 
+  test("displays error for written date of birth", async ({ page }) => {
+    const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("December 25, 1984");
     await personalPage.nextButton.click();
     await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
