@@ -214,3 +214,39 @@ test.describe("mocks API responses on Review page", () => {
     await expect(reviewPage.unavailableUsernameError).toBeVisible();
   });
 });
+
+test.describe("displays error messages", () => {
+  test("displays error for missing email symbol", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.emailInput.fill("testgmail.com");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.emailErrorMessage).toBeVisible();
+  });
+
+  test("displays error for missing email domain", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.emailInput.fill("test@.com");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.emailErrorMessage).toBeVisible();
+  });
+
+  test("displays error for missing email username", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.emailInput.fill("@gmail.com");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.emailErrorMessage).toBeVisible();
+  });
+
+  test("displays error for missing email top-level domain", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.emailInput.fill("user@gmail");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.emailErrorMessage).toBeVisible();
+  });
+});

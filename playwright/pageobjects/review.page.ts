@@ -23,6 +23,7 @@ export class ReviewPage {
   readonly emailHeading: Locator;
   readonly emailInputHeading: Locator;
   readonly emailInput: Locator;
+  readonly emailErrorMessage: Locator;
   readonly receiveInfoHeading: Locator;
   readonly receiveInfoChoice: Locator;
   readonly receiveInfoCheckbox: Locator;
@@ -130,6 +131,9 @@ export class ReviewPage {
       name: "Email address (required)",
       exact: true,
     });
+    this.emailErrorMessage = page.getByText(
+      "There was a problem. Please enter a valid email address."
+    );
     this.receiveInfoHeading = page.getByText(
       "Receive information about NYPL's programs and services",
       { exact: true }
