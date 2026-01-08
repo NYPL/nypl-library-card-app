@@ -32,9 +32,9 @@ export class PersonalPage {
     this.lastNameInput = this.page.getByLabel(/Last name/i);
     this.dateOfBirthInput = this.page.getByLabel(/Date of birth/i);
     this.emailInput = this.page.getByLabel(/Email/i);
-    this.receiveInfoCheckbox = this.page.getByText(
-      "Yes, I would like to receive information about NYPL's programs and services"
-    );
+    this.receiveInfoCheckbox = this.page.getByRole("checkbox", {
+      name: "Yes, I would like to receive information about NYPL's programs and services",
+    });
     this.previousButton = this.page.getByRole("link", {
       name: "Previous",
       exact: true,
