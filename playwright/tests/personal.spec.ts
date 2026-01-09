@@ -68,6 +68,54 @@ test.describe("displays error messages", () => {
     await expect(personalPage.emailErrorMessage).toBeVisible();
   });
 
+  test("displays error for dashes in date of birth", async ({ page }) => {
+    const personalPage = new PersonalPage(page);
+    await personalPage.dateOfBirthInput.fill("12-25-1984");
+    await personalPage.nextButton.click();
+    await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
+  });
+
+  test("displays error for YYYY/MM/DD format in date of birth", async ({
+    page,
+  }) => {
+    const personalPage = new PersonalPage(page);
+    await personalPage.dateOfBirthInput.fill("1984/12/25");
+    await personalPage.nextButton.click();
+    await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
+  });
+
+  test("displays error for DD/MM/YYYY format in date of birth", async ({
+    page,
+  }) => {
+    const personalPage = new PersonalPage(page);
+    await personalPage.dateOfBirthInput.fill("25/12/1984");
+    await personalPage.nextButton.click();
+    await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
+  });
+
+  test("displays error for M/D/YY format in date of birth", async ({
+    page,
+  }) => {
+    const personalPage = new PersonalPage(page);
+    await personalPage.dateOfBirthInput.fill("1/1/84");
+    await personalPage.nextButton.click();
+    await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
+  });
+
+  test("displays error for written date of birth", async ({ page }) => {
+    const personalPage = new PersonalPage(page);
+    await personalPage.dateOfBirthInput.fill("December 25, 1984");
+    await personalPage.nextButton.click();
+    await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
+  });
+
+  test("displays error for future date of birth", async ({ page }) => {
+    const personalPage = new PersonalPage(page);
+    await personalPage.dateOfBirthInput.fill("12/31/2099");
+    await personalPage.nextButton.click();
+    await expect(personalPage.dateOfBirthErrorMessage).toBeVisible();
+  });
+
   test("displays error for missing email symbol", async ({ page }) => {
     const personalPage = new PersonalPage(page);
     await personalPage.emailInput.fill("testgmail.com");
