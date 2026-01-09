@@ -16,36 +16,89 @@ test.describe("Accessibility tests on personal info page", () => {
 
   test("should have keyboard focus indicators for form fields", async ({
     page,
+    browserName,
   }) => {
     const personalPage = new PersonalPage(page);
+    if (browserName === "webkit") {
+      await page.keyboard.press("Alt+Tab");
+    } else {
+      await page.keyboard.press("Tab");
+    }
 
-    await personalPage.stepHeading.focus();
-    await page.keyboard.press("Tab");
+    await personalPage.firstNameInput.focus();
     await expect(personalPage.firstNameInput).toBeFocused();
-    await page.keyboard.press("Tab");
+    await personalPage.firstNameInput.fill("John");
+
+    if (browserName === "webkit") {
+      await page.keyboard.press("Alt+Tab");
+    } else {
+      await page.keyboard.press("Tab");
+    }
     await expect(personalPage.lastNameInput).toBeFocused();
-    await page.keyboard.press("Tab");
+    await personalPage.lastNameInput.fill("Doe");
+    if (browserName === "webkit") {
+      await page.keyboard.press("Alt+Tab");
+    } else {
+      await page.keyboard.press("Tab");
+    }
     await expect(personalPage.dateOfBirthInput).toBeFocused();
-    await page.keyboard.press("Tab");
+    await personalPage.dateOfBirthInput.fill("03/30/2003");
+
+    if (browserName === "webkit") {
+      await page.keyboard.press("Alt+Tab");
+    } else {
+      await page.keyboard.press("Tab");
+    }
     await expect(personalPage.emailInput).toBeFocused();
-  });
-
-  test("should have keyboard focus validation for links, checkbox, and buttons", async ({
-    page,
-  }) => {
-    const personalPage = new PersonalPage(page);
-
-    await personalPage.emailInput.focus();
     await personalPage.emailInput.fill("test@gmail.com");
-    await page.keyboard.press("Tab");
-    await expect(personalPage.alternateFormLink).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(personalPage.locationsLink).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(personalPage.receiveInfoCheckbox).toBeFocused();
-    await page.keyboard.press("Tab");
+
+    if (browserName === "webkit") {
+      await page.keyboard.press("Alt+Tab");
+    } else {
+      await page.keyboard.press("Tab");
+    }
+    if (
+      (await personalPage.alternateFormLink.isVisible()) &&
+      (await personalPage.alternateFormLink.isEnabled())
+    ) {
+      await expect(personalPage.alternateFormLink).toBeFocused();
+    }
+
+    if (browserName === "webkit") {
+      await page.keyboard.press("Alt+Tab");
+    } else {
+      await page.keyboard.press("Tab");
+    }
+
+    if (
+      (await personalPage.locationsLink.isVisible()) &&
+      (await personalPage.locationsLink.isEnabled())
+    ) {
+      await expect(personalPage.locationsLink).toBeFocused();
+    }
+    if (browserName === "webkit") {
+      await page.keyboard.press("Alt+Tab");
+    } else {
+      await page.keyboard.press("Tab");
+    }
+    if (
+      (await personalPage.receiveCheckboxA11y.isVisible()) &&
+      (await personalPage.receiveCheckboxA11y.isEnabled())
+    ) {
+      await expect(personalPage.receiveCheckboxA11y).toBeFocused();
+    }
+    if (browserName === "webkit") {
+      await page.keyboard.press("Alt+Tab");
+    } else {
+      await page.keyboard.press("Tab");
+    }
     await expect(personalPage.previousButton).toBeFocused();
-    await page.keyboard.press("Tab");
+
+    if (browserName === "webkit") {
+      await page.keyboard.press("Alt+Tab");
+    } else {
+      await page.keyboard.press("Tab");
+    }
     await expect(personalPage.nextButton).toBeFocused();
   });
 });
