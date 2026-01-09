@@ -21,7 +21,7 @@ The production site on NYPL.org:
 
 The current production version:
 
-- v1.3.0
+- v1.3.1
 
 ## Installation & Configuration
 
