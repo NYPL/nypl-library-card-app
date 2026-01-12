@@ -28,10 +28,16 @@ test.describe("Accessibility tests on Address Page", () => {
       addressPage.nextButton,
     ];
 
-    for (let i = 0; i < addressLocators.length; i++) {
-      await addressLocators[i].focus();
-      await expect(addressLocators[i]).toBeFocused();
-      if (i < addressLocators.length - 1) {
+    await addressLocators[0].focus();
+
+    for (
+      let locatorIndex = 0;
+      locatorIndex < addressLocators.length;
+      locatorIndex++
+    ) {
+      await addressLocators[locatorIndex].focus();
+      await expect(addressLocators[locatorIndex]).toBeFocused();
+      if (locatorIndex < addressLocators.length - 1) {
         await page.keyboard.press("Tab");
       }
     }
