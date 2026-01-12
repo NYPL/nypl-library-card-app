@@ -18,30 +18,22 @@ test.describe("Accessibility tests on Address Page", () => {
   }) => {
     const addressPage = new AddressPage(page);
 
-    await addressPage.streetAddressInput.focus();
-    await addressPage.streetAddressInput.fill("123 Main St");
-    await expect(addressPage.streetAddressInput).toBeFocused();
+    const addressLocators = [
+      addressPage.streetAddressInput,
+      addressPage.apartmentSuiteInput,
+      addressPage.cityInput,
+      addressPage.stateInput,
+      addressPage.postalCodeInput,
+      addressPage.previousButton,
+      addressPage.nextButton,
+    ];
 
-    await page.keyboard.press("Tab");
-    await addressPage.apartmentSuiteInput.fill("Apt 4B");
-    await expect(addressPage.apartmentSuiteInput).toBeFocused();
-
-    await page.keyboard.press("Tab");
-    await addressPage.cityInput.fill("New York");
-    await expect(addressPage.cityInput).toBeFocused();
-
-    await page.keyboard.press("Tab");
-    await addressPage.stateInput.fill("NY");
-    await expect(addressPage.stateInput).toBeFocused();
-
-    await page.keyboard.press("Tab");
-    await addressPage.postalCodeInput.fill("10001");
-    await expect(addressPage.postalCodeInput).toBeFocused();
-
-    await page.keyboard.press("Tab");
-    await expect(addressPage.previousButton).toBeFocused();
-
-    await page.keyboard.press("Tab");
-    await expect(addressPage.nextButton).toBeFocused();
+    for (let i = 0; i < addressLocators.length; i++) {
+      await addressLocators[i].focus();
+      await expect(addressLocators[i]).toBeFocused();
+      if (i < addressLocators.length - 1) {
+        await page.keyboard.press("Tab");
+      }
+    }
   });
 });
