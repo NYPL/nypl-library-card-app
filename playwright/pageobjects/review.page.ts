@@ -20,6 +20,7 @@ export class ReviewPage {
   readonly dateOfBirthHeading: Locator;
   readonly dateOfBirthInputHeading: Locator;
   readonly dateOfBirthInput: Locator;
+  readonly dateOfBirthErrorMessage: Locator;
   readonly emailHeading: Locator;
   readonly emailInputHeading: Locator;
   readonly emailInput: Locator;
@@ -123,6 +124,9 @@ export class ReviewPage {
       name: "Date of birth (required)",
       exact: true,
     });
+    this.dateOfBirthErrorMessage = page.getByText(
+      "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes."
+    );
     this.emailHeading = page.getByText("Email address", { exact: true });
     this.emailInputHeading = page.getByText("Email address (required)", {
       exact: true,
