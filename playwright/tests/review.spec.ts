@@ -6,8 +6,7 @@ import {
   TEST_CUSTOMIZE_ACCOUNT,
   TEST_HOME_ADDRESS,
   TEST_PATRON_INFO,
-  USERNAME_AVAILABLE_MESSAGE,
-  USERNAME_UNAVAILABLE_MESSAGE,
+  ERROR_MESSAGES,
 } from "../utils/constants";
 import {
   fillAccountInfo,
@@ -194,7 +193,7 @@ test.describe("edits patron information on review page", () => {
 test.describe("mocks API responses on Review page", () => {
   test("displays username available message", async ({ page }) => {
     // mock the API call for username availability
-    await mockUsernameApi(page, USERNAME_AVAILABLE_MESSAGE);
+    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_AVAILABLE);
 
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
@@ -205,7 +204,7 @@ test.describe("mocks API responses on Review page", () => {
 
   test("displays username unavailable error message", async ({ page }) => {
     // mock the API call for username unavailability
-    await mockUsernameApi(page, USERNAME_UNAVAILABLE_MESSAGE);
+    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_UNAVAILABLE);
 
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();

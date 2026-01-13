@@ -53,8 +53,10 @@ export const TEST_MULTIMATCH_ADDRESS_WEST: AddressData = {
   postalCode: "10001-2101",
 };
 
-export const USERNAME_AVAILABLE_MESSAGE = "This username is available.";
-export const USERNAME_UNAVAILABLE_MESSAGE =
-  "This username is unavailable. Please try another.";
+export const ERROR_MESSAGES = {
+  EMAIL_INVALID: "There was a problem. Please enter a valid email address.",
+  USERNAME_UNAVAILABLE: "This username is unavailable. Please try another.",
+  USERNAME_AVAILABLE: "This username is available.",
+};
 
 export const TEST_BARCODE_NUMBER = "12341234123412";

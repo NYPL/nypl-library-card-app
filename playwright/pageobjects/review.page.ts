@@ -1,8 +1,5 @@
 import { Page, Locator } from "@playwright/test";
-import {
-  USERNAME_AVAILABLE_MESSAGE,
-  USERNAME_UNAVAILABLE_MESSAGE,
-} from "../utils/constants";
+import { ERROR_MESSAGES } from "../utils/constants";
 
 export class ReviewPage {
   readonly page: Page;
@@ -131,9 +128,7 @@ export class ReviewPage {
       name: "Email address (required)",
       exact: true,
     });
-    this.emailErrorMessage = page.getByText(
-      "There was a problem. Please enter a valid email address."
-    );
+    this.emailErrorMessage = page.getByText(ERROR_MESSAGES.EMAIL_INVALID);
     this.receiveInfoHeading = page.getByText(
       "Receive information about NYPL's programs and services",
       { exact: true }
@@ -188,9 +183,11 @@ export class ReviewPage {
       name: "Check if username is available",
       exact: true,
     });
-    this.availableUsernameMessage = page.getByText(USERNAME_AVAILABLE_MESSAGE);
+    this.availableUsernameMessage = page.getByText(
+      ERROR_MESSAGES.USERNAME_AVAILABLE
+    );
     this.unavailableUsernameError = page.getByText(
-      USERNAME_UNAVAILABLE_MESSAGE
+      ERROR_MESSAGES.USERNAME_UNAVAILABLE
     );
     this.passwordHeading = page.getByText("Password", { exact: true });
     this.passwordInputHeading = page.getByText("Password (required)", {
