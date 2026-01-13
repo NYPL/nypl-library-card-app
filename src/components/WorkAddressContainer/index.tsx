@@ -29,7 +29,6 @@ import { PageSubHeading } from "../PageSubHeading";
 
 const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [disabled, setDisabled] = useState(false);
   const { state, dispatch } = useFormDataContext();
   const { formValues, addressesResponse } = state;
   const router = useRouter();
@@ -45,7 +44,6 @@ const AddressContainer = ({ csrfToken }) => {
   const submitForm = async (formData, e) => {
     e.preventDefault();
     setIsLoading(true);
-    setDisabled(true);
     const workAddress = constructAddressType(formData, "work");
     // If the work address wasn't filled out, that's okay, proceed.
     if (
@@ -120,7 +118,6 @@ const AddressContainer = ({ csrfToken }) => {
           } else {
             (async () => {
               setIsLoading(false);
-              setDisabled(false);
               nextUrl = `/address-verification?${queryStr}`;
 
               await router.push(nextUrl);
@@ -172,7 +169,7 @@ const AddressContainer = ({ csrfToken }) => {
             <RoutingLinks
               isDisabled={isLoading}
               previous={{ url: `/location?${queryStr}` }}
-              next={{ submit: true, disabled: disabled }}
+              next={{ submit: true }}
             />
           </DSFormField>
         </FormRow>

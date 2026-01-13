@@ -30,7 +30,6 @@ import { PageSubHeading } from "../PageSubHeading";
 
 const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [disabled, setDisabled] = useState(false);
   const { state, dispatch } = useFormDataContext();
   const { formValues } = state;
   const router = useRouter();
@@ -47,7 +46,6 @@ const AddressContainer = ({ csrfToken }) => {
   const submitForm = (formData, e) => {
     e.preventDefault();
     setIsLoading(true);
-    setDisabled(true);
 
     // Set the global form state...
     dispatch({
@@ -116,7 +114,6 @@ const AddressContainer = ({ csrfToken }) => {
       })
       .finally(() => {
         setIsLoading(false);
-        setDisabled(false);
         // Check to see if the submitted address is in NYC.
         const addressInNYC =
           nyCities.includes(updatedHomeAddress.city?.toLowerCase()) ||
@@ -190,7 +187,7 @@ const AddressContainer = ({ csrfToken }) => {
             <RoutingLinks
               isDisabled={isLoading}
               previous={{ url: `/personal?${queryStr}` }}
-              next={{ submit: true, disabled: disabled }}
+              next={{ submit: true }}
             />
           </DSFormField>
         </FormRow>
