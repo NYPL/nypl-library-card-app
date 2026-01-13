@@ -78,7 +78,7 @@ function RoutingLinks({
 
   return (
     <Box
-      my="2rem"
+      mt="2rem"
       display="flex"
       gap="xs"
       flexDir={{ base: "column", md: "row" }}
