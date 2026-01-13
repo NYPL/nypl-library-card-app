@@ -1,8 +1,8 @@
 import { AddressData } from "./types";
 
 const uniqueSuffix = Date.now().toString().slice(-6);
+const TEST_UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
 
-const UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
 export const TEST_PATRON_INFO = {
   firstName: "Jane",
   lastName: "Doe",
@@ -18,7 +18,7 @@ export const TEST_HOME_ADDRESS: AddressData = {
   postalCode: "06902",
 };
 export const TEST_CUSTOMIZE_ACCOUNT = {
-  username: UNIQUE_USERNAME,
+  username: TEST_UNIQUE_USERNAME,
   password: "Test@1234",
   homeLibrary: "eb", // used to confirm dropdown selection
   defaultLibrary: "E-Branch", // used to confirm text displays on page
