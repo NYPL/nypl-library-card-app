@@ -14,8 +14,8 @@ import { AddressFormPage, AddressData } from "./types";
 export async function fillPersonalInfo(page: PersonalPage | ReviewPage) {
   await page.firstNameInput.fill(TEST_PATRON_INFO.firstName);
   await page.lastNameInput.fill(TEST_PATRON_INFO.lastName);
-  await page.emailInput.fill(TEST_PATRON_INFO.email);
   await page.dateOfBirthInput.fill(TEST_PATRON_INFO.dateOfBirth);
+  await page.emailInput.fill(TEST_PATRON_INFO.email);
 }
 
 export async function fillAddress(
