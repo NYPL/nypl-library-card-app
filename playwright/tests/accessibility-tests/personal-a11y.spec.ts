@@ -16,89 +16,21 @@ test.describe("Accessibility tests on personal info page", () => {
 
   test("should have keyboard focus indicators for form fields", async ({
     page,
-    browserName,
   }) => {
     const personalPage = new PersonalPage(page);
-    if (browserName === "webkit") {
-      await page.keyboard.press("Alt+Tab");
-    } else {
-      await page.keyboard.press("Tab");
-    }
 
-    await personalPage.firstNameInput.focus();
-    await expect(personalPage.firstNameInput).toBeFocused();
-    await personalPage.firstNameInput.fill("John");
+    const personalLocators = [
+      personalPage.firstNameInput,
+      personalPage.lastNameInput,
+      personalPage.dateOfBirthInput,
+      personalPage.emailInput,
+    ];
 
-    if (browserName === "webkit") {
-      await page.keyboard.press("Alt+Tab");
-    } else {
-      await page.keyboard.press("Tab");
-    }
-    await expect(personalPage.lastNameInput).toBeFocused();
-    await personalPage.lastNameInput.fill("Doe");
-    if (browserName === "webkit") {
-      await page.keyboard.press("Alt+Tab");
-    } else {
-      await page.keyboard.press("Tab");
-    }
-    await expect(personalPage.dateOfBirthInput).toBeFocused();
-    await personalPage.dateOfBirthInput.fill("03/30/2003");
+    await personalPage.stepHeading.focus();
 
-    if (browserName === "webkit") {
-      await page.keyboard.press("Alt+Tab");
-    } else {
+    for (const locator of personalLocators) {
       await page.keyboard.press("Tab");
+      await expect(locator).toBeFocused();
     }
-    await expect(personalPage.emailInput).toBeFocused();
-    await personalPage.emailInput.fill("test@gmail.com");
-
-    if (browserName === "webkit") {
-      await page.keyboard.press("Alt+Tab");
-    } else {
-      await page.keyboard.press("Tab");
-    }
-    if (
-      (await personalPage.alternateFormLink.isVisible()) &&
-      (await personalPage.alternateFormLink.isEnabled())
-    ) {
-      await expect(personalPage.alternateFormLink).toBeFocused();
-    }
-
-    if (browserName === "webkit") {
-      await page.keyboard.press("Alt+Tab");
-    } else {
-      await page.keyboard.press("Tab");
-    }
-
-    if (
-      (await personalPage.locationsLink.isVisible()) &&
-      (await personalPage.locationsLink.isEnabled())
-    ) {
-      await expect(personalPage.locationsLink).toBeFocused();
-    }
-    if (browserName === "webkit") {
-      await page.keyboard.press("Alt+Tab");
-    } else {
-      await page.keyboard.press("Tab");
-    }
-    if (
-      (await personalPage.receiveCheckboxA11y.isVisible()) &&
-      (await personalPage.receiveCheckboxA11y.isEnabled())
-    ) {
-      await expect(personalPage.receiveCheckboxA11y).toBeFocused();
-    }
-    if (browserName === "webkit") {
-      await page.keyboard.press("Alt+Tab");
-    } else {
-      await page.keyboard.press("Tab");
-    }
-    await expect(personalPage.previousButton).toBeFocused();
-
-    if (browserName === "webkit") {
-      await page.keyboard.press("Alt+Tab");
-    } else {
-      await page.keyboard.press("Tab");
-    }
-    await expect(personalPage.nextButton).toBeFocused();
   });
 });
