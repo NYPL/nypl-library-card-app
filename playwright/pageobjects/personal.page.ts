@@ -9,7 +9,6 @@ export class PersonalPage {
   readonly emailInput: Locator;
   readonly dateOfBirthInput: Locator;
   readonly receiveInfoCheckbox: Locator;
-  readonly receiveCheckboxA11y;
   readonly previousButton: Locator;
   readonly nextButton: Locator;
   readonly firstNameErrorMessage: Locator;
@@ -36,9 +35,7 @@ export class PersonalPage {
     this.receiveInfoCheckbox = this.page.getByText(
       "Yes, I would like to receive information about NYPL's programs and services"
     );
-    this.receiveCheckboxA11y = this.page.getByLabel(
-      "/Yes, I would like to receive/i"
-    );
+
     this.previousButton = this.page.getByRole("link", {
       name: "Previous",
       exact: true,
