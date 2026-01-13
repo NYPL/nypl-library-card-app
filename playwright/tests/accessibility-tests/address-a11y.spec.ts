@@ -13,9 +13,7 @@ test.describe("Accessibility tests on Address Page", () => {
       .analyze();
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
-  test("should have keyboard focus indicators for form fields and buttons", async ({
-    page,
-  }) => {
+  test("should reach all form fields via the tab key", async ({ page }) => {
     const addressPage = new AddressPage(page);
 
     const addressLocators = [
@@ -24,22 +22,13 @@ test.describe("Accessibility tests on Address Page", () => {
       addressPage.cityInput,
       addressPage.stateInput,
       addressPage.postalCodeInput,
-      addressPage.previousButton,
-      addressPage.nextButton,
     ];
 
-    await addressLocators[0].focus();
+    await addressPage.stepHeading.focus();
 
-    for (
-      let locatorIndex = 0;
-      locatorIndex < addressLocators.length;
-      locatorIndex++
-    ) {
-      await addressLocators[locatorIndex].focus();
-      await expect(addressLocators[locatorIndex]).toBeFocused();
-      if (locatorIndex < addressLocators.length - 1) {
-        await page.keyboard.press("Tab");
-      }
+    for (const locator of addressLocators) {
+      await page.keyboard.press("Tab");
+      await expect(locator).toBeFocused();
     }
   });
 });
