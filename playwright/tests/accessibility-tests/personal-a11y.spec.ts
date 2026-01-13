@@ -14,9 +14,7 @@ test.describe("Accessibility tests on personal info page", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("should have keyboard focus indicators for form fields", async ({
-    page,
-  }) => {
+  test("should reach all form fields via the tab key", async ({ page }) => {
     const personalPage = new PersonalPage(page);
 
     const personalLocators = [
