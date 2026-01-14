@@ -13,7 +13,11 @@ import {
   TEST_PATRON_INFO,
 } from "../utils/constants";
 
-import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
+import {
+  getPatronID,
+  getPatronData,
+  deletePatron,
+} from "../utils/sierra-api-utils";
 
 test.describe("E2E: Complete application with Sierra API integration", () => {
   let scrapedBarcode: string | null = null;
@@ -158,6 +162,37 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       scrapedBarcode =
         await pageManager.congratsPage.patronBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();
+    });
+    test.step("verify patron data on backend", async () => {
+      const patronID = await getPatronID(scrapedBarcode);
+      const patronData = await getPatronData(patronID);
+      const expectedName =
+        `${TEST_PATRON_INFO.lastName}, ${TEST_PATRON_INFO.firstName}`.toUpperCase();
+      const [month, day, year] = TEST_PATRON_INFO.dateOfBirth.split("/");
+      const normalizedExpectedDOB = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+
+      const expectedAddress = new RegExp(
+        [
+          TEST_HOME_ADDRESS.street,
+          TEST_HOME_ADDRESS.apartmentSuite,
+          TEST_HOME_ADDRESS.city,
+          TEST_HOME_ADDRESS.state,
+          TEST_HOME_ADDRESS.postalCode,
+        ]
+          .filter(Boolean)
+          .map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+          .join(".*"),
+        "i"
+      );
+
+      const actualName = patronData.names?.[0].toUpperCase();
+      const actualAddressText = patronData.addresses?.[0].lines
+        .join(" ")
+        .toUpperCase();
+
+      expect(actualName).toContain(expectedName);
+      expect(patronData.birthDate).toBe(normalizedExpectedDOB);
+      expect(actualAddressText).toMatch(expectedAddress);
     });
   });
 });
