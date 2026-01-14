@@ -59,6 +59,7 @@ export class PersonalPage {
     );
     this.alternateFormLink = this.page.getByRole("link", {
       name: "alternate form",
+      exact: true,
     });
     this.locationsLink = this.page.getByRole("link", {
       name: "locations",
