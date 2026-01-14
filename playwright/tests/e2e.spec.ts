@@ -170,6 +170,10 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
         `${TEST_PATRON_INFO.lastName}, ${TEST_PATRON_INFO.firstName}`.toUpperCase();
       const [month, day, year] = TEST_PATRON_INFO.dateOfBirth.split("/");
       const normalizedExpectedDOB = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+      const expectedEmail = TEST_PATRON_INFO.email.toLowerCase();
+      const patronEmails = patronData.emails?.map((email) =>
+        email.toLowerCase()
+      );
 
       const expectedAddress = new RegExp(
         [
@@ -193,6 +197,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       expect(actualName).toContain(expectedName);
       expect(patronData.birthDate).toBe(normalizedExpectedDOB);
       expect(actualAddressText).toMatch(expectedAddress);
+      expect(patronEmails).toContain(expectedEmail);
     });
   });
 });
