@@ -18,7 +18,7 @@ const LanguageMenu = (): JSX.Element => {
       >
         {language.label}
       </a>,
-      ...[isLastItem ? [] : <span key={`span-${language.charCode}`}>·</span>],
+      isLastItem ? null : <span key={`span-${language.charCode}`}>·</span>,
     ];
   });
   // Flatten the array of arrays for the `List` component.
