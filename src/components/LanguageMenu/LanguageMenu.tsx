@@ -9,7 +9,8 @@ import { languageData } from "../../data/languages";
  */
 const LanguageMenu = (): JSX.Element => {
   // Every link item is separated by a dot.
-  const languageElems = languageData.map((language) => {
+  const languageElems = languageData.map((language, idx) => {
+    const isLastItem = idx === languageData.length - 1;
     return [
       <a
         href={`/library-card/new?lang=${language.charCode}`}
@@ -17,7 +18,7 @@ const LanguageMenu = (): JSX.Element => {
       >
         {language.label}
       </a>,
-      <span key={`span-${language.charCode}`}>·</span>,
+      ...[isLastItem ? [] : <span key={`span-${language.charCode}`}>·</span>],
     ];
   });
   // Flatten the array of arrays for the `List` component.
