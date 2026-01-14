@@ -27,10 +27,6 @@ test.describe("Accessibility tests on Address Page", () => {
     await addressPage.stepHeading.focus();
 
     for (const locator of addressLocators) {
-      if (locator === addressPage.previousButton) {
-        await page.keyboard.press("Tab");
-      }
-
       await page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
     }
