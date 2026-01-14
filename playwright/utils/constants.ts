@@ -54,6 +54,10 @@ export const TEST_MULTIMATCH_ADDRESS_WEST: AddressData = {
 };
 
 export const ERROR_MESSAGES = {
+  FIRST_NAME_INVALID: "There was a problem. Please enter a valid first name.",
+  LAST_NAME_INVALID: "There was a problem. Please enter a valid last name.",
+  DATE_OF_BIRTH_INVALID:
+    "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
   EMAIL_INVALID: "There was a problem. Please enter a valid email address.",
   USERNAME_UNAVAILABLE: "This username is unavailable. Please try another.",
   USERNAME_AVAILABLE: "This username is available.",
