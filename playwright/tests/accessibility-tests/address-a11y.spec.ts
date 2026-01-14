@@ -22,11 +22,17 @@ test.describe("Accessibility tests on Address Page", () => {
       addressPage.cityInput,
       addressPage.stateInput,
       addressPage.postalCodeInput,
+      addressPage.previousButton,
+      addressPage.nextButton,
     ];
 
     await addressPage.stepHeading.focus();
 
     for (const locator of addressLocators) {
+      if (locator === addressPage.previousButton) {
+        await page.keyboard.press("Tab");
+      }
+
       await page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
     }
