@@ -1,6 +1,19 @@
+require("dotenv").config({
+  path: "/Users/bridgetterose/Desktop/nypl-library-card-app/.env.local",
+});
 const sierraApiBaseUrl = process.env.SIERRA_API_BASE_URL_QA;
 const basicAuth = process.env.SIERRA_BASIC_AUTH_BASE64;
 
+export interface SierraPatron {
+  id: number;
+  names: string[];
+  birthDate?: string;
+  addresses?: {
+    lines: string[];
+    type: string;
+  }[];
+  emails?: string[];
+}
 export async function getAuthToken(): Promise<string> {
   const response = await fetch(`${sierraApiBaseUrl}/iii/sierra-api/v6/token`, {
     method: "POST",
@@ -38,6 +51,25 @@ export async function getPatronID(barcode: string): Promise<number> {
   if (!data.id) throw new Error(`No patron found for barcode ${barcode}`);
   const patronId: number = data.id;
   return patronId;
+}
+
+export async function getPatronData(patronId: number): Promise<SierraPatron> {
+  const authToken = await getAuthToken();
+  const fields = "names,birthDate,addresses,emails";
+  const response = await fetch(
+    `${sierraApiBaseUrl}/iii/sierra-api/v6/patrons/${patronId}?fields=${fields}`,
+    {
+      method: "GET",
+      headers: { Authorization: `Bearer ${authToken}` },
+    }
+  );
+
+  if (!response.ok)
+    throw new Error(
+      `Failed to fetch patron data for ID ${patronId}: ${response.status} ${response.statusText}`
+    );
+
+  return (await response.json()) as SierraPatron;
 }
 
 export async function deletePatron(patronId: number): Promise<void> {
