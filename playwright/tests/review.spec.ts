@@ -168,7 +168,7 @@ test.describe("edits patron information on review page", () => {
   });
 
   // does not replace account info since there's no existing text
-  test("enters Account information", async ({ page }) => {
+  test("enters account information", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
     await fillAccountInfo(reviewPage);
@@ -190,7 +190,7 @@ test.describe("edits patron information on review page", () => {
   });
 });
 
-test.describe("mocks API responses on Review page", () => {
+test.describe("mocks API responses on review page", () => {
   test("displays username available message", async ({ page }) => {
     // mock the API call for username availability
     await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_AVAILABLE);
@@ -210,7 +210,7 @@ test.describe("mocks API responses on Review page", () => {
     await reviewPage.editAccountButton.click();
     await reviewPage.usernameInput.fill("UnavailableUsername");
     await reviewPage.availableUsernameButton.click();
-    await expect(reviewPage.unavailableUsernameError).toBeVisible();
+    await expect(reviewPage.unavailableUsernameMessage).toBeVisible();
   });
 });
 

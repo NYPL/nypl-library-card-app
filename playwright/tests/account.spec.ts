@@ -1,10 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { AccountPage } from "../pageobjects/account.page";
 import { mockUsernameApi } from "../utils/mock-api";
-import {
-  USERNAME_AVAILABLE_MESSAGE,
-  USERNAME_UNAVAILABLE_MESSAGE,
-} from "../utils/constants";
+import { ERROR_MESSAGES } from "../utils/constants";
 import { fillAccountInfo } from "../utils/form-helper";
 import { TEST_CUSTOMIZE_ACCOUNT } from "../utils/constants";
 
@@ -112,10 +109,10 @@ test.describe("displays errors for invalid inputs on Account page", () => {
   });
 });
 
-test.describe("mocks API responses on Account page", () => {
+test.describe("mocks API responses on account page", () => {
   test("displays username available message", async ({ page }) => {
     // mock the API call for username availability
-    await mockUsernameApi(page, USERNAME_AVAILABLE_MESSAGE);
+    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_AVAILABLE);
 
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("AvailableUsername");
@@ -125,12 +122,12 @@ test.describe("mocks API responses on Account page", () => {
 
   test("displays username unavailable error message", async ({ page }) => {
     // mock the API call for username unavailability
-    await mockUsernameApi(page, USERNAME_UNAVAILABLE_MESSAGE);
+    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_UNAVAILABLE);
 
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("UnavailableUsername");
     await accountPage.availableUsernameButton.click();
-    await expect(accountPage.unavailableUsernameError).toBeVisible();
+    await expect(accountPage.unavailableUsernameMessage).toBeVisible();
   });
 });
 

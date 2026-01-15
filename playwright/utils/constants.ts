@@ -66,10 +66,16 @@ export const ERROR_MESSAGES = {
     "There was a problem. Please enter a 2-character state abbreviation.",
   POSTAL_CODE_INVALID:
     "There was a problem. Please enter a 5 or 9-digit postal code.",
-  PASSWORD_INVALID:
-    "Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character.",
+  USERNAME_INVALID:
+    "There was a problem. Username must be between 5-25 alphanumeric characters.",
   USERNAME_UNAVAILABLE: "This username is unavailable. Please try another.",
   USERNAME_AVAILABLE: "This username is available.",
+  PASSWORD_INVALID:
+    "There was a problem. Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
+  VERIFY_PASSWORD_INVALID:
+    "There was a problem. The two passwords don't match.",
+  ACCEPT_TERMS_ERROR:
+    "There was a problem. The Terms and Conditions must be checked.",
 };
 
 export const TEST_BARCODE_NUMBER = "12341234123412";
