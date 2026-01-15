@@ -42,8 +42,8 @@ const PersonalFormContainer = () => {
     });
 
     const nextUrl = `/location?${queryStr}`;
-    await router.push(nextUrl);
     setIsLoading(false);
+    await router.push(nextUrl);
   };
 
   return (
