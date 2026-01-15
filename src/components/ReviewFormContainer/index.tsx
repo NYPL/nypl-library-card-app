@@ -238,6 +238,7 @@ function ReviewFormContainer({ csrfToken }) {
             },
           }
         );
+        setIsLoading(false);
         // Catch any CSRF token issues and return a generic error message
         // and redirect to the home page.
         if (error.response.status == 403) {
@@ -255,7 +256,6 @@ function ReviewFormContainer({ csrfToken }) {
           // so they can be fixed.
           dispatch({ type: "SET_FORM_ERRORS", value: error.response?.data });
         }
-        setIsLoading(false);
       });
   };
 
@@ -502,7 +502,10 @@ function ReviewFormContainer({ csrfToken }) {
           <DSFormField>
             <RoutingLinks
               isDisabled={isLoading}
-              next={{ submit: true, text: t("button.submit") }}
+              next={{
+                submit: true,
+                text: t("button.submit"),
+              }}
             />
           </DSFormField>
         </FormRow>
