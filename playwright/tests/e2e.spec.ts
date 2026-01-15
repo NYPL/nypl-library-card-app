@@ -19,6 +19,8 @@ import {
   deletePatron,
 } from "../utils/sierra-api-utils";
 
+import { createFuzzyMatcher, formatSierraDate } from "../utils/formatter";
+
 test.describe("E2E: Complete application with Sierra API integration", () => {
   let scrapedBarcode: string | null = null;
 
@@ -168,31 +170,26 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       const patronData = await getPatronData(patronID);
       const expectedName =
         `${TEST_PATRON_INFO.lastName}, ${TEST_PATRON_INFO.firstName}`.toUpperCase();
-      const [month, day, year] = TEST_PATRON_INFO.dateOfBirth.split("/");
-      const normalizedExpectedDOB = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+
+      const expectedDOB = formatSierraDate(TEST_PATRON_INFO.dateOfBirth);
       const expectedEmail = TEST_PATRON_INFO.email.toLowerCase();
       const patronEmails = patronData.emails?.map((email) =>
         email.toLowerCase()
       );
 
-      const expectedAddress = new RegExp(
-        [
-          TEST_HOME_ADDRESS.street,
-          TEST_HOME_ADDRESS.apartmentSuite,
-          TEST_HOME_ADDRESS.city,
-          TEST_HOME_ADDRESS.state,
-          TEST_HOME_ADDRESS.postalCode,
-        ]
-          .filter(Boolean)
-          .map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
-          .join(".*"),
-        "i"
+      const expectedAddress = createFuzzyMatcher([
+        TEST_HOME_ADDRESS.street,
+        TEST_HOME_ADDRESS.apartmentSuite,
+        TEST_HOME_ADDRESS.city,
+        TEST_HOME_ADDRESS.state,
+        TEST_HOME_ADDRESS.postalCode,
+      ]);
+
+      const actualAddressText = (patronData.addresses?.[0]?.lines || []).join(
+        " "
       );
 
       const actualName = patronData.names?.[0].toUpperCase();
-      const actualAddressText = patronData.addresses?.[0].lines
-        .join(" ")
-        .toUpperCase();
 
       expect(
         patronData.names,
@@ -201,7 +198,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       expect(patronData.names?.length).toBeGreaterThan(0);
       expect(actualName).toContain(expectedName);
 
-      expect(patronData.birthDate).toBe(normalizedExpectedDOB);
+      expect(patronData.birthDate).toBe(expectedDOB);
 
       expect(
         patronData.addresses,
