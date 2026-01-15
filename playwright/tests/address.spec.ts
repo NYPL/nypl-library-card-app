@@ -31,6 +31,24 @@ test.describe("displays elements on Address page", () => {
   });
 });
 
+test.describe("enters home address", () => {
+  test("enters valid home address", async ({ page }) => {
+    const addressPage = new AddressPage(page);
+    await fillHomeAddress(addressPage);
+    await expect(addressPage.streetAddressInput).toHaveValue(
+      TEST_HOME_ADDRESS.street
+    );
+    await expect(addressPage.apartmentSuiteInput).toHaveValue(
+      TEST_HOME_ADDRESS.apartmentSuite
+    );
+    await expect(addressPage.cityInput).toHaveValue(TEST_HOME_ADDRESS.city);
+    await expect(addressPage.stateInput).toHaveValue(TEST_HOME_ADDRESS.state);
+    await expect(addressPage.postalCodeInput).toHaveValue(
+      TEST_HOME_ADDRESS.postalCode
+    );
+  });
+});
+
 test.describe("displays errors for invalid fields", () => {
   test("displays errors for required fields", async ({ page }) => {
     const addressPage = new AddressPage(page);
@@ -61,23 +79,5 @@ test.describe("displays errors for invalid fields", () => {
     await addressPage.nextButton.click();
     await expect(addressPage.stateError).toBeVisible();
     await expect(addressPage.postalCodeError).toBeVisible();
-  });
-});
-
-test.describe("enters home address", () => {
-  test("enters valid home address", async ({ page }) => {
-    const addressPage = new AddressPage(page);
-    await fillHomeAddress(addressPage);
-    await expect(addressPage.streetAddressInput).toHaveValue(
-      TEST_HOME_ADDRESS.street
-    );
-    await expect(addressPage.apartmentSuiteInput).toHaveValue(
-      TEST_HOME_ADDRESS.apartmentSuite
-    );
-    await expect(addressPage.cityInput).toHaveValue(TEST_HOME_ADDRESS.city);
-    await expect(addressPage.stateInput).toHaveValue(TEST_HOME_ADDRESS.state);
-    await expect(addressPage.postalCodeInput).toHaveValue(
-      TEST_HOME_ADDRESS.postalCode
-    );
   });
 });

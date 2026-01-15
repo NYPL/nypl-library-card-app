@@ -1,9 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { AccountPage } from "../pageobjects/account.page";
-import { mockUsernameApi } from "../utils/mock-api";
-import { ERROR_MESSAGES } from "../utils/constants";
+import { ERROR_MESSAGES, TEST_CUSTOMIZE_ACCOUNT } from "../utils/constants";
 import { fillAccountInfo } from "../utils/form-helper";
-import { TEST_CUSTOMIZE_ACCOUNT } from "../utils/constants";
+import { mockUsernameApi } from "../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/account?newCard=true");
@@ -42,7 +41,50 @@ test.describe("displays all form elements on Account page", () => {
   });
 });
 
-test.describe("displays errors for invalid inputs on Account page", () => {
+test.describe("enters account information", () => {
+  test("displays entered values in form fields", async ({ page }) => {
+    const accountPage = new AccountPage(page);
+    await fillAccountInfo(accountPage);
+    await expect(accountPage.usernameInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.username
+    );
+    await accountPage.showPasswordCheckbox.check();
+    await expect(accountPage.passwordInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.password
+    );
+    await expect(accountPage.verifyPasswordInput).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.password
+    );
+    await expect(accountPage.selectHomeLibrary).toHaveValue(
+      TEST_CUSTOMIZE_ACCOUNT.homeLibrary
+    );
+    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
+  });
+});
+
+test.describe("mocks API responses on account page", () => {
+  test("displays username available message", async ({ page }) => {
+    // mock the API call for username availability
+    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_AVAILABLE);
+
+    const accountPage = new AccountPage(page);
+    await accountPage.usernameInput.fill("AvailableUsername");
+    await accountPage.availableUsernameButton.click();
+    await expect(accountPage.availableUsernameMessage).toBeVisible();
+  });
+
+  test("displays username unavailable error message", async ({ page }) => {
+    // mock the API call for username unavailability
+    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_UNAVAILABLE);
+
+    const accountPage = new AccountPage(page);
+    await accountPage.usernameInput.fill("UnavailableUsername");
+    await accountPage.availableUsernameButton.click();
+    await expect(accountPage.unavailableUsernameMessage).toBeVisible();
+  });
+});
+
+test.describe("displays error messages", () => {
   test("displays errors for required fields", async ({ page }) => {
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("");
@@ -106,48 +148,5 @@ test.describe("displays errors for invalid inputs on Account page", () => {
     await accountPage.nextButton.click();
     await expect(accountPage.usernameError).toBeVisible();
     await expect(accountPage.passwordError).toBeVisible();
-  });
-});
-
-test.describe("mocks API responses on account page", () => {
-  test("displays username available message", async ({ page }) => {
-    // mock the API call for username availability
-    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_AVAILABLE);
-
-    const accountPage = new AccountPage(page);
-    await accountPage.usernameInput.fill("AvailableUsername");
-    await accountPage.availableUsernameButton.click();
-    await expect(accountPage.availableUsernameMessage).toBeVisible();
-  });
-
-  test("displays username unavailable error message", async ({ page }) => {
-    // mock the API call for username unavailability
-    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_UNAVAILABLE);
-
-    const accountPage = new AccountPage(page);
-    await accountPage.usernameInput.fill("UnavailableUsername");
-    await accountPage.availableUsernameButton.click();
-    await expect(accountPage.unavailableUsernameMessage).toBeVisible();
-  });
-});
-
-test.describe("enters account information", () => {
-  test("displays entered values in form fields", async ({ page }) => {
-    const accountPage = new AccountPage(page);
-    await fillAccountInfo(accountPage);
-    await expect(accountPage.usernameInput).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.username
-    );
-    await accountPage.showPasswordCheckbox.check();
-    await expect(accountPage.passwordInput).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.password
-    );
-    await expect(accountPage.verifyPasswordInput).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.password
-    );
-    await expect(accountPage.selectHomeLibrary).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.homeLibrary
-    );
-    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
   });
 });
