@@ -25,6 +25,7 @@ test.describe("Accessibility tests on personal info page", () => {
     ];
 
     await personalPage.stepHeading.focus();
+    await expect(personalPage.stepHeading).toBeFocused();
 
     for (const locator of personalLocators) {
       await page.keyboard.press("Tab");
