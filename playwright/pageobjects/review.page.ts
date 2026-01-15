@@ -41,7 +41,6 @@ export class ReviewPage {
   readonly usernameHeading: Locator;
   readonly usernameInputHeading: Locator;
   readonly usernameInput: Locator;
-  readonly usernameError: Locator;
   readonly availableUsernameButton: Locator;
   readonly availableUsernameMessage: Locator;
   readonly unavailableUsernameMessage: Locator;
@@ -184,7 +183,6 @@ export class ReviewPage {
       name: "Check if username is available",
       exact: true,
     });
-    this.usernameError = page.getByText(ERROR_MESSAGES.USERNAME_INVALID);
     this.availableUsernameMessage = page.getByText(
       ERROR_MESSAGES.USERNAME_AVAILABLE
     );
