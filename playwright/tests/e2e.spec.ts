@@ -194,9 +194,27 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
         .join(" ")
         .toUpperCase();
 
+      expect(
+        patronData.names,
+        "Patron names array should be present"
+      ).toBeDefined();
+      expect(patronData.names?.length).toBeGreaterThan(0);
       expect(actualName).toContain(expectedName);
+
       expect(patronData.birthDate).toBe(normalizedExpectedDOB);
+
+      expect(
+        patronData.addresses,
+        "Patron addresses array should be present"
+      ).toBeDefined();
+      expect(patronData.addresses?.length).toBeGreaterThan(0);
       expect(actualAddressText).toMatch(expectedAddress);
+
+      expect(
+        patronEmails,
+        "Patron emails array should be present"
+      ).toBeDefined();
+      expect(patronEmails?.length).toBeGreaterThan(0);
       expect(patronEmails).toContain(expectedEmail);
     });
   });
