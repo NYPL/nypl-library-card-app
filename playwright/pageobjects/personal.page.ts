@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+import { ERROR_MESSAGES } from "../utils/constants";
 
 export class PersonalPage {
   readonly page: Page;
@@ -45,16 +46,14 @@ export class PersonalPage {
     });
 
     this.firstNameErrorMessage = this.page.getByText(
-      "There was a problem. Please enter a valid first name."
+      ERROR_MESSAGES.FIRST_NAME_INVALID
     );
     this.lastNameErrorMessage = this.page.getByText(
-      "There was a problem. Please enter a valid last name."
+      ERROR_MESSAGES.LAST_NAME_INVALID
     );
-    this.emailErrorMessage = this.page.getByText(
-      "There was a problem. Please enter a valid email address."
-    );
+    this.emailErrorMessage = this.page.getByText(ERROR_MESSAGES.EMAIL_INVALID);
     this.dateOfBirthErrorMessage = this.page.getByText(
-      "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes."
+      ERROR_MESSAGES.DATE_OF_BIRTH_INVALID
     );
 
     this.alternateFormLink = this.page.getByRole("link", {
