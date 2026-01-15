@@ -59,6 +59,15 @@ export const ERROR_MESSAGES = {
   DATE_OF_BIRTH_INVALID:
     "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
   EMAIL_INVALID: "There was a problem. Please enter a valid email address.",
+  STREET_ADDRESS_INVALID:
+    "There was a problem. Please enter a valid street address.",
+  CITY_INVALID: "There was a problem. Please enter a valid city.",
+  STATE_INVALID:
+    "There was a problem. Please enter a 2-character state abbreviation.",
+  POSTAL_CODE_INVALID:
+    "There was a problem. Please enter a 5 or 9-digit postal code.",
+  PASSWORD_INVALID:
+    "Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character.",
   USERNAME_UNAVAILABLE: "This username is unavailable. Please try another.",
   USERNAME_AVAILABLE: "This username is available.",
 };
