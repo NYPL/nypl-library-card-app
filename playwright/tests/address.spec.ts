@@ -49,7 +49,7 @@ test.describe("enters home address", () => {
   });
 });
 
-test.describe("displays errors for invalid fields", () => {
+test.describe("displays error messages", () => {
   test("displays errors for required fields", async ({ page }) => {
     const addressPage = new AddressPage(page);
     await addressPage.streetAddressInput.fill("");
