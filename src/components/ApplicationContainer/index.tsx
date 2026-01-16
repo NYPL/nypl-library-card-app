@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
-import Banner from "../Banner";
+import Hero from "../Hero";
 import ApiErrors from "../ApiErrors";
 import useFormDataContext from "../../context/FormDataContext";
 import {
@@ -34,7 +34,7 @@ const ApplicationContainer = ({ children, problemDetail }) => {
     <Template variant="narrow">
       <TemplateHeader>
         <TemplateBreakout>
-          <Banner />
+          <Hero />
         </TemplateBreakout>
       </TemplateHeader>
       <TemplateMain id="mainContent">
