@@ -20,9 +20,11 @@ export class ReviewPage {
   readonly dateOfBirthHeading: Locator;
   readonly dateOfBirthInputHeading: Locator;
   readonly dateOfBirthInput: Locator;
+  readonly dateOfBirthErrorMessage: Locator;
   readonly emailHeading: Locator;
   readonly emailInputHeading: Locator;
   readonly emailInput: Locator;
+  readonly emailErrorMessage: Locator;
   readonly receiveInfoHeading: Locator;
   readonly receiveInfoChoice: Locator;
   readonly receiveInfoCheckbox: Locator;
@@ -122,6 +124,9 @@ export class ReviewPage {
       name: "Date of birth (required)",
       exact: true,
     });
+    this.dateOfBirthErrorMessage = page.getByText(
+      "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes."
+    );
     this.emailHeading = page.getByText("Email address", { exact: true });
     this.emailInputHeading = page.getByText("Email address (required)", {
       exact: true,
@@ -130,6 +135,9 @@ export class ReviewPage {
       name: "Email address (required)",
       exact: true,
     });
+    this.emailErrorMessage = page.getByText(
+      "There was a problem. Please enter a valid email address."
+    );
     this.receiveInfoHeading = page.getByText(
       "Receive information about NYPL's programs and services",
       { exact: true }
