@@ -1,8 +1,8 @@
 import { AddressData } from "./types";
 
 const uniqueSuffix = Date.now().toString().slice(-6);
+const TEST_UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
 
-const UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
 export const TEST_PATRON_INFO = {
   firstName: "Jane",
   lastName: "Doe",
@@ -18,7 +18,7 @@ export const TEST_HOME_ADDRESS: AddressData = {
   postalCode: "06902",
 };
 export const TEST_CUSTOMIZE_ACCOUNT = {
-  username: UNIQUE_USERNAME,
+  username: TEST_UNIQUE_USERNAME,
   password: "Test@1234",
   homeLibrary: "eb", // used to confirm dropdown selection
   defaultLibrary: "E-Branch", // used to confirm text displays on page
@@ -53,8 +53,29 @@ export const TEST_MULTIMATCH_ADDRESS_WEST: AddressData = {
   postalCode: "10001-2101",
 };
 
-export const USERNAME_AVAILABLE_MESSAGE = "This username is available.";
-export const USERNAME_UNAVAILABLE_MESSAGE =
-  "This username is unavailable. Please try another.";
+export const ERROR_MESSAGES = {
+  FIRST_NAME_INVALID: "There was a problem. Please enter a valid first name.",
+  LAST_NAME_INVALID: "There was a problem. Please enter a valid last name.",
+  DATE_OF_BIRTH_INVALID:
+    "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
+  EMAIL_INVALID: "There was a problem. Please enter a valid email address.",
+  STREET_ADDRESS_INVALID:
+    "There was a problem. Please enter a valid street address.",
+  CITY_INVALID: "There was a problem. Please enter a valid city.",
+  STATE_INVALID:
+    "There was a problem. Please enter a 2-character state abbreviation.",
+  POSTAL_CODE_INVALID:
+    "There was a problem. Please enter a 5 or 9-digit postal code.",
+  USERNAME_INVALID:
+    "There was a problem. Username must be between 5-25 alphanumeric characters.",
+  USERNAME_UNAVAILABLE: "This username is unavailable. Please try another.",
+  USERNAME_AVAILABLE: "This username is available.",
+  PASSWORD_INVALID:
+    "There was a problem. Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
+  VERIFY_PASSWORD_INVALID:
+    "There was a problem. The two passwords don't match.",
+  ACCEPT_TERMS_ERROR:
+    "There was a problem. The Terms and Conditions must be checked.",
+};
 
 export const TEST_BARCODE_NUMBER = "12341234123412";

@@ -1,8 +1,5 @@
 import { Page, Locator } from "@playwright/test";
-import {
-  USERNAME_AVAILABLE_MESSAGE,
-  USERNAME_UNAVAILABLE_MESSAGE,
-} from "../utils/constants";
+import { ERROR_MESSAGES } from "../utils/constants";
 
 export class ReviewPage {
   readonly page: Page;
@@ -47,7 +44,7 @@ export class ReviewPage {
   readonly usernameInput: Locator;
   readonly availableUsernameButton: Locator;
   readonly availableUsernameMessage: Locator;
-  readonly unavailableUsernameError: Locator;
+  readonly unavailableUsernameMessage: Locator;
   readonly passwordHeading: Locator;
   readonly passwordInputHeading: Locator;
   readonly passwordInput: Locator;
@@ -135,9 +132,7 @@ export class ReviewPage {
       name: "Email address (required)",
       exact: true,
     });
-    this.emailErrorMessage = page.getByText(
-      "There was a problem. Please enter a valid email address."
-    );
+    this.emailErrorMessage = page.getByText(ERROR_MESSAGES.EMAIL_INVALID);
     this.receiveInfoHeading = page.getByText(
       "Receive information about NYPL's programs and services",
       { exact: true }
@@ -192,9 +187,11 @@ export class ReviewPage {
       name: "Check if username is available",
       exact: true,
     });
-    this.availableUsernameMessage = page.getByText(USERNAME_AVAILABLE_MESSAGE);
-    this.unavailableUsernameError = page.getByText(
-      USERNAME_UNAVAILABLE_MESSAGE
+    this.availableUsernameMessage = page.getByText(
+      ERROR_MESSAGES.USERNAME_AVAILABLE
+    );
+    this.unavailableUsernameMessage = page.getByText(
+      ERROR_MESSAGES.USERNAME_UNAVAILABLE
     );
     this.passwordHeading = page.getByText("Password", { exact: true });
     this.passwordInputHeading = page.getByText("Password (required)", {
