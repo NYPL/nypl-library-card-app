@@ -24,7 +24,6 @@ test.describe("Accessibility tests on personal info page", () => {
       personalPage.emailInput,
     ];
 
-    await personalPage.stepHeading.focus();
     await expect(personalPage.stepHeading).toBeFocused();
 
     for (const locator of personalLocators) {
