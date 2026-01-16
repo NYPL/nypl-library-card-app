@@ -24,7 +24,6 @@ test.describe("Accessibility tests on Address Page", () => {
       addressPage.postalCodeInput,
     ];
 
-    await addressPage.stepHeading.focus();
     await expect(addressPage.stepHeading).toBeFocused();
 
     for (const locator of addressLocators) {
