@@ -227,6 +227,59 @@ test.describe("displays error messages", () => {
     await expect(reviewPage.lastNameError).toBeVisible();
     await expect(reviewPage.dateOfBirthError).toBeVisible();
     await expect(reviewPage.emailError).toBeVisible();
+  
+  test("displays error for dashes in date of birth", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("12-25-1984");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthErrorMessage).toBeVisible();
+  });
+
+  test("displays error for YYYY/MM/DD format in date of birth", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("1984/12/25");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthErrorMessage).toBeVisible();
+  });
+
+  test("displays error for DD/MM/YYYY format in date of birth", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("25/12/1984");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthErrorMessage).toBeVisible();
+  });
+
+  test("displays error for M/D/YY format in date of birth", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("1/1/84");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthErrorMessage).toBeVisible();
+  });
+
+  test("displays error for written date of birth", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("December 25, 1984");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthErrorMessage).toBeVisible();
+  });
+
+  test("displays error for future date of birth", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("12/31/2099");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthErrorMessage).toBeVisible();
   });
 
   test("displays error for missing email symbol", async ({ page }) => {
