@@ -13,7 +13,13 @@ import {
   TEST_PATRON_INFO,
 } from "../utils/constants";
 
-import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
+import {
+  getPatronID,
+  getPatronData,
+  deletePatron,
+} from "../utils/sierra-api-utils";
+
+import { createFuzzyMatcher, formatSierraDate } from "../utils/formatter";
 
 test.describe("E2E: Complete application with Sierra API integration", () => {
   let scrapedBarcode: string | null = null;
@@ -158,6 +164,55 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       scrapedBarcode =
         await pageManager.congratsPage.patronBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();
+    });
+    test.step("verify patron data on backend", async () => {
+      const patronID = await getPatronID(scrapedBarcode);
+      const patronData = await getPatronData(patronID);
+      const expectedName =
+        `${TEST_PATRON_INFO.lastName}, ${TEST_PATRON_INFO.firstName}`.toUpperCase();
+
+      const expectedDOB = formatSierraDate(TEST_PATRON_INFO.dateOfBirth);
+      const expectedEmail = TEST_PATRON_INFO.email.toLowerCase();
+      const patronEmails = patronData.emails?.map((email) =>
+        email.toLowerCase()
+      );
+
+      const expectedAddress = createFuzzyMatcher([
+        TEST_HOME_ADDRESS.street,
+        TEST_HOME_ADDRESS.apartmentSuite,
+        TEST_HOME_ADDRESS.city,
+        TEST_HOME_ADDRESS.state,
+        TEST_HOME_ADDRESS.postalCode,
+      ]);
+
+      const actualAddressText = (patronData.addresses?.[0]?.lines || []).join(
+        " "
+      );
+
+      const actualName = patronData.names?.[0].toUpperCase();
+
+      expect(
+        patronData.names,
+        "Patron names array should be present"
+      ).toBeDefined();
+      expect(patronData.names?.length).toBeGreaterThan(0);
+      expect(actualName).toContain(expectedName);
+
+      expect(patronData.birthDate).toBe(expectedDOB);
+
+      expect(
+        patronData.addresses,
+        "Patron addresses array should be present"
+      ).toBeDefined();
+      expect(patronData.addresses?.length).toBeGreaterThan(0);
+      expect(actualAddressText).toMatch(expectedAddress);
+
+      expect(
+        patronEmails,
+        "Patron emails array should be present"
+      ).toBeDefined();
+      expect(patronEmails?.length).toBeGreaterThan(0);
+      expect(patronEmails).toContain(expectedEmail);
     });
   });
 });
