@@ -215,12 +215,26 @@ test.describe("mocks API responses on review page", () => {
 });
 
 test.describe("displays error messages", () => {
+  test("displays errors for required fields", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.firstNameInput.fill("");
+    await reviewPage.lastNameInput.fill("");
+    await reviewPage.dateOfBirthInput.fill("");
+    await reviewPage.emailInput.fill("");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.firstNameError).toBeVisible();
+    await expect(reviewPage.lastNameError).toBeVisible();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.emailError).toBeVisible();
+  });
+
   test("displays error for missing email symbol", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.emailInput.fill("testgmail.com");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.emailErrorMessage).toBeVisible();
+    await expect(reviewPage.emailError).toBeVisible();
   });
 
   test("displays error for missing email domain", async ({ page }) => {
@@ -228,7 +242,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.emailInput.fill("test@.com");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.emailErrorMessage).toBeVisible();
+    await expect(reviewPage.emailError).toBeVisible();
   });
 
   test("displays error for missing email username", async ({ page }) => {
@@ -236,7 +250,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.emailInput.fill("@gmail.com");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.emailErrorMessage).toBeVisible();
+    await expect(reviewPage.emailError).toBeVisible();
   });
 
   test("displays error for missing email top-level domain", async ({
@@ -246,6 +260,6 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.emailInput.fill("user@gmail");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.emailErrorMessage).toBeVisible();
+    await expect(reviewPage.emailError).toBeVisible();
   });
 });
