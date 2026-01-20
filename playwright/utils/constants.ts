@@ -1,4 +1,7 @@
 import { AddressData } from "./types";
+import appContent from "../../public/locales/en/common.json";
+import * as apiErrorMessages from "../../src/data/apiErrorMessageTranslations";
+import { apiTranslations } from "../../src/data/apiMessageTranslations";
 
 const uniqueSuffix = Date.now().toString().slice(-6);
 const TEST_UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
@@ -54,28 +57,23 @@ export const TEST_MULTIMATCH_ADDRESS_WEST: AddressData = {
 };
 
 export const ERROR_MESSAGES = {
-  FIRST_NAME_INVALID: "There was a problem. Please enter a valid first name.",
-  LAST_NAME_INVALID: "There was a problem. Please enter a valid last name.",
-  DATE_OF_BIRTH_INVALID:
-    "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
-  EMAIL_INVALID: "There was a problem. Please enter a valid email address.",
-  STREET_ADDRESS_INVALID:
-    "There was a problem. Please enter a valid street address.",
-  CITY_INVALID: "There was a problem. Please enter a valid city.",
-  STATE_INVALID:
-    "There was a problem. Please enter a 2-character state abbreviation.",
-  POSTAL_CODE_INVALID:
-    "There was a problem. Please enter a 5 or 9-digit postal code.",
-  USERNAME_INVALID:
-    "There was a problem. Username must be between 5-25 alphanumeric characters.",
-  USERNAME_UNAVAILABLE: "This username is unavailable. Please try another.",
-  USERNAME_AVAILABLE: "This username is available.",
-  PASSWORD_INVALID:
-    "There was a problem. Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)",
-  VERIFY_PASSWORD_INVALID:
-    "There was a problem. The two passwords don't match.",
-  ACCEPT_TERMS_ERROR:
-    "There was a problem. The Terms and Conditions must be checked.",
+  FIRST_NAME_INVALID: appContent.personal.errorMessage.firstName,
+  LAST_NAME_INVALID: appContent.personal.errorMessage.lastName,
+  DATE_OF_BIRTH_INVALID: appContent.personal.errorMessage.birthdate,
+  EMAIL_INVALID: appContent.personal.errorMessage.email,
+  STREET_ADDRESS_INVALID: appContent.location.errorMessage.line1,
+  CITY_INVALID: appContent.location.errorMessage.city,
+  STATE_INVALID: appContent.location.errorMessage.state,
+  POSTAL_CODE_INVALID: appContent.location.errorMessage.zip,
+  USERNAME_INVALID: appContent.account.errorMessage.username,
+  USERNAME_UNAVAILABLE:
+    apiErrorMessages.apiErrorTranslations[
+      "The username is unavailable. Please try another."
+    ],
+  USERNAME_AVAILABLE: apiTranslations["This username is available."].en,
+  PASSWORD_INVALID: appContent.account.errorMessage.password,
+  VERIFY_PASSWORD_INVALID: appContent.account.errorMessage.verifyPassword,
+  ACCEPT_TERMS_ERROR: appContent.account.errorMessage.acceptTerms,
 };
 
 export const TEST_BARCODE_NUMBER = "12341234123412";
