@@ -316,4 +316,74 @@ test.describe("displays error messages", () => {
     await reviewPage.submitButton.click();
     await expect(reviewPage.emailError).toBeVisible();
   });
+
+  test("displays error for empty username and password", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("");
+    await reviewPage.passwordInput.fill("");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.usernameError).toBeVisible();
+    await expect(reviewPage.passwordError).toBeVisible();
+  });
+
+  test("displays error for username with special characters", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("User!@#");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.usernameError).toBeVisible();
+  });
+
+  test("displays error for username with non-Latin characters", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("用戶名用戶名");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.usernameError).toBeVisible();
+  });
+
+  test("displays error when passwords do not match", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("ValidUser1");
+    await reviewPage.passwordInput.fill("ValidPass1!");
+    await reviewPage.verifyPasswordInput.fill("DifferentPass1!");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.verifyPasswordError).toBeVisible();
+  });
+
+  test("displays error with too many characters", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    await reviewPage.passwordInput.fill("123456789012345678901234567890123");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.usernameError).toBeVisible();
+    await expect(reviewPage.passwordError).toBeVisible();
+  });
+
+  test("displays error with too few characters", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("A");
+    await reviewPage.passwordInput.fill("1!");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.usernameError).toBeVisible();
+    await expect(reviewPage.passwordError).toBeVisible();
+  });
+
+  test("displays error when terms are not accepted", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("ValidUser1");
+    await reviewPage.passwordInput.fill("ValidPass1!");
+    await reviewPage.verifyPasswordInput.fill("ValidPass1!");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.acceptTermsError).toBeVisible();
+  });
 });
