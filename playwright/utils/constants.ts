@@ -1,4 +1,5 @@
 import { AddressData } from "./types";
+import errorMessages from "../../public/locales/en/common.json";
 
 const uniqueSuffix = Date.now().toString().slice(-6);
 const TEST_UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
@@ -54,11 +55,10 @@ export const TEST_MULTIMATCH_ADDRESS_WEST: AddressData = {
 };
 
 export const ERROR_MESSAGES = {
-  FIRST_NAME_INVALID: "There was a problem. Please enter a valid first name.",
-  LAST_NAME_INVALID: "There was a problem. Please enter a valid last name.",
-  DATE_OF_BIRTH_INVALID:
-    "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
-  EMAIL_INVALID: "There was a problem. Please enter a valid email address.",
+  FIRST_NAME_INVALID: errorMessages.personal.errorMessage.firstName,
+  LAST_NAME_INVALID: errorMessages.personal.errorMessage.lastName,
+  DATE_OF_BIRTH_INVALID: errorMessages.personal.errorMessage.birthdate,
+  EMAIL_INVALID: errorMessages.personal.errorMessage.email,
   STREET_ADDRESS_INVALID:
     "There was a problem. Please enter a valid street address.",
   CITY_INVALID: "There was a problem. Please enter a valid city.",
