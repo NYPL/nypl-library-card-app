@@ -10,25 +10,35 @@ export const TEST_PATRON_INFO = {
   dateOfBirth: "12/25/1984",
 };
 
-export const TEST_HOME_ADDRESS: AddressData = {
+export const TEST_NYC_ADDRESS: AddressData = {
+  street: "476 5th Ave",
+  apartmentSuite: "Room 200",
+  city: "New York",
+  state: "NY",
+  postalCode: "10018",
+};
+
+export const TEST_NYS_ADDRESS: AddressData = {
+  street: "500 S Meadow St",
+  apartmentSuite: "Suite 1",
+  city: "Ithaca",
+  state: "NY",
+  postalCode: "14850",
+};
+
+export const TEST_OOS_ADDRESS: AddressData = {
   street: "123 Main St",
   apartmentSuite: "Apartment 201",
   city: "Stamford",
   state: "CT",
   postalCode: "06902",
 };
+
 export const TEST_CUSTOMIZE_ACCOUNT = {
   username: UNIQUE_USERNAME,
   password: "Test@1234",
   homeLibrary: "eb", // used to confirm dropdown selection
   defaultLibrary: "E-Branch", // used to confirm text displays on page
-};
-export const TEST_ALTERNATE_ADDRESS: AddressData = {
-  street: "476 5th Ave",
-  apartmentSuite: "Room 200",
-  city: "New York",
-  state: "NY",
-  postalCode: "10018",
 };
 
 export const TEST_MULTIMATCH_ADDRESS: AddressData = {
