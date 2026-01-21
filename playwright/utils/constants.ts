@@ -1,7 +1,5 @@
 import { AddressData } from "./types";
 import appContent from "../../public/locales/en/common.json";
-import * as apiErrorMessages from "../../src/data/apiErrorMessageTranslations";
-import { apiTranslations } from "../../src/data/apiMessageTranslations";
 
 const uniqueSuffix = Date.now().toString().slice(-6);
 const TEST_UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
@@ -66,11 +64,8 @@ export const ERROR_MESSAGES = {
   STATE_INVALID: appContent.location.errorMessage.state,
   POSTAL_CODE_INVALID: appContent.location.errorMessage.zip,
   USERNAME_INVALID: appContent.account.errorMessage.username,
-  USERNAME_UNAVAILABLE:
-    apiErrorMessages.apiErrorTranslations[
-      "The username is unavailable. Please try another."
-    ],
-  USERNAME_AVAILABLE: apiTranslations["This username is available."].en,
+  USERNAME_UNAVAILABLE: "This username is unavailable. Please try another.",
+  USERNAME_AVAILABLE: "This username is available.",
   PASSWORD_INVALID: appContent.account.errorMessage.password,
   VERIFY_PASSWORD_INVALID: appContent.account.errorMessage.verifyPassword,
   ACCEPT_TERMS_ERROR: appContent.account.errorMessage.acceptTerms,
