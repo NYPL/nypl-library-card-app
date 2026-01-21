@@ -165,7 +165,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
         await pageManager.congratsPage.patronBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();
     });
-    test.step("verify patron data on backend", async () => {
+    test.step("verify patron data on sierra database", async () => {
       const patronID = await getPatronID(scrapedBarcode);
       const patronData = await getPatronData(patronID);
       const expectedName =
@@ -192,10 +192,17 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       const actualName = patronData.names?.[0].toUpperCase();
 
       expect(
+        patronData,
+        "API response should contain patron data"
+      ).toBeDefined();
+      expect(
+        Array.isArray(patronData.names),
+        "Names should be an array"
+      ).toBeTruthy();
+      expect(
         patronData.names,
         "Patron names array should be present"
       ).toBeDefined();
-      expect(patronData.names?.length).toBeGreaterThan(0);
       expect(actualName).toContain(expectedName);
 
       expect(patronData.birthDate).toBe(expectedDOB);
@@ -204,14 +211,20 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
         patronData.addresses,
         "Patron addresses array should be present"
       ).toBeDefined();
-      expect(patronData.addresses?.length).toBeGreaterThan(0);
+      expect(
+        Array.isArray(patronData.addresses),
+        "Addresses should be an array"
+      ).toBeTruthy();
       expect(actualAddressText).toMatch(expectedAddress);
 
       expect(
         patronEmails,
         "Patron emails array should be present"
       ).toBeDefined();
-      expect(patronEmails?.length).toBeGreaterThan(0);
+      expect(
+        Array.isArray(patronEmails),
+        "Emails should be an array"
+      ).toBeTruthy();
       expect(patronEmails).toContain(expectedEmail);
     });
   });
