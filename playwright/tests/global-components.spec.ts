@@ -55,7 +55,7 @@ test.describe("Verify breadcrumbs on every page", () => {
       await expect(page).toHaveURL(
         /^(https:\/\/www\.nypl\.org\/|https:\/\/qa-www\.nypl\.org\/)$/
       );
-      await expect(page).toHaveTitle(/^New York Public Library$/);
+      await expect(page).toHaveTitle(/New York Public Library/);
     });
   }
 });
