@@ -183,6 +183,10 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
         "Names array should not be empty"
       ).toBeGreaterThan(0);
       expect(
+        patronData.birthDate,
+        "Birthdate should not be empty"
+      ).toBeTruthy();
+      expect(
         patronData.emails.length,
         "Emails array should not be empty"
       ).toBeGreaterThan(0);
