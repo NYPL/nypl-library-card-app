@@ -32,13 +32,13 @@ const ApplicationContainer = ({ children, problemDetail }) => {
 
   return (
     <Template variant="narrow">
-      <TemplateHeader>
+      <TemplateHeader m="0!">
         <TemplateBreakout>
           <Banner />
         </TemplateBreakout>
       </TemplateHeader>
       <TemplateMain id="mainContent">
-        <TemplateContent>
+        <TemplateContent my="xl">
           <>
             <ApiErrors
               lang={finalLang}
