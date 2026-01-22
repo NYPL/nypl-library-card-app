@@ -165,12 +165,34 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
         await pageManager.congratsPage.patronBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();
     });
-    test.step("verify patron data on sierra database", async () => {
+    await test.step("verify patron data on sierra database", async () => {
       const patronID = await getPatronID(scrapedBarcode);
       const patronData = await getPatronData(patronID);
+
+      expect(patronData, "API response must be a valid object").toEqual(
+        expect.objectContaining({
+          names: expect.any(Array),
+          emails: expect.any(Array),
+          addresses: expect.any(Array),
+          birthDate: expect.any(String),
+        })
+      );
+
+      expect(
+        patronData.names.length,
+        "Names array should not be empty"
+      ).toBeGreaterThan(0);
+      expect(
+        patronData.emails.length,
+        "Emails array should not be empty"
+      ).toBeGreaterThan(0);
+      expect(
+        patronData.addresses.length,
+        "Addresses array should not be empty"
+      ).toBeGreaterThan(0);
+
       const expectedName =
         `${TEST_PATRON_INFO.lastName}, ${TEST_PATRON_INFO.firstName}`.toUpperCase();
-
       const expectedDOB = formatSierraDate(TEST_PATRON_INFO.dateOfBirth);
       const expectedEmail = TEST_PATRON_INFO.email.toLowerCase();
       const patronEmails = patronData.emails?.map((email) =>
@@ -188,43 +210,11 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       const actualAddressText = (patronData.addresses?.[0]?.lines || []).join(
         " "
       );
-
       const actualName = patronData.names?.[0].toUpperCase();
 
-      expect(
-        patronData,
-        "API response should contain patron data"
-      ).toBeDefined();
-      expect(
-        Array.isArray(patronData.names),
-        "Names should be an array"
-      ).toBeTruthy();
-      expect(
-        patronData.names,
-        "Patron names array should be present"
-      ).toBeDefined();
       expect(actualName).toContain(expectedName);
-
       expect(patronData.birthDate).toBe(expectedDOB);
-
-      expect(
-        patronData.addresses,
-        "Patron addresses array should be present"
-      ).toBeDefined();
-      expect(
-        Array.isArray(patronData.addresses),
-        "Addresses should be an array"
-      ).toBeTruthy();
       expect(actualAddressText).toMatch(expectedAddress);
-
-      expect(
-        patronEmails,
-        "Patron emails array should be present"
-      ).toBeDefined();
-      expect(
-        Array.isArray(patronEmails),
-        "Emails should be an array"
-      ).toBeTruthy();
       expect(patronEmails).toContain(expectedEmail);
     });
   });
