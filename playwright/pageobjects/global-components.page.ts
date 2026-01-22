@@ -8,12 +8,9 @@ export class GlobalComponentsPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.breadcrumb = page.locator(
-      'nav[aria-label="breadcrumb"], .chakra-breadcrumb'
-    );
     this.homeBreadcrumb = page.getByRole("link", { name: "Home", exact: true });
-    this.getLibraryCardBreadcrumb = this.breadcrumb.getByRole("link", {
-      name: "Get A Library Card",
+    this.getLibraryCardBreadcrumb = page.getByRole("navigation", {
+      name: "Breadcrumb",
       exact: true,
     });
   }
