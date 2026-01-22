@@ -10,9 +10,11 @@ export class GlobalComponentsPage {
     this.page = page;
     this.breadcrumb = page.getByRole("navigation", { name: "Breadcrumb" });
     this.homeBreadcrumb = page.getByRole("link", { name: "Home", exact: true });
-    this.getLibraryCardBreadcrumb = this.breadcrumb.getByRole("link", {
-      name: "Get A Library Card",
-      exact: true,
-    });
+    this.getLibraryCardBreadcrumb = page
+      .getByLabel("Breadcrumb")
+      .getByRole("link", {
+        name: "Get A Library Card",
+        exact: true,
+      });
   }
 }
