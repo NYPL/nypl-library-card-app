@@ -8,9 +8,10 @@ export class GlobalComponentsPage {
 
   constructor(page: Page) {
     this.page = page;
+    this.breadcrumb = page.getByRole("navigation", { name: "Breadcrumb" });
     this.homeBreadcrumb = page.getByRole("link", { name: "Home", exact: true });
-    this.getLibraryCardBreadcrumb = page.getByRole("navigation", {
-      name: "Breadcrumb",
+    this.getLibraryCardBreadcrumb = this.breadcrumb.getByRole("link", {
+      name: "Get A Library Card",
       exact: true,
     });
   }
