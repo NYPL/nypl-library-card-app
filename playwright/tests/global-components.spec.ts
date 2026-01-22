@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 
-test.use({ baseURL: "https://nypl-library-card-jrgbzm0jl-nypl.vercel.app/" });
 test.describe("Verify breadcrumbs on every page", () => {
   const routes = [
     { name: "Landing Page", path: "/library-card/new?newCard=true" },
