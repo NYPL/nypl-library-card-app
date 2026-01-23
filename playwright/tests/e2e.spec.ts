@@ -203,11 +203,11 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       );
 
       const expectedAddress = createFuzzyMatcher([
-        TEST_HOME_ADDRESS.street,
-        TEST_HOME_ADDRESS.apartmentSuite,
-        TEST_HOME_ADDRESS.city,
-        TEST_HOME_ADDRESS.state,
-        TEST_HOME_ADDRESS.postalCode,
+        TEST_OOS_ADDRESS.street,
+        TEST_OOS_ADDRESS.apartmentSuite,
+        TEST_OOS_ADDRESS.city,
+        TEST_OOS_ADDRESS.state,
+        TEST_OOS_ADDRESS.postalCode,
       ]);
 
       const actualAddressText = (patronData.addresses?.[0]?.lines || []).join(
