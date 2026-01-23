@@ -68,6 +68,7 @@ function RoutingLinks({
       variant="primary"
       id="routing-links-next"
       disabled={isDisabled}
+      aria-disabled={isDisabled}
       type="submit"
     >
       {nextText}
@@ -78,7 +79,7 @@ function RoutingLinks({
 
   return (
     <Box
-      my="2rem"
+      mt="2rem"
       display="flex"
       gap="xs"
       flexDir={{ base: "column", md: "row" }}

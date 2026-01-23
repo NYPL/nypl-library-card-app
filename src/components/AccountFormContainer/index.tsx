@@ -39,8 +39,8 @@ const AccountFormContainer = ({ csrfToken }) => {
     });
 
     const nextUrl = `/review?${queryStr}`;
-    await router.push(nextUrl);
     setIsLoading(false);
+    await router.push(nextUrl);
   };
 
   return (

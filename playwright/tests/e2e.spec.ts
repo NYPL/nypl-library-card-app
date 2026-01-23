@@ -2,14 +2,13 @@ import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import {
   fillPersonalInfo,
-  fillHomeAddress,
-  fillAlternateAddress,
+  fillAddress,
   fillAccountInfo,
 } from "../utils/form-helper";
 import {
-  TEST_ALTERNATE_ADDRESS,
   TEST_CUSTOMIZE_ACCOUNT,
-  TEST_HOME_ADDRESS,
+  TEST_OOS_ADDRESS,
+  TEST_NYC_ADDRESS,
   TEST_PATRON_INFO,
 } from "../utils/constants";
 
@@ -55,13 +54,13 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
     await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillHomeAddress(pageManager.addressPage);
+      await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       await pageManager.addressPage.nextButton.click();
     });
 
     await test.step("enters alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await fillAlternateAddress(pageManager.alternateAddressPage);
+      await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
       await pageManager.alternateAddressPage.nextButton.click();
     });
 
@@ -70,10 +69,10 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
       await pageManager.addressVerificationPage
-        .getHomeAddressOption(TEST_HOME_ADDRESS.street)
+        .getHomeAddressOption(TEST_OOS_ADDRESS.street)
         .check();
       await pageManager.addressVerificationPage
-        .getAlternateAddressOption(TEST_ALTERNATE_ADDRESS.street)
+        .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
         .check();
       await pageManager.addressVerificationPage.nextButton.click();
     });
@@ -103,28 +102,28 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
     await test.step("displays home and alternate addresses on review page", async () => {
       await expect(
-        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.street)
+        pageManager.reviewPage.getText(TEST_OOS_ADDRESS.street)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.city)
+        pageManager.reviewPage.getText(TEST_OOS_ADDRESS.city)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.state)
+        pageManager.reviewPage.getText(TEST_OOS_ADDRESS.state)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.postalCode)
+        pageManager.reviewPage.getText(TEST_OOS_ADDRESS.postalCode)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.street)
+        pageManager.reviewPage.getText(TEST_NYC_ADDRESS.street)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.city)
+        pageManager.reviewPage.getText(TEST_NYC_ADDRESS.city)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.state)
+        pageManager.reviewPage.getText(TEST_NYC_ADDRESS.state)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.postalCode)
+        pageManager.reviewPage.getText(TEST_NYC_ADDRESS.postalCode)
       ).toBeVisible();
     });
 

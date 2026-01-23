@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
-import { TEST_ALTERNATE_ADDRESS } from "../utils/constants";
-import { fillAlternateAddress } from "../utils/form-helper";
+import { TEST_NYC_ADDRESS } from "../utils/constants";
+import { fillAddress } from "../utils/form-helper";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/workAddress?newCard=true");
@@ -34,21 +34,21 @@ test.describe("displays elements on Alternate address page", () => {
 test.describe("enters alternate address", () => {
   test("enters valid alternate address", async ({ page }) => {
     const alternateAddressPage = new AlternateAddressPage(page);
-    await fillAlternateAddress(alternateAddressPage);
+    await fillAddress(alternateAddressPage, TEST_NYC_ADDRESS);
     await expect(alternateAddressPage.streetAddressInput).toHaveValue(
-      TEST_ALTERNATE_ADDRESS.street
+      TEST_NYC_ADDRESS.street
     );
     await expect(alternateAddressPage.apartmentSuiteInput).toHaveValue(
-      TEST_ALTERNATE_ADDRESS.apartmentSuite
+      TEST_NYC_ADDRESS.apartmentSuite
     );
     await expect(alternateAddressPage.cityInput).toHaveValue(
-      TEST_ALTERNATE_ADDRESS.city
+      TEST_NYC_ADDRESS.city
     );
     await expect(alternateAddressPage.stateInput).toHaveValue(
-      TEST_ALTERNATE_ADDRESS.state
+      TEST_NYC_ADDRESS.state
     );
     await expect(alternateAddressPage.postalCodeInput).toHaveValue(
-      TEST_ALTERNATE_ADDRESS.postalCode
+      TEST_NYC_ADDRESS.postalCode
     );
   });
 });

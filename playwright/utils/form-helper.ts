@@ -1,14 +1,7 @@
 import { AccountPage } from "../pageobjects/account.page";
-import { AddressPage } from "../pageobjects/address.page";
-import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { PersonalPage } from "../pageobjects/personal.page";
 import { ReviewPage } from "../pageobjects/review.page";
-import {
-  TEST_PATRON_INFO,
-  TEST_HOME_ADDRESS,
-  TEST_ALTERNATE_ADDRESS,
-  TEST_CUSTOMIZE_ACCOUNT,
-} from "./constants";
+import { TEST_PATRON_INFO, TEST_CUSTOMIZE_ACCOUNT } from "./constants";
 import { AddressFormPage, AddressData } from "./types";
 
 export async function fillPersonalInfo(page: PersonalPage | ReviewPage) {
@@ -35,12 +28,4 @@ export async function fillAccountInfo(page: AccountPage | ReviewPage) {
   await page.verifyPasswordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
   await page.selectHomeLibrary.selectOption(TEST_CUSTOMIZE_ACCOUNT.homeLibrary);
   await page.acceptTermsCheckbox.check();
-}
-
-export async function fillHomeAddress(page: AddressPage) {
-  await fillAddress(page, TEST_HOME_ADDRESS);
-}
-
-export async function fillAlternateAddress(page: AlternateAddressPage) {
-  await fillAddress(page, TEST_ALTERNATE_ADDRESS);
 }
