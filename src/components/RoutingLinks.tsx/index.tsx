@@ -55,9 +55,6 @@ function RoutingLinks({
       href={previous.url}
       id="routing-links-previous"
       variant="buttonSecondary"
-      borderColor="ui.gray.medium"
-      _visited={{ color: "ui.gray.dark" }}
-      _hover={{ color: "ui.gray.dark" }}
     >
       {previousText}
     </DSLink>
