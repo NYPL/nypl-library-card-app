@@ -48,7 +48,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
         placeholder="Please select"
         id="librarylist-select"
         labelText={t("account.library.selectLibrary")}
-        isRequired={false}
+        isRequired={true}
         // Pass in the `react-hook-form` register function so it can handle this
         // form element's state for us.
         {...register("homeLibraryCode")}
