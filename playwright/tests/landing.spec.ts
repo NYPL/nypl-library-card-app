@@ -35,10 +35,18 @@ test("displays available languages", async ({ page }) => {
   await expect(landingPage.urduLanguage).toBeVisible();
 });
 
-test("displays informational links", async ({ page }) => {
+test("displays informational links, feedback banner and get started button", async ({
+  page,
+}) => {
   const landingPage = new LandingPage(page);
+
+  await expect(landingPage.digitalResourcesLink).toBeVisible();
+  await expect(landingPage.visitLibraryLink).toBeVisible();
+  await expect(landingPage.alternateFormLink).toBeVisible();
   await expect(landingPage.whatYouCanAccess).toBeVisible();
   await expect(landingPage.cardholderTerms).toBeVisible();
   await expect(landingPage.rulesRegulations).toBeVisible();
   await expect(landingPage.privacyPolicy).toBeVisible();
+  await expect(landingPage.feedbackBanner).toBeVisible();
+  await expect(landingPage.getStartedButton).toBeVisible();
 });

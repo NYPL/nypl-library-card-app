@@ -20,6 +20,10 @@ export class LandingPage {
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
   readonly getStartedButton: Locator;
+  readonly digitalResourcesLink: Locator;
+  readonly visitLibraryLink: Locator;
+  readonly alternateFormLink: Locator;
+  readonly feedbackBanner: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -65,5 +69,14 @@ export class LandingPage {
       .locator("#mainContent")
       .getByRole("link", { name: "Privacy Policy" });
     this.getStartedButton = page.getByRole("link", { name: "Get started" });
+
+    this.digitalResourcesLink = page.getByRole("link", {
+      name: "digital resources",
+    });
+    this.visitLibraryLink = page.getByRole("link", {
+      name: "visit any NYPL location",
+    });
+    this.alternateFormLink = page.getByRole("link", { name: "alternate form" });
+    this.feedbackBanner = page.getByTestId("ds-banner");
   }
 }
