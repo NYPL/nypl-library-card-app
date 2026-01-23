@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+import { ERROR_MESSAGES } from "../utils/constants";
 
 export class AddressPage {
   readonly page: Page;
@@ -37,15 +38,11 @@ export class AddressPage {
     this.stateInput = page.getByLabel(/State/i);
     this.postalCodeInput = page.getByLabel(/Postal code/i);
     this.streetAddressError = page.getByText(
-      "Please enter a valid street address."
+      ERROR_MESSAGES.STREET_ADDRESS_INVALID
     );
-    this.cityError = page.getByText("Please enter a valid city.");
-    this.stateError = page.getByText(
-      "Please enter a 2-character state abbreviation."
-    );
-    this.postalCodeError = page.getByText(
-      "Please enter a 5 or 9-digit postal code."
-    );
+    this.cityError = page.getByText(ERROR_MESSAGES.CITY_INVALID);
+    this.stateError = page.getByText(ERROR_MESSAGES.STATE_INVALID);
+    this.postalCodeError = page.getByText(ERROR_MESSAGES.POSTAL_CODE_INVALID);
     this.nextButton = page.getByRole("button", { name: "Next", exact: true });
     this.previousButton = page.getByRole("link", {
       name: "Previous",
