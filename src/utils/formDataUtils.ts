@@ -28,7 +28,7 @@ const errorMessages = {
     "uppercase and lowercase letters, include a mixture of letters and " +
     "numbers, and have at least one special character except period (.)",
   verifyPassword: "There was a problem. The two passwords don't match.",
-  homeLibraryCode: "There was a problem. Please select a valid home library.",
+  homeLibraryCode: "There was a problem. Please select a home library.",
   acceptTerms: "There was a problem. The Terms and Conditions must be checked.",
   address: {
     line1: "There was a problem. Please enter a valid street address.",
