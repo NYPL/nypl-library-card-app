@@ -15,7 +15,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/address-verification?&newCard=true&lang=es");
 });
 
-test("snapshot test on Address Verification page", async ({ page }) => {
+test("Spanish snapshot test on Address Verification page", async ({ page }) => {
   await expect(
     page.getByTestId("ds-hero-content").getByTestId("ds-heading")
   ).toMatchAriaSnapshot(
@@ -31,7 +31,7 @@ test("snapshot test on Address Verification page", async ({ page }) => {
     `);
 });
 
-test("displays translated elements on Address Verification page", async ({
+test("displays Spanish elements on Address Verification page", async ({
   page,
 }) => {
   await expect(
