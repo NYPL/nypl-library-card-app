@@ -34,9 +34,13 @@ export class ReviewPage {
   // Address section
   readonly addressHeading: Locator;
   readonly streetHeading: Locator;
+  readonly streetAddressError: Locator;
   readonly cityHeading: Locator;
+  readonly cityError: Locator;
   readonly stateHeading: Locator;
+  readonly stateError: Locator;
   readonly postalCodeHeading: Locator;
+  readonly postalCodeError: Locator;
   readonly editAddressButton: Locator;
 
   // Account section
@@ -150,9 +154,21 @@ export class ReviewPage {
       exact: true,
     });
     this.streetHeading = page.getByText("Street address", { exact: true });
+    this.streetAddressError = page.getByText(
+      "There was a problem. Please enter a valid home street address."
+    );
     this.cityHeading = page.getByText("City", { exact: true });
+    this.cityError = page.getByText(
+      "There was a problem. Please enter a valid home city."
+    );
     this.stateHeading = page.getByText("State", { exact: true });
+    this.stateError = page.getByText(
+      "There was a problem. Please enter a 2-character home state abbreviation."
+    );
     this.postalCodeHeading = page.getByText("Postal code", { exact: true });
+    this.postalCodeError = page.getByText(
+      "There was a problem. Please enter a 5 or 9-digit home postal code."
+    );
     this.editAddressButton = page.getByRole("button", {
       name: "Edit Address",
       exact: true,
