@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
-import Hero from "../Hero";
+import Banner from "../Banner";
 import ApiErrors from "../ApiErrors";
 import useFormDataContext from "../../context/FormDataContext";
 import {
@@ -11,6 +11,7 @@ import {
   TemplateHeader,
   TemplateMain,
 } from "@nypl/design-system-react-components";
+import Breadcrumbs from "../Breadcrumb";
 
 const ApplicationContainer = ({ children, problemDetail }) => {
   const {
@@ -34,7 +35,8 @@ const ApplicationContainer = ({ children, problemDetail }) => {
     <Template variant="narrow">
       <TemplateHeader m="0!">
         <TemplateBreakout>
-          <Hero />
+          <Breadcrumbs />
+          <Banner />
         </TemplateBreakout>
       </TemplateHeader>
       <TemplateMain id="mainContent">
