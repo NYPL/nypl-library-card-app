@@ -11,43 +11,46 @@ export const ADDRESS_VERIFICATION_ES = {
   NEXT_BUTTON: appContent.button.next,
 };
 
-test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/address-verification?&newCard=true&lang=es");
-});
+test.describe("Spanish language tests for Address Verification page", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/library-card/address-verification?&newCard=true&lang=es");
+  });
 
-test("Spanish snapshot test on Address Verification page", async ({ page }) => {
-  await expect(
-    page.getByTestId("ds-hero-content").getByTestId("ds-heading")
-  ).toMatchAriaSnapshot(
-    `- heading "${ADDRESS_VERIFICATION_ES.MAIN_HEADING}" [level=1]`
-  );
-  await expect(page.locator("#mainContent")).toMatchAriaSnapshot(`
-    - main:
-      - 'heading "${ADDRESS_VERIFICATION_ES.STEP_HEADING}" [level=2]'
-      - text: ${ADDRESS_VERIFICATION_ES.DESCRIPTION}
-      - heading "${ADDRESS_VERIFICATION_ES.HOME_ADDRESS_HEADING}" [level=3]
-      - link "${ADDRESS_VERIFICATION_ES.PREVIOUS_BUTTON}"
-      - button "${ADDRESS_VERIFICATION_ES.NEXT_BUTTON}"
-    `);
-});
+  test("Spanish snapshot test on Address Verification page", async ({
+    page,
+  }) => {
+    await expect(page.getByTestId("ds-hero-content")).toMatchAriaSnapshot(
+      `- heading "${ADDRESS_VERIFICATION_ES.MAIN_HEADING}" [level=1]`
+    );
+    await expect(page.locator("#mainContent")).toMatchAriaSnapshot(`
+      - main:
+        - 'heading "${ADDRESS_VERIFICATION_ES.STEP_HEADING}" [level=2]'
+        - text: ${ADDRESS_VERIFICATION_ES.DESCRIPTION}
+        - heading "${ADDRESS_VERIFICATION_ES.HOME_ADDRESS_HEADING}" [level=3]
+        - link "${ADDRESS_VERIFICATION_ES.PREVIOUS_BUTTON}":
+          - /url: /library-card/location?&newCard=true&lang=es
+        - button "${ADDRESS_VERIFICATION_ES.NEXT_BUTTON}"
+      `);
+  });
 
-test("displays Spanish elements on Address Verification page", async ({
-  page,
-}) => {
-  await expect(
-    page.getByText(ADDRESS_VERIFICATION_ES.MAIN_HEADING)
-  ).toBeVisible();
-  await expect(
-    page.getByText(ADDRESS_VERIFICATION_ES.STEP_HEADING)
-  ).toBeVisible();
-  await expect(
-    page.getByText(ADDRESS_VERIFICATION_ES.HOME_ADDRESS_HEADING)
-  ).toBeVisible();
-  // await expect(page.getByText(ADDRESS_VERIFICATION_ES.ALTERNATE_ADDRESS_HEADING)).toBeVisible();
-  await expect(
-    page.getByText(ADDRESS_VERIFICATION_ES.PREVIOUS_BUTTON)
-  ).toBeVisible();
-  await expect(
-    page.getByText(ADDRESS_VERIFICATION_ES.NEXT_BUTTON)
-  ).toBeVisible();
+  test("displays Spanish elements on Address Verification page", async ({
+    page,
+  }) => {
+    await expect(
+      page.getByText(ADDRESS_VERIFICATION_ES.MAIN_HEADING)
+    ).toBeVisible();
+    await expect(
+      page.getByText(ADDRESS_VERIFICATION_ES.STEP_HEADING)
+    ).toBeVisible();
+    await expect(
+      page.getByText(ADDRESS_VERIFICATION_ES.HOME_ADDRESS_HEADING)
+    ).toBeVisible();
+    // await expect(page.getByText(ADDRESS_VERIFICATION_ES.ALTERNATE_ADDRESS_HEADING)).toBeVisible();
+    await expect(
+      page.getByText(ADDRESS_VERIFICATION_ES.PREVIOUS_BUTTON)
+    ).toBeVisible();
+    await expect(
+      page.getByText(ADDRESS_VERIFICATION_ES.NEXT_BUTTON)
+    ).toBeVisible();
+  });
 });
