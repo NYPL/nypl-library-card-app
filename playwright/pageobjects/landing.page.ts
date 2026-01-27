@@ -21,10 +21,10 @@ export class LandingPage {
   readonly privacyPolicy: Locator;
   readonly getStartedButton: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, appContent: any) {
     this.page = page;
     this.mainHeading = page.getByRole("heading", {
-      name: "Apply for a Library Card Online",
+      name: appContent.banner.title,
       level: 1,
     });
     this.arabicLanguage = page.getByRole("link", {
