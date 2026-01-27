@@ -4,7 +4,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Accessibility tests on Alternate Address page", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/library-card/workAddress?&newCard=true");
+    await page.goto("/library-card/workAddress?newCard=true");
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {
