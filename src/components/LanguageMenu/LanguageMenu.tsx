@@ -26,7 +26,7 @@ const LanguageMenu = (): JSX.Element => {
 
   return (
     <>
-      <HorizontalRule bg="ui.gray.xx-dark" my="s" />
+      <HorizontalRule bg="ui.gray.xx-dark" mb="s" />
       <List
         inline
         listItems={listItems}

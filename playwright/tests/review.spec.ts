@@ -2,17 +2,15 @@ import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import { ReviewPage } from "../pageobjects/review.page";
 import {
-  TEST_ALTERNATE_ADDRESS,
   TEST_CUSTOMIZE_ACCOUNT,
-  TEST_HOME_ADDRESS,
+  TEST_NYC_ADDRESS,
+  TEST_OOS_ADDRESS,
   TEST_PATRON_INFO,
-  USERNAME_AVAILABLE_MESSAGE,
-  USERNAME_UNAVAILABLE_MESSAGE,
+  ERROR_MESSAGES,
 } from "../utils/constants";
 import {
   fillAccountInfo,
-  fillAlternateAddress,
-  fillHomeAddress,
+  fillAddress,
   fillPersonalInfo,
 } from "../utils/form-helper";
 import { mockUsernameApi } from "../utils/mock-api";
@@ -110,13 +108,13 @@ test.describe("edits patron information on review page", () => {
 
     await test.step("navigates to address page and enters address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillHomeAddress(pageManager.addressPage);
+      await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       await pageManager.addressPage.nextButton.click();
     });
 
     await test.step("enters alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await fillAlternateAddress(pageManager.alternateAddressPage);
+      await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
       await pageManager.alternateAddressPage.nextButton.click();
     });
 
@@ -125,10 +123,10 @@ test.describe("edits patron information on review page", () => {
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
       await pageManager.addressVerificationPage
-        .getHomeAddressOption(TEST_HOME_ADDRESS.street)
+        .getHomeAddressOption(TEST_OOS_ADDRESS.street)
         .check();
       await pageManager.addressVerificationPage
-        .getAlternateAddressOption(TEST_ALTERNATE_ADDRESS.street)
+        .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
         .check();
       await pageManager.addressVerificationPage.nextButton.click();
     });
@@ -142,10 +140,10 @@ test.describe("edits patron information on review page", () => {
     await test.step("displays addresses on review page", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_HOME_ADDRESS.street)
+        pageManager.reviewPage.getText(TEST_OOS_ADDRESS.street)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_ALTERNATE_ADDRESS.street)
+        pageManager.reviewPage.getText(TEST_NYC_ADDRESS.street)
       ).toBeVisible();
     });
   });
@@ -169,7 +167,7 @@ test.describe("edits patron information on review page", () => {
   });
 
   // does not replace account info since there's no existing text
-  test("enters Account information", async ({ page }) => {
+  test("enters account information", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
     await fillAccountInfo(reviewPage);
@@ -191,10 +189,10 @@ test.describe("edits patron information on review page", () => {
   });
 });
 
-test.describe("mocks API responses on Review page", () => {
+test.describe("mocks API responses on review page", () => {
   test("displays username available message", async ({ page }) => {
     // mock the API call for username availability
-    await mockUsernameApi(page, USERNAME_AVAILABLE_MESSAGE);
+    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_AVAILABLE);
 
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
@@ -205,12 +203,186 @@ test.describe("mocks API responses on Review page", () => {
 
   test("displays username unavailable error message", async ({ page }) => {
     // mock the API call for username unavailability
-    await mockUsernameApi(page, USERNAME_UNAVAILABLE_MESSAGE);
+    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_UNAVAILABLE);
 
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
     await reviewPage.usernameInput.fill("UnavailableUsername");
     await reviewPage.availableUsernameButton.click();
-    await expect(reviewPage.unavailableUsernameError).toBeVisible();
+    await expect(reviewPage.unavailableUsernameMessage).toBeVisible();
+  });
+});
+
+test.describe("displays error messages", () => {
+  test("displays errors for required fields", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.firstNameInput.fill("");
+    await reviewPage.lastNameInput.fill("");
+    await reviewPage.dateOfBirthInput.fill("");
+    await reviewPage.emailInput.fill("");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.firstNameError).toBeVisible();
+    await expect(reviewPage.lastNameError).toBeVisible();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.emailError).toBeVisible();
+  });
+
+  test("displays error for dashes in date of birth", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("12-25-1984");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+  });
+
+  test("displays error for YYYY/MM/DD format in date of birth", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("1984/12/25");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+  });
+
+  test("displays error for DD/MM/YYYY format in date of birth", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("25/12/1984");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+  });
+
+  test("displays error for M/D/YY format in date of birth", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("1/1/84");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+  });
+
+  test("displays error for written date of birth", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("December 25, 1984");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+  });
+
+  test("displays error for future date of birth", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("12/31/2099");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+  });
+
+  test("displays error for missing email symbol", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.emailInput.fill("testgmail.com");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.emailError).toBeVisible();
+  });
+
+  test("displays error for missing email domain", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.emailInput.fill("test@.com");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.emailError).toBeVisible();
+  });
+
+  test("displays error for missing email username", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.emailInput.fill("@gmail.com");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.emailError).toBeVisible();
+  });
+
+  test("displays error for missing email top-level domain", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.emailInput.fill("user@gmail");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.emailError).toBeVisible();
+  });
+
+  test("displays error for empty username and password", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("");
+    await reviewPage.passwordInput.fill("");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.usernameError).toBeVisible();
+    await expect(reviewPage.passwordError).toBeVisible();
+  });
+
+  test("displays error for username with special characters", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("User!@#");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.usernameError).toBeVisible();
+  });
+
+  test("displays error for username with non-Latin characters", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("用戶名用戶名");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.usernameError).toBeVisible();
+  });
+
+  test("displays error when passwords do not match", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("ValidUser1");
+    await reviewPage.passwordInput.fill("ValidPass1!");
+    await reviewPage.verifyPasswordInput.fill("DifferentPass1!");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.verifyPasswordError).toBeVisible();
+  });
+
+  test("displays error with too many characters", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    await reviewPage.passwordInput.fill("123456789012345678901234567890123");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.usernameError).toBeVisible();
+    await expect(reviewPage.passwordError).toBeVisible();
+  });
+
+  test("displays error with too few characters", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("A");
+    await reviewPage.passwordInput.fill("1!");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.usernameError).toBeVisible();
+    await expect(reviewPage.passwordError).toBeVisible();
+  });
+
+  test("displays error when terms are not accepted", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editAccountButton.click();
+    await reviewPage.usernameInput.fill("ValidUser1");
+    await reviewPage.passwordInput.fill("ValidPass1!");
+    await reviewPage.verifyPasswordInput.fill("ValidPass1!");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.acceptTermsError).toBeVisible();
   });
 });

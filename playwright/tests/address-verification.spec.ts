@@ -4,8 +4,8 @@ import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
 import { fillAddress } from "../utils/form-helper";
 import {
-  TEST_ALTERNATE_ADDRESS,
-  TEST_HOME_ADDRESS,
+  TEST_NYC_ADDRESS,
+  TEST_OOS_ADDRESS,
   TEST_MULTIMATCH_ADDRESS,
   TEST_MULTIMATCH_ADDRESS_EAST,
   TEST_MULTIMATCH_ADDRESS_WEST,
@@ -41,27 +41,27 @@ test.describe("enters home address and alternate address", () => {
 
     await test.step("enters home address", async () => {
       await expect(addressPage.addressHeading).toBeVisible();
-      await fillAddress(addressPage, TEST_HOME_ADDRESS);
+      await fillAddress(addressPage, TEST_OOS_ADDRESS);
       await addressPage.nextButton.click();
     });
 
     await test.step("enters alternate address", async () => {
       await expect(alternateAddressPage.addressHeading).toBeVisible();
-      await fillAddress(alternateAddressPage, TEST_ALTERNATE_ADDRESS);
+      await fillAddress(alternateAddressPage, TEST_NYC_ADDRESS);
       await alternateAddressPage.nextButton.click();
     });
 
     await test.step("displays home and alternate addresses", async () => {
       await expect(addressVerificationPage.homeAddressHeading).toBeVisible();
       await expect(
-        addressVerificationPage.getHomeAddressOption(TEST_HOME_ADDRESS.street)
+        addressVerificationPage.getHomeAddressOption(TEST_OOS_ADDRESS.street)
       ).toBeVisible();
       await expect(
         addressVerificationPage.alternateAddressHeading
       ).toBeVisible();
       await expect(
         addressVerificationPage.getAlternateAddressOption(
-          TEST_ALTERNATE_ADDRESS.street
+          TEST_NYC_ADDRESS.street
         )
       ).toBeVisible();
     });

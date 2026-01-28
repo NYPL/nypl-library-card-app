@@ -20,8 +20,6 @@ const Banner = ({ fullImageSrc = defaultImageSrc }: BannerProps) => {
   );
   return (
     <Hero
-      backgroundColor="#333"
-      foregroundColor="#ffffff"
       backgroundImageSrc={fullImageSrc}
       heading={h1Heading}
       variant="primary"

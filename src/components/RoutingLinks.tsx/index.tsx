@@ -55,9 +55,6 @@ function RoutingLinks({
       href={previous.url}
       id="routing-links-previous"
       variant="buttonSecondary"
-      borderColor="ui.gray.medium"
-      _visited={{ color: "ui.gray.dark" }}
-      _hover={{ color: "ui.gray.dark" }}
     >
       {previousText}
     </DSLink>
@@ -68,6 +65,7 @@ function RoutingLinks({
       variant="primary"
       id="routing-links-next"
       disabled={isDisabled}
+      aria-disabled={isDisabled}
       type="submit"
     >
       {nextText}
@@ -78,7 +76,7 @@ function RoutingLinks({
 
   return (
     <Box
-      my="2rem"
+      mt="2rem"
       display="flex"
       gap="xs"
       flexDir={{ base: "column", md: "row" }}
