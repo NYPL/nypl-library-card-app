@@ -23,7 +23,7 @@ export class LandingPage {
   readonly digitalResourcesLink: Locator;
   readonly visitLibraryLink: Locator;
   readonly alternateFormLink: Locator;
-  readonly feedbackBanner: Locator;
+  readonly informationalBanner: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -77,6 +77,6 @@ export class LandingPage {
       name: "visit any NYPL location",
     });
     this.alternateFormLink = page.getByRole("link", { name: "alternate form" });
-    this.feedbackBanner = page.getByTestId("ds-banner");
+    this.informationalBanner = page.getByTestId("ds-banner");
   }
 }
