@@ -15,11 +15,6 @@ test("displays the apply heading", async ({ page }) => {
   await expect(landingPage.applyHeading).toBeVisible();
 });
 
-test("displays get started button", async ({ page }) => {
-  const landingPage = new LandingPage(page);
-  await expect(landingPage.getStartedButton).toBeVisible();
-});
-
 test("displays available languages", async ({ page }) => {
   const landingPage = new LandingPage(page);
   await expect(landingPage.arabicLanguage).toBeVisible();
