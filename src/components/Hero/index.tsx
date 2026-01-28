@@ -20,8 +20,6 @@ const Hero = ({ fullImageSrc = defaultImageSrc }: HeroProps) => {
   );
   return (
     <DSHero
-      backgroundColor="#333"
-      foregroundColor="#ffffff"
       backgroundImageSrc={fullImageSrc}
       heading={h1Heading}
       variant="primary"
