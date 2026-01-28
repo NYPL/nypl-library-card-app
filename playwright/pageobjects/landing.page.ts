@@ -49,11 +49,11 @@ export class LandingPage {
     });
     this.urduLanguage = page.getByRole("link", { name: "Urdu | اُردُو" });
     this.applyHeading = page.getByRole("heading", {
-      name: "Apply for a library card today in a few easy steps",
+      name: appContent.home.title,
       level: 2,
     });
     this.whatYouCanAccess = page.getByRole("link", {
-      name: "what you can access",
+      name: appContent.home.description.part3.whatYouCanAccess.text,
     });
     this.cardholderTerms = page.getByRole("link", {
       name: "Cardholder Terms and Conditions",
@@ -64,6 +64,8 @@ export class LandingPage {
     this.privacyPolicy = page
       .locator("#mainContent")
       .getByRole("link", { name: "Privacy Policy" });
-    this.getStartedButton = page.getByRole("link", { name: "Get started" });
+    this.getStartedButton = page.getByRole("link", {
+      name: appContent.button.start,
+    });
   }
 }
