@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
+import appContent from "../../public/locales/en/common.json";
 
 test.describe("Verify breadcrumbs on every page", () => {
   const routes = [
@@ -23,7 +24,7 @@ test.describe("Verify breadcrumbs on every page", () => {
     test(`displays breadcrumb navigation on ${route.name}`, async ({
       page,
     }) => {
-      const pm = new PageManager(page);
+      const pm = new PageManager(page, appContent);
       await page.goto(route.path);
 
       await expect(pm.globalComponents.homeBreadcrumb).toBeVisible();
@@ -35,7 +36,7 @@ test.describe("Verify breadcrumbs on every page", () => {
     test(`get a library card breadcrumb navigates to landing page from ${route.name}`, async ({
       page,
     }) => {
-      const pm = new PageManager(page);
+      const pm = new PageManager(page, appContent);
       await page.goto(route.path);
 
       await pm.globalComponents.getLibraryCardBreadcrumb.click();
@@ -48,7 +49,7 @@ test.describe("Verify breadcrumbs on every page", () => {
     test(`home breadcrumb navigates to nypl home page ${route.name}`, async ({
       page,
     }) => {
-      const pm = new PageManager(page);
+      const pm = new PageManager(page, appContent);
       await page.goto(route.path);
 
       await pm.globalComponents.homeBreadcrumb.click();
