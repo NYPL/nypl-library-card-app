@@ -21,7 +21,7 @@ The production site on NYPL.org:
 
 The current production version:
 
-- v1.3.1
+- [v1.3.2](https://github.com/NYPL/nypl-library-card-app/releases/latest)
 
 ## Installation & Configuration
 
