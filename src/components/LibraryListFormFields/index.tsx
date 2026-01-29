@@ -44,6 +44,11 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
       <PageSubHeading>{t("account.library.title")}</PageSubHeading>
       <Paragraph>{t("account.library.description.part1")}</Paragraph>
       <Paragraph>{t("account.library.description.part2")}</Paragraph>
+      <Paragraph
+        dangerouslySetInnerHTML={{
+          __html: t("account.library.description.part3"),
+        }}
+      />
       <Select
         placeholder="Please select"
         id="librarylist-select"

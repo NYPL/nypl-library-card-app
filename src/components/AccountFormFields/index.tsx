@@ -80,7 +80,11 @@ function AccountFormFields({
       />
 
       <FormRow id={`${id}-accountForm-2`}>
-        <DSFormField sx={{ span: { my: "xs", display: "block" } }}>
+        <DSFormField
+          sx={{
+            "#password-helperErrorText span": { my: "xs", display: "block" },
+          }}
+        >
           <FormField
             id="password"
             type={passwordType}
