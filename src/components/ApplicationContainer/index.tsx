@@ -11,6 +11,7 @@ import {
   TemplateHeader,
   TemplateMain,
 } from "@nypl/design-system-react-components";
+import Breadcrumbs from "../Breadcrumb";
 
 const ApplicationContainer = ({ children, problemDetail }) => {
   const {
@@ -34,6 +35,7 @@ const ApplicationContainer = ({ children, problemDetail }) => {
     <Template variant="narrow">
       <TemplateHeader m="0!">
         <TemplateBreakout>
+          <Breadcrumbs />
           <Banner />
         </TemplateBreakout>
       </TemplateHeader>

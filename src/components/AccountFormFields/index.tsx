@@ -80,7 +80,7 @@ function AccountFormFields({
       />
 
       <FormRow id={`${id}-accountForm-2`}>
-        <DSFormField>
+        <DSFormField sx={{ span: { my: "xs", display: "block" } }}>
           <FormField
             id="password"
             type={passwordType}
