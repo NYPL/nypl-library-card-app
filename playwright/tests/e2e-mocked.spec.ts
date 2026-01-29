@@ -15,18 +15,17 @@ import {
 // } from "../utils/form-helper";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
-  test.describe(`E2E Flow: Complete application using mocked submit in ${name} (${lang})`, () => {
+  test.describe(`E2E: Complete application using mocked submit in ${name} (${lang})`, () => {
     let pageManager: PageManager;
     let appContent: any;
 
     test("displays patron information on congrats page", async ({ page }) => {
       appContent = require(`../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
-      await page.goto(`/library-card/new?newCard=true&lang=${lang}`);
-
       // const fullName = `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`;
 
       await test.step("begins at landing", async () => {
+        await page.goto(`/library-card/new?newCard=true&lang=${lang}`);
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
         await pageManager.landingPage.getStartedButton.click();
       });

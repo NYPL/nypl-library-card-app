@@ -9,8 +9,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test.beforeEach(async ({ page }) => {
       appContent = require(`../../public/locales/${lang}/common.json`);
-      await page.goto(`/library-card/new?newCard=true&lang=${lang}`);
       landingPage = new LandingPage(page, appContent);
+      await page.goto(`/library-card/new?newCard=true&lang=${lang}`);
     });
 
     test("displays the main heading", async () => {

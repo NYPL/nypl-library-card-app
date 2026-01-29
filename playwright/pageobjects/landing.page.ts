@@ -69,7 +69,7 @@ export class LandingPage {
       .locator("#mainContent")
       .getByRole("link", { name: "Privacy Policy" });
     this.getStartedButton = page.getByRole("link", {
-      name: appContent?.button?.start || "Get Started",
+      name: appContent?.button?.start || "Get started",
     });
   }
 }
