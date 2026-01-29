@@ -88,3 +88,9 @@ export const ERROR_MESSAGES = {
   VERIFY_PASSWORD_INVALID: appContent.account.errorMessage.verifyPassword,
   ACCEPT_TERMS_ERROR: appContent.account.errorMessage.acceptTerms,
 };
+
+export const SUPPORTED_LANGUAGES = [
+  { lang: "en", name: "English" },
+  { lang: "es", name: "Spanish" },
+  // add remaining languages
+];

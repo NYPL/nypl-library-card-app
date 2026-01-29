@@ -33,7 +33,11 @@ function HomePage({ policyType, lang }: HomePageProps) {
       <Box mb="s">{t("home.description.part2")}</Box>
       <Box
         mb="s"
-        dangerouslySetInnerHTML={{ __html: t("home.description.part3") }}
+        dangerouslySetInnerHTML={{
+          __html: t("home.description.part3", {
+            whatYouCanAccess: t("home.description.whatYouCanAccess"),
+          }),
+        }}
       />
       <Box
         mb="s"

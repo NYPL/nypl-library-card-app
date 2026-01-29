@@ -21,10 +21,10 @@ export class LandingPage {
   readonly privacyPolicy: Locator;
   readonly getStartedButton: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, appContent?: any) {
     this.page = page;
     this.mainHeading = page.getByRole("heading", {
-      name: "Apply for a Library Card Online",
+      name: appContent?.banner?.title || "Apply for a Library Card Online",
       level: 1,
     });
     this.arabicLanguage = page.getByRole("link", {
@@ -49,11 +49,15 @@ export class LandingPage {
     });
     this.urduLanguage = page.getByRole("link", { name: "Urdu | اُردُو" });
     this.applyHeading = page.getByRole("heading", {
-      name: "Apply for a library card today in a few easy steps",
+      name:
+        appContent?.home?.title ||
+        "Apply for a library card today in a few easy steps",
       level: 2,
     });
     this.whatYouCanAccess = page.getByRole("link", {
-      name: "what you can access",
+      name:
+        appContent?.home?.description?.whatYouCanAccess ||
+        "what you can access",
     });
     this.cardholderTerms = page.getByRole("link", {
       name: "Cardholder Terms and Conditions",
@@ -64,6 +68,8 @@ export class LandingPage {
     this.privacyPolicy = page
       .locator("#mainContent")
       .getByRole("link", { name: "Privacy Policy" });
-    this.getStartedButton = page.getByRole("link", { name: "Get started" });
+    this.getStartedButton = page.getByRole("link", {
+      name: appContent?.button?.start || "Get started",
+    });
   }
 }
