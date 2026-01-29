@@ -13,7 +13,7 @@ export class PageManager {
   readonly page: Page;
   readonly appContent: any;
 
-  constructor(page: Page, appContent: any) {
+  constructor(page: Page, appContent?: any) {
     this.page = page;
     this.appContent = appContent;
   }

@@ -22,10 +22,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     test("displays patron information on congrats page", async ({ page }) => {
       appContent = require(`../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
+      await page.goto(`/library-card/new?newCard=true&lang=${lang}`);
+
       // const fullName = `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`;
 
       await test.step("begins at landing", async () => {
-        await page.goto(`/library-card/new?newCard=true&lang=${lang}`);
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
         await pageManager.landingPage.getStartedButton.click();
       });

@@ -24,7 +24,7 @@ test.describe("Verify breadcrumbs on every page", () => {
     test(`displays breadcrumb navigation on ${route.name}`, async ({
       page,
     }) => {
-      const pm = new PageManager(page, appContent);
+      const pm = new PageManager(page);
       await page.goto(route.path);
 
       await expect(pm.globalComponents.homeBreadcrumb).toBeVisible();
