@@ -89,9 +89,11 @@ test.describe("displays error messages", () => {
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("");
     await accountPage.passwordInput.fill("");
+    await accountPage.selectHomeLibrary.click();
     await accountPage.nextButton.click();
     await expect(accountPage.usernameError).toBeVisible();
     await expect(accountPage.passwordError).toBeVisible();
+    await expect(accountPage.homeLibraryError).toBeVisible();
   });
 
   test("displays error when special characters in username", async ({
@@ -126,6 +128,7 @@ test.describe("displays error messages", () => {
     await accountPage.usernameInput.fill("ValidUser1");
     await accountPage.passwordInput.fill("ValidPass1!");
     await accountPage.verifyPasswordInput.fill("ValidPass1!");
+    await accountPage.selectHomeLibrary.selectOption("vr");
     await accountPage.nextButton.click();
     await expect(accountPage.acceptTermsError).toBeVisible();
   });

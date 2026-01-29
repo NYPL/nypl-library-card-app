@@ -68,6 +68,7 @@ export const ERROR_MESSAGES = {
   USERNAME_AVAILABLE: "This username is available.",
   PASSWORD_INVALID: appContent.account.errorMessage.password,
   VERIFY_PASSWORD_INVALID: appContent.account.errorMessage.verifyPassword,
+  HOME_LIBRARY_ERROR: appContent.account.errorMessage.homeLibraryCode,
   ACCEPT_TERMS_ERROR: appContent.account.errorMessage.acceptTerms,
 };
 
