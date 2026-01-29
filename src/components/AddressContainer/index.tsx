@@ -2,6 +2,7 @@ import {
   Form,
   FormField as DSFormField,
   FormRow,
+  Link as DSLink,
 } from "@nypl/design-system-react-components";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
@@ -25,7 +26,6 @@ import { nyCounties, nyCities, createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../context/FormDataContext";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 import { NRError } from "../../logger/newrelic";
-import { Paragraph } from "../Paragraph";
 import { PageSubHeading } from "../PageSubHeading";
 
 const AddressContainer = ({ csrfToken }) => {
@@ -153,7 +153,10 @@ const AddressContainer = ({ csrfToken }) => {
       <LoadingIndicator isLoading={isLoading} />
 
       <PageSubHeading>{t("location.address.title")}</PageSubHeading>
-      <Paragraph>{t("location.address.description")}</Paragraph>
+      <DSLink
+        variant="external"
+        dangerouslySetInnerHTML={{ __html: t("location.address.description") }}
+      />
 
       <Form
         // action="/library-card/api/submit"
