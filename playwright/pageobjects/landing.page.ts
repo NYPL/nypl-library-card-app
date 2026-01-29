@@ -53,7 +53,7 @@ export class LandingPage {
       level: 2,
     });
     this.whatYouCanAccess = page.getByRole("link", {
-      name: appContent.home.description.part3.whatYouCanAccess.text,
+      name: appContent.home.description.whatYouCanAccess,
     });
     this.cardholderTerms = page.getByRole("link", {
       name: "Cardholder Terms and Conditions",

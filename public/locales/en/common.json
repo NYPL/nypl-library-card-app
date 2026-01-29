@@ -9,13 +9,8 @@
     "description": {
       "part1": "If you are 13 or older and live, work, attend school, or pay property taxes in New York State, you can apply for a free library card right now using this online application—then visit your nearest NYPL location to validate your information and receive a physical NYPL card. If your location within New York State can be confirmed, you will receive a free digital library card right now.",
       "part2": "Visitors from outside of New York State can also use this form to apply for a temporary card that allows them to place holds for physical items. This card must be validated in person within 30 days, and does not provide access to e-books, databases, or the Culture Pass program.",
-      "part3": {
-        "text": "Learn more about {whatYouCanAccess} with your library card!",
-        "whatYouCanAccess": {
-          "text": "what you can access",
-          "url": "https://www.nypl.org/library-card"
-        }
-      },
+      "part3": "Learn more about <a href='https://www.nypl.org/library-card'>{{whatYouCanAccess}}</a> with your library card!",
+      "whatYouCanAccess": "what you can access",
       "part4": "By submitting an application, you understand and agree to our <a href='https://nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
     }
   },
