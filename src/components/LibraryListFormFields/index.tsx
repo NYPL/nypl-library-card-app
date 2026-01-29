@@ -45,6 +45,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
       <Paragraph>{t("account.library.description.part1")}</Paragraph>
       <Paragraph>{t("account.library.description.part2")}</Paragraph>
       <Paragraph
+        mb="l"
         dangerouslySetInnerHTML={{
           __html: t("account.library.description.part3"),
         }}

@@ -21,12 +21,14 @@ const AcceptTermsForm: React.FC = () => {
   return (
     <>
       <Paragraph
+        m={0}
         dangerouslySetInnerHTML={{
           __html: t("account.termsAndCondition.text"),
         }}
       />
 
       <Checkbox
+        mb={"-l"}
         id="acceptTerms"
         invalidText={t("account.errorMessage.acceptTerms")}
         isInvalid={!!errors?.acceptTerms?.message}
