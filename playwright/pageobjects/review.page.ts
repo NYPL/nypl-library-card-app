@@ -34,9 +34,13 @@ export class ReviewPage {
   // Address section
   readonly addressHeading: Locator;
   readonly streetHeading: Locator;
+  readonly streetAddressError: Locator;
   readonly cityHeading: Locator;
+  readonly cityError: Locator;
   readonly stateHeading: Locator;
+  readonly stateError: Locator;
   readonly postalCodeHeading: Locator;
+  readonly postalCodeError: Locator;
   readonly editAddressButton: Locator;
 
   // Account section
@@ -51,8 +55,10 @@ export class ReviewPage {
   readonly passwordHeading: Locator;
   readonly passwordInputHeading: Locator;
   readonly passwordInput: Locator;
+  readonly passwordError: Locator;
   readonly verifyPasswordInputHeading: Locator;
   readonly verifyPasswordInput: Locator;
+  readonly verifyPasswordError: Locator;
   readonly showPasswordCheckbox: Locator;
   readonly homeLibraryHeading: Locator;
   readonly selectHomeLibrary: Locator;
@@ -60,6 +66,7 @@ export class ReviewPage {
   readonly rulesRegulationsLink: Locator;
   readonly privacyPolicyLink: Locator;
   readonly acceptTermsCheckbox: Locator;
+  readonly acceptTermsError: Locator;
   readonly editAccountButton: Locator;
   readonly submitButton: Locator;
 
@@ -147,9 +154,21 @@ export class ReviewPage {
       exact: true,
     });
     this.streetHeading = page.getByText("Street address", { exact: true });
+    this.streetAddressError = page.getByText(
+      "There was a problem. Please enter a valid home street address."
+    );
     this.cityHeading = page.getByText("City", { exact: true });
+    this.cityError = page.getByText(
+      "There was a problem. Please enter a valid home city."
+    );
     this.stateHeading = page.getByText("State", { exact: true });
+    this.stateError = page.getByText(
+      "There was a problem. Please enter a 2-character home state abbreviation."
+    );
     this.postalCodeHeading = page.getByText("Postal code", { exact: true });
+    this.postalCodeError = page.getByText(
+      "There was a problem. Please enter a 5 or 9-digit home postal code."
+    );
     this.editAddressButton = page.getByRole("button", {
       name: "Edit Address",
       exact: true,
@@ -187,6 +206,7 @@ export class ReviewPage {
       name: "Password (required)",
       exact: true,
     });
+    this.passwordError = page.getByText(ERROR_MESSAGES.PASSWORD_INVALID);
     this.verifyPasswordInputHeading = page.getByText(
       "Verify password (required)",
       { exact: true }
@@ -195,6 +215,9 @@ export class ReviewPage {
       name: "Verify password (required)",
       exact: true,
     });
+    this.verifyPasswordError = page.getByText(
+      ERROR_MESSAGES.VERIFY_PASSWORD_INVALID
+    );
     this.showPasswordCheckbox = page.getByText("Show password", {
       exact: true,
     });
@@ -218,6 +241,7 @@ export class ReviewPage {
         exact: true,
       }
     );
+    this.acceptTermsError = page.getByText(ERROR_MESSAGES.ACCEPT_TERMS_ERROR);
     this.editAccountButton = page.getByRole("button", {
       name: "Edit Create your account",
       exact: true,
