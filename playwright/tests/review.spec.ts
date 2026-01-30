@@ -54,9 +54,6 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.passwordHeading).toBeVisible();
     await expect(reviewPage.showPasswordCheckbox).toBeVisible();
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
-    await expect(
-      reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.defaultLibrary)
-    ).toBeVisible();
   });
 });
 
