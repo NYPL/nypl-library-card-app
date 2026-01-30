@@ -131,7 +131,6 @@ test.describe("edits patron information on review page", () => {
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage);
-      // await expect(pageManager.accountPage.selectHomeLibrary).toHaveValue("vr"); // confirmed library is selected but still giving an error
       await pageManager.accountPage.nextButton.click();
     });
 
