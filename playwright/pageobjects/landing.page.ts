@@ -24,7 +24,7 @@ export class LandingPage {
   constructor(page: Page, appContent?: any) {
     this.page = page;
     this.mainHeading = page.getByRole("heading", {
-      name: appContent?.banner?.title || "Apply for a Library Card Online",
+      name: appContent.banner.title || "Apply for a Library Card Online",
       level: 1,
     });
     this.arabicLanguage = page.getByRole("link", {
@@ -50,14 +50,13 @@ export class LandingPage {
     this.urduLanguage = page.getByRole("link", { name: "Urdu | اُردُو" });
     this.applyHeading = page.getByRole("heading", {
       name:
-        appContent?.home?.title ||
+        appContent.home.title ||
         "Apply for a library card today in a few easy steps",
       level: 2,
     });
     this.whatYouCanAccess = page.getByRole("link", {
       name:
-        appContent?.home?.description?.whatYouCanAccess ||
-        "what you can access",
+        appContent.home.description.whatYouCanAccess || "what you can access",
     });
     this.cardholderTerms = page.getByRole("link", {
       name: "Cardholder Terms and Conditions",
@@ -69,7 +68,7 @@ export class LandingPage {
       .locator("#mainContent")
       .getByRole("link", { name: "Privacy Policy" });
     this.getStartedButton = page.getByRole("link", {
-      name: appContent?.button?.start || "Get started",
+      name: appContent.button.start || "Get started",
     });
   }
 }
