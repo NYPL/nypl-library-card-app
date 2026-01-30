@@ -131,6 +131,7 @@ test.describe("edits patron information on review page", () => {
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage);
+      await expect(pageManager.accountPage.selectHomeLibrary).toHaveValue("vr"); // confirmed library is checked but still giving an error
       await pageManager.accountPage.nextButton.click();
     });
 
@@ -145,7 +146,7 @@ test.describe("edits patron information on review page", () => {
     });
   });
 
-  test.skip("displays editable Account section", async ({ page }) => {
+  test("displays editable Account section", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.editAccountButton).toBeVisible();
     await reviewPage.editAccountButton.click();
