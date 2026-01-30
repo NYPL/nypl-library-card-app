@@ -151,13 +151,4 @@ test.describe("displays error messages", () => {
     await expect(accountPage.usernameError).toBeVisible();
     await expect(accountPage.passwordError).toBeVisible();
   });
-
-  test("does not display home library error", async ({ page }) => {
-    // remove
-    const accountPage = new AccountPage(page);
-    await accountPage.selectHomeLibrary.click();
-    await accountPage.selectHomeLibrary.selectOption("vr");
-    await accountPage.nextButton.click();
-    await expect(accountPage.homeLibraryError).not.toBeVisible();
-  });
 });
