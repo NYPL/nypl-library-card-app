@@ -225,15 +225,12 @@ export class ReviewPage {
     this.selectHomeLibrary = page.getByLabel("Select a home library:");
     this.cardholderTermsLink = page.getByRole("link", {
       name: "Cardholder Terms and Conditions",
-      exact: true,
     });
     this.rulesRegulationsLink = page.getByRole("link", {
       name: "Rules and Regulations",
-      exact: true,
     });
     this.privacyPolicyLink = page.locator("#mainContent").getByRole("link", {
       name: "Privacy Policy",
-      exact: true,
     });
     this.acceptTermsCheckbox = page.getByText(
       "Yes, I accept the terms and conditions.",
