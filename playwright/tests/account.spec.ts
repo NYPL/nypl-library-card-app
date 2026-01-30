@@ -128,6 +128,7 @@ test.describe("displays error messages", () => {
     await accountPage.usernameInput.fill("ValidUser1");
     await accountPage.passwordInput.fill("ValidPass1!");
     await accountPage.verifyPasswordInput.fill("ValidPass1!");
+    await accountPage.selectHomeLibrary.click();
     await accountPage.selectHomeLibrary.selectOption("vr");
     await accountPage.nextButton.click();
     await expect(accountPage.acceptTermsError).toBeVisible();
@@ -149,5 +150,14 @@ test.describe("displays error messages", () => {
     await accountPage.nextButton.click();
     await expect(accountPage.usernameError).toBeVisible();
     await expect(accountPage.passwordError).toBeVisible();
+  });
+
+  test("does not display home library error", async ({ page }) => {
+    // remove
+    const accountPage = new AccountPage(page);
+    await accountPage.selectHomeLibrary.click();
+    await accountPage.selectHomeLibrary.selectOption("vr");
+    await accountPage.nextButton.click();
+    await expect(accountPage.homeLibraryError).not.toBeVisible();
   });
 });
