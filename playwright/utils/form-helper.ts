@@ -26,6 +26,7 @@ export async function fillAccountInfo(page: AccountPage | ReviewPage) {
   await page.usernameInput.fill(TEST_CUSTOMIZE_ACCOUNT.username);
   await page.passwordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
   await page.verifyPasswordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
+  await page.selectHomeLibrary.click();
   await page.selectHomeLibrary.selectOption(TEST_CUSTOMIZE_ACCOUNT.homeLibrary);
   await page.acceptTermsCheckbox.check();
 }

@@ -53,9 +53,6 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.passwordHeading).toBeVisible();
     await expect(reviewPage.showPasswordCheckbox).toBeVisible();
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
-    await expect(
-      reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.defaultLibrary)
-    ).toBeVisible();
   });
 });
 
@@ -396,6 +393,7 @@ test.describe("displays error messages", () => {
     await expect(reviewPage.usernameError).toBeVisible();
     await expect(reviewPage.passwordError).toBeVisible();
     await expect(reviewPage.verifyPasswordError).toBeVisible();
+    await expect(reviewPage.homeLibraryError).toBeVisible();
     await expect(reviewPage.acceptTermsError).toBeVisible();
     await expect(reviewPage.streetAddressError).toBeVisible();
     await expect(reviewPage.cityError).toBeVisible();

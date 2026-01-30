@@ -85,7 +85,7 @@
     },
     "password": {
       "label": "Modpas",
-      "instruction": "Nou ankouraje w pou chwazi yon modpas ki solid ki gen ladann: omwen 8 karaktè, yon melanj lèt majiskil ak miniskil, yon melanj lèt ak chif, epi omwen yon karaktè espesyal, sòf pwen (.)<br />Egzanp: MyLib1731@<br /> Modpas la pa ka gen ladann karaktè komen tankou repete 3 fwa oswa plis menm karaktè a youn dèyè lòt; egzanp: aaaatf54 oswa repete yon karaktè, egzanp: abcabcab"
+      "instruction": "Nou ankouraje w pou chwazi yon modpas ki solid ki gen ladann: omwen 8 karaktè, yon melanj lèt majiskil ak miniskil, yon melanj lèt ak chif, epi omwen yon karaktè espesyal, sòf pwen (.)<span>Egzanp: MyLib1731@</span> Modpas la pa ka gen ladann karaktè komen tankou repete 3 fwa oswa plis menm karaktè a youn dèyè lòt; egzanp: aaaatf54 oswa repete yon karaktè, egzanp: abcabcab"
     },
     "verifyPassword": {
       "label": "Verifye Modpas ",

@@ -5,11 +5,12 @@ import { mockTFunction, TestProviderWrapper } from "../../../testHelper/utils";
 import AcceptTermsFormFields from ".";
 
 jest.mock("react-i18next", () => {
+  const React = jest.requireActual("react");
   const en = {
     account: {
       termsAndCondition: {
         label: "Yes, I accept the terms and conditions.",
-        text: "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>.",
+        text: "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library's use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>.",
       },
       errorMessage: {
         acceptTerms: "The Terms and Conditions must be checked.",
@@ -17,10 +18,18 @@ jest.mock("react-i18next", () => {
     },
   };
   return {
-    // this mock makes sure any components using the translate hook can use it without a warning being shown
     useTranslation: () => ({
       t: mockTFunction(en),
+      i18n: { language: "en" },
     }),
+    Trans: ({ children, i18nKey }) => {
+      return React.createElement(
+        "div",
+        { "data-testid": `mock-trans` },
+        i18nKey,
+        children
+      );
+    },
   };
 });
 
@@ -44,12 +53,11 @@ describe("AcceptTermsFormFields", () => {
     );
   });
 
-  test("renders text with three links", () => {
+  test("renders the terms and conditions section", () => {
+    expect(screen.getByTestId("mock-trans")).toBeInTheDocument();
     expect(
-      screen.getByText("Cardholder Terms and Conditions")
+      screen.getByText("account.termsAndCondition.text")
     ).toBeInTheDocument();
-    expect(screen.getByText("Rules and Regulations")).toBeInTheDocument();
-    expect(screen.getByText("Privacy Policy")).toBeInTheDocument();
   });
 
   test("renders a checkbox", () => {

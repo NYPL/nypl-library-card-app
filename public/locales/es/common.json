@@ -80,7 +80,7 @@
     },
     "password": {
       "label": "Contraseña",
-      "instruction": "Le recomendamos elegir una contraseña segura que incluya al menos 8 caracteres, una combinación de letras mayúsculas y minúsculas, una combinación de letras y números, y al menos un carácter especial, excepto el punto (.).<br />Ejemplo: MyLib1731@<br />La contraseña no puede tener patrones comunes, como repetir consecutivamente un carácter tres o más veces (por ejemplo, aaaatf54) o repetir un patrón (por ejemplo, abcabcab)."
+      "instruction": "Le recomendamos elegir una contraseña segura que incluya al menos 8 caracteres, una combinación de letras mayúsculas y minúsculas, una combinación de letras y números, y al menos un carácter especial, excepto el punto (.).<span>Ejemplo: MyLib1731@</span>La contraseña no puede tener patrones comunes, como repetir consecutivamente un carácter tres o más veces (por ejemplo, aaaatf54) o repetir un patrón (por ejemplo, abcabcab)."
     },
     "verifyPassword": {
       "label": "Verificar contraseña",

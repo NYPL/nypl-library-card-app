@@ -29,7 +29,10 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
     ? findLibraryName(formValues?.homeLibraryCode)
     : "";
   const [value, setValue] = useState(defaultValue);
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   const onChange = (event) => {
     setValue(event.target.value);
@@ -44,14 +47,24 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
       <PageSubHeading>{t("account.library.title")}</PageSubHeading>
       <Paragraph>{t("account.library.description.part1")}</Paragraph>
       <Paragraph>{t("account.library.description.part2")}</Paragraph>
+      <Paragraph
+        mb="m"
+        dangerouslySetInnerHTML={{
+          __html: t("account.library.description.part3"),
+        }}
+      />
       <Select
         placeholder="Please select"
         id="librarylist-select"
         labelText={t("account.library.selectLibrary")}
-        isRequired={false}
+        invalidText={t("account.errorMessage.homeLibraryCode")}
+        isInvalid={!!errors?.homeLibraryCode?.message}
+        isRequired={true}
         // Pass in the `react-hook-form` register function so it can handle this
         // form element's state for us.
-        {...register("homeLibraryCode")}
+        {...register("homeLibraryCode", {
+          required: t("account.errorMessage.homeLibraryCode"),
+        })}
         {...inputProps}
         autoComplete="on"
       >
