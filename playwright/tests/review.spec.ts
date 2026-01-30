@@ -145,7 +145,7 @@ test.describe("edits patron information on review page", () => {
     });
   });
 
-  test.skip("displays editable Account section", async ({ page }) => {
+  test("displays editable Account section", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.editAccountButton).toBeVisible();
     await reviewPage.editAccountButton.click();
@@ -381,5 +381,23 @@ test.describe("displays error messages", () => {
     await reviewPage.verifyPasswordInput.fill("ValidPass1!");
     await reviewPage.submitButton.click();
     await expect(reviewPage.acceptTermsError).toBeVisible();
+  });
+
+  test("displays errors when submitting empty form", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.firstNameError).toBeVisible();
+    await expect(reviewPage.lastNameError).toBeVisible();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.emailError).toBeVisible();
+    await expect(reviewPage.usernameError).toBeVisible();
+    await expect(reviewPage.passwordError).toBeVisible();
+    await expect(reviewPage.verifyPasswordError).toBeVisible();
+    await expect(reviewPage.homeLibraryError).toBeVisible();
+    await expect(reviewPage.acceptTermsError).toBeVisible();
+    await expect(reviewPage.streetAddressError).toBeVisible();
+    await expect(reviewPage.cityError).toBeVisible();
+    await expect(reviewPage.stateError).toBeVisible();
+    await expect(reviewPage.postalCodeError).toBeVisible();
   });
 });

@@ -25,7 +25,7 @@ test.describe("displays all form elements on Account page", () => {
     await expect(accountPage.showPasswordCheckbox).toBeVisible();
   });
 
-  test.skip("displays home library form", async ({ page }) => {
+  test("displays home library form", async ({ page }) => {
     const accountPage = new AccountPage(page);
     await expect(accountPage.selectHomeLibrary).toBeVisible();
     await expect(accountPage.cardholderTerms).toBeVisible();
@@ -89,9 +89,11 @@ test.describe("displays error messages", () => {
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("");
     await accountPage.passwordInput.fill("");
+    await accountPage.selectHomeLibrary.click();
     await accountPage.nextButton.click();
     await expect(accountPage.usernameError).toBeVisible();
     await expect(accountPage.passwordError).toBeVisible();
+    await expect(accountPage.homeLibraryError).toBeVisible();
   });
 
   test("displays error when special characters in username", async ({
@@ -121,11 +123,13 @@ test.describe("displays error messages", () => {
     await expect(accountPage.verifyPasswordError).toBeVisible();
   });
 
-  test.skip("displays error when terms are not accepted", async ({ page }) => {
+  test("displays error when terms are not accepted", async ({ page }) => {
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("ValidUser1");
     await accountPage.passwordInput.fill("ValidPass1!");
     await accountPage.verifyPasswordInput.fill("ValidPass1!");
+    await accountPage.selectHomeLibrary.click();
+    await accountPage.selectHomeLibrary.selectOption("vr");
     await accountPage.nextButton.click();
     await expect(accountPage.acceptTermsError).toBeVisible();
   });

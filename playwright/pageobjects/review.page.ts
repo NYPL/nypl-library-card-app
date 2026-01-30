@@ -34,9 +34,13 @@ export class ReviewPage {
   // Address section
   readonly addressHeading: Locator;
   readonly streetHeading: Locator;
+  readonly streetAddressError: Locator;
   readonly cityHeading: Locator;
+  readonly cityError: Locator;
   readonly stateHeading: Locator;
+  readonly stateError: Locator;
   readonly postalCodeHeading: Locator;
+  readonly postalCodeError: Locator;
   readonly editAddressButton: Locator;
 
   // Account section
@@ -58,6 +62,7 @@ export class ReviewPage {
   readonly showPasswordCheckbox: Locator;
   readonly homeLibraryHeading: Locator;
   readonly selectHomeLibrary: Locator;
+  readonly homeLibraryError: Locator;
   readonly cardholderTermsLink: Locator;
   readonly rulesRegulationsLink: Locator;
   readonly privacyPolicyLink: Locator;
@@ -150,9 +155,21 @@ export class ReviewPage {
       exact: true,
     });
     this.streetHeading = page.getByText("Street address", { exact: true });
+    this.streetAddressError = page.getByText(
+      "There was a problem. Please enter a valid home street address."
+    );
     this.cityHeading = page.getByText("City", { exact: true });
+    this.cityError = page.getByText(
+      "There was a problem. Please enter a valid home city."
+    );
     this.stateHeading = page.getByText("State", { exact: true });
+    this.stateError = page.getByText(
+      "There was a problem. Please enter a 2-character home state abbreviation."
+    );
     this.postalCodeHeading = page.getByText("Postal code", { exact: true });
+    this.postalCodeError = page.getByText(
+      "There was a problem. Please enter a 5 or 9-digit home postal code."
+    );
     this.editAddressButton = page.getByRole("button", {
       name: "Edit Address",
       exact: true,
@@ -207,17 +224,15 @@ export class ReviewPage {
     });
     this.homeLibraryHeading = page.getByText("Home library", { exact: true });
     this.selectHomeLibrary = page.getByLabel("Select a home library:");
+    this.homeLibraryError = page.getByText(ERROR_MESSAGES.HOME_LIBRARY_ERROR);
     this.cardholderTermsLink = page.getByRole("link", {
       name: "Cardholder Terms and Conditions",
-      exact: true,
     });
     this.rulesRegulationsLink = page.getByRole("link", {
       name: "Rules and Regulations",
-      exact: true,
     });
     this.privacyPolicyLink = page.locator("#mainContent").getByRole("link", {
       name: "Privacy Policy",
-      exact: true,
     });
     this.acceptTermsCheckbox = page.getByText(
       "Yes, I accept the terms and conditions.",
