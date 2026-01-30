@@ -85,8 +85,7 @@
     },
     "password": {
       "label": "Password",
-      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <br />Example: MyLib1731@<br />Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
-    },
+      "instruction": "We encourage you to select a strong password that includes: at least 8 characters, a mixture of uppercase and lowercase letters, a mixture of letters and numbers, and at least one special character <i>except</i> period (.) <span>Example: MyLib1731@</span>Password cannot contain common patterns such as consecutively repeating a character three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"    },
     "verifyPassword": {
       "label": "Verify password",
       "instruction": "8-32 characters"
@@ -98,7 +97,8 @@
       "title": "Home library",
       "description": {
         "part1": "Choosing a home library will help us make sure you're getting everything you need from a branch that's most convenient for you.",
-        "part2": "You can skip this step and update it at any point through your account."
+        "part2": "Please select an NYPL location from the dropdown menu below to be your home library. If you do not have a home library, please select “Virtual.” You may update this at any time through your account settings.",
+        "part3": "To borrow physical items, you <strong>must</strong> visit an NYPL location to verify your info and receive a physical card."
       }
     },
     "termsAndCondition": {

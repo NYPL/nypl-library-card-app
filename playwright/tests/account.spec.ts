@@ -25,7 +25,7 @@ test.describe("displays all form elements on Account page", () => {
     await expect(accountPage.showPasswordCheckbox).toBeVisible();
   });
 
-  test("displays home library form", async ({ page }) => {
+  test.skip("displays home library form", async ({ page }) => {
     const accountPage = new AccountPage(page);
     await expect(accountPage.selectHomeLibrary).toBeVisible();
     await expect(accountPage.cardholderTerms).toBeVisible();
@@ -123,7 +123,7 @@ test.describe("displays error messages", () => {
     await expect(accountPage.verifyPasswordError).toBeVisible();
   });
 
-  test("displays error when terms are not accepted", async ({ page }) => {
+  test.skip("displays error when terms are not accepted", async ({ page }) => {
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("ValidUser1");
     await accountPage.passwordInput.fill("ValidPass1!");

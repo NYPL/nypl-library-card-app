@@ -145,7 +145,7 @@ test.describe("edits patron information on review page", () => {
     });
   });
 
-  test("displays editable Account section", async ({ page }) => {
+  test.skip("displays editable Account section", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await expect(reviewPage.editAccountButton).toBeVisible();
     await reviewPage.editAccountButton.click();

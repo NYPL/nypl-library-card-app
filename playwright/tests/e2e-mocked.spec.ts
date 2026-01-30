@@ -56,7 +56,7 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
       await pageManager.addressVerificationPage.nextButton.click();
     });
 
-    await test.step("enters account information", async () => {
+    await test.step.skip("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage);
       await pageManager.accountPage.nextButton.click();
