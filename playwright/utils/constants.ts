@@ -66,7 +66,6 @@ export const TEST_CUSTOMIZE_ACCOUNT = {
   username: TEST_UNIQUE_USERNAME,
   password: "Test@1234",
   homeLibrary: "eb", // used to confirm dropdown selection
-  defaultLibrary: "E-Branch", // used to confirm text displays on page
 };
 
 // congrats
