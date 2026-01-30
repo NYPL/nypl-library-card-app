@@ -65,8 +65,7 @@ const TEST_UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
 export const TEST_CUSTOMIZE_ACCOUNT = {
   username: TEST_UNIQUE_USERNAME,
   password: "Test@1234",
-  homeLibrary: "vr", // used to confirm dropdown selection
-  defaultLibrary: "Virtual", // used to confirm text displays on page
+  homeLibrary: "eb", // used to confirm dropdown selection
 };
 
 // congrats

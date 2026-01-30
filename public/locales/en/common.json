@@ -97,7 +97,8 @@
       "title": "Home library",
       "description": {
         "part1": "Choosing a home library will help us make sure you're getting everything you need from a branch that's most convenient for you.",
-        "part2": "You can skip this step and update it at any point through your account."
+        "part2": "Please select an NYPL location from the dropdown menu below to be your home library. If you do not have a home library, please select “Virtual.” You may update this at any time through your account settings.",
+        "part3": "To borrow physical items, you <strong>must</strong> visit an NYPL location to verify your info and receive a physical card."
       }
     },
     "termsAndCondition": {
