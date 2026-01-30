@@ -1,16 +1,15 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import {
-  TEST_ALTERNATE_ADDRESS,
   TEST_BARCODE_NUMBER,
-  TEST_HOME_ADDRESS,
+  TEST_NYC_ADDRESS,
+  TEST_OOS_ADDRESS,
   TEST_PATRON_INFO,
 } from "../utils/constants";
 import { mockCreatePatronApi } from "../utils/mock-api";
 import {
   fillAccountInfo,
-  fillAlternateAddress,
-  fillHomeAddress,
+  fillAddress,
   fillPersonalInfo,
 } from "../utils/form-helper";
 
@@ -34,13 +33,13 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
 
     await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillHomeAddress(pageManager.addressPage);
+      await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       await pageManager.addressPage.nextButton.click();
     });
 
     await test.step("enters alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await fillAlternateAddress(pageManager.alternateAddressPage);
+      await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
       await pageManager.alternateAddressPage.nextButton.click();
     });
 
@@ -49,10 +48,10 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
       await pageManager.addressVerificationPage
-        .getHomeAddressOption(TEST_HOME_ADDRESS.street)
+        .getHomeAddressOption(TEST_OOS_ADDRESS.street)
         .check();
       await pageManager.addressVerificationPage
-        .getAlternateAddressOption(TEST_ALTERNATE_ADDRESS.street)
+        .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
         .check();
       await pageManager.addressVerificationPage.nextButton.click();
     });
