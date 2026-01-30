@@ -1,19 +1,23 @@
 import {
   FormField as DSFormField,
   FormRow,
+  Select,
+  useCloseDropDown,
 } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
-import React from "react";
+import React, { useState, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { isNumeric } from "validator";
 
 import FormField from "../FormField";
 import { AddressTypes, FormInputData } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
+import { USStateObject } from "../../interfaces";
 
 interface AddressFormProps {
   id?: string;
   type: AddressTypes;
+  stateData: USStateObject[];
 }
 
 /**
@@ -22,10 +26,19 @@ interface AddressFormProps {
  * street address (line1), second street address (line2), city, state,
  * and zip code.
  */
-const AddressForm = ({ id, type }: AddressFormProps) => {
+const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useCloseDropDown(setIsOpen, ref);
+
+  const inputProps = {
+    isOpen,
+    useCloseDropDown,
+  };
+
   // This component must be used within the `react-hook-form` provider so that
   // these functions are available to use.
   const {
@@ -118,25 +131,29 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
             autoComplete={`section-${type} address-level2`}
           />
         </DSFormField>
-        <DSFormField>
-          <FormField
-            id={`state-${type}`}
-            instructionText={t("location.address.state.instruction")}
-            label={t("location.address.state.label")}
-            {...register(`${type}-state`, {
-              validate: lengthValidation(
-                STATELENGTH,
-                STATELENGTH,
-                "location.errorMessage.state"
-              ),
-            })}
-            isRequired={isRequired}
-            errorState={errors}
-            maxLength={STATELENGTH}
-            defaultValue={formValues[`${type}-state`]}
-            autoComplete={`section-${type} address-level1`}
-          />
-        </DSFormField>
+        <Select
+          placeholder="Please select"
+          id={`state-${type}`}
+          labelText={t("location.address.state.label")}
+          isRequired={isRequired}
+          // Pass in the `react-hook-form` register function so it can handle this
+          // form element's state for us.
+          {...register(`${type}-state`, {
+            validate: lengthValidation(
+              STATELENGTH,
+              STATELENGTH,
+              "location.errorMessage.state"
+            ),
+          })}
+          {...inputProps}
+          autoComplete={`section-${type} address-level1`}
+        >
+          {stateData.map(({ value, label }, i) => (
+            <option key={i} value={value}>
+              {label}
+            </option>
+          ))}
+        </Select>
       </FormRow>
 
       <FormRow id={`${id}-addressForm-4`}>
