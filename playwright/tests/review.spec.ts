@@ -393,6 +393,7 @@ test.describe("displays error messages", () => {
     await expect(reviewPage.usernameError).toBeVisible();
     await expect(reviewPage.passwordError).toBeVisible();
     await expect(reviewPage.verifyPasswordError).toBeVisible();
+    await expect(reviewPage.homeLibraryError).toBeVisible();
     await expect(reviewPage.acceptTermsError).toBeVisible();
     await expect(reviewPage.streetAddressError).toBeVisible();
     await expect(reviewPage.cityError).toBeVisible();
