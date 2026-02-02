@@ -76,7 +76,10 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
             errorState={errors}
             isRequired
             defaultValue={formValues.email}
-            instructionText={t("personal.email.instruction")}
+            instructionText={t("personal.email.instruction", {
+              alternateForm: t("personal.email.alternateForm"),
+              locations: t("personal.email.locations"),
+            })}
             autoComplete="email"
           />
         </DSFormField>

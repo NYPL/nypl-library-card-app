@@ -19,46 +19,54 @@ export class PersonalPage {
   readonly previousButton: Locator;
   readonly nextButton: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, appContent?: any) {
     this.page = page;
     this.mainHeading = this.page.getByRole("heading", {
-      name: "Apply for a Library Card Online",
+      name: appContent?.banner?.title || "Apply for a Library Card Online",
       level: 1,
     });
     this.stepHeading = this.page.getByRole("heading", {
-      name: "Step 1 of 5: Personal information",
+      name: appContent?.personal?.title || "Step 1 of 5: Personal information",
       level: 2,
     });
-    this.firstNameInput = this.page.getByLabel(/First name/i);
+    this.firstNameInput = this.page.getByLabel(
+      appContent?.personal?.firstName.label || /First name/i
+    );
     this.firstNameError = this.page.getByText(
       ERROR_MESSAGES.FIRST_NAME_INVALID
     );
-    this.lastNameInput = this.page.getByLabel(/Last name/i);
+    this.lastNameInput = this.page.getByLabel(
+      appContent?.personal?.lastName.label || /Last name/i
+    );
     this.lastNameError = this.page.getByText(ERROR_MESSAGES.LAST_NAME_INVALID);
-    this.dateOfBirthInput = this.page.getByLabel(/Date of birth/i);
+    this.dateOfBirthInput = this.page.getByLabel(
+      appContent?.personal?.birthdate.label || /Date of birth/i
+    );
     this.dateOfBirthError = this.page.getByText(
       ERROR_MESSAGES.DATE_OF_BIRTH_INVALID
     );
-    this.emailInput = this.page.getByLabel(/Email/i);
+    this.emailInput = this.page.getByLabel(
+      appContent?.personal?.email.label || /Email/i
+    );
     this.emailError = this.page.getByText(ERROR_MESSAGES.EMAIL_INVALID);
     this.alternateFormLink = this.page.getByRole("link", {
-      name: "alternate form",
+      name: appContent?.personal?.email?.alternateForm || "alternate form",
       exact: true,
     });
     this.locationsLink = this.page.getByRole("link", {
-      name: "locations",
+      name: appContent?.personal?.email?.locations || "locations",
       exact: true,
     });
     this.receiveInfoCheckbox = this.page.getByText(
-      "Yes, I would like to receive information about NYPL's programs and services"
+      appContent?.personal?.eCommunications?.labelText ||
+        "Yes, I would like to receive information about NYPL's programs and services"
     );
-
     this.previousButton = this.page.getByRole("link", {
-      name: "Previous",
+      name: appContent?.button?.previous || "Previous",
       exact: true,
     });
     this.nextButton = this.page.getByRole("button", {
-      name: "Next",
+      name: appContent?.button?.next || "Next",
       exact: true,
     });
   }

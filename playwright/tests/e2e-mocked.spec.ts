@@ -8,11 +8,11 @@ import {
   // TEST_PATRON_INFO,
 } from "../utils/constants";
 // import { mockCreatePatronApi } from "../utils/mock-api";
-// import {
-//   fillAccountInfo,
-//   fillAddress,
-//   fillPersonalInfo,
-// } from "../utils/form-helper";
+import {
+  //   fillAccountInfo,
+  //   fillAddress,
+  fillPersonalInfo,
+} from "../utils/form-helper";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`E2E: Complete application using mocked submit in ${name} (${lang})`, () => {
@@ -30,14 +30,14 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.landingPage.getStartedButton.click();
       });
 
-      // await test.step("enters personal information", async () => {
-      //   await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      //   await fillPersonalInfo(pageManager.personalPage);
-      //   await expect(
-      //     pageManager.personalPage.receiveInfoCheckbox
-      //   ).toBeChecked();
-      //   await pageManager.personalPage.nextButton.click();
-      // });
+      await test.step("enters personal information", async () => {
+        await expect(pageManager.personalPage.stepHeading).toBeVisible();
+        await fillPersonalInfo(pageManager.personalPage);
+        await expect(
+          pageManager.personalPage.receiveInfoCheckbox
+        ).toBeChecked();
+        await pageManager.personalPage.nextButton.click();
+      });
 
       // await test.step("enters home address", async () => {
       //   await expect(pageManager.addressPage.stepHeading).toBeVisible();
