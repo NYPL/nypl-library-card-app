@@ -2,20 +2,36 @@ import { AxeBuilder } from "@axe-core/playwright";
 import { AddressVerificationPage } from "../../pageobjects/address-verification.page";
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
-import { fillAddress } from "../../utils/form-helper";
-import { TEST_NYC_ADDRESS } from "../../utils/constants";
+import { fillAddress, fillPersonalInfo } from "../../utils/form-helper";
+import { TEST_NYC_ADDRESS, TEST_OOS_ADDRESS } from "../../utils/constants";
 
 test.describe("Accessibility tests on Address Verification page", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto("/library-card/location?newCard=true");
-    const pm = new PageManager(page);
-    await fillAddress(pm.addressPage, TEST_NYC_ADDRESS);
-    await expect(pm.addressPage.nextButton).toBeVisible();
-    await pm.addressPage.nextButton.click();
-    await expect(pm.addressVerificationPage.homeAddressHeading).toBeVisible();
+  test.beforeEach(async ({ page, context }) => {
+    await context.clearCookies();
+    await page.goto("/library-card/new");
+    const pageManager = new PageManager(page);
+
+    await pageManager.landingPage.getStartedButton.click();
+
+    await fillPersonalInfo(pageManager.personalPage);
+    await pageManager.personalPage.nextButton.click();
+
+    await expect(pageManager.addressPage.stepHeading).toBeVisible();
+    await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
+    await pageManager.addressPage.nextButton.click();
+
+    await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
+    await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
+    await pageManager.alternateAddressPage.nextButton.click();
+
+    await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
+
+    const spinner = page.getByRole("status");
+    await expect(spinner).not.toBeVisible({ timeout: 10000 });
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {
+    await expect(page).toHaveURL(/.*\/address-verification\?&?newCard=true/);
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags(["wcag21aa", "wcag22aa"])
       .analyze();
@@ -23,8 +39,10 @@ test.describe("Accessibility tests on Address Verification page", () => {
   });
 
   test("keyboard navigation", async ({ page }) => {
+    await expect(page).toHaveURL(/.*\/address-verification\?&?newCard=true/);
     const addressVerification = new AddressVerificationPage(page);
+    await addressVerification.stepHeading.focus();
     await page.keyboard.press("Tab");
-    await expect(addressVerification.radioButton).toBeFocused();
+    await expect(addressVerification.radioButton.first()).toBeFocused();
   });
 });

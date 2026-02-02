@@ -37,9 +37,7 @@ export class AddressVerificationPage {
       exact: true,
     });
 
-    this.radioButton = this.page.getByRole("radio", {
-      name: "home-address-select",
-    });
+    this.radioButton = this.page.getByRole("radio").first();
   }
 
   getHomeAddressOption(street: string): Locator {
