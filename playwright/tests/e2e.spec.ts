@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
-// import {
-//   fillPersonalInfo,
-//   fillAddress,
-//   fillAccountInfo,
-// } from "../utils/form-helper";
+import {
+  fillPersonalInfo,
+  //   fillAddress,
+  //   fillAccountInfo,
+} from "../utils/form-helper";
 import {
   SUPPORTED_LANGUAGES,
   // TEST_CUSTOMIZE_ACCOUNT,
@@ -49,11 +49,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.landingPage.getStartedButton.click();
       });
 
-      // await test.step("enters personal information", async () => {
-      //   await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      //   await fillPersonalInfo(pageManager.personalPage);
-      //   await pageManager.personalPage.nextButton.click();
-      // });
+      await test.step("enters personal information", async () => {
+        await expect(pageManager.personalPage.stepHeading).toBeVisible();
+        await fillPersonalInfo(pageManager.personalPage);
+        await pageManager.personalPage.nextButton.click();
+      });
 
       // await test.step("enters home address", async () => {
       //   await expect(pageManager.addressPage.stepHeading).toBeVisible();

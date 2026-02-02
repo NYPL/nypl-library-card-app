@@ -1,5 +1,4 @@
 import { Page, Locator } from "@playwright/test";
-import { ERROR_MESSAGES } from "../utils/constants";
 
 export class PersonalPage {
   readonly page: Page;
@@ -33,22 +32,30 @@ export class PersonalPage {
       appContent?.personal?.firstName.label || /First name/i
     );
     this.firstNameError = this.page.getByText(
-      ERROR_MESSAGES.FIRST_NAME_INVALID
+      appContent?.personal?.errorMessage?.firstName ||
+        "There was a problem. Please enter a valid first name."
     );
     this.lastNameInput = this.page.getByLabel(
       appContent?.personal?.lastName.label || /Last name/i
     );
-    this.lastNameError = this.page.getByText(ERROR_MESSAGES.LAST_NAME_INVALID);
+    this.lastNameError = this.page.getByText(
+      appContent?.personal?.errorMessage?.lastName ||
+        "There was a problem. Please enter a valid last name."
+    );
     this.dateOfBirthInput = this.page.getByLabel(
       appContent?.personal?.birthdate.label || /Date of birth/i
     );
     this.dateOfBirthError = this.page.getByText(
-      ERROR_MESSAGES.DATE_OF_BIRTH_INVALID
+      appContent?.personal?.errorMessage?.birthdate ||
+        "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes."
     );
     this.emailInput = this.page.getByLabel(
       appContent?.personal?.email.label || /Email/i
     );
-    this.emailError = this.page.getByText(ERROR_MESSAGES.EMAIL_INVALID);
+    this.emailError = this.page.getByText(
+      appContent?.personal?.errorMessage?.email ||
+        "There was a problem. Please enter a valid email address."
+    );
     this.alternateFormLink = this.page.getByRole("link", {
       name: appContent?.personal?.email?.alternateForm || "alternate form",
       exact: true,
