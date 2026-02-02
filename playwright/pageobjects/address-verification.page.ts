@@ -6,7 +6,9 @@ export class AddressVerificationPage {
   readonly stepHeading: Locator;
   readonly homeAddressHeading: Locator;
   readonly alternateAddressHeading: Locator;
-  readonly radioButton: Locator;
+  readonly radioHomeButton: Locator;
+  readonly radioAlternateButton: Locator;
+  readonly spinner: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -37,7 +39,9 @@ export class AddressVerificationPage {
       exact: true,
     });
 
-    this.radioButton = this.page.getByRole("radio").first();
+    this.radioHomeButton = this.page.getByRole("radio").first();
+    this.radioAlternateButton = this.page.getByRole("radio").nth(1);
+    this.spinner = this.page.getByRole("status");
   }
 
   getHomeAddressOption(street: string): Locator {

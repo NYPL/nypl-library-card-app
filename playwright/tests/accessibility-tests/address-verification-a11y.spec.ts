@@ -26,8 +26,9 @@ test.describe("Accessibility tests on Address Verification page", () => {
 
     await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
 
-    const spinner = page.getByRole("status");
-    await expect(spinner).not.toBeVisible({ timeout: 10000 });
+    await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
+      timeout: 10000,
+    });
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {
@@ -42,7 +43,19 @@ test.describe("Accessibility tests on Address Verification page", () => {
     await expect(page).toHaveURL(/.*\/address-verification\?&?newCard=true/);
     const addressVerification = new AddressVerificationPage(page);
     await addressVerification.stepHeading.focus();
-    await page.keyboard.press("Tab");
-    await expect(addressVerification.radioButton.first()).toBeFocused();
+
+    const addressVerificationLocators = [
+      addressVerification.radioHomeButton,
+      addressVerification.radioAlternateButton,
+      addressVerification.previousButton,
+      addressVerification.nextButton,
+    ];
+
+    await expect(addressVerification.stepHeading).toBeFocused();
+
+    for (const locator of addressVerificationLocators) {
+      await page.keyboard.press("Tab");
+      await expect(locator).toBeFocused();
+    }
   });
 });
