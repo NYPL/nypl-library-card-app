@@ -3,7 +3,7 @@
  * Do NOT point the browser to http://localhost:3000 with no route.
  * If you do, you will throw an error related to i18next.
  * */
-import { Box } from "@nypl/design-system-react-components";
+import { Banner, Box, Icon } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 
 import { GetServerSideProps } from "next";
@@ -26,15 +26,35 @@ function HomePage({ policyType, lang }: HomePageProps) {
   return (
     <>
       <LanguageMenu />
-
-      <PageHeading>{t("home.title")}</PageHeading>
-
+      <PageHeading mt="l">{t("home.title")}</PageHeading>
       <Box mb="s">{t("home.description.part1")}</Box>
-      <Box mb="s">{t("home.description.part2")}</Box>
       <Box
         mb="s"
         dangerouslySetInnerHTML={{
-          __html: t("home.description.part3", {
+          __html: t("home.description.part2", {
+            digitalResources: t("home.description.digitalResources"),
+            visitNYPL: t("home.description.visitNYPL"),
+          }),
+        }}
+      />
+      <Box
+        mb="s"
+        dangerouslySetInnerHTML={{
+          __html: t("home.description.part3"),
+        }}
+      />
+      <Box
+        mb="s"
+        dangerouslySetInnerHTML={{
+          __html: t("home.description.part4", {
+            alternateForm: t("home.description.alternateForm"),
+          }),
+        }}
+      />
+      <Box
+        mb="s"
+        dangerouslySetInnerHTML={{
+          __html: t("home.description.part5", {
             whatYouCanAccess: t("home.description.whatYouCanAccess"),
           }),
         }}
@@ -42,12 +62,25 @@ function HomePage({ policyType, lang }: HomePageProps) {
       <Box
         mb="s"
         dangerouslySetInnerHTML={{
-          __html: t("home.description.part4", {
+          __html: t("home.description.part6", {
             termsConditions: t("home.description.termsConditions"),
             rulesRegulations: t("home.description.rulesRegulations"),
             privacyPolicy: t("home.description.privacyPolicy"),
           }),
         }}
+      />
+      <Banner
+        color="ui.typography.body"
+        content={t("home.banner.text")}
+        icon={
+          <Icon
+            name="actionInfo"
+            title="Banner with informative icon"
+            size="large"
+            marginTop="xxxs"
+          />
+        }
+        variant="informative"
       />
       <RoutingLinks
         next={{
