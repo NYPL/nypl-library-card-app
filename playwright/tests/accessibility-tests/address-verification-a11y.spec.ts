@@ -40,7 +40,7 @@ test.describe("Accessibility tests on Address Verification page", () => {
   });
 
   test("keyboard navigation", async ({ page }) => {
-    await expect(page).toHaveURL(/.*\/address-verification\?&?newCard=true/);
+    await expect(page).toHaveURL(/.*\/address-verification\?.*newCard=true/);
     const addressVerification = new AddressVerificationPage(page);
     await addressVerification.stepHeading.focus();
 
