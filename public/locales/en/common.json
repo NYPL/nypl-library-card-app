@@ -7,14 +7,19 @@
   "home": {
     "title": "Apply for a library card today in a few easy steps",
     "description": {
-      "part1": "If you are 13 or older and live, work, attend school, or pay property taxes in New York State, you can apply for a free library card right now using this online application—then visit your nearest NYPL location to validate your information and receive a physical NYPL card. If your location within New York State can be confirmed, you will receive a free digital library card right now.",
-      "part2": "Visitors from outside of New York State can also use this form to apply for a temporary card that allows them to place holds for physical items. This card must be validated in person within 30 days, and does not provide access to e-books, databases, or the Culture Pass program.",
-      "part3": "Learn more about <a href='https://www.nypl.org/library-card'>{{whatYouCanAccess}}</a> with your library card!",
+      "part1": "Do you live, work, go to school, or pay property taxes in New York State? Get a free library card now to access everything The New York Public Library has to offer!",
+      "part2": "Start your application now and begin using e-books and other <a href=\"https://www.nypl.org/help/services/remote-resources\">digital resources</a> right away. Then, <a href=\"https://www.nypl.org/locations\">visit any NYPL location</a> to verify your information and receive a physical NYPL card. This card gives you access to even more from the Library, including physical books and the Culture Pass program.",
+      "part3": "If you are visiting New York from another state, you can apply for a temporary card with this form. Before your visit, you can request physical materials and schedule research appointments. For additional Library services, you must validate your card in person at an NYPL location within 30 days.",
+      "part4": "If you are visiting from another country, please use our <a href=\"https://www.nypl.org/help/library-card#international-researchers\">alternate form</a> for international visitors. With your temporary card, you may request materials and schedule research appointments.",
+      "part5": "Learn more about <a href=\"https://www.nypl.org/help/library-card\">{{whatYouCanAccess}}</a> with your library card!",
       "whatYouCanAccess": "what you can access",
-      "part4": "By submitting an application, you understand and agree to our <a href='https://nypl.org/help/library-card/terms-conditions'>{{termsConditions}}</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>{{rulesRegulations}}</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>{{privacyPolicy}}</a>.",
+      "part6": "By submitting an application, you understand and agree to our <a href=\"https://www.nypl.org/help/library-card/terms-conditions\">{{termsConditions}}</a> and agree to our <a href=\"https://www.nypl.org/help/legal-notices/policies-and-rules\">{{rulesRegulations}}</a>. To learn more about the Library's use of personal information, please read our <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy\">{{privacyPolicy}}</a>.",
       "termsConditions": "Cardholder Terms and Conditions",
       "rulesRegulations": "Rules and Regulations",
       "privacyPolicy": "Privacy Policy"
+    },
+    "banner": {
+      "text":"Please note: You must be at least 13 years old to apply online. To get a digital library card and immediate access to online resources, you must be in New York state when submitting an application."
     }
   },
   "personal": {

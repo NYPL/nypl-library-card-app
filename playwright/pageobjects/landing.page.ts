@@ -20,6 +20,10 @@ export class LandingPage {
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
   readonly getStartedButton: Locator;
+  readonly digitalResourcesLink: Locator;
+  readonly visitLibraryLink: Locator;
+  readonly alternateFormLink: Locator;
+  readonly informationalBanner: Locator;
 
   constructor(page: Page, appContent?: any) {
     this.page = page;
@@ -54,6 +58,13 @@ export class LandingPage {
         "Apply for a library card today in a few easy steps",
       level: 2,
     });
+    this.digitalResourcesLink = page.getByRole("link", {
+      name: "digital resources",
+    });
+    this.visitLibraryLink = page.getByRole("link", {
+      name: "visit any NYPL location",
+    });
+    this.alternateFormLink = page.getByRole("link", { name: "alternate form" });
     this.whatYouCanAccess = page.getByRole("link", {
       name:
         appContent?.home?.description?.whatYouCanAccess ||
@@ -72,6 +83,7 @@ export class LandingPage {
     this.privacyPolicy = page.locator("#mainContent").getByRole("link", {
       name: appContent?.home?.description?.privacyPolicy || "Privacy Policy",
     });
+    this.informationalBanner = page.getByTestId("ds-banner");
     this.getStartedButton = page.getByRole("link", {
       name: appContent?.button?.start || "Get started",
     });

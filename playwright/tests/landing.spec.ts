@@ -13,15 +13,9 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       await page.goto(`/library-card/new?newCard=true&lang=${lang}`);
     });
 
-    test("displays the main heading", async () => {
+    test("displays headings and get started button", async () => {
       await expect(landingPage.mainHeading).toBeVisible();
-    });
-
-    test("displays the apply heading", async () => {
       await expect(landingPage.applyHeading).toBeVisible();
-    });
-
-    test("displays get started button", async () => {
       await expect(landingPage.getStartedButton).toBeVisible();
     });
 
@@ -39,11 +33,15 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       await expect(landingPage.urduLanguage).toBeVisible();
     });
 
-    test("displays informational links", async () => {
+    test("displays informational links and banner", async () => {
+      await expect(landingPage.digitalResourcesLink).toBeVisible();
+      await expect(landingPage.visitLibraryLink).toBeVisible();
+      await expect(landingPage.alternateFormLink).toBeVisible();
       await expect(landingPage.whatYouCanAccess).toBeVisible();
       await expect(landingPage.cardholderTerms).toBeVisible();
       await expect(landingPage.rulesRegulations).toBeVisible();
       await expect(landingPage.privacyPolicy).toBeVisible();
+      await expect(landingPage.informationalBanner).toBeVisible();
     });
   });
 }
