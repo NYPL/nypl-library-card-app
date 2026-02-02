@@ -41,7 +41,13 @@ function HomePage({ policyType, lang }: HomePageProps) {
       />
       <Box
         mb="s"
-        dangerouslySetInnerHTML={{ __html: t("home.description.part4") }}
+        dangerouslySetInnerHTML={{
+          __html: t("home.description.part4", {
+            termsConditions: t("home.description.termsConditions"),
+            rulesRegulations: t("home.description.rulesRegulations"),
+            privacyPolicy: t("home.description.privacyPolicy"),
+          }),
+        }}
       />
       <RoutingLinks
         next={{

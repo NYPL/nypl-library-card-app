@@ -59,14 +59,17 @@ export class LandingPage {
         appContent.home.description.whatYouCanAccess || "what you can access",
     });
     this.cardholderTerms = page.getByRole("link", {
-      name: "Cardholder Terms and Conditions",
+      name:
+        appContent.home.description.termsConditions ||
+        "Cardholder Terms and Conditions",
     });
     this.rulesRegulations = page.getByRole("link", {
-      name: "Rules and Regulations",
+      name:
+        appContent.home.description.rulesRegulations || "Rules and Regulations",
     });
-    this.privacyPolicy = page
-      .locator("#mainContent")
-      .getByRole("link", { name: "Privacy Policy" });
+    this.privacyPolicy = page.locator("#mainContent").getByRole("link", {
+      name: appContent.home.description.privacyPolicy || "Privacy Policy",
+    });
     this.getStartedButton = page.getByRole("link", {
       name: appContent.button.start || "Get started",
     });

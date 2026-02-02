@@ -41,9 +41,9 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test("displays informational links", async () => {
       await expect(landingPage.whatYouCanAccess).toBeVisible();
-      //   await expect(landingPage.cardholderTerms).toBeVisible();
-      //   await expect(landingPage.rulesRegulations).toBeVisible();
-      //   await expect(landingPage.privacyPolicy).toBeVisible();
+      await expect(landingPage.cardholderTerms).toBeVisible();
+      await expect(landingPage.rulesRegulations).toBeVisible();
+      await expect(landingPage.privacyPolicy).toBeVisible();
     });
   });
 }

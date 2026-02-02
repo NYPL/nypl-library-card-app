@@ -11,7 +11,10 @@
       "part2": "Visitors from outside of New York State can also use this form to apply for a temporary card that allows them to place holds for physical items. This card must be validated in person within 30 days, and does not provide access to e-books, databases, or the Culture Pass program.",
       "part3": "Learn more about <a href='https://www.nypl.org/library-card'>{{whatYouCanAccess}}</a> with your library card!",
       "whatYouCanAccess": "what you can access",
-      "part4": "By submitting an application, you understand and agree to our <a href='https://nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+      "part4": "By submitting an application, you understand and agree to our <a href='https://nypl.org/help/library-card/terms-conditions'>{{termsConditions}}</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>{{rulesRegulations}}</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>{{privacyPolicy}}</a>.",
+      "termsConditions": "Cardholder Terms and Conditions",
+      "rulesRegulations": "Rules and Regulations",
+      "privacyPolicy": "Privacy Policy"
     }
   },
   "personal": {
