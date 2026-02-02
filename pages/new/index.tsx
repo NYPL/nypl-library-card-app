@@ -30,12 +30,31 @@ function HomePage({ policyType, lang }: HomePageProps) {
       <Box mb="s">{t("home.description.part1")}</Box>
       <Box
         mb="s"
-        dangerouslySetInnerHTML={{ __html: t("home.description.part2") }}
+        dangerouslySetInnerHTML={{
+          __html: t("home.description.part2", {
+            digitalResources: t("home.description.digitalResources"),
+            visitNYPL: t("home.description.visitNYPL"),
+          }),
+        }}
       />
       <Box
         mb="s"
         dangerouslySetInnerHTML={{
-          __html: t("home.description.part3", {
+          __html: t("home.description.part3"),
+        }}
+      />
+      <Box
+        mb="s"
+        dangerouslySetInnerHTML={{
+          __html: t("home.description.part4", {
+            alternateForm: t("home.description.alternateForm"),
+          }),
+        }}
+      />
+      <Box
+        mb="s"
+        dangerouslySetInnerHTML={{
+          __html: t("home.description.part5", {
             whatYouCanAccess: t("home.description.whatYouCanAccess"),
           }),
         }}
@@ -43,20 +62,12 @@ function HomePage({ policyType, lang }: HomePageProps) {
       <Box
         mb="s"
         dangerouslySetInnerHTML={{
-          __html: t("home.description.part4", {
+          __html: t("home.description.part6", {
             termsConditions: t("home.description.termsConditions"),
             rulesRegulations: t("home.description.rulesRegulations"),
             privacyPolicy: t("home.description.privacyPolicy"),
           }),
         }}
-      />
-      <Box
-        mb="s"
-        dangerouslySetInnerHTML={{ __html: t("home.description.part5") }}
-      />
-      <Box
-        mb="l"
-        dangerouslySetInnerHTML={{ __html: t("home.description.part6") }}
       />
       <Banner
         color="ui.typography.body"

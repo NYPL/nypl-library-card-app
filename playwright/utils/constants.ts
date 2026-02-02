@@ -73,6 +73,7 @@ export const TEST_CUSTOMIZE_ACCOUNT = {
 export const TEST_BARCODE_NUMBER = "12341234123412";
 
 export const ERROR_MESSAGES = {
+  // probs remove this at the end
   FIRST_NAME_INVALID: appContent.personal.errorMessage.firstName,
   LAST_NAME_INVALID: appContent.personal.errorMessage.lastName,
   DATE_OF_BIRTH_INVALID: appContent.personal.errorMessage.birthdate,
