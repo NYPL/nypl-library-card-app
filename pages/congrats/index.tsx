@@ -30,8 +30,8 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       (window as any).dataLayer = (window as any).dataLayer || [];
       (window as any).dataLayer.push({
         event: "library_card_submission",
-        nypl_location: libraryName[0]?.label || "E-branch (default)",
-        location_id: state.formValues.homeLibraryCode || "eb",
+        nypl_location: libraryName[0]?.label,
+        location_id: state.formValues.homeLibraryCode,
       });
     }
   }, []);
