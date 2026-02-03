@@ -14,7 +14,7 @@ test("displays invalid street address error", async ({ page }) => {
     await expect(pageManager.addressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.addressPage, {
       street: invalidStreet,
-      apartmentSuite: "Apt 1",
+      apartmentSuite: "1",
       city: "City",
       state: "NY",
       postalCode: "12345",
