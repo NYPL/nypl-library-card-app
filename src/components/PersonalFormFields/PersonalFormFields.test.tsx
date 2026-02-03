@@ -34,7 +34,7 @@ jest.mock("react-i18next", () => {
         birthdate:
           "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
         ageGate:
-          "There was a problem. You must be 13 years or older to continue.",
+          "There was a problem. Date of birth is below the minimum age of 13.",
         email: "There was a problem. Please enter a valid email address.",
       },
     },

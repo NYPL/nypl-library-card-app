@@ -76,6 +76,7 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
             })}
             errorState={errors}
             isRequired
+            type="email"
             defaultValue={formValues.email}
             instructionText={
               <Trans
