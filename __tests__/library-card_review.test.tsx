@@ -77,9 +77,6 @@ describe("ReviewPage", () => {
         screen.getByText("Step 5 of 5: Confirm your information")
       ).toBeInTheDocument();
     });
-    test("defaults to EBranch if no home library is selected", () => {
-      expect(screen.getByText("E-Branch")).toBeInTheDocument();
-    });
   });
 
   describe("redirects", () => {

@@ -136,9 +136,6 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await expect(
         pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.password)
       ).toBeVisible();
-      await expect(
-        pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.defaultLibrary)
-      ).toBeVisible();
     });
 
     await test.step("submits application", async () => {

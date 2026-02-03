@@ -85,7 +85,7 @@
     },
     "password": {
       "label": "Hasło",
-      "instruction": "Zachęcamy do wybrania silnego hasła, które składa się z co najmniej 8 znaków, w tym wielkich i małych liter, cyfr oraz co najmniej jednego znaku specjalnego — z wyjątkiem kropki (.).<br />Przykład: MyLib1731@<br />Hasło nie może zawierać typowych wzorców, takich jak ten sam znak powtórzony trzy lub więcej razy, np. aaaatf54, czy powtarzający się ciąg, np. abcabcab."
+      "instruction": "Zachęcamy do wybrania silnego hasła, które składa się z co najmniej 8 znaków, w tym wielkich i małych liter, cyfr oraz co najmniej jednego znaku specjalnego — z wyjątkiem kropki (.).<span>Przykład: MyLib1731@</span>Hasło nie może zawierać typowych wzorców, takich jak ten sam znak powtórzony trzy lub więcej razy, np. aaaatf54, czy powtarzający się ciąg, np. abcabcab."
     },
     "verifyPassword": {
       "label": "Zweryfikuj hasło",
