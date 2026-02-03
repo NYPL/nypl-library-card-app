@@ -28,6 +28,7 @@ const errorMessages = {
     "uppercase and lowercase letters, include a mixture of letters and " +
     "numbers, and have at least one special character except period (.)",
   verifyPassword: "There was a problem. The two passwords don't match.",
+  homeLibraryCode: "There was a problem. Please select a home library.",
   acceptTerms: "There was a problem. The Terms and Conditions must be checked.",
   address: {
     line1: "There was a problem. Please enter a valid street address.",
@@ -73,29 +74,27 @@ function isDate(
 /**
  * findLibraryCode
  * Find the code for a library by searching for its name in the `ilsLibraryList`
- * array. If no object is found, return the default value of "eb" for
- * "e-branch" or "simplye" (interchangeable names);
+ * array.
  * @param libraryName Name of library to find in the list.
  */
-function findLibraryCode(libraryName?: string): string {
+function findLibraryCode(libraryName: string): string | undefined {
   const library = ilsLibraryList.find(
     (library) => library.label === libraryName
   );
-  return library?.value || "eb";
+  return library?.value;
 }
 
 /**
  * findLibraryName
  * Find the name for a library by searching for its code in the `ilsLibraryList`
- * array. If no object is found, return the default value of "eb" for
- * "e-branch" or "simplye" (interchangeable names);
+ * array.
  * @param libraryCode Name of library to find in the list.
  */
-function findLibraryName(libraryCode?: string): string {
+function findLibraryName(libraryCode: string): string | undefined {
   const library = ilsLibraryList.find(
     (library) => library.value === libraryCode
   );
-  return library?.label || "E-Branch";
+  return library?.label;
 }
 
 /**
@@ -277,7 +276,8 @@ const validatePersonalFormData = (initErrorObj, data) => {
  */
 const validateAccountFormData = (initErrorObj, data) => {
   let errorObj = { ...initErrorObj };
-  const { username, password, verifyPassword, acceptTerms } = data;
+  const { username, password, verifyPassword, acceptTerms, homeLibraryCode } =
+    data;
 
   if (
     isEmpty(username) ||
@@ -297,6 +297,11 @@ const validateAccountFormData = (initErrorObj, data) => {
   if (isEmpty(verifyPassword) || password !== verifyPassword) {
     errorObj = { ...errorObj, verifyPassword: errorMessages.verifyPassword };
   }
+
+  if (isEmpty(homeLibraryCode) || !findLibraryName(homeLibraryCode)) {
+    errorObj = { ...errorObj, homeLibraryCode: errorMessages.homeLibraryCode };
+  }
+
   if (!acceptTerms) {
     errorObj = { ...errorObj, acceptTerms: errorMessages.acceptTerms };
   }
