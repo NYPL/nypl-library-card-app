@@ -61,7 +61,7 @@ jest.mock("react-i18next", () => {
 });
 
 const libraryList: LibraryListObject[] = [
-  { value: "eb", label: "SimplyE" },
+  { value: "vr", label: "Virtual" },
   { value: "sasb", label: "Schwarzman" },
   { value: "schomburg", label: "Schomburg" },
 ];
@@ -83,7 +83,9 @@ describe("LibraryListFormFields", () => {
       </TestProviderWrapper>
     );
 
-    expect(screen.getByLabelText("Select a home library:")).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Select a home library: (required)")
+    ).toBeInTheDocument();
     // "textbox" is the role for the input element.
     expect(screen.getByRole("combobox")).toBeInTheDocument();
   });

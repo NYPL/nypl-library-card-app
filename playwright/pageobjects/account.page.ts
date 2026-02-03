@@ -17,6 +17,7 @@ export class AccountPage {
   readonly showPasswordCheckbox: Locator;
   readonly homeLibraryHeading: Locator;
   readonly selectHomeLibrary: Locator;
+  readonly homeLibraryError: Locator;
   readonly cardholderTerms: Locator;
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
@@ -72,17 +73,16 @@ export class AccountPage {
       exact: true,
     });
     this.selectHomeLibrary = page.getByLabel("Select a home library:");
+    this.homeLibraryError = page.getByText(ERROR_MESSAGES.HOME_LIBRARY_ERROR);
     this.cardholderTerms = page.getByRole("link", {
       name: "Cardholder Terms and Conditions",
-      exact: true,
     });
     this.rulesRegulations = page.getByRole("link", {
       name: "Rules and Regulations",
-      exact: true,
     });
     this.privacyPolicy = page
       .locator("#mainContent")
-      .getByRole("link", { name: "Privacy Policy", exact: true });
+      .getByRole("link", { name: "Privacy Policy" });
     this.acceptTermsCheckbox = page.getByText(
       "Yes, I accept the terms and conditions."
     );

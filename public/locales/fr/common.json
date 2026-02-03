@@ -85,7 +85,7 @@
     },
     "password": {
       "label": "Mot de passe",
-      "instruction": "Nous vous recommandons de choisir un mot de passe sécurisé qui serait constitué d'au moins 8 caractères, un mélange de minuscules et majuscules, de lettres et de chiffres, et d'au moins un caractère spécial à l'exception du point (.).<br />Exemple: MyLib1731@<br />Le mot de passe ne doit pas suivre une structure commune, comme la répétition d'un même caractère trois fois de suite ou plus, comme par exemple aaaatf54, ou un modèle répétitif, comme par exemple abcabcab."
+      "instruction": "Nous vous recommandons de choisir un mot de passe sécurisé qui serait constitué d'au moins 8 caractères, un mélange de minuscules et majuscules, de lettres et de chiffres, et d'au moins un caractère spécial à l'exception du point (.).<span>Exemple: MyLib1731@</span>Le mot de passe ne doit pas suivre une structure commune, comme la répétition d'un même caractère trois fois de suite ou plus, comme par exemple aaaatf54, ou un modèle répétitif, comme par exemple abcabcab."
     },
     "verifyPassword": {
       "label": "Vérification du mot de passe",

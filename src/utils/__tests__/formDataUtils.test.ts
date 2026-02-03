@@ -34,14 +34,10 @@ describe("isDate", () => {
 });
 
 describe("findLibraryCode", () => {
-  // `eb` is the default value describing the "E-Branch" or "SimplyE" library.
-  test("it returns `eb` as the default value", () => {
-    expect(findLibraryCode()).toEqual("eb");
-  });
-
   test("it returns the value code for a library name", () => {
     // Spot checking random libraries. Check "/src/data/ilLibraryList.ts" for a
     // full mapping of library name to library code.
+    expect(findLibraryCode("Virtual")).toEqual("vr");
     expect(findLibraryCode("Melrose Library")).toEqual("me");
     expect(findLibraryCode("Pelham Bay Library")).toEqual("pm");
     expect(findLibraryCode("West Farms Library")).toEqual("wf");
@@ -49,14 +45,10 @@ describe("findLibraryCode", () => {
 });
 
 describe("findLibraryName", () => {
-  // "E-Branch" library is the default.
-  test("it returns `eb` as the default value", () => {
-    expect(findLibraryName()).toEqual("E-Branch");
-  });
-
   test("it returns the value code for a library name", () => {
     // Spot checking random libraries. Check "/src/data/ilLibraryList.ts" for a
     // full mapping of library code to library name.
+    expect(findLibraryName("vr")).toEqual("Virtual");
     expect(findLibraryName("ew")).toEqual("Edenwald Library");
     expect(findLibraryName("ht")).toEqual("Countee Cullen Library");
     expect(findLibraryName("se")).toEqual("Seward Park Library");
@@ -335,6 +327,7 @@ describe("validateAccountFormData", () => {
       password: "",
       verifyPassword: "",
       acceptTerms: "",
+      homeLibraryCode: "non-existent-code",
     };
 
     expect(validateAccountFormData({}, data)).toEqual({
@@ -342,6 +335,7 @@ describe("validateAccountFormData", () => {
       password: errorMessages.password,
       verifyPassword: errorMessages.verifyPassword,
       acceptTerms: errorMessages.acceptTerms,
+      homeLibraryCode: errorMessages.homeLibraryCode,
     });
   });
 
@@ -351,6 +345,7 @@ describe("validateAccountFormData", () => {
       password: "MyLib1731@!",
       verifyPassword: "MyLib1731@!",
       acceptTerms: true,
+      homeLibraryCode: "vr",
     };
 
     expect(validateAccountFormData({}, data)).toEqual({});
@@ -363,6 +358,7 @@ describe("validateAccountFormData", () => {
       password: "MyLib1731@!",
       verifyPassword: "MyLib1731@!",
       acceptTerms: true,
+      homeLibraryCode: "vr",
     };
 
     expect(validateAccountFormData(errors, data)).toEqual({
@@ -401,6 +397,7 @@ describe("validateFormData", () => {
       birthdate: errorMessages.birthdate,
       username: errorMessages.username,
       verifyPassword: errorMessages.verifyPassword,
+      homeLibraryCode: errorMessages.homeLibraryCode,
       acceptTerms: errorMessages.acceptTerms,
       address: {
         home: { city: errorMessages.address.city },
@@ -417,6 +414,7 @@ describe("validateFormData", () => {
       email: "tomnook@acnh.com",
       username: "tomnook",
       verifyPassword: "MyLib1731@!",
+      homeLibraryCode: "vr",
       acceptTerms: true,
       location: "nyc",
     };
