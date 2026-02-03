@@ -271,6 +271,22 @@ test.describe("displays error messages", () => {
     await expect(reviewPage.dateOfBirthError).toBeVisible();
   });
 
+  test("displays error for earliest date of birth", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("01/01/1902");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+  });
+
+  test("displays error for current date of birth", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("01/01/2026");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+  });
+
   test("displays error for future date of birth", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editPersonalInfoButton.click();
