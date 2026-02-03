@@ -2,14 +2,11 @@ import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import { fillAccountInfo, fillAddress } from "../utils/form-helper";
 
-test("displays invalid street address error", async ({ page }) => {
+test("displays error when address is too long", async ({ page }) => {
   const pageManager = new PageManager(page);
   const invalidStreet = "A".repeat(100);
-  // const excessiveStreet = "A".repeat(101); // lol
-  const invalidStreetError =
-    "Street address fields must not be more than 100 lines.";
 
-  await test.step("enters home address with invalid street address", async () => {
+  await test.step("enters invalid home address", async () => {
     await page.goto("/library-card/location?newCard=true");
     await expect(pageManager.addressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.addressPage, {
@@ -44,6 +41,6 @@ test("displays invalid street address error", async ({ page }) => {
   await test.step("displays error on review page", async () => {
     await expect(pageManager.reviewPage.stepHeading).toBeVisible();
     await pageManager.reviewPage.submitButton.click();
-    await expect(page.getByText(invalidStreetError)).toBeVisible();
+    await expect(pageManager.reviewPage.streetAddressError).toBeVisible();
   });
 });

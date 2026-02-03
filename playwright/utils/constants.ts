@@ -77,6 +77,8 @@ export const ERROR_MESSAGES = {
   DATE_OF_BIRTH_INVALID: appContent.personal.errorMessage.birthdate,
   EMAIL_INVALID: appContent.personal.errorMessage.email,
   STREET_ADDRESS_INVALID: appContent.location.errorMessage.line1,
+  STREET_ADDRESS_ERROR:
+    "Street address fields must not be more than 100 lines.",
   CITY_INVALID: appContent.location.errorMessage.city,
   STATE_INVALID: appContent.location.errorMessage.state,
   POSTAL_CODE_INVALID: appContent.location.errorMessage.zip,

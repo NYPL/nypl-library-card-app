@@ -395,7 +395,7 @@ test.describe("displays error messages", () => {
     await expect(reviewPage.verifyPasswordError).toBeVisible();
     await expect(reviewPage.homeLibraryError).toBeVisible();
     await expect(reviewPage.acceptTermsError).toBeVisible();
-    await expect(reviewPage.streetAddressError).toBeVisible();
+    await expect(reviewPage.streetAddressInvalid).toBeVisible();
     await expect(reviewPage.cityError).toBeVisible();
     await expect(reviewPage.stateError).toBeVisible();
     await expect(reviewPage.postalCodeError).toBeVisible();
