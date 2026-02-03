@@ -32,11 +32,18 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
   const { formValues } = state;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState("");
   useCloseDropDown(setIsOpen, ref);
+
+  const onChange = (event) => {
+    setValue(event.target.value);
+  };
 
   const inputProps = {
     isOpen,
     useCloseDropDown,
+    value,
+    onChange,
   };
 
   // This component must be used within the `react-hook-form` provider so that
@@ -131,29 +138,31 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
             autoComplete={`section-${type} address-level2`}
           />
         </DSFormField>
-        <Select
-          placeholder="Please select"
-          id={`state-${type}`}
-          labelText={t("location.address.state.label")}
-          isRequired={isRequired}
-          // Pass in the `react-hook-form` register function so it can handle this
-          // form element's state for us.
-          {...register(`${type}-state`, {
-            validate: lengthValidation(
-              STATELENGTH,
-              STATELENGTH,
-              "location.errorMessage.state"
-            ),
-          })}
-          {...inputProps}
-          autoComplete={`section-${type} address-level1`}
-        >
-          {stateData.map(({ value, label }, i) => (
-            <option key={i} value={value}>
-              {label}
-            </option>
-          ))}
-        </Select>
+        <DSFormField>
+          <Select
+            placeholder="Please select"
+            id={`state-${type}`}
+            labelText={t("location.address.state.label")}
+            isRequired={isRequired}
+            autoComplete="on"
+            // Pass in the `react-hook-form` register function so it can handle this
+            // form element's state for us.
+            {...register(`${type}-state`, {
+              validate: lengthValidation(
+                STATELENGTH,
+                STATELENGTH,
+                "location.errorMessage.state"
+              ),
+            })}
+            {...inputProps}
+          >
+            {stateData.map(({ label, value }, i) => (
+              <option key={i} value={value}>
+                {label}
+              </option>
+            ))}
+          </Select>
+        </DSFormField>
       </FormRow>
 
       <FormRow id={`${id}-addressForm-4`}>
