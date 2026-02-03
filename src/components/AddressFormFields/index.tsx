@@ -52,7 +52,6 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
     register,
     formState: { errors },
   } = useFormContext<FormInputData>();
-  const STATELENGTH = 2;
   const MINLENGTHZIP = 5;
   const MAXLENGTHZIP = 9;
   // Only the home address is required. The work address is optional.
@@ -144,16 +143,9 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
             id={`state-${type}`}
             labelText={t("location.address.state.label")}
             isRequired={isRequired}
-            autoComplete="on"
             // Pass in the `react-hook-form` register function so it can handle this
             // form element's state for us.
-            {...register(`${type}-state`, {
-              validate: lengthValidation(
-                STATELENGTH,
-                STATELENGTH,
-                "location.errorMessage.state"
-              ),
-            })}
+            {...register(`${type}-state`)}
             {...inputProps}
           >
             {stateData.map(({ label, value }, i) => (
