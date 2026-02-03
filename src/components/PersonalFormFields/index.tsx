@@ -2,8 +2,9 @@ import {
   Checkbox,
   FormField as DSFormField,
   FormRow,
+  Link as DSLink,
 } from "@nypl/design-system-react-components";
-import { useTranslation } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { isEmail } from "validator";
@@ -76,7 +77,12 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
             errorState={errors}
             isRequired
             defaultValue={formValues.email}
-            instructionText={t("personal.email.instruction")}
+            instructionText={
+              <Trans
+                i18nKey="personal.email.instruction"
+                components={{ a: <DSLink variant="external" /> }}
+              />
+            }
             autoComplete="email"
           />
         </DSFormField>
