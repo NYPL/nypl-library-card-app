@@ -15,9 +15,13 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     });
 
     test.describe("displays elements on personal information page", () => {
-      test("displays headings", async () => {
+      test("displays headings, links, and buttons", async () => {
         await expect(personalPage.mainHeading).toBeVisible();
         await expect(personalPage.stepHeading).toBeVisible();
+        await expect(personalPage.alternateFormLink).toBeVisible();
+        await expect(personalPage.locationsLink).toBeVisible();
+        await expect(personalPage.previousButton).toBeVisible();
+        await expect(personalPage.nextButton).toBeVisible();
       });
 
       test("displays personal information form", async () => {
@@ -26,16 +30,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(personalPage.dateOfBirthInput).toBeVisible();
         await expect(personalPage.emailInput).toBeVisible();
         await expect(personalPage.receiveInfoCheckbox).toBeVisible();
-      });
-
-      test("displays links", async () => {
-        await expect(personalPage.alternateFormLink).toBeVisible();
-        await expect(personalPage.locationsLink).toBeVisible();
-      });
-
-      test("displays next and previous buttons", async () => {
-        await expect(personalPage.previousButton).toBeVisible();
-        await expect(personalPage.nextButton).toBeVisible();
       });
     });
 
