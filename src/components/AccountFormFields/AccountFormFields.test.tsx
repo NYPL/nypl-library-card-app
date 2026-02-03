@@ -126,6 +126,8 @@ describe("AccountFormFields", () => {
 
   test("renders the autosuggest dropdown", () => {
     expect(screen.getByText("Home library")).toBeInTheDocument();
-    expect(screen.getByLabelText("Select a home library:")).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Select a home library: (required)")
+    ).toBeInTheDocument();
   });
 });

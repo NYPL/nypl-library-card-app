@@ -65,8 +65,7 @@ const TEST_UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
 export const TEST_CUSTOMIZE_ACCOUNT = {
   username: TEST_UNIQUE_USERNAME,
   password: "Test@1234",
-  homeLibrary: "eb", // used to confirm dropdown selection
-  defaultLibrary: "E-Branch", // used to confirm text displays on page
+  homeLibrary: "vr", // used to confirm dropdown selection
 };
 
 // congrats
@@ -87,6 +86,7 @@ export const ERROR_MESSAGES = {
   USERNAME_AVAILABLE: "This username is available.",
   PASSWORD_INVALID: appContent.account.errorMessage.password,
   VERIFY_PASSWORD_INVALID: appContent.account.errorMessage.verifyPassword,
+  HOME_LIBRARY_ERROR: appContent.account.errorMessage.homeLibraryCode,
   ACCEPT_TERMS_ERROR: appContent.account.errorMessage.acceptTerms,
 };
 
