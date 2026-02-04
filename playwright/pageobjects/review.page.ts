@@ -160,7 +160,7 @@ export class ReviewPage {
       "There was a problem. Please enter a valid home street address."
     );
     this.streetAddressError = page.getByText(
-      ERROR_MESSAGES.STREET_ADDRESS_ERROR
+      "Street address fields must not be more than 100 lines."
     );
     this.cityHeading = page.getByText("City", { exact: true });
     this.cityError = page.getByText(
