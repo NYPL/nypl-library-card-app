@@ -8,7 +8,7 @@ test.describe("Verify breadcrumbs on every page", () => {
     { name: "Address Page", path: "/library-card/location?newCard=true" },
     {
       name: "Alternate Address Page",
-      path: "/library-card/alternate-address?newCard=true",
+      path: "/library-card/workAddress?newCard=true",
     },
     {
       name: "Address Verification Page",
