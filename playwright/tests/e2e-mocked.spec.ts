@@ -4,13 +4,13 @@ import {
   SUPPORTED_LANGUAGES,
   // TEST_BARCODE_NUMBER,
   // TEST_NYC_ADDRESS,
-  // TEST_OOS_ADDRESS,
+  TEST_OOS_ADDRESS,
   // TEST_PATRON_INFO,
 } from "../utils/constants";
 // import { mockCreatePatronApi } from "../utils/mock-api";
 import {
   //   fillAccountInfo,
-  //   fillAddress,
+  fillAddress,
   fillPersonalInfo,
 } from "../utils/form-helper";
 
@@ -39,11 +39,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.personalPage.nextButton.click();
       });
 
-      // await test.step("enters home address", async () => {
-      //   await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      //   await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-      //   await pageManager.addressPage.nextButton.click();
-      // });
+      await test.step("enters home address", async () => {
+        await expect(pageManager.addressPage.stepHeading).toBeVisible();
+        await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
+        await pageManager.addressPage.nextButton.click();
+      });
 
       // await test.step("enters alternate address", async () => {
       //   await expect(
