@@ -8,10 +8,8 @@ import { TEST_NYC_ADDRESS, TEST_OOS_ADDRESS } from "../../utils/constants";
 test.describe("Accessibility tests on Address Verification page", () => {
   test.beforeEach(async ({ page, context }) => {
     await context.clearCookies();
-    await page.goto("/library-card/new");
+    await page.goto("/library-card/personal?newCard=true");
     const pageManager = new PageManager(page);
-
-    await pageManager.landingPage.getStartedButton.click();
 
     await fillPersonalInfo(pageManager.personalPage);
     await pageManager.personalPage.nextButton.click();
@@ -42,7 +40,6 @@ test.describe("Accessibility tests on Address Verification page", () => {
   test("keyboard navigation", async ({ page }) => {
     await expect(page).toHaveURL(/.*\/address-verification\?.*newCard=true/);
     const addressVerification = new AddressVerificationPage(page);
-    await addressVerification.stepHeading.focus();
 
     const addressVerificationLocators = [
       addressVerification.radioHomeButton,
