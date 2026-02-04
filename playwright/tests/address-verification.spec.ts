@@ -76,10 +76,16 @@ test.describe("enters home address and alternate address", () => {
       await expect(addressPage.addressHeading).toBeVisible();
       await fillAddress(addressPage, TEST_MULTIMATCH_ADDRESS);
       await addressPage.nextButton.click();
+      await expect(addressVerificationPage.spinner).not.toBeVisible({
+        timeout: 10000,
+      });
 
       await expect(alternateAddressPage.addressHeading).toBeVisible();
       await fillAddress(alternateAddressPage, TEST_MULTIMATCH_ADDRESS);
       await alternateAddressPage.nextButton.click();
+      await expect(addressVerificationPage.spinner).not.toBeVisible({
+        timeout: 10000,
+      });
     });
 
     await test.step("displays address options", async () => {
