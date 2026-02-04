@@ -2,10 +2,9 @@ import {
   FormField as DSFormField,
   FormRow,
   Select,
-  useCloseDropDown,
 } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { isNumeric } from "validator";
 
@@ -30,18 +29,13 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const ref = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState("");
-  useCloseDropDown(setIsOpen, ref);
 
   const onChange = (event) => {
     setValue(event.target.value);
   };
 
   const inputProps = {
-    isOpen,
-    useCloseDropDown,
     value,
     onChange,
   };
@@ -142,10 +136,17 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
             placeholder="Please select"
             id={`state-${type}`}
             labelText={t("location.address.state.label")}
+            autoComplete={`section-${type} address-level1`}
             isRequired={isRequired}
+            invalidText={t("location.errorMessage.state")}
             // Pass in the `react-hook-form` register function so it can handle this
             // form element's state for us.
-            {...register(`${type}-state`)}
+            {...register(`${type}-state`, {
+              required: {
+                value: isRequired,
+                message: t("location.errorMessage.state"),
+              },
+            })}
             {...inputProps}
           >
             {stateData.map(({ label, value }, i) => (
