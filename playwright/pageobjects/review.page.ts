@@ -96,7 +96,9 @@ export class ReviewPage {
       name: "First name (required)",
       exact: true,
     });
-    this.firstNameError = page.getByText(ERROR_MESSAGES.FIRST_NAME_INVALID);
+    this.firstNameError = page.getByText(
+      "There was a problem. Please enter a valid first name."
+    );
     this.lastNameHeading = page.getByText("Last name", { exact: true });
     this.lastNameInputHeading = page.getByText("Last name (required)", {
       exact: true,
@@ -105,7 +107,9 @@ export class ReviewPage {
       name: "Last name (required)",
       exact: true,
     });
-    this.lastNameError = page.getByText(ERROR_MESSAGES.LAST_NAME_INVALID);
+    this.lastNameError = page.getByText(
+      "There was a problem. Please enter a valid last name."
+    );
     this.dateOfBirthHeading = page.getByText("Date of birth", { exact: true });
     this.dateOfBirthInputHeading = page.getByText("Date of birth (required)", {
       exact: true,
@@ -115,7 +119,7 @@ export class ReviewPage {
       exact: true,
     });
     this.dateOfBirthError = page.getByText(
-      ERROR_MESSAGES.DATE_OF_BIRTH_INVALID
+      "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes."
     );
     this.emailHeading = page.getByText("Email address", { exact: true });
     this.emailInputHeading = page.getByText("Email address (required)", {
@@ -125,7 +129,9 @@ export class ReviewPage {
       name: "Email address (required)",
       exact: true,
     });
-    this.emailError = page.getByText(ERROR_MESSAGES.EMAIL_INVALID);
+    this.emailError = page.getByText(
+      "There was a problem. Please enter a valid email address."
+    );
     this.receiveInfoHeading = page.getByText(
       "Receive information about NYPL's programs and services",
       { exact: true }
