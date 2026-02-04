@@ -9,6 +9,7 @@ import { useFormContext } from "react-hook-form";
 import { isNumeric } from "validator";
 
 import FormField from "../FormField";
+import { findState } from "../../utils/formDataUtils";
 import { AddressTypes, FormInputData } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
 import { USStateObject } from "../../interfaces";
@@ -29,8 +30,10 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
-  const [value, setValue] = useState("");
-
+  const defaultValue = formValues?.["home-state"]
+    ? findState(formValues["home-state"])
+    : "";
+  const [value, setValue] = useState(defaultValue);
   const onChange = (event) => {
     setValue(event.target.value);
   };
@@ -138,21 +141,17 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
             labelText={t("location.address.state.label")}
             autoComplete={`section-${type} address-level1`}
             isRequired={isRequired}
+            defaultValue="defaul"
             invalidText={t("location.errorMessage.state")}
             // Pass in the `react-hook-form` register function so it can handle this
             // form element's state for us.
             {...register(`${type}-state`, {
-              required: {
-                value: isRequired,
-                message: t("location.errorMessage.state"),
-              },
+              required: t("location.errorMessage.state"),
             })}
             {...inputProps}
           >
-            {stateData.map(({ label, value }, i) => (
-              <option key={i} value={value}>
-                {label}
-              </option>
+            {stateData.map(({ label }, i) => (
+              <option key={`${i}-${label}`}>{label}</option>
             ))}
           </Select>
         </DSFormField>

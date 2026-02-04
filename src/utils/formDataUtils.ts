@@ -10,6 +10,7 @@ import {
 } from "../interfaces";
 import { ipLocationMessageTranslations } from "../data/ipLocationMessageTranslations";
 import { every, isEmpty } from "lodash";
+import stateData from "../data/stateAbbreviations";
 
 const errorMessages = {
   firstName: "There was a problem. Please enter a valid first name.",
@@ -95,6 +96,17 @@ function findLibraryName(libraryCode: string): string | undefined {
     (library) => library.value === libraryCode
   );
   return library?.label;
+}
+
+/**
+ * findState
+ * Find the 2-letter code for state by searching for its code in the `stateData`
+ * array.
+ * @param usState Name of library to find in the list.
+ */
+function findState(usState: string): string | undefined {
+  const state = stateData.find((state) => state.value === usState);
+  return state?.label;
 }
 
 /**
@@ -389,6 +401,7 @@ export {
   isDate,
   findLibraryCode,
   findLibraryName,
+  findState,
   getPatronAgencyType,
   getLocationValue,
   constructAddresses,

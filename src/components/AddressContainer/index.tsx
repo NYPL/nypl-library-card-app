@@ -155,7 +155,7 @@ const AddressContainer = ({ csrfToken }) => {
       <LoadingIndicator isLoading={isLoading} />
 
       <PageSubHeading>{t("location.address.title")}</PageSubHeading>
-      <Paragraph m={0}>
+      <Paragraph m={0} mb="l">
         <Trans
           i18nKey="location.address.description"
           components={{ a: <DSLink variant="external" /> }}
