@@ -2,14 +2,14 @@ import {
   FormField as DSFormField,
   FormRow,
   Select,
-  useCloseDropDown,
 } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { isNumeric } from "validator";
 
 import FormField from "../FormField";
+import { findState } from "../../utils/formDataUtils";
 import { AddressTypes, FormInputData } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
 import { USStateObject } from "../../interfaces";
@@ -30,18 +30,15 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const [value, setValue] = useState("");
-  useCloseDropDown(setIsOpen, ref);
-
+  const defaultValue = formValues?.["home-state"]
+    ? findState(formValues["home-state"])
+    : "";
+  const [value, setValue] = useState(defaultValue);
   const onChange = (event) => {
     setValue(event.target.value);
   };
 
   const inputProps = {
-    isOpen,
-    useCloseDropDown,
     value,
     onChange,
   };
@@ -52,7 +49,6 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
     register,
     formState: { errors },
   } = useFormContext<FormInputData>();
-  const STATELENGTH = 2;
   const MINLENGTHZIP = 5;
   const MAXLENGTHZIP = 9;
   // Only the home address is required. The work address is optional.
@@ -143,23 +139,19 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
             placeholder="Please select"
             id={`state-${type}`}
             labelText={t("location.address.state.label")}
+            autoComplete={`section-${type} address-level1`}
             isRequired={isRequired}
-            autoComplete="on"
+            defaultValue="defaul"
+            invalidText={t("location.errorMessage.state")}
             // Pass in the `react-hook-form` register function so it can handle this
             // form element's state for us.
             {...register(`${type}-state`, {
-              validate: lengthValidation(
-                STATELENGTH,
-                STATELENGTH,
-                "location.errorMessage.state"
-              ),
+              required: t("location.errorMessage.state"),
             })}
             {...inputProps}
           >
-            {stateData.map(({ label, value }, i) => (
-              <option key={i} value={value}>
-                {label}
-              </option>
+            {stateData.map(({ label }, i) => (
+              <option key={`${i}-${label}`}>{label}</option>
             ))}
           </Select>
         </DSFormField>
