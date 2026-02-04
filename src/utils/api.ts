@@ -446,8 +446,6 @@ export async function createPatron(
   appObj = app
 ) {
   const data = req.body;
-  // default to e branch
-  if (!data.homeLibraryCode) data.homeLibraryCode = "eb";
   const csrfTokenValid = validateCsrfToken(req);
   if (!csrfTokenValid) {
     return invalidCsrfResponse(res);

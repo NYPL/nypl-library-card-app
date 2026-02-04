@@ -1,5 +1,5 @@
-import { Checkbox } from "@nypl/design-system-react-components";
-import { useTranslation } from "next-i18next";
+import { Checkbox, Link } from "@nypl/design-system-react-components";
+import { Trans, useTranslation } from "next-i18next";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { Paragraph } from "../Paragraph";
@@ -20,13 +20,15 @@ const AcceptTermsForm: React.FC = () => {
 
   return (
     <>
-      <Paragraph
-        dangerouslySetInnerHTML={{
-          __html: t("account.termsAndCondition.text"),
-        }}
-      />
+      <Paragraph m={0}>
+        <Trans
+          i18nKey="account.termsAndCondition.text"
+          components={{ a: <Link variant="external" /> }}
+        />
+      </Paragraph>
 
       <Checkbox
+        mb={"-l"}
         id="acceptTerms"
         invalidText={t("account.errorMessage.acceptTerms")}
         isInvalid={!!errors?.acceptTerms?.message}
