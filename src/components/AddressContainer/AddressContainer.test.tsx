@@ -23,7 +23,7 @@ jest.mock("react-i18next", () => {
         line1: { label: "Street address" },
         line2: { label: "Apartment / Suite" },
         city: { label: "City" },
-        state: { label: "State", instruction: "2-letter abbreviation" },
+        state: { label: "State" },
         postalCode: {
           label: "Postal code",
           instruction: "5 or 9-digit postal code",
