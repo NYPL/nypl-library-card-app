@@ -49,6 +49,7 @@ function HomePage({ policyType, lang }: HomePageProps) {
         dangerouslySetInnerHTML={{ __html: t("home.description.part6") }}
       />
       <Banner
+        mb="l"
         color="ui.typography.body"
         content={t("home.banner.text")}
         icon={
