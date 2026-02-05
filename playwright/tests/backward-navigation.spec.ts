@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { SPINNER_TIMEOUT } from "../utils/constants";
 import { PageManager } from "../pageobjects/page-manager.page";
 import { fillAddress, fillPersonalInfo } from "../utils/form-helper";
 import {
@@ -70,6 +71,9 @@ test.describe("E2E: Navigate backward in application", () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
       await pageManager.alternateAddressPage.nextButton.click();
+      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
     });
 
     await test.step("confirms address verification", async () => {
@@ -83,6 +87,9 @@ test.describe("E2E: Navigate backward in application", () => {
         .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
         .check();
       await pageManager.addressVerificationPage.nextButton.click();
+      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
+        { timeout: SPINNER_TIMEOUT }
+      );
     });
 
     await test.step("displays account page", async () => {

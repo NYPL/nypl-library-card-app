@@ -58,6 +58,9 @@ export const TEST_MULTIMATCH_ADDRESS_WEST: AddressData = {
   postalCode: "10001-2101",
 };
 
+// Common timeouts
+export const SPINNER_TIMEOUT = 10000;
+
 // account
 const uniqueSuffix = Date.now().toString().slice(-6);
 const TEST_UNIQUE_USERNAME = `qauser${uniqueSuffix}`;

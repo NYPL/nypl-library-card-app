@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { SPINNER_TIMEOUT } from "../utils/constants";
 import { AddressPage } from "../pageobjects/address.page";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
@@ -76,10 +77,16 @@ test.describe("enters home address and alternate address", () => {
       await expect(addressPage.addressHeading).toBeVisible();
       await fillAddress(addressPage, TEST_MULTIMATCH_ADDRESS);
       await addressPage.nextButton.click();
+      await expect(addressVerificationPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
 
       await expect(alternateAddressPage.addressHeading).toBeVisible();
       await fillAddress(alternateAddressPage, TEST_MULTIMATCH_ADDRESS);
       await alternateAddressPage.nextButton.click();
+      await expect(addressVerificationPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
     });
 
     await test.step("displays address options", async () => {
