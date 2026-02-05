@@ -32,7 +32,7 @@ jest.mock("react-i18next", () => {
   const en = {
     confirmation: {
       title:
-        "Congratulations! You now have a digital New York Public Library card.",
+        "Congratulations! You now have a temporary digital New York Public Library card.",
       description: {
         part1:
           "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
