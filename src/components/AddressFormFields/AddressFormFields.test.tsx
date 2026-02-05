@@ -120,7 +120,7 @@ describe("AddressFormFields", () => {
     });
     const line2 = screen.getByLabelText("Apartment / Suite");
     const city = screen.getByRole("textbox", { name: "City (required)" });
-    const state = screen.getByRole("combobox", { name: "State (required)" });
+    const state = screen.getByLabelText("State (required)");
     const zip = screen.getByRole("textbox", { name: "Postal code (required)" });
 
     expect(line1).toBeInTheDocument();
