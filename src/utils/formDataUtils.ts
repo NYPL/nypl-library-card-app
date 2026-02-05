@@ -105,7 +105,7 @@ function findLibraryName(libraryCode: string): string | undefined {
  * @param usState Name of library to find in the list.
  */
 function findState(usState: string): string | undefined {
-  const state = stateData.find((state) => state.value === usState);
+  const state = stateData.find((state) => state.label === usState);
   return state?.label;
 }
 
