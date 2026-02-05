@@ -54,17 +54,18 @@ test.describe("displays error messages", () => {
     const addressPage = new AddressPage(page);
     await addressPage.streetAddressInput.fill("");
     await addressPage.cityInput.fill("");
+    // await addressPage.stateInput.selectOption("");
+    // await addressPage.stateInput.click();
     await addressPage.postalCodeInput.fill("");
     await addressPage.nextButton.click();
     await expect(addressPage.streetAddressError).toBeVisible();
     await expect(addressPage.cityError).toBeVisible();
-    //await expect(addressPage.stateError).toBeVisible(); still don't see the error for state and we have to update the  error message
+    //await expect(addressPage.stateError).toBeVisible();
     await expect(addressPage.postalCodeError).toBeVisible();
   });
 
   test("enter too many characters", async ({ page }) => {
     const addressPage = new AddressPage(page);
-    await addressPage.stateInput.selectOption("Please select");
     await addressPage.postalCodeInput.fill("123456");
     await addressPage.nextButton.click();
     await expect(addressPage.postalCodeError).toBeVisible();
