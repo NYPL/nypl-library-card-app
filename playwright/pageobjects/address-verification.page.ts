@@ -6,8 +6,6 @@ export class AddressVerificationPage {
   readonly stepHeading: Locator;
   readonly homeAddressHeading: Locator;
   readonly alternateAddressHeading: Locator;
-  readonly radioHomeButton: Locator;
-  readonly radioAlternateButton: Locator;
   readonly spinner: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
@@ -39,8 +37,6 @@ export class AddressVerificationPage {
       exact: true,
     });
 
-    this.radioHomeButton = this.page.getByRole("radio").first();
-    this.radioAlternateButton = this.page.getByRole("radio").nth(1);
     this.spinner = this.page.getByRole("status");
   }
 
@@ -50,5 +46,9 @@ export class AddressVerificationPage {
 
   getAlternateAddressOption(street: string): Locator {
     return this.page.getByLabel("Alternate address").getByText(street);
+  }
+
+  get radioButtons() {
+    return this.page.getByRole("radiogroup").getByRole("radio");
   }
 }

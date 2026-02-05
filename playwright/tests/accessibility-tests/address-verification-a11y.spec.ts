@@ -30,7 +30,7 @@ test.describe("Accessibility tests on Address Verification page", () => {
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {
-    await expect(page).toHaveURL(/.*\/address-verification\?&?newCard=true/);
+    await expect(page).toHaveURL(/.*\/address-verification\?.*newCard=true/);
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags(["wcag21aa", "wcag22aa"])
       .analyze();
@@ -41,9 +41,10 @@ test.describe("Accessibility tests on Address Verification page", () => {
     await expect(page).toHaveURL(/.*\/address-verification\?.*newCard=true/);
     const addressVerification = new AddressVerificationPage(page);
 
+    const radioButtons = await addressVerification.radioButtons.all();
+
     const addressVerificationLocators = [
-      addressVerification.radioHomeButton,
-      addressVerification.radioAlternateButton,
+      ...radioButtons,
       addressVerification.previousButton,
       addressVerification.nextButton,
     ];
