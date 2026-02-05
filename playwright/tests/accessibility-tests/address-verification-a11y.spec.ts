@@ -41,7 +41,7 @@ test.describe("Accessibility tests on Address Verification page", () => {
     await expect(page).toHaveURL(/.*\/address-verification\?.*newCard=true/);
     const addressVerification = new AddressVerificationPage(page);
 
-    const radioButtons = await addressVerification.radioButtons.all();
+    const radioButtons = await addressVerification.getRadioButtons.all();
 
     const addressVerificationLocators = [
       ...radioButtons,

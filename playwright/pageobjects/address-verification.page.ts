@@ -48,7 +48,7 @@ export class AddressVerificationPage {
     return this.page.getByLabel("Alternate address").getByText(street);
   }
 
-  get radioButtons() {
+  get getRadioButtons() {
     return this.page.getByRole("radiogroup").getByRole("radio");
   }
 }
