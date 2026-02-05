@@ -43,6 +43,12 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
     onChange,
   };
 
+  const styles = {
+    gridSpacing: {
+      mb: { base: "-l", md: "0" },
+    },
+  };
+
   // This component must be used within the `react-hook-form` provider so that
   // these functions are available to use.
   const {
@@ -162,7 +168,7 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
       </FormRow>
 
       <FormRow id={`${id}-addressForm-4`}>
-        <DSFormField mb="-l">
+        <DSFormField sx={styles.gridSpacing}>
           <FormField
             id={`zip-${type}`}
             label={t("location.address.postalCode.label")}
