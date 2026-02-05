@@ -162,7 +162,7 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
       </FormRow>
 
       <FormRow id={`${id}-addressForm-4`}>
-        <DSFormField>
+        <DSFormField mb="-l">
           <FormField
             id={`zip-${type}`}
             label={t("location.address.postalCode.label")}
