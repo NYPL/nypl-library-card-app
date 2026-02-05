@@ -135,7 +135,10 @@
     "nextStep": "আপনি আপনার আবেদন পত্র জমা দেওয়ার পর, আপনি আপনার অ্যাকাউন্ট তথ্য সহ একটি নিশ্চিতকরণ পৃষ্ঠা দেখতে পাবেন, এবং আপনি লগ ইন করতে পারবেন এবং বই এবং উপকরণ অনুরোধ করতে পারবেন"
   },
   "confirmation": {
-    "title": "অভিনন্দন! এবার আপনার কাছে নিউ ইয়র্ক পাবলিক লাইব্রেরির একটি ডিজিটাল কার্ড আছে।",
+    "title": {
+      "metro":"অভিনন্দন! এবার আপনার কাছে নিউ ইয়র্ক পাবলিক লাইব্রেরির একটি ডিজিটাল কার্ড আছে।",
+      "temporary":"TEMP"
+    },
     "description": {
       "part1": "আপনার রেকর্ডের জন্য এই তথ্য প্রিন্ট করুন বা সেভ করে রাখুন। 24 ঘণ্টার মধ্যে আপনার অ্যাকাউন্টের বিশদ সহ আপনি একটি ইমেইল পাবেন।",
       "part2": "ফিজিক্যাল মেটেরিয়াল নিতে হলে আমাদের <a href='http://nypl.org/locations'>লোকেশনে</a> যান, সাথে একটি বৈধ ফটো আইডি <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>এবং ঠিকানার প্রমাণ</a> নিয়ে যাবেন, যাতে ফিজিক্যাল কার্ডের জন্য আবেদন সম্পূর্ণ করা যায়।",
@@ -148,9 +151,10 @@
     },
     "nextSteps": {
       "title": "নিউ ইয়র্ক পাবলিক লাইব্রেরির সাথে শুরু করুন",
-      "borrow": "<b>বই এবং আরও অনেক কিছু পাবেন</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'>আপনার অ্যাকাউন্টে লগ ইন করুন</a> এবং ক্যাটালগ ব্রাউজ করুন।",
-      "updates": "<b>আপডেট পান</b><br /><a href='https://www.nypl.org/enews'>লাইব্রেরি থেকে কী কী পাওয়া যায় তা দেখুন।</a>",
-      "more": "<b>আরও জানুন</b><br /><a href='https://www.nypl.org/discover-library-card'>লাইব্রেরি কার্ড দিয়ে আপনি কী কী করতে পারেন তা জানুন।</a>"
+      "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
+      "borrow": "<b>বই এবং আরও অনেক কিছু পাবেন</b><br /><a href='{{loginUrl}}'>আপনার অ্যাকাউন্টে লগ ইন করুন</a> এবং ক্যাটালগ ব্রাউজ করুন।",
+      "updates": "<b>আপডেট পান</b><a href='https://www.nypl.org/enews'>লাইব্রেরি থেকে কী কী পাওয়া যায় তা দেখুন।</a>",
+      "more": "<b>আরও জানুন</b><a href='https://www.nypl.org/discover-library-card'>লাইব্রেরি কার্ড দিয়ে আপনি কী কী করতে পারেন তা জানুন।</a>"
     }
   },
   "button": {

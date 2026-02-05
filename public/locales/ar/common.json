@@ -132,7 +132,10 @@
     "nextStep": "بعد تقديم طلبك، سترى صفحة تأكيد تحتوي على معلومات حسابك، وستتمكن من تسجيل الدخول وطلب الكتب والمواد."
   },
   "confirmation": {
-    "title": "تهانينا! لديك الآن بطاقة رقمية لمكتبة نيويورك العامة.",
+    "title": {
+      "metro":"تهانينا! لديك الآن بطاقة رقمية لمكتبة نيويورك العامة.", 
+      "temporary":"TEMP"
+    },
     "description": {
       "part1": "اطبع هذه المعلومات أو احفظها لسجلاتك. ستتلقى بريدًا إلكترونيًا في غضون ۲٤ ساعة بتفاصيل حسابك.",
       "part2": "لاستعارة مواد مادية، يرجى زيارة أحد <a href='http://nypl.org/locations'>مواقعنا</a> مع <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>بطاقة هوية صالحة تحمل صورة وإثبات للعنوان</a> لإكمال طلب الحصول على بطاقة مادية.",
@@ -145,9 +148,10 @@
     },
     "nextSteps": {
       "title": "ابدأ مع مكتبة نيويورك العامة",
-      "borrow": "<b>استعر الكتب والمزيد</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'>سجِّل الدخول إلى حسابك</a> وتصفح الفهرس.",
-      "updates": "<b>احصل على التحديثات</b><br /><a href='https://www.nypl.org/enews'>تعرَّف على كل ما تقدمه المكتبة.</a>",
-      "more": "<b>تعرَّف على المزيد</b><br /><a href='https://www.nypl.org/discover-library-card'>اكتشف كل ما يمكنك فعله ببطاقة المكتبة الخاصة بك.</a>"
+      "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
+      "borrow": "<b>استعر الكتب والمزيد</b><a href='{{loginUrl}}'>سجِّل الدخول إلى حسابك</a> وتصفح الفهرس.",
+      "updates": "<b>احصل على التحديثات</b><a href='https://www.nypl.org/enews'>تعرَّف على كل ما تقدمه المكتبة.</a>",
+      "more": "<b>تعرَّف على المزيد</b><a href='https://www.nypl.org/discover-library-card'>اكتشف كل ما يمكنك فعله ببطاقة المكتبة الخاصة بك.</a>"
     }
   },
   "button": {
