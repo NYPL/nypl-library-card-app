@@ -50,7 +50,6 @@ export class CongratsPage {
     this.libraryCardBackground = page.locator(".background-lion");
     this.locationsLink = page.getByRole("link", {
       name: "NYPL location",
-      exact: true,
     });
     this.photoIdAndProofOfAddressLink = page.getByRole("link", {
       name: "photo ID and proof of address",
