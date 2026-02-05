@@ -14,7 +14,7 @@ export const TEST_NYC_ADDRESS: AddressData = {
   street: "476 5th Ave",
   apartmentSuite: "Room 200",
   city: "New York",
-  state: "New York",
+  state: "NY",
   postalCode: "10018",
 };
 
@@ -22,7 +22,7 @@ export const TEST_NYS_ADDRESS: AddressData = {
   street: "500 S Meadow St",
   apartmentSuite: "Suite 1",
   city: "Ithaca",
-  state: "New York",
+  state: "NY",
   postalCode: "14850",
 };
 
@@ -30,7 +30,7 @@ export const TEST_OOS_ADDRESS: AddressData = {
   street: "123 Main St",
   apartmentSuite: "Apartment 201",
   city: "Stamford",
-  state: "Connecticut",
+  state: "CT",
   postalCode: "06902",
 };
 
@@ -38,7 +38,7 @@ export const TEST_MULTIMATCH_ADDRESS: AddressData = {
   street: "123 34th Street",
   apartmentSuite: "Suite 100",
   city: "New York",
-  state: "New York",
+  state: "NY",
   postalCode: "10000",
 };
 
@@ -46,7 +46,7 @@ export const TEST_MULTIMATCH_ADDRESS_EAST: AddressData = {
   street: "123 E 34th St STE 100",
   apartmentSuite: "",
   city: "New York",
-  state: "New York",
+  state: "NY",
   postalCode: "10016-4601",
 };
 
@@ -54,7 +54,7 @@ export const TEST_MULTIMATCH_ADDRESS_WEST: AddressData = {
   street: "123 W 34th St STE 100",
   apartmentSuite: "",
   city: "New York",
-  state: "New York",
+  state: "NY",
   postalCode: "10001-2101",
 };
 

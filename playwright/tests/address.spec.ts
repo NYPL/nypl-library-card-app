@@ -58,6 +58,7 @@ test.describe("displays error messages", () => {
     await addressPage.nextButton.click();
     await expect(addressPage.streetAddressError).toBeVisible();
     await expect(addressPage.cityError).toBeVisible();
+    //await expect(addressPage.stateError).toBeVisible(); still don't see the error for state and we have to update the  error message
     await expect(addressPage.postalCodeError).toBeVisible();
   });
 
