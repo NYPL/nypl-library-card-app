@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { SPINNER_TIMEOUT } from "../utils/constants";
 import { AddressPage } from "../pageobjects/address.page";
 import { TEST_OOS_ADDRESS } from "../utils/constants";
 import { fillAddress } from "../utils/form-helper";
@@ -57,7 +58,9 @@ test.describe("displays error messages", () => {
     await addressPage.stateInput.fill("");
     await addressPage.postalCodeInput.fill("");
     await addressPage.nextButton.click();
-    await expect(addressPage.spinner).not.toBeVisible({ timeout: 10000 });
+    await expect(addressPage.spinner).not.toBeVisible({
+      timeout: SPINNER_TIMEOUT,
+    });
     await expect(addressPage.streetAddressError).toBeVisible();
     await expect(addressPage.cityError).toBeVisible();
     await expect(addressPage.stateError).toBeVisible();
@@ -69,7 +72,9 @@ test.describe("displays error messages", () => {
     await addressPage.stateInput.fill("ABC");
     await addressPage.postalCodeInput.fill("123456");
     await addressPage.nextButton.click();
-    await expect(addressPage.spinner).not.toBeVisible({ timeout: 10000 });
+    await expect(addressPage.spinner).not.toBeVisible({
+      timeout: SPINNER_TIMEOUT,
+    });
     await expect(addressPage.stateError).toBeVisible();
     await expect(addressPage.postalCodeError).toBeVisible();
   });
@@ -79,7 +84,9 @@ test.describe("displays error messages", () => {
     await addressPage.stateInput.fill("A");
     await addressPage.postalCodeInput.fill("1234");
     await addressPage.nextButton.click();
-    await expect(addressPage.spinner).not.toBeVisible({ timeout: 10000 });
+    await expect(addressPage.spinner).not.toBeVisible({
+      timeout: SPINNER_TIMEOUT,
+    });
     await expect(addressPage.postalCodeError).toBeVisible();
   });
 });
