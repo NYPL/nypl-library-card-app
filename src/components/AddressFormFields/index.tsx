@@ -141,12 +141,16 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
             labelText={t("location.address.state.label")}
             autoComplete={`section-${type} address-level1`}
             isRequired={isRequired}
+            isInvalid={!!errors?.[`${type}-state`]?.message}
             defaultValue={formValues[`${type}-state`]}
             invalidText={t("location.errorMessage.state")}
             // Pass in the `react-hook-form` register function so it can handle this
             // form element's state for us.
             {...register(`${type}-state`, {
-              required: t("location.errorMessage.state"),
+              required: {
+                value: isRequired,
+                message: t("location.errorMessage.state"),
+              },
             })}
             {...inputProps}
           >
