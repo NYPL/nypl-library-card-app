@@ -30,8 +30,8 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
-  const defaultValue = formValues?.["home-state"]
-    ? findState(formValues["home-state"])
+  const defaultValue = formValues[`${type}-state`]
+    ? findState(formValues[`${type}-state`])
     : "";
   const [value, setValue] = useState(defaultValue);
   const onChange = (event) => {
@@ -141,7 +141,7 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
             labelText={t("location.address.state.label")}
             autoComplete={`section-${type} address-level1`}
             isRequired={isRequired}
-            defaultValue="defaul"
+            defaultValue="defaultValue"
             invalidText={t("location.errorMessage.state")}
             // Pass in the `react-hook-form` register function so it can handle this
             // form element's state for us.
