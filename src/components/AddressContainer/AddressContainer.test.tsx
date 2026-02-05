@@ -19,7 +19,7 @@ jest.mock("react-i18next", () => {
       address: {
         title: "Home address",
         description:
-          "If you live in NYC, please fill out the home address form.",
+          "If you live in the United States, please provide your home address below. If you are visiting New York from another state, you can apply for a temporary card with this form. A temporary card allows you to request physical materials and schedule research appointments before your visit. International visitors should use our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>.",
         line1: { label: "Street address" },
         line2: { label: "Apartment / Suite" },
         city: { label: "City" },
