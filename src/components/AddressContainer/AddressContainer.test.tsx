@@ -14,6 +14,7 @@ Object.defineProperty(window, "matchMedia", {
 });
 
 jest.mock("react-i18next", () => {
+  const React = jest.requireActual("react");
   const en = {
     location: {
       address: {
@@ -59,7 +60,16 @@ jest.mock("react-i18next", () => {
     // this mock makes sure any components using the translate hook can use it without a warning being shown
     useTranslation: () => ({
       t: mockTFunction(en),
+      i18n: { language: "en" },
     }),
+    Trans: ({ children, i18nKey }) => {
+      return React.createElement(
+        "div",
+        { "data-testid": `mock-trans` },
+        i18nKey,
+        children
+      );
+    },
   };
 });
 
