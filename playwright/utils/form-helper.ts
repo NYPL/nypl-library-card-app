@@ -18,6 +18,7 @@ export async function fillAddress(
   await page.streetAddressInput.fill(addressData.street);
   await page.apartmentSuiteInput.fill(addressData.apartmentSuite);
   await page.cityInput.fill(addressData.city);
+  await page.stateInput.click();
   await page.stateInput.selectOption({ value: addressData.state });
   await page.postalCodeInput.fill(addressData.postalCode);
 }
