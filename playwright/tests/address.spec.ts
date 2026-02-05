@@ -15,10 +15,12 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     });
 
     test.describe("displays elements", () => {
-      test("displays headings", async () => {
+      test("displays headings and buttons", async () => {
         await expect(addressPage.mainHeading).toBeVisible();
         await expect(addressPage.stepHeading).toBeVisible();
         await expect(addressPage.addressHeading).toBeVisible();
+        await expect(addressPage.nextButton).toBeVisible();
+        await expect(addressPage.previousButton).toBeVisible();
       });
 
       test("displays home address form", async () => {
@@ -27,11 +29,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(addressPage.cityInput).toBeVisible();
         await expect(addressPage.stateInput).toBeVisible();
         await expect(addressPage.postalCodeInput).toBeVisible();
-      });
-
-      test("displays next and previous buttons", async () => {
-        await expect(addressPage.nextButton).toBeVisible();
-        await expect(addressPage.previousButton).toBeVisible();
       });
     });
 
