@@ -72,6 +72,7 @@ export const TEST_CUSTOMIZE_ACCOUNT = {
 export const TEST_BARCODE_NUMBER = "12341234123412";
 
 export const ERROR_MESSAGES = {
+  // probs remove this at the end
   FIRST_NAME_INVALID: appContent.personal.errorMessage.firstName,
   LAST_NAME_INVALID: appContent.personal.errorMessage.lastName,
   DATE_OF_BIRTH_INVALID: appContent.personal.errorMessage.birthdate,
@@ -88,3 +89,17 @@ export const ERROR_MESSAGES = {
   HOME_LIBRARY_ERROR: appContent.account.errorMessage.homeLibraryCode,
   ACCEPT_TERMS_ERROR: appContent.account.errorMessage.acceptTerms,
 };
+
+export const SUPPORTED_LANGUAGES = [
+  { lang: "en", name: "English" },
+  // { lang: "ar", name: "Arabic" },
+  // { lang: "bn", name: "Bengali" },
+  { lang: "es", name: "Spanish" },
+  // { lang: "fr", name: "French" },
+  // { lang: "ht", name: "Haitian Creole" },
+  // { lang: "ko", name: "Korean" },
+  // { lang: "pl", name: "Polish" },
+  // { lang: "ru", name: "Russian" },
+  // { lang: "ur", name: "Urdu" },
+  // { lang: "zhcn", name: "Chinese" },
+];
