@@ -172,7 +172,8 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
           <FormField
             id={`zip-${type}`}
             label={t("location.address.postalCode.label")}
-            type="numeric"
+            inputMode="numeric"
+            pattern="[0-9]*"
             {...register(`${type}-zip`, {
               validate: validateZip(),
             })}
