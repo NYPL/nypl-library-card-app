@@ -4,6 +4,7 @@ import { axe } from "jest-axe";
 import AddressFormFields from ".";
 import { mockTFunction, TestProviderWrapper } from "../../../testHelper/utils";
 import { Address, AddressTypes } from "../../interfaces";
+import stateData from "../../data/stateAbbreviations";
 
 const addressErrorMessages: Address = {
   line1: "Please enter a valid street address.",
@@ -20,16 +21,17 @@ const reactHookFormErrors = {
 };
 
 jest.mock("react-i18next", () => {
+  const React = jest.requireActual("react");
   const en = {
     location: {
       address: {
         title: "Home address",
         description:
-          "If you live in NYC, please fill out the home address form.",
+          "If you live in the United States, please provide your home address below. If you are visiting New York from another state, you can apply for a temporary card with this form. A temporary card allows you to request physical materials and schedule research appointments before your visit. International visitors should use our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>.",
         line1: { label: "Street address" },
         line2: { label: "Apartment / Suite" },
         city: { label: "City" },
-        state: { label: "State", instruction: "2-letter abbreviation" },
+        state: { label: "State" },
         postalCode: {
           label: "Postal code",
           instruction: "5 or 9-digit postal code",
@@ -57,7 +59,16 @@ jest.mock("react-i18next", () => {
     // this mock makes sure any components using the translate hook can use it without a warning being shown
     useTranslation: () => ({
       t: mockTFunction(en),
+      i18n: { language: "en" },
     }),
+    Trans: ({ children, i18nKey }) => {
+      return React.createElement(
+        "div",
+        { "data-testid": `mock-trans` },
+        i18nKey,
+        children
+      );
+    },
   };
 });
 
@@ -65,7 +76,11 @@ describe("AddressFormFields", () => {
   test("it passes axe accessibility test", async () => {
     const { container } = render(
       <TestProviderWrapper>
-        <AddressFormFields id="address-test" type={AddressTypes.Home} />
+        <AddressFormFields
+          id="address-test"
+          type={AddressTypes.Home}
+          stateData={stateData}
+        />
       </TestProviderWrapper>
     );
     expect(await axe(container)).toHaveNoViolations();
@@ -74,7 +89,11 @@ describe("AddressFormFields", () => {
   test("it passes accessibilty checks with error messages", async () => {
     const { container } = render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
-        <AddressFormFields id="address-test" type={AddressTypes.Home} />
+        <AddressFormFields
+          id="address-test"
+          type={AddressTypes.Home}
+          stateData={stateData}
+        />
       </TestProviderWrapper>
     );
 
@@ -84,7 +103,11 @@ describe("AddressFormFields", () => {
   test("it should render five fields", () => {
     render(
       <TestProviderWrapper>
-        <AddressFormFields id="address-test" type={AddressTypes.Home} />
+        <AddressFormFields
+          id="address-test"
+          type={AddressTypes.Home}
+          stateData={stateData}
+        />
       </TestProviderWrapper>
     );
 
@@ -97,7 +120,7 @@ describe("AddressFormFields", () => {
     });
     const line2 = screen.getByLabelText("Apartment / Suite");
     const city = screen.getByRole("textbox", { name: "City (required)" });
-    const state = screen.getByRole("textbox", { name: "State (required)" });
+    const state = screen.getByLabelText("State (required)");
     const zip = screen.getByRole("textbox", { name: "Postal code (required)" });
 
     expect(line1).toBeInTheDocument();
@@ -110,7 +133,11 @@ describe("AddressFormFields", () => {
   test("it should render five optional fields for the work address", () => {
     render(
       <TestProviderWrapper>
-        <AddressFormFields id="address-test" type={AddressTypes.Work} />
+        <AddressFormFields
+          id="address-test"
+          type={AddressTypes.Work}
+          stateData={stateData}
+        />
       </TestProviderWrapper>
     );
 
@@ -132,7 +159,11 @@ describe("AddressFormFields", () => {
   test.skip("it should render any error messages for required fields", () => {
     render(
       <TestProviderWrapper hookFormState={{ errors: reactHookFormErrors }}>
-        <AddressFormFields id="address-test" type={AddressTypes.Home} />
+        <AddressFormFields
+          id="address-test"
+          type={AddressTypes.Home}
+          stateData={stateData}
+        />
       </TestProviderWrapper>
     );
 

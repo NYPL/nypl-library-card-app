@@ -26,6 +26,7 @@ import { useTranslation } from "next-i18next";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 import { Paragraph } from "../Paragraph";
 import { PageSubHeading } from "../PageSubHeading";
+import stateData from "../../data/stateAbbreviations";
 
 const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -143,6 +144,7 @@ const AddressContainer = ({ csrfToken }) => {
         <AddressFormFields
           id="work-address-container"
           type={AddressTypes.Work}
+          stateData={stateData}
         />
 
         <FormRow display="none">

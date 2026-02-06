@@ -54,7 +54,7 @@ test.describe("displays error messages", () => {
     const addressPage = new AddressPage(page);
     await addressPage.streetAddressInput.fill("");
     await addressPage.cityInput.fill("");
-    await addressPage.stateInput.fill("");
+    await addressPage.stateInput.click();
     await addressPage.postalCodeInput.fill("");
     await addressPage.nextButton.click();
     await expect(addressPage.streetAddressError).toBeVisible();
@@ -65,19 +65,15 @@ test.describe("displays error messages", () => {
 
   test("enter too many characters", async ({ page }) => {
     const addressPage = new AddressPage(page);
-    await addressPage.stateInput.fill("ABC");
     await addressPage.postalCodeInput.fill("123456");
     await addressPage.nextButton.click();
-    await expect(addressPage.stateError).toBeVisible();
     await expect(addressPage.postalCodeError).toBeVisible();
   });
 
   test("enter too few characters", async ({ page }) => {
     const addressPage = new AddressPage(page);
-    await addressPage.stateInput.fill("A");
     await addressPage.postalCodeInput.fill("1234");
     await addressPage.nextButton.click();
-    await expect(addressPage.stateError).toBeVisible();
     await expect(addressPage.postalCodeError).toBeVisible();
   });
 });
