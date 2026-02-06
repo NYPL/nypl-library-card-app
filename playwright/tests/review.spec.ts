@@ -281,6 +281,7 @@ test.describe("displays error messages", () => {
 
   test("displays error for current date of birth", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
+    await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("01/01/2026");
     await reviewPage.submitButton.click();
