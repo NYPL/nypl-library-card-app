@@ -137,11 +137,9 @@ export class ReviewPage {
     );
     this.alternateFormLink = this.page.getByRole("link", {
       name: "alternate form",
-      exact: true,
     });
-    this.locationsLink = this.page.getByRole("link", {
+    this.locationsLink = this.page.locator("#mainContent").getByRole("link", {
       name: "locations",
-      exact: true,
     });
     this.editPersonalInfoButton = page.getByRole("button", {
       name: "Edit Personal information",
