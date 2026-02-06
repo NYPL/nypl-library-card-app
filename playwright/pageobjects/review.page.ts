@@ -34,6 +34,7 @@ export class ReviewPage {
   // Address section
   readonly addressHeading: Locator;
   readonly streetHeading: Locator;
+  readonly streetAddressInvalid: Locator;
   readonly streetAddressError: Locator;
   readonly cityHeading: Locator;
   readonly cityError: Locator;
@@ -153,8 +154,11 @@ export class ReviewPage {
       exact: true,
     });
     this.streetHeading = page.getByText("Street address", { exact: true });
-    this.streetAddressError = page.getByText(
+    this.streetAddressInvalid = page.getByText(
       "There was a problem. Please enter a valid home street address."
+    );
+    this.streetAddressError = page.getByText(
+      "Street address fields must not be more than 100 lines."
     );
     this.cityHeading = page.getByText("City", { exact: true });
     this.cityError = page.getByText(
