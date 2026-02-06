@@ -2,11 +2,14 @@ import { test, expect } from "@playwright/test";
 import { CongratsPage } from "../pageobjects/congrats.page";
 
 test.use({
-  geolocation: { longitude: 41.890221, latitude: 12.492348 },
+  geolocation: {
+    latitude: 48.8566,
+    longitude: 2.3522,
+  },
   permissions: ["geolocation"],
 });
 test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/congrats?&newCard=true");
+  await page.goto("/library-card/congrats?newCard=true");
 });
 
 test.describe("Temporary Card: displays elements on Congrats page", () => {

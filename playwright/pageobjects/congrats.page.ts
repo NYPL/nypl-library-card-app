@@ -68,8 +68,12 @@ export class CongratsPage {
       name: "Discover everything you can do with your library card.",
     });
     this.temporaryCardBanner = page.getByTestId("ds-banner");
-    this.learnMoreLink = page.getByRole("link", { name: "learn more" });
-    this.emailLink = page.getByRole("link", { name: "gethelp@nypl.org" });
+    this.learnMoreLink = this.temporaryCardBanner.getByRole("link", {
+      name: "learn more",
+    });
+    this.emailLink = this.temporaryCardBanner.getByRole("link", {
+      name: "gethelp@nypl.org",
+    });
   }
 
   public getDate(): string {
