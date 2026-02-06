@@ -28,7 +28,6 @@ const AcceptTermsForm: React.FC = () => {
       </Paragraph>
 
       <Checkbox
-        mb={"-l"}
         id="acceptTerms"
         invalidText={t("account.errorMessage.acceptTerms")}
         isInvalid={!!errors?.acceptTerms?.message}
