@@ -59,7 +59,7 @@ export class PersonalPage {
     this.alternateFormLink = this.page.getByRole("link", {
       name: appContent?.personal?.email?.alternateForm || "alternate form",
     });
-    this.locationsLink = this.page.getByRole("link", {
+    this.locationsLink = this.page.locator("#mainContent").getByRole("link", {
       name: appContent?.personal?.email?.locations || "locations",
     });
     this.receiveInfoCheckbox = this.page.getByText(
