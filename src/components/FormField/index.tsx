@@ -66,6 +66,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
       text: "text",
       password: "password",
       email: "email",
+      numeric: "numeric",
       hidden: "hidden",
     };
     const updatedRef = ref || attributes?.ref ? ref || attributes?.ref : null;
