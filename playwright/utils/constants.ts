@@ -73,10 +73,6 @@ export const TEST_BARCODE_NUMBER = "12341234123412";
 
 export const ERROR_MESSAGES = {
   // probs remove this at the end
-  FIRST_NAME_INVALID: appContent.personal.errorMessage.firstName,
-  LAST_NAME_INVALID: appContent.personal.errorMessage.lastName,
-  DATE_OF_BIRTH_INVALID: appContent.personal.errorMessage.birthdate,
-  EMAIL_INVALID: appContent.personal.errorMessage.email,
   STREET_ADDRESS_INVALID: appContent.location.errorMessage.line1,
   CITY_INVALID: appContent.location.errorMessage.city,
   STATE_INVALID: appContent.location.errorMessage.state,
