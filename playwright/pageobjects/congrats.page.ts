@@ -19,6 +19,9 @@ export class CongratsPage {
   readonly discoverLink: Locator;
   readonly patronBarcodeNumber: Locator;
   readonly EXPECTED_BARCODE_PREFIX = "255";
+  readonly temporaryCardBanner: Locator;
+  readonly learnMoreLink: Locator;
+  readonly emailLink: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -64,6 +67,9 @@ export class CongratsPage {
     this.discoverLink = page.getByRole("link", {
       name: "Discover everything you can do with your library card.",
     });
+    this.temporaryCardBanner = page.getByTestId("ds-banner");
+    this.learnMoreLink = page.getByRole("link", { name: "learn more" });
+    this.emailLink = page.getByRole("link", { name: "gethelp@nypl.org" });
   }
 
   public getDate(): string {
