@@ -75,12 +75,7 @@ function RoutingLinks({
   const nextElement = !next?.submit ? <GetStartedButton /> : <NextButton />;
 
   return (
-    <Box
-      mt="2rem"
-      display="flex"
-      gap="xs"
-      flexDir={{ base: "column", md: "row" }}
-    >
+    <Box display="flex" gap="xs" flexDir={{ base: "column", md: "row" }}>
       {/* Next button will be placed on top on mobile view */}
       {isLargerThanLargeMobile ? (
         <>
