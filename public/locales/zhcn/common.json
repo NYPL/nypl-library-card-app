@@ -129,10 +129,13 @@
     "nextStep": "提交申请后，您将看到一个确认页面，其中包含您的帐户资料，您将能够登录并索取书籍和物料。"
   },
   "confirmation": {
-    "title": "恭喜！您现在已获取一张纽约公共图书馆电子图书卡。",
+    "title": {
+      "metro":"恭喜！您现在已获取一张纽约公共图书馆电子图书卡。",
+      "temporary":"TEMP"
+    },
     "description": {
       "part1": "请打印或保存此信息以作为记录。您将在 24 小时内收到一封包含您账户详细信息的电子邮件。",
-      "part2": "如要借阅实体材料，请携带有效的<a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>带照片身份证件和地址证明</a>前往我们的其中一个<a href='http://nypl.org/locations'>分馆地点</a>完成实体图书卡的申请。",
+      "part2": "如要借阅实体材料，请携带有效的<a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>带照片身份证件和地址证明</a>前往我们的其中一个<a href='http://nypl.org/locations'>分馆地点</a>完成实体图书卡的申请。",
       "part3": "这是一张临时图书卡，将在 30 天后到期失效。如您是在纽约认可的学院就读的学生、纽约市企业的员工（现在不在纽约市或纽约州）或即将访问我们研究中心的研究人员，请联系我们<a href='mailto:gethelp@nypl.org'>更新您的图书卡。</a>"
     },
     "graphic": {
@@ -142,9 +145,10 @@
     },
     "nextSteps": {
       "title": "开始使用纽约公共图书馆",
-      "borrow": "<b>借阅书籍和其他物品</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'>登录您的帐户</a>并浏览目录。",
-      "updates": "<b>获取更新</b><br /><a href='https://www.nypl.org/enews'>发现图书馆提供的所有服务。</a>",
-      "more": "<b>了解更多</b><br /><a href='https://www.nypl.org/discover-library-card'>发现您可以用图书卡做些什么。</a>"
+      "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
+      "borrow": "<b>借阅书籍和其他物品</b><a href='{{loginUrl}}'>登录您的帐户</a>并浏览目录。",
+      "updates": "<b>获取更新</b><a href='https://www.nypl.org/enews'>发现图书馆提供的所有服务。</a>",
+      "more": "<b>了解更多</b><a href='https://www.nypl.org/discover-library-card'>发现您可以用图书卡做些什么。</a>"
     }
   },
   "button": {

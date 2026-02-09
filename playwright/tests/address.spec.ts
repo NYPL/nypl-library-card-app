@@ -79,6 +79,12 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(addressPage.stateError).toBeVisible();
         await expect(addressPage.postalCodeError).toBeVisible();
       });
+      
+      test("enter postal code with dash", async ({ page }) => {
+        await addressPage.postalCodeInput.fill("12345-6789");
+        await addressPage.nextButton.click();
+        await expect(addressPage.postalCodeError).toBeVisible();
+      });
     });
   });
-}
+});

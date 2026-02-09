@@ -51,7 +51,7 @@
       "firstName": "There was a problem. Please enter a valid first name.",
       "lastName": "There was a problem. Please enter a valid last name.",
       "birthdate": "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
-      "ageGate": "There was a problem. You must be 13 years or older to continue.",
+      "ageGate": "There was a problem. Date of birth is below the minimum age of 13.",
       "email": "There was a problem. Please enter a valid email address."
     }
   },
@@ -147,11 +147,14 @@
     "nextStep": "After you submit your application, you will see a confirmation page with your account information, and you will be able to log in and request books and materials."
   },
   "confirmation": {
-    "title": "Congratulations! You now have a digital New York Public Library card.",
+    "title": {
+      "metro": "Congratulations! You now have a digital New York Public Library card.",
+      "temporary": "Congratulations! You now have a temporary digital New York Public Library card."
+    },
     "description": {
       "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
-      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
-      "part3": " This is a temporary card and will expire in 30 days. If you are a student in a New York–accredited college, an employee at a NYC company but not physically in the city or state, or a researcher who will be visiting one of our research centers, contact <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> to update your card."
+      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
+      "part3": "<b>This is a temporary card and will expire in 30 days.</b> If you live, work, attend school, or pay property taxes in New York State, <a href='https://www.nypl.org/help/library-card/terms-conditions#renew'>learn more</a> about how to update your card. If you're a researcher planning an upcoming visit more than 30 days from now, and for all other questions, contact  <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> ."
     },
     "graphic": {
       "memberName": "MEMBER NAME",
@@ -160,9 +163,10 @@
     },
     "nextSteps": {
       "title": "Get started with The New York Public Library",
-      "borrow": "<b>Borrow books &amp; more</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'> Log into your account</a> and browse the catalog.",
-      "updates": "<b>Get updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
-      "more": "<b>Learn more</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+      "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
+      "borrow": "<b>Borrow books & more</b><a href='{{loginUrl}}'> Log into your account</a> and browse the catalog. To check out and borrow physical items, visit any <a href='https://www.nypl.org/locations'>NYPL location</a> to verify your information and receive a physical card.",
+      "updates": "<b>Get updates</b><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
+      "more": "<b>Learn more</b><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
     }
   },
   "button": {

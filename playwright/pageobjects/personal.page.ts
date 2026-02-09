@@ -57,12 +57,10 @@ export class PersonalPage {
         "There was a problem. Please enter a valid email address."
     );
     this.alternateFormLink = this.page.getByRole("link", {
-      name: appContent?.personal?.email?.alternateForm || "alternate form",
-      exact: true,
+      name: appContent?.personal?.email?.alternateForm || "alternate form"
     });
-    this.locationsLink = this.page.getByRole("link", {
-      name: appContent?.personal?.email?.locations || "locations",
-      exact: true,
+    this.locationsLink = this.page.locator("#mainContent").getByRole("link", {
+      name: appContent?.personal?.email?.locations || "locations"
     });
     this.receiveInfoCheckbox = this.page.getByText(
       appContent?.personal?.eCommunications?.labelText ||

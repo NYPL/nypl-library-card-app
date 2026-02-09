@@ -65,6 +65,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
     const typeToInputTypeMap = {
       text: "text",
       password: "password",
+      email: "email",
       hidden: "hidden",
     };
     const updatedRef = ref || attributes?.ref ? ref || attributes?.ref : null;

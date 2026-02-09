@@ -94,6 +94,18 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await personalPage.nextButton.click();
         await expect(personalPage.dateOfBirthError).toBeVisible();
       });
+      
+      test("displays error for earliest date of birth", async ({ page }) => {
+        await personalPage.dateOfBirthInput.fill("01/01/1902");
+        await personalPage.nextButton.click();
+        await expect(personalPage.dateOfBirthError).toBeVisible();
+      });
+      
+      test("displays error for current date of birth", async ({ page }) => {
+        await personalPage.dateOfBirthInput.fill("01/01/2026");
+        await personalPage.nextButton.click();
+        await expect(personalPage.dateOfBirthError).toBeVisible();
+      });
 
       test("displays error for future date of birth", async () => {
         await personalPage.dateOfBirthInput.fill("12/31/2099");

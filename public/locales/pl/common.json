@@ -132,10 +132,13 @@
     "nextStep": "Kiedy wyślesz wniosek, wyświetli się strona z potwierdzeniem i danymi konta. Możesz wówczas się zalogować i zamówić książki oraz inne materiały."
   },
   "confirmation": {
-    "title": "Gratulujemy! Masz już cyfrową kartę Nowojorskiej Biblioteki Publicznej.",
+    "title": {
+      "metro": "Gratulujemy! Masz już cyfrową kartę Nowojorskiej Biblioteki Publicznej.",
+      "temporary": "TEMP"
+    },
     "description": {
       "part1": "Wydrukuj lub zapisz te informacje na przyszłość. W ciągu 24 godzin otrzymasz e-mail z danymi konta.",
-      "part2": "Aby wypożyczyć materiały fizyczne, odwiedź jeden z naszych <a href='http://nypl.org/locations'>oddziałów</a> i okaż ważny <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>dokument tożsamości ze zdjęciem oraz dowód adresu zamieszkania</a> w celu wypełnienia wniosku o kartę fizyczną.",
+      "part2": "Aby wypożyczyć materiały fizyczne, odwiedź jeden z naszych <a href='http://nypl.org/locations'>oddziałów</a> i okaż ważny <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>dokument tożsamości ze zdjęciem oraz dowód adresu zamieszkania</a> w celu wypełnienia wniosku o kartę fizyczną.",
       "part3": "Ta karta jest tymczasowa i wygaśnie po 30 dniach. Jeżeli jesteś studentem uczelni akredytowanej w Nowym Jorku, pracownikiem firmy z NYC, który nie przebywa w mieście ani stanie Nowy Jork, albo badaczem, który będzie odwiedzać jeden z naszych ośrodków badawczych, skontaktuj się z nami pod adresem <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a>, aby zaktualizować kartę"
     },
     "graphic": {
@@ -145,9 +148,10 @@
     },
     "nextSteps": {
       "title": "Zacznij korzystać z Nowojorskiej Biblioteki Publicznej",
-      "borrow": "<b>Wypożycz książki i inne materiały</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'>Zaloguj się na konto</a> i przejrzyj katalog.",
-      "updates": "<b>Otrzymuj aktualności</b><br /><a href='https://www.nypl.org/enews'>Dowiedz się wszystkiego o ofercie Biblioteki.</a>",
-      "more": "<b>Więcej informacji</b><br /><a href='https://www.nypl.org/discover-library-card'>Dowiedz się, co możesz robić przy użyciu karty bibliotecznej.</a>"
+      "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
+      "borrow": "<b>Wypożycz książki i inne materiały</b><a href='{{loginUrl}}'>Zaloguj się na konto</a> i przejrzyj katalog.",
+      "updates": "<b>Otrzymuj aktualności</b><a href='https://www.nypl.org/enews'>Dowiedz się wszystkiego o ofercie Biblioteki.</a>",
+      "more": "<b>Więcej informacji</b><a href='https://www.nypl.org/discover-library-card'>Dowiedz się, co możesz robić przy użyciu karty bibliotecznej.</a>"
     }
   },
   "button": {
