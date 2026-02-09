@@ -43,11 +43,9 @@ export class PersonalPage {
     this.emailError = this.page.getByText(ERROR_MESSAGES.EMAIL_INVALID);
     this.alternateFormLink = this.page.getByRole("link", {
       name: "alternate form",
-      exact: true,
     });
-    this.locationsLink = this.page.getByRole("link", {
+    this.locationsLink = this.page.locator("#mainContent").getByRole("link", {
       name: "locations",
-      exact: true,
     });
     this.receiveInfoCheckbox = this.page.getByText(
       "Yes, I would like to receive information about NYPL's programs and services"

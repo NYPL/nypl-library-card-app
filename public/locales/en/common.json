@@ -42,7 +42,7 @@
       "firstName": "There was a problem. Please enter a valid first name.",
       "lastName": "There was a problem. Please enter a valid last name.",
       "birthdate": "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
-      "ageGate": "There was a problem. You must be 13 years or older to continue.",
+      "ageGate": "There was a problem. Date of birth is below the minimum age of 13.",
       "email": "There was a problem. Please enter a valid email address."
     }
   },
@@ -144,8 +144,8 @@
     },
     "description": {
       "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
-      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
-      "part3": "<b>This is a temporary card and will expire in 30 days.</b> If you live, work, attend school, or pay property taxes in New York State and your location could not be verified via the online form, <a href='https://www.nypl.org/help/library-card/terms-conditions#renew'>learn more</a> about how to update your card. If you're a researcher planning an upcoming visit more than 30 days from now, and for all other questions, contact  <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> ."
+      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
+      "part3": "<b>This is a temporary card and will expire in 30 days.</b> If you live, work, attend school, or pay property taxes in New York State, <a href='https://www.nypl.org/help/library-card/terms-conditions#renew'>learn more</a> about how to update your card. If you're a researcher planning an upcoming visit more than 30 days from now, and for all other questions, contact  <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> ."
     },
     "graphic": {
       "memberName": "MEMBER NAME",
@@ -155,7 +155,7 @@
     "nextSteps": {
       "title": "Get started with The New York Public Library",
       "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
-      "borrow": "<b>Borrow books & more</b><a href='{{loginUrl}}'> Log into your account</a> and browse the catalog. To request physical items, visit any <a href='https://www.nypl.org/locations'>NYPL location</a> to verify your information and receive a physical card.",
+      "borrow": "<b>Borrow books & more</b><a href='{{loginUrl}}'> Log into your account</a> and browse the catalog. To check out and borrow physical items, visit any <a href='https://www.nypl.org/locations'>NYPL location</a> to verify your information and receive a physical card.",
       "updates": "<b>Get updates</b><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
       "more": "<b>Learn more</b><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
     }

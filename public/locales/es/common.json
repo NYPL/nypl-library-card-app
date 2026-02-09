@@ -133,7 +133,7 @@
     },
     "description": {
       "part1": "Imprima o guarde esta información para su registro. En las próximas 24 horas, recibirá un correo electrónico con los detalles de su cuenta.",
-      "part2": "Para pedir prestados materiales físicos, visite una de nuestras <a href='http://nypl.org/locations'>localidades</a> con una <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>identificación válida con foto y prueba de domicilio particular</a> para completar la solicitud de una tarjeta física.",
+      "part2": "Para pedir prestados materiales físicos, visite una de nuestras <a href='http://nypl.org/locations'>localidades</a> con una <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>identificación válida con foto y prueba de domicilio particular</a> para completar la solicitud de una tarjeta física.",
       "part3": "Esta tarjeta es temporal y caducará en 30 días. Si estudia en una universidad acreditada en Nueva York, trabaja en una empresa de la ciudad de Nueva York pero no está físicamente en la ciudad o el estado, o se dedica a investigar y va a visitar uno de nuestros centros de investigación, comuníquese con nosotros <a href='mailto:gethelp@nypl.org'>para actualizar su tarjeta.</a>"
     },
     "graphic": {
