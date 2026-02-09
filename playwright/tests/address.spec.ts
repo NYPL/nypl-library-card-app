@@ -89,4 +89,11 @@ test.describe("displays error messages", () => {
     });
     await expect(addressPage.postalCodeError).toBeVisible();
   });
+
+  test("enter postal code with dash", async ({ page }) => {
+    const addressPage = new AddressPage(page);
+    await addressPage.postalCodeInput.fill("12345-6789");
+    await addressPage.nextButton.click();
+    await expect(addressPage.postalCodeError).toBeVisible();
+  });
 });

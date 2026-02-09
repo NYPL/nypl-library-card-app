@@ -46,4 +46,8 @@ export class AddressVerificationPage {
   getAlternateAddressOption(street: string): Locator {
     return this.page.getByLabel("Alternate address").getByText(street);
   }
+
+  get getRadioButtons() {
+    return this.page.getByRole("radiogroup").getByRole("radio");
+  }
 }

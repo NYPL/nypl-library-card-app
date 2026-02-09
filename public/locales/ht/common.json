@@ -132,10 +132,13 @@
     "nextStep": "Apre ou fin soumèt aplikasyon w lan, w ap wè yon paj konfimasyon ki genyen enfòmasyon sou kont ou an ladan, epi w ap kapab konekte w ak mande liv ak materyèl."
   },
   "confirmation": {
-    "title": "Felisitasyon! Kounye a, ou gen yon kat Bibliyotèk Piblik New York.",
+    "title": {
+      "metro":"Felisitasyon! Kounye a, ou gen yon kat Bibliyotèk Piblik New York.",
+      "temporary":"TEMP"
+    },
     "description": {
       "part1": "Enprime oswa sovgade enfòmasyon sa yo pou dosye w. Nan 24 èdtan, ou pral resevwa yon imèl ak tout detay kont ou an.",
-      "part2": "Pou prete materyèl fizik, tanpri ale nan youn nan l <a href='http://nypl.org/locations'>lokal nou yo</a> ak yon <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>pyès idantite ki gen foto epi ki valab ak prèv adrès kote ou rete a</a> pou ranpli aplikasyon an pou jwenn yon kat fizik",
+      "part2": "Pou prete materyèl fizik, tanpri ale nan youn nan l <a href='http://nypl.org/locations'>lokal nou yo</a> ak yon <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>pyès idantite ki gen foto epi ki valab ak prèv adrès kote ou rete a</a> pou ranpli aplikasyon an pou jwenn yon kat fizik",
       "part3": "Sa a se yon kat tanporè li ye epi li pral ekspire nan 30 jou. Si ou se yon elèv nan yon kolèj ki akredi New York, oubyen yon anplwaye nan yon konpayi nan Vil NY men ou pa fizikman nan vil oswa Eta New York, oubyen yon chèchè ki pral vizite youn nan sant rechèch nou yo, kontakte <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> pou mete kat ou ajou."
     },
     "graphic": {
@@ -145,9 +148,10 @@
     },
     "nextSteps": {
       "title": "Demare ak Bibliyotèk Piblik New York la",
-      "borrow": "<b>Prete Liv ak Plis Bagay Toujou</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'> Konekte sou kont ou</a> epi konsilte katalòg la.",
-      "updates": "<b>Jwenn Mizajou yo</b><br /><a href='https://www.nypl.org/enews'>Dekouvri tout sa Bibliyotèk la kapab ofri w.</a>",
-      "more": "<b>Jwenn plis enfòmasyon.</b><br /><a href='https://www.nypl.org/discover-library-card'>Dekouvri tout bagay ou kapab fè ak kat Bibliyotèk ou an.</a>"
+      "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
+      "borrow": "<b>Prete Liv ak Plis Bagay Toujou</b><a href='{{loginUrl}}'> Konekte sou kont ou</a> epi konsilte katalòg la.",
+      "updates": "<b>Jwenn Mizajou yo</b><a href='https://www.nypl.org/enews'>Dekouvri tout sa Bibliyotèk la kapab ofri w.</a>",
+      "more": "<b>Jwenn plis enfòmasyon.</b><a href='https://www.nypl.org/discover-library-card'>Dekouvri tout bagay ou kapab fè ak kat Bibliyotèk ou an.</a>"
     }
   },
   "button": {
