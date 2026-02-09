@@ -6,6 +6,7 @@ import { PageManager } from "../pageobjects/page-manager.page";
 //   fillAccountInfo,
 // } from "../utils/form-helper";
 import {
+  // SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   // TEST_CUSTOMIZE_ACCOUNT,
   // TEST_OOS_ADDRESS,
@@ -59,12 +60,18 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   await expect(pageManager.addressPage.stepHeading).toBeVisible();
       //   await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       //   await pageManager.addressPage.nextButton.click();
+      // await expect(pageManager.addressPage.spinner).not.toBeVisible({
+      //   timeout: SPINNER_TIMEOUT,
+      // });
       // });
 
       // await test.step("enters alternate address", async () => {
       //   await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       //   await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
       //   await pageManager.alternateAddressPage.nextButton.click();
+      // await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+      //   timeout: SPINNER_TIMEOUT,
+      // });
       // });
 
       // await test.step("selects home and alternate addresses", async () => {
@@ -78,6 +85,9 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
       //     .check();
       //   await pageManager.addressVerificationPage.nextButton.click();
+      // await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
+      //   { timeout: SPINNER_TIMEOUT }
+      // );
       // });
 
       // await test.step("enters account information", async () => {
