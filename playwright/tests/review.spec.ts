@@ -271,6 +271,23 @@ test.describe("displays error messages", () => {
     await expect(reviewPage.dateOfBirthError).toBeVisible();
   });
 
+  test("displays error for earliest date of birth", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("01/01/1902");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+  });
+
+  test("displays error for current date of birth", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("01/01/2026");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+  });
+
   test("displays error for future date of birth", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editPersonalInfoButton.click();
@@ -395,7 +412,7 @@ test.describe("displays error messages", () => {
     await expect(reviewPage.verifyPasswordError).toBeVisible();
     await expect(reviewPage.homeLibraryError).toBeVisible();
     await expect(reviewPage.acceptTermsError).toBeVisible();
-    await expect(reviewPage.streetAddressError).toBeVisible();
+    await expect(reviewPage.streetAddressInvalid).toBeVisible();
     await expect(reviewPage.cityError).toBeVisible();
     await expect(reviewPage.stateError).toBeVisible();
     await expect(reviewPage.postalCodeError).toBeVisible();

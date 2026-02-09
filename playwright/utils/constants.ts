@@ -58,6 +58,9 @@ export const TEST_MULTIMATCH_ADDRESS_WEST: AddressData = {
   postalCode: "10001-2101",
 };
 
+// Common timeouts
+export const SPINNER_TIMEOUT = 10000;
+
 // account
 const uniqueSuffix = Date.now().toString().slice(-6);
 const TEST_UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
@@ -84,6 +87,14 @@ export const ERROR_MESSAGES = {
 
 export const SUPPORTED_LANGUAGES = [
   { lang: "en", name: "English" },
+  // { lang: "ar", name: "Arabic" },
+  // { lang: "bn", name: "Bengali" },
   { lang: "es", name: "Spanish" },
-  // add remaining languages
+  // { lang: "fr", name: "French" },
+  // { lang: "ht", name: "Haitian Creole" },
+  // { lang: "ko", name: "Korean" },
+  // { lang: "pl", name: "Polish" },
+  // { lang: "ru", name: "Russian" },
+  // { lang: "ur", name: "Urdu" },
+  // { lang: "zhcn", name: "Chinese" },
 ];

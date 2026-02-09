@@ -14,6 +14,7 @@ export class AddressPage {
   readonly cityError: Locator;
   readonly stateError: Locator;
   readonly postalCodeError: Locator;
+  readonly spinner: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -70,5 +71,6 @@ export class AddressPage {
       name: appContent?.button?.previous || "Previous",
       exact: true,
     });
+    this.spinner = this.page.getByRole("status", { name: "Loading Indicator" });
   }
 }

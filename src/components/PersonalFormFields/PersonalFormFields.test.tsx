@@ -6,6 +6,7 @@ import { mockTFunction, TestProviderWrapper } from "../../../testHelper/utils";
 import PersonalFormFields from ".";
 
 jest.mock("react-i18next", () => {
+  const React = jest.requireActual("react");
   const en = {
     personal: {
       title: "Step 1 of 5: Personal information",
@@ -34,16 +35,24 @@ jest.mock("react-i18next", () => {
         birthdate:
           "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
         ageGate:
-          "There was a problem. You must be 13 years or older to continue.",
+          "There was a problem. Date of birth is below the minimum age of 13.",
         email: "There was a problem. Please enter a valid email address.",
       },
     },
   };
   return {
-    // this mock makes sure any components using the translate hook can use it without a warning being shown
     useTranslation: () => ({
       t: mockTFunction(en),
+      i18n: { language: "en" },
     }),
+    Trans: ({ children, i18nKey }) => {
+      return React.createElement(
+        "div",
+        { "data-testid": `mock-trans` },
+        i18nKey,
+        children
+      );
+    },
   };
 });
 

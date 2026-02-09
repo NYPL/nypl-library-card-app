@@ -70,6 +70,7 @@ function HomePage({ policyType, lang }: HomePageProps) {
         }}
       />
       <Banner
+        mb="l"
         color="ui.typography.body"
         content={t("home.banner.text")}
         icon={
