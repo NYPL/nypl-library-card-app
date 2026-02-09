@@ -1,4 +1,4 @@
-import { Box } from "@nypl/design-system-react-components";
+import { Banner, Box, Icon } from "@nypl/design-system-react-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import React, { JSX, useEffect } from "react";
@@ -13,6 +13,10 @@ import * as cookie from "../../src/utils/CookieUtils";
 
 import ilsLibraryList from "../../src/data/ilsLibraryList";
 import { PageHeading } from "../../src/components/PageHeading";
+import { Paragraph } from "../../src/components/Paragraph";
+import { Trans } from "../../src/components/Trans";
+
+const TEMPORARY_PTYPE = 7;
 
 function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
   const { state } = useFormDataContext();
@@ -20,11 +24,12 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
   const { t } = useTranslation("common");
   // Render the temporary message in case there's no ptype, but this
   // shouldn't happen.
-  const ptype = formResults?.ptype || 7;
-  const temporary = ptype === 7;
+  const ptype = formResults?.ptype || TEMPORARY_PTYPE;
+  const temporary = ptype === TEMPORARY_PTYPE;
+
   useEffect(() => {
     if (state.formValues.username) {
-      const libraryName: any = ilsLibraryList.filter(
+      const libraryName = ilsLibraryList.filter(
         (library) => library.value === state.formValues.homeLibraryCode
       );
       (window as any).dataLayer = (window as any).dataLayer || [];
@@ -36,57 +41,75 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
     }
   }, []);
 
-  const loginHtml =
-    nextAppEnv === "qa"
-      ? t("confirmation.nextSteps.borrow").replace("https://", "https://dev-")
-      : t("confirmation.nextSteps.borrow");
+  const loginUrl = `https://${nextAppEnv === "qa" ? "dev-" : ""}login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile`;
 
   return (
     <Box id="congratulations" mb="s">
-      <PageHeading autoScrollOnMount>{t("confirmation.title")}</PageHeading>
+      <PageHeading autoScrollOnMount mb="l">
+        {t(`confirmation.title.${temporary ? "temporary" : "metro"}`)}
+      </PageHeading>
       <ConfirmationGraphic />
-      <Box mb="s">
-        <b>{t("confirmation.description.part1")}</b>
-      </Box>
-      <Box mb="s">
-        <b
-          dangerouslySetInnerHTML={{
-            __html: t("confirmation.description.part2"),
-          }}
-        />
-      </Box>
+      <Paragraph fontWeight="bold">
+        {t("confirmation.description.part1")}
+      </Paragraph>
+
+      <Paragraph fontWeight="bold">
+        <Trans i18nKey="confirmation.description.part2" />
+      </Paragraph>
 
       {temporary && (
-        <Box
-          mb="s"
-          dangerouslySetInnerHTML={{
-            __html: t("confirmation.description.part3"),
-          }}
-        />
+        <Box my="l">
+          <Banner
+            color="ui.typography.body"
+            content={<Trans i18nKey="confirmation.description.part3" />}
+            icon={
+              <Icon
+                name="actionInfo"
+                title="Banner with informative icon"
+                size="large"
+                marginTop="xxxs"
+              />
+            }
+            variant="informative"
+          />
+        </Box>
       )}
 
-      <PageHeading mt="l">{t("confirmation.nextSteps.title")}</PageHeading>
-      <Box
-        mb="s"
-        dangerouslySetInnerHTML={{
-          __html: loginHtml,
-        }}
-      />
-      <Box
-        mb="s"
-        dangerouslySetInnerHTML={{
-          __html: t("confirmation.nextSteps.updates"),
-        }}
-      />
-      <Box
-        mb="s"
-        dangerouslySetInnerHTML={{
-          __html: t("confirmation.nextSteps.more"),
-        }}
-      />
+      <PageHeading mt="l" lineHeight={"1!"}>
+        {t("confirmation.nextSteps.title")}
+      </PageHeading>
+
+      {!temporary && (
+        <NextSteps>
+          <Trans i18nKey="confirmation.nextSteps.explore" />
+        </NextSteps>
+      )}
+
+      <NextSteps>
+        <Trans
+          i18nKey="confirmation.nextSteps.borrow"
+          values={{ loginUrl: loginUrl }}
+        />
+      </NextSteps>
+
+      <NextSteps>
+        <Trans i18nKey="confirmation.nextSteps.updates" />
+      </NextSteps>
+
+      <NextSteps>
+        <Trans i18nKey="confirmation.nextSteps.more" />
+      </NextSteps>
     </Box>
   );
 }
+
+const NextSteps = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <Paragraph sx={{ b: { display: "block", marginBottom: "xs" } }}>
+      {children}
+    </Paragraph>
+  );
+};
 
 export const getServerSideProps: GetServerSideProps = async ({
   query,

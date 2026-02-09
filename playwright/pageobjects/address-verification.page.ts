@@ -36,8 +36,7 @@ export class AddressVerificationPage {
       name: "Next",
       exact: true,
     });
-
-    this.spinner = this.page.getByRole("status");
+    this.spinner = this.page.getByRole("status", { name: "Loading Indicator" });
   }
 
   getHomeAddressOption(street: string): Locator {
