@@ -67,9 +67,12 @@ export class CongratsPage {
     this.discoverLink = page.getByRole("link", {
       name: "Discover everything you can do with your library card.",
     });
-    this.temporaryCardBanner = page.getByTestId("ds-banner");
+
+    this.temporaryCardBanner = page.locator("aside", {
+      hasText: "This is a temporary card",
+    });
     this.learnMoreLink = this.temporaryCardBanner.getByRole("link", {
-      name: "learn more",
+      name: /learn more/i,
     });
     this.emailLink = this.temporaryCardBanner.getByRole("link", {
       name: "gethelp@nypl.org",

@@ -1,11 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { CongratsPage } from "../pageobjects/congrats.page";
+import { PARIS_GEOLOCATION } from "../utils/constants";
 
 test.use({
-  geolocation: {
-    latitude: 48.8566,
-    longitude: 2.3522,
-  },
+  geolocation: PARIS_GEOLOCATION,
   permissions: ["geolocation"],
 });
 test.beforeEach(async ({ page }) => {
