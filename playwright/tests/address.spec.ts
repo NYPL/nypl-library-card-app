@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { AddressPage } from "../pageobjects/address.page";
-import { SUPPORTED_LANGUAGES, TEST_OOS_ADDRESS } from "../utils/constants";
 import { fillAddress } from "../utils/form-helper";
+import { SUPPORTED_LANGUAGES, TEST_OOS_ADDRESS } from "../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`home address page in ${name} (${lang})`, () => {
@@ -55,7 +55,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       test("displays errors for required fields", async () => {
         await addressPage.streetAddressInput.fill("");
         await addressPage.cityInput.fill("");
-        await addressPage.stateInput.fill("");
+        await addressPage.stateInput.click();
         await addressPage.postalCodeInput.fill("");
         await addressPage.nextButton.click();
         await expect(addressPage.streetAddressError).toBeVisible();
@@ -65,18 +65,20 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       });
 
       test("enter too many characters", async () => {
-        await addressPage.stateInput.fill("ABC");
         await addressPage.postalCodeInput.fill("123456");
         await addressPage.nextButton.click();
-        await expect(addressPage.stateError).toBeVisible();
         await expect(addressPage.postalCodeError).toBeVisible();
       });
 
       test("enter too few characters", async () => {
-        await addressPage.stateInput.fill("A");
         await addressPage.postalCodeInput.fill("1234");
         await addressPage.nextButton.click();
-        await expect(addressPage.stateError).toBeVisible();
+        await expect(addressPage.postalCodeError).toBeVisible();
+      });
+      
+      test("enter postal code with dash", async () => {
+        await addressPage.postalCodeInput.fill("12345-6789");
+        await addressPage.nextButton.click();
         await expect(addressPage.postalCodeError).toBeVisible();
       });
     });

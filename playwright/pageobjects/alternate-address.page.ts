@@ -10,6 +10,7 @@ export class AlternateAddressPage {
   readonly cityInput: Locator;
   readonly stateInput: Locator;
   readonly postalCodeInput: Locator;
+  readonly spinner: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -37,5 +38,6 @@ export class AlternateAddressPage {
       name: "Previous",
       exact: true,
     });
+    this.spinner = this.page.getByRole("status", { name: "Loading Indicator" });
   }
 }

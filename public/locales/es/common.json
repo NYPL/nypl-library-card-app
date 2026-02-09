@@ -28,7 +28,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Dirección de correo electrónico",
-      "instruction": "Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos. Si no desea proporcionar una dirección de correo electrónico, puede solicitar una tarjeta física utilizando nuestro <a href='https://on.nypl.org/internationalresearch'>{{alternateForm}}</a>. Una vez que lo haya completado, por favor visite una de nuestras <a href='http://nypl.org/locations'>{{locations}}</a> con un comprobante de identidad y domicilio para recoger su tarjeta física.",
+      "instruction": "Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos. Si no desea proporcionar una dirección de correo electrónico, puede solicitar una tarjeta física utilizando nuestro <a1 href='https://on.nypl.org/internationalresearch'>{{alternateForm}}</a1>. Una vez que lo haya completado, por favor visite una de nuestras <a2 href='http://nypl.org/locations'>{{locations}}</a2> con un comprobante de identidad y domicilio para recoger su tarjeta física.",
       "alternateForm": "formulario alterno (en inglés)",
       "locations": "bibliotecas"
     },
@@ -133,10 +133,13 @@
     "nextStep": "Después de enviar su solicitud, verá una página de confirmación con la información de su cuenta, y podrá iniciar sesión y solicitar libros y materiales."
   },
   "confirmation": {
-    "title": "¡Felicitaciones! Ahora tiene una tarjeta digital de la Biblioteca Pública de Nueva York.",
+    "title": {
+      "metro":"¡Felicitaciones! Ahora tiene una tarjeta digital de la Biblioteca Pública de Nueva York.",
+      "temporary":"TEMP"
+    },
     "description": {
       "part1": "Imprima o guarde esta información para su registro. En las próximas 24 horas, recibirá un correo electrónico con los detalles de su cuenta.",
-      "part2": "Para pedir prestados materiales físicos, visite una de nuestras <a href='http://nypl.org/locations'>localidades</a> con una <a href='https://www.nypl.org/help/library-card/terms-conditions#Eligibility'>identificación válida con foto y prueba de domicilio particular</a> para completar la solicitud de una tarjeta física.",
+      "part2": "Para pedir prestados materiales físicos, visite una de nuestras <a href='http://nypl.org/locations'>localidades</a> con una <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>identificación válida con foto y prueba de domicilio particular</a> para completar la solicitud de una tarjeta física.",
       "part3": "Esta tarjeta es temporal y caducará en 30 días. Si estudia en una universidad acreditada en Nueva York, trabaja en una empresa de la ciudad de Nueva York pero no está físicamente en la ciudad o el estado, o se dedica a investigar y va a visitar uno de nuestros centros de investigación, comuníquese con nosotros <a href='mailto:gethelp@nypl.org'>para actualizar su tarjeta.</a>"
     },
     "graphic": {
@@ -146,9 +149,10 @@
     },
     "nextSteps": {
       "title": "Comenzar con la Biblioteca Pública de Nueva York",
-      "borrow": "<b>Pedir prestados libros y más</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'>Inicie sesión en su cuenta </a> y explore el catálogo.",
-      "updates": "<b>Reciba actualizaciones</b><br /><a href='https://www.nypl.org/enews'>Descubra todo lo que la Biblioteca tiene para ofrecer.</a>",
-      "more": "<b>Obtener más información</b><br /><a href='https://www.nypl.org/discover-library-card'>Descubra todo lo que puede hacer con su tarjeta de la Biblioteca.</a>"
+      "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
+      "borrow": "<b>Pedir prestados libros y más</b><a href='{{loginUrl}}'>Inicie sesión en su cuenta </a> y explore el catálogo.",
+      "updates": "<b>Reciba actualizaciones</b><a href='https://www.nypl.org/enews'>Descubra todo lo que la Biblioteca tiene para ofrecer.</a>",
+      "more": "<b>Obtener más información</b><a href='https://www.nypl.org/discover-library-card'>Descubra todo lo que puede hacer con su tarjeta de la Biblioteca.</a>"
     }
   },
   "button": {

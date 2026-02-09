@@ -58,11 +58,9 @@ export class PersonalPage {
     );
     this.alternateFormLink = this.page.getByRole("link", {
       name: appContent?.personal?.email?.alternateForm || "alternate form",
-      exact: true,
     });
-    this.locationsLink = this.page.getByRole("link", {
+    this.locationsLink = this.page.locator("#mainContent").getByRole("link", {
       name: appContent?.personal?.email?.locations || "locations",
-      exact: true,
     });
     this.receiveInfoCheckbox = this.page.getByText(
       appContent?.personal?.eCommunications?.labelText ||
