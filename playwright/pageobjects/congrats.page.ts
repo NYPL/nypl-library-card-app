@@ -74,9 +74,9 @@ export class CongratsPage {
     this.learnMoreLink = this.temporaryCardBanner.getByRole("link", {
       name: /learn more/i,
     });
-    this.emailLink = this.temporaryCardBanner.getByRole("link", {
-      name: "gethelp@nypl.org",
-    });
+    this.emailLink = this.temporaryCardBanner.locator(
+      'a[href^="mailto:gethelp@nypl.org"]'
+    );
   }
 
   public getDate(): string {

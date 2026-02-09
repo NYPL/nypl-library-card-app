@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { CongratsPage } from "../pageobjects/congrats.page";
-import { PARIS_GEOLOCATION } from "../utils/constants";
+import { NON_NY_GEOLOCATION } from "../utils/constants";
 
 test.use({
-  geolocation: PARIS_GEOLOCATION,
+  geolocation: NON_NY_GEOLOCATION,
   permissions: ["geolocation"],
 });
 test.beforeEach(async ({ page }) => {
