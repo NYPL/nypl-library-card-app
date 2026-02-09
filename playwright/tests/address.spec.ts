@@ -1,7 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { AddressPage } from "../pageobjects/address.page";
-import { SUPPORTED_LANGUAGES, TEST_OOS_ADDRESS } from "../utils/constants";
 import { fillAddress } from "../utils/form-helper";
+import {
+  SPINNER_TIMEOUT,
+  SUPPORTED_LANGUAGES,
+  TEST_OOS_ADDRESS,
+} from "../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`home address page in ${name} (${lang})`, () => {
@@ -58,6 +62,10 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await addressPage.stateInput.fill("");
         await addressPage.postalCodeInput.fill("");
         await addressPage.nextButton.click();
+        await expect(addressPage.spinner).not.toBeVisible({
+          // need?
+          timeout: SPINNER_TIMEOUT,
+        });
         await expect(addressPage.streetAddressError).toBeVisible();
         await expect(addressPage.cityError).toBeVisible();
         await expect(addressPage.stateError).toBeVisible();
@@ -68,6 +76,10 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await addressPage.stateInput.fill("ABC");
         await addressPage.postalCodeInput.fill("123456");
         await addressPage.nextButton.click();
+        await expect(addressPage.spinner).not.toBeVisible({
+          // need?
+          timeout: SPINNER_TIMEOUT,
+        });
         await expect(addressPage.stateError).toBeVisible();
         await expect(addressPage.postalCodeError).toBeVisible();
       });
@@ -76,6 +88,10 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await addressPage.stateInput.fill("A");
         await addressPage.postalCodeInput.fill("1234");
         await addressPage.nextButton.click();
+        await expect(addressPage.spinner).not.toBeVisible({
+          // need?
+          timeout: SPINNER_TIMEOUT,
+        });
         await expect(addressPage.stateError).toBeVisible();
         await expect(addressPage.postalCodeError).toBeVisible();
       });

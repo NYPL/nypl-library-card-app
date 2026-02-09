@@ -10,6 +10,7 @@ export class AlternateAddressPage {
   readonly cityInput: Locator;
   readonly stateInput: Locator;
   readonly postalCodeInput: Locator;
+  readonly spinner: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -34,13 +35,13 @@ export class AlternateAddressPage {
       appContent?.location?.address.line2.label || "Apartment / Suite"
     );
     this.cityInput = page.getByLabel(
-      appContent?.location?.city.label || "City"
+      appContent?.location?.address.city.label || "City"
     );
     this.stateInput = page.getByLabel(
-      appContent?.location?.state.label || "State"
+      appContent?.location?.address.state.label || "State"
     );
     this.postalCodeInput = page.getByLabel(
-      appContent?.location?.postalCode.label || "Postal code"
+      appContent?.location?.address.postalCode.label || "Postal code"
     );
     this.nextButton = page.getByRole("button", {
       name: appContent?.button?.next || "Next",
@@ -50,5 +51,6 @@ export class AlternateAddressPage {
       name: appContent?.button?.previous || "Previous",
       exact: true,
     });
+    this.spinner = this.page.getByRole("status", { name: "Loading Indicator" });
   }
 }
