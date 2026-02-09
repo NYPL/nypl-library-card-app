@@ -13,6 +13,8 @@ test.beforeEach(async ({ page }) => {
 test.describe("Temporary Card: displays elements on Congrats page", () => {
   test("displays temporary card message on Congrats page", async ({ page }) => {
     const congratsPage = new CongratsPage(page);
+
+    await expect(congratsPage.temporaryHeading).toBeVisible();
     await expect(congratsPage.temporaryCardBanner).toBeVisible();
     await expect(congratsPage.learnMoreLink).toBeVisible();
     await expect(congratsPage.emailLink).toBeVisible();
