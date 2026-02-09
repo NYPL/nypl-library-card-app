@@ -173,7 +173,6 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
             id={`zip-${type}`}
             label={t("location.address.postalCode.label")}
             inputMode="numeric"
-            pattern="[0-9]*"
             {...register(`${type}-zip`, {
               validate: validateZip(),
             })}
@@ -184,6 +183,9 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
             instructionText={t("location.address.postalCode.instruction")}
             defaultValue={formValues[`${type}-zip`]}
             autoComplete={`section-${type} postal-code`}
+            pattern="[0-9]*"
+            type="number"
+            inputmode="numeric"
           />
         </DSFormField>
         <DSFormField></DSFormField>

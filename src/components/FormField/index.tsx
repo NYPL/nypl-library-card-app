@@ -21,6 +21,8 @@ interface FormFieldProps {
   maxLength?: number;
   defaultValue?: any;
   attributes?: any;
+  pattern?: any;
+  inputmode?: any;
   autoComplete?:
     | AutoCompleteValues
     | "section-home address-line1"
@@ -48,7 +50,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
       label,
       type = "text",
       name,
-      inputMode = "text",
+      inputMode,
       errorState = {},
       className = "",
       isRequired = false,
