@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
-import { /*fillAddress,*/ fillPersonalInfo } from "../utils/form-helper";
+import { fillAddress, fillPersonalInfo } from "../utils/form-helper";
 import {
-  // SPINNER_TIMEOUT,
+  SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
-  // TEST_NYC_ADDRESS,
-  // TEST_OOS_ADDRESS,
+  TEST_NYC_ADDRESS,
+  TEST_OOS_ADDRESS,
   // TEST_PATRON_INFO,
 } from "../utils/constants";
 
@@ -68,22 +68,25 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.personalPage.nextButton.click();
       });
 
-      // await test.step("enters home address", async () => {
-      //   await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      //   await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-      //   await pageManager.addressPage.nextButton.click();
-      // });
+      await test.step("enters home address", async () => {
+        await expect(pageManager.addressPage.stepHeading).toBeVisible();
+        await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
+        await pageManager.addressPage.nextButton.click();
+        await expect(pageManager.addressPage.spinner).not.toBeVisible({
+          timeout: SPINNER_TIMEOUT,
+        });
+      });
 
-      // await test.step("enters alternate address", async () => {
-      //   await expect(
-      //     pageManager.alternateAddressPage.stepHeading
-      //   ).toBeVisible();
-      //   await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
-      //   await pageManager.alternateAddressPage.nextButton.click();
-      //   await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-      //     timeout: SPINNER_TIMEOUT,
-      //   });
-      // });
+      await test.step("enters alternate address", async () => {
+        await expect(
+          pageManager.alternateAddressPage.stepHeading
+        ).toBeVisible();
+        await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
+        await pageManager.alternateAddressPage.nextButton.click();
+        await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+          timeout: SPINNER_TIMEOUT,
+        });
+      });
 
       // await test.step("confirms address verification", async () => {
       //   await expect(
