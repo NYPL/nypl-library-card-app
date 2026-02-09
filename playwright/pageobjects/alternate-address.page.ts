@@ -13,28 +13,41 @@ export class AlternateAddressPage {
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, appContent?: any) {
     this.page = page;
     this.mainHeading = page.getByRole("heading", {
-      name: "Apply for a Library Card Online",
+      name: appContent?.banner?.title || "Apply for a Library Card Online",
       level: 1,
     });
     this.stepHeading = page.getByRole("heading", {
-      name: "Alternate address",
+      name: appContent?.location?.title || "Alternate address",
       level: 2,
     });
     this.addressHeading = page.getByRole("heading", {
-      name: "Alternate address",
+      name: appContent?.location?.title || "Alternate address",
       level: 3,
     });
-    this.streetAddressInput = page.getByLabel(/Street address/i);
-    this.apartmentSuiteInput = page.getByLabel(/Apartment \/ Suite/i);
-    this.cityInput = page.getByLabel(/City/i);
-    this.stateInput = page.getByLabel(/State/i);
-    this.postalCodeInput = page.getByLabel(/Postal code/i);
-    this.nextButton = page.getByRole("button", { name: "Next", exact: true });
+    this.streetAddressInput = page.getByLabel(
+      appContent?.location?.address.line1.label || "Street address"
+    );
+    this.apartmentSuiteInput = page.getByLabel(
+      appContent?.location?.address.line2.label || "Apartment / Suite"
+    );
+    this.cityInput = page.getByLabel(
+      appContent?.location?.city.label || "City"
+    );
+    this.stateInput = page.getByLabel(
+      appContent?.location?.state.label || "State"
+    );
+    this.postalCodeInput = page.getByLabel(
+      appContent?.location?.postalCode.label || "Postal code"
+    );
+    this.nextButton = page.getByRole("button", {
+      name: appContent?.button?.next || "Next",
+      exact: true,
+    });
     this.previousButton = page.getByRole("link", {
-      name: "Previous",
+      name: appContent?.button?.previous || "Previous",
       exact: true,
     });
   }
