@@ -7,7 +7,7 @@ import {
   fillAccountInfo,
 } from "../utils/form-helper";
 import {
-  TEST_CUSTOMIZE_ACCOUNT,
+  TEST_ACCOUNT,
   TEST_OOS_ADDRESS,
   TEST_NYC_ADDRESS,
   TEST_PATRON_INFO,
@@ -89,7 +89,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await fillAccountInfo(pageManager.accountPage);
+      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();
     });
 
@@ -139,12 +139,12 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
     await test.step("displays account information on review page", async () => {
       await expect(
-        pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.username)
+        pageManager.reviewPage.getText(TEST_ACCOUNT.username)
       ).toBeVisible();
       await expect(pageManager.reviewPage.showPasswordCheckbox).toBeVisible();
       await pageManager.reviewPage.showPasswordCheckbox.check();
       await expect(
-        pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.password)
+        pageManager.reviewPage.getText(TEST_ACCOUNT.password)
       ).toBeVisible();
     });
 

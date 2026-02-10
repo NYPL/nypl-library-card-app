@@ -65,10 +65,18 @@ export const SPINNER_TIMEOUT = 10000;
 const uniqueSuffix = Date.now().toString().slice(-6);
 const TEST_UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
 
-export const TEST_CUSTOMIZE_ACCOUNT = {
+export const TEST_ACCOUNT = {
   username: TEST_UNIQUE_USERNAME,
   password: "Test@1234",
-  homeLibrary: "vr", // used to confirm dropdown selection
+  homeLibrary: "Virtual", // used to confirm text on review page
+  homeLibraryCode: "vr", // used to confirm dropdown selection
+};
+
+export const TEST_EDITED_ACCOUNT = {
+  username: "EditedUsername",
+  password: "Edited@1234",
+  homeLibrary: "Andrew Heiskell Braille and Talking Book Library", // used to confirm text on review page
+  homeLibraryCode: "lb", // used to confirm dropdown selection
 };
 
 // congrats
