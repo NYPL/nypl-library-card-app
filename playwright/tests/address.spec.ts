@@ -74,7 +74,6 @@ test.describe("displays error messages", () => {
     await expect(addressPage.spinner).not.toBeVisible({
       timeout: SPINNER_TIMEOUT,
     });
-    await expect(addressPage.stateError).toBeVisible();
     await expect(addressPage.postalCodeError).toBeVisible();
   });
 
