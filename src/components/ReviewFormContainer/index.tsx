@@ -67,7 +67,7 @@ const styles = {
     width: "100%",
     paddingTop: "s",
   },
-  editButton: { width: { base: "100%", md: "auto" } },
+  editButton: { marginTop: "s", width: { base: "100%", md: "auto" } },
 };
 
 /**
@@ -347,7 +347,8 @@ function ReviewFormContainer({ csrfToken }) {
       {/* If there is no location value, don't render this at all -
           there's nothing to show and will just be confusing. */}
       {formValues.location && (
-        <Box sx={styles.field}>
+        // We will hide this visually with CSS, but we want to send this to the backend to make sure we know the user's location when they submit the form
+        <Box sx={{ display: "none" }}>
           <Box sx={styles.title}>{t("review.section.address.location")}</Box>
           <Radio
             className="radio-input"
@@ -477,7 +478,7 @@ function ReviewFormContainer({ csrfToken }) {
         id="review-submit"
         method="post"
         onSubmit={handleSubmit(submitForm)}
-        mt="20px"
+        mt="l"
       >
         <FormRow display="none">
           <DSFormField>
