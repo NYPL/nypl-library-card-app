@@ -1,19 +1,23 @@
 import {
   FormField as DSFormField,
   FormRow,
+  Select,
 } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { isNumeric } from "validator";
 
 import FormField from "../FormField";
+import { findState } from "../../utils/formDataUtils";
 import { AddressTypes, FormInputData } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
+import { USStateObject } from "../../interfaces";
 
 interface AddressFormProps {
   id?: string;
   type: AddressTypes;
+  stateData: USStateObject[];
 }
 
 /**
@@ -22,17 +26,35 @@ interface AddressFormProps {
  * street address (line1), second street address (line2), city, state,
  * and zip code.
  */
-const AddressForm = ({ id, type }: AddressFormProps) => {
+const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
+  const defaultValue = formValues[`${type}-state`]
+    ? findState(formValues[`${type}-state`])
+    : "";
+  const [value, setValue] = useState(defaultValue);
+  const onChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  const inputProps = {
+    value,
+    onChange,
+  };
+
+  const styles = {
+    gridSpacing: {
+      mb: { base: "-l", md: "0" },
+    },
+  };
+
   // This component must be used within the `react-hook-form` provider so that
   // these functions are available to use.
   const {
     register,
     formState: { errors },
   } = useFormContext<FormInputData>();
-  const STATELENGTH = 2;
   const MINLENGTHZIP = 5;
   const MAXLENGTHZIP = 9;
   // Only the home address is required. The work address is optional.
@@ -119,28 +141,34 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
           />
         </DSFormField>
         <DSFormField>
-          <FormField
+          <Select
+            placeholder="Please select"
             id={`state-${type}`}
-            instructionText={t("location.address.state.instruction")}
-            label={t("location.address.state.label")}
-            {...register(`${type}-state`, {
-              validate: lengthValidation(
-                STATELENGTH,
-                STATELENGTH,
-                "location.errorMessage.state"
-              ),
-            })}
-            isRequired={isRequired}
-            errorState={errors}
-            maxLength={STATELENGTH}
-            defaultValue={formValues[`${type}-state`]}
+            labelText={t("location.address.state.label")}
             autoComplete={`section-${type} address-level1`}
-          />
+            isRequired={isRequired}
+            isInvalid={!!errors?.[`${type}-state`]?.message}
+            defaultValue={formValues[`${type}-state`]}
+            invalidText={t("location.errorMessage.state")}
+            // Pass in the `react-hook-form` register function so it can handle this
+            // form element's state for us.
+            {...register(`${type}-state`, {
+              required: {
+                value: isRequired,
+                message: t("location.errorMessage.state"),
+              },
+            })}
+            {...inputProps}
+          >
+            {stateData.map(({ label }, i) => (
+              <option key={`${i}-${label}`}>{label}</option>
+            ))}
+          </Select>
         </DSFormField>
       </FormRow>
 
       <FormRow id={`${id}-addressForm-4`}>
-        <DSFormField>
+        <DSFormField sx={styles.gridSpacing}>
           <FormField
             id={`zip-${type}`}
             label={t("location.address.postalCode.label")}
@@ -154,6 +182,8 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
             instructionText={t("location.address.postalCode.instruction")}
             defaultValue={formValues[`${type}-zip`]}
             autoComplete={`section-${type} postal-code`}
+            pattern="[0-9]*"
+            inputMode="numeric"
           />
         </DSFormField>
         <DSFormField></DSFormField>
