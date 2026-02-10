@@ -1,20 +1,19 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import { /*fillAccountInfo,*/ fillAddress } from "../utils/form-helper";
-import {
-  SPINNER_TIMEOUT,
-  SUPPORTED_LANGUAGES,
-  // TEST_PATRON_INFO,
-} from "../utils/constants";
+import { SPINNER_TIMEOUT, SUPPORTED_LANGUAGES } from "../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
-  test.describe(`E2E: Validate address errors in ${name} (${lang})`, () => {
+  test.describe(`partial e2e tests in ${name} (${lang})`, () => {
     let pageManager: PageManager;
     let appContent: any;
 
-    test("displays error when address is too long", async ({ page }) => {
+    test.beforeEach(async ({ page }) => {
       appContent = require(`../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
+    });
+
+    test("displays error when address is too long", async ({ page }) => {
       const invalidStreet = "A".repeat(100);
 
       await test.step("enters invalid home address", async () => {

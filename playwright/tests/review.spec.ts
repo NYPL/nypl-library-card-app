@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import { ReviewPage } from "../pageobjects/review.page";
 import {
+  SPINNER_TIMEOUT,
   TEST_CUSTOMIZE_ACCOUNT,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
@@ -107,12 +108,18 @@ test.describe("edits patron information on review page", () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       await pageManager.addressPage.nextButton.click();
+      await expect(pageManager.addressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
     });
 
     await test.step("enters alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
       await pageManager.alternateAddressPage.nextButton.click();
+      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
     });
 
     await test.step("confirms addresses", async () => {
@@ -126,6 +133,11 @@ test.describe("edits patron information on review page", () => {
         .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
         .check();
       await pageManager.addressVerificationPage.nextButton.click();
+      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
+        {
+          timeout: SPINNER_TIMEOUT,
+        }
+      );
     });
 
     await test.step("enters account information", async () => {
