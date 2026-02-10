@@ -157,6 +157,11 @@ export interface LocationResponse {
   inNYCity: boolean;
 }
 
+export interface USStateObject {
+  value: string;
+  label: string;
+}
+
 export interface LibraryListObject {
   value: string;
   label: string;

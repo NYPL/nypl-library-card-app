@@ -2,15 +2,17 @@ import {
   Form,
   FormField as DSFormField,
   FormRow,
+  Link as DSLink,
 } from "@nypl/design-system-react-components";
 import axios from "axios";
 import isEmpty from "lodash/isEmpty";
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import AddressFormFields from "../AddressFormFields";
+import stateData from "../../data/stateAbbreviations";
 import RoutingLinks from "../RoutingLinks.tsx";
 import {
   AddressResponse,
@@ -25,8 +27,8 @@ import { nyCounties, nyCities, createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../context/FormDataContext";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 import { NRError } from "../../logger/newrelic";
-import { Paragraph } from "../Paragraph";
 import { PageSubHeading } from "../PageSubHeading";
+import { Paragraph } from "../Paragraph";
 
 const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -153,15 +155,24 @@ const AddressContainer = ({ csrfToken }) => {
       <LoadingIndicator isLoading={isLoading} />
 
       <PageSubHeading>{t("location.address.title")}</PageSubHeading>
-      <Paragraph>{t("location.address.description")}</Paragraph>
-
+      <Paragraph m={0} mb="l">
+        <Trans
+          i18nKey="location.address.description"
+          components={{ a: <DSLink variant="external" /> }}
+        />
+      </Paragraph>
       <Form
+        mt="l"
         // action="/library-card/api/submit"
         id="address-container"
         method="post"
         onSubmit={handleSubmit(submitForm)}
       >
-        <AddressFormFields id="address-container" type={AddressTypes.Home} />
+        <AddressFormFields
+          id="address-container"
+          type={AddressTypes.Home}
+          stateData={stateData}
+        />
 
         <FormRow display="none">
           <DSFormField>
