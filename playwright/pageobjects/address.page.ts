@@ -5,6 +5,7 @@ export class AddressPage {
   readonly mainHeading: Locator; // displays on each page
   readonly stepHeading: Locator;
   readonly addressHeading: Locator;
+  readonly alternateForm: Locator;
   readonly streetAddressInput: Locator;
   readonly apartmentSuiteInput: Locator;
   readonly cityInput: Locator;
@@ -32,6 +33,7 @@ export class AddressPage {
       name: appContent?.location?.address.title || "Home address",
       level: 3,
     });
+    this.alternateForm = page.getByRole("link", { name: appContent?.home?.description?.alternateForm || "alternate form" });
     this.streetAddressInput = page.getByLabel(
       appContent?.location?.address.line1.label || "Street address"
     );

@@ -63,7 +63,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(addressPage.stateError).toBeVisible();
         await expect(addressPage.postalCodeError).toBeVisible();
       });
-
+      
       test("enter too many characters", async () => {
         await addressPage.postalCodeInput.fill("123456");
         await addressPage.nextButton.click();
