@@ -29,28 +29,28 @@ export class PersonalPage {
       level: 2,
     });
     this.firstNameInput = this.page.getByLabel(
-      appContent?.personal?.firstName.label || /First name/i
+      appContent?.personal?.firstName.label || "First name"
     );
     this.firstNameError = this.page.getByText(
       appContent?.personal?.errorMessage?.firstName ||
         "There was a problem. Please enter a valid first name."
     );
     this.lastNameInput = this.page.getByLabel(
-      appContent?.personal?.lastName.label || /Last name/i
+      appContent?.personal?.lastName.label || "Last name"
     );
     this.lastNameError = this.page.getByText(
       appContent?.personal?.errorMessage?.lastName ||
         "There was a problem. Please enter a valid last name."
     );
     this.dateOfBirthInput = this.page.getByLabel(
-      appContent?.personal?.birthdate.label || /Date of birth/i
+      appContent?.personal?.birthdate.label || "Date of birth"
     );
     this.dateOfBirthError = this.page.getByText(
       appContent?.personal?.errorMessage?.birthdate ||
         "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes."
     );
     this.emailInput = this.page.getByLabel(
-      appContent?.personal?.email.label || /Email/i
+      appContent?.personal?.email.label || "Email"
     );
     this.emailError = this.page.getByText(
       appContent?.personal?.errorMessage?.email ||
