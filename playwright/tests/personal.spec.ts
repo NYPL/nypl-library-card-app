@@ -14,7 +14,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       await page.goto(`/library-card/personal?newCard=true&lang=${lang}`);
     });
 
-    test.describe("displays elements on personal information page", () => {
+    test.describe("displays elements", () => {
       test("displays headings, links, and buttons", async () => {
         await expect(personalPage.mainHeading).toBeVisible();
         await expect(personalPage.stepHeading).toBeVisible();
