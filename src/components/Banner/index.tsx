@@ -5,10 +5,10 @@ import {
 } from "@nypl/design-system-react-components";
 
 interface BannerProps {
-  content: Element | string | React.ReactElement;
+  content: string | React.ReactElement;
 }
 
-const Banner = ({ content }: BannerProps) => {
+export const Banner = ({ content }: BannerProps) => {
   return (
     <Box my="l">
       <DSBanner
@@ -16,6 +16,7 @@ const Banner = ({ content }: BannerProps) => {
         content={content}
         icon={
           <Icon
+            decorative
             name="actionInfo"
             title="Banner with informative icon"
             size="large"
@@ -27,5 +28,3 @@ const Banner = ({ content }: BannerProps) => {
     </Box>
   );
 };
-
-export default Banner;

@@ -15,7 +15,7 @@ import ilsLibraryList from "../../src/data/ilsLibraryList";
 import { PageHeading } from "../../src/components/PageHeading";
 import { Paragraph } from "../../src/components/Paragraph";
 import { Trans } from "../../src/components/Trans";
-import Banner from "../../src/components/Banner";
+import { Banner } from "../../src/components/Banner";
 
 const TEMPORARY_PTYPE = 7;
 

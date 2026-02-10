@@ -12,7 +12,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import LanguageMenu from "../../src/components/LanguageMenu/LanguageMenu";
 import { cookieDomain } from "../../appConfig.js";
 import { PageHeading } from "../../src/components/PageHeading";
-import Banner from "../../src/components/Banner";
+import { Banner } from "../../src/components/Banner";
 
 interface HomePageProps {
   policyType: any;

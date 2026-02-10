@@ -16,7 +16,7 @@ import {
 import * as cookie from "../../src/utils/CookieUtils";
 import { Paragraph } from "../../src/components/Paragraph";
 import { PageHeading } from "../../src/components/PageHeading";
-import Banner from "../../src/components/Banner";
+import { Banner } from "../../src/components/Banner";
 import { Trans } from "../../src/components/Trans";
 interface WorkAddressPageProps {
   hasUserAlreadyRegistered?: boolean;
