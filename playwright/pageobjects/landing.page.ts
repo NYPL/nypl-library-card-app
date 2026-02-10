@@ -59,12 +59,16 @@ export class LandingPage {
       level: 2,
     });
     this.digitalResourcesLink = page.getByRole("link", {
-      name: "digital resources",
+      name:
+        appContent?.home?.description?.digitalResources || "digital resources",
     });
     this.visitLibraryLink = page.getByRole("link", {
-      name: "visit any NYPL location",
+      name:
+        appContent?.home?.description?.visitNYPL || "visit any NYPL location",
     });
-    this.alternateFormLink = page.getByRole("link", { name: "alternate form" });
+    this.alternateFormLink = page.getByRole("link", {
+      name: appContent?.home?.description?.alternateForm || "alternate form",
+    });
     this.whatYouCanAccess = page.getByRole("link", {
       name:
         appContent?.home?.description?.whatYouCanAccess ||
