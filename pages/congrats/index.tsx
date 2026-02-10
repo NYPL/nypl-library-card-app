@@ -1,4 +1,4 @@
-import { Banner, Box, Icon } from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import React, { JSX, useEffect } from "react";
@@ -15,6 +15,7 @@ import ilsLibraryList from "../../src/data/ilsLibraryList";
 import { PageHeading } from "../../src/components/PageHeading";
 import { Paragraph } from "../../src/components/Paragraph";
 import { Trans } from "../../src/components/Trans";
+import Banner from "../../src/components/Banner";
 
 const TEMPORARY_PTYPE = 7;
 
@@ -58,21 +59,7 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       </Paragraph>
 
       {temporary && (
-        <Box my="l">
-          <Banner
-            color="ui.typography.body"
-            content={<Trans i18nKey="confirmation.description.part3" />}
-            icon={
-              <Icon
-                name="actionInfo"
-                title="Banner with informative icon"
-                size="large"
-                marginTop="xxxs"
-              />
-            }
-            variant="informative"
-          />
-        </Box>
+        <Banner content={<Trans i18nKey="confirmation.description.part3" />} />
       )}
 
       <PageHeading mt="l" lineHeight={"1!"}>
