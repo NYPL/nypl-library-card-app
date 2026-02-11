@@ -42,13 +42,15 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         });
       });
 
-      //   await test.step("confirms address verification", async () => {
-      //     await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
-      //     await pageManager.addressVerificationPage
-      //       .getHomeAddressOption(invalidStreet)
-      //       .check();
-      //     await pageManager.addressVerificationPage.nextButton.click();
-      //   });
+      await test.step("confirms address verification", async () => {
+        await expect(
+          pageManager.addressVerificationPage.stepHeading
+        ).toBeVisible();
+        await pageManager.addressVerificationPage
+          .getHomeAddressOption(invalidStreet)
+          .check();
+        await pageManager.addressVerificationPage.nextButton.click();
+      });
 
       //   await test.step("enters account information", async () => {
       //     await expect(pageManager.accountPage.stepHeading).toBeVisible();

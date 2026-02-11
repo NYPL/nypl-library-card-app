@@ -65,22 +65,24 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           timeout: SPINNER_TIMEOUT,
         });
 
-        // await test.step("confirms address verification", async () => {
-        //   await expect(
-        //     pageManager.addressVerificationPage.stepHeading
-        //   ).toBeVisible();
-        //   await pageManager.addressVerificationPage
-        //     .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-        //     .check();
-        //   await pageManager.addressVerificationPage
-        //     .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
-        //     .check();
-        //   await pageManager.addressVerificationPage.nextButton.click();
-//         await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-//           // eventually replace with mock
-//           timeout: SPINNER_TIMEOUT,
-//         });
-        // });
+        await test.step("confirms address verification", async () => {
+          await expect(
+            pageManager.addressVerificationPage.stepHeading
+          ).toBeVisible();
+          await pageManager.addressVerificationPage
+            .getHomeAddressOption(TEST_OOS_ADDRESS.street)
+            .check();
+          await pageManager.addressVerificationPage
+            .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
+            .check();
+          await pageManager.addressVerificationPage.nextButton.click();
+          await expect(
+            pageManager.addressVerificationPage.spinner
+          ).not.toBeVisible({
+            // eventually replace with mock
+            timeout: SPINNER_TIMEOUT,
+          });
+        });
 
         // await test.step("enters account information", async () => {
         //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
@@ -88,16 +90,16 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         //   await pageManager.accountPage.nextButton.click();
         // });
 
-      // await test.step("displays review page", async () => {
-      //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      // });
+        // await test.step("displays review page", async () => {
+        //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+        // });
 
-      // await test.step("verifies receive info checkbox is unchecked on review page", async () => {
-      // await pageManager.reviewPage.editPersonalInfoButton.click();
-      // await expect(
-      // pageManager.reviewPage.receiveInfoCheckbox
-      // ).not.toBeChecked();
-      // });
+        // await test.step("verifies receive info checkbox is unchecked on review page", async () => {
+        // await pageManager.reviewPage.editPersonalInfoButton.click();
+        // await expect(
+        // pageManager.reviewPage.receiveInfoCheckbox
+        // ).not.toBeChecked();
+        // });
 
         // await test.step("submits application", async () => {
         //   await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER);
