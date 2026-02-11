@@ -344,9 +344,11 @@ function ReviewFormContainer({ csrfToken }) {
           there's nothing to show and will just be confusing. */}
       {formValues.location && (
         // We will hide this visually with CSS, but we want to send this to the backend to make sure we know the user's location when they submit the form
-        <Box sx={{ display: "none" }}>
+        <Box sx={{ display: "none" }} aria-hidden="true">
           <Box sx={styles.title}>{t("review.section.address.location")}</Box>
           <Radio
+            // Hide this from focus as well
+            tabIndex={-1}
             className="radio-input"
             id="review-location-id"
             isChecked={true}
@@ -357,7 +359,7 @@ function ReviewFormContainer({ csrfToken }) {
         </Box>
       )}
       {formValues["work-line1"] && (
-        <Heading level="h4" size="heading7" my="l">
+        <Heading level="h4" size="heading7" mb="l">
           {t("review.section.address.home")}
         </Heading>
       )}
@@ -388,7 +390,7 @@ function ReviewFormContainer({ csrfToken }) {
           <Heading level="h4" size="heading7" mb="l" mt="s">
             {t("review.section.address.work")}
           </Heading>
-          <Box sx={styles.field}>
+          <Box sx={{ ...styles.field, marginTop: 0 }}>
             <Box sx={styles.title}>{t("location.address.line1.label")}</Box>
             <Box>{formValues["work-line1"]}</Box>
           </Box>
@@ -440,7 +442,9 @@ function ReviewFormContainer({ csrfToken }) {
       </Box>
 
       <Box sx={styles.formSection}>
-        <PageSubHeading>{t("review.section.address.label")}</PageSubHeading>
+        <PageSubHeading mb="l">
+          {t("review.section.address.label")}
+        </PageSubHeading>
         {renderAddressValues()}
       </Box>
 
