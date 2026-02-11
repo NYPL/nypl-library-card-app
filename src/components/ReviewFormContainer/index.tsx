@@ -63,10 +63,6 @@ const styles = {
     fontWeight: "bold",
     marginBottom: "xs",
   },
-  workTitle: {
-    width: "100%",
-    paddingTop: "s",
-  },
   editButton: { marginTop: "s", width: { base: "100%", md: "auto" } },
 };
 
@@ -361,11 +357,11 @@ function ReviewFormContainer({ csrfToken }) {
         </Box>
       )}
       {formValues["work-line1"] && (
-        <Heading level="h4" size="heading7">
+        <Heading level="h4" size="heading7" my="l">
           {t("review.section.address.home")}
         </Heading>
       )}
-      <Box sx={styles.field}>
+      <Box sx={{ ...styles.field, marginTop: 0 }}>
         <Box sx={styles.title}>{t("location.address.line1.label")}</Box>
         <Box>{formValues["home-line1"]}</Box>
       </Box>
@@ -389,7 +385,7 @@ function ReviewFormContainer({ csrfToken }) {
       </Box>
       {formValues["work-line1"] && (
         <>
-          <Heading level="h4" sx={styles.workTitle} size="heading7">
+          <Heading level="h4" size="heading7" mb="l" mt="s">
             {t("review.section.address.work")}
           </Heading>
           <Box sx={styles.field}>
@@ -444,9 +440,7 @@ function ReviewFormContainer({ csrfToken }) {
       </Box>
 
       <Box sx={styles.formSection}>
-        <PageSubHeading mb="s">
-          {t("review.section.address.label")}
-        </PageSubHeading>
+        <PageSubHeading>{t("review.section.address.label")}</PageSubHeading>
         {renderAddressValues()}
       </Box>
 

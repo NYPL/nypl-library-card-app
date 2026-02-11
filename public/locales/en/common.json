@@ -126,8 +126,8 @@
       "address": {
         "label": "Address",
         "location": "Location",
-        "home": "Home",
-        "work": "Work"
+        "home": "Home address",
+        "work": "Alternate address"
       },
       "homeLibrary": "Home library"
     },
