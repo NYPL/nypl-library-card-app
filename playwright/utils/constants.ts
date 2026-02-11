@@ -89,7 +89,7 @@ export const ERROR_MESSAGES = {
   ACCEPT_TERMS_ERROR: appContent.account.errorMessage.acceptTerms,
 };
 
-export const NON_NY_GEOLOCATION = {
+export const OUTSIDE_NY_GEOLOCATION = {
   latitude: 48.8566,
   longitude: 2.3522,
 };
