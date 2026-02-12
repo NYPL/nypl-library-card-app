@@ -1,6 +1,12 @@
 // import { test, expect } from "@playwright/test";
 // import { PageManager } from "../pageobjects/page-manager.page";
 // import { fillAccountInfo, fillAddress } from "../utils/form-helper";
+// import {
+//   SPINNER_TIMEOUT,
+//   TEST_ACCOUNT,
+//   TEST_EDITED_ACCOUNT,
+//   TEST_NYC_ADDRESS,
+// } from "../utils/constants";
 
 // test("displays error when address is too long", async ({ page }) => {
 //   const pageManager = new PageManager(page);
@@ -17,11 +23,17 @@
 //       postalCode: "12345",
 //     });
 //     await pageManager.addressPage.nextButton.click();
+//     await expect(pageManager.addressPage.spinner).not.toBeVisible({
+//       timeout: SPINNER_TIMEOUT,
+//     });
 //   });
 
 //   await test.step("skips alternate address", async () => {
 //     await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
 //     await pageManager.alternateAddressPage.nextButton.click();
+//     await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+//       timeout: SPINNER_TIMEOUT,
+//     });
 //   });
 
 //   await test.step("confirms address verification", async () => {
@@ -30,11 +42,14 @@
 //       .getHomeAddressOption(invalidStreet)
 //       .check();
 //     await pageManager.addressVerificationPage.nextButton.click();
+//     await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
+//       timeout: SPINNER_TIMEOUT,
+//     });
 //   });
 
 //   await test.step("enters account information", async () => {
 //     await expect(pageManager.accountPage.stepHeading).toBeVisible();
-//     await fillAccountInfo(pageManager.accountPage);
+//     await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
 //     await pageManager.accountPage.nextButton.click();
 //   });
 
@@ -42,5 +57,71 @@
 //     await expect(pageManager.reviewPage.stepHeading).toBeVisible();
 //     await pageManager.reviewPage.submitButton.click();
 //     await expect(pageManager.reviewPage.streetAddressError).toBeVisible();
+//   });
+// });
+
+// test("displays updated account info after editing addresses", async ({
+//   page,
+// }) => {
+//   const pageManager = new PageManager(page);
+
+//   await test.step("enters account information", async () => {
+//     await page.goto("/library-card/account?newCard=true");
+//     await expect(pageManager.accountPage.stepHeading).toBeVisible();
+//     await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+//     await pageManager.accountPage.nextButton.click();
+//   });
+
+//   await test.step("edits address from review page", async () => {
+//     await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+//     await pageManager.reviewPage.editAddressButton.click();
+//   });
+
+//   await test.step("enters home address", async () => {
+//     await expect(pageManager.addressPage.stepHeading).toBeVisible();
+//     await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
+//     await pageManager.addressPage.nextButton.click();
+//     await expect(pageManager.addressPage.spinner).not.toBeVisible({
+//       timeout: SPINNER_TIMEOUT,
+//     });
+//   });
+
+//   await test.step("skips alternate address", async () => {
+//     await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
+//     await pageManager.alternateAddressPage.nextButton.click();
+//     await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+//       timeout: SPINNER_TIMEOUT,
+//     });
+//   });
+
+//   await test.step("confirms address verification", async () => {
+//     await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
+//     await pageManager.addressVerificationPage
+//       .getHomeAddressOption(TEST_NYC_ADDRESS.street)
+//       .check();
+//     await pageManager.addressVerificationPage.nextButton.click();
+//     await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
+//       timeout: SPINNER_TIMEOUT,
+//     });
+//   });
+
+//   await test.step("edits account information", async () => {
+//     await expect(pageManager.accountPage.stepHeading).toBeVisible();
+//     await fillAccountInfo(pageManager.accountPage, TEST_EDITED_ACCOUNT);
+//     await pageManager.accountPage.nextButton.click();
+//   });
+
+//   await test.step("displays updated account info on review page", async () => {
+//     await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+//     await expect(
+//       pageManager.reviewPage.getText(TEST_EDITED_ACCOUNT.username)
+//     ).toBeVisible();
+//     await pageManager.reviewPage.showPasswordCheckbox.check();
+//     await expect(
+//       pageManager.reviewPage.getText(TEST_EDITED_ACCOUNT.password)
+//     ).toBeVisible();
+//     await expect(
+//       pageManager.reviewPage.getText(TEST_EDITED_ACCOUNT.homeLibrary)
+//     ).toBeVisible();
 //   });
 // });
