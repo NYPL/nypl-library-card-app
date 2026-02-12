@@ -66,7 +66,7 @@
       "description": {
         "part1": "Do you work, go to school, or pay property taxes in New York State? Even if you don't live in New York, you may still be eligible for a library card.",
         "part2": "Form fields must be filled out using only Latin characters.",
-        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State.<b>If none of these apply to you, click next.</b>"
+        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State. <b>If none of these apply to you, click next.</b>"
       }
     },
     "errorMessage": {
