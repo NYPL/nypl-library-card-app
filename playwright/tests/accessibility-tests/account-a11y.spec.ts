@@ -41,7 +41,6 @@ test.describe("Account Page Accessibility Tests", () => {
     await page.keyboard.press("Tab");
     await expect(accountPage.a11yAcceptTermsCheckbox).toBeFocused();
     await page.keyboard.press("Space");
-    await page.keyboard.press("Enter");
     await expect(accountPage.a11yAcceptTermsCheckbox).toBeChecked();
   });
 });
