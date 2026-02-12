@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { AccountPage } from "../pageobjects/account.page";
-import { ERROR_MESSAGES, TEST_CUSTOMIZE_ACCOUNT } from "../utils/constants";
 import { fillAccountInfo } from "../utils/form-helper";
+import { ERROR_MESSAGES, TEST_ACCOUNT } from "../utils/constants";
 import { mockUsernameApi } from "../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
@@ -44,19 +44,15 @@ test.describe("displays all form elements on Account page", () => {
 test.describe("enters account information", () => {
   test("displays entered values in form fields", async ({ page }) => {
     const accountPage = new AccountPage(page);
-    await fillAccountInfo(accountPage);
-    await expect(accountPage.usernameInput).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.username
-    );
+    await fillAccountInfo(accountPage, TEST_ACCOUNT);
+    await expect(accountPage.usernameInput).toHaveValue(TEST_ACCOUNT.username);
     await accountPage.showPasswordCheckbox.check();
-    await expect(accountPage.passwordInput).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.password
-    );
+    await expect(accountPage.passwordInput).toHaveValue(TEST_ACCOUNT.password);
     await expect(accountPage.verifyPasswordInput).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.password
+      TEST_ACCOUNT.password
     );
     await expect(accountPage.selectHomeLibrary).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.homeLibrary
+      TEST_ACCOUNT.homeLibraryCode
     );
     await expect(accountPage.acceptTermsCheckbox).toBeChecked();
   });

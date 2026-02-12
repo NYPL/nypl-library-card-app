@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PersonalPage } from "../pageobjects/personal.page";
-import { SUPPORTED_LANGUAGES, TEST_PATRON_INFO } from "../utils/constants";
 import { fillPersonalInfo } from "../utils/form-helper";
+import { SUPPORTED_LANGUAGES, TEST_PATRON_INFO } from "../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`personal information page in ${name} (${lang})`, () => {
