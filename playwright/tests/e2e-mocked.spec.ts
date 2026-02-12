@@ -1,19 +1,20 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import {
+  //   fillAccountInfo,
+  fillAddress,
+  fillPersonalInfo,
+} from "../utils/form-helper";
+import {
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
+  // TEST_ACCOUNT,
   // TEST_BARCODE_NUMBER,
   // TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   // TEST_PATRON_INFO,
 } from "../utils/constants";
 // import { mockCreatePatronApi } from "../utils/mock-api";
-import {
-  //   fillAccountInfo,
-  fillAddress,
-  fillPersonalInfo,
-} from "../utils/form-helper";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`E2E: Complete application using mocked submit in ${name} (${lang})`, () => {
@@ -77,7 +78,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       // await test.step("enters account information", async () => {
       //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      //   await fillAccountInfo(pageManager.accountPage);
+      //   await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       //   await pageManager.accountPage.nextButton.click();
       // });
 

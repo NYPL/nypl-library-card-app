@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import {
-  fillPersonalInfo,
-  fillAddress,
   //   fillAccountInfo,
+  fillAddress,
+  fillPersonalInfo,
 } from "../utils/form-helper";
 import {
   SPINNER_TIMEOUT,
