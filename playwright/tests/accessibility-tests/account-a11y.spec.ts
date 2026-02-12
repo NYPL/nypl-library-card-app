@@ -18,21 +18,30 @@ test.describe("Account Page Accessibility Tests", () => {
     const accountPage = new AccountPage(page);
 
     const accountLocators = [
-      accountPage.usernameInput,
+      accountPage.availableUsernameButton,
       accountPage.passwordInput,
       accountPage.verifyPasswordInput,
-      accountPage.showPasswordCheckbox,
+      accountPage.a11yShowPasswordCheckbox,
       accountPage.selectHomeLibrary,
-      accountPage.acceptTermsCheckbox,
-      accountPage.nextButton,
-      accountPage.previousButton,
+      accountPage.cardholderTerms,
+      accountPage.rulesRegulations,
+      accountPage.privacyPolicy,
     ];
 
     await expect(accountPage.stepHeading).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(accountPage.usernameInput).toBeFocused();
+    await accountPage.usernameInput.fill("testuser");
 
     for (const locator of accountLocators) {
       await page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
     }
+
+    await page.keyboard.press("Tab");
+    await expect(accountPage.a11yAcceptTermsCheckbox).toBeFocused();
+    await page.keyboard.press("Space");
+    await page.keyboard.press("Enter");
+    await expect(accountPage.a11yAcceptTermsCheckbox).toBeChecked();
   });
 });
