@@ -2,6 +2,11 @@ import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import { ReviewPage } from "../pageobjects/review.page";
 import {
+  fillAccountInfo,
+  fillAddress,
+  fillPersonalInfo,
+} from "../utils/form-helper";
+import {
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_NYC_ADDRESS,
@@ -9,11 +14,6 @@ import {
   TEST_PATRON_INFO,
   ERROR_MESSAGES,
 } from "../utils/constants";
-import {
-  fillAccountInfo,
-  fillAddress,
-  fillPersonalInfo,
-} from "../utils/form-helper";
 import { mockUsernameApi } from "../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {

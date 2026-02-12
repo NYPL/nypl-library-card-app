@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
-import { TEST_NYC_ADDRESS } from "../utils/constants";
 import { fillAddress } from "../utils/form-helper";
+import { TEST_NYC_ADDRESS } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/library-card/workAddress?newCard=true");

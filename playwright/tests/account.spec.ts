@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { AccountPage } from "../pageobjects/account.page";
-import { ERROR_MESSAGES, TEST_ACCOUNT } from "../utils/constants";
 import { fillAccountInfo } from "../utils/form-helper";
+import { ERROR_MESSAGES, TEST_ACCOUNT } from "../utils/constants";
 import { mockUsernameApi } from "../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
