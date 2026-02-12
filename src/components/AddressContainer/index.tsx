@@ -171,6 +171,7 @@ const AddressContainer = ({ csrfToken }) => {
         <AddressFormFields
           id="address-container"
           type={AddressTypes.Home}
+          isRequired
           stateData={stateData}
         />
 

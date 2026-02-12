@@ -3,7 +3,7 @@ import {
   FormField as DSFormField,
   FormRow,
 } from "@nypl/design-system-react-components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -34,10 +34,27 @@ const AddressContainer = ({ csrfToken }) => {
   const { formValues, addressesResponse } = state;
   const router = useRouter();
   const { t } = useTranslation("common");
-  // Specific functions and object from react-hook-form.
-  const { handleSubmit } = useFormContext();
-  // Get the URL query params for `newCard` and `lang`.
+  const { handleSubmit, watch, trigger } = useFormContext();
   const queryStr = createQueryParams(router?.query);
+
+  const [line1, city, stateValue, zip] = watch([
+    "work-line1",
+    "work-city",
+    "work-state",
+    "work-zip",
+  ]);
+  const formIsPartiallyFilled = !![line1, city, stateValue, zip].some(
+    (val) => val && val.trim() !== ""
+  );
+
+  useEffect(() => {
+    if (!formIsPartiallyFilled) {
+      // Re-validate the form fields to clear any validation errors
+      // if the user has cleared out all the fields after partially filling out the form.
+      trigger(["work-line1", "work-city", "work-state", "work-zip"]);
+    }
+  }, [formIsPartiallyFilled, trigger]);
+
   /**
    * submitForm
    * @param formData - data object returned from react-hook-form
@@ -144,6 +161,7 @@ const AddressContainer = ({ csrfToken }) => {
         <AddressFormFields
           id="work-address-container"
           type={AddressTypes.Work}
+          isRequired={formIsPartiallyFilled}
           stateData={stateData}
         />
 
