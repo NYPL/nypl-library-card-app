@@ -22,7 +22,7 @@ export class CongratsPage {
   readonly temporaryHeading: Locator;
   readonly temporaryCardBanner: Locator;
   readonly learnMoreLink: Locator;
-  readonly emailLink: Locator;
+  readonly bannerEmail: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -80,9 +80,9 @@ export class CongratsPage {
     this.learnMoreLink = this.temporaryCardBanner.getByRole("link", {
       name: /learn more/i,
     });
-    this.emailLink = this.temporaryCardBanner.locator(
-      'a[href^="mailto:gethelp@nypl.org"]'
-    );
+    this.bannerEmail = this.temporaryCardBanner.getByRole("link", {
+      name: "gethelp@nypl.org",
+    });
   }
 
   public getDate(): string {

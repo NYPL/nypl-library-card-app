@@ -88,8 +88,3 @@ export const ERROR_MESSAGES = {
   HOME_LIBRARY_ERROR: appContent.account.errorMessage.homeLibraryCode,
   ACCEPT_TERMS_ERROR: appContent.account.errorMessage.acceptTerms,
 };
-
-export const OUTSIDE_NY_GEOLOCATION = {
-  latitude: 48.8566,
-  longitude: 2.3522,
-};

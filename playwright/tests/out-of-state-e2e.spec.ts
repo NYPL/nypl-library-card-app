@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { CongratsPage } from "../pageobjects/congrats.page";
-//import { OUTSIDE_NY_GEOLOCATION, TEST_NYC_ADDRESS, TEST_OOS_ADDRESS} from "../utils/constants";
+import { TEST_NYC_ADDRESS, TEST_OOS_ADDRESS } from "../utils/constants";
 import { PageManager } from "../pageobjects/page-manager.page";
 import {
   fillPersonalInfo,
@@ -9,10 +9,6 @@ import {
 } from "../utils/form-helper";
 import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 
-/*test.use({
-  geolocation: OUTSIDE_NY_GEOLOCATION,
-  permissions: ["geolocation"],
-});*/
 test.describe("E2E: Temporary Card - displays temporary card message on Congrats page", () => {
   let scrapedBarcode: string | null = null;
 
@@ -83,7 +79,7 @@ test.describe("E2E: Temporary Card - displays temporary card message on Congrats
       await expect(congratsPage.temporaryHeading).toBeVisible();
       await expect(congratsPage.temporaryCardBanner).toBeVisible();
       await expect(congratsPage.learnMoreLink).toBeVisible();
-      await expect(congratsPage.emailLink).toBeVisible();
+      await expect(congratsPage.bannerEmail).toBeVisible();
     });
   });
 });
