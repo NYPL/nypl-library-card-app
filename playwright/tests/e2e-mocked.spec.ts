@@ -8,6 +8,7 @@ import {
 import {
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
+  // TEST_ACCOUNT,
   // TEST_BARCODE_NUMBER,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
@@ -84,11 +85,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           });
         });
 
-        // await test.step("enters account information", async () => {
-        //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
-        //   await fillAccountInfo(pageManager.accountPage);
-        //   await pageManager.accountPage.nextButton.click();
-        // });
+      // await test.step("enters account information", async () => {
+      //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
+      //   await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+      //   await pageManager.accountPage.nextButton.click();
+      // });
 
         // await test.step("displays review page", async () => {
         //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();

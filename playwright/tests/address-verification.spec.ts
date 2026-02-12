@@ -1,6 +1,4 @@
 import { test, expect } from "@playwright/test";
-// import { AddressPage } from "../pageobjects/address.page";
-// import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
 import { PageManager } from "../pageobjects/page-manager.page";
 import { fillAddress } from "../utils/form-helper";
@@ -99,7 +97,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           ).not.toBeVisible({
             timeout: SPINNER_TIMEOUT,
           });
-
           await expect(
             pageManager.alternateAddressPage.addressHeading
           ).toBeVisible();
