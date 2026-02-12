@@ -15,3 +15,10 @@ export interface AddressData {
   state: string;
   postalCode: string;
 }
+
+export interface AccountData {
+  username: string;
+  password: string;
+  homeLibrary: string;
+  homeLibraryCode: string;
+}
