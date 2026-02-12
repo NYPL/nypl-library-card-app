@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import {
+  TEST_ACCOUNT,
   TEST_BARCODE_NUMBER,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
@@ -64,7 +65,7 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
 
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await fillAccountInfo(pageManager.accountPage);
+      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();
     });
 
