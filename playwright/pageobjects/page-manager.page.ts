@@ -31,7 +31,7 @@ export class PageManager {
   }
 
   get alternateAddressPage(): AlternateAddressPage {
-    return new AlternateAddressPage(this.page);
+    return new AlternateAddressPage(this.page, this.appContent);
   }
 
   get addressVerificationPage(): AddressVerificationPage {

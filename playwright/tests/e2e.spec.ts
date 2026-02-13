@@ -10,7 +10,7 @@ import {
   SUPPORTED_LANGUAGES,
   // TEST_CUSTOMIZE_ACCOUNT,
   TEST_OOS_ADDRESS,
-  // TEST_NYC_ADDRESS,
+  TEST_NYC_ADDRESS,
   // TEST_PATRON_INFO,
 } from "../utils/constants";
 import {
@@ -65,14 +65,16 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         });
       });
 
-      // await test.step("enters alternate address", async () => {
-      //   await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      //   await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
-      //   await pageManager.alternateAddressPage.nextButton.click();
-      // await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-      //   timeout: SPINNER_TIMEOUT,
-      // });
-      // });
+      await test.step("enters alternate address", async () => {
+        await expect(
+          pageManager.alternateAddressPage.stepHeading
+        ).toBeVisible();
+        await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
+        await pageManager.alternateAddressPage.nextButton.click();
+        await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+          timeout: SPINNER_TIMEOUT,
+        });
+      });
 
       // await test.step("selects home and alternate addresses", async () => {
       //   await expect(
