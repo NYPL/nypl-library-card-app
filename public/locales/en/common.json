@@ -40,7 +40,9 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Email address",
-      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://on.nypl.org/internationalresearch'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
+      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a1 href='https://on.nypl.org/internationalresearch'>{{alternateForm}}</a1>. Once filled out, please visit one of our <a2 href='https://www.nypl.org/locations'>{{locations}}</a2> with proof of identity and home address to pick up your card.",
+      "alternateForm": "alternate form",
+      "locations": "locations"
     },
     "eCommunications": {
       "labelText": "Yes, I would like to receive information about NYPL's programs and services"

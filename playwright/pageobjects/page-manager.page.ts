@@ -23,7 +23,7 @@ export class PageManager {
   }
 
   get personalPage(): PersonalPage {
-    return new PersonalPage(this.page);
+    return new PersonalPage(this.page, this.appContent);
   }
 
   get addressPage(): AddressPage {

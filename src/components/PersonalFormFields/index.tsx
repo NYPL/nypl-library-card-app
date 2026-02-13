@@ -81,7 +81,14 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
             instructionText={
               <Trans
                 i18nKey="personal.email.instruction"
-                components={{ a: <DSLink variant="external" /> }}
+                values={{
+                  alternateForm: t("personal.email.alternateForm"),
+                  locations: t("personal.email.locations"),
+                }}
+                components={{
+                  a1: <DSLink key="alt" variant="external" />,
+                  a2: <DSLink key="loc" variant="external" />,
+                }}
               />
             }
             autoComplete="email"
