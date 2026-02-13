@@ -32,7 +32,10 @@ console.info("App Version: ", pkg.version);
 function MyApp({ Component, pageProps }: MyAppProps) {
   const router = useRouter();
   const formInitialStateCopy = { ...formInitialState };
-  const formMethods = useForm<FormInputData>({ mode: "onBlur" });
+  const formMethods = useForm<FormInputData>({
+    mode: "onBlur",
+    reValidateMode: "onBlur",
+  });
   const { favIconPath, appTitle } = appConfig;
 
   // Setting the "lang" and the "dir" attribute

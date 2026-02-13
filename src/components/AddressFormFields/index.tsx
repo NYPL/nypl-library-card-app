@@ -4,7 +4,7 @@ import {
   Select,
 } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { isNumeric } from "validator";
 
@@ -17,6 +17,8 @@ import { USStateObject } from "../../interfaces";
 interface AddressFormProps {
   id?: string;
   type: AddressTypes;
+  /* Only the home page is required by default. */
+  isRequired: boolean;
   stateData: USStateObject[];
 }
 
@@ -26,20 +28,39 @@ interface AddressFormProps {
  * street address (line1), second street address (line2), city, state,
  * and zip code.
  */
-const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
+const AddressForm = ({
+  id,
+  type,
+  isRequired,
+  stateData = [],
+}: AddressFormProps) => {
   const { t } = useTranslation("common");
+  const {
+    register,
+    formState: { errors },
+    setValue,
+  } = useFormContext<FormInputData>();
   const { state } = useFormDataContext();
   const { formValues } = state;
-  const defaultValue = formValues[`${type}-state`]
+  const defaultStateValue = formValues[`${type}-state`]
     ? findState(formValues[`${type}-state`])
     : "";
-  const [value, setValue] = useState(defaultValue);
-  const onChange = (event) => {
-    setValue(event.target.value);
-  };
+  const [stateValue, setStateValue] = useState(defaultStateValue);
+
+  const onChange = useCallback(
+    (event) => {
+      // Set value manually to trigger the watch() function
+      setValue(`${type}-state`, event.target.value, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+      setStateValue(event.target.value);
+    },
+    [isRequired]
+  );
 
   const inputProps = {
-    value,
+    value: stateValue,
     onChange,
   };
 
@@ -49,16 +70,9 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
     },
   };
 
-  // This component must be used within the `react-hook-form` provider so that
-  // these functions are available to use.
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<FormInputData>();
-  const MINLENGTHZIP = 5;
-  const MAXLENGTHZIP = 9;
-  // Only the home address is required. The work address is optional.
-  const isRequired = type === AddressTypes.Home;
+  const MIN_LENGTH_ZIP = 5;
+  const MAX_LENGTH_ZIP = 9;
+
   /**
    * lengthValidation
    * Returns a function to use for the `validate` property in the `register`
@@ -84,8 +98,8 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
       return t("location.errorMessage.zip");
     }
     return lengthValidation(
-      MINLENGTHZIP,
-      MAXLENGTHZIP,
+      MIN_LENGTH_ZIP,
+      MAX_LENGTH_ZIP,
       "location.errorMessage.zip"
     )(value);
   };
@@ -177,8 +191,8 @@ const AddressForm = ({ id, type, stateData = [] }: AddressFormProps) => {
             })}
             isRequired={isRequired}
             errorState={errors}
-            minLength={MINLENGTHZIP}
-            maxLength={MAXLENGTHZIP}
+            minLength={MIN_LENGTH_ZIP}
+            maxLength={MAX_LENGTH_ZIP}
             instructionText={t("location.address.postalCode.instruction")}
             defaultValue={formValues[`${type}-zip`]}
             autoComplete={`section-${type} postal-code`}
