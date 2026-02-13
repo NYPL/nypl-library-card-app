@@ -27,7 +27,7 @@ jobs:
       SIERRA_BASIC_AUTH_BASE64: ${{ secrets.SIERRA_BASIC_AUTH_BASE64 }}
       SIERRA_API_BASE_URL_QA: ${{ vars.SIERRA_API_BASE_URL_QA }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: actions/setup-node@v4
         with:
