@@ -54,9 +54,11 @@
     },
     "workAddress": {
       "title": "替代地址",
+      "subtitle": "替代地址（可选）",
       "description": {
         "part1": "申请流程略有不同，具体取决于您是在纽约市或纽约州的其他地方生活、工作、上学或缴纳财产税，还是您在美国其他地方工作、上学或缴纳财产税，只是刚好来纽约市旅行。请选择以下选项之一并填写必填项。",
-        "part2": "如果您在纽约市工作或上学，请提供地址。"
+        "part2": "如果您在纽约市工作或上学，请提供地址。",
+        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State.<b>If none of these apply to you, click next.</b>"
       }
     },
     "errorMessage": {
