@@ -28,6 +28,8 @@ import {
   getLocationValue,
   findLibraryName,
   findLibraryCode,
+  SupportedLoc,
+  SupportedLang,
 } from "../../../src/utils/formDataUtils";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 import { NRError } from "../../logger/newrelic";
@@ -63,11 +65,7 @@ const styles = {
     fontWeight: "bold",
     marginBottom: "xs",
   },
-  workTitle: {
-    width: "100%",
-    paddingTop: "s",
-  },
-  editButton: { width: { base: "100%", md: "auto" } },
+  editButton: { marginTop: "s", width: { base: "100%", md: "auto" } },
 };
 
 /**
@@ -347,24 +345,30 @@ function ReviewFormContainer({ csrfToken }) {
       {/* If there is no location value, don't render this at all -
           there's nothing to show and will just be confusing. */}
       {formValues.location && (
-        <Box sx={styles.field}>
+        // We will hide this visually with CSS, but we want to send this to the backend to make sure we know the user's location when they submit the form
+        <Box sx={{ display: "none" }} aria-hidden="true">
           <Box sx={styles.title}>{t("review.section.address.location")}</Box>
           <Radio
+            // Hide this from focus as well
+            tabIndex={-1}
             className="radio-input"
             id="review-location-id"
             isChecked={true}
-            labelText={getLocationValue(formValues.location, lang as string)}
+            labelText={getLocationValue(
+              formValues.location as SupportedLoc,
+              (Array.isArray(lang) ? lang[0] : lang) as SupportedLang
+            )}
             name={"location"}
             value={formValues.location}
           />
         </Box>
       )}
       {formValues["work-line1"] && (
-        <Heading level="h4" size="heading7">
+        <Heading level="h4" size="heading7" mb="l">
           {t("review.section.address.home")}
         </Heading>
       )}
-      <Box sx={styles.field}>
+      <Box sx={{ ...styles.field, marginTop: 0 }}>
         <Box sx={styles.title}>{t("location.address.line1.label")}</Box>
         <Box>{formValues["home-line1"]}</Box>
       </Box>
@@ -388,10 +392,10 @@ function ReviewFormContainer({ csrfToken }) {
       </Box>
       {formValues["work-line1"] && (
         <>
-          <Heading level="h4" sx={styles.workTitle} size="heading7">
+          <Heading level="h4" size="heading7" mb="l" mt="s">
             {t("review.section.address.work")}
           </Heading>
-          <Box sx={styles.field}>
+          <Box sx={{ ...styles.field, marginTop: 0 }}>
             <Box sx={styles.title}>{t("location.address.line1.label")}</Box>
             <Box>{formValues["work-line1"]}</Box>
           </Box>
@@ -443,7 +447,7 @@ function ReviewFormContainer({ csrfToken }) {
       </Box>
 
       <Box sx={styles.formSection}>
-        <PageSubHeading mb="s">
+        <PageSubHeading mb="l">
           {t("review.section.address.label")}
         </PageSubHeading>
         {renderAddressValues()}
@@ -477,7 +481,7 @@ function ReviewFormContainer({ csrfToken }) {
         id="review-submit"
         method="post"
         onSubmit={handleSubmit(submitForm)}
-        mt="20px"
+        mt="l"
       >
         <FormRow display="none">
           <DSFormField>

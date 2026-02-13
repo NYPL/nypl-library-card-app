@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import useFormDataContext from "../../context/FormDataContext";
-import { findLibraryName } from "../../utils/formDataUtils";
 import { LibraryListObject } from "../../interfaces";
 import { Paragraph } from "../Paragraph";
 import { PageSubHeading } from "../PageSubHeading";
@@ -25,9 +24,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
-  const defaultValue = formValues?.homeLibraryCode
-    ? findLibraryName(formValues?.homeLibraryCode)
-    : "";
+  const defaultValue = formValues?.homeLibraryCode || "";
   const [value, setValue] = useState(defaultValue);
   const {
     register,
@@ -65,11 +62,12 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
         {...register("homeLibraryCode", {
           required: t("account.errorMessage.homeLibraryCode"),
         })}
+        defaultValue={defaultValue}
         {...inputProps}
         autoComplete="on"
       >
         {libraryList.map(({ value, label }, i) => (
-          <option key={i} value={value}>
+          <option key={`librarylist-option-${i}-${value}`} value={value}>
             {label}
           </option>
         ))}
