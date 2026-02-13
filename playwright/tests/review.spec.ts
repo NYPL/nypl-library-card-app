@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import { ReviewPage } from "../pageobjects/review.page";
 import {
-  TEST_CUSTOMIZE_ACCOUNT,
+  TEST_ACCOUNT,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON_INFO,
@@ -130,7 +130,7 @@ test.describe("edits patron information on review page", () => {
 
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await fillAccountInfo(pageManager.accountPage);
+      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();
     });
 
@@ -167,20 +167,16 @@ test.describe("edits patron information on review page", () => {
   test("enters account information", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
-    await fillAccountInfo(reviewPage);
+    await fillAccountInfo(reviewPage, TEST_ACCOUNT);
 
-    await expect(reviewPage.usernameInput).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.username
-    );
+    await expect(reviewPage.usernameInput).toHaveValue(TEST_ACCOUNT.username);
     await reviewPage.showPasswordCheckbox.check();
-    await expect(reviewPage.passwordInput).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.password
-    );
+    await expect(reviewPage.passwordInput).toHaveValue(TEST_ACCOUNT.password);
     await expect(reviewPage.verifyPasswordInput).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.password
+      TEST_ACCOUNT.password
     );
     await expect(reviewPage.selectHomeLibrary).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.homeLibrary
+      TEST_ACCOUNT.homeLibraryCode
     );
     await expect(reviewPage.acceptTermsCheckbox).toBeChecked();
   });

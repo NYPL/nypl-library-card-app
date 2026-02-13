@@ -24,8 +24,8 @@ import useFormDataContext from "../../context/FormDataContext";
 import { createQueryParams } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
-import { Paragraph } from "../Paragraph";
 import { PageSubHeading } from "../PageSubHeading";
+import stateData from "../../data/stateAbbreviations";
 
 const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -131,8 +131,9 @@ const AddressContainer = ({ csrfToken }) => {
     <>
       <LoadingIndicator isLoading={isLoading} />
 
-      <PageSubHeading>{t("location.workAddress.title")}</PageSubHeading>
-      <Paragraph>{t("location.workAddress.description.part2")}</Paragraph>
+      <PageSubHeading mb="l">
+        {t("location.workAddress.subtitle")}
+      </PageSubHeading>
 
       <Form
         // action="/library-card/api/submit"
@@ -143,6 +144,7 @@ const AddressContainer = ({ csrfToken }) => {
         <AddressFormFields
           id="work-address-container"
           type={AddressTypes.Work}
+          stateData={stateData}
         />
 
         <FormRow display="none">

@@ -10,6 +10,7 @@ import {
 } from "../interfaces";
 import { ipLocationMessageTranslations } from "../data/ipLocationMessageTranslations";
 import { every, isEmpty } from "lodash";
+import stateData from "../data/stateAbbreviations";
 
 const errorMessages = {
   firstName: "There was a problem. Please enter a valid first name.",
@@ -52,7 +53,7 @@ function isDate(
   // regular expression to match required date format
   const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 
-  if (input === "") {
+  if (typeof input !== "string" || input === "") {
     return false;
   }
 
@@ -98,6 +99,17 @@ function findLibraryName(libraryCode: string): string | undefined {
 }
 
 /**
+ * findState
+ * Find the 2-letter code for state by searching for its code in the `stateData`
+ * array.
+ * @param usState Name of library to find in the list.
+ */
+function findState(usState: string): string | undefined {
+  const state = stateData.find((state) => state.label === usState);
+  return state?.label;
+}
+
+/**
  * getPatronAgencyType
  * Returns the agency type based on the patron's location
  * from the query param.
@@ -109,11 +121,27 @@ const getPatronAgencyType = (agencyTypeParam?) => {
     : agencyType.default;
 };
 
+export type SupportedLang =
+  | "ar"
+  | "bn"
+  | "en"
+  | "es"
+  | "fr"
+  | "ht"
+  | "ko"
+  | "pl"
+  | "ru"
+  | "ur"
+  | "zhcn";
+export type SupportedLoc = "nyc" | "nys" | "us";
 /**
  * getLocationValue
  * Map the location value from the form field into the string value.
  */
-const getLocationValue = (location = "us", lang = "en"): string => {
+const getLocationValue = (
+  location: SupportedLoc = "us",
+  lang: SupportedLang = "en"
+): string => {
   return ipLocationMessageTranslations[lang][location];
 };
 
@@ -129,7 +157,7 @@ const constructAddressType = (object = {}, type: string): Address => {
     if (key.indexOf(`${type}-`) !== -1) {
       // Remove the addresses field prefix and add to the proper object.
       const field = key.split("-")[1];
-      address[field] = object[key];
+      address[field] = object[key] as string;
     }
   });
   return address;
@@ -165,7 +193,7 @@ const constructProblemDetail = (
   type = "general-error",
   title = "General Error",
   detail = "There was an error with your request",
-  error = null
+  error: { [key: string]: string } = null
 ): ProblemDetail => {
   const pd: ProblemDetail = {
     status,
@@ -186,12 +214,15 @@ const constructProblemDetail = (
  * validation is perform on the home and work address, if available. Since the
  * work address is optional, having an empty work address is acceptable.
  */
-const validateAddressFormData = (initErrorObj, addresses: Addresses) => {
+const validateAddressFormData = (
+  initErrorObj: object,
+  addresses: Addresses
+) => {
   let errorObj = { ...initErrorObj };
   // Keep track of the home or work address errors in this larger object.
-  const addressErrors = {};
+  const addressErrors = {} as { [key in keyof Addresses]?: Address };
 
-  Object.keys(addresses).forEach((addressType) => {
+  Object.keys(addresses).forEach((addressType: keyof Addresses = "home") => {
     // `addressType` can be either "home" or "work".
     const typeObj = addresses[addressType];
 
@@ -243,7 +274,10 @@ const validateAddressFormData = (initErrorObj, addresses: Addresses) => {
  * validatePersonalFormData
  * * Validates the firstName, lastName, birthdate, ageGate, and email fields.
  */
-const validatePersonalFormData = (initErrorObj, data) => {
+const validatePersonalFormData = (
+  initErrorObj: object,
+  data: FormInputData
+) => {
   let errorObj = { ...initErrorObj };
   const { firstName, lastName, birthdate, email } = data;
 
@@ -274,7 +308,7 @@ const validatePersonalFormData = (initErrorObj, data) => {
  * validateAccountFormData
  * Validates the username, password, verifyPassword, and acceptTerms fields.
  */
-const validateAccountFormData = (initErrorObj, data) => {
+const validateAccountFormData = (initErrorObj: object, data: FormInputData) => {
   let errorObj = { ...initErrorObj };
   const { username, password, verifyPassword, acceptTerms, homeLibraryCode } =
     data;
@@ -316,7 +350,7 @@ const validateAccountFormData = (initErrorObj, data) => {
  * easier to validate data on a per page basis if it needs to, and then all at
  * once here.
  */
-const validateFormData = (data, addresses) => {
+const validateFormData = (data: FormInputData, addresses: Addresses) => {
   // Initially, there are no errors so the first param is an empty object.
   let errorObj = validatePersonalFormData({}, data);
   errorObj = validateAddressFormData(errorObj, addresses);
@@ -389,6 +423,7 @@ export {
   isDate,
   findLibraryCode,
   findLibraryName,
+  findState,
   getPatronAgencyType,
   getLocationValue,
   constructAddresses,

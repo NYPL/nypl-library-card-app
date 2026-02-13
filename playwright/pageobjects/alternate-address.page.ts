@@ -10,6 +10,7 @@ export class AlternateAddressPage {
   readonly cityInput: Locator;
   readonly stateInput: Locator;
   readonly postalCodeInput: Locator;
+  readonly spinner: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -20,11 +21,11 @@ export class AlternateAddressPage {
       level: 1,
     });
     this.stepHeading = page.getByRole("heading", {
-      name: "Alternate address",
+      name: "Step 2 of 5: Alternate address",
       level: 2,
     });
     this.addressHeading = page.getByRole("heading", {
-      name: "Alternate address",
+      name: "Alternate address (optional)",
       level: 3,
     });
     this.streetAddressInput = page.getByLabel(/Street address/i);
@@ -37,5 +38,6 @@ export class AlternateAddressPage {
       name: "Previous",
       exact: true,
     });
+    this.spinner = this.page.getByRole("status", { name: "Loading Indicator" });
   }
 }

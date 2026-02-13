@@ -3,7 +3,7 @@
  * Do NOT point the browser to http://localhost:3000 with no route.
  * If you do, you will throw an error related to i18next.
  * */
-import { Banner, Box, Icon } from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
 import RoutingLinks from "../../src/components/RoutingLinks.tsx";
 
 import { GetServerSideProps } from "next";
@@ -12,6 +12,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import LanguageMenu from "../../src/components/LanguageMenu/LanguageMenu";
 import { cookieDomain } from "../../appConfig.js";
 import { PageHeading } from "../../src/components/PageHeading";
+import { Banner } from "../../src/components/Banner";
 
 interface HomePageProps {
   policyType: any;
@@ -48,20 +49,7 @@ function HomePage({ policyType, lang }: HomePageProps) {
         mb="l"
         dangerouslySetInnerHTML={{ __html: t("home.description.part6") }}
       />
-      <Banner
-        mb="l"
-        color="ui.typography.body"
-        content={t("home.banner.text")}
-        icon={
-          <Icon
-            name="actionInfo"
-            title="Banner with informative icon"
-            size="large"
-            marginTop="xxxs"
-          />
-        }
-        variant="informative"
-      />
+      <Banner content={t("home.banner.text")} />
       <RoutingLinks
         next={{
           url: `/personal?newCard=true${queryParam}${

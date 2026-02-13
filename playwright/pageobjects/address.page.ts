@@ -6,6 +6,7 @@ export class AddressPage {
   readonly mainHeading: Locator; // displays on each page
   readonly stepHeading: Locator;
   readonly addressHeading: Locator;
+  readonly alternateForm: Locator;
   readonly streetAddressInput: Locator;
   readonly apartmentSuiteInput: Locator;
   readonly cityInput: Locator;
@@ -15,6 +16,7 @@ export class AddressPage {
   readonly cityError: Locator;
   readonly stateError: Locator;
   readonly postalCodeError: Locator;
+  readonly spinner: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -32,6 +34,7 @@ export class AddressPage {
       name: "Home address",
       level: 3,
     });
+    this.alternateForm = page.getByRole("link", { name: "alternate form" });
     this.streetAddressInput = page.getByLabel(/Street address/i);
     this.apartmentSuiteInput = page.getByLabel(/Apartment \/ Suite/i);
     this.cityInput = page.getByLabel(/City/i);
@@ -48,5 +51,6 @@ export class AddressPage {
       name: "Previous",
       exact: true,
     });
+    this.spinner = this.page.getByRole("status", { name: "Loading Indicator" });
   }
 }
