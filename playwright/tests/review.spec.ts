@@ -170,7 +170,7 @@ test.describe("edits patron information on review page", () => {
     await fillAccountInfo(reviewPage, TEST_ACCOUNT);
 
     await expect(reviewPage.usernameInput).toHaveValue(TEST_ACCOUNT.username);
-    await reviewPage.showPasswordCheckbox.check();
+    await reviewPage.showPasswordLabel.check();
     await expect(reviewPage.passwordInput).toHaveValue(TEST_ACCOUNT.password);
     await expect(reviewPage.verifyPasswordInput).toHaveValue(
       TEST_ACCOUNT.password

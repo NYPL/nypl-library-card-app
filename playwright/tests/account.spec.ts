@@ -46,7 +46,7 @@ test.describe("enters account information", () => {
     const accountPage = new AccountPage(page);
     await fillAccountInfo(accountPage, TEST_ACCOUNT);
     await expect(accountPage.usernameInput).toHaveValue(TEST_ACCOUNT.username);
-    await accountPage.showPasswordCheckbox.check();
+    await accountPage.showPasswordLabel.check();
     await expect(accountPage.passwordInput).toHaveValue(TEST_ACCOUNT.password);
     await expect(accountPage.verifyPasswordInput).toHaveValue(
       TEST_ACCOUNT.password
