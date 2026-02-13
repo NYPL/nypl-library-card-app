@@ -125,3 +125,38 @@ test("displays updated account info after editing addresses", async ({
     ).toBeVisible();
   });
 });
+
+test("displays updated account info after editing account on review page", async ({
+  page,
+}) => {
+  const pageManager = new PageManager(page);
+
+  await test.step("enters account info", async () => {
+    await page.goto("/library-card/account?newCard=true");
+    await expect(pageManager.accountPage.stepHeading).toBeVisible();
+    await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+    await pageManager.accountPage.nextButton.click();
+  });
+
+  await test.step("edits account on review page", async () => {
+    await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+    await pageManager.reviewPage.editAccountButton.click();
+    await fillAccountInfo(pageManager.accountPage, TEST_EDITED_ACCOUNT);
+  });
+
+  await test.step("displays updated account info on review page", async () => {
+    await expect(pageManager.reviewPage.usernameInput).toHaveValue(
+      TEST_EDITED_ACCOUNT.username
+    );
+    await pageManager.reviewPage.showPasswordCheckbox.check();
+    await expect(pageManager.reviewPage.passwordInput).toHaveValue(
+      TEST_EDITED_ACCOUNT.password
+    );
+    await expect(pageManager.reviewPage.verifyPasswordInput).toHaveValue(
+      TEST_EDITED_ACCOUNT.password
+    );
+    await expect(pageManager.reviewPage.selectHomeLibrary).toHaveValue(
+      TEST_EDITED_ACCOUNT.homeLibraryCode
+    );
+  });
+});
