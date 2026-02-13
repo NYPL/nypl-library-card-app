@@ -56,10 +56,12 @@
       }
     },
     "workAddress": {
-      "title": "대체 주소",
+      "title": "2/5단계: 대체 주소",
+      "subtitle": "대체 주소 (선택 사항)",
       "description": {
         "part1": "신청 절차는 뉴욕시에서 귀하의 거주 여부, 직장 또는 학교에 다니는지의 여부, 뉴욕시, 뉴욕주 또는 미국 내 다른 지역에서 재산세를 납부하는지의 여부, 또는 뉴욕시에 단순 방문인지의 여부에 따라 약간 다릅니다. 다음 중 해당하는 항목 하나를 선택하고 필수 항목을 기입해 주십시오.",
-        "part2": "뉴욕시에서 직장에 다니고 있거나 학교를 다니는 경우 주소를 제공해 주십시오."
+        "part2": "뉴욕시에서 직장에 다니고 있거나 학교를 다니는 경우 주소를 제공해 주십시오.",
+        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State.<b>If none of these apply to you, click next.</b>"
       }
     },
     "errorMessage": {

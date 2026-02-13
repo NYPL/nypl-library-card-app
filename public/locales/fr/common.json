@@ -56,10 +56,12 @@
       }
     },
     "workAddress": {
-      "title": "Autre adresse",
+      "title": "Étape 2/5 : Autre adresse",
+      "subtitle": "Autre adresse (optionnelle)",
       "description": {
         "part1": "Le processus de demande est légèrement différent selon que vous vivez, travaillez, étudiez ou payez des impôts fonciers à la ville de New York, ailleurs dans l'État de New York ou ailleurs aux États-Unis, et que vous ne faites que visiter la ville de New York. Veuillez sélectionner l'une des options suivantes et remplir les champs obligatoires.",
-        "part2": "Si vous travaillez ou étudiez dans la ville de New York, veuillez fournir l'adresse pertinente."
+        "part2": "Si vous travaillez ou étudiez dans la ville de New York, veuillez fournir l'adresse pertinente.",
+        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State.<b>If none of these apply to you, click next.</b>"
       }
     },
     "errorMessage": {
