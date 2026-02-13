@@ -148,7 +148,7 @@ test("displays updated account info after editing account on review page", async
     await expect(pageManager.reviewPage.usernameInput).toHaveValue(
       TEST_EDITED_ACCOUNT.username
     );
-    await pageManager.reviewPage.showPasswordCheckbox.check();
+    await pageManager.reviewPage.showPasswordLabel.check();
     await expect(pageManager.reviewPage.passwordInput).toHaveValue(
       TEST_EDITED_ACCOUNT.password
     );
