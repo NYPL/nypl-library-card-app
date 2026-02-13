@@ -21,7 +21,7 @@ test.describe("Account Page Accessibility Tests", () => {
       accountPage.availableUsernameButton,
       accountPage.passwordInput,
       accountPage.verifyPasswordInput,
-      accountPage.a11yShowPasswordCheckbox,
+      accountPage.showPasswordCheckbox,
       accountPage.selectHomeLibrary,
       accountPage.cardholderTerms,
       accountPage.rulesRegulations,
@@ -39,8 +39,8 @@ test.describe("Account Page Accessibility Tests", () => {
     }
 
     await page.keyboard.press("Tab");
-    await expect(accountPage.a11yAcceptTermsCheckbox).toBeFocused();
+    await expect(accountPage.acceptTermsCheckbox).toBeFocused();
     await page.keyboard.press("Space");
-    await expect(accountPage.a11yAcceptTermsCheckbox).toBeChecked();
+    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
   });
 });

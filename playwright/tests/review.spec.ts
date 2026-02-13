@@ -51,7 +51,7 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.createYourAccountHeading).toBeVisible();
     await expect(reviewPage.usernameHeading).toBeVisible();
     await expect(reviewPage.passwordHeading).toBeVisible();
-    await expect(reviewPage.showPasswordCheckbox).toBeVisible();
+    await expect(reviewPage.showPasswordLabel).toBeVisible();
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
   });
 });
@@ -155,12 +155,12 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.passwordInput).toBeVisible();
     await expect(reviewPage.verifyPasswordInputHeading).toBeVisible();
     await expect(reviewPage.verifyPasswordInput).toBeVisible();
-    await expect(reviewPage.showPasswordCheckbox).toBeVisible();
+    await expect(reviewPage.showPasswordLabel).toBeVisible();
     await expect(reviewPage.selectHomeLibrary).toBeVisible();
     await expect(reviewPage.cardholderTermsLink).toBeVisible();
     await expect(reviewPage.rulesRegulationsLink).toBeVisible();
     await expect(reviewPage.privacyPolicyLink).toBeVisible();
-    await expect(reviewPage.acceptTermsCheckbox).toBeVisible();
+    await expect(reviewPage.acceptTermsLabel).toBeVisible();
   });
 
   // does not replace account info since there's no existing text
@@ -172,7 +172,7 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.usernameInput).toHaveValue(
       TEST_CUSTOMIZE_ACCOUNT.username
     );
-    await reviewPage.showPasswordCheckbox.check();
+    await reviewPage.showPasswordLabel.check();
     await expect(reviewPage.passwordInput).toHaveValue(
       TEST_CUSTOMIZE_ACCOUNT.password
     );
@@ -182,7 +182,7 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.selectHomeLibrary).toHaveValue(
       TEST_CUSTOMIZE_ACCOUNT.homeLibrary
     );
-    await expect(reviewPage.acceptTermsCheckbox).toBeChecked();
+    await expect(reviewPage.acceptTermsLabel).toBeChecked();
   });
 });
 
