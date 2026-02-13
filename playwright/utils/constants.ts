@@ -84,10 +84,6 @@ export const TEST_BARCODE_NUMBER = "12341234123412";
 
 export const ERROR_MESSAGES = {
   // probs remove this at the end
-  STREET_ADDRESS_INVALID: appContent.location.errorMessage.line1,
-  CITY_INVALID: appContent.location.errorMessage.city,
-  STATE_INVALID: appContent.location.errorMessage.state,
-  POSTAL_CODE_INVALID: appContent.location.errorMessage.zip,
   USERNAME_INVALID: appContent.account.errorMessage.username,
   USERNAME_UNAVAILABLE: "This username is unavailable. Please try another.",
   USERNAME_AVAILABLE: "This username is available.",

@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { SPINNER_TIMEOUT } from "../utils/constants";
 import { AddressPage } from "../pageobjects/address.page";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
 import { fillAddress } from "../utils/form-helper";
 import {
+  SPINNER_TIMEOUT,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_MULTIMATCH_ADDRESS,
