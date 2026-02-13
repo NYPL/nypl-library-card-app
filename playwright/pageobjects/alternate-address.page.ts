@@ -3,7 +3,7 @@ import { Page, Locator } from "@playwright/test";
 export class AlternateAddressPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
-  readonly stepHeading: Locator; // alternate address does not specify step
+  readonly stepHeading: Locator;
   readonly addressHeading: Locator;
   readonly streetAddressInput: Locator;
   readonly apartmentSuiteInput: Locator;
@@ -21,11 +21,11 @@ export class AlternateAddressPage {
       level: 1,
     });
     this.stepHeading = page.getByRole("heading", {
-      name: appContent?.location?.workAddress?.title || "Alternate address",
+      name: appContent?.location?.workAddress?.title || "Step 2 of 5: Alternate address",
       level: 2,
     });
     this.addressHeading = page.getByRole("heading", {
-      name: appContent?.location?.workAddress?.title || "Alternate address",
+      name: appContent?.location?.workAddress?.title || "Alternate address (optional)",
       level: 3,
     });
     this.streetAddressInput = page.getByLabel(

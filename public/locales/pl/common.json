@@ -56,10 +56,12 @@
       }
     },
     "workAddress": {
-      "title": "Adres alternatywny",
+      "title": "Krok 2 z 5: Adres alternatywny",
+      "subtitle": "Adres alternatywny (opcjonalnie)",
       "description": {
         "part1": "Sposób zgłaszania się różni się nieco w zależności od tego, czy mieszkasz, pracujesz, uczysz się lub płacisz podatki od nieruchomości w mieście Nowy Jork, w innych miejscowościach stanu Nowy Jork czy też w innej miejscowości Stanów Zjednoczonych i tylko odwiedzasz Nowy Jork. Wybierz jedną z poniższych opcji i wypełnij wymagane pola.",
-        "part2": "Jeżeli pracujesz lub chodzisz do szkoły w NYC, podaj adres szkoły lub miejsca pracy:"
+        "part2": "Jeżeli pracujesz lub chodzisz do szkoły w NYC, podaj adres szkoły lub miejsca pracy:",
+        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State.<b>If none of these apply to you, click next.</b>"
       }
     },
     "errorMessage": {
