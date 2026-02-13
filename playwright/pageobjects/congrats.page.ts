@@ -19,10 +19,8 @@ export class CongratsPage {
   readonly discoverLink: Locator;
   readonly patronBarcodeNumber: Locator;
   readonly EXPECTED_BARCODE_PREFIX = "255";
-  readonly temporaryHeading: Locator;
   readonly temporaryCardBanner: Locator;
   readonly learnMoreLink: Locator;
-  readonly bannerEmail: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -69,19 +67,11 @@ export class CongratsPage {
       name: "Discover everything you can do with your library card.",
     });
 
-    this.temporaryHeading = page.getByRole("heading", {
-      name: "Congratulations! You now have a temporary digital New York Public Library card.",
-      level: 2,
-      exact: true,
-    });
     this.temporaryCardBanner = page.locator("aside", {
       hasText: "This is a temporary card",
     });
     this.learnMoreLink = this.temporaryCardBanner.getByRole("link", {
       name: /learn more/i,
-    });
-    this.bannerEmail = this.temporaryCardBanner.getByRole("link", {
-      name: "gethelp@nypl.org",
     });
   }
 
