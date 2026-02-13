@@ -141,8 +141,8 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await expect(
         pageManager.reviewPage.getText(TEST_ACCOUNT.username)
       ).toBeVisible();
-      await expect(pageManager.reviewPage.showPasswordCheckbox).toBeVisible();
-      await pageManager.reviewPage.showPasswordCheckbox.check();
+      await expect(pageManager.reviewPage.showPasswordLabel).toBeVisible();
+      await pageManager.reviewPage.showPasswordLabel.check();
       await expect(
         pageManager.reviewPage.getText(TEST_ACCOUNT.password)
       ).toBeVisible();

@@ -116,7 +116,7 @@ test("displays updated account info after editing addresses", async ({
     await expect(
       pageManager.reviewPage.getText(TEST_EDITED_ACCOUNT.username)
     ).toBeVisible();
-    await pageManager.reviewPage.showPasswordCheckbox.check();
+    await pageManager.reviewPage.showPasswordLabel.check();
     await expect(
       pageManager.reviewPage.getText(TEST_EDITED_ACCOUNT.password)
     ).toBeVisible();
