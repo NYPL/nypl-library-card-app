@@ -1,8 +1,8 @@
 import { AccountPage } from "../pageobjects/account.page";
 import { PersonalPage } from "../pageobjects/personal.page";
 import { ReviewPage } from "../pageobjects/review.page";
-import { TEST_PATRON_INFO, TEST_CUSTOMIZE_ACCOUNT } from "./constants";
-import { AddressFormPage, AddressData } from "./types";
+import { TEST_PATRON_INFO } from "./constants";
+import { AddressFormPage, AddressData, AccountData } from "./types";
 
 export async function fillPersonalInfo(page: PersonalPage | ReviewPage) {
   await page.firstNameInput.fill(TEST_PATRON_INFO.firstName);
@@ -18,15 +18,19 @@ export async function fillAddress(
   await page.streetAddressInput.fill(addressData.street);
   await page.apartmentSuiteInput.fill(addressData.apartmentSuite);
   await page.cityInput.fill(addressData.city);
-  await page.stateInput.fill(addressData.state);
+  await page.stateInput.click();
+  await page.stateInput.selectOption(addressData.state);
   await page.postalCodeInput.fill(addressData.postalCode);
 }
 
-export async function fillAccountInfo(page: AccountPage | ReviewPage) {
-  await page.usernameInput.fill(TEST_CUSTOMIZE_ACCOUNT.username);
-  await page.passwordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
-  await page.verifyPasswordInput.fill(TEST_CUSTOMIZE_ACCOUNT.password);
+export async function fillAccountInfo(
+  page: AccountPage | ReviewPage,
+  accountData: AccountData
+) {
+  await page.usernameInput.fill(accountData.username);
+  await page.passwordInput.fill(accountData.password);
+  await page.verifyPasswordInput.fill(accountData.password);
   await page.selectHomeLibrary.click();
-  await page.selectHomeLibrary.selectOption(TEST_CUSTOMIZE_ACCOUNT.homeLibrary);
-  await page.acceptTermsLabel.check();
+  await page.selectHomeLibrary.selectOption(accountData.homeLibraryCode);
+  await page.acceptTermsCheckbox.check();
 }

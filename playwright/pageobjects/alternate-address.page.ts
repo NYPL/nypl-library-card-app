@@ -21,11 +21,11 @@ export class AlternateAddressPage {
       level: 1,
     });
     this.stepHeading = page.getByRole("heading", {
-      name: "Alternate address",
+      name: "Step 2 of 5: Alternate address",
       level: 2,
     });
     this.addressHeading = page.getByRole("heading", {
-      name: "Alternate address",
+      name: "Alternate address (optional)",
       level: 3,
     });
     this.streetAddressInput = page.getByLabel(/Street address/i);

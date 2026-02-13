@@ -50,21 +50,23 @@
     "title": "Step 2 of 5: Address",
     "address": {
       "title": "Home address",
-      "description": "If you live in NYC, please fill out the home address form.",
+      "description": "If you live in the United States, please provide your home address below. If you are visiting New York from another state, you can apply for a temporary card with this form. A temporary card allows you to request physical materials and schedule research appointments before your visit. International visitors should use our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>.",
       "line1": { "label": "Street address" },
       "line2": { "label": "Apartment / Suite" },
       "city": { "label": "City" },
-      "state": { "label": "State", "instruction": "2-letter abbreviation" },
+      "state": { "label": "State" },
       "postalCode": {
         "label": "Postal code",
         "instruction": "5 or 9-digit postal code"
       }
     },
     "workAddress": {
-      "title": "Alternate address",
+      "title": "Step 2 of 5: Alternate address",
+      "subtitle": "Alternate address (optional)",
       "description": {
-        "part1": "The application process is slightly different depending on whether you live, work, go to school, or pay property taxes in New York City, elsewhere in New York State, or elsewhere in the United States and you're just visiting New York City. Please select one of the following and fill out the required fields.",
-        "part2": "If you work or go to school in NYC please provide the address."
+        "part1": "Do you work, go to school, or pay property taxes in New York State? Even if you don't live in New York, you may still be eligible for a library card.",
+        "part2": "Form fields must be filled out using only Latin characters.",
+        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State. <b>If none of these apply to you, click next.</b>"
       }
     },
     "errorMessage": {

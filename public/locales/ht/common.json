@@ -56,10 +56,12 @@
       }
     },
     "workAddress": {
-      "title": "Lòt adrès",
+      "title": "Etap 2 sou 5: Lòt adrès",
+      "subtitle": "Lòt adrès (optional)",
       "description": {
         "part1": "Pwosesis aplikasyon an lejèman diferan selon si ou abite, travay oswa ale lekòl oubyen si ou peye taks nan Vil Nouyòk, yon lòt kote nan Eta New York oswa yon lòt kote Ozetazini epi w ap senpman vizite Vil New York.  Tanpri chwazi youn nan sa ki annapre a epi bay enfòmasyon obligatwa yo.",
-        "part2": "Si ou travay oswa ou ale lekòl nan NYC, tanpri bay enfòmasyon yo mande yo."
+        "part2": "Si ou travay oswa ou ale lekòl nan NYC, tanpri bay enfòmasyon yo mande yo.",
+        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State.<b>If none of these apply to you, click next.</b>"
       }
     },
     "errorMessage": {

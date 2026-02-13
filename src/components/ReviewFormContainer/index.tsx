@@ -28,6 +28,8 @@ import {
   getLocationValue,
   findLibraryName,
   findLibraryCode,
+  SupportedLoc,
+  SupportedLang,
 } from "../../../src/utils/formDataUtils";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
 import { NRError } from "../../logger/newrelic";
@@ -353,7 +355,10 @@ function ReviewFormContainer({ csrfToken }) {
             className="radio-input"
             id="review-location-id"
             isChecked={true}
-            labelText={getLocationValue(formValues.location, lang as string)}
+            labelText={getLocationValue(
+              formValues.location as SupportedLoc,
+              (Array.isArray(lang) ? lang[0] : lang) as SupportedLang
+            )}
             name={"location"}
             value={formValues.location}
           />
