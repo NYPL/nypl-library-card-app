@@ -55,10 +55,12 @@
       }
     },
     "workAddress": {
-      "title": "Dirección alternativa",
+      "title": "Paso 2 de 5: Dirección alternativa",
+      "subtitle": "Dirección alternativa (opcional)",
       "description": {
         "part1": "El proceso de solicitud es un poco diferente dependiendo de si usted vive, trabaja, estudia o paga impuestos sobre la propiedad en la ciudad de Nueva York, en otro lugar del estado de Nueva York o en otro lugar de Estados Unidos, o si solo está de visita en la ciudad de Nueva York. Seleccione una de las siguientes opciones y complete los campos obligatorios.",
-        "part2": "Si trabaja o estudia en la ciudad de Nueva York, indique la dirección."
+        "part2": "Si trabaja o estudia en la ciudad de Nueva York, indique la dirección.",
+        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State.<b>If none of these apply to you, click next.</b>"
       }
     },
     "errorMessage": {
