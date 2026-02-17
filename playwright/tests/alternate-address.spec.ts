@@ -51,4 +51,32 @@ test.describe("enters alternate address", () => {
       TEST_NYC_ADDRESS.postalCode
     );
   });
+
+  test("enters incomplete alternate address", async ({ page }) => {
+    const alternateAddressPage = new AlternateAddressPage(page);
+    // await test.step("displays street and city errors", async () => {
+    //   await alternateAddressPage.stateInput.click();
+    //   await alternateAddressPage.stateInput.selectOption(TEST_NYC_ADDRESS.state);
+    //   await alternateAddressPage.postalCodeInput.fill(TEST_NYC_ADDRESS.postalCode);
+    //   await alternateAddressPage.nextButton.click();
+    //   await expect(alternateAddressPage.streetAddressError).toBeVisible();
+    //   await expect(alternateAddressPage.cityError).toBeVisible();
+    // });
+
+    // await test.step("displays state and postal code errors", async () => {
+    //   await alternateAddressPage.streetAddressInput.fill(TEST_NYC_ADDRESS.street);
+    //   await alternateAddressPage.cityInput.fill(TEST_NYC_ADDRESS.city);
+    //   await alternateAddressPage.nextButton.click();
+    //   await expect(alternateAddressPage.stateError).toBeVisible();
+    //   await expect(alternateAddressPage.postalCodeError).toBeVisible();
+    // });
+
+    // test.step("displays city, state, and postal code errors", async () => {
+    await alternateAddressPage.streetAddressInput.fill(TEST_NYC_ADDRESS.street);
+    await alternateAddressPage.nextButton.click();
+    await expect(alternateAddressPage.cityError).toBeVisible();
+    await expect(alternateAddressPage.stateError).toBeVisible();
+    await expect(alternateAddressPage.postalCodeError).toBeVisible();
+    // });
+  });
 });
