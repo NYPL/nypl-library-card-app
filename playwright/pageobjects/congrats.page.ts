@@ -4,7 +4,7 @@ import { TEST_PATRON_INFO } from "../utils/constants";
 export class CongratsPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
-  readonly stepHeading: Locator;
+  readonly temporaryHeading: Locator;
   readonly getStartedHeading: Locator;
   readonly memberNameHeading: Locator;
   readonly memberName: Locator;
@@ -28,7 +28,7 @@ export class CongratsPage {
       name: "Apply for a Library Card Online",
       level: 1,
     });
-    this.stepHeading = page.getByRole("heading", {
+    this.temporaryHeading = page.getByRole("heading", {
       name: "Congratulations! You now have a temporary digital New York Public Library card.",
       level: 2,
     });
