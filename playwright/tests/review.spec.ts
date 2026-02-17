@@ -7,6 +7,7 @@ import {
   TEST_OOS_ADDRESS,
   TEST_PATRON_INFO,
   ERROR_MESSAGES,
+  TEST_EDITED_ACCOUNT,
 } from "../utils/constants";
 import {
   fillAccountInfo,
@@ -51,7 +52,7 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.createYourAccountHeading).toBeVisible();
     await expect(reviewPage.usernameHeading).toBeVisible();
     await expect(reviewPage.passwordHeading).toBeVisible();
-    await expect(reviewPage.showPasswordCheckbox).toBeVisible();
+    await expect(reviewPage.showPasswordLabel).toBeVisible();
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
   });
 });
@@ -155,22 +156,22 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.passwordInput).toBeVisible();
     await expect(reviewPage.verifyPasswordInputHeading).toBeVisible();
     await expect(reviewPage.verifyPasswordInput).toBeVisible();
-    await expect(reviewPage.showPasswordCheckbox).toBeVisible();
+    await expect(reviewPage.showPasswordLabel).toBeVisible();
     await expect(reviewPage.selectHomeLibrary).toBeVisible();
     await expect(reviewPage.cardholderTermsLink).toBeVisible();
     await expect(reviewPage.rulesRegulationsLink).toBeVisible();
     await expect(reviewPage.privacyPolicyLink).toBeVisible();
-    await expect(reviewPage.acceptTermsCheckbox).toBeVisible();
+    await expect(reviewPage.acceptTermsLabel).toBeVisible();
   });
 
   // does not replace account info since there's no existing text
-  test("enters account information", async ({ page }) => {
+  test("enters account info", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
     await fillAccountInfo(reviewPage, TEST_ACCOUNT);
 
     await expect(reviewPage.usernameInput).toHaveValue(TEST_ACCOUNT.username);
-    await reviewPage.showPasswordCheckbox.check();
+    await reviewPage.showPasswordLabel.check();
     await expect(reviewPage.passwordInput).toHaveValue(TEST_ACCOUNT.password);
     await expect(reviewPage.verifyPasswordInput).toHaveValue(
       TEST_ACCOUNT.password
@@ -178,7 +179,40 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.selectHomeLibrary).toHaveValue(
       TEST_ACCOUNT.homeLibraryCode
     );
-    await expect(reviewPage.acceptTermsCheckbox).toBeChecked();
+    await expect(reviewPage.acceptTermsLabel).toBeChecked();
+  });
+
+  test("enters updated account info", async ({ page }) => {
+    const pageManager = new PageManager(page);
+
+    await test.step("enters account info", async () => {
+      await page.goto("/library-card/account?newCard=true");
+      await expect(pageManager.accountPage.stepHeading).toBeVisible();
+      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+      await pageManager.accountPage.nextButton.click();
+    });
+
+    await test.step("edits account info on review page", async () => {
+      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      await pageManager.reviewPage.editAccountButton.click();
+      await fillAccountInfo(pageManager.accountPage, TEST_EDITED_ACCOUNT);
+    });
+
+    await test.step("displays updated account info on review page", async () => {
+      await expect(pageManager.reviewPage.usernameInput).toHaveValue(
+        TEST_EDITED_ACCOUNT.username
+      );
+      await pageManager.reviewPage.showPasswordLabel.check();
+      await expect(pageManager.reviewPage.passwordInput).toHaveValue(
+        TEST_EDITED_ACCOUNT.password
+      );
+      await expect(pageManager.reviewPage.verifyPasswordInput).toHaveValue(
+        TEST_EDITED_ACCOUNT.password
+      );
+      await expect(pageManager.reviewPage.selectHomeLibrary).toHaveValue(
+        TEST_EDITED_ACCOUNT.homeLibraryCode
+      );
+    });
   });
 });
 
