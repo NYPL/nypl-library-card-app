@@ -1,5 +1,5 @@
 import { Page, Locator } from "@playwright/test";
-import { TEST_PATRON_INFO } from "../utils/constants";
+import { TEST_PATRON } from "../utils/constants";
 
 export class CongratsPage {
   readonly page: Page;
@@ -38,7 +38,7 @@ export class CongratsPage {
       .locator("#member-name")
       .getByText("MEMBER NAME");
     this.memberName = page.getByText(
-      `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`,
+      `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`,
       { exact: true }
     );
     this.issuedDateHeading = page.locator("#issued").getByText("ISSUED");

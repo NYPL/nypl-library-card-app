@@ -10,7 +10,7 @@ import {
   TEST_ACCOUNT,
   TEST_OOS_ADDRESS,
   TEST_NYC_ADDRESS,
-  TEST_PATRON_INFO,
+  TEST_PATRON,
 } from "../utils/constants";
 
 import {
@@ -49,7 +49,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
     await test.step("enters personal information", async () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      await fillPersonalInfo(pageManager.personalPage);
+      await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
       await pageManager.personalPage.nextButton.click();
     });
 
@@ -96,16 +96,16 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     await test.step("displays personal information on review page", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_PATRON_INFO.firstName)
+        pageManager.reviewPage.getText(TEST_PATRON.firstName)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_PATRON_INFO.lastName)
+        pageManager.reviewPage.getText(TEST_PATRON.lastName)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_PATRON_INFO.dateOfBirth)
+        pageManager.reviewPage.getText(TEST_PATRON.dateOfBirth)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_PATRON_INFO.email)
+        pageManager.reviewPage.getText(TEST_PATRON.email)
       ).toBeVisible();
       await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
     });
@@ -154,7 +154,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     });
 
     await test.step("displays generated library card on congrats page", async () => {
-      const fullName = `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`;
+      const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
       await expect(pageManager.congratsPage.stepHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
@@ -202,9 +202,9 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       ).toBeGreaterThan(0);
 
       const expectedName =
-        `${TEST_PATRON_INFO.lastName}, ${TEST_PATRON_INFO.firstName}`.toUpperCase();
-      const expectedDOB = formatSierraDate(TEST_PATRON_INFO.dateOfBirth);
-      const expectedEmail = TEST_PATRON_INFO.email.toLowerCase();
+        `${TEST_PATRON.lastName}, ${TEST_PATRON.firstName}`.toUpperCase();
+      const expectedDOB = formatSierraDate(TEST_PATRON.dateOfBirth);
+      const expectedEmail = TEST_PATRON.email.toLowerCase();
       const patronEmails = patronData.emails?.map((email) =>
         email.toLowerCase()
       );
