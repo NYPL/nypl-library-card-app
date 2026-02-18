@@ -33,6 +33,7 @@ test.describe("E2E: Edits patron information", () => {
 
   test("edits personal info on review page", async ({ page }) => {
     const pageManager = new PageManager(page);
+    const editedFullName = `${TEST_EDITED_PATRON.firstName} ${TEST_EDITED_PATRON.lastName}`;
 
     await test.step("begins at landing", async () => {
       await page.goto("/library-card/new?newCard=true");
@@ -115,7 +116,6 @@ test.describe("E2E: Edits patron information", () => {
     });
 
     await test.step("displays edited name on congrats page", async () => {
-      const editedFullName = `${TEST_EDITED_PATRON.firstName} ${TEST_EDITED_PATRON.lastName}`;
       await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberName).toHaveText(
