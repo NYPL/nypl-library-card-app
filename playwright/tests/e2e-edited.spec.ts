@@ -14,8 +14,7 @@ import {
 } from "../utils/constants";
 import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 
-test.describe("E2E: Edit personal info on review page", () => {
-  // or retains edited info
+test.describe("E2E: Edits patron information", () => {
   let scrapedBarcode: string | null = null;
 
   test.afterAll("deletes patron", async () => {
@@ -32,9 +31,7 @@ test.describe("E2E: Edit personal info on review page", () => {
     }
   });
 
-  test("edits personal info on review page and submits application", async ({
-    page,
-  }) => {
+  test("edits personal info on review page", async ({ page }) => {
     const pageManager = new PageManager(page);
 
     await test.step("begins at landing", async () => {
