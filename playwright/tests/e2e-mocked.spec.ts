@@ -94,15 +94,12 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
       await expect(pageManager.congratsPage.patronBarcodeNumber).toHaveText(
         TEST_BARCODE_NUMBER
       );
-
-      await test.step("display temporary card banner", async () => {
-        await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
-        await expect(
-          pageManager.congratsPage.temporaryCardBanner
-        ).toBeVisible();
-        await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
-        await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
-      });
+    });
+    await test.step("displays temporary card banner", async () => {
+      await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
+      await expect(pageManager.congratsPage.temporaryCardBanner).toBeVisible();
+      await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
+      await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
     });
   });
 });
