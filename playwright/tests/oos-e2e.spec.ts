@@ -153,9 +153,15 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await pageManager.reviewPage.submitButton.click();
     });
 
+    await test.step("displays headings and banner on congrats page", async () => {
+      await expect(pageManager.congratsPage.mainHeading).toBeVisible();
+      await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
+      await expect(pageManager.congratsPage.temporaryCardBanner).toBeVisible();
+      await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
+      await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
+    });
     await test.step("displays generated library card on congrats page", async () => {
       const fullName = `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`;
-      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
       await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();

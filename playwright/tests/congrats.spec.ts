@@ -9,7 +9,7 @@ test.describe("displays elements on Congrats page", () => {
   test("displays headings on Congrats page", async ({ page }) => {
     const congratsPage = new CongratsPage(page);
     await expect(congratsPage.mainHeading).toBeVisible();
-    await expect(congratsPage.stepHeading).toBeVisible();
+    await expect(congratsPage.temporaryHeading).toBeVisible();
     await expect(congratsPage.getStartedHeading).toBeVisible();
   });
 
