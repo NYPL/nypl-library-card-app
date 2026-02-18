@@ -55,6 +55,23 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.showPasswordLabel).toBeVisible();
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
   });
+
+  test("opens links in new tab", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    const links = [
+      reviewPage.alternateFormLink,
+      reviewPage.locationsLink,
+      reviewPage.cardholderTermsLink,
+      reviewPage.rulesRegulationsLink,
+      reviewPage.privacyPolicyLink,
+    ];
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.editAccountButton.click();
+    for (const link of links) {
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("rel", "nofollow noopener noreferrer");
+    }
+  });
 });
 
 test.describe("edits patron information on review page", () => {
