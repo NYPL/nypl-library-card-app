@@ -1,5 +1,4 @@
 import { test, expect } from "@playwright/test";
-import { SPINNER_TIMEOUT } from "../utils/constants";
 import { PageManager } from "../pageobjects/page-manager.page";
 import {
   fillPersonalInfo,
@@ -7,18 +6,17 @@ import {
   fillAccountInfo,
 } from "../utils/form-helper";
 import {
+  SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_OOS_ADDRESS,
   TEST_NYC_ADDRESS,
   TEST_PATRON,
 } from "../utils/constants";
-
 import {
   getPatronID,
   getPatronData,
   deletePatron,
 } from "../utils/sierra-api-utils";
-
 import { createFuzzyMatcher, formatSierraDate } from "../utils/formatter";
 
 test.describe("E2E: Complete application with Sierra API integration", () => {
@@ -153,9 +151,16 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await pageManager.reviewPage.submitButton.click();
     });
 
+    await test.step("displays headings and banner on congrats page", async () => {
+      await expect(pageManager.congratsPage.mainHeading).toBeVisible();
+      await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
+      await expect(pageManager.congratsPage.temporaryCardBanner).toBeVisible();
+      await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
+      await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
+    });
+
     await test.step("displays generated library card on congrats page", async () => {
       const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
-      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
       await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
@@ -171,6 +176,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
         await pageManager.congratsPage.patronBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();
     });
+
     await test.step("verify patron data on sierra database", async () => {
       const patronID = await getPatronID(scrapedBarcode);
       const patronData = await getPatronData(patronID);

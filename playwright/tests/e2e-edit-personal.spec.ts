@@ -15,6 +15,7 @@ import {
 import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 
 test.describe("E2E: Edit personal info on review page", () => {
+  // or retains edited info
   let scrapedBarcode: string | null = null;
 
   test.afterAll("deletes patron", async () => {
@@ -118,7 +119,7 @@ test.describe("E2E: Edit personal info on review page", () => {
 
     await test.step("displays edited name on congrats page", async () => {
       const editedFullName = `${TEST_EDITED_PATRON.firstName} ${TEST_EDITED_PATRON.lastName}`;
-      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
+      await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberName).toHaveText(
         editedFullName
