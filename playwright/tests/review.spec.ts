@@ -165,7 +165,7 @@ test.describe("edits patron information on review page", () => {
   });
 
   // does not replace account info since there's no existing text
-  test("enters account information", async ({ page }) => {
+  test("enters account info", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
     await fillAccountInfo(reviewPage, TEST_ACCOUNT);

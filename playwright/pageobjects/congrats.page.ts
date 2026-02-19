@@ -33,10 +33,6 @@ export class CongratsPage {
       name: "Congratulations! You now have a temporary digital New York Public Library card.",
       level: 2,
     });
-    this.getStartedHeading = page.getByRole("heading", {
-      name: "Get started with The New York Public Library",
-      level: 2,
-    });
     this.memberNameHeading = page
       .locator("#member-name")
       .getByText("MEMBER NAME");
@@ -64,6 +60,10 @@ export class CongratsPage {
     });
     this.getHelpEmailLink = page.getByRole("link", {
       name: "gethelp@nypl.org",
+    });
+    this.getStartedHeading = page.getByRole("heading", {
+      name: "Get started with The New York Public Library",
+      level: 2,
     });
     this.loginLink = page.getByRole("link", { name: "Log into your account" });
     this.nyplLocationLink = page.getByRole("link", {
