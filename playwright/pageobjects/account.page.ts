@@ -14,14 +14,14 @@ export class AccountPage {
   readonly passwordError: Locator;
   readonly verifyPasswordInput: Locator;
   readonly verifyPasswordError: Locator;
-  readonly showPasswordCheckbox: Locator;
+  readonly showPasswordLabel: Locator;
   readonly homeLibraryHeading: Locator;
   readonly selectHomeLibrary: Locator;
   readonly homeLibraryError: Locator;
   readonly cardholderTerms: Locator;
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
-  readonly acceptTermsCheckbox: Locator;
+  readonly acceptTermsLabel: Locator;
   readonly acceptTermsError: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
@@ -64,7 +64,7 @@ export class AccountPage {
     this.verifyPasswordError = page.getByText(
       ERROR_MESSAGES.VERIFY_PASSWORD_INVALID
     );
-    this.showPasswordCheckbox = page.getByText("Show password", {
+    this.showPasswordLabel = page.getByText("Show password", {
       exact: true,
     });
     this.homeLibraryHeading = page.getByRole("heading", {
@@ -83,7 +83,7 @@ export class AccountPage {
     this.privacyPolicy = page
       .locator("#mainContent")
       .getByRole("link", { name: "Privacy Policy" });
-    this.acceptTermsCheckbox = page.getByText(
+    this.acceptTermsLabel = page.getByText(
       "Yes, I accept the terms and conditions."
     );
 
