@@ -1,19 +1,20 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
 import { ReviewPage } from "../pageobjects/review.page";
-import {
-  TEST_ACCOUNT,
-  TEST_NYC_ADDRESS,
-  TEST_OOS_ADDRESS,
-  TEST_PATRON_INFO,
-  ERROR_MESSAGES,
-  TEST_EDITED_ACCOUNT,
-} from "../utils/constants";
+import { PageManager } from "../pageobjects/page-manager.page";
 import {
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
 } from "../utils/form-helper";
+import {
+  ERROR_MESSAGES,
+  SPINNER_TIMEOUT,
+  TEST_ACCOUNT,
+  TEST_EDITED_ACCOUNT,
+  TEST_NYC_ADDRESS,
+  TEST_OOS_ADDRESS,
+  TEST_PATRON,
+} from "../utils/constants";
 import { mockUsernameApi } from "../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
@@ -79,19 +80,15 @@ test.describe("edits patron information on review page", () => {
   test("enters Personal information", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editPersonalInfoButton.click();
-    await fillPersonalInfo(reviewPage);
+    await fillPersonalInfo(reviewPage, TEST_PATRON);
     await reviewPage.receiveInfoCheckbox.click(); // unable to check()
 
-    await expect(reviewPage.firstNameInput).toHaveValue(
-      TEST_PATRON_INFO.firstName
-    );
-    await expect(reviewPage.lastNameInput).toHaveValue(
-      TEST_PATRON_INFO.lastName
-    );
+    await expect(reviewPage.firstNameInput).toHaveValue(TEST_PATRON.firstName);
+    await expect(reviewPage.lastNameInput).toHaveValue(TEST_PATRON.lastName);
     await expect(reviewPage.dateOfBirthInput).toHaveValue(
-      TEST_PATRON_INFO.dateOfBirth
+      TEST_PATRON.dateOfBirth
     );
-    await expect(reviewPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
+    await expect(reviewPage.emailInput).toHaveValue(TEST_PATRON.email);
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
   });
 
@@ -108,12 +105,18 @@ test.describe("edits patron information on review page", () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       await pageManager.addressPage.nextButton.click();
+      await expect(pageManager.addressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
     });
 
     await test.step("enters alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
       await pageManager.alternateAddressPage.nextButton.click();
+      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
     });
 
     await test.step("confirms addresses", async () => {
@@ -127,6 +130,9 @@ test.describe("edits patron information on review page", () => {
         .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
         .check();
       await pageManager.addressVerificationPage.nextButton.click();
+      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
+        { timeout: SPINNER_TIMEOUT }
+      );
     });
 
     await test.step("enters account information", async () => {
