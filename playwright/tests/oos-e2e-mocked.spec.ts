@@ -6,7 +6,7 @@ import {
   TEST_BARCODE_NUMBER,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
-  TEST_PATRON_INFO,
+  TEST_PATRON,
 } from "../utils/constants";
 import { mockCreatePatronApi } from "../utils/mock-api";
 import {
@@ -18,7 +18,7 @@ import {
 test.describe("E2E Flow: Complete application using mocked submit", () => {
   test("displays patron information on congrats page", async ({ page }) => {
     const pageManager = new PageManager(page);
-    const fullName = `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`;
+    const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
 
     await test.step("begins at landing", async () => {
       await page.goto(PAGE_ROUTES.LANDING);
@@ -28,7 +28,7 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
 
     await test.step("enters personal information", async () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      await fillPersonalInfo(pageManager.personalPage);
+      await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
     });
 
     await test.step("unchecks receive info checkbox", async () => {
@@ -95,6 +95,12 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
       await expect(pageManager.congratsPage.patronBarcodeNumber).toHaveText(
         TEST_BARCODE_NUMBER
       );
+    });
+    await test.step("displays temporary card banner", async () => {
+      await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
+      await expect(pageManager.congratsPage.temporaryCardBanner).toBeVisible();
+      await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
+      await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
     });
   });
 });

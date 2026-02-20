@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { PersonalPage } from "../pageobjects/personal.page";
-import { PAGE_ROUTES, TEST_PATRON_INFO } from "../utils/constants";
+import { PAGE_ROUTES, TEST_PATRON } from "../utils/constants";
 import { fillPersonalInfo } from "../utils/form-helper";
 
 test.beforeEach(async ({ page }) => {
@@ -39,17 +39,15 @@ test.describe("displays elements on personal information page", () => {
 test.describe("enters personal information", () => {
   test("enters valid personal information", async ({ page }) => {
     const personalPage = new PersonalPage(page);
-    await fillPersonalInfo(personalPage);
+    await fillPersonalInfo(personalPage, TEST_PATRON);
     await expect(personalPage.firstNameInput).toHaveValue(
-      TEST_PATRON_INFO.firstName
+      TEST_PATRON.firstName
     );
-    await expect(personalPage.lastNameInput).toHaveValue(
-      TEST_PATRON_INFO.lastName
-    );
+    await expect(personalPage.lastNameInput).toHaveValue(TEST_PATRON.lastName);
     await expect(personalPage.dateOfBirthInput).toHaveValue(
-      TEST_PATRON_INFO.dateOfBirth
+      TEST_PATRON.dateOfBirth
     );
-    await expect(personalPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
+    await expect(personalPage.emailInput).toHaveValue(TEST_PATRON.email);
   });
 });
 

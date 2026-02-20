@@ -7,6 +7,7 @@ import {
   PAGE_ROUTES,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
+  TEST_PATRON,
 } from "../../utils/constants";
 
 test.describe("Accessibility tests on Address Verification page", () => {
@@ -15,7 +16,7 @@ test.describe("Accessibility tests on Address Verification page", () => {
     await page.goto(PAGE_ROUTES.PERSONAL);
     const pageManager = new PageManager(page);
 
-    await fillPersonalInfo(pageManager.personalPage);
+    await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
     await pageManager.personalPage.nextButton.click();
 
     await expect(pageManager.addressPage.stepHeading).toBeVisible();
