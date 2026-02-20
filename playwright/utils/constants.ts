@@ -1,12 +1,19 @@
-import { AddressData } from "./types";
+import { AddressData, PatronData } from "./types";
 import appContent from "../../public/locales/en/common.json";
 
 // personal information
-export const TEST_PATRON_INFO = {
+export const TEST_PATRON: PatronData = {
   firstName: "Jane",
   lastName: "Doe",
   email: "test@gmail.com",
   dateOfBirth: "12/25/1984",
+};
+
+export const TEST_EDITED_PATRON: PatronData = {
+  firstName: "Tom",
+  lastName: "Nook",
+  email: "edited@gmail.com",
+  dateOfBirth: "01/01/1990",
 };
 
 // address

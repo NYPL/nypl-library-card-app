@@ -2,8 +2,6 @@ import { test, expect } from "@playwright/test";
 import { LandingPage } from "../pageobjects/landing.page";
 import { SUPPORTED_LANGUAGES } from "../utils/constants";
 
-// test
-
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`landing page in ${name} (${lang})`, () => {
     let landingPage: LandingPage;

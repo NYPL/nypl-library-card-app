@@ -63,7 +63,7 @@
 //   await test.step("enters personal information", async () => {
 //     await page.goto("/library-card/personal?newCard=true");
 //     await expect(pageManager.personalPage.stepHeading).toBeVisible();
-//     await fillPersonalInfo(pageManager.personalPage);
+//     await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
 //     await pageManager.personalPage.receiveInfoCheckbox.click();
 //     await pageManager.personalPage.nextButton.click();
 //   });
@@ -146,16 +146,16 @@
 //   await test.step("displays user-entered info on personal information page", async () => {
 //     await expect(pageManager.personalPage.stepHeading).toBeVisible();
 //     await expect(pageManager.personalPage.firstNameInput).toHaveValue(
-//       TEST_PATRON_INFO.firstName
+//       TEST_PATRON.firstName
 //     );
 //     await expect(pageManager.personalPage.lastNameInput).toHaveValue(
-//       TEST_PATRON_INFO.lastName
+//       TEST_PATRON.lastName
 //     );
 //     await expect(pageManager.personalPage.dateOfBirthInput).toHaveValue(
-//       TEST_PATRON_INFO.dateOfBirth
+//       TEST_PATRON.dateOfBirth
 //     );
 //     await expect(pageManager.personalPage.emailInput).toHaveValue(
-//       TEST_PATRON_INFO.email
+//       TEST_PATRON.email
 //     );
 //     await expect(
 //       pageManager.personalPage.receiveInfoCheckbox

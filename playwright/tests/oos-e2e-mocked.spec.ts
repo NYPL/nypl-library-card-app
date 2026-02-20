@@ -11,7 +11,7 @@ import {
   // TEST_BARCODE_NUMBER,
   // TEST_NYC_ADDRESS,
   // TEST_OOS_ADDRESS,
-  // TEST_PATRON_INFO,
+  // TEST_PATRON,
 } from "../utils/constants";
 // import { mockCreatePatronApi } from "../utils/mock-api";
 
@@ -23,26 +23,26 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     test("displays patron information on congrats page", async ({ page }) => {
       appContent = require(`../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
-      // const fullName = `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`;
+      // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
 
       await test.step("begins at landing", async () => {
         await page.goto(`/library-card/new?newCard=true&lang=${lang}`);
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
         await pageManager.landingPage.getStartedButton.click();
       });
-      
-    // await test.step("enters personal information", async () => {
-      // await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      // await fillPersonalInfo(pageManager.personalPage);
-    // });
 
-    // await test.step("unchecks receive info checkbox", async () => {
+      // await test.step("enters personal information", async () => {
+      // await expect(pageManager.personalPage.stepHeading).toBeVisible();
+      // await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+      // });
+
+      // await test.step("unchecks receive info checkbox", async () => {
       // await pageManager.personalPage.receiveInfoCheckbox.click();
       // await expect(
-        // pageManager.personalPage.receiveInfoCheckbox
+      // pageManager.personalPage.receiveInfoCheckbox
       // ).not.toBeChecked();
-       // await pageManager.personalPage.nextButton.click();
-    // });
+      // await pageManager.personalPage.nextButton.click();
+      // });
 
       // await test.step("enters home address", async () => {
       //   await expect(pageManager.addressPage.stepHeading).toBeVisible();
@@ -80,13 +80,13 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       // await test.step("displays review page", async () => {
       //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       // });
-      
+
       // await test.step("verifies receive info checkbox is unchecked on review page", async () => {
       // await pageManager.reviewPage.editPersonalInfoButton.click();
       // await expect(
-        // pageManager.reviewPage.receiveInfoCheckbox
+      // pageManager.reviewPage.receiveInfoCheckbox
       // ).not.toBeChecked();
-    // });
+      // });
 
       // await test.step("submits application", async () => {
       //   await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER);
@@ -102,6 +102,13 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   await expect(pageManager.congratsPage.patronBarcodeNumber).toHaveText(
       //     TEST_BARCODE_NUMBER
       //   );
+      // });
+
+      // await test.step("displays temporary card banner", async () => {
+      //   await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
+      //   await expect(pageManager.congratsPage.temporaryCardBanner).toBeVisible();
+      //   await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
+      //   await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
       // });
     });
   });

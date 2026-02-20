@@ -1,5 +1,4 @@
 import { Page, Locator } from "@playwright/test";
-import { TEST_PATRON_INFO } from "../utils/constants";
 
 export class CongratsPage {
   readonly page: Page;
@@ -36,11 +35,7 @@ export class CongratsPage {
     this.memberNameHeading = page
       .locator("#member-name")
       .getByText("MEMBER NAME");
-    this.memberName = page.getByText(
-      `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`,
-      { exact: true }
-    );
-    this.patronBarcodeNumber = page.locator(".barcode");
+    this.memberName = page.locator("#member-name .content");
     this.issuedDateHeading = page.locator("#issued").getByText("ISSUED");
     this.issuedDate = page.locator("#issued").getByText(this.getDate(), {
       exact: true,
