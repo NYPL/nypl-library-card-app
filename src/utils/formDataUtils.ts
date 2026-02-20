@@ -55,7 +55,7 @@ function isDate(input, minYear = 1902): boolean {
   const tomorrow = moment().add(1, "day");
 
   // A valid date must be in the past and the year must be after the minYear.
-  return date.isValid() && date.isBefore(tomorrow) && date.year() > minYear;
+  return date.isValid() && date.isBefore(tomorrow) && date.year() >= minYear;
 }
 
 /**
