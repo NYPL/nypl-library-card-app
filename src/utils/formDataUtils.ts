@@ -10,6 +10,7 @@ import {
 } from "../interfaces";
 import { ipLocationMessageTranslations } from "../data/ipLocationMessageTranslations";
 import { every, isEmpty } from "lodash";
+import moment from "moment";
 import stateData from "../data/stateAbbreviations";
 
 const errorMessages = {
@@ -45,28 +46,17 @@ const errorMessages = {
  * Makes sure that the input value matches the desired path and is a date with
  * the year bounds.
  */
-function isDate(
-  input,
-  minYear = 1902,
-  maxYear = new Date().getFullYear()
-): boolean {
-  // regular expression to match required date format
-  const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
-
+function isDate(input, minYear = 1902): boolean {
   if (typeof input !== "string" || input === "") {
     return false;
   }
 
-  if (input.match(regex)) {
-    const temp = input.split("/");
-    const dateFromInput = new Date(`${temp[2]}/${temp[0]}/${temp[1]}`);
+  const date = moment(input, "MM/DD/YYYY", true);
+  const tomorrow = moment().add(1, "day");
 
-    return (
-      dateFromInput.getDate() === Number(temp[1]) &&
-      dateFromInput.getMonth() + 1 === Number(temp[0]) &&
-      Number(temp[2]) > minYear &&
-      Number(temp[2]) < maxYear
-    );
+  if (date.isValid() && date.isBefore(tomorrow)) {
+    // If date is valid and not in the future, check that the year is after the minimum year.
+    return date.year() >= minYear;
   }
 
   return false;
