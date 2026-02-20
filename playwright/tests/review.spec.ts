@@ -310,18 +310,29 @@ test.describe("displays error messages", () => {
   test("displays error for earliest date of birth", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editPersonalInfoButton.click();
-    await reviewPage.dateOfBirthInput.fill("01/01/1902");
+    await reviewPage.dateOfBirthInput.fill("01/01/1901");
     await reviewPage.submitButton.click();
     await expect(reviewPage.dateOfBirthError).toBeVisible();
   });
 
-  test("displays error for current date of birth", async ({ page }) => {
+  test("displays error for date of birth in current year", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("01/01/2026");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthAgeError).toBeVisible();
+    await expect(reviewPage.ageError).toBeVisible();
+  });
+
+  test("displays error for date of birth under 13 years old", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("01/01/2014");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.ageError).toBeVisible();
   });
 
   test("displays error for future date of birth", async ({ page }) => {

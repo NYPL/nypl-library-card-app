@@ -11,7 +11,7 @@ export class PersonalPage {
   readonly lastNameError: Locator;
   readonly dateOfBirthInput: Locator;
   readonly dateOfBirthError: Locator;
-  readonly dateOfBirthAgeError: Locator;
+  readonly ageError: Locator;
   readonly emailInput: Locator;
   readonly emailError: Locator;
   readonly alternateFormLink: Locator;
@@ -40,9 +40,7 @@ export class PersonalPage {
     this.dateOfBirthError = this.page.getByText(
       ERROR_MESSAGES.DATE_OF_BIRTH_INVALID
     );
-    this.dateOfBirthAgeError = this.page.getByText(
-      "There was a problem. Date of birth is below the minimum age of 13."
-    );
+    this.ageError = this.page.getByText(ERROR_MESSAGES.AGE_ERROR);
     this.emailInput = this.page.getByLabel(/Email/i);
     this.emailError = this.page.getByText(ERROR_MESSAGES.EMAIL_INVALID);
     this.alternateFormLink = this.page.getByRole("link", {

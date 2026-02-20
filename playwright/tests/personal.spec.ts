@@ -109,16 +109,27 @@ test.describe("displays error messages", () => {
 
   test("displays error for earliest date of birth", async ({ page }) => {
     const personalPage = new PersonalPage(page);
-    await personalPage.dateOfBirthInput.fill("01/01/1902");
+    await personalPage.dateOfBirthInput.fill("01/01/1901");
     await personalPage.nextButton.click();
     await expect(personalPage.dateOfBirthError).toBeVisible();
   });
 
-  test("displays error for current date of birth", async ({ page }) => {
+  test("displays error for date of birth in current year", async ({ page }) => {
     const personalPage = new PersonalPage(page);
+    await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
     await personalPage.dateOfBirthInput.fill("01/01/2026");
     await personalPage.nextButton.click();
-    await expect(personalPage.dateOfBirthAgeError).toBeVisible();
+    await expect(personalPage.ageError).toBeVisible();
+  });
+
+  test("displays error for date of birth under 13 years old", async ({
+    page,
+  }) => {
+    const personalPage = new PersonalPage(page);
+    await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
+    await personalPage.dateOfBirthInput.fill("01/01/2014");
+    await personalPage.nextButton.click();
+    await expect(personalPage.ageError).toBeVisible();
   });
 
   test("displays error for future date of birth", async ({ page }) => {
