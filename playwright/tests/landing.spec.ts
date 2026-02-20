@@ -1,8 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { LandingPage } from "../pageobjects/landing.page";
+import { PAGE_ROUTES } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/new");
+  await page.goto(PAGE_ROUTES.LANDING);
 });
 
 test("displays the main heading", async ({ page }) => {

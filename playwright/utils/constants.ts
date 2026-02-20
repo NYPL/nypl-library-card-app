@@ -106,3 +106,14 @@ export const ERROR_MESSAGES = {
   HOME_LIBRARY_ERROR: appContent.account.errorMessage.homeLibraryCode,
   ACCEPT_TERMS_ERROR: appContent.account.errorMessage.acceptTerms,
 };
+
+export const PAGE_ROUTES = {
+  LANDING: "/library-card/new?newCard=true",
+  PERSONAL: "/library-card/personal?newCard=true",
+  ADDRESS: "/library-card/location?newCard=true",
+  ALTERNATE_ADDRESS: "/library-card/alternate-address?newCard=true",
+  ADDRESS_VERIFICATION: "/library-card/address-verification?newCard=true",
+  ACCOUNT: "/library-card/account?newCard=true",
+  REVIEW: "/library-card/review?newCard=true",
+  CONGRATS: "/library-card/congrats?newCard=true",
+};

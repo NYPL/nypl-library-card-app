@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { SPINNER_TIMEOUT } from "../utils/constants";
+import { PAGE_ROUTES, SPINNER_TIMEOUT } from "../utils/constants";
 import { AddressPage } from "../pageobjects/address.page";
 import { TEST_OOS_ADDRESS } from "../utils/constants";
 import { fillAddress } from "../utils/form-helper";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/location?newCard=true");
+  await page.goto(PAGE_ROUTES.ADDRESS);
 });
 
 test.describe("displays elements on Address page", () => {
