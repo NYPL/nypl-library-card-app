@@ -188,6 +188,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
           emails: expect.any(Array),
           addresses: expect.any(Array),
           birthDate: expect.any(String),
+          patronType: expect.any(Number),
         })
       );
 
@@ -208,6 +209,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
         "Addresses array should not be empty"
       ).toBeGreaterThan(0);
 
+      expect(patronData.patronType).toBeGreaterThan(0);
       const expectedName =
         `${TEST_PATRON.lastName}, ${TEST_PATRON.firstName}`.toUpperCase();
       const expectedDOB = formatSierraDate(TEST_PATRON.dateOfBirth);
@@ -233,6 +235,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       expect(patronData.birthDate).toBe(expectedDOB);
       expect(actualAddressText).toMatch(expectedAddress);
       expect(patronEmails).toContain(expectedEmail);
+      expect(patronData.patronType).toBe(7);
     });
   });
 });
