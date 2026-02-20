@@ -11,6 +11,7 @@ import {
   TEST_OOS_ADDRESS,
   TEST_NYC_ADDRESS,
   TEST_PATRON,
+  PAGE_ROUTES,
 } from "../utils/constants";
 import {
   getPatronID,
@@ -40,7 +41,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     const pageManager = new PageManager(page);
 
     await test.step("begins at landing", async () => {
-      await page.goto("/library-card/new?newCard=true");
+      await page.goto(PAGE_ROUTES.LANDING);
       await expect(pageManager.landingPage.applyHeading).toBeVisible();
       await pageManager.landingPage.getStartedButton.click();
     });
