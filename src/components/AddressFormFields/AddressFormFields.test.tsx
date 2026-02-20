@@ -80,6 +80,7 @@ describe("AddressFormFields", () => {
           id="address-test"
           type={AddressTypes.Home}
           stateData={stateData}
+          isRequired={true}
         />
       </TestProviderWrapper>
     );
@@ -93,6 +94,7 @@ describe("AddressFormFields", () => {
           id="address-test"
           type={AddressTypes.Home}
           stateData={stateData}
+          isRequired={true}
         />
       </TestProviderWrapper>
     );
@@ -107,6 +109,7 @@ describe("AddressFormFields", () => {
           id="address-test"
           type={AddressTypes.Home}
           stateData={stateData}
+          isRequired={true}
         />
       </TestProviderWrapper>
     );
@@ -137,6 +140,7 @@ describe("AddressFormFields", () => {
           id="address-test"
           type={AddressTypes.Work}
           stateData={stateData}
+          isRequired={false}
         />
       </TestProviderWrapper>
     );
@@ -163,6 +167,7 @@ describe("AddressFormFields", () => {
           id="address-test"
           type={AddressTypes.Home}
           stateData={stateData}
+          isRequired={true}
         />
       </TestProviderWrapper>
     );
