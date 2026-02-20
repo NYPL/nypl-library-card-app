@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { SPINNER_TIMEOUT } from "../utils/constants";
+import { PAGE_ROUTES, SPINNER_TIMEOUT } from "../utils/constants";
 import { PageManager } from "../pageobjects/page-manager.page";
 import { fillAddress, fillPersonalInfo } from "../utils/form-helper";
 import {
@@ -15,7 +15,7 @@ test.describe("E2E: Navigate backward in application", () => {
     const pageManager = new PageManager(page);
 
     await test.step("begins at account page", async () => {
-      await page.goto("/library-card/account?newCard=true");
+      await page.goto(PAGE_ROUTES.ACCOUNT);
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await expect(pageManager.accountPage.previousButton).toBeVisible();
       await pageManager.accountPage.previousButton.click();
@@ -54,7 +54,7 @@ test.describe("E2E: Navigate backward in application", () => {
     const pageManager = new PageManager(page);
 
     await test.step("enters personal information", async () => {
-      await page.goto("/library-card/personal?newCard=true");
+      await page.goto(PAGE_ROUTES.PERSONAL);
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage);
       await pageManager.personalPage.receiveInfoCheckbox.click();

@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { SPINNER_TIMEOUT } from "../utils/constants";
+import { PAGE_ROUTES, SPINNER_TIMEOUT } from "../utils/constants";
 import { PageManager } from "../pageobjects/page-manager.page";
 import {
   fillPersonalInfo,
@@ -42,7 +42,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     const pageManager = new PageManager(page);
 
     await test.step("begins at landing", async () => {
-      await page.goto("/library-card/new?newCard=true");
+      await page.goto(PAGE_ROUTES.LANDING);
       await expect(pageManager.landingPage.applyHeading).toBeVisible();
       await pageManager.landingPage.getStartedButton.click();
     });

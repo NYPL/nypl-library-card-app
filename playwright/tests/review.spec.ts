@@ -8,6 +8,7 @@ import {
   TEST_PATRON_INFO,
   ERROR_MESSAGES,
   TEST_EDITED_ACCOUNT,
+  PAGE_ROUTES,
 } from "../utils/constants";
 import {
   fillAccountInfo,
@@ -17,7 +18,7 @@ import {
 import { mockUsernameApi } from "../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/review?newCard=true");
+  await page.goto(PAGE_ROUTES.REVIEW);
 });
 
 test.describe("displays elements on review page", () => {
