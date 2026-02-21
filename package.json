@@ -82,7 +82,7 @@
     "qs": "6.10.4",
     "react": "^18.3.1",
     "react-autosuggest": "10.0.2",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.2.4",
     "react-ga4": "2.1.0",
     "react-hook-form": "^7.62.0",
     "request": "2.88.2",
