@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import {
+  PAGE_ROUTES,
   TEST_ACCOUNT,
   TEST_BARCODE_NUMBER,
   TEST_NYC_ADDRESS,
@@ -20,7 +21,7 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
     const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
 
     await test.step("begins at landing", async () => {
-      await page.goto("/library-card/new?newCard=true");
+      await page.goto(PAGE_ROUTES.LANDING);
       await expect(pageManager.landingPage.applyHeading).toBeVisible();
       await pageManager.landingPage.getStartedButton.click();
     });
