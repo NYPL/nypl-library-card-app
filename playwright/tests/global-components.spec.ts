@@ -1,24 +1,25 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
+import { PAGE_ROUTES } from "../utils/constants";
+
+const routes = [
+  { name: "Landing Page", path: PAGE_ROUTES.LANDING },
+  { name: "Personal Page", path: PAGE_ROUTES.PERSONAL },
+  { name: "Address Page", path: PAGE_ROUTES.ADDRESS },
+  {
+    name: "Alternate Address Page",
+    path: PAGE_ROUTES.ALTERNATE_ADDRESS,
+  },
+  {
+    name: "Address Verification Page",
+    path: PAGE_ROUTES.ADDRESS_VERIFICATION,
+  },
+  { name: "Account Page", path: PAGE_ROUTES.ACCOUNT },
+  { name: "Review Page", path: PAGE_ROUTES.REVIEW },
+  { name: "Congrats Page", path: PAGE_ROUTES.CONGRATS },
+];
 
 test.describe("Verify breadcrumbs on every page", () => {
-  const routes = [
-    { name: "Landing Page", path: "/library-card/new?newCard=true" },
-    { name: "Personal Page", path: "/library-card/personal?newCard=true" },
-    { name: "Address Page", path: "/library-card/location?newCard=true" },
-    {
-      name: "Alternate Address Page",
-      path: "/library-card/workAddress?newCard=true",
-    },
-    {
-      name: "Address Verification Page",
-      path: "/library-card/address-verification?newCard=true",
-    },
-    { name: "Account Page", path: "/library-card/account?newCard=true" },
-    { name: "Review Page", path: "/library-card/review?newCard=true" },
-    { name: "Congrats Page", path: "/library-card/congrats?newCard=true" },
-  ];
-
   for (const route of routes) {
     test(`displays breadcrumb navigation on ${route.name}`, async ({
       page,

@@ -1,10 +1,11 @@
 import AxeBuilder from "@axe-core/playwright";
 import { AlternateAddressPage } from "../../pageobjects/alternate-address.page";
 import { test, expect } from "@playwright/test";
+import { PAGE_ROUTES } from "../../utils/constants";
 
 test.describe("Accessibility tests on Alternate Address page", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/library-card/workAddress?newCard=true");
+    await page.goto(PAGE_ROUTES.ALTERNATE_ADDRESS);
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {

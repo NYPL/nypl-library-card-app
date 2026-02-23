@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { AccountPage } from "../pageobjects/account.page";
-import { ERROR_MESSAGES, TEST_ACCOUNT } from "../utils/constants";
+import { ERROR_MESSAGES, PAGE_ROUTES, TEST_ACCOUNT } from "../utils/constants";
 import { fillAccountInfo } from "../utils/form-helper";
 import { mockUsernameApi } from "../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/account?newCard=true");
+  await page.goto(PAGE_ROUTES.ACCOUNT);
 });
 
 test.describe("displays all form elements on Account page", () => {
