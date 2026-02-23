@@ -109,7 +109,7 @@ test.describe("displays error messages", () => {
 
   test("displays error for earliest date of birth", async ({ page }) => {
     const personalPage = new PersonalPage(page);
-    await personalPage.dateOfBirthInput.fill("01/01/1901");
+    await personalPage.dateOfBirthInput.fill("01/01/1902");
     await personalPage.nextButton.click();
     await expect(personalPage.dateOfBirthError).toBeVisible();
   });
