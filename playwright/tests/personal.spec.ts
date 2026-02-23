@@ -1,7 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { PersonalPage } from "../pageobjects/personal.page";
-import { SUPPORTED_LANGUAGES, TEST_PATRON_INFO } from "../utils/constants";
 import { fillPersonalInfo } from "../utils/form-helper";
+import {
+  PAGE_ROUTES,
+  SUPPORTED_LANGUAGES,
+  TEST_PATRON,
+} from "../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`personal information page in ${name} (${lang})`, () => {
@@ -11,7 +15,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     test.beforeEach(async ({ page }) => {
       appContent = require(`../../public/locales/${lang}/common.json`);
       personalPage = new PersonalPage(page, appContent);
-      await page.goto(`/library-card/personal?newCard=true&lang=${lang}`);
+      await page.goto(PAGE_ROUTES.PERSONAL(lang));
     });
 
     test.describe("displays elements", () => {
@@ -35,19 +39,17 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test.describe("enters personal information", () => {
       test("enters valid personal information", async () => {
-        await fillPersonalInfo(personalPage);
+        await fillPersonalInfo(personalPage, TEST_PATRON);
         await expect(personalPage.firstNameInput).toHaveValue(
-          TEST_PATRON_INFO.firstName
+          TEST_PATRON.firstName
         );
         await expect(personalPage.lastNameInput).toHaveValue(
-          TEST_PATRON_INFO.lastName
+          TEST_PATRON.lastName
         );
         await expect(personalPage.dateOfBirthInput).toHaveValue(
-          TEST_PATRON_INFO.dateOfBirth
+          TEST_PATRON.dateOfBirth
         );
-        await expect(personalPage.emailInput).toHaveValue(
-          TEST_PATRON_INFO.email
-        );
+        await expect(personalPage.emailInput).toHaveValue(TEST_PATRON.email);
       });
     });
 

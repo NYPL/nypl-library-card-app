@@ -1,14 +1,16 @@
 import { AccountPage } from "../pageobjects/account.page";
 import { PersonalPage } from "../pageobjects/personal.page";
 import { ReviewPage } from "../pageobjects/review.page";
-import { TEST_PATRON_INFO } from "./constants";
-import { AddressFormPage, AddressData, AccountData } from "./types";
+import { AddressFormPage, AddressData, AccountData, PatronData } from "./types";
 
-export async function fillPersonalInfo(page: PersonalPage | ReviewPage) {
-  await page.firstNameInput.fill(TEST_PATRON_INFO.firstName);
-  await page.lastNameInput.fill(TEST_PATRON_INFO.lastName);
-  await page.dateOfBirthInput.fill(TEST_PATRON_INFO.dateOfBirth);
-  await page.emailInput.fill(TEST_PATRON_INFO.email);
+export async function fillPersonalInfo(
+  page: PersonalPage | ReviewPage,
+  patronData: PatronData
+) {
+  await page.firstNameInput.fill(patronData.firstName);
+  await page.lastNameInput.fill(patronData.lastName);
+  await page.dateOfBirthInput.fill(patronData.dateOfBirth);
+  await page.emailInput.fill(patronData.email);
 }
 
 export async function fillAddress(
@@ -32,5 +34,5 @@ export async function fillAccountInfo(
   await page.verifyPasswordInput.fill(accountData.password);
   await page.selectHomeLibrary.click();
   await page.selectHomeLibrary.selectOption(accountData.homeLibraryCode);
-  await page.acceptTermsCheckbox.check();
+  await page.acceptTermsLabel.check();
 }

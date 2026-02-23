@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { LandingPage } from "../pageobjects/landing.page";
-import { SUPPORTED_LANGUAGES } from "../utils/constants";
+import { PAGE_ROUTES, SUPPORTED_LANGUAGES } from "../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`landing page in ${name} (${lang})`, () => {
@@ -10,7 +10,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     test.beforeEach(async ({ page }) => {
       appContent = require(`../../public/locales/${lang}/common.json`);
       landingPage = new LandingPage(page, appContent);
-      await page.goto(`/library-card/new?newCard=true&lang=${lang}`);
+      await page.goto(PAGE_ROUTES.LANDING(lang));
     });
 
     test("displays headings and get started button", async () => {
