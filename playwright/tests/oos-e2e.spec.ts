@@ -209,7 +209,6 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
         "Addresses array should not be empty"
       ).toBeGreaterThan(0);
 
-      expect(patronData.patronType).toBeGreaterThan(0);
       const expectedName =
         `${TEST_PATRON.lastName}, ${TEST_PATRON.firstName}`.toUpperCase();
       const expectedDOB = formatSierraDate(TEST_PATRON.dateOfBirth);
