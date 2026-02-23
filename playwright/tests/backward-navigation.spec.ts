@@ -2,11 +2,12 @@
 // import { PageManager } from "../pageobjects/page-manager.page";
 // import { fillAddress, fillPersonalInfo } from "../utils/form-helper";
 // import {
+//   PAGE_ROUTES,
 //   SPINNER_TIMEOUT,
 //   SUPPORTED_LANGUAGES,
 //   TEST_NYC_ADDRESS,
 //   TEST_OOS_ADDRESS,
-//   TEST_PATRON_INFO,
+//   TEST_PATRON,
 // } from "../utils/constants";
 
 // for (const { lang, name } of SUPPORTED_LANGUAGES) {
@@ -21,7 +22,7 @@
 //   pageManager = new PageManager(page, appContent);
 
 //   await test.step("begins at account page", async () => {
-//     await page.goto(`/library-card/account?newCard=true&lang=${lang}`);
+//     await page.goto(PAGE_ROUTES.ACCOUNT());
 //     await expect(pageManager.accountPage.stepHeading).toBeVisible();
 //     await expect(pageManager.accountPage.previousButton).toBeVisible();
 //     await pageManager.accountPage.previousButton.click();
@@ -54,19 +55,19 @@
 //   });
 // });
 
-// test(`retains user-entered info when navigating backward (${lang})`, async ({
+// test("retains user-entered info when navigating backward", async ({
 //   page,
 // }) => {
 //   appContent = require(`../../public/locales/${lang}/common.json`);
 //   pageManager = new PageManager(page, appContent);
 
-//   await test.step("enters personal information", async () => {
-//     await page.goto("/library-card/personal?newCard=true");
-//     await expect(pageManager.personalPage.stepHeading).toBeVisible();
-//     await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-//     await pageManager.personalPage.receiveInfoCheckbox.click();
-//     await pageManager.personalPage.nextButton.click();
-//   });
+//     await test.step("enters personal information", async () => {
+//       await page.goto(PAGE_ROUTES.PERSONAL());
+//       await expect(pageManager.personalPage.stepHeading).toBeVisible();
+//       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+//       await pageManager.personalPage.receiveInfoCheckbox.click();
+//       await pageManager.personalPage.nextButton.click();
+//     });
 
 //   await test.step("enters home address", async () => {
 //     await expect(pageManager.addressPage.stepHeading).toBeVisible();

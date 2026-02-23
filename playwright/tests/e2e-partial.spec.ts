@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import { fillAccountInfo, fillAddress } from "../utils/form-helper";
 import {
+  PAGE_ROUTES,
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_EDITED_ACCOUNT,
@@ -13,7 +14,7 @@ test("displays error when address is too long", async ({ page }) => {
   const invalidStreet = "A".repeat(100);
 
   await test.step("enters invalid home address", async () => {
-    await page.goto("/library-card/location?newCard=true");
+    await page.goto(PAGE_ROUTES.ADDRESS());
     await expect(pageManager.addressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.addressPage, {
       street: invalidStreet,
@@ -66,7 +67,7 @@ test("displays updated account info after editing addresses", async ({
   const pageManager = new PageManager(page);
 
   await test.step("enters account information", async () => {
-    await page.goto("/library-card/account?newCard=true");
+    await page.goto(PAGE_ROUTES.ACCOUNT());
     await expect(pageManager.accountPage.stepHeading).toBeVisible();
     await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
     await pageManager.accountPage.nextButton.click();

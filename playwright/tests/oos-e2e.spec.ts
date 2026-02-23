@@ -5,6 +5,7 @@ import {} from // fillPersonalInfo,
 // fillAccountInfo,
 "../utils/form-helper";
 import {
+  PAGE_ROUTES,
   // SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   // TEST_ACCOUNT,
@@ -46,7 +47,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test("displays patron information on congrats page", async ({ page }) => {
       await test.step("begins at landing", async () => {
-        await page.goto(`/library-card/new?newCard=true&lang=${lang}`);
+        await page.goto(PAGE_ROUTES.LANDING(lang));
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
         await pageManager.landingPage.getStartedButton.click();
       });

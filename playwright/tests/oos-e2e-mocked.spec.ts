@@ -6,6 +6,7 @@ import { PageManager } from "../pageobjects/page-manager.page";
 //   fillPersonalInfo,
 // } from "../utils/form-helper";
 import {
+  PAGE_ROUTES,
   SUPPORTED_LANGUAGES,
   // TEST_ACCOUNT,
   // TEST_BARCODE_NUMBER,
@@ -26,7 +27,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
 
       await test.step("begins at landing", async () => {
-        await page.goto(`/library-card/new?newCard=true&lang=${lang}`);
+        await page.goto(PAGE_ROUTES.LANDING(lang));
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
         await pageManager.landingPage.getStartedButton.click();
       });

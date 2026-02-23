@@ -121,3 +121,19 @@ export const SUPPORTED_LANGUAGES = [
   // { lang: "ur", name: "Urdu" },
   // { lang: "zhcn", name: "Chinese" },
 ];
+
+const withLang = (path: string, lang?: string) =>
+  `${path}?newCard=true${lang ? `&lang=${encodeURIComponent(lang)}` : ""}`;
+
+export const PAGE_ROUTES = {
+  LANDING: (lang?: string) => withLang("/library-card/new", lang),
+  PERSONAL: (lang?: string) => withLang("/library-card/personal", lang),
+  ADDRESS: (lang?: string) => withLang("/library-card/location", lang),
+  ALTERNATE_ADDRESS: (lang?: string) =>
+    withLang("/library-card/alternate-address", lang),
+  ADDRESS_VERIFICATION: (lang?: string) =>
+    withLang("/library-card/address-verification", lang),
+  ACCOUNT: (lang?: string) => withLang("/library-card/account", lang),
+  REVIEW: (lang?: string) => withLang("/library-card/review", lang),
+  CONGRATS: (lang?: string) => withLang("/library-card/congrats", lang),
+};

@@ -1,10 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { SPINNER_TIMEOUT } from "../utils/constants";
 import { AddressPage } from "../pageobjects/address.page";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../pageobjects/address-verification.page";
 import { fillAddress } from "../utils/form-helper";
 import {
+  PAGE_ROUTES,
+  SPINNER_TIMEOUT,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_MULTIMATCH_ADDRESS,
@@ -14,8 +15,9 @@ import {
 
 test.describe("displays elements on address verification page", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/library-card/address-verification?newCard=true");
+    await page.goto(PAGE_ROUTES.ADDRESS_VERIFICATION());
   });
+
   test("displays headings", async ({ page }) => {
     const addressVerificationPage = new AddressVerificationPage(page);
     await expect(addressVerificationPage.mainHeading).toBeVisible();

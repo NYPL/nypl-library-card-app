@@ -8,6 +8,7 @@ import {
 } from "../utils/form-helper";
 import {
   ERROR_MESSAGES,
+  PAGE_ROUTES,
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_EDITED_ACCOUNT,
@@ -18,7 +19,7 @@ import {
 import { mockUsernameApi } from "../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/review?newCard=true");
+  await page.goto(PAGE_ROUTES.REVIEW());
 });
 
 test.describe("displays elements on review page", () => {

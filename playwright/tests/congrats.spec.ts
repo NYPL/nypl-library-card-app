@@ -1,8 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { CongratsPage } from "../pageobjects/congrats.page";
+import { PAGE_ROUTES } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/congrats?&newCard=true");
+  await page.goto(PAGE_ROUTES.CONGRATS());
 });
 
 test.describe("displays elements on Congrats page", () => {

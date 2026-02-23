@@ -1,10 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { AccountPage } from "../../pageobjects/account.page";
 import { AxeBuilder } from "@axe-core/playwright";
+import { PAGE_ROUTES } from "../../utils/constants";
 
 test.describe("Account Page Accessibility Tests", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/library-card/account?newCard=true");
+    await page.goto(PAGE_ROUTES.ACCOUNT());
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {
