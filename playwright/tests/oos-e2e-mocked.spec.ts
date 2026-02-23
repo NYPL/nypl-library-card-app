@@ -6,13 +6,14 @@ import {
   fillPersonalInfo,
 } from "../utils/form-helper";
 import {
+  PAGE_ROUTES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   // TEST_ACCOUNT,
   // TEST_BARCODE_NUMBER,
   // TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
-  // TEST_PATRON_INFO,
+  TEST_PATRON,
 } from "../utils/constants";
 // import { mockCreatePatronApi } from "../utils/mock-api";
 
@@ -24,17 +25,17 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     test("displays patron information on congrats page", async ({ page }) => {
       appContent = require(`../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
-      // const fullName = `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`;
+      // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
 
       await test.step("begins at landing", async () => {
-        await page.goto(`/library-card/new?newCard=true&lang=${lang}`);
+        await page.goto(PAGE_ROUTES.LANDING(lang));
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
         await pageManager.landingPage.getStartedButton.click();
       });
 
       await test.step("enters personal information", async () => {
         await expect(pageManager.personalPage.stepHeading).toBeVisible();
-        await fillPersonalInfo(pageManager.personalPage);
+        await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
       });
 
       await test.step("unchecks receive info checkbox", async () => {
@@ -50,7 +51,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
         await pageManager.addressPage.nextButton.click();
         await expect(pageManager.addressPage.spinner).not.toBeVisible({
-          // eventually replace with mock
           timeout: SPINNER_TIMEOUT,
         });
       });
@@ -107,6 +107,13 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   await expect(pageManager.congratsPage.patronBarcodeNumber).toHaveText(
       //     TEST_BARCODE_NUMBER
       //   );
+      // });
+
+      // await test.step("displays temporary card banner", async () => {
+      //   await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
+      //   await expect(pageManager.congratsPage.temporaryCardBanner).toBeVisible();
+      //   await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
+      //   await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
       // });
     });
   });

@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
 import { fillAddress } from "../utils/form-helper";
-import { TEST_NYC_ADDRESS } from "../utils/constants";
+import { PAGE_ROUTES, TEST_NYC_ADDRESS } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/workAddress?newCard=true");
+  await page.goto(PAGE_ROUTES.ALTERNATE_ADDRESS());
 });
 
 test.describe("displays elements on Alternate address page", () => {

@@ -2,11 +2,13 @@ import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import { fillAddress, fillPersonalInfo } from "../utils/form-helper";
 import {
+  PAGE_ROUTES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
+  TEST_PATRON,
   // TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
-  // TEST_PATRON_INFO,
+  // TEST_PATRON,
 } from "../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
@@ -21,7 +23,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     //   pageManager = new PageManager(page, appContent);
 
     //   await test.step("begins at account page", async () => {
-    //     await page.goto(`/library-card/account?newCard=true&lang=${lang}`);
+    //     await page.goto(PAGE_ROUTES.ACCOUNT());
     //     await expect(pageManager.accountPage.stepHeading).toBeVisible();
     //     await expect(pageManager.accountPage.previousButton).toBeVisible();
     //     await pageManager.accountPage.previousButton.click();
@@ -61,9 +63,9 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       pageManager = new PageManager(page, appContent);
 
       await test.step("enters personal information", async () => {
-        await page.goto(`/library-card/personal?newCard=true&lang=${lang}`);
+        await page.goto(PAGE_ROUTES.PERSONAL(lang));
         await expect(pageManager.personalPage.stepHeading).toBeVisible();
-        await fillPersonalInfo(pageManager.personalPage);
+        await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
         await pageManager.personalPage.receiveInfoCheckbox.click(); // unchecks
         await pageManager.personalPage.nextButton.click();
       });
@@ -146,24 +148,24 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   await pageManager.addressPage.previousButton.click();
       // });
 
-      // await test.step("displays user-entered info on personal information page", async () => {
-      //   await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      //   await expect(pageManager.personalPage.firstNameInput).toHaveValue(
-      //     TEST_PATRON_INFO.firstName
-      //   );
-      //   await expect(pageManager.personalPage.lastNameInput).toHaveValue(
-      //     TEST_PATRON_INFO.lastName
-      //   );
-      //   await expect(pageManager.personalPage.dateOfBirthInput).toHaveValue(
-      //     TEST_PATRON_INFO.dateOfBirth
-      //   );
-      //   await expect(pageManager.personalPage.emailInput).toHaveValue(
-      //     TEST_PATRON_INFO.email
-      //   );
-      //   await expect(
-      //     pageManager.personalPage.receiveInfoCheckbox
-      //   ).not.toBeChecked();
-      // });
+      //   await test.step("displays user-entered info on personal information page", async () => {
+      //     await expect(pageManager.personalPage.stepHeading).toBeVisible();
+      //     await expect(pageManager.personalPage.firstNameInput).toHaveValue(
+      //       TEST_PATRON.firstName
+      //     );
+      //     await expect(pageManager.personalPage.lastNameInput).toHaveValue(
+      //       TEST_PATRON.lastName
+      //     );
+      //     await expect(pageManager.personalPage.dateOfBirthInput).toHaveValue(
+      //       TEST_PATRON.dateOfBirth
+      //     );
+      //     await expect(pageManager.personalPage.emailInput).toHaveValue(
+      //       TEST_PATRON.email
+      //     );
+      //     await expect(
+      //       pageManager.personalPage.receiveInfoCheckbox
+      //     ).not.toBeChecked();
+      //   });
     });
   });
 }

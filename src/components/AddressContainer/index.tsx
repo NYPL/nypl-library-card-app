@@ -132,7 +132,7 @@ const AddressContainer = ({ csrfToken }) => {
             ((formValues.location === "nyc" || formValues.location === "nys") &&
               !addressInNYC)
           ) {
-            nextUrl = `/workAddress?${queryStr}`;
+            nextUrl = `/alternate-address?${queryStr}`;
           } else {
             nextUrl = `/address-verification?${queryStr}`;
           }
@@ -171,6 +171,7 @@ const AddressContainer = ({ csrfToken }) => {
         <AddressFormFields
           id="address-container"
           type={AddressTypes.Home}
+          isRequired
           stateData={stateData}
         />
 
