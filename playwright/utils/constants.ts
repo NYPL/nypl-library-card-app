@@ -93,6 +93,7 @@ export const ERROR_MESSAGES = {
   FIRST_NAME_INVALID: appContent.personal.errorMessage.firstName,
   LAST_NAME_INVALID: appContent.personal.errorMessage.lastName,
   DATE_OF_BIRTH_INVALID: appContent.personal.errorMessage.birthdate,
+  AGE_ERROR: appContent.personal.errorMessage.ageGate,
   EMAIL_INVALID: appContent.personal.errorMessage.email,
   STREET_ADDRESS_INVALID: appContent.location.errorMessage.line1,
   CITY_INVALID: appContent.location.errorMessage.city,
@@ -116,4 +117,10 @@ export const PAGE_ROUTES = {
   ACCOUNT: "/library-card/account?newCard=true",
   REVIEW: "/library-card/review?newCard=true",
   CONGRATS: "/library-card/congrats?newCard=true",
+};
+
+export const PATRON_TYPES = {
+  PATRON_TYPE_7: 7,
+  PATRON_TYPE_8: 8,
+  PATRON_TYPE_9: 9,
 };

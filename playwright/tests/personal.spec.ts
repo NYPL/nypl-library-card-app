@@ -127,7 +127,7 @@ test.describe("displays error messages", () => {
     const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("01/01/2026");
     await personalPage.nextButton.click();
-    await expect(personalPage.dateOfBirthError).toBeVisible();
+    await expect(personalPage.ageError).toBeVisible();
   });
 
   test("displays error for future date of birth", async ({ page }) => {
