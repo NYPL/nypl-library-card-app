@@ -12,6 +12,7 @@ import {
   TEST_NYC_ADDRESS,
   TEST_PATRON,
   PAGE_ROUTES,
+  PATRON_TYPES,
 } from "../utils/constants";
 import {
   getPatronID,
@@ -234,9 +235,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       expect(patronData.birthDate).toBe(expectedDOB);
       expect(actualAddressText).toMatch(expectedAddress);
       expect(patronEmails).toContain(expectedEmail);
-      expect(patronData.patronType).toBe(
-        pageManager.congratsPage.PATRON_TYPE_7
-      );
+      expect(patronData.patronType).toBe(PATRON_TYPES.PATRON_TYPE_7);
     });
   });
 });

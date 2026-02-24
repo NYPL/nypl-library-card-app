@@ -20,7 +20,6 @@ export class CongratsPage {
   readonly EXPECTED_BARCODE_PREFIX = "255";
   readonly temporaryCardBanner: Locator;
   readonly learnMoreLink: Locator;
-  readonly PATRON_TYPE_7 = 7;
 
   constructor(page: Page) {
     this.page = page;
