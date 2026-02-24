@@ -3,13 +3,14 @@ import { AddressVerificationPage } from "../pageobjects/address-verification.pag
 import { PageManager } from "../pageobjects/page-manager.page";
 import { fillAddress } from "../utils/form-helper";
 import {
+  PAGE_ROUTES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
-  TEST_NYC_ADDRESS,
-  TEST_OOS_ADDRESS,
   TEST_MULTIMATCH_ADDRESS,
   TEST_MULTIMATCH_ADDRESS_EAST,
   TEST_MULTIMATCH_ADDRESS_WEST,
+  TEST_NYC_ADDRESS,
+  TEST_OOS_ADDRESS,
 } from "../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
@@ -26,9 +27,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test.describe("displays elements", () => {
       test("displays headings and buttons", async ({ page }) => {
-        await page.goto(
-          `/library-card/address-verification?newCard=true&lang=${lang}`
-        );
+        await page.goto(PAGE_ROUTES.ADDRESS_VERIFICATION(lang));
         await expect(addressVerificationPage.mainHeading).toBeVisible();
         await expect(addressVerificationPage.stepHeading).toBeVisible();
         await expect(addressVerificationPage.homeAddressHeading).toBeVisible();
@@ -39,7 +38,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test.describe("enters home address and alternate address", () => {
       test.beforeEach(async ({ page }) => {
-        await page.goto(`/library-card/location?newCard=true&lang=${lang}`);
+        await page.goto(PAGE_ROUTES.ADDRESS(lang));
       });
 
       test("enters valid addresses", async () => {

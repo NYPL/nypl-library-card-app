@@ -1,7 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { AddressPage } from "../pageobjects/address.page";
 import { fillAddress } from "../utils/form-helper";
-import { SUPPORTED_LANGUAGES, TEST_OOS_ADDRESS } from "../utils/constants";
+import {
+  PAGE_ROUTES,
+  SUPPORTED_LANGUAGES,
+  TEST_OOS_ADDRESS,
+} from "../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`home address page in ${name} (${lang})`, () => {
@@ -11,7 +15,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     test.beforeEach(async ({ page }) => {
       appContent = require(`../../public/locales/${lang}/common.json`);
       addressPage = new AddressPage(page, appContent);
-      await page.goto(`/library-card/location?newCard=true&lang=${lang}`);
+      await page.goto(PAGE_ROUTES.ADDRESS(lang));
     });
 
     test.describe("displays elements", () => {
@@ -63,7 +67,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(addressPage.stateError).toBeVisible();
         await expect(addressPage.postalCodeError).toBeVisible();
       });
-      
+
       test("enter too many characters", async () => {
         await addressPage.postalCodeInput.fill("123456");
         await addressPage.nextButton.click();

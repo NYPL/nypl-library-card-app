@@ -1,17 +1,18 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import {
-  //   fillAccountInfo,
+  //  fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
 } from "../utils/form-helper";
 import {
+  PAGE_ROUTES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
-  // TEST_CUSTOMIZE_ACCOUNT,
-  TEST_OOS_ADDRESS,
+  // TEST_ACCOUNT,
   TEST_NYC_ADDRESS,
-  // TEST_PATRON_INFO,
+  TEST_OOS_ADDRESS,
+  TEST_PATRON,
 } from "../utils/constants";
 import {
   getPatronID,
@@ -25,6 +26,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let pageManager: PageManager;
     let appContent: any;
     const scrapedBarcode: string | null = null;
+
+    test.beforeEach(async ({ page }) => {
+      appContent = require(`../../public/locales/${lang}/common.json`);
+      pageManager = new PageManager(page, appContent);
+    });
 
     test.afterAll("deletes patron", async () => {
       if (scrapedBarcode) {
@@ -41,18 +47,15 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     });
 
     test("displays patron information on congrats page", async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
-      pageManager = new PageManager(page, appContent);
-
       await test.step("begins at landing", async () => {
-        await page.goto(`/library-card/new?newCard=true&lang=${lang}`);
+        await page.goto(PAGE_ROUTES.LANDING(lang));
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
         await pageManager.landingPage.getStartedButton.click();
       });
 
       await test.step("enters personal information", async () => {
         await expect(pageManager.personalPage.stepHeading).toBeVisible();
-        await fillPersonalInfo(pageManager.personalPage);
+        await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
         await pageManager.personalPage.nextButton.click();
       });
 
@@ -94,23 +97,23 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       // await test.step("enters account information", async () => {
       //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      //   await fillAccountInfo(pageManager.accountPage);
+      //   await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       //   await pageManager.accountPage.nextButton.click();
       // });
 
       // await test.step("displays personal information on review page", async () => {
       //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       //   await expect(
-      //     pageManager.reviewPage.getText(TEST_PATRON_INFO.firstName)
+      //     pageManager.reviewPage.getText(TEST_PATRON.firstName)
       //   ).toBeVisible();
       //   await expect(
-      //     pageManager.reviewPage.getText(TEST_PATRON_INFO.lastName)
+      //     pageManager.reviewPage.getText(TEST_PATRON.lastName)
       //   ).toBeVisible();
       //   await expect(
-      //     pageManager.reviewPage.getText(TEST_PATRON_INFO.dateOfBirth)
+      //     pageManager.reviewPage.getText(TEST_PATRON.dateOfBirth)
       //   ).toBeVisible();
       //   await expect(
-      //     pageManager.reviewPage.getText(TEST_PATRON_INFO.email)
+      //     pageManager.reviewPage.getText(TEST_PATRON.email)
       //   ).toBeVisible();
       //   await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
       // });
@@ -144,15 +147,12 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       // await test.step("displays account information on review page", async () => {
       //   await expect(
-      //     pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.username)
+      //     pageManager.reviewPage.getText(TEST_ACCOUNT.username)
       //   ).toBeVisible();
-      //   await expect(pageManager.reviewPage.showPasswordCheckbox).toBeVisible();
-      //   await pageManager.reviewPage.showPasswordCheckbox.check();
+      //   await expect(pageManager.reviewPage.showPasswordLabel).toBeVisible();
+      //   await pageManager.reviewPage.showPasswordLabel.check();
       //   await expect(
-      //     pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.password)
-      //   ).toBeVisible();
-      //   await expect(
-      //     pageManager.reviewPage.getText(TEST_CUSTOMIZE_ACCOUNT.defaultLibrary)
+      //     pageManager.reviewPage.getText(TEST_ACCOUNT.password)
       //   ).toBeVisible();
       // });
 
@@ -161,9 +161,16 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   await pageManager.reviewPage.submitButton.click();
       // });
 
+      // await test.step("displays temporary card elements on congrats page", async () => {
+      //   await expect(pageManager.congratsPage.mainHeading).toBeVisible();
+      //   await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
+      //   await expect(pageManager.congratsPage.temporaryCardBanner).toBeVisible();
+      //   await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
+      //   await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
+      // });
+
       // await test.step("displays generated library card on congrats page", async () => {
-      //   const fullName = `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`;
-      //   await expect(pageManager.congratsPage.stepHeading).toBeVisible();
+      //   const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
       //   await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       //   await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
       //   await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
@@ -179,7 +186,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     await pageManager.congratsPage.patronBarcodeNumber.textContent();
       //   expect(scrapedBarcode).not.toBeNull();
       // });
-      // await test.step("verify patron data on sierra database", async () => {
+
+      // await test.step("verifies patron data in Sierra database", async () => {
       //   const patronID = await getPatronID(scrapedBarcode);
       //   const patronData = await getPatronData(patronID);
 
@@ -210,9 +218,9 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   ).toBeGreaterThan(0);
 
       //   const expectedName =
-      //     `${TEST_PATRON_INFO.lastName}, ${TEST_PATRON_INFO.firstName}`.toUpperCase();
-      //   const expectedDOB = formatSierraDate(TEST_PATRON_INFO.dateOfBirth);
-      //   const expectedEmail = TEST_PATRON_INFO.email.toLowerCase();
+      //     `${TEST_PATRON.lastName}, ${TEST_PATRON.firstName}`.toUpperCase();
+      //   const expectedDOB = formatSierraDate(TEST_PATRON.dateOfBirth);
+      //   const expectedEmail = TEST_PATRON.email.toLowerCase();
       //   const patronEmails = patronData.emails?.map((email) =>
       //     email.toLowerCase()
       //   );

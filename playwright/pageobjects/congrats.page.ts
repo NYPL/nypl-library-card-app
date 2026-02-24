@@ -1,24 +1,26 @@
 import { Page, Locator } from "@playwright/test";
-import { TEST_PATRON_INFO } from "../utils/constants";
 
 export class CongratsPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
-  readonly stepHeading: Locator;
-  readonly getStartedHeading: Locator;
+  readonly temporaryHeading: Locator;
   readonly memberNameHeading: Locator;
   readonly memberName: Locator;
+  readonly patronBarcodeNumber: Locator;
+  readonly EXPECTED_BARCODE_PREFIX = "255";
   readonly issuedDateHeading: Locator;
   readonly issuedDate: Locator;
   readonly libraryCardBackground: Locator;
   readonly locationsLink: Locator;
   readonly photoIdAndProofOfAddressLink: Locator;
+  readonly temporaryCardBanner: Locator;
+  readonly learnMoreLink: Locator;
   readonly getHelpEmailLink: Locator;
+  readonly getStartedHeading: Locator;
   readonly loginLink: Locator;
+  readonly nyplLocationLink: Locator;
   readonly findOutLibraryLink: Locator;
   readonly discoverLink: Locator;
-  readonly patronBarcodeNumber: Locator;
-  readonly EXPECTED_BARCODE_PREFIX = "255";
 
   constructor(page: Page) {
     this.page = page;
@@ -26,27 +28,18 @@ export class CongratsPage {
       name: "Apply for a Library Card Online",
       level: 1,
     });
-    this.stepHeading = page.getByRole("heading", {
+    this.temporaryHeading = page.getByRole("heading", {
       name: "Congratulations! You now have a temporary digital New York Public Library card.",
-      level: 2,
-    });
-    this.getStartedHeading = page.getByRole("heading", {
-      name: "Get started with The New York Public Library",
       level: 2,
     });
     this.memberNameHeading = page
       .locator("#member-name")
       .getByText("MEMBER NAME");
-    this.memberName = page.getByText(
-      `${TEST_PATRON_INFO.firstName} ${TEST_PATRON_INFO.lastName}`,
-      { exact: true }
-    );
+    this.memberName = page.locator("#member-name .content");
     this.issuedDateHeading = page.locator("#issued").getByText("ISSUED");
     this.issuedDate = page.locator("#issued").getByText(this.getDate(), {
       exact: true,
     });
-
-    this.patronBarcodeNumber = page.locator(".barcode");
     this.libraryCardBackground = page.locator(".background-lion");
     this.locationsLink = page.getByRole("link", {
       name: "NYPL location",
@@ -54,10 +47,23 @@ export class CongratsPage {
     this.photoIdAndProofOfAddressLink = page.getByRole("link", {
       name: "photo ID and proof of address",
     });
+    this.temporaryCardBanner = page.locator("aside", {
+      hasText: "This is a temporary card",
+    });
+    this.learnMoreLink = this.temporaryCardBanner.getByRole("link", {
+      name: /learn more/i,
+    });
     this.getHelpEmailLink = page.getByRole("link", {
       name: "gethelp@nypl.org",
     });
+    this.getStartedHeading = page.getByRole("heading", {
+      name: "Get started with The New York Public Library",
+      level: 2,
+    });
     this.loginLink = page.getByRole("link", { name: "Log into your account" });
+    this.nyplLocationLink = page.getByRole("link", {
+      name: "NYPL location",
+    });
     this.findOutLibraryLink = page.getByRole("link", {
       name: "Find out about all the Library has to offer.",
     });
