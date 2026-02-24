@@ -8,7 +8,7 @@
     "title": "只需简单几步，即可立即申请图书卡",
     "description": {
       "part1": "您是否在纽约州居住、工作、上学或缴付物业税？立即申请免费图书卡，即可享用纽约公共图书馆提供的种种资源！",
-      "part2": "一旦您开始申请，就可以立即使用电子书和其他数字资源。然后，前往任何一家NYPL分馆，验证您的信息并领取NYPL实体图书卡。通过这张图书卡，您可以享用图书馆的更多资源，包括实体书籍和文化通行证（Culture Pass）计划。",
+      "part2": "一旦您开始申请，就可以立即使用电子书和其他<a href='https://www.nypl.org/help/services/remote-resources'>数字资源</a>。然后，<a href='https://www.nypl.org/locations'>前往任何一家NYPL分馆</a>，验证您的信息并领取NYPL实体图书卡。通过这张图书卡，您可以享用图书馆的更多资源，包括实体书籍和文化通行证（Culture Pass）计划。",
       "part3": "如果您是其他州的居民，目前旅居于纽约，您可以使用此表格申请临时图书卡。在您来访之前，您可以预先要求借阅实体资料和预约研究时间。如需使用更多图书馆服务，您必须在30天内亲自前往任何一家NYPL分馆验证您的图书卡。",
       "part4": "如果您来自其他国家，请使用我们专为国际访客提供的<a href='https://www.nypl.org/help/library-card#international-researchers'>替代表格</a>。您可以使用您的临时图书卡要求借阅资料和预约研究时间。",
       "part5": "<a href=\"https://www.nypl.org/library-card\">探索更多</a>关于图书卡的用途！",
@@ -50,7 +50,7 @@
     "title": "第 2 步：地址",
     "address": {
       "title": "居住地址",
-      "description": "如果您居住在美国，请在下方提供您的家庭住址。如果您是其他州的居民，目前旅居于纽约，您可以使用此表格申请临时图书卡。通过临时图书卡，您可以在来访之前要求借阅实体资料和预约研究时间。国际访客请使用我们的<a href'https://legacycatalog.nypl.org/selfreg/patonsite'>替代表格</a>。",
+      "description": "如果您居住在美国，请在下方提供您的家庭住址。如果您是其他州的居民，目前旅居于纽约，您可以使用此表格申请临时图书卡。通过临时图书卡，您可以在来访之前要求借阅实体资料和预约研究时间。国际访客请使用我们的<a href='https://legacycatalog.nypl.org/selfreg/patonsite'>替代表格</a>。",
       "line1": { "label": "街道地址" },
       "line2": { "label": "公寓號碼" },
       "city": { "label": "城市" },
@@ -155,7 +155,7 @@
     "nextSteps": {
       "title": "开始使用纽约公共图书馆",
       "explore": "<b>探索电子书和电子有声书</b>您可以<a href='https://www.nypl.org/books-music-movies/help'>随时随地阅读或聆听</a>各种各样的书籍。",
-      "borrow": "<b>借阅书籍和其他物品</b><a href='{{loginUrl}}'>登录您的帐户</a>并浏览目录。如需借阅实体物品，请前往任何一家<a hreh='https://www.nypl.org/locations'>NYPL分馆</a>验证您的信息并领取实体图书卡。",
+      "borrow": "<b>借阅书籍和其他物品</b><a href='{{loginUrl}}'>登录您的帐户</a>并浏览目录。如需借阅实体物品，请前往任何一家<a href='https://www.nypl.org/locations'>NYPL分馆</a>验证您的信息并领取实体图书卡。",
       "updates": "<b>获取更新</b><a href='https://www.nypl.org/enews'>发现图书馆提供的所有服务。</a>",
       "more": "<b>了解更多</b><a href='https://www.nypl.org/discover-library-card'>发现您可以用图书卡做些什么。</a>"
     }

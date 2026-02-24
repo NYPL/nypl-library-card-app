@@ -8,7 +8,7 @@
     "title": "Solicite hoy mismo una tarjeta de la biblioteca con solo unos pasos",
     "description": {
       "part1": "¿Vive, trabaja, estudia o paga impuestos a la propiedad en el Estado de Nueva York? ¡Obtenga una tarjeta de la biblioteca gratis ahora mismo para acceder a todo lo que La Biblioteca Pública de Nueva York tiene para ofrecer!",
-      "part2": "Llene su solicitud ahora y empiece a utilizar los libros electrónicos y otros recursos digitales de inmediato. Luego, visite cualquier biblioteca de la NYPL para verificar su información y recibir una tarjeta física. Con esta tarjeta, tendrá acceso a muchos otros recursos de la Biblioteca, como libros físicos y el programa Pase cultural.",
+      "part2": "Llene su solicitud ahora y empiece a utilizar los libros electrónicos y otros <a href='https://www.nypl.org/help/services/remote-resources'>recursos digitales</a> de inmediato. Luego, <a href='https://www.nypl.org/locations'>visite cualquier biblioteca de la NYPL</a> para verificar su información y recibir una tarjeta física. Con esta tarjeta, tendrá acceso a muchos otros recursos de la Biblioteca, como libros físicos y el programa Pase cultural.",
       "part3": "Si viene de otro estado a visitar Nueva York, con este formulario puede solicitar una tarjeta temporal. Antes de su visita, puede pedir materiales físicos y programar citas para investigación. Para acceder a otros servicios, debe validar su tarjeta en persona en alguna biblioteca de la NYPL en un plazo de 30 días.",
       "part4": "Si viene de visita desde otro país, utilice<a href='https://www.nypl.org/help/library-card#international-researchers'> el formulario alternativo</a> para turistas internacionales. Con su tarjeta temporal, puede pedir materiales y programar citas para investigación.",
       "part5": "<a href='https://www.nypl.org/library-card'>Obtenga más información</a> sobre a qué puede acceder con su tarjeta de la biblioteca.",
@@ -153,8 +153,8 @@
     },
     "nextSteps": {
       "title": "Comenzar con la Biblioteca Pública de Nueva York",
-      "explore": "<b>Consulte los libros y audiolibros electrónicos</b>Acceda a una gran variedad de títulos y<a href='https://www.nypl.org/books-music-movies/help'> léalos o escúchelos donde quiera</a>.",
-      "borrow": "<b>Pedir prestados libros y más</b><a href='{{loginUrl}}'>Inicie sesión en su cuenta </a> y explore el catálogo. Si quiere pedir materiales físicos, visite alguna biblioteca <a href='https://www.nypl.org/locations'>de la</a> NYPL para verificar su información y recibir una tarjeta física.",
+      "explore": "<b>Consulte los libros y audiolibros electrónicos</b>Acceda a una gran variedad de títulos y <a href='https://www.nypl.org/books-music-movies/help'>léalos o escúchelos donde quiera</a>.",
+      "borrow": "<b>Pedir prestados libros y más</b><a href='{{loginUrl}}'>Inicie sesión en su cuenta </a> y explore el catálogo. Si quiere pedir materiales físicos, visite alguna biblioteca <a href='https://www.nypl.org/locations'>de la NYPL</a> para verificar su información y recibir una tarjeta física.",
       "updates": "<b>Reciba actualizaciones</b><a href='https://www.nypl.org/enews'>Descubra todo lo que la Biblioteca tiene para ofrecer.</a>",
       "more": "<b>Obtener más información</b><a href='https://www.nypl.org/discover-library-card'>Descubra todo lo que puede hacer con su tarjeta de la Biblioteca.</a>"
     }
