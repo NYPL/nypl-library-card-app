@@ -5,12 +5,17 @@
     "title": "Déposez une demande pour une carte de bibliothèque en ligne"
   },
   "home": {
-    "title": "Faites une demande pour obtenir une carte de bibliothèque en quelques étapes simples",
+    "title": "Demandez votre carte de bibliothèque aujourd'hui en quelques étapes faciles",
     "description": {
-      "part1": "Si vous avez 13 ans ou plus et que vous habitez, travaillez, étudiez ou payez des impôts fonciers dans l’État de New York, vous pouvez obtenir immédiatement une carte de bibliothèque numérique gratuite en remplissant ce formulaire en ligne. Il vous suffira ensuite de vous rendre dans votre bibliothèque NYPL la plus proche pour valider vos coordonnées et retirer votre carte NYPL physique. Si votre bibliothèque dans l’État de New York peut être confirmée, vous recevrez immédiatement une carte de bibliothèque numérique gratuite.",
-      "part2": "Les visiteurs qui ne viennent pas de l’État de New York peuvent également remplir ce formulaire pour faire une demande de carte temporaire leur permettant de réserver des articles physiques. Cette carte doit être validée en personne dans les 30 jours, et ne vous permet pas d’avoir accès aux livres électroniques, aux bases de données ou au programme Culture Pass. ",
-      "part3": "<a href=\"https://www.nypl.org/library-card\">D&eacute;couvrez</a> ce &agrave; quoi vous avez acc&egrave;s avec votre carte de biblioth&egrave;que.",
-      "part4": "En soumettant une demande, vous certifiez que vous avez lu et accept&eacute; les <a href=\"https://nypl.org/help/library-card/terms-conditions\">Conditions g&eacute;n&eacute;rales des titulaires de la carte</a> ainsi que notre&nbsp;</span><a href=\"https://www.nypl.org/help/about-nypl/legal-notices/policies-and-rules/fr\">r&egrave;glement int&eacute;rieur</a>. Pour en savoir plus sur l&rsquo;utilisation de vos donn&eacute;es personnelles par la Biblioth&egrave;que, veuillez lire notre <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy/fr\">Politique de confidentialit&eacute;</a>."
+      "part1": "Vous vivez, travaillez, étudiez ou payez des impôts fonciers dans l'État de New York ? Obtenez dès maintenant une carte de bibliothèque gratuite pour accéder à toutes les ressources offertes par La Bibliothèque Publique de New York !",
+      "part2": "Commencez votre demande en ligne et profitez immédiatement de nos livres électroniques et autres ressources numériques. Rendez-vous ensuite dans n'importe quelle bibliothèque NYPL pour valider vos informations et recevoir votre carte NYPL physique. Cette carte vous donnera accès à un vaste choix de services, notamment aux livres papier et au programme Culture Pass.",
+      "part3":"Si vous visitez New York depuis un autre État, vous pouvez déposer une demande pour une carte temporaire en remplissant ce formulaire. Vous pouvez, avant votre visite, réserver des supports physiques et planifier vos rendez-vous de recherche. Pour accéder à d'autres services de la Bibliothèque, vous devrez valider votre carte en personne dans une bibliothèque NYPL dans un délai de 30 jours.",
+      "part4":"Si vous venez d'un autre pays, veuillez utiliser notre<a href=\"https://www.nypl.org/help/library-card#international-researchers\"> formulaire alternatif<a/> réservé aux visiteurs internationaux. Votre carte temporaire vous permettra de réserver des supports et de planifier vos rendez-vous de recherche.",
+      "part5": "<a href=\"https://www.nypl.org/library-card\">D&eacute;couvrez</a> ce &agrave; quoi vous avez acc&egrave;s avec votre carte de biblioth&egrave;que.",
+      "part6": "En soumettant une demande, vous certifiez que vous avez lu et accept&eacute; les <a href=\"https://nypl.org/help/library-card/terms-conditions\">Conditions g&eacute;n&eacute;rales des titulaires de la carte</a> ainsi que notre&nbsp;</span><a href=\"https://www.nypl.org/help/about-nypl/legal-notices/policies-and-rules/fr\">r&egrave;glement int&eacute;rieur</a>. Pour en savoir plus sur l&rsquo;utilisation de vos donn&eacute;es personnelles par la Biblioth&egrave;que, veuillez lire notre <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy/fr\">Politique de confidentialit&eacute;</a>."
+    },
+    "banner": {
+      "text": "À noter : La demande en ligne est réservée aux personnes âgées de 13 ans et plus. Pour bénéficier d'une carte de bibliothèque numérique et d'un accès immédiat aux ressources en ligne, vous devez vous trouver dans l'État de New York au moment de la soumission de votre demande."
     }
   },
   "personal": {
@@ -37,7 +42,7 @@
       "firstName": "Veuillez saisir un prénom valide.",
       "lastName": "Veuillez saisir un nom de famille valide.",
       "birthdate": "Veuillez saisir une date valide, MM/JJ/AAAA, séparée par des barres obliques.",
-      "ageGate": "You must be 13 years or older to continue.",
+      "ageGate": "La demande en ligne est réservée aux personnes âgées de 13 ans et plus.",
       "email": "Veuillez saisir une adresse e-mail valide."
     }
   },
@@ -45,7 +50,7 @@
     "title": "Étape 2/5 : Adresse",
     "address": {
       "title": "Adresse de votre domicile",
-      "description": "Si vous habitez dans la ville de New York, merci d’indiquer l’adresse de votre domicile.",
+      "description": "Si vous vivez aux États-Unis, veuillez indiquer votre adresse personnelle ci-dessous. Si vous visitez New York depuis un autre État, vous pouvez déposer une demande pour une carte temporaire en remplissant ce formulaire. Une carte temporaire vous permet de réserver des supports physiques et de planifier vos rendez-vous de recherche avant votre visite. Les visiteurs internationaux doivent utiliser notre<a href=\"https://legacycatalog.nypl.org/selfreg/patonsite\"> formulaire alternatif</a>.",
       "line1": { "label": "Nom de la rue" },
       "line2": { "label": "Apartment / Suite" },
       "city": { "label": "Ville" },
@@ -57,11 +62,11 @@
     },
     "workAddress": {
       "title": "Étape 2/5 : Autre adresse",
-      "subtitle": "Autre adresse (optionnelle)",
+      "subtitle": "Adresse alternative (facultative)",
       "description": {
-        "part1": "Le processus de demande est légèrement différent selon que vous vivez, travaillez, étudiez ou payez des impôts fonciers à la ville de New York, ailleurs dans l'État de New York ou ailleurs aux États-Unis, et que vous ne faites que visiter la ville de New York. Veuillez sélectionner l'une des options suivantes et remplir les champs obligatoires.",
+        "part1": "Avez-vous une activité professionnelle, suivez-vous des études ou payez-vous des impôts fonciers dans l'État de New York ? Même si vous n'habitez pas à New York, vous pourriez tout de même vous procurer une carte de bibliothèque.",
         "part2": "Si vous travaillez ou étudiez dans la ville de New York, veuillez fournir l'adresse pertinente.",
-        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State.<b>If none of these apply to you, click next.</b>"
+        "part3": "Indiquez l’adresse correspondant à votre travail, vos études, ou figurant sur votre déclaration d’impôts fonciers dans l’État de New York. Si aucune de ces situations ne s’applique à vous, cliquez sur « Suivant »."
       }
     },
     "errorMessage": {
@@ -100,7 +105,8 @@
       "title": "Bibliothèque de rattachement",
       "description": {
         "part1": "Votre choix d'une bibliothèque de rattachement nous permettra de nous assurer que vous trouverez tout ce dont vous avez besoin sur le site qui vous convient le mieux.",
-        "part2": "Vous pouvez passer cette étape et y revenir à tout moment à partir de votre compte."
+        "part2": "Veuillez sélectionner une bibliothèque NYPL dans le menu déroulant ci-dessous afin de définir votre bibliothèque de référence. Si aucune bibliothèque ne vous correspond, veuillez sélectionner « Virtual ». Vous pouvez modifier ce choix à tout moment depuis les paramètres de votre compte.",
+        "part3": "Pour emprunter des articles physiques, vous devez vous rendre dans une bibliothèque NYPL pour valider vos informations et recevoir votre carte physique."
       }
     },
     "termsAndCondition": {
@@ -111,7 +117,8 @@
       "username": "Votre nom d'utilisateur doit être composé de 5 à 25 caractères alphanumériques.",
       "password": "Votre mot de passe doit être constitué d'au moins 8 caractères, notamment un mélange de minuscules et majuscules, y compris des lettres et des chiffres, et contenir au moins un caractère spécial à l'exception d'un point (.)",
       "verifyPassword": "Les deux mots de passe ne correspondent pas.",
-      "acceptTerms": "Vous devez cocher les conditions générales."
+      "acceptTerms": "Vous devez cocher les conditions générales.",
+      "homeLibraryCode": "Un incident est survenu. Veuillez sélectionner une bibliothèque de référence."
     }
   },
   "review": {
@@ -136,12 +143,12 @@
   "confirmation": {
     "title": {
       "metro": "Félicitations ! Vous êtes désormais en possession d'une carte numérique de la Bibliothèque publique de New York.",
-      "temporary": "TEMP"
+      "temporary": "Félicitations ! Vous êtes désormais en possession d'une carte numérique temporaire de la Bibliothèque publique de New York."
     },
     "description": {
       "part1": "Imprimez ou sauvegardez ces informations pour vos dossiers. Dans les 24 heures qui suivent, vous recevrez un e-mail contenant les informations relatives à votre compte.",
       "part2": "Pour emprunter des ouvrages physiques, veuillez vous rendre dans l'une de nos <a href='http://nypl.org/locations'>bibliothèques</a> avec une <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>pièce d'identité avec photo valide et un justificatif de domicile</a> pour remplir la demande de carte physique.",
-      "part3": "Il s'agit d'une carte temporaire qui expirera après 30 jours. Si vous êtes un(e) étudiant(e) dans une université accréditée de New York, un(e) employé(e) d'une entreprise new-yorkaise, mais que vous ne vous trouvez pas physiquement dans la ville ou l'État, ou un chercheur qui se rendra dans un de nos centres de recherche, contactez <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> pour mettre votre carte à jour."
+      "part3": "Il s'agit d'une carte temporaire qui expirera après 30 jours. Si vous vivez, travaillez, étudiez ou payez des impôts fonciers dans l’État de New York, <a href=\"https://www.nypl.org/help/library-card/terms-conditions#renew\">découvrez</a> comment mettre à jour votre carte. Si vous êtes chercheur(e)s planifiant une visite dans plus de 30 jours, ou pour toute autre question, contactez-nous à : gethelp@nypl.org."
     },
     "graphic": {
       "memberName": "Nom de membre",
@@ -150,8 +157,8 @@
     },
     "nextSteps": {
       "title": "Lancez-vous à la découverte de la Bibliothèque publique de New York",
-      "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
-      "borrow": "<b>Emprunter des livres et bien plus encore</b><a href='{{loginUrl}}'>Connectez-vous à votre compte</a> et consultez le catalogue.",
+      "explore": "<b>Explorer les livres électroniques et les livres audio électroniques</b><a href='https://www.nypl.org/books-music-movies/help'>Lisez ou écoutez vos titres préférés où que vous soyez</a> grâce à un accès à notre vaste sélection.",
+      "borrow": "<b>Emprunter des livres et bien plus encore</b><a href='{{loginUrl}}'>Connectez-vous à votre compte</a> et parcourez le catalogue. Pour emprunter des articles physiques, rendez-vous dans n’importe quelle <a href=\"https://www.nypl.org/locations\">bibliothèque NYPL</a> pour valider vos informations et recevoir votre carte physique.",
       "updates": "<b>Recevoir des mises à jour</b><a href='https://www.nypl.org/enews'>Découvrez tout ce que la Bibliothèque a à offrir.</a>",
       "more": "<b>En savoir plus</b><a href='https://www.nypl.org/discover-library-card'>Découvrez tout ce que vous pouvez faire avec votre carte de bibliothèque.</a>"
     }
