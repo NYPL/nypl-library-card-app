@@ -62,7 +62,7 @@ test.describe("displays error messages", () => {
 
     await expect(personalPage.firstNameError).toBeVisible();
     await expect(personalPage.lastNameError).toBeVisible();
-    await expect(personalPage.dateOfBirthError).toBeVisible();
+    await expect(personalPage.dateOfBirthInvalid).toBeVisible();
     await expect(personalPage.emailError).toBeVisible();
   });
 
@@ -70,7 +70,7 @@ test.describe("displays error messages", () => {
     const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("12-25-1984");
     await personalPage.nextButton.click();
-    await expect(personalPage.dateOfBirthError).toBeVisible();
+    await expect(personalPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for YYYY/MM/DD format in date of birth", async ({
@@ -79,7 +79,7 @@ test.describe("displays error messages", () => {
     const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("1984/12/25");
     await personalPage.nextButton.click();
-    await expect(personalPage.dateOfBirthError).toBeVisible();
+    await expect(personalPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for DD/MM/YYYY format in date of birth", async ({
@@ -88,7 +88,7 @@ test.describe("displays error messages", () => {
     const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("25/12/1984");
     await personalPage.nextButton.click();
-    await expect(personalPage.dateOfBirthError).toBeVisible();
+    await expect(personalPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for M/D/YY format in date of birth", async ({
@@ -97,21 +97,21 @@ test.describe("displays error messages", () => {
     const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("1/1/84");
     await personalPage.nextButton.click();
-    await expect(personalPage.dateOfBirthError).toBeVisible();
+    await expect(personalPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for written date of birth", async ({ page }) => {
     const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("December 25, 1984");
     await personalPage.nextButton.click();
-    await expect(personalPage.dateOfBirthError).toBeVisible();
+    await expect(personalPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for earliest date of birth", async ({ page }) => {
     const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("01/01/1902");
     await personalPage.nextButton.click();
-    await expect(personalPage.dateOfBirthError).toBeVisible();
+    await expect(personalPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for date of birth in current year", async ({ page }) => {
@@ -119,7 +119,7 @@ test.describe("displays error messages", () => {
     await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
     await personalPage.dateOfBirthInput.fill("01/01/2026");
     await personalPage.nextButton.click();
-    await expect(personalPage.ageError).toBeVisible();
+    await expect(personalPage.dateOfBirthError).toBeVisible();
   });
 
   test("displays error for date of birth under 13 years old", async ({
@@ -129,14 +129,14 @@ test.describe("displays error messages", () => {
     await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
     await personalPage.dateOfBirthInput.fill("01/01/2014");
     await personalPage.nextButton.click();
-    await expect(personalPage.ageError).toBeVisible();
+    await expect(personalPage.dateOfBirthError).toBeVisible();
   });
 
   test("displays error for future date of birth", async ({ page }) => {
     const personalPage = new PersonalPage(page);
     await personalPage.dateOfBirthInput.fill("12/31/2099");
     await personalPage.nextButton.click();
-    await expect(personalPage.dateOfBirthError).toBeVisible();
+    await expect(personalPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for missing email symbol", async ({ page }) => {
