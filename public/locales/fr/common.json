@@ -148,7 +148,7 @@
     "description": {
       "part1": "Imprimez ou sauvegardez ces informations pour vos dossiers. Dans les 24 heures qui suivent, vous recevrez un e-mail contenant les informations relatives à votre compte.",
       "part2": "Pour emprunter des ouvrages physiques, veuillez vous rendre dans l'une de nos <a href='http://nypl.org/locations'>bibliothèques</a> avec une <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>pièce d'identité avec photo valide et un justificatif de domicile</a> pour remplir la demande de carte physique.",
-      "part3": "Il s'agit d'une carte temporaire qui expirera après 30 jours. Si vous vivez, travaillez, étudiez ou payez des impôts fonciers dans l’État de New York, <a href=\"https://www.nypl.org/help/library-card/terms-conditions#renew\">découvrez</a> comment mettre à jour votre carte. Si vous êtes chercheur(e)s planifiant une visite dans plus de 30 jours, ou pour toute autre question, contactez-nous à : gethelp@nypl.org."
+      "part3": "Il s'agit d'une carte temporaire qui expirera après 30 jours. Si vous vivez, travaillez, étudiez ou payez des impôts fonciers dans l’État de New York, <a href=\"https://www.nypl.org/help/library-card/terms-conditions#renew\">découvrez</a> comment mettre à jour votre carte. Si vous êtes chercheur(e)s planifiant une visite dans plus de 30 jours, ou pour toute autre question, contactez-nous à : <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a>."
     },
     "graphic": {
       "memberName": "Nom de membre",

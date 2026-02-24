@@ -148,7 +148,7 @@
     "description": {
       "part1": "기록용으로 이 정보를 인쇄해두거나 보관해 두십시오. 24시간 이내로 귀하의 계정에 대한 자세한 정보와 함께 이메일을 받으시게 됩니다.",
       "part2": "실제 자료를 대여하시려면 저희 <a href='http://nypl.org/locations'>지점</a> 중 한 곳에 유효한 <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>사진 부착 신분증과 주소지 증명</a>을 지참하고 방문해 주십시오. 그리고 실제 카드를 받기 위한 신청을 마쳐 주십시오.",
-      "part3": "해당 카드는 임시 카드이며 30일 후에 만료됩니다. 뉴욕주에서 거주 또는 근무하거나, 학교에 다니거나, 재산세를 납부하시는 경우, 카드 업데이트 방법에 대해<a href='https://www.nypl.org/help/library-card/terms-conditions#renew'> 자세히 알아보시기 바랍니다</a>. 30일 이후 방문을 계획 중인 연구자이시거나 기타 문의 사항이 있으시면 gethelp@nypl.org로 연락해 주십시오."
+      "part3": "해당 카드는 임시 카드이며 30일 후에 만료됩니다. 뉴욕주에서 거주 또는 근무하거나, 학교에 다니거나, 재산세를 납부하시는 경우, 카드 업데이트 방법에 대해<a href='https://www.nypl.org/help/library-card/terms-conditions#renew'> 자세히 알아보시기 바랍니다</a>. 30일 이후 방문을 계획 중인 연구자이시거나 기타 문의 사항이 있으시면 <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a>로 연락해 주십시오."
     },
     "graphic": {
       "memberName": "회원 이름",

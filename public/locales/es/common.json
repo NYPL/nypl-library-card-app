@@ -144,7 +144,7 @@
     "description": {
       "part1": "Imprima o guarde esta información para su registro. En las próximas 24 horas, recibirá un correo electrónico con los detalles de su cuenta.",
       "part2": "Para pedir prestados materiales físicos, visite una de nuestras <a href='http://nypl.org/locations'>localidades</a> con una <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>identificación válida con foto y prueba de domicilio particular</a> para completar la solicitud de una tarjeta física.",
-      "part3": "Esta tarjeta es temporal y vencerá en 30 días. Si vive, trabaja, estudia o paga impuestos a la propiedad en el Estado de Nueva York,<a href='https://www.nypl.org/help/library-card/terms-conditions#renew'> obtenga más información</a> sobre cómo actualizar su tarjeta. Si se dedica a la investigación y está planeando una visita dentro de más de 30 días, o tiene alguna pregunta, envíe un correo electrónico a gethelp@nypl.org."
+      "part3": "Esta tarjeta es temporal y vencerá en 30 días. Si vive, trabaja, estudia o paga impuestos a la propiedad en el Estado de Nueva York,<a href='https://www.nypl.org/help/library-card/terms-conditions#renew'> obtenga más información</a> sobre cómo actualizar su tarjeta. Si se dedica a la investigación y está planeando una visita dentro de más de 30 días, o tiene alguna pregunta, envíe un correo electrónico a <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a>."
     },
     "graphic": {
       "memberName": "Nombre de miembro",
