@@ -322,7 +322,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("01/01/2026");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.ageError).toBeVisible();
   });
 
   test("displays error for future date of birth", async ({ page }) => {
