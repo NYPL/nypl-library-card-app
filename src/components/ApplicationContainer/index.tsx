@@ -21,7 +21,12 @@ const ApplicationContainer = ({ children, problemDetail }) => {
   const { state } = useFormDataContext();
   const { errorObj } = state;
   const errorToDisplay = problemDetail ? problemDetail : errorObj;
-  const finalLang = Array.isArray(lang) && lang.length > 0 ? lang[0] : "en";
+  const finalLang =
+    typeof lang === "string"
+      ? lang
+      : Array.isArray(lang) && lang.length > 0
+        ? lang[0]
+        : "en";
 
   // If there are errors, focus on the element that displays those errors,
   // for client-side rendering.
