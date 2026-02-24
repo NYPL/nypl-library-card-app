@@ -39,11 +39,11 @@
       "labelText": "是的，我想收到有关NYPL活动和服务的信息"
     },
     "errorMessage": {
-      "firstName": "请输入有效的名字。",
-      "lastName": "请输入有效的姓氏。",
-      "birthdate": "请输入有效的日期（月月/日日/年年年年，包括斜杠）。",
-      "ageGate": "You must be 13 years or older to continue.",
-      "email": "请输入有效的电子邮件地址。"
+      "firstName": "出现了问题。请输入有效的名字。",
+      "lastName": "出现了问题。请输入有效的姓氏。",
+      "birthdate": "出现了问题。请输入有效的日期（月月/日日/年年年年，包括斜杠）。",
+      "ageGate": "出现了问题。您必须至少年满13岁才能在线申请。",
+      "email": "出现了问题。请输入有效的电子邮件地址。"
     }
   },
   "location": {
@@ -67,10 +67,10 @@
       }
     },
     "errorMessage": {
-      "line1": "请输入有效的街道地址。",
-      "city": "请输入有效的城市名称。",
-      "state": "请输入 2 个字符的州简称。",
-      "zip": "请输入 5 或 9 位邮政编码。"
+      "line1": "出现了问题。请输入有效的街道地址。",
+      "city": "出现了问题。请输入有效的城市名称。",
+      "state": "出现了问题。请输入 2 个字符的州简称。",
+      "zip": "出现了问题。请输入 5 或 9 位邮政编码。"
     }
   },
   "verifyAddress": {
@@ -111,10 +111,10 @@
       "text": "提交申请，即表示您理解并同意我们的<a href='https://www.nypl.org/help/library-card/terms-conditions'>持卡人条款和条件</a>，并同意我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>规范与法则</a>。要了解有关图书馆使用个人资料的更多信息，请阅读我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>隐私政策</a>。"
     },
     "errorMessage": {
-      "username": "用户名需由 5-25 位英文字母数字字符组成。",
-      "password": "密码需包含至少 8 个字符，包括大小写字母、字母和数字并至少包含 1 个特殊字符，句号 (.) 除外。",
-      "verifyPassword": "密码不一致。",
-      "acceptTerms": "须查看条款和细则。",
+      "username": "出现了问题。用户名需由 5-25 位英文字母数字字符组成。",
+      "password": "出现了问题。密码需包含至少 8 个字符，包括大小写字母、字母和数字并至少包含 1 个特殊字符，句号 (.) 除外。",
+      "verifyPassword": "出现了问题。密码不一致。",
+      "acceptTerms": "出现了问题。须查看条款和细则。",
       "homeLibraryCode": "出现了问题。请选择一家区内图书馆。"
     }
   },

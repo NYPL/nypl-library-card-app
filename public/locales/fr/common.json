@@ -39,11 +39,11 @@
       "labelText": "Oui, je souhaite recevoir les informations sur les activités et les services de la NYPL."
     },
     "errorMessage": {
-      "firstName": "Veuillez saisir un prénom valide.",
-      "lastName": "Veuillez saisir un nom de famille valide.",
-      "birthdate": "Veuillez saisir une date valide, MM/JJ/AAAA, séparée par des barres obliques.",
-      "ageGate": "La demande en ligne est réservée aux personnes âgées de 13 ans et plus.",
-      "email": "Veuillez saisir une adresse e-mail valide."
+      "firstName": "Un incident est survenu. Veuillez saisir un prénom valide.",
+      "lastName": "Un incident est survenu. Veuillez saisir un nom de famille valide.",
+      "birthdate": "Un incident est survenu. Veuillez saisir une date valide, MM/JJ/AAAA, séparée par des barres obliques.",
+      "ageGate": "Un incident est survenu. La demande en ligne est réservée aux personnes âgées de 13 ans et plus.",
+      "email": "Un incident est survenu. Veuillez saisir une adresse e-mail valide."
     }
   },
   "location": {
@@ -70,10 +70,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Veuillez saisir une adresse postale valide.",
-      "city": "Veuillez saisir une ville valide.",
-      "state": "Veuillez saisir l'abréviation à 2 lettres de l'état.",
-      "zip": "Veuillez saisir un code postal à 5 ou 9 chiffres."
+      "line1": "Un incident est survenu. Veuillez saisir une adresse postale valide.",
+      "city": "Un incident est survenu. Veuillez saisir une ville valide.",
+      "state": "Un incident est survenu. Veuillez saisir l'abréviation à 2 lettres de l'état.",
+      "zip": "Un incident est survenu. Veuillez saisir un code postal à 5 ou 9 chiffres."
     }
   },
   "verifyAddress": {
@@ -114,10 +114,10 @@
       "text": " En soumettant cette demande, vous certifiez que vous avez lu et accepté les <a href='https://www.nypl.org/help/library-card/terms-conditions'>conditions générales des titulaires de la carte</a> ainsi que notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>règlement intérieur</a>. Pour en savoir plus sur l’utilisation de vos données personnelles par la Bibliothèque, veuillez lire notre <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>politique de confidentialité</a>."
     },
     "errorMessage": {
-      "username": "Votre nom d'utilisateur doit être composé de 5 à 25 caractères alphanumériques.",
-      "password": "Votre mot de passe doit être constitué d'au moins 8 caractères, notamment un mélange de minuscules et majuscules, y compris des lettres et des chiffres, et contenir au moins un caractère spécial à l'exception d'un point (.)",
-      "verifyPassword": "Les deux mots de passe ne correspondent pas.",
-      "acceptTerms": "Vous devez cocher les conditions générales.",
+      "username": "Un incident est survenu. Votre nom d'utilisateur doit être composé de 5 à 25 caractères alphanumériques.",
+      "password": "Un incident est survenu. Votre mot de passe doit être constitué d'au moins 8 caractères, notamment un mélange de minuscules et majuscules, y compris des lettres et des chiffres, et contenir au moins un caractère spécial à l'exception d'un point (.)",
+      "verifyPassword": "Un incident est survenu. Les deux mots de passe ne correspondent pas.",
+      "acceptTerms": "Un incident est survenu. Vous devez cocher les conditions générales.",
       "homeLibraryCode": "Un incident est survenu. Veuillez sélectionner une bibliothèque de référence."
     }
   },

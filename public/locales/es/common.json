@@ -35,10 +35,11 @@
       "labelText": "Sí, me gustaría recibir información sobre los programas y servicios que ofrece la NYPL"
     },
     "errorMessage": {
-      "firstName": "Ingrese un nombre válido.",
-      "lastName": "Ingrese un apellido válido.",
-      "birthdate": "Ingrese una fecha válida: MM/DD/AAAA, incluya las barras.",
-      "email": "Ingrese una dirección de correo electrónico válida."
+      "firstName": "Hubo un problema. Ingrese un nombre válido.",
+      "lastName": "Hubo un problema. Ingrese un apellido válido.",
+      "birthdate": "Hubo un problema. Ingrese una fecha válida: MM/DD/AAAA, incluya las barras.",
+      "ageGate": "Hubo un problema. Debe tener al menos 13 años para solicitar la tarjeta en línea.",
+      "email": "Hubo un problema. Ingrese una dirección de correo electrónico válida."
     }
   },
   "location": {
@@ -65,10 +66,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Ingrese una dirección postal válida.",
-      "city": "Ingrese una ciudad válida.",
-      "state": "Ingrese la abreviación de 2 caracteres del estado.",
-      "zip": "Ingrese un código postal de 5 o 9 dígitos."
+      "line1": "Hubo un problema. Ingrese una dirección postal válida.",
+      "city": "Hubo un problema. Ingrese una ciudad válida.",
+      "state": "Hubo un problema. Ingrese la abreviación de 2 caracteres del estado.",
+      "zip": "Hubo un problema. Ingrese un código postal de 5 o 9 dígitos."
     }
   },
   "verifyAddress": {
@@ -109,10 +110,10 @@
       "text": "Al enviar una solicitud, comprende y acepta nuestros <a href='https://www.nypl.org/help/library-card/terms-conditions'>Términos y condiciones del titular de la tarjeta</a> (en inglés) y acepta nuestras <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Normas y reglamentos generales</a>. Para obtener más información sobre el uso de información personal por parte de la Biblioteca, lea nuestra <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Política de privacidad</a>."
     },
     "errorMessage": {
-      "username": "El nombre de usuario debe tener entre 5 y 25 caracteres alfanuméricos.",
-      "password": "Su contraseña debe tener al menos 8 caracteres, incluyendo una combinación de letras mayúsculas y minúsculas, una combinación de letras y números, y al menos un carácter especial, excepto el punto (.).",
-      "verifyPassword": "Las dos contraseñas no coinciden.",
-      "acceptTerms": "Debe aceptar los términos y condiciones.",
+      "username": "Hubo un problema. El nombre de usuario debe tener entre 5 y 25 caracteres alfanuméricos.",
+      "password": "Hubo un problema. Su contraseña debe tener al menos 8 caracteres, incluyendo una combinación de letras mayúsculas y minúsculas, una combinación de letras y números, y al menos un carácter especial, excepto el punto (.).",
+      "verifyPassword": "Hubo un problema. Las dos contraseñas no coinciden.",
+      "acceptTerms": "Hubo un problema. Debe aceptar los términos y condiciones.",
       "homeLibraryCode": "Hubo un problema. Seleccione una biblioteca principal."
     }
   },

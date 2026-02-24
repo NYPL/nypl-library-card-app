@@ -39,11 +39,11 @@
       "labelText": "Wi, mwen ta renmen resevwa enfòmasyon sou pwogram ak sèvis Bibliyotèk Piblik New York (NYPL) ofri yo."
     },
     "errorMessage": {
-      "firstName": "Tanpri antre yon non ki valab.",
-      "lastName": "Tanpri antre yon siyati ki valab.",
-      "birthdate": "Tanpri antre yon dat ki valab, MM/DD/AAAA, ki gen ladan karaktè oblik yo.",
-      "ageGate": "You must be 13 years or older to continue.",
-      "email": "Tanpri antre yon adrès imèl ki valab."
+      "firstName": "Te gen yon pwoblèm. Tanpri antre yon non ki valab.",
+      "lastName": "Te gen yon pwoblèm. Tanpri antre yon siyati ki valab.",
+      "birthdate": "Te gen yon pwoblèm. Tanpri antre yon dat ki valab, MM/DD/AAAA, ki gen ladan karaktè oblik yo.",
+      "ageGate": "Te gen yon pwoblèm. Ou dwe gen omwen laj 13 lane pou w aplike anliy.",
+      "email": "Te gen yon pwoblèm. Tanpri antre yon adrès imèl ki valab."
     }
   },
   "location": {
@@ -70,10 +70,10 @@
       }
     },
     "errorMessage": {
-      "line1": "Tanpri antre yon non ri ki valab.",
-      "city": "Tanpri antre non yon vil ki valab.",
-      "state": "Tanpri antre fòm abrevyasyon 2 karaktè yon eta.",
-      "zip": "Tanpri antre yon kòd postal ki genyen 5 oswa 9 chif."
+      "line1": "Te gen yon pwoblèm. Tanpri antre yon non ri ki valab.",
+      "city": "Te gen yon pwoblèm. Tanpri antre non yon vil ki valab.",
+      "state": "Te gen yon pwoblèm. Tanpri antre fòm abrevyasyon 2 karaktè yon eta.",
+      "zip": "Te gen yon pwoblèm. Tanpri antre yon kòd postal ki genyen 5 oswa 9 chif."
     }
   },
   "verifyAddress": {
@@ -114,10 +114,10 @@
       "text": "Lè ou soumèt yon aplikasyon, ou konprann epi ou dakò ak <a href='https://www.nypl.org/help/library-card/terms-conditions'>Tèm ak Kondisyon pou moun ki gen kat</a> nou yo epi ou dakò ak <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Règ ak Règleman</a> nou yo. Pou aprann plis sou itilizasyon enfòmasyon pèsonèl Bibliyotèk la, tanpri li <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Règleman sou Vi Prive</a> nou an."
     },
     "errorMessage": {
-      "username": "Non itilizatè a dwe genyen ant 5-25 karaktè alfanimerik.",
-      "password": "Modpas ou a dwe gen omwen 8 karaktè, sa gen ladan yon melanj lèt majiskil ak miniskil, ki enkli yon melanj lèt ak nimewo, epi li dwe gen omwen yon karaktè espesyal eksepte pwen (.)",
-      "verifyPassword": "De modpas yo pa koresponn.",
-      "acceptTerms": "Ou dwe tcheke seksyon Tèm ak Kondisyon yo.",
+      "username": "Te gen yon pwoblèm. Non itilizatè a dwe genyen ant 5-25 karaktè alfanimerik.",
+      "password": "Te gen yon pwoblèm. Modpas ou a dwe gen omwen 8 karaktè, sa gen ladan yon melanj lèt majiskil ak miniskil, ki enkli yon melanj lèt ak nimewo, epi li dwe gen omwen yon karaktè espesyal eksepte pwen (.)",
+      "verifyPassword": "Te gen yon pwoblèm. De modpas yo pa koresponn.",
+      "acceptTerms": "Te gen yon pwoblèm. Ou dwe tcheke seksyon Tèm ak Kondisyon yo.",
       "homeLibraryCode": "Te gen yon pwoblèm. Tanpri seleksyone yon bibliyotèk prensipal."
     }
   },
