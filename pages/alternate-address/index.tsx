@@ -18,15 +18,15 @@ import { Paragraph } from "../../src/components/Paragraph";
 import { PageHeading } from "../../src/components/PageHeading";
 import { Banner } from "../../src/components/Banner";
 import { Trans } from "../../src/components/Trans";
-interface WorkAddressPageProps {
+interface AlternateAddressProps {
   hasUserAlreadyRegistered?: boolean;
   csrfToken: string;
 }
 
-function WorkAddressPage({
+function AlternateAddress({
   hasUserAlreadyRegistered,
   csrfToken,
-}: WorkAddressPageProps) {
+}: AlternateAddressProps) {
   const { t } = useTranslation("common");
   const router = useRouter();
   useEffect(() => {
@@ -73,4 +73,4 @@ export const getServerSideProps: GetServerSideProps = async ({
   };
 };
 
-export default WorkAddressPage;
+export default AlternateAddress;
