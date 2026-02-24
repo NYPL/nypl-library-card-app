@@ -118,3 +118,9 @@ export const PAGE_ROUTES = {
   REVIEW: "/library-card/review?newCard=true",
   CONGRATS: "/library-card/congrats?newCard=true",
 };
+
+export const PATRON_TYPES = {
+  PATRON_TYPE_7: 7,
+  PATRON_TYPE_8: 8,
+  PATRON_TYPE_9: 9,
+};

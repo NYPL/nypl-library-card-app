@@ -12,6 +12,7 @@ import {
   TEST_NYC_ADDRESS,
   TEST_PATRON,
   PAGE_ROUTES,
+  PATRON_TYPES,
 } from "../utils/constants";
 import {
   getPatronID,
@@ -188,6 +189,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
           emails: expect.any(Array),
           addresses: expect.any(Array),
           birthDate: expect.any(String),
+          patronType: expect.any(Number),
         })
       );
 
@@ -233,6 +235,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       expect(patronData.birthDate).toBe(expectedDOB);
       expect(actualAddressText).toMatch(expectedAddress);
       expect(patronEmails).toContain(expectedEmail);
+      expect(patronData.patronType).toBe(PATRON_TYPES.PATRON_TYPE_7);
     });
   });
 });
