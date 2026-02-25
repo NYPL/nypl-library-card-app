@@ -107,7 +107,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
         await personalPage.dateOfBirthInput.fill("01/01/2026");
         await personalPage.nextButton.click();
-        await expect(personalPage.dateOfBirthError).toBeVisible();
+        await expect(personalPage.ageError).toBeVisible();
       });
 
       test("displays error for future date of birth", async () => {
