@@ -39,7 +39,7 @@ export class PageManager {
   }
 
   get accountPage(): AccountPage {
-    return new AccountPage(this.page);
+    return new AccountPage(this.page, this.appContent);
   }
 
   get reviewPage(): ReviewPage {
@@ -49,6 +49,7 @@ export class PageManager {
   get congratsPage(): CongratsPage {
     return new CongratsPage(this.page);
   }
+
   get globalComponents(): GlobalComponentsPage {
     return new GlobalComponentsPage(this.page);
   }

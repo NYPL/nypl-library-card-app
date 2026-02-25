@@ -23,7 +23,16 @@ const AcceptTermsForm: React.FC = () => {
       <Paragraph m={0}>
         <Trans
           i18nKey="account.termsAndCondition.text"
-          components={{ a: <Link variant="external" /> }}
+          values={{
+            termsConditions: t("account.termsAndCondition.termsConditions"),
+            rulesRegulations: t("account.termsAndCondition.rulesRegulations"),
+            privacyPolicy: t("account.termsAndCondition.privacyPolicy"),
+          }}
+          components={{
+            a1: <Link key="terms" variant="external" />,
+            a2: <Link key="rules" variant="external" />,
+            a3: <Link key="privacy" variant="external" />,
+          }}
         />
       </Paragraph>
 

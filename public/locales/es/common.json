@@ -116,7 +116,10 @@
     },
     "termsAndCondition": {
       "label": "Sí, acepto los términos y condiciones.",
-      "text": "Al enviar una solicitud, comprende y acepta nuestros <a href='https://www.nypl.org/help/library-card/terms-conditions'>Términos y condiciones del titular de la tarjeta</a> (en inglés) y acepta nuestras <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Normas y reglamentos generales</a>. Para obtener más información sobre el uso de información personal por parte de la Biblioteca, lea nuestra <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Política de privacidad</a>."
+      "text": "Al enviar una solicitud, comprende y acepta nuestros <a1 href='https://www.nypl.org/help/library-card/terms-conditions'>{{termsConditions}}</a1> (en inglés) y acepta nuestras <a2 href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>{{rulesRegulations}}</a2>. Para obtener más información sobre el uso de información personal por parte de la Biblioteca, lea nuestra <a3 href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>{{privacyPolicy}}</a3>.",
+      "termsConditions": "Términos y condiciones del titular de la tarjeta",
+      "rulesRegulations": "Normas y reglamentos generales",
+      "privacyPolicy": "Política de privacidad"
     },
     "errorMessage": {
       "username": "Hubo un problema. El nombre de usuario debe tener entre 5 y 25 caracteres alfanuméricos.",
