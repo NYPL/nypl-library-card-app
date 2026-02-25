@@ -73,20 +73,20 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         });
       });
 
-      // await test.step("confirms address verification", async () => {
-      //   await expect(
-      //     pageManager.addressVerificationPage.stepHeading
-      //   ).toBeVisible();
-      //   await pageManager.addressVerificationPage
-      //     .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-      //     .check();
-      //   await pageManager.addressVerificationPage.nextButton.click();
-      //   await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-      //     {
-      //       timeout: SPINNER_TIMEOUT,
-      //     }
-      //   );
-      // });
+      await test.step("confirms address verification", async () => {
+        await expect(
+          pageManager.addressVerificationPage.stepHeading
+        ).toBeVisible();
+        await pageManager.addressVerificationPage
+          .getHomeAddressOption(TEST_OOS_ADDRESS.street)
+          .check();
+        await pageManager.addressVerificationPage.nextButton.click();
+        await expect(
+          pageManager.addressVerificationPage.spinner
+        ).not.toBeVisible({
+          timeout: SPINNER_TIMEOUT,
+        });
+      });
 
       // await test.step("enters account information", async () => {
       //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
