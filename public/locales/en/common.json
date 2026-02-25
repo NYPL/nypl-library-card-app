@@ -154,7 +154,7 @@
     "description": {
       "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
       "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
-      "part3": "<b>This is a temporary card and will expire in 30 days.</b> If you live, work, attend school, or pay property taxes in New York State, <a href='https://www.nypl.org/help/library-card/terms-conditions#renew'>learn more</a> about how to update your card. If you're a researcher planning an upcoming visit more than 30 days from now, and for all other questions, contact  <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a> ."
+      "part3": "<b>This is a temporary card and will expire in 30 days.</b> If you live, work, attend school, or pay property taxes in New York State, <a href='https://www.nypl.org/help/library-card/terms-conditions#renew'>learn more</a> about how to update your card. If you're a researcher planning an upcoming visit more than 30 days from now, and for all other questions, contact  <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a>."
     },
     "graphic": {
       "memberName": "MEMBER NAME",

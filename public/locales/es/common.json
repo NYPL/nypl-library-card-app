@@ -5,16 +5,24 @@
     "title": "Solicite una tarjeta de la Biblioteca en línea"
   },
   "home": {
-    "title": "Solicite hoy mismo una tarjeta de la biblioteca en tan solo unos pasos",
+    "title": "Solicite hoy mismo una tarjeta de la biblioteca con solo unos pasos",
     "description": {
-      "part1": "Si es mayor de 13 años y vive, trabaja, estudia o paga impuestos a la propiedad en el estado de Nueva York, puede obtener una tarjeta gratis de la biblioteca ahora mismo completando esta solicitud en línea. Luego, visite la biblioteca de la NYPL más cercana para validar sus datos y recibir una tarjeta física de la NYPL. Si podemos confirmar su ubicación dentro del estado de Nueva York, recibirá ahora mismo una tarjeta digital gratis de la biblioteca. ",
-      "part2": "Los visitantes de fuera del estado de Nueva York también pueden utilizar este formulario para solicitar una tarjeta temporal que les permite reservar materiales físicos. Esta tarjeta se debe validar en persona en un plazo de 30 días y no brinda acceso a libros electrónicos, bases de datos ni al programa Culture Pass.",
-      "part3": "<a href='https://www.nypl.org/library-card'>{{whatYouCanAccess}}</a> sobre a qué puede acceder con su tarjeta de la biblioteca.",
+      "part1": "¿Vive, trabaja, estudia o paga impuestos a la propiedad en el Estado de Nueva York? ¡Obtenga una tarjeta de la biblioteca gratis ahora mismo para acceder a todo lo que La Biblioteca Pública de Nueva York tiene para ofrecer!",
+      "part2": "Llene su solicitud ahora y empiece a utilizar los libros electrónicos y otros <a href='https://www.nypl.org/help/services/remote-resources'>{{digitalResources}}</a> de inmediato. Luego, <a href='https://www.nypl.org/locations'>{{visitNYPL}}</a> para verificar su información y recibir una tarjeta física. Con esta tarjeta, tendrá acceso a muchos otros recursos de la Biblioteca, como libros físicos y el programa Pase cultural.",
+      "digitalResources": "recursos digitales",
+      "visitNYPL": "visite cualquier biblioteca de la NYPL",
+      "part3": "Si viene de otro estado a visitar Nueva York, con este formulario puede solicitar una tarjeta temporal. Antes de su visita, puede pedir materiales físicos y programar citas para investigación. Para acceder a otros servicios, debe validar su tarjeta en persona en alguna biblioteca de la NYPL en un plazo de 30 días.",
+      "part4": "Si viene de visita desde otro país, utilice <a href='https://www.nypl.org/help/library-card#international-researchers'>{{alternativeForm}}</a> para turistas internacionales. Con su tarjeta temporal, puede pedir materiales y programar citas para investigación.",
+      "alternativeForm": "el formulario alternativo",
+      "part5": "<a href='https://www.nypl.org/library-card'>{{whatYouCanAccess}}</a> sobre a qué puede acceder con su tarjeta de la biblioteca.",
       "whatYouCanAccess": "Obtenga más información",
-      "part4": "Al presentar una solicitud, usted entiende y est&aacute; de acuerdo con nuestros <a href=\"https://nypl.org/help/library-card/terms-conditions\">{{termsConditions}}</a> y con nuestras <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/policies-and-rules/es\">{{rulesRegulations}}</a>. Para obtener m&aacute;s informaci&oacute;n sobre c&oacute;mo la Biblioteca usa la informaci&oacute;n personal, consulte nuestra <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy/es\">{{privacyPolicy}}</a>.",
-      "termsConditions": "Términos y condiciones para titulares de tarjeta",
+      "part6": "Al presentar una solicitud, usted entiende y est&aacute; de acuerdo con nuestros <a href=\"https://nypl.org/help/library-card/terms-conditions\">{{termsConditions}}</a> y con nuestras <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/policies-and-rules/es\">{{rulesRegulations}}</a>. Para obtener m&aacute;s informaci&oacute;n sobre c&oacute;mo la Biblioteca usa la informaci&oacute;n personal, consulte nuestra <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy/es\">{{privacyPolicy}}</a>.",
+      "termsConditions": "T&eacute;rminos y condiciones para titulares de tarjeta",
       "rulesRegulations": "Reglas y normas",
-      "privacyPolicy": "Política de privacidad"
+      "privacyPolicy": "Pol&iacute;tica de privacidad"
+    },
+    "banner": {
+      "text": "Tenga en cuenta que debe tener al menos 13 años para solicitar la tarjeta en línea. Para obtener una tarjeta electrónica y acceder de inmediato a los recursos en línea, debe estar en el Estado de Nueva York cuando presente la solicitud."
     }
   },
   "personal": {
@@ -34,17 +42,18 @@
       "labelText": "Sí, me gustaría recibir información sobre los programas y servicios que ofrece la NYPL"
     },
     "errorMessage": {
-      "firstName": "Ingrese un nombre válido.",
-      "lastName": "Ingrese un apellido válido.",
-      "birthdate": "Ingrese una fecha válida: MM/DD/AAAA, incluya las barras.",
-      "email": "Ingrese una dirección de correo electrónico válida."
+      "firstName": "Hubo un problema. Ingrese un nombre válido.",
+      "lastName": "Hubo un problema. Ingrese un apellido válido.",
+      "birthdate": "Hubo un problema. Ingrese una fecha válida: MM/DD/AAAA, incluya las barras.",
+      "ageGate": "Hubo un problema. Debe tener al menos 13 años para solicitar la tarjeta en línea.",
+      "email": "Hubo un problema. Ingrese una dirección de correo electrónico válida."
     }
   },
   "location": {
     "title": "Paso 2 de 5: Dirección",
     "address": {
       "title": "Dirección de domicilio",
-      "description": "Si vive en la ciudad de Nueva York, por favor complete el formulario de domicilio.",
+      "description": "Si vive en Estados Unidos, indique su dirección a continuación. Si viene de otro estado a visitar Nueva York, con este formulario puede solicitar una tarjeta temporal. Una tarjeta temporal le permite pedir materiales físicos y programar citas para investigación antes de su visita. Los turistas internacionales deben utilizar el <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>formulario alternativo</a>.",
       "line1": { "label": "Calle" },
       "line2": { "label": "Departamento/Suite" },
       "city": { "label": "Ciudad" },
@@ -58,16 +67,16 @@
       "title": "Paso 2 de 5: Dirección alternativa",
       "subtitle": "Dirección alternativa (opcional)",
       "description": {
-        "part1": "El proceso de solicitud es un poco diferente dependiendo de si usted vive, trabaja, estudia o paga impuestos sobre la propiedad en la ciudad de Nueva York, en otro lugar del estado de Nueva York o en otro lugar de Estados Unidos, o si solo está de visita en la ciudad de Nueva York. Seleccione una de las siguientes opciones y complete los campos obligatorios.",
+        "part1": "¿Trabaja, estudia o paga impuestos a la propiedad en el Estado de Nueva York? Incluso si no vive en Nueva York, puede solicitar una tarjeta de la biblioteca.",
         "part2": "Si trabaja o estudia en la ciudad de Nueva York, indique la dirección.",
-        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State.<b>If none of these apply to you, click next.</b>"
+        "part3": "Indique la dirección de su trabajo, escuela o lugar donde paga impuestos a la propiedad en el Estado de Nueva York. Si ninguna de estas opciones le corresponde, haga clic en “Siguiente”."
       }
     },
     "errorMessage": {
-      "line1": "Ingrese una dirección postal válida.",
-      "city": "Ingrese una ciudad válida.",
-      "state": "Ingrese la abreviación de 2 caracteres del estado.",
-      "zip": "Ingrese un código postal de 5 o 9 dígitos."
+      "line1": "Hubo un problema. Ingrese una dirección postal válida.",
+      "city": "Hubo un problema. Ingrese una ciudad válida.",
+      "state": "Hubo un problema. Ingrese la abreviación de 2 caracteres del estado.",
+      "zip": "Hubo un problema. Ingrese un código postal de 5 o 9 dígitos."
     }
   },
   "verifyAddress": {
@@ -99,7 +108,8 @@
       "title": "Biblioteca local",
       "description": {
         "part1": "Elegir una biblioteca local, nos ayudará a asegurarnos de que usted obtenga todo lo que necesita de la biblioteca que le resulte más conveniente.",
-        "part2": "Puede omitir este paso y actualizarlo en cualquier momento a través de su cuenta."
+        "part2": "En el menú desplegable a continuación, seleccione una biblioteca de la NYPL como su biblioteca principal. Si no tiene una biblioteca principal, seleccione “Virtual”. Puede actualizar esta información en cualquier momento desde la configuración de su cuenta.",
+        "part3": "Para pedir prestados materiales físicos, puede visitar cualquier biblioteca de la NYPL para verificar su información y recibir una tarjeta física."
       }
     },
     "termsAndCondition": {
@@ -107,10 +117,11 @@
       "text": "Al enviar una solicitud, comprende y acepta nuestros <a href='https://www.nypl.org/help/library-card/terms-conditions'>Términos y condiciones del titular de la tarjeta</a> (en inglés) y acepta nuestras <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Normas y reglamentos generales</a>. Para obtener más información sobre el uso de información personal por parte de la Biblioteca, lea nuestra <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Política de privacidad</a>."
     },
     "errorMessage": {
-      "username": "El nombre de usuario debe tener entre 5 y 25 caracteres alfanuméricos.",
-      "password": "Su contraseña debe tener al menos 8 caracteres, incluyendo una combinación de letras mayúsculas y minúsculas, una combinación de letras y números, y al menos un carácter especial, excepto el punto (.).",
-      "verifyPassword": "Las dos contraseñas no coinciden.",
-      "acceptTerms": "Debe aceptar los términos y condiciones."
+      "username": "Hubo un problema. El nombre de usuario debe tener entre 5 y 25 caracteres alfanuméricos.",
+      "password": "Hubo un problema. Su contraseña debe tener al menos 8 caracteres, incluyendo una combinación de letras mayúsculas y minúsculas, una combinación de letras y números, y al menos un carácter especial, excepto el punto (.).",
+      "verifyPassword": "Hubo un problema. Las dos contraseñas no coinciden.",
+      "acceptTerms": "Hubo un problema. Debe aceptar los términos y condiciones.",
+      "homeLibraryCode": "Hubo un problema. Seleccione una biblioteca principal."
     }
   },
   "review": {
@@ -135,12 +146,12 @@
   "confirmation": {
     "title": {
       "metro":"¡Felicitaciones! Ahora tiene una tarjeta digital de la Biblioteca Pública de Nueva York.",
-      "temporary":"TEMP"
+      "temporary":"¡Felicitaciones! Ahora tiene una tarjeta electrónica temporal de la Biblioteca Pública de Nueva York."
     },
     "description": {
       "part1": "Imprima o guarde esta información para su registro. En las próximas 24 horas, recibirá un correo electrónico con los detalles de su cuenta.",
       "part2": "Para pedir prestados materiales físicos, visite una de nuestras <a href='http://nypl.org/locations'>localidades</a> con una <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>identificación válida con foto y prueba de domicilio particular</a> para completar la solicitud de una tarjeta física.",
-      "part3": "Esta tarjeta es temporal y caducará en 30 días. Si estudia en una universidad acreditada en Nueva York, trabaja en una empresa de la ciudad de Nueva York pero no está físicamente en la ciudad o el estado, o se dedica a investigar y va a visitar uno de nuestros centros de investigación, comuníquese con nosotros <a href='mailto:gethelp@nypl.org'>para actualizar su tarjeta.</a>"
+      "part3": "Esta tarjeta es temporal y vencerá en 30 días. Si vive, trabaja, estudia o paga impuestos a la propiedad en el Estado de Nueva York,<a href='https://www.nypl.org/help/library-card/terms-conditions#renew'> obtenga más información</a> sobre cómo actualizar su tarjeta. Si se dedica a la investigación y está planeando una visita dentro de más de 30 días, o tiene alguna pregunta, envíe un correo electrónico a <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a>."
     },
     "graphic": {
       "memberName": "Nombre de miembro",
@@ -149,8 +160,8 @@
     },
     "nextSteps": {
       "title": "Comenzar con la Biblioteca Pública de Nueva York",
-      "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
-      "borrow": "<b>Pedir prestados libros y más</b><a href='{{loginUrl}}'>Inicie sesión en su cuenta </a> y explore el catálogo.",
+      "explore": "<b>Consulte los libros y audiolibros electrónicos</b>Acceda a una gran variedad de títulos y <a href='https://www.nypl.org/books-music-movies/help'>léalos o escúchelos donde quiera</a>.",
+      "borrow": "<b>Pedir prestados libros y más</b><a href='{{loginUrl}}'>Inicie sesión en su cuenta </a> y explore el catálogo. Si quiere pedir materiales físicos, visite alguna biblioteca <a href='https://www.nypl.org/locations'>de la NYPL</a> para verificar su información y recibir una tarjeta física.",
       "updates": "<b>Reciba actualizaciones</b><a href='https://www.nypl.org/enews'>Descubra todo lo que la Biblioteca tiene para ofrecer.</a>",
       "more": "<b>Obtener más información</b><a href='https://www.nypl.org/discover-library-card'>Descubra todo lo que puede hacer con su tarjeta de la Biblioteca.</a>"
     }
