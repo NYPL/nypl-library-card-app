@@ -63,13 +63,15 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         });
       });
 
-      // await test.step("skips alternate address", async () => {
-      //   await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      //   await pageManager.alternateAddressPage.nextButton.click();
-      //   await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-      //     timeout: SPINNER_TIMEOUT,
-      //   });
-      // });
+      await test.step("skips alternate address", async () => {
+        await expect(
+          pageManager.alternateAddressPage.stepHeading
+        ).toBeVisible();
+        await pageManager.alternateAddressPage.nextButton.click();
+        await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+          timeout: SPINNER_TIMEOUT,
+        });
+      });
 
       // await test.step("confirms address verification", async () => {
       //   await expect(

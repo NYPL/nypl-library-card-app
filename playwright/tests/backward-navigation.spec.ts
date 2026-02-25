@@ -5,10 +5,9 @@ import {
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
-  TEST_PATRON,
-  // TEST_NYC_ADDRESS,
+  TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
-  // TEST_PATRON,
+  TEST_PATRON,
 } from "../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
@@ -78,16 +77,16 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         });
       });
 
-      // await test.step("enters alternate address", async () => {
-      //   await expect(
-      //     pageManager.alternateAddressPage.stepHeading
-      //   ).toBeVisible();
-      //   await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
-      //   await pageManager.alternateAddressPage.nextButton.click();
-      //   await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-      //     timeout: SPINNER_TIMEOUT,
-      //   });
-      // });
+      await test.step("enters alternate address", async () => {
+        await expect(
+          pageManager.alternateAddressPage.stepHeading
+        ).toBeVisible();
+        await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
+        await pageManager.alternateAddressPage.nextButton.click();
+        await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+          timeout: SPINNER_TIMEOUT,
+        });
+      });
 
       // await test.step("confirms address verification", async () => {
       //   await expect(
