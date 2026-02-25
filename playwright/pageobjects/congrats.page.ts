@@ -4,6 +4,7 @@ export class CongratsPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
   readonly temporaryHeading: Locator;
+  // readonly stepHeading: Locator;
   readonly getStartedHeading: Locator;
   readonly memberNameHeading: Locator;
   readonly memberName: Locator;
@@ -27,6 +28,7 @@ export class CongratsPage {
       name: "Apply for a Library Card Online",
       level: 1,
     });
+    // this.stepHeading = page.getByRole("heading" name: "")
     this.temporaryHeading = page.getByRole("heading", {
       name: "Congratulations! You now have a temporary digital New York Public Library card.",
       level: 2,
