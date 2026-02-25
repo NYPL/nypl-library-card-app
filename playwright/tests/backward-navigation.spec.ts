@@ -15,14 +15,16 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let pageManager: PageManager;
     let appContent: any;
 
+    test.beforeEach(async ({ page }) => {
+      appContent = require(`../../public/locales/${lang}/common.json`);
+      pageManager = new PageManager(page, appContent);
+    });
+
     // test("navigates backward to landing without entering info", async ({
     //   page,
     // }) => {
-    //   appContent = require(`../../public/locales/${lang}/common.json`);
-    //   pageManager = new PageManager(page, appContent);
-
     //   await test.step("begins at account page", async () => {
-    //     await page.goto(PAGE_ROUTES.ACCOUNT());
+    //     await page.goto(PAGE_ROUTES.ACCOUNT(lang));
     //     await expect(pageManager.accountPage.stepHeading).toBeVisible();
     //     await expect(pageManager.accountPage.previousButton).toBeVisible();
     //     await pageManager.accountPage.previousButton.click();
@@ -58,9 +60,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     test("retains user-entered info when navigating backward", async ({
       page,
     }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
-      pageManager = new PageManager(page, appContent);
-
       await test.step("enters personal information", async () => {
         await page.goto(PAGE_ROUTES.PERSONAL(lang));
         await expect(pageManager.personalPage.stepHeading).toBeVisible();

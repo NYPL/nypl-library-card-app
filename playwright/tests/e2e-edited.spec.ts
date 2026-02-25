@@ -1,9 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
-import {} from // fillAccountInfo,
-// fillAddress,
-// fillPersonalInfo,
-"../utils/form-helper";
+import {
+  // fillAccountInfo,
+  // fillAddress,
+  fillPersonalInfo,
+} from "../utils/form-helper";
 import {
   PAGE_ROUTES,
   // SPINNER_TIMEOUT,
@@ -11,7 +12,7 @@ import {
   // TEST_ACCOUNT,
   // TEST_EDITED_PATRON,
   // TEST_OOS_ADDRESS,
-  // TEST_PATRON,
+  TEST_PATRON,
 } from "../utils/constants";
 import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
 
@@ -20,6 +21,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let pageManager: PageManager;
     let appContent: any;
     const scrapedBarcode: string | null = null;
+
+    test.beforeEach(async ({ page }) => {
+      appContent = require(`../../public/locales/${lang}/common.json`);
+      pageManager = new PageManager(page, appContent);
+    });
 
     test.afterAll("deletes patron", async () => {
       if (scrapedBarcode) {
@@ -36,19 +42,17 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     });
 
     test("edits personal info on review page", async ({ page }) => {
-      pageManager = new PageManager(page, appContent);
-
       await test.step("begins at landing", async () => {
-        await page.goto(PAGE_ROUTES.LANDING());
+        await page.goto(PAGE_ROUTES.LANDING(lang));
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
         await pageManager.landingPage.getStartedButton.click();
       });
 
-      // await test.step("enters personal information", async () => {
-      //   await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      //   await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      //   await pageManager.personalPage.nextButton.click();
-      // });
+      await test.step("enters personal information", async () => {
+        await expect(pageManager.personalPage.stepHeading).toBeVisible();
+        await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+        await pageManager.personalPage.nextButton.click();
+      });
 
       // await test.step("enters home address", async () => {
       //   await expect(pageManager.addressPage.stepHeading).toBeVisible();

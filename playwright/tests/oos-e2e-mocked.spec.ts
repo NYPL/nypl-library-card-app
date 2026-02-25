@@ -21,9 +21,12 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let pageManager: PageManager;
     let appContent: any;
 
-    test("displays patron information on congrats page", async ({ page }) => {
+    test.beforeEach(async ({ page }) => {
       appContent = require(`../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
+    });
+
+    test("displays patron information on congrats page", async ({ page }) => {
       // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
 
       await test.step("begins at landing", async () => {
