@@ -7,6 +7,7 @@ import {
 } from "../utils/form-helper";
 import {
   PAGE_ROUTES,
+  // PATRON_TYPES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   // TEST_ACCOUNT,
@@ -195,6 +196,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //       emails: expect.any(Array),
       //       addresses: expect.any(Array),
       //       birthDate: expect.any(String),
+      //       patronType: expect.any(Number),
       //     })
       //   );
 
@@ -240,6 +242,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   expect(patronData.birthDate).toBe(expectedDOB);
       //   expect(actualAddressText).toMatch(expectedAddress);
       //   expect(patronEmails).toContain(expectedEmail);
+      //   expect(patronData.patronType).toBe(PATRON_TYPES.PATRON_TYPE_7);
       // });
     });
   });

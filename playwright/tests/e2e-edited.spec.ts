@@ -22,6 +22,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let appContent: any;
     const scrapedBarcode: string | null = null;
 
+    test.beforeEach(async ({ page }) => {
+      appContent = require(`../../public/locales/${lang}/common.json`);
+      pageManager = new PageManager(page, appContent);
+    });
+
     test.afterAll("deletes patron", async () => {
       if (scrapedBarcode) {
         try {
@@ -37,10 +42,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     });
 
     test("edits personal info on review page", async ({ page }) => {
-      pageManager = new PageManager(page, appContent);
-
       await test.step("begins at landing", async () => {
-        await page.goto(PAGE_ROUTES.LANDING());
+        await page.goto(PAGE_ROUTES.LANDING(lang));
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
         await pageManager.landingPage.getStartedButton.click();
       });
