@@ -12,14 +12,14 @@
       "digitalResources": "recursos digitales",
       "visitNYPL": "visite cualquier biblioteca de la NYPL",
       "part3": "Si viene de otro estado a visitar Nueva York, con este formulario puede solicitar una tarjeta temporal. Antes de su visita, puede pedir materiales físicos y programar citas para investigación. Para acceder a otros servicios, debe validar su tarjeta en persona en alguna biblioteca de la NYPL en un plazo de 30 días.",
-      "part4": "Si viene de visita desde otro país, utilice <a href='https://www.nypl.org/help/library-card#international-researchers'>{{alternativeForm}}</a> para turistas internacionales. Con su tarjeta temporal, puede pedir materiales y programar citas para investigación.",
-      "alternativeForm": "el formulario alternativo",
+      "part4": "Si viene de visita desde otro país, utilice <a href='https://www.nypl.org/help/library-card#international-researchers'>{{alternateForm}}</a> para turistas internacionales. Con su tarjeta temporal, puede pedir materiales y programar citas para investigación.",
+      "alternateForm": "el formulario alternativo",
       "part5": "<a href='https://www.nypl.org/library-card'>{{whatYouCanAccess}}</a> sobre a qué puede acceder con su tarjeta de la biblioteca.",
       "whatYouCanAccess": "Obtenga más información",
       "part6": "Al presentar una solicitud, usted entiende y est&aacute; de acuerdo con nuestros <a href=\"https://nypl.org/help/library-card/terms-conditions\">{{termsConditions}}</a> y con nuestras <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/policies-and-rules/es\">{{rulesRegulations}}</a>. Para obtener m&aacute;s informaci&oacute;n sobre c&oacute;mo la Biblioteca usa la informaci&oacute;n personal, consulte nuestra <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy/es\">{{privacyPolicy}}</a>.",
-      "termsConditions": "T&eacute;rminos y condiciones para titulares de tarjeta",
+      "termsConditions": "Términos y condiciones para titulares de tarjeta",
       "rulesRegulations": "Reglas y normas",
-      "privacyPolicy": "Pol&iacute;tica de privacidad"
+      "privacyPolicy": "Política de privacidad"
     },
     "banner": {
       "text": "Tenga en cuenta que debe tener al menos 13 años para solicitar la tarjeta en línea. Para obtener una tarjeta electrónica y acceder de inmediato a los recursos en línea, debe estar en el Estado de Nueva York cuando presente la solicitud."
