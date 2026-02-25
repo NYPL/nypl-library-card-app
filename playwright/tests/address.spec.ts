@@ -3,97 +3,88 @@ import { AddressPage } from "../pageobjects/address.page";
 import { fillAddress } from "../utils/form-helper";
 import {
   PAGE_ROUTES,
-  SPINNER_TIMEOUT,
+  SUPPORTED_LANGUAGES,
   TEST_OOS_ADDRESS,
 } from "../utils/constants";
 
-test.beforeEach(async ({ page }) => {
-  await page.goto(PAGE_ROUTES.ADDRESS());
-});
+for (const { lang, name } of SUPPORTED_LANGUAGES) {
+  test.describe(`home address page in ${name} (${lang})`, () => {
+    let addressPage: AddressPage;
+    let appContent: any;
 
-test.describe("displays elements on Address page", () => {
-  test("displays headings", async ({ page }) => {
-    const addressPage = new AddressPage(page);
-    await expect(addressPage.mainHeading).toBeVisible();
-    await expect(addressPage.stepHeading).toBeVisible();
-    await expect(addressPage.addressHeading).toBeVisible();
-  });
-
-  test("displays home address form", async ({ page }) => {
-    const addressPage = new AddressPage(page);
-    await expect(addressPage.streetAddressInput).toBeVisible();
-    await expect(addressPage.apartmentSuiteInput).toBeVisible();
-    await expect(addressPage.cityInput).toBeVisible();
-    await expect(addressPage.stateInput).toBeVisible();
-    await expect(addressPage.postalCodeInput).toBeVisible();
-  });
-
-  test("displays next and previous buttons", async ({ page }) => {
-    const addressPage = new AddressPage(page);
-    await expect(addressPage.nextButton).toBeVisible();
-    await expect(addressPage.previousButton).toBeVisible();
-  });
-});
-
-test.describe("enters home address", () => {
-  test("enters valid home address", async ({ page }) => {
-    const addressPage = new AddressPage(page);
-    await fillAddress(addressPage, TEST_OOS_ADDRESS);
-    await expect(addressPage.streetAddressInput).toHaveValue(
-      TEST_OOS_ADDRESS.street
-    );
-    await expect(addressPage.apartmentSuiteInput).toHaveValue(
-      TEST_OOS_ADDRESS.apartmentSuite
-    );
-    await expect(addressPage.cityInput).toHaveValue(TEST_OOS_ADDRESS.city);
-    await expect(addressPage.stateInput).toHaveValue(TEST_OOS_ADDRESS.state);
-    await expect(addressPage.postalCodeInput).toHaveValue(
-      TEST_OOS_ADDRESS.postalCode
-    );
-  });
-});
-
-test.describe("displays error messages", () => {
-  test("displays errors for required fields", async ({ page }) => {
-    const addressPage = new AddressPage(page);
-    await addressPage.streetAddressInput.fill("");
-    await addressPage.cityInput.fill("");
-    await addressPage.stateInput.click();
-    await addressPage.postalCodeInput.fill("");
-    await addressPage.nextButton.click();
-    await expect(addressPage.spinner).not.toBeVisible({
-      timeout: SPINNER_TIMEOUT,
+    test.beforeEach(async ({ page }) => {
+      appContent = require(`../../public/locales/${lang}/common.json`);
+      addressPage = new AddressPage(page, appContent);
+      await page.goto(PAGE_ROUTES.ADDRESS(lang));
     });
-    await expect(addressPage.streetAddressError).toBeVisible();
-    await expect(addressPage.cityError).toBeVisible();
-    await expect(addressPage.stateError).toBeVisible();
-    await expect(addressPage.postalCodeError).toBeVisible();
-  });
 
-  test("enter too many characters", async ({ page }) => {
-    const addressPage = new AddressPage(page);
-    await addressPage.postalCodeInput.fill("123456");
-    await addressPage.nextButton.click();
-    await expect(addressPage.spinner).not.toBeVisible({
-      timeout: SPINNER_TIMEOUT,
+    test.describe("displays elements", () => {
+      test("displays headings and buttons", async () => {
+        await expect(addressPage.mainHeading).toBeVisible();
+        await expect(addressPage.stepHeading).toBeVisible();
+        await expect(addressPage.addressHeading).toBeVisible();
+        await expect(addressPage.nextButton).toBeVisible();
+        await expect(addressPage.previousButton).toBeVisible();
+      });
+
+      test("displays home address form", async () => {
+        await expect(addressPage.streetAddressInput).toBeVisible();
+        await expect(addressPage.apartmentSuiteInput).toBeVisible();
+        await expect(addressPage.cityInput).toBeVisible();
+        await expect(addressPage.stateInput).toBeVisible();
+        await expect(addressPage.postalCodeInput).toBeVisible();
+      });
     });
-    await expect(addressPage.postalCodeError).toBeVisible();
-  });
 
-  test("enter too few characters", async ({ page }) => {
-    const addressPage = new AddressPage(page);
-    await addressPage.postalCodeInput.fill("1234");
-    await addressPage.nextButton.click();
-    await expect(addressPage.spinner).not.toBeVisible({
-      timeout: SPINNER_TIMEOUT,
+    test.describe("enters home address", () => {
+      test("enters valid home address", async () => {
+        await fillAddress(addressPage, TEST_OOS_ADDRESS);
+        await expect(addressPage.streetAddressInput).toHaveValue(
+          TEST_OOS_ADDRESS.street
+        );
+        await expect(addressPage.apartmentSuiteInput).toHaveValue(
+          TEST_OOS_ADDRESS.apartmentSuite
+        );
+        await expect(addressPage.cityInput).toHaveValue(TEST_OOS_ADDRESS.city);
+        await expect(addressPage.stateInput).toHaveValue(
+          TEST_OOS_ADDRESS.state
+        );
+        await expect(addressPage.postalCodeInput).toHaveValue(
+          TEST_OOS_ADDRESS.postalCode
+        );
+      });
     });
-    await expect(addressPage.postalCodeError).toBeVisible();
-  });
 
-  test("enter postal code with dash", async ({ page }) => {
-    const addressPage = new AddressPage(page);
-    await addressPage.postalCodeInput.fill("12345-6789");
-    await addressPage.nextButton.click();
-    await expect(addressPage.postalCodeError).toBeVisible();
+    test.describe("displays error messages", () => {
+      test("displays errors for required fields", async () => {
+        await addressPage.streetAddressInput.fill("");
+        await addressPage.cityInput.fill("");
+        await addressPage.stateInput.click();
+        await addressPage.postalCodeInput.fill("");
+        await addressPage.nextButton.click();
+        await expect(addressPage.streetAddressError).toBeVisible();
+        await expect(addressPage.cityError).toBeVisible();
+        await expect(addressPage.stateError).toBeVisible();
+        await expect(addressPage.postalCodeError).toBeVisible();
+      });
+
+      test("enter too many characters", async () => {
+        await addressPage.postalCodeInput.fill("123456");
+        await addressPage.nextButton.click();
+        await expect(addressPage.postalCodeError).toBeVisible();
+      });
+
+      test("enter too few characters", async () => {
+        await addressPage.postalCodeInput.fill("1234");
+        await addressPage.nextButton.click();
+        await expect(addressPage.postalCodeError).toBeVisible();
+      });
+
+      test("enter postal code with dash", async () => {
+        await addressPage.postalCodeInput.fill("12345-6789");
+        await addressPage.nextButton.click();
+        await expect(addressPage.postalCodeError).toBeVisible();
+      });
+    });
   });
-});
+}
