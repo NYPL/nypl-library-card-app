@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
 import {
   PAGE_ROUTES,
   TEST_ACCOUNT,
@@ -7,13 +7,13 @@ import {
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
-} from "../utils/constants";
-import { mockCreatePatronApi } from "../utils/mock-api";
+} from "../../utils/constants";
+import { mockCreatePatronApi } from "../../utils/mock-api";
 import {
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
-} from "../utils/form-helper";
+} from "../../utils/form-helper";
 
 test.describe("E2E Flow: Complete application using mocked submit", () => {
   test("displays patron information on congrats page", async ({ page }) => {
