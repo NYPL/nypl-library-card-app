@@ -39,6 +39,19 @@ test.describe("displays all form elements on Account page", () => {
     await expect(accountPage.nextButton).toBeVisible();
     await expect(accountPage.previousButton).toBeVisible();
   });
+
+  test("opens links in new tab", async ({ page }) => {
+    const accountPage = new AccountPage(page);
+    const links = [
+      accountPage.cardholderTerms,
+      accountPage.rulesRegulations,
+      accountPage.privacyPolicy,
+    ];
+    for (const link of links) {
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("rel", "nofollow noopener noreferrer");
+    }
+  });
 });
 
 test.describe("enters account information", () => {
