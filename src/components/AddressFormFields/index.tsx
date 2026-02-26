@@ -156,7 +156,7 @@ const AddressForm = ({
         </DSFormField>
         <DSFormField>
           <Select
-            placeholder="Please select"
+            placeholder={t("dropdown.placeholder")}
             id={`state-${type}`}
             labelText={t("location.address.state.label")}
             autoComplete={`section-${type} address-level1`}
