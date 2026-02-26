@@ -34,6 +34,15 @@ test.describe("displays elements on personal information page", () => {
     await expect(personalPage.previousButton).toBeVisible();
     await expect(personalPage.nextButton).toBeVisible();
   });
+
+  test("opens links in new tab", async ({ page }) => {
+    const personalPage = new PersonalPage(page);
+    const links = [personalPage.alternateFormLink, personalPage.locationsLink];
+    for (const link of links) {
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("rel", "nofollow noopener noreferrer");
+    }
+  });
 });
 
 test.describe("enters personal information", () => {
