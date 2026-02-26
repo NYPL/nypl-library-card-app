@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { SPINNER_TIMEOUT } from "../utils/constants";
+import { PAGE_ROUTES, SPINNER_TIMEOUT } from "../utils/constants";
 import { PageManager } from "../pageobjects/page-manager.page";
 import { fillAddress, fillPersonalInfo } from "../utils/form-helper";
 import {
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
-  TEST_PATRON_INFO,
+  TEST_PATRON,
 } from "../utils/constants";
 
 test.describe("E2E: Navigate backward in application", () => {
@@ -15,7 +15,7 @@ test.describe("E2E: Navigate backward in application", () => {
     const pageManager = new PageManager(page);
 
     await test.step("begins at account page", async () => {
-      await page.goto("/library-card/account?newCard=true");
+      await page.goto(PAGE_ROUTES.ACCOUNT);
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await expect(pageManager.accountPage.previousButton).toBeVisible();
       await pageManager.accountPage.previousButton.click();
@@ -54,9 +54,9 @@ test.describe("E2E: Navigate backward in application", () => {
     const pageManager = new PageManager(page);
 
     await test.step("enters personal information", async () => {
-      await page.goto("/library-card/personal?newCard=true");
+      await page.goto(PAGE_ROUTES.PERSONAL);
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      await fillPersonalInfo(pageManager.personalPage);
+      await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
       await pageManager.personalPage.receiveInfoCheckbox.click();
       await pageManager.personalPage.nextButton.click();
     });
@@ -137,16 +137,16 @@ test.describe("E2E: Navigate backward in application", () => {
     await test.step("displays user-entered info on personal information page", async () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await expect(pageManager.personalPage.firstNameInput).toHaveValue(
-        TEST_PATRON_INFO.firstName
+        TEST_PATRON.firstName
       );
       await expect(pageManager.personalPage.lastNameInput).toHaveValue(
-        TEST_PATRON_INFO.lastName
+        TEST_PATRON.lastName
       );
       await expect(pageManager.personalPage.dateOfBirthInput).toHaveValue(
-        TEST_PATRON_INFO.dateOfBirth
+        TEST_PATRON.dateOfBirth
       );
       await expect(pageManager.personalPage.emailInput).toHaveValue(
-        TEST_PATRON_INFO.email
+        TEST_PATRON.email
       );
       await expect(
         pageManager.personalPage.receiveInfoCheckbox

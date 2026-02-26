@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { SPINNER_TIMEOUT } from "../utils/constants";
+import { PAGE_ROUTES, SPINNER_TIMEOUT } from "../utils/constants";
 import { AddressPage } from "../pageobjects/address.page";
 import { TEST_OOS_ADDRESS } from "../utils/constants";
 import { fillAddress } from "../utils/form-helper";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/location?newCard=true");
+  await page.goto(PAGE_ROUTES.ADDRESS);
 });
 
 test.describe("displays elements on Address page", () => {
@@ -29,6 +29,15 @@ test.describe("displays elements on Address page", () => {
     const addressPage = new AddressPage(page);
     await expect(addressPage.nextButton).toBeVisible();
     await expect(addressPage.previousButton).toBeVisible();
+  });
+
+  test("opens link in new tab", async ({ page }) => {
+    const addressPage = new AddressPage(page);
+    await expect(addressPage.alternateForm).toHaveAttribute("target", "_blank");
+    await expect(addressPage.alternateForm).toHaveAttribute(
+      "rel",
+      "nofollow noopener noreferrer"
+    );
   });
 });
 

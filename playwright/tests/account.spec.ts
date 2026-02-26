@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { AccountPage } from "../pageobjects/account.page";
-import { ERROR_MESSAGES, TEST_ACCOUNT } from "../utils/constants";
+import { ERROR_MESSAGES, PAGE_ROUTES, TEST_ACCOUNT } from "../utils/constants";
 import { fillAccountInfo } from "../utils/form-helper";
 import { mockUsernameApi } from "../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/account?newCard=true");
+  await page.goto(PAGE_ROUTES.ACCOUNT);
 });
 
 test.describe("displays all form elements on Account page", () => {
@@ -22,7 +22,7 @@ test.describe("displays all form elements on Account page", () => {
     await expect(accountPage.availableUsernameButton).toBeVisible();
     await expect(accountPage.passwordInput).toBeVisible();
     await expect(accountPage.verifyPasswordInput).toBeVisible();
-    await expect(accountPage.showPasswordCheckbox).toBeVisible();
+    await expect(accountPage.showPasswordLabel).toBeVisible();
   });
 
   test("displays home library form", async ({ page }) => {
@@ -31,13 +31,26 @@ test.describe("displays all form elements on Account page", () => {
     await expect(accountPage.cardholderTerms).toBeVisible();
     await expect(accountPage.rulesRegulations).toBeVisible();
     await expect(accountPage.privacyPolicy).toBeVisible();
-    await expect(accountPage.acceptTermsCheckbox).toBeVisible();
+    await expect(accountPage.acceptTermsLabel).toBeVisible();
   });
 
   test("displays next and previous buttons", async ({ page }) => {
     const accountPage = new AccountPage(page);
     await expect(accountPage.nextButton).toBeVisible();
     await expect(accountPage.previousButton).toBeVisible();
+  });
+
+  test("opens links in new tab", async ({ page }) => {
+    const accountPage = new AccountPage(page);
+    const links = [
+      accountPage.cardholderTerms,
+      accountPage.rulesRegulations,
+      accountPage.privacyPolicy,
+    ];
+    for (const link of links) {
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("rel", "nofollow noopener noreferrer");
+    }
   });
 });
 
@@ -46,7 +59,7 @@ test.describe("enters account information", () => {
     const accountPage = new AccountPage(page);
     await fillAccountInfo(accountPage, TEST_ACCOUNT);
     await expect(accountPage.usernameInput).toHaveValue(TEST_ACCOUNT.username);
-    await accountPage.showPasswordCheckbox.check();
+    await accountPage.showPasswordLabel.check();
     await expect(accountPage.passwordInput).toHaveValue(TEST_ACCOUNT.password);
     await expect(accountPage.verifyPasswordInput).toHaveValue(
       TEST_ACCOUNT.password
@@ -54,7 +67,7 @@ test.describe("enters account information", () => {
     await expect(accountPage.selectHomeLibrary).toHaveValue(
       TEST_ACCOUNT.homeLibraryCode
     );
-    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
+    await expect(accountPage.acceptTermsLabel).toBeChecked();
   });
 });
 

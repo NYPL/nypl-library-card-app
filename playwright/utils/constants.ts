@@ -1,12 +1,19 @@
-import { AddressData } from "./types";
+import { AddressData, PatronData } from "./types";
 import appContent from "../../public/locales/en/common.json";
 
 // personal information
-export const TEST_PATRON_INFO = {
+export const TEST_PATRON: PatronData = {
   firstName: "Jane",
   lastName: "Doe",
   email: "test@gmail.com",
   dateOfBirth: "12/25/1984",
+};
+
+export const TEST_EDITED_PATRON: PatronData = {
+  firstName: "Tom",
+  lastName: "Nook",
+  email: "edited@gmail.com",
+  dateOfBirth: "01/01/1990",
 };
 
 // address
@@ -86,6 +93,7 @@ export const ERROR_MESSAGES = {
   FIRST_NAME_INVALID: appContent.personal.errorMessage.firstName,
   LAST_NAME_INVALID: appContent.personal.errorMessage.lastName,
   DATE_OF_BIRTH_INVALID: appContent.personal.errorMessage.birthdate,
+  DATE_OF_BIRTH_ERROR: appContent.personal.errorMessage.ageGate,
   EMAIL_INVALID: appContent.personal.errorMessage.email,
   STREET_ADDRESS_INVALID: appContent.location.errorMessage.line1,
   CITY_INVALID: appContent.location.errorMessage.city,
@@ -98,4 +106,21 @@ export const ERROR_MESSAGES = {
   VERIFY_PASSWORD_INVALID: appContent.account.errorMessage.verifyPassword,
   HOME_LIBRARY_ERROR: appContent.account.errorMessage.homeLibraryCode,
   ACCEPT_TERMS_ERROR: appContent.account.errorMessage.acceptTerms,
+};
+
+export const PAGE_ROUTES = {
+  LANDING: "/library-card/new?newCard=true",
+  PERSONAL: "/library-card/personal?newCard=true",
+  ADDRESS: "/library-card/location?newCard=true",
+  ALTERNATE_ADDRESS: "/library-card/alternate-address?newCard=true",
+  ADDRESS_VERIFICATION: "/library-card/address-verification?newCard=true",
+  ACCOUNT: "/library-card/account?newCard=true",
+  REVIEW: "/library-card/review?newCard=true",
+  CONGRATS: "/library-card/congrats?newCard=true",
+};
+
+export const PATRON_TYPES = {
+  PATRON_TYPE_7: 7,
+  PATRON_TYPE_8: 8,
+  PATRON_TYPE_9: 9,
 };

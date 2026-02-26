@@ -3,15 +3,20 @@ import { AddressVerificationPage } from "../../pageobjects/address-verification.
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import { fillAddress, fillPersonalInfo } from "../../utils/form-helper";
-import { TEST_NYC_ADDRESS, TEST_OOS_ADDRESS } from "../../utils/constants";
+import {
+  PAGE_ROUTES,
+  TEST_NYC_ADDRESS,
+  TEST_OOS_ADDRESS,
+  TEST_PATRON,
+} from "../../utils/constants";
 
 test.describe("Accessibility tests on Address Verification page", () => {
   test.beforeEach(async ({ page, context }) => {
     await context.clearCookies();
-    await page.goto("/library-card/personal?newCard=true");
+    await page.goto(PAGE_ROUTES.PERSONAL);
     const pageManager = new PageManager(page);
 
-    await fillPersonalInfo(pageManager.personalPage);
+    await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
     await pageManager.personalPage.nextButton.click();
 
     await expect(pageManager.addressPage.stepHeading).toBeVisible();

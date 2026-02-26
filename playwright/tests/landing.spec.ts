@@ -1,8 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { LandingPage } from "../pageobjects/landing.page";
+import { PAGE_ROUTES } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/new");
+  await page.goto(PAGE_ROUTES.LANDING);
 });
 
 test("displays the main heading", async ({ page }) => {
@@ -44,4 +45,21 @@ test("displays informational links, informational banner and get started button"
   await expect(landingPage.privacyPolicy).toBeVisible();
   await expect(landingPage.informationalBanner).toBeVisible();
   await expect(landingPage.getStartedButton).toBeVisible();
+});
+
+test("opens links in same tab", async ({ page }) => {
+  const landingPage = new LandingPage(page);
+  const links = [
+    landingPage.digitalResourcesLink,
+    landingPage.visitLibraryLink,
+    landingPage.alternateFormLink,
+    landingPage.whatYouCanAccess,
+    landingPage.cardholderTerms,
+    landingPage.rulesRegulations,
+    landingPage.privacyPolicy,
+  ];
+
+  for (const link of links) {
+    await expect(link).not.toHaveAttribute("target", "_blank");
+  }
 });

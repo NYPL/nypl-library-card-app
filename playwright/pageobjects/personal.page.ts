@@ -10,6 +10,7 @@ export class PersonalPage {
   readonly lastNameInput: Locator;
   readonly lastNameError: Locator;
   readonly dateOfBirthInput: Locator;
+  readonly dateOfBirthInvalid: Locator;
   readonly dateOfBirthError: Locator;
   readonly emailInput: Locator;
   readonly emailError: Locator;
@@ -36,8 +37,11 @@ export class PersonalPage {
     this.lastNameInput = this.page.getByLabel(/Last name/i);
     this.lastNameError = this.page.getByText(ERROR_MESSAGES.LAST_NAME_INVALID);
     this.dateOfBirthInput = this.page.getByLabel(/Date of birth/i);
-    this.dateOfBirthError = this.page.getByText(
+    this.dateOfBirthInvalid = this.page.getByText(
       ERROR_MESSAGES.DATE_OF_BIRTH_INVALID
+    );
+    this.dateOfBirthError = this.page.getByText(
+      ERROR_MESSAGES.DATE_OF_BIRTH_ERROR
     );
     this.emailInput = this.page.getByLabel(/Email/i);
     this.emailError = this.page.getByText(ERROR_MESSAGES.EMAIL_INVALID);

@@ -1,22 +1,25 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
 import { ReviewPage } from "../pageobjects/review.page";
-import {
-  TEST_ACCOUNT,
-  TEST_NYC_ADDRESS,
-  TEST_OOS_ADDRESS,
-  TEST_PATRON_INFO,
-  ERROR_MESSAGES,
-} from "../utils/constants";
+import { PageManager } from "../pageobjects/page-manager.page";
 import {
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
 } from "../utils/form-helper";
+import {
+  ERROR_MESSAGES,
+  PAGE_ROUTES,
+  SPINNER_TIMEOUT,
+  TEST_ACCOUNT,
+  TEST_EDITED_ACCOUNT,
+  TEST_NYC_ADDRESS,
+  TEST_OOS_ADDRESS,
+  TEST_PATRON,
+} from "../utils/constants";
 import { mockUsernameApi } from "../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/review?newCard=true");
+  await page.goto(PAGE_ROUTES.REVIEW);
 });
 
 test.describe("displays elements on review page", () => {
@@ -51,8 +54,25 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.createYourAccountHeading).toBeVisible();
     await expect(reviewPage.usernameHeading).toBeVisible();
     await expect(reviewPage.passwordHeading).toBeVisible();
-    await expect(reviewPage.showPasswordCheckbox).toBeVisible();
+    await expect(reviewPage.showPasswordLabel).toBeVisible();
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
+  });
+
+  test("opens links in new tab", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    const links = [
+      reviewPage.alternateFormLink,
+      reviewPage.locationsLink,
+      reviewPage.cardholderTermsLink,
+      reviewPage.rulesRegulationsLink,
+      reviewPage.privacyPolicyLink,
+    ];
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.editAccountButton.click();
+    for (const link of links) {
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("rel", "nofollow noopener noreferrer");
+    }
   });
 });
 
@@ -78,19 +98,15 @@ test.describe("edits patron information on review page", () => {
   test("enters Personal information", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editPersonalInfoButton.click();
-    await fillPersonalInfo(reviewPage);
+    await fillPersonalInfo(reviewPage, TEST_PATRON);
     await reviewPage.receiveInfoCheckbox.click(); // unable to check()
 
-    await expect(reviewPage.firstNameInput).toHaveValue(
-      TEST_PATRON_INFO.firstName
-    );
-    await expect(reviewPage.lastNameInput).toHaveValue(
-      TEST_PATRON_INFO.lastName
-    );
+    await expect(reviewPage.firstNameInput).toHaveValue(TEST_PATRON.firstName);
+    await expect(reviewPage.lastNameInput).toHaveValue(TEST_PATRON.lastName);
     await expect(reviewPage.dateOfBirthInput).toHaveValue(
-      TEST_PATRON_INFO.dateOfBirth
+      TEST_PATRON.dateOfBirth
     );
-    await expect(reviewPage.emailInput).toHaveValue(TEST_PATRON_INFO.email);
+    await expect(reviewPage.emailInput).toHaveValue(TEST_PATRON.email);
     await expect(reviewPage.receiveInfoCheckbox).not.toBeChecked();
   });
 
@@ -107,12 +123,18 @@ test.describe("edits patron information on review page", () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       await pageManager.addressPage.nextButton.click();
+      await expect(pageManager.addressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
     });
 
     await test.step("enters alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
       await pageManager.alternateAddressPage.nextButton.click();
+      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
     });
 
     await test.step("confirms addresses", async () => {
@@ -126,6 +148,9 @@ test.describe("edits patron information on review page", () => {
         .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
         .check();
       await pageManager.addressVerificationPage.nextButton.click();
+      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
+        { timeout: SPINNER_TIMEOUT }
+      );
     });
 
     await test.step("enters account information", async () => {
@@ -155,22 +180,22 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.passwordInput).toBeVisible();
     await expect(reviewPage.verifyPasswordInputHeading).toBeVisible();
     await expect(reviewPage.verifyPasswordInput).toBeVisible();
-    await expect(reviewPage.showPasswordCheckbox).toBeVisible();
+    await expect(reviewPage.showPasswordLabel).toBeVisible();
     await expect(reviewPage.selectHomeLibrary).toBeVisible();
     await expect(reviewPage.cardholderTermsLink).toBeVisible();
     await expect(reviewPage.rulesRegulationsLink).toBeVisible();
     await expect(reviewPage.privacyPolicyLink).toBeVisible();
-    await expect(reviewPage.acceptTermsCheckbox).toBeVisible();
+    await expect(reviewPage.acceptTermsLabel).toBeVisible();
   });
 
   // does not replace account info since there's no existing text
-  test("enters account information", async ({ page }) => {
+  test("enters account info", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
     await fillAccountInfo(reviewPage, TEST_ACCOUNT);
 
     await expect(reviewPage.usernameInput).toHaveValue(TEST_ACCOUNT.username);
-    await reviewPage.showPasswordCheckbox.check();
+    await reviewPage.showPasswordLabel.check();
     await expect(reviewPage.passwordInput).toHaveValue(TEST_ACCOUNT.password);
     await expect(reviewPage.verifyPasswordInput).toHaveValue(
       TEST_ACCOUNT.password
@@ -178,7 +203,40 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.selectHomeLibrary).toHaveValue(
       TEST_ACCOUNT.homeLibraryCode
     );
-    await expect(reviewPage.acceptTermsCheckbox).toBeChecked();
+    await expect(reviewPage.acceptTermsLabel).toBeChecked();
+  });
+
+  test("enters updated account info", async ({ page }) => {
+    const pageManager = new PageManager(page);
+
+    await test.step("enters account info", async () => {
+      await page.goto("/library-card/account?newCard=true");
+      await expect(pageManager.accountPage.stepHeading).toBeVisible();
+      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+      await pageManager.accountPage.nextButton.click();
+    });
+
+    await test.step("edits account info on review page", async () => {
+      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      await pageManager.reviewPage.editAccountButton.click();
+      await fillAccountInfo(pageManager.accountPage, TEST_EDITED_ACCOUNT);
+    });
+
+    await test.step("displays updated account info on review page", async () => {
+      await expect(pageManager.reviewPage.usernameInput).toHaveValue(
+        TEST_EDITED_ACCOUNT.username
+      );
+      await pageManager.reviewPage.showPasswordLabel.check();
+      await expect(pageManager.reviewPage.passwordInput).toHaveValue(
+        TEST_EDITED_ACCOUNT.password
+      );
+      await expect(pageManager.reviewPage.verifyPasswordInput).toHaveValue(
+        TEST_EDITED_ACCOUNT.password
+      );
+      await expect(pageManager.reviewPage.selectHomeLibrary).toHaveValue(
+        TEST_EDITED_ACCOUNT.homeLibraryCode
+      );
+    });
   });
 });
 
@@ -217,7 +275,7 @@ test.describe("displays error messages", () => {
     await reviewPage.submitButton.click();
     await expect(reviewPage.firstNameError).toBeVisible();
     await expect(reviewPage.lastNameError).toBeVisible();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
     await expect(reviewPage.emailError).toBeVisible();
   });
 
@@ -226,7 +284,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("12-25-1984");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for YYYY/MM/DD format in date of birth", async ({
@@ -236,7 +294,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("1984/12/25");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for DD/MM/YYYY format in date of birth", async ({
@@ -246,7 +304,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("25/12/1984");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for M/D/YY format in date of birth", async ({
@@ -256,7 +314,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("1/1/84");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for written date of birth", async ({ page }) => {
@@ -264,7 +322,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("December 25, 1984");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for earliest date of birth", async ({ page }) => {
@@ -272,14 +330,25 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("01/01/1902");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
-  test("displays error for current date of birth", async ({ page }) => {
+  test("displays error for date of birth in current year", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("01/01/2026");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+  });
+
+  test("displays error for date of birth under 13 years old", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("01/01/2014");
     await reviewPage.submitButton.click();
     await expect(reviewPage.dateOfBirthError).toBeVisible();
   });
@@ -289,7 +358,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("12/31/2099");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for missing email symbol", async ({ page }) => {
@@ -401,7 +470,7 @@ test.describe("displays error messages", () => {
     await reviewPage.submitButton.click();
     await expect(reviewPage.firstNameError).toBeVisible();
     await expect(reviewPage.lastNameError).toBeVisible();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
     await expect(reviewPage.emailError).toBeVisible();
     await expect(reviewPage.usernameError).toBeVisible();
     await expect(reviewPage.passwordError).toBeVisible();

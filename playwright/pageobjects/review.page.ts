@@ -19,6 +19,7 @@ export class ReviewPage {
   readonly dateOfBirthHeading: Locator;
   readonly dateOfBirthInputHeading: Locator;
   readonly dateOfBirthInput: Locator;
+  readonly dateOfBirthInvalid: Locator;
   readonly dateOfBirthError: Locator;
   readonly emailHeading: Locator;
   readonly emailInputHeading: Locator;
@@ -60,14 +61,14 @@ export class ReviewPage {
   readonly verifyPasswordInputHeading: Locator;
   readonly verifyPasswordInput: Locator;
   readonly verifyPasswordError: Locator;
-  readonly showPasswordCheckbox: Locator;
+  readonly showPasswordLabel: Locator;
   readonly homeLibraryHeading: Locator;
   readonly selectHomeLibrary: Locator;
   readonly homeLibraryError: Locator;
   readonly cardholderTermsLink: Locator;
   readonly rulesRegulationsLink: Locator;
   readonly privacyPolicyLink: Locator;
-  readonly acceptTermsCheckbox: Locator;
+  readonly acceptTermsLabel: Locator;
   readonly acceptTermsError: Locator;
   readonly editAccountButton: Locator;
   readonly submitButton: Locator;
@@ -115,9 +116,10 @@ export class ReviewPage {
       name: "Date of birth (required)",
       exact: true,
     });
-    this.dateOfBirthError = page.getByText(
+    this.dateOfBirthInvalid = page.getByText(
       ERROR_MESSAGES.DATE_OF_BIRTH_INVALID
     );
+    this.dateOfBirthError = page.getByText(ERROR_MESSAGES.DATE_OF_BIRTH_ERROR);
     this.emailHeading = page.getByText("Email address", { exact: true });
     this.emailInputHeading = page.getByText("Email address (required)", {
       exact: true,
@@ -221,7 +223,7 @@ export class ReviewPage {
     this.verifyPasswordError = page.getByText(
       ERROR_MESSAGES.VERIFY_PASSWORD_INVALID
     );
-    this.showPasswordCheckbox = page.getByText("Show password", {
+    this.showPasswordLabel = page.getByText("Show password", {
       exact: true,
     });
     this.homeLibraryHeading = page.getByText("Home library", { exact: true });
@@ -236,7 +238,7 @@ export class ReviewPage {
     this.privacyPolicyLink = page.locator("#mainContent").getByRole("link", {
       name: "Privacy Policy",
     });
-    this.acceptTermsCheckbox = page.getByText(
+    this.acceptTermsLabel = page.getByText(
       "Yes, I accept the terms and conditions.",
       {
         exact: true,
