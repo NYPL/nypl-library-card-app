@@ -93,7 +93,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       ).toBeVisible();
       await expect(pageManager.congratsPage.readOrListenOnGo).toBeVisible();
       await expect(pageManager.congratsPage.loginLink).toBeVisible();
-      await expect(pageManager.congratsPage.nyplLocation).toBeVisible();
+      await expect(pageManager.congratsPage.nyplLocationLink).toBeVisible();
       await expect(pageManager.congratsPage.findOutLibraryLink).toBeVisible();
       await expect(pageManager.congratsPage.discoverLink).toBeVisible();
     });

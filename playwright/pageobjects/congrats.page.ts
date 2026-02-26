@@ -22,9 +22,7 @@ export class CongratsPage {
   readonly patronBarcodeNumber: Locator;
   readonly EXPECTED_BARCODE_PREFIX = "255";
   readonly temporaryCardBanner: Locator;
-  readonly learnMoreLink: Locator;
   readonly readOrListenOnGo: Locator;
-  readonly nyplLocation: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -83,15 +81,8 @@ export class CongratsPage {
     this.temporaryCardBanner = page.locator("aside", {
       hasText: "This is a temporary card",
     });
-    this.learnMoreLink = this.temporaryCardBanner.getByRole("link", {
-      name: /learn more/i,
-    });
-
     this.readOrListenOnGo = page.getByRole("link", {
       name: "Read or listen on-the-go",
-    });
-    this.nyplLocation = page.getByRole("link", {
-      name: "NYPL location This link opens",
     });
   }
 
