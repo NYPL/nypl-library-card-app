@@ -20,6 +20,7 @@ import {
 } from "../../utils/sierra-api-utils";
 import { createFuzzyMatcher, formatSierraDate } from "../../utils/formatter";
 
+test.use({ baseURL: "https://qa-www.nypl.org/library-card/new" });
 test.describe("E2E: Complete application with Sierra API integration", () => {
   let scrapedBarcode: string | null = null;
 
@@ -72,6 +73,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       ).toBeVisible();
       await pageManager.addressVerificationPage.nextButton.click();
     });
+
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
@@ -81,6 +83,19 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     await test.step("review page", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
+    });
+
+    await test.step("displays congrats page headings and links", async () => {
+      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
+      await expect(pageManager.congratsPage.locationsLink).toBeVisible();
+      await expect(
+        pageManager.congratsPage.photoIdAndProofOfAddressLink
+      ).toBeVisible();
+      await expect(pageManager.congratsPage.readOrListenOnGo).toBeVisible();
+      await expect(pageManager.congratsPage.loginLink).toBeVisible();
+      await expect(pageManager.congratsPage.nyplLocation).toBeVisible();
+      await expect(pageManager.congratsPage.findOutLibraryLink).toBeVisible();
+      await expect(pageManager.congratsPage.discoverLink).toBeVisible();
     });
 
     await test.step("displays generated library card on congrats page", async () => {
