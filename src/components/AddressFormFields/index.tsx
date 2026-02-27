@@ -156,11 +156,12 @@ const AddressForm = ({
         </DSFormField>
         <DSFormField>
           <Select
-            placeholder="Please select"
+            placeholder={t("dropdown.placeholder")}
             id={`state-${type}`}
             labelText={t("location.address.state.label")}
             autoComplete={`section-${type} address-level1`}
             isRequired={isRequired}
+            requiredLabelText={t("required")}
             isInvalid={!!errors?.[`${type}-state`]?.message}
             defaultValue={formValues[`${type}-state`]}
             invalidText={t("location.errorMessage.state")}

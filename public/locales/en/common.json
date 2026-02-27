@@ -4,6 +4,9 @@
   "banner": {
     "title": "Apply for a Library Card Online"
   },
+  "dropdown": {
+    "placeholder": "Please select"
+  },
   "home": {
     "title": "Apply for a library card today in a few easy steps",
     "description": {

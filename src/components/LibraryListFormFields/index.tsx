@@ -51,7 +51,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
         }}
       />
       <Select
-        placeholder="Please select"
+        placeholder={t("dropdown.placeholder")}
         id="librarylist-select"
         labelText={t("account.library.selectLibrary")}
         invalidText={t("account.errorMessage.homeLibraryCode")}
