@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
+
 import {
   fillPersonalInfo,
   fillAddress,
@@ -8,10 +9,10 @@ import {
 import {
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
+  TEST_NYS_ADDRESS,
   TEST_PATRON,
   PAGE_ROUTES,
   PATRON_TYPES,
-  TEST_NYS_ADDRESS,
 } from "../../utils/constants";
 import {
   getPatronID,
@@ -20,9 +21,15 @@ import {
 } from "../../utils/sierra-api-utils";
 import { createFuzzyMatcher, formatSierraDate } from "../../utils/formatter";
 
-test.use({ baseURL: "https://qa-www.nypl.org/library-card/new" });
 test.describe("E2E: Complete application with Sierra API integration", () => {
   let scrapedBarcode: string | null = null;
+
+  test.beforeEach(async ({ page }) => {
+    await page.setExtraHTTPHeaders({
+      "x-client-ip": "65.209.66.130",
+      "x-forwarded-for": "65.209.66.130",
+    });
+  });
 
   test.afterAll("deletes patron", async () => {
     if (scrapedBarcode) {
@@ -62,40 +69,78 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       });
     });
 
-    await test.step("skips alternate address page", async () => {
+    await test.step("enters alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await pageManager.alternateAddressPage.nextButton.click();
+      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
     });
 
-    await test.step("address verification page", async () => {
+    await test.step("address verfication", async () => {
       await expect(
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
       await pageManager.addressVerificationPage.nextButton.click();
     });
-
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();
     });
 
-    await test.step("review page", async () => {
+    await test.step("displays personal information on review page", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_PATRON.firstName)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_PATRON.lastName)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_PATRON.dateOfBirth)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_PATRON.email)
+      ).toBeVisible();
+      await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
+    });
+
+    await test.step("displays home on review page", async () => {
+      await expect(
+        pageManager.reviewPage.getText(TEST_NYS_ADDRESS.street)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_NYS_ADDRESS.city)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_NYS_ADDRESS.state)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_NYS_ADDRESS.postalCode)
+      ).toBeVisible();
+    });
+
+    await test.step("displays account information on review page", async () => {
+      await expect(
+        pageManager.reviewPage.getText(TEST_ACCOUNT.username)
+      ).toBeVisible();
+      await expect(pageManager.reviewPage.showPasswordLabel).toBeVisible();
+      await pageManager.reviewPage.showPasswordLabel.check();
+      await expect(
+        pageManager.reviewPage.getText(TEST_ACCOUNT.password)
+      ).toBeVisible();
+    });
+
+    await test.step("submits application", async () => {
+      await expect(pageManager.reviewPage.submitButton).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
     });
 
-    await test.step("displays congrats page headings and links", async () => {
+    await test.step("displays headings and banner on congrats page", async () => {
+      await expect(pageManager.congratsPage.mainHeading).toBeVisible();
       await expect(pageManager.congratsPage.stepHeading).toBeVisible();
-      await expect(pageManager.congratsPage.locationsLink).toBeVisible();
-      await expect(
-        pageManager.congratsPage.photoIdAndProofOfAddressLink
-      ).toBeVisible();
-      await expect(pageManager.congratsPage.readOrListenOnGo).toBeVisible();
-      await expect(pageManager.congratsPage.loginLink).toBeVisible();
-      await expect(pageManager.congratsPage.nyplLocationLink).toBeVisible();
-      await expect(pageManager.congratsPage.findOutLibraryLink).toBeVisible();
-      await expect(pageManager.congratsPage.discoverLink).toBeVisible();
+      await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
     });
 
     await test.step("displays generated library card on congrats page", async () => {
