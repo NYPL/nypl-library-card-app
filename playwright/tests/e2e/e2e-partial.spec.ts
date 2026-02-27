@@ -1,13 +1,13 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
-import { fillAccountInfo, fillAddress } from "../utils/form-helper";
+import { PageManager } from "../../pageobjects/page-manager.page";
+import { fillAccountInfo, fillAddress } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_EDITED_ACCOUNT,
   TEST_NYC_ADDRESS,
-} from "../utils/constants";
+} from "../../utils/constants";
 
 test("displays error when address is too long", async ({ page }) => {
   const pageManager = new PageManager(page);
