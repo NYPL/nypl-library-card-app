@@ -51,4 +51,33 @@ test.describe("enters alternate address", () => {
       TEST_NYC_ADDRESS.postalCode
     );
   });
+
+  test("enters incomplete alternate address and displays street and city errors", async ({
+    page,
+  }) => {
+    const alternateAddressPage = new AlternateAddressPage(page);
+    await alternateAddressPage.stateInput.click();
+    await alternateAddressPage.stateInput.selectOption(TEST_NYC_ADDRESS.state);
+    await alternateAddressPage.postalCodeInput.fill(
+      TEST_NYC_ADDRESS.postalCode
+    );
+    await alternateAddressPage.streetAddressInput.click();
+    await alternateAddressPage.cityInput.click();
+    await alternateAddressPage.nextButton.click();
+    await expect(alternateAddressPage.streetAddressError).toBeVisible();
+    await expect(alternateAddressPage.cityError).toBeVisible();
+  });
+
+  test("enters incomplete alternate address and displays state and postal code errors", async ({
+    page,
+  }) => {
+    const alternateAddressPage = new AlternateAddressPage(page);
+    await alternateAddressPage.streetAddressInput.fill(TEST_NYC_ADDRESS.street);
+    await alternateAddressPage.cityInput.fill(TEST_NYC_ADDRESS.city);
+    await alternateAddressPage.stateInput.click();
+    await alternateAddressPage.postalCodeInput.click();
+    await alternateAddressPage.nextButton.click();
+    await expect(alternateAddressPage.stateError).toBeVisible();
+    await expect(alternateAddressPage.postalCodeError).toBeVisible();
+  });
 });
