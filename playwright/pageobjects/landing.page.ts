@@ -25,10 +25,10 @@ export class LandingPage {
   readonly alternateFormLink: Locator;
   readonly informationalBanner: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, appContent?: any) {
     this.page = page;
     this.mainHeading = page.getByRole("heading", {
-      name: "Apply for a Library Card Online",
+      name: appContent?.banner?.title || "Apply for a Library Card Online",
       level: 1,
     });
     this.arabicLanguage = page.getByRole("link", {
@@ -53,30 +53,43 @@ export class LandingPage {
     });
     this.urduLanguage = page.getByRole("link", { name: "Urdu | اُردُو" });
     this.applyHeading = page.getByRole("heading", {
-      name: "Apply for a library card today in a few easy steps",
+      name:
+        appContent?.home?.title ||
+        "Apply for a library card today in a few easy steps",
       level: 2,
     });
-    this.whatYouCanAccess = page.getByRole("link", {
-      name: "what you can access",
-    });
-    this.cardholderTerms = page.getByRole("link", {
-      name: "Cardholder Terms and Conditions",
-    });
-    this.rulesRegulations = page.getByRole("link", {
-      name: "Rules and Regulations",
-    });
-    this.privacyPolicy = page
-      .locator("#mainContent")
-      .getByRole("link", { name: "Privacy Policy" });
-    this.getStartedButton = page.getByRole("link", { name: "Get started" });
-
     this.digitalResourcesLink = page.getByRole("link", {
-      name: "digital resources",
+      name:
+        appContent?.home?.description?.digitalResources || "digital resources",
     });
     this.visitLibraryLink = page.getByRole("link", {
-      name: "visit any NYPL location",
+      name:
+        appContent?.home?.description?.visitNYPL || "visit any NYPL location",
     });
-    this.alternateFormLink = page.getByRole("link", { name: "alternate form" });
+    this.alternateFormLink = page.getByRole("link", {
+      name: appContent?.home?.description?.alternateForm || "alternate form",
+    });
+    this.whatYouCanAccess = page.getByRole("link", {
+      name:
+        appContent?.home?.description?.whatYouCanAccess ||
+        "what you can access",
+    });
+    this.cardholderTerms = page.getByRole("link", {
+      name:
+        appContent?.home?.description?.termsConditions ||
+        "Cardholder Terms and Conditions",
+    });
+    this.rulesRegulations = page.getByRole("link", {
+      name:
+        appContent?.home?.description?.rulesRegulations ||
+        "Rules and Regulations",
+    });
+    this.privacyPolicy = page.locator("#mainContent").getByRole("link", {
+      name: appContent?.home?.description?.privacyPolicy || "Privacy Policy",
+    });
     this.informationalBanner = page.getByTestId("ds-banner");
+    this.getStartedButton = page.getByRole("link", {
+      name: appContent?.button?.start || "Get started",
+    });
   }
 }

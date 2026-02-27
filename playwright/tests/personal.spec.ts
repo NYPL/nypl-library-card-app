@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { PersonalPage } from "../pageobjects/personal.page";
-import { PAGE_ROUTES, TEST_PATRON } from "../utils/constants";
 import { fillPersonalInfo } from "../utils/form-helper";
+import { PAGE_ROUTES, TEST_PATRON } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(PAGE_ROUTES.PERSONAL);
+  await page.goto(PAGE_ROUTES.PERSONAL());
 });
 
 test.describe("displays elements on personal information page", () => {

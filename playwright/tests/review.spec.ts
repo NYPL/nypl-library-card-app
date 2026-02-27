@@ -19,7 +19,7 @@ import {
 import { mockUsernameApi } from "../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(PAGE_ROUTES.REVIEW);
+  await page.goto(PAGE_ROUTES.REVIEW());
 });
 
 test.describe("displays elements on review page", () => {

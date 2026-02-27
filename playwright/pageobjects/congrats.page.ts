@@ -4,23 +4,23 @@ export class CongratsPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
   readonly temporaryHeading: Locator;
-  readonly getStartedHeading: Locator;
   readonly memberNameHeading: Locator;
   readonly memberName: Locator;
+  readonly patronBarcodeNumber: Locator;
+  readonly EXPECTED_BARCODE_PREFIX = "255";
   readonly issuedDateHeading: Locator;
   readonly issuedDate: Locator;
   readonly libraryCardBackground: Locator;
   readonly locationsLink: Locator;
   readonly photoIdAndProofOfAddressLink: Locator;
+  readonly temporaryCardBanner: Locator;
   readonly learnMoreLink: Locator;
   readonly getHelpEmailLink: Locator;
+  readonly getStartedHeading: Locator;
   readonly loginLink: Locator;
   readonly nyplLocationLink: Locator;
   readonly findOutLibraryLink: Locator;
   readonly discoverLink: Locator;
-  readonly patronBarcodeNumber: Locator;
-  readonly EXPECTED_BARCODE_PREFIX = "255";
-  readonly temporaryCardBanner: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -30,10 +30,6 @@ export class CongratsPage {
     });
     this.temporaryHeading = page.getByRole("heading", {
       name: "Congratulations! You now have a temporary digital New York Public Library card.",
-      level: 2,
-    });
-    this.getStartedHeading = page.getByRole("heading", {
-      name: "Get started with The New York Public Library",
       level: 2,
     });
     this.memberNameHeading = page
@@ -60,6 +56,10 @@ export class CongratsPage {
     });
     this.getHelpEmailLink = page.getByRole("link", {
       name: "gethelp@nypl.org",
+    });
+    this.getStartedHeading = page.getByRole("heading", {
+      name: "Get started with The New York Public Library",
+      level: 2,
     });
     this.loginLink = page.getByRole("link", { name: "Log into your account" });
     this.nyplLocationLink = page.getByRole("link", {

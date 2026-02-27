@@ -14,7 +14,7 @@ test("displays error when address is too long", async ({ page }) => {
   const invalidStreet = "A".repeat(100);
 
   await test.step("enters invalid home address", async () => {
-    await page.goto(PAGE_ROUTES.ADDRESS);
+    await page.goto(PAGE_ROUTES.ADDRESS());
     await expect(pageManager.addressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.addressPage, {
       street: invalidStreet,
@@ -67,7 +67,7 @@ test("displays updated account info after editing addresses", async ({
   const pageManager = new PageManager(page);
 
   await test.step("enters account information", async () => {
-    await page.goto(PAGE_ROUTES.ACCOUNT);
+    await page.goto(PAGE_ROUTES.ACCOUNT());
     await expect(pageManager.accountPage.stepHeading).toBeVisible();
     await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
     await pageManager.accountPage.nextButton.click();

@@ -5,7 +5,7 @@ import { PAGE_ROUTES } from "../../utils/constants";
 
 test.describe("Accessibility tests on personal info page", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(PAGE_ROUTES.PERSONAL);
+    await page.goto(PAGE_ROUTES.PERSONAL());
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {
