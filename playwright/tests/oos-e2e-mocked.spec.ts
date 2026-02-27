@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
-// import {
-//   fillAccountInfo,
-//   fillAddress,
-//   fillPersonalInfo,
-// } from "../utils/form-helper";
+import {
+  //   fillAccountInfo,
+  //   fillAddress,
+  fillPersonalInfo,
+} from "../utils/form-helper";
 import {
   PAGE_ROUTES,
   SUPPORTED_LANGUAGES,
@@ -12,7 +12,7 @@ import {
   // TEST_BARCODE_NUMBER,
   // TEST_NYC_ADDRESS,
   // TEST_OOS_ADDRESS,
-  // TEST_PATRON,
+  TEST_PATRON,
 } from "../utils/constants";
 // import { mockCreatePatronApi } from "../utils/mock-api";
 
@@ -21,9 +21,12 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let pageManager: PageManager;
     let appContent: any;
 
-    test("displays patron information on congrats page", async ({ page }) => {
+    test.beforeEach(async ({ page }) => {
       appContent = require(`../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
+    });
+
+    test("displays patron information on congrats page", async ({ page }) => {
       // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
 
       await test.step("begins at landing", async () => {
@@ -32,18 +35,18 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.landingPage.getStartedButton.click();
       });
 
-      // await test.step("enters personal information", async () => {
-      // await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      // await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      // });
+      await test.step("enters personal information", async () => {
+        await expect(pageManager.personalPage.stepHeading).toBeVisible();
+        await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+      });
 
-      // await test.step("unchecks receive info checkbox", async () => {
-      // await pageManager.personalPage.receiveInfoCheckbox.click();
-      // await expect(
-      // pageManager.personalPage.receiveInfoCheckbox
-      // ).not.toBeChecked();
-      // await pageManager.personalPage.nextButton.click();
-      // });
+      await test.step("unchecks receive info checkbox", async () => {
+        await pageManager.personalPage.receiveInfoCheckbox.click();
+        await expect(
+          pageManager.personalPage.receiveInfoCheckbox
+        ).not.toBeChecked();
+        await pageManager.personalPage.nextButton.click();
+      });
 
       // await test.step("enters home address", async () => {
       //   await expect(pageManager.addressPage.stepHeading).toBeVisible();

@@ -1,18 +1,19 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
-import {} from // fillPersonalInfo,
-// fillAddress,
-// fillAccountInfo,
-"../utils/form-helper";
+import {
+  //   fillAddress,
+  //   fillAccountInfo,
+  fillPersonalInfo,
+} from "../utils/form-helper";
 import {
   PAGE_ROUTES,
   // PATRON_TYPES,
   // SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   // TEST_ACCOUNT,
-  // TEST_OOS_ADDRESS,
   // TEST_NYC_ADDRESS,
-  // TEST_PATRON,
+  // TEST_OOS_ADDRESS,
+  TEST_PATRON,
 } from "../utils/constants";
 import {
   getPatronID,
@@ -53,11 +54,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.landingPage.getStartedButton.click();
       });
 
-      // await test.step("enters personal information", async () => {
-      //   await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      //   await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      //   await pageManager.personalPage.nextButton.click();
-      // });
+      await test.step("enters personal information", async () => {
+        await expect(pageManager.personalPage.stepHeading).toBeVisible();
+        await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+        await pageManager.personalPage.nextButton.click();
+      });
 
       // await test.step("enters home address", async () => {
       //   await expect(pageManager.addressPage.stepHeading).toBeVisible();
@@ -241,7 +242,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   expect(patronData.birthDate).toBe(expectedDOB);
       //   expect(actualAddressText).toMatch(expectedAddress);
       //   expect(patronEmails).toContain(expectedEmail);
-      //       expect(patronData.patronType).toBe(PATRON_TYPES.PATRON_TYPE_7);
+      //   expect(patronData.patronType).toBe(PATRON_TYPES.PATRON_TYPE_7);
       // });
     });
   });
