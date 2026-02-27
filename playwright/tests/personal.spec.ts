@@ -102,6 +102,20 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await personalPage.nextButton.click();
         await expect(personalPage.dateOfBirthError).toBeVisible();
       });
+      
+      test("displays error for date of birth in current year", async () => {
+        await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
+        await personalPage.dateOfBirthInput.fill("01/01/2026");
+        await personalPage.nextButton.click();
+        await expect(personalPage.dateOfBirthError).toBeVisible();
+      });
+
+      test("displays error for date of birth under 13 years old", async () => {
+        await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
+        await personalPage.dateOfBirthInput.fill("01/01/2014");
+        await personalPage.nextButton.click();
+        await expect(personalPage.dateOfBirthError).toBeVisible();
+      });
 
       test("displays error for current date of birth", async ({ page }) => {
         await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));

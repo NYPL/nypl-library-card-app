@@ -43,5 +43,21 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       await expect(landingPage.privacyPolicy).toBeVisible();
       await expect(landingPage.informationalBanner).toBeVisible();
     });
+
+    test("opens links in same tab", async () => {
+      const links = [
+        landingPage.digitalResourcesLink,
+        landingPage.visitLibraryLink,
+        landingPage.alternateFormLink,
+        landingPage.whatYouCanAccess,
+        landingPage.cardholderTerms,
+        landingPage.rulesRegulations,
+        landingPage.privacyPolicy,
+      ];
+
+      for (const link of links) {
+        await expect(link).not.toHaveAttribute("target", "_blank");
+      }
+    });
   });
 }

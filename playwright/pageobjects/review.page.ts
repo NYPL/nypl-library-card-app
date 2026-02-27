@@ -19,8 +19,8 @@ export class ReviewPage {
   readonly dateOfBirthHeading: Locator;
   readonly dateOfBirthInputHeading: Locator;
   readonly dateOfBirthInput: Locator;
+  readonly dateOfBirthInvalid: Locator;
   readonly dateOfBirthError: Locator;
-  readonly ageError: Locator;
   readonly emailHeading: Locator;
   readonly emailInputHeading: Locator;
   readonly emailInput: Locator;
@@ -120,10 +120,8 @@ export class ReviewPage {
       name: "Date of birth (required)",
       exact: true,
     });
-    this.dateOfBirthError = page.getByText(
-      "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes."
-    );
-    this.ageError = page.getByText(ERROR_MESSAGES.AGE_ERROR);
+    this.dateOfBirthInvalid = this.page.getByText("There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.");
+    this.dateOfBirthError = this.page.getByText("There was a problem. Date of birth is below the minimum age of 13.");
     this.emailHeading = page.getByText("Email address", { exact: true });
     this.emailInputHeading = page.getByText("Email address (required)", {
       exact: true,

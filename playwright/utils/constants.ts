@@ -94,7 +94,7 @@ export const ERROR_MESSAGES = {
   FIRST_NAME_INVALID: appContent.personal.errorMessage.firstName,
   LAST_NAME_INVALID: appContent.personal.errorMessage.lastName,
   DATE_OF_BIRTH_INVALID: appContent.personal.errorMessage.birthdate,
-  AGE_ERROR: appContent.personal.errorMessage.ageGate,
+  DATE_OF_BIRTH_ERROR: appContent.personal.errorMessage.ageGate,
   EMAIL_INVALID: appContent.personal.errorMessage.email,
   STREET_ADDRESS_INVALID: appContent.location.errorMessage.line1,
   CITY_INVALID: appContent.location.errorMessage.city,
