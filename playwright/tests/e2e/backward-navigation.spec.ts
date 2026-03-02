@@ -1,12 +1,12 @@
 import { test, expect } from "@playwright/test";
-import { PAGE_ROUTES, SPINNER_TIMEOUT } from "../utils/constants";
-import { PageManager } from "../pageobjects/page-manager.page";
-import { fillAddress, fillPersonalInfo } from "../utils/form-helper";
+import { PAGE_ROUTES, SPINNER_TIMEOUT } from "../../utils/constants";
+import { PageManager } from "../../pageobjects/page-manager.page";
+import { fillAddress, fillPersonalInfo } from "../../utils/form-helper";
 import {
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
-} from "../utils/constants";
+} from "../../utils/constants";
 
 test.describe("E2E: Navigate backward in application", () => {
   test("navigates backward to landing without entering info", async ({
