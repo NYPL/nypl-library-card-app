@@ -5,12 +5,17 @@
     "title": "도서관 카드를 온라인으로 신청하세요"
   },
   "home": {
-    "title": "도서관 카드를 신청하는 몇 가지 쉬운 방법",
+    "title": "간단한 몇 단계로 지금 바로 도서관 카드를 신청하세요",
     "description": {
-      "part1": "13세 이상이고 뉴욕주에서 거주하거나, 일하거나, 학교에 다니거나, 재산세를 납부하는 사람은 이 온라인 신청서를 이용하여 지금 즉시 무료 도서관 카드를 신청할 수 있습니다. 근거지에서 가까운 NYPL에 방문하여 여러분의 정보를 확인하고 실물 NYPL 카드를 받으세요. 뉴욕주 내에 근거지가 있음이 확인되면, 즉시 무료 디지털 도서관 카드를 받을 수 있습니다.",
-      "part2": "뉴욕주 외부에서 온 방문객도 이 양식을 사용하여 실물 대출건(도서 등) 예약을 할 수 있는 임시 카드를 신청할 수 있습니다. 이 카드는 30일 이내에 대면으로 직접 확인을 받아야 하며, 전자책, 데이터베이스 또는 Culture Pass 프로그램에는 이용할 수 없습니다.",
-      "part3": "도서관 카드로 이용할 수 있는 것에 대해&nbsp;</span><a href=\"https://www.nypl.org/library-card\">자세히 알아보세요</a>!",
-      "part4": "신청서를 제출하시면, 귀하는 <a href=\"https://nypl.org/help/library-card/terms-conditions\">카드소지자 이용 약관</a> 에 동의하고, <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/policies-and-rules/ko\">도서관 규칙과 규정</a> 에 동의하는 것으로 간주됩니다. 도서관의 개인정보 사용에 관해 자세히 알아보시려면 <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy/ko\">개인정보 취급방침</a> 을 읽어주십시오."
+      "part1": "뉴욕주에서 거주 또는 근무하거나, 학교에 다니거나, 재산세를 납부하고 계십니까? 지금 무료 도서관 카드를 받아 뉴욕 공공도서관이 제공하는 다양한 서비스를 이용해보십시오!",
+      "part2": "지금 신청을 시작하시면 전자책 및 기타 <a href='https://www.nypl.org/help/services/remote-resources'>디지털 리소스</a>를 즉시 이용하실 수 있습니다. 이후 가까운 <a href='https://www.nypl.org/locations'>NYPL 지점을 방문</a>해 정보를 확인하고 실물 카드를 발급받으시면 실물 도서 대출과 Culture Pass 프로그램 등 더 많은 서비스를 이용하실 수 있습니다.",
+      "part3": "다른 주에서 뉴욕을 방문 중이신 경우에는 이 양식을 통해 임시 카드를 신청하실 수 있으며, 이 카드로 방문 전에 실물 자료를 요청하거나 연구 자료 열람을 예약하실 수 있습니다. 추가 서비스를 이용하려면 30일 이내에 NYPL 지점에서 카드 확인 절차를 완료해야 합니다.",
+      "part4": "다른 국가에서 방문 중이시라면 해외 방문자용<a href=\"https://www.nypl.org/help/library-card#international-researchers\">  대체 양식</a>을 이용해 주십시오. 임시 카드로 자료를 요청하고 연구 자료 열람 예약을 하실 수 있습니다.",
+      "part5": "도서관 카드로 이용할 수 있는 것에 대해&nbsp;</span><a href=\"https://www.nypl.org/library-card\">자세히 알아보세요</a>!",
+      "part6": "신청서를 제출하시면, 귀하는 <a href=\"https://nypl.org/help/library-card/terms-conditions\">카드소지자 이용 약관</a> 에 동의하고, <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/policies-and-rules/ko\">도서관 규칙과 규정</a> 에 동의하는 것으로 간주됩니다. 도서관의 개인정보 사용에 관해 자세히 알아보시려면 <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy/ko\">개인정보 취급방침</a> 을 읽어주십시오."
+    },
+    "banner": {
+      "text": "참고: 온라인 신청은 만 13세 이상만 가능합니다. 디지털 도서관 카드를 발급받아 온라인 리소스를 즉시 이용하려면 신청서 제출 시 뉴욕주 내에 계셔야 합니다."
     }
   },
   "personal": {
@@ -34,18 +39,18 @@
       "labelText": "예, NYPL의 프로그램과 서비스에 대한 정보를 받기를 원합니다."
     },
     "errorMessage": {
-      "firstName": "유효한 이름을 입력해주십시오.",
-      "lastName": "유효한 성씨를 입력해주십시오.",
-      "birthdate": "유효한 날짜를 /를 포함하여 월월/일일/년년년년 형식으로 입력해주십시오.",
-      "ageGate": "You must be 13 years or older to continue.",
-      "email": "유효한 이메일 주소를 입력해 주십시오."
+      "firstName": "문제가 발생했습니다. 유효한 이름을 입력해주십시오.",
+      "lastName": "문제가 발생했습니다. 유효한 성씨를 입력해주십시오.",
+      "birthdate": "문제가 발생했습니다. 유효한 날짜를 /를 포함하여 월월/일일/년년년년 형식으로 입력해주십시오.",
+      "ageGate": "문제가 발생했습니다. 온라인 신청은 만 13세 이상만 가능합니다.",
+      "email": "문제가 발생했습니다. 유효한 이메일 주소를 입력해 주십시오."
     }
   },
   "location": {
     "title": "2/5단계: 주소",
     "address": {
       "title": "집 주소",
-      "description": "뉴욕시에 거주하고 계시는 분은 집 주소 양식서에 기재해주십시오.",
+      "description": "미국 거주자의 경우 아래에 자택 주소를 입력해 주십시오. 다른 주에서 뉴욕을 방문 중이신 경우에는 이 양식을 통해 임시 카드를 신청하실 수 있으며, 이 카드로 방문 전에 실물 자료를 요청하거나 연구 자료 열람을 예약하실 수 있습니다. 해외 방문자는 <a href='https://legacycatalog.nypl.org/selfreg/patonsite'> 대체 양식</a>을 이용해 주십시오.",
       "line1": { "label": "거리 주소" },
       "line2": { "label": "아파트/ 호수" },
       "city": { "label": "시" },
@@ -57,18 +62,18 @@
     },
     "workAddress": {
       "title": "2/5단계: 대체 주소",
-      "subtitle": "대체 주소 (선택 사항)",
+      "subtitle": "대체 주소(선택 사항)",
       "description": {
-        "part1": "신청 절차는 뉴욕시에서 귀하의 거주 여부, 직장 또는 학교에 다니는지의 여부, 뉴욕시, 뉴욕주 또는 미국 내 다른 지역에서 재산세를 납부하는지의 여부, 또는 뉴욕시에 단순 방문인지의 여부에 따라 약간 다릅니다. 다음 중 해당하는 항목 하나를 선택하고 필수 항목을 기입해 주십시오.",
+        "part1": "뉴욕주에서 근무하거나, 학교에 다니거나, 재산세를 납부하고 계십니까? 뉴욕에 거주하지 않으시더라도 도서관 카드를 받을 자격이 있을 수 있습니다.",
         "part2": "뉴욕시에서 직장에 다니고 있거나 학교를 다니는 경우 주소를 제공해 주십시오.",
-        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State.<b>If none of these apply to you, click next.</b>"
+        "part3": "뉴욕주에서 근무하거나, 학교에 다니거나, 재산세를 납부하는 곳의 주소를 입력해 주십시오. 해당 사항이 없으시면 다음을 클릭하십시오."
       }
     },
     "errorMessage": {
-      "line1": "유효한 거리 주소를 입력해주십시오.",
-      "city": "유효한 도시명을 입력해주십시오.",
-      "state": "유효한 2자리 주 약어를 입력해주십시오.",
-      "zip": "5자리 또는 9자리 우편번호를 입력해주십시오."
+      "line1": "문제가 발생했습니다. 유효한 거리 주소를 입력해주십시오.",
+      "city": "문제가 발생했습니다. 유효한 도시명을 입력해주십시오.",
+      "state": "문제가 발생했습니다. 유효한 2자리 주 약어를 입력해주십시오.",
+      "zip": "문제가 발생했습니다. 5자리 또는 9자리 우편번호를 입력해주십시오."
     }
   },
   "verifyAddress": {
@@ -100,7 +105,8 @@
       "title": "홈 라이브러리",
       "description": {
         "part1": "홈 라이브러리란 내게 가장 가까운 도서관 지점을 말하며, 선택하시면 해당 지점에서 필요한 모든 것을 구하는 데 도움이 됩니다.",
-        "part2": "이 단계를 건너뛰고 계정을 통해 언제든지 업데이트할 수 있습니다."
+        "part2": "아래 드롭다운 메뉴에서 NYPL 지점을 선택하여 홈 도서관으로 지정해 주십시오. 해당하는 홈 도서관이 없으면 \"Virtual\"을 선택해 주십시오. 계정 설정을 통해 언제든지 변경하실 수 있습니다.",
+        "part3": "실물 자료를 대출하려면 NYPL 지점을 방문해 정보를 확인하고 실물 카드를 발급받으셔야 합니다."
       }
     },
     "termsAndCondition": {
@@ -108,10 +114,11 @@
       "text": "신청서를 제출하시면, 귀하는 <a href='https://www.nypl.org/help/library-card/terms-conditions'>카드소지자 이용약관</a>에 동의하고, <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>규칙과 규정</a>에 동의하는 것으로 간주됩니다. 도서관의 개인정보 사용에 관해 자세히 알아보시려면 <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>개인정보 취급방침</a>을 읽어주십시오."
     },
     "errorMessage": {
-      "username": "사용자명은 5 내지 25자의 영숫자로 해야 합니다.",
-      "password": "비밀번호는 8자 이상이어야 하며, 대문자, 소문자, 숫자, 특수문자(마침표(.) 제외)를 혼합하여 만들어야 합니다.",
-      "verifyPassword": "두 개의 비밀번호가 일치하지 않습니다.",
-      "acceptTerms": "이용약관을 확인해야 합니다."
+      "username": "문제가 발생했습니다. 사용자명은 5 내지 25자의 영숫자로 해야 합니다.",
+      "password": "문제가 발생했습니다. 비밀번호는 8자 이상이어야 하며, 대문자, 소문자, 숫자, 특수문자(마침표(.) 제외)를 혼합하여 만들어야 합니다.",
+      "verifyPassword": "문제가 발생했습니다. 두 개의 비밀번호가 일치하지 않습니다.",
+      "acceptTerms": "문제가 발생했습니다. 이용약관을 확인해야 합니다.",
+      "homeLibraryCode": "문제가 발생했습니다. 홈 도서관을 선택해 주십시오."
     }
   },
   "review": {
@@ -136,12 +143,12 @@
   "confirmation": {
     "title": {
       "metro":"축하드립니다! 이제 디지털 뉴욕 공공도서관 카드를 갖게 되셨습니다.",
-      "temporary":"임시"
+      "temporary":"축하합니다! 이제 뉴욕 공공도서관 임시 디지털 카드가 발급되었습니다."
     },
     "description": {
       "part1": "기록용으로 이 정보를 인쇄해두거나 보관해 두십시오. 24시간 이내로 귀하의 계정에 대한 자세한 정보와 함께 이메일을 받으시게 됩니다.",
       "part2": "실제 자료를 대여하시려면 저희 <a href='http://nypl.org/locations'>지점</a> 중 한 곳에 유효한 <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>사진 부착 신분증과 주소지 증명</a>을 지참하고 방문해 주십시오. 그리고 실제 카드를 받기 위한 신청을 마쳐 주십시오.",
-      "part3": "본 카드는 임시 카드이며 30일 후에 만료됩니다. 뉴욕주 인정 칼리지의 학생이거나 뉴욕시 소재 회사의 직원이지만 여기 시 또는 주에 실거주를 하지 않고 있거나 여기 연구소를 방문할 연구원인 경우 귀하의 카드를 <a href='mailto:gethelp@nypl.org'>업데이트하기 위해</a> 연락해 주십시오."
+      "part3": "해당 카드는 임시 카드이며 30일 후에 만료됩니다. 뉴욕주에서 거주 또는 근무하거나, 학교에 다니거나, 재산세를 납부하시는 경우, 카드 업데이트 방법에 대해<a href='https://www.nypl.org/help/library-card/terms-conditions#renew'> 자세히 알아보시기 바랍니다</a>. 30일 이후 방문을 계획 중인 연구자이시거나 기타 문의 사항이 있으시면 <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a>로 연락해 주십시오."
     },
     "graphic": {
       "memberName": "회원 이름",
@@ -150,8 +157,8 @@
     },
     "nextSteps": {
       "title": "뉴욕 공공도서관 이용 시작하기",
-      "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
-      "borrow": "<b>책과 자료 대여</b><a href='{{loginUrl}}'>계정에 로그인하여</a> 카탈로그를 탐색하십시오.",
+      "explore": "<b>전자책 및 전자 오디오북 둘러보기</b>다양한 도서를<a href='https://www.nypl.org/books-music-movies/help'> 이동 중에도 읽거나 들어 보십시오.</a>",
+      "borrow": "<b>책과 자료 대여</b><a href='{{loginUrl}}'>계정에 로그인</a> 하여 카탈로그를 둘러보십시오. 실물 자료를 요청하려면 <a href='https://www.nypl.org/locations'>NYPL 지점</a>을 방문해 정보를 확인하고 실물 카드를 발급받으셔야 합니다.",
       "updates": "<b>업데이트 확인</b><a href='https://www.nypl.org/enews'>도서관에서 이용할 수 있는 정보를 확인해 보십시오.</a>",
       "more": "<b>자세히 알아보기</b><a href='https://www.nypl.org/discover-library-card'>도서관 카드로 어떤 일을 할 수 있는지 알아 보십시오.</a>"
     }
