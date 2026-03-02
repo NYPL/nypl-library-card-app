@@ -1,11 +1,11 @@
-/*import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { test, expect } from "@playwright/test";
+import { PageManager } from "../../pageobjects/page-manager.page";
 
 import {
   fillPersonalInfo,
   fillAddress,
   fillAccountInfo,
-} from "../utils/form-helper";
+} from "../../utils/form-helper";
 import {
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
@@ -13,21 +13,22 @@ import {
   TEST_PATRON,
   PAGE_ROUTES,
   PATRON_TYPES,
-} from "../utils/constants";
+  IP,
+} from "../../utils/constants";
 import {
   getPatronID,
   getPatronData,
   deletePatron,
-} from "../utils/sierra-api-utils";
-import { createFuzzyMatcher, formatSierraDate } from "../utils/formatter";
+} from "../../utils/sierra-api-utils";
+import { createFuzzyMatcher, formatSierraDate } from "../../utils/formatter";
 
 test.describe("E2E: Complete application with Sierra API integration", () => {
   let scrapedBarcode: string | null = null;
 
   test.beforeEach(async ({ page }) => {
     await page.setExtraHTTPHeaders({
-      "x-client-ip": "65.209.66.130",
-      "x-forwarded-for": "65.209.66.130",
+      "x-client-ip": IP.NYC_IP,
+      "x-forwarded-for": IP.NYC_IP,
     });
   });
 
@@ -65,14 +66,6 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
       await pageManager.addressPage.nextButton.click();
       await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
-    });
-
-    await test.step("enters alternate address", async () => {
-      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await pageManager.alternateAddressPage.nextButton.click();
-      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });
     });
@@ -225,8 +218,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       expect(patronData.birthDate).toBe(expectedDOB);
       expect(actualAddressText).toMatch(expectedAddress);
       expect(patronEmails).toContain(expectedEmail);
-      expect(patronData.patronType).toBe(PATRON_TYPES.PATRON_TYPE_8);
+      expect(patronData.patronType).toBe(PATRON_TYPES.PATRON_TYPE_9);
     });
   });
 });
-*/
