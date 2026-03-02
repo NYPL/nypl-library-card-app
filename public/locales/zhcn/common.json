@@ -7,10 +7,15 @@
   "home": {
     "title": "只需简单几步，即可立即申请图书卡",
     "description": {
-      "part1": "如果您年满13岁，并且在纽约州生活、工作、上学或缴纳财产税，您可以立即使用此在线申请表申请免费图书卡，然后前往离您最近的纽约公共图书馆验证信息，并获取一张实体的纽约公共图书馆图书卡。如果系统可以确认您在纽约州的位置，您将可立即获得一张免费电子图书卡。",
-      "part2": "来自纽约州以外的访客也可以使用此申请表申请临时图书卡，以便预订图书馆的实体书籍。该图书卡必须在30天内亲自到场验证，并且不提供电子书、数据库访问，也不能使用文化通行证（Culture Pass）计划提供的服务.",
-      "part3": "<a href=\"https://www.nypl.org/library-card\">探索更多</a>关于图书卡的用途！",
-      "part4": "提交申请，即表示您理解并同意我们的<a href='https://www.nypl.org/help/library-card/terms-conditions'>持卡人条款和条件</a>，并同意我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/policies-and-rules/zh-cn'>规范与法则</a>。要了解有关图书馆使用个人资料的更多信息，请阅读我们的<a href=' https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy/zh-tw'>隐私政策</a>。"
+      "part1": "您是否在纽约州居住、工作、上学或缴付物业税？立即申请免费图书卡，即可享用纽约公共图书馆提供的种种资源！",
+      "part2": "一旦您开始申请，就可以立即使用电子书和其他<a href='https://www.nypl.org/help/services/remote-resources'>数字资源</a>。然后，<a href='https://www.nypl.org/locations'>前往任何一家NYPL分馆</a>，验证您的信息并领取NYPL实体图书卡。通过这张图书卡，您可以享用图书馆的更多资源，包括实体书籍和文化通行证（Culture Pass）计划。",
+      "part3": "如果您是其他州的居民，目前旅居于纽约，您可以使用此表格申请临时图书卡。在您来访之前，您可以预先要求借阅实体资料和预约研究时间。如需使用更多图书馆服务，您必须在30天内亲自前往任何一家NYPL分馆验证您的图书卡。",
+      "part4": "如果您来自其他国家，请使用我们专为国际访客提供的<a href='https://www.nypl.org/help/library-card#international-researchers'>替代表格</a>。您可以使用您的临时图书卡要求借阅资料和预约研究时间。",
+      "part5": "<a href=\"https://www.nypl.org/library-card\">探索更多</a>关于图书卡的用途！",
+      "part6": "提交申请，即表示您理解并同意我们的<a href='https://www.nypl.org/help/library-card/terms-conditions'>持卡人条款和条件</a>，并同意我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/policies-and-rules/zh-cn'>规范与法则</a>。要了解有关图书馆使用个人资料的更多信息，请阅读我们的<a href=' https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy/zh-tw'>隐私政策</a>。"
+    },
+    "banner": {
+      "text": "请注意：您必须至少年满13岁才能在线申请。如需获得电子图书卡并立即享用线上资源，您必须在提交申请时身处纽约州。"
     }
   },
   "personal": {
@@ -34,18 +39,18 @@
       "labelText": "是的，我想收到有关NYPL活动和服务的信息"
     },
     "errorMessage": {
-      "firstName": "请输入有效的名字。",
-      "lastName": "请输入有效的姓氏。",
-      "birthdate": "请输入有效的日期（月月/日日/年年年年，包括斜杠）。",
-      "ageGate": "You must be 13 years or older to continue.",
-      "email": "请输入有效的电子邮件地址。"
+      "firstName": "出现了问题。请输入有效的名字。",
+      "lastName": "出现了问题。请输入有效的姓氏。",
+      "birthdate": "出现了问题。请输入有效的日期（月月/日日/年年年年，包括斜杠）。",
+      "ageGate": "出现了问题。您必须至少年满13岁才能在线申请。",
+      "email": "出现了问题。请输入有效的电子邮件地址。"
     }
   },
   "location": {
     "title": "第 2 步：地址",
     "address": {
       "title": "居住地址",
-      "description": "如果您住在纽约市，请填写居住地址部分。",
+      "description": "如果您居住在美国，请在下方提供您的家庭住址。如果您是其他州的居民，目前旅居于纽约，您可以使用此表格申请临时图书卡。通过临时图书卡，您可以在来访之前要求借阅实体资料和预约研究时间。国际访客请使用我们的<a href='https://legacycatalog.nypl.org/selfreg/patonsite'>替代表格</a>。",
       "line1": { "label": "街道地址" },
       "line2": { "label": "公寓號碼" },
       "city": { "label": "城市" },
@@ -54,18 +59,18 @@
     },
     "workAddress": {
       "title": "替代地址",
-      "subtitle": "替代地址（可选）",
+      "subtitle": "替代地址（可选)",
       "description": {
-        "part1": "申请流程略有不同，具体取决于您是在纽约市或纽约州的其他地方生活、工作、上学或缴纳财产税，还是您在美国其他地方工作、上学或缴纳财产税，只是刚好来纽约市旅行。请选择以下选项之一并填写必填项。",
+        "part1": "您是否在纽约州工作、上学或缴付物业税？即使您不住在纽约，您仍然可能有资格申请图书卡。",
         "part2": "如果您在纽约市工作或上学，请提供地址。",
-        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State.<b>If none of these apply to you, click next.</b>"
+        "part3": "请提供您在纽约州工作、上学或缴付物业税的地址。如果以上内容均不适用于您，请点击下一步。"
       }
     },
     "errorMessage": {
-      "line1": "请输入有效的街道地址。",
-      "city": "请输入有效的城市名称。",
-      "state": "请输入 2 个字符的州简称。",
-      "zip": "请输入 5 或 9 位邮政编码。"
+      "line1": "出现了问题。请输入有效的街道地址。",
+      "city": "出现了问题。请输入有效的城市名称。",
+      "state": "出现了问题。请输入 2 个字符的州简称。",
+      "zip": "出现了问题。请输入 5 或 9 位邮政编码。"
     }
   },
   "verifyAddress": {
@@ -97,7 +102,8 @@
       "title": "区内图书馆",
       "description": {
         "part1": "选择一个区内图书馆将有助于我们确保您能够从对您来说最便利的分馆获得所需的一切。",
-        "part2": "您可以跳过此步骤并通过您的帐户随时进行更新。"
+        "part2": "请从下面的下拉选单中选择一家NYPL分馆作为您的区内图书馆。如果您没有区内图书馆，请选择“Virtual”。您可随时通过帐户设置更新此信息。",
+        "part3": "如需借阅实体物品，您必须前往一家NYPL分馆验证您的信息并领取实体图书卡。"
       }
     },
     "termsAndCondition": {
@@ -105,10 +111,11 @@
       "text": "提交申请，即表示您理解并同意我们的<a href='https://www.nypl.org/help/library-card/terms-conditions'>持卡人条款和条件</a>，并同意我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>规范与法则</a>。要了解有关图书馆使用个人资料的更多信息，请阅读我们的<a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>隐私政策</a>。"
     },
     "errorMessage": {
-      "username": "用户名需由 5-25 位英文字母数字字符组成。",
-      "password": "密码需包含至少 8 个字符，包括大小写字母、字母和数字并至少包含 1 个特殊字符，句号 (.) 除外。",
-      "verifyPassword": "密码不一致。",
-      "acceptTerms": "须查看条款和细则。"
+      "username": "出现了问题。用户名需由 5-25 位英文字母数字字符组成。",
+      "password": "出现了问题。密码需包含至少 8 个字符，包括大小写字母、字母和数字并至少包含 1 个特殊字符，句号 (.) 除外。",
+      "verifyPassword": "出现了问题。密码不一致。",
+      "acceptTerms": "出现了问题。须查看条款和细则。",
+      "homeLibraryCode": "出现了问题。请选择一家区内图书馆。"
     }
   },
   "review": {
@@ -133,12 +140,12 @@
   "confirmation": {
     "title": {
       "metro":"恭喜！您现在已获取一张纽约公共图书馆电子图书卡。",
-      "temporary":"TEMP"
+      "temporary":"恭喜！您现已获得一张临时的纽约公共图书馆电子图书卡。"
     },
     "description": {
       "part1": "请打印或保存此信息以作为记录。您将在 24 小时内收到一封包含您账户详细信息的电子邮件。",
       "part2": "如要借阅实体材料，请携带有效的<a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>带照片身份证件和地址证明</a>前往我们的其中一个<a href='http://nypl.org/locations'>分馆地点</a>完成实体图书卡的申请。",
-      "part3": "这是一张临时图书卡，将在 30 天后到期失效。如您是在纽约认可的学院就读的学生、纽约市企业的员工（现在不在纽约市或纽约州）或即将访问我们研究中心的研究人员，请联系我们<a href='mailto:gethelp@nypl.org'>更新您的图书卡。</a>"
+      "part3": "这是一张临时图书卡，将在30天后到期失效。如果您在纽约州居住、工作、上学或缴付物业税，请<a href='https://www.nypl.org/help/library-card/terms-conditions#renew'>了解更多</a>关于如何更新图书卡的信息。如果您是研究人员且计划在30多天后来访图书馆，或者有任何其他疑问，请联系 <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a>。"
     },
     "graphic": {
       "memberName": "成员名字",
@@ -147,8 +154,8 @@
     },
     "nextSteps": {
       "title": "开始使用纽约公共图书馆",
-      "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
-      "borrow": "<b>借阅书籍和其他物品</b><a href='{{loginUrl}}'>登录您的帐户</a>并浏览目录。",
+      "explore": "<b>探索电子书和电子有声书</b>您可以<a href='https://www.nypl.org/books-music-movies/help'>随时随地阅读或聆听</a>各种各样的书籍。",
+      "borrow": "<b>借阅书籍和其他物品</b><a href='{{loginUrl}}'>登录您的帐户</a>并浏览目录。如需借阅实体物品，请前往任何一家<a href='https://www.nypl.org/locations'>NYPL分馆</a>验证您的信息并领取实体图书卡。",
       "updates": "<b>获取更新</b><a href='https://www.nypl.org/enews'>发现图书馆提供的所有服务。</a>",
       "more": "<b>了解更多</b><a href='https://www.nypl.org/discover-library-card'>发现您可以用图书卡做些什么。</a>"
     }
