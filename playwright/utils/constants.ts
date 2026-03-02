@@ -124,3 +124,8 @@ export const PATRON_TYPES = {
   PATRON_TYPE_8: 8,
   PATRON_TYPE_9: 9,
 };
+
+export const IP = {
+  NYC_IP: "65.209.66.130",
+  NYS_IP: "172.100.3.84",
+};

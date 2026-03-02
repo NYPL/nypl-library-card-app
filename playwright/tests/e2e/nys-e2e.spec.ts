@@ -13,6 +13,7 @@ import {
   TEST_PATRON,
   PAGE_ROUTES,
   PATRON_TYPES,
+  IP,
 } from "../../utils/constants";
 import {
   getPatronID,
@@ -26,8 +27,8 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
   test.beforeEach(async ({ page }) => {
     await page.setExtraHTTPHeaders({
-      "x-client-ip": "65.209.66.130",
-      "x-forwarded-for": "65.209.66.130",
+      "x-client-ip": IP.NYS_IP,
+      "x-forwarded-for": IP.NYS_IP,
     });
   });
 
