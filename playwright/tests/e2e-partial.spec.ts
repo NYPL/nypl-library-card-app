@@ -139,7 +139,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
   const pageManager = new PageManager(page);
 
   await test.step("enters personal information", async () => {
-    await page.goto(PAGE_ROUTES.PERSONAL);
+    await page.goto(PAGE_ROUTES.PERSONAL());
     await expect(pageManager.personalPage.stepHeading).toBeVisible();
     await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
     await pageManager.personalPage.receiveInfoCheckbox.click(); // unchecks
@@ -161,7 +161,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
     });
   });
 
-  await test.step("confirms address verification", async () => {
+  await test.step("verifies home and alternate address", async () => {
     await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
     await pageManager.addressVerificationPage
       .getHomeAddressOption(TEST_OOS_ADDRESS.street)
