@@ -35,8 +35,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(addressPage.postalCodeInput).toBeVisible();
       });
 
-      test("opens link in new tab", async ({ page }) => {
-        const addressPage = new AddressPage(page);
+      test("confirms link opens in new tab", async () => {
         await expect(addressPage.alternateForm).toHaveAttribute(
           "target",
           "_blank"

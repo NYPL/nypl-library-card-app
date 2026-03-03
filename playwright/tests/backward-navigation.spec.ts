@@ -20,42 +20,42 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       pageManager = new PageManager(page, appContent);
     });
 
-    // test("navigates backward to landing without entering info", async ({
-    //   page,
-    // }) => {
-    //   await test.step("begins at account page", async () => {
-    //     await page.goto(PAGE_ROUTES.ACCOUNT(lang));
-    //     await expect(pageManager.accountPage.stepHeading).toBeVisible();
-    //     await expect(pageManager.accountPage.previousButton).toBeVisible();
-    //     await pageManager.accountPage.previousButton.click();
-    //   });
+    test("navigates backward to landing without entering info", async ({
+      page,
+    }) => {
+      await test.step("begins at account page", async () => {
+        await page.goto(PAGE_ROUTES.ACCOUNT(lang));
+        await expect(pageManager.accountPage.stepHeading).toBeVisible();
+        await expect(pageManager.accountPage.previousButton).toBeVisible();
+        await pageManager.accountPage.previousButton.click();
+      });
 
-    //   await test.step("displays address verification page", async () => {
-    //     await expect(
-    //       pageManager.addressVerificationPage.stepHeading
-    //     ).toBeVisible();
-    //     await expect(
-    //       pageManager.addressVerificationPage.previousButton
-    //     ).toBeVisible();
-    //     await pageManager.addressVerificationPage.previousButton.click();
-    //   });
+      await test.step("displays address verification page", async () => {
+        await expect(
+          pageManager.addressVerificationPage.stepHeading
+        ).toBeVisible();
+        await expect(
+          pageManager.addressVerificationPage.previousButton
+        ).toBeVisible();
+        await pageManager.addressVerificationPage.previousButton.click();
+      });
 
-    //   await test.step("displays address page", async () => {
-    //     await expect(pageManager.addressPage.stepHeading).toBeVisible();
-    //     await expect(pageManager.addressPage.previousButton).toBeVisible();
-    //     await pageManager.addressPage.previousButton.click();
-    //   });
+      await test.step("displays address page", async () => {
+        await expect(pageManager.addressPage.stepHeading).toBeVisible();
+        await expect(pageManager.addressPage.previousButton).toBeVisible();
+        await pageManager.addressPage.previousButton.click();
+      });
 
-    //   await test.step("displays personal information page", async () => {
-    //     await expect(pageManager.personalPage.stepHeading).toBeVisible();
-    //     await expect(pageManager.personalPage.previousButton).toBeVisible();
-    //     await pageManager.personalPage.previousButton.click();
-    //   });
+      await test.step("displays personal information page", async () => {
+        await expect(pageManager.personalPage.stepHeading).toBeVisible();
+        await expect(pageManager.personalPage.previousButton).toBeVisible();
+        await pageManager.personalPage.previousButton.click();
+      });
 
-    //   await test.step("displays landing page", async () => {
-    //     await expect(pageManager.landingPage.applyHeading).toBeVisible();
-    //   });
-    // });
+      await test.step("displays landing page", async () => {
+        await expect(pageManager.landingPage.applyHeading).toBeVisible();
+      });
+    });
 
     test("retains user-entered info when navigating backward", async ({
       page,
@@ -104,66 +104,66 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         ).not.toBeVisible({ timeout: SPINNER_TIMEOUT });
       });
 
-      // await test.step("displays account page", async () => {
-      //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      //   await pageManager.accountPage.previousButton.click();
-      // });
+      await test.step("displays account page", async () => {
+        await expect(pageManager.accountPage.stepHeading).toBeVisible();
+        await pageManager.accountPage.previousButton.click();
+      });
 
-      // await test.step("displays user-entered info on address verification page", async () => {
-      //   await expect(
-      //     pageManager.addressVerificationPage.stepHeading
-      //   ).toBeVisible();
-      //   await expect(
-      //     pageManager.addressVerificationPage.getHomeAddressOption(
-      //       TEST_OOS_ADDRESS.street
-      //     )
-      //   ).toBeChecked();
-      //   await expect(
-      //     pageManager.addressVerificationPage.getAlternateAddressOption(
-      //       TEST_NYC_ADDRESS.street
-      //     )
-      //   ).toBeChecked();
-      //   await pageManager.addressVerificationPage.previousButton.click();
-      // });
+      await test.step("displays user-entered info on address verification page", async () => {
+        await expect(
+          pageManager.addressVerificationPage.stepHeading
+        ).toBeVisible();
+        await expect(
+          pageManager.addressVerificationPage.getHomeAddressOption(
+            TEST_OOS_ADDRESS.street
+          )
+        ).toBeChecked();
+        await expect(
+          pageManager.addressVerificationPage.getAlternateAddressOption(
+            TEST_NYC_ADDRESS.street
+          )
+        ).toBeChecked();
+        await pageManager.addressVerificationPage.previousButton.click();
+      });
 
-      // await test.step("displays user-entered info on address page", async () => {
-      //   await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      //   await expect(pageManager.addressPage.streetAddressInput).toHaveValue(
-      //     TEST_OOS_ADDRESS.street
-      //   );
-      //   await expect(pageManager.addressPage.apartmentSuiteInput).toHaveValue(
-      //     TEST_OOS_ADDRESS.apartmentSuite
-      //   );
-      //   await expect(pageManager.addressPage.cityInput).toHaveValue(
-      //     TEST_OOS_ADDRESS.city
-      //   );
-      //   await expect(pageManager.addressPage.stateInput).toHaveValue(
-      //     TEST_OOS_ADDRESS.state
-      //   );
-      //   await expect(pageManager.addressPage.postalCodeInput).toHaveValue(
-      //     TEST_OOS_ADDRESS.postalCode
-      //   );
-      //   await pageManager.addressPage.previousButton.click();
-      // });
+      await test.step("displays user-entered info on address page", async () => {
+        await expect(pageManager.addressPage.stepHeading).toBeVisible();
+        await expect(pageManager.addressPage.streetAddressInput).toHaveValue(
+          TEST_OOS_ADDRESS.street
+        );
+        await expect(pageManager.addressPage.apartmentSuiteInput).toHaveValue(
+          TEST_OOS_ADDRESS.apartmentSuite
+        );
+        await expect(pageManager.addressPage.cityInput).toHaveValue(
+          TEST_OOS_ADDRESS.city
+        );
+        await expect(pageManager.addressPage.stateInput).toHaveValue(
+          TEST_OOS_ADDRESS.state
+        );
+        await expect(pageManager.addressPage.postalCodeInput).toHaveValue(
+          TEST_OOS_ADDRESS.postalCode
+        );
+        await pageManager.addressPage.previousButton.click();
+      });
 
-      //   await test.step("displays user-entered info on personal information page", async () => {
-      //     await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      //     await expect(pageManager.personalPage.firstNameInput).toHaveValue(
-      //       TEST_PATRON.firstName
-      //     );
-      //     await expect(pageManager.personalPage.lastNameInput).toHaveValue(
-      //       TEST_PATRON.lastName
-      //     );
-      //     await expect(pageManager.personalPage.dateOfBirthInput).toHaveValue(
-      //       TEST_PATRON.dateOfBirth
-      //     );
-      //     await expect(pageManager.personalPage.emailInput).toHaveValue(
-      //       TEST_PATRON.email
-      //     );
-      //     await expect(
-      //       pageManager.personalPage.receiveInfoCheckbox
-      //     ).not.toBeChecked();
-      //   });
+      await test.step("displays user-entered info on personal information page", async () => {
+        await expect(pageManager.personalPage.stepHeading).toBeVisible();
+        await expect(pageManager.personalPage.firstNameInput).toHaveValue(
+          TEST_PATRON.firstName
+        );
+        await expect(pageManager.personalPage.lastNameInput).toHaveValue(
+          TEST_PATRON.lastName
+        );
+        await expect(pageManager.personalPage.dateOfBirthInput).toHaveValue(
+          TEST_PATRON.dateOfBirth
+        );
+        await expect(pageManager.personalPage.emailInput).toHaveValue(
+          TEST_PATRON.email
+        );
+        await expect(
+          pageManager.personalPage.receiveInfoCheckbox
+        ).not.toBeChecked();
+      });
     });
   });
 }

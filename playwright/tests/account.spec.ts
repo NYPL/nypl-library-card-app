@@ -45,8 +45,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(accountPage.acceptTermsLabel).toBeVisible();
       });
 
-      test("opens links in new tab", async ({ page }) => {
-        const accountPage = new AccountPage(page);
+      test("confirms links open in new tab", async () => {
         const links = [
           accountPage.cardholderTerms,
           accountPage.rulesRegulations,
