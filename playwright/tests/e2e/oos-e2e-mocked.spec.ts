@@ -22,7 +22,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let appContent: any;
 
     test("submits OOS patron application", async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
       // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
 

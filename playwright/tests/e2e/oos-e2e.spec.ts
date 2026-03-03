@@ -28,7 +28,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     const scrapedBarcode: string | null = null;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
     });
 

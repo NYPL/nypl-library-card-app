@@ -32,7 +32,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         "x-client-ip": IP.NYC_IP,
         "x-forwarded-for": IP.NYC_IP,
       });
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
     });
 
