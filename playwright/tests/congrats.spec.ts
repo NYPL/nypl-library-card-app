@@ -3,6 +3,7 @@ import { CongratsPage } from "../pageobjects/congrats.page";
 import { PageManager } from "../pageobjects/page-manager.page";
 import {
   PAGE_ROUTES,
+  PATRON_TYPES,
   TEST_BARCODE_NUMBER,
   TEST_PATRON,
 } from "../utils/constants";
@@ -37,7 +38,12 @@ test.describe("displays congrats page", () => {
 
   test("displays congrats page for NYC patron", async ({ page }) => {
     await test.step("submits mocked application", async () => {
-      await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER, 9);
+      await mockCreatePatronApi(
+        page,
+        fullName,
+        TEST_BARCODE_NUMBER,
+        PATRON_TYPES.PATRON_TYPE_9
+      );
       await pageManager.reviewPage.submitButton.click();
     });
 
@@ -76,7 +82,12 @@ test.describe("displays congrats page", () => {
 
   test("displays congrats page for NYS patron", async ({ page }) => {
     await test.step("submits mocked application", async () => {
-      await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER, 8);
+      await mockCreatePatronApi(
+        page,
+        fullName,
+        TEST_BARCODE_NUMBER,
+        PATRON_TYPES.PATRON_TYPE_8
+      );
       await pageManager.reviewPage.submitButton.click();
     });
 
@@ -115,7 +126,12 @@ test.describe("displays congrats page", () => {
 
   test("displays congrats page for OOS patron", async ({ page }) => {
     await test.step("submits mocked application", async () => {
-      await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER, 7);
+      await mockCreatePatronApi(
+        page,
+        fullName,
+        TEST_BARCODE_NUMBER,
+        PATRON_TYPES.PATRON_TYPE_7
+      );
       await pageManager.reviewPage.submitButton.click();
     });
 
