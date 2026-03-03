@@ -57,6 +57,23 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.showPasswordLabel).toBeVisible();
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
   });
+
+  test("opens links in new tab", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+    const links = [
+      reviewPage.alternateFormLink,
+      reviewPage.locationsLink,
+      reviewPage.cardholderTermsLink,
+      reviewPage.rulesRegulationsLink,
+      reviewPage.privacyPolicyLink,
+    ];
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.editAccountButton.click();
+    for (const link of links) {
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("rel", "nofollow noopener noreferrer");
+    }
+  });
 });
 
 test.describe("edits patron information on review page", () => {
@@ -258,7 +275,7 @@ test.describe("displays error messages", () => {
     await reviewPage.submitButton.click();
     await expect(reviewPage.firstNameError).toBeVisible();
     await expect(reviewPage.lastNameError).toBeVisible();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
     await expect(reviewPage.emailError).toBeVisible();
   });
 
@@ -267,7 +284,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("12-25-1984");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for YYYY/MM/DD format in date of birth", async ({
@@ -277,7 +294,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("1984/12/25");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for DD/MM/YYYY format in date of birth", async ({
@@ -287,7 +304,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("25/12/1984");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for M/D/YY format in date of birth", async ({
@@ -297,7 +314,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("1/1/84");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for written date of birth", async ({ page }) => {
@@ -305,7 +322,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("December 25, 1984");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for earliest date of birth", async ({ page }) => {
@@ -313,16 +330,27 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("01/01/1902");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
-  test("displays error for current date of birth", async ({ page }) => {
+  test("displays error for date of birth in current year", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("01/01/2026");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.ageError).toBeVisible();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
+  });
+
+  test("displays error for date of birth under 13 years old", async ({
+    page,
+  }) => {
+    const reviewPage = new ReviewPage(page);
+    await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
+    await reviewPage.editPersonalInfoButton.click();
+    await reviewPage.dateOfBirthInput.fill("01/01/2014");
+    await reviewPage.submitButton.click();
+    await expect(reviewPage.dateOfBirthError).toBeVisible();
   });
 
   test("displays error for future date of birth", async ({ page }) => {
@@ -330,7 +358,7 @@ test.describe("displays error messages", () => {
     await reviewPage.editPersonalInfoButton.click();
     await reviewPage.dateOfBirthInput.fill("12/31/2099");
     await reviewPage.submitButton.click();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
   });
 
   test("displays error for missing email symbol", async ({ page }) => {
@@ -442,7 +470,7 @@ test.describe("displays error messages", () => {
     await reviewPage.submitButton.click();
     await expect(reviewPage.firstNameError).toBeVisible();
     await expect(reviewPage.lastNameError).toBeVisible();
-    await expect(reviewPage.dateOfBirthError).toBeVisible();
+    await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
     await expect(reviewPage.emailError).toBeVisible();
     await expect(reviewPage.usernameError).toBeVisible();
     await expect(reviewPage.passwordError).toBeVisible();
