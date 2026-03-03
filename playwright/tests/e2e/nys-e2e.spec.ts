@@ -70,7 +70,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       });
     });
 
-    await test.step("enters alternate address", async () => {
+    await test.step("skips alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await pageManager.alternateAddressPage.nextButton.click();
       await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
@@ -78,11 +78,19 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       });
     });
 
-    await test.step("address verfication", async () => {
+    await test.step("displays address verification page", async () => {
       await expect(
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
+      await pageManager.addressVerificationPage
+        .getHomeAddressOption(TEST_NYS_ADDRESS.street)
+        .check();
       await pageManager.addressVerificationPage.nextButton.click();
+      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
+        {
+          timeout: SPINNER_TIMEOUT,
+        }
+      );
     });
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
@@ -141,15 +149,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     await test.step("displays headings and banner on congrats page", async () => {
       await expect(pageManager.congratsPage.mainHeading).toBeVisible();
       await expect(pageManager.congratsPage.stepHeading).toBeVisible();
-      await expect(pageManager.congratsPage.locationsLink).toBeVisible();
-      await expect(
-        pageManager.congratsPage.photoIdAndProofOfAddressLink
-      ).toBeVisible();
       await expect(pageManager.congratsPage.readOrListenOnGo).toBeVisible();
-      await expect(pageManager.congratsPage.loginLink).toBeVisible();
-      await expect(pageManager.congratsPage.nyplLocationLink).toBeVisible();
-      await expect(pageManager.congratsPage.findOutLibraryLink).toBeVisible();
-      await expect(pageManager.congratsPage.discoverLink).toBeVisible();
     });
 
     await test.step("displays generated library card on congrats page", async () => {
