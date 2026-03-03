@@ -44,8 +44,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(accountPage.privacyPolicy).toBeVisible();
         await expect(accountPage.acceptTermsLabel).toBeVisible();
       });
-      
-      
+
       test("opens links in new tab", async ({ page }) => {
         const accountPage = new AccountPage(page);
         const links = [
@@ -55,7 +54,10 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         ];
         for (const link of links) {
           await expect(link).toHaveAttribute("target", "_blank");
-          await expect(link).toHaveAttribute("rel", "nofollow noopener noreferrer");
+          await expect(link).toHaveAttribute(
+            "rel",
+            "nofollow noopener noreferrer"
+          );
         }
       });
     });
@@ -157,5 +159,5 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(accountPage.passwordError).toBeVisible();
       });
     });
-});
+  });
 }
