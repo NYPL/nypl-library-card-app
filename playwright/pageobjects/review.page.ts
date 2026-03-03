@@ -120,8 +120,12 @@ export class ReviewPage {
       name: "Date of birth (required)",
       exact: true,
     });
-    this.dateOfBirthInvalid = this.page.getByText("There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.");
-    this.dateOfBirthError = this.page.getByText("There was a problem. Date of birth is below the minimum age of 13.");
+    this.dateOfBirthInvalid = this.page.getByText(
+      "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes."
+    );
+    this.dateOfBirthError = this.page.getByText(
+      "There was a problem. Date of birth is below the minimum age of 13."
+    );
     this.emailHeading = page.getByText("Email address", { exact: true });
     this.emailInputHeading = page.getByText("Email address (required)", {
       exact: true,

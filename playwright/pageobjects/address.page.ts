@@ -33,7 +33,9 @@ export class AddressPage {
       name: appContent?.location?.address.title || "Home address",
       level: 3,
     });
-    this.alternateForm = page.getByRole("link", { name: appContent?.home?.description?.alternateForm || "alternate form" });
+    this.alternateForm = page.getByRole("link", {
+      name: appContent?.home?.description?.alternateForm || "alternate form",
+    });
     this.streetAddressInput = page.getByLabel(
       appContent?.location?.address.line1.label || "Street address"
     );
