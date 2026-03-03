@@ -40,9 +40,10 @@ export class CongratsPage {
     this.issuedDate = page.locator("#issued").getByText(this.getDate(), {
       exact: true,
     });
+    this.patronBarcodeNumber = page.locator(".barcode");
     this.libraryCardBackground = page.locator(".background-lion");
-    this.locationsLink = page.getByRole("link", {
-      name: "NYPL location",
+    this.locationsLink = page.locator("#mainContent").getByRole("link", {
+      name: "locations",
     });
     this.photoIdAndProofOfAddressLink = page.getByRole("link", {
       name: "photo ID and proof of address",
