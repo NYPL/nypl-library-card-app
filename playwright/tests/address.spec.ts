@@ -34,6 +34,14 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(addressPage.stateInput).toBeVisible();
         await expect(addressPage.postalCodeInput).toBeVisible();
       });
+      
+      test("opens link in new tab", async ({ page }) => {
+        const addressPage = new AddressPage(page);
+        await expect(addressPage.alternateForm).toHaveAttribute("target", "_blank");
+        await expect(addressPage.alternateForm).toHaveAttribute(
+          "rel",
+          "nofollow noopener noreferrer"
+        );
     });
 
     test.describe("enters home address", () => {

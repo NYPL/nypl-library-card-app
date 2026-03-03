@@ -9,8 +9,8 @@ export class PersonalPage {
   readonly lastNameInput: Locator;
   readonly lastNameError: Locator;
   readonly dateOfBirthInput: Locator;
+  readonly dateOfBirthInvalid: Locator;
   readonly dateOfBirthError: Locator;
-  readonly ageError: Locator;
   readonly emailInput: Locator;
   readonly emailError: Locator;
   readonly alternateFormLink: Locator;
@@ -46,11 +46,11 @@ export class PersonalPage {
     this.dateOfBirthInput = this.page.getByLabel(
       appContent?.personal?.birthdate.label || "Date of birth"
     );
-    this.dateOfBirthError = this.page.getByText(
+    this.dateOfBirthInvalid = this.page.getByText(
       appContent?.personal?.errorMessage?.birthdate ||
         "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes."
     );
-    this.ageError = this.page.getByText(
+    this.dateOfBirthError = this.page.getByText(
       appContent?.personal?.errorMessage?.ageGate ||
         "There was a problem. Date of birth is below the minimum age of 13."
     );
