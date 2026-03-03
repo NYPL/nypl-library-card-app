@@ -23,6 +23,7 @@ export class CongratsPage {
   readonly patronBarcodeNumber: Locator;
   readonly EXPECTED_BARCODE_PREFIX = "255";
   readonly temporaryCardBanner: Locator;
+  readonly readOrListenOnGo: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -79,6 +80,13 @@ export class CongratsPage {
     });
     this.discoverLink = page.getByRole("link", {
       name: "Discover everything you can do with your library card.",
+    });
+
+    this.temporaryCardBanner = page.locator("aside", {
+      hasText: "This is a temporary card",
+    });
+    this.readOrListenOnGo = page.getByRole("link", {
+      name: "Read or listen on-the-go",
     });
   }
 

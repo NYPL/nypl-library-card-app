@@ -18,19 +18,19 @@ export const TEST_EDITED_PATRON: PatronData = {
 
 // address
 export const TEST_NYC_ADDRESS: AddressData = {
-  street: "476 5th Ave",
-  apartmentSuite: "Room 200",
+  street: "246 E 90th St",
+  apartmentSuite: "APT 4D",
   city: "New York",
   state: "NY",
-  postalCode: "10018",
+  postalCode: "10128",
 };
 
 export const TEST_NYS_ADDRESS: AddressData = {
-  street: "500 S Meadow St",
-  apartmentSuite: "Suite 1",
-  city: "Ithaca",
+  street: "167 Lovering Ave",
+  apartmentSuite: "",
+  city: "Buffalo",
   state: "NY",
-  postalCode: "14850",
+  postalCode: "14216",
 };
 
 export const TEST_OOS_ADDRESS: AddressData = {
@@ -123,4 +123,9 @@ export const PATRON_TYPES = {
   PATRON_TYPE_7: 7, // OOS
   PATRON_TYPE_8: 8, // NYS
   PATRON_TYPE_9: 9, // NYC
+};
+
+export const IP = {
+  NYC_IP: "65.209.66.130",
+  NYS_IP: "172.100.3.84",
 };
