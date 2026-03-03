@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
 import {
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
-} from "../utils/form-helper";
+} from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
