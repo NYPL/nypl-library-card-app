@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
 import {} from // fillAccountInfo,
 // fillAddress,
 // fillPersonalInfo,
-"../utils/form-helper";
+"../../utils/form-helper";
 import {
   PAGE_ROUTES,
   // SPINNER_TIMEOUT,
@@ -12,8 +12,8 @@ import {
   // TEST_EDITED_PATRON,
   // TEST_OOS_ADDRESS,
   // TEST_PATRON,
-} from "../utils/constants";
-import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
+} from "../../utils/constants";
+import { getPatronID, deletePatron } from "../../utils/sierra-api-utils";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`E2E: Edits patron information in ${name} (${lang})`, () => {
@@ -92,7 +92,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       //   await pageManager.reviewPage.editPersonalInfoButton.click();
       //   await fillPersonalInfo(pageManager.reviewPage, TEST_EDITED_PATRON);
-      //   await pageManager.reviewPage.receiveInfoCheckbox.click();
+      //   await pageManager.reviewPage.receiveInfoCheckbox.click(); // unchecks
       // });
 
       // await test.step("displays updated personal info on review page", async () => {

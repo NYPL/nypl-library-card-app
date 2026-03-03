@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
 // import {
 //   fillAccountInfo,
 //   fillAddress,
 //   fillPersonalInfo,
-// } from "../utils/form-helper";
+// } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SUPPORTED_LANGUAGES,
@@ -13,15 +13,15 @@ import {
   // TEST_NYC_ADDRESS,
   // TEST_OOS_ADDRESS,
   // TEST_PATRON,
-} from "../utils/constants";
-// import { mockCreatePatronApi } from "../utils/mock-api";
+} from "../../utils/constants";
+// import { mockCreatePatronApi } from "../../utils/mock-api";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
-  test.describe(`E2E: Complete application using mocked submit in ${name} (${lang})`, () => {
+  test.describe(`E2E: Complete OOS patron application using mocked submit in ${name} (${lang})`, () => {
     let pageManager: PageManager;
     let appContent: any;
 
-    test("displays patron information on congrats page", async ({ page }) => {
+    test("submits OOS patron application", async ({ page }) => {
       appContent = require(`../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
       // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
@@ -35,14 +35,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       // await test.step("enters personal information", async () => {
       //   await expect(pageManager.personalPage.stepHeading).toBeVisible();
       //   await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      // });
-
-      // await test.step("unchecks receive info checkbox", async () => {
-      //   await pageManager.personalPage.receiveInfoCheckbox.click();
-      //   await expect(
-      //     pageManager.personalPage.receiveInfoCheckbox
-      //   ).not.toBeChecked();
-      //   await pageManager.personalPage.nextButton.click();
       // });
 
       // await test.step("enters home address", async () => {
@@ -80,13 +72,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       // await test.step("displays review page", async () => {
       //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      // });
-
-      // await test.step("verifies receive info checkbox is unchecked on review page", async () => {
-      //   await pageManager.reviewPage.editPersonalInfoButton.click();
-      //   await expect(
-      //     pageManager.reviewPage.receiveInfoCheckbox
-      //   ).not.toBeChecked();
       // });
 
       // await test.step("submits application", async () => {
