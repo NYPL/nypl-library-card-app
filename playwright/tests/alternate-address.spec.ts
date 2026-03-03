@@ -52,7 +52,7 @@ test.describe("enters alternate address", () => {
     );
   });
 
-  test("enters incomplete alternate address and displays street and city errors", async ({
+  test("enters only 'state' and 'postal code' and displays street and city errors", async ({
     page,
   }) => {
     const alternateAddressPage = new AlternateAddressPage(page);
@@ -68,7 +68,7 @@ test.describe("enters alternate address", () => {
     await expect(alternateAddressPage.cityError).toBeVisible();
   });
 
-  test("enters incomplete alternate address and displays state and postal code errors", async ({
+  test("enters only 'street' and 'city' and displays state and postal code errors", async ({
     page,
   }) => {
     const alternateAddressPage = new AlternateAddressPage(page);
