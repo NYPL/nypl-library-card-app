@@ -55,14 +55,12 @@ export class AccountPage {
         "Check if username is available",
       exact: true,
     });
-    this.availableUsernameMessage = page.getByText(
-      "This username is available.",
-      { exact: true }
-    );
-    this.unavailableUsernameMessage = page.getByText(
-      "This username is unavailable. Please try another.",
-      { exact: true }
-    );
+    this.availableUsernameMessage = page
+      .getByText("El nombre de usuario está disponible.") // replace when translation available
+      .or(page.getByText("This username is available."));
+    this.unavailableUsernameMessage = page
+      .getByText("Este nombre de usuario no está disponible. Pruebe con otro.") // replace when translation available
+      .or(page.getByText("This username is unavailable. Please try another."));
     this.passwordInput = page.getByRole("textbox", {
       name: withRequired(appContent?.account?.password?.label || "Password"),
       exact: true,

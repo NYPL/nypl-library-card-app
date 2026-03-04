@@ -13,6 +13,10 @@ export class AlternateAddressPage {
   readonly spinner: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
+  readonly streetAddressError: Locator;
+  readonly cityError: Locator;
+  readonly stateError: Locator;
+  readonly postalCodeError: Locator;
 
   constructor(page: Page, appContent?: any) {
     this.page = page;
@@ -33,19 +37,35 @@ export class AlternateAddressPage {
       level: 3,
     });
     this.streetAddressInput = page.getByLabel(
-      appContent?.location?.address.line1.label || "Street address"
+      appContent?.location?.address?.line1?.label || "Street address"
+    );
+    this.streetAddressError = page.getByText(
+      appContent?.location?.errorMessage?.line1 ||
+        "There was a problem. Please enter a valid street address."
     );
     this.apartmentSuiteInput = page.getByLabel(
-      appContent?.location?.address.line2.label || "Apartment / Suite"
+      appContent?.location?.address?.line2?.label || "Apartment / Suite"
     );
     this.cityInput = page.getByLabel(
-      appContent?.location?.address.city.label || "City"
+      appContent?.location?.address?.city?.label || "City"
+    );
+    this.cityError = page.getByText(
+      appContent?.location?.errorMessage?.city ||
+        "There was a problem. Please enter a valid city."
     );
     this.stateInput = page.getByLabel(
-      appContent?.location?.address.state.label || "State"
+      appContent?.location?.address?.state?.label || "State"
+    );
+    this.stateError = page.getByText(
+      appContent?.location?.errorMessage?.state ||
+        "There was a problem. Please enter a 2-character state abbreviation."
     );
     this.postalCodeInput = page.getByLabel(
-      appContent?.location?.address.postalCode.label || "Postal code"
+      appContent?.location?.address?.postalCode?.label || "Postal code"
+    );
+    this.postalCodeError = page.getByText(
+      appContent?.location?.errorMessage?.zip ||
+        "There was a problem. Please enter a 5 or 9-digit postal code."
     );
     this.nextButton = page.getByRole("button", {
       name: appContent?.button?.next || "Next",

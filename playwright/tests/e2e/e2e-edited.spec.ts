@@ -1,20 +1,20 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  // fillAccountInfo,
+  fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
-} from "../utils/form-helper";
+} from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
-  // TEST_ACCOUNT,
+  TEST_ACCOUNT,
   // TEST_EDITED_PATRON,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
-} from "../utils/constants";
-import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
+} from "../../utils/constants";
+import { getPatronID, deletePatron } from "../../utils/sierra-api-utils";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`E2E: Edits patron information in ${name} (${lang})`, () => {
@@ -23,7 +23,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     const scrapedBarcode: string | null = null;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
     });
 
@@ -73,7 +73,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         });
       });
 
-      await test.step("confirms address verification", async () => {
+      await test.step("verifies home address", async () => {
         await expect(
           pageManager.addressVerificationPage.stepHeading
         ).toBeVisible();
@@ -88,17 +88,17 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         });
       });
 
-      // await test.step("enters account information", async () => {
-      //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      //   await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      //   await pageManager.accountPage.nextButton.click();
-      // });
+      await test.step("enters account information", async () => {
+        await expect(pageManager.accountPage.stepHeading).toBeVisible();
+        await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+        await pageManager.accountPage.nextButton.click();
+      });
 
       // await test.step("edits personal info on review page", async () => {
       //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       //   await pageManager.reviewPage.editPersonalInfoButton.click();
       //   await fillPersonalInfo(pageManager.reviewPage, TEST_EDITED_PATRON);
-      //   await pageManager.reviewPage.receiveInfoCheckbox.click();
+      //   await pageManager.reviewPage.receiveInfoCheckbox.click(); // unchecks
       // });
 
       // await test.step("displays updated personal info on review page", async () => {

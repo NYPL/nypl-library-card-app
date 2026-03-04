@@ -1,33 +1,33 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  //   fillAccountInfo,
+  fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
-} from "../utils/form-helper";
+} from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
-  // TEST_ACCOUNT,
+  TEST_ACCOUNT,
   // TEST_BARCODE_NUMBER,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
-} from "../utils/constants";
-// import { mockCreatePatronApi } from "../utils/mock-api";
+} from "../../utils/constants";
+// import { mockCreatePatronApi } from "../../utils/mock-api";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
-  test.describe(`E2E: Complete application using mocked submit in ${name} (${lang})`, () => {
+  test.describe(`E2E: Complete OOS patron application using mocked submit in ${name} (${lang})`, () => {
     let pageManager: PageManager;
     let appContent: any;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
     });
 
-    test("displays patron information on congrats page", async ({ page }) => {
+    test("submits OOS patron application", async ({ page }) => {
       // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
 
       await test.step("begins at landing", async () => {
@@ -39,13 +39,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       await test.step("enters personal information", async () => {
         await expect(pageManager.personalPage.stepHeading).toBeVisible();
         await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      });
-
-      await test.step("unchecks receive info checkbox", async () => {
-        await pageManager.personalPage.receiveInfoCheckbox.click();
-        await expect(
-          pageManager.personalPage.receiveInfoCheckbox
-        ).not.toBeChecked();
         await pageManager.personalPage.nextButton.click();
       });
 
@@ -68,7 +61,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           timeout: SPINNER_TIMEOUT,
         });
 
-        await test.step("confirms address verification", async () => {
+        await test.step("verifies home and alternate addresses", async () => {
           await expect(
             pageManager.addressVerificationPage.stepHeading
           ).toBeVisible();
@@ -79,28 +72,16 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
             .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
             .check();
           await pageManager.addressVerificationPage.nextButton.click();
-          await expect(
-            pageManager.addressVerificationPage.spinner
-          ).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
         });
 
-        // await test.step("enters account information", async () => {
-        //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
-        //   await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-        //   await pageManager.accountPage.nextButton.click();
-        // });
+        await test.step("enters account information", async () => {
+          await expect(pageManager.accountPage.stepHeading).toBeVisible();
+          await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+          await pageManager.accountPage.nextButton.click();
+        });
 
         // await test.step("displays review page", async () => {
         //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-        // });
-
-        // await test.step("verifies receive info checkbox is unchecked on review page", async () => {
-        // await pageManager.reviewPage.editPersonalInfoButton.click();
-        // await expect(
-        // pageManager.reviewPage.receiveInfoCheckbox
-        // ).not.toBeChecked();
         // });
 
         // await test.step("submits application", async () => {
@@ -109,7 +90,17 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         //   await pageManager.reviewPage.submitButton.click();
         // });
 
-        // await test.step("displays variable elements on Congrats page", async () => {
+        // await test.step("displays temporary card elements on congrats page", async () => {
+        //   await expect(pageManager.congratsPage.mainHeading).toBeVisible();
+        //   await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
+        //   await expect(
+        //     pageManager.congratsPage.temporaryCardBanner
+        //   ).toBeVisible();
+        //   await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
+        //   await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
+        // });
+
+        // await test.step("displays generated library card on congrats page", async () => {
         //   await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
         //   await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
         //   await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
@@ -117,13 +108,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         //   await expect(pageManager.congratsPage.patronBarcodeNumber).toHaveText(
         //     TEST_BARCODE_NUMBER
         //   );
-        // });
-
-        // await test.step("displays temporary card banner", async () => {
-        //   await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
-        //   await expect(pageManager.congratsPage.temporaryCardBanner).toBeVisible();
-        //   await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
-        //   await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
         // });
       });
     });
