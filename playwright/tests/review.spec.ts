@@ -64,7 +64,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(reviewPage.homeLibraryHeading).toBeVisible();
       });
 
-      test("opens links in new tab", async () => {
+      test("confirms links open in new tab", async () => {
         const links = [
           reviewPage.alternateFormLink,
           reviewPage.locationsLink,
@@ -148,7 +148,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           });
         });
 
-        await test.step("confirms addresses", async () => {
+        await test.step("verifies home and alternate addresses", async () => {
           await expect(
             pageManager.addressVerificationPage.stepHeading
           ).toBeVisible();

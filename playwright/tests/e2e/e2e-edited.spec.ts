@@ -10,7 +10,7 @@ import {
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   TEST_ACCOUNT,
-  // TEST_EDITED_PATRON,
+  TEST_EDITED_PATRON,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
 } from "../../utils/constants";
@@ -94,35 +94,35 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.accountPage.nextButton.click();
       });
 
-      // await test.step("edits personal info on review page", async () => {
-      //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      //   await pageManager.reviewPage.editPersonalInfoButton.click();
-      //   await fillPersonalInfo(pageManager.reviewPage, TEST_EDITED_PATRON);
-      //   await pageManager.reviewPage.receiveInfoCheckbox.click(); // unchecks
-      // });
+      await test.step("edits personal info on review page", async () => {
+        await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+        await pageManager.reviewPage.editPersonalInfoButton.click();
+        await fillPersonalInfo(pageManager.reviewPage, TEST_EDITED_PATRON);
+        await pageManager.reviewPage.receiveInfoCheckbox.click(); // unchecks
+      });
 
-      // await test.step("displays updated personal info on review page", async () => {
-      //   await expect(pageManager.reviewPage.firstNameInput).toHaveValue(
-      //     TEST_EDITED_PATRON.firstName
-      //   );
-      //   await expect(pageManager.reviewPage.lastNameInput).toHaveValue(
-      //     TEST_EDITED_PATRON.lastName
-      //   );
-      //   await expect(pageManager.reviewPage.dateOfBirthInput).toHaveValue(
-      //     TEST_EDITED_PATRON.dateOfBirth
-      //   );
-      //   await expect(pageManager.reviewPage.emailInput).toHaveValue(
-      //     TEST_EDITED_PATRON.email
-      //   );
-      //   await expect(
-      //     pageManager.reviewPage.receiveInfoCheckbox
-      //   ).not.toBeChecked();
-      // });
+      await test.step("displays updated personal info on review page", async () => {
+        await expect(pageManager.reviewPage.firstNameInput).toHaveValue(
+          TEST_EDITED_PATRON.firstName
+        );
+        await expect(pageManager.reviewPage.lastNameInput).toHaveValue(
+          TEST_EDITED_PATRON.lastName
+        );
+        await expect(pageManager.reviewPage.dateOfBirthInput).toHaveValue(
+          TEST_EDITED_PATRON.dateOfBirth
+        );
+        await expect(pageManager.reviewPage.emailInput).toHaveValue(
+          TEST_EDITED_PATRON.email
+        );
+        await expect(
+          pageManager.reviewPage.receiveInfoCheckbox
+        ).not.toBeChecked();
+      });
 
-      // await test.step("submits application", async () => {
-      //   await expect(pageManager.reviewPage.submitButton).toBeVisible();
-      //   await pageManager.reviewPage.submitButton.click();
-      // });
+      await test.step("submits application", async () => {
+        await expect(pageManager.reviewPage.submitButton).toBeVisible();
+        // await pageManager.reviewPage.submitButton.click(); // wait to click til congrats page is ready
+      });
 
       // await test.step("displays edited name on congrats page", async () => {
       //   const editedFullName = `${TEST_EDITED_PATRON.firstName} ${TEST_EDITED_PATRON.lastName}`;
