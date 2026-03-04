@@ -35,7 +35,7 @@ test.describe("displays elements on personal information page", () => {
     await expect(personalPage.nextButton).toBeVisible();
   });
 
-  test("opens links in new tab", async ({ page }) => {
+  test("confirms links open in new tab", async ({ page }) => {
     const personalPage = new PersonalPage(page);
     const links = [personalPage.alternateFormLink, personalPage.locationsLink];
     for (const link of links) {
