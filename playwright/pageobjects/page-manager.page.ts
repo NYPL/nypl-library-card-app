@@ -27,7 +27,7 @@ export class PageManager {
   }
 
   get addressPage(): AddressPage {
-    return new AddressPage(this.page);
+    return new AddressPage(this.page, this.appContent);
   }
 
   get alternateAddressPage(): AlternateAddressPage {
