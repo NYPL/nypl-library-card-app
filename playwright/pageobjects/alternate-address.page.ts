@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+import { ERROR_MESSAGES } from "../utils/constants";
 
 export class AlternateAddressPage {
   readonly page: Page;
@@ -13,6 +14,10 @@ export class AlternateAddressPage {
   readonly spinner: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
+  readonly streetAddressError: Locator;
+  readonly cityError: Locator;
+  readonly stateError: Locator;
+  readonly postalCodeError: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -29,10 +34,16 @@ export class AlternateAddressPage {
       level: 3,
     });
     this.streetAddressInput = page.getByLabel(/Street address/i);
+    this.streetAddressError = page.getByText(
+      ERROR_MESSAGES.STREET_ADDRESS_INVALID
+    );
     this.apartmentSuiteInput = page.getByLabel(/Apartment \/ Suite/i);
     this.cityInput = page.getByLabel(/City/i);
+    this.cityError = page.getByText(ERROR_MESSAGES.CITY_INVALID);
     this.stateInput = page.getByLabel(/State/i);
+    this.stateError = page.getByText(ERROR_MESSAGES.STATE_INVALID);
     this.postalCodeInput = page.getByLabel(/Postal code/i);
+    this.postalCodeError = page.getByText(ERROR_MESSAGES.POSTAL_CODE_INVALID);
     this.nextButton = page.getByRole("button", { name: "Next", exact: true });
     this.previousButton = page.getByRole("link", {
       name: "Previous",
