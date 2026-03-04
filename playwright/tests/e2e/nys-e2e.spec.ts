@@ -74,7 +74,9 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       });
 
       //   await test.step("skips alternate address", async () => {
-      //     await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
+      //     await expect(
+      //       pageManager.alternateAddressPage.stepHeading
+      //     ).toBeVisible();
       //     await pageManager.alternateAddressPage.nextButton.click();
       //     await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
       //       timeout: SPINNER_TIMEOUT,
@@ -89,13 +91,12 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //       .getHomeAddressOption(TEST_NYS_ADDRESS.street)
       //       .check();
       //     await pageManager.addressVerificationPage.nextButton.click();
-      //     await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-      //       {
-      //         timeout: SPINNER_TIMEOUT,
-      //       }
-      //     );
+      //     await expect(
+      //       pageManager.addressVerificationPage.spinner
+      //     ).not.toBeVisible({
+      //       timeout: SPINNER_TIMEOUT,
+      //     });
       //   });
-
       //   await test.step("enters account information", async () => {
       //     await expect(pageManager.accountPage.stepHeading).toBeVisible();
       //     await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
@@ -116,7 +117,9 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     await expect(
       //       pageManager.reviewPage.getText(TEST_PATRON.email)
       //     ).toBeVisible();
-      //     await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
+      //     await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText(
+      //       "Yes"
+      //     );
       //   });
 
       //   await test.step("displays home address on review page", async () => {
@@ -162,10 +165,12 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
       //     await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
       //     await expect(pageManager.congratsPage.issuedDate).toBeVisible();
-      //     await expect(pageManager.congratsPage.patronBarcodeNumber).toBeVisible();
-      //     await expect(pageManager.congratsPage.patronBarcodeNumber).toContainText(
-      //       pageManager.congratsPage.EXPECTED_BARCODE_PREFIX
-      //     );
+      //     await expect(
+      //       pageManager.congratsPage.patronBarcodeNumber
+      //     ).toBeVisible();
+      //     await expect(
+      //       pageManager.congratsPage.patronBarcodeNumber
+      //     ).toContainText(pageManager.congratsPage.EXPECTED_BARCODE_PREFIX);
       //   });
 
       //   await test.step("retrieves barcode from congrats page", async () => {
