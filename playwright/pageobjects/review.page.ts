@@ -214,31 +214,31 @@ export class ReviewPage {
     );
     this.streetAddressInvalid = page.getByText(
       "There was a problem. Please enter a valid home street address."
-    ); // ref other translation file
+    ); // need translation
     this.streetAddressError = page.getByText(
       "Street address fields must not be more than 100 lines."
-    ); // ref other translation file
+    ); // need translation
     this.cityHeading = page.getByText(
       appContent?.location?.address?.city?.label || "City",
       { exact: true }
     );
     this.cityError = page.getByText(
       "There was a problem. Please enter a valid home city."
-    ); // ref other translation file
+    ); // need translation
     this.stateHeading = page.getByText(
       appContent?.location?.address?.state?.label || "State",
       { exact: true }
     );
     this.stateError = page.getByText(
       "There was a problem. Please enter a 2-character home state abbreviation."
-    ); // ref other translation file
+    ); // need translation
     this.postalCodeHeading = page.getByText(
       appContent?.location?.address?.postalCode?.label || "Postal code",
       { exact: true }
     );
     this.postalCodeError = page.getByText(
       "There was a problem. Please enter a 5 or 9-digit home postal code."
-    ); // ref other translation file
+    ); // need translation
     this.editAddressButton = page.getByRole("button", {
       name: withEdit(appContent?.review?.section?.address?.label || "Address"),
       exact: true,
@@ -274,10 +274,10 @@ export class ReviewPage {
       exact: true,
     });
     this.availableUsernameMessage = page
-      .getByText("El nombre de usuario está disponible.") // update with translation when available
+      .getByText("El nombre de usuario está disponible.") // update with translation key when available
       .or(page.getByText("This username is available."));
     this.unavailableUsernameMessage = page
-      .getByText("Este nombre de usuario no está disponible. Pruebe con otro.") // update with translation when available
+      .getByText("Este nombre de usuario no está disponible. Pruebe con otro.") // update with translation key when available
       .or(page.getByText("This username is unavailable. Please try another."));
     this.passwordHeading = page.getByText(
       appContent?.account?.password?.label || "Password",

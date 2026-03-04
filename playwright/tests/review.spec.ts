@@ -443,23 +443,24 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(reviewPage.acceptTermsError).toBeVisible();
       });
 
-      // not yet translated
-      // test("displays errors when submitting empty form", async () => {
-      //   await reviewPage.submitButton.click();
-      //   await expect(reviewPage.firstNameError).toBeVisible();
-      //   await expect(reviewPage.lastNameError).toBeVisible();
-      //   await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
-      //   await expect(reviewPage.emailError).toBeVisible();
-      //   await expect(reviewPage.usernameError).toBeVisible();
-      //   await expect(reviewPage.passwordError).toBeVisible();
-      //   await expect(reviewPage.verifyPasswordError).toBeVisible();
-      //   await expect(reviewPage.homeLibraryError).toBeVisible();
-      //   await expect(reviewPage.acceptTermsError).toBeVisible();
-      //   await expect(reviewPage.streetAddressInvalid).toBeVisible();
-      //   await expect(reviewPage.cityError).toBeVisible();
-      //   await expect(reviewPage.stateError).toBeVisible();
-      //   await expect(reviewPage.postalCodeError).toBeVisible();
-      // });
+      test("displays errors when submitting empty form", async () => {
+        test.skip(lang !== "en", "Error messages not yet translated");
+
+        await reviewPage.submitButton.click();
+        await expect(reviewPage.firstNameError).toBeVisible();
+        await expect(reviewPage.lastNameError).toBeVisible();
+        await expect(reviewPage.dateOfBirthInvalid).toBeVisible();
+        await expect(reviewPage.emailError).toBeVisible();
+        await expect(reviewPage.usernameError).toBeVisible();
+        await expect(reviewPage.passwordError).toBeVisible();
+        await expect(reviewPage.verifyPasswordError).toBeVisible();
+        await expect(reviewPage.homeLibraryError).toBeVisible();
+        await expect(reviewPage.acceptTermsError).toBeVisible();
+        await expect(reviewPage.streetAddressInvalid).toBeVisible();
+        await expect(reviewPage.cityError).toBeVisible();
+        await expect(reviewPage.stateError).toBeVisible();
+        await expect(reviewPage.postalCodeError).toBeVisible();
+      });
     });
   });
 }
