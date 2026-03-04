@@ -35,6 +35,20 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(personalPage.emailInput).toBeVisible();
         await expect(personalPage.receiveInfoCheckbox).toBeVisible();
       });
+
+      test("confirms links open in new tab", async () => {
+        const links = [
+          personalPage.alternateFormLink,
+          personalPage.locationsLink,
+        ];
+        for (const link of links) {
+          await expect(link).toHaveAttribute("target", "_blank");
+          await expect(link).toHaveAttribute(
+            "rel",
+            "nofollow noopener noreferrer"
+          );
+        }
+      });
     });
 
     test.describe("enters personal information", () => {
