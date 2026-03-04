@@ -1,4 +1,5 @@
 import { Page } from "@playwright/test";
+import { AddressData } from "./types";
 
 export async function mockUsernameApi(page: Page, message: string) {
   await page.route("**/library-card/api/username", async (route) => {
@@ -20,24 +21,18 @@ export async function mockCreatePatronApi(
     await route.fulfill({
       status: 200,
       contentType: "application/json",
-      body: JSON.stringify({ name, barcode, ptype: ptype == 9 }),
+      body: JSON.stringify({ name, barcode, ptype }),
     });
   });
 }
 
-export async function mockCreateAddress(
-  page: Page,
-  street: string,
-  city: string,
-  state: string = "New York",
-  postalCode: string
-) {
+export async function mockCreateAddress(page: Page, address: AddressData) {
   await page.route("**/library-card/api/address", async (route) => {
     const addressData = {
-      line1: street,
-      city,
-      state,
-      zip: postalCode,
+      line1: address.street,
+      city: address.city,
+      state: address.state,
+      zip: address.postalCode,
       hasBeenValidated: true,
     };
 

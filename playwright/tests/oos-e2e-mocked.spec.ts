@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { PageManager } from "../pageobjects/page-manager.page";
 import {
   PAGE_ROUTES,
+  PATRON_TYPES,
   TEST_ACCOUNT,
   TEST_BARCODE_NUMBER,
   TEST_NYC_ADDRESS,
@@ -82,12 +83,17 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
     });
 
     await test.step("submits application", async () => {
-      await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER);
+      await mockCreatePatronApi(
+        page,
+        fullName,
+        TEST_BARCODE_NUMBER,
+        PATRON_TYPES.DIGITAL_TEMPORARY
+      );
       await expect(pageManager.reviewPage.submitButton).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
     });
 
-    await test.step("displays variable elements on Congrats page", async () => {
+    await test.step("displays variable elements on congrats page", async () => {
       await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
       await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
