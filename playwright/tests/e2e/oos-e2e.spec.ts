@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
 import {
   //  fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
-} from "../utils/form-helper";
+} from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   // PATRON_TYPES,
@@ -14,22 +14,22 @@ import {
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
-} from "../utils/constants";
+} from "../../utils/constants";
 import {
-  getPatronID,
-  // getPatronData,
   deletePatron,
-} from "../utils/sierra-api-utils";
-// import { createFuzzyMatcher, formatSierraDate } from "../utils/formatter";
+  // getPatronData,
+  getPatronID,
+} from "../../utils/sierra-api-utils";
+// import { createFuzzyMatcher, formatSierraDate } from "../../utils/formatter";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
-  test.describe(`E2E: Complete application with Sierra API integration in ${name} (${lang})`, () => {
+  test.describe(`E2E: Complete OOS patron application with Sierra API integration in ${name} (${lang})`, () => {
     let pageManager: PageManager;
     let appContent: any;
     const scrapedBarcode: string | null = null;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
     });
 
@@ -47,7 +47,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       }
     });
 
-    test("displays patron information on congrats page", async ({ page }) => {
+    test("submits OOS patron application", async ({ page }) => {
       await test.step("begins at landing", async () => {
         await page.goto(PAGE_ROUTES.LANDING(lang));
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
@@ -80,7 +80,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         });
       });
 
-      // await test.step("selects home and alternate addresses", async () => {
+      // await test.step("verifies home and alternate addresses", async () => {
       //   await expect(
       //     pageManager.addressVerificationPage.stepHeading
       //   ).toBeVisible();
