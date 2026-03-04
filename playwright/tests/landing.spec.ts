@@ -44,7 +44,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       await expect(landingPage.informationalBanner).toBeVisible();
     });
 
-    test("opens links in same tab", async () => {
+    test("confirms links open in same tab", async () => {
       const links = [
         landingPage.digitalResourcesLink,
         landingPage.visitLibraryLink,
