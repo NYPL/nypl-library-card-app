@@ -1,9 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
-import {} from // fillAccountInfo,
-// fillAddress,
-// fillPersonalInfo,
-"../../utils/form-helper";
+import {
+  // fillAccountInfo,
+  // fillAddress,
+  fillPersonalInfo,
+} from "../../utils/form-helper";
 import {
   IP,
   PAGE_ROUTES,
@@ -12,7 +13,7 @@ import {
   SUPPORTED_LANGUAGES,
   // TEST_ACCOUNT,
   // TEST_NYS_ADDRESS,
-  // TEST_PATRON,
+  TEST_PATRON,
 } from "../../utils/constants";
 import {
   deletePatron,
@@ -57,11 +58,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.landingPage.getStartedButton.click();
       });
 
-      //   await test.step("enters personal information", async () => {
-      //     await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      //     await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      //     await pageManager.personalPage.nextButton.click();
-      //   });
+      await test.step("enters personal information", async () => {
+        await expect(pageManager.personalPage.stepHeading).toBeVisible();
+        await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+        await pageManager.personalPage.nextButton.click();
+      });
 
       //   await test.step("enters home address", async () => {
       //     await expect(pageManager.addressPage.stepHeading).toBeVisible();
