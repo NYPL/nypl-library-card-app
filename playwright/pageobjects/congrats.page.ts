@@ -24,24 +24,32 @@ export class CongratsPage {
   readonly findOutLibraryLink: Locator;
   readonly discoverLink: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, appContent?: any) {
     this.page = page;
     this.mainHeading = page.getByRole("heading", {
-      name: "Apply for a Library Card Online",
+      name: appContent?.banner?.title || "Apply for a Library Card Online",
       level: 1,
     });
     this.metroHeading = page.getByRole("heading", {
-      name: "Congratulations! You now have a digital New York Public Library card.",
+      name:
+        appContent?.confirmation?.title?.metro ||
+        "Congratulations! You now have a digital New York Public Library card.",
     });
     this.temporaryHeading = page.getByRole("heading", {
-      name: "Congratulations! You now have a temporary digital New York Public Library card.",
+      name:
+        appContent?.confirmation?.title?.temporary ||
+        "Congratulations! You now have a temporary digital New York Public Library card.",
       level: 2,
     });
     this.memberNameHeading = page
       .locator("#member-name")
-      .getByText("MEMBER NAME");
+      .getByText(
+        appContent?.confirmation?.graphic?.memberName || "MEMBER NAME"
+      );
     this.memberName = page.locator("#member-name .content");
-    this.issuedDateHeading = page.locator("#issued").getByText("ISSUED");
+    this.issuedDateHeading = page
+      .locator("#issued")
+      .getByText(appContent?.confirmation?.graphic?.issued || "ISSUED");
     this.issuedDate = page.locator("#issued").getByText(this.getDate(), {
       exact: true,
     });
