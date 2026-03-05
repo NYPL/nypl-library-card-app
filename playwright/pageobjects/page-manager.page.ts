@@ -43,7 +43,7 @@ export class PageManager {
   }
 
   get reviewPage(): ReviewPage {
-    return new ReviewPage(this.page);
+    return new ReviewPage(this.page, this.appContent);
   }
 
   get congratsPage(): CongratsPage {
