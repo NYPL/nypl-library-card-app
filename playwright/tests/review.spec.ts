@@ -7,7 +7,6 @@ import {
   fillPersonalInfo,
 } from "../utils/form-helper";
 import {
-  ERROR_MESSAGES,
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
@@ -243,7 +242,7 @@ test.describe("edits patron information on review page", () => {
 test.describe("mocks API responses on review page", () => {
   test("displays username available message", async ({ page }) => {
     // mock the API call for username availability
-    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_AVAILABLE);
+    await mockUsernameApi(page, "available");
 
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
@@ -254,7 +253,7 @@ test.describe("mocks API responses on review page", () => {
 
   test("displays username unavailable error message", async ({ page }) => {
     // mock the API call for username unavailability
-    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_UNAVAILABLE);
+    await mockUsernameApi(page, "unavailable");
 
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
