@@ -7,7 +7,6 @@ import {
   fillPersonalInfo,
 } from "../utils/form-helper";
 import {
-  ERROR_MESSAGES,
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
@@ -254,7 +253,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     test.describe("mocks API responses on review page", () => {
       test("displays username available message", async ({ page }) => {
         // mock the API call for username availability
-        await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_AVAILABLE);
+        await mockUsernameApi(page, "available");
         await reviewPage.editAccountButton.click();
         await reviewPage.usernameInput.fill("AvailableUsername");
         await reviewPage.availableUsernameButton.click();
@@ -263,7 +262,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       test("displays username unavailable error message", async ({ page }) => {
         // mock the API call for username unavailability
-        await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_UNAVAILABLE);
+        await mockUsernameApi(page, "unavailable");
         await reviewPage.editAccountButton.click();
         await reviewPage.usernameInput.fill("UnavailableUsername");
         await reviewPage.availableUsernameButton.click();
