@@ -56,36 +56,52 @@ export class CongratsPage {
     this.patronBarcodeNumber = page.locator(".barcode");
     this.libraryCardBackground = page.locator(".background-lion");
     this.locationsLink = page.locator("#mainContent").getByRole("link", {
-      name: "locations",
+      name: appContent?.confirmation?.nextSteps?.nyplLocation || "locations",
     });
     this.photoIdAndProofOfAddressLink = page.getByRole("link", {
-      name: "photo ID and proof of address",
+      name:
+        appContent?.confirmation?.nextSteps?.proof ||
+        "photo ID and proof of address",
     });
     this.temporaryCardBanner = page.locator("aside", {
-      hasText: "This is a temporary card",
+      hasText:
+        appContent?.confirmation?.description?.part3 ||
+        "This is a temporary card",
     });
     this.learnMoreLink = this.temporaryCardBanner.getByRole("link", {
-      name: /learn more/i,
+      name: appContent?.confirmation?.nextSteps?.learnMore || "learn more",
     });
     this.getHelpEmailLink = page.getByRole("link", {
-      name: "gethelp@nypl.org",
+      name: appContent?.confirmation?.nextSteps?.getHelp || "gethelp@nypl.org",
     });
     this.getStartedHeading = page.getByRole("heading", {
-      name: "Get started with The New York Public Library",
+      name:
+        appContent?.confirmation?.nextSteps?.title ||
+        "Get started with The New York Public Library",
       level: 2,
     });
     this.readListenLink = page.getByRole("link", {
-      name: "Read or listen on-the-go",
+      name:
+        appContent?.confirmation?.nextSteps?.readListen ||
+        "Read or listen on-the-go",
     });
-    this.loginLink = page.getByRole("link", { name: "Log into your account" });
+    this.loginLink = page.getByRole("link", {
+      name:
+        appContent?.confirmation?.nextSteps?.login || "Log into your account",
+    });
     this.nyplLocationLink = page.getByRole("link", {
-      name: "NYPL location",
+      name:
+        appContent?.confirmation?.nextSteps?.nyplLocation || "NYPL location",
     });
     this.findOutLibraryLink = page.getByRole("link", {
-      name: "Find out about all the Library has to offer.",
+      name:
+        appContent?.confirmation?.nextSteps?.findOut ||
+        "Find out about all the Library has to offer.",
     });
     this.discoverLink = page.getByRole("link", {
-      name: "Discover everything you can do with your library card.",
+      name:
+        appContent?.confirmation?.nextSteps?.discover ||
+        "Discover everything you can do with your library card.",
     });
   }
 

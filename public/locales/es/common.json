@@ -155,8 +155,12 @@
     },
     "description": {
       "part1": "Imprima o guarde esta información para su registro. En las próximas 24 horas, recibirá un correo electrónico con los detalles de su cuenta.",
-      "part2": "Para pedir prestados materiales físicos, visite una de nuestras <a href='http://nypl.org/locations'>localidades</a> con una <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>identificación válida con foto y prueba de domicilio particular</a> para completar la solicitud de una tarjeta física.",
-      "part3": "Esta tarjeta es temporal y vencerá en 30 días. Si vive, trabaja, estudia o paga impuestos a la propiedad en el Estado de Nueva York,<a href='https://www.nypl.org/help/library-card/terms-conditions#renew'> obtenga más información</a> sobre cómo actualizar su tarjeta. Si se dedica a la investigación y está planeando una visita dentro de más de 30 días, o tiene alguna pregunta, envíe un correo electrónico a <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a>."
+      "part2": "Para pedir prestados materiales físicos, visite una de nuestras <a href='http://nypl.org/locations'>{{locations}}</a> con una <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>{{proof}}</a> para completar la solicitud de una tarjeta física.",
+      "locations": "localidades",
+      "proof": "identificación válida con foto y prueba de domicilio particular",
+      "part3": "Esta tarjeta es temporal y vencerá en 30 días. Si vive, trabaja, estudia o paga impuestos a la propiedad en el Estado de Nueva York, <a href='https://www.nypl.org/help/library-card/terms-conditions#renew'>{{learnMore}}</a> sobre cómo actualizar su tarjeta. Si se dedica a la investigación y está planeando una visita dentro de más de 30 días, o tiene alguna pregunta, envíe un correo electrónico a <a href='mailto:gethelp@nypl.org'>{{getHelp}}</a>.",
+      "learnMore": "obtenga más información",
+      "getHelp": "gethelp@nypl.org"
     },
     "graphic": {
       "memberName": "Nombre de miembro",
@@ -165,10 +169,15 @@
     },
     "nextSteps": {
       "title": "Comenzar con la Biblioteca Pública de Nueva York",
-      "explore": "<b>Consulte los libros y audiolibros electrónicos</b>Acceda a una gran variedad de títulos y <a href='https://www.nypl.org/books-music-movies/help'>léalos o escúchelos donde quiera</a>.",
-      "borrow": "<b>Pedir prestados libros y más</b><a href='{{loginUrl}}'>Inicie sesión en su cuenta </a> y explore el catálogo. Si quiere pedir materiales físicos, visite alguna biblioteca <a href='https://www.nypl.org/locations'>de la NYPL</a> para verificar su información y recibir una tarjeta física.",
-      "updates": "<b>Reciba actualizaciones</b><a href='https://www.nypl.org/enews'>Descubra todo lo que la Biblioteca tiene para ofrecer.</a>",
-      "more": "<b>Obtener más información</b><a href='https://www.nypl.org/discover-library-card'>Descubra todo lo que puede hacer con su tarjeta de la Biblioteca.</a>"
+      "explore": "<b>Consulte los libros y audiolibros electrónicos</b>Acceda a una gran variedad de títulos y <a href='https://www.nypl.org/books-music-movies/help'>{{readListen}}</a>.",
+      "readListen": "léalos o escúchelos donde quiera",
+      "borrow": "<b>Pedir prestados libros y más</b><a href='{{loginUrl}}'>{{login}}</a> y explore el catálogo. Si quiere pedir materiales físicos, visite alguna biblioteca <a href='https://www.nypl.org/locations'>{{nyplLocation}}</a> para verificar su información y recibir una tarjeta física.",
+      "login": "Inicie sesión en su cuenta",
+      "nyplLocation": "de la NYPL",
+      "updates": "<b>Reciba actualizaciones</b><a href='https://www.nypl.org/enews'>{{findOut}}</a>",
+      "findOut": "Descubra todo lo que la Biblioteca tiene para ofrecer.",
+      "more": "<b>Obtener más información</b><a href='https://www.nypl.org/discover-library-card'>{{discover}}</a>",
+      "discover": "Descubra todo lo que puede hacer con su tarjeta de la Biblioteca."
     }
   },
   "button": {
