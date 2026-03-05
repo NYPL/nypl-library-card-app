@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { PersonalPage } from "../pageobjects/personal.page";
-import { PAGE_ROUTES, TEST_PATRON } from "../utils/constants";
 import { fillPersonalInfo } from "../utils/form-helper";
+import { PAGE_ROUTES, TEST_PATRON } from "../utils/constants";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(PAGE_ROUTES.PERSONAL);
+  await page.goto(PAGE_ROUTES.PERSONAL());
 });
 
 test.describe("displays elements on personal information page", () => {
@@ -35,7 +35,7 @@ test.describe("displays elements on personal information page", () => {
     await expect(personalPage.nextButton).toBeVisible();
   });
 
-  test("opens links in new tab", async ({ page }) => {
+  test("confirms links open in new tab", async ({ page }) => {
     const personalPage = new PersonalPage(page);
     const links = [personalPage.alternateFormLink, personalPage.locationsLink];
     for (const link of links) {

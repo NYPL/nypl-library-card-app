@@ -13,7 +13,7 @@ import {
 test.describe("Accessibility tests on Address Verification page", () => {
   test.beforeEach(async ({ page, context }) => {
     await context.clearCookies();
-    await page.goto(PAGE_ROUTES.PERSONAL);
+    await page.goto(PAGE_ROUTES.PERSONAL());
     const pageManager = new PageManager(page);
 
     await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);

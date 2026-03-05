@@ -3,20 +3,20 @@ import { PageManager } from "../pageobjects/page-manager.page";
 import { PAGE_ROUTES } from "../utils/constants";
 
 const routes = [
-  { name: "Landing Page", path: PAGE_ROUTES.LANDING },
-  { name: "Personal Page", path: PAGE_ROUTES.PERSONAL },
-  { name: "Address Page", path: PAGE_ROUTES.ADDRESS },
+  { name: "Landing Page", path: PAGE_ROUTES.LANDING() },
+  { name: "Personal Page", path: PAGE_ROUTES.PERSONAL() },
+  { name: "Address Page", path: PAGE_ROUTES.ADDRESS() },
   {
     name: "Alternate Address Page",
-    path: PAGE_ROUTES.ALTERNATE_ADDRESS,
+    path: PAGE_ROUTES.ALTERNATE_ADDRESS(),
   },
   {
     name: "Address Verification Page",
-    path: PAGE_ROUTES.ADDRESS_VERIFICATION,
+    path: PAGE_ROUTES.ADDRESS_VERIFICATION(),
   },
-  { name: "Account Page", path: PAGE_ROUTES.ACCOUNT },
-  { name: "Review Page", path: PAGE_ROUTES.REVIEW },
-  { name: "Congrats Page", path: PAGE_ROUTES.CONGRATS },
+  { name: "Account Page", path: PAGE_ROUTES.ACCOUNT() },
+  { name: "Review Page", path: PAGE_ROUTES.REVIEW() },
+  { name: "Congrats Page", path: PAGE_ROUTES.CONGRATS() },
 ];
 
 test.describe("Verify breadcrumbs on every page", () => {

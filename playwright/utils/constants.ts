@@ -90,6 +90,7 @@ export const TEST_EDITED_ACCOUNT = {
 export const TEST_BARCODE_NUMBER = "12341234123412";
 
 export const ERROR_MESSAGES = {
+  // probs remove this at the end
   FIRST_NAME_INVALID: appContent.personal.errorMessage.firstName,
   LAST_NAME_INVALID: appContent.personal.errorMessage.lastName,
   DATE_OF_BIRTH_INVALID: appContent.personal.errorMessage.birthdate,
@@ -108,15 +109,34 @@ export const ERROR_MESSAGES = {
   ACCEPT_TERMS_ERROR: appContent.account.errorMessage.acceptTerms,
 };
 
+export const SUPPORTED_LANGUAGES = [
+  { lang: "en", name: "English" },
+  // { lang: "ar", name: "Arabic" },
+  // { lang: "bn", name: "Bengali" },
+  { lang: "es", name: "Spanish" },
+  // { lang: "fr", name: "French" },
+  // { lang: "ht", name: "Haitian Creole" },
+  // { lang: "ko", name: "Korean" },
+  // { lang: "pl", name: "Polish" },
+  // { lang: "ru", name: "Russian" },
+  // { lang: "ur", name: "Urdu" },
+  // { lang: "zhcn", name: "Chinese" },
+];
+
+const withLang = (path: string, lang?: string) =>
+  `${path}?newCard=true${lang ? `&lang=${encodeURIComponent(lang)}` : ""}`;
+
 export const PAGE_ROUTES = {
-  LANDING: "/library-card/new?newCard=true",
-  PERSONAL: "/library-card/personal?newCard=true",
-  ADDRESS: "/library-card/location?newCard=true",
-  ALTERNATE_ADDRESS: "/library-card/alternate-address?newCard=true",
-  ADDRESS_VERIFICATION: "/library-card/address-verification?newCard=true",
-  ACCOUNT: "/library-card/account?newCard=true",
-  REVIEW: "/library-card/review?newCard=true",
-  CONGRATS: "/library-card/congrats?newCard=true",
+  LANDING: (lang?: string) => withLang("/library-card/new", lang),
+  PERSONAL: (lang?: string) => withLang("/library-card/personal", lang),
+  ADDRESS: (lang?: string) => withLang("/library-card/location", lang),
+  ALTERNATE_ADDRESS: (lang?: string) =>
+    withLang("/library-card/alternate-address", lang),
+  ADDRESS_VERIFICATION: (lang?: string) =>
+    withLang("/library-card/address-verification", lang),
+  ACCOUNT: (lang?: string) => withLang("/library-card/account", lang),
+  REVIEW: (lang?: string) => withLang("/library-card/review", lang),
+  CONGRATS: (lang?: string) => withLang("/library-card/congrats", lang),
 };
 
 export const PATRON_TYPES = {
