@@ -3,7 +3,7 @@ import { Page, Locator } from "@playwright/test";
 export class CongratsPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
-  readonly stepHeading: Locator;
+  readonly metroHeading: Locator;
   readonly temporaryHeading: Locator;
   readonly getStartedHeading: Locator;
   readonly memberNameHeading: Locator;
@@ -15,6 +15,7 @@ export class CongratsPage {
   readonly photoIdAndProofOfAddressLink: Locator;
   readonly learnMoreLink: Locator;
   readonly getHelpEmailLink: Locator;
+  readonly readListenLink: Locator;
   readonly loginLink: Locator;
   readonly nyplLocationLink: Locator;
   readonly findOutLibraryLink: Locator;
@@ -30,10 +31,10 @@ export class CongratsPage {
       name: "Apply for a Library Card Online",
       level: 1,
     });
-    this.stepHeading = page.getByRole("heading", {
+    this.metroHeading = page.getByRole("heading", {
       name: "Congratulations! You now have a digital New York Public Library card.",
+      level: 2,
     });
-
     this.temporaryHeading = page.getByRole("heading", {
       name: "Congratulations! You now have a temporary digital New York Public Library card.",
       level: 2,
@@ -66,6 +67,9 @@ export class CongratsPage {
     });
     this.getHelpEmailLink = page.getByRole("link", {
       name: "gethelp@nypl.org",
+    });
+    this.readListenLink = page.getByRole("link", {
+      name: "Read or listen on-the-go",
     });
     this.loginLink = page.getByRole("link", { name: "Log into your account" });
     this.nyplLocationLink = page.getByRole("link", {

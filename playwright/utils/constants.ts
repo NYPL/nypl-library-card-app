@@ -120,9 +120,9 @@ export const PAGE_ROUTES = {
 };
 
 export const PATRON_TYPES = {
-  PATRON_TYPE_7: 7,
-  PATRON_TYPE_8: 8,
-  PATRON_TYPE_9: 9,
+  PATRON_TYPE_7: 7, // OOS
+  PATRON_TYPE_8: 8, // NYS
+  PATRON_TYPE_9: 9, // NYC
 };
 
 export const IP = {
