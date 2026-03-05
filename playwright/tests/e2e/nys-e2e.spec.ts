@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  // fillAccountInfo,
+  fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
 } from "../../utils/form-helper";
@@ -11,7 +11,7 @@ import {
   // PATRON_TYPES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
-  // TEST_ACCOUNT,
+  TEST_ACCOUNT,
   TEST_NYS_ADDRESS,
   TEST_PATRON,
 } from "../../utils/constants";
@@ -98,11 +98,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         });
       });
 
-      //   await test.step("enters account information", async () => {
-      //     await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      //     await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      //     await pageManager.accountPage.nextButton.click();
-      //   });
+      await test.step("enters account information", async () => {
+        await expect(pageManager.accountPage.stepHeading).toBeVisible();
+        await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+        await pageManager.accountPage.nextButton.click();
+      });
 
       //   await test.step("displays personal information on review page", async () => {
       //     await expect(pageManager.reviewPage.stepHeading).toBeVisible();
