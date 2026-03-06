@@ -47,7 +47,7 @@ export class PageManager {
   }
 
   get congratsPage(): CongratsPage {
-    return new CongratsPage(this.page);
+    return new CongratsPage(this.page, this.appContent);
   }
 
   get globalComponents(): GlobalComponentsPage {
