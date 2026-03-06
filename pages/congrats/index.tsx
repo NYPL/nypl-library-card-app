@@ -70,6 +70,7 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
             <Trans
               i18nKey="confirmation.description.part3"
               values={{
+                temporaryCard: t("confirmation.description.temporaryCard"),
                 learnMore: t("confirmation.description.learnMore"),
                 getHelp: t("confirmation.description.getHelp"),
               }}

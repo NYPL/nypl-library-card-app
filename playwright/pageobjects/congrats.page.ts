@@ -60,19 +60,20 @@ export class CongratsPage {
     });
     this.photoIdAndProofOfAddressLink = page.getByRole("link", {
       name:
-        appContent?.confirmation?.nextSteps?.proof ||
+        appContent?.confirmation?.description?.proof ||
         "photo ID and proof of address",
     });
     this.temporaryCardBanner = page.locator("aside", {
       hasText:
-        appContent?.confirmation?.description?.part3 ||
-        "This is a temporary card",
+        appContent?.confirmation?.description?.temporaryCard ||
+        "This is a temporary card and will expire in 30 days.",
     });
     this.learnMoreLink = this.temporaryCardBanner.getByRole("link", {
-      name: appContent?.confirmation?.nextSteps?.learnMore || "learn more",
+      name: appContent?.confirmation?.description?.learnMore || "learn more",
     });
     this.getHelpEmailLink = page.getByRole("link", {
-      name: appContent?.confirmation?.nextSteps?.getHelp || "gethelp@nypl.org",
+      name:
+        appContent?.confirmation?.description?.getHelp || "gethelp@nypl.org",
     });
     this.getStartedHeading = page.getByRole("heading", {
       name:

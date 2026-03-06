@@ -161,7 +161,8 @@
       "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>{{locations}}</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>{{proof}}</a> to complete the application for a physical card.",
       "locations": "locations",
       "proof": "photo ID and proof of address",
-      "part3": "<b>This is a temporary card and will expire in 30 days.</b> If you live, work, attend school, or pay property taxes in New York State, <a href='https://www.nypl.org/help/library-card/terms-conditions#renew'>{{learnMore}}</a> about how to update your card. If you're a researcher planning an upcoming visit more than 30 days from now, and for all other questions, contact <a href='mailto:gethelp@nypl.org'>{{getHelp}}</a>.",
+      "part3": "<b>{{temporaryCard}}</b> If you live, work, attend school, or pay property taxes in New York State, <a href='https://www.nypl.org/help/library-card/terms-conditions#renew'>{{learnMore}}</a> about how to update your card. If you're a researcher planning an upcoming visit more than 30 days from now, and for all other questions, contact <a href='mailto:gethelp@nypl.org'>{{getHelp}}</a>.",
+      "temporaryCard": "This is a temporary card and will expire in 30 days.",
       "learnMore": "learn more",
       "getHelp": "gethelp@nypl.org"
     },
