@@ -56,7 +56,7 @@ export class CongratsPage {
     this.patronBarcodeNumber = page.locator(".barcode");
     this.libraryCardBackground = page.locator(".background-lion");
     this.locationsLink = page.locator("#mainContent").getByRole("link", {
-      name: appContent?.confirmation?.nextSteps?.nyplLocation || "locations",
+      name: appContent?.confirmation?.description?.locations || "locations",
     });
     this.photoIdAndProofOfAddressLink = page.getByRole("link", {
       name:
