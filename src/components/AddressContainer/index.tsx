@@ -154,7 +154,7 @@ const AddressContainer = ({ csrfToken }) => {
     <>
       <LoadingIndicator isLoading={isLoading} />
 
-      <PageSubHeading>{t("location.address.title")}</PageSubHeading>
+      <PageSubHeading mb="xs">{t("location.address.title")}</PageSubHeading>
       <Paragraph m={0} mb="l">
         <Trans
           i18nKey="location.address.description"
