@@ -95,7 +95,7 @@
     "typescript-eslint": "^8.45.0",
     "underscore": "1.13.1",
     "validator": "13.0.0",
-    "winston": "3.3.3"
+    "winston": "3.19.0"
   },
   "husky": {
     "hooks": {
