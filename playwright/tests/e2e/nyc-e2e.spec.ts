@@ -1,12 +1,12 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
-
 import {
   fillPersonalInfo,
   fillAddress,
   fillAccountInfo,
 } from "../../utils/form-helper";
 import {
+  EXPECTED_BARCODE_PREFIX,
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_NYC_ADDRESS,
@@ -84,6 +84,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
         }
       );
     });
+
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
@@ -140,8 +141,8 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
     await test.step("displays headings and banner on congrats page", async () => {
       await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
-      await expect(pageManager.congratsPage.readOrListenOnGo).toBeVisible();
+      await expect(pageManager.congratsPage.metroNonMetroHeading).toBeVisible();
+      await expect(pageManager.congratsPage.readListenLink).toBeVisible();
     });
 
     await test.step("displays generated library card on congrats page", async () => {
@@ -152,7 +153,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await expect(pageManager.congratsPage.issuedDate).toBeVisible();
       await expect(pageManager.congratsPage.patronBarcodeNumber).toBeVisible();
       await expect(pageManager.congratsPage.patronBarcodeNumber).toContainText(
-        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX
+        EXPECTED_BARCODE_PREFIX
       );
     });
 

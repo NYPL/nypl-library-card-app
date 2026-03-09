@@ -42,14 +42,14 @@ test.describe("displays congrats page", () => {
         page,
         fullName,
         TEST_BARCODE_NUMBER,
-        PATRON_TYPES.PATRON_TYPE_9
+        PATRON_TYPES.DIGITAL_METRO
       );
       await pageManager.reviewPage.submitButton.click();
     });
 
     await test.step("displays metro card headings and links", async () => {
       await expect(congratsPage.mainHeading).toBeVisible();
-      await expect(congratsPage.metroHeading).toBeVisible();
+      await expect(congratsPage.metroNonMetroHeading).toBeVisible();
       await expect(congratsPage.locationsLink).toBeVisible();
       await expect(congratsPage.photoIdAndProofOfAddressLink).toBeVisible();
       await expect(congratsPage.getStartedHeading).toBeVisible();
@@ -86,14 +86,14 @@ test.describe("displays congrats page", () => {
         page,
         fullName,
         TEST_BARCODE_NUMBER,
-        PATRON_TYPES.PATRON_TYPE_8
+        PATRON_TYPES.DIGITAL_NON_METRO
       );
       await pageManager.reviewPage.submitButton.click();
     });
 
     await test.step("displays metro card headings and links", async () => {
       await expect(congratsPage.mainHeading).toBeVisible();
-      await expect(congratsPage.metroHeading).toBeVisible();
+      await expect(congratsPage.metroNonMetroHeading).toBeVisible();
       await expect(congratsPage.locationsLink).toBeVisible();
       await expect(congratsPage.photoIdAndProofOfAddressLink).toBeVisible();
       await expect(congratsPage.getStartedHeading).toBeVisible();
@@ -130,7 +130,7 @@ test.describe("displays congrats page", () => {
         page,
         fullName,
         TEST_BARCODE_NUMBER,
-        PATRON_TYPES.PATRON_TYPE_7
+        PATRON_TYPES.DIGITAL_TEMPORARY
       );
       await pageManager.reviewPage.submitButton.click();
     });

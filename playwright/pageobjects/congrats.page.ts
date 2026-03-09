@@ -3,7 +3,7 @@ import { Page, Locator } from "@playwright/test";
 export class CongratsPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
-  readonly metroHeading: Locator;
+  readonly metroNonMetroHeading: Locator;
   readonly temporaryHeading: Locator;
   readonly getStartedHeading: Locator;
   readonly memberNameHeading: Locator;
@@ -21,9 +21,7 @@ export class CongratsPage {
   readonly findOutLibraryLink: Locator;
   readonly discoverLink: Locator;
   readonly patronBarcodeNumber: Locator;
-  readonly EXPECTED_BARCODE_PREFIX = "255";
   readonly temporaryCardBanner: Locator;
-  readonly readOrListenOnGo: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -31,7 +29,7 @@ export class CongratsPage {
       name: "Apply for a Library Card Online",
       level: 1,
     });
-    this.metroHeading = page.getByRole("heading", {
+    this.metroNonMetroHeading = page.getByRole("heading", {
       name: "Congratulations! You now have a digital New York Public Library card.",
       level: 2,
     });
@@ -81,12 +79,8 @@ export class CongratsPage {
     this.discoverLink = page.getByRole("link", {
       name: "Discover everything you can do with your library card.",
     });
-
     this.temporaryCardBanner = page.locator("aside", {
       hasText: "This is a temporary card",
-    });
-    this.readOrListenOnGo = page.getByRole("link", {
-      name: "Read or listen on-the-go",
     });
   }
 

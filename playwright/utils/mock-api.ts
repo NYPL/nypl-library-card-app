@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { PATRON_TYPES } from "../../utils/constants";
+import { PATRON_TYPES } from "./constants";
 import { AddressData } from "./types";
 
 export async function mockUsernameApi(page: Page, message: string) {
