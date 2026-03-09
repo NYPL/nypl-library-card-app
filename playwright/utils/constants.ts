@@ -131,3 +131,8 @@ export const IP = {
   NYC_IP: "65.209.66.130",
   NYS_IP: "172.100.3.84",
 };
+
+export const IP = {
+  NYC_IP: "65.209.66.130",
+  NYS_IP: "172.100.3.84",
+};
