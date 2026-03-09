@@ -9,6 +9,10 @@ on:
       PLAYWRIGHT_BASE_URL:
         required: false
         type: string
+      SUPPORTED_LANGUAGES:
+        required: false
+        type: string
+        default: all
 
 jobs:
   playwright-tests:
@@ -41,7 +45,16 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
+      - name: Run Playwright tests (PR - English only)
+        if: ${{ github.event_name == 'pull_request' }}
+        env:
+          SUPPORTED_LANGUAGES: en
+        run: npx playwright test
+
+      - name: Run Playwright tests (Main/QA - all languages)
+        if: ${{ github.event_name != 'pull_request' }}
+        env:
+          SUPPORTED_LANGUAGES: ${{ inputs.SUPPORTED_LANGUAGES || 'all' }}
         run: npx playwright test
 
       - name: Upload Playwright reports on failure
