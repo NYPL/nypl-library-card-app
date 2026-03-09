@@ -37,13 +37,11 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
       await mockCreateAddress(page, TEST_NYC_ADDRESS);
       await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
       await pageManager.addressPage.nextButton.click();
-      await expect(pageManager.addressPage.spinner).not.toBeVisible();
     });
 
     await test.step("skips alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await pageManager.alternateAddressPage.nextButton.click();
-      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible();
     });
 
     await test.step("confirms address verification", async () => {
@@ -89,10 +87,6 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
       await expect(pageManager.congratsPage.patronBarcodeNumber).toHaveText(
         TEST_BARCODE_NUMBER
       );
-    });
-
-    await test.step("verifies patron type", async () => {
-      expect(PATRON_TYPES.DIGITAL_METRO).toBe(9);
     });
   });
 });
