@@ -103,7 +103,7 @@
       "description": {
         "part1": "选择一个区内图书馆将有助于我们确保您能够从对您来说最便利的分馆获得所需的一切。",
         "part2": "请从下面的下拉选单中选择一家NYPL分馆作为您的区内图书馆。如果您没有区内图书馆，请选择“Virtual”。您可随时通过帐户设置更新此信息。",
-        "part3": "如需借阅实体物品，您必须前往一<a href='https://www.nypl.org/locations'>家NYPL分馆</a>验证您的信息并领取实体图书卡。"
+        "part3": "如需借阅实体物品，您必须前往一家<a href='https://www.nypl.org/locations'>NYPL分馆</a>验证您的信息并领取实体图书卡。"
       }
     },
     "termsAndCondition": {
