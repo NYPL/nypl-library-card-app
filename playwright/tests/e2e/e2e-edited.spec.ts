@@ -1,18 +1,18 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
 import {
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
-} from "../utils/form-helper";
+} from "../../utils/form-helper";
 import {
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_PATRON,
   TEST_EDITED_PATRON,
   TEST_OOS_ADDRESS,
-} from "../utils/constants";
-import { getPatronID, deletePatron } from "../utils/sierra-api-utils";
+} from "../../utils/constants";
+import { getPatronID, deletePatron } from "../../utils/sierra-api-utils";
 
 test.describe("E2E: Edits patron information", () => {
   let scrapedBarcode: string | null = null;
