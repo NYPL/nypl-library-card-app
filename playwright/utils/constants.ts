@@ -120,10 +120,12 @@ export const PAGE_ROUTES = {
 };
 
 export const PATRON_TYPES = {
-  PATRON_TYPE_7: 7, // OOS
-  PATRON_TYPE_8: 8, // NYS
-  PATRON_TYPE_9: 9, // NYC
-};
+  DIGITAL_TEMPORARY: 7,
+  DIGITAL_NON_METRO: 8,
+  DIGITAL_METRO: 9,
+} as const;
+
+export type PType = (typeof PATRON_TYPES)[keyof typeof PATRON_TYPES];
 
 export const IP = {
   NYC_IP: "65.209.66.130",
