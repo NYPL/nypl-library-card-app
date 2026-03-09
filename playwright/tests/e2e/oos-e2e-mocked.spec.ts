@@ -35,6 +35,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       // await test.step("enters personal information", async () => {
       //   await expect(pageManager.personalPage.stepHeading).toBeVisible();
       //   await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+      // await pageManager.personalPage.nextButton.click();
       // });
 
       // await test.step("enters home address", async () => {
