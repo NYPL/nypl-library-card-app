@@ -79,7 +79,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       // });
 
       // await test.step("submits application", async () => {
-      //   await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER);
+      //   await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER, PATRON_TYPES.DIGITAL_TEMPORARY);
       //   await expect(pageManager.reviewPage.submitButton).toBeVisible();
       //   await pageManager.reviewPage.submitButton.click();
       // });

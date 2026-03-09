@@ -241,7 +241,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   expect(patronData.birthDate).toBe(expectedDOB);
       //   expect(actualAddressText).toMatch(expectedAddress);
       //   expect(patronEmails).toContain(expectedEmail);
-      //   expect(patronData.patronType).toBe(PATRON_TYPES.PATRON_TYPE_7);
+      //   expect(patronData.patronType).toBe(PATRON_TYPES.DIGITAL_TEMPORARY);
       // });
     });
   });
