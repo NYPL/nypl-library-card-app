@@ -218,7 +218,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       expect(patronData.birthDate).toBe(expectedDOB);
       expect(actualAddressText).toMatch(expectedAddress);
       expect(patronEmails).toContain(expectedEmail);
-      expect(patronData.patronType).toBe(PATRON_TYPES.PATRON_TYPE_9);
+      expect(patronData.patronType).toBe(PATRON_TYPES.DIGITAL_METRO);
     });
   });
 });
