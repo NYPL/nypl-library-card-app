@@ -3,7 +3,7 @@ import { Page, Locator } from "@playwright/test";
 export class CongratsPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
-  readonly metroHeading: Locator;
+  readonly metroNonMetroHeading: Locator;
   readonly temporaryHeading: Locator;
   readonly memberNameHeading: Locator;
   readonly memberName: Locator;
@@ -30,7 +30,7 @@ export class CongratsPage {
       name: "Apply for a Library Card Online",
       level: 1,
     });
-    this.metroHeading = page.getByRole("heading", {
+    this.metroNonMetroHeading = page.getByRole("heading", {
       name: "Congratulations! You now have a digital New York Public Library card.",
     });
     this.temporaryHeading = page.getByRole("heading", {
