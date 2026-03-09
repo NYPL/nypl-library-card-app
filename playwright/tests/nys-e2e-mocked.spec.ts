@@ -65,7 +65,12 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
     });
 
     await test.step("submits application", async () => {
-      await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER, 8);
+      await mockCreatePatronApi(
+        page,
+        fullName,
+        TEST_BARCODE_NUMBER,
+        PATRON_TYPES.DIGITAL_NON_METRO
+      );
       await expect(pageManager.reviewPage.submitButton).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
     });
@@ -82,9 +87,6 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
       await expect(pageManager.congratsPage.patronBarcodeNumber).toHaveText(
         TEST_BARCODE_NUMBER
       );
-      await test.step("verify patron-type", async () => {
-        expect(PATRON_TYPES.DIGITAL_NON_METRO).toBe(8);
-      });
     });
   });
 });
