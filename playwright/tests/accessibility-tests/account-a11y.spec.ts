@@ -36,6 +36,7 @@ test.describe("Account Page Accessibility Tests", () => {
 
     for (const locator of accountLocators) {
       await page.keyboard.press("Tab");
+      await page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
     }
 
