@@ -6,6 +6,7 @@ import {
   fillAccountInfo,
 } from "../../utils/form-helper";
 import {
+  EXPECTED_BARCODE_PREFIX,
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_OOS_ADDRESS,
@@ -169,7 +170,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await expect(pageManager.congratsPage.issuedDate).toBeVisible();
       await expect(pageManager.congratsPage.patronBarcodeNumber).toBeVisible();
       await expect(pageManager.congratsPage.patronBarcodeNumber).toContainText(
-        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX
+        EXPECTED_BARCODE_PREFIX
       );
     });
 
@@ -235,7 +236,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       expect(patronData.birthDate).toBe(expectedDOB);
       expect(actualAddressText).toMatch(expectedAddress);
       expect(patronEmails).toContain(expectedEmail);
-      expect(patronData.patronType).toBe(PATRON_TYPES.PATRON_TYPE_7);
+      expect(patronData.patronType).toBe(PATRON_TYPES.DIGITAL_TEMPORARY);
     });
   });
 });
