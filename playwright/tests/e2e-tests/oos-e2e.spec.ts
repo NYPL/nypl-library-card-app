@@ -1,23 +1,23 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  fillPersonalInfo,
-  fillAddress,
   fillAccountInfo,
+  fillAddress,
+  fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
-  SPINNER_TIMEOUT,
-  TEST_ACCOUNT,
-  TEST_OOS_ADDRESS,
-  TEST_NYC_ADDRESS,
-  TEST_PATRON,
   PAGE_ROUTES,
   PATRON_TYPES,
+  SPINNER_TIMEOUT,
+  TEST_ACCOUNT,
+  TEST_NYC_ADDRESS,
+  TEST_OOS_ADDRESS,
+  TEST_PATRON,
 } from "../../utils/constants";
 import {
-  getPatronID,
-  getPatronData,
   deletePatron,
+  getPatronData,
+  getPatronID,
 } from "../../utils/sierra-api-utils";
 import { createFuzzyMatcher, formatSierraDate } from "../../utils/formatter";
 

@@ -1,6 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
+  fillAccountInfo,
+  fillAddress,
+  fillPersonalInfo,
+} from "../../utils/form-helper";
+import {
   PAGE_ROUTES,
   PATRON_TYPES,
   TEST_ACCOUNT,
@@ -10,11 +15,6 @@ import {
   TEST_PATRON,
 } from "../../utils/constants";
 import { mockCreatePatronApi } from "../../utils/mock-api";
-import {
-  fillAccountInfo,
-  fillAddress,
-  fillPersonalInfo,
-} from "../../utils/form-helper";
 
 test.describe("E2E Flow: Complete application using mocked submit", () => {
   test("displays patron information on congrats page", async ({ page }) => {
@@ -102,6 +102,7 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
         TEST_BARCODE_NUMBER
       );
     });
+
     await test.step("displays temporary card banner", async () => {
       await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
       await expect(pageManager.congratsPage.temporaryCardBanner).toBeVisible();

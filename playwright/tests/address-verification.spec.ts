@@ -32,7 +32,7 @@ test.describe("displays elements on address verification page", () => {
 
 test.describe("enters home address and alternate address", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/library-card/location?newCard=true");
+    await page.goto(PAGE_ROUTES.ADDRESS);
   });
 
   test("enters valid addresses", async ({ page }) => {

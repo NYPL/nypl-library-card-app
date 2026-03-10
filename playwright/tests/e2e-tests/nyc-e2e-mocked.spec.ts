@@ -1,19 +1,19 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
+import {
+  fillAccountInfo,
+  fillAddress,
+  fillPersonalInfo,
+} from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   PATRON_TYPES,
   TEST_ACCOUNT,
   TEST_BARCODE_NUMBER,
-  TEST_NYS_ADDRESS,
+  TEST_NYC_ADDRESS,
   TEST_PATRON,
-} from "../utils/constants";
-import { mockCreatePatronApi, mockCreateAddress } from "../utils/mock-api";
-import {
-  fillAccountInfo,
-  fillAddress,
-  fillPersonalInfo,
-} from "../utils/form-helper";
+} from "../../utils/constants";
+import { mockCreateAddress, mockCreatePatronApi } from "../../utils/mock-api";
 
 test.describe("E2E Flow: Complete application using mocked address and submit", () => {
   test("displays patron information on congrats page", async ({ page }) => {
@@ -34,8 +34,8 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
 
     await test.step("enters mocked home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await mockCreateAddress(page, TEST_NYS_ADDRESS);
-      await fillAddress(pageManager.addressPage, TEST_NYS_ADDRESS);
+      await mockCreateAddress(page, TEST_NYC_ADDRESS);
+      await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
       await pageManager.addressPage.nextButton.click();
     });
 
@@ -49,7 +49,7 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
       await pageManager.addressVerificationPage
-        .getHomeAddressOption(TEST_NYS_ADDRESS.street)
+        .getHomeAddressOption(TEST_NYC_ADDRESS.street)
         .check();
       await pageManager.addressVerificationPage.nextButton.click();
     });
@@ -69,7 +69,7 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
         page,
         fullName,
         TEST_BARCODE_NUMBER,
-        PATRON_TYPES.DIGITAL_NON_METRO
+        PATRON_TYPES.DIGITAL_METRO
       );
       await expect(pageManager.reviewPage.submitButton).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
@@ -79,7 +79,8 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
       await expect(pageManager.congratsPage.stepHeading).toBeVisible();
       await expect(pageManager.congratsPage.readOrListenOnGo).toBeVisible();
     });
-    await test.step("displays variable elements on Congrats page", async () => {
+
+    await test.step("displays variable elements on congrats page", async () => {
       await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
       await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();

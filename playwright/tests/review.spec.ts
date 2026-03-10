@@ -210,7 +210,7 @@ test.describe("edits patron information on review page", () => {
     const pageManager = new PageManager(page);
 
     await test.step("enters account info", async () => {
-      await page.goto("/library-card/account?newCard=true");
+      await page.goto(PAGE_ROUTES.ACCOUNT);
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();

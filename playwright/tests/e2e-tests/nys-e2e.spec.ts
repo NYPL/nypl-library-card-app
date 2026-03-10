@@ -1,24 +1,23 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
-
 import {
-  fillPersonalInfo,
-  fillAddress,
   fillAccountInfo,
+  fillAddress,
+  fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
+  IP,
+  PAGE_ROUTES,
+  PATRON_TYPES,
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_NYS_ADDRESS,
   TEST_PATRON,
-  PAGE_ROUTES,
-  PATRON_TYPES,
-  IP,
 } from "../../utils/constants";
 import {
-  getPatronID,
-  getPatronData,
   deletePatron,
+  getPatronData,
+  getPatronID,
 } from "../../utils/sierra-api-utils";
 import { createFuzzyMatcher, formatSierraDate } from "../../utils/formatter";
 
@@ -92,6 +91,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
         }
       );
     });
+
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
