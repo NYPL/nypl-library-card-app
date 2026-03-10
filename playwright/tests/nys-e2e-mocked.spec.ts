@@ -86,7 +86,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       // await test.step("displays metro card elements on congrats page", async () => {
       //   await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      //   await expect(pageManager.congratsPage.metroNonMetroHeading).toBeVisible();
+      //   await expect(pageManager.congratsPage.metroOrNonMetroHeading).toBeVisible();
       //   await expect(pageManager.congratsPage.readListenLink).toBeVisible();
       // });
 

@@ -88,6 +88,7 @@ export const TEST_EDITED_ACCOUNT = {
 
 // congrats
 export const TEST_BARCODE_NUMBER = "12341234123412";
+export const EXPECTED_BARCODE_PREFIX = "255";
 
 export const ERROR_MESSAGES = {
   // probs remove this at the end

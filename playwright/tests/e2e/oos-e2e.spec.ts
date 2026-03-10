@@ -1,17 +1,19 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
- // fillAccountInfo,
- // fillAddress,
+  // fillAccountInfo,
+  // fillAddress,
   fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
+  // EXPECTED_BARCODE_PREFIX,
   PAGE_ROUTES,
   // PATRON_TYPES,
   // SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   // TEST_ACCOUNT,
   // TEST_NYC_ADDRESS,
+  // TEST_OOS_ADDRESS,
   TEST_PATRON,
 } from "../../utils/constants";
 import {
@@ -47,6 +49,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     });
 
     test("submits OOS patron application", async ({ page }) => {
+      // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
+
       await test.step("begins at landing", async () => {
         await page.goto(PAGE_ROUTES.LANDING(lang));
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
@@ -168,14 +172,13 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       // });
 
       // await test.step("displays generated library card on congrats page", async () => {
-      //   const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
       //   await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       //   await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
       //   await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
       //   await expect(pageManager.congratsPage.issuedDate).toBeVisible();
       //   await expect(pageManager.congratsPage.patronBarcodeNumber).toBeVisible();
       //   await expect(pageManager.congratsPage.patronBarcodeNumber).toContainText(
-      //     pageManager.congratsPage.EXPECTED_BARCODE_PREFIX
+      //     EXPECTED_BARCODE_PREFIX
       //   );
       // });
 
