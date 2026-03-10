@@ -76,9 +76,12 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
     });
 
     await test.step("displays heading and link on congrats page", async () => {
-      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
-      await expect(pageManager.congratsPage.readOrListenOnGo).toBeVisible();
+      await expect(
+        pageManager.congratsPage.metroOrNonMetroHeading
+      ).toBeVisible();
+      await expect(pageManager.congratsPage.readListenLink).toBeVisible();
     });
+
     await test.step("displays variable elements on Congrats page", async () => {
       await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       await expect(pageManager.congratsPage.memberName).toHaveText(fullName);

@@ -1,4 +1,5 @@
 import { Page } from "@playwright/test";
+import { PATRON_TYPES } from "./constants";
 import { AddressData } from "./types";
 
 export async function mockUsernameApi(page: Page, message: string) {
@@ -15,7 +16,7 @@ export async function mockCreatePatronApi(
   page: Page,
   name: string,
   barcode: string,
-  ptype: number
+  ptype: number = PATRON_TYPES.DIGITAL_TEMPORARY
 ) {
   await page.route("**/library-card/api/create-patron", async (route) => {
     await route.fulfill({

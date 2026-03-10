@@ -3,7 +3,7 @@ import { Page, Locator } from "@playwright/test";
 export class CongratsPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
-  readonly stepHeading: Locator;
+  readonly metroOrNonMetroHeading: Locator;
   readonly temporaryHeading: Locator;
   readonly getStartedHeading: Locator;
   readonly memberNameHeading: Locator;
@@ -15,14 +15,13 @@ export class CongratsPage {
   readonly photoIdAndProofOfAddressLink: Locator;
   readonly learnMoreLink: Locator;
   readonly getHelpEmailLink: Locator;
+  readonly readListenLink: Locator;
   readonly loginLink: Locator;
   readonly nyplLocationLink: Locator;
   readonly findOutLibraryLink: Locator;
   readonly discoverLink: Locator;
   readonly patronBarcodeNumber: Locator;
-  readonly EXPECTED_BARCODE_PREFIX = "255";
   readonly temporaryCardBanner: Locator;
-  readonly readOrListenOnGo: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -30,10 +29,10 @@ export class CongratsPage {
       name: "Apply for a Library Card Online",
       level: 1,
     });
-    this.stepHeading = page.getByRole("heading", {
+    this.metroOrNonMetroHeading = page.getByRole("heading", {
       name: "Congratulations! You now have a digital New York Public Library card.",
+      level: 2,
     });
-
     this.temporaryHeading = page.getByRole("heading", {
       name: "Congratulations! You now have a temporary digital New York Public Library card.",
       level: 2,
@@ -67,6 +66,9 @@ export class CongratsPage {
     this.getHelpEmailLink = page.getByRole("link", {
       name: "gethelp@nypl.org",
     });
+    this.readListenLink = page.getByRole("link", {
+      name: "Read or listen on-the-go",
+    });
     this.loginLink = page.getByRole("link", { name: "Log into your account" });
     this.nyplLocationLink = page.getByRole("link", {
       name: "NYPL location",
@@ -77,12 +79,8 @@ export class CongratsPage {
     this.discoverLink = page.getByRole("link", {
       name: "Discover everything you can do with your library card.",
     });
-
     this.temporaryCardBanner = page.locator("aside", {
       hasText: "This is a temporary card",
-    });
-    this.readOrListenOnGo = page.getByRole("link", {
-      name: "Read or listen on-the-go",
     });
   }
 
