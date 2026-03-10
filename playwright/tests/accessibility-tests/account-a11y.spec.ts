@@ -23,6 +23,7 @@ test.describe("Account Page Accessibility Tests", () => {
       accountPage.passwordInput,
       accountPage.verifyPasswordInput,
       accountPage.showPasswordCheckbox,
+      accountPage.libraryLocations,
       accountPage.selectHomeLibrary,
       accountPage.cardholderTerms,
       accountPage.rulesRegulations,
@@ -35,7 +36,6 @@ test.describe("Account Page Accessibility Tests", () => {
     await accountPage.usernameInput.fill("testuser");
 
     for (const locator of accountLocators) {
-      await page.keyboard.press("Tab");
       await page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
     }
