@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
-import {
-// fillAccountInfo,
+import {} from // fillAccountInfo,
 // fillAddress,
 // fillPersonalInfo,
-} from "../../utils/form-helper";
+"../../utils/form-helper";
 import {
+  // EXPECTED_BARCODE_PREFIX,
   IP,
   PAGE_ROUTES,
   // PATRON_TYPES,
@@ -146,7 +146,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       //   await test.step("displays metro card elements on congrats page", async () => {
       //     await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.metroHeading).toBeVisible();
+      //     await expect(pageManager.congratsPage.metroOrNonMetroHeading).toBeVisible();
       //     await expect(pageManager.congratsPage.readListenLink).toBeVisible();
       //   });
 
@@ -161,7 +161,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     ).toBeVisible();
       //     await expect(
       //       pageManager.congratsPage.patronBarcodeNumber
-      //     ).toContainText(pageManager.congratsPage.EXPECTED_BARCODE_PREFIX);
+      //     ).toContainText(EXPECTED_BARCODE_PREFIX);
       //   });
 
       //   await test.step("retrieves barcode from congrats page", async () => {
