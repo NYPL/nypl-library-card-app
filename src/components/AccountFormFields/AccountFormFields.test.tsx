@@ -5,6 +5,7 @@ import { mockTFunction, TestProviderWrapper } from "../../../testHelper/utils";
 import AccountFormFields from ".";
 
 jest.mock("react-i18next", () => {
+  const React = jest.requireActual("react");
   const en = {
     account: {
       title: "Step 4 of 5: Customize your account",
@@ -57,6 +58,14 @@ jest.mock("react-i18next", () => {
     useTranslation: () => ({
       t: mockTFunction(en),
     }),
+    Trans: ({ children, i18nKey }) => {
+      return React.createElement(
+        "div",
+        { "data-testid": `mock-trans` },
+        i18nKey,
+        children
+      );
+    },
   };
 });
 
