@@ -3,12 +3,11 @@ import { Page, Locator } from "@playwright/test";
 export class CongratsPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
-  readonly metroNonMetroHeading: Locator;
+  readonly metroOrNonMetroHeading: Locator;
   readonly temporaryHeading: Locator;
   readonly memberNameHeading: Locator;
   readonly memberName: Locator;
   readonly patronBarcodeNumber: Locator;
-  readonly EXPECTED_BARCODE_PREFIX = "255";
   readonly issuedDateHeading: Locator;
   readonly issuedDate: Locator;
   readonly libraryCardBackground: Locator;
@@ -30,8 +29,9 @@ export class CongratsPage {
       name: "Apply for a Library Card Online",
       level: 1,
     });
-    this.metroNonMetroHeading = page.getByRole("heading", {
+    this.metroOrNonMetroHeading = page.getByRole("heading", {
       name: "Congratulations! You now have a digital New York Public Library card.",
+      level: 2,
     });
     this.temporaryHeading = page.getByRole("heading", {
       name: "Congratulations! You now have a temporary digital New York Public Library card.",

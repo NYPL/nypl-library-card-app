@@ -6,6 +6,7 @@ import {
   fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
+  // EXPECTED_BARCODE_PREFIX,
   IP,
   PAGE_ROUTES,
   // PATRON_TYPES,
@@ -52,6 +53,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     });
 
     test("submits NYS patron application", async ({ page }) => {
+      // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
+
       await test.step("begins at landing", async () => {
         await page.goto(PAGE_ROUTES.LANDING(lang));
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
@@ -97,6 +100,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //       timeout: SPINNER_TIMEOUT,
       //     });
       //   });
+
       //   await test.step("enters account information", async () => {
       //     await expect(pageManager.accountPage.stepHeading).toBeVisible();
       //     await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
@@ -155,12 +159,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       //   await test.step("displays metro card elements on congrats page", async () => {
       //     await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.metroHeading).toBeVisible();
+      //     await expect(pageManager.congratsPage.metroOrNonMetroHeading).toBeVisible();
       //     await expect(pageManager.congratsPage.readListenLink).toBeVisible();
       //   });
 
       //   await test.step("displays generated library card on congrats page", async () => {
-      //     const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
       //     await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       //     await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
       //     await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
@@ -170,7 +173,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     ).toBeVisible();
       //     await expect(
       //       pageManager.congratsPage.patronBarcodeNumber
-      //     ).toContainText(pageManager.congratsPage.EXPECTED_BARCODE_PREFIX);
+      //     ).toContainText(EXPECTED_BARCODE_PREFIX);
       //   });
 
       //   await test.step("retrieves barcode from congrats page", async () => {
