@@ -23,7 +23,7 @@ test.describe("displays congrats page", () => {
 
   test("displays library card on congrats page", async ({ page }) => {
     await test.step("submits mocked application", async () => {
-      await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER);
+      await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER); // defaults to temporary patron type
       await pageManager.reviewPage.submitButton.click();
     });
 
@@ -49,7 +49,7 @@ test.describe("displays congrats page", () => {
 
     await test.step("displays metro card headings and links", async () => {
       await expect(congratsPage.mainHeading).toBeVisible();
-      await expect(congratsPage.metroNonMetroHeading).toBeVisible();
+      await expect(congratsPage.metroOrNonMetroHeading).toBeVisible();
       await expect(congratsPage.locationsLink).toBeVisible();
       await expect(congratsPage.photoIdAndProofOfAddressLink).toBeVisible();
       await expect(congratsPage.getStartedHeading).toBeVisible();
@@ -93,7 +93,7 @@ test.describe("displays congrats page", () => {
 
     await test.step("displays metro card headings and links", async () => {
       await expect(congratsPage.mainHeading).toBeVisible();
-      await expect(congratsPage.metroNonMetroHeading).toBeVisible();
+      await expect(congratsPage.metroOrNonMetroHeading).toBeVisible();
       await expect(congratsPage.locationsLink).toBeVisible();
       await expect(congratsPage.photoIdAndProofOfAddressLink).toBeVisible();
       await expect(congratsPage.getStartedHeading).toBeVisible();

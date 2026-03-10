@@ -149,7 +149,9 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
     await test.step("displays headings and banner on congrats page", async () => {
       await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      await expect(pageManager.congratsPage.metroNonMetroHeading).toBeVisible();
+      await expect(
+        pageManager.congratsPage.metroOrNonMetroHeading
+      ).toBeVisible();
       await expect(pageManager.congratsPage.readListenLink).toBeVisible();
     });
 
