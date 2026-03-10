@@ -6,6 +6,7 @@ import {
   fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
+  EXPECTED_BARCODE_PREFIX,
   PAGE_ROUTES,
   PATRON_TYPES,
   SPINNER_TIMEOUT,
@@ -169,7 +170,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await expect(pageManager.congratsPage.issuedDate).toBeVisible();
       await expect(pageManager.congratsPage.patronBarcodeNumber).toBeVisible();
       await expect(pageManager.congratsPage.patronBarcodeNumber).toContainText(
-        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX
+        EXPECTED_BARCODE_PREFIX
       );
     });
 

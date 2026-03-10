@@ -6,6 +6,7 @@ import {
   fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
+  EXPECTED_BARCODE_PREFIX,
   IP,
   PAGE_ROUTES,
   PATRON_TYPES,
@@ -140,8 +141,10 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
     await test.step("displays headings and banner on congrats page", async () => {
       await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      await expect(pageManager.congratsPage.stepHeading).toBeVisible();
-      await expect(pageManager.congratsPage.readOrListenOnGo).toBeVisible();
+      await expect(
+        pageManager.congratsPage.metroOrNonMetroHeading
+      ).toBeVisible();
+      await expect(pageManager.congratsPage.readListenLink).toBeVisible();
     });
 
     await test.step("displays generated library card on congrats page", async () => {
@@ -152,7 +155,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await expect(pageManager.congratsPage.issuedDate).toBeVisible();
       await expect(pageManager.congratsPage.patronBarcodeNumber).toBeVisible();
       await expect(pageManager.congratsPage.patronBarcodeNumber).toContainText(
-        pageManager.congratsPage.EXPECTED_BARCODE_PREFIX
+        EXPECTED_BARCODE_PREFIX
       );
     });
 
