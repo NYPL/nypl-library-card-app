@@ -108,7 +108,7 @@
       "title": "Biblioteca local",
       "description": {
         "part1": "Elegir una biblioteca local, nos ayudará a asegurarnos de que usted obtenga todo lo que necesita de la biblioteca que le resulte más conveniente.",
-        "part2": "En el menú desplegable a continuación, seleccione una biblioteca de la NYPL como su biblioteca principal. Si no tiene una biblioteca principal, seleccione “Virtual”. Puede actualizar esta información en cualquier momento desde la configuración de su cuenta.",
+        "part2": "En el menú desplegable a continuación, seleccione una <a href='https://www.nypl.org/locations'>biblioteca de la NYPL</a> como su biblioteca principal. Si no tiene una biblioteca principal, seleccione “Virtual”. Puede actualizar esta información en cualquier momento desde la configuración de su cuenta.",
         "part3": "Para pedir prestados materiales físicos, puede visitar cualquier biblioteca de la NYPL para verificar su información y recibir una tarjeta física."
       }
     },
