@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { CongratsPage } from "../pageobjects/congrats.page";
-import { PAGE_ROUTES } from "../utils/constants";
+import { CongratsPage } from "../../pageobjects/congrats.page";
+import { PAGE_ROUTES } from "../../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(PAGE_ROUTES.CONGRATS);

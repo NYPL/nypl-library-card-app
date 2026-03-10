@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { LandingPage } from "../pageobjects/landing.page";
-import { PAGE_ROUTES } from "../utils/constants";
+import { LandingPage } from "../../pageobjects/landing.page";
+import { PAGE_ROUTES } from "../../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(PAGE_ROUTES.LANDING);
@@ -35,7 +35,6 @@ test("displays informational links, informational banner and get started button"
   page,
 }) => {
   const landingPage = new LandingPage(page);
-
   await expect(landingPage.digitalResourcesLink).toBeVisible();
   await expect(landingPage.visitLibraryLink).toBeVisible();
   await expect(landingPage.alternateFormLink).toBeVisible();
@@ -58,7 +57,6 @@ test("opens links in same tab", async ({ page }) => {
     landingPage.rulesRegulations,
     landingPage.privacyPolicy,
   ];
-
   for (const link of links) {
     await expect(link).not.toHaveAttribute("target", "_blank");
   }
