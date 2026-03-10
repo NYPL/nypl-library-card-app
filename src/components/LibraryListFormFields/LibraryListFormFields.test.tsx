@@ -52,11 +52,20 @@ jest.mock("react-i18next", () => {
       },
     },
   };
+  const React = jest.requireActual("react");
   return {
     // this mock makes sure any components using the translate hook can use it without a warning being shown
     useTranslation: () => ({
       t: mockTFunction(en),
     }),
+    Trans: ({ children, i18nKey }) => {
+      return React.createElement(
+        "div",
+        { "data-testid": `mock-trans` },
+        i18nKey,
+        children
+      );
+    },
   };
 });
 
