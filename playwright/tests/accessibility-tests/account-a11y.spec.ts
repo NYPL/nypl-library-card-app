@@ -23,6 +23,7 @@ test.describe("Account Page Accessibility Tests", () => {
       accountPage.passwordInput,
       accountPage.verifyPasswordInput,
       accountPage.showPasswordCheckbox,
+      accountPage.libraryLocations,
       accountPage.selectHomeLibrary,
       accountPage.cardholderTerms,
       accountPage.rulesRegulations,
