@@ -1,33 +1,32 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../../pageobjects/page-manager.page";
+import { PageManager } from "../pageobjects/page-manager.page";
 import {
   //   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
-} from "../../utils/form-helper";
+} from "../utils/form-helper";
 import {
   PAGE_ROUTES,
-  SPINNER_TIMEOUT,
+  // PATRON_TYPES,
   SUPPORTED_LANGUAGES,
   // TEST_ACCOUNT,
   // TEST_BARCODE_NUMBER,
-  // TEST_NYC_ADDRESS,
-  TEST_OOS_ADDRESS,
+  TEST_NYS_ADDRESS,
   TEST_PATRON,
-} from "../../utils/constants";
-// import { mockCreatePatronApi } from "../../utils/mock-api";
+} from "../utils/constants";
+import { mockCreateAddress /*mockCreatePatronApi*/ } from "../utils/mock-api";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
-  test.describe(`E2E: Complete OOS patron application using mocked submit in ${name} (${lang})`, () => {
+  test.describe(`E2E: Complete NYS patron application using mocked address and submit in ${name} (${lang}))`, () => {
     let pageManager: PageManager;
     let appContent: any;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../../public/locales/${lang}/common.json`);
+      appContent = require(`../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
     });
 
-    test("submits OOS patron application", async ({ page }) => {
+    test("submits NYS patron application", async ({ page }) => {
       // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
 
       await test.step("begins at landing", async () => {
@@ -42,32 +41,24 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.personalPage.nextButton.click();
       });
 
-      await test.step("enters home address", async () => {
+      await test.step("enters mocked home address", async () => {
         await expect(pageManager.addressPage.stepHeading).toBeVisible();
-        await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
+        await mockCreateAddress(page, TEST_NYS_ADDRESS);
+        await fillAddress(pageManager.addressPage, TEST_NYS_ADDRESS);
         await pageManager.addressPage.nextButton.click();
-        await expect(pageManager.addressPage.spinner).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
       });
 
-      // await test.step("enters alternate address", async () => {
-      //   await expect(
-      //     pageManager.alternateAddressPage.stepHeading
-      //   ).toBeVisible();
-      //   await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
+      // await test.step("skips alternate address", async () => {
+      //   await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       //   await pageManager.alternateAddressPage.nextButton.click();
       // });
 
-      // await test.step("verifies home and alternate addresses", async () => {
+      // await test.step("verifies home address", async () => {
       //   await expect(
       //     pageManager.addressVerificationPage.stepHeading
       //   ).toBeVisible();
       //   await pageManager.addressVerificationPage
-      //     .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-      //     .check();
-      //   await pageManager.addressVerificationPage
-      //     .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
+      //     .getHomeAddressOption(TEST_NYS_ADDRESS.street)
       //     .check();
       //   await pageManager.addressVerificationPage.nextButton.click();
       // });
@@ -83,19 +74,20 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       // });
 
       // await test.step("submits application", async () => {
-      //   await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER, PATRON_TYPES.DIGITAL_TEMPORARY);
+      //   await mockCreatePatronApi(
+      //     page,
+      //     fullName,
+      //     TEST_BARCODE_NUMBER,
+      //     PATRON_TYPES.DIGITAL_NON_METRO
+      //   );
       //   await expect(pageManager.reviewPage.submitButton).toBeVisible();
       //   await pageManager.reviewPage.submitButton.click();
       // });
 
-      // await test.step("displays temporary card elements on congrats page", async () => {
+      // await test.step("displays metro card elements on congrats page", async () => {
       //   await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      //   await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
-      //   await expect(
-      //     pageManager.congratsPage.temporaryCardBanner
-      //   ).toBeVisible();
-      //   await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
-      //   await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
+      //   await expect(pageManager.congratsPage.metroNonMetroHeading).toBeVisible();
+      //   await expect(pageManager.congratsPage.readListenLink).toBeVisible();
       // });
 
       // await test.step("displays generated library card on congrats page", async () => {
