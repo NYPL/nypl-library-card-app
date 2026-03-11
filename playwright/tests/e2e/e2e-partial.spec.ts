@@ -168,6 +168,9 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(pageManager.addressPage.stepHeading).toBeVisible();
         await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
         await pageManager.addressPage.nextButton.click();
+        await expect(pageManager.addressPage.spinner).not.toBeVisible({
+          timeout: SPINNER_TIMEOUT,
+        });
       });
 
       //       await test.step("enters alternate address", async () => {

@@ -23,7 +23,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(addressPage.mainHeading).toBeVisible();
         await expect(addressPage.stepHeading).toBeVisible();
         await expect(addressPage.addressHeading).toBeVisible();
-        await expect(addressPage.alternateForm).toBeVisible();
+        await expect(addressPage.alternateFormLink).toBeVisible();
         await expect(addressPage.nextButton).toBeVisible();
         await expect(addressPage.previousButton).toBeVisible();
       });
@@ -37,11 +37,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       });
 
       test("confirms link opens in new tab", async () => {
-        await expect(addressPage.alternateForm).toHaveAttribute(
+        await expect(addressPage.alternateFormLink).toHaveAttribute(
           "target",
           "_blank"
         );
-        await expect(addressPage.alternateForm).toHaveAttribute(
+        await expect(addressPage.alternateFormLink).toHaveAttribute(
           "rel",
           "nofollow noopener noreferrer"
         );
