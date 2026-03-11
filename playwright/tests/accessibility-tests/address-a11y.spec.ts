@@ -18,7 +18,7 @@ test.describe("Accessibility tests on Address Page", () => {
     const addressPage = new AddressPage(page);
 
     const addressLocators = [
-      addressPage.alternateForm,
+      addressPage.alternateFormLink,
       addressPage.streetAddressInput,
       addressPage.apartmentSuiteInput,
       addressPage.cityInput,
