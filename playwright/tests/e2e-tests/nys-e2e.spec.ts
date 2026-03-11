@@ -1,24 +1,24 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  fillPersonalInfo,
-  fillAddress,
   fillAccountInfo,
+  fillAddress,
+  fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
   EXPECTED_BARCODE_PREFIX,
-  SPINNER_TIMEOUT,
-  TEST_ACCOUNT,
-  TEST_NYC_ADDRESS,
-  TEST_PATRON,
+  IP,
   PAGE_ROUTES,
   PATRON_TYPES,
-  IP,
+  SPINNER_TIMEOUT,
+  TEST_ACCOUNT,
+  TEST_NYS_ADDRESS,
+  TEST_PATRON,
 } from "../../utils/constants";
 import {
-  getPatronID,
-  getPatronData,
   deletePatron,
+  getPatronData,
+  getPatronID,
 } from "../../utils/sierra-api-utils";
 import { createFuzzyMatcher, formatSierraDate } from "../../utils/formatter";
 
@@ -27,8 +27,8 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
   test.beforeEach(async ({ page }) => {
     await page.setExtraHTTPHeaders({
-      "x-client-ip": IP.NYC_IP,
-      "x-forwarded-for": IP.NYC_IP,
+      "x-client-ip": IP.NYS_IP,
+      "x-forwarded-for": IP.NYS_IP,
     });
   });
 
@@ -63,19 +63,27 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
     await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
+      await fillAddress(pageManager.addressPage, TEST_NYS_ADDRESS);
       await pageManager.addressPage.nextButton.click();
       await expect(pageManager.addressPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });
     });
 
-    await test.step("displays address verification", async () => {
+    await test.step("skips alternate address", async () => {
+      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
+      await pageManager.alternateAddressPage.nextButton.click();
+      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
+    });
+
+    await test.step("displays address verification page", async () => {
       await expect(
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
       await pageManager.addressVerificationPage
-        .getHomeAddressOption(TEST_NYC_ADDRESS.street)
+        .getHomeAddressOption(TEST_NYS_ADDRESS.street)
         .check();
       await pageManager.addressVerificationPage.nextButton.click();
       await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
@@ -110,16 +118,16 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
     await test.step("displays home on review page", async () => {
       await expect(
-        pageManager.reviewPage.getText(TEST_NYC_ADDRESS.street)
+        pageManager.reviewPage.getText(TEST_NYS_ADDRESS.street)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_NYC_ADDRESS.city)
+        pageManager.reviewPage.getText(TEST_NYS_ADDRESS.city)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_NYC_ADDRESS.state)
+        pageManager.reviewPage.getText(TEST_NYS_ADDRESS.state)
       ).toBeVisible();
       await expect(
-        pageManager.reviewPage.getText(TEST_NYC_ADDRESS.postalCode)
+        pageManager.reviewPage.getText(TEST_NYS_ADDRESS.postalCode)
       ).toBeVisible();
     });
 
@@ -205,11 +213,11 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       );
 
       const expectedAddress = createFuzzyMatcher([
-        TEST_NYC_ADDRESS.street,
-        TEST_NYC_ADDRESS.apartmentSuite,
-        TEST_NYC_ADDRESS.city,
-        TEST_NYC_ADDRESS.state,
-        TEST_NYC_ADDRESS.postalCode,
+        TEST_NYS_ADDRESS.street,
+        TEST_NYS_ADDRESS.apartmentSuite,
+        TEST_NYS_ADDRESS.city,
+        TEST_NYS_ADDRESS.state,
+        TEST_NYS_ADDRESS.postalCode,
       ]);
 
       const actualAddressText = (patronData.addresses?.[0]?.lines || []).join(
@@ -221,7 +229,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       expect(patronData.birthDate).toBe(expectedDOB);
       expect(actualAddressText).toMatch(expectedAddress);
       expect(patronEmails).toContain(expectedEmail);
-      expect(patronData.patronType).toBe(PATRON_TYPES.DIGITAL_METRO);
+      expect(patronData.patronType).toBe(PATRON_TYPES.DIGITAL_NON_METRO);
     });
   });
 });

@@ -6,13 +6,14 @@ import {
   fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
+  PAGE_ROUTES,
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
-  TEST_PATRON,
   TEST_EDITED_PATRON,
   TEST_OOS_ADDRESS,
+  TEST_PATRON,
 } from "../../utils/constants";
-import { getPatronID, deletePatron } from "../../utils/sierra-api-utils";
+import { deletePatron, getPatronID } from "../../utils/sierra-api-utils";
 
 test.describe("E2E: Edits patron information", () => {
   let scrapedBarcode: string | null = null;
@@ -36,7 +37,7 @@ test.describe("E2E: Edits patron information", () => {
     const editedFullName = `${TEST_EDITED_PATRON.firstName} ${TEST_EDITED_PATRON.lastName}`;
 
     await test.step("begins at landing", async () => {
-      await page.goto("/library-card/new?newCard=true");
+      await page.goto(PAGE_ROUTES.LANDING);
       await expect(pageManager.landingPage.applyHeading).toBeVisible();
       await pageManager.landingPage.getStartedButton.click();
     });
