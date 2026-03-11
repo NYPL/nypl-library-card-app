@@ -63,6 +63,7 @@ test.describe("displays elements on review page", () => {
     const links = [
       reviewPage.alternateFormLink,
       reviewPage.locationsLink,
+      reviewPage.nyplLocationLink,
       reviewPage.cardholderTermsLink,
       reviewPage.rulesRegulationsLink,
       reviewPage.privacyPolicyLink,
@@ -181,6 +182,8 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.verifyPasswordInputHeading).toBeVisible();
     await expect(reviewPage.verifyPasswordInput).toBeVisible();
     await expect(reviewPage.showPasswordLabel).toBeVisible();
+    await expect(reviewPage.homeLibraryHeading).toBeVisible();
+    await expect(reviewPage.nyplLocationLink).toBeVisible();
     await expect(reviewPage.selectHomeLibrary).toBeVisible();
     await expect(reviewPage.cardholderTermsLink).toBeVisible();
     await expect(reviewPage.rulesRegulationsLink).toBeVisible();

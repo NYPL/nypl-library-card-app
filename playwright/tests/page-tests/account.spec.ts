@@ -31,6 +31,7 @@ test.describe("displays all form elements on Account page", () => {
 
   test("displays home library form", async ({ page }) => {
     const accountPage = new AccountPage(page);
+    await expect(accountPage.nyplLocationLink).toBeVisible();
     await expect(accountPage.selectHomeLibrary).toBeVisible();
     await expect(accountPage.cardholderTerms).toBeVisible();
     await expect(accountPage.rulesRegulations).toBeVisible();
@@ -47,6 +48,7 @@ test.describe("displays all form elements on Account page", () => {
   test("opens links in new tab", async ({ page }) => {
     const accountPage = new AccountPage(page);
     const links = [
+      accountPage.nyplLocationLink,
       accountPage.cardholderTerms,
       accountPage.rulesRegulations,
       accountPage.privacyPolicy,
