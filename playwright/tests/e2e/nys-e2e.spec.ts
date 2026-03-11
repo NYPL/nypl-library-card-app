@@ -1,9 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
-import {} from // fillAccountInfo,
-// fillAddress,
-// fillPersonalInfo,
-"../../utils/form-helper";
+import {
+  // fillAccountInfo,
+  // fillAddress,
+  fillPersonalInfo,
+} from "../../utils/form-helper";
 import {
   // EXPECTED_BARCODE_PREFIX,
   IP,
@@ -13,7 +14,7 @@ import {
   SUPPORTED_LANGUAGES,
   // TEST_ACCOUNT,
   // TEST_NYS_ADDRESS,
-  // TEST_PATRON,
+  TEST_PATRON,
 } from "../../utils/constants";
 import {
   deletePatron,
@@ -52,17 +53,19 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     });
 
     test("submits NYS patron application", async ({ page }) => {
+      // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
+
       await test.step("begins at landing", async () => {
         await page.goto(PAGE_ROUTES.LANDING(lang));
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
         await pageManager.landingPage.getStartedButton.click();
       });
 
-      //   await test.step("enters personal information", async () => {
-      //     await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      //     await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      //     await pageManager.personalPage.nextButton.click();
-      //   });
+      await test.step("enters personal information", async () => {
+        await expect(pageManager.personalPage.stepHeading).toBeVisible();
+        await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+        await pageManager.personalPage.nextButton.click();
+      });
 
       //   await test.step("enters home address", async () => {
       //     await expect(pageManager.addressPage.stepHeading).toBeVisible();
@@ -161,7 +164,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   });
 
       //   await test.step("displays generated library card on congrats page", async () => {
-      //     const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
       //     await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       //     await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
       //     await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();

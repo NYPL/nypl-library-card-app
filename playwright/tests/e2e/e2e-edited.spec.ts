@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-// fillAccountInfo,
-// fillAddress,
-// fillPersonalInfo,
+  // fillAccountInfo,
+  // fillAddress,
+  fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
@@ -12,9 +12,9 @@ import {
   // TEST_ACCOUNT,
   // TEST_EDITED_PATRON,
   // TEST_OOS_ADDRESS,
-  // TEST_PATRON,
+  TEST_PATRON,
 } from "../../utils/constants";
-import { getPatronID, deletePatron } from "../../utils/sierra-api-utils";
+import { deletePatron, getPatronID } from "../../utils/sierra-api-utils";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`E2E: Edits patron information in ${name} (${lang})`, () => {
@@ -48,11 +48,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.landingPage.getStartedButton.click();
       });
 
-      // await test.step("enters personal information", async () => {
-      //   await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      //   await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      //   await pageManager.personalPage.nextButton.click();
-      // });
+      await test.step("enters personal information", async () => {
+        await expect(pageManager.personalPage.stepHeading).toBeVisible();
+        await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+        await pageManager.personalPage.nextButton.click();
+      });
 
       // await test.step("enters home address", async () => {
       //   await expect(pageManager.addressPage.stepHeading).toBeVisible();
