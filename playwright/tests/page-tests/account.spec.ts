@@ -1,8 +1,12 @@
 import { test, expect } from "@playwright/test";
-import { AccountPage } from "../pageobjects/account.page";
-import { ERROR_MESSAGES, PAGE_ROUTES, TEST_ACCOUNT } from "../utils/constants";
-import { fillAccountInfo } from "../utils/form-helper";
-import { mockUsernameApi } from "../utils/mock-api";
+import { AccountPage } from "../../pageobjects/account.page";
+import { fillAccountInfo } from "../../utils/form-helper";
+import {
+  ERROR_MESSAGES,
+  PAGE_ROUTES,
+  TEST_ACCOUNT,
+} from "../../utils/constants";
+import { mockUsernameApi } from "../../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(PAGE_ROUTES.ACCOUNT);
@@ -77,7 +81,6 @@ test.describe("mocks API responses on account page", () => {
   test("displays username available message", async ({ page }) => {
     // mock the API call for username availability
     await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_AVAILABLE);
-
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("AvailableUsername");
     await accountPage.availableUsernameButton.click();
@@ -87,7 +90,6 @@ test.describe("mocks API responses on account page", () => {
   test("displays username unavailable error message", async ({ page }) => {
     // mock the API call for username unavailability
     await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_UNAVAILABLE);
-
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("UnavailableUsername");
     await accountPage.availableUsernameButton.click();

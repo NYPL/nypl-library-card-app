@@ -1,13 +1,13 @@
 import { test, expect } from "@playwright/test";
-import { CongratsPage } from "../pageobjects/congrats.page";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { CongratsPage } from "../../pageobjects/congrats.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
 import {
   PAGE_ROUTES,
   PATRON_TYPES,
   TEST_BARCODE_NUMBER,
   TEST_PATRON,
-} from "../utils/constants";
-import { mockCreatePatronApi } from "../utils/mock-api";
+} from "../../utils/constants";
+import { mockCreatePatronApi } from "../../utils/mock-api";
 
 test.describe("displays congrats page", () => {
   let congratsPage: CongratsPage;
