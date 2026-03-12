@@ -1,17 +1,17 @@
 import { test, expect } from "@playwright/test";
-import { AddressPage } from "../pageobjects/address.page";
-import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
-import { AddressVerificationPage } from "../pageobjects/address-verification.page";
-import { fillAddress } from "../utils/form-helper";
+import { AddressPage } from "../../pageobjects/address.page";
+import { AlternateAddressPage } from "../../pageobjects/alternate-address.page";
+import { AddressVerificationPage } from "../../pageobjects/address-verification.page";
+import { fillAddress } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
-  TEST_NYC_ADDRESS,
-  TEST_OOS_ADDRESS,
   TEST_MULTIMATCH_ADDRESS,
   TEST_MULTIMATCH_ADDRESS_EAST,
   TEST_MULTIMATCH_ADDRESS_WEST,
-} from "../utils/constants";
+  TEST_NYC_ADDRESS,
+  TEST_OOS_ADDRESS,
+} from "../../utils/constants";
 
 test.describe("displays elements on address verification page", () => {
   test.beforeEach(async ({ page }) => {
@@ -34,7 +34,7 @@ test.describe("displays elements on address verification page", () => {
 
 test.describe("enters home address and alternate address", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/library-card/location?newCard=true");
+    await page.goto(PAGE_ROUTES.ADDRESS());
   });
 
   test("enters valid addresses", async ({ page }) => {
@@ -82,7 +82,6 @@ test.describe("enters home address and alternate address", () => {
       await expect(addressVerificationPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });
-
       await expect(alternateAddressPage.addressHeading).toBeVisible();
       await fillAddress(alternateAddressPage, TEST_MULTIMATCH_ADDRESS);
       await alternateAddressPage.nextButton.click();

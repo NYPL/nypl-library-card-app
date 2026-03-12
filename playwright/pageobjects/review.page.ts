@@ -63,6 +63,7 @@ export class ReviewPage {
   readonly verifyPasswordError: Locator;
   readonly showPasswordLabel: Locator;
   readonly homeLibraryHeading: Locator;
+  readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
   readonly homeLibraryError: Locator;
   readonly cardholderTermsLink: Locator;
@@ -235,6 +236,9 @@ export class ReviewPage {
       exact: true,
     });
     this.homeLibraryHeading = page.getByText("Home library", { exact: true });
+    this.nyplLocationLink = page.getByRole("link", {
+      name: "NYPL location",
+    });
     this.selectHomeLibrary = page.getByLabel("Select a home library:");
     this.homeLibraryError = page.getByText(ERROR_MESSAGES.HOME_LIBRARY_ERROR);
     this.cardholderTermsLink = page.getByRole("link", {

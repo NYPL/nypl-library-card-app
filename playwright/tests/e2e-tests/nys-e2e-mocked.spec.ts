@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
 import {
   //   fillAccountInfo,
   //   fillAddress,
   fillPersonalInfo,
-} from "../utils/form-helper";
+} from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   // PATRON_TYPES,
@@ -13,8 +13,8 @@ import {
   // TEST_BARCODE_NUMBER,
   // TEST_NYS_ADDRESS,
   TEST_PATRON,
-} from "../utils/constants";
-// import { mockCreateAddress, mockCreatePatronApi } from "../utils/mock-api";
+} from "../../utils/constants";
+// import { mockCreateAddress, mockCreatePatronApi } from "../../utils/mock-api";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`E2E: Complete NYS patron application using mocked address and submit in ${name} (${lang}))`, () => {
@@ -22,7 +22,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let appContent: any;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
     });
 

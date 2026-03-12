@@ -17,14 +17,14 @@ export class AccountPage {
   readonly showPasswordCheckbox: Locator;
   readonly showPasswordLabel: Locator;
   readonly homeLibraryHeading: Locator;
-  readonly libraryLocations: Locator;
+  readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
   readonly homeLibraryError: Locator;
   readonly cardholderTerms: Locator;
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
   readonly acceptTermsCheckbox: Locator;
-  readonly acceptTermsLabel: Locator;  
+  readonly acceptTermsLabel: Locator;
   readonly acceptTermsError: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
@@ -77,7 +77,7 @@ export class AccountPage {
       level: 3,
       exact: true,
     });
-    this.libraryLocations = page.getByRole("link", {
+    this.nyplLocationLink = page.getByRole("link", {
       name: "NYPL location",
     });
     this.selectHomeLibrary = page.getByLabel("Select a home library:");
