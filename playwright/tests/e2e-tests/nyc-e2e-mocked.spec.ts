@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
   //   fillAccountInfo,
-  //   fillAddress,
+  fillAddress,
   fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
@@ -11,10 +11,12 @@ import {
   SUPPORTED_LANGUAGES,
   // TEST_ACCOUNT,
   // TEST_BARCODE_NUMBER,
-  // TEST_NYC_ADDRESS,
+  TEST_NYC_ADDRESS,
   TEST_PATRON,
 } from "../../utils/constants";
-// import { mockCreatePatronApi, mockCreateAddress } from "../utils/mock-api";
+import {
+  mockCreateAddress /*mockCreatePatronApi*/,
+} from "../../utils/mock-api";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`E2E: Complete NYC patron application using mocked address and submit in ${name} (${lang}))`, () => {
@@ -41,12 +43,12 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.personalPage.nextButton.click();
       });
 
-      //   await test.step("enters mocked home address", async () => {
-      //     await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      //     await mockCreateAddress(page, TEST_NYC_ADDRESS);
-      //     await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
-      //     await pageManager.addressPage.nextButton.click();
-      //   });
+      await test.step("enters mocked home address", async () => {
+        await expect(pageManager.addressPage.stepHeading).toBeVisible();
+        await mockCreateAddress(page, TEST_NYC_ADDRESS);
+        await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
+        await pageManager.addressPage.nextButton.click();
+      });
 
       //   await test.step("skips alternate address", async () => {
       //     await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
