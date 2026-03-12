@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { AddressPage } from "../pageobjects/address.page";
-import { fillAddress } from "../utils/form-helper";
+import { AddressPage } from "../../pageobjects/address.page";
+import { fillAddress } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SUPPORTED_LANGUAGES,
   TEST_OOS_ADDRESS,
-} from "../utils/constants";
+} from "../../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`home address page in ${name} (${lang})`, () => {
@@ -13,7 +13,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let appContent: any;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       addressPage = new AddressPage(page, appContent);
       await page.goto(PAGE_ROUTES.ADDRESS(lang));
     });

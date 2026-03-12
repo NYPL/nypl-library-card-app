@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { ReviewPage } from "../pageobjects/review.page";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { ReviewPage } from "../../pageobjects/review.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
 import {
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
-} from "../utils/form-helper";
+} from "../../utils/form-helper";
 import {
   ERROR_MESSAGES,
   PAGE_ROUTES,
@@ -15,8 +15,8 @@ import {
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
-} from "../utils/constants";
-import { mockUsernameApi } from "../utils/mock-api";
+} from "../../utils/constants";
+import { mockUsernameApi } from "../../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(PAGE_ROUTES.REVIEW());
@@ -63,6 +63,7 @@ test.describe("displays elements on review page", () => {
     const links = [
       reviewPage.alternateFormLink,
       reviewPage.locationsLink,
+      reviewPage.nyplLocationLink,
       reviewPage.cardholderTermsLink,
       reviewPage.rulesRegulationsLink,
       reviewPage.privacyPolicyLink,
@@ -181,6 +182,8 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.verifyPasswordInputHeading).toBeVisible();
     await expect(reviewPage.verifyPasswordInput).toBeVisible();
     await expect(reviewPage.showPasswordLabel).toBeVisible();
+    await expect(reviewPage.homeLibraryHeading).toBeVisible();
+    await expect(reviewPage.nyplLocationLink).toBeVisible();
     await expect(reviewPage.selectHomeLibrary).toBeVisible();
     await expect(reviewPage.cardholderTermsLink).toBeVisible();
     await expect(reviewPage.rulesRegulationsLink).toBeVisible();
@@ -193,7 +196,6 @@ test.describe("edits patron information on review page", () => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
     await fillAccountInfo(reviewPage, TEST_ACCOUNT);
-
     await expect(reviewPage.usernameInput).toHaveValue(TEST_ACCOUNT.username);
     await reviewPage.showPasswordLabel.check();
     await expect(reviewPage.passwordInput).toHaveValue(TEST_ACCOUNT.password);
@@ -210,7 +212,7 @@ test.describe("edits patron information on review page", () => {
     const pageManager = new PageManager(page);
 
     await test.step("enters account info", async () => {
-      await page.goto("/library-card/account?newCard=true");
+      await page.goto(PAGE_ROUTES.ACCOUNT());
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();
@@ -244,7 +246,6 @@ test.describe("mocks API responses on review page", () => {
   test("displays username available message", async ({ page }) => {
     // mock the API call for username availability
     await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_AVAILABLE);
-
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
     await reviewPage.usernameInput.fill("AvailableUsername");
@@ -255,7 +256,6 @@ test.describe("mocks API responses on review page", () => {
   test("displays username unavailable error message", async ({ page }) => {
     // mock the API call for username unavailability
     await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_UNAVAILABLE);
-
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
     await reviewPage.usernameInput.fill("UnavailableUsername");
