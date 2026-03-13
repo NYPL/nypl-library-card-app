@@ -11,17 +11,19 @@ import { GlobalComponentsPage } from "./global-components.page";
 
 export class PageManager {
   readonly page: Page;
+  readonly appContent: any;
 
-  constructor(page: Page) {
+  constructor(page: Page, appContent?: any) {
     this.page = page;
+    this.appContent = appContent;
   }
 
   get landingPage(): LandingPage {
-    return new LandingPage(this.page);
+    return new LandingPage(this.page, this.appContent);
   }
 
   get personalPage(): PersonalPage {
-    return new PersonalPage(this.page);
+    return new PersonalPage(this.page, this.appContent);
   }
 
   get addressPage(): AddressPage {

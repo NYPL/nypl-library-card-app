@@ -4,7 +4,7 @@ import { fillAddress } from "../../utils/form-helper";
 import { PAGE_ROUTES, TEST_NYC_ADDRESS } from "../../utils/constants";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(PAGE_ROUTES.ALTERNATE_ADDRESS);
+  await page.goto(PAGE_ROUTES.ALTERNATE_ADDRESS());
 });
 
 test.describe("displays elements on Alternate address page", () => {

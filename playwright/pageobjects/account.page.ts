@@ -23,8 +23,8 @@ export class AccountPage {
   readonly cardholderTerms: Locator;
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
-  readonly acceptTermsLabel: Locator;
   readonly acceptTermsCheckbox: Locator;
+  readonly acceptTermsLabel: Locator;
   readonly acceptTermsError: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
@@ -39,7 +39,6 @@ export class AccountPage {
       name: "Step 4 of 5: Customize your account",
       level: 2,
     });
-
     this.usernameInput = page.getByRole("textbox", {
       name: "Username (required)",
       exact: true,
@@ -70,7 +69,6 @@ export class AccountPage {
     this.showPasswordLabel = page.getByText("Show password", {
       exact: true,
     });
-
     this.showPasswordCheckbox = page.getByRole("checkbox", {
       name: "Show password",
     });
@@ -96,7 +94,6 @@ export class AccountPage {
     this.acceptTermsLabel = page.getByText(
       "Yes, I accept the terms and conditions."
     );
-
     this.acceptTermsCheckbox = page.getByRole("checkbox", {
       name: "Yes, I accept the terms and conditions.",
     });

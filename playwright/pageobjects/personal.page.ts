@@ -1,5 +1,4 @@
 import { Page, Locator } from "@playwright/test";
-import { ERROR_MESSAGES } from "../utils/constants";
 
 export class PersonalPage {
   readonly page: Page;
@@ -20,47 +19,64 @@ export class PersonalPage {
   readonly previousButton: Locator;
   readonly nextButton: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, appContent?: any) {
     this.page = page;
     this.mainHeading = this.page.getByRole("heading", {
-      name: "Apply for a Library Card Online",
+      name: appContent?.banner?.title || "Apply for a Library Card Online",
       level: 1,
     });
     this.stepHeading = this.page.getByRole("heading", {
-      name: "Step 1 of 5: Personal information",
+      name: appContent?.personal?.title || "Step 1 of 5: Personal information",
       level: 2,
     });
-    this.firstNameInput = this.page.getByLabel(/First name/i);
-    this.firstNameError = this.page.getByText(
-      ERROR_MESSAGES.FIRST_NAME_INVALID
+    this.firstNameInput = this.page.getByLabel(
+      appContent?.personal?.firstName.label || "First name"
     );
-    this.lastNameInput = this.page.getByLabel(/Last name/i);
-    this.lastNameError = this.page.getByText(ERROR_MESSAGES.LAST_NAME_INVALID);
-    this.dateOfBirthInput = this.page.getByLabel(/Date of birth/i);
+    this.firstNameError = this.page.getByText(
+      appContent?.personal?.errorMessage?.firstName ||
+        "There was a problem. Please enter a valid first name."
+    );
+    this.lastNameInput = this.page.getByLabel(
+      appContent?.personal?.lastName.label || "Last name"
+    );
+    this.lastNameError = this.page.getByText(
+      appContent?.personal?.errorMessage?.lastName ||
+        "There was a problem. Please enter a valid last name."
+    );
+    this.dateOfBirthInput = this.page.getByLabel(
+      appContent?.personal?.birthdate.label || "Date of birth"
+    );
     this.dateOfBirthInvalid = this.page.getByText(
-      ERROR_MESSAGES.DATE_OF_BIRTH_INVALID
+      appContent?.personal?.errorMessage?.birthdate ||
+        "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes."
     );
     this.dateOfBirthError = this.page.getByText(
-      ERROR_MESSAGES.DATE_OF_BIRTH_ERROR
+      appContent?.personal?.errorMessage?.ageGate ||
+        "There was a problem. Date of birth is below the minimum age of 13."
     );
-    this.emailInput = this.page.getByLabel(/Email/i);
-    this.emailError = this.page.getByText(ERROR_MESSAGES.EMAIL_INVALID);
+    this.emailInput = this.page.getByLabel(
+      appContent?.personal?.email.label || "Email"
+    );
+    this.emailError = this.page.getByText(
+      appContent?.personal?.errorMessage?.email ||
+        "There was a problem. Please enter a valid email address."
+    );
     this.alternateFormLink = this.page.getByRole("link", {
-      name: "alternate form",
+      name: appContent?.personal?.email?.alternateForm || "alternate form",
     });
     this.locationsLink = this.page.locator("#mainContent").getByRole("link", {
-      name: "locations",
+      name: appContent?.personal?.email?.locations || "locations",
     });
     this.receiveInfoCheckbox = this.page.getByText(
-      "Yes, I would like to receive information about NYPL's programs and services"
+      appContent?.personal?.eCommunications?.labelText ||
+        "Yes, I would like to receive information about NYPL's programs and services"
     );
-
     this.previousButton = this.page.getByRole("link", {
-      name: "Previous",
+      name: appContent?.button?.previous || "Previous",
       exact: true,
     });
     this.nextButton = this.page.getByRole("button", {
-      name: "Next",
+      name: appContent?.button?.next || "Next",
       exact: true,
     });
   }

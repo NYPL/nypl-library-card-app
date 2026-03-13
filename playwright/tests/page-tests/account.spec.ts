@@ -9,7 +9,7 @@ import {
 import { mockUsernameApi } from "../../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(PAGE_ROUTES.ACCOUNT);
+  await page.goto(PAGE_ROUTES.ACCOUNT());
 });
 
 test.describe("displays all form elements on Account page", () => {

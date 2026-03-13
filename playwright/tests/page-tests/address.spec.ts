@@ -8,7 +8,7 @@ import {
 } from "../../utils/constants";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(PAGE_ROUTES.ADDRESS);
+  await page.goto(PAGE_ROUTES.ADDRESS());
 });
 
 test.describe("displays elements on Address page", () => {

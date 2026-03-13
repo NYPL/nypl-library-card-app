@@ -19,7 +19,7 @@ import {
 import { mockUsernameApi } from "../../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(PAGE_ROUTES.REVIEW);
+  await page.goto(PAGE_ROUTES.REVIEW());
 });
 
 test.describe("displays elements on review page", () => {
@@ -212,7 +212,7 @@ test.describe("edits patron information on review page", () => {
     const pageManager = new PageManager(page);
 
     await test.step("enters account info", async () => {
-      await page.goto(PAGE_ROUTES.ACCOUNT);
+      await page.goto(PAGE_ROUTES.ACCOUNT());
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();

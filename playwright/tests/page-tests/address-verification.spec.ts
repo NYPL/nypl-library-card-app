@@ -15,7 +15,7 @@ import {
 
 test.describe("displays elements on address verification page", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(PAGE_ROUTES.ADDRESS_VERIFICATION);
+    await page.goto(PAGE_ROUTES.ADDRESS_VERIFICATION());
   });
 
   test("displays headings", async ({ page }) => {
@@ -34,7 +34,7 @@ test.describe("displays elements on address verification page", () => {
 
 test.describe("enters home address and alternate address", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(PAGE_ROUTES.ADDRESS);
+    await page.goto(PAGE_ROUTES.ADDRESS());
   });
 
   test("enters valid addresses", async ({ page }) => {
