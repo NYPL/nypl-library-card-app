@@ -62,6 +62,7 @@ export class ReviewPage {
   readonly verifyPasswordInput: Locator;
   readonly verifyPasswordError: Locator;
   readonly showPasswordLabel: Locator;
+  readonly nyplLocationsLink: Locator;
   readonly homeLibraryHeading: Locator;
   readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
@@ -225,6 +226,10 @@ export class ReviewPage {
       ERROR_MESSAGES.VERIFY_PASSWORD_INVALID
     );
     this.showPasswordLabel = page.getByText("Show password", {
+      exact: true,
+    });
+    this.nyplLocationsLink = page.getByRole("link", {
+      name: "NYPL Locations",
       exact: true,
     });
     this.homeLibraryHeading = page.getByText("Home library", { exact: true });
