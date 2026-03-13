@@ -36,18 +36,19 @@ export class AddressPage {
     this.alternateFormLink = page.getByRole("link", {
       name: appContent?.home?.description?.alternateForm || "alternate form",
     });
-    this.streetAddressInput = page.getByLabel(
-      appContent?.location?.address?.line1?.label || "Street address"
-    );
+    this.streetAddressInput = page.getByRole("textbox", {
+      name: appContent?.location?.address?.line1?.label || "Street address",
+    });
     this.apartmentSuiteInput = page.getByLabel(
       appContent?.location?.address?.line2?.label || "Apartment / Suite"
     );
     this.cityInput = page.getByLabel(
       appContent?.location?.address?.city?.label || "City"
     );
-    this.stateInput = page.getByLabel(
-      appContent?.location?.address?.state?.label || "State"
-    );
+    this.stateInput = page.getByRole("combobox", {
+      name: appContent?.location?.address?.state?.label || "State",
+    });
+
     this.postalCodeInput = page.getByLabel(
       appContent?.location?.address?.postalCode?.label || "Postal code"
     );

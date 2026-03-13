@@ -61,12 +61,12 @@ export class PersonalPage {
       appContent?.personal?.errorMessage?.email ||
         "There was a problem. Please enter a valid email address."
     );
-    this.alternateFormLink = this.page.getByRole("link", {
-      name: appContent?.personal?.email?.alternateForm || "alternate form",
-    });
-    this.locationsLink = this.page.locator("#mainContent").getByRole("link", {
-      name: appContent?.personal?.email?.locations || "locations",
-    });
+    this.alternateFormLink = this.page.locator(
+      "#mainContent a[href*='on.nypl.org/internationalresearch']"
+    );
+    this.locationsLink = this.page.locator(
+      "#mainContent a[href*='nypl.org/locations']"
+    );
     this.receiveInfoCheckbox = this.page.getByText(
       appContent?.personal?.eCommunications?.labelText ||
         "Yes, I would like to receive information about NYPL's programs and services"

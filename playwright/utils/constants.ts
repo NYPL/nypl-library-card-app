@@ -112,16 +112,16 @@ export const ERROR_MESSAGES = {
 
 export const SUPPORTED_LANGUAGES = [
   { lang: "en", name: "English" },
-  // { lang: "ar", name: "Arabic" },
-  // { lang: "bn", name: "Bengali" },
+  { lang: "ar", name: "Arabic" },
+  { lang: "bn", name: "Bengali" },
   { lang: "es", name: "Spanish" },
-  // { lang: "fr", name: "French" },
-  // { lang: "ht", name: "Haitian Creole" },
-  // { lang: "ko", name: "Korean" },
-  // { lang: "pl", name: "Polish" },
-  // { lang: "ru", name: "Russian" },
-  // { lang: "ur", name: "Urdu" },
-  // { lang: "zhcn", name: "Chinese" },
+  { lang: "fr", name: "French" },
+  { lang: "ht", name: "Haitian Creole" },
+  { lang: "ko", name: "Korean" },
+  { lang: "pl", name: "Polish" },
+  { lang: "ru", name: "Russian" },
+  { lang: "ur", name: "Urdu" },
+  { lang: "zhcn", name: "Chinese" },
 ];
 
 const withLang = (path: string, lang?: string) =>
