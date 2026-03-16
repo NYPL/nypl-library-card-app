@@ -40,7 +40,16 @@ function AlternateAddress({
       <Paragraph>{t("location.workAddress.description.part1")}</Paragraph>
       <Paragraph>{t("internationalInstructions")}</Paragraph>
       <Banner
-        content={<Trans i18nKey="location.workAddress.description.part3" />}
+        content={
+          <Trans
+            i18nKey="location.workAddress.description.part3"
+            values={{
+              provideAddress: t(
+                "location.workAddress.description.provideAddress"
+              ),
+            }}
+          />
+        }
       />
       <WorkAddressContainer csrfToken={csrfToken} />
     </>
