@@ -13,7 +13,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let appContent: any;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       alternateAddressPage = new AlternateAddressPage(page, appContent);
       await page.goto(PAGE_ROUTES.ALTERNATE_ADDRESS(lang));
     });

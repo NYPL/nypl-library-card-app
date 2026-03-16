@@ -33,7 +33,8 @@ export class AlternateAddressPage {
     });
     this.informationalBanner = page.locator("aside", {
       hasText:
-        "Please provide the address of where you work, attend school, or pay property taxes in New York State.",
+        appContent?.location?.workAddress?.description?.part3 ||
+        "Please provide the address of where you work, attend school, or pay property taxes in New York State. <b>If none of these apply to you, click next.</b>",
     });
     this.addressHeading = page.getByRole("heading", {
       name:
