@@ -30,21 +30,21 @@ export class PersonalPage {
       level: 2,
     });
     this.firstNameInput = this.page.getByLabel(
-      appContent?.personal?.firstName.label || "First name"
+      appContent?.personal?.firstName?.label || "First name"
     );
     this.firstNameError = this.page.getByText(
       appContent?.personal?.errorMessage?.firstName ||
         "There was a problem. Please enter a valid first name."
     );
     this.lastNameInput = this.page.getByLabel(
-      appContent?.personal?.lastName.label || "Last name"
+      appContent?.personal?.lastName?.label || "Last name"
     );
     this.lastNameError = this.page.getByText(
       appContent?.personal?.errorMessage?.lastName ||
         "There was a problem. Please enter a valid last name."
     );
     this.dateOfBirthInput = this.page.getByLabel(
-      appContent?.personal?.birthdate.label || "Date of birth"
+      appContent?.personal?.birthdate?.label || "Date of birth"
     );
     this.dateOfBirthInvalid = this.page.getByText(
       appContent?.personal?.errorMessage?.birthdate ||
@@ -55,7 +55,7 @@ export class PersonalPage {
         "There was a problem. Date of birth is below the minimum age of 13."
     );
     this.emailInput = this.page.getByLabel(
-      appContent?.personal?.email.label || "Email"
+      appContent?.personal?.email?.label || "Email"
     );
     this.emailError = this.page.getByText(
       appContent?.personal?.errorMessage?.email ||

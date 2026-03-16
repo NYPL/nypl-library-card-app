@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { LandingPage } from "../pageobjects/landing.page";
-import { PAGE_ROUTES, SUPPORTED_LANGUAGES } from "../utils/constants";
+import { LandingPage } from "../../pageobjects/landing.page";
+import { PAGE_ROUTES, SUPPORTED_LANGUAGES } from "../../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`landing page in ${name} (${lang})`, () => {
@@ -8,7 +8,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let appContent: any;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       landingPage = new LandingPage(page, appContent);
       await page.goto(PAGE_ROUTES.LANDING(lang));
     });
@@ -54,7 +54,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         landingPage.rulesRegulations,
         landingPage.privacyPolicy,
       ];
-
       for (const link of links) {
         await expect(link).not.toHaveAttribute("target", "_blank");
       }

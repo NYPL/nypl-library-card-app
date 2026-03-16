@@ -88,14 +88,10 @@ export const TEST_EDITED_ACCOUNT = {
 
 // congrats
 export const TEST_BARCODE_NUMBER = "12341234123412";
+export const EXPECTED_BARCODE_PREFIX = "255";
 
 export const ERROR_MESSAGES = {
   // probs remove this at the end
-  FIRST_NAME_INVALID: appContent.personal.errorMessage.firstName,
-  LAST_NAME_INVALID: appContent.personal.errorMessage.lastName,
-  DATE_OF_BIRTH_INVALID: appContent.personal.errorMessage.birthdate,
-  DATE_OF_BIRTH_ERROR: appContent.personal.errorMessage.ageGate,
-  EMAIL_INVALID: appContent.personal.errorMessage.email,
   STREET_ADDRESS_INVALID: appContent.location.errorMessage.line1,
   CITY_INVALID: appContent.location.errorMessage.city,
   STATE_INVALID: appContent.location.errorMessage.state,
@@ -140,10 +136,12 @@ export const PAGE_ROUTES = {
 };
 
 export const PATRON_TYPES = {
-  PATRON_TYPE_7: 7,
-  PATRON_TYPE_8: 8,
-  PATRON_TYPE_9: 9,
-};
+  DIGITAL_TEMPORARY: 7,
+  DIGITAL_NON_METRO: 8,
+  DIGITAL_METRO: 9,
+} as const;
+
+export type PType = (typeof PATRON_TYPES)[keyof typeof PATRON_TYPES];
 
 export const IP = {
   NYC_IP: "65.209.66.130",

@@ -14,7 +14,7 @@ import {
   TEST_OOS_ADDRESS,
   TEST_PATRON,
 } from "../../utils/constants";
-import { getPatronID, deletePatron } from "../../utils/sierra-api-utils";
+import { deletePatron, getPatronID } from "../../utils/sierra-api-utils";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`E2E: Edits patron information in ${name} (${lang})`, () => {

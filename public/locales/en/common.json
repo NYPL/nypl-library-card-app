@@ -4,6 +4,9 @@
   "banner": {
     "title": "Apply for a Library Card Online"
   },
+  "select": {
+    "placeholder": "Please select"
+  },
   "home": {
     "title": "Apply for a library card today in a few easy steps",
     "description": {
@@ -40,7 +43,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Email address",
-      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a1 href='https://on.nypl.org/internationalresearch'>{{alternateForm}}</a1>. Once filled out, please visit one of our <a2 href='https://www.nypl.org/locations'>{{locations}}</a2> with proof of identity and home address to pick up your card.",
+      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://on.nypl.org/internationalresearch'>{{alternateForm}}</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>{{locations}}</a> with proof of identity and home address to pick up your card.",
       "alternateForm": "alternate form",
       "locations": "locations"
     },
@@ -59,7 +62,8 @@
     "title": "Step 2 of 5: Address",
     "address": {
       "title": "Home address",
-      "description": "If you live in the United States, please provide your home address below. If you are visiting New York from another state, you can apply for a temporary card with this form. A temporary card allows you to request physical materials and schedule research appointments before your visit. International visitors should use our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>.",
+      "description": "If you live in the United States, please provide your home address below. If you are visiting New York from another state, you can apply for a temporary card with this form. A temporary card allows you to request physical materials and schedule research appointments before your visit. International visitors should use our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>{{alternateForm}}</a>.",
+      "alternateForm": "alternate form",
       "line1": { "label": "Street address" },
       "line2": { "label": "Apartment / Suite" },
       "city": { "label": "City" },
@@ -113,7 +117,7 @@
       "title": "Home library",
       "description": {
         "part1": "Choosing a home library will help us make sure you're getting everything you need from a branch that's most convenient for you.",
-        "part2": "Please select an NYPL location from the dropdown menu below to be your home library. If you do not have a home library, please select “Virtual.” You may update this at any time through your account settings.",
+        "part2": "Please select an <a href='https://www.nypl.org/locations'>NYPL location</a> from the dropdown menu below to be your home library. If you do not have a home library, please select “Virtual.” You may update this at any time through your account settings.",
         "part3": "To borrow physical items, you <strong>must</strong> visit an NYPL location to verify your info and receive a physical card."
       }
     },

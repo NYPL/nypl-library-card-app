@@ -4,6 +4,7 @@ export class AlternateAddressPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
   readonly stepHeading: Locator;
+  readonly informationalBanner: Locator;
   readonly addressHeading: Locator;
   readonly streetAddressInput: Locator;
   readonly apartmentSuiteInput: Locator;
@@ -29,6 +30,10 @@ export class AlternateAddressPage {
         appContent?.location?.workAddress?.title ||
         "Step 2 of 5: Alternate address",
       level: 2,
+    });
+    this.informationalBanner = page.locator("aside", {
+      hasText:
+        "Please provide the address of where you work, attend school, or pay property taxes in New York State.",
     });
     this.addressHeading = page.getByRole("heading", {
       name:
