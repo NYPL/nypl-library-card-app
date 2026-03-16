@@ -14,9 +14,14 @@ interface HeroProps {
  * with other necessary components
  */
 const Hero = ({ fullImageSrc = defaultImageSrc }: HeroProps) => {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const h1Heading = (
-    <Heading id="hero-banner" level="h1" text={t("banner.title")} />
+    <Heading
+      id="hero-banner"
+      level="h1"
+      text={t("banner.title")}
+      dir={i18n.dir()}
+    />
   );
   return (
     <DSHero

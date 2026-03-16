@@ -22,7 +22,7 @@ import { PageSubHeading } from "../PageSubHeading";
 
 const styles = {
   input: {
-    marginRight: "20px",
+    marginEnd: "20px",
   },
 };
 
