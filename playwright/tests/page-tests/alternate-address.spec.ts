@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
-import { fillAddress } from "../utils/form-helper";
+import { AlternateAddressPage } from "../../pageobjects/alternate-address.page";
+import { fillAddress } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SUPPORTED_LANGUAGES,
   TEST_NYC_ADDRESS,
-} from "../utils/constants";
+} from "../../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`alternate address page in ${name} (${lang})`, () => {
@@ -13,15 +13,16 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let appContent: any;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       alternateAddressPage = new AlternateAddressPage(page, appContent);
       await page.goto(PAGE_ROUTES.ALTERNATE_ADDRESS(lang));
     });
 
     test.describe("displays elements", () => {
-      test("displays headings and buttons", async () => {
+      test("displays headings, banner, and buttons", async () => {
         await expect(alternateAddressPage.mainHeading).toBeVisible();
         await expect(alternateAddressPage.stepHeading).toBeVisible();
+        await expect(alternateAddressPage.informationalBanner).toBeVisible();
         await expect(alternateAddressPage.addressHeading).toBeVisible();
         await expect(alternateAddressPage.nextButton).toBeVisible();
         await expect(alternateAddressPage.previousButton).toBeVisible();

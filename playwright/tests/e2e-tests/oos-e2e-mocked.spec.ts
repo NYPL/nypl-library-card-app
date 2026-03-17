@@ -72,6 +72,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
             .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
             .check();
           await pageManager.addressVerificationPage.nextButton.click();
+          await expect(
+            pageManager.addressVerificationPage.spinner
+          ).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
         });
 
         // await test.step("enters account information", async () => {
@@ -85,7 +90,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         // });
 
         // await test.step("submits application", async () => {
-        //   await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER);
+        //   await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER, PATRON_TYPES.DIGITAL_TEMPORARY);
         //   await expect(pageManager.reviewPage.submitButton).toBeVisible();
         //   await pageManager.reviewPage.submitButton.click();
         // });

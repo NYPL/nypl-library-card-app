@@ -17,6 +17,7 @@ export class AccountPage {
   readonly showPasswordCheckbox: Locator;
   readonly showPasswordLabel: Locator;
   readonly homeLibraryHeading: Locator;
+  readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
   readonly homeLibraryError: Locator;
   readonly cardholderTerms: Locator;
@@ -65,16 +66,19 @@ export class AccountPage {
     this.verifyPasswordError = page.getByText(
       ERROR_MESSAGES.VERIFY_PASSWORD_INVALID
     );
-    this.showPasswordCheckbox = page.getByRole("checkbox", {
-      name: "Show password",
-    });
     this.showPasswordLabel = page.getByText("Show password", {
       exact: true,
+    });
+    this.showPasswordCheckbox = page.getByRole("checkbox", {
+      name: "Show password",
     });
     this.homeLibraryHeading = page.getByRole("heading", {
       name: "Home library",
       level: 3,
       exact: true,
+    });
+    this.nyplLocationLink = page.getByRole("link", {
+      name: "NYPL location",
     });
     this.selectHomeLibrary = page.getByLabel("Select a home library:");
     this.homeLibraryError = page.getByText(ERROR_MESSAGES.HOME_LIBRARY_ERROR);
@@ -87,12 +91,12 @@ export class AccountPage {
     this.privacyPolicy = page
       .locator("#mainContent")
       .getByRole("link", { name: "Privacy Policy" });
-    this.acceptTermsCheckbox = page.getByRole("checkbox", {
-      name: "Yes, I accept the terms and conditions.",
-    });
     this.acceptTermsLabel = page.getByText(
       "Yes, I accept the terms and conditions."
     );
+    this.acceptTermsCheckbox = page.getByRole("checkbox", {
+      name: "Yes, I accept the terms and conditions.",
+    });
     this.acceptTermsError = page.getByText(ERROR_MESSAGES.ACCEPT_TERMS_ERROR);
     this.nextButton = page.getByRole("button", { name: "Next", exact: true });
     this.previousButton = page.getByRole("link", {

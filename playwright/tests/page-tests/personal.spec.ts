@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { PersonalPage } from "../pageobjects/personal.page";
-import { fillPersonalInfo } from "../utils/form-helper";
+import { PersonalPage } from "../../pageobjects/personal.page";
+import { fillPersonalInfo } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SUPPORTED_LANGUAGES,
   TEST_PATRON,
-} from "../utils/constants";
+} from "../../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`personal information page in ${name} (${lang})`, () => {
@@ -13,7 +13,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let appContent: any;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       personalPage = new PersonalPage(page, appContent);
       await page.goto(PAGE_ROUTES.PERSONAL(lang));
     });

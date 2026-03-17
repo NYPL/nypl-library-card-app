@@ -105,7 +105,7 @@
       "title": "Bibliothèque de rattachement",
       "description": {
         "part1": "Votre choix d'une bibliothèque de rattachement nous permettra de nous assurer que vous trouverez tout ce dont vous avez besoin sur le site qui vous convient le mieux.",
-        "part2": "Veuillez sélectionner une bibliothèque NYPL dans le menu déroulant ci-dessous afin de définir votre bibliothèque de référence. Si aucune bibliothèque ne vous correspond, veuillez sélectionner « Virtual ». Vous pouvez modifier ce choix à tout moment depuis les paramètres de votre compte.",
+        "part2": "Veuillez sélectionner une <a href='https://www.nypl.org/locations'>bibliothèque NYPL</a> dans le menu déroulant ci-dessous afin de définir votre bibliothèque de référence. Si aucune bibliothèque ne vous correspond, veuillez sélectionner « Virtual ». Vous pouvez modifier ce choix à tout moment depuis les paramètres de votre compte.",
         "part3": "Pour emprunter des articles physiques, vous devez vous rendre dans une bibliothèque NYPL pour valider vos informations et recevoir votre carte physique."
       }
     },
