@@ -126,11 +126,7 @@ const ALL_SUPPORTED_LANGUAGES = [
 const requestedLanguages = process.env.SUPPORTED_LANGUAGES || "all";
 
 const filteredLanguages = ALL_SUPPORTED_LANGUAGES.filter(({ lang }) =>
-  requestedLanguages
-    .split(",")
-    .map((value) => value.trim())
-    .filter(Boolean)
-    .includes(lang)
+  requestedLanguages.split(",").includes(lang)
 );
 
 export const SUPPORTED_LANGUAGES =
