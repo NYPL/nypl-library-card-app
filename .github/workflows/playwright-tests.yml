@@ -48,7 +48,7 @@ jobs:
       - name: Run Playwright tests (PR - English only)
         if: ${{ github.event_name == 'pull_request' }}
         env:
-          SUPPORTED_LANGUAGES: es
+          SUPPORTED_LANGUAGES: 
         run: npx playwright test
 
       - name: Run Playwright tests (Main/QA - all languages)
