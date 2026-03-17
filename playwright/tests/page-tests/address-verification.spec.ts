@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { AddressVerificationPage } from "../pageobjects/address-verification.page";
-import { PageManager } from "../pageobjects/page-manager.page";
-import { fillAddress } from "../utils/form-helper";
+import { AddressVerificationPage } from "../../pageobjects/address-verification.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
+import { fillAddress } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
@@ -11,7 +11,7 @@ import {
   TEST_MULTIMATCH_ADDRESS_WEST,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
-} from "../utils/constants";
+} from "../../utils/constants";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`address verification page in ${name} (${lang})`, () => {
@@ -20,7 +20,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let appContent: any;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       addressVerificationPage = new AddressVerificationPage(page, appContent);
       pageManager = new PageManager(page, appContent);
     });

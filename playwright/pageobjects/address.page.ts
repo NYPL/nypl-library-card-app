@@ -5,7 +5,7 @@ export class AddressPage {
   readonly mainHeading: Locator; // displays on each page
   readonly stepHeading: Locator;
   readonly addressHeading: Locator;
-  readonly alternateForm: Locator;
+  readonly alternateFormLink: Locator;
   readonly streetAddressInput: Locator;
   readonly apartmentSuiteInput: Locator;
   readonly cityInput: Locator;
@@ -33,23 +33,23 @@ export class AddressPage {
       name: appContent?.location?.address?.title || "Home address",
       level: 3,
     });
-    this.alternateForm = page.getByRole("link", {
+    this.alternateFormLink = page.getByRole("link", {
       name: appContent?.home?.description?.alternateForm || "alternate form",
     });
     this.streetAddressInput = page.getByLabel(
-      appContent?.location?.address.line1.label || "Street address"
+      appContent?.location?.address?.line1?.label || "Street address"
     );
     this.apartmentSuiteInput = page.getByLabel(
-      appContent?.location?.address.line2.label || "Apartment / Suite"
+      appContent?.location?.address?.line2?.label || "Apartment / Suite"
     );
     this.cityInput = page.getByLabel(
-      appContent?.location?.address.city.label || "City"
+      appContent?.location?.address?.city?.label || "City"
     );
     this.stateInput = page.getByLabel(
-      appContent?.location?.address.state.label || "State"
+      appContent?.location?.address?.state?.label || "State"
     );
     this.postalCodeInput = page.getByLabel(
-      appContent?.location?.address.postalCode.label || "Postal code"
+      appContent?.location?.address?.postalCode?.label || "Postal code"
     );
     this.streetAddressError = page.getByText(
       appContent?.location?.errorMessage?.line1 ||
