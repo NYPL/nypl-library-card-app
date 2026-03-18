@@ -97,55 +97,53 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.accountPage.nextButton.click();
       });
 
-      //   await test.step("displays personal information on review page", async () => {
-      //     await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_PATRON.firstName)
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_PATRON.lastName)
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_PATRON.dateOfBirth)
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_PATRON.email)
-      //     ).toBeVisible();
-      //     await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText(
-      //       "Yes"
-      //     );
-      //   });
+      await test.step("displays personal information on review page", async () => {
+        await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+        await expect(
+          pageManager.reviewPage.getText(TEST_PATRON.firstName)
+        ).toBeVisible();
+        await expect(
+          pageManager.reviewPage.getText(TEST_PATRON.lastName)
+        ).toBeVisible();
+        await expect(
+          pageManager.reviewPage.getText(TEST_PATRON.dateOfBirth)
+        ).toBeVisible();
+        await expect(
+          pageManager.reviewPage.getText(TEST_PATRON.email)
+        ).toBeVisible();
+        await expect(pageManager.reviewPage.receiveInfoChoice).toBeVisible();
+      });
 
-      //   await test.step("displays home address on review page", async () => {
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_NYC_ADDRESS.street)
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_NYC_ADDRESS.city)
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_NYC_ADDRESS.state)
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_NYC_ADDRESS.postalCode)
-      //     ).toBeVisible();
-      //   });
+      await test.step("displays home address on review page", async () => {
+        await expect(
+          pageManager.reviewPage.getText(TEST_NYC_ADDRESS.street)
+        ).toBeVisible();
+        await expect(
+          pageManager.reviewPage.getText(TEST_NYC_ADDRESS.city)
+        ).toBeVisible();
+        await expect(
+          pageManager.reviewPage.getText(TEST_NYC_ADDRESS.state)
+        ).toBeVisible();
+        await expect(
+          pageManager.reviewPage.getText(TEST_NYC_ADDRESS.postalCode)
+        ).toBeVisible();
+      });
 
-      //   await test.step("displays account information on review page", async () => {
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_ACCOUNT.username)
-      //     ).toBeVisible();
-      //     await expect(pageManager.reviewPage.showPasswordLabel).toBeVisible();
-      //     await pageManager.reviewPage.showPasswordLabel.check();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_ACCOUNT.password)
-      //     ).toBeVisible();
-      //   });
+      await test.step("displays account information on review page", async () => {
+        await expect(
+          pageManager.reviewPage.getText(TEST_ACCOUNT.username)
+        ).toBeVisible();
+        await expect(pageManager.reviewPage.showPasswordLabel).toBeVisible();
+        await pageManager.reviewPage.showPasswordLabel.check();
+        await expect(
+          pageManager.reviewPage.getText(TEST_ACCOUNT.password)
+        ).toBeVisible();
+      });
 
-      //   await test.step("submits application", async () => {
-      //     await expect(pageManager.reviewPage.submitButton).toBeVisible();
-      //     await pageManager.reviewPage.submitButton.click();
-      //   });
+      await test.step("submits application", async () => {
+        await expect(pageManager.reviewPage.submitButton).toBeVisible();
+        // await pageManager.reviewPage.submitButton.click(); // wait to click til congrats page is ready
+      });
 
       //   await test.step("displays metro card elements on congrats page", async () => {
       //     await expect(pageManager.congratsPage.mainHeading).toBeVisible();
