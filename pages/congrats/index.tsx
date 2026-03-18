@@ -55,11 +55,28 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       </Paragraph>
 
       <Paragraph fontWeight="bold">
-        <Trans i18nKey="confirmation.description.part2" />
+        <Trans
+          i18nKey="confirmation.description.part2"
+          values={{
+            locations: t("confirmation.description.locations"),
+            proof: t("confirmation.description.proof"),
+          }}
+        />
       </Paragraph>
 
       {temporary && (
-        <Banner content={<Trans i18nKey="confirmation.description.part3" />} />
+        <Banner
+          content={
+            <Trans
+              i18nKey="confirmation.description.part3"
+              values={{
+                temporaryCard: t("confirmation.description.temporaryCard"),
+                learnMore: t("confirmation.description.learnMore"),
+                getHelp: t("confirmation.description.getHelp"),
+              }}
+            />
+          }
+        />
       )}
 
       <PageHeading mt="l" lineHeight={"1!"}>
@@ -68,23 +85,36 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
 
       {!temporary && (
         <NextSteps>
-          <Trans i18nKey="confirmation.nextSteps.explore" />
+          <Trans
+            i18nKey="confirmation.nextSteps.explore"
+            values={{ readListen: t("confirmation.nextSteps.readListen") }}
+          />
         </NextSteps>
       )}
 
       <NextSteps>
         <Trans
           i18nKey="confirmation.nextSteps.borrow"
-          values={{ loginUrl: loginUrl }}
+          values={{
+            loginUrl: loginUrl,
+            login: t("confirmation.nextSteps.login"),
+            nyplLocation: t("confirmation.nextSteps.nyplLocation"),
+          }}
         />
       </NextSteps>
 
       <NextSteps>
-        <Trans i18nKey="confirmation.nextSteps.updates" />
+        <Trans
+          i18nKey="confirmation.nextSteps.updates"
+          values={{ findOut: t("confirmation.nextSteps.findOut") }}
+        />
       </NextSteps>
 
       <NextSteps>
-        <Trans i18nKey="confirmation.nextSteps.more" />
+        <Trans
+          i18nKey="confirmation.nextSteps.more"
+          values={{ discover: t("confirmation.nextSteps.discover") }}
+        />
       </NextSteps>
     </Box>
   );
