@@ -1,7 +1,12 @@
-import { Box, Select } from "@nypl/design-system-react-components";
+import {
+  Box,
+  Link as DSLink,
+  Select,
+} from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { Trans } from "../Trans";
 
 import useFormDataContext from "../../context/FormDataContext";
 import { LibraryListObject } from "../../interfaces";
@@ -43,7 +48,15 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
     <Box>
       <PageSubHeading>{t("account.library.title")}</PageSubHeading>
       <Paragraph>{t("account.library.description.part1")}</Paragraph>
-      <Paragraph>{t("account.library.description.part2")}</Paragraph>
+      <Paragraph>
+        <Trans
+          i18nKey="account.library.description.part2"
+          components={{ a: <DSLink variant="external" /> }}
+          values={{
+            nyplLocation: t("account.library.description.nyplLocation"),
+          }}
+        />
+      </Paragraph>
       <Paragraph
         mb="m"
         dangerouslySetInnerHTML={{
@@ -51,7 +64,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
         }}
       />
       <Select
-        placeholder="Please select"
+        placeholder={t("select.placeholder")}
         id="librarylist-select"
         labelText={t("account.library.selectLibrary")}
         invalidText={t("account.errorMessage.homeLibraryCode")}

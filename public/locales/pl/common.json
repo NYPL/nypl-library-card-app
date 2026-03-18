@@ -105,7 +105,7 @@
       "title": "Lokalna biblioteka",
       "description": {
         "part1": "Jeżeli wybierzesz lokalną bibliotekę, będziemy Ci dostarczać wszystkie potrzebne materiały z oddziału o najbardziej dogodnym dla Ciebie położeniu.",
-        "part2": "Wybierz z poniższego menu rozwijanego placówkę NYPL jako swoją bibliotekę lokalną. Jeśli nie masz biblioteki lokalnej, wybierz opcję „Virtual”. Wybór ten możesz w każdej chwili zaktualizować w ustawieniach konta.",
+        "part2": "Wybierz z poniższego menu rozwijanego <a href='https://www.nypl.org/locations'>placówkę NYPL</a> jako swoją bibliotekę lokalną. Jeśli nie masz biblioteki lokalnej, wybierz opcję „Virtual”. Wybór ten możesz w każdej chwili zaktualizować w ustawieniach konta.",
         "part3": "Aby móc wypożyczyć materiały fizyczne, odwiedź placówkę NYPL w celu zweryfikowania swoich danych i uzyskania fizycznej karty NYPL."
       }
     },

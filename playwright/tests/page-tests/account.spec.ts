@@ -1,12 +1,12 @@
 import { test, expect } from "@playwright/test";
-import { AccountPage } from "../pageobjects/account.page";
-import { fillAccountInfo } from "../utils/form-helper";
+import { AccountPage } from "../../pageobjects/account.page";
+import { fillAccountInfo } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SUPPORTED_LANGUAGES,
   TEST_ACCOUNT,
-} from "../utils/constants";
-import { mockUsernameApi } from "../utils/mock-api";
+} from "../../utils/constants";
+import { mockUsernameApi } from "../../utils/mock-api";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`account page tests in ${name} (${lang})`, () => {
@@ -14,7 +14,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let appContent: any;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       accountPage = new AccountPage(page, appContent);
       await page.goto(PAGE_ROUTES.ACCOUNT(lang));
     });
@@ -37,6 +37,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       });
 
       test("displays home library form", async () => {
+        await expect(accountPage.nyplLocationLink).toBeVisible();
         await expect(accountPage.selectHomeLibrary).toBeVisible();
         await expect(accountPage.cardholderTerms).toBeVisible();
         await expect(accountPage.rulesRegulations).toBeVisible();
@@ -46,6 +47,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       test("confirms links open in new tab", async () => {
         const links = [
+          accountPage.nyplLocationLink,
           accountPage.cardholderTerms,
           accountPage.rulesRegulations,
           accountPage.privacyPolicy,

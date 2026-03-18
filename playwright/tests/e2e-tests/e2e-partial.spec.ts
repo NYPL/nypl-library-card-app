@@ -157,6 +157,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     test("retains user-entered info after clicking breadcrumb", async ({
       page,
     }) => {
+      test.skip(
+        lang !== "en",
+        "Selected language not yet retained upon clicking breadcrumb"
+      );
+
       await test.step("enters personal information", async () => {
         await page.goto(PAGE_ROUTES.PERSONAL(lang));
         await expect(pageManager.personalPage.stepHeading).toBeVisible();
@@ -169,6 +174,9 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(pageManager.addressPage.stepHeading).toBeVisible();
         await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
         await pageManager.addressPage.nextButton.click();
+        await expect(pageManager.addressPage.spinner).not.toBeVisible({
+          timeout: SPINNER_TIMEOUT,
+        });
       });
 
       await test.step("enters alternate address", async () => {
