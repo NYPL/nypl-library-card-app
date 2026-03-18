@@ -16,6 +16,7 @@ export class AccountPage {
   readonly showPasswordCheckbox: Locator;
   readonly showPasswordLabel: Locator;
   readonly homeLibraryHeading: Locator;
+  readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
   readonly homeLibraryError: Locator;
   readonly cardholderTerms: Locator;
@@ -79,17 +80,22 @@ export class AccountPage {
       appContent?.account?.errorMessage?.verifyPassword ||
         "There was a problem. The two passwords don't match."
     );
-    this.showPasswordCheckbox = page.getByRole("checkbox", {
-      name: appContent?.account?.showPassword || "Show password",
-    });
     this.showPasswordLabel = page.getByText(
       appContent?.account?.showPassword || "Show password",
       { exact: true }
     );
+    this.showPasswordCheckbox = page.getByRole("checkbox", {
+      name: appContent?.account?.showPassword || "Show password",
+    });
     this.homeLibraryHeading = page.getByRole("heading", {
       name: appContent?.account?.library?.title || "Home library",
       level: 3,
       exact: true,
+    });
+    this.nyplLocationLink = page.getByRole("link", {
+      name:
+        appContent?.account?.library?.description?.nyplLocation ||
+        "NYPL location",
     });
     this.selectHomeLibrary = page.getByLabel(
       appContent?.account?.library?.selectLibrary || "Select a home library:"

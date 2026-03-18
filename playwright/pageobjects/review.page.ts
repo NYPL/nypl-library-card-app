@@ -62,6 +62,7 @@ export class ReviewPage {
   readonly verifyPasswordError: Locator;
   readonly showPasswordLabel: Locator;
   readonly homeLibraryHeading: Locator;
+  readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
   readonly homeLibraryError: Locator;
   readonly cardholderTermsLink: Locator;
@@ -325,6 +326,11 @@ export class ReviewPage {
       appContent?.account?.library?.title || "Home library",
       { exact: true }
     );
+    this.nyplLocationLink = page.getByRole("link", {
+      name:
+        appContent?.account?.library?.description?.nyplLocation ||
+        "NYPL location",
+    });
     this.selectHomeLibrary = page.getByLabel(
       appContent?.account?.library?.selectLibrary || "Select a home library:"
     );

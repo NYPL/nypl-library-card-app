@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { ReviewPage } from "../pageobjects/review.page";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { ReviewPage } from "../../pageobjects/review.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
 import {
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
-} from "../utils/form-helper";
+} from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
@@ -15,8 +15,8 @@ import {
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
-} from "../utils/constants";
-import { mockUsernameApi } from "../utils/mock-api";
+} from "../../utils/constants";
+import { mockUsernameApi } from "../../utils/mock-api";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`review page in ${name} (${lang})`, () => {
@@ -25,7 +25,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     let appContent: any;
 
     test.beforeEach(async ({ page }) => {
-      appContent = require(`../../public/locales/${lang}/common.json`);
+      appContent = require(`../../../public/locales/${lang}/common.json`);
       reviewPage = new ReviewPage(page, appContent);
       pageManager = new PageManager(page, appContent);
       await page.goto(PAGE_ROUTES.REVIEW(lang));
@@ -67,6 +67,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         const links = [
           reviewPage.alternateFormLink,
           reviewPage.locationsLink,
+          reviewPage.nyplLocationLink,
           reviewPage.cardholderTermsLink,
           reviewPage.rulesRegulationsLink,
           reviewPage.privacyPolicyLink,
@@ -105,7 +106,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await reviewPage.editPersonalInfoButton.click();
         await fillPersonalInfo(reviewPage, TEST_PATRON);
         await reviewPage.receiveInfoCheckbox.click(); // unable to check()
-
         await expect(reviewPage.firstNameInput).toHaveValue(
           TEST_PATRON.firstName
         );
@@ -190,6 +190,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(reviewPage.verifyPasswordInputHeading).toBeVisible();
         await expect(reviewPage.verifyPasswordInput).toBeVisible();
         await expect(reviewPage.showPasswordLabel).toBeVisible();
+        await expect(reviewPage.nyplLocationLink).toBeVisible();
         await expect(reviewPage.selectHomeLibrary).toBeVisible();
         await expect(reviewPage.cardholderTermsLink).toBeVisible();
         await expect(reviewPage.rulesRegulationsLink).toBeVisible();
@@ -201,7 +202,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       test("enters account info", async () => {
         await reviewPage.editAccountButton.click();
         await fillAccountInfo(reviewPage, TEST_ACCOUNT);
-
         await expect(reviewPage.usernameInput).toHaveValue(
           TEST_ACCOUNT.username
         );
