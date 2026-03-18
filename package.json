@@ -42,7 +42,6 @@
     "@next/eslint-plugin-next": "^15.5.4",
     "@nypl/design-system-react-components": "4.0.0",
     "@nypl/dgx-react-footer": "0.5.7",
-    "@playwright/test": "^1.54.2",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.7.0",
     "@testing-library/react": "^16.3.0",
@@ -108,6 +107,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.0",
+    "@playwright/test": "^1.58.2",
     "@types/newrelic": "^9.14.8",
     "next-router-mock": "^0.9.13"
   }
