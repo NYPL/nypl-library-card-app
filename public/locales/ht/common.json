@@ -105,7 +105,7 @@
       "title": "Bibliyotèk Adomisil",
       "description": {
         "part1": "Chwazi yon bibliyotèk adomisil ap ede nou asire nou ke w jwenn tout sa w bezwen nan sikisal ki pi bon pou ou a.",
-        "part2": "Tanpri seleksyone yon branch NYPL apati meni dewoulan ki pi ba a kòm bibliyotèk prensipal ou. Si w pa gen yon bibliyotèk prensipal, tanpri seleksyone “Virtual.” Ou kapab mete enfòmasyon sa a ajou nenpòt lè apati paramèt kont ou an.",
+        "part2": "Tanpri seleksyone yon <a href='https://www.nypl.org/locations'>branch NYPL</a> apati meni dewoulan ki pi ba a kòm bibliyotèk prensipal ou. Si w pa gen yon bibliyotèk prensipal, tanpri seleksyone “Virtual.” Ou kapab mete enfòmasyon sa a ajou nenpòt lè apati paramèt kont ou an.",
         "part3": "Pou w prete atik fizik, ou dwe prezante w nan yon branch NYPL pou verifye enfòmasyon w epi pou w resevwa yon kat fizik."
       }
     },

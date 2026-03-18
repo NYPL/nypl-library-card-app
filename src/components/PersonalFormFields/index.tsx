@@ -86,8 +86,7 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
                   locations: t("personal.email.locations"),
                 }}
                 components={{
-                  a1: <DSLink key="alt" variant="external" />,
-                  a2: <DSLink key="loc" variant="external" />,
+                  a: <DSLink variant="external" />,
                 }}
               />
             }

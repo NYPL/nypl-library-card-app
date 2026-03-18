@@ -6,13 +6,14 @@ import {
   fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
+  // EXPECTED_BARCODE_PREFIX,
   IP,
   PAGE_ROUTES,
   // PATRON_TYPES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   TEST_ACCOUNT,
-  TEST_NYC_ADDRESS,
+  TEST_NYS_ADDRESS,
   TEST_PATRON,
 } from "../../utils/constants";
 import {
@@ -23,15 +24,15 @@ import {
 // import { createFuzzyMatcher, formatSierraDate } from "../../utils/formatter";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
-  test.describe(`E2E: Complete NYC patron application with Sierra API integration in ${name} (${lang})`, () => {
+  test.describe(`E2E: Complete NYS patron application with Sierra API integration in ${name} (${lang})`, () => {
     let pageManager: PageManager;
     let appContent: any;
     const scrapedBarcode: string | null = null;
 
     test.beforeEach(async ({ page }) => {
       await page.setExtraHTTPHeaders({
-        "x-client-ip": IP.NYC_IP,
-        "x-forwarded-for": IP.NYC_IP,
+        "x-client-ip": IP.NYS_IP,
+        "x-forwarded-for": IP.NYS_IP,
       });
       appContent = require(`../../../public/locales/${lang}/common.json`);
       pageManager = new PageManager(page, appContent);
@@ -51,7 +52,9 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       }
     });
 
-    test("submits NYC patron application", async ({ page }) => {
+    test("submits NYS patron application", async ({ page }) => {
+      // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
+
       await test.step("begins at landing", async () => {
         await page.goto(PAGE_ROUTES.LANDING(lang));
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
@@ -66,9 +69,19 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       await test.step("enters home address", async () => {
         await expect(pageManager.addressPage.stepHeading).toBeVisible();
-        await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
+        await fillAddress(pageManager.addressPage, TEST_NYS_ADDRESS);
         await pageManager.addressPage.nextButton.click();
         await expect(pageManager.addressPage.spinner).not.toBeVisible({
+          timeout: SPINNER_TIMEOUT,
+        });
+      });
+
+      await test.step("skips alternate address", async () => {
+        await expect(
+          pageManager.alternateAddressPage.stepHeading
+        ).toBeVisible();
+        await pageManager.alternateAddressPage.nextButton.click();
+        await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
           timeout: SPINNER_TIMEOUT,
         });
       });
@@ -78,7 +91,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           pageManager.addressVerificationPage.stepHeading
         ).toBeVisible();
         await pageManager.addressVerificationPage
-          .getHomeAddressOption(TEST_NYC_ADDRESS.street)
+          .getHomeAddressOption(TEST_NYS_ADDRESS.street)
           .check();
         await pageManager.addressVerificationPage.nextButton.click();
         await expect(
@@ -113,16 +126,16 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       await test.step("displays home address on review page", async () => {
         await expect(
-          pageManager.reviewPage.getText(TEST_NYC_ADDRESS.street)
+          pageManager.reviewPage.getText(TEST_NYS_ADDRESS.street)
         ).toBeVisible();
         await expect(
-          pageManager.reviewPage.getText(TEST_NYC_ADDRESS.city)
+          pageManager.reviewPage.getText(TEST_NYS_ADDRESS.city)
         ).toBeVisible();
         await expect(
-          pageManager.reviewPage.getText(TEST_NYC_ADDRESS.state)
+          pageManager.reviewPage.getText(TEST_NYS_ADDRESS.state)
         ).toBeVisible();
         await expect(
-          pageManager.reviewPage.getText(TEST_NYC_ADDRESS.postalCode)
+          pageManager.reviewPage.getText(TEST_NYS_ADDRESS.postalCode)
         ).toBeVisible();
       });
 
@@ -144,12 +157,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       //   await test.step("displays metro card elements on congrats page", async () => {
       //     await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.metroHeading).toBeVisible();
+      //     await expect(pageManager.congratsPage.metroOrNonMetroHeading).toBeVisible();
       //     await expect(pageManager.congratsPage.readListenLink).toBeVisible();
       //   });
 
       //   await test.step("displays generated library card on congrats page", async () => {
-      //     const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
       //     await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
       //     await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
       //     await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
@@ -159,7 +171,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     ).toBeVisible();
       //     await expect(
       //       pageManager.congratsPage.patronBarcodeNumber
-      //     ).toContainText(pageManager.congratsPage.EXPECTED_BARCODE_PREFIX);
+      //     ).toContainText(EXPECTED_BARCODE_PREFIX);
       //   });
 
       //   await test.step("retrieves barcode from congrats page", async () => {
@@ -208,11 +220,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     );
 
       //     const expectedAddress = createFuzzyMatcher([
-      //       TEST_NYC_ADDRESS.street,
-      //       TEST_NYC_ADDRESS.apartmentSuite,
-      //       TEST_NYC_ADDRESS.city,
-      //       TEST_NYC_ADDRESS.state,
-      //       TEST_NYC_ADDRESS.postalCode,
+      //       TEST_NYS_ADDRESS.street,
+      //       TEST_NYS_ADDRESS.apartmentSuite,
+      //       TEST_NYS_ADDRESS.city,
+      //       TEST_NYS_ADDRESS.state,
+      //       TEST_NYS_ADDRESS.postalCode,
       //     ]);
 
       //     const actualAddressText = (patronData.addresses?.[0]?.lines || []).join(
@@ -224,7 +236,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     expect(patronData.birthDate).toBe(expectedDOB);
       //     expect(actualAddressText).toMatch(expectedAddress);
       //     expect(patronEmails).toContain(expectedEmail);
-      //     expect(patronData.patronType).toBe(PATRON_TYPES.PATRON_TYPE_9);
+      //     expect(patronData.patronType).toBe(PATRON_TYPES.DIGITAL_NON_METRO);
       //   });
     });
   });
