@@ -462,7 +462,7 @@ function ReviewFormContainer({ csrfToken }) {
           <Form
             id="review-form-account-fields"
             onSubmit={handleSubmit((formData) =>
-              editSectionInfo(formData, setEditPersonalInfoFlag)
+              editSectionInfo(formData, setEditAccountInfoFlag)
             )}
             noValidate
           >
