@@ -21,6 +21,16 @@ export interface RoutingLinksType {
   isDisabled?: boolean;
 }
 
+interface LinkButtonProps {
+  text: string;
+  url: string;
+}
+
+interface SubmitButtonProps {
+  text: string;
+  isDisabled: boolean;
+}
+
 /**
  * RoutingLinks
  * Renders two links that look like buttons to be used for routing. The
@@ -37,59 +47,67 @@ function RoutingLinks({
   const nextText = next.text || t("button.next");
   const previousText = previous?.text || t("button.previous");
 
-  const GetStartedButton = () => (
-    <DSLink
-      as={Link}
-      href={next.url}
-      id="routing-links-next"
-      variant="buttonPrimary"
-      width={{ base: "100%", md: "auto" }}
-    >
-      {nextText}
-    </DSLink>
+  const nextElement = !next?.submit ? (
+    <GetStartedButton text={nextText} url={next.url} />
+  ) : (
+    <NextButton text={nextText} isDisabled={isDisabled} />
   );
-
-  const PreviousLink = () => (
-    <DSLink
-      as={Link}
-      href={previous.url}
-      id="routing-links-previous"
-      variant="buttonSecondary"
-    >
-      {previousText}
-    </DSLink>
-  );
-
-  const NextButton = () => (
-    <Button
-      variant="primary"
-      id="routing-links-next"
-      disabled={isDisabled}
-      aria-disabled={isDisabled}
-      type="submit"
-    >
-      {nextText}
-    </Button>
-  );
-
-  const nextElement = !next?.submit ? <GetStartedButton /> : <NextButton />;
 
   return (
     <Box display="flex" gap="xs" flexDir={{ base: "column", md: "row" }}>
       {/* Next button will be placed on top on mobile view */}
       {isLargerThanLargeMobile ? (
         <>
-          {previous?.url && <PreviousLink />}
+          {previous?.url && (
+            <PreviousLink text={previousText} url={previous.url} />
+          )}
           {nextElement}
         </>
       ) : (
         <>
           {nextElement}
-          {previous?.url && <PreviousLink />}
+          {previous?.url && (
+            <PreviousLink text={previousText} url={previous.url} />
+          )}
         </>
       )}
     </Box>
   );
 }
+
+const GetStartedButton = ({ text, url }: LinkButtonProps) => (
+  <DSLink
+    as={Link}
+    href={url}
+    id="routing-links-next"
+    variant="buttonPrimary"
+    width={{ base: "100%", md: "auto" }}
+  >
+    {text}
+  </DSLink>
+);
+
+const PreviousLink = ({ text, url }: LinkButtonProps) => (
+  <DSLink
+    as={Link}
+    href={url}
+    id="routing-links-previous"
+    variant="buttonSecondary"
+  >
+    {text}
+  </DSLink>
+);
+
+const NextButton = ({ text, isDisabled }: SubmitButtonProps) => (
+  <Button
+    variant="primary"
+    id="routing-links-next"
+    disabled={isDisabled}
+    aria-disabled={isDisabled}
+    type="submit"
+  >
+    {text}
+  </Button>
+);
 
 export default RoutingLinks;
