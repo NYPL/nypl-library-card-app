@@ -26,7 +26,7 @@ test.describe("displays all form elements on Account page", () => {
     await expect(accountPage.availableUsernameButton).toBeVisible();
     await expect(accountPage.passwordInput).toBeVisible();
     await expect(accountPage.verifyPasswordInput).toBeVisible();
-    await expect(accountPage.showPasswordLabel).toBeVisible();
+    await expect(accountPage.showPasswordCheckboxLabel).toBeVisible();
   });
 
   test("displays home library form", async ({ page }) => {
@@ -36,7 +36,7 @@ test.describe("displays all form elements on Account page", () => {
     await expect(accountPage.cardholderTerms).toBeVisible();
     await expect(accountPage.rulesRegulations).toBeVisible();
     await expect(accountPage.privacyPolicy).toBeVisible();
-    await expect(accountPage.acceptTermsLabel).toBeVisible();
+    await expect(accountPage.acceptTermsCheckboxLabel).toBeVisible();
   });
 
   test("displays next and previous buttons", async ({ page }) => {
@@ -65,7 +65,7 @@ test.describe("enters account information", () => {
     const accountPage = new AccountPage(page);
     await fillAccountInfo(accountPage, TEST_ACCOUNT);
     await expect(accountPage.usernameInput).toHaveValue(TEST_ACCOUNT.username);
-    await accountPage.showPasswordLabel.check();
+    await accountPage.showPasswordCheckboxLabel.click();
     await expect(accountPage.passwordInput).toHaveValue(TEST_ACCOUNT.password);
     await expect(accountPage.verifyPasswordInput).toHaveValue(
       TEST_ACCOUNT.password
@@ -73,7 +73,7 @@ test.describe("enters account information", () => {
     await expect(accountPage.selectHomeLibrary).toHaveValue(
       TEST_ACCOUNT.homeLibraryCode
     );
-    await expect(accountPage.acceptTermsLabel).toBeChecked();
+    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
   });
 });
 
