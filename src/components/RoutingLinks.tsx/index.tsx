@@ -13,11 +13,18 @@ export interface LinkType {
   text?: string;
 }
 
+/**
+ * Link can either be a navigation link or a form submit button.
+ */
+type NextRoutingLink =
+  | ({ submit?: false } & LinkType)
+  | ({ submit: true } & Partial<LinkType>);
+
 export interface RoutingLinksType {
   previous?: LinkType;
   // We only want an optional "submit" property for the next prop.
   // The "url" and "text" props are not needed if "submit" is passed.
-  next: Partial<LinkType> & { submit?: boolean };
+  next: NextRoutingLink;
   isDisabled?: boolean;
 }
 
@@ -47,35 +54,43 @@ function RoutingLinks({
   const nextText = next.text || t("button.next");
   const previousText = previous?.text || t("button.previous");
 
-  const nextElement = !next?.submit ? (
-    <GetStartedButton text={nextText} url={next.url} />
-  ) : (
+  const nextElement = isSubmitMode(next) ? (
     <NextButton text={nextText} isDisabled={isDisabled} />
+  ) : (
+    <GetStartedButton text={nextText} url={next.url} />
   );
+
+  const renderNavigationButtons = () => {
+    const previousButton = previous?.url && (
+      <PreviousLink text={previousText} url={previous.url} />
+    );
+
+    return isLargerThanLargeMobile ? (
+      <>
+        {/* Next button will be placed on top on mobile view */}
+        {previousButton}
+        {nextElement}
+      </>
+    ) : (
+      <>
+        {nextElement}
+        {previousButton}
+      </>
+    );
+  };
 
   return (
     <Box display="flex" gap="xs" flexDir={{ base: "column", md: "row" }}>
-      {/* Next button will be placed on top on mobile view */}
-      {isLargerThanLargeMobile ? (
-        <>
-          {previous?.url && (
-            <PreviousLink text={previousText} url={previous.url} />
-          )}
-          {nextElement}
-        </>
-      ) : (
-        <>
-          {nextElement}
-          {previous?.url && (
-            <PreviousLink text={previousText} url={previous.url} />
-          )}
-        </>
-      )}
+      {renderNavigationButtons()}
     </Box>
   );
 }
 
-const GetStartedButton = ({ text, url }: LinkButtonProps) => (
+function isSubmitMode(next: NextRoutingLink): next is { submit: true } {
+  return next.submit === true;
+}
+
+const GetStartedButton: React.FC<LinkButtonProps> = ({ text, url }) => (
   <DSLink
     as={Link}
     href={url}
@@ -87,7 +102,7 @@ const GetStartedButton = ({ text, url }: LinkButtonProps) => (
   </DSLink>
 );
 
-const PreviousLink = ({ text, url }: LinkButtonProps) => (
+const PreviousLink: React.FC<LinkButtonProps> = ({ text, url }) => (
   <DSLink
     as={Link}
     href={url}
@@ -98,7 +113,7 @@ const PreviousLink = ({ text, url }: LinkButtonProps) => (
   </DSLink>
 );
 
-const NextButton = ({ text, isDisabled }: SubmitButtonProps) => (
+const NextButton: React.FC<SubmitButtonProps> = ({ text, isDisabled }) => (
   <Button
     variant="primary"
     id="routing-links-next"
