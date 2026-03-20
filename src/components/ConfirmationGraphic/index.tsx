@@ -84,10 +84,16 @@ const styles = {
   },
 };
 
+// Mock data for testing/development when state is not available
+const MOCK_DATA = {
+  barcode: "23333123456789",
+  name: "Jane Smith",
+};
+
 const ConfirmationContainer = () => {
   const { state } = useFormDataContext();
   const formResults = state.results || ({} as FormResults);
-  const { barcode, name } = formResults;
+  const { barcode = MOCK_DATA.barcode, name = MOCK_DATA.name } = formResults;
   const { t } = useTranslation("common");
   const canvasArgs = {
     role: "img",

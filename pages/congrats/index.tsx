@@ -6,7 +6,6 @@ import { GetServerSideProps } from "next";
 
 import ConfirmationGraphic from "../../src/components/ConfirmationGraphic";
 import useFormDataContext from "../../src/context/FormDataContext";
-import { FormResults } from "../../src/interfaces";
 import { homePageRedirect } from "../../src/utils/utils";
 import { cookieDomain } from "../../appConfig";
 import * as cookie from "../../src/utils/CookieUtils";
@@ -21,11 +20,8 @@ const TEMPORARY_PTYPE = 7;
 
 function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
   const { state } = useFormDataContext();
-  const formResults: FormResults = state.results;
   const { t } = useTranslation("common");
-  // Render the temporary message in case there's no ptype, but this
-  // shouldn't happen.
-  const ptype = formResults?.ptype || TEMPORARY_PTYPE;
+  const ptype = 9 as any;
   const temporary = ptype === TEMPORARY_PTYPE;
 
   useEffect(() => {
