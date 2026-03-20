@@ -142,7 +142,10 @@ test("retains user-entered info after clicking breadcrumb", async ({
     await page.goto(PAGE_ROUTES.PERSONAL);
     await expect(pageManager.personalPage.stepHeading).toBeVisible();
     await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-    await pageManager.personalPage.receiveInfoCheckboxLabel.click(); // unchecks
+    await pageManager.personalPage.receiveInfoCheckboxLabel.click();
+    await expect(
+      pageManager.personalPage.receiveInfoCheckbox
+    ).not.toBeChecked();
     await pageManager.personalPage.nextButton.click();
   });
 
