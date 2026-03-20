@@ -6,8 +6,11 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./playwright",
   timeout: 30000, // default timeout for each test
+
   expect: {
-    timeout: 5000, // default timeout for expect statements
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.02,
+    },
   },
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -27,6 +30,9 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
   },
+
+  snapshotPathTemplate:
+    "{testDir}/__screenshots__/{projectName}/{testFilePath}/{arg}{ext}",
 
   /* Configure projects for major browsers */
   projects: [
