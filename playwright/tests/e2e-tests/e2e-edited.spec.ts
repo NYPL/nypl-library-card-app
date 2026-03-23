@@ -71,7 +71,7 @@ test.describe("E2E: Edits patron information", () => {
       ).toBeVisible();
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-        .check();
+        .click();
       await pageManager.addressVerificationPage.nextButton.click();
       await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
         {
@@ -90,7 +90,7 @@ test.describe("E2E: Edits patron information", () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       await pageManager.reviewPage.editPersonalInfoButton.click();
       await fillPersonalInfo(pageManager.reviewPage, TEST_EDITED_PATRON);
-      await pageManager.reviewPage.receiveInfoCheckbox.click();
+      await pageManager.reviewPage.receiveInfoCheckboxLabel.click();
     });
 
     await test.step("displays updated personal info on review page", async () => {

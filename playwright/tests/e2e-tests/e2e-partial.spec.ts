@@ -47,7 +47,7 @@ test("displays error when address is too long", async ({ page }) => {
     await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
     await pageManager.addressVerificationPage
       .getHomeAddressOption(invalidStreet)
-      .check();
+      .click();
     await pageManager.addressVerificationPage.nextButton.click();
     await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
       timeout: SPINNER_TIMEOUT,
@@ -105,7 +105,7 @@ test("displays updated account info after editing addresses", async ({
     await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
     await pageManager.addressVerificationPage
       .getHomeAddressOption(TEST_NYC_ADDRESS.street)
-      .check();
+      .click();
     await pageManager.addressVerificationPage.nextButton.click();
     await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
       timeout: SPINNER_TIMEOUT,
@@ -123,7 +123,7 @@ test("displays updated account info after editing addresses", async ({
     await expect(
       pageManager.reviewPage.getText(TEST_EDITED_ACCOUNT.username)
     ).toBeVisible();
-    await pageManager.reviewPage.showPasswordLabel.check();
+    await pageManager.reviewPage.showPasswordCheckboxLabel.click();
     await expect(
       pageManager.reviewPage.getText(TEST_EDITED_ACCOUNT.password)
     ).toBeVisible();
@@ -142,7 +142,10 @@ test("retains user-entered info after clicking breadcrumb", async ({
     await page.goto(PAGE_ROUTES.PERSONAL);
     await expect(pageManager.personalPage.stepHeading).toBeVisible();
     await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-    await pageManager.personalPage.receiveInfoCheckbox.click(); // unchecks
+    await pageManager.personalPage.receiveInfoCheckboxLabel.click();
+    await expect(
+      pageManager.personalPage.receiveInfoCheckbox
+    ).not.toBeChecked();
     await pageManager.personalPage.nextButton.click();
   });
 
@@ -168,10 +171,10 @@ test("retains user-entered info after clicking breadcrumb", async ({
     await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
     await pageManager.addressVerificationPage
       .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-      .check();
+      .click();
     await pageManager.addressVerificationPage
       .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
-      .check();
+      .click();
     await pageManager.addressVerificationPage.nextButton.click();
     await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
       timeout: SPINNER_TIMEOUT,
