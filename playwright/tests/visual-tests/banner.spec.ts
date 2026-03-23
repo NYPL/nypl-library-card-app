@@ -16,11 +16,11 @@ test.describe("Visual tests for banner component", () => {
     await page.goto(PAGE_ROUTES.LANDING, { waitUntil: "commit" });
     const landingPage = new LandingPage(page);
     await landingPage.urduLanguage.click();
-    const urduHeading = page.getByRole("heading", {
-      name: "للائبریری کارڈ کے لیے آن لائن اپلائی کریں",
-      level: 1,
-    });
-    await expect(urduHeading).toBeVisible();
-    await expect(urduHeading).toHaveScreenshot("landing-page-banner-urdu.png");
+
+    await expect(landingPage.heroBanner).toBeVisible();
+    await expect(landingPage.mainHeading).toBeVisible();
+    await expect(landingPage.heroBanner).toHaveScreenshot(
+      "landing-page-banner-urdu.png"
+    );
   });
 });
