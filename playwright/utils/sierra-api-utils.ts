@@ -8,7 +8,7 @@ const basicAuth = process.env.SIERRA_BASIC_AUTH_BASE64;
 export interface SierraPatron {
   id: number;
   names: string[];
-  birthDate?: string;
+  birthdate?: string;
   addresses?: {
     lines: string[];
     type: string;
@@ -88,15 +88,15 @@ export async function verifyPatronData(
       names: expect.any(Array),
       emails: expect.any(Array),
       addresses: expect.any(Array),
-      birthDate: expect.any(String),
-      patronType: expect.any(Number),
+      birthdate: expect.any(String),
+      expectedPatronType: expect.any(Number),
     })
   );
   expect(
     patronData.names.length,
     "Names array should not be empty"
   ).toBeGreaterThan(0);
-  expect(patronData.birthDate, "Birthdate should not be empty").toBeTruthy();
+  expect(patronData.birthdate, "Birthdate should not be empty").toBeTruthy();
   expect(
     patronData.emails.length,
     "Emails array should not be empty"
@@ -107,9 +107,8 @@ export async function verifyPatronData(
   ).toBeGreaterThan(0);
 
   const expectedName = `${patron.lastName}, ${patron.firstName}`.toUpperCase();
-  const expectedDOB = formatSierraDate(patron.dateOfBirth);
+  const expectedBirthdate = formatSierraDate(patron.dateOfBirth);
   const expectedEmail = patron.email.toLowerCase();
-  const patronEmails = patronData.emails?.map((email) => email.toLowerCase());
   const expectedAddress = createFuzzyMatcher([
     address.street,
     address.apartmentSuite,
@@ -117,13 +116,14 @@ export async function verifyPatronData(
     address.state,
     address.postalCode,
   ]);
-  const actualAddressText = (patronData.addresses?.[0]?.lines || []).join(" ");
   const actualName = patronData.names?.[0].toUpperCase();
+  const actualEmails = patronData.emails?.map((email) => email.toLowerCase());
+  const actualAddress = (patronData.addresses?.[0]?.lines || []).join(" ");
 
   expect(actualName).toContain(expectedName);
-  expect(patronData.birthDate).toBe(expectedDOB);
-  expect(actualAddressText).toMatch(expectedAddress);
-  expect(patronEmails).toContain(expectedEmail);
+  expect(patronData.birthdate).toBe(expectedBirthdate);
+  expect(actualEmails).toContain(expectedEmail);
+  expect(actualAddress).toMatch(expectedAddress);
   expect(patronData.patronType).toBe(expectedPatronType);
 }
 
