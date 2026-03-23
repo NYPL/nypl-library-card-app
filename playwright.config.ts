@@ -29,6 +29,10 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
+
+    /* Standardize viewport and pixel density across local and CI environments */
+    viewport: { width: 1280, height: 720 },
+    deviceScaleFactor: 1,
   },
 
   snapshotPathTemplate:

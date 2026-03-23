@@ -7,18 +7,20 @@ test.describe("Visual tests for banner component", () => {
     await page.goto(PAGE_ROUTES.LANDING, { waitUntil: "commit" });
     const landingPage = new LandingPage(page);
     await expect(landingPage.mainHeading).toBeVisible();
-    await expect(landingPage.mainHeading).toHaveScreenshot(
+    await expect(landingPage.heroBanner).toHaveScreenshot(
       "landing-page-banner-english.png"
     );
   });
 
   test("displays banner on landing page in Urdu", async ({ page }) => {
-    await page.goto(PAGE_ROUTES.LANDING, { waitUntil: "commit" });
+    const urduUrl = `${PAGE_ROUTES.LANDING}?lang=ur`;
+    await page.goto(urduUrl, { waitUntil: "commit" });
     const landingPage = new LandingPage(page);
-    await landingPage.urduLanguage.click();
 
     await expect(landingPage.heroBanner).toBeVisible();
-    await expect(landingPage.mainHeading).toBeVisible();
+    await expect(landingPage.mainHeading).toHaveText(
+      /للائبریری کارڈ کے لیے آن لائن اپلائی کریں/
+    );
     await expect(landingPage.heroBanner).toHaveScreenshot(
       "landing-page-banner-urdu.png"
     );
