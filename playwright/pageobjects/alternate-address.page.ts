@@ -34,7 +34,7 @@ export class AlternateAddressPage {
     this.informationalBanner = page.locator("aside", {
       hasText:
         appContent?.location?.workAddress?.description?.provideAddress ||
-        "Please provide the address of where you work, attend school, or pay property taxes in New York State.",
+        /Please provide the address of where you work, attend school, or pay property taxes in New York State. [^<b>]If none of these apply to you, click next.[^</b>]/,
     });
     this.addressHeading = page.getByRole("heading", {
       name:
