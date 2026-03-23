@@ -158,13 +158,10 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       );
     });
 
-    await test.step("retrieves barcode from congrats page", async () => {
+    await test.step("verifies patron data in Sierra database", async () => {
       scrapedBarcode =
         await pageManager.congratsPage.patronBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();
-    });
-
-    await test.step("verifies patron data in Sierra database", async () => {
       await verifyPatronData(
         scrapedBarcode,
         TEST_PATRON,
