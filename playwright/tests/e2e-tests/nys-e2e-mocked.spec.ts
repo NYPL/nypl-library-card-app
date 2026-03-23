@@ -50,7 +50,7 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
       ).toBeVisible();
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_NYS_ADDRESS.street)
-        .check();
+        .click();
       await pageManager.addressVerificationPage.nextButton.click();
     });
 

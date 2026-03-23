@@ -110,10 +110,10 @@ test.describe("enters home address and alternate address", () => {
     await test.step("selects address options", async () => {
       await addressVerificationPage
         .getHomeAddressOption(TEST_MULTIMATCH_ADDRESS_WEST.street)
-        .check();
+        .click();
       await addressVerificationPage
         .getAlternateAddressOption(TEST_MULTIMATCH_ADDRESS_EAST.street)
-        .check();
+        .click();
     });
 
     await test.step("confirms addresses are selected", async () => {
