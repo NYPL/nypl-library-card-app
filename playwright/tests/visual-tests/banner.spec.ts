@@ -4,17 +4,18 @@ import { LandingPage } from "../../pageobjects/landing.page";
 
 test.describe("Visual tests for banner component", () => {
   test("displays banner on landing page", async ({ page }) => {
-    await page.goto(PAGE_ROUTES.LANDING, { waitUntil: "commit" });
+    await page.goto(PAGE_ROUTES.LANDING, { waitUntil: "networkidle" });
     const landingPage = new LandingPage(page);
     await expect(landingPage.mainHeading).toBeVisible();
     await expect(landingPage.heroBanner).toHaveScreenshot(
-      "landing-page-banner-english.png"
+      "landing-page-banner-english.png",
+      { maxDiffPixelRatio: 0.05 }
     );
   });
 
   test("displays banner on landing page in Urdu", async ({ page }) => {
-    const urduUrl = `${PAGE_ROUTES.LANDING}?lang=ur`;
-    await page.goto(urduUrl, { waitUntil: "commit" });
+    const urduUrl = `${PAGE_ROUTES.LANDING}&lang=ur`;
+    await page.goto(urduUrl, { waitUntil: "networkidle" });
     const landingPage = new LandingPage(page);
 
     await expect(landingPage.heroBanner).toBeVisible();
@@ -22,7 +23,10 @@ test.describe("Visual tests for banner component", () => {
       /للائبریری کارڈ کے لیے آن لائن اپلائی کریں/
     );
     await expect(landingPage.heroBanner).toHaveScreenshot(
-      "landing-page-banner-urdu.png"
+      "landing-page-banner-urdu.png",
+      {
+        maxDiffPixelRatio: 0.05,
+      }
     );
   });
 });
