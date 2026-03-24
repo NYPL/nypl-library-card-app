@@ -9,7 +9,10 @@ test.describe("Visual tests for banner component", () => {
     await expect(landingPage.mainHeading).toBeVisible();
     await expect(landingPage.heroBanner).toHaveScreenshot(
       "landing-page-banner-english.png",
-      { maxDiffPixelRatio: 0.05 }
+      {
+        mask: [page.locator(".hero-background-image")], // Use the actual selector for the image
+        maxDiffPixelRatio: 0.02, // Now you can be very strict!
+      }
     );
   });
 

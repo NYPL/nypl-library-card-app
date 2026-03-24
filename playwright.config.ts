@@ -7,11 +7,6 @@ export default defineConfig({
   testDir: "./playwright",
   timeout: 30000, // default timeout for each test
 
-  expect: {
-    toHaveScreenshot: {
-      maxDiffPixelRatio: 0.02,
-    },
-  },
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -36,24 +31,34 @@ export default defineConfig({
   },
 
   snapshotPathTemplate:
-    "{testDir}/__screenshots__/{projectName}/{testFilePath}/{arg}{ext}",
+    "{testDir}/__screenshots__/{platform}/{projectName}/{arg}{ext}",
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1280, height: 720 },
+        deviceScaleFactor: 1,
+      },
     },
 
     {
       name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
+      use: {
+        ...devices["Desktop Firefox"],
+        viewport: { width: 1280, height: 720 },
+        deviceScaleFactor: 1,
+      },
     },
 
     {
       name: "webkit",
       use: {
         ...devices["Desktop Safari"],
+        viewport: { width: 1280, height: 720 },
+        deviceScaleFactor: 1,
       },
     },
 
