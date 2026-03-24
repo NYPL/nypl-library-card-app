@@ -31,10 +31,12 @@ export class AlternateAddressPage {
         "Step 2 of 5: Alternate address",
       level: 2,
     });
+    const translationText =
+      appContent?.location?.workAddress?.description?.part3 ||
+      "Please provide the address of where you work, attend school, or pay property taxes in New York State. If none of these apply to you, click next.";
+    const cleanText = translationText.replace(/<[^>]*>/g, "");
     this.informationalBanner = page.locator("aside", {
-      hasText:
-        appContent?.location?.workAddress?.description?.provideAddress ||
-        "Please provide the address of where you work, attend school, or pay property taxes in New York State.",
+      hasText: cleanText,
     });
     this.addressHeading = page.getByRole("heading", {
       name:
