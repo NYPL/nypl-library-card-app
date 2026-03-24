@@ -8,7 +8,7 @@ const basicAuth = process.env.SIERRA_BASIC_AUTH_BASE64;
 export interface SierraPatron {
   id: number;
   names: string[];
-  birthdate?: string;
+  birthDate?: string;
   addresses?: {
     lines: string[];
     type: string;
@@ -88,15 +88,15 @@ export async function verifyPatronData(
       names: expect.any(Array),
       emails: expect.any(Array),
       addresses: expect.any(Array),
-      birthdate: expect.any(String),
-      expectedPatronType: expect.any(Number),
+      birthDate: expect.any(String),
+      patronType: expect.any(Number),
     })
   );
   expect(
     patronData.names.length,
     "Names array should not be empty"
   ).toBeGreaterThan(0);
-  expect(patronData.birthdate, "Birthdate should not be empty").toBeTruthy();
+  expect(patronData.birthDate, "Birthdate should not be empty").toBeTruthy();
   expect(
     patronData.emails.length,
     "Emails array should not be empty"
@@ -121,7 +121,7 @@ export async function verifyPatronData(
   const actualAddress = (patronData.addresses?.[0]?.lines || []).join(" ");
 
   expect(actualName).toContain(expectedName);
-  expect(patronData.birthdate).toBe(expectedBirthdate);
+  expect(patronData.birthDate).toBe(expectedBirthdate);
   expect(actualEmails).toContain(expectedEmail);
   expect(actualAddress).toMatch(expectedAddress);
   expect(patronData.patronType).toBe(expectedPatronType);
