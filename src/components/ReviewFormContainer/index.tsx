@@ -8,11 +8,12 @@ import {
   FormRow,
   Heading,
   Radio,
+  TextInputRefType,
 } from "@nypl/design-system-react-components";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 import PersonalFormFields from "../PersonalFormFields";
@@ -94,6 +95,9 @@ function ReviewFormContainer({ csrfToken }) {
   const [showPassword, setShowPassword] = useState(true);
   const updateShowPassword = () => setShowPassword(!showPassword);
 
+  const firstPersonalFieldRef = useRef<TextInputRefType>(null);
+  const firstAccountFieldRef = useRef<TextInputRefType>(null);
+
   // Will run whenever the `errorObj` has changes, specifically for
   // bad requests.
   useEffect(() => {
@@ -119,18 +123,21 @@ function ReviewFormContainer({ csrfToken }) {
    * toggling instead of an anchor element. This is for the Personal and the
    * Account sections.
    */
-  const editSectionButton = (editSectionFlag, sectionName, page) => {
+  const editSectionButton = (editSectionFlag, sectionName, page, focusRef) => {
     const label = `${t("button.edit")} ${
       page === "personal"
         ? t(`review.section.personal`)
         : t("review.createAccount")
     }`;
+
     return clientSide ? (
       <Button
         variant="secondary"
         id={`editSectionButton-${sectionName.replace(/\s+/g, "")}`}
         onClick={() => {
           editSectionFlag(true);
+          // For extra security incase focusRef is stil null?
+          setTimeout(() => focusRef.current?.focus(), 0);
         }}
         aria-label={label}
         sx={styles.editButton}
@@ -288,7 +295,8 @@ function ReviewFormContainer({ csrfToken }) {
       {editSectionButton(
         setEditPersonalInfoFlag,
         "Personal information",
-        "personal"
+        "personal",
+        firstPersonalFieldRef
       )}
     </Box>
   );
@@ -332,7 +340,8 @@ function ReviewFormContainer({ csrfToken }) {
       {editSectionButton(
         setEditAccountInfoFlag,
         "Create your account",
-        "account"
+        "account",
+        firstAccountFieldRef
       )}
     </Box>
   );
@@ -441,7 +450,7 @@ function ReviewFormContainer({ csrfToken }) {
               editSectionInfo(formData, setEditPersonalInfoFlag)
             )}
           >
-            <PersonalFormFields />
+            <PersonalFormFields firstFieldRef={firstPersonalFieldRef} />
           </Form>
         )}
       </Box>
@@ -468,6 +477,7 @@ function ReviewFormContainer({ csrfToken }) {
               id="review-form-account-fields"
               showPasswordOnLoad
               csrfToken={csrfToken}
+              firstFieldRef={firstAccountFieldRef}
             />
             <AcceptTermsFormFields />
           </Form>

@@ -3,6 +3,7 @@ import {
   FormField as DSFormField,
   FormRow,
   Link as DSLink,
+  TextInputRefType,
 } from "@nypl/design-system-react-components";
 import { Trans, useTranslation } from "next-i18next";
 import { useState } from "react";
@@ -16,8 +17,12 @@ import useFormDataContext from "../../context/FormDataContext";
 interface PersonalFormFieldsProps {
   agencyType?: string;
   id?: string;
+  firstFieldRef?: React.RefObject<TextInputRefType>;
 }
-function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
+function PersonalFormFields({
+  id = "",
+  firstFieldRef,
+}: PersonalFormFieldsProps) {
   const { t } = useTranslation("common");
   const {
     register,
@@ -43,6 +48,7 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
             errorState={errors}
             defaultValue={formValues.firstName}
             autoComplete="given-name"
+            ref={firstFieldRef}
           />
         </DSFormField>
         <DSFormField>

@@ -5,6 +5,7 @@ import {
   Center,
   FormField as DSFormField,
   FormRow,
+  TextInputRefType,
 } from "@nypl/design-system-react-components";
 import axios from "axios";
 import { useTranslation } from "next-i18next";
@@ -28,6 +29,7 @@ interface UsernameValidationFormProps {
   id?: string;
   errorMessage?: string;
   csrfToken: string;
+  firstFieldRef?: React.RefObject<TextInputRefType>;
 }
 
 /**
@@ -39,6 +41,7 @@ const UsernameValidationForm = ({
   id = "",
   errorMessage = "",
   csrfToken,
+  firstFieldRef,
 }: UsernameValidationFormProps) => {
   const { t } = useTranslation("common");
   const {
@@ -174,6 +177,7 @@ const UsernameValidationForm = ({
             maxLength={25}
             defaultValue={formValues.username}
             autoComplete="username"
+            ref={firstFieldRef}
           />
         </DSFormField>
       </FormRow>
