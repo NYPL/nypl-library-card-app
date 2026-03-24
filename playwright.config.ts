@@ -39,8 +39,6 @@ export default defineConfig({
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        viewport: { width: 1280, height: 720 },
-        deviceScaleFactor: 1,
       },
     },
 
@@ -48,8 +46,6 @@ export default defineConfig({
       name: "firefox",
       use: {
         ...devices["Desktop Firefox"],
-        viewport: { width: 1280, height: 720 },
-        deviceScaleFactor: 1,
       },
     },
 
@@ -57,8 +53,6 @@ export default defineConfig({
       name: "webkit",
       use: {
         ...devices["Desktop Safari"],
-        viewport: { width: 1280, height: 720 },
-        deviceScaleFactor: 1,
       },
     },
 
@@ -88,5 +82,7 @@ export default defineConfig({
     command: "npm run dev",
     url: "http://localhost:3000/library-card/new",
     reuseExistingServer: !process.env.CI,
+    stdout: "ignore",
+    stderr: "pipe",
   },
 });
