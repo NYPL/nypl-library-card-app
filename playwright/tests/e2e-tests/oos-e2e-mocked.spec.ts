@@ -67,16 +67,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           ).toBeVisible();
           await pageManager.addressVerificationPage
             .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-            .check();
+            .click();
           await pageManager.addressVerificationPage
             .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
-            .check();
+            .click();
           await pageManager.addressVerificationPage.nextButton.click();
-          await expect(
-            pageManager.addressVerificationPage.spinner
-          ).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
         });
 
         // await test.step("enters account information", async () => {

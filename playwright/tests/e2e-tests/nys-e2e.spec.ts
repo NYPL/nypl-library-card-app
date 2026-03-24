@@ -92,7 +92,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         ).toBeVisible();
         await pageManager.addressVerificationPage
           .getHomeAddressOption(TEST_NYS_ADDRESS.street)
-          .check();
+          .click();
         await pageManager.addressVerificationPage.nextButton.click();
         await expect(
           pageManager.addressVerificationPage.spinner
@@ -101,145 +101,149 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         });
       });
 
-      //   await test.step("enters account information", async () => {
-      //     await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      //     await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      //     await pageManager.accountPage.nextButton.click();
-      //   });
+      // await test.step("enters account information", async () => {
+      //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
+      //   await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+      //   await pageManager.accountPage.nextButton.click();
+      // });
 
-      //   await test.step("displays personal information on review page", async () => {
-      //     await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_PATRON.firstName)
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_PATRON.lastName)
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_PATRON.dateOfBirth)
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_PATRON.email)
-      //     ).toBeVisible();
-      //     await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText(
-      //       "Yes"
-      //     );
-      //   });
+      // await test.step("displays personal information on review page", async () => {
+      //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      //   await expect(
+      //     pageManager.reviewPage.getText(TEST_PATRON.firstName)
+      //   ).toBeVisible();
+      //   await expect(
+      //     pageManager.reviewPage.getText(TEST_PATRON.lastName)
+      //   ).toBeVisible();
+      //   await expect(
+      //     pageManager.reviewPage.getText(TEST_PATRON.dateOfBirth)
+      //   ).toBeVisible();
+      //   await expect(
+      //     pageManager.reviewPage.getText(TEST_PATRON.email)
+      //   ).toBeVisible();
+      //   await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText(
+      //     "Yes"
+      //   );
+      // });
 
-      //   await test.step("displays home address on review page", async () => {
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_NYS_ADDRESS.street)
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_NYS_ADDRESS.city)
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_NYS_ADDRESS.state)
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_NYS_ADDRESS.postalCode)
-      //     ).toBeVisible();
-      //   });
+      // await test.step("displays home address on review page", async () => {
+      //   await expect(
+      //     pageManager.reviewPage.getText(TEST_NYS_ADDRESS.street)
+      //   ).toBeVisible();
+      //   await expect(
+      //     pageManager.reviewPage.getText(TEST_NYS_ADDRESS.city)
+      //   ).toBeVisible();
+      //   await expect(
+      //     pageManager.reviewPage.getText(TEST_NYS_ADDRESS.state)
+      //   ).toBeVisible();
+      //   await expect(
+      //     pageManager.reviewPage.getText(TEST_NYS_ADDRESS.postalCode)
+      //   ).toBeVisible();
+      // });
 
-      //   await test.step("displays account information on review page", async () => {
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_ACCOUNT.username)
-      //     ).toBeVisible();
-      //     await expect(pageManager.reviewPage.showPasswordLabel).toBeVisible();
-      //     await pageManager.reviewPage.showPasswordLabel.check();
-      //     await expect(
-      //       pageManager.reviewPage.getText(TEST_ACCOUNT.password)
-      //     ).toBeVisible();
-      //   });
+      // await test.step("displays account information on review page", async () => {
+      //   await expect(
+      //     pageManager.reviewPage.getText(TEST_ACCOUNT.username)
+      //   ).toBeVisible();
+      //   await expect(
+      //     pageManager.reviewPage.showPasswordCheckboxLabel
+      //   ).toBeVisible();
+      //   await pageManager.reviewPage.showPasswordCheckboxLabel.click();
+      //   await expect(
+      //     pageManager.reviewPage.getText(TEST_ACCOUNT.password)
+      //   ).toBeVisible();
+      // });
 
-      //   await test.step("submits application", async () => {
-      //     await expect(pageManager.reviewPage.submitButton).toBeVisible();
-      //     await pageManager.reviewPage.submitButton.click();
-      //   });
+      // await test.step("submits application", async () => {
+      //   await expect(pageManager.reviewPage.submitButton).toBeVisible();
+      //   await pageManager.reviewPage.submitButton.click();
+      // });
 
-      //   await test.step("displays metro card elements on congrats page", async () => {
-      //     await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.metroOrNonMetroHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.readListenLink).toBeVisible();
-      //   });
+      // await test.step("displays metro card elements on congrats page", async () => {
+      //   await expect(pageManager.congratsPage.mainHeading).toBeVisible();
+      //   await expect(
+      //     pageManager.congratsPage.metroOrNonMetroHeading
+      //   ).toBeVisible();
+      //   await expect(pageManager.congratsPage.readListenLink).toBeVisible();
+      // });
 
-      //   await test.step("displays generated library card on congrats page", async () => {
-      //     await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
-      //     await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.issuedDate).toBeVisible();
-      //     await expect(
-      //       pageManager.congratsPage.patronBarcodeNumber
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.congratsPage.patronBarcodeNumber
-      //     ).toContainText(EXPECTED_BARCODE_PREFIX);
-      //   });
+      // await test.step("displays generated library card on congrats page", async () => {
+      //   await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
+      //   await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
+      //   await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
+      //   await expect(pageManager.congratsPage.issuedDate).toBeVisible();
+      //   await expect(
+      //     pageManager.congratsPage.patronBarcodeNumber
+      //   ).toBeVisible();
+      //   await expect(
+      //     pageManager.congratsPage.patronBarcodeNumber
+      //   ).toContainText(EXPECTED_BARCODE_PREFIX);
+      // });
 
-      //   await test.step("retrieves barcode from congrats page", async () => {
-      //     scrapedBarcode =
-      //       await pageManager.congratsPage.patronBarcodeNumber.textContent();
-      //     expect(scrapedBarcode).not.toBeNull();
-      //   });
+      // await test.step("retrieves barcode from congrats page", async () => {
+      //   scrapedBarcode =
+      //     await pageManager.congratsPage.patronBarcodeNumber.textContent();
+      //   expect(scrapedBarcode).not.toBeNull();
+      // });
 
-      //   await test.step("verifies patron data in Sierra database", async () => {
-      //     const patronID = await getPatronID(scrapedBarcode);
-      //     const patronData = await getPatronData(patronID);
+      // await test.step("verifies patron data in Sierra database", async () => {
+      //   const patronID = await getPatronID(scrapedBarcode);
+      //   const patronData = await getPatronData(patronID);
 
-      //     expect(patronData, "API response must be a valid object").toEqual(
-      //       expect.objectContaining({
-      //         names: expect.any(Array),
-      //         emails: expect.any(Array),
-      //         addresses: expect.any(Array),
-      //         birthDate: expect.any(String),
-      //         patronType: expect.any(Number),
-      //       })
-      //     );
+      //   expect(patronData, "API response must be a valid object").toEqual(
+      //     expect.objectContaining({
+      //       names: expect.any(Array),
+      //       emails: expect.any(Array),
+      //       addresses: expect.any(Array),
+      //       birthDate: expect.any(String),
+      //       patronType: expect.any(Number),
+      //     })
+      //   );
 
-      //     expect(
-      //       patronData.names.length,
-      //       "Names array should not be empty"
-      //     ).toBeGreaterThan(0);
-      //     expect(
-      //       patronData.birthDate,
-      //       "Birthdate should not be empty"
-      //     ).toBeTruthy();
-      //     expect(
-      //       patronData.emails.length,
-      //       "Emails array should not be empty"
-      //     ).toBeGreaterThan(0);
-      //     expect(
-      //       patronData.addresses.length,
-      //       "Addresses array should not be empty"
-      //     ).toBeGreaterThan(0);
+      //   expect(
+      //     patronData.names.length,
+      //     "Names array should not be empty"
+      //   ).toBeGreaterThan(0);
+      //   expect(
+      //     patronData.birthDate,
+      //     "Birthdate should not be empty"
+      //   ).toBeTruthy();
+      //   expect(
+      //     patronData.emails.length,
+      //     "Emails array should not be empty"
+      //   ).toBeGreaterThan(0);
+      //   expect(
+      //     patronData.addresses.length,
+      //     "Addresses array should not be empty"
+      //   ).toBeGreaterThan(0);
 
-      //     const expectedName =
-      //       `${TEST_PATRON.lastName}, ${TEST_PATRON.firstName}`.toUpperCase();
-      //     const expectedDOB = formatSierraDate(TEST_PATRON.dateOfBirth);
-      //     const expectedEmail = TEST_PATRON.email.toLowerCase();
-      //     const patronEmails = patronData.emails?.map((email) =>
-      //       email.toLowerCase()
-      //     );
+      //   const expectedName =
+      //     `${TEST_PATRON.lastName}, ${TEST_PATRON.firstName}`.toUpperCase();
+      //   const expectedDOB = formatSierraDate(TEST_PATRON.dateOfBirth);
+      //   const expectedEmail = TEST_PATRON.email.toLowerCase();
+      //   const patronEmails = patronData.emails?.map((email) =>
+      //     email.toLowerCase()
+      //   );
 
-      //     const expectedAddress = createFuzzyMatcher([
-      //       TEST_NYS_ADDRESS.street,
-      //       TEST_NYS_ADDRESS.apartmentSuite,
-      //       TEST_NYS_ADDRESS.city,
-      //       TEST_NYS_ADDRESS.state,
-      //       TEST_NYS_ADDRESS.postalCode,
-      //     ]);
+      //   const expectedAddress = createFuzzyMatcher([
+      //     TEST_NYS_ADDRESS.street,
+      //     TEST_NYS_ADDRESS.apartmentSuite,
+      //     TEST_NYS_ADDRESS.city,
+      //     TEST_NYS_ADDRESS.state,
+      //     TEST_NYS_ADDRESS.postalCode,
+      //   ]);
 
-      //     const actualAddressText = (patronData.addresses?.[0]?.lines || []).join(
-      //       " "
-      //     );
-      //     const actualName = patronData.names?.[0].toUpperCase();
+      //   const actualAddressText = (patronData.addresses?.[0]?.lines || []).join(
+      //     " "
+      //   );
+      //   const actualName = patronData.names?.[0].toUpperCase();
 
-      //     expect(actualName).toContain(expectedName);
-      //     expect(patronData.birthDate).toBe(expectedDOB);
-      //     expect(actualAddressText).toMatch(expectedAddress);
-      //     expect(patronEmails).toContain(expectedEmail);
-      //     expect(patronData.patronType).toBe(PATRON_TYPES.DIGITAL_NON_METRO);
-      //   });
+      //   expect(actualName).toContain(expectedName);
+      //   expect(patronData.birthDate).toBe(expectedDOB);
+      //   expect(actualAddressText).toMatch(expectedAddress);
+      //   expect(patronEmails).toContain(expectedEmail);
+      //   expect(patronData.patronType).toBe(PATRON_TYPES.DIGITAL_NON_METRO);
+      // });
     });
   });
 }
