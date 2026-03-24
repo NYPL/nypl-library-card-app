@@ -50,10 +50,12 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.addressPage.nextButton.click();
       });
 
-      // await test.step("skips alternate address", async () => {
-      //   await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      //   await pageManager.alternateAddressPage.nextButton.click();
-      // });
+      await test.step("skips alternate address", async () => {
+        await expect(
+          pageManager.alternateAddressPage.stepHeading
+        ).toBeVisible();
+        await pageManager.alternateAddressPage.nextButton.click();
+      });
 
       // await test.step("verifies home address", async () => {
       //   await expect(
