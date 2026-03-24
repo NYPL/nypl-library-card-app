@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+import { cleanText } from "../utils/formatter";
 
 export class AlternateAddressPage {
   readonly page: Page;
@@ -31,12 +32,11 @@ export class AlternateAddressPage {
         "Step 2 of 5: Alternate address",
       level: 2,
     });
-    const translationText =
-      appContent?.location?.workAddress?.description?.part3 ||
-      "Please provide the address of where you work, attend school, or pay property taxes in New York State. If none of these apply to you, click next.";
-    const cleanText = translationText.replace(/<[^>]*>/g, "");
     this.informationalBanner = page.locator("aside", {
-      hasText: cleanText,
+      hasText: cleanText(
+        appContent?.location?.workAddress?.description?.part3 ||
+          "Please provide the address of where you work, attend school, or pay property taxes in New York State. If none of these apply to you, click next."
+      ),
     });
     this.addressHeading = page.getByRole("heading", {
       name:
