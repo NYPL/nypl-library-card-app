@@ -69,12 +69,14 @@ export class PersonalPage {
       name: appContent?.personal?.email?.locations || "locations",
     });
     this.receiveInfoCheckbox = this.page.getByRole("checkbox", {
-      name: appContent?.personal?.eCommunications?.labelText || "Yes, I would like to receive information about NYPL's programs and services",
+      name:
+        appContent?.personal?.eCommunications?.labelText ||
+        "Yes, I would like to receive information about NYPL's programs and services",
     });
     this.receiveInfoCheckboxLabel = this.page.getByText(
       appContent?.personal?.eCommunications?.labelText ||
         "Yes, I would like to receive information about NYPL's programs and services"
-     });
+    );
     this.previousButton = this.page.getByRole("link", {
       name: appContent?.button?.previous || "Previous",
       exact: true,

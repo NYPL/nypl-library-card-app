@@ -79,13 +79,13 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   ).toBeVisible();
       //   await pageManager.addressVerificationPage
       //     .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-      //     .check();
+      //     .click();
       //   await pageManager.addressVerificationPage.nextButton.click();
-      //   await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-      //     {
-      //       timeout: SPINNER_TIMEOUT,
-      //     }
-      //   );
+      //   await expect(
+      //     pageManager.addressVerificationPage.spinner
+      //   ).not.toBeVisible({
+      //     timeout: SPINNER_TIMEOUT,
+      //   });
       // });
 
       // await test.step("enters account information", async () => {
@@ -93,13 +93,13 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       //   await pageManager.accountPage.nextButton.click();
       // });
-      
-//     await test.step("edits personal info on review page", async () => {
-//       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-//       await pageManager.reviewPage.editPersonalInfoButton.click();
-//       await fillPersonalInfo(pageManager.reviewPage, TEST_EDITED_PATRON);
-//       await pageManager.reviewPage.receiveInfoCheckboxLabel.click();
-//     });
+
+      // await test.step("edits personal info on review page", async () => {
+      //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      //   await pageManager.reviewPage.editPersonalInfoButton.click();
+      //   await fillPersonalInfo(pageManager.reviewPage, TEST_EDITED_PATRON);
+      //   await pageManager.reviewPage.receiveInfoCheckboxLabel.click();
+      // });
 
       // await test.step("displays updated personal info on review page", async () => {
       //   await expect(pageManager.reviewPage.firstNameInput).toHaveValue(

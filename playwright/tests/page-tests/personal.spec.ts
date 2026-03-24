@@ -103,7 +103,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await personalPage.nextButton.click();
         await expect(personalPage.dateOfBirthInvalid).toBeVisible();
       });
-      
+
       test("displays error for written date of birth", async () => {
         await personalPage.dateOfBirthInput.fill("December 25, 1984");
         await personalPage.nextButton.click();

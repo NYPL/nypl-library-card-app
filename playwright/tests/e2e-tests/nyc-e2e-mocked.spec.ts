@@ -57,52 +57,54 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.alternateAddressPage.nextButton.click();
       });
 
-      //   await test.step("verifies home address", async () => {
-      //     await expect(
-      //       pageManager.addressVerificationPage.stepHeading
-      //     ).toBeVisible();
-      //     await pageManager.addressVerificationPage
-      //       .getHomeAddressOption(TEST_NYC_ADDRESS.street)
-      //       .click();
-      //     await pageManager.addressVerificationPage.nextButton.click();
-      //   });
+      // await test.step("verifies home address", async () => {
+      //   await expect(
+      //     pageManager.addressVerificationPage.stepHeading
+      //   ).toBeVisible();
+      //   await pageManager.addressVerificationPage
+      //     .getHomeAddressOption(TEST_NYC_ADDRESS.street)
+      //     .click();
+      //   await pageManager.addressVerificationPage.nextButton.click();
+      // });
 
-      //   await test.step("enters account information", async () => {
-      //     await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      //     await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      //     await pageManager.accountPage.nextButton.click();
-      //   });
+      // await test.step("enters account information", async () => {
+      //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
+      //   await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+      //   await pageManager.accountPage.nextButton.click();
+      // });
 
-      //   await test.step("displays review page", async () => {
-      //     await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      //   });
+      // await test.step("displays review page", async () => {
+      //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      // });
 
-      //   await test.step("submits application", async () => {
-      //     await mockCreatePatronApi(
-      //       page,
-      //       fullName,
-      //       TEST_BARCODE_NUMBER,
-      //       PATRON_TYPES.DIGITAL_METRO
-      //     );
-      //     await expect(pageManager.reviewPage.submitButton).toBeVisible();
-      //     await pageManager.reviewPage.submitButton.click();
-      //   });
+      // await test.step("submits application", async () => {
+      //   await mockCreatePatronApi(
+      //     page,
+      //     fullName,
+      //     TEST_BARCODE_NUMBER,
+      //     PATRON_TYPES.DIGITAL_METRO
+      //   );
+      //   await expect(pageManager.reviewPage.submitButton).toBeVisible();
+      //   await pageManager.reviewPage.submitButton.click();
+      // });
 
-      //   await test.step("displays metro card elements on congrats page", async () => {
-      //     await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.metroOrNonMetroHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.readListenLink).toBeVisible();
-      //   });
+      // await test.step("displays metro card elements on congrats page", async () => {
+      //   await expect(pageManager.congratsPage.mainHeading).toBeVisible();
+      //   await expect(
+      //     pageManager.congratsPage.metroOrNonMetroHeading
+      //   ).toBeVisible();
+      //   await expect(pageManager.congratsPage.readListenLink).toBeVisible();
+      // });
 
-      //   await test.step("displays generated library card on congrats page", async () => {
-      //     await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
-      //     await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.issuedDate).toBeVisible();
-      //     await expect(pageManager.congratsPage.patronBarcodeNumber).toHaveText(
-      //       TEST_BARCODE_NUMBER
-      //     );
-      //   });
+      // await test.step("displays generated library card on congrats page", async () => {
+      //   await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
+      //   await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
+      //   await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
+      //   await expect(pageManager.congratsPage.issuedDate).toBeVisible();
+      //   await expect(pageManager.congratsPage.patronBarcodeNumber).toHaveText(
+      //     TEST_BARCODE_NUMBER
+      //   );
+      // });
     });
   });
 }
