@@ -47,3 +47,7 @@ export const formatSierraDate = (dateStr: string): string => {
   // Transforms "12/31/2023" -> "2023-12-31"
   return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
 };
+
+export const cleanText = (text: string): string => {
+  return text.replace(/<[^>]*>/g, "");
+};
