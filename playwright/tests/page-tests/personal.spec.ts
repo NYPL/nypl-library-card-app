@@ -33,7 +33,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(personalPage.lastNameInput).toBeVisible();
         await expect(personalPage.dateOfBirthInput).toBeVisible();
         await expect(personalPage.emailInput).toBeVisible();
-        await expect(personalPage.receiveInfoCheckbox).toBeVisible();
+        await expect(personalPage.receiveInfoCheckboxLabel).toBeVisible();
       });
 
       test("confirms links open in new tab", async () => {
@@ -74,7 +74,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await personalPage.dateOfBirthInput.fill("");
         await personalPage.emailInput.fill("");
         await personalPage.nextButton.click();
-
         await expect(personalPage.firstNameError).toBeVisible();
         await expect(personalPage.lastNameError).toBeVisible();
         await expect(personalPage.dateOfBirthInvalid).toBeVisible();
@@ -104,7 +103,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await personalPage.nextButton.click();
         await expect(personalPage.dateOfBirthInvalid).toBeVisible();
       });
-
+      
       test("displays error for written date of birth", async () => {
         await personalPage.dateOfBirthInput.fill("December 25, 1984");
         await personalPage.nextButton.click();

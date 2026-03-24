@@ -54,7 +54,7 @@ test.describe("displays elements on review page", () => {
     await expect(reviewPage.createYourAccountHeading).toBeVisible();
     await expect(reviewPage.usernameHeading).toBeVisible();
     await expect(reviewPage.passwordHeading).toBeVisible();
-    await expect(reviewPage.showPasswordLabel).toBeVisible();
+    await expect(reviewPage.showPasswordCheckboxLabel).toBeVisible();
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
   });
 
@@ -92,7 +92,7 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.emailInput).toBeVisible();
     await expect(reviewPage.alternateFormLink).toBeVisible();
     await expect(reviewPage.locationsLink).toBeVisible();
-    await expect(reviewPage.receiveInfoCheckbox).toBeVisible();
+    await expect(reviewPage.receiveInfoCheckboxLabel).toBeVisible();
   });
 
   // does not replace personal info since there's no existing text
@@ -100,8 +100,7 @@ test.describe("edits patron information on review page", () => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editPersonalInfoButton.click();
     await fillPersonalInfo(reviewPage, TEST_PATRON);
-    await reviewPage.receiveInfoCheckbox.click(); // unable to check()
-
+    await reviewPage.receiveInfoCheckboxLabel.click();
     await expect(reviewPage.firstNameInput).toHaveValue(TEST_PATRON.firstName);
     await expect(reviewPage.lastNameInput).toHaveValue(TEST_PATRON.lastName);
     await expect(reviewPage.dateOfBirthInput).toHaveValue(
@@ -144,10 +143,10 @@ test.describe("edits patron information on review page", () => {
       ).toBeVisible();
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-        .check();
+        .click();
       await pageManager.addressVerificationPage
         .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
-        .check();
+        .click();
       await pageManager.addressVerificationPage.nextButton.click();
       await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
         { timeout: SPINNER_TIMEOUT }
@@ -181,14 +180,14 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.passwordInput).toBeVisible();
     await expect(reviewPage.verifyPasswordInputHeading).toBeVisible();
     await expect(reviewPage.verifyPasswordInput).toBeVisible();
-    await expect(reviewPage.showPasswordLabel).toBeVisible();
+    await expect(reviewPage.showPasswordCheckboxLabel).toBeVisible();
     await expect(reviewPage.homeLibraryHeading).toBeVisible();
     await expect(reviewPage.nyplLocationLink).toBeVisible();
     await expect(reviewPage.selectHomeLibrary).toBeVisible();
     await expect(reviewPage.cardholderTermsLink).toBeVisible();
     await expect(reviewPage.rulesRegulationsLink).toBeVisible();
     await expect(reviewPage.privacyPolicyLink).toBeVisible();
-    await expect(reviewPage.acceptTermsLabel).toBeVisible();
+    await expect(reviewPage.acceptTermsCheckboxLabel).toBeVisible();
   });
 
   // does not replace account info since there's no existing text
@@ -197,7 +196,7 @@ test.describe("edits patron information on review page", () => {
     await reviewPage.editAccountButton.click();
     await fillAccountInfo(reviewPage, TEST_ACCOUNT);
     await expect(reviewPage.usernameInput).toHaveValue(TEST_ACCOUNT.username);
-    await reviewPage.showPasswordLabel.check();
+    await reviewPage.showPasswordCheckboxLabel.click();
     await expect(reviewPage.passwordInput).toHaveValue(TEST_ACCOUNT.password);
     await expect(reviewPage.verifyPasswordInput).toHaveValue(
       TEST_ACCOUNT.password
@@ -205,7 +204,7 @@ test.describe("edits patron information on review page", () => {
     await expect(reviewPage.selectHomeLibrary).toHaveValue(
       TEST_ACCOUNT.homeLibraryCode
     );
-    await expect(reviewPage.acceptTermsLabel).toBeChecked();
+    await expect(reviewPage.acceptTermsCheckbox).toBeChecked();
   });
 
   test("enters updated account info", async ({ page }) => {
@@ -228,7 +227,7 @@ test.describe("edits patron information on review page", () => {
       await expect(pageManager.reviewPage.usernameInput).toHaveValue(
         TEST_EDITED_ACCOUNT.username
       );
-      await pageManager.reviewPage.showPasswordLabel.check();
+      await pageManager.reviewPage.showPasswordCheckboxLabel.click();
       await expect(pageManager.reviewPage.passwordInput).toHaveValue(
         TEST_EDITED_ACCOUNT.password
       );

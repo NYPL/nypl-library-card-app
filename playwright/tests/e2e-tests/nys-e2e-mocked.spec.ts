@@ -63,7 +63,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   ).toBeVisible();
       //   await pageManager.addressVerificationPage
       //     .getHomeAddressOption(TEST_NYS_ADDRESS.street)
-      //     .check();
+      //     .click();
       //   await pageManager.addressVerificationPage.nextButton.click();
       // });
 

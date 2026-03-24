@@ -143,7 +143,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     //         await expect(
     //           pageManager.reviewPage.getText(TEST_EDITED_ACCOUNT.username)
     //         ).toBeVisible();
-    //         await pageManager.reviewPage.showPasswordLabel.check();
+    //         await pageManager.reviewPage.showPasswordCheckboxLabel.click();
     //         await expect(
     //           pageManager.reviewPage.getText(TEST_EDITED_ACCOUNT.password)
     //         ).toBeVisible();
@@ -152,6 +152,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     //         ).toBeVisible();
     //       });
     //     });
+});
 
     test("retains user-entered info after clicking breadcrumb", async ({
       page,
@@ -160,7 +161,10 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await page.goto(PAGE_ROUTES.PERSONAL(lang));
         await expect(pageManager.personalPage.stepHeading).toBeVisible();
         await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-        await pageManager.personalPage.receiveInfoCheckbox.click(); // unchecks
+        await pageManager.personalPage.receiveInfoCheckboxLabel.click();
+        await expect(
+          pageManager.personalPage.receiveInfoCheckbox
+        ).not.toBeChecked();
         await pageManager.personalPage.nextButton.click();
       });
 
@@ -190,10 +194,10 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //         ).toBeVisible();
       //         await pageManager.addressVerificationPage
       //           .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-      //           .check();
+      //           .click();
       //         await pageManager.addressVerificationPage
       //           .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
-      //           .check();
+      //           .click();
       //         await pageManager.addressVerificationPage.nextButton.click();
       //         await expect(
       //           pageManager.addressVerificationPage.spinner

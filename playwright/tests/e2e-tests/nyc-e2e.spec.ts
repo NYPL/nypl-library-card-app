@@ -60,7 +60,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(pageManager.landingPage.applyHeading).toBeVisible();
         await pageManager.landingPage.getStartedButton.click();
       });
-
+      
       await test.step("enters personal information", async () => {
         await expect(pageManager.personalPage.stepHeading).toBeVisible();
         await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
@@ -82,7 +82,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     ).toBeVisible();
       //     await pageManager.addressVerificationPage
       //       .getHomeAddressOption(TEST_NYC_ADDRESS.street)
-      //       .check();
+      //       .click();
       //     await pageManager.addressVerificationPage.nextButton.click();
       //     await expect(
       //       pageManager.addressVerificationPage.spinner
@@ -96,7 +96,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       //     await pageManager.accountPage.nextButton.click();
       //   });
-
+    
       //   await test.step("displays personal information on review page", async () => {
       //     await expect(pageManager.reviewPage.stepHeading).toBeVisible();
       //     await expect(
@@ -135,13 +135,13 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     await expect(
       //       pageManager.reviewPage.getText(TEST_ACCOUNT.username)
       //     ).toBeVisible();
-      //     await expect(pageManager.reviewPage.showPasswordLabel).toBeVisible();
-      //     await pageManager.reviewPage.showPasswordLabel.check();
+      //     await expect(pageManager.reviewPage.showPasswordCheckboxLabel).toBeVisible();
+      //     await pageManager.reviewPage.showPasswordCheckboxLabel.click();
       //     await expect(
       //       pageManager.reviewPage.getText(TEST_ACCOUNT.password)
       //     ).toBeVisible();
       //   });
-
+    
       //   await test.step("submits application", async () => {
       //     await expect(pageManager.reviewPage.submitButton).toBeVisible();
       //     await pageManager.reviewPage.submitButton.click();
@@ -165,7 +165,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //       pageManager.congratsPage.patronBarcodeNumber
       //     ).toContainText(EXPECTED_BARCODE_PREFIX);
       //   });
-
+  
       //   await test.step("retrieves barcode from congrats page", async () => {
       //     scrapedBarcode =
       //       await pageManager.congratsPage.patronBarcodeNumber.textContent();

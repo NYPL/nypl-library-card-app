@@ -92,7 +92,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     ).toBeVisible();
       //     await pageManager.addressVerificationPage
       //       .getHomeAddressOption(TEST_NYS_ADDRESS.street)
-      //       .check();
+      //       .click();
       //     await pageManager.addressVerificationPage.nextButton.click();
       //     await expect(
       //       pageManager.addressVerificationPage.spinner
@@ -145,8 +145,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //     await expect(
       //       pageManager.reviewPage.getText(TEST_ACCOUNT.username)
       //     ).toBeVisible();
-      //     await expect(pageManager.reviewPage.showPasswordLabel).toBeVisible();
-      //     await pageManager.reviewPage.showPasswordLabel.check();
+      //     await expect(pageManager.reviewPage.showPasswordCheckboxLabel).toBeVisible();
+      //     await pageManager.reviewPage.showPasswordCheckboxLabel.click();
       //     await expect(
       //       pageManager.reviewPage.getText(TEST_ACCOUNT.password)
       //     ).toBeVisible();
