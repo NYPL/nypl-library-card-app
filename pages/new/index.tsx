@@ -12,6 +12,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import LanguageMenu from "../../src/components/LanguageMenu/LanguageMenu";
 import { cookieDomain } from "../../appConfig.js";
 import { PageHeading } from "../../src/components/PageHeading";
+import { Banner } from "../../src/components/Banner";
 
 interface HomePageProps {
   policyType: any;
@@ -26,11 +27,12 @@ function HomePage({ policyType, lang }: HomePageProps) {
   return (
     <>
       <LanguageMenu />
-
-      <PageHeading>{t("home.title")}</PageHeading>
-
+      <PageHeading mt="l">{t("home.title")}</PageHeading>
       <Box mb="s">{t("home.description.part1")}</Box>
-      <Box mb="s">{t("home.description.part2")}</Box>
+      <Box
+        mb="s"
+        dangerouslySetInnerHTML={{ __html: t("home.description.part2") }}
+      />
       <Box
         mb="s"
         dangerouslySetInnerHTML={{ __html: t("home.description.part3") }}
@@ -39,6 +41,15 @@ function HomePage({ policyType, lang }: HomePageProps) {
         mb="s"
         dangerouslySetInnerHTML={{ __html: t("home.description.part4") }}
       />
+      <Box
+        mb="s"
+        dangerouslySetInnerHTML={{ __html: t("home.description.part5") }}
+      />
+      <Box
+        mb="l"
+        dangerouslySetInnerHTML={{ __html: t("home.description.part6") }}
+      />
+      <Banner content={t("home.banner.text")} />
       <RoutingLinks
         next={{
           url: `/personal?newCard=true${queryParam}${

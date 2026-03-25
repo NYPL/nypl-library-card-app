@@ -62,13 +62,13 @@ async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
       errors = validateAddressFormData({}, addresses);
       if (isEmpty(errors)) {
         if (existingValues.location !== "nyc") {
-          page = "workAddress";
+          page = "alternate-address";
         } else {
           page = "account";
         }
       }
       break;
-    case "workAddress":
+    case "alternate-address":
       // We need to add the existing home address values since
       // `validateAddressFormData` checks for both home and work addresses.
       addresses = constructAddresses({

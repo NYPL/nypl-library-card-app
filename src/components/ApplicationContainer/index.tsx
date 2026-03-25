@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
-import Banner from "../Banner";
+import Hero from "../Hero";
 import ApiErrors from "../ApiErrors";
 import useFormDataContext from "../../context/FormDataContext";
 import {
@@ -11,6 +11,7 @@ import {
   TemplateHeader,
   TemplateMain,
 } from "@nypl/design-system-react-components";
+import Breadcrumbs from "../Breadcrumb";
 
 const ApplicationContainer = ({ children, problemDetail }) => {
   const {
@@ -20,7 +21,12 @@ const ApplicationContainer = ({ children, problemDetail }) => {
   const { state } = useFormDataContext();
   const { errorObj } = state;
   const errorToDisplay = problemDetail ? problemDetail : errorObj;
-  const finalLang = Array.isArray(lang) && lang.length > 0 ? lang[0] : "en";
+  const finalLang =
+    typeof lang === "string"
+      ? lang
+      : Array.isArray(lang) && lang.length > 0
+        ? lang[0]
+        : "en";
 
   // If there are errors, focus on the element that displays those errors,
   // for client-side rendering.
@@ -32,13 +38,14 @@ const ApplicationContainer = ({ children, problemDetail }) => {
 
   return (
     <Template variant="narrow">
-      <TemplateHeader>
+      <TemplateHeader m="0!">
         <TemplateBreakout>
-          <Banner />
+          <Breadcrumbs />
+          <Hero />
         </TemplateBreakout>
       </TemplateHeader>
       <TemplateMain id="mainContent">
-        <TemplateContent>
+        <TemplateContent my="xl">
           <>
             <ApiErrors
               lang={finalLang}

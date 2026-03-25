@@ -4,6 +4,7 @@ import { useTranslation } from "next-i18next";
 import FormField from "../FormField";
 import { isDate } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
+import moment from "moment";
 
 /**
  * AgeForm
@@ -20,6 +21,21 @@ const AgeForm = () => {
   } = useFormContext();
   const DATE_MAX_LENGTH = 10;
 
+  const validateBirthdate = (inputDate: string) => {
+    if (!inputDate) return true;
+    if (inputDate.length > DATE_MAX_LENGTH || !isDate(inputDate)) {
+      return t("personal.errorMessage.birthdate");
+    }
+
+    const birthDate = moment(inputDate, "MM/DD/YYYY", true);
+    const thirteenYearsAgo = moment().subtract(13, "years");
+
+    if (birthDate.isAfter(thirteenYearsAgo)) {
+      return t("personal.errorMessage.ageGate");
+    }
+    return true;
+  };
+
   const birthdateField = (
     <FormField
       id="birthdate"
@@ -27,9 +43,7 @@ const AgeForm = () => {
       label={t("personal.birthdate.label")}
       {...register("birthdate", {
         required: t("personal.errorMessage.birthdate"),
-        validate: (val) =>
-          (val.length <= DATE_MAX_LENGTH && isDate(val)) ||
-          t("personal.errorMessage.birthdate"),
+        validate: validateBirthdate,
       })}
       isRequired
       errorState={errors}

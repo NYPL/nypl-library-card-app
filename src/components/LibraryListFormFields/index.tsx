@@ -1,10 +1,14 @@
-import { Box, Select } from "@nypl/design-system-react-components";
+import {
+  Box,
+  Link as DSLink,
+  Select,
+} from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { Trans } from "../Trans";
 
 import useFormDataContext from "../../context/FormDataContext";
-import { findLibraryName } from "../../utils/formDataUtils";
 import { LibraryListObject } from "../../interfaces";
 import { Paragraph } from "../Paragraph";
 import { PageSubHeading } from "../PageSubHeading";
@@ -25,11 +29,12 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   const { t } = useTranslation("common");
   const { state } = useFormDataContext();
   const { formValues } = state;
-  const defaultValue = formValues?.homeLibraryCode
-    ? findLibraryName(formValues?.homeLibraryCode)
-    : "";
+  const defaultValue = formValues?.homeLibraryCode || "";
   const [value, setValue] = useState(defaultValue);
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   const onChange = (event) => {
     setValue(event.target.value);
@@ -43,20 +48,36 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
     <Box>
       <PageSubHeading>{t("account.library.title")}</PageSubHeading>
       <Paragraph>{t("account.library.description.part1")}</Paragraph>
-      <Paragraph>{t("account.library.description.part2")}</Paragraph>
+      <Paragraph>
+        <Trans
+          i18nKey="account.library.description.part2"
+          components={{ a: <DSLink variant="external" /> }}
+        />
+      </Paragraph>
+      <Paragraph
+        mb="m"
+        dangerouslySetInnerHTML={{
+          __html: t("account.library.description.part3"),
+        }}
+      />
       <Select
-        placeholder="Please select"
+        placeholder={t("select.placeholder")}
         id="librarylist-select"
         labelText={t("account.library.selectLibrary")}
-        isRequired={false}
+        invalidText={t("account.errorMessage.homeLibraryCode")}
+        isInvalid={!!errors?.homeLibraryCode?.message}
+        isRequired={true}
         // Pass in the `react-hook-form` register function so it can handle this
         // form element's state for us.
-        {...register("homeLibraryCode")}
+        {...register("homeLibraryCode", {
+          required: t("account.errorMessage.homeLibraryCode"),
+        })}
+        defaultValue={defaultValue}
         {...inputProps}
         autoComplete="on"
       >
         {libraryList.map(({ value, label }, i) => (
-          <option key={i} value={value}>
+          <option key={`librarylist-option-${i}-${value}`} value={value}>
             {label}
           </option>
         ))}

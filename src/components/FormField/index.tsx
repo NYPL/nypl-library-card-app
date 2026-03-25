@@ -12,6 +12,7 @@ interface FormFieldProps {
   label?: string;
   type?: string;
   name: string;
+  inputMode?: string;
   errorState?: any;
   className?: string;
   isRequired?: boolean;
@@ -20,6 +21,7 @@ interface FormFieldProps {
   maxLength?: number;
   defaultValue?: any;
   attributes?: any;
+  pattern?: any;
   autoComplete?:
     | AutoCompleteValues
     | "section-home address-line1"
@@ -47,6 +49,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
       label,
       type = "text",
       name,
+      inputMode = "text",
       errorState = {},
       className = "",
       isRequired = false,
@@ -65,6 +68,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
     const typeToInputTypeMap = {
       text: "text",
       password: "password",
+      email: "email",
       hidden: "hidden",
     };
     const updatedRef = ref || attributes?.ref ? ref || attributes?.ref : null;
@@ -103,6 +107,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
           max={maxLength || null}
           defaultValue={defaultValue}
           name={name}
+          inputMode={inputMode}
           labelText={label}
           {...attributes}
           ref={updatedRef}

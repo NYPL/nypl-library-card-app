@@ -46,7 +46,7 @@ function AddressPage({
   return (
     <>
       <PageHeading autoScrollOnMount>{t("location.title")}</PageHeading>
-      <Paragraph>{t("internationalInstructions")}</Paragraph>
+      <Paragraph mb="l">{t("internationalInstructions")}</Paragraph>
       <AddressContainer csrfToken={csrfToken} />
     </>
   );

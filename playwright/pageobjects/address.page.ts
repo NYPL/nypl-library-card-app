@@ -1,10 +1,12 @@
 import { Page, Locator } from "@playwright/test";
+import { ERROR_MESSAGES } from "../utils/constants";
 
 export class AddressPage {
   readonly page: Page;
   readonly mainHeading: Locator; // displays on each page
   readonly stepHeading: Locator;
   readonly addressHeading: Locator;
+  readonly alternateForm: Locator;
   readonly streetAddressInput: Locator;
   readonly apartmentSuiteInput: Locator;
   readonly cityInput: Locator;
@@ -14,6 +16,7 @@ export class AddressPage {
   readonly cityError: Locator;
   readonly stateError: Locator;
   readonly postalCodeError: Locator;
+  readonly spinner: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
@@ -31,25 +34,23 @@ export class AddressPage {
       name: "Home address",
       level: 3,
     });
+    this.alternateForm = page.getByRole("link", { name: "alternate form" });
     this.streetAddressInput = page.getByLabel(/Street address/i);
     this.apartmentSuiteInput = page.getByLabel(/Apartment \/ Suite/i);
     this.cityInput = page.getByLabel(/City/i);
     this.stateInput = page.getByLabel(/State/i);
     this.postalCodeInput = page.getByLabel(/Postal code/i);
     this.streetAddressError = page.getByText(
-      "Please enter a valid street address."
+      ERROR_MESSAGES.STREET_ADDRESS_INVALID
     );
-    this.cityError = page.getByText("Please enter a valid city.");
-    this.stateError = page.getByText(
-      "Please enter a 2-character state abbreviation."
-    );
-    this.postalCodeError = page.getByText(
-      "Please enter a 5 or 9-digit postal code."
-    );
+    this.cityError = page.getByText(ERROR_MESSAGES.CITY_INVALID);
+    this.stateError = page.getByText(ERROR_MESSAGES.STATE_INVALID);
+    this.postalCodeError = page.getByText(ERROR_MESSAGES.POSTAL_CODE_INVALID);
     this.nextButton = page.getByRole("button", { name: "Next", exact: true });
     this.previousButton = page.getByRole("link", {
       name: "Previous",
       exact: true,
     });
+    this.spinner = this.page.getByRole("status", { name: "Loading Indicator" });
   }
 }

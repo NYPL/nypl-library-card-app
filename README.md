@@ -106,7 +106,7 @@ Deployments are triggered by creating and pushing tags with specific naming conv
 
 #### Deploy to QA Environment
 
-A QA deploy can be started by manually creating a qa compatible tag in the project releases dashboard.
+A QA deploy can be started by manually creating a qa compatible tag in the project releases dashboard. To access the dashboard, navigate to Releases and click "Draft a new release." Define your tag and release title, but ensure "Set as the latest release" remains unchecked for the QA deployment. Once you click "Publish release," the system will automatically create the tag and push it to the QA environment.
 
 Alternatively, tags can be created manually from any branch, and must be of this format: `qa-*`
 

@@ -14,7 +14,7 @@ import { useTranslation } from "next-i18next";
 
 const styles = {
   outerBox: {
-    mb: "s",
+    mb: "l",
     bg: "var(--nypl-colors-ui-gray-light-cool)",
     position: "relative",
     display: "flex",

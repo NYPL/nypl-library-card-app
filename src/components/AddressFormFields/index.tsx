@@ -1,19 +1,25 @@
 import {
   FormField as DSFormField,
   FormRow,
+  Select,
 } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { isNumeric } from "validator";
 
 import FormField from "../FormField";
+import { findState } from "../../utils/formDataUtils";
 import { AddressTypes, FormInputData } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
+import { USStateObject } from "../../interfaces";
 
 interface AddressFormProps {
   id?: string;
   type: AddressTypes;
+  /* Only the home page is required by default. */
+  isRequired: boolean;
+  stateData: USStateObject[];
 }
 
 /**
@@ -22,21 +28,51 @@ interface AddressFormProps {
  * street address (line1), second street address (line2), city, state,
  * and zip code.
  */
-const AddressForm = ({ id, type }: AddressFormProps) => {
+const AddressForm = ({
+  id,
+  type,
+  isRequired,
+  stateData = [],
+}: AddressFormProps) => {
   const { t } = useTranslation("common");
-  const { state } = useFormDataContext();
-  const { formValues } = state;
-  // This component must be used within the `react-hook-form` provider so that
-  // these functions are available to use.
   const {
     register,
     formState: { errors },
+    setValue,
   } = useFormContext<FormInputData>();
-  const STATELENGTH = 2;
-  const MINLENGTHZIP = 5;
-  const MAXLENGTHZIP = 9;
-  // Only the home address is required. The work address is optional.
-  const isRequired = type === AddressTypes.Home;
+  const { state } = useFormDataContext();
+  const { formValues } = state;
+  const defaultStateValue = formValues[`${type}-state`]
+    ? findState(formValues[`${type}-state`])
+    : "";
+  const [stateValue, setStateValue] = useState(defaultStateValue);
+
+  const onChange = useCallback(
+    (event) => {
+      // Set value manually to trigger the watch() function
+      setValue(`${type}-state`, event.target.value, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+      setStateValue(event.target.value);
+    },
+    [isRequired]
+  );
+
+  const inputProps = {
+    value: stateValue,
+    onChange,
+  };
+
+  const styles = {
+    gridSpacing: {
+      mb: { base: "-l", md: "0" },
+    },
+  };
+
+  const MIN_LENGTH_ZIP = 5;
+  const MAX_LENGTH_ZIP = 9;
+
   /**
    * lengthValidation
    * Returns a function to use for the `validate` property in the `register`
@@ -62,8 +98,8 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
       return t("location.errorMessage.zip");
     }
     return lengthValidation(
-      MINLENGTHZIP,
-      MAXLENGTHZIP,
+      MIN_LENGTH_ZIP,
+      MAX_LENGTH_ZIP,
       "location.errorMessage.zip"
     )(value);
   };
@@ -119,28 +155,35 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
           />
         </DSFormField>
         <DSFormField>
-          <FormField
+          <Select
+            placeholder={t("select.placeholder")}
             id={`state-${type}`}
-            instructionText={t("location.address.state.instruction")}
-            label={t("location.address.state.label")}
-            {...register(`${type}-state`, {
-              validate: lengthValidation(
-                STATELENGTH,
-                STATELENGTH,
-                "location.errorMessage.state"
-              ),
-            })}
-            isRequired={isRequired}
-            errorState={errors}
-            maxLength={STATELENGTH}
-            defaultValue={formValues[`${type}-state`]}
+            labelText={t("location.address.state.label")}
             autoComplete={`section-${type} address-level1`}
-          />
+            isRequired={isRequired}
+            requiredLabelText={t("required")}
+            isInvalid={!!errors?.[`${type}-state`]?.message}
+            defaultValue={formValues[`${type}-state`]}
+            invalidText={t("location.errorMessage.state")}
+            // Pass in the `react-hook-form` register function so it can handle this
+            // form element's state for us.
+            {...register(`${type}-state`, {
+              required: {
+                value: isRequired,
+                message: t("location.errorMessage.state"),
+              },
+            })}
+            {...inputProps}
+          >
+            {stateData.map(({ label }, i) => (
+              <option key={`${i}-${label}`}>{label}</option>
+            ))}
+          </Select>
         </DSFormField>
       </FormRow>
 
       <FormRow id={`${id}-addressForm-4`}>
-        <DSFormField>
+        <DSFormField sx={styles.gridSpacing}>
           <FormField
             id={`zip-${type}`}
             label={t("location.address.postalCode.label")}
@@ -149,11 +192,13 @@ const AddressForm = ({ id, type }: AddressFormProps) => {
             })}
             isRequired={isRequired}
             errorState={errors}
-            minLength={MINLENGTHZIP}
-            maxLength={MAXLENGTHZIP}
+            minLength={MIN_LENGTH_ZIP}
+            maxLength={MAX_LENGTH_ZIP}
             instructionText={t("location.address.postalCode.instruction")}
             defaultValue={formValues[`${type}-zip`]}
             autoComplete={`section-${type} postal-code`}
+            pattern="[0-9]*"
+            inputMode="numeric"
           />
         </DSFormField>
         <DSFormField></DSFormField>

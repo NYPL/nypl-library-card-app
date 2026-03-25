@@ -1,8 +1,5 @@
 import { Page, Locator } from "@playwright/test";
-import {
-  USERNAME_AVAILABLE_MESSAGE,
-  USERNAME_UNAVAILABLE_MESSAGE,
-} from "../utils/constants";
+import { ERROR_MESSAGES } from "../utils/constants";
 
 export class ReviewPage {
   readonly page: Page;
@@ -14,19 +11,24 @@ export class ReviewPage {
   readonly firstNameHeading: Locator;
   readonly firstNameInputHeading: Locator;
   readonly firstNameInput: Locator;
+  readonly firstNameError: Locator;
   readonly lastNameHeading: Locator;
   readonly lastNameInputHeading: Locator;
   readonly lastNameInput: Locator;
+  readonly lastNameError: Locator;
   readonly dateOfBirthHeading: Locator;
   readonly dateOfBirthInputHeading: Locator;
   readonly dateOfBirthInput: Locator;
+  readonly dateOfBirthInvalid: Locator;
+  readonly dateOfBirthError: Locator;
   readonly emailHeading: Locator;
   readonly emailInputHeading: Locator;
   readonly emailInput: Locator;
-  readonly emailErrorMessage: Locator;
+  readonly emailError: Locator;
   readonly receiveInfoHeading: Locator;
   readonly receiveInfoChoice: Locator;
   readonly receiveInfoCheckbox: Locator;
+  readonly receiveInfoCheckboxLabel: Locator;
   readonly alternateFormLink: Locator;
   readonly locationsLink: Locator;
   readonly editPersonalInfoButton: Locator;
@@ -34,9 +36,14 @@ export class ReviewPage {
   // Address section
   readonly addressHeading: Locator;
   readonly streetHeading: Locator;
+  readonly streetAddressInvalid: Locator;
+  readonly streetAddressError: Locator;
   readonly cityHeading: Locator;
+  readonly cityError: Locator;
   readonly stateHeading: Locator;
+  readonly stateError: Locator;
   readonly postalCodeHeading: Locator;
+  readonly postalCodeError: Locator;
   readonly editAddressButton: Locator;
 
   // Account section
@@ -44,21 +51,29 @@ export class ReviewPage {
   readonly usernameHeading: Locator;
   readonly usernameInputHeading: Locator;
   readonly usernameInput: Locator;
+  readonly usernameError: Locator;
   readonly availableUsernameButton: Locator;
   readonly availableUsernameMessage: Locator;
-  readonly unavailableUsernameError: Locator;
+  readonly unavailableUsernameMessage: Locator;
   readonly passwordHeading: Locator;
   readonly passwordInputHeading: Locator;
   readonly passwordInput: Locator;
+  readonly passwordError: Locator;
   readonly verifyPasswordInputHeading: Locator;
   readonly verifyPasswordInput: Locator;
+  readonly verifyPasswordError: Locator;
   readonly showPasswordCheckbox: Locator;
+  readonly showPasswordCheckboxLabel: Locator;
   readonly homeLibraryHeading: Locator;
+  readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
+  readonly homeLibraryError: Locator;
   readonly cardholderTermsLink: Locator;
   readonly rulesRegulationsLink: Locator;
   readonly privacyPolicyLink: Locator;
   readonly acceptTermsCheckbox: Locator;
+  readonly acceptTermsCheckboxLabel: Locator;
+  readonly acceptTermsError: Locator;
   readonly editAccountButton: Locator;
   readonly submitButton: Locator;
 
@@ -83,30 +98,11 @@ export class ReviewPage {
     this.firstNameInputHeading = page.getByText("First name (required)", {
       exact: true,
     });
-
-    this.firstNameHeading = page.getByText("First name", { exact: true });
-    this.lastNameHeading = page.getByText("Last name", { exact: true });
-    this.dateOfBirthHeading = page.getByText("Date of birth", { exact: true });
-    this.emailHeading = page.getByText("Email address", { exact: true });
-    this.receiveInfoHeading = page.getByText(
-      "Receive information about NYPL's programs and services",
-      { exact: true }
-    );
-
-    this.streetHeading = page.getByText("Street address", { exact: true });
-    this.cityHeading = page.getByText("City", { exact: true });
-    this.stateHeading = page.getByText("State", { exact: true });
-    this.postalCodeHeading = page.getByText("Postal code", { exact: true });
-    this.editPersonalInfoButton = page
-      .getByRole("button", {
-        name: "Edit Personal information",
-        exact: true,
-      })
-      .first();
     this.firstNameInput = page.getByRole("textbox", {
       name: "First name (required)",
       exact: true,
     });
+    this.firstNameError = page.getByText(ERROR_MESSAGES.FIRST_NAME_INVALID);
     this.lastNameHeading = page.getByText("Last name", { exact: true });
     this.lastNameInputHeading = page.getByText("Last name (required)", {
       exact: true,
@@ -115,6 +111,7 @@ export class ReviewPage {
       name: "Last name (required)",
       exact: true,
     });
+    this.lastNameError = page.getByText(ERROR_MESSAGES.LAST_NAME_INVALID);
     this.dateOfBirthHeading = page.getByText("Date of birth", { exact: true });
     this.dateOfBirthInputHeading = page.getByText("Date of birth (required)", {
       exact: true,
@@ -123,6 +120,10 @@ export class ReviewPage {
       name: "Date of birth (required)",
       exact: true,
     });
+    this.dateOfBirthInvalid = page.getByText(
+      ERROR_MESSAGES.DATE_OF_BIRTH_INVALID
+    );
+    this.dateOfBirthError = page.getByText(ERROR_MESSAGES.DATE_OF_BIRTH_ERROR);
     this.emailHeading = page.getByText("Email address", { exact: true });
     this.emailInputHeading = page.getByText("Email address (required)", {
       exact: true,
@@ -131,25 +132,24 @@ export class ReviewPage {
       name: "Email address (required)",
       exact: true,
     });
-    this.emailErrorMessage = page.getByText(
-      "There was a problem. Please enter a valid email address."
-    );
+    this.emailError = page.getByText(ERROR_MESSAGES.EMAIL_INVALID);
     this.receiveInfoHeading = page.getByText(
       "Receive information about NYPL's programs and services",
       { exact: true }
     );
     this.receiveInfoChoice = page.getByText("Yes", { exact: true });
-    this.receiveInfoCheckbox = page.getByText(
+    this.receiveInfoCheckbox = page.getByRole("checkbox", {
+      name: "Yes, I would like to receive information about NYPL's programs and services",
+    });
+    this.receiveInfoCheckboxLabel = page.getByText(
       "Yes, I would like to receive information about NYPL's programs and services",
       { exact: true }
     );
     this.alternateFormLink = this.page.getByRole("link", {
       name: "alternate form",
-      exact: true,
     });
-    this.locationsLink = this.page.getByRole("link", {
+    this.locationsLink = this.page.locator("#mainContent").getByRole("link", {
       name: "locations",
-      exact: true,
     });
     this.editPersonalInfoButton = page.getByRole("button", {
       name: "Edit Personal information",
@@ -163,9 +163,24 @@ export class ReviewPage {
       exact: true,
     });
     this.streetHeading = page.getByText("Street address", { exact: true });
+    this.streetAddressInvalid = page.getByText(
+      "There was a problem. Please enter a valid home street address."
+    );
+    this.streetAddressError = page.getByText(
+      "Street address fields must not be more than 100 lines."
+    );
     this.cityHeading = page.getByText("City", { exact: true });
+    this.cityError = page.getByText(
+      "There was a problem. Please enter a valid home city."
+    );
     this.stateHeading = page.getByText("State", { exact: true });
+    this.stateError = page.getByText(
+      "There was a problem. Please enter a 2-character home state abbreviation."
+    );
     this.postalCodeHeading = page.getByText("Postal code", { exact: true });
+    this.postalCodeError = page.getByText(
+      "There was a problem. Please enter a 5 or 9-digit home postal code."
+    );
     this.editAddressButton = page.getByRole("button", {
       name: "Edit Address",
       exact: true,
@@ -184,13 +199,16 @@ export class ReviewPage {
       name: "Username (required)",
       exact: true,
     });
+    this.usernameError = page.getByText(ERROR_MESSAGES.USERNAME_INVALID);
     this.availableUsernameButton = page.getByRole("button", {
       name: "Check if username is available",
       exact: true,
     });
-    this.availableUsernameMessage = page.getByText(USERNAME_AVAILABLE_MESSAGE);
-    this.unavailableUsernameError = page.getByText(
-      USERNAME_UNAVAILABLE_MESSAGE
+    this.availableUsernameMessage = page.getByText(
+      ERROR_MESSAGES.USERNAME_AVAILABLE
+    );
+    this.unavailableUsernameMessage = page.getByText(
+      ERROR_MESSAGES.USERNAME_UNAVAILABLE
     );
     this.passwordHeading = page.getByText("Password", { exact: true });
     this.passwordInputHeading = page.getByText("Password (required)", {
@@ -200,6 +218,7 @@ export class ReviewPage {
       name: "Password (required)",
       exact: true,
     });
+    this.passwordError = page.getByText(ERROR_MESSAGES.PASSWORD_INVALID);
     this.verifyPasswordInputHeading = page.getByText(
       "Verify password (required)",
       { exact: true }
@@ -208,29 +227,41 @@ export class ReviewPage {
       name: "Verify password (required)",
       exact: true,
     });
-    this.showPasswordCheckbox = page.getByText("Show password", {
+    this.verifyPasswordError = page.getByText(
+      ERROR_MESSAGES.VERIFY_PASSWORD_INVALID
+    );
+    this.showPasswordCheckbox = page.getByRole("checkbox", {
+      name: "Show password",
+      exact: true,
+    });
+    this.showPasswordCheckboxLabel = page.getByText("Show password", {
       exact: true,
     });
     this.homeLibraryHeading = page.getByText("Home library", { exact: true });
+    this.nyplLocationLink = page.getByRole("link", {
+      name: "NYPL location",
+    });
     this.selectHomeLibrary = page.getByLabel("Select a home library:");
+    this.homeLibraryError = page.getByText(ERROR_MESSAGES.HOME_LIBRARY_ERROR);
     this.cardholderTermsLink = page.getByRole("link", {
       name: "Cardholder Terms and Conditions",
-      exact: true,
     });
     this.rulesRegulationsLink = page.getByRole("link", {
       name: "Rules and Regulations",
-      exact: true,
     });
     this.privacyPolicyLink = page.locator("#mainContent").getByRole("link", {
       name: "Privacy Policy",
-      exact: true,
     });
-    this.acceptTermsCheckbox = page.getByText(
+    this.acceptTermsCheckbox = page.getByRole("checkbox", {
+      name: "Yes, I accept the terms and conditions",
+    });
+    this.acceptTermsCheckboxLabel = page.getByText(
       "Yes, I accept the terms and conditions.",
       {
         exact: true,
       }
     );
+    this.acceptTermsError = page.getByText(ERROR_MESSAGES.ACCEPT_TERMS_ERROR);
     this.editAccountButton = page.getByRole("button", {
       name: "Edit Create your account",
       exact: true,

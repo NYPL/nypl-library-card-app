@@ -1,8 +1,5 @@
 import { Page, Locator } from "@playwright/test";
-import {
-  USERNAME_AVAILABLE_MESSAGE,
-  USERNAME_UNAVAILABLE_MESSAGE,
-} from "../utils/constants";
+import { ERROR_MESSAGES } from "../utils/constants";
 
 export class AccountPage {
   readonly page: Page;
@@ -12,18 +9,22 @@ export class AccountPage {
   readonly usernameError: Locator;
   readonly availableUsernameButton: Locator;
   readonly availableUsernameMessage: Locator;
-  readonly unavailableUsernameError: Locator;
+  readonly unavailableUsernameMessage: Locator;
   readonly passwordInput: Locator;
   readonly passwordError: Locator;
   readonly verifyPasswordInput: Locator;
   readonly verifyPasswordError: Locator;
   readonly showPasswordCheckbox: Locator;
+  readonly showPasswordCheckboxLabel: Locator;
   readonly homeLibraryHeading: Locator;
+  readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
+  readonly homeLibraryError: Locator;
   readonly cardholderTerms: Locator;
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
   readonly acceptTermsCheckbox: Locator;
+  readonly acceptTermsCheckboxLabel: Locator;
   readonly acceptTermsError: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
@@ -38,35 +39,37 @@ export class AccountPage {
       name: "Step 4 of 5: Customize your account",
       level: 2,
     });
-
     this.usernameInput = page.getByRole("textbox", {
       name: "Username (required)",
       exact: true,
     });
-    this.usernameError = page.getByText(
-      "Username must be between 5-25 alphanumeric characters."
-    );
+    this.usernameError = page.getByText(ERROR_MESSAGES.USERNAME_INVALID);
     this.availableUsernameButton = page.getByRole("button", {
       name: "Check if username is available",
       exact: true,
     });
-    this.availableUsernameMessage = page.getByText(USERNAME_AVAILABLE_MESSAGE);
-    this.unavailableUsernameError = page.getByText(
-      USERNAME_UNAVAILABLE_MESSAGE
+    this.availableUsernameMessage = page.getByText(
+      ERROR_MESSAGES.USERNAME_AVAILABLE
+    );
+    this.unavailableUsernameMessage = page.getByText(
+      ERROR_MESSAGES.USERNAME_UNAVAILABLE
     );
     this.passwordInput = page.getByRole("textbox", {
       name: "Password (required)",
       exact: true,
     });
-    this.passwordError = page.getByText(
-      "There was a problem. Your password must be at least 8 characters, include a mixture of both uppercase and lowercase letters, include a mixture of letters and numbers, and have at least one special character except period (.)"
-    );
+    this.passwordError = page.getByText(ERROR_MESSAGES.PASSWORD_INVALID);
     this.verifyPasswordInput = page.getByRole("textbox", {
       name: "Verify password (required)",
       exact: true,
     });
-    this.verifyPasswordError = page.getByText("The two passwords don't match.");
-    this.showPasswordCheckbox = page.getByText("Show password", {
+    this.verifyPasswordError = page.getByText(
+      ERROR_MESSAGES.VERIFY_PASSWORD_INVALID
+    );
+    this.showPasswordCheckbox = page.getByRole("checkbox", {
+      name: "Show password",
+    });
+    this.showPasswordCheckboxLabel = page.getByText("Show password", {
       exact: true,
     });
     this.homeLibraryHeading = page.getByRole("heading", {
@@ -74,25 +77,27 @@ export class AccountPage {
       level: 3,
       exact: true,
     });
+    this.nyplLocationLink = page.getByRole("link", {
+      name: "NYPL location",
+    });
     this.selectHomeLibrary = page.getByLabel("Select a home library:");
+    this.homeLibraryError = page.getByText(ERROR_MESSAGES.HOME_LIBRARY_ERROR);
     this.cardholderTerms = page.getByRole("link", {
       name: "Cardholder Terms and Conditions",
-      exact: true,
     });
     this.rulesRegulations = page.getByRole("link", {
       name: "Rules and Regulations",
-      exact: true,
     });
     this.privacyPolicy = page
       .locator("#mainContent")
-      .getByRole("link", { name: "Privacy Policy", exact: true });
-    this.acceptTermsCheckbox = page.getByText(
+      .getByRole("link", { name: "Privacy Policy" });
+    this.acceptTermsCheckbox = page.getByRole("checkbox", {
+      name: "Yes, I accept the terms and conditions.",
+    });
+    this.acceptTermsCheckboxLabel = page.getByText(
       "Yes, I accept the terms and conditions."
     );
-
-    this.acceptTermsError = page.getByText(
-      "The Terms and Conditions must be checked."
-    );
+    this.acceptTermsError = page.getByText(ERROR_MESSAGES.ACCEPT_TERMS_ERROR);
     this.nextButton = page.getByRole("button", { name: "Next", exact: true });
     this.previousButton = page.getByRole("link", {
       name: "Previous",

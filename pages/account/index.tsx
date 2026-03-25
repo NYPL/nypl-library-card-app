@@ -35,7 +35,7 @@ function AccountPage({
     <>
       <PageHeading autoScrollOnMount>{t("account.title")}</PageHeading>
       <Paragraph>{t("account.description")}</Paragraph>
-      <Paragraph>{t("internationalInstructions")}</Paragraph>
+      <Paragraph mb="l">{t("internationalInstructions")}</Paragraph>
       <AccountFormContainer csrfToken={csrfToken} />
     </>
   );

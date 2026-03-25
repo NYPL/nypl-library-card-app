@@ -3,7 +3,7 @@ import {
   FormField as DSFormField,
   FormRow,
 } from "@nypl/design-system-react-components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -24,8 +24,8 @@ import useFormDataContext from "../../context/FormDataContext";
 import { createQueryParams } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
 import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
-import { Paragraph } from "../Paragraph";
 import { PageSubHeading } from "../PageSubHeading";
+import stateData from "../../data/stateAbbreviations";
 
 const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,10 +33,27 @@ const AddressContainer = ({ csrfToken }) => {
   const { formValues, addressesResponse } = state;
   const router = useRouter();
   const { t } = useTranslation("common");
-  // Specific functions and object from react-hook-form.
-  const { handleSubmit } = useFormContext();
-  // Get the URL query params for `newCard` and `lang`.
+  const { handleSubmit, watch, trigger } = useFormContext();
   const queryStr = createQueryParams(router?.query);
+
+  const [line1, city, stateValue, zip] = watch([
+    "work-line1",
+    "work-city",
+    "work-state",
+    "work-zip",
+  ]);
+  const formIsPartiallyFilled = !![line1, city, stateValue, zip].some(
+    (val) => val && val.trim() !== ""
+  );
+
+  useEffect(() => {
+    if (!formIsPartiallyFilled) {
+      // Re-validate the form fields to clear any validation errors
+      // if the user has cleared out all the fields after partially filling out the form.
+      trigger(["work-line1", "work-city", "work-state", "work-zip"]);
+    }
+  }, [formIsPartiallyFilled, trigger]);
+
   /**
    * submitForm
    * @param formData - data object returned from react-hook-form
@@ -131,18 +148,22 @@ const AddressContainer = ({ csrfToken }) => {
     <>
       <LoadingIndicator isLoading={isLoading} />
 
-      <PageSubHeading>{t("location.workAddress.title")}</PageSubHeading>
-      <Paragraph>{t("location.workAddress.description.part2")}</Paragraph>
+      <PageSubHeading mb="l">
+        {t("location.workAddress.subtitle")}
+      </PageSubHeading>
 
       <Form
         // action="/library-card/api/submit"
         id="work-address-container"
         method="post"
         onSubmit={handleSubmit(submitForm)}
+        noValidate
       >
         <AddressFormFields
           id="work-address-container"
           type={AddressTypes.Work}
+          isRequired={formIsPartiallyFilled}
+          stateData={stateData}
         />
 
         <FormRow display="none">

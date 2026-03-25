@@ -14,16 +14,17 @@ Object.defineProperty(window, "matchMedia", {
 });
 
 jest.mock("react-i18next", () => {
+  const React = jest.requireActual("react");
   const en = {
     location: {
       address: {
         title: "Home address",
         description:
-          "If you live in NYC, please fill out the home address form.",
+          "If you live in the United States, please provide your home address below. If you are visiting New York from another state, you can apply for a temporary card with this form. A temporary card allows you to request physical materials and schedule research appointments before your visit. International visitors should use our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>.",
         line1: { label: "Street address" },
         line2: { label: "Apartment / Suite" },
         city: { label: "City" },
-        state: { label: "State", instruction: "2-letter abbreviation" },
+        state: { label: "State" },
         postalCode: {
           label: "Postal code",
           instruction: "5 or 9-digit postal code",
@@ -59,7 +60,16 @@ jest.mock("react-i18next", () => {
     // this mock makes sure any components using the translate hook can use it without a warning being shown
     useTranslation: () => ({
       t: mockTFunction(en),
+      i18n: { language: "en" },
     }),
+    Trans: ({ children, i18nKey }) => {
+      return React.createElement(
+        "div",
+        { "data-testid": `mock-trans` },
+        i18nKey,
+        children
+      );
+    },
   };
 });
 

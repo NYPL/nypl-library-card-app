@@ -16,15 +16,17 @@ import {
 import * as cookie from "../../src/utils/CookieUtils";
 import { Paragraph } from "../../src/components/Paragraph";
 import { PageHeading } from "../../src/components/PageHeading";
-interface WorkAddressPageProps {
+import { Banner } from "../../src/components/Banner";
+import { Trans } from "../../src/components/Trans";
+interface AlternateAddressProps {
   hasUserAlreadyRegistered?: boolean;
   csrfToken: string;
 }
 
-function WorkAddressPage({
+function AlternateAddress({
   hasUserAlreadyRegistered,
   csrfToken,
-}: WorkAddressPageProps) {
+}: AlternateAddressProps) {
   const { t } = useTranslation("common");
   const router = useRouter();
   useEffect(() => {
@@ -37,6 +39,9 @@ function WorkAddressPage({
       </PageHeading>
       <Paragraph>{t("location.workAddress.description.part1")}</Paragraph>
       <Paragraph>{t("internationalInstructions")}</Paragraph>
+      <Banner
+        content={<Trans i18nKey="location.workAddress.description.part3" />}
+      />
       <WorkAddressContainer csrfToken={csrfToken} />
     </>
   );
@@ -68,4 +73,4 @@ export const getServerSideProps: GetServerSideProps = async ({
   };
 };
 
-export default WorkAddressPage;
+export default AlternateAddress;

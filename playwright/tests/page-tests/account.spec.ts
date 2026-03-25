@@ -1,15 +1,15 @@
 import { test, expect } from "@playwright/test";
-import { AccountPage } from "../pageobjects/account.page";
-import { mockUsernameApi } from "../utils/mock-api";
+import { AccountPage } from "../../pageobjects/account.page";
+import { fillAccountInfo } from "../../utils/form-helper";
 import {
-  USERNAME_AVAILABLE_MESSAGE,
-  USERNAME_UNAVAILABLE_MESSAGE,
-} from "../utils/constants";
-import { fillAccountInfo } from "../utils/form-helper";
-import { TEST_CUSTOMIZE_ACCOUNT } from "../utils/constants";
+  ERROR_MESSAGES,
+  PAGE_ROUTES,
+  TEST_ACCOUNT,
+} from "../../utils/constants";
+import { mockUsernameApi } from "../../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/library-card/account?newCard=true");
+  await page.goto(PAGE_ROUTES.ACCOUNT);
 });
 
 test.describe("displays all form elements on Account page", () => {
@@ -26,16 +26,17 @@ test.describe("displays all form elements on Account page", () => {
     await expect(accountPage.availableUsernameButton).toBeVisible();
     await expect(accountPage.passwordInput).toBeVisible();
     await expect(accountPage.verifyPasswordInput).toBeVisible();
-    await expect(accountPage.showPasswordCheckbox).toBeVisible();
+    await expect(accountPage.showPasswordCheckboxLabel).toBeVisible();
   });
 
   test("displays home library form", async ({ page }) => {
     const accountPage = new AccountPage(page);
+    await expect(accountPage.nyplLocationLink).toBeVisible();
     await expect(accountPage.selectHomeLibrary).toBeVisible();
     await expect(accountPage.cardholderTerms).toBeVisible();
     await expect(accountPage.rulesRegulations).toBeVisible();
     await expect(accountPage.privacyPolicy).toBeVisible();
-    await expect(accountPage.acceptTermsCheckbox).toBeVisible();
+    await expect(accountPage.acceptTermsCheckboxLabel).toBeVisible();
   });
 
   test("displays next and previous buttons", async ({ page }) => {
@@ -43,16 +44,69 @@ test.describe("displays all form elements on Account page", () => {
     await expect(accountPage.nextButton).toBeVisible();
     await expect(accountPage.previousButton).toBeVisible();
   });
+
+  test("opens links in new tab", async ({ page }) => {
+    const accountPage = new AccountPage(page);
+    const links = [
+      accountPage.nyplLocationLink,
+      accountPage.cardholderTerms,
+      accountPage.rulesRegulations,
+      accountPage.privacyPolicy,
+    ];
+    for (const link of links) {
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("rel", "nofollow noopener noreferrer");
+    }
+  });
 });
 
-test.describe("displays errors for invalid inputs on Account page", () => {
+test.describe("enters account information", () => {
+  test("displays entered values in form fields", async ({ page }) => {
+    const accountPage = new AccountPage(page);
+    await fillAccountInfo(accountPage, TEST_ACCOUNT);
+    await expect(accountPage.usernameInput).toHaveValue(TEST_ACCOUNT.username);
+    await accountPage.showPasswordCheckboxLabel.click();
+    await expect(accountPage.passwordInput).toHaveValue(TEST_ACCOUNT.password);
+    await expect(accountPage.verifyPasswordInput).toHaveValue(
+      TEST_ACCOUNT.password
+    );
+    await expect(accountPage.selectHomeLibrary).toHaveValue(
+      TEST_ACCOUNT.homeLibraryCode
+    );
+    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
+  });
+});
+
+test.describe("mocks API responses on account page", () => {
+  test("displays username available message", async ({ page }) => {
+    // mock the API call for username availability
+    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_AVAILABLE);
+    const accountPage = new AccountPage(page);
+    await accountPage.usernameInput.fill("AvailableUsername");
+    await accountPage.availableUsernameButton.click();
+    await expect(accountPage.availableUsernameMessage).toBeVisible();
+  });
+
+  test("displays username unavailable error message", async ({ page }) => {
+    // mock the API call for username unavailability
+    await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_UNAVAILABLE);
+    const accountPage = new AccountPage(page);
+    await accountPage.usernameInput.fill("UnavailableUsername");
+    await accountPage.availableUsernameButton.click();
+    await expect(accountPage.unavailableUsernameMessage).toBeVisible();
+  });
+});
+
+test.describe("displays error messages", () => {
   test("displays errors for required fields", async ({ page }) => {
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("");
     await accountPage.passwordInput.fill("");
+    await accountPage.selectHomeLibrary.click();
     await accountPage.nextButton.click();
     await expect(accountPage.usernameError).toBeVisible();
     await expect(accountPage.passwordError).toBeVisible();
+    await expect(accountPage.homeLibraryError).toBeVisible();
   });
 
   test("displays error when special characters in username", async ({
@@ -84,11 +138,11 @@ test.describe("displays errors for invalid inputs on Account page", () => {
 
   test("displays error when terms are not accepted", async ({ page }) => {
     const accountPage = new AccountPage(page);
-    await expect(accountPage.usernameInput).toBeVisible();
     await accountPage.usernameInput.fill("ValidUser1");
-    await expect(accountPage.passwordInput).toBeVisible();
     await accountPage.passwordInput.fill("ValidPass1!");
     await accountPage.verifyPasswordInput.fill("ValidPass1!");
+    await accountPage.selectHomeLibrary.click();
+    await accountPage.selectHomeLibrary.selectOption("vr");
     await accountPage.nextButton.click();
     await expect(accountPage.acceptTermsError).toBeVisible();
   });
@@ -109,48 +163,5 @@ test.describe("displays errors for invalid inputs on Account page", () => {
     await accountPage.nextButton.click();
     await expect(accountPage.usernameError).toBeVisible();
     await expect(accountPage.passwordError).toBeVisible();
-  });
-});
-
-test.describe("mocks API responses on Account page", () => {
-  test("displays username available message", async ({ page }) => {
-    // mock the API call for username availability
-    await mockUsernameApi(page, USERNAME_AVAILABLE_MESSAGE);
-
-    const accountPage = new AccountPage(page);
-    await accountPage.usernameInput.fill("AvailableUsername");
-    await accountPage.availableUsernameButton.click();
-    await expect(accountPage.availableUsernameMessage).toBeVisible();
-  });
-
-  test("displays username unavailable error message", async ({ page }) => {
-    // mock the API call for username unavailability
-    await mockUsernameApi(page, USERNAME_UNAVAILABLE_MESSAGE);
-
-    const accountPage = new AccountPage(page);
-    await accountPage.usernameInput.fill("UnavailableUsername");
-    await accountPage.availableUsernameButton.click();
-    await expect(accountPage.unavailableUsernameError).toBeVisible();
-  });
-});
-
-test.describe("enters account information", () => {
-  test("displays entered values in form fields", async ({ page }) => {
-    const accountPage = new AccountPage(page);
-    await fillAccountInfo(accountPage);
-    await expect(accountPage.usernameInput).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.username
-    );
-    await accountPage.showPasswordCheckbox.check();
-    await expect(accountPage.passwordInput).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.password
-    );
-    await expect(accountPage.verifyPasswordInput).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.password
-    );
-    await expect(accountPage.selectHomeLibrary).toHaveValue(
-      TEST_CUSTOMIZE_ACCOUNT.homeLibrary
-    );
-    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
   });
 });

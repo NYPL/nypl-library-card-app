@@ -1,10 +1,11 @@
 import { LandingPage } from "../../pageobjects/landing.page";
 import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
+import { PAGE_ROUTES } from "../../utils/constants";
 
 test.describe("Accessibility tests on Landing Page", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/library-card/new");
+    await page.goto(PAGE_ROUTES.LANDING);
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {

@@ -27,7 +27,7 @@ function PersonalInformationPage({
   return (
     <>
       <PageHeading autoScrollOnMount>{t("personal.title")}</PageHeading>
-      <Paragraph>{t("internationalInstructions")}</Paragraph>
+      <Paragraph mb="l">{t("internationalInstructions")}</Paragraph>
       <PersonalFormContainer />
     </>
   );

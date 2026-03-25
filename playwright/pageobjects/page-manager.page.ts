@@ -7,6 +7,7 @@ import { AlternateAddressPage } from "./alternate-address.page";
 import { AccountPage } from "./account.page";
 import { ReviewPage } from "./review.page";
 import { CongratsPage } from "./congrats.page";
+import { GlobalComponentsPage } from "./global-components.page";
 
 export class PageManager {
   readonly page: Page;
@@ -45,5 +46,8 @@ export class PageManager {
 
   get congratsPage(): CongratsPage {
     return new CongratsPage(this.page);
+  }
+  get globalComponents(): GlobalComponentsPage {
+    return new GlobalComponentsPage(this.page);
   }
 }

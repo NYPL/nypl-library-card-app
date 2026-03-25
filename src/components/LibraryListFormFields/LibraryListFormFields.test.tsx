@@ -6,6 +6,7 @@ import { mockTFunction, TestProviderWrapper } from "../../../testHelper/utils";
 import { LibraryListObject } from "../../interfaces";
 
 jest.mock("react-i18next", () => {
+  const React = jest.requireActual("react");
   const en = {
     account: {
       title: "Step 4 of 5: Customize your account",
@@ -57,11 +58,19 @@ jest.mock("react-i18next", () => {
     useTranslation: () => ({
       t: mockTFunction(en),
     }),
+    Trans: ({ children, i18nKey }) => {
+      return React.createElement(
+        "div",
+        { "data-testid": `mock-trans` },
+        i18nKey,
+        children
+      );
+    },
   };
 });
 
 const libraryList: LibraryListObject[] = [
-  { value: "eb", label: "SimplyE" },
+  { value: "vr", label: "Virtual" },
   { value: "sasb", label: "Schwarzman" },
   { value: "schomburg", label: "Schomburg" },
 ];
@@ -83,7 +92,9 @@ describe("LibraryListFormFields", () => {
       </TestProviderWrapper>
     );
 
-    expect(screen.getByLabelText("Select a home library:")).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Select a home library: (required)")
+    ).toBeInTheDocument();
     // "textbox" is the role for the input element.
     expect(screen.getByRole("combobox")).toBeInTheDocument();
   });

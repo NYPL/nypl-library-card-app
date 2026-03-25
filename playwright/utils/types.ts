@@ -1,5 +1,12 @@
 import { Locator } from "@playwright/test";
 
+export interface PatronData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  dateOfBirth: string;
+}
+
 export interface AddressFormPage {
   streetAddressInput: Locator;
   apartmentSuiteInput: Locator;
@@ -14,4 +21,11 @@ export interface AddressData {
   city: string;
   state: string;
   postalCode: string;
+}
+
+export interface AccountData {
+  username: string;
+  password: string;
+  homeLibrary: string;
+  homeLibraryCode: string;
 }
