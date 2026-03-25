@@ -51,6 +51,7 @@ const PersonalFormContainer = () => {
       id="perform-form-container"
       onSubmit={handleSubmit(submitForm)}
       method="post"
+      noValidate
       // action="/library-card/api/submit"
     >
       <PersonalFormFields
