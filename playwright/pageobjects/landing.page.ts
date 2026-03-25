@@ -87,7 +87,11 @@ export class LandingPage {
     this.privacyPolicy = page.locator("#mainContent").getByRole("link", {
       name: appContent?.home?.description?.privacyPolicy || "Privacy Policy",
     });
-    this.informationalBanner = page.getByTestId("ds-banner");
+    this.informationalBanner = page.locator("aside", {
+      hasText:
+        appContent?.home?.banner?.text ||
+        "Please note: You must be at least 13 years old to apply online. To get a digital library card and immediate access to online resources, you must be in New York state when submitting an application.",
+    });
     this.getStartedButton = page.getByRole("link", {
       name: appContent?.button?.start || "Get started",
     });

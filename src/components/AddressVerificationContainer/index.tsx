@@ -217,6 +217,7 @@ function AddressVerificationContainer() {
       id="address-verification-container"
       method="post"
       onSubmit={handleSubmit(submitForm)}
+      noValidate
     >
       <FormRow>
         <DSFormField gridGap="0">
