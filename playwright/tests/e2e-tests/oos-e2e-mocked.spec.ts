@@ -33,7 +33,7 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
     });
 
     await test.step("unchecks receive info checkbox", async () => {
-      await pageManager.personalPage.receiveInfoCheckbox.click();
+      await pageManager.personalPage.receiveInfoCheckboxLabel.click();
       await expect(
         pageManager.personalPage.receiveInfoCheckbox
       ).not.toBeChecked();
@@ -58,10 +58,10 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
       ).toBeVisible();
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-        .check();
+        .click();
       await pageManager.addressVerificationPage
         .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
-        .check();
+        .click();
       await pageManager.addressVerificationPage.nextButton.click();
     });
 

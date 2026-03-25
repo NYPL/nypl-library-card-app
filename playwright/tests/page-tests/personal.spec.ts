@@ -20,7 +20,7 @@ test.describe("displays elements on personal information page", () => {
     await expect(personalPage.lastNameInput).toBeVisible();
     await expect(personalPage.dateOfBirthInput).toBeVisible();
     await expect(personalPage.emailInput).toBeVisible();
-    await expect(personalPage.receiveInfoCheckbox).toBeVisible();
+    await expect(personalPage.receiveInfoCheckboxLabel).toBeVisible();
   });
 
   test("displays links", async ({ page }) => {
