@@ -20,7 +20,7 @@ const Hero = ({ fullImageSrc = defaultImageSrc }: HeroProps) => {
       id="hero-banner"
       level="h1"
       text={t("banner.title")}
-      dir={i18n.dir()}
+      dir={typeof i18n.dir === "function" ? i18n.dir() : "ltr"}
     />
   );
   return (
