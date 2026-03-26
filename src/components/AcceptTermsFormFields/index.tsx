@@ -1,7 +1,7 @@
 import { Checkbox, Link } from "@nypl/design-system-react-components";
 import { Trans, useTranslation } from "next-i18next";
 import React from "react";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { Paragraph } from "../Paragraph";
 
 /**
@@ -14,7 +14,7 @@ import { Paragraph } from "../Paragraph";
 const AcceptTermsForm: React.FC = () => {
   const { t } = useTranslation("common");
   const {
-    register,
+    control,
     formState: { errors },
   } = useFormContext();
 
@@ -27,14 +27,21 @@ const AcceptTermsForm: React.FC = () => {
         />
       </Paragraph>
 
-      <Checkbox
-        id="acceptTerms"
-        invalidText={t("account.errorMessage.acceptTerms")}
-        isInvalid={!!errors?.acceptTerms?.message}
-        {...register("acceptTerms", {
-          required: t("account.errorMessage.acceptTerms"),
-        })}
-        labelText={t("account.termsAndCondition.label")}
+      <Controller
+        name="acceptTerms"
+        control={control}
+        defaultValue={false}
+        rules={{ required: t("account.errorMessage.acceptTerms") }}
+        render={({ field: { onChange, value } }) => (
+          <Checkbox
+            id="acceptTerms"
+            invalidText={t("account.errorMessage.acceptTerms")}
+            isInvalid={!!errors?.acceptTerms?.message}
+            isChecked={value}
+            labelText={t("account.termsAndCondition.label")}
+            onChange={(e) => onChange(e.target.checked)}
+          />
+        )}
       />
     </>
   );

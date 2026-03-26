@@ -1,8 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { PAGE_ROUTES, SPINNER_TIMEOUT } from "../utils/constants";
-import { AddressPage } from "../pageobjects/address.page";
-import { TEST_OOS_ADDRESS } from "../utils/constants";
-import { fillAddress } from "../utils/form-helper";
+import { AddressPage } from "../../pageobjects/address.page";
+import { fillAddress } from "../../utils/form-helper";
+import {
+  PAGE_ROUTES,
+  SPINNER_TIMEOUT,
+  TEST_OOS_ADDRESS,
+} from "../../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(PAGE_ROUTES.ADDRESS);

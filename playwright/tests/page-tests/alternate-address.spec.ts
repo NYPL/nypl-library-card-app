@@ -1,18 +1,21 @@
 import { test, expect } from "@playwright/test";
-import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
-import { PAGE_ROUTES, TEST_NYC_ADDRESS } from "../utils/constants";
-import { fillAddress } from "../utils/form-helper";
+import { AlternateAddressPage } from "../../pageobjects/alternate-address.page";
+import { fillAddress } from "../../utils/form-helper";
+import { PAGE_ROUTES, TEST_NYC_ADDRESS } from "../../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(PAGE_ROUTES.ALTERNATE_ADDRESS);
 });
 
 test.describe("displays elements on Alternate address page", () => {
-  test("displays all headings", async ({ page }) => {
+  test("displays headings, banner, and buttons", async ({ page }) => {
     const alternateAddressPage = new AlternateAddressPage(page);
     await expect(alternateAddressPage.mainHeading).toBeVisible();
     await expect(alternateAddressPage.stepHeading).toBeVisible();
+    await expect(alternateAddressPage.informationalBanner).toBeVisible();
     await expect(alternateAddressPage.addressHeading).toBeVisible();
+    await expect(alternateAddressPage.nextButton).toBeVisible();
+    await expect(alternateAddressPage.previousButton).toBeVisible();
   });
 
   test("displays alternate address form", async ({ page }) => {
@@ -22,12 +25,6 @@ test.describe("displays elements on Alternate address page", () => {
     await expect(alternateAddressPage.cityInput).toBeVisible();
     await expect(alternateAddressPage.stateInput).toBeVisible();
     await expect(alternateAddressPage.postalCodeInput).toBeVisible();
-  });
-
-  test("displays next and previous buttons", async ({ page }) => {
-    const alternateAddressPage = new AlternateAddressPage(page);
-    await expect(alternateAddressPage.nextButton).toBeVisible();
-    await expect(alternateAddressPage.previousButton).toBeVisible();
   });
 });
 

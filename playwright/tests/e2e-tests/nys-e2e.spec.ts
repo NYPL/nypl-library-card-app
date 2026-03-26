@@ -1,24 +1,24 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  fillPersonalInfo,
-  fillAddress,
   fillAccountInfo,
+  fillAddress,
+  fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
   EXPECTED_BARCODE_PREFIX,
+  IP,
+  PAGE_ROUTES,
+  PATRON_TYPES,
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_NYS_ADDRESS,
   TEST_PATRON,
-  PAGE_ROUTES,
-  PATRON_TYPES,
-  IP,
 } from "../../utils/constants";
 import {
-  getPatronID,
-  getPatronData,
   deletePatron,
+  getPatronData,
+  getPatronID,
 } from "../../utils/sierra-api-utils";
 import { createFuzzyMatcher, formatSierraDate } from "../../utils/formatter";
 
@@ -84,7 +84,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       ).toBeVisible();
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_NYS_ADDRESS.street)
-        .check();
+        .click();
       await pageManager.addressVerificationPage.nextButton.click();
       await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
         {
@@ -135,8 +135,10 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await expect(
         pageManager.reviewPage.getText(TEST_ACCOUNT.username)
       ).toBeVisible();
-      await expect(pageManager.reviewPage.showPasswordLabel).toBeVisible();
-      await pageManager.reviewPage.showPasswordLabel.check();
+      await expect(
+        pageManager.reviewPage.showPasswordCheckboxLabel
+      ).toBeVisible();
+      await pageManager.reviewPage.showPasswordCheckboxLabel.click();
       await expect(
         pageManager.reviewPage.getText(TEST_ACCOUNT.password)
       ).toBeVisible();

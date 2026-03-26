@@ -34,5 +34,7 @@ export async function fillAccountInfo(
   await page.verifyPasswordInput.fill(accountData.password);
   await page.selectHomeLibrary.click();
   await page.selectHomeLibrary.selectOption(accountData.homeLibraryCode);
-  await page.acceptTermsLabel.check();
+  if (!(await page.acceptTermsCheckbox.isChecked())) {
+    await page.acceptTermsCheckboxLabel.click();
+  }
 }

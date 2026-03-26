@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { PersonalPage } from "../pageobjects/personal.page";
-import { PAGE_ROUTES, TEST_PATRON } from "../utils/constants";
-import { fillPersonalInfo } from "../utils/form-helper";
+import { PersonalPage } from "../../pageobjects/personal.page";
+import { fillPersonalInfo } from "../../utils/form-helper";
+import { PAGE_ROUTES, TEST_PATRON } from "../../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(PAGE_ROUTES.PERSONAL);
@@ -20,7 +20,7 @@ test.describe("displays elements on personal information page", () => {
     await expect(personalPage.lastNameInput).toBeVisible();
     await expect(personalPage.dateOfBirthInput).toBeVisible();
     await expect(personalPage.emailInput).toBeVisible();
-    await expect(personalPage.receiveInfoCheckbox).toBeVisible();
+    await expect(personalPage.receiveInfoCheckboxLabel).toBeVisible();
   });
 
   test("displays links", async ({ page }) => {
@@ -68,7 +68,6 @@ test.describe("displays error messages", () => {
     await personalPage.dateOfBirthInput.fill("");
     await personalPage.emailInput.fill("");
     await personalPage.nextButton.click();
-
     await expect(personalPage.firstNameError).toBeVisible();
     await expect(personalPage.lastNameError).toBeVisible();
     await expect(personalPage.dateOfBirthInvalid).toBeVisible();

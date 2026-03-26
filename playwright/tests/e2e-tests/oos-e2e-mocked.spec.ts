@@ -1,21 +1,22 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../pageobjects/page-manager.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
+import {
+  fillAccountInfo,
+  fillAddress,
+  fillPersonalInfo,
+} from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   PATRON_TYPES,
   TEST_ACCOUNT,
   TEST_BARCODE_NUMBER,
   TEST_NYC_ADDRESS,
+  TEST_OOS_ADDRESS,
   TEST_PATRON,
-} from "../utils/constants";
-import { mockCreatePatronApi, mockCreateAddress } from "../utils/mock-api";
-import {
-  fillAccountInfo,
-  fillAddress,
-  fillPersonalInfo,
-} from "../utils/form-helper";
+} from "../../utils/constants";
+import { mockCreatePatronApi } from "../../utils/mock-api";
 
-test.describe("E2E Flow: Complete application using mocked address and submit", () => {
+test.describe("E2E Flow: Complete application using mocked submit", () => {
   test("displays patron information on congrats page", async ({ page }) => {
     const pageManager = new PageManager(page);
     const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
@@ -29,18 +30,25 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
     await test.step("enters personal information", async () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+    });
+
+    await test.step("unchecks receive info checkbox", async () => {
+      await pageManager.personalPage.receiveInfoCheckboxLabel.click();
+      await expect(
+        pageManager.personalPage.receiveInfoCheckbox
+      ).not.toBeChecked();
       await pageManager.personalPage.nextButton.click();
     });
 
-    await test.step("enters mocked home address", async () => {
+    await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await mockCreateAddress(page, TEST_NYC_ADDRESS);
-      await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
+      await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       await pageManager.addressPage.nextButton.click();
     });
 
-    await test.step("skips alternate address", async () => {
+    await test.step("enters alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
+      await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
       await pageManager.alternateAddressPage.nextButton.click();
     });
 
@@ -49,8 +57,11 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
       await pageManager.addressVerificationPage
-        .getHomeAddressOption(TEST_NYC_ADDRESS.street)
-        .check();
+        .getHomeAddressOption(TEST_OOS_ADDRESS.street)
+        .click();
+      await pageManager.addressVerificationPage
+        .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
+        .click();
       await pageManager.addressVerificationPage.nextButton.click();
     });
 
@@ -64,22 +75,22 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
     });
 
+    await test.step("verifies receive info checkbox is unchecked on review page", async () => {
+      await pageManager.reviewPage.editPersonalInfoButton.click();
+      await expect(
+        pageManager.reviewPage.receiveInfoCheckbox
+      ).not.toBeChecked();
+    });
+
     await test.step("submits application", async () => {
       await mockCreatePatronApi(
         page,
         fullName,
         TEST_BARCODE_NUMBER,
-        PATRON_TYPES.DIGITAL_METRO
+        PATRON_TYPES.DIGITAL_TEMPORARY
       );
       await expect(pageManager.reviewPage.submitButton).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
-    });
-
-    await test.step("displays heading and link on congrats page", async () => {
-      await expect(
-        pageManager.congratsPage.metroOrNonMetroHeading
-      ).toBeVisible();
-      await expect(pageManager.congratsPage.readListenLink).toBeVisible();
     });
 
     await test.step("displays variable elements on congrats page", async () => {
@@ -90,6 +101,13 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
       await expect(pageManager.congratsPage.patronBarcodeNumber).toHaveText(
         TEST_BARCODE_NUMBER
       );
+    });
+
+    await test.step("displays temporary card banner", async () => {
+      await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
+      await expect(pageManager.congratsPage.temporaryCardBanner).toBeVisible();
+      await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
+      await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
     });
   });
 });

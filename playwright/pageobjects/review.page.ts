@@ -28,6 +28,7 @@ export class ReviewPage {
   readonly receiveInfoHeading: Locator;
   readonly receiveInfoChoice: Locator;
   readonly receiveInfoCheckbox: Locator;
+  readonly receiveInfoCheckboxLabel: Locator;
   readonly alternateFormLink: Locator;
   readonly locationsLink: Locator;
   readonly editPersonalInfoButton: Locator;
@@ -61,15 +62,17 @@ export class ReviewPage {
   readonly verifyPasswordInputHeading: Locator;
   readonly verifyPasswordInput: Locator;
   readonly verifyPasswordError: Locator;
-  readonly showPasswordLabel: Locator;
-  readonly nyplLocationsLink: Locator;
+  readonly showPasswordCheckbox: Locator;
+  readonly showPasswordCheckboxLabel: Locator;
   readonly homeLibraryHeading: Locator;
+  readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
   readonly homeLibraryError: Locator;
   readonly cardholderTermsLink: Locator;
   readonly rulesRegulationsLink: Locator;
   readonly privacyPolicyLink: Locator;
-  readonly acceptTermsLabel: Locator;
+  readonly acceptTermsCheckbox: Locator;
+  readonly acceptTermsCheckboxLabel: Locator;
   readonly acceptTermsError: Locator;
   readonly editAccountButton: Locator;
   readonly submitButton: Locator;
@@ -135,7 +138,10 @@ export class ReviewPage {
       { exact: true }
     );
     this.receiveInfoChoice = page.getByText("Yes", { exact: true });
-    this.receiveInfoCheckbox = page.getByText(
+    this.receiveInfoCheckbox = page.getByRole("checkbox", {
+      name: "Yes, I would like to receive information about NYPL's programs and services",
+    });
+    this.receiveInfoCheckboxLabel = page.getByText(
       "Yes, I would like to receive information about NYPL's programs and services",
       { exact: true }
     );
@@ -224,14 +230,17 @@ export class ReviewPage {
     this.verifyPasswordError = page.getByText(
       ERROR_MESSAGES.VERIFY_PASSWORD_INVALID
     );
-    this.showPasswordLabel = page.getByText("Show password", {
+    this.showPasswordCheckbox = page.getByRole("checkbox", {
+      name: "Show password",
       exact: true,
     });
-    this.nyplLocationsLink = page.getByRole("link", {
-      name: "NYPL Locations",
+    this.showPasswordCheckboxLabel = page.getByText("Show password", {
       exact: true,
     });
     this.homeLibraryHeading = page.getByText("Home library", { exact: true });
+    this.nyplLocationLink = page.getByRole("link", {
+      name: "NYPL location",
+    });
     this.selectHomeLibrary = page.getByLabel("Select a home library:");
     this.homeLibraryError = page.getByText(ERROR_MESSAGES.HOME_LIBRARY_ERROR);
     this.cardholderTermsLink = page.getByRole("link", {
@@ -243,7 +252,10 @@ export class ReviewPage {
     this.privacyPolicyLink = page.locator("#mainContent").getByRole("link", {
       name: "Privacy Policy",
     });
-    this.acceptTermsLabel = page.getByText(
+    this.acceptTermsCheckbox = page.getByRole("checkbox", {
+      name: "Yes, I accept the terms and conditions",
+    });
+    this.acceptTermsCheckboxLabel = page.getByText(
       "Yes, I accept the terms and conditions.",
       {
         exact: true,

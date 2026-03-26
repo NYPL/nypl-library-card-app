@@ -1,36 +1,29 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  fillPersonalInfo,
-  fillAddress,
   fillAccountInfo,
+  fillAddress,
+  fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
   EXPECTED_BARCODE_PREFIX,
+  PAGE_ROUTES,
+  PATRON_TYPES,
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_NYC_ADDRESS,
+  TEST_OOS_ADDRESS,
   TEST_PATRON,
-  PAGE_ROUTES,
-  PATRON_TYPES,
-  IP,
 } from "../../utils/constants";
 import {
-  getPatronID,
-  getPatronData,
   deletePatron,
+  getPatronData,
+  getPatronID,
 } from "../../utils/sierra-api-utils";
 import { createFuzzyMatcher, formatSierraDate } from "../../utils/formatter";
 
 test.describe("E2E: Complete application with Sierra API integration", () => {
   let scrapedBarcode: string | null = null;
-
-  test.beforeEach(async ({ page }) => {
-    await page.setExtraHTTPHeaders({
-      "x-client-ip": IP.NYC_IP,
-      "x-forwarded-for": IP.NYC_IP,
-    });
-  });
 
   test.afterAll("deletes patron", async () => {
     if (scrapedBarcode) {
@@ -63,25 +56,35 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
     await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
+      await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       await pageManager.addressPage.nextButton.click();
       await expect(pageManager.addressPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });
     });
 
-    await test.step("displays address verification", async () => {
+    await test.step("enters alternate address", async () => {
+      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
+      await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
+      await pageManager.alternateAddressPage.nextButton.click();
+      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
+    });
+
+    await test.step("selects home and alternate addresses", async () => {
       await expect(
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
       await pageManager.addressVerificationPage
-        .getHomeAddressOption(TEST_NYC_ADDRESS.street)
-        .check();
+        .getHomeAddressOption(TEST_OOS_ADDRESS.street)
+        .click();
+      await pageManager.addressVerificationPage
+        .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
+        .click();
       await pageManager.addressVerificationPage.nextButton.click();
       await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
-        }
+        { timeout: SPINNER_TIMEOUT }
       );
     });
 
@@ -108,7 +111,19 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
     });
 
-    await test.step("displays home on review page", async () => {
+    await test.step("displays home and alternate addresses on review page", async () => {
+      await expect(
+        pageManager.reviewPage.getText(TEST_OOS_ADDRESS.street)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_OOS_ADDRESS.city)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_OOS_ADDRESS.state)
+      ).toBeVisible();
+      await expect(
+        pageManager.reviewPage.getText(TEST_OOS_ADDRESS.postalCode)
+      ).toBeVisible();
       await expect(
         pageManager.reviewPage.getText(TEST_NYC_ADDRESS.street)
       ).toBeVisible();
@@ -127,8 +142,10 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await expect(
         pageManager.reviewPage.getText(TEST_ACCOUNT.username)
       ).toBeVisible();
-      await expect(pageManager.reviewPage.showPasswordLabel).toBeVisible();
-      await pageManager.reviewPage.showPasswordLabel.check();
+      await expect(
+        pageManager.reviewPage.showPasswordCheckboxLabel
+      ).toBeVisible();
+      await pageManager.reviewPage.showPasswordCheckboxLabel.click();
       await expect(
         pageManager.reviewPage.getText(TEST_ACCOUNT.password)
       ).toBeVisible();
@@ -141,10 +158,10 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
     await test.step("displays headings and banner on congrats page", async () => {
       await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      await expect(
-        pageManager.congratsPage.metroOrNonMetroHeading
-      ).toBeVisible();
-      await expect(pageManager.congratsPage.readListenLink).toBeVisible();
+      await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
+      await expect(pageManager.congratsPage.temporaryCardBanner).toBeVisible();
+      await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
+      await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
     });
 
     await test.step("displays generated library card on congrats page", async () => {
@@ -205,11 +222,11 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       );
 
       const expectedAddress = createFuzzyMatcher([
-        TEST_NYC_ADDRESS.street,
-        TEST_NYC_ADDRESS.apartmentSuite,
-        TEST_NYC_ADDRESS.city,
-        TEST_NYC_ADDRESS.state,
-        TEST_NYC_ADDRESS.postalCode,
+        TEST_OOS_ADDRESS.street,
+        TEST_OOS_ADDRESS.apartmentSuite,
+        TEST_OOS_ADDRESS.city,
+        TEST_OOS_ADDRESS.state,
+        TEST_OOS_ADDRESS.postalCode,
       ]);
 
       const actualAddressText = (patronData.addresses?.[0]?.lines || []).join(
@@ -221,7 +238,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       expect(patronData.birthDate).toBe(expectedDOB);
       expect(actualAddressText).toMatch(expectedAddress);
       expect(patronEmails).toContain(expectedEmail);
-      expect(patronData.patronType).toBe(PATRON_TYPES.DIGITAL_METRO);
+      expect(patronData.patronType).toBe(PATRON_TYPES.DIGITAL_TEMPORARY);
     });
   });
 });

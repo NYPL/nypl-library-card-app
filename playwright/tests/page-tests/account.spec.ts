@@ -1,8 +1,12 @@
 import { test, expect } from "@playwright/test";
-import { AccountPage } from "../pageobjects/account.page";
-import { ERROR_MESSAGES, PAGE_ROUTES, TEST_ACCOUNT } from "../utils/constants";
-import { fillAccountInfo } from "../utils/form-helper";
-import { mockUsernameApi } from "../utils/mock-api";
+import { AccountPage } from "../../pageobjects/account.page";
+import { fillAccountInfo } from "../../utils/form-helper";
+import {
+  ERROR_MESSAGES,
+  PAGE_ROUTES,
+  TEST_ACCOUNT,
+} from "../../utils/constants";
+import { mockUsernameApi } from "../../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(PAGE_ROUTES.ACCOUNT);
@@ -22,16 +26,17 @@ test.describe("displays all form elements on Account page", () => {
     await expect(accountPage.availableUsernameButton).toBeVisible();
     await expect(accountPage.passwordInput).toBeVisible();
     await expect(accountPage.verifyPasswordInput).toBeVisible();
-    await expect(accountPage.showPasswordLabel).toBeVisible();
+    await expect(accountPage.showPasswordCheckboxLabel).toBeVisible();
   });
 
   test("displays home library form", async ({ page }) => {
     const accountPage = new AccountPage(page);
+    await expect(accountPage.nyplLocationLink).toBeVisible();
     await expect(accountPage.selectHomeLibrary).toBeVisible();
     await expect(accountPage.cardholderTerms).toBeVisible();
     await expect(accountPage.rulesRegulations).toBeVisible();
     await expect(accountPage.privacyPolicy).toBeVisible();
-    await expect(accountPage.acceptTermsLabel).toBeVisible();
+    await expect(accountPage.acceptTermsCheckboxLabel).toBeVisible();
   });
 
   test("displays next and previous buttons", async ({ page }) => {
@@ -43,6 +48,7 @@ test.describe("displays all form elements on Account page", () => {
   test("opens links in new tab", async ({ page }) => {
     const accountPage = new AccountPage(page);
     const links = [
+      accountPage.nyplLocationLink,
       accountPage.cardholderTerms,
       accountPage.rulesRegulations,
       accountPage.privacyPolicy,
@@ -59,7 +65,7 @@ test.describe("enters account information", () => {
     const accountPage = new AccountPage(page);
     await fillAccountInfo(accountPage, TEST_ACCOUNT);
     await expect(accountPage.usernameInput).toHaveValue(TEST_ACCOUNT.username);
-    await accountPage.showPasswordLabel.check();
+    await accountPage.showPasswordCheckboxLabel.click();
     await expect(accountPage.passwordInput).toHaveValue(TEST_ACCOUNT.password);
     await expect(accountPage.verifyPasswordInput).toHaveValue(
       TEST_ACCOUNT.password
@@ -67,7 +73,7 @@ test.describe("enters account information", () => {
     await expect(accountPage.selectHomeLibrary).toHaveValue(
       TEST_ACCOUNT.homeLibraryCode
     );
-    await expect(accountPage.acceptTermsLabel).toBeChecked();
+    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
   });
 });
 
@@ -75,7 +81,6 @@ test.describe("mocks API responses on account page", () => {
   test("displays username available message", async ({ page }) => {
     // mock the API call for username availability
     await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_AVAILABLE);
-
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("AvailableUsername");
     await accountPage.availableUsernameButton.click();
@@ -85,7 +90,6 @@ test.describe("mocks API responses on account page", () => {
   test("displays username unavailable error message", async ({ page }) => {
     // mock the API call for username unavailability
     await mockUsernameApi(page, ERROR_MESSAGES.USERNAME_UNAVAILABLE);
-
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("UnavailableUsername");
     await accountPage.availableUsernameButton.click();

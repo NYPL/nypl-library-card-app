@@ -15,16 +15,16 @@ export class AccountPage {
   readonly verifyPasswordInput: Locator;
   readonly verifyPasswordError: Locator;
   readonly showPasswordCheckbox: Locator;
-  readonly showPasswordLabel: Locator;
+  readonly showPasswordCheckboxLabel: Locator;
   readonly homeLibraryHeading: Locator;
-  readonly libraryLocations: Locator;
+  readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
   readonly homeLibraryError: Locator;
   readonly cardholderTerms: Locator;
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
-  readonly acceptTermsLabel: Locator;
   readonly acceptTermsCheckbox: Locator;
+  readonly acceptTermsCheckboxLabel: Locator;
   readonly acceptTermsError: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
@@ -39,7 +39,6 @@ export class AccountPage {
       name: "Step 4 of 5: Customize your account",
       level: 2,
     });
-
     this.usernameInput = page.getByRole("textbox", {
       name: "Username (required)",
       exact: true,
@@ -67,19 +66,18 @@ export class AccountPage {
     this.verifyPasswordError = page.getByText(
       ERROR_MESSAGES.VERIFY_PASSWORD_INVALID
     );
-    this.showPasswordLabel = page.getByText("Show password", {
-      exact: true,
-    });
-
     this.showPasswordCheckbox = page.getByRole("checkbox", {
       name: "Show password",
+    });
+    this.showPasswordCheckboxLabel = page.getByText("Show password", {
+      exact: true,
     });
     this.homeLibraryHeading = page.getByRole("heading", {
       name: "Home library",
       level: 3,
       exact: true,
     });
-    this.libraryLocations = page.getByRole("link", {
+    this.nyplLocationLink = page.getByRole("link", {
       name: "NYPL location",
     });
     this.selectHomeLibrary = page.getByLabel("Select a home library:");
@@ -93,13 +91,12 @@ export class AccountPage {
     this.privacyPolicy = page
       .locator("#mainContent")
       .getByRole("link", { name: "Privacy Policy" });
-    this.acceptTermsLabel = page.getByText(
-      "Yes, I accept the terms and conditions."
-    );
-
     this.acceptTermsCheckbox = page.getByRole("checkbox", {
       name: "Yes, I accept the terms and conditions.",
     });
+    this.acceptTermsCheckboxLabel = page.getByText(
+      "Yes, I accept the terms and conditions."
+    );
     this.acceptTermsError = page.getByText(ERROR_MESSAGES.ACCEPT_TERMS_ERROR);
     this.nextButton = page.getByRole("button", { name: "Next", exact: true });
     this.previousButton = page.getByRole("link", {
