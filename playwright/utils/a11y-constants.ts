@@ -1,1 +1,1 @@
-export const A11Y_GUIDELINES = ["wcaag21aa", "wcaag22aa"] as const;
+export const A11Y_GUIDELINES = ["wcag21aa", "wcag22aa"] as const;
