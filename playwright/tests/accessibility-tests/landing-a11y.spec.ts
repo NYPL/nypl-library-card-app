@@ -2,6 +2,7 @@ import { LandingPage } from "../../pageobjects/landing.page";
 import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
 import { PAGE_ROUTES } from "../../utils/constants";
+import { A11Y_GUIDELINES } from "../../utils/a11y-constants";
 
 test.describe("Accessibility tests on Landing Page", () => {
   test.beforeEach(async ({ page }) => {
@@ -10,7 +11,7 @@ test.describe("Accessibility tests on Landing Page", () => {
 
   test("should have no accessibility violations on load", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
-      .withTags(["wcag21aa", "wcag22aa"])
+      .withTags([...A11Y_GUIDELINES])
       .analyze();
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
