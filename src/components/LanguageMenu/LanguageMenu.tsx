@@ -15,8 +15,16 @@ const LanguageMenu = (): JSX.Element => {
       <a
         href={`/library-card/new?lang=${language.charCode}`}
         key={language.charCode}
+        style={{ display: "block" }}
       >
-        {language.label}
+        {language.nativeLabel ? (
+          <>
+            {`${language.englishLabel} | `}
+            <span lang={language.langCode}>{language.nativeLabel}</span>
+          </>
+        ) : (
+          language.englishLabel
+        )}
       </a>,
       isLastItem ? null : <span key={`span-${language.charCode}`}>·</span>,
     ];
