@@ -39,8 +39,8 @@ const styles = {
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     height: "100%",
-    p: "0 40px 0 25px",
-    gap: "10px 5px",
+    p: "0 2em 0 1.25em",
+    gap: "0.5em 0.25em",
     gridTemplateColumns: "58% 30%",
     gridTemplateRows: "20% 40% 20%",
     justifyContent: "center",
@@ -48,16 +48,16 @@ const styles = {
   },
   memberName: {
     color: "white",
-    fontSize: "0.8em",
+    fontSize: "clamp(0.8vw, 0.8rem, 1.6vw)",
   },
   logoItem: {
     color: "white",
     fontSize: "0.6em",
-    mt: "20px",
+    mt: "1em",
   },
   barcodeContainer: {
     bg: "white",
-    p: "15px 20px 0px",
+    p: "0.75em 1em 0em",
     display: "inline-block",
     gridColumn: "1/3",
     gridRow: "2/2",
@@ -79,7 +79,7 @@ const styles = {
   },
   issuedText: {
     color: "white",
-    fontSize: "1em",
+    fontSize: "clamp(1vw, 1rem, 2vw)",
     mb: "s",
   },
 };
@@ -143,7 +143,7 @@ const ConfirmationContainer = () => {
             <canvas
               id="barcodeCanvas"
               {...canvasArgs}
-              style={{ width: "100%", height: "50px" }}
+              style={{ width: "100%", height: "2.5em" }}
             ></canvas>
             <Box className="barcode" sx={styles.barcode}>
               {barcode}
