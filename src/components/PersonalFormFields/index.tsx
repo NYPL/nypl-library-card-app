@@ -4,14 +4,14 @@ import {
   FormRow,
   Link as DSLink,
 } from "@nypl/design-system-react-components";
-import { Trans, useTranslation } from "next-i18next";
-import { useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { useTranslation } from "next-i18next";
+import { Controller, useFormContext } from "react-hook-form";
 import { isEmail } from "validator";
 
 import FormField from "../FormField";
 import AgeFormFields from "../AgeFormFields";
 import useFormDataContext from "../../context/FormDataContext";
+import { Trans } from "../Trans";
 
 interface PersonalFormFieldsProps {
   agencyType?: string;
@@ -20,14 +20,12 @@ interface PersonalFormFieldsProps {
 function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
   const { t } = useTranslation("common");
   const {
+    control,
     register,
     formState: { errors },
   } = useFormContext();
   const { state } = useFormDataContext();
   const { formValues } = state;
-  const [ecommunicationsPref, setEcommunicationsPref] = useState<boolean>(
-    formValues.ecommunicationsPref
-  );
 
   return (
     <>
@@ -90,12 +88,18 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
       </FormRow>
       <FormRow id={`${id}-personalForm-4`}>
         <DSFormField>
-          <Checkbox
-            id="eCommunications"
-            isChecked={ecommunicationsPref}
-            labelText={t("personal.eCommunications.labelText")}
-            {...register("ecommunicationsPref")}
-            onChange={() => setEcommunicationsPref((prev) => !prev)}
+          <Controller
+            name="ecommunicationsPref"
+            control={control}
+            defaultValue={formValues.ecommunicationsPref}
+            render={({ field: { onChange, value } }) => (
+              <Checkbox
+                id="eCommunications"
+                isChecked={value}
+                labelText={t("personal.eCommunications.labelText")}
+                onChange={(e) => onChange(e.target.checked)}
+              />
+            )}
           />
         </DSFormField>
       </FormRow>
