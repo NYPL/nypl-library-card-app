@@ -63,7 +63,9 @@ test.describe("E2E: Navigate backward in application", () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
       await pageManager.personalPage.receiveInfoCheckboxLabel.click();
-      await expect(pageManager.personalPage.receiveInfoCheckbox).not.toBeChecked();
+      await expect(
+        pageManager.personalPage.receiveInfoCheckbox
+      ).not.toBeChecked();
       await pageManager.personalPage.nextButton.click();
     });
 

@@ -449,6 +449,7 @@ function ReviewFormContainer({ csrfToken }) {
             onSubmit={handleSubmit((formData) =>
               editSectionInfo(formData, setEditPersonalInfoFlag)
             )}
+            noValidate
           >
             <PersonalFormFields firstFieldRef={firstPersonalFieldRef} />
           </Form>
@@ -470,8 +471,9 @@ function ReviewFormContainer({ csrfToken }) {
           <Form
             id="review-form-account-fields"
             onSubmit={handleSubmit((formData) =>
-              editSectionInfo(formData, setEditPersonalInfoFlag)
+              editSectionInfo(formData, setEditAccountInfoFlag)
             )}
+            noValidate
           >
             <AccountFormFields
               id="review-form-account-fields"
@@ -492,6 +494,7 @@ function ReviewFormContainer({ csrfToken }) {
         method="post"
         onSubmit={handleSubmit(submitForm)}
         mt="l"
+        noValidate
       >
         <FormRow display="none">
           <DSFormField>
