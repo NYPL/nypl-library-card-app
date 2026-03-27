@@ -1,0 +1,29 @@
+services:
+  # Your actual Next.js app (built from your production Dockerfile)
+  sut: # "System Under Test"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=test
+      - PORT=3000
+
+  # The Playwright Test Runner
+  playwright:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+      args:
+        # This will be populated by our script below
+        - PW_VERSION=${PW_VERSION:-1.58.2}
+    environment:
+      - PLAYWRIGHT_BASE_URL=http://sut:3000
+    depends_on:
+      - sut
+    volumes:
+      # Mount the current directory to see test results/screenshots locally
+      - .:/app
+      # Avoid overwriting the container's node_modules with your local (likely macOS/Windows) ones
+      - /app/node_modules

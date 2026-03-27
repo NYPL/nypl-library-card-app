@@ -2,6 +2,7 @@ import { Page, Locator } from "@playwright/test";
 
 export class LandingPage {
   readonly page: Page;
+  readonly heroBanner: Locator;
   readonly mainHeading: Locator; // displays on each page
   readonly arabicLanguage: Locator;
   readonly bengaliLanguage: Locator;
@@ -27,8 +28,10 @@ export class LandingPage {
 
   constructor(page: Page) {
     this.page = page;
+
+    this.heroBanner = page.getByTestId("ds-hero");
     this.mainHeading = page.getByRole("heading", {
-      name: "Apply for a Library Card Online",
+      name: /Apply for a Library Card Online|للائبریری کارڈ کے لیے آن لائن اپلائی کریں/,
       level: 1,
     });
     this.arabicLanguage = page.getByRole("link", {

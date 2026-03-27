@@ -16,7 +16,10 @@
     "playwright": "npx playwright test",
     "playwright:qa": "PLAYWRIGHT_BASE_URL=https://qa-www.nypl.org npx playwright test",
     "prepare": "husky install",
-    "lint": "eslint --fix"
+    "lint": "eslint --fix",
+   "test:visual": "docker run --rm --network host -v \"$(pwd)\":/app -w /app mcr.microsoft.com/playwright:v1.58.2-noble npx playwright test",
+   "test:visual:update": "docker run --rm --network host -v \"$(pwd)\":/app -w /app mcr.microsoft.com/playwright:v1.58.2-noble npx playwright test --update-snapshots=all"
+
   },
   "engines": {
     "node": ">=10.24.0"

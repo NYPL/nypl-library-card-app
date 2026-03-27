@@ -6,9 +6,7 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./playwright",
   timeout: 30000, // default timeout for each test
-  expect: {
-    timeout: 5000, // default timeout for expect statements
-  },
+
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -26,18 +24,29 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
+
+    /* Standardize viewport and pixel density across local and CI environments */
+    viewport: { width: 1280, height: 720 },
+    deviceScaleFactor: 1,
   },
+
+  snapshotPathTemplate:
+    "{testDir}/__screenshots__/{platform}/{projectName}/{arg}{ext}",
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+      },
     },
 
     {
       name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
+      use: {
+        ...devices["Desktop Firefox"],
+      },
     },
 
     {
@@ -73,5 +82,7 @@ export default defineConfig({
     command: "npm run dev",
     url: "http://localhost:3000/library-card/new",
     reuseExistingServer: !process.env.CI,
+    stdout: "ignore",
+    stderr: "pipe",
   },
 });
