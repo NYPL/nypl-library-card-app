@@ -18,10 +18,9 @@ import {
 } from "../../utils/constants";
 import {
   deletePatron,
-  // getPatronData,
   getPatronID,
+  // verifyPatronData,
 } from "../../utils/sierra-api-utils";
-// import { createFuzzyMatcher, formatSierraDate } from "../../utils/formatter";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`E2E: Complete NYS patron application with Sierra API integration in ${name} (${lang})`, () => {
@@ -180,69 +179,16 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       //   ).toContainText(EXPECTED_BARCODE_PREFIX);
       // });
 
-      // await test.step("retrieves barcode from congrats page", async () => {
+      // await test.step("verifies patron data in Sierra database", async () => {
       //   scrapedBarcode =
       //     await pageManager.congratsPage.patronBarcodeNumber.textContent();
       //   expect(scrapedBarcode).not.toBeNull();
-      // });
-
-      // await test.step("verifies patron data in Sierra database", async () => {
-      //   const patronID = await getPatronID(scrapedBarcode);
-      //   const patronData = await getPatronData(patronID);
-
-      //   expect(patronData, "API response must be a valid object").toEqual(
-      //     expect.objectContaining({
-      //       names: expect.any(Array),
-      //       emails: expect.any(Array),
-      //       addresses: expect.any(Array),
-      //       birthDate: expect.any(String),
-      //       patronType: expect.any(Number),
-      //     })
+      //   await verifyPatronData(
+      //     scrapedBarcode,
+      //     TEST_PATRON,
+      //     TEST_NYS_ADDRESS,
+      //     PATRON_TYPES.DIGITAL_NON_METRO
       //   );
-
-      //   expect(
-      //     patronData.names.length,
-      //     "Names array should not be empty"
-      //   ).toBeGreaterThan(0);
-      //   expect(
-      //     patronData.birthDate,
-      //     "Birthdate should not be empty"
-      //   ).toBeTruthy();
-      //   expect(
-      //     patronData.emails.length,
-      //     "Emails array should not be empty"
-      //   ).toBeGreaterThan(0);
-      //   expect(
-      //     patronData.addresses.length,
-      //     "Addresses array should not be empty"
-      //   ).toBeGreaterThan(0);
-
-      //   const expectedName =
-      //     `${TEST_PATRON.lastName}, ${TEST_PATRON.firstName}`.toUpperCase();
-      //   const expectedDOB = formatSierraDate(TEST_PATRON.dateOfBirth);
-      //   const expectedEmail = TEST_PATRON.email.toLowerCase();
-      //   const patronEmails = patronData.emails?.map((email) =>
-      //     email.toLowerCase()
-      //   );
-
-      //   const expectedAddress = createFuzzyMatcher([
-      //     TEST_NYS_ADDRESS.street,
-      //     TEST_NYS_ADDRESS.apartmentSuite,
-      //     TEST_NYS_ADDRESS.city,
-      //     TEST_NYS_ADDRESS.state,
-      //     TEST_NYS_ADDRESS.postalCode,
-      //   ]);
-
-      //   const actualAddressText = (patronData.addresses?.[0]?.lines || []).join(
-      //     " "
-      //   );
-      //   const actualName = patronData.names?.[0].toUpperCase();
-
-      //   expect(actualName).toContain(expectedName);
-      //   expect(patronData.birthDate).toBe(expectedDOB);
-      //   expect(actualAddressText).toMatch(expectedAddress);
-      //   expect(patronEmails).toContain(expectedEmail);
-      //   expect(patronData.patronType).toBe(PATRON_TYPES.DIGITAL_NON_METRO);
       // });
     });
   });
