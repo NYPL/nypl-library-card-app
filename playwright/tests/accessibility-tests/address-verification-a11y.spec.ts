@@ -3,12 +3,14 @@ import { AddressVerificationPage } from "../../pageobjects/address-verification.
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import { fillAddress, fillPersonalInfo } from "../../utils/form-helper";
+import { A11Y_GUIDELINES } from "../../utils/a11y-constants";
 import {
   PAGE_ROUTES,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
 } from "../../utils/constants";
+import { validateA11yCoverage } from "../../utils/a11y-helper";
 
 test.describe("Accessibility tests on Address Verification page", () => {
   test.beforeEach(async ({ page, context }) => {
@@ -37,8 +39,9 @@ test.describe("Accessibility tests on Address Verification page", () => {
   test("should have no accessibility violations on load", async ({ page }) => {
     await expect(page).toHaveURL(/.*\/address-verification\?.*newCard=true/);
     const accessibilityScanResults = await new AxeBuilder({ page })
-      .withTags(["wcag21aa", "wcag22aa"])
+      .withTags([...A11Y_GUIDELINES])
       .analyze();
+    validateA11yCoverage(accessibilityScanResults);
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
