@@ -14,7 +14,7 @@ export class AccountPage {
   readonly verifyPasswordInput: Locator;
   readonly verifyPasswordError: Locator;
   readonly showPasswordCheckbox: Locator;
-  readonly showPasswordLabel: Locator;
+  readonly showPasswordCheckboxLabel: Locator;
   readonly homeLibraryHeading: Locator;
   readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
@@ -23,7 +23,7 @@ export class AccountPage {
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
   readonly acceptTermsCheckbox: Locator;
-  readonly acceptTermsLabel: Locator;
+  readonly acceptTermsCheckboxLabel: Locator;
   readonly acceptTermsError: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
@@ -80,13 +80,15 @@ export class AccountPage {
       appContent?.account?.errorMessage?.verifyPassword ||
         "There was a problem. The two passwords don't match."
     );
-    this.showPasswordLabel = page.getByText(
-      appContent?.account?.showPassword || "Show password",
-      { exact: true }
-    );
     this.showPasswordCheckbox = page.getByRole("checkbox", {
       name: appContent?.account?.showPassword || "Show password",
     });
+    this.showPasswordCheckboxLabel = page.getByText(
+      appContent?.account?.showPassword || "Show password",
+      {
+        exact: true,
+      }
+    );
     this.homeLibraryHeading = page.getByRole("heading", {
       name: appContent?.account?.library?.title || "Home library",
       level: 3,
@@ -124,7 +126,7 @@ export class AccountPage {
         appContent?.account?.termsAndCondition?.label ||
         "Yes, I accept the terms and conditions.",
     });
-    this.acceptTermsLabel = page.getByText(
+    this.acceptTermsCheckboxLabel = page.getByText(
       appContent?.account?.termsAndCondition?.label ||
         "Yes, I accept the terms and conditions."
     );

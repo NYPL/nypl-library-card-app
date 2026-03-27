@@ -33,7 +33,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(accountPage.availableUsernameButton).toBeVisible();
         await expect(accountPage.passwordInput).toBeVisible();
         await expect(accountPage.verifyPasswordInput).toBeVisible();
-        await expect(accountPage.showPasswordLabel).toBeVisible();
+        await expect(accountPage.showPasswordCheckboxLabel).toBeVisible();
       });
 
       test("displays home library form", async () => {
@@ -42,7 +42,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(accountPage.cardholderTerms).toBeVisible();
         await expect(accountPage.rulesRegulations).toBeVisible();
         await expect(accountPage.privacyPolicy).toBeVisible();
-        await expect(accountPage.acceptTermsLabel).toBeVisible();
+        await expect(accountPage.acceptTermsCheckboxLabel).toBeVisible();
       });
 
       test("confirms links open in new tab", async () => {
@@ -68,7 +68,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(accountPage.usernameInput).toHaveValue(
           TEST_ACCOUNT.username
         );
-        await accountPage.showPasswordLabel.check();
+        await accountPage.showPasswordCheckboxLabel.click();
         await expect(accountPage.passwordInput).toHaveValue(
           TEST_ACCOUNT.password
         );
@@ -78,7 +78,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(accountPage.selectHomeLibrary).toHaveValue(
           TEST_ACCOUNT.homeLibraryCode
         );
-        await expect(accountPage.acceptTermsLabel).toBeChecked();
+        await expect(accountPage.acceptTermsCheckbox).toBeChecked();
       });
     });
 

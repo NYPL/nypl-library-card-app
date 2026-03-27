@@ -34,6 +34,7 @@ const LanguageMenu = (): JSX.Element => {
         variant="ul"
         flexWrap="wrap"
         justifyContent="center"
+        dir="ltr"
       />
       <HorizontalRule bg="ui.gray.xx-dark" my="s" />
     </>
