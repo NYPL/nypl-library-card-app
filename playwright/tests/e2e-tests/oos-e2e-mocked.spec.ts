@@ -61,18 +61,18 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           timeout: SPINNER_TIMEOUT,
         });
 
-        // await test.step("verifies home and alternate addresses", async () => {
-        //   await expect(
-        //     pageManager.addressVerificationPage.stepHeading
-        //   ).toBeVisible();
-        //   await pageManager.addressVerificationPage
-        //     .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-        //     .click();
-        //   await pageManager.addressVerificationPage
-        //     .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
-        //     .click();
-        //   await pageManager.addressVerificationPage.nextButton.click();
-        // });
+        await test.step("verifies home and alternate addresses", async () => {
+          await expect(
+            pageManager.addressVerificationPage.stepHeading
+          ).toBeVisible();
+          await pageManager.addressVerificationPage
+            .getHomeAddressOption(TEST_OOS_ADDRESS.street)
+            .click();
+          await pageManager.addressVerificationPage
+            .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
+            .click();
+          await pageManager.addressVerificationPage.nextButton.click();
+        });
 
         // await test.step("enters account information", async () => {
         //   await expect(pageManager.accountPage.stepHeading).toBeVisible();

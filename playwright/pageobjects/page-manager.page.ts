@@ -35,7 +35,7 @@ export class PageManager {
   }
 
   get addressVerificationPage(): AddressVerificationPage {
-    return new AddressVerificationPage(this.page);
+    return new AddressVerificationPage(this.page, this.appContent);
   }
 
   get accountPage(): AccountPage {

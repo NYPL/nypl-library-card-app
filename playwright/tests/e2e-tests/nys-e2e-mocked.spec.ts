@@ -57,15 +57,15 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.alternateAddressPage.nextButton.click();
       });
 
-      // await test.step("verifies home address", async () => {
-      //   await expect(
-      //     pageManager.addressVerificationPage.stepHeading
-      //   ).toBeVisible();
-      //   await pageManager.addressVerificationPage
-      //     .getHomeAddressOption(TEST_NYS_ADDRESS.street)
-      //     .click();
-      //   await pageManager.addressVerificationPage.nextButton.click();
-      // });
+      await test.step("verifies home address", async () => {
+        await expect(
+          pageManager.addressVerificationPage.stepHeading
+        ).toBeVisible();
+        await pageManager.addressVerificationPage
+          .getHomeAddressOption(TEST_NYS_ADDRESS.street)
+          .click();
+        await pageManager.addressVerificationPage.nextButton.click();
+      });
 
       // await test.step("enters account information", async () => {
       //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
