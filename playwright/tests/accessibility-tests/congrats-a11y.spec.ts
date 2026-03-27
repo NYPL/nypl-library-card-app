@@ -3,6 +3,7 @@ import { CongratsPage } from "../../pageobjects/congrats.page";
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import { A11Y_GUIDELINES } from "../../utils/a11y-constants";
+import { validateA11yCoverage } from "../../utils/a11y-helper";
 import {
   fillPersonalInfo,
   fillAddress,
@@ -97,6 +98,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();
+    validateA11yCoverage(accessibilityScanResults);
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 

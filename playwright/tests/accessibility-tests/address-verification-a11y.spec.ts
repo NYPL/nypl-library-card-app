@@ -10,6 +10,7 @@ import {
   TEST_OOS_ADDRESS,
   TEST_PATRON,
 } from "../../utils/constants";
+import { validateA11yCoverage } from "../../utils/a11y-helper";
 
 test.describe("Accessibility tests on Address Verification page", () => {
   test.beforeEach(async ({ page, context }) => {
@@ -40,6 +41,7 @@ test.describe("Accessibility tests on Address Verification page", () => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();
+    validateA11yCoverage(accessibilityScanResults);
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 

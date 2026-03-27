@@ -3,6 +3,7 @@ import { AlternateAddressPage } from "../../pageobjects/alternate-address.page";
 import { test, expect } from "@playwright/test";
 import { PAGE_ROUTES } from "../../utils/constants";
 import { A11Y_GUIDELINES } from "../../utils/a11y-constants";
+import { validateA11yCoverage } from "../../utils/a11y-helper";
 
 test.describe("Accessibility tests on Alternate Address page", () => {
   test.beforeEach(async ({ page }) => {
@@ -13,6 +14,7 @@ test.describe("Accessibility tests on Alternate Address page", () => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();
+    validateA11yCoverage(accessibilityScanResults);
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
