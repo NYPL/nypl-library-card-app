@@ -5,7 +5,7 @@ import { PAGE_ROUTES } from "../../utils/constants";
 
 test.describe("Accessibility tests on Address Page", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(PAGE_ROUTES.ADDRESS);
+    await page.goto(PAGE_ROUTES.ADDRESS());
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {
@@ -18,7 +18,7 @@ test.describe("Accessibility tests on Address Page", () => {
     const addressPage = new AddressPage(page);
 
     const addressLocators = [
-      addressPage.alternateForm,
+      addressPage.alternateFormLink,
       addressPage.streetAddressInput,
       addressPage.apartmentSuiteInput,
       addressPage.cityInput,

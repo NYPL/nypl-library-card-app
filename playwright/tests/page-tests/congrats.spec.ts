@@ -18,7 +18,7 @@ test.describe("displays congrats page", () => {
     pageManager = new PageManager(page);
     congratsPage = new CongratsPage(page);
     fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
-    await page.goto(PAGE_ROUTES.REVIEW);
+    await page.goto(PAGE_ROUTES.REVIEW());
   });
 
   test("displays library card on congrats page", async ({ page }) => {

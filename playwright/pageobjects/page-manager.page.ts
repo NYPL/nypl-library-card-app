@@ -11,29 +11,31 @@ import { GlobalComponentsPage } from "./global-components.page";
 
 export class PageManager {
   readonly page: Page;
+  readonly appContent: any;
 
-  constructor(page: Page) {
+  constructor(page: Page, appContent?: any) {
     this.page = page;
+    this.appContent = appContent;
   }
 
   get landingPage(): LandingPage {
-    return new LandingPage(this.page);
+    return new LandingPage(this.page, this.appContent);
   }
 
   get personalPage(): PersonalPage {
-    return new PersonalPage(this.page);
+    return new PersonalPage(this.page, this.appContent);
   }
 
   get addressPage(): AddressPage {
-    return new AddressPage(this.page);
+    return new AddressPage(this.page, this.appContent);
   }
 
   get alternateAddressPage(): AlternateAddressPage {
-    return new AlternateAddressPage(this.page);
+    return new AlternateAddressPage(this.page, this.appContent);
   }
 
   get addressVerificationPage(): AddressVerificationPage {
-    return new AddressVerificationPage(this.page);
+    return new AddressVerificationPage(this.page, this.appContent);
   }
 
   get accountPage(): AccountPage {
