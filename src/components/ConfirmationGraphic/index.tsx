@@ -48,7 +48,7 @@ const styles = {
   },
   memberName: {
     color: "white",
-    fontSize: "clamp(0.8vw, 0.8rem, 1.6vw)",
+    fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.6rem)",
   },
   logoItem: {
     color: "white",
@@ -79,7 +79,7 @@ const styles = {
   },
   issuedText: {
     color: "white",
-    fontSize: "clamp(1vw, 1rem, 2vw)",
+    fontSize: "clamp(0.6rem, 0.6rem + 0.2vw, 1rem)",
     mb: "s",
   },
 };
@@ -151,7 +151,10 @@ const ConfirmationContainer = () => {
           </Box>
           <GridItem id="issued" sx={styles.issuedText}>
             {t("confirmation.graphic.issued")}
-            <Box className="content" fontSize={"1.6em"}>
+            <Box
+              className="content"
+              fontSize={"clamp(1rem, 1rem + 0.2vw, 1.6rem)"}
+            >
               {new Date().toLocaleDateString()}
             </Box>
           </GridItem>
