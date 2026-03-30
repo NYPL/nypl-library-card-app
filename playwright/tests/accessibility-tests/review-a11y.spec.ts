@@ -15,7 +15,6 @@ import {
   TEST_NYC_ADDRESS,
   IP,
 } from "../../utils/constants";
-
 test.describe("Review Page Accessibility Tests", () => {
   test.beforeEach(async ({ page, context }) => {
     await context.clearCookies();
@@ -23,34 +22,44 @@ test.describe("Review Page Accessibility Tests", () => {
       "x-client-ip": IP.NYC_IP,
       "x-forwarded-for": IP.NYC_IP,
     });
+
     const pageManager = new PageManager(page);
     await page.goto(PAGE_ROUTES.PERSONAL);
 
-    await expect(pageManager.personalPage.stepHeading).toBeVisible();
-    await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-    await pageManager.personalPage.nextButton.click();
-
-    // address page
-    await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
-    await pageManager.addressPage.nextButton.click();
-    await expect(pageManager.addressPage.spinner).not.toBeVisible({
-      timeout: SPINNER_TIMEOUT,
+    await test.step("Personal info page", async () => {
+      await expect(pageManager.personalPage.stepHeading).toBeVisible();
+      await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+      await pageManager.personalPage.nextButton.click();
     });
 
-    // address verification page
-    await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
-    await pageManager.addressVerificationPage.nextButton.click();
-    await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
-      timeout: SPINNER_TIMEOUT,
+    await test.step("Address page", async () => {
+      await expect(pageManager.addressPage.stepHeading).toBeVisible();
+      await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
+      await pageManager.addressPage.nextButton.click();
+      await expect(pageManager.addressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
     });
 
-    // account page
-    await expect(pageManager.accountPage.stepHeading).toBeVisible();
-    await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-    await pageManager.accountPage.nextButton.click();
+    await test.step("Address verification page", async () => {
+      await expect(
+        pageManager.addressVerificationPage.stepHeading
+      ).toBeVisible();
+      await pageManager.addressVerificationPage.nextButton.click();
+      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
+        { timeout: SPINNER_TIMEOUT }
+      );
+    });
 
-    // review page
-    await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+    await test.step("Account page", async () => {
+      await expect(pageManager.accountPage.stepHeading).toBeVisible();
+      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+      await pageManager.accountPage.nextButton.click();
+    });
+
+    await test.step("Review page", async () => {
+      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+    });
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {
