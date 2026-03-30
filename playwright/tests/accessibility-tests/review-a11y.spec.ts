@@ -26,13 +26,13 @@ test.describe("Review Page Accessibility Tests", () => {
     const pageManager = new PageManager(page);
     await page.goto(PAGE_ROUTES.PERSONAL);
 
-    await test.step("Personal info page", async () => {
+    await test.step("it should display Personal info page", async () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
       await pageManager.personalPage.nextButton.click();
     });
 
-    await test.step("Address page", async () => {
+    await test.step("it should display Address page", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
       await pageManager.addressPage.nextButton.click();
@@ -41,7 +41,7 @@ test.describe("Review Page Accessibility Tests", () => {
       });
     });
 
-    await test.step("Address verification page", async () => {
+    await test.step("it should display Address verification page", async () => {
       await expect(
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
@@ -51,13 +51,13 @@ test.describe("Review Page Accessibility Tests", () => {
       );
     });
 
-    await test.step("Account page", async () => {
+    await test.step("it should display Account page", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();
     });
 
-    await test.step("Review page", async () => {
+    await test.step("it should display Review page", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
     });
   });
