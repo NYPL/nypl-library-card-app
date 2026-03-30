@@ -2,8 +2,7 @@ import { test, expect } from "@playwright/test";
 import { AccountPage } from "../../pageobjects/account.page";
 import { AxeBuilder } from "@axe-core/playwright";
 import { PAGE_ROUTES } from "../../utils/constants";
-import { A11Y_GUIDELINES } from "../../utils/a11y-constants";
-import { validateA11yCoverage } from "../../utils/a11y-helper";
+import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 
 test.describe("Account Page Accessibility Tests", () => {
   test.beforeEach(async ({ page }) => {

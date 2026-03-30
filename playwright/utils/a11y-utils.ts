@@ -1,4 +1,4 @@
-import { A11Y_GUIDELINES } from "./a11y-utils";
+export const A11Y_GUIDELINES = ["wcag21aa", "wcag22aa"] as const;
 
 export function validateA11yCoverage(results) {
   const analyzedTags = new Set([

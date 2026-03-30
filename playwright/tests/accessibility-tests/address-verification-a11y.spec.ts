@@ -3,14 +3,13 @@ import { AddressVerificationPage } from "../../pageobjects/address-verification.
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import { fillAddress, fillPersonalInfo } from "../../utils/form-helper";
-import { A11Y_GUIDELINES } from "../../utils/a11y-constants";
+import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 import {
   PAGE_ROUTES,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
 } from "../../utils/constants";
-import { validateA11yCoverage } from "../../utils/a11y-helper";
 
 test.describe("Accessibility tests on Address Verification page", () => {
   test.beforeEach(async ({ page, context }) => {
