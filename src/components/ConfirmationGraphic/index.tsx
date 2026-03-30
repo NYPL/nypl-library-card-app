@@ -48,7 +48,7 @@ const styles = {
   },
   memberName: {
     color: "white",
-    fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.6rem)",
+    fontSize: "clamp(0.8rem, 0.8rem + 0.4vw, 1.2rem)",
   },
   logoItem: {
     color: "white",
