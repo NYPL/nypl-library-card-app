@@ -5,11 +5,12 @@ import {
   Center,
   FormField as DSFormField,
   FormRow,
+  TextInputRefType,
 } from "@nypl/design-system-react-components";
 import axios from "axios";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { isAlphanumeric } from "validator";
 
@@ -23,11 +24,13 @@ import {
 } from "../../data/apiErrorMessageTranslations";
 import { apiTranslations } from "../../data/apiMessageTranslations";
 import { NRError } from "../../logger/newrelic";
+import { useMergedRef } from "../../hooks/useMergedRef";
 
 interface UsernameValidationFormProps {
   id?: string;
   errorMessage?: string;
   csrfToken: string;
+  firstFieldRef?: React.RefObject<TextInputRefType>;
 }
 
 /**
@@ -39,6 +42,7 @@ const UsernameValidationForm = ({
   id = "",
   errorMessage = "",
   csrfToken,
+  firstFieldRef,
 }: UsernameValidationFormProps) => {
   const { t } = useTranslation("common");
   const {
@@ -122,6 +126,12 @@ const UsernameValidationForm = ({
         setIsLoading(false);
       });
   };
+  const { ref: registerRef, ...usernameRegisterProps } = register("username", {
+    validate: (val) => inputValidation(val) || errorMessage,
+  });
+
+  const mergedRef = useMergedRef(registerRef, firstFieldRef);
+
   const inputValidation = (value = "") =>
     value.length >= 5 && value.length <= 25 && isAlphanumeric(value);
   /**
@@ -165,15 +175,14 @@ const UsernameValidationForm = ({
           <FormField
             id="username"
             label={t("account.username.label")}
-            {...register("username", {
-              validate: (val) => inputValidation(val) || errorMessage,
-            })}
+            {...usernameRegisterProps}
             instructionText={t("account.username.instruction")}
             isRequired
             errorState={errors}
             maxLength={25}
             defaultValue={formValues.username}
             autoComplete="username"
+            ref={mergedRef}
           />
         </DSFormField>
       </FormRow>

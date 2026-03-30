@@ -3,6 +3,7 @@ import {
   FormField as DSFormField,
   FormRow,
   Link as DSLink,
+  TextInputRefType,
 } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { Controller, useFormContext } from "react-hook-form";
@@ -11,13 +12,18 @@ import { isEmail } from "validator";
 import FormField from "../FormField";
 import AgeFormFields from "../AgeFormFields";
 import useFormDataContext from "../../context/FormDataContext";
+import { useMergedRef } from "../../hooks/useMergedRef";
 import { Trans } from "../Trans";
 
 interface PersonalFormFieldsProps {
   agencyType?: string;
   id?: string;
+  firstFieldRef?: React.RefObject<TextInputRefType>;
 }
-function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
+function PersonalFormFields({
+  id = "",
+  firstFieldRef,
+}: PersonalFormFieldsProps) {
   const { t } = useTranslation("common");
   const {
     control,
@@ -27,6 +33,12 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
   const { state } = useFormDataContext();
   const { formValues } = state;
 
+  const { ref: firstNameRegisterRef, ...firstNameRegisterProps } = register(
+    "firstName",
+    { required: t("personal.errorMessage.firstName") }
+  );
+  const mergedRef = useMergedRef(firstNameRegisterRef, firstFieldRef);
+
   return (
     <>
       <FormRow id={`${id}-personalForm-1`}>
@@ -34,13 +46,12 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
           <FormField
             id="firstName"
             label={t("personal.firstName.label")}
-            {...register("firstName", {
-              required: t("personal.errorMessage.firstName"),
-            })}
+            {...firstNameRegisterProps}
             isRequired
             errorState={errors}
             defaultValue={formValues.firstName}
             autoComplete="given-name"
+            ref={mergedRef}
           />
         </DSFormField>
         <DSFormField>
