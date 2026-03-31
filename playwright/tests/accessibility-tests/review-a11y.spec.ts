@@ -46,6 +46,9 @@ test.describe("Review Page Accessibility Tests", () => {
       await expect(
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
+      await pageManager.addressVerificationPage
+        .getHomeAddressOption(TEST_NYC_ADDRESS.street)
+        .click();
       await pageManager.addressVerificationPage.nextButton.click();
       await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
         { timeout: SPINNER_TIMEOUT }
