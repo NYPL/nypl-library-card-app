@@ -15,7 +15,7 @@ export interface SierraPatron {
   }[];
   emails?: string[];
   patronType: number;
-  notificationEmails?: boolean;
+  notificationEmails?: string[];
 }
 export async function getAuthToken(): Promise<string> {
   const response = await fetch(`${sierraApiBaseUrl}/iii/sierra-api/v6/token`, {
