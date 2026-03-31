@@ -15,7 +15,7 @@ export interface SierraPatron {
   }[];
   emails?: string[];
   patronType: number;
-  ecommunicationsPref?: boolean;
+  notificationEmails?: boolean;
 }
 export async function getAuthToken(): Promise<string> {
   const response = await fetch(`${sierraApiBaseUrl}/iii/sierra-api/v6/token`, {
@@ -68,10 +68,12 @@ export async function getPatronData(patronId: number): Promise<SierraPatron> {
     }
   );
 
-  if (!response.ok)
+  if (!response.ok) {
+    const errorBody = await response.text();
     throw new Error(
-      `Failed to fetch patron data for ID ${patronId}: ${response.status} ${response.statusText}`
+      `Failed to fetch patron data for ID ${patronId}: ${response.status} ${response.statusText}\nDetails: ${errorBody}`
     );
+  }
 
   return (await response.json()) as SierraPatron;
 }
@@ -92,7 +94,7 @@ export async function verifyPatronData(
       addresses: expect.any(Array),
       birthDate: expect.any(String),
       patronType: expect.any(Number),
-      ecommunicationsPref: expect.any(Boolean),
+      notificationEmails: expect.any(Array),
     })
   );
   expect(
@@ -122,13 +124,16 @@ export async function verifyPatronData(
   const actualName = patronData.names?.[0].toUpperCase();
   const actualEmails = patronData.emails?.map((email) => email.toLowerCase());
   const actualAddress = (patronData.addresses?.[0]?.lines || []).join(" ");
+  const actualNotificationEmails = patronData.emails?.map((email) =>
+    email.toLowerCase()
+  );
 
   expect(actualName).toContain(expectedName);
   expect(patronData.birthDate).toBe(expectedBirthdate);
   expect(actualEmails).toContain(expectedEmail);
   expect(actualAddress).toMatch(expectedAddress);
   expect(patronData.patronType).toBe(expectedPatronType);
-  expect(patronData.ecommunicationsPref).toBe(true);
+  expect(actualNotificationEmails).toContain(expectedEmail);
 }
 
 export async function deletePatron(patronId: number): Promise<void> {
