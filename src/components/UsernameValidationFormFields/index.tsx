@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { isAlphanumeric } from "validator";
 
@@ -53,6 +53,7 @@ const UsernameValidationForm = ({
     message: "",
   };
   const [isLoading, setIsLoading] = useState(false);
+  const usernameInputRef = useRef<TextInputRefType>(null);
   const [usernameIsAvailable, setUsernameIsAvailable] = useState(defaultState);
   const {
     watch,
@@ -124,13 +125,14 @@ const UsernameValidationForm = ({
       })
       .finally(() => {
         setIsLoading(false);
+        usernameInputRef.current?.focus();
       });
   };
   const { ref: registerRef, ...usernameRegisterProps } = register("username", {
     validate: (val) => inputValidation(val) || errorMessage,
   });
 
-  const mergedRef = useMergedRef(registerRef, firstFieldRef);
+  const mergedRef = useMergedRef(registerRef, firstFieldRef, usernameInputRef);
 
   const inputValidation = (value = "") =>
     value.length >= 5 && value.length <= 25 && isAlphanumeric(value);
