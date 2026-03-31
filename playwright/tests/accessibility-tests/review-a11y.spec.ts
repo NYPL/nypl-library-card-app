@@ -15,6 +15,7 @@ import {
   TEST_NYC_ADDRESS,
   IP,
 } from "../../utils/constants";
+
 test.describe("Review Page Accessibility Tests", () => {
   test.beforeEach(async ({ page, context }) => {
     await context.clearCookies();
@@ -73,44 +74,75 @@ test.describe("Review Page Accessibility Tests", () => {
   test("should reach all form fields via the tab key", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
 
-    const reviewLocators = [
-      reviewPage.editPersonalInfoButton,
-      reviewPage.lastNameInput,
-      reviewPage.dateOfBirthInput,
-      reviewPage.emailInput,
-      reviewPage.alternateFormLink,
-      reviewPage.locationsLink,
-      reviewPage.receiveInfoCheckbox,
-      reviewPage.editAddressButton,
-      reviewPage.showPasswordCheckbox,
-      reviewPage.editAccountButton,
-      reviewPage.availableUsernameButton,
-      reviewPage.passwordInput,
-      reviewPage.verifyPasswordInput,
-      reviewPage.showPasswordCheckbox,
-      reviewPage.nyplLocationLink,
-      reviewPage.selectHomeLibrary,
-      reviewPage.cardholderTermsLink,
-      reviewPage.rulesRegulationsLink,
-      reviewPage.privacyPolicyLink,
-      reviewPage.acceptTermsCheckbox,
-      reviewPage.submitButton,
-    ];
-    await expect(reviewPage.stepHeading).toBeFocused();
+    await test.step("it should tab through on Personal section", async () => {
+      await reviewPage.stepHeading.focus();
+      await expect(reviewPage.stepHeading).toBeFocused();
+    });
 
-    for (const locator of reviewLocators) {
+    await test.step("it should focus on the Edit button and activate it", async () => {
       await page.keyboard.press("Tab");
-      await expect(locator).toBeFocused();
+      await expect(reviewPage.editPersonalInfoButton).toBeFocused();
 
-      if (locator === reviewPage.editPersonalInfoButton) {
-        await page.keyboard.press("Enter");
-        await expect(reviewPage.firstNameInput).toBeVisible();
-        await expect(reviewPage.firstNameInput).toBeFocused();
-      } else if (locator === reviewPage.editAccountButton) {
-        await page.keyboard.press("Enter");
-        await expect(reviewPage.usernameInput).toBeVisible();
-        await expect(reviewPage.usernameInput).toBeFocused();
+      await page.keyboard.press("Enter");
+      await expect(reviewPage.firstNameInput).toBeFocused();
+    });
+
+    await test.step("it should tab through on Personal info fields", async () => {
+      const personalFields = [
+        reviewPage.lastNameInput,
+        reviewPage.dateOfBirthInput,
+        reviewPage.emailInput,
+        reviewPage.alternateFormLink,
+        reviewPage.locationsLink,
+        reviewPage.receiveInfoCheckbox,
+      ];
+
+      for (const field of personalFields) {
+        await page.keyboard.press("Tab");
+        await expect(field).toBeFocused();
       }
-    }
+    });
+
+    await test.step("it should tab through on Address section", async () => {
+      await page.keyboard.press("Tab");
+      await expect(reviewPage.editAddressButton).toBeFocused();
+    });
+
+    await test.step("it should tab through on Account section", async () => {
+      await page.keyboard.press("Tab");
+      await expect(reviewPage.showPasswordCheckbox).toBeFocused();
+      await page.keyboard.press("Tab");
+    });
+    await test.step("it should focus on the Edit Account button and activate it", async () => {
+      await expect(reviewPage.editAccountButton).toBeFocused();
+      await page.keyboard.press("Enter");
+      await expect(reviewPage.usernameInput).toBeVisible();
+      await expect(reviewPage.usernameInput).toBeFocused();
+    });
+    await test.step("it should tab through on Account info fields", async () => {
+      const accountFields = [
+        reviewPage.availableUsernameButton,
+        reviewPage.passwordInput,
+        reviewPage.verifyPasswordInput,
+        reviewPage.showPasswordCheckbox,
+        reviewPage.nyplLocationLink,
+        reviewPage.selectHomeLibrary,
+        reviewPage.cardholderTermsLink,
+        reviewPage.rulesRegulationsLink,
+        reviewPage.privacyPolicyLink,
+        reviewPage.acceptTermsCheckbox,
+      ];
+
+      for (const field of accountFields) {
+        await page.keyboard.press("Tab");
+        await expect(field).toBeFocused();
+      }
+      await reviewPage.acceptTermsCheckbox.focus();
+      await page.keyboard.press("Space");
+    });
+    await test.step("it should focus on submit button", async () => {
+      await page.keyboard.press("Tab");
+      await expect(reviewPage.submitButton).toBeFocused();
+    });
   });
 });
