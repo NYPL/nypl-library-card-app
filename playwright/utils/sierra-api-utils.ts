@@ -15,6 +15,7 @@ export interface SierraPatron {
   }[];
   emails?: string[];
   patronType: number;
+  ecommunicationsPref?: boolean;
 }
 export async function getAuthToken(): Promise<string> {
   const response = await fetch(`${sierraApiBaseUrl}/iii/sierra-api/v6/token`, {
@@ -57,7 +58,8 @@ export async function getPatronID(barcode: string): Promise<number> {
 
 export async function getPatronData(patronId: number): Promise<SierraPatron> {
   const authToken = await getAuthToken();
-  const fields = "names,birthDate,addresses,emails,patronType";
+  const fields =
+    "names,birthDate,addresses,emails,patronType,ecommunicationsPref";
   const response = await fetch(
     `${sierraApiBaseUrl}/iii/sierra-api/v6/patrons/${patronId}?fields=${fields}`,
     {
@@ -90,6 +92,7 @@ export async function verifyPatronData(
       addresses: expect.any(Array),
       birthDate: expect.any(String),
       patronType: expect.any(Number),
+      ecommunicationsPref: expect.any(Boolean),
     })
   );
   expect(
@@ -125,6 +128,7 @@ export async function verifyPatronData(
   expect(actualEmails).toContain(expectedEmail);
   expect(actualAddress).toMatch(expectedAddress);
   expect(patronData.patronType).toBe(expectedPatronType);
+  expect(patronData.ecommunicationsPref).toBe(true);
 }
 
 export async function deletePatron(patronId: number): Promise<void> {
