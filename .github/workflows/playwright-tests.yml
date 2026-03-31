@@ -45,7 +45,7 @@ jobs:
         run: npx playwright test
 
       - name: Upload Playwright reports on failure
-        if: ${{ failure() }}
+        if: ${{ cancelled() || failure() }}
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
