@@ -96,9 +96,9 @@ const NextSteps = ({ children }: { children: React.ReactNode }) => {
       sx={{
         b: { display: "block", marginBottom: "xs" },
         a: {
-          whiteSpace: "normal", // ensure links wrap
-          overflowWrap: "break-word", // break long URLs
-          maxWidth: "100%", // don't exceed container
+          whiteSpace: "normal",
+          overflowWrap: "break-word",
+          maxWidth: "100%",
         },
       }}
     >
