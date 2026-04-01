@@ -2,10 +2,8 @@ import { expect } from "@playwright/test";
 
 export const A11Y_GUIDELINES = ["wcag21aa", "wcag22aa"] as const;
 
-/* this is for our test case for checking for already used username availability. 
-  We will probably have to create this same username in 30 days
-  since it was created with a temporary account
-*/
+/* Tests existing username rejection. 
+Account is temporary; username availability reset expected in 30 days. */
 export const USED_USER_NAME = "tester";
 export const AVAILABLE_USER_NAME = "testuser";
 
