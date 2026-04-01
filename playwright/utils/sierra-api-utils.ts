@@ -59,7 +59,7 @@ export async function getPatronID(barcode: string): Promise<number> {
 export async function getPatronData(patronId: number): Promise<SierraPatron> {
   const authToken = await getAuthToken();
   const fields =
-    "names,birthDate,addresses,emails,patronType,ecommunicationsPref";
+    "names,birthDate,addresses,emails,patronType,notificationEmails";
   const response = await fetch(
     `${sierraApiBaseUrl}/iii/sierra-api/v6/patrons/${patronId}?fields=${fields}`,
     {
