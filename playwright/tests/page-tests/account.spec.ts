@@ -15,7 +15,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test.beforeEach(async ({ page }) => {
       appContent = require(`../../../public/locales/${lang}/common.json`);
-      accountPage = new AccountPage(page, appContent);
+      accountPage = new AccountPage(page, appContent, lang);
       await page.goto(PAGE_ROUTES.ACCOUNT(lang));
     });
 

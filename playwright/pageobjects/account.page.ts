@@ -30,7 +30,7 @@ export class AccountPage {
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
-  constructor(page: Page, appContent?: any) {
+  constructor(page: Page, appContent?: any, lang?: string) {
     this.page = page;
 
     const required = appContent?.required || "required";
@@ -58,16 +58,15 @@ export class AccountPage {
         "Check if username is available",
       exact: true,
     });
-    this.availableUsernameMessage = page
-      .getByText(apiTranslations["This username is available."].es)
-      .or(page.getByText(apiTranslations["This username is available."].en));
-    this.unavailableUsernameMessage = page
-      .getByText(
-        apiErrorTranslations[
-          "This username is unavailable. Please try another."
-        ].es
-      )
-      .or(page.getByText("This username is unavailable. Please try another.")); // en not listed
+    this.availableUsernameMessage = page.getByText(
+      apiTranslations["This username is available."][lang] ||
+        "This username is available."
+    );
+    this.unavailableUsernameMessage = page.getByText(
+      apiErrorTranslations["This username is unavailable. Please try another."][
+        lang
+      ] || "This username is unavailable. Please try another."
+    );
     this.passwordInput = page.getByRole("textbox", {
       name: withRequired(appContent?.account?.password?.label || "Password"),
       exact: true,
