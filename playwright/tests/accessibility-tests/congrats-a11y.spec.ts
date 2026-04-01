@@ -2,6 +2,8 @@ import { AxeBuilder } from "@axe-core/playwright";
 import { CongratsPage } from "../../pageobjects/congrats.page";
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
+import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+
 import {
   fillPersonalInfo,
   fillAddress,
@@ -94,8 +96,9 @@ test.describe("Accessibility tests on Congrats Page", () => {
 
   test("should have no accessibility violations on load", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
-      .withTags(["wcag21aa", "wcag22aa"])
+      .withTags([...A11Y_GUIDELINES])
       .analyze();
+    validateA11yCoverage(accessibilityScanResults);
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 

@@ -69,10 +69,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test.describe("displays error messages", () => {
       test("displays errors for required fields", async () => {
-        await addressPage.streetAddressInput.fill("");
-        await addressPage.cityInput.fill("");
-        await addressPage.stateInput.click();
-        await addressPage.postalCodeInput.fill("");
         await addressPage.nextButton.click();
         await expect(addressPage.streetAddressError).toBeVisible();
         await expect(addressPage.cityError).toBeVisible();
