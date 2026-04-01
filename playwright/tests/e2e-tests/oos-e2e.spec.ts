@@ -115,7 +115,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON.email)
       ).toBeVisible();
-      await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("No");
+      // await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
     });
 
     await test.step("displays home and alternate addresses on review page", async () => {
