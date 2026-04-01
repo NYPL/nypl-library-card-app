@@ -267,10 +267,6 @@ test.describe("displays error messages", () => {
   test("displays errors for required fields", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editPersonalInfoButton.click();
-    await reviewPage.firstNameInput.fill("");
-    await reviewPage.lastNameInput.fill("");
-    await reviewPage.dateOfBirthInput.fill("");
-    await reviewPage.emailInput.fill("");
     await reviewPage.submitButton.click();
     await expect(reviewPage.firstNameError).toBeVisible();
     await expect(reviewPage.lastNameError).toBeVisible();
@@ -397,8 +393,6 @@ test.describe("displays error messages", () => {
   test("displays error for empty username and password", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
     await reviewPage.editAccountButton.click();
-    await reviewPage.usernameInput.fill("");
-    await reviewPage.passwordInput.fill("");
     await reviewPage.submitButton.click();
     await expect(reviewPage.usernameError).toBeVisible();
     await expect(reviewPage.passwordError).toBeVisible();
