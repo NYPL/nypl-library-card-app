@@ -1,4 +1,6 @@
 import { Page, Locator } from "@playwright/test";
+import { apiTranslations } from "../../src/data/apiMessageTranslations";
+import { apiErrorTranslations } from "../../src/data/apiErrorMessageTranslations";
 
 export class AccountPage {
   readonly page: Page;
@@ -57,11 +59,15 @@ export class AccountPage {
       exact: true,
     });
     this.availableUsernameMessage = page
-      .getByText("El nombre de usuario está disponible.") // replace when translation available
-      .or(page.getByText("This username is available."));
+      .getByText(apiTranslations["This username is available."].es)
+      .or(page.getByText(apiTranslations["This username is available."].en));
     this.unavailableUsernameMessage = page
-      .getByText("Este nombre de usuario no está disponible. Pruebe con otro.") // replace when translation available
-      .or(page.getByText("This username is unavailable. Please try another."));
+      .getByText(
+        apiErrorTranslations[
+          "This username is unavailable. Please try another."
+        ].es
+      )
+      .or(page.getByText("This username is unavailable. Please try another.")); // en not listed
     this.passwordInput = page.getByRole("textbox", {
       name: withRequired(appContent?.account?.password?.label || "Password"),
       exact: true,

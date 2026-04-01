@@ -1,4 +1,4 @@
-import { Checkbox, Link } from "@nypl/design-system-react-components";
+import { Checkbox, Link as DSLink } from "@nypl/design-system-react-components";
 import { Trans, useTranslation } from "next-i18next";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
@@ -23,7 +23,7 @@ const AcceptTermsForm: React.FC = () => {
       <Paragraph m={0}>
         <Trans
           i18nKey="account.termsAndCondition.text"
-          components={{ a: <Link variant="external" /> }}
+          components={{ a: <DSLink variant="external" /> }}
           values={{
             termsConditions: t("account.termsAndCondition.termsConditions"),
             rulesRegulations: t("account.termsAndCondition.rulesRegulations"),
