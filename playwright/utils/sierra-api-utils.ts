@@ -134,6 +134,9 @@ export async function verifyPatronData(
   expect(actualAddress).toMatch(expectedAddress);
   expect(patronData.patronType).toBe(expectedPatronType);
   expect(actualNotificationEmails).toContain(expectedEmail);
+  console.log(
+    `Actual notification emails: ${actualNotificationEmails} Expected email: ${expectedEmail}`
+  );
 }
 
 export async function deletePatron(patronId: number): Promise<void> {
