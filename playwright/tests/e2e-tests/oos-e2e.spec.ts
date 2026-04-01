@@ -38,9 +38,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     }
   });
 
-  test.only("displays patron information on congrats page", async ({
-    page,
-  }) => {
+  test("displays patron information on congrats page", async ({ page }) => {
     const pageManager = new PageManager(page);
 
     await test.step("begins at landing", async () => {
