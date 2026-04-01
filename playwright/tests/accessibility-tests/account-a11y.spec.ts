@@ -2,7 +2,12 @@ import { test, expect } from "@playwright/test";
 import { AccountPage } from "../../pageobjects/account.page";
 import { AxeBuilder } from "@axe-core/playwright";
 import { PAGE_ROUTES } from "../../utils/constants";
-import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import {
+  A11Y_GUIDELINES,
+  validateA11yCoverage,
+  USED_USER_NAME,
+  AVAILABLE_USER_NAME,
+} from "../../utils/a11y-utils";
 
 test.describe("Account Page Accessibility Tests", () => {
   test.beforeEach(async ({ page }) => {
@@ -46,5 +51,35 @@ test.describe("Account Page Accessibility Tests", () => {
     await expect(accountPage.acceptTermsCheckbox).toBeFocused();
     await page.keyboard.press("Space");
     await expect(accountPage.acceptTermsCheckbox).toBeChecked();
+  });
+
+  test("should retain focus when checking unavailable username", async ({
+    page,
+  }) => {
+    const accountPage = new AccountPage(page);
+    await expect(accountPage.stepHeading).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(accountPage.usernameInput).toBeFocused();
+    await accountPage.usernameInput.pressSequentially(USED_USER_NAME);
+    await page.keyboard.press("Tab");
+    await expect(accountPage.availableUsernameButton).toBeFocused();
+    await accountPage.availableUsernameButton.press("Enter");
+    await expect(accountPage.unavailableUsernameMessage).toBeVisible();
+    await page.keyboard.press("Backspace");
+    await expect(accountPage.usernameInput).toBeFocused();
+  });
+
+  test("should retain focus when checking available username", async ({
+    page,
+  }) => {
+    const accountPage = new AccountPage(page);
+    await expect(accountPage.stepHeading).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(accountPage.usernameInput).toBeFocused();
+    await accountPage.usernameInput.pressSequentially(AVAILABLE_USER_NAME);
+    await page.keyboard.press("Tab");
+    await expect(accountPage.availableUsernameButton).toBeFocused();
+    await accountPage.availableUsernameButton.press("Enter");
+    await expect(accountPage.availableUsernameMessage).toBeVisible();
   });
 });
