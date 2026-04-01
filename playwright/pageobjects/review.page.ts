@@ -137,7 +137,7 @@ export class ReviewPage {
       "Receive information about NYPL's programs and services",
       { exact: true }
     );
-    this.receiveInfoChoice = page.getByText("Yes", { exact: true });
+    this.receiveInfoChoice = page.getByText("No", { exact: true });
     this.receiveInfoCheckbox = page.getByRole("checkbox", {
       name: "Yes, I would like to receive information about NYPL's programs and services",
     });

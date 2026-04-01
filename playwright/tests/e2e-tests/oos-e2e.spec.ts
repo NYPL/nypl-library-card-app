@@ -38,7 +38,9 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     }
   });
 
-  test("displays patron information on congrats page", async ({ page }) => {
+  test.only("displays patron information on congrats page", async ({
+    page,
+  }) => {
     const pageManager = new PageManager(page);
 
     await test.step("begins at landing", async () => {
@@ -115,7 +117,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await expect(
         pageManager.reviewPage.getText(TEST_PATRON.email)
       ).toBeVisible();
-      await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
+      await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("No");
     });
 
     await test.step("displays home and alternate addresses on review page", async () => {

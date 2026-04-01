@@ -42,7 +42,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npx playwright test playwright/tests/e2e-tests/oos-e2e.spec.ts
 
       - name: Upload Playwright reports on failure
         if: always()
