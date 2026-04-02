@@ -126,18 +126,21 @@ export async function verifyPatronData(
   const actualAddress = (patronData.addresses?.[0]?.lines || []).join(" ");
   const actualNotificationEmails =
     patronData.notificationEmails
-      ?.filter((email) => typeof email === "string")
-      .map((email) => email.toLowerCase()) ?? [];
+      ?.map((email) => email?.toLowerCase())
+      .filter((address) => typeof address === "string") ?? [];
 
   expect(actualName).toContain(expectedName);
   expect(patronData.birthDate).toBe(expectedBirthdate);
   expect(actualEmails).toContain(expectedEmail);
   expect(actualAddress).toMatch(expectedAddress);
   expect(patronData.patronType).toBe(expectedPatronType);
-  expect(actualNotificationEmails).toContain(expectedEmail);
+  console.log(
+    `$(notificationEmails): ${JSON.stringify(patronData.notificationEmails)}`
+  );
   console.log(
     `Actual notification emails: ${actualNotificationEmails} Expected email: ${expectedEmail}`
   );
+  expect(actualNotificationEmails).toContain(expectedEmail);
 }
 
 export async function deletePatron(patronId: number): Promise<void> {
