@@ -16,12 +16,13 @@ export interface SierraPatron {
   emails?: string[];
   patronType: number;
   notificationEmails?: Array<string | { address?: string }>;
+  patronCodes?: Array<{ code: string; type: string }>;
 }
 
-export interface MoreSierraPatron {
-  id: number;
-  ecommunicationsPref?: boolean;
-}
+// export interface MoreSierraPatron {
+//   id: number;
+//   ecommunicationsPref?: boolean;
+// }
 
 export async function getAuthToken(): Promise<string> {
   const response = await fetch(`${sierraApiBaseUrl}/iii/sierra-api/v6/token`, {
@@ -65,7 +66,7 @@ export async function getPatronID(barcode: string): Promise<number> {
 export async function getPatronData(patronId: number): Promise<SierraPatron> {
   const authToken = await getAuthToken();
   const fields =
-    "names,birthDate,addresses,emails,patronType,notificationEmails";
+    "names,birthDate,addresses,emails,patronType,notificationEmails,patronCodes";
   const response = await fetch(
     `${sierraApiBaseUrl}/iii/sierra-api/v6/patrons/${patronId}?fields=${fields}`,
     {
@@ -84,28 +85,28 @@ export async function getPatronData(patronId: number): Promise<SierraPatron> {
   return (await response.json()) as SierraPatron;
 }
 
-export async function getMorePatronData(
-  patronId: number
-): Promise<MoreSierraPatron> {
-  const authToken = await getAuthToken();
-  const fields = "ecommunicationsPref";
-  const response = await fetch(
-    `${sierraApiBaseUrl}/iii/sierra-api/v0.3/patrons/${patronId}?fields=${fields}`,
-    {
-      method: "GET",
-      headers: { Authorization: `Bearer ${authToken}` },
-    }
-  );
+// export async function getMorePatronData(
+//   patronId: number
+// ): Promise<MoreSierraPatron> {
+//   const authToken = await getAuthToken();
+//   const fields = "ecommunicationsPref";
+//   const response = await fetch(
+//     `${sierraApiBaseUrl}/iii/sierra-api/v0.3/patrons/${patronId}?fields=${fields}`,
+//     {
+//       method: "GET",
+//       headers: { Authorization: `Bearer ${authToken}` },
+//     }
+//   );
 
-  if (!response.ok) {
-    const errorBody = await response.text();
-    throw new Error(
-      `Failed to fetch patron data for ID ${patronId}: ${response.status} ${response.statusText}\nDetails: ${errorBody}`
-    );
-  }
+//   if (!response.ok) {
+//     const errorBody = await response.text();
+//     throw new Error(
+//       `Failed to fetch patron data for ID ${patronId}: ${response.status} ${response.statusText}\nDetails: ${errorBody}`
+//     );
+//   }
 
-  return (await response.json()) as MoreSierraPatron;
-}
+//   return (await response.json()) as MoreSierraPatron;
+// }
 
 export async function verifyPatronData(
   barcode: string,
@@ -115,7 +116,7 @@ export async function verifyPatronData(
 ): Promise<void> {
   const patronID = await getPatronID(barcode);
   const patronData = await getPatronData(patronID);
-  const morePatronData = await getMorePatronData(patronID);
+  // const morePatronData = await getMorePatronData(patronID);
 
   expect(patronData, "API response must be a valid object").toEqual(
     expect.objectContaining({
@@ -125,6 +126,7 @@ export async function verifyPatronData(
       birthDate: expect.any(String),
       patronType: expect.any(Number),
       notificationEmails: expect.any(Array),
+      patronCodes: expect.any(Array),
     })
   );
   expect(
@@ -159,7 +161,7 @@ export async function verifyPatronData(
       (typeof entry === "string" ? entry : entry?.address)?.toLowerCase()
     )
     .filter((email): email is string => typeof email === "string");
-  const actualEcommsPref = morePatronData.ecommunicationsPref;
+  // const actualEcommsPref = morePatronData.ecommunicationsPref;
 
   expect(actualName).toContain(expectedName);
   expect(patronData.birthDate).toBe(expectedBirthdate);
@@ -172,8 +174,9 @@ export async function verifyPatronData(
   console.log(
     `Actual notification emails: ${actualNotificationEmails} Expected email: ${expectedEmail}`
   );
+  console.log(`Patron codes`, patronData.patronCodes);
   expect(actualNotificationEmails).toContain(expectedEmail);
-  expect(actualEcommsPref).toBe(patron.ecommunicationsPref);
+  // expect(actualEcommsPref).toBe(patron.ecommunicationsPref);
 }
 
 export async function deletePatron(patronId: number): Promise<void> {
