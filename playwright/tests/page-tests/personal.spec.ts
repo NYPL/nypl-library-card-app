@@ -63,10 +63,6 @@ test.describe("enters personal information", () => {
 test.describe("displays error messages", () => {
   test("displays errors for required fields", async ({ page }) => {
     const personalPage = new PersonalPage(page);
-    await personalPage.firstNameInput.fill("");
-    await personalPage.lastNameInput.fill("");
-    await personalPage.dateOfBirthInput.fill("");
-    await personalPage.emailInput.fill("");
     await personalPage.nextButton.click();
     await expect(personalPage.firstNameError).toBeVisible();
     await expect(personalPage.lastNameError).toBeVisible();

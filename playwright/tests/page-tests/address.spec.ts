@@ -65,10 +65,6 @@ test.describe("enters home address", () => {
 test.describe("displays error messages", () => {
   test("displays errors for required fields", async ({ page }) => {
     const addressPage = new AddressPage(page);
-    await addressPage.streetAddressInput.fill("");
-    await addressPage.cityInput.fill("");
-    await addressPage.stateInput.click();
-    await addressPage.postalCodeInput.fill("");
     await addressPage.nextButton.click();
     await expect(addressPage.spinner).not.toBeVisible({
       timeout: SPINNER_TIMEOUT,
@@ -79,7 +75,7 @@ test.describe("displays error messages", () => {
     await expect(addressPage.postalCodeError).toBeVisible();
   });
 
-  test("enter too many characters", async ({ page }) => {
+  test("enters too many characters", async ({ page }) => {
     const addressPage = new AddressPage(page);
     await addressPage.postalCodeInput.fill("123456");
     await addressPage.nextButton.click();
@@ -89,7 +85,7 @@ test.describe("displays error messages", () => {
     await expect(addressPage.postalCodeError).toBeVisible();
   });
 
-  test("enter too few characters", async ({ page }) => {
+  test("enters too few characters", async ({ page }) => {
     const addressPage = new AddressPage(page);
     await addressPage.postalCodeInput.fill("1234");
     await addressPage.nextButton.click();
@@ -99,7 +95,7 @@ test.describe("displays error messages", () => {
     await expect(addressPage.postalCodeError).toBeVisible();
   });
 
-  test("enter postal code with dash", async ({ page }) => {
+  test("enters postal code with dash", async ({ page }) => {
     const addressPage = new AddressPage(page);
     await addressPage.postalCodeInput.fill("12345-6789");
     await addressPage.nextButton.click();
