@@ -7,13 +7,19 @@ import {
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
+  PATRON_TYPES,
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_EDITED_PATRON,
+  TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
 } from "../../utils/constants";
-import { deletePatron, getPatronID } from "../../utils/sierra-api-utils";
+import {
+  deletePatron,
+  getPatronID,
+  verifyPatronData,
+} from "../../utils/sierra-api-utils";
 
 test.describe("E2E: Edits patron information", () => {
   let scrapedBarcode: string | null = null;
@@ -128,6 +134,89 @@ test.describe("E2E: Edits patron information", () => {
       scrapedBarcode =
         await pageManager.congratsPage.patronBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();
+    });
+  });
+});
+
+test.describe("retains ecommunications preference in Sierra", () => {
+  test("unchecks ecommunications preference on personal page", async ({
+    page,
+  }) => {
+    const pageManager = new PageManager(page);
+
+    await test.step("enters personal information with ecomms unchecked", async () => {
+      await page.goto(PAGE_ROUTES.PERSONAL);
+      await expect(pageManager.personalPage.stepHeading).toBeVisible();
+      await fillPersonalInfo(pageManager.personalPage, TEST_EDITED_PATRON);
+      await expect(
+        pageManager.personalPage.receiveInfoCheckbox
+      ).not.toBeChecked();
+      await pageManager.personalPage.nextButton.click();
+    });
+
+    await test.step("enters home address", async () => {
+      await expect(pageManager.addressPage.stepHeading).toBeVisible();
+      await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
+      await pageManager.addressPage.nextButton.click();
+      await expect(pageManager.addressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
+    });
+
+    await test.step("enters alternate address", async () => {
+      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
+      await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
+      await pageManager.alternateAddressPage.nextButton.click();
+      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
+    });
+
+    await test.step("verifies home and alternate addresses", async () => {
+      await expect(
+        pageManager.addressVerificationPage.stepHeading
+      ).toBeVisible();
+      await pageManager.addressVerificationPage
+        .getHomeAddressOption(TEST_OOS_ADDRESS.street)
+        .click();
+      await pageManager.addressVerificationPage
+        .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
+        .click();
+      await pageManager.addressVerificationPage.nextButton.click();
+      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
+        {
+          timeout: SPINNER_TIMEOUT,
+        }
+      );
+    });
+
+    await test.step("enters account information", async () => {
+      await expect(pageManager.accountPage.stepHeading).toBeVisible();
+      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+      await pageManager.accountPage.nextButton.click();
+    });
+
+    await test.step("confirms ecommunications preference is retained on review page", async () => {
+      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      await pageManager.reviewPage.editPersonalInfoButton.click();
+      await expect(
+        pageManager.reviewPage.receiveInfoCheckbox
+      ).not.toBeChecked();
+    });
+
+    await test.step("submits application and verifies Sierra data", async () => {
+      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      await pageManager.reviewPage.submitButton.click();
+
+      const scrapedBarcode =
+        await pageManager.congratsPage.patronBarcodeNumber.textContent();
+      expect(scrapedBarcode).not.toBeNull();
+      await verifyPatronData(
+        scrapedBarcode,
+        TEST_EDITED_PATRON,
+        TEST_OOS_ADDRESS,
+        PATRON_TYPES.DIGITAL_TEMPORARY
+      );
     });
   });
 });
