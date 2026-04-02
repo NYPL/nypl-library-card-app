@@ -15,7 +15,7 @@ export interface SierraPatron {
   }[];
   emails?: string[];
   patronType: number;
-  notificationEmails?: string[];
+  notificationEmails?: Array<string | { address?: string }>;
 }
 export async function getAuthToken(): Promise<string> {
   const response = await fetch(`${sierraApiBaseUrl}/iii/sierra-api/v6/token`, {
@@ -124,9 +124,11 @@ export async function verifyPatronData(
   const actualName = patronData.names?.[0].toUpperCase();
   const actualEmails = patronData.emails?.map((email) => email.toLowerCase());
   const actualAddress = (patronData.addresses?.[0]?.lines || []).join(" ");
-  const actualNotificationEmails = (patronData.notificationEmails ?? []).filter(
-    (email): email is string => typeof email === "string"
-  );
+  const actualNotificationEmails = (patronData.notificationEmails ?? [])
+    .map((entry) =>
+      (typeof entry === "string" ? entry : entry?.address)?.toLowerCase()
+    )
+    .filter((email): email is string => typeof email === "string");
 
   expect(actualName).toContain(expectedName);
   expect(patronData.birthDate).toBe(expectedBirthdate);
