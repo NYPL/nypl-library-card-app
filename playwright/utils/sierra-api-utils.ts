@@ -17,6 +17,12 @@ export interface SierraPatron {
   patronType: number;
   notificationEmails?: Array<string | { address?: string }>;
 }
+
+export interface MoreSierraPatron {
+  id: number;
+  ecommunicationsPref?: boolean;
+}
+
 export async function getAuthToken(): Promise<string> {
   const response = await fetch(`${sierraApiBaseUrl}/iii/sierra-api/v6/token`, {
     method: "POST",
@@ -78,6 +84,29 @@ export async function getPatronData(patronId: number): Promise<SierraPatron> {
   return (await response.json()) as SierraPatron;
 }
 
+export async function getMorePatronData(
+  patronId: number
+): Promise<MoreSierraPatron> {
+  const authToken = await getAuthToken();
+  const fields = "ecommunicationsPref";
+  const response = await fetch(
+    `${sierraApiBaseUrl}/iii/sierra-api/v0.3/patrons/${patronId}?fields=${fields}`,
+    {
+      method: "GET",
+      headers: { Authorization: `Bearer ${authToken}` },
+    }
+  );
+
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(
+      `Failed to fetch patron data for ID ${patronId}: ${response.status} ${response.statusText}\nDetails: ${errorBody}`
+    );
+  }
+
+  return (await response.json()) as MoreSierraPatron;
+}
+
 export async function verifyPatronData(
   barcode: string,
   patron: PatronData,
@@ -86,6 +115,7 @@ export async function verifyPatronData(
 ): Promise<void> {
   const patronID = await getPatronID(barcode);
   const patronData = await getPatronData(patronID);
+  const morePatronData = await getMorePatronData(patronID);
 
   expect(patronData, "API response must be a valid object").toEqual(
     expect.objectContaining({
@@ -129,6 +159,7 @@ export async function verifyPatronData(
       (typeof entry === "string" ? entry : entry?.address)?.toLowerCase()
     )
     .filter((email): email is string => typeof email === "string");
+  const actualEcommsPref = morePatronData.ecommunicationsPref;
 
   expect(actualName).toContain(expectedName);
   expect(patronData.birthDate).toBe(expectedBirthdate);
@@ -142,6 +173,7 @@ export async function verifyPatronData(
     `Actual notification emails: ${actualNotificationEmails} Expected email: ${expectedEmail}`
   );
   expect(actualNotificationEmails).toContain(expectedEmail);
+  expect(actualEcommsPref).toBe(patron.ecommunicationsPref);
 }
 
 export async function deletePatron(patronId: number): Promise<void> {
