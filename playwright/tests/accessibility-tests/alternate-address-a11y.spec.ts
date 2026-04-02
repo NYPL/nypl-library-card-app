@@ -26,6 +26,8 @@ test.describe("Accessibility tests on Alternate Address page", () => {
       alternateAddress.cityInput,
       alternateAddress.stateInput,
       alternateAddress.postalCodeInput,
+      alternateAddress.previousButton,
+      alternateAddress.nextButton,
     ];
     await expect(alternateAddress.stepHeading).toBeFocused();
 
