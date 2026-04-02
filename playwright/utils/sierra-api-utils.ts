@@ -124,10 +124,9 @@ export async function verifyPatronData(
   const actualName = patronData.names?.[0].toUpperCase();
   const actualEmails = patronData.emails?.map((email) => email.toLowerCase());
   const actualAddress = (patronData.addresses?.[0]?.lines || []).join(" ");
-  const actualNotificationEmails =
-    patronData.notificationEmails
-      ?.map((email) => email?.toLowerCase())
-      .filter((address) => typeof address === "string") ?? [];
+  const actualNotificationEmails = (patronData.notificationEmails ?? []).filter(
+    (email): email is string => typeof email === "string"
+  );
 
   expect(actualName).toContain(expectedName);
   expect(patronData.birthDate).toBe(expectedBirthdate);
