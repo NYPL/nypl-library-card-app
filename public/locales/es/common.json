@@ -62,7 +62,7 @@
       "description": {
         "part1": "¿Trabaja, estudia o paga impuestos a la propiedad en el Estado de Nueva York? Incluso si no vive en Nueva York, puede solicitar una tarjeta de la biblioteca.",
         "part2": "Si trabaja o estudia en la ciudad de Nueva York, indique la dirección.",
-        "part3": "Indique la dirección de su trabajo, escuela o lugar donde paga impuestos a la propiedad en el Estado de Nueva York. Si ninguna de estas opciones le corresponde, haga clic en “Siguiente”."
+        "part3": "Indique la dirección de su trabajo, escuela o lugar donde paga impuestos a la propiedad en el Estado de Nueva York. Si ninguna de estas opciones le corresponde, haga clic en “Próximo”."
       }
     },
     "errorMessage": {
