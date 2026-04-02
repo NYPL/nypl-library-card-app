@@ -1,4 +1,4 @@
-import { Box } from "@nypl/design-system-react-components";
+import { Box, Heading } from "@nypl/design-system-react-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import React, { JSX, useEffect } from "react";
@@ -67,11 +67,19 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       </PageHeading>
 
       {!temporary && (
+        <NextStepHeading>
+          <Trans i18nKey="confirmation.nextSteps.exploreHeader" />
+        </NextStepHeading>
+      )}
+      {!temporary && (
         <NextSteps>
           <Trans i18nKey="confirmation.nextSteps.explore" />
         </NextSteps>
       )}
 
+      <NextStepHeading>
+        <Trans i18nKey="confirmation.nextSteps.borrowHeader" />
+      </NextStepHeading>
       <NextSteps>
         <Trans
           i18nKey="confirmation.nextSteps.borrow"
@@ -79,10 +87,16 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
         />
       </NextSteps>
 
+      <NextStepHeading>
+        <Trans i18nKey="confirmation.nextSteps.updatesHeader" />
+      </NextStepHeading>
       <NextSteps>
         <Trans i18nKey="confirmation.nextSteps.updates" />
       </NextSteps>
 
+      <NextStepHeading>
+        <Trans i18nKey="confirmation.nextSteps.moreHeader" />
+      </NextStepHeading>
       <NextSteps>
         <Trans i18nKey="confirmation.nextSteps.more" />
       </NextSteps>
@@ -90,11 +104,20 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
   );
 }
 
+const NextStepHeading = ({ children }: { children: React.ReactNode }) => (
+  <Heading
+    level="h3"
+    size="heading5"
+    sx={{ display: "block", marginBottom: "xs" }}
+  >
+    {children}
+  </Heading>
+);
+
 const NextSteps = ({ children }: { children: React.ReactNode }) => {
   return (
     <Paragraph
       sx={{
-        b: { display: "block", marginBottom: "xs" },
         a: {
           whiteSpace: "normal",
           overflowWrap: "break-word",
