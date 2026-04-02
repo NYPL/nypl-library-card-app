@@ -50,10 +50,10 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     await test.step("enters personal information", async () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      // await pageManager.personalPage.receiveInfoCheckboxLabel.click(); // temporary uncheck ecomms
-      // await expect(
-      //   pageManager.personalPage.receiveInfoCheckbox
-      // ).not.toBeChecked(); // verify ecomms is unchecked
+      await pageManager.personalPage.receiveInfoCheckboxLabel.click(); // temporary uncheck ecomms
+      await expect(
+        pageManager.personalPage.receiveInfoCheckbox
+      ).not.toBeChecked(); // verify ecomms is unchecked
       console.log(
         "Receive info checkbox checked:",
         await pageManager.personalPage.receiveInfoCheckbox.isChecked()
