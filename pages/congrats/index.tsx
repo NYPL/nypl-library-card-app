@@ -1,4 +1,4 @@
-import { Box, Heading } from "@nypl/design-system-react-components";
+import { Box } from "@nypl/design-system-react-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import React, { JSX, useEffect } from "react";
@@ -16,6 +16,7 @@ import { PageHeading } from "../../src/components/PageHeading";
 import { Paragraph } from "../../src/components/Paragraph";
 import { Trans } from "../../src/components/Trans";
 import { Banner } from "../../src/components/Banner";
+import { PageSubHeading } from "../../src/components/PageSubHeading";
 
 const TEMPORARY_PTYPE = 7;
 
@@ -67,9 +68,9 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       </PageHeading>
 
       {!temporary && (
-        <NextStepHeading>
+        <PageSubHeading mb="xs">
           <Trans i18nKey="confirmation.nextSteps.exploreHeader" />
-        </NextStepHeading>
+        </PageSubHeading>
       )}
       {!temporary && (
         <NextSteps>
@@ -77,9 +78,9 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
         </NextSteps>
       )}
 
-      <NextStepHeading>
+      <PageSubHeading mb="xs">
         <Trans i18nKey="confirmation.nextSteps.borrowHeader" />
-      </NextStepHeading>
+      </PageSubHeading>
       <NextSteps>
         <Trans
           i18nKey="confirmation.nextSteps.borrow"
@@ -87,32 +88,22 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
         />
       </NextSteps>
 
-      <NextStepHeading>
+      <PageSubHeading mb="xs">
         <Trans i18nKey="confirmation.nextSteps.updatesHeader" />
-      </NextStepHeading>
+      </PageSubHeading>
       <NextSteps>
         <Trans i18nKey="confirmation.nextSteps.updates" />
       </NextSteps>
 
-      <NextStepHeading>
+      <PageSubHeading mb="xs">
         <Trans i18nKey="confirmation.nextSteps.moreHeader" />
-      </NextStepHeading>
+      </PageSubHeading>
       <NextSteps>
         <Trans i18nKey="confirmation.nextSteps.more" />
       </NextSteps>
     </Box>
   );
 }
-
-const NextStepHeading = ({ children }: { children: React.ReactNode }) => (
-  <Heading
-    level="h3"
-    size="heading5"
-    sx={{ display: "block", marginBottom: "xs" }}
-  >
-    {children}
-  </Heading>
-);
 
 const NextSteps = ({ children }: { children: React.ReactNode }) => {
   return (

@@ -154,13 +154,13 @@
     },
     "nextSteps": {
       "title": "开始使用纽约公共图书馆",
-      "exploreHeader": "<b>探索电子书和电子有声书</b>",
+      "exploreHeader": "探索电子书和电子有声书",
       "explore": "您可以<a href='https://www.nypl.org/books-music-movies/help'>随时随地阅读或聆听</a>各种各样的书籍。",
-      "borrowHeader": "<b>借阅书籍和其他物品</b>",
+      "borrowHeader": "借阅书籍和其他物品",
       "borrow": "<a href='{{loginUrl}}'>登录您的帐户</a>并浏览目录。如需借阅实体物品，请前往任何一家<a href='https://www.nypl.org/locations'>NYPL分馆</a>验证您的信息并领取实体图书卡。",
-      "updatesHeader": "<b>获取更新</b>",
+      "updatesHeader": "获取更新",
       "updates": "<a href='https://www.nypl.org/enews'>发现图书馆提供的所有服务。</a>",
-      "moreHeader": "<b>了解更多</b>",
+      "moreHeader": "了解更多",
       "more": "<a href='https://www.nypl.org/discover-library-card'>发现您可以用图书卡做些什么。</a>"
     }
   },

@@ -157,13 +157,13 @@
     },
     "nextSteps": {
       "title": "Demare ak Bibliyotèk Piblik New York la",
-      "exploreHeader": "<b>Eksplore Liv Elektwonik ak Liv Odyo Elektwonik</b>",
+      "exploreHeader": "Eksplore Liv Elektwonik ak Liv Odyo Elektwonik",
       "explore": "<a href='https://www.nypl.org/books-music-movies/help'>Li oswa Koute kèlkeswa kote w ye a</a> etan w gen aksè a yon gwo seleksyon tit.",
-      "borrowHeader": "<b>Prete Liv ak Plis Bagay Toujou</b>",
+      "borrowHeader": "Prete Liv ak Plis Bagay Toujou",
       "borrow": "<a href='{{loginUrl}}'> Konekte w sou kont ou</a> epi eksplore katalòg la. Pou w mande atik fizik, prezante w nan nenpòt <a href=\"https://www.nypl.org/locations\">branch NYPL</a> pou verifye enfòmasyon w yo epi resevwa yon kat fizik.",
-      "updatesHeader": "<b>Jwenn Mizajou yo</b>",
+      "updatesHeader": "Jwenn Mizajou yo",
       "updates": "<a href='https://www.nypl.org/enews'>Dekouvri tout sa Bibliyotèk la kapab ofri w.</a>",
-      "moreHeader": "<b>Jwenn plis enfòmasyon.</b>",
+      "moreHeader": "Jwenn plis enfòmasyon.",
       "more": "<a href='https://www.nypl.org/discover-library-card'>Dekouvri tout bagay ou kapab fè ak kat Bibliyotèk ou an.</a>"
     }
   },

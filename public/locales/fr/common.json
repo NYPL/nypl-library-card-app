@@ -157,13 +157,13 @@
     },
     "nextSteps": {
       "title": "Lancez-vous à la découverte de la Bibliothèque publique de New York",
-      "exploreHeader": "<b>Explorer les livres électroniques et les livres audio électroniques</b>",
+      "exploreHeader": "Explorer les livres électroniques et les livres audio électroniques",
       "explore": "<a href='https://www.nypl.org/books-music-movies/help'>Lisez ou écoutez vos titres préférés où que vous soyez</a> grâce à un accès à notre vaste sélection.",
-      "borrowHeader": "<b>Emprunter des livres et bien plus encore</b>",
+      "borrowHeader": "Emprunter des livres et bien plus encore",
       "borrow": "<a href='{{loginUrl}}'>Connectez-vous à votre compte</a> et parcourez le catalogue. Pour emprunter des articles physiques, rendez-vous dans n'importe quelle <a href=\"https://www.nypl.org/locations\">bibliothèque NYPL</a> pour valider vos informations et recevoir votre carte physique.",
-      "updatesHeader": "<b>Recevoir des mises à jour</b>",
+      "updatesHeader": "Recevoir des mises à jour",
       "updates": "<a href='https://www.nypl.org/enews'>Découvrez tout ce que la Bibliothèque a à offrir.</a>",
-      "moreHeader": "<b>En savoir plus</b>",
+      "moreHeader": "En savoir plus",
       "more": "<a href='https://www.nypl.org/discover-library-card'>Découvrez tout ce que vous pouvez faire avec votre carte de bibliothèque.</a>"
     }
   },
