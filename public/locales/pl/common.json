@@ -157,10 +157,14 @@
     },
     "nextSteps": {
       "title": "Zacznij korzystać z Nowojorskiej Biblioteki Publicznej",
-      "explore": "<b>Poznaj kolekcję e-booków i e-audiobooków</b><a href='https://www.nypl.org/books-music-movies/help'>Czytaj lub słuchaj, gdziekolwiek jesteś</a> korzystając z obszernego zbioru pozycji.",
-      "borrow": "<b>Wypożycz książki i inne materiały</b><a href='{{loginUrl}}'>Zaloguj się na konto</a> i przejrzyj katalog. Aby wypożyczać materiały fizyczne, odwiedź dowolną <a href='https://www.nypl.org/locations'>placówkę NYPL</a> w celu zweryfikowania swoich danych i uzyskania karty fizycznej.",
-      "updates": "<b>Otrzymuj aktualności</b><a href='https://www.nypl.org/enews'>Dowiedz się wszystkiego o ofercie Biblioteki.</a>",
-      "more": "<b>Więcej informacji</b><a href='https://www.nypl.org/discover-library-card'>Dowiedz się, co możesz robić przy użyciu karty bibliotecznej.</a>"
+      "exploreHeader": "<b>Poznaj kolekcję e-booków i e-audiobooków</b>",
+      "explore": "<a href='https://www.nypl.org/books-music-movies/help'>Czytaj lub słuchaj, gdziekolwiek jesteś</a> korzystając z obszernego zbioru pozycji.",
+      "borrowHeader": "<b>Wypożycz książki i inne materiały</b>",
+      "borrow": "<a href='{{loginUrl}}'>Zaloguj się na konto</a> i przejrzyj katalog. Aby wypożyczać materiały fizyczne, odwiedź dowolną <a href='https://www.nypl.org/locations'>placówkę NYPL</a> w celu zweryfikowania swoich danych i uzyskania karty fizycznej.",
+      "updatesHeader": "<b>Otrzymuj aktualności</b>",
+      "updates": "<a href='https://www.nypl.org/enews'>Dowiedz się wszystkiego o ofercie Biblioteki.</a>",
+      "moreHeader": "<b>Więcej informacji</b>",
+      "more": "<a href='https://www.nypl.org/discover-library-card'>Dowiedz się, co możesz robić przy użyciu karty bibliotecznej.</a>"
     }
   },
   "button": {

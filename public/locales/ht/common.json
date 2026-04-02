@@ -157,10 +157,14 @@
     },
     "nextSteps": {
       "title": "Demare ak Bibliyotèk Piblik New York la",
-      "explore": "<b>Eksplore Liv Elektwonik ak Liv Odyo Elektwonik</b><a href='https://www.nypl.org/books-music-movies/help'>Li oswa Koute kèlkeswa kote w ye a</a> etan w gen aksè a yon gwo seleksyon tit.",
-      "borrow": "<b>Prete Liv ak Plis Bagay Toujou</b><a href='{{loginUrl}}'> Konekte w sou kont ou</a> epi eksplore katalòg la. Pou w mande atik fizik, prezante w nan nenpòt <a href=\"https://www.nypl.org/locations\">branch NYPL</a> pou verifye enfòmasyon w yo epi resevwa yon kat fizik.",
-      "updates": "<b>Jwenn Mizajou yo</b><a href='https://www.nypl.org/enews'>Dekouvri tout sa Bibliyotèk la kapab ofri w.</a>",
-      "more": "<b>Jwenn plis enfòmasyon.</b><a href='https://www.nypl.org/discover-library-card'>Dekouvri tout bagay ou kapab fè ak kat Bibliyotèk ou an.</a>"
+      "exploreHeader": "<b>Eksplore Liv Elektwonik ak Liv Odyo Elektwonik</b>",
+      "explore": "<a href='https://www.nypl.org/books-music-movies/help'>Li oswa Koute kèlkeswa kote w ye a</a> etan w gen aksè a yon gwo seleksyon tit.",
+      "borrowHeader": "<b>Prete Liv ak Plis Bagay Toujou</b>",
+      "borrow": "<a href='{{loginUrl}}'> Konekte w sou kont ou</a> epi eksplore katalòg la. Pou w mande atik fizik, prezante w nan nenpòt <a href=\"https://www.nypl.org/locations\">branch NYPL</a> pou verifye enfòmasyon w yo epi resevwa yon kat fizik.",
+      "updatesHeader": "<b>Jwenn Mizajou yo</b>",
+      "updates": "<a href='https://www.nypl.org/enews'>Dekouvri tout sa Bibliyotèk la kapab ofri w.</a>",
+      "moreHeader": "<b>Jwenn plis enfòmasyon.</b>",
+      "more": "<a href='https://www.nypl.org/discover-library-card'>Dekouvri tout bagay ou kapab fè ak kat Bibliyotèk ou an.</a>"
     }
   },
   "button": {

@@ -157,10 +157,14 @@
     },
     "nextSteps": {
       "title": "Lancez-vous à la découverte de la Bibliothèque publique de New York",
-      "explore": "<b>Explorer les livres électroniques et les livres audio électroniques</b><a href='https://www.nypl.org/books-music-movies/help'>Lisez ou écoutez vos titres préférés où que vous soyez</a> grâce à un accès à notre vaste sélection.",
-      "borrow": "<b>Emprunter des livres et bien plus encore</b><a href='{{loginUrl}}'>Connectez-vous à votre compte</a> et parcourez le catalogue. Pour emprunter des articles physiques, rendez-vous dans n’importe quelle <a href=\"https://www.nypl.org/locations\">bibliothèque NYPL</a> pour valider vos informations et recevoir votre carte physique.",
-      "updates": "<b>Recevoir des mises à jour</b><a href='https://www.nypl.org/enews'>Découvrez tout ce que la Bibliothèque a à offrir.</a>",
-      "more": "<b>En savoir plus</b><a href='https://www.nypl.org/discover-library-card'>Découvrez tout ce que vous pouvez faire avec votre carte de bibliothèque.</a>"
+      "exploreHeader": "<b>Explorer les livres électroniques et les livres audio électroniques</b>",
+      "explore": "<a href='https://www.nypl.org/books-music-movies/help'>Lisez ou écoutez vos titres préférés où que vous soyez</a> grâce à un accès à notre vaste sélection.",
+      "borrowHeader": "<b>Emprunter des livres et bien plus encore</b>",
+      "borrow": "<a href='{{loginUrl}}'>Connectez-vous à votre compte</a> et parcourez le catalogue. Pour emprunter des articles physiques, rendez-vous dans n'importe quelle <a href=\"https://www.nypl.org/locations\">bibliothèque NYPL</a> pour valider vos informations et recevoir votre carte physique.",
+      "updatesHeader": "<b>Recevoir des mises à jour</b>",
+      "updates": "<a href='https://www.nypl.org/enews'>Découvrez tout ce que la Bibliothèque a à offrir.</a>",
+      "moreHeader": "<b>En savoir plus</b>",
+      "more": "<a href='https://www.nypl.org/discover-library-card'>Découvrez tout ce que vous pouvez faire avec votre carte de bibliothèque.</a>"
     }
   },
   "button": {
