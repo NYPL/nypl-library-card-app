@@ -15,7 +15,7 @@ export const TEST_EDITED_PATRON: PatronData = {
   lastName: "Nook",
   email: "edited@gmail.com",
   dateOfBirth: "01/01/1990",
-  ecommunicationsPref: true,
+  ecommunicationsPref: false,
 };
 
 // address
