@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import { ReviewPage } from "../../pageobjects/review.page";
+import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 import {
   fillPersonalInfo,
   fillAddress,
@@ -69,12 +70,13 @@ test.describe("Review Page Accessibility Tests", () => {
   test("should have no accessibility violations on load", async ({ page }) => {
     await expect(page).toHaveURL(/.*\/review\?.*newCard=true/);
     const accessibilityScanResults = await new AxeBuilder({ page })
-      .withTags(["wcag21aa", "wcag22aa"])
+      .withTags([...A11Y_GUIDELINES])
       .analyze();
+    validateA11yCoverage(accessibilityScanResults);
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("should reach all form fields via the tab key", async ({ page }) => {
+  test("it should reach all form fields via the tab key", async ({ page }) => {
     const reviewPage = new ReviewPage(page);
 
     await test.step("it should tab through on Personal section", async () => {
