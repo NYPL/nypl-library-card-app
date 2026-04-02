@@ -15,9 +15,8 @@ export interface SierraPatron {
   }[];
   emails?: string[];
   patronType: number;
-  notificationEmails?: Array<string | { address?: string }>; // remove
-  patronCodes?: {
-    pcode1?: string;
+  patronCodes: {
+    pcode1: string;
   };
 }
 
@@ -62,8 +61,7 @@ export async function getPatronID(barcode: string): Promise<number> {
 
 export async function getPatronData(patronId: number): Promise<SierraPatron> {
   const authToken = await getAuthToken();
-  const fields =
-    "names,birthDate,addresses,emails,patronType,notificationEmails,patronCodes"; // remove notificationEmails
+  const fields = "names,birthDate,addresses,emails,patronType,patronCodes";
   const response = await fetch(
     `${sierraApiBaseUrl}/iii/sierra-api/v6/patrons/${patronId}?fields=${fields}`,
     {
@@ -73,9 +71,8 @@ export async function getPatronData(patronId: number): Promise<SierraPatron> {
   );
 
   if (!response.ok) {
-    const errorBody = await response.text();
     throw new Error(
-      `Failed to fetch patron data for ID ${patronId}: ${response.status} ${response.statusText}\nDetails: ${errorBody}`
+      `Failed to fetch patron data for ID ${patronId}: ${response.status} ${response.statusText}`
     );
   }
 
@@ -97,7 +94,6 @@ export async function verifyPatronData(
       emails: expect.any(Array),
       addresses: expect.any(Array),
       birthDate: expect.any(String),
-      notificationEmails: expect.any(Array), // remove
       patronCodes: expect.objectContaining({ pcode1: expect.any(String) }),
       patronType: expect.any(Number),
     })
@@ -111,6 +107,10 @@ export async function verifyPatronData(
     patronData.emails.length,
     "Emails array should not be empty"
   ).toBeGreaterThan(0);
+  expect(
+    patronData.patronCodes?.pcode1,
+    "Ecommunications preference code should be either 's' or '-'"
+  ).toMatch(/^(s|-)$/);
   expect(
     patronData.addresses.length,
     "Addresses array should not be empty"
@@ -131,25 +131,13 @@ export async function verifyPatronData(
   const actualEmails = patronData.emails?.map((email) => email.toLowerCase());
   const actualEcommsPref = patronData.patronCodes?.pcode1;
   const actualAddress = (patronData.addresses?.[0]?.lines || []).join(" ");
-  const actualNotificationEmails = (patronData.notificationEmails ?? []) // remove
-    .map((entry) =>
-      (typeof entry === "string" ? entry : entry?.address)?.toLowerCase()
-    )
-    .filter((email): email is string => typeof email === "string");
 
   expect(actualName).toContain(expectedName);
   expect(patronData.birthDate).toBe(expectedBirthdate);
   expect(actualEmails).toContain(expectedEmail);
   expect(actualAddress).toMatch(expectedAddress);
   expect(patronData.patronType).toBe(expectedPatronType);
-  console.log(
-    `$(notificationEmails): ${JSON.stringify(patronData.notificationEmails)}`
-  );
-  console.log(
-    `Actual notification emails: ${actualNotificationEmails} Expected email: ${expectedEmail}`
-  );
-  console.log(`Patron codes`, patronData.patronCodes);
-  expect(actualNotificationEmails).toContain(expectedEmail);
+  console.log(`Patron codes`, patronData.patronCodes); // remove after debugging
   expect(actualEcommsPref).toBe(expectedEcommsPref);
 }
 

@@ -11,7 +11,6 @@ import {
   PATRON_TYPES,
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
-  TEST_EDITED_PATRON,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
@@ -182,7 +181,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       expect(scrapedBarcode).not.toBeNull();
       await verifyPatronData(
         scrapedBarcode,
-        TEST_EDITED_PATRON,
+        TEST_PATRON,
         TEST_OOS_ADDRESS,
         PATRON_TYPES.DIGITAL_TEMPORARY
       );
