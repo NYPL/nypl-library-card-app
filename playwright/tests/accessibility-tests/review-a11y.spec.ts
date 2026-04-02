@@ -78,7 +78,7 @@ test.describe("Review Page Accessibility Tests", () => {
     const reviewPage = new ReviewPage(page);
 
     await test.step("it should tab through on Personal section", async () => {
-      await reviewPage.stepHeading.focus();
+      await expect(reviewPage.stepHeading).toBeVisible();
       await expect(reviewPage.stepHeading).toBeFocused();
     });
 
@@ -140,7 +140,6 @@ test.describe("Review Page Accessibility Tests", () => {
         await page.keyboard.press("Tab");
         await expect(field).toBeFocused();
       }
-      await reviewPage.acceptTermsCheckbox.focus();
       await page.keyboard.press("Space");
     });
     await test.step("it should focus on submit button", async () => {
