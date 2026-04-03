@@ -70,11 +70,10 @@ export async function getPatronData(patronId: number): Promise<SierraPatron> {
     }
   );
 
-  if (!response.ok) {
+  if (!response.ok)
     throw new Error(
       `Failed to fetch patron data for ID ${patronId}: ${response.status} ${response.statusText}`
     );
-  }
 
   return (await response.json()) as SierraPatron;
 }
