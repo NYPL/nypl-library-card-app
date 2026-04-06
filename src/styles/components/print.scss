@@ -3,39 +3,55 @@
 // so it's necessary to make sure that the barcode graphic image displays
 // correctly so patrons can scan it.
 @media print {
-  // Override to shrink the DS Header when printing the confirmation page.
-  .hero--primary {
-    min-height: 0;
-
-    .hero__content {
-      padding: 30px;
-    }
+  #sitewideAlerts-notification {
+    display: none !important;
   }
 
-  .content-primary {
-    margin: 0;
+  // nypl-header
+  #nypl-header * {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  #nypl-header > div > header > div > div {
+    display: none !important;
+    margin: 0 !important;
+  }
+
+  // main site content
+  #mainHeader {
+    display: none !important;
+  }
+
+  #mainContent {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .ds-template-content {
+    margin: 0 !important;
+  }
+
+  // Reset all the paragraph spacings
+  #congratulations > div {
+    margin: 0.75rem 0 !important;
+  }
+
+  #congratulations h2 {
+    margin: 0 !important;
+    font-size: 1.5rem !important;
+  }
+
+  .card-container {
+    margin: 0 !important;
   }
 
   .image-lion {
-    font-size: 1.5em;
-    width: 70%;
+    width: 50% !important;
+    width: 400px !important;
   }
 
-  .background-lion {
-    top: 20px;
-    left: 25px;
-    width: 100%;
-    padding: 10px 0 0 5px;
-  }
-
-  .grid-item {
-    color: black;
-
-    &.barcode-container {
-      #barcodeCanvas {
-        width: 100%;
-        height: 85px;
-      }
-    }
+  #nypl-footer {
+    display: none !important;
   }
 }
