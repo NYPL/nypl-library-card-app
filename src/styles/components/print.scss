@@ -3,55 +3,57 @@
 // so it's necessary to make sure that the barcode graphic image displays
 // correctly so patrons can scan it.
 @media print {
-  #sitewideAlerts-notification {
+  @page {
+    size: letter portrait;
+    margin: 14mm;
+  }
+
+  #sitewideAlerts-notification,
+  #nypl-header > div > header > div > div,
+  #mainHeader,
+  #nypl-footer {
     display: none !important;
   }
 
-  // nypl-header
-  #nypl-header * {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  #nypl-header > div > header > div > div {
-    display: none !important;
-    margin: 0 !important;
-  }
-
-  // main site content
-  #mainHeader {
-    display: none !important;
-  }
-
-  #mainContent {
+  #mainContent,
+  #mainContent > div,
+  .ds-template-content {
     display: block !important;
     margin: 0 !important;
     padding: 0 !important;
   }
 
-  .ds-template-content {
-    margin: 0 !important;
-  }
-
-  // Reset all the paragraph spacings
   #congratulations > div {
     margin: 0.75rem 0 !important;
   }
 
   #congratulations h2 {
-    margin: 0 !important;
     font-size: 1.5rem !important;
+    margin: 0 !important;
   }
 
   .card-container {
     margin: 0 !important;
+    background: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .image-lion {
     width: 50% !important;
-    width: 400px !important;
+    max-width: 400px !important;
   }
 
-  #nypl-footer {
-    display: none !important;
+  #member-name,
+  #issued,
+  #issued .content {
+    font-size: 8pt !important;
+  }
+
+  // Collapse spacing after the card graphic
+  .card-container + div {
+    margin: 0 !important;
   }
 }
