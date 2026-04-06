@@ -110,13 +110,17 @@
       "title": "Biblioteca local",
       "description": {
         "part1": "Elegir una biblioteca local, nos ayudará a asegurarnos de que usted obtenga todo lo que necesita de la biblioteca que le resulte más conveniente.",
-        "part2": "En el menú desplegable a continuación, seleccione una <a href='https://www.nypl.org/locations'>biblioteca de la NYPL</a> como su biblioteca principal. Si no tiene una biblioteca principal, seleccione “Virtual”. Puede actualizar esta información en cualquier momento desde la configuración de su cuenta.",
+        "part2": "En el menú desplegable a continuación, seleccione una <a href='https://www.nypl.org/locations'>{{nyplLocation}}</a> como su biblioteca principal. Si no tiene una biblioteca principal, seleccione “Virtual”. Puede actualizar esta información en cualquier momento desde la configuración de su cuenta.",
+        "nyplLocation": "biblioteca de la NYPL",
         "part3": "Para pedir prestados materiales físicos, puede visitar cualquier biblioteca de la NYPL para verificar su información y recibir una tarjeta física."
       }
     },
     "termsAndCondition": {
       "label": "Sí, acepto los términos y condiciones.",
-      "text": "Al enviar una solicitud, comprende y acepta nuestros <a href='https://www.nypl.org/help/library-card/terms-conditions'>Términos y condiciones del titular de la tarjeta</a> (en inglés) y acepta nuestras <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Normas y reglamentos generales</a>. Para obtener más información sobre el uso de información personal por parte de la Biblioteca, lea nuestra <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Política de privacidad</a>."
+      "text": "Al enviar una solicitud, comprende y acepta nuestros <a href='https://www.nypl.org/help/library-card/terms-conditions'>{{termsConditions}}</a> (en inglés) y acepta nuestras <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>{{rulesRegulations}}</a>. Para obtener más información sobre el uso de información personal por parte de la Biblioteca, lea nuestra <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>{{privacyPolicy}}</a>.",
+      "termsConditions": "Términos y condiciones del titular de la tarjeta",
+      "rulesRegulations": "Normas y reglamentos generales",
+      "privacyPolicy": "Política de privacidad"
     },
     "errorMessage": {
       "username": "Hubo un problema. El nombre de usuario debe tener entre 5 y 25 caracteres alfanuméricos.",

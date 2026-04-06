@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  // fillAccountInfo,
+  fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
 } from "../../utils/form-helper";
@@ -9,7 +9,7 @@ import {
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
-  // TEST_ACCOUNT,
+  TEST_ACCOUNT,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
@@ -25,42 +25,42 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       pageManager = new PageManager(page, appContent);
     });
 
-    // test("navigates backward to landing without entering info", async ({
-    //   page,
-    // }) => {
-    //   await test.step("begins at account page", async () => {
-    //     await page.goto(PAGE_ROUTES.ACCOUNT(lang));
-    //     await expect(pageManager.accountPage.stepHeading).toBeVisible();
-    //     await expect(pageManager.accountPage.previousButton).toBeVisible();
-    //     await pageManager.accountPage.previousButton.click();
-    //   });
+    test("navigates backward to landing without entering info", async ({
+      page,
+    }) => {
+      await test.step("begins at account page", async () => {
+        await page.goto(PAGE_ROUTES.ACCOUNT(lang));
+        await expect(pageManager.accountPage.stepHeading).toBeVisible();
+        await expect(pageManager.accountPage.previousButton).toBeVisible();
+        await pageManager.accountPage.previousButton.click();
+      });
 
-    //   await test.step("navigates back to address verification page", async () => {
-    //     await expect(
-    //       pageManager.addressVerificationPage.stepHeading
-    //     ).toBeVisible();
-    //     await expect(
-    //       pageManager.addressVerificationPage.previousButton
-    //     ).toBeVisible();
-    //     await pageManager.addressVerificationPage.previousButton.click();
-    //   });
+      await test.step("navigates back to address verification page", async () => {
+        await expect(
+          pageManager.addressVerificationPage.stepHeading
+        ).toBeVisible();
+        await expect(
+          pageManager.addressVerificationPage.previousButton
+        ).toBeVisible();
+        await pageManager.addressVerificationPage.previousButton.click();
+      });
 
-    //   await test.step("navigates back to address page", async () => {
-    //     await expect(pageManager.addressPage.stepHeading).toBeVisible();
-    //     await expect(pageManager.addressPage.previousButton).toBeVisible();
-    //     await pageManager.addressPage.previousButton.click();
-    //   });
+      await test.step("navigates back to address page", async () => {
+        await expect(pageManager.addressPage.stepHeading).toBeVisible();
+        await expect(pageManager.addressPage.previousButton).toBeVisible();
+        await pageManager.addressPage.previousButton.click();
+      });
 
-    //   await test.step("navigates back to personal information page", async () => {
-    //     await expect(pageManager.personalPage.stepHeading).toBeVisible();
-    //     await expect(pageManager.personalPage.previousButton).toBeVisible();
-    //     await pageManager.personalPage.previousButton.click();
-    //   });
+      await test.step("navigates back to personal information page", async () => {
+        await expect(pageManager.personalPage.stepHeading).toBeVisible();
+        await expect(pageManager.personalPage.previousButton).toBeVisible();
+        await pageManager.personalPage.previousButton.click();
+      });
 
-    //   await test.step("navigates back to landing page", async () => {
-    //     await expect(pageManager.landingPage.applyHeading).toBeVisible();
-    //   });
-    // });
+      await test.step("navigates back to landing page", async () => {
+        await expect(pageManager.landingPage.applyHeading).toBeVisible();
+      });
+    });
 
     test("retains user-entered info when navigating backward", async ({
       page,
@@ -112,11 +112,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         ).not.toBeVisible({ timeout: SPINNER_TIMEOUT });
       });
 
-      // await test.step("enters account information", async () => {
-      //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      //   await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      //   await pageManager.accountPage.nextButton.click();
-      // });
+      await test.step("enters account information", async () => {
+        await expect(pageManager.accountPage.stepHeading).toBeVisible();
+        await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+        await pageManager.accountPage.nextButton.click();
+      });
 
       // await test.step("displays review page and navigates back to account page", async () => {
       //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();

@@ -117,13 +117,17 @@
       "title": "Home library",
       "description": {
         "part1": "Choosing a home library will help us make sure you're getting everything you need from a branch that's most convenient for you.",
-        "part2": "Please select an <a href='https://www.nypl.org/locations'>NYPL location</a> from the dropdown menu below to be your home library. If you do not have a home library, please select “Virtual.” You may update this at any time through your account settings.",
+        "part2": "Please select an <a href='https://www.nypl.org/locations'>{{nyplLocation}}</a> from the dropdown menu below to be your home library. If you do not have a home library, please select “Virtual.” You may update this at any time through your account settings.",
+        "nyplLocation": "NYPL location",
         "part3": "To borrow physical items, you <strong>must</strong> visit an NYPL location to verify your info and receive a physical card."
       }
     },
     "termsAndCondition": {
       "label": "Yes, I accept the terms and conditions.",
-      "text": "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+      "text": "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>{{termsConditions}}</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>{{rulesRegulations}}</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>{{privacyPolicy}}</a>.",
+      "termsConditions": "Cardholder Terms and Conditions",
+      "rulesRegulations": "Rules and Regulations",
+      "privacyPolicy": "Privacy Policy"
     },
     "errorMessage": {
       "username": "There was a problem. Username must be between 5-25 alphanumeric characters.",
