@@ -65,7 +65,6 @@ test.describe("Account Page Accessibility Tests", () => {
     await expect(accountPage.availableUsernameButton).toBeFocused();
     await accountPage.availableUsernameButton.press("Enter");
     await expect(accountPage.unavailableUsernameMessage).toBeVisible();
-    await page.keyboard.press("Backspace");
     await expect(accountPage.usernameInput).toBeFocused();
   });
 
@@ -81,5 +80,6 @@ test.describe("Account Page Accessibility Tests", () => {
     await expect(accountPage.availableUsernameButton).toBeFocused();
     await accountPage.availableUsernameButton.press("Enter");
     await expect(accountPage.availableUsernameMessage).toBeVisible();
+    await expect(accountPage.usernameInput).toBeFocused();
   });
 });
