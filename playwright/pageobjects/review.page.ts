@@ -27,6 +27,7 @@ export class ReviewPage {
   readonly receiveInfoHeading: Locator;
   readonly receiveInfoChoice: Locator;
   readonly receiveInfoCheckbox: Locator;
+  readonly receiveInfoCheckboxLabel: Locator;
   readonly alternateFormLink: Locator;
   readonly locationsLink: Locator;
   readonly editPersonalInfoButton: Locator;
@@ -60,7 +61,8 @@ export class ReviewPage {
   readonly verifyPasswordInputHeading: Locator;
   readonly verifyPasswordInput: Locator;
   readonly verifyPasswordError: Locator;
-  readonly showPasswordLabel: Locator;
+  readonly showPasswordCheckbox: Locator;
+  readonly showPasswordCheckboxLabel: Locator;
   readonly homeLibraryHeading: Locator;
   readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
@@ -68,19 +70,18 @@ export class ReviewPage {
   readonly cardholderTermsLink: Locator;
   readonly rulesRegulationsLink: Locator;
   readonly privacyPolicyLink: Locator;
-  readonly acceptTermsLabel: Locator;
+  readonly acceptTermsCheckbox: Locator;
+  readonly acceptTermsCheckboxLabel: Locator;
   readonly acceptTermsError: Locator;
   readonly editAccountButton: Locator;
   readonly submitButton: Locator;
 
   constructor(page: Page, appContent?: any) {
-    this.page = page;
-
     const required = appContent?.required || "required";
     const withRequired = (label: string) => `${label} (${required})`;
     const edit = appContent?.button?.edit || "Edit";
     const withEdit = (label: string) => `${edit} ${label}`;
-
+    this.page = page;
     this.mainHeading = page.getByRole("heading", {
       name: appContent?.banner?.title || "Apply for a Library Card Online",
       level: 1,
@@ -182,13 +183,19 @@ export class ReviewPage {
         "Receive information about NYPL's programs and services",
       { exact: true }
     );
-    this.receiveInfoChoice = page.getByText(appContent?.review?.yes || "Yes", {
-      exact: true,
-    });
-    this.receiveInfoCheckbox = page.getByText(
-      appContent?.personal?.eCommunications?.labelText ||
+    this.receiveInfoChoice = page
+      .getByText(appContent?.review?.yes || "Yes", {
+        exact: true,
+      })
+      .or(page.getByText(appContent?.review?.no || "No", { exact: true }));
+    this.receiveInfoCheckbox = page.getByRole("checkbox", {
+      name:
+        appContent?.personal?.eCommunications?.labelText ||
         "Yes, I would like to receive information about NYPL's programs and services",
-      { exact: true }
+    });
+    this.receiveInfoCheckboxLabel = page.getByText(
+      appContent?.personal?.eCommunications?.labelText ||
+        "Yes, I would like to receive information about NYPL's programs and services"
     );
     this.alternateFormLink = this.page.getByRole("link", {
       name: appContent?.personal?.email?.alternateForm || "alternate form",
@@ -316,7 +323,11 @@ export class ReviewPage {
       appContent?.account?.errorMessage?.verifyPassword ||
         "There was a problem. The two passwords don't match."
     );
-    this.showPasswordLabel = page.getByText(
+    this.showPasswordCheckbox = page.getByRole("checkbox", {
+      name: appContent?.account?.showPassword || "Show password",
+      exact: true,
+    });
+    this.showPasswordCheckboxLabel = page.getByText(
       appContent?.account?.showPassword || "Show password",
       {
         exact: true,
@@ -353,7 +364,13 @@ export class ReviewPage {
         appContent?.account?.termsAndCondition?.privacyPolicy ||
         "Privacy Policy",
     });
-    this.acceptTermsLabel = page.getByText(
+    this.acceptTermsCheckbox = page.getByRole("checkbox", {
+      name:
+        appContent?.account?.termsAndCondition?.label ||
+        "Yes, I accept the terms and conditions",
+      exact: true,
+    });
+    this.acceptTermsCheckboxLabel = page.getByText(
       appContent?.account?.termsAndCondition?.label ||
         "Yes, I accept the terms and conditions.",
       {
@@ -380,3 +397,44 @@ export class ReviewPage {
     return this.page.getByText(expected, { exact: true });
   }
 }
+
+// remove below once done
+//     this.verifyPasswordInput = page.getByRole("textbox", {
+//       name: "Verify password (required)",
+//       exact: true,
+//     });
+//     this.verifyPasswordError = page.getByText(
+//       ERROR_MESSAGES.VERIFY_PASSWORD_INVALID
+//     );
+//     this.showPasswordCheckbox = page.getByRole("checkbox", {
+//       name: "Show password",
+//       exact: true,
+//     });
+//     this.showPasswordCheckboxLabel = page.getByText("Show password", {
+//       exact: true,
+//     });
+//     this.homeLibraryHeading = page.getByText("Home library", { exact: true });
+//     this.nyplLocationLink = page.getByRole("link", {
+//       name: "NYPL location",
+//     });
+//     this.selectHomeLibrary = page.getByLabel("Select a home library:");
+//     this.homeLibraryError = page.getByText(ERROR_MESSAGES.HOME_LIBRARY_ERROR);
+//     this.cardholderTermsLink = page.getByRole("link", {
+//       name: "Cardholder Terms and Conditions",
+//     });
+//     this.rulesRegulationsLink = page.getByRole("link", {
+//       name: "Rules and Regulations",
+//     });
+//     this.privacyPolicyLink = page.locator("#mainContent").getByRole("link", {
+//       name: "Privacy Policy",
+//     });
+//     this.acceptTermsCheckbox = page.getByRole("checkbox", {
+//       name: "Yes, I accept the terms and conditions",
+//     });
+//     this.acceptTermsCheckboxLabel = page.getByText(
+//       "Yes, I accept the terms and conditions.",
+// >>>>>>> SWIS-300/language-agnostic-landing
+//       {
+//         exact: true,
+//       }
+//     );

@@ -92,7 +92,16 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
 
 const NextSteps = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Paragraph sx={{ b: { display: "block", marginBottom: "xs" } }}>
+    <Paragraph
+      sx={{
+        b: { display: "block", marginBottom: "xs" },
+        a: {
+          whiteSpace: "normal",
+          overflowWrap: "break-word",
+          maxWidth: "100%",
+        },
+      }}
+    >
       {children}
     </Paragraph>
   );

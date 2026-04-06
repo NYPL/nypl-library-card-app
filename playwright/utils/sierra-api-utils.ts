@@ -1,3 +1,7 @@
+import { expect } from "@playwright/test";
+import { PatronData, AddressData } from "./types";
+import { createFuzzyMatcher, formatSierraDate } from "./formatter";
+
 const sierraApiBaseUrl = process.env.SIERRA_API_BASE_URL_QA;
 const basicAuth = process.env.SIERRA_BASIC_AUTH_BASE64;
 
@@ -68,6 +72,59 @@ export async function getPatronData(patronId: number): Promise<SierraPatron> {
     );
 
   return (await response.json()) as SierraPatron;
+}
+
+export async function verifyPatronData(
+  barcode: string,
+  patron: PatronData,
+  address: AddressData,
+  expectedPatronType: number
+): Promise<void> {
+  const patronID = await getPatronID(barcode);
+  const patronData = await getPatronData(patronID);
+
+  expect(patronData, "API response must be a valid object").toEqual(
+    expect.objectContaining({
+      names: expect.any(Array),
+      emails: expect.any(Array),
+      addresses: expect.any(Array),
+      birthDate: expect.any(String),
+      patronType: expect.any(Number),
+    })
+  );
+  expect(
+    patronData.names.length,
+    "Names array should not be empty"
+  ).toBeGreaterThan(0);
+  expect(patronData.birthDate, "Birthdate should not be empty").toBeTruthy();
+  expect(
+    patronData.emails.length,
+    "Emails array should not be empty"
+  ).toBeGreaterThan(0);
+  expect(
+    patronData.addresses.length,
+    "Addresses array should not be empty"
+  ).toBeGreaterThan(0);
+
+  const expectedName = `${patron.lastName}, ${patron.firstName}`.toUpperCase();
+  const expectedBirthdate = formatSierraDate(patron.dateOfBirth);
+  const expectedEmail = patron.email.toLowerCase();
+  const expectedAddress = createFuzzyMatcher([
+    address.street,
+    address.apartmentSuite,
+    address.city,
+    address.state,
+    address.postalCode,
+  ]);
+  const actualName = patronData.names?.[0].toUpperCase();
+  const actualEmails = patronData.emails?.map((email) => email.toLowerCase());
+  const actualAddress = (patronData.addresses?.[0]?.lines || []).join(" ");
+
+  expect(actualName).toContain(expectedName);
+  expect(patronData.birthDate).toBe(expectedBirthdate);
+  expect(actualEmails).toContain(expectedEmail);
+  expect(actualAddress).toMatch(expectedAddress);
+  expect(patronData.patronType).toBe(expectedPatronType);
 }
 
 export async function deletePatron(patronId: number): Promise<void> {

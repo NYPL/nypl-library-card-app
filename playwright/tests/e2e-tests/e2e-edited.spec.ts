@@ -79,7 +79,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         ).toBeVisible();
         await pageManager.addressVerificationPage
           .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-          .check();
+          .click();
         await pageManager.addressVerificationPage.nextButton.click();
         await expect(
           pageManager.addressVerificationPage.spinner
@@ -98,7 +98,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(pageManager.reviewPage.stepHeading).toBeVisible();
         await pageManager.reviewPage.editPersonalInfoButton.click();
         await fillPersonalInfo(pageManager.reviewPage, TEST_EDITED_PATRON);
-        await pageManager.reviewPage.receiveInfoCheckbox.click(); // unchecks
+        await pageManager.reviewPage.receiveInfoCheckboxLabel.click();
       });
 
       await test.step("displays updated personal info on review page", async () => {

@@ -33,7 +33,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(personalPage.lastNameInput).toBeVisible();
         await expect(personalPage.dateOfBirthInput).toBeVisible();
         await expect(personalPage.emailInput).toBeVisible();
-        await expect(personalPage.receiveInfoCheckbox).toBeVisible();
+        await expect(personalPage.receiveInfoCheckboxLabel).toBeVisible();
       });
 
       test("confirms links open in new tab", async () => {
@@ -69,12 +69,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test.describe("displays error messages", () => {
       test("displays errors for required fields", async () => {
-        await personalPage.firstNameInput.fill("");
-        await personalPage.lastNameInput.fill("");
-        await personalPage.dateOfBirthInput.fill("");
-        await personalPage.emailInput.fill("");
         await personalPage.nextButton.click();
-
         await expect(personalPage.firstNameError).toBeVisible();
         await expect(personalPage.lastNameError).toBeVisible();
         await expect(personalPage.dateOfBirthInvalid).toBeVisible();
@@ -126,7 +121,9 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(personalPage.dateOfBirthError).toBeVisible();
       });
 
-      test("displays error for current date of birth", async ({ page }) => {
+      test("displays error for date of birth in current year", async ({
+        page,
+      }) => {
         await page.clock.setFixedTime(new Date("2026-01-01T10:00:00"));
         await personalPage.dateOfBirthInput.fill("01/01/2026");
         await personalPage.nextButton.click();

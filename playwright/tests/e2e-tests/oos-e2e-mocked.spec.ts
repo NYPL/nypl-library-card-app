@@ -7,6 +7,7 @@ import {
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
+  PATRON_TYPES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   TEST_ACCOUNT,
@@ -67,10 +68,10 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           ).toBeVisible();
           await pageManager.addressVerificationPage
             .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-            .check();
+            .click();
           await pageManager.addressVerificationPage
             .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
-            .check();
+            .click();
           await pageManager.addressVerificationPage.nextButton.click();
           await expect(
             pageManager.addressVerificationPage.spinner
@@ -90,7 +91,12 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         });
 
         await test.step("submits application", async () => {
-          await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER);
+          await mockCreatePatronApi(
+            page,
+            fullName,
+            TEST_BARCODE_NUMBER,
+            PATRON_TYPES.DIGITAL_TEMPORARY
+          );
           await expect(pageManager.reviewPage.submitButton).toBeVisible();
           // await pageManager.reviewPage.submitButton.click(); // wait to click til congrats page is ready
         });

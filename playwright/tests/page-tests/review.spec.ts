@@ -59,7 +59,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(reviewPage.createYourAccountHeading).toBeVisible();
         await expect(reviewPage.usernameHeading).toBeVisible();
         await expect(reviewPage.passwordHeading).toBeVisible();
-        await expect(reviewPage.showPasswordLabel).toBeVisible();
+        await expect(reviewPage.showPasswordCheckboxLabel).toBeVisible();
         await expect(reviewPage.homeLibraryHeading).toBeVisible();
       });
 
@@ -98,14 +98,14 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(reviewPage.emailInput).toBeVisible();
         await expect(reviewPage.alternateFormLink).toBeVisible();
         await expect(reviewPage.locationsLink).toBeVisible();
-        await expect(reviewPage.receiveInfoCheckbox).toBeVisible();
+        await expect(reviewPage.receiveInfoCheckboxLabel).toBeVisible();
       });
 
       // does not replace personal info since there's no existing text
       test("enters Personal information", async () => {
         await reviewPage.editPersonalInfoButton.click();
         await fillPersonalInfo(reviewPage, TEST_PATRON);
-        await reviewPage.receiveInfoCheckbox.click(); // unable to check()
+        await reviewPage.receiveInfoCheckboxLabel.click();
         await expect(reviewPage.firstNameInput).toHaveValue(
           TEST_PATRON.firstName
         );
@@ -189,13 +189,13 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(reviewPage.passwordInput).toBeVisible();
         await expect(reviewPage.verifyPasswordInputHeading).toBeVisible();
         await expect(reviewPage.verifyPasswordInput).toBeVisible();
-        await expect(reviewPage.showPasswordLabel).toBeVisible();
+        await expect(reviewPage.showPasswordCheckboxLabel).toBeVisible();
         await expect(reviewPage.nyplLocationLink).toBeVisible();
         await expect(reviewPage.selectHomeLibrary).toBeVisible();
         await expect(reviewPage.cardholderTermsLink).toBeVisible();
         await expect(reviewPage.rulesRegulationsLink).toBeVisible();
         await expect(reviewPage.privacyPolicyLink).toBeVisible();
-        await expect(reviewPage.acceptTermsLabel).toBeVisible();
+        await expect(reviewPage.acceptTermsCheckboxLabel).toBeVisible();
       });
 
       // does not replace account info since there's no existing text
@@ -205,7 +205,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(reviewPage.usernameInput).toHaveValue(
           TEST_ACCOUNT.username
         );
-        await reviewPage.showPasswordLabel.check();
+        await reviewPage.showPasswordCheckboxLabel.click();
         await expect(reviewPage.passwordInput).toHaveValue(
           TEST_ACCOUNT.password
         );
@@ -215,7 +215,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(reviewPage.selectHomeLibrary).toHaveValue(
           TEST_ACCOUNT.homeLibraryCode
         );
-        await expect(reviewPage.acceptTermsLabel).toBeChecked();
+        await expect(reviewPage.acceptTermsCheckbox).toBeChecked();
       });
 
       test("enters updated account info", async ({ page }) => {
@@ -236,7 +236,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await expect(pageManager.reviewPage.usernameInput).toHaveValue(
             TEST_EDITED_ACCOUNT.username
           );
-          await pageManager.reviewPage.showPasswordLabel.check();
+          await pageManager.reviewPage.showPasswordCheckboxLabel.click();
           await expect(pageManager.reviewPage.passwordInput).toHaveValue(
             TEST_EDITED_ACCOUNT.password
           );
