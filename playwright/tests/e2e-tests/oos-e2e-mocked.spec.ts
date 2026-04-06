@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  //   fillAccountInfo,
+  fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
 } from "../../utils/form-helper";
@@ -9,7 +9,7 @@ import {
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
-  // TEST_ACCOUNT,
+  TEST_ACCOUNT,
   // TEST_BARCODE_NUMBER,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
@@ -72,13 +72,18 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
             .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
             .click();
           await pageManager.addressVerificationPage.nextButton.click();
+          await expect(
+            pageManager.addressVerificationPage.spinner
+          ).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
         });
 
-        // await test.step("enters account information", async () => {
-        //   await expect(pageManager.accountPage.stepHeading).toBeVisible();
-        //   await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-        //   await pageManager.accountPage.nextButton.click();
-        // });
+        await test.step("enters account information", async () => {
+          await expect(pageManager.accountPage.stepHeading).toBeVisible();
+          await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+          await pageManager.accountPage.nextButton.click();
+        });
 
         // await test.step("displays review page", async () => {
         //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();

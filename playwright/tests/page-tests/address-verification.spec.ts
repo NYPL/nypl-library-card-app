@@ -58,7 +58,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
           await pageManager.alternateAddressPage.nextButton.click();
           await expect(
-            pageManager.addressVerificationPage.spinner
+            pageManager.alternateAddressPage.spinner
           ).not.toBeVisible({
             timeout: SPINNER_TIMEOUT,
           });
@@ -101,7 +101,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           );
           await pageManager.alternateAddressPage.nextButton.click();
           await expect(
-            pageManager.addressVerificationPage.spinner
+            pageManager.alternateAddressPage.spinner
           ).not.toBeVisible({
             timeout: SPINNER_TIMEOUT,
           });
