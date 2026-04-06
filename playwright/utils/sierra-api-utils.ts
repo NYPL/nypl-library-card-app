@@ -136,7 +136,6 @@ export async function verifyPatronData(
   expect(actualEmails).toContain(expectedEmail);
   expect(actualAddress).toMatch(expectedAddress);
   expect(patronData.patronType).toBe(expectedPatronType);
-  console.log(`Patron codes`, patronData.patronCodes); // remove after debugging
   expect(actualEcommsPref).toBe(expectedEcommsPref);
 }
 
