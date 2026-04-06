@@ -192,6 +192,7 @@ test.describe("retains ecommunications preference in Sierra", () => {
 
     await test.step("confirms ecommunications preference is retained on review page", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("No");
       await pageManager.reviewPage.editPersonalInfoButton.click();
       await expect(
         pageManager.reviewPage.receiveInfoCheckbox
@@ -266,6 +267,7 @@ test.describe("retains ecommunications preference in Sierra", () => {
 
     await test.step("unchecks ecommunications preference on review page", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
       await pageManager.reviewPage.editPersonalInfoButton.click();
       await pageManager.reviewPage.receiveInfoCheckboxLabel.click();
       await expect(
@@ -345,6 +347,7 @@ test.describe("retains ecommunications preference in Sierra", () => {
 
     await test.step("confirms ecommunications preference is retained on review page", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
       await pageManager.reviewPage.editPersonalInfoButton.click();
       await expect(pageManager.reviewPage.receiveInfoCheckbox).toBeChecked();
     });
@@ -417,6 +420,7 @@ test.describe("retains ecommunications preference in Sierra", () => {
 
     await test.step("rechecks ecommunications preference on review page", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("No");
       await pageManager.reviewPage.editPersonalInfoButton.click();
       await pageManager.reviewPage.receiveInfoCheckboxLabel.click();
       await expect(pageManager.reviewPage.receiveInfoCheckbox).toBeChecked();
