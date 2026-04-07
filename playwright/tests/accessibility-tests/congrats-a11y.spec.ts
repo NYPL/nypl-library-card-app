@@ -33,7 +33,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
 
     const accountForThisTest = {
       ...TEST_ACCOUNT,
-      username: `qa${Date.now()}w${testInfo.workerIndex}${(randomBytes(2).readUInt16BE(0) % 900) + 100}`,
+      username: `qa${Date.now()}w${testInfo.workerIndex}${randomBytes(4).toString("hex")}`,
     };
 
     await test.step("Pre-test database cleanup", async () => {
