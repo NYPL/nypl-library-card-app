@@ -1,6 +1,7 @@
 import { AxeBuilder } from "@axe-core/playwright";
 import { CongratsPage } from "../../pageobjects/congrats.page";
 import { test, expect } from "@playwright/test";
+import { randomBytes } from "crypto";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 
@@ -32,7 +33,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
 
     const accountForThisTest = {
       ...TEST_ACCOUNT,
-      username: `qa${Date.now()}w${testInfo.workerIndex}${Math.floor(Math.random() * 1000)}`,
+      username: `qa${Date.now()}w${testInfo.workerIndex}${(randomBytes(2).readUInt16BE(0) % 900) + 100}`,
     };
 
     await test.step("Pre-test database cleanup", async () => {
