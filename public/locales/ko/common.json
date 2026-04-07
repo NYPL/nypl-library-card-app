@@ -157,14 +157,22 @@
     },
     "nextSteps": {
       "title": "뉴욕 공공도서관 이용 시작하기",
-      "exploreHeader": "전자책 및 전자 오디오북 둘러보기",
-      "explore": "다양한 도서를<a href='https://www.nypl.org/books-music-movies/help'> 이동 중에도 읽거나 들어 보십시오.</a>",
-      "borrowHeader": "책과 자료 대여",
-      "borrow": "<a href='{{loginUrl}}'>계정에 로그인</a> 하여 카탈로그를 둘러보십시오. 실물 자료를 요청하려면 <a href='https://www.nypl.org/locations'>NYPL 지점</a>을 방문해 정보를 확인하고 실물 카드를 발급받으셔야 합니다.",
-      "updatesHeader": "업데이트 확인",
-      "updates": "<a href='https://www.nypl.org/enews'>도서관에서 이용할 수 있는 정보를 확인해 보십시오.</a>",
-      "moreHeader": "자세히 알아보기",
-      "more": "<a href='https://www.nypl.org/discover-library-card'>도서관 카드로 어떤 일을 할 수 있는지 알아 보십시오.</a>"
+      "explore": {
+        "header": "전자책 및 전자 오디오북 둘러보기",
+        "content": "다양한 도서를<a href='https://www.nypl.org/books-music-movies/help'> 이동 중에도 읽거나 들어 보십시오.</a>"
+      },
+      "borrow": {
+        "header": "책과 자료 대여",
+        "content": "<a href='{{loginUrl}}'>계정에 로그인</a> 하여 카탈로그를 둘러보십시오. 실물 자료를 요청하려면 <a href='https://www.nypl.org/locations'>NYPL 지점</a>을 방문해 정보를 확인하고 실물 카드를 발급받으셔야 합니다."
+      },
+      "updates": {
+        "header": "업데이트 확인",
+        "content": "<a href='https://www.nypl.org/enews'>도서관에서 이용할 수 있는 정보를 확인해 보십시오.</a>"
+      },
+      "more": {
+        "header": "자세히 알아보기",
+        "content": "<a href='https://www.nypl.org/discover-library-card'>도서관 카드로 어떤 일을 할 수 있는지 알아 보십시오.</a>"
+      }
     }
   },
   "button": {
