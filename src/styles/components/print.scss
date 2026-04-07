@@ -4,7 +4,7 @@
 // correctly so patrons can scan it.
 @media print {
   @page {
-    size: letter portrait;
+    size: letter;
     margin: 14mm;
   }
 
@@ -34,7 +34,6 @@
 
   .card-container {
     margin: 0 !important;
-    background: none !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
     break-inside: avoid;
@@ -55,5 +54,10 @@
   // Collapse spacing after the card graphic
   .card-container + div {
     margin: 0 !important;
+  }
+
+  aside {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
