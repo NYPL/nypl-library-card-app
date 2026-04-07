@@ -26,7 +26,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test.beforeEach(async ({ page }) => {
       appContent = require(`../../../public/locales/${lang}/common.json`);
-      reviewPage = new ReviewPage(page, appContent);
+      reviewPage = new ReviewPage(page, appContent, lang);
       pageManager = new PageManager(page, appContent);
       await page.goto(PAGE_ROUTES.REVIEW(lang));
     });
@@ -101,7 +101,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(reviewPage.receiveInfoCheckboxLabel).toBeVisible();
       });
 
-      // does not replace personal info since there's no existing text
       test("enters Personal information", async () => {
         await reviewPage.editPersonalInfoButton.click();
         await fillPersonalInfo(reviewPage, TEST_PATRON);
@@ -153,10 +152,10 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           ).toBeVisible();
           await pageManager.addressVerificationPage
             .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-            .check();
+            .click();
           await pageManager.addressVerificationPage
             .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
-            .check();
+            .click();
           await pageManager.addressVerificationPage.nextButton.click();
           await expect(
             pageManager.addressVerificationPage.spinner
@@ -198,7 +197,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(reviewPage.acceptTermsCheckboxLabel).toBeVisible();
       });
 
-      // does not replace account info since there's no existing text
       test("enters account info", async () => {
         await reviewPage.editAccountButton.click();
         await fillAccountInfo(reviewPage, TEST_ACCOUNT);
@@ -252,7 +250,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test.describe("mocks API responses on review page", () => {
       test("displays username available message", async ({ page }) => {
-        // mock the API call for username availability
         await mockUsernameApi(page, "available");
         await reviewPage.editAccountButton.click();
         await reviewPage.usernameInput.fill("AvailableUsername");
@@ -261,7 +258,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       });
 
       test("displays username unavailable error message", async ({ page }) => {
-        // mock the API call for username unavailability
         await mockUsernameApi(page, "unavailable");
         await reviewPage.editAccountButton.click();
         await reviewPage.usernameInput.fill("UnavailableUsername");
@@ -273,10 +269,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     test.describe("displays error messages", () => {
       test("displays errors for required fields", async () => {
         await reviewPage.editPersonalInfoButton.click();
-        await reviewPage.firstNameInput.fill("");
-        await reviewPage.lastNameInput.fill("");
-        await reviewPage.dateOfBirthInput.fill("");
-        await reviewPage.emailInput.fill("");
         await reviewPage.submitButton.click();
         await expect(reviewPage.firstNameError).toBeVisible();
         await expect(reviewPage.lastNameError).toBeVisible();
@@ -383,8 +375,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       test("displays error for empty username and password", async () => {
         await reviewPage.editAccountButton.click();
-        await reviewPage.usernameInput.fill("");
-        await reviewPage.passwordInput.fill("");
         await reviewPage.submitButton.click();
         await expect(reviewPage.usernameError).toBeVisible();
         await expect(reviewPage.passwordError).toBeVisible();

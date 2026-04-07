@@ -1,4 +1,6 @@
 import { Page, Locator } from "@playwright/test";
+import { apiTranslations } from "../../src/data/apiMessageTranslations";
+import { apiErrorTranslations } from "../../src/data/apiErrorMessageTranslations";
 
 export class ReviewPage {
   readonly page: Page;
@@ -76,7 +78,7 @@ export class ReviewPage {
   readonly editAccountButton: Locator;
   readonly submitButton: Locator;
 
-  constructor(page: Page, appContent?: any) {
+  constructor(page: Page, appContent?: any, lang?: string) {
     const required = appContent?.required || "required";
     const withRequired = (label: string) => `${label} (${required})`;
     const edit = appContent?.button?.edit || "Edit";
@@ -205,7 +207,7 @@ export class ReviewPage {
     });
     this.editPersonalInfoButton = page.getByRole("button", {
       name: withEdit(
-        appContent?.review?.section?.personal || "Edit Personal information"
+        appContent?.review?.section?.personal || "Personal information"
       ),
       exact: true,
     });
@@ -281,12 +283,15 @@ export class ReviewPage {
         "Check if username is available",
       exact: true,
     });
-    this.availableUsernameMessage = page
-      .getByText("El nombre de usuario está disponible.") // update with translation key when available
-      .or(page.getByText("This username is available."));
-    this.unavailableUsernameMessage = page
-      .getByText("Este nombre de usuario no está disponible. Pruebe con otro.") // update with translation key when available
-      .or(page.getByText("This username is unavailable. Please try another."));
+    this.availableUsernameMessage = page.getByText(
+      apiTranslations["This username is available."][lang] ||
+        "This username is available."
+    );
+    this.unavailableUsernameMessage = page.getByText(
+      apiErrorTranslations["This username is unavailable. Please try another."][
+        lang
+      ] || "This username is unavailable. Please try another."
+    );
     this.passwordHeading = page.getByText(
       appContent?.account?.password?.label || "Password",
       { exact: true }
@@ -367,7 +372,7 @@ export class ReviewPage {
     this.acceptTermsCheckbox = page.getByRole("checkbox", {
       name:
         appContent?.account?.termsAndCondition?.label ||
-        "Yes, I accept the terms and conditions",
+        "Yes, I accept the terms and conditions.",
       exact: true,
     });
     this.acceptTermsCheckboxLabel = page.getByText(
@@ -397,44 +402,3 @@ export class ReviewPage {
     return this.page.getByText(expected, { exact: true });
   }
 }
-
-// remove below once done
-//     this.verifyPasswordInput = page.getByRole("textbox", {
-//       name: "Verify password (required)",
-//       exact: true,
-//     });
-//     this.verifyPasswordError = page.getByText(
-//       ERROR_MESSAGES.VERIFY_PASSWORD_INVALID
-//     );
-//     this.showPasswordCheckbox = page.getByRole("checkbox", {
-//       name: "Show password",
-//       exact: true,
-//     });
-//     this.showPasswordCheckboxLabel = page.getByText("Show password", {
-//       exact: true,
-//     });
-//     this.homeLibraryHeading = page.getByText("Home library", { exact: true });
-//     this.nyplLocationLink = page.getByRole("link", {
-//       name: "NYPL location",
-//     });
-//     this.selectHomeLibrary = page.getByLabel("Select a home library:");
-//     this.homeLibraryError = page.getByText(ERROR_MESSAGES.HOME_LIBRARY_ERROR);
-//     this.cardholderTermsLink = page.getByRole("link", {
-//       name: "Cardholder Terms and Conditions",
-//     });
-//     this.rulesRegulationsLink = page.getByRole("link", {
-//       name: "Rules and Regulations",
-//     });
-//     this.privacyPolicyLink = page.locator("#mainContent").getByRole("link", {
-//       name: "Privacy Policy",
-//     });
-//     this.acceptTermsCheckbox = page.getByRole("checkbox", {
-//       name: "Yes, I accept the terms and conditions",
-//     });
-//     this.acceptTermsCheckboxLabel = page.getByText(
-//       "Yes, I accept the terms and conditions.",
-// >>>>>>> SWIS-300/language-agnostic-landing
-//       {
-//         exact: true,
-//       }
-//     );

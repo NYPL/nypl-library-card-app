@@ -76,7 +76,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.accountPage.nextButton.click();
       });
 
-      await test.step.skip("displays error on review page", async () => {
+      await test.step("displays error on review page", async () => {
         await expect(pageManager.reviewPage.stepHeading).toBeVisible();
         await pageManager.reviewPage.submitButton.click();
         await expect(pageManager.reviewPage.streetAddressError).toBeVisible();
