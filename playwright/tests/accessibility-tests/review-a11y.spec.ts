@@ -1,0 +1,152 @@
+import { test, expect } from "@playwright/test";
+import { AxeBuilder } from "@axe-core/playwright";
+import { PageManager } from "../../pageobjects/page-manager.page";
+import { ReviewPage } from "../../pageobjects/review.page";
+import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import {
+  fillPersonalInfo,
+  fillAddress,
+  fillAccountInfo,
+} from "../../utils/form-helper";
+import {
+  PAGE_ROUTES,
+  SPINNER_TIMEOUT,
+  TEST_ACCOUNT,
+  TEST_PATRON,
+  TEST_NYC_ADDRESS,
+  IP,
+} from "../../utils/constants";
+
+test.describe("Review Page Accessibility Tests", () => {
+  test.beforeEach(async ({ page, context }) => {
+    await context.clearCookies();
+    await page.setExtraHTTPHeaders({
+      "x-client-ip": IP.NYC_IP,
+      "x-forwarded-for": IP.NYC_IP,
+    });
+
+    const pageManager = new PageManager(page);
+    await page.goto(PAGE_ROUTES.PERSONAL);
+
+    await test.step("it should display Personal info page", async () => {
+      await expect(pageManager.personalPage.stepHeading).toBeVisible();
+      await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+      await pageManager.personalPage.nextButton.click();
+    });
+
+    await test.step("it should display Address page", async () => {
+      await expect(pageManager.addressPage.stepHeading).toBeVisible();
+      await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
+      await pageManager.addressPage.nextButton.click();
+      await expect(pageManager.addressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
+    });
+
+    await test.step("it should display Address verification page", async () => {
+      await expect(
+        pageManager.addressVerificationPage.stepHeading
+      ).toBeVisible();
+      await pageManager.addressVerificationPage
+        .getHomeAddressOption(TEST_NYC_ADDRESS.street)
+        .click();
+      await pageManager.addressVerificationPage.nextButton.click();
+      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
+        { timeout: SPINNER_TIMEOUT }
+      );
+    });
+
+    await test.step("it should display Account page", async () => {
+      await expect(pageManager.accountPage.stepHeading).toBeVisible();
+      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+      await pageManager.accountPage.nextButton.click();
+    });
+
+    await test.step("it should display Review page", async () => {
+      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+    });
+  });
+
+  test("should have no accessibility violations on load", async ({ page }) => {
+    await expect(page).toHaveURL(/.*\/review\?.*newCard=true/);
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withTags([...A11Y_GUIDELINES])
+      .analyze();
+    validateA11yCoverage(accessibilityScanResults);
+    expect(accessibilityScanResults.violations).toHaveLength(0);
+  });
+
+  test("it should reach all form fields via the tab key", async ({ page }) => {
+    const reviewPage = new ReviewPage(page);
+
+    await test.step("it should tab through on Personal section", async () => {
+      await expect(reviewPage.stepHeading).toBeVisible();
+      await expect(reviewPage.stepHeading).toBeFocused();
+    });
+
+    await test.step("it should focus on the Edit button and activate it", async () => {
+      await page.keyboard.press("Tab");
+      await expect(reviewPage.editPersonalInfoButton).toBeFocused();
+
+      await page.keyboard.press("Enter");
+      await expect(reviewPage.firstNameInput).toBeFocused();
+    });
+
+    await test.step("it should tab through on Personal info fields", async () => {
+      const personalFields = [
+        reviewPage.lastNameInput,
+        reviewPage.dateOfBirthInput,
+        reviewPage.emailInput,
+        reviewPage.alternateFormLink,
+        reviewPage.locationsLink,
+        reviewPage.receiveInfoCheckbox,
+      ];
+
+      for (const field of personalFields) {
+        await page.keyboard.press("Tab");
+        await expect(field).toBeFocused();
+      }
+    });
+
+    await test.step("it should tab through on Address section", async () => {
+      await page.keyboard.press("Tab");
+      await expect(reviewPage.editAddressButton).toBeFocused();
+    });
+
+    await test.step("it should tab through on Account section", async () => {
+      await page.keyboard.press("Tab");
+      await expect(reviewPage.showPasswordCheckbox).toBeFocused();
+      await page.keyboard.press("Tab");
+    });
+    await test.step("it should focus on the Edit Account button and activate it", async () => {
+      await expect(reviewPage.editAccountButton).toBeFocused();
+      await page.keyboard.press("Enter");
+      await expect(reviewPage.usernameInput).toBeVisible();
+      await expect(reviewPage.usernameInput).toBeFocused();
+    });
+    await test.step("it should tab through on Account info fields", async () => {
+      const accountFields = [
+        reviewPage.availableUsernameButton,
+        reviewPage.passwordInput,
+        reviewPage.verifyPasswordInput,
+        reviewPage.showPasswordCheckbox,
+        reviewPage.nyplLocationLink,
+        reviewPage.selectHomeLibrary,
+        reviewPage.cardholderTermsLink,
+        reviewPage.rulesRegulationsLink,
+        reviewPage.privacyPolicyLink,
+        reviewPage.acceptTermsCheckbox,
+      ];
+
+      for (const field of accountFields) {
+        await page.keyboard.press("Tab");
+        await expect(field).toBeFocused();
+      }
+      await page.keyboard.press("Space");
+    });
+    await test.step("it should focus on submit button", async () => {
+      await page.keyboard.press("Tab");
+      await expect(reviewPage.submitButton).toBeFocused();
+    });
+  });
+});
