@@ -118,7 +118,7 @@ const ConfirmationContainer = () => {
   }, [canvas]);
 
   return (
-    <Box sx={styles.outerBox}>
+    <Box className="card-container" sx={styles.outerBox}>
       <Box className="image-lion" sx={styles.imageLion}>
         <Image
           alt="NYPL Library Barcode Background"
