@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
+  expectNoErrors,
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
@@ -38,18 +39,21 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
         pageManager.personalPage.receiveInfoCheckbox
       ).not.toBeChecked();
       await pageManager.personalPage.nextButton.click();
+      await expectNoErrors(pageManager.personalPage);
     });
 
     await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       await pageManager.addressPage.nextButton.click();
+      await expectNoErrors(pageManager.addressPage);
     });
 
     await test.step("enters alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
       await pageManager.alternateAddressPage.nextButton.click();
+      await expectNoErrors(pageManager.alternateAddressPage);
     });
 
     await test.step("confirms address verification", async () => {
@@ -69,6 +73,7 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();
+      await expectNoErrors(pageManager.accountPage);
     });
 
     await test.step("displays review page", async () => {
@@ -91,6 +96,7 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
       );
       await expect(pageManager.reviewPage.submitButton).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
+      await expectNoErrors(pageManager.reviewPage);
     });
 
     await test.step("displays variable elements on congrats page", async () => {
