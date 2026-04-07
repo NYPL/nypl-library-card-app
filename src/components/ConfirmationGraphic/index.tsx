@@ -48,7 +48,9 @@ const styles = {
   },
   memberName: {
     color: "white",
-    fontSize: "clamp(0.8rem, 0.8rem + 0.4vw, 1.2rem)",
+    fontSize: "clamp(0.8rem, 0.8rem + 0.4vw, 1rem)",
+    lineHeight: 1.1,
+    gridColumn: "span 2",
   },
   logoItem: {
     color: "white",
@@ -118,7 +120,7 @@ const ConfirmationContainer = () => {
   }, [canvas]);
 
   return (
-    <Box sx={styles.outerBox}>
+    <Box className="card-container" sx={styles.outerBox}>
       <Box className="image-lion" sx={styles.imageLion}>
         <Image
           alt="NYPL Library Barcode Background"
@@ -127,10 +129,13 @@ const ConfirmationContainer = () => {
           width="939"
         />
         <Grid className="background-lion" sx={styles.backgroundLion}>
-          <GridItem id="member-name" sx={styles.memberName}>
-            {t("confirmation.graphic.memberName")}
-            <Box className="content" fontSize="1.6em">
-              {name}
+          <GridItem id="issued" sx={styles.issuedText}>
+            {t("confirmation.graphic.issued")}
+            <Box
+              className="content"
+              fontSize={"clamp(1rem, 1rem + 0.2vw, 1.6rem)"}
+            >
+              {new Date().toLocaleDateString()}
             </Box>
           </GridItem>
           <GridItem sx={styles.logoItem}>
@@ -149,13 +154,10 @@ const ConfirmationContainer = () => {
               {barcode}
             </Box>
           </Box>
-          <GridItem id="issued" sx={styles.issuedText}>
-            {t("confirmation.graphic.issued")}
-            <Box
-              className="content"
-              fontSize={"clamp(1rem, 1rem + 0.2vw, 1.6rem)"}
-            >
-              {new Date().toLocaleDateString()}
+          <GridItem id="member-name" sx={styles.memberName}>
+            {t("confirmation.graphic.memberName")}
+            <Box className="content" fontSize="1.6em">
+              {name}
             </Box>
           </GridItem>
         </Grid>
