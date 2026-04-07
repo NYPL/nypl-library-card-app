@@ -75,6 +75,7 @@ export class ReviewPage {
   readonly acceptTermsCheckboxLabel: Locator;
   readonly acceptTermsError: Locator;
   readonly editAccountButton: Locator;
+  readonly progressBar: Locator;
   readonly submitButton: Locator;
 
   constructor(page: Page) {
@@ -265,6 +266,9 @@ export class ReviewPage {
     this.editAccountButton = page.getByRole("button", {
       name: "Edit Create your account",
       exact: true,
+    });
+    this.progressBar = this.page.getByRole("progressbar", {
+      name: "Loading Indicator",
     });
     this.submitButton = page.getByRole("button", {
       name: "Submit",

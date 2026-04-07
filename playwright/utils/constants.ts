@@ -67,6 +67,7 @@ export const TEST_MULTIMATCH_ADDRESS_WEST: AddressData = {
 
 // Common timeouts
 export const SPINNER_TIMEOUT = 10000;
+export const PROGRESS_BAR_TIMEOUT = 15000;
 
 // account
 const uniqueSuffix = Date.now().toString().slice(-6);

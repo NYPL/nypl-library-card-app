@@ -22,7 +22,7 @@ test.describe("Accessibility tests on Landing Page", () => {
   }) => {
     const landingPage = new LandingPage(page);
 
-    const languageLocators = [
+    const landingLocators = [
       landingPage.arabicLanguage,
       landingPage.bengaliLanguage,
       landingPage.chineseLanguage,
@@ -34,13 +34,21 @@ test.describe("Accessibility tests on Landing Page", () => {
       landingPage.russianLanguage,
       landingPage.spanishLanguage,
       landingPage.urduLanguage,
+      landingPage.digitalResourcesLink,
+      landingPage.visitLibraryLink,
+      landingPage.alternateFormLink,
+      landingPage.whatYouCanAccess,
+      landingPage.cardholderTerms,
+      landingPage.rulesRegulations,
+      landingPage.privacyPolicy,
+      landingPage.getStartedButton,
     ];
 
-    await languageLocators[0].focus();
-    await expect(languageLocators[0]).toBeFocused();
-    for (let i = 1; i < languageLocators.length; i++) {
+    await landingLocators[0].focus();
+    await expect(landingLocators[0]).toBeFocused();
+    for (let i = 1; i < landingLocators.length; i++) {
       await page.keyboard.press("Tab");
-      await expect(languageLocators[i]).toBeFocused();
+      await expect(landingLocators[i]).toBeFocused();
     }
   });
 });

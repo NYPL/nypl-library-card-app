@@ -27,7 +27,7 @@ export class AlternateAddressPage {
       level: 1,
     });
     this.stepHeading = page.getByRole("heading", {
-      name: "Step 2 of 5: Alternate address",
+      name: /Step 2 of 5: Alternate address/,
       level: 2,
     });
     this.informationalBanner = page.locator("aside", {

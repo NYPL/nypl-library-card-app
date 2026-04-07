@@ -30,11 +30,11 @@ export class CongratsPage {
       level: 1,
     });
     this.metroOrNonMetroHeading = page.getByRole("heading", {
-      name: "Congratulations! You now have a digital New York Public Library card.",
+      name: /Congratulations! You now have a digital New York Public Library card./,
       level: 2,
     });
     this.temporaryHeading = page.getByRole("heading", {
-      name: "Congratulations! You now have a temporary digital New York Public Library card.",
+      name: /Congratulations! You now have a temporary digital New York Public Library card./,
       level: 2,
     });
     this.getStartedHeading = page.getByRole("heading", {

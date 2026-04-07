@@ -11,6 +11,7 @@ import {
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
+  PROGRESS_BAR_TIMEOUT,
   SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_PATRON,
@@ -22,11 +23,25 @@ import { deletePatron, getPatronID } from "../../utils/sierra-api-utils";
 test.describe("Accessibility tests on Congrats Page", () => {
   let scrapedBarcode: string | null = null;
 
-  test.beforeEach(async ({ page, context }) => {
+  test.beforeEach(async ({ page, context }, testInfo) => {
     await context.clearCookies();
     await page.setExtraHTTPHeaders({
       "x-client-ip": IP.NYC_IP,
       "x-forwarded-for": IP.NYC_IP,
+    });
+
+    const accountForThisTest = {
+      ...TEST_ACCOUNT,
+      username: `qa${Date.now()}w${testInfo.workerIndex}${Math.floor(Math.random() * 1000)}`,
+    };
+
+    await test.step("Pre-test database cleanup", async () => {
+      try {
+        const id = await getPatronID(accountForThisTest.username);
+        if (id) await deletePatron(id);
+      } catch {
+        // ignore not found errors
+      }
     });
 
     const pageManager = new PageManager(page);
@@ -52,35 +67,38 @@ test.describe("Accessibility tests on Congrats Page", () => {
       ).toBeVisible();
       await pageManager.addressVerificationPage.nextButton.click();
       await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
-        }
+        { timeout: SPINNER_TIMEOUT }
       );
+    });
 
-      await test.step("filling account information", async () => {
-        await expect(pageManager.accountPage.stepHeading).toBeVisible();
-        await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-        await pageManager.accountPage.nextButton.click();
-      });
+    await test.step("filling account information", async () => {
+      await expect(pageManager.accountPage.stepHeading).toBeVisible();
+      await fillAccountInfo(pageManager.accountPage, accountForThisTest);
+      await pageManager.accountPage.nextButton.click();
+    });
 
-      await test.step("review page", async () => {
-        await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-        await expect(pageManager.reviewPage.submitButton).toBeEnabled();
-        await pageManager.reviewPage.submitButton.click();
-      });
+    await test.step("review page", async () => {
+      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      await expect(pageManager.reviewPage.submitButton).toBeEnabled();
 
-      await test.step("congrats page", async () => {
-        await expect(
-          pageManager.congratsPage.metroOrNonMetroHeading
-        ).toBeVisible();
-        scrapedBarcode =
-          await pageManager.congratsPage.patronBarcodeNumber.textContent();
-        expect(scrapedBarcode).not.toBeNull();
+      await pageManager.reviewPage.submitButton.click();
+      await expect(pageManager.reviewPage.progressBar).toBeVisible();
+      await expect(pageManager.reviewPage.progressBar).not.toBeVisible({
+        timeout: PROGRESS_BAR_TIMEOUT,
       });
+    });
+
+    await test.step("congrats page", async () => {
+      await expect(
+        pageManager.congratsPage.metroOrNonMetroHeading
+      ).toBeVisible();
+      scrapedBarcode =
+        await pageManager.congratsPage.patronBarcodeNumber.textContent();
+      expect(scrapedBarcode).not.toBeNull();
     });
   });
 
-  test.afterAll("deletes patron", async () => {
+  test.afterEach("deletes patron", async () => {
     if (scrapedBarcode) {
       try {
         const patronID = await getPatronID(scrapedBarcode);
