@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { ReviewPage } from "../../pageobjects/review.page";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
+  expectNoErrors,
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
@@ -123,6 +124,7 @@ test.describe("edits patron information on review page", () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       await pageManager.addressPage.nextButton.click();
+      await expectNoErrors(pageManager.addressPage);
       await expect(pageManager.addressPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });
@@ -132,6 +134,7 @@ test.describe("edits patron information on review page", () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
       await pageManager.alternateAddressPage.nextButton.click();
+      await expectNoErrors(pageManager.alternateAddressPage);
       await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });
@@ -157,6 +160,7 @@ test.describe("edits patron information on review page", () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();
+      await expectNoErrors(pageManager.accountPage);
     });
 
     await test.step("displays addresses on review page", async () => {
@@ -215,6 +219,7 @@ test.describe("edits patron information on review page", () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();
+      await expectNoErrors(pageManager.accountPage);
     });
 
     await test.step("edits account info on review page", async () => {

@@ -2,7 +2,11 @@ import { AxeBuilder } from "@axe-core/playwright";
 import { AddressVerificationPage } from "../../pageobjects/address-verification.page";
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
-import { fillAddress, fillPersonalInfo } from "../../utils/form-helper";
+import {
+  expectNoErrors,
+  fillAddress,
+  fillPersonalInfo,
+} from "../../utils/form-helper";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 import {
   PAGE_ROUTES,
@@ -19,10 +23,12 @@ test.describe("Accessibility tests on Address Verification page", () => {
 
     await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
     await pageManager.personalPage.nextButton.click();
+    await expectNoErrors(pageManager.personalPage);
 
     await expect(pageManager.addressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
     await pageManager.addressPage.nextButton.click();
+    await expectNoErrors(pageManager.addressPage);
 
     await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);

@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
+  expectNoErrors,
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
@@ -67,18 +68,21 @@ test.describe("E2E: Navigate backward in application", () => {
         pageManager.personalPage.receiveInfoCheckbox
       ).not.toBeChecked();
       await pageManager.personalPage.nextButton.click();
+      await expectNoErrors(pageManager.personalPage);
     });
 
     await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       await pageManager.addressPage.nextButton.click();
+      await expectNoErrors(pageManager.addressPage);
     });
 
     await test.step("enters alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
       await pageManager.alternateAddressPage.nextButton.click();
+      await expectNoErrors(pageManager.alternateAddressPage);
       await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });
@@ -104,6 +108,7 @@ test.describe("E2E: Navigate backward in application", () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();
+      await expectNoErrors(pageManager.accountPage);
     });
 
     await test.step("displays review page and navigates back to account page", async () => {

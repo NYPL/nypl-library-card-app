@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
+  expectNoErrors,
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
@@ -46,12 +47,14 @@ test.describe("E2E: Edits patron information", () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
       await pageManager.personalPage.nextButton.click();
+      await expectNoErrors(pageManager.personalPage);
     });
 
     await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       await pageManager.addressPage.nextButton.click();
+      await expectNoErrors(pageManager.addressPage);
       await expect(pageManager.addressPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });
@@ -60,6 +63,7 @@ test.describe("E2E: Edits patron information", () => {
     await test.step("skips alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await pageManager.alternateAddressPage.nextButton.click();
+      await expectNoErrors(pageManager.alternateAddressPage);
       await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });
@@ -84,6 +88,7 @@ test.describe("E2E: Edits patron information", () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();
+      await expectNoErrors(pageManager.accountPage);
     });
 
     await test.step("edits personal info on review page", async () => {
@@ -114,6 +119,7 @@ test.describe("E2E: Edits patron information", () => {
     await test.step("submits application", async () => {
       await expect(pageManager.reviewPage.submitButton).toBeVisible();
       await pageManager.reviewPage.submitButton.click();
+      await expectNoErrors(pageManager.reviewPage);
     });
 
     await test.step("displays edited name on congrats page", async () => {

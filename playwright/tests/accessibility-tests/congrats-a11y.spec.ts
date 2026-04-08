@@ -8,6 +8,7 @@ import {
   fillPersonalInfo,
   fillAddress,
   fillAccountInfo,
+  expectNoErrors,
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
@@ -35,12 +36,14 @@ test.describe("Accessibility tests on Congrats Page", () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
       await pageManager.personalPage.nextButton.click();
+      await expectNoErrors(pageManager.personalPage);
     });
 
     await test.step("filling address information", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
       await pageManager.addressPage.nextButton.click();
+      await expectNoErrors(pageManager.addressPage);
       await expect(pageManager.addressPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });
@@ -61,12 +64,14 @@ test.describe("Accessibility tests on Congrats Page", () => {
         await expect(pageManager.accountPage.stepHeading).toBeVisible();
         await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
         await pageManager.accountPage.nextButton.click();
+        await expectNoErrors(pageManager.accountPage);
       });
 
       await test.step("review page", async () => {
         await expect(pageManager.reviewPage.stepHeading).toBeVisible();
         await expect(pageManager.reviewPage.submitButton).toBeEnabled();
         await pageManager.reviewPage.submitButton.click();
+        await expectNoErrors(pageManager.reviewPage);
       });
 
       await test.step("congrats page", async () => {

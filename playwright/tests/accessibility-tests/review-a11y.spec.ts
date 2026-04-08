@@ -7,6 +7,7 @@ import {
   fillPersonalInfo,
   fillAddress,
   fillAccountInfo,
+  expectNoErrors,
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
@@ -32,12 +33,14 @@ test.describe("Review Page Accessibility Tests", () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
       await pageManager.personalPage.nextButton.click();
+      await expectNoErrors(pageManager.personalPage);
     });
 
     await test.step("it should display Address page", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
       await pageManager.addressPage.nextButton.click();
+      await expectNoErrors(pageManager.addressPage);
       await expect(pageManager.addressPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });
@@ -60,6 +63,7 @@ test.describe("Review Page Accessibility Tests", () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
       await pageManager.accountPage.nextButton.click();
+      await expectNoErrors(pageManager.accountPage);
     });
 
     await test.step("it should display Review page", async () => {

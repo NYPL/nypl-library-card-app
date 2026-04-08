@@ -8,6 +8,7 @@ import {
   TEST_PATRON,
 } from "../../utils/constants";
 import { mockCreatePatronApi } from "../../utils/mock-api";
+import { expectNoErrors } from "../../utils/form-helper";
 
 test.describe("displays congrats page", () => {
   let congratsPage: CongratsPage;
@@ -45,6 +46,7 @@ test.describe("displays congrats page", () => {
         PATRON_TYPES.DIGITAL_METRO
       );
       await pageManager.reviewPage.submitButton.click();
+      await expectNoErrors(pageManager.reviewPage);
     });
 
     await test.step("displays metro card headings and links", async () => {
@@ -89,6 +91,7 @@ test.describe("displays congrats page", () => {
         PATRON_TYPES.DIGITAL_NON_METRO
       );
       await pageManager.reviewPage.submitButton.click();
+      await expectNoErrors(pageManager.reviewPage);
     });
 
     await test.step("displays metro card headings and links", async () => {
@@ -133,6 +136,7 @@ test.describe("displays congrats page", () => {
         PATRON_TYPES.DIGITAL_TEMPORARY
       );
       await pageManager.reviewPage.submitButton.click();
+      await expectNoErrors(pageManager.reviewPage);
     });
 
     await test.step("displays temporary card headings and links", async () => {

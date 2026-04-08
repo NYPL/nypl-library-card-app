@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { AddressPage } from "../../pageobjects/address.page";
 import { AlternateAddressPage } from "../../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../../pageobjects/address-verification.page";
-import { fillAddress } from "../../utils/form-helper";
+import { expectNoErrors, fillAddress } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
@@ -46,12 +46,14 @@ test.describe("enters home address and alternate address", () => {
       await expect(addressPage.addressHeading).toBeVisible();
       await fillAddress(addressPage, TEST_OOS_ADDRESS);
       await addressPage.nextButton.click();
+      await expectNoErrors(addressPage);
     });
 
     await test.step("enters alternate address", async () => {
       await expect(alternateAddressPage.addressHeading).toBeVisible();
       await fillAddress(alternateAddressPage, TEST_NYC_ADDRESS);
       await alternateAddressPage.nextButton.click();
+      await expectNoErrors(alternateAddressPage);
     });
 
     await test.step("displays home and alternate addresses", async () => {
@@ -79,12 +81,14 @@ test.describe("enters home address and alternate address", () => {
       await expect(addressPage.addressHeading).toBeVisible();
       await fillAddress(addressPage, TEST_MULTIMATCH_ADDRESS);
       await addressPage.nextButton.click();
+      await expectNoErrors(addressPage);
       await expect(addressVerificationPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });
       await expect(alternateAddressPage.addressHeading).toBeVisible();
       await fillAddress(alternateAddressPage, TEST_MULTIMATCH_ADDRESS);
       await alternateAddressPage.nextButton.click();
+      await expectNoErrors(alternateAddressPage);
       await expect(addressVerificationPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });

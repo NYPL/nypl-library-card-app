@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
+  expectNoErrors,
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
@@ -147,12 +148,14 @@ test("retains user-entered info after clicking breadcrumb", async ({
       pageManager.personalPage.receiveInfoCheckbox
     ).not.toBeChecked();
     await pageManager.personalPage.nextButton.click();
+    await expectNoErrors(pageManager.personalPage);
   });
 
   await test.step("enters home address", async () => {
     await expect(pageManager.addressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
     await pageManager.addressPage.nextButton.click();
+    await expectNoErrors(pageManager.addressPage);
     await expect(pageManager.addressPage.spinner).not.toBeVisible({
       timeout: SPINNER_TIMEOUT,
     });
@@ -162,6 +165,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
     await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
     await pageManager.alternateAddressPage.nextButton.click();
+    await expectNoErrors(pageManager.alternateAddressPage);
     await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
       timeout: SPINNER_TIMEOUT,
     });
@@ -185,6 +189,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
     await expect(pageManager.accountPage.stepHeading).toBeVisible();
     await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
     await pageManager.accountPage.nextButton.click();
+    await expectNoErrors(pageManager.accountPage);
   });
 
   await test.step("displays review page and clicks breadcrumb", async () => {
@@ -212,6 +217,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
       pageManager.personalPage.receiveInfoCheckbox
     ).not.toBeChecked();
     await pageManager.personalPage.nextButton.click();
+    await expectNoErrors(pageManager.personalPage);
   });
 
   await test.step("retains info on address page", async () => {
@@ -232,6 +238,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
       TEST_OOS_ADDRESS.postalCode
     );
     await pageManager.addressPage.nextButton.click();
+    await expectNoErrors(pageManager.addressPage);
     await expect(pageManager.addressPage.spinner).not.toBeVisible({
       timeout: SPINNER_TIMEOUT,
     });
@@ -255,6 +262,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
       TEST_NYC_ADDRESS.postalCode
     );
     await pageManager.alternateAddressPage.nextButton.click();
+    await expectNoErrors(pageManager.alternateAddressPage);
     await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
       timeout: SPINNER_TIMEOUT,
     });
