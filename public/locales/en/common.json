@@ -173,10 +173,22 @@
     },
     "nextSteps": {
       "title": "Get started with The New York Public Library",
-      "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
-      "borrow": "<b>Borrow books & more</b><a href='{{loginUrl}}'> Log into your account</a> and browse the catalog. To check out and borrow physical items, visit any <a href='https://www.nypl.org/locations'>NYPL location</a> to verify your information and receive a physical card.",
-      "updates": "<b>Get updates</b><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
-      "more": "<b>Learn more</b><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+      "explore": {
+        "header": "Explore E-Books & E-Audiobooks",
+        "content": "<a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles."
+      },
+      "borrow": {
+        "header": "Borrow books & more",
+        "content": "<a href='{{loginUrl}}'> Log into your account</a> and browse the catalog. To check out and borrow physical items, visit any <a href='https://www.nypl.org/locations'>NYPL location</a> to verify your information and receive a physical card."
+      },
+      "updates": {
+        "header": "Get updates",
+        "content": "<a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>"
+      },
+      "more": {
+        "header": "Learn more",
+        "content": "<a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+      }
     }
   },
   "button": {

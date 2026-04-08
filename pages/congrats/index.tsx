@@ -16,6 +16,7 @@ import { PageHeading } from "../../src/components/PageHeading";
 import { Paragraph } from "../../src/components/Paragraph";
 import { Trans } from "../../src/components/Trans";
 import { Banner } from "../../src/components/Banner";
+import { PageSubHeading } from "../../src/components/PageSubHeading";
 
 const TEMPORARY_PTYPE = 7;
 
@@ -67,24 +68,38 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       </PageHeading>
 
       {!temporary && (
+        <PageSubHeading mb="xs">
+          <Trans i18nKey="confirmation.nextSteps.explore.header" />
+        </PageSubHeading>
+      )}
+      {!temporary && (
         <NextSteps>
-          <Trans i18nKey="confirmation.nextSteps.explore" />
+          <Trans i18nKey="confirmation.nextSteps.explore.content" />
         </NextSteps>
       )}
 
+      <PageSubHeading mb="xs">
+        <Trans i18nKey="confirmation.nextSteps.borrow.header" />
+      </PageSubHeading>
       <NextSteps>
         <Trans
-          i18nKey="confirmation.nextSteps.borrow"
+          i18nKey="confirmation.nextSteps.borrow.content"
           values={{ loginUrl: loginUrl }}
         />
       </NextSteps>
 
+      <PageSubHeading mb="xs">
+        <Trans i18nKey="confirmation.nextSteps.updates.header" />
+      </PageSubHeading>
       <NextSteps>
-        <Trans i18nKey="confirmation.nextSteps.updates" />
+        <Trans i18nKey="confirmation.nextSteps.updates.content" />
       </NextSteps>
 
+      <PageSubHeading mb="xs">
+        <Trans i18nKey="confirmation.nextSteps.more.header" />
+      </PageSubHeading>
       <NextSteps>
-        <Trans i18nKey="confirmation.nextSteps.more" />
+        <Trans i18nKey="confirmation.nextSteps.more.content" />
       </NextSteps>
     </Box>
   );
@@ -94,7 +109,6 @@ const NextSteps = ({ children }: { children: React.ReactNode }) => {
   return (
     <Paragraph
       sx={{
-        b: { display: "block", marginBottom: "xs" },
         a: {
           whiteSpace: "normal",
           overflowWrap: "break-word",
