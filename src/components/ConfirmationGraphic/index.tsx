@@ -42,7 +42,7 @@ const styles = {
     p: "0 2em 0 1.25em",
     gap: "0.5em 0.25em",
     gridTemplateColumns: "58% 30%",
-    gridTemplateRows: "20% 40% 20%",
+    gridTemplateRows: "20% 40% 14%",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -50,7 +50,7 @@ const styles = {
     color: "white",
     fontSize: "clamp(0.8rem, 0.8rem + 0.4vw, 1rem)",
     lineHeight: 1.1,
-    gridColumn: "span 2",
+    gridColumn: "span 3",
   },
   logoItem: {
     color: "white",
