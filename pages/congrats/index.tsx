@@ -68,7 +68,7 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       </PageHeading>
 
       {!temporary && (
-        <PageSubHeading mb="xs">
+        <PageSubHeading>
           <Trans i18nKey="confirmation.nextSteps.explore.header" />
         </PageSubHeading>
       )}
@@ -78,7 +78,7 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
         </NextSteps>
       )}
 
-      <PageSubHeading mb="xs">
+      <PageSubHeading>
         <Trans i18nKey="confirmation.nextSteps.borrow.header" />
       </PageSubHeading>
       <NextSteps>
@@ -88,14 +88,14 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
         />
       </NextSteps>
 
-      <PageSubHeading mb="xs">
+      <PageSubHeading>
         <Trans i18nKey="confirmation.nextSteps.updates.header" />
       </PageSubHeading>
       <NextSteps>
         <Trans i18nKey="confirmation.nextSteps.updates.content" />
       </NextSteps>
 
-      <PageSubHeading mb="xs">
+      <PageSubHeading>
         <Trans i18nKey="confirmation.nextSteps.more.header" />
       </PageSubHeading>
       <NextSteps>
