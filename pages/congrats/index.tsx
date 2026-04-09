@@ -68,44 +68,47 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       </PageHeading>
 
       {!temporary && (
-        <PageSubHeading mb="xs">
+        <PageSubHeading>
           <Trans i18nKey="confirmation.nextSteps.explore.header" />
         </PageSubHeading>
       )}
       {!temporary && (
-        <NextSteps>
+        <NextSteps mt="xs">
           <Trans i18nKey="confirmation.nextSteps.explore.content" />
         </NextSteps>
       )}
 
-      <PageSubHeading mb="xs">
+      <PageSubHeading>
         <Trans i18nKey="confirmation.nextSteps.borrow.header" />
       </PageSubHeading>
-      <NextSteps>
+      <NextSteps mt="xs">
         <Trans
           i18nKey="confirmation.nextSteps.borrow.content"
           values={{ loginUrl: loginUrl }}
         />
       </NextSteps>
 
-      <PageSubHeading mb="xs">
+      <PageSubHeading>
         <Trans i18nKey="confirmation.nextSteps.updates.header" />
       </PageSubHeading>
-      <NextSteps>
+      <NextSteps mt="xs">
         <Trans i18nKey="confirmation.nextSteps.updates.content" />
       </NextSteps>
 
-      <PageSubHeading mb="xs">
+      <PageSubHeading>
         <Trans i18nKey="confirmation.nextSteps.more.header" />
       </PageSubHeading>
-      <NextSteps>
+      <NextSteps mt="xs">
         <Trans i18nKey="confirmation.nextSteps.more.content" />
       </NextSteps>
     </Box>
   );
 }
 
-const NextSteps = ({ children }: { children: React.ReactNode }) => {
+const NextSteps = ({
+  children,
+  ...rest
+}: { children: React.ReactNode } & React.ComponentProps<typeof Paragraph>) => {
   return (
     <Paragraph
       sx={{
@@ -115,6 +118,7 @@ const NextSteps = ({ children }: { children: React.ReactNode }) => {
           maxWidth: "100%",
         },
       }}
+      {...rest}
     >
       {children}
     </Paragraph>
