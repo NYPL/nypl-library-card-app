@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  expectNoErrors,
+  clickNextButton,
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
@@ -46,27 +46,33 @@ test.describe("E2E: Edits patron information", () => {
     await test.step("enters personal information", async () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      await pageManager.personalPage.nextButton.click();
-      await expectNoErrors(pageManager.personalPage);
+      await clickNextButton(
+        pageManager.personalPage,
+        pageManager.personalPage.nextButton,
+        pageManager.addressPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expectNoErrors(pageManager.addressPage);
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.addressPage,
+        pageManager.addressPage.nextButton,
+        pageManager.alternateAddressPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("skips alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await pageManager.alternateAddressPage.nextButton.click();
-      await expectNoErrors(pageManager.alternateAddressPage);
-      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.alternateAddressPage,
+        pageManager.alternateAddressPage.nextButton,
+        pageManager.addressVerificationPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("confirms address verification", async () => {
@@ -87,8 +93,12 @@ test.describe("E2E: Edits patron information", () => {
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
-      await expectNoErrors(pageManager.accountPage);
+      await clickNextButton(
+        pageManager.accountPage,
+        pageManager.accountPage.nextButton,
+        pageManager.reviewPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("edits personal info on review page", async () => {
@@ -118,8 +128,12 @@ test.describe("E2E: Edits patron information", () => {
 
     await test.step("submits application", async () => {
       await expect(pageManager.reviewPage.submitButton).toBeVisible();
-      await pageManager.reviewPage.submitButton.click();
-      await expectNoErrors(pageManager.reviewPage);
+      await clickNextButton(
+        pageManager.reviewPage,
+        pageManager.reviewPage.submitButton,
+        pageManager.congratsPage.mainHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("displays edited name on congrats page", async () => {

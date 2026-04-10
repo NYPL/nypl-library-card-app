@@ -3,13 +3,14 @@ import { AddressVerificationPage } from "../../pageobjects/address-verification.
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  expectNoErrors,
+  clickNextButton,
   fillAddress,
   fillPersonalInfo,
 } from "../../utils/form-helper";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 import {
   PAGE_ROUTES,
+  SPINNER_TIMEOUT,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
@@ -22,22 +23,34 @@ test.describe("Accessibility tests on Address Verification page", () => {
     const pageManager = new PageManager(page);
 
     await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-    await pageManager.personalPage.nextButton.click();
-    await expectNoErrors(pageManager.personalPage);
+    await clickNextButton(
+      pageManager.personalPage,
+      pageManager.personalPage.nextButton,
+      pageManager.addressPage.stepHeading,
+      SPINNER_TIMEOUT
+    );
 
     await expect(pageManager.addressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-    await pageManager.addressPage.nextButton.click();
-    await expectNoErrors(pageManager.addressPage);
+    await clickNextButton(
+      pageManager.addressPage,
+      pageManager.addressPage.nextButton,
+      pageManager.alternateAddressPage.stepHeading,
+      SPINNER_TIMEOUT
+    );
 
     await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
-    await pageManager.alternateAddressPage.nextButton.click();
+    await clickNextButton(
+      pageManager.alternateAddressPage,
+      pageManager.alternateAddressPage.nextButton,
+      pageManager.addressVerificationPage.stepHeading,
+      SPINNER_TIMEOUT
+    );
 
     await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
-
     await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
-      timeout: 10000,
+      timeout: SPINNER_TIMEOUT,
     });
   });
 

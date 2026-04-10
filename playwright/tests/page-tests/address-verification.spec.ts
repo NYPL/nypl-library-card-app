@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { AddressPage } from "../../pageobjects/address.page";
 import { AlternateAddressPage } from "../../pageobjects/alternate-address.page";
 import { AddressVerificationPage } from "../../pageobjects/address-verification.page";
-import { expectNoErrors, fillAddress } from "../../utils/form-helper";
+import { clickNextButton, fillAddress } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   SPINNER_TIMEOUT,
@@ -45,15 +45,23 @@ test.describe("enters home address and alternate address", () => {
     await test.step("enters home address", async () => {
       await expect(addressPage.addressHeading).toBeVisible();
       await fillAddress(addressPage, TEST_OOS_ADDRESS);
-      await addressPage.nextButton.click();
-      await expectNoErrors(addressPage);
+      await clickNextButton(
+        addressPage,
+        addressPage.nextButton,
+        alternateAddressPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("enters alternate address", async () => {
       await expect(alternateAddressPage.addressHeading).toBeVisible();
       await fillAddress(alternateAddressPage, TEST_NYC_ADDRESS);
-      await alternateAddressPage.nextButton.click();
-      await expectNoErrors(alternateAddressPage);
+      await clickNextButton(
+        alternateAddressPage,
+        alternateAddressPage.nextButton,
+        addressVerificationPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("displays home and alternate addresses", async () => {
@@ -77,21 +85,26 @@ test.describe("enters home address and alternate address", () => {
     const alternateAddressPage = new AlternateAddressPage(page);
     const addressVerificationPage = new AddressVerificationPage(page);
 
-    await test.step("enters home and alternate addresses", async () => {
+    await test.step("enters home address", async () => {
       await expect(addressPage.addressHeading).toBeVisible();
       await fillAddress(addressPage, TEST_MULTIMATCH_ADDRESS);
-      await addressPage.nextButton.click();
-      await expectNoErrors(addressPage);
-      await expect(addressVerificationPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        addressPage,
+        addressPage.nextButton,
+        alternateAddressPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
+    });
+
+    await test.step("enters alternate address", async () => {
       await expect(alternateAddressPage.addressHeading).toBeVisible();
       await fillAddress(alternateAddressPage, TEST_MULTIMATCH_ADDRESS);
-      await alternateAddressPage.nextButton.click();
-      await expectNoErrors(alternateAddressPage);
-      await expect(addressVerificationPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        alternateAddressPage,
+        alternateAddressPage.nextButton,
+        addressVerificationPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("displays address options", async () => {

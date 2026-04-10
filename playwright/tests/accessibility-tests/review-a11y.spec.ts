@@ -4,10 +4,10 @@ import { PageManager } from "../../pageobjects/page-manager.page";
 import { ReviewPage } from "../../pageobjects/review.page";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 import {
+  clickNextButton,
   fillPersonalInfo,
   fillAddress,
   fillAccountInfo,
-  expectNoErrors,
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
@@ -32,18 +32,23 @@ test.describe("Review Page Accessibility Tests", () => {
     await test.step("it should display Personal info page", async () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      await pageManager.personalPage.nextButton.click();
-      await expectNoErrors(pageManager.personalPage);
+      await clickNextButton(
+        pageManager.personalPage,
+        pageManager.personalPage.nextButton,
+        pageManager.addressPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("it should display Address page", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expectNoErrors(pageManager.addressPage);
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.addressPage,
+        pageManager.addressPage.nextButton,
+        pageManager.addressVerificationPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("it should display Address verification page", async () => {
@@ -62,8 +67,12 @@ test.describe("Review Page Accessibility Tests", () => {
     await test.step("it should display Account page", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
-      await expectNoErrors(pageManager.accountPage);
+      await clickNextButton(
+        pageManager.accountPage,
+        pageManager.accountPage.nextButton,
+        pageManager.reviewPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("it should display Review page", async () => {

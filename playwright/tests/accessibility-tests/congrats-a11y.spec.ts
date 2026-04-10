@@ -3,12 +3,11 @@ import { CongratsPage } from "../../pageobjects/congrats.page";
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
-
 import {
+  clickNextButton,
   fillPersonalInfo,
   fillAddress,
   fillAccountInfo,
-  expectNoErrors,
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
@@ -35,18 +34,23 @@ test.describe("Accessibility tests on Congrats Page", () => {
       await page.goto(PAGE_ROUTES.PERSONAL);
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      await pageManager.personalPage.nextButton.click();
-      await expectNoErrors(pageManager.personalPage);
+      await clickNextButton(
+        pageManager.personalPage,
+        pageManager.personalPage.nextButton,
+        pageManager.addressPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("filling address information", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expectNoErrors(pageManager.addressPage);
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.addressPage,
+        pageManager.addressPage.nextButton,
+        pageManager.addressVerificationPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("address verification page", async () => {
@@ -63,15 +67,23 @@ test.describe("Accessibility tests on Congrats Page", () => {
       await test.step("filling account information", async () => {
         await expect(pageManager.accountPage.stepHeading).toBeVisible();
         await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-        await pageManager.accountPage.nextButton.click();
-        await expectNoErrors(pageManager.accountPage);
+        await clickNextButton(
+          pageManager.accountPage,
+          pageManager.accountPage.nextButton,
+          pageManager.reviewPage.stepHeading,
+          SPINNER_TIMEOUT
+        );
       });
 
       await test.step("review page", async () => {
         await expect(pageManager.reviewPage.stepHeading).toBeVisible();
         await expect(pageManager.reviewPage.submitButton).toBeEnabled();
-        await pageManager.reviewPage.submitButton.click();
-        await expectNoErrors(pageManager.reviewPage);
+        await clickNextButton(
+          pageManager.reviewPage,
+          pageManager.reviewPage.submitButton,
+          pageManager.congratsPage.mainHeading,
+          SPINNER_TIMEOUT
+        );
       });
 
       await test.step("congrats page", async () => {

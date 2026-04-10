@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { ReviewPage } from "../../pageobjects/review.page";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  expectNoErrors,
+  clickNextButton,
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
@@ -123,21 +123,23 @@ test.describe("edits patron information on review page", () => {
     await test.step("navigates to address page and enters address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expectNoErrors(pageManager.addressPage);
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.addressPage,
+        pageManager.addressPage.nextButton,
+        pageManager.alternateAddressPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("enters alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
-      await pageManager.alternateAddressPage.nextButton.click();
-      await expectNoErrors(pageManager.alternateAddressPage);
-      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.alternateAddressPage,
+        pageManager.alternateAddressPage.nextButton,
+        pageManager.addressVerificationPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("confirms addresses", async () => {
@@ -159,8 +161,12 @@ test.describe("edits patron information on review page", () => {
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
-      await expectNoErrors(pageManager.accountPage);
+      await clickNextButton(
+        pageManager.accountPage,
+        pageManager.accountPage.nextButton,
+        pageManager.reviewPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("displays addresses on review page", async () => {
@@ -218,8 +224,12 @@ test.describe("edits patron information on review page", () => {
       await page.goto(PAGE_ROUTES.ACCOUNT);
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
-      await expectNoErrors(pageManager.accountPage);
+      await clickNextButton(
+        pageManager.accountPage,
+        pageManager.accountPage.nextButton,
+        pageManager.reviewPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("edits account info on review page", async () => {

@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  expectNoErrors,
+  clickNextButton,
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
@@ -30,22 +30,31 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
     await test.step("enters personal information", async () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      await pageManager.personalPage.nextButton.click();
-      await expectNoErrors(pageManager.personalPage);
+      await clickNextButton(
+        pageManager.personalPage,
+        pageManager.personalPage.nextButton,
+        pageManager.addressPage.stepHeading
+      );
     });
 
     await test.step("enters mocked home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await mockCreateAddress(page, TEST_NYS_ADDRESS);
       await fillAddress(pageManager.addressPage, TEST_NYS_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expectNoErrors(pageManager.addressPage);
+      await clickNextButton(
+        pageManager.addressPage,
+        pageManager.addressPage.nextButton,
+        pageManager.alternateAddressPage.stepHeading
+      );
     });
 
     await test.step("skips alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await pageManager.alternateAddressPage.nextButton.click();
-      await expectNoErrors(pageManager.alternateAddressPage);
+      await clickNextButton(
+        pageManager.alternateAddressPage,
+        pageManager.alternateAddressPage.nextButton,
+        pageManager.addressVerificationPage.stepHeading
+      );
     });
 
     await test.step("confirms address verification", async () => {
@@ -61,8 +70,11 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
-      await expectNoErrors(pageManager.accountPage);
+      await clickNextButton(
+        pageManager.accountPage,
+        pageManager.accountPage.nextButton,
+        pageManager.reviewPage.stepHeading
+      );
     });
 
     await test.step("displays review page", async () => {
@@ -77,8 +89,11 @@ test.describe("E2E Flow: Complete application using mocked address and submit", 
         PATRON_TYPES.DIGITAL_NON_METRO
       );
       await expect(pageManager.reviewPage.submitButton).toBeVisible();
-      await pageManager.reviewPage.submitButton.click();
-      await expectNoErrors(pageManager.reviewPage);
+      await clickNextButton(
+        pageManager.reviewPage,
+        pageManager.reviewPage.submitButton,
+        pageManager.congratsPage.metroOrNonMetroHeading
+      );
     });
 
     await test.step("displays heading and link on congrats page", async () => {

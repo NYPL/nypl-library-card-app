@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
-  expectNoErrors,
+  clickNextButton,
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
@@ -58,18 +58,23 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     await test.step("enters personal information", async () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      await pageManager.personalPage.nextButton.click();
-      await expectNoErrors(pageManager.personalPage);
+      await clickNextButton(
+        pageManager.personalPage,
+        pageManager.personalPage.nextButton,
+        pageManager.addressPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expectNoErrors(pageManager.addressPage);
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.addressPage,
+        pageManager.addressPage.nextButton,
+        pageManager.addressVerificationPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("displays address verification", async () => {
@@ -90,8 +95,12 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
-      await expectNoErrors(pageManager.accountPage);
+      await clickNextButton(
+        pageManager.accountPage,
+        pageManager.accountPage.nextButton,
+        pageManager.reviewPage.stepHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("displays personal information on review page", async () => {
@@ -141,8 +150,12 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
 
     await test.step("submits application", async () => {
       await expect(pageManager.reviewPage.submitButton).toBeVisible();
-      await pageManager.reviewPage.submitButton.click();
-      await expectNoErrors(pageManager.reviewPage);
+      await clickNextButton(
+        pageManager.reviewPage,
+        pageManager.reviewPage.submitButton,
+        pageManager.congratsPage.metroOrNonMetroHeading,
+        SPINNER_TIMEOUT
+      );
     });
 
     await test.step("displays headings and banner on congrats page", async () => {

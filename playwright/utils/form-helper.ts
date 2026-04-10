@@ -1,4 +1,4 @@
-import { expect } from "@playwright/test";
+import { expect, Locator } from "@playwright/test";
 import { PersonalPage } from "../pageobjects/personal.page";
 import { AddressPage } from "../pageobjects/address.page";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
@@ -41,50 +41,124 @@ export async function fillAccountInfo(
   }
 }
 
-export async function expectNoErrors(
+// clicking the next button triggers either error messages or the next page to load, this function waits for either of those to happen
+// waits for either error messages or next page's heading to display, returns true if the next page heading displays or false if error messages display
+export async function displaysNextPage( // rename to displaysNextPage or waitForErrorOrHeading
+  errorMessages: Locator[],
+  nextPageHeading: Locator,
+  loadTimeout: number // currently spinner timeout
+  // errorTimeout = 1500,
+): Promise<boolean> {
+  return Promise.race([
+    ...errorMessages.map((locator) =>
+      locator
+        .waitFor({ state: "visible" /*, timeout: errorTimeout*/ }) // curious to see how long it takes with timeout removed
+        .then(() => false)
+        .catch(() => new Promise<never>(() => {}))
+    ),
+    nextPageHeading
+      .waitFor({ state: "visible", timeout: loadTimeout })
+      .then(() => true),
+  ]);
+}
+
+export function getErrorMessages(
   page:
     | PersonalPage
     | AddressPage
     | AlternateAddressPage
     | AccountPage
     | ReviewPage
-) {
+): Locator[] {
   if (page instanceof PersonalPage) {
-    await expect(page.firstNameError).not.toBeVisible();
-    await expect(page.lastNameError).not.toBeVisible();
-    await expect(page.dateOfBirthInvalid).not.toBeVisible();
-    await expect(page.dateOfBirthError).not.toBeVisible();
-    await expect(page.emailError).not.toBeVisible();
+    return [
+      page.firstNameError,
+      page.lastNameError,
+      page.dateOfBirthInvalid,
+      page.dateOfBirthError,
+      page.emailError,
+    ];
   } else if (page instanceof AddressPage) {
-    await expect(page.streetAddressError).not.toBeVisible();
-    await expect(page.cityError).not.toBeVisible();
-    await expect(page.stateError).not.toBeVisible();
-    await expect(page.postalCodeError).not.toBeVisible();
+    return [
+      page.streetAddressError,
+      page.cityError,
+      page.stateError,
+      page.postalCodeError,
+    ];
   } else if (page instanceof AlternateAddressPage) {
-    await expect(page.streetAddressError).not.toBeVisible();
-    await expect(page.cityError).not.toBeVisible();
-    await expect(page.stateError).not.toBeVisible();
-    await expect(page.postalCodeError).not.toBeVisible();
+    return [
+      page.streetAddressError,
+      page.cityError,
+      page.stateError,
+      page.postalCodeError,
+    ];
   } else if (page instanceof AccountPage) {
-    await expect(page.usernameError).not.toBeVisible();
-    await expect(page.passwordError).not.toBeVisible();
-    await expect(page.verifyPasswordError).not.toBeVisible();
-    await expect(page.homeLibraryError).not.toBeVisible();
-    await expect(page.acceptTermsError).not.toBeVisible();
+    return [
+      page.usernameError,
+      page.passwordError,
+      page.verifyPasswordError,
+      page.homeLibraryError,
+      page.acceptTermsError,
+    ];
   } else if (page instanceof ReviewPage) {
-    await expect(page.firstNameError).not.toBeVisible();
-    await expect(page.lastNameError).not.toBeVisible();
-    await expect(page.dateOfBirthInvalid).not.toBeVisible();
-    await expect(page.dateOfBirthError).not.toBeVisible();
-    await expect(page.emailError).not.toBeVisible();
-    await expect(page.streetAddressError).not.toBeVisible();
-    await expect(page.cityError).not.toBeVisible();
-    await expect(page.stateError).not.toBeVisible();
-    await expect(page.postalCodeError).not.toBeVisible();
-    await expect(page.usernameError).not.toBeVisible();
-    await expect(page.passwordError).not.toBeVisible();
-    await expect(page.verifyPasswordError).not.toBeVisible();
-    await expect(page.homeLibraryError).not.toBeVisible();
-    await expect(page.acceptTermsError).not.toBeVisible();
+    return [
+      page.firstNameError,
+      page.lastNameError,
+      page.dateOfBirthInvalid,
+      page.dateOfBirthError,
+      page.emailError,
+      page.streetAddressError,
+      page.cityError,
+      page.stateError,
+      page.postalCodeError,
+      page.usernameError,
+      page.unavailableUsernameMessage,
+      page.passwordError,
+      page.verifyPasswordError,
+      page.homeLibraryError,
+      page.acceptTermsError,
+    ];
+  }
+  return [];
+}
+
+// export async function expectNoErrors(
+//   page:
+//     | PersonalPage
+//     | AddressPage
+//     | AlternateAddressPage
+//     | AccountPage
+//     | ReviewPage
+// ) {
+//   const errorMessages = getErrorMessages(page);
+//   for (const errorMessage of errorMessages) {
+//     await expect(errorMessage).not.toBeVisible();
+//   }
+// }
+
+export async function clickNextButton(
+  currentPage:
+    | PersonalPage
+    | AddressPage
+    | AlternateAddressPage
+    | AccountPage
+    | ReviewPage,
+  nextButton: Locator,
+  nextPageHeading: Locator,
+  loadTimeout?: number // rename to just timeout?
+): Promise<void> {
+  await nextButton.click();
+  const errorMessages = getErrorMessages(currentPage);
+
+  const nextPageLoaded = await displaysNextPage(
+    errorMessages,
+    nextPageHeading,
+    loadTimeout
+  );
+
+  if (!nextPageLoaded) {
+    for (const errorMessage of errorMessages) {
+      await expect(errorMessage).toBeVisible();
+    }
   }
 }
