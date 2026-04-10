@@ -80,7 +80,12 @@ function RoutingLinks({
   };
 
   return (
-    <Box display="flex" gap="xs" flexDir={{ base: "column", md: "row" }}>
+    <Box
+      className="routing-links"
+      display="flex"
+      gap="xs"
+      flexDir={{ base: "column", md: "row" }}
+    >
       {renderNavigationButtons()}
     </Box>
   );

@@ -3,15 +3,27 @@
 // so it's necessary to make sure that the barcode graphic image displays
 // correctly so patrons can scan it.
 @media print {
-  @page {
-    size: letter;
-    margin: 14mm;
+  html,
+  body {
+    overflow: hidden !important;
+    height: auto !important;
   }
 
   #sitewideAlerts-notification,
   #nypl-header > div > header > div > div,
   #mainHeader,
-  #nypl-footer {
+  #nypl-footer,
+  .routing-links,
+  hr,
+  option,
+  .edit-button {
+    display: none !important;
+  }
+
+  #nypl-header {
+    width: 1200px !important;
+    min-width: 1200px !important;
+    max-width: 1200px !important;
     display: none !important;
   }
 
@@ -23,8 +35,24 @@
     padding: 0 !important;
   }
 
-  #congratulations > div {
-    margin: 0.75rem 0 !important;
+  h1,
+  h2,
+  h3,
+  h4,
+  img {
+    page-break-after: avoid;
+  }
+
+  a svg {
+    display: none !important;
+  }
+
+  // Override Chakra UI height and overflow styles that cause the input fields to be cut off when printed
+  .chakra-input__group,
+  .chakra-input {
+    height: auto !important;
+    min-height: 1px !important;
+    overflow: visible !important;
   }
 
   #congratulations h2 {
@@ -34,10 +62,15 @@
 
   .card-container {
     margin: 0 !important;
+    background-color: inherit !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+
+  .card-container + div {
+    margin: 0 !important;
   }
 
   .image-lion {
@@ -48,16 +81,6 @@
   #member-name,
   #issued,
   #issued .content {
-    font-size: 8pt !important;
-  }
-
-  // Collapse spacing after the card graphic
-  .card-container + div {
-    margin: 0 !important;
-  }
-
-  aside {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    font-size: 0.85rem !important;
   }
 }
