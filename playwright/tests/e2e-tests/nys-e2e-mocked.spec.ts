@@ -7,16 +7,14 @@ import {
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
-  // PATRON_TYPES,
+  PATRON_TYPES,
   SUPPORTED_LANGUAGES,
   TEST_ACCOUNT,
-  // TEST_BARCODE_NUMBER,
+  TEST_BARCODE_NUMBER,
   TEST_NYS_ADDRESS,
   TEST_PATRON,
 } from "../../utils/constants";
-import {
-  mockCreateAddress /*mockCreatePatronApi*/,
-} from "../../utils/mock-api";
+import { mockCreateAddress, mockCreatePatronApi } from "../../utils/mock-api";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`E2E: Complete NYS patron application using mocked address and submit in ${name} (${lang}))`, () => {
@@ -29,7 +27,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     });
 
     test("submits NYS patron application", async ({ page }) => {
-      // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
+      const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
 
       await test.step("begins at landing", async () => {
         await page.goto(PAGE_ROUTES.LANDING(lang));
@@ -73,20 +71,20 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.accountPage.nextButton.click();
       });
 
-      // await test.step("displays review page", async () => {
-      //   await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      // });
+      await test.step("displays review page", async () => {
+        await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+      });
 
-      // await test.step("submits application", async () => {
-      //   await mockCreatePatronApi(
-      //     page,
-      //     fullName,
-      //     TEST_BARCODE_NUMBER,
-      //     PATRON_TYPES.DIGITAL_NON_METRO
-      //   );
-      //   await expect(pageManager.reviewPage.submitButton).toBeVisible();
-      //   await pageManager.reviewPage.submitButton.click();
-      // });
+      await test.step("submits application", async () => {
+        await mockCreatePatronApi(
+          page,
+          fullName,
+          TEST_BARCODE_NUMBER,
+          PATRON_TYPES.DIGITAL_NON_METRO
+        );
+        await expect(pageManager.reviewPage.submitButton).toBeVisible();
+        // await pageManager.reviewPage.submitButton.click(); // wait to click til congrats page is ready
+      });
 
       // await test.step("displays metro card elements on congrats page", async () => {
       //   await expect(pageManager.congratsPage.mainHeading).toBeVisible();
