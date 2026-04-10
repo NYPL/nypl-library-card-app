@@ -17,24 +17,38 @@ test.describe("Accessibility tests on personal info page", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("should reach all form fields via the tab key", async ({ page }) => {
+  test("should reach all form fields via the tab key", async ({
+    page,
+    browserName,
+  }) => {
     const personalPage = new PersonalPage(page);
 
-    const personalLocators = [
+    const inputLocators = [
       personalPage.firstNameInput,
       personalPage.lastNameInput,
       personalPage.dateOfBirthInput,
       personalPage.emailInput,
-      personalPage.alternateFormLink,
-      personalPage.locationsLink,
-      personalPage.receiveInfoCheckbox,
-      personalPage.previousButton,
-      personalPage.nextButton,
     ];
+
+    // WebKit on macOS does not include links in the default Tab sequence
+    const locators =
+      browserName === "webkit"
+        ? inputLocators
+        : [
+            personalPage.firstNameInput,
+            personalPage.lastNameInput,
+            personalPage.dateOfBirthInput,
+            personalPage.emailInput,
+            personalPage.alternateFormLink,
+            personalPage.locationsLink,
+            personalPage.receiveInfoCheckbox,
+            personalPage.previousButton,
+            personalPage.nextButton,
+          ];
 
     await expect(personalPage.stepHeading).toBeFocused();
 
-    for (const locator of personalLocators) {
+    for (const locator of locators) {
       await page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
     }

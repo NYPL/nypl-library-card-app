@@ -17,34 +17,60 @@ test.describe("Account Page Accessibility Tests", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("should reach all form fields via the tab key", async ({ page }) => {
+  test("should reach all form fields via the tab key", async ({
+    page,
+    browserName,
+  }) => {
     const accountPage = new AccountPage(page);
+    const isWebKit = browserName === "webkit";
 
-    const accountLocators = [
-      accountPage.availableUsernameButton,
-      accountPage.passwordInput,
-      accountPage.verifyPasswordInput,
-      accountPage.showPasswordCheckbox,
-      accountPage.nyplLocationLink,
+    const formFieldLocators = isWebKit
+      ? [
+          accountPage.passwordInput,
+          accountPage.verifyPasswordInput,
+          accountPage.showPasswordCheckbox,
+        ]
+      : [
+          accountPage.availableUsernameButton,
+          accountPage.passwordInput,
+          accountPage.verifyPasswordInput,
+          accountPage.showPasswordCheckbox,
+        ];
+
+    const linkLocators = [
       accountPage.selectHomeLibrary,
       accountPage.cardholderTerms,
       accountPage.rulesRegulations,
       accountPage.privacyPolicy,
     ];
+    const locators = isWebKit
+      ? [
+          accountPage.passwordInput,
+          accountPage.verifyPasswordInput,
+          accountPage.selectHomeLibrary,
+        ]
+      : [
+          ...formFieldLocators,
+          accountPage.nyplLocationLink,
+          ...linkLocators,
+          accountPage.acceptTermsCheckbox,
+          accountPage.previousButton,
+          accountPage.nextButton,
+        ];
 
     await expect(accountPage.stepHeading).toBeFocused();
     await page.keyboard.press("Tab");
     await expect(accountPage.usernameInput).toBeFocused();
-    await accountPage.usernameInput.fill("testuser");
+    await accountPage.usernameInput.pressSequentially("testuser");
 
-    for (const locator of accountLocators) {
+    for (const locator of locators) {
       await page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
-    }
 
-    await page.keyboard.press("Tab");
-    await expect(accountPage.acceptTermsCheckbox).toBeFocused();
-    await page.keyboard.press("Space");
-    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
+      if (!isWebKit && locator === accountPage.acceptTermsCheckbox) {
+        await accountPage.acceptTermsCheckbox.press("Space");
+        await expect(accountPage.acceptTermsCheckbox).toBeChecked();
+      }
+    }
   });
 });

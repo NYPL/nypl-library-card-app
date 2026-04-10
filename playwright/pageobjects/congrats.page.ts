@@ -52,7 +52,7 @@ export class CongratsPage {
     this.patronBarcodeNumber = page.locator(".barcode");
     this.libraryCardBackground = page.locator(".background-lion");
     this.locationsLink = page.locator("#mainContent").getByRole("link", {
-      name: "locations",
+      name: /locations/i,
     });
     this.photoIdAndProofOfAddressLink = page.getByRole("link", {
       name: "photo ID and proof of address",

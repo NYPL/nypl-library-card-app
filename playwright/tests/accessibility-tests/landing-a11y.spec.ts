@@ -19,7 +19,13 @@ test.describe("Accessibility tests on Landing Page", () => {
 
   test("should have keyboard focus indicators for language links", async ({
     page,
+    browserName,
   }) => {
+    test.skip(
+      browserName === "webkit",
+      "WebKit on macOS does not include links in the default Tab sequence"
+    );
+
     const landingPage = new LandingPage(page);
 
     const landingLocators = [
@@ -44,11 +50,17 @@ test.describe("Accessibility tests on Landing Page", () => {
       landingPage.getStartedButton,
     ];
 
-    await landingLocators[0].focus();
-    await expect(landingLocators[0]).toBeFocused();
-    for (let i = 1; i < landingLocators.length; i++) {
+    await page.keyboard.press("Control+Home");
+    await expect(landingPage.mainHeading).toBeVisible();
+    await page.keyboard.press("Tab");
+    await expect(landingPage.skipToMainContentLink).toBeFocused();
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("Tab");
+    await expect(landingPage.arabicLanguage).toBeFocused();
+
+    for (const locator of landingLocators.slice(1)) {
       await page.keyboard.press("Tab");
-      await expect(landingLocators[i]).toBeFocused();
+      await expect(locator).toBeFocused();
     }
   });
 });

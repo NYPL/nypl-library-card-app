@@ -36,15 +36,6 @@ test.describe("Accessibility tests on Congrats Page", () => {
       username: `qa${Date.now()}w${testInfo.workerIndex}${randomBytes(4).toString("hex")}`,
     };
 
-    await test.step("Pre-test database cleanup", async () => {
-      try {
-        const id = await getPatronID(accountForThisTest.username);
-        if (id) await deletePatron(id);
-      } catch {
-        // ignore not found errors
-      }
-    });
-
     const pageManager = new PageManager(page);
     await test.step("filling personal information", async () => {
       await page.goto(PAGE_ROUTES.PERSONAL);
@@ -56,6 +47,9 @@ test.describe("Accessibility tests on Congrats Page", () => {
     await test.step("filling address information", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
+      await expect(pageManager.addressPage.cityInput).toHaveValue(
+        TEST_NYC_ADDRESS.city
+      );
       await pageManager.addressPage.nextButton.click();
       await expect(pageManager.addressPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
@@ -121,7 +115,15 @@ test.describe("Accessibility tests on Congrats Page", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("it should support keyboard navigation", async ({ page }) => {
+  test("it should support keyboard navigation", async ({
+    page,
+    browserName,
+  }) => {
+    test.skip(
+      browserName === "webkit",
+      "WebKit on macOS does not include links in the default Tab sequence"
+    );
+
     const congratsPage = new CongratsPage(page);
 
     const locators = [

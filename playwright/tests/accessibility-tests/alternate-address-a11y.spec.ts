@@ -17,21 +17,33 @@ test.describe("Accessibility tests on Alternate Address page", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("should reach all form fields via the tab key", async ({ page }) => {
+  test("should reach all form fields via the tab key", async ({
+    page,
+    browserName,
+  }) => {
     const alternateAddress = new AlternateAddressPage(page);
 
-    const alternateAddressLocators = [
+    const inputLocators = [
       alternateAddress.streetAddressInput,
       alternateAddress.apartmentSuiteInput,
       alternateAddress.cityInput,
       alternateAddress.stateInput,
       alternateAddress.postalCodeInput,
+    ];
+    const linkButtons = [
       alternateAddress.previousButton,
       alternateAddress.nextButton,
     ];
+
+    // WebKit on macOS does not include links in the default Tab sequence
+    const locators =
+      browserName === "webkit"
+        ? [...inputLocators]
+        : [...inputLocators, ...linkButtons];
+
     await expect(alternateAddress.stepHeading).toBeFocused();
 
-    for (const locator of alternateAddressLocators) {
+    for (const locator of locators) {
       await page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
     }

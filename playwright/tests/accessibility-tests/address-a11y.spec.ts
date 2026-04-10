@@ -16,19 +16,27 @@ test.describe("Accessibility tests on Address Page", () => {
     validateA11yCoverage(accessibilityScanResults);
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
-  test("should reach all form fields via the tab key", async ({ page }) => {
+  test("should reach all form fields via the tab key", async ({
+    page,
+    browserName,
+  }) => {
     const addressPage = new AddressPage(page);
 
-    const addressLocators = [
-      addressPage.alternateForm,
+    const inputLocators = [
       addressPage.streetAddressInput,
       addressPage.apartmentSuiteInput,
       addressPage.cityInput,
       addressPage.stateInput,
       addressPage.postalCodeInput,
-      addressPage.previousButton,
-      addressPage.nextButton,
     ];
+
+    const linkButtons = [addressPage.previousButton, addressPage.nextButton];
+
+    // WebKit on macOS does not include links in the default Tab sequence
+    const addressLocators =
+      browserName === "webkit"
+        ? [...inputLocators]
+        : [addressPage.alternateForm, ...inputLocators, ...linkButtons];
 
     await expect(addressPage.stepHeading).toBeFocused();
 
