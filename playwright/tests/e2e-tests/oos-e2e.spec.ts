@@ -10,7 +10,6 @@ import {
   EXPECTED_BARCODE_PREFIX,
   PAGE_ROUTES,
   PATRON_TYPES,
-  SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
@@ -54,8 +53,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await clickNextButton(
         pageManager.personalPage,
         pageManager.personalPage.nextButton,
-        pageManager.addressPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.addressPage.stepHeading
       );
     });
 
@@ -65,8 +63,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await clickNextButton(
         pageManager.addressPage,
         pageManager.addressPage.nextButton,
-        pageManager.alternateAddressPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.alternateAddressPage.stepHeading
       );
     });
 
@@ -76,8 +73,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await clickNextButton(
         pageManager.alternateAddressPage,
         pageManager.alternateAddressPage.nextButton,
-        pageManager.addressVerificationPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.addressVerificationPage.stepHeading
       );
     });
 
@@ -91,9 +87,10 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await pageManager.addressVerificationPage
         .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
         .click();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        { timeout: SPINNER_TIMEOUT }
+      await clickNextButton(
+        pageManager.addressVerificationPage,
+        pageManager.addressVerificationPage.nextButton,
+        pageManager.accountPage.stepHeading
       );
     });
 
@@ -103,8 +100,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await clickNextButton(
         pageManager.accountPage,
         pageManager.accountPage.nextButton,
-        pageManager.reviewPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.reviewPage.stepHeading
       );
     });
 
@@ -170,8 +166,7 @@ test.describe("E2E: Complete application with Sierra API integration", () => {
       await clickNextButton(
         pageManager.reviewPage,
         pageManager.reviewPage.submitButton,
-        pageManager.congratsPage.temporaryHeading,
-        SPINNER_TIMEOUT
+        pageManager.congratsPage.temporaryHeading
       );
     });
 

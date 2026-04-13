@@ -10,7 +10,6 @@ import {
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 import {
   PAGE_ROUTES,
-  SPINNER_TIMEOUT,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
@@ -26,8 +25,7 @@ test.describe("Accessibility tests on Address Verification page", () => {
     await clickNextButton(
       pageManager.personalPage,
       pageManager.personalPage.nextButton,
-      pageManager.addressPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.addressPage.stepHeading
     );
 
     await expect(pageManager.addressPage.stepHeading).toBeVisible();
@@ -35,8 +33,7 @@ test.describe("Accessibility tests on Address Verification page", () => {
     await clickNextButton(
       pageManager.addressPage,
       pageManager.addressPage.nextButton,
-      pageManager.alternateAddressPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.alternateAddressPage.stepHeading
     );
 
     await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
@@ -44,14 +41,10 @@ test.describe("Accessibility tests on Address Verification page", () => {
     await clickNextButton(
       pageManager.alternateAddressPage,
       pageManager.alternateAddressPage.nextButton,
-      pageManager.addressVerificationPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.addressVerificationPage.stepHeading
     );
 
     await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
-    await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
-      timeout: SPINNER_TIMEOUT,
-    });
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {

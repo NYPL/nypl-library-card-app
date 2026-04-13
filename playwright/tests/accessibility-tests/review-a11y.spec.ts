@@ -11,7 +11,6 @@ import {
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
-  SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_PATRON,
   TEST_NYC_ADDRESS,
@@ -35,8 +34,7 @@ test.describe("Review Page Accessibility Tests", () => {
       await clickNextButton(
         pageManager.personalPage,
         pageManager.personalPage.nextButton,
-        pageManager.addressPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.addressPage.stepHeading
       );
     });
 
@@ -46,8 +44,7 @@ test.describe("Review Page Accessibility Tests", () => {
       await clickNextButton(
         pageManager.addressPage,
         pageManager.addressPage.nextButton,
-        pageManager.addressVerificationPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.addressVerificationPage.stepHeading
       );
     });
 
@@ -58,9 +55,10 @@ test.describe("Review Page Accessibility Tests", () => {
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_NYC_ADDRESS.street)
         .click();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        { timeout: SPINNER_TIMEOUT }
+      await clickNextButton(
+        pageManager.addressVerificationPage,
+        pageManager.addressVerificationPage.nextButton,
+        pageManager.accountPage.stepHeading
       );
     });
 
@@ -70,8 +68,7 @@ test.describe("Review Page Accessibility Tests", () => {
       await clickNextButton(
         pageManager.accountPage,
         pageManager.accountPage.nextButton,
-        pageManager.reviewPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.reviewPage.stepHeading
       );
     });
 

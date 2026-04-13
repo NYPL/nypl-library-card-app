@@ -10,7 +10,6 @@ import {
 import {
   ERROR_MESSAGES,
   PAGE_ROUTES,
-  SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_EDITED_ACCOUNT,
   TEST_NYC_ADDRESS,
@@ -126,8 +125,7 @@ test.describe("edits patron information on review page", () => {
       await clickNextButton(
         pageManager.addressPage,
         pageManager.addressPage.nextButton,
-        pageManager.alternateAddressPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.alternateAddressPage.stepHeading
       );
     });
 
@@ -137,8 +135,7 @@ test.describe("edits patron information on review page", () => {
       await clickNextButton(
         pageManager.alternateAddressPage,
         pageManager.alternateAddressPage.nextButton,
-        pageManager.addressVerificationPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.addressVerificationPage.stepHeading
       );
     });
 
@@ -152,9 +149,10 @@ test.describe("edits patron information on review page", () => {
       await pageManager.addressVerificationPage
         .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
         .click();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        { timeout: SPINNER_TIMEOUT }
+      await clickNextButton(
+        pageManager.addressVerificationPage,
+        pageManager.addressVerificationPage.nextButton,
+        pageManager.accountPage.stepHeading
       );
     });
 
@@ -164,8 +162,7 @@ test.describe("edits patron information on review page", () => {
       await clickNextButton(
         pageManager.accountPage,
         pageManager.accountPage.nextButton,
-        pageManager.reviewPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.reviewPage.stepHeading
       );
     });
 
@@ -227,8 +224,7 @@ test.describe("edits patron information on review page", () => {
       await clickNextButton(
         pageManager.accountPage,
         pageManager.accountPage.nextButton,
-        pageManager.reviewPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.reviewPage.stepHeading
       );
     });
 

@@ -2,9 +2,11 @@ import { expect, Locator } from "@playwright/test";
 import { PersonalPage } from "../pageobjects/personal.page";
 import { AddressPage } from "../pageobjects/address.page";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
+import { AddressVerificationPage } from "../pageobjects/address-verification.page";
 import { AccountPage } from "../pageobjects/account.page";
 import { ReviewPage } from "../pageobjects/review.page";
 import { AddressFormPage, AddressData, AccountData, PatronData } from "./types";
+import { SPINNER_TIMEOUT } from "./constants";
 
 export async function fillPersonalInfo(
   page: PersonalPage | ReviewPage,
@@ -49,7 +51,7 @@ export async function fillAccountInfo(
 export async function displaysNextPage( // rename to displaysNextPage or waitForErrorOrHeading
   errorMessages: Locator[],
   nextPageHeading: Locator,
-  loadTimeout: number // currently spinner timeout
+  timeout: number = SPINNER_TIMEOUT
   // errorTimeout = 1500,
 ): Promise<boolean> {
   return Promise.race([
@@ -60,7 +62,7 @@ export async function displaysNextPage( // rename to displaysNextPage or waitFor
         .catch(() => new Promise<never>(() => {}))
     ),
     nextPageHeading
-      .waitFor({ state: "visible", timeout: loadTimeout })
+      .waitFor({ state: "visible", timeout: timeout })
       .then(() => true),
   ]);
 }
@@ -70,6 +72,7 @@ export function getErrorMessages(
     | PersonalPage
     | AddressPage
     | AlternateAddressPage
+    | AddressVerificationPage
     | AccountPage
     | ReviewPage
 ): Locator[] {
@@ -95,6 +98,8 @@ export function getErrorMessages(
       page.stateError,
       page.postalCodeError,
     ];
+  } else if (page instanceof AddressVerificationPage) {
+    return [];
   } else if (page instanceof AccountPage) {
     return [
       page.usernameError,
@@ -144,20 +149,21 @@ export async function clickNextButton(
     | PersonalPage
     | AddressPage
     | AlternateAddressPage
+    | AddressVerificationPage
     | AccountPage
     | ReviewPage,
   nextButton: Locator,
-  nextPageHeading: Locator,
-  loadTimeout?: number // rename to just timeout?
+  nextPageHeading: Locator
 ): Promise<void> {
   await nextButton.click();
+
+  // if (spinner) {
+  //   await expect(spinner).not.toBeVisible({ timeout: SPINNER_TIMEOUT });
+  // }
+
   const errorMessages = getErrorMessages(currentPage);
 
-  const nextPageLoaded = await displaysNextPage(
-    errorMessages,
-    nextPageHeading,
-    loadTimeout
-  );
+  const nextPageLoaded = await displaysNextPage(errorMessages, nextPageHeading);
 
   if (!nextPageLoaded) {
     for (const errorMessage of errorMessages) {

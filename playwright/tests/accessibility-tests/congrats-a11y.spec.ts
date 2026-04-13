@@ -11,7 +11,6 @@ import {
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
-  SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_PATRON,
   TEST_NYC_ADDRESS,
@@ -37,8 +36,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
       await clickNextButton(
         pageManager.personalPage,
         pageManager.personalPage.nextButton,
-        pageManager.addressPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.addressPage.stepHeading
       );
     });
 
@@ -48,8 +46,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
       await clickNextButton(
         pageManager.addressPage,
         pageManager.addressPage.nextButton,
-        pageManager.addressVerificationPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.addressVerificationPage.stepHeading
       );
     });
 
@@ -57,11 +54,10 @@ test.describe("Accessibility tests on Congrats Page", () => {
       await expect(
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
-        }
+      await clickNextButton(
+        pageManager.addressVerificationPage,
+        pageManager.addressVerificationPage.nextButton,
+        pageManager.accountPage.stepHeading
       );
 
       await test.step("filling account information", async () => {
@@ -70,8 +66,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
         await clickNextButton(
           pageManager.accountPage,
           pageManager.accountPage.nextButton,
-          pageManager.reviewPage.stepHeading,
-          SPINNER_TIMEOUT
+          pageManager.reviewPage.stepHeading
         );
       });
 
@@ -81,8 +76,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
         await clickNextButton(
           pageManager.reviewPage,
           pageManager.reviewPage.submitButton,
-          pageManager.congratsPage.mainHeading,
-          SPINNER_TIMEOUT
+          pageManager.congratsPage.mainHeading
         );
       });
 

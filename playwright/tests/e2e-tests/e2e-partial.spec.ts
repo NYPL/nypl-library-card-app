@@ -8,7 +8,6 @@ import {
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
-  SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_EDITED_ACCOUNT,
   TEST_NYC_ADDRESS,
@@ -33,8 +32,7 @@ test("displays error when address is too long", async ({ page }) => {
     await clickNextButton(
       pageManager.addressPage,
       pageManager.addressPage.nextButton,
-      pageManager.alternateAddressPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.alternateAddressPage.stepHeading
     );
   });
 
@@ -43,8 +41,7 @@ test("displays error when address is too long", async ({ page }) => {
     await clickNextButton(
       pageManager.alternateAddressPage,
       pageManager.alternateAddressPage.nextButton,
-      pageManager.addressVerificationPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.addressVerificationPage.stepHeading
     );
   });
 
@@ -53,10 +50,11 @@ test("displays error when address is too long", async ({ page }) => {
     await pageManager.addressVerificationPage
       .getHomeAddressOption(invalidStreet)
       .click();
-    await pageManager.addressVerificationPage.nextButton.click();
-    await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
-      timeout: SPINNER_TIMEOUT,
-    });
+    await clickNextButton(
+      pageManager.addressVerificationPage,
+      pageManager.addressVerificationPage.nextButton,
+      pageManager.accountPage.stepHeading
+    );
   });
 
   await test.step("enters account information", async () => {
@@ -65,8 +63,7 @@ test("displays error when address is too long", async ({ page }) => {
     await clickNextButton(
       pageManager.accountPage,
       pageManager.accountPage.nextButton,
-      pageManager.reviewPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.reviewPage.stepHeading
     );
   });
 
@@ -89,8 +86,7 @@ test("displays updated account info after editing addresses", async ({
     await clickNextButton(
       pageManager.accountPage,
       pageManager.accountPage.nextButton,
-      pageManager.reviewPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.reviewPage.stepHeading
     );
   });
 
@@ -105,8 +101,7 @@ test("displays updated account info after editing addresses", async ({
     await clickNextButton(
       pageManager.addressPage,
       pageManager.addressPage.nextButton,
-      pageManager.alternateAddressPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.alternateAddressPage.stepHeading
     );
   });
 
@@ -115,8 +110,7 @@ test("displays updated account info after editing addresses", async ({
     await clickNextButton(
       pageManager.alternateAddressPage,
       pageManager.alternateAddressPage.nextButton,
-      pageManager.addressVerificationPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.addressVerificationPage.stepHeading
     );
   });
 
@@ -125,10 +119,11 @@ test("displays updated account info after editing addresses", async ({
     await pageManager.addressVerificationPage
       .getHomeAddressOption(TEST_NYC_ADDRESS.street)
       .click();
-    await pageManager.addressVerificationPage.nextButton.click();
-    await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
-      timeout: SPINNER_TIMEOUT,
-    });
+    await clickNextButton(
+      pageManager.addressVerificationPage,
+      pageManager.addressVerificationPage.nextButton,
+      pageManager.accountPage.stepHeading
+    );
   });
 
   await test.step("edits account information", async () => {
@@ -137,8 +132,7 @@ test("displays updated account info after editing addresses", async ({
     await clickNextButton(
       pageManager.accountPage,
       pageManager.accountPage.nextButton,
-      pageManager.reviewPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.reviewPage.stepHeading
     );
   });
 
@@ -173,8 +167,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
     await clickNextButton(
       pageManager.personalPage,
       pageManager.personalPage.nextButton,
-      pageManager.addressPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.addressPage.stepHeading
     );
   });
 
@@ -184,8 +177,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
     await clickNextButton(
       pageManager.addressPage,
       pageManager.addressPage.nextButton,
-      pageManager.alternateAddressPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.alternateAddressPage.stepHeading
     );
   });
 
@@ -196,8 +188,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
     await clickNextButton(
       pageManager.alternateAddressPage,
       pageManager.alternateAddressPage.nextButton,
-      pageManager.addressVerificationPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.addressVerificationPage.stepHeading
     );
   });
 
@@ -209,10 +200,11 @@ test("retains user-entered info after clicking breadcrumb", async ({
     await pageManager.addressVerificationPage
       .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
       .click();
-    await pageManager.addressVerificationPage.nextButton.click();
-    await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
-      timeout: SPINNER_TIMEOUT,
-    });
+    await clickNextButton(
+      pageManager.addressVerificationPage,
+      pageManager.addressVerificationPage.nextButton,
+      pageManager.accountPage.stepHeading
+    );
   });
 
   await test.step("enters account information", async () => {
@@ -221,8 +213,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
     await clickNextButton(
       pageManager.accountPage,
       pageManager.accountPage.nextButton,
-      pageManager.reviewPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.reviewPage.stepHeading
     );
   });
 
@@ -253,8 +244,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
     await clickNextButton(
       pageManager.personalPage,
       pageManager.personalPage.nextButton,
-      pageManager.addressPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.addressPage.stepHeading
     );
   });
 
@@ -278,8 +268,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
     await clickNextButton(
       pageManager.addressPage,
       pageManager.addressPage.nextButton,
-      pageManager.alternateAddressPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.alternateAddressPage.stepHeading
     );
   });
 
@@ -303,8 +292,7 @@ test("retains user-entered info after clicking breadcrumb", async ({
     await clickNextButton(
       pageManager.alternateAddressPage,
       pageManager.alternateAddressPage.nextButton,
-      pageManager.addressVerificationPage.stepHeading,
-      SPINNER_TIMEOUT
+      pageManager.addressVerificationPage.stepHeading
     );
   });
 
@@ -320,10 +308,11 @@ test("retains user-entered info after clicking breadcrumb", async ({
         TEST_NYC_ADDRESS.street
       )
     ).toBeChecked();
-    await pageManager.addressVerificationPage.nextButton.click();
-    await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
-      timeout: SPINNER_TIMEOUT,
-    });
+    await clickNextButton(
+      pageManager.addressVerificationPage,
+      pageManager.addressVerificationPage.nextButton,
+      pageManager.accountPage.stepHeading
+    );
   });
 
   await test.step("retains info on account page", async () => {

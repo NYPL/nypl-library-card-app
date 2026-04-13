@@ -9,7 +9,6 @@ import {
 import {
   PAGE_ROUTES,
   PATRON_TYPES,
-  SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_EDITED_PATRON,
   TEST_OOS_ADDRESS,
@@ -54,8 +53,7 @@ test.describe("E2E: Edits patron information", () => {
       await clickNextButton(
         pageManager.personalPage,
         pageManager.personalPage.nextButton,
-        pageManager.addressPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.addressPage.stepHeading
       );
     });
 
@@ -65,8 +63,7 @@ test.describe("E2E: Edits patron information", () => {
       await clickNextButton(
         pageManager.addressPage,
         pageManager.addressPage.nextButton,
-        pageManager.alternateAddressPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.alternateAddressPage.stepHeading
       );
     });
 
@@ -75,8 +72,7 @@ test.describe("E2E: Edits patron information", () => {
       await clickNextButton(
         pageManager.alternateAddressPage,
         pageManager.alternateAddressPage.nextButton,
-        pageManager.addressVerificationPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.addressVerificationPage.stepHeading
       );
     });
 
@@ -87,11 +83,10 @@ test.describe("E2E: Edits patron information", () => {
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_OOS_ADDRESS.street)
         .click();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
-        }
+      await clickNextButton(
+        pageManager.addressVerificationPage,
+        pageManager.addressVerificationPage.nextButton,
+        pageManager.accountPage.stepHeading
       );
     });
 
@@ -101,8 +96,7 @@ test.describe("E2E: Edits patron information", () => {
       await clickNextButton(
         pageManager.accountPage,
         pageManager.accountPage.nextButton,
-        pageManager.reviewPage.stepHeading,
-        SPINNER_TIMEOUT
+        pageManager.reviewPage.stepHeading
       );
     });
 
@@ -135,8 +129,7 @@ test.describe("E2E: Edits patron information", () => {
       await clickNextButton(
         pageManager.reviewPage,
         pageManager.reviewPage.submitButton,
-        pageManager.congratsPage.mainHeading,
-        SPINNER_TIMEOUT
+        pageManager.congratsPage.temporaryHeading
       );
     });
 
@@ -169,24 +162,30 @@ test.describe("retains ecommunications preference in Sierra", () => {
       await expect(
         pageManager.personalPage.receiveInfoCheckbox
       ).not.toBeChecked();
-      await pageManager.personalPage.nextButton.click();
+      await clickNextButton(
+        pageManager.personalPage,
+        pageManager.personalPage.nextButton,
+        pageManager.addressPage.stepHeading
+      );
     });
 
     await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.addressPage,
+        pageManager.addressPage.nextButton,
+        pageManager.alternateAddressPage.stepHeading
+      );
     });
 
     await test.step("skips alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await pageManager.alternateAddressPage.nextButton.click();
-      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.alternateAddressPage,
+        pageManager.alternateAddressPage.nextButton,
+        pageManager.addressVerificationPage.stepHeading
+      );
     });
 
     await test.step("verifies home address", async () => {
@@ -196,18 +195,21 @@ test.describe("retains ecommunications preference in Sierra", () => {
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_OOS_ADDRESS.street)
         .click();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
-        }
+      await clickNextButton(
+        pageManager.addressVerificationPage,
+        pageManager.addressVerificationPage.nextButton,
+        pageManager.accountPage.stepHeading
       );
     });
 
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
+      await clickNextButton(
+        pageManager.accountPage,
+        pageManager.accountPage.nextButton,
+        pageManager.reviewPage.stepHeading
+      );
     });
 
     await test.step("confirms ecommunications preference is retained on review page", async () => {
@@ -221,7 +223,11 @@ test.describe("retains ecommunications preference in Sierra", () => {
 
     await test.step("submits application and verifies Sierra data", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await pageManager.reviewPage.submitButton.click();
+      await clickNextButton(
+        pageManager.reviewPage,
+        pageManager.reviewPage.submitButton,
+        pageManager.congratsPage.temporaryHeading
+      );
       const scrapedBarcode =
         await pageManager.congratsPage.patronBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();
@@ -244,24 +250,30 @@ test.describe("retains ecommunications preference in Sierra", () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
       await expect(pageManager.personalPage.receiveInfoCheckbox).toBeChecked();
-      await pageManager.personalPage.nextButton.click();
+      await clickNextButton(
+        pageManager.personalPage,
+        pageManager.personalPage.nextButton,
+        pageManager.addressPage.stepHeading
+      );
     });
 
     await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.addressPage,
+        pageManager.addressPage.nextButton,
+        pageManager.alternateAddressPage.stepHeading
+      );
     });
 
     await test.step("skips alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await pageManager.alternateAddressPage.nextButton.click();
-      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.alternateAddressPage,
+        pageManager.alternateAddressPage.nextButton,
+        pageManager.addressVerificationPage.stepHeading
+      );
     });
 
     await test.step("verifies home address", async () => {
@@ -271,18 +283,21 @@ test.describe("retains ecommunications preference in Sierra", () => {
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_OOS_ADDRESS.street)
         .click();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
-        }
+      await clickNextButton(
+        pageManager.addressVerificationPage,
+        pageManager.addressVerificationPage.nextButton,
+        pageManager.accountPage.stepHeading
       );
     });
 
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
+      await clickNextButton(
+        pageManager.accountPage,
+        pageManager.accountPage.nextButton,
+        pageManager.reviewPage.stepHeading
+      );
     });
 
     await test.step("unchecks ecommunications preference on review page", async () => {
@@ -297,7 +312,11 @@ test.describe("retains ecommunications preference in Sierra", () => {
 
     await test.step("submits application and verifies Sierra data", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await pageManager.reviewPage.submitButton.click();
+      await clickNextButton(
+        pageManager.reviewPage,
+        pageManager.reviewPage.submitButton,
+        pageManager.congratsPage.temporaryHeading
+      );
       const scrapedBarcode =
         await pageManager.congratsPage.patronBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();
@@ -324,24 +343,30 @@ test.describe("retains ecommunications preference in Sierra", () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
       await expect(pageManager.personalPage.receiveInfoCheckbox).toBeChecked();
-      await pageManager.personalPage.nextButton.click();
+      await clickNextButton(
+        pageManager.personalPage,
+        pageManager.personalPage.nextButton,
+        pageManager.addressPage.stepHeading
+      );
     });
 
     await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.addressPage,
+        pageManager.addressPage.nextButton,
+        pageManager.alternateAddressPage.stepHeading
+      );
     });
 
     await test.step("skips alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await pageManager.alternateAddressPage.nextButton.click();
-      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.alternateAddressPage,
+        pageManager.alternateAddressPage.nextButton,
+        pageManager.addressVerificationPage.stepHeading
+      );
     });
 
     await test.step("verifies home address", async () => {
@@ -351,18 +376,21 @@ test.describe("retains ecommunications preference in Sierra", () => {
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_OOS_ADDRESS.street)
         .click();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
-        }
+      await clickNextButton(
+        pageManager.addressVerificationPage,
+        pageManager.addressVerificationPage.nextButton,
+        pageManager.accountPage.stepHeading
       );
     });
 
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
+      await clickNextButton(
+        pageManager.accountPage,
+        pageManager.accountPage.nextButton,
+        pageManager.reviewPage.stepHeading
+      );
     });
 
     await test.step("confirms ecommunications preference is retained on review page", async () => {
@@ -374,7 +402,11 @@ test.describe("retains ecommunications preference in Sierra", () => {
 
     await test.step("submits application and verifies Sierra data", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await pageManager.reviewPage.submitButton.click();
+      await clickNextButton(
+        pageManager.reviewPage,
+        pageManager.reviewPage.submitButton,
+        pageManager.congratsPage.temporaryHeading
+      );
       const scrapedBarcode =
         await pageManager.congratsPage.patronBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();
@@ -397,24 +429,30 @@ test.describe("retains ecommunications preference in Sierra", () => {
       await expect(
         pageManager.personalPage.receiveInfoCheckbox
       ).not.toBeChecked();
-      await pageManager.personalPage.nextButton.click();
+      await clickNextButton(
+        pageManager.personalPage,
+        pageManager.personalPage.nextButton,
+        pageManager.addressPage.stepHeading
+      );
     });
 
     await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.addressPage,
+        pageManager.addressPage.nextButton,
+        pageManager.alternateAddressPage.stepHeading
+      );
     });
 
     await test.step("skips alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await pageManager.alternateAddressPage.nextButton.click();
-      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
+      await clickNextButton(
+        pageManager.alternateAddressPage,
+        pageManager.alternateAddressPage.nextButton,
+        pageManager.addressVerificationPage.stepHeading
+      );
     });
 
     await test.step("verifies home address", async () => {
@@ -424,18 +462,21 @@ test.describe("retains ecommunications preference in Sierra", () => {
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_OOS_ADDRESS.street)
         .click();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
-        }
+      await clickNextButton(
+        pageManager.addressVerificationPage,
+        pageManager.addressVerificationPage.nextButton,
+        pageManager.accountPage.stepHeading
       );
     });
 
     await test.step("enters account information", async () => {
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
+      await clickNextButton(
+        pageManager.accountPage,
+        pageManager.accountPage.nextButton,
+        pageManager.reviewPage.stepHeading
+      );
     });
 
     await test.step("rechecks ecommunications preference on review page", async () => {
@@ -448,7 +489,11 @@ test.describe("retains ecommunications preference in Sierra", () => {
 
     await test.step("submits application and verifies Sierra data", async () => {
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await pageManager.reviewPage.submitButton.click();
+      await clickNextButton(
+        pageManager.reviewPage,
+        pageManager.reviewPage.submitButton,
+        pageManager.congratsPage.temporaryHeading
+      );
       const scrapedBarcode =
         await pageManager.congratsPage.patronBarcodeNumber.textContent();
       expect(scrapedBarcode).not.toBeNull();

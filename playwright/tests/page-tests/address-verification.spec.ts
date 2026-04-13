@@ -5,7 +5,6 @@ import { AddressVerificationPage } from "../../pageobjects/address-verification.
 import { clickNextButton, fillAddress } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
-  SPINNER_TIMEOUT,
   TEST_MULTIMATCH_ADDRESS,
   TEST_MULTIMATCH_ADDRESS_EAST,
   TEST_MULTIMATCH_ADDRESS_WEST,
@@ -48,8 +47,7 @@ test.describe("enters home address and alternate address", () => {
       await clickNextButton(
         addressPage,
         addressPage.nextButton,
-        alternateAddressPage.stepHeading,
-        SPINNER_TIMEOUT
+        alternateAddressPage.stepHeading
       );
     });
 
@@ -59,8 +57,7 @@ test.describe("enters home address and alternate address", () => {
       await clickNextButton(
         alternateAddressPage,
         alternateAddressPage.nextButton,
-        addressVerificationPage.stepHeading,
-        SPINNER_TIMEOUT
+        addressVerificationPage.stepHeading
       );
     });
 
@@ -91,8 +88,7 @@ test.describe("enters home address and alternate address", () => {
       await clickNextButton(
         addressPage,
         addressPage.nextButton,
-        alternateAddressPage.stepHeading,
-        SPINNER_TIMEOUT
+        alternateAddressPage.stepHeading
       );
     });
 
@@ -102,8 +98,7 @@ test.describe("enters home address and alternate address", () => {
       await clickNextButton(
         alternateAddressPage,
         alternateAddressPage.nextButton,
-        addressVerificationPage.stepHeading,
-        SPINNER_TIMEOUT
+        addressVerificationPage.stepHeading
       );
     });
 

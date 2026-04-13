@@ -5,7 +5,6 @@ import { clickNextButton } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   PATRON_TYPES,
-  SPINNER_TIMEOUT,
   TEST_BARCODE_NUMBER,
   TEST_PATRON,
 } from "../../utils/constants";
@@ -49,8 +48,7 @@ test.describe("displays congrats page", () => {
       await clickNextButton(
         pageManager.reviewPage,
         pageManager.reviewPage.submitButton,
-        congratsPage.metroOrNonMetroHeading,
-        SPINNER_TIMEOUT
+        congratsPage.metroOrNonMetroHeading
       );
     });
 
@@ -98,8 +96,7 @@ test.describe("displays congrats page", () => {
       await clickNextButton(
         pageManager.reviewPage,
         pageManager.reviewPage.submitButton,
-        congratsPage.metroOrNonMetroHeading,
-        SPINNER_TIMEOUT
+        congratsPage.metroOrNonMetroHeading
       );
     });
 
@@ -147,8 +144,7 @@ test.describe("displays congrats page", () => {
       await clickNextButton(
         pageManager.reviewPage,
         pageManager.reviewPage.submitButton,
-        congratsPage.temporaryHeading,
-        SPINNER_TIMEOUT
+        congratsPage.temporaryHeading
       );
     });
 

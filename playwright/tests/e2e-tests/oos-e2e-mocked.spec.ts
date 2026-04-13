@@ -68,7 +68,11 @@ test.describe("E2E Flow: Complete application using mocked submit", () => {
       await pageManager.addressVerificationPage
         .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
         .click();
-      await pageManager.addressVerificationPage.nextButton.click();
+      await clickNextButton(
+        pageManager.addressVerificationPage,
+        pageManager.addressVerificationPage.nextButton,
+        pageManager.accountPage.stepHeading
+      );
     });
 
     await test.step("enters account information", async () => {
