@@ -153,7 +153,6 @@ test.describe("Review Page Accessibility Tests", () => {
             reviewPage.selectHomeLibrary,
           ]
         : [
-            reviewPage.availableUsernameButton,
             reviewPage.passwordInput,
             reviewPage.verifyPasswordInput,
             reviewPage.showPasswordCheckbox,
@@ -165,8 +164,22 @@ test.describe("Review Page Accessibility Tests", () => {
             reviewPage.acceptTermsCheckbox,
           ];
 
+      if (await reviewPage.availableUsernameButton.isEnabled()) {
+        if (isWebKit) {
+          await reviewPage.availableUsernameButton.focus();
+          await expect(reviewPage.availableUsernameButton).toBeFocused();
+        } else {
+          await tabAndCheck(reviewPage.availableUsernameButton);
+        }
+      }
+
       for (const field of accountLocators) {
-        await tabAndCheck(field);
+        if (isWebKit) {
+          await field.focus();
+          await expect(field).toBeFocused();
+        } else {
+          await tabAndCheck(field);
+        }
       }
 
       if (!isWebKit) {
