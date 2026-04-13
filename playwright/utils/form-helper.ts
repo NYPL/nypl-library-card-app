@@ -46,18 +46,41 @@ export async function fillAccountInfo(
   }
 }
 
+export async function clickNextButton(
+  currentPage:
+    | PersonalPage
+    | AddressPage
+    | AlternateAddressPage
+    | AddressVerificationPage
+    | AccountPage
+    | ReviewPage,
+  nextButton: Locator,
+  nextPageHeading: Locator
+): Promise<void> {
+  await nextButton.click();
+
+  const errorMessages = getErrorMessages(currentPage);
+
+  const nextPageLoaded = await displaysNextPage(errorMessages, nextPageHeading);
+
+  if (!nextPageLoaded) {
+    for (const errorMessage of errorMessages) {
+      await expect(errorMessage).toBeVisible();
+    }
+  }
+}
+
 // clicking the next button triggers either error messages or the next page to load, this function waits for either of those to happen
 // waits for either error messages or next page's heading to display, returns true if the next page heading displays or false if error messages display
 export async function displaysNextPage( // rename to displaysNextPage or waitForErrorOrHeading
   errorMessages: Locator[],
   nextPageHeading: Locator,
   timeout: number = SPINNER_TIMEOUT
-  // errorTimeout = 1500,
 ): Promise<boolean> {
   return Promise.race([
     ...errorMessages.map((locator) =>
       locator
-        .waitFor({ state: "visible" /*, timeout: errorTimeout*/ }) // curious to see how long it takes with timeout removed
+        .waitFor({ state: "visible", timeout: 1500 })
         .then(() => false)
         .catch(() => new Promise<never>(() => {}))
     ),
@@ -128,46 +151,4 @@ export function getErrorMessages(
     ];
   }
   return [];
-}
-
-// export async function expectNoErrors(
-//   page:
-//     | PersonalPage
-//     | AddressPage
-//     | AlternateAddressPage
-//     | AccountPage
-//     | ReviewPage
-// ) {
-//   const errorMessages = getErrorMessages(page);
-//   for (const errorMessage of errorMessages) {
-//     await expect(errorMessage).not.toBeVisible();
-//   }
-// }
-
-export async function clickNextButton(
-  currentPage:
-    | PersonalPage
-    | AddressPage
-    | AlternateAddressPage
-    | AddressVerificationPage
-    | AccountPage
-    | ReviewPage,
-  nextButton: Locator,
-  nextPageHeading: Locator
-): Promise<void> {
-  await nextButton.click();
-
-  // if (spinner) {
-  //   await expect(spinner).not.toBeVisible({ timeout: SPINNER_TIMEOUT });
-  // }
-
-  const errorMessages = getErrorMessages(currentPage);
-
-  const nextPageLoaded = await displaysNextPage(errorMessages, nextPageHeading);
-
-  if (!nextPageLoaded) {
-    for (const errorMessage of errorMessages) {
-      await expect(errorMessage).toBeVisible();
-    }
-  }
 }
