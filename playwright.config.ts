@@ -45,7 +45,7 @@ export default defineConfig({
       use: {
         ...devices["Desktop Safari"],
         launchOptions: {
-          args: ["--enable-accessibility-tab-order"],
+          args: ["--enable-full-keyboard-focus"],
         },
       },
     },

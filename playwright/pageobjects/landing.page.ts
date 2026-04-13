@@ -24,7 +24,6 @@ export class LandingPage {
   readonly visitLibraryLink: Locator;
   readonly alternateFormLink: Locator;
   readonly informationalBanner: Locator;
-  readonly skipToMainContentLink: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -79,8 +78,5 @@ export class LandingPage {
     });
     this.alternateFormLink = page.getByRole("link", { name: "alternate form" });
     this.informationalBanner = page.getByTestId("ds-banner");
-    this.skipToMainContentLink = page.getByRole("link", {
-      name: /skip to main content/i,
-    });
   }
 }

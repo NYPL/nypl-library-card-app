@@ -40,18 +40,14 @@ test.describe("Review Page Accessibility Tests", () => {
       await pageManager.addressVerificationPage
         .getHomeAddressOption(TEST_NYC_ADDRESS.street)
         .click();
-      await Promise.all([
-        page.waitForURL(/.*\/account(\?.*)?$/),
-        pageManager.addressVerificationPage.nextButton.click(),
-      ]);
+      await pageManager.addressVerificationPage.nextButton.click();
+      await expect(page).toHaveURL(/.*\/account(\?.*)?$/);
 
       // Account
       await expect(pageManager.accountPage.stepHeading).toBeVisible();
       await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await Promise.all([
-        page.waitForURL(/.*\/review(\?.*)?$/),
-        pageManager.accountPage.nextButton.click(),
-      ]);
+      await pageManager.accountPage.nextButton.click();
+      await expect(page).toHaveURL(/.*\/review(\?.*)?$/);
 
       await expect(pageManager.reviewPage.stepHeading).toBeVisible();
     });

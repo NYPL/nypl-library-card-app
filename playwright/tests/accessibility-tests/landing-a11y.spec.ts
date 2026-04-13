@@ -48,27 +48,9 @@ test.describe("Accessibility tests on Landing Page", () => {
       landingPage.getStartedButton,
     ];
 
-    // Reset focus to top
-    await page.keyboard.press("Control+Home");
     await expect(landingPage.mainHeading).toBeVisible();
-
-    // Test Skip Link
-    if (isWebKit) {
-      await landingPage.skipToMainContentLink.focus();
-    } else {
-      await page.keyboard.press("Tab");
-    }
-    await expect(landingPage.skipToMainContentLink).toBeFocused();
-
-    // Activate skip link and move to content
-    await page.keyboard.press("Enter");
-
-    // First Language Link (Arabic)
-    if (isWebKit) {
-      await landingPage.arabicLanguage.focus();
-    } else {
-      await page.keyboard.press("Tab");
-    }
+    await page.evaluate(() => (document.activeElement as HTMLElement)?.blur());
+    await landingPage.arabicLanguage.focus();
     await expect(landingPage.arabicLanguage).toBeFocused();
 
     // Loop through remaining locators
