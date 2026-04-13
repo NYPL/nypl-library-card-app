@@ -83,7 +83,6 @@ export class ReviewPage {
     const withRequired = (label: string) => `${label} (${required})`;
     const edit = appContent?.button?.edit || "Edit";
     const withEdit = (label: string) => `${edit} ${label}`;
-
     this.page = page;
     this.mainHeading = page.getByRole("heading", {
       name: appContent?.banner?.title || "Apply for a Library Card Online",
