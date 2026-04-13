@@ -57,11 +57,23 @@ export async function navigateToAddressVerificationPage({
 
   await expect(pageManager.personalPage.nextButton).toBeEnabled();
   await pageManager.personalPage.nextButton.click();
-  await expect(page).toHaveURL(ADDRESS_ROUTE_PATTERN);
+  await expect(page).toHaveURL(ADDRESS_ROUTE_PATTERN, {
+    timeout: SPINNER_TIMEOUT,
+  });
 
   //address page
   await expect(pageManager.addressPage.stepHeading).toBeVisible();
   await fillAddress(pageManager.addressPage, addressData);
+  await expect(pageManager.addressPage.streetAddressInput).toHaveValue(
+    addressData.street
+  );
+  await expect(pageManager.addressPage.cityInput).toHaveValue(addressData.city);
+  await expect(pageManager.addressPage.stateInput).toHaveValue(
+    addressData.state
+  );
+  await expect(pageManager.addressPage.postalCodeInput).toHaveValue(
+    addressData.postalCode
+  );
   await expect(pageManager.addressPage.spinner).not.toBeVisible({
     timeout: SPINNER_TIMEOUT,
   });
@@ -69,17 +81,33 @@ export async function navigateToAddressVerificationPage({
 
   if (alternateAddressData) {
     await pageManager.addressPage.nextButton.click();
-    await expect(page).toHaveURL(ALTERNATE_ADDRESS_ROUTE_PATTERN);
+    await expect(page).toHaveURL(ALTERNATE_ADDRESS_ROUTE_PATTERN, {
+      timeout: SPINNER_TIMEOUT,
+    });
 
     await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.alternateAddressPage, alternateAddressData);
+    await expect(
+      pageManager.alternateAddressPage.streetAddressInput
+    ).toHaveValue(alternateAddressData.street);
+    await expect(pageManager.alternateAddressPage.cityInput).toHaveValue(
+      alternateAddressData.city
+    );
+    await expect(pageManager.alternateAddressPage.stateInput).toHaveValue(
+      alternateAddressData.state
+    );
+    await expect(pageManager.alternateAddressPage.postalCodeInput).toHaveValue(
+      alternateAddressData.postalCode
+    );
     await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
       timeout: SPINNER_TIMEOUT,
     });
     await expect(pageManager.alternateAddressPage.nextButton).toBeEnabled();
 
     await pageManager.alternateAddressPage.nextButton.click();
-    await expect(page).toHaveURL(ADDRESS_VERIFICATION_ROUTE_PATTERN);
+    await expect(page).toHaveURL(ADDRESS_VERIFICATION_ROUTE_PATTERN, {
+      timeout: SPINNER_TIMEOUT,
+    });
 
     //address verification page
     await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
@@ -87,7 +115,9 @@ export async function navigateToAddressVerificationPage({
     });
   } else {
     await pageManager.addressPage.nextButton.click();
-    await expect(page).toHaveURL(ADDRESS_VERIFICATION_ROUTE_PATTERN);
+    await expect(page).toHaveURL(ADDRESS_VERIFICATION_ROUTE_PATTERN, {
+      timeout: SPINNER_TIMEOUT,
+    });
     await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
       timeout: SPINNER_TIMEOUT,
     });
