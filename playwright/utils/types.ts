@@ -5,6 +5,7 @@ export interface PatronData {
   lastName: string;
   email: string;
   dateOfBirth: string;
+  ecommunicationsPref: boolean;
 }
 
 export interface AddressFormPage {

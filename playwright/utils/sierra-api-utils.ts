@@ -15,7 +15,11 @@ export interface SierraPatron {
   }[];
   emails?: string[];
   patronType: number;
+  patronCodes: {
+    pcode1: string;
+  };
 }
+
 export async function getAuthToken(): Promise<string> {
   const response = await fetch(`${sierraApiBaseUrl}/iii/sierra-api/v6/token`, {
     method: "POST",
@@ -57,7 +61,7 @@ export async function getPatronID(barcode: string): Promise<number> {
 
 export async function getPatronData(patronId: number): Promise<SierraPatron> {
   const authToken = await getAuthToken();
-  const fields = "names,birthDate,addresses,emails,patronType";
+  const fields = "names,birthDate,addresses,emails,patronType,patronCodes";
   const response = await fetch(
     `${sierraApiBaseUrl}/iii/sierra-api/v6/patrons/${patronId}?fields=${fields}`,
     {
@@ -83,12 +87,16 @@ export async function verifyPatronData(
   const patronID = await getPatronID(barcode);
   const patronData = await getPatronData(patronID);
 
+  const SUBSCRIBED_ECOMMUNICATIONS_PREF = "s";
+  const NOT_SUBSCRIBED_ECOMMUNICATIONS_PREF = "-";
+
   expect(patronData, "API response must be a valid object").toEqual(
     expect.objectContaining({
       names: expect.any(Array),
       emails: expect.any(Array),
       addresses: expect.any(Array),
       birthDate: expect.any(String),
+      patronCodes: expect.objectContaining({ pcode1: expect.any(String) }),
       patronType: expect.any(Number),
     })
   );
@@ -102,6 +110,10 @@ export async function verifyPatronData(
     "Emails array should not be empty"
   ).toBeGreaterThan(0);
   expect(
+    [SUBSCRIBED_ECOMMUNICATIONS_PREF, NOT_SUBSCRIBED_ECOMMUNICATIONS_PREF],
+    "Ecommunications preference code should be either 's' or '-'"
+  ).toContain(patronData.patronCodes?.pcode1);
+  expect(
     patronData.addresses.length,
     "Addresses array should not be empty"
   ).toBeGreaterThan(0);
@@ -109,6 +121,9 @@ export async function verifyPatronData(
   const expectedName = `${patron.lastName}, ${patron.firstName}`.toUpperCase();
   const expectedBirthdate = formatSierraDate(patron.dateOfBirth);
   const expectedEmail = patron.email.toLowerCase();
+  const expectedEcommsPref = patron.ecommunicationsPref
+    ? SUBSCRIBED_ECOMMUNICATIONS_PREF
+    : NOT_SUBSCRIBED_ECOMMUNICATIONS_PREF;
   const expectedAddress = createFuzzyMatcher([
     address.street,
     address.apartmentSuite,
@@ -118,6 +133,7 @@ export async function verifyPatronData(
   ]);
   const actualName = patronData.names?.[0].toUpperCase();
   const actualEmails = patronData.emails?.map((email) => email.toLowerCase());
+  const actualEcommsPref = patronData.patronCodes?.pcode1;
   const actualAddress = (patronData.addresses?.[0]?.lines || []).join(" ");
 
   expect(actualName).toContain(expectedName);
@@ -125,6 +141,7 @@ export async function verifyPatronData(
   expect(actualEmails).toContain(expectedEmail);
   expect(actualAddress).toMatch(expectedAddress);
   expect(patronData.patronType).toBe(expectedPatronType);
+  expect(actualEcommsPref).toBe(expectedEcommsPref);
 }
 
 export async function deletePatron(patronId: number): Promise<void> {
