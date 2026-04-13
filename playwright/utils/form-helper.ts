@@ -14,6 +14,9 @@ export async function fillPersonalInfo(
   await page.lastNameInput.fill(patronData.lastName);
   await page.dateOfBirthInput.fill(patronData.dateOfBirth);
   await page.emailInput.fill(patronData.email);
+  if (!patronData.ecommunicationsPref) {
+    await page.receiveInfoCheckboxLabel.click();
+  }
 }
 
 export async function fillAddress(
