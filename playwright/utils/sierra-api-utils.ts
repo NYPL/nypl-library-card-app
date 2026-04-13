@@ -110,11 +110,9 @@ export async function verifyPatronData(
     "Emails array should not be empty"
   ).toBeGreaterThan(0);
   expect(
-    patronData.patronCodes?.pcode1,
+    [SUBSCRIBED_ECOMMUNICATIONS_PREF, NOT_SUBSCRIBED_ECOMMUNICATIONS_PREF],
     "Ecommunications preference code should be either 's' or '-'"
-  ).toContain(
-    SUBSCRIBED_ECOMMUNICATIONS_PREF || NOT_SUBSCRIBED_ECOMMUNICATIONS_PREF
-  );
+  ).toContain(patronData.patronCodes?.pcode1);
   expect(
     patronData.addresses.length,
     "Addresses array should not be empty"
