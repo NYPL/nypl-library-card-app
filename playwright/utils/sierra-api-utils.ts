@@ -87,6 +87,9 @@ export async function verifyPatronData(
   const patronID = await getPatronID(barcode);
   const patronData = await getPatronData(patronID);
 
+  const SUBSCRIBED_ECOMMUNICATIONS_PREF = "s";
+  const NOT_SUBSCRIBED_ECOMMUNICATIONS_PREF = "-";
+
   expect(patronData, "API response must be a valid object").toEqual(
     expect.objectContaining({
       names: expect.any(Array),
@@ -109,7 +112,9 @@ export async function verifyPatronData(
   expect(
     patronData.patronCodes?.pcode1,
     "Ecommunications preference code should be either 's' or '-'"
-  ).toMatch(/^(s|-)$/);
+  ).toContain(
+    SUBSCRIBED_ECOMMUNICATIONS_PREF || NOT_SUBSCRIBED_ECOMMUNICATIONS_PREF
+  );
   expect(
     patronData.addresses.length,
     "Addresses array should not be empty"
@@ -118,7 +123,9 @@ export async function verifyPatronData(
   const expectedName = `${patron.lastName}, ${patron.firstName}`.toUpperCase();
   const expectedBirthdate = formatSierraDate(patron.dateOfBirth);
   const expectedEmail = patron.email.toLowerCase();
-  const expectedEcommsPref = patron.ecommunicationsPref ? "s" : "-";
+  const expectedEcommsPref = patron.ecommunicationsPref
+    ? SUBSCRIBED_ECOMMUNICATIONS_PREF
+    : NOT_SUBSCRIBED_ECOMMUNICATIONS_PREF;
   const expectedAddress = createFuzzyMatcher([
     address.street,
     address.apartmentSuite,
