@@ -3,14 +3,9 @@ import { AxeBuilder } from "@axe-core/playwright";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import { ReviewPage } from "../../pageobjects/review.page";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import { fillAccountInfo } from "../../utils/form-helper";
+import { navigateToAddressVerificationPage } from "../../utils/a11y-helper";
 import {
-  fillPersonalInfo,
-  fillAddress,
-  fillAccountInfo,
-} from "../../utils/form-helper";
-import {
-  PAGE_ROUTES,
-  SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_PATRON,
   TEST_NYC_ADDRESS,
@@ -29,50 +24,13 @@ test.describe("Review Page Accessibility Tests", () => {
       "x-forwarded-for": IP.NYC_IP,
     });
 
-    await page.goto(PAGE_ROUTES.PERSONAL);
-
     // Sequence to reach the Review Page
     await test.step("Setup: Navigate to Review Page", async () => {
-      // Personal Info
-      await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      const ensureValue = async (
-        field: import("@playwright/test").Locator,
-        value: string
-      ) => {
-        if ((await field.inputValue()) !== value) {
-          await field.fill(value);
-        }
-      };
-
-      await ensureValue(
-        pageManager.personalPage.firstNameInput,
-        TEST_PATRON.firstName
-      );
-      await ensureValue(
-        pageManager.personalPage.lastNameInput,
-        TEST_PATRON.lastName
-      );
-      await ensureValue(
-        pageManager.personalPage.dateOfBirthInput,
-        TEST_PATRON.dateOfBirth
-      );
-      await ensureValue(pageManager.personalPage.emailInput, TEST_PATRON.email);
-
-      await Promise.all([
-        page.waitForURL(/.*\/location(\?.*)?$/),
-        pageManager.personalPage.nextButton.click(),
-      ]);
-
-      // Address
-      await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
-      await Promise.all([
-        page.waitForURL(/.*\/address-verification(\?.*)?$/),
-        pageManager.addressPage.nextButton.click(),
-      ]);
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
+      await navigateToAddressVerificationPage({
+        page,
+        pageManager,
+        patronData: TEST_PATRON,
+        addressData: TEST_NYC_ADDRESS,
       });
 
       // Verification
@@ -132,7 +90,7 @@ test.describe("Review Page Accessibility Tests", () => {
         await reviewPage.editPersonalInfoButton.click();
       } else {
         await tabAndCheck(reviewPage.editPersonalInfoButton);
-        await page.keyboard.press("Enter");
+        await reviewPage.editPersonalInfoButton.press("Enter");
       }
 
       await expect(reviewPage.firstNameInput).toBeVisible();
@@ -185,7 +143,7 @@ test.describe("Review Page Accessibility Tests", () => {
       if (isWebKit) {
         await reviewPage.editAccountButton.click();
       } else {
-        await page.keyboard.press("Enter");
+        await reviewPage.editAccountButton.press("Enter");
       }
       await expect(reviewPage.usernameInput).toBeVisible();
       await expect(reviewPage.usernameInput).toBeFocused();

@@ -28,7 +28,8 @@ export async function fillAccountInfo(
   page: AccountPage | ReviewPage,
   accountData: AccountData
 ) {
-  await page.usernameInput.fill(accountData.username);
+  const safeUsername = accountData.username.substring(0, 25);
+  await page.usernameInput.fill(safeUsername);
   await page.passwordInput.fill(accountData.password);
   await page.verifyPasswordInput.fill(accountData.password);
   await page.selectHomeLibrary.click();

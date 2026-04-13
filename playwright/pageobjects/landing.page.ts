@@ -80,7 +80,7 @@ export class LandingPage {
     this.alternateFormLink = page.getByRole("link", { name: "alternate form" });
     this.informationalBanner = page.getByTestId("ds-banner");
     this.skipToMainContentLink = page.getByRole("link", {
-      name: "Skip to main content",
+      name: /skip to main content/i,
     });
   }
 }

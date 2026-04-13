@@ -4,16 +4,9 @@ import { test, expect } from "@playwright/test";
 import { randomBytes } from "crypto";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import { navigateToCongratsPage } from "../../utils/a11y-helper";
 
 import {
-  fillPersonalInfo,
-  fillAddress,
-  fillAccountInfo,
-} from "../../utils/form-helper";
-import {
-  PAGE_ROUTES,
-  PROGRESS_BAR_TIMEOUT,
-  SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_PATRON,
   TEST_NYC_ADDRESS,
@@ -37,49 +30,13 @@ test.describe("Accessibility tests on Congrats Page", () => {
     };
 
     const pageManager = new PageManager(page);
-    await test.step("filling personal information", async () => {
-      await page.goto(PAGE_ROUTES.PERSONAL);
-      await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      await pageManager.personalPage.nextButton.click();
-    });
-
-    await test.step("filling address information", async () => {
-      await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
-      await expect(pageManager.addressPage.cityInput).toHaveValue(
-        TEST_NYC_ADDRESS.city
-      );
-      await pageManager.addressPage.nextButton.click();
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
-    });
-
-    await test.step("address verification page", async () => {
-      await expect(
-        pageManager.addressVerificationPage.stepHeading
-      ).toBeVisible();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        { timeout: SPINNER_TIMEOUT }
-      );
-    });
-
-    await test.step("filling account information", async () => {
-      await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await fillAccountInfo(pageManager.accountPage, accountForThisTest);
-      await pageManager.accountPage.nextButton.click();
-    });
-
-    await test.step("review page", async () => {
-      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await expect(pageManager.reviewPage.submitButton).toBeEnabled();
-
-      await pageManager.reviewPage.submitButton.click();
-      await expect(pageManager.reviewPage.progressBar).toBeVisible();
-      await expect(pageManager.reviewPage.progressBar).not.toBeVisible({
-        timeout: PROGRESS_BAR_TIMEOUT,
+    await test.step("Setup: Navigate to Congrats", async () => {
+      await navigateToCongratsPage({
+        page,
+        pageManager,
+        patronData: TEST_PATRON,
+        addressData: TEST_NYC_ADDRESS,
+        accountData: accountForThisTest,
       });
     });
 
