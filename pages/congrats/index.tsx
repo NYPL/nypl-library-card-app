@@ -16,6 +16,7 @@ import { PageHeading } from "../../src/components/PageHeading";
 import { Paragraph } from "../../src/components/Paragraph";
 import { Trans } from "../../src/components/Trans";
 import { Banner } from "../../src/components/Banner";
+import { PageSubHeading } from "../../src/components/PageSubHeading";
 
 const TEMPORARY_PTYPE = 7;
 
@@ -84,45 +85,77 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       </PageHeading>
 
       {!temporary && (
-        <NextSteps>
+        <PageSubHeading>
+          <Trans i18nKey="confirmation.nextSteps.explore.header" />
+        </PageSubHeading>
+      )}
+      {!temporary && (
+        <NextSteps mt="xs">
           <Trans
-            i18nKey="confirmation.nextSteps.explore"
-            values={{ readListen: t("confirmation.nextSteps.readListen") }}
+            i18nKey="confirmation.nextSteps.explore.content"
+            values={{
+              readListen: t("confirmation.nextSteps.explore.readListen"),
+            }}
           />
         </NextSteps>
       )}
 
-      <NextSteps>
+      <PageSubHeading>
+        <Trans i18nKey="confirmation.nextSteps.borrow.header" />
+      </PageSubHeading>
+      <NextSteps mt="xs">
         <Trans
-          i18nKey="confirmation.nextSteps.borrow"
+          i18nKey="confirmation.nextSteps.borrow.content"
           values={{
             loginUrl: loginUrl,
-            login: t("confirmation.nextSteps.login"),
-            nyplLocation: t("confirmation.nextSteps.nyplLocation"),
+            login: t("confirmation.nextSteps.borrow.login"),
+            nyplLocation: t("confirmation.nextSteps.borrow.nyplLocation"),
           }}
         />
       </NextSteps>
 
-      <NextSteps>
+      <PageSubHeading>
+        <Trans i18nKey="confirmation.nextSteps.updates.header" />
+      </PageSubHeading>
+      <NextSteps mt="xs">
         <Trans
-          i18nKey="confirmation.nextSteps.updates"
-          values={{ findOut: t("confirmation.nextSteps.findOut") }}
+          i18nKey="confirmation.nextSteps.updates.content"
+          values={{
+            findOut: t("confirmation.nextSteps.updates.findOut"),
+          }}
         />
       </NextSteps>
 
-      <NextSteps>
+      <PageSubHeading>
+        <Trans i18nKey="confirmation.nextSteps.more.header" />
+      </PageSubHeading>
+      <NextSteps mt="xs">
         <Trans
-          i18nKey="confirmation.nextSteps.more"
-          values={{ discover: t("confirmation.nextSteps.discover") }}
+          i18nKey="confirmation.nextSteps.more.content"
+          values={{
+            discover: t("confirmation.nextSteps.more.discover"),
+          }}
         />
       </NextSteps>
     </Box>
   );
 }
 
-const NextSteps = ({ children }: { children: React.ReactNode }) => {
+const NextSteps = ({
+  children,
+  ...rest
+}: { children: React.ReactNode } & React.ComponentProps<typeof Paragraph>) => {
   return (
-    <Paragraph sx={{ b: { display: "block", marginBottom: "xs" } }}>
+    <Paragraph
+      sx={{
+        a: {
+          whiteSpace: "normal",
+          overflowWrap: "break-word",
+          maxWidth: "100%",
+        },
+      }}
+      {...rest}
+    >
       {children}
     </Paragraph>
   );

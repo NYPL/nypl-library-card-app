@@ -1,4 +1,6 @@
 import { Page, Locator } from "@playwright/test";
+import { apiTranslations } from "../../src/data/apiMessageTranslations";
+import { apiErrorTranslations } from "../../src/data/apiErrorMessageTranslations";
 
 export class ReviewPage {
   readonly page: Page;
@@ -27,6 +29,7 @@ export class ReviewPage {
   readonly receiveInfoHeading: Locator;
   readonly receiveInfoChoice: Locator;
   readonly receiveInfoCheckbox: Locator;
+  readonly receiveInfoCheckboxLabel: Locator;
   readonly alternateFormLink: Locator;
   readonly locationsLink: Locator;
   readonly editPersonalInfoButton: Locator;
@@ -60,7 +63,8 @@ export class ReviewPage {
   readonly verifyPasswordInputHeading: Locator;
   readonly verifyPasswordInput: Locator;
   readonly verifyPasswordError: Locator;
-  readonly showPasswordLabel: Locator;
+  readonly showPasswordCheckbox: Locator;
+  readonly showPasswordCheckboxLabel: Locator;
   readonly homeLibraryHeading: Locator;
   readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
@@ -68,19 +72,19 @@ export class ReviewPage {
   readonly cardholderTermsLink: Locator;
   readonly rulesRegulationsLink: Locator;
   readonly privacyPolicyLink: Locator;
-  readonly acceptTermsLabel: Locator;
+  readonly acceptTermsCheckbox: Locator;
+  readonly acceptTermsCheckboxLabel: Locator;
   readonly acceptTermsError: Locator;
   readonly editAccountButton: Locator;
   readonly submitButton: Locator;
 
-  constructor(page: Page, appContent?: any) {
-    this.page = page;
-
+  constructor(page: Page, appContent?: any, lang?: string) {
     const required = appContent?.required || "required";
     const withRequired = (label: string) => `${label} (${required})`;
     const edit = appContent?.button?.edit || "Edit";
     const withEdit = (label: string) => `${edit} ${label}`;
 
+    this.page = page;
     this.mainHeading = page.getByRole("heading", {
       name: appContent?.banner?.title || "Apply for a Library Card Online",
       level: 1,
@@ -182,13 +186,19 @@ export class ReviewPage {
         "Receive information about NYPL's programs and services",
       { exact: true }
     );
-    this.receiveInfoChoice = page.getByText(appContent?.review?.yes || "Yes", {
-      exact: true,
-    });
-    this.receiveInfoCheckbox = page.getByText(
-      appContent?.personal?.eCommunications?.labelText ||
+    this.receiveInfoChoice = page
+      .getByText(appContent?.review?.yes || "Yes", {
+        exact: true,
+      })
+      .or(page.getByText(appContent?.review?.no || "No", { exact: true }));
+    this.receiveInfoCheckbox = page.getByRole("checkbox", {
+      name:
+        appContent?.personal?.eCommunications?.labelText ||
         "Yes, I would like to receive information about NYPL's programs and services",
-      { exact: true }
+    });
+    this.receiveInfoCheckboxLabel = page.getByText(
+      appContent?.personal?.eCommunications?.labelText ||
+        "Yes, I would like to receive information about NYPL's programs and services"
     );
     this.alternateFormLink = this.page.getByRole("link", {
       name: appContent?.personal?.email?.alternateForm || "alternate form",
@@ -198,7 +208,7 @@ export class ReviewPage {
     });
     this.editPersonalInfoButton = page.getByRole("button", {
       name: withEdit(
-        appContent?.review?.section?.personal || "Edit Personal information"
+        appContent?.review?.section?.personal || "Personal information"
       ),
       exact: true,
     });
@@ -274,12 +284,15 @@ export class ReviewPage {
         "Check if username is available",
       exact: true,
     });
-    this.availableUsernameMessage = page
-      .getByText("El nombre de usuario está disponible.") // update with translation key when available
-      .or(page.getByText("This username is available."));
-    this.unavailableUsernameMessage = page
-      .getByText("Este nombre de usuario no está disponible. Pruebe con otro.") // update with translation key when available
-      .or(page.getByText("This username is unavailable. Please try another."));
+    this.availableUsernameMessage = page.getByText(
+      apiTranslations["This username is available."][lang] ||
+        "This username is available."
+    );
+    this.unavailableUsernameMessage = page.getByText(
+      apiErrorTranslations["This username is unavailable. Please try another."][
+        lang
+      ] || "This username is unavailable. Please try another."
+    );
     this.passwordHeading = page.getByText(
       appContent?.account?.password?.label || "Password",
       { exact: true }
@@ -316,7 +329,11 @@ export class ReviewPage {
       appContent?.account?.errorMessage?.verifyPassword ||
         "There was a problem. The two passwords don't match."
     );
-    this.showPasswordLabel = page.getByText(
+    this.showPasswordCheckbox = page.getByRole("checkbox", {
+      name: appContent?.account?.showPassword || "Show password",
+      exact: true,
+    });
+    this.showPasswordCheckboxLabel = page.getByText(
       appContent?.account?.showPassword || "Show password",
       {
         exact: true,
@@ -353,7 +370,13 @@ export class ReviewPage {
         appContent?.account?.termsAndCondition?.privacyPolicy ||
         "Privacy Policy",
     });
-    this.acceptTermsLabel = page.getByText(
+    this.acceptTermsCheckbox = page.getByRole("checkbox", {
+      name:
+        appContent?.account?.termsAndCondition?.label ||
+        "Yes, I accept the terms and conditions.",
+      exact: true,
+    });
+    this.acceptTermsCheckboxLabel = page.getByText(
       appContent?.account?.termsAndCondition?.label ||
         "Yes, I accept the terms and conditions.",
       {

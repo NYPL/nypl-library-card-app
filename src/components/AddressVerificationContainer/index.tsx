@@ -22,7 +22,7 @@ import { PageSubHeading } from "../PageSubHeading";
 
 const styles = {
   input: {
-    marginRight: "20px",
+    marginEnd: "20px",
   },
 };
 
@@ -217,6 +217,7 @@ function AddressVerificationContainer() {
       id="address-verification-container"
       method="post"
       onSubmit={handleSubmit(submitForm)}
+      noValidate
     >
       <FormRow>
         <DSFormField gridGap="0">

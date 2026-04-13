@@ -79,8 +79,7 @@
       "description": {
         "part1": "Do you work, go to school, or pay property taxes in New York State? Even if you don't live in New York, you may still be eligible for a library card.",
         "part2": "Form fields must be filled out using only Latin characters.",
-        "part3": "{{provideAddress}} <b>If none of these apply to you, click next.</b>",
-        "provideAddress": "Please provide the address of where you work, attend school, or pay property taxes in New York State."
+        "part3": "Please provide the address of where you work, attend school, or pay property taxes in New York State. <b>If none of these apply to you, click next.</b>"
       }
     },
     "errorMessage": {
@@ -179,15 +178,27 @@
     },
     "nextSteps": {
       "title": "Get started with The New York Public Library",
-      "explore": "<b>Explore E-Books & E-Audiobooks</b><a href='https://www.nypl.org/books-music-movies/help'>{{readListen}}</a> with access to a wide array of titles.",
-      "readListen": "Read or listen on-the-go",
-      "borrow": "<b>Borrow books & more</b><a href='{{loginUrl}}'>{{login}}</a> and browse the catalog. To check out and borrow physical items, visit any <a href='https://www.nypl.org/locations'>{{nyplLocation}}</a> to verify your information and receive a physical card.",
-      "login": "Log into your account",
-      "nyplLocation": "NYPL location",
-      "updates": "<b>Get updates</b><a href='https://www.nypl.org/enews'>{{findOut}}</a>",
-      "findOut": "Find out about all the Library has to offer.",
-      "more": "<b>Learn more</b><a href='https://www.nypl.org/discover-library-card'>{{discover}}</a>",
-      "discover": "Discover everything you can do with your library card."
+      "explore": {
+        "header": "Explore E-Books & E-Audiobooks",
+        "content": "<a href='https://www.nypl.org/books-music-movies/help'>{{readListen}}</a> with access to a wide array of titles.",
+        "readListen": "Read or listen on-the-go"
+      },
+      "borrow": {
+        "header": "Borrow books & more",
+        "content": "<a href='{{loginUrl}}'>{{login}}</a> and browse the catalog. To check out and borrow physical items, visit any <a href='https://www.nypl.org/locations'>{{nyplLocation}}</a> to verify your information and receive a physical card.",
+        "login": "Log into your account",
+        "nyplLocation": "NYPL location"
+      },
+      "updates": {
+        "header": "Get updates",
+        "content": "<a href='https://www.nypl.org/enews'>{{findOut}}</a>",
+        "findOut": "Find out about all the Library has to offer."
+      },
+      "more": {
+        "header": "Learn more",
+        "content": "<a href='https://www.nypl.org/discover-library-card'>{{discover}}</a>",
+        "discover": "Discover everything you can do with your library card."
+      }
     }
   },
   "button": {

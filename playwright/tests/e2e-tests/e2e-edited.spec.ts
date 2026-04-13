@@ -20,7 +20,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`E2E: Edits patron information in ${name} (${lang})`, () => {
     let pageManager: PageManager;
     let appContent: any;
-    const scrapedBarcode: string | null = null;
+    let scrapedBarcode: string | null = null;
 
     test.beforeEach(async ({ page }) => {
       appContent = require(`../../../public/locales/${lang}/common.json`);
@@ -79,7 +79,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         ).toBeVisible();
         await pageManager.addressVerificationPage
           .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-          .check();
+          .click();
         await pageManager.addressVerificationPage.nextButton.click();
         await expect(
           pageManager.addressVerificationPage.spinner
@@ -98,7 +98,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(pageManager.reviewPage.stepHeading).toBeVisible();
         await pageManager.reviewPage.editPersonalInfoButton.click();
         await fillPersonalInfo(pageManager.reviewPage, TEST_EDITED_PATRON);
-        await pageManager.reviewPage.receiveInfoCheckbox.click(); // unchecks
+        await pageManager.reviewPage.receiveInfoCheckboxLabel.click();
       });
 
       await test.step("displays updated personal info on review page", async () => {
@@ -121,23 +121,23 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       await test.step("submits application", async () => {
         await expect(pageManager.reviewPage.submitButton).toBeVisible();
-        // await pageManager.reviewPage.submitButton.click(); // wait to click til congrats page is ready
+        await pageManager.reviewPage.submitButton.click();
       });
 
-      // await test.step("displays edited name on congrats page", async () => {
-      //   const editedFullName = `${TEST_EDITED_PATRON.firstName} ${TEST_EDITED_PATRON.lastName}`;
-      //   await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
-      //   await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
-      //   await expect(pageManager.congratsPage.memberName).toHaveText(
-      //     editedFullName
-      //   );
-      // });
+      await test.step("displays edited name on congrats page", async () => {
+        const editedFullName = `${TEST_EDITED_PATRON.firstName} ${TEST_EDITED_PATRON.lastName}`;
+        await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
+        await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
+        await expect(pageManager.congratsPage.memberName).toHaveText(
+          editedFullName
+        );
+      });
 
-      // await test.step("retrieves barcode from congrats page", async () => {
-      //   scrapedBarcode =
-      //     await pageManager.congratsPage.patronBarcodeNumber.textContent();
-      //   expect(scrapedBarcode).not.toBeNull();
-      // });
+      await test.step("retrieves barcode from congrats page", async () => {
+        scrapedBarcode =
+          await pageManager.congratsPage.patronBarcodeNumber.textContent();
+        expect(scrapedBarcode).not.toBeNull();
+      });
     });
   });
 }

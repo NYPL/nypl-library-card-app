@@ -46,9 +46,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await expect(pageManager.addressPage.addressHeading).toBeVisible();
           await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
           await pageManager.addressPage.nextButton.click();
-          await expect(
-            pageManager.addressVerificationPage.spinner
-          ).not.toBeVisible({
+          await expect(pageManager.addressPage.spinner).not.toBeVisible({
             timeout: SPINNER_TIMEOUT,
           });
         });
@@ -60,7 +58,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
           await pageManager.alternateAddressPage.nextButton.click();
           await expect(
-            pageManager.addressVerificationPage.spinner
+            pageManager.alternateAddressPage.spinner
           ).not.toBeVisible({
             timeout: SPINNER_TIMEOUT,
           });
@@ -91,9 +89,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await expect(pageManager.addressPage.addressHeading).toBeVisible();
           await fillAddress(pageManager.addressPage, TEST_MULTIMATCH_ADDRESS);
           await pageManager.addressPage.nextButton.click();
-          await expect(
-            pageManager.addressVerificationPage.spinner
-          ).not.toBeVisible({
+          await expect(pageManager.addressPage.spinner).not.toBeVisible({
             timeout: SPINNER_TIMEOUT,
           });
           await expect(
@@ -105,7 +101,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           );
           await pageManager.alternateAddressPage.nextButton.click();
           await expect(
-            pageManager.addressVerificationPage.spinner
+            pageManager.alternateAddressPage.spinner
           ).not.toBeVisible({
             timeout: SPINNER_TIMEOUT,
           });
@@ -133,10 +129,10 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await test.step("selects address options", async () => {
           await pageManager.addressVerificationPage
             .getHomeAddressOption(TEST_MULTIMATCH_ADDRESS_WEST.street)
-            .check();
+            .click();
           await pageManager.addressVerificationPage
             .getAlternateAddressOption(TEST_MULTIMATCH_ADDRESS_EAST.street)
-            .check();
+            .click();
         });
 
         await test.step("confirms addresses are selected", async () => {
