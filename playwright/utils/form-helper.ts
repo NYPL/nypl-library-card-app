@@ -58,24 +58,23 @@ export async function clickNextButton(
   nextPageHeading: Locator
 ): Promise<void> {
   await nextButton.click();
-
   const errorMessages = getErrorMessages(currentPage);
-
-  const nextPageLoaded = await displaysNextPage(errorMessages, nextPageHeading);
-
+  const nextPageLoaded = await waitForErrorOrHeading(
+    errorMessages,
+    nextPageHeading
+  ); // rename to displaysErrors?
   if (!nextPageLoaded) {
     for (const errorMessage of errorMessages) {
-      await expect(errorMessage).toBeVisible();
+      await expect(errorMessage).not.toBeVisible();
     }
   }
 }
 
-// clicking the next button triggers either error messages or the next page to load, this function waits for either of those to happen
-// waits for either error messages or next page's heading to display, returns true if the next page heading displays or false if error messages display
-export async function displaysNextPage( // rename to displaysNextPage or waitForErrorOrHeading
+// waits for either error messages or next page's heading to display
+// returns true if the next page heading displays or false if error messages display
+export async function waitForErrorOrHeading(
   errorMessages: Locator[],
-  nextPageHeading: Locator,
-  timeout: number = SPINNER_TIMEOUT
+  nextPageHeading: Locator
 ): Promise<boolean> {
   return Promise.race([
     ...errorMessages.map((locator) =>
@@ -85,7 +84,7 @@ export async function displaysNextPage( // rename to displaysNextPage or waitFor
         .catch(() => new Promise<never>(() => {}))
     ),
     nextPageHeading
-      .waitFor({ state: "visible", timeout: timeout })
+      .waitFor({ state: "visible", timeout: SPINNER_TIMEOUT })
       .then(() => true),
   ]);
 }
