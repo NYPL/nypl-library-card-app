@@ -8,22 +8,22 @@
     overflow: hidden !important;
     height: auto !important;
   }
+  // When the Campaign banner is present, it pushes the content down
+  body {
+    position: absolute !important;
+    top: 0 !important;
+  }
 
   #sitewideAlerts-notification,
-  #nypl-header > div > header > div > div,
   #mainHeader,
   #nypl-footer,
   .routing-links,
   hr,
   option,
+  #nypl-header,
+  .Campaign,
+  .Campaign,
   .edit-button {
-    display: none !important;
-  }
-
-  #nypl-header {
-    width: 1200px !important;
-    min-width: 1200px !important;
-    max-width: 1200px !important;
     display: none !important;
   }
 
@@ -39,12 +39,19 @@
   h2,
   h3,
   h4,
-  img {
-    page-break-after: avoid;
+  img,
+  p {
+    page-break-after: avoid !important;
+    overflow: visible !important;
+    height: auto !important;
   }
 
+  // DS external svg
   a svg {
     display: none !important;
+  }
+  a:visited {
+    color: var(--nypl-colors-ui-link-primary) !important;
   }
 
   // Override Chakra UI height and overflow styles that cause the input fields to be cut off when printed
@@ -55,9 +62,27 @@
     overflow: visible !important;
   }
 
-  #congratulations h2 {
+  #congratulations > h2 {
     font-size: 1.5rem !important;
     margin: 0 !important;
+    outline: none;
+  }
+
+  #congratulations > h3 {
+    margin: 0.5rem 0 !important;
+    outline: none;
+  }
+
+  #congratulations > h3 + p {
+    margin: 0 !important;
+  }
+
+  .congrats-banner {
+    margin: 0.9rem 0 !important;
+  }
+
+  .get-started-header {
+    display: none !important;
   }
 
   .card-container {
@@ -69,10 +94,6 @@
     page-break-inside: avoid;
   }
 
-  .card-container + div {
-    margin: 0 !important;
-  }
-
   .image-lion {
     width: 50% !important;
     max-width: 400px !important;
@@ -80,7 +101,8 @@
 
   #member-name,
   #issued,
-  #issued .content {
-    font-size: 0.85rem !important;
+  #issued .content,
+  .card-logo {
+    font-size: 0.75rem !important;
   }
 }
