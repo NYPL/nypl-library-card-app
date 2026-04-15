@@ -2,7 +2,11 @@ import { test, expect } from "@playwright/test";
 import { AccountPage } from "../../pageobjects/account.page";
 import { AxeBuilder } from "@axe-core/playwright";
 import { PAGE_ROUTES } from "../../utils/constants";
-import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import {
+  A11Y_GUIDELINES,
+  pressTab,
+  validateA11yCoverage,
+} from "../../utils/a11y-utils";
 
 test.describe("Account Page Accessibility Tests", () => {
   test.beforeEach(async ({ page }) => {
@@ -23,7 +27,6 @@ test.describe("Account Page Accessibility Tests", () => {
     browserName,
   }) => {
     const accountPage = new AccountPage(page);
-    const isWebKit = browserName === "webkit";
 
     const accountLocators = [
       accountPage.availableUsernameButton,
@@ -40,29 +43,14 @@ test.describe("Account Page Accessibility Tests", () => {
       accountPage.nextButton,
     ];
 
-    // WebKit excludes links from the default tab sequence; test form controls only.
-    const webKitAccountLocators = [
-      accountPage.passwordInput,
-      accountPage.verifyPasswordInput,
-      accountPage.showPasswordCheckbox,
-      accountPage.selectHomeLibrary,
-      accountPage.acceptTermsCheckbox,
-    ];
-
-    const locators = isWebKit ? webKitAccountLocators : accountLocators;
-
     await expect(accountPage.stepHeading).toBeFocused();
 
-    await page.keyboard.press("Tab");
+    await pressTab(page, browserName);
     await expect(accountPage.usernameInput).toBeFocused();
     await accountPage.usernameInput.pressSequentially("testuser");
 
-    for (const locator of locators) {
-      if (isWebKit) {
-        await locator.focus();
-      } else {
-        await page.keyboard.press("Tab");
-      }
+    for (const locator of accountLocators) {
+      await pressTab(page, browserName);
 
       await expect(locator).toBeFocused();
 

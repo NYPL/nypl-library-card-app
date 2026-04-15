@@ -12,6 +12,8 @@ const ADDRESS_ROUTE_PATTERN = /\/location\?.*newCard=true/;
 const ALTERNATE_ADDRESS_ROUTE_PATTERN = /\/alternate-address\?.*newCard=true/;
 const ADDRESS_VERIFICATION_ROUTE_PATTERN =
   /\/address-verification\?.*newCard=true/;
+const ACCOUNT_ROUTE_PATTERN = /\/account\?.*newCard=true/;
+const REVIEW_ROUTE_PATTERN = /\/review\?.*newCard=true/;
 
 type NavigateToAddressVerificationOptions = {
   page: Page;
@@ -22,6 +24,15 @@ type NavigateToAddressVerificationOptions = {
 };
 
 type NavigateToCongratsOptions = {
+  page: Page;
+  pageManager: PageManager;
+  patronData: PatronData;
+  addressData: AddressData;
+  accountData: AccountData;
+  alternateAddressData?: AddressData;
+};
+
+type NavigateToReviewOptions = {
   page: Page;
   pageManager: PageManager;
   patronData: PatronData;
@@ -134,22 +145,14 @@ export async function navigateToCongratsPage({
   accountData,
   alternateAddressData,
 }: NavigateToCongratsOptions) {
-  await navigateToAddressVerificationPage({
+  await navigateToReviewPage({
     page,
     pageManager,
     patronData,
     addressData,
+    accountData,
     alternateAddressData,
   });
-
-  await expect(pageManager.addressVerificationPage.nextButton).toBeEnabled();
-  await pageManager.addressVerificationPage.nextButton.click();
-  await expect(pageManager.accountPage.stepHeading).toBeVisible();
-
-  await fillAccountInfo(pageManager.accountPage, accountData);
-  await expect(pageManager.accountPage.nextButton).toBeEnabled();
-  await pageManager.accountPage.nextButton.click();
-  await expect(pageManager.reviewPage.stepHeading).toBeVisible();
 
   await expect(pageManager.reviewPage.submitButton).toBeEnabled();
   await pageManager.reviewPage.submitButton.click();
@@ -159,4 +162,42 @@ export async function navigateToCongratsPage({
   });
 
   await expect(pageManager.congratsPage.metroOrNonMetroHeading).toBeVisible();
+}
+
+export async function navigateToReviewPage({
+  page,
+  pageManager,
+  patronData,
+  addressData,
+  accountData,
+  alternateAddressData,
+}: NavigateToReviewOptions) {
+  await navigateToAddressVerificationPage({
+    page,
+    pageManager,
+    patronData,
+    addressData,
+    alternateAddressData,
+  });
+
+  await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
+  await pageManager.addressVerificationPage
+    .getHomeAddressOption(addressData.street)
+    .click();
+
+  await expect(pageManager.addressVerificationPage.nextButton).toBeEnabled();
+  await pageManager.addressVerificationPage.nextButton.click();
+  await expect(page).toHaveURL(ACCOUNT_ROUTE_PATTERN, {
+    timeout: SPINNER_TIMEOUT,
+  });
+
+  await expect(pageManager.accountPage.stepHeading).toBeVisible();
+  await fillAccountInfo(pageManager.accountPage, accountData);
+  await expect(pageManager.accountPage.nextButton).toBeEnabled();
+  await pageManager.accountPage.nextButton.click();
+  await expect(page).toHaveURL(REVIEW_ROUTE_PATTERN, {
+    timeout: SPINNER_TIMEOUT,
+  });
+
+  await expect(pageManager.reviewPage.stepHeading).toBeVisible();
 }

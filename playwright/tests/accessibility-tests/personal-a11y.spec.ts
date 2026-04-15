@@ -2,7 +2,11 @@ import { PersonalPage } from "../../pageobjects/personal.page";
 import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
 import { PAGE_ROUTES } from "../../utils/constants";
-import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import {
+  A11Y_GUIDELINES,
+  validateA11yCoverage,
+  pressTab,
+} from "../../utils/a11y-utils";
 
 test.describe("Accessibility tests on personal info page", () => {
   test.beforeEach(async ({ page }) => {
@@ -23,33 +27,22 @@ test.describe("Accessibility tests on personal info page", () => {
   }) => {
     const personalPage = new PersonalPage(page);
 
-    const inputLocators = [
+    const locators = [
       personalPage.firstNameInput,
       personalPage.lastNameInput,
       personalPage.dateOfBirthInput,
       personalPage.emailInput,
+      personalPage.alternateFormLink,
+      personalPage.locationsLink,
+      personalPage.receiveInfoCheckbox,
+      personalPage.previousButton,
+      personalPage.nextButton,
     ];
-
-    // WebKit on macOS does not include links in the default Tab sequence
-    const locators =
-      browserName === "webkit"
-        ? inputLocators
-        : [
-            personalPage.firstNameInput,
-            personalPage.lastNameInput,
-            personalPage.dateOfBirthInput,
-            personalPage.emailInput,
-            personalPage.alternateFormLink,
-            personalPage.locationsLink,
-            personalPage.receiveInfoCheckbox,
-            personalPage.previousButton,
-            personalPage.nextButton,
-          ];
 
     await expect(personalPage.stepHeading).toBeFocused();
 
     for (const locator of locators) {
-      await page.keyboard.press("Tab");
+      await pressTab(page, browserName);
       await expect(locator).toBeFocused();
     }
   });

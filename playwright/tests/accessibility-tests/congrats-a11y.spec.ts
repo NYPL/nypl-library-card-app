@@ -3,7 +3,11 @@ import { CongratsPage } from "../../pageobjects/congrats.page";
 import { test, expect } from "@playwright/test";
 import { randomBytes } from "crypto";
 import { PageManager } from "../../pageobjects/page-manager.page";
-import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import {
+  A11Y_GUIDELINES,
+  validateA11yCoverage,
+  pressTab,
+} from "../../utils/a11y-utils";
 import { navigateToCongratsPage } from "../../utils/a11y-helper";
 
 import {
@@ -76,11 +80,6 @@ test.describe("Accessibility tests on Congrats Page", () => {
     page,
     browserName,
   }) => {
-    test.skip(
-      browserName === "webkit",
-      "WebKit on macOS does not include links in the default Tab sequence"
-    );
-
     const congratsPage = new CongratsPage(page);
 
     const locators = [
@@ -96,7 +95,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
     await expect(congratsPage.metroOrNonMetroHeading).toBeFocused();
 
     for (const locator of locators) {
-      await page.keyboard.press("Tab");
+      await pressTab(page, browserName);
       await expect(locator).toBeFocused();
     }
   });

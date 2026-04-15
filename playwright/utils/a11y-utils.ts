@@ -1,4 +1,4 @@
-import { expect } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
 
 export const A11Y_GUIDELINES = ["wcag21aa", "wcag22aa"] as const;
 
@@ -19,5 +19,18 @@ export function validateA11yCoverage(results: A11yResults) {
 
   for (const guideline of A11Y_GUIDELINES) {
     expect(analyzedTags.has(guideline)).toBe(true);
+  }
+}
+
+export async function pressTab(page: Page, browserName: string) {
+  // Check if we are on WebKit AND on a Mac
+  const isMacWebKit = browserName === "webkit" && process.platform === "darwin";
+
+  if (isMacWebKit) {
+    // Simulates Option+Tab on macOS to ensure links/buttons are focused
+    await page.keyboard.press("Alt+Tab");
+  } else {
+    // Standard Tab for Chrome, Firefox, and WebKit on Linux/Windows
+    await page.keyboard.press("Tab");
   }
 }

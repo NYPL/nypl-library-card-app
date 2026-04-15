@@ -2,12 +2,15 @@ import { LandingPage } from "../../pageobjects/landing.page";
 import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
 import { PAGE_ROUTES } from "../../utils/constants";
-import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import {
+  A11Y_GUIDELINES,
+  validateA11yCoverage,
+  pressTab,
+} from "../../utils/a11y-utils";
 
 test.describe("Accessibility tests on Landing Page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(PAGE_ROUTES.LANDING);
-    // Crucial: Fixes the "element not found" error by waiting for hydration
     await page.waitForLoadState("networkidle");
   });
 
@@ -24,7 +27,6 @@ test.describe("Accessibility tests on Landing Page", () => {
     browserName,
   }) => {
     const landingPage = new LandingPage(page);
-    const isWebKit = browserName === "webkit";
 
     const landingLocators = [
       landingPage.arabicLanguage,
@@ -48,20 +50,13 @@ test.describe("Accessibility tests on Landing Page", () => {
       landingPage.getStartedButton,
     ];
 
-    await expect(landingPage.mainHeading).toBeVisible();
-    await page.evaluate(() => (document.activeElement as HTMLElement)?.blur());
-    await landingPage.arabicLanguage.focus();
-    await expect(landingPage.arabicLanguage).toBeFocused();
+    await landingPage.mainHeading.evaluate((el) =>
+      el.setAttribute("tabindex", "-1")
+    );
+    await landingPage.mainHeading.focus();
 
-    // Loop through remaining locators
-    for (const locator of landingLocators.slice(1)) {
-      if (isWebKit) {
-        // Forces focus to bypass WebKit's link-skipping and 'inactive' lag
-        await locator.focus();
-      } else {
-        await page.keyboard.press("Tab");
-      }
-
+    for (const locator of landingLocators) {
+      await pressTab(page, browserName);
       await expect(locator).toBeFocused();
     }
   });

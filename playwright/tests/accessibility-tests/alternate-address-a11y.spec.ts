@@ -2,7 +2,11 @@ import AxeBuilder from "@axe-core/playwright";
 import { AlternateAddressPage } from "../../pageobjects/alternate-address.page";
 import { test, expect } from "@playwright/test";
 import { PAGE_ROUTES } from "../../utils/constants";
-import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import {
+  A11Y_GUIDELINES,
+  validateA11yCoverage,
+  pressTab,
+} from "../../utils/a11y-utils";
 
 test.describe("Accessibility tests on Alternate Address page", () => {
   test.beforeEach(async ({ page }) => {
@@ -29,22 +33,14 @@ test.describe("Accessibility tests on Alternate Address page", () => {
       alternateAddress.cityInput,
       alternateAddress.stateInput,
       alternateAddress.postalCodeInput,
-    ];
-    const linkButtons = [
       alternateAddress.previousButton,
       alternateAddress.nextButton,
     ];
 
-    // WebKit on macOS does not include links in the default Tab sequence
-    const locators =
-      browserName === "webkit"
-        ? [...inputLocators]
-        : [...inputLocators, ...linkButtons];
-
     await expect(alternateAddress.stepHeading).toBeFocused();
 
-    for (const locator of locators) {
-      await page.keyboard.press("Tab");
+    for (const locator of inputLocators) {
+      await pressTab(page, browserName);
       await expect(locator).toBeFocused();
     }
   });

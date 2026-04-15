@@ -17,11 +17,11 @@ export async function fillAddress(
   page: AddressFormPage,
   addressData: AddressData
 ) {
-  await page.streetAddressInput.fill(addressData.street);
   await page.apartmentSuiteInput.fill(addressData.apartmentSuite);
   await page.cityInput.fill(addressData.city);
   await page.stateInput.selectOption(addressData.state);
   await page.postalCodeInput.fill(addressData.postalCode);
+  await page.streetAddressInput.fill(addressData.street);
 }
 
 export async function fillAccountInfo(
