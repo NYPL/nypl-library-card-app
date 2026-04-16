@@ -24,7 +24,7 @@ export function validateA11yCoverage(results: A11yResults) {
 
 export async function pressTab(page: Page, browserName: string) {
   // Check if we are on WebKit AND on a Mac
-  const isMacWebKit = browserName === "webkit";
+  const isMacWebKit = browserName === "webkit" && process.platform === "darwin";
 
   if (isMacWebKit) {
     // Simulates Option+Tab on macOS to ensure links/buttons are focused
