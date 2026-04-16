@@ -60,10 +60,13 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       </Paragraph>
 
       {temporary && (
-        <Banner content={<Trans i18nKey="confirmation.description.part3" />} />
+        <Banner
+          className="congrats-banner"
+          content={<Trans i18nKey="confirmation.description.part3" />}
+        />
       )}
 
-      <PageHeading mt="l" lineHeight={"1!"}>
+      <PageHeading className="get-started-header" mt="l" lineHeight={"1!"}>
         {t("confirmation.nextSteps.title")}
       </PageHeading>
 
