@@ -132,6 +132,7 @@ function ReviewFormContainer({ csrfToken }) {
 
     return clientSide ? (
       <Button
+        className="edit-button"
         variant="secondary"
         id={`editSectionButton-${sectionName.replace(/\s+/g, "")}`}
         onClick={() => {
@@ -146,6 +147,7 @@ function ReviewFormContainer({ csrfToken }) {
       </Button>
     ) : (
       <a
+        className="edit-button"
         aria-label={label}
         href={`/library-card/${page}?${encodeURI(`${queryStr}${queryValues}`)}`}
       >
@@ -162,6 +164,7 @@ function ReviewFormContainer({ csrfToken }) {
     const label = `${t("button.edit")} ${t("review.section.address.label")}`;
     return clientSide ? (
       <Button
+        className="edit-button"
         variant="secondary"
         id="editAddressButton"
         onClick={async () => {
@@ -174,6 +177,7 @@ function ReviewFormContainer({ csrfToken }) {
       </Button>
     ) : (
       <a
+        className="edit-button"
         aria-label={label}
         href={`/library-card/location?${encodeURI(
           `${queryStr}${queryValues}`
