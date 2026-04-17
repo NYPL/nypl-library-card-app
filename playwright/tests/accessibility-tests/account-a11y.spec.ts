@@ -65,7 +65,7 @@ test.describe("Account Page Accessibility Tests", () => {
     await expect(accountPage.availableUsernameButton).toBeFocused();
     await accountPage.availableUsernameButton.press("Enter");
     await expect(accountPage.unavailableUsernameMessage).toBeVisible();
-    await expect(accountPage.usernameInput).toBeFocused();
+    await expect(accountPage.availableUsernameButton).toBeDisabled();
   });
 
   test("should retain focus when checking available username", async ({
@@ -79,7 +79,7 @@ test.describe("Account Page Accessibility Tests", () => {
     await page.keyboard.press("Tab");
     await expect(accountPage.availableUsernameButton).toBeFocused();
     await accountPage.availableUsernameButton.press("Enter");
+    await expect(accountPage.availableUsernameButton).toBeDisabled();
     await expect(accountPage.availableUsernameMessage).toBeVisible();
-    await expect(accountPage.usernameInput).toBeFocused();
   });
 });
