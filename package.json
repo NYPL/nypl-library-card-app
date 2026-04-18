@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@babel/preset-typescript": "7.10.4",
-    "@eslint/js": "^9.36.0",
+    "@eslint/js": "^10.0.1",
     "@next/eslint-plugin-next": "^15.5.4",
     "@nypl/design-system-react-components": "4.0.0",
     "@nypl/dgx-react-footer": "0.5.7",
