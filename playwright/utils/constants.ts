@@ -6,6 +6,7 @@ export const TEST_PATRON: PatronData = {
   lastName: "Doe",
   email: "test@gmail.com",
   dateOfBirth: "12/25/1984",
+  ecommunicationsPref: true,
 };
 
 export const TEST_EDITED_PATRON: PatronData = {
@@ -13,6 +14,7 @@ export const TEST_EDITED_PATRON: PatronData = {
   lastName: "Nook",
   email: "edited@gmail.com",
   dateOfBirth: "01/01/1990",
+  ecommunicationsPref: false,
 };
 
 // address

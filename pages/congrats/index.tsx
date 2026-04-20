@@ -80,7 +80,7 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
         />
       )}
 
-      <PageHeading mt="l" lineHeight={"1!"}>
+      <PageHeading className="get-started-header" mt="l" lineHeight={"1!"}>
         {t("confirmation.nextSteps.title")}
       </PageHeading>
 
