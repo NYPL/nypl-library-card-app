@@ -56,11 +56,28 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       </Paragraph>
 
       <Paragraph fontWeight="bold">
-        <Trans i18nKey="confirmation.description.part2" />
+        <Trans
+          i18nKey="confirmation.description.part2"
+          values={{
+            locations: t("confirmation.description.locations"),
+            proof: t("confirmation.description.proof"),
+          }}
+        />
       </Paragraph>
 
       {temporary && (
-        <Banner content={<Trans i18nKey="confirmation.description.part3" />} />
+        <Banner
+          content={
+            <Trans
+              i18nKey="confirmation.description.part3"
+              values={{
+                temporaryCard: t("confirmation.description.temporaryCard"),
+                learnMore: t("confirmation.description.learnMore"),
+                getHelp: t("confirmation.description.getHelp"),
+              }}
+            />
+          }
+        />
       )}
 
       <PageHeading mt="l" lineHeight={"1!"}>
@@ -74,7 +91,12 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       )}
       {!temporary && (
         <NextSteps mt="xs">
-          <Trans i18nKey="confirmation.nextSteps.explore.content" />
+          <Trans
+            i18nKey="confirmation.nextSteps.explore.content"
+            values={{
+              readListen: t("confirmation.nextSteps.explore.readListen"),
+            }}
+          />
         </NextSteps>
       )}
 
@@ -84,7 +106,11 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
       <NextSteps mt="xs">
         <Trans
           i18nKey="confirmation.nextSteps.borrow.content"
-          values={{ loginUrl: loginUrl }}
+          values={{
+            loginUrl: loginUrl,
+            login: t("confirmation.nextSteps.borrow.login"),
+            nyplLocation: t("confirmation.nextSteps.borrow.nyplLocation"),
+          }}
         />
       </NextSteps>
 
@@ -92,14 +118,24 @@ function ConfirmationPage({ nextAppEnv }: { nextAppEnv: string }): JSX.Element {
         <Trans i18nKey="confirmation.nextSteps.updates.header" />
       </PageSubHeading>
       <NextSteps mt="xs">
-        <Trans i18nKey="confirmation.nextSteps.updates.content" />
+        <Trans
+          i18nKey="confirmation.nextSteps.updates.content"
+          values={{
+            findOut: t("confirmation.nextSteps.updates.findOut"),
+          }}
+        />
       </NextSteps>
 
       <PageSubHeading>
         <Trans i18nKey="confirmation.nextSteps.more.header" />
       </PageSubHeading>
       <NextSteps mt="xs">
-        <Trans i18nKey="confirmation.nextSteps.more.content" />
+        <Trans
+          i18nKey="confirmation.nextSteps.more.content"
+          values={{
+            discover: t("confirmation.nextSteps.more.discover"),
+          }}
+        />
       </NextSteps>
     </Box>
   );

@@ -83,24 +83,26 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           PATRON_TYPES.DIGITAL_NON_METRO
         );
         await expect(pageManager.reviewPage.submitButton).toBeVisible();
-        // await pageManager.reviewPage.submitButton.click(); // wait to click til congrats page is ready
+        await pageManager.reviewPage.submitButton.click();
       });
 
-      // await test.step("displays metro card elements on congrats page", async () => {
-      //   await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      //   await expect(pageManager.congratsPage.metroOrNonMetroHeading).toBeVisible();
-      //   await expect(pageManager.congratsPage.readListenLink).toBeVisible();
-      // });
+      await test.step("displays metro card elements on congrats page", async () => {
+        await expect(pageManager.congratsPage.mainHeading).toBeVisible();
+        await expect(
+          pageManager.congratsPage.metroOrNonMetroHeading
+        ).toBeVisible();
+        await expect(pageManager.congratsPage.readListenLink).toBeVisible();
+      });
 
-      // await test.step("displays generated library card on congrats page", async () => {
-      //   await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
-      //   await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
-      //   await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
-      //   await expect(pageManager.congratsPage.issuedDate).toBeVisible();
-      //   await expect(pageManager.congratsPage.patronBarcodeNumber).toHaveText(
-      //     TEST_BARCODE_NUMBER
-      //   );
-      // });
+      await test.step("displays generated library card on congrats page", async () => {
+        await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
+        await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
+        await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
+        await expect(pageManager.congratsPage.issuedDate).toBeVisible();
+        await expect(pageManager.congratsPage.patronBarcodeNumber).toHaveText(
+          TEST_BARCODE_NUMBER
+        );
+      });
     });
   });
 }

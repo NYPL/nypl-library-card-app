@@ -6,9 +6,9 @@ import {
   fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
-  // EXPECTED_BARCODE_PREFIX,
+  EXPECTED_BARCODE_PREFIX,
   PAGE_ROUTES,
-  // PATRON_TYPES,
+  PATRON_TYPES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   TEST_ACCOUNT,
@@ -19,14 +19,14 @@ import {
 import {
   deletePatron,
   getPatronID,
-  // verifyPatronData,
+  verifyPatronData,
 } from "../../utils/sierra-api-utils";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`E2E: Complete OOS patron application with Sierra API integration in ${name} (${lang})`, () => {
     let pageManager: PageManager;
     let appContent: any;
-    const scrapedBarcode: string | null = null;
+    let scrapedBarcode: string | null = null;
 
     test.beforeEach(async ({ page }) => {
       appContent = require(`../../../public/locales/${lang}/common.json`);
@@ -48,7 +48,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     });
 
     test("submits OOS patron application", async ({ page }) => {
-      // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
+      const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
 
       await test.step("begins at landing", async () => {
         await page.goto(PAGE_ROUTES.LANDING(lang));
@@ -163,39 +163,43 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       await test.step("submits application", async () => {
         await expect(pageManager.reviewPage.submitButton).toBeVisible();
-        // await pageManager.reviewPage.submitButton.click(); // wait to click til congrats page is ready
+        await pageManager.reviewPage.submitButton.click();
       });
 
-      // await test.step("displays temporary card elements on congrats page", async () => {
-      //   await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      //   await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
-      //   await expect(pageManager.congratsPage.temporaryCardBanner).toBeVisible();
-      //   await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
-      //   await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
-      // });
+      await test.step("displays temporary card elements on congrats page", async () => {
+        await expect(pageManager.congratsPage.mainHeading).toBeVisible();
+        await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
+        await expect(
+          pageManager.congratsPage.temporaryCardBanner
+        ).toBeVisible();
+        await expect(pageManager.congratsPage.learnMoreLink).toBeVisible();
+        await expect(pageManager.congratsPage.getHelpEmailLink).toBeVisible();
+      });
 
-      // await test.step("displays generated library card on congrats page", async () => {
-      //   await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
-      //   await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
-      //   await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
-      //   await expect(pageManager.congratsPage.issuedDate).toBeVisible();
-      //   await expect(pageManager.congratsPage.patronBarcodeNumber).toBeVisible();
-      //   await expect(pageManager.congratsPage.patronBarcodeNumber).toContainText(
-      //     EXPECTED_BARCODE_PREFIX
-      //   );
-      // });
+      await test.step("displays generated library card on congrats page", async () => {
+        await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
+        await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
+        await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
+        await expect(pageManager.congratsPage.issuedDate).toBeVisible();
+        await expect(
+          pageManager.congratsPage.patronBarcodeNumber
+        ).toBeVisible();
+        await expect(
+          pageManager.congratsPage.patronBarcodeNumber
+        ).toContainText(EXPECTED_BARCODE_PREFIX);
+      });
 
-      // await test.step("verifies patron data in Sierra database", async () => {
-      //   scrapedBarcode =
-      //     await pageManager.congratsPage.patronBarcodeNumber.textContent();
-      //   expect(scrapedBarcode).not.toBeNull();
-      //   await verifyPatronData(
-      //     scrapedBarcode,
-      //     TEST_PATRON,
-      //     TEST_OOS_ADDRESS,
-      //     PATRON_TYPES.DIGITAL_TEMPORARY
-      //   );
-      // });
+      await test.step("verifies patron data in Sierra database", async () => {
+        scrapedBarcode =
+          await pageManager.congratsPage.patronBarcodeNumber.textContent();
+        expect(scrapedBarcode).not.toBeNull();
+        await verifyPatronData(
+          scrapedBarcode,
+          TEST_PATRON,
+          TEST_OOS_ADDRESS,
+          PATRON_TYPES.DIGITAL_TEMPORARY
+        );
+      });
     });
   });
 }

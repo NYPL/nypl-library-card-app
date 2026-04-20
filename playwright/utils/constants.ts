@@ -1,5 +1,4 @@
 import { AddressData, PatronData } from "./types";
-import appContent from "../../public/locales/en/common.json";
 
 // personal information
 export const TEST_PATRON: PatronData = {
@@ -89,26 +88,6 @@ export const TEST_EDITED_ACCOUNT = {
 // congrats
 export const TEST_BARCODE_NUMBER = "12341234123412";
 export const EXPECTED_BARCODE_PREFIX = "255";
-
-export const ERROR_MESSAGES = {
-  // probs remove this at the end
-  FIRST_NAME_INVALID: appContent.personal.errorMessage.firstName,
-  LAST_NAME_INVALID: appContent.personal.errorMessage.lastName,
-  DATE_OF_BIRTH_INVALID: appContent.personal.errorMessage.birthdate,
-  DATE_OF_BIRTH_ERROR: appContent.personal.errorMessage.ageGate,
-  EMAIL_INVALID: appContent.personal.errorMessage.email,
-  STREET_ADDRESS_INVALID: appContent.location.errorMessage.line1,
-  CITY_INVALID: appContent.location.errorMessage.city,
-  STATE_INVALID: appContent.location.errorMessage.state,
-  POSTAL_CODE_INVALID: appContent.location.errorMessage.zip,
-  USERNAME_INVALID: appContent.account.errorMessage.username,
-  USERNAME_UNAVAILABLE: "This username is unavailable. Please try another.",
-  USERNAME_AVAILABLE: "This username is available.",
-  PASSWORD_INVALID: appContent.account.errorMessage.password,
-  VERIFY_PASSWORD_INVALID: appContent.account.errorMessage.verifyPassword,
-  HOME_LIBRARY_ERROR: appContent.account.errorMessage.homeLibraryCode,
-  ACCEPT_TERMS_ERROR: appContent.account.errorMessage.acceptTerms,
-};
 
 export const SUPPORTED_LANGUAGES = [
   { lang: "en", name: "English" },
