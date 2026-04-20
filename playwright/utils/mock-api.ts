@@ -27,6 +27,20 @@ export async function mockCreatePatronApi(
   });
 }
 
+export async function mockUsernameUnavailable(page: Page) {
+  await page.route("**/library-card/api/username", async (route) => {
+    await route.fulfill({
+      status: 400,
+      contentType: "application/json",
+      // Common JSON structure for "taken" handles
+      body: JSON.stringify({
+        available: false,
+        message: "This username is unavailable. Please try another.",
+      }),
+    });
+  });
+}
+
 export async function mockCreateAddress(page: Page, address: AddressData) {
   await page.route("**/library-card/api/address", async (route) => {
     const addressData = {

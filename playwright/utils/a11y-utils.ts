@@ -2,7 +2,6 @@ import { expect } from "@playwright/test";
 
 export const A11Y_GUIDELINES = ["wcag21aa", "wcag22aa"] as const;
 
-// Created: 04/01/26; Expires: 04/01/27
 export const USED_USER_NAME = "tester";
 export const AVAILABLE_USER_NAME = "testuser";
 
