@@ -1,4 +1,4 @@
-import { expect, Locator } from "@playwright/test";
+import { expect, Locator, Response } from "@playwright/test";
 import { PersonalPage } from "../pageobjects/personal.page";
 import { AddressPage } from "../pageobjects/address.page";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
@@ -57,25 +57,55 @@ export async function clickNextButton(
   nextButton: Locator,
   nextPageHeading: Locator
 ): Promise<void> {
+  let apiListener: Promise<Response> | undefined;
+
+  if (currentPage instanceof ReviewPage) {
+    apiListener = currentPage.page.waitForResponse(
+      (response) =>
+        response.request().method() === "POST" &&
+        response.url().includes("/library-card/api/create-patron"),
+      { timeout: SPINNER_TIMEOUT }
+    );
+  } // add else if for address API
+
   await nextButton.click();
+
   const errorMessages = getErrorMessages(currentPage);
   const nextPageLoaded = await waitForErrorOrHeading(
     errorMessages,
-    nextPageHeading
-  ); // rename to displaysErrors?
+    nextPageHeading,
+    apiListener
+  );
+
   if (!nextPageLoaded) {
     for (const errorMessage of errorMessages) {
+      // replace with throw new Error?
       await expect(errorMessage).not.toBeVisible();
     }
   }
 }
 
-// waits for either error messages or next page's heading to display
-// returns true if the next page heading displays or false if error messages display
+/* 
+waits for either error messages or next page's heading to display
+returns true if the next page heading displays or false if error messages display
+*/
 export async function waitForErrorOrHeading(
   errorMessages: Locator[],
-  nextPageHeading: Locator
+  nextPageHeading: Locator,
+  apiListener?: Promise<Response>
 ): Promise<boolean> {
+  const apiStatus: Promise<never> =
+    apiListener !== undefined
+      ? apiListener.then((response) => {
+          if (!response.ok()) {
+            throw new Error(
+              `Create patron API failed with status ${response.status()}: ${response.statusText()} before next page rendered.`
+            );
+          }
+          return new Promise<never>(() => {});
+        })
+      : new Promise<never>(() => {});
+
   return Promise.race([
     ...errorMessages.map((locator) =>
       locator
@@ -86,6 +116,7 @@ export async function waitForErrorOrHeading(
     nextPageHeading
       .waitFor({ state: "visible", timeout: SPINNER_TIMEOUT })
       .then(() => true),
+    apiStatus,
   ]);
 }
 
