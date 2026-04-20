@@ -34,7 +34,6 @@ export async function fillAccountInfo(
   await page.usernameInput.fill(accountData.username);
   await page.passwordInput.fill(accountData.password);
   await page.verifyPasswordInput.fill(accountData.password);
-  await page.selectHomeLibrary.click();
   await page.selectHomeLibrary.selectOption(accountData.homeLibraryCode);
   if (!(await page.acceptTermsCheckbox.isChecked())) {
     await page.acceptTermsCheckboxLabel.click();
