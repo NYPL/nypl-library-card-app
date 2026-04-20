@@ -84,7 +84,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test.describe("mocks API responses on account page", () => {
       test("displays username available message", async ({ page }) => {
-        // mock the API call for username availability
         await mockUsernameApi(page, "available");
         await accountPage.usernameInput.fill("AvailableUsername");
         await accountPage.availableUsernameButton.click();
@@ -92,7 +91,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       });
 
       test("displays username unavailable error message", async ({ page }) => {
-        // mock the API call for username unavailability
         await mockUsernameApi(page, "unavailable");
         await accountPage.usernameInput.fill("UnavailableUsername");
         await accountPage.availableUsernameButton.click();

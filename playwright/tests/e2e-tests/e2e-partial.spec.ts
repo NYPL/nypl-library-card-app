@@ -156,11 +156,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     test("retains user-entered info after clicking breadcrumb", async ({
       page,
     }) => {
-      test.skip(
-        lang !== "en",
-        "Selected language not yet retained upon clicking breadcrumb"
-      );
-
       await test.step("enters personal information", async () => {
         await page.goto(PAGE_ROUTES.PERSONAL(lang));
         await expect(pageManager.personalPage.stepHeading).toBeVisible();
