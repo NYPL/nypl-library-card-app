@@ -19,10 +19,6 @@ The production site on NYPL.org:
 
 - https://www.nypl.org/library-card/new/
 
-The current production version:
-
-- v1.3.3
-
 ## Installation & Configuration
 
 ### Node Version Manager (nvm)

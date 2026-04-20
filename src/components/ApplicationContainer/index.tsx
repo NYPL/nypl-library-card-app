@@ -38,7 +38,7 @@ const ApplicationContainer = ({ children, problemDetail }) => {
 
   return (
     <Template variant="narrow">
-      <TemplateHeader m="0!" dir="ltr">
+      <TemplateHeader id="mainHeader" m="0!" dir="ltr">
         <TemplateBreakout>
           <Breadcrumbs />
           <Hero />
