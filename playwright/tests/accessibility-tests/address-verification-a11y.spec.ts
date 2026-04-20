@@ -7,7 +7,7 @@ import {
   validateA11yCoverage,
   pressTab,
 } from "../../utils/a11y-utils";
-import { navigateToAddressVerificationPage } from "../../utils/a11y-helper";
+import { navigateToAddressVerificationPage } from "../../utils/navigation-helper";
 import {
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,

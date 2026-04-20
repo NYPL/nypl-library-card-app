@@ -8,7 +8,7 @@ import {
   validateA11yCoverage,
   pressTab,
 } from "../../utils/a11y-utils";
-import { navigateToCongratsPage } from "../../utils/a11y-helper";
+import { navigateToCongratsPage } from "../../utils/navigation-helper";
 
 import {
   TEST_ACCOUNT,

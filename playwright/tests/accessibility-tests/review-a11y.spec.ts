@@ -7,7 +7,7 @@ import {
   validateA11yCoverage,
   pressTab,
 } from "../../utils/a11y-utils";
-import { navigateToReviewPage } from "../../utils/a11y-helper";
+import { navigateToReviewPage } from "../../utils/navigation-helper";
 import {
   TEST_ACCOUNT,
   TEST_PATRON,
