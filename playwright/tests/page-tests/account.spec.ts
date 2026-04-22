@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { AccountPage } from "../../pageobjects/account.page";
 import { fillAccountInfo } from "../../utils/form-helper";
 import { PAGE_ROUTES, TEST_ACCOUNT } from "../../utils/constants";
-import { mockUsernameApi, UNAVAILABLE_RESPONSE } from "../../utils/mock-api";
+import { mockUsernameApi, usernameResponse } from "../../utils/mock-api";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(PAGE_ROUTES.ACCOUNT);
@@ -76,23 +76,23 @@ test.describe("enters account information", () => {
 test.describe("mocks API responses on account page", () => {
   test("displays username available message", async ({ page }) => {
     // mock the API call for username availability
-    await mockUsernameApi(page, false);
+    await mockUsernameApi(page, "unavailable");
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("AvailableUsername");
     await accountPage.availableUsernameButton.click();
     await expect(
-      page.getByText(UNAVAILABLE_RESPONSE.message.toString())
+      page.getByText(usernameResponse.unavailable.message)
     ).toBeVisible();
   });
 
   test("displays username unavailable error message", async ({ page }) => {
     // mock the API call for username unavailability
-    await mockUsernameApi(page, false);
+    await mockUsernameApi(page, "unavailable");
     const accountPage = new AccountPage(page);
     await accountPage.usernameInput.fill("UnavailableUsername");
     await accountPage.availableUsernameButton.click();
     await expect(
-      page.getByText(UNAVAILABLE_RESPONSE.message.toString())
+      page.getByText(usernameResponse.unavailable.message)
     ).toBeVisible();
   });
 });
