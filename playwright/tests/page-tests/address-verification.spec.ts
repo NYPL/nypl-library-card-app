@@ -13,6 +13,10 @@ import {
   TEST_OOS_ADDRESS,
 } from "../../utils/constants";
 
+const ALTERNATE_ADDRESS_ROUTE_PATTERN = /\/alternate-address\?.*newCard=true/;
+const ADDRESS_VERIFICATION_ROUTE_PATTERN =
+  /\/address-verification\?.*newCard=true/;
+
 test.describe("displays elements on address verification page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(PAGE_ROUTES.ADDRESS_VERIFICATION);
@@ -45,13 +49,27 @@ test.describe("enters home address and alternate address", () => {
     await test.step("enters home address", async () => {
       await expect(addressPage.addressHeading).toBeVisible();
       await fillAddress(addressPage, TEST_OOS_ADDRESS);
+      await expect(addressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
+      await expect(addressPage.nextButton).toBeEnabled();
       await addressPage.nextButton.click();
+      await expect(page).toHaveURL(ALTERNATE_ADDRESS_ROUTE_PATTERN, {
+        timeout: SPINNER_TIMEOUT,
+      });
     });
 
     await test.step("enters alternate address", async () => {
       await expect(alternateAddressPage.addressHeading).toBeVisible();
       await fillAddress(alternateAddressPage, TEST_NYC_ADDRESS);
+      await expect(alternateAddressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
+      await expect(alternateAddressPage.nextButton).toBeEnabled();
       await alternateAddressPage.nextButton.click();
+      await expect(page).toHaveURL(ADDRESS_VERIFICATION_ROUTE_PATTERN, {
+        timeout: SPINNER_TIMEOUT,
+      });
     });
 
     await test.step("displays home and alternate addresses", async () => {
@@ -78,13 +96,27 @@ test.describe("enters home address and alternate address", () => {
     await test.step("enters home and alternate addresses", async () => {
       await expect(addressPage.addressHeading).toBeVisible();
       await fillAddress(addressPage, TEST_MULTIMATCH_ADDRESS);
+      await expect(addressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
+      await expect(addressPage.nextButton).toBeEnabled();
       await addressPage.nextButton.click();
+      await expect(page).toHaveURL(ALTERNATE_ADDRESS_ROUTE_PATTERN, {
+        timeout: SPINNER_TIMEOUT,
+      });
       await expect(addressVerificationPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });
       await expect(alternateAddressPage.addressHeading).toBeVisible();
       await fillAddress(alternateAddressPage, TEST_MULTIMATCH_ADDRESS);
+      await expect(alternateAddressPage.spinner).not.toBeVisible({
+        timeout: SPINNER_TIMEOUT,
+      });
+      await expect(alternateAddressPage.nextButton).toBeEnabled();
       await alternateAddressPage.nextButton.click();
+      await expect(page).toHaveURL(ADDRESS_VERIFICATION_ROUTE_PATTERN, {
+        timeout: SPINNER_TIMEOUT,
+      });
       await expect(addressVerificationPage.spinner).not.toBeVisible({
         timeout: SPINNER_TIMEOUT,
       });

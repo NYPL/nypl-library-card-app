@@ -2,7 +2,11 @@ import { PersonalPage } from "../../pageobjects/personal.page";
 import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
 import { PAGE_ROUTES } from "../../utils/constants";
-import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import {
+  A11Y_GUIDELINES,
+  validateA11yCoverage,
+  pressTab,
+} from "../../utils/a11y-utils";
 
 test.describe("Accessibility tests on personal info page", () => {
   test.beforeEach(async ({ page }) => {
@@ -17,20 +21,28 @@ test.describe("Accessibility tests on personal info page", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("should reach all form fields via the tab key", async ({ page }) => {
+  test("should reach all form fields via the tab key", async ({
+    page,
+    browserName,
+  }) => {
     const personalPage = new PersonalPage(page);
 
-    const personalLocators = [
+    const locators = [
       personalPage.firstNameInput,
       personalPage.lastNameInput,
       personalPage.dateOfBirthInput,
       personalPage.emailInput,
+      personalPage.alternateFormLink,
+      personalPage.locationsLink,
+      personalPage.receiveInfoCheckbox,
+      personalPage.previousButton,
+      personalPage.nextButton,
     ];
 
     await expect(personalPage.stepHeading).toBeFocused();
 
-    for (const locator of personalLocators) {
-      await page.keyboard.press("Tab");
+    for (const locator of locators) {
+      await pressTab(page, browserName);
       await expect(locator).toBeFocused();
     }
   });

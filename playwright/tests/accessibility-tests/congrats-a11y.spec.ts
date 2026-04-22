@@ -1,17 +1,16 @@
 import { AxeBuilder } from "@axe-core/playwright";
 import { CongratsPage } from "../../pageobjects/congrats.page";
 import { test, expect } from "@playwright/test";
+import { randomBytes } from "crypto";
 import { PageManager } from "../../pageobjects/page-manager.page";
-import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import {
+  A11Y_GUIDELINES,
+  validateA11yCoverage,
+  pressTab,
+} from "../../utils/a11y-utils";
+import { navigateToCongratsPage } from "../../utils/navigation-helper";
 
 import {
-  fillPersonalInfo,
-  fillAddress,
-  fillAccountInfo,
-} from "../../utils/form-helper";
-import {
-  PAGE_ROUTES,
-  SPINNER_TIMEOUT,
   TEST_ACCOUNT,
   TEST_PATRON,
   TEST_NYC_ADDRESS,
@@ -22,65 +21,40 @@ import { deletePatron, getPatronID } from "../../utils/sierra-api-utils";
 test.describe("Accessibility tests on Congrats Page", () => {
   let scrapedBarcode: string | null = null;
 
-  test.beforeEach(async ({ page, context }) => {
+  test.beforeEach(async ({ page, context }, testInfo) => {
     await context.clearCookies();
     await page.setExtraHTTPHeaders({
       "x-client-ip": IP.NYC_IP,
       "x-forwarded-for": IP.NYC_IP,
     });
 
+    const accountForThisTest = {
+      ...TEST_ACCOUNT,
+      username: `qa${Date.now()}w${testInfo.workerIndex}${randomBytes(4).toString("hex")}`,
+    };
+
     const pageManager = new PageManager(page);
-    await test.step("filling personal information", async () => {
-      await page.goto(PAGE_ROUTES.PERSONAL);
-      await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      await pageManager.personalPage.nextButton.click();
-    });
-
-    await test.step("filling address information", async () => {
-      await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
+    await test.step("Setup: Navigate to Congrats", async () => {
+      await navigateToCongratsPage({
+        page,
+        pageManager,
+        patronData: TEST_PATRON,
+        addressData: TEST_NYC_ADDRESS,
+        accountData: accountForThisTest,
       });
     });
 
-    await test.step("address verification page", async () => {
+    await test.step("congrats page", async () => {
       await expect(
-        pageManager.addressVerificationPage.stepHeading
+        pageManager.congratsPage.metroOrNonMetroHeading
       ).toBeVisible();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
-        }
-      );
-
-      await test.step("filling account information", async () => {
-        await expect(pageManager.accountPage.stepHeading).toBeVisible();
-        await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-        await pageManager.accountPage.nextButton.click();
-      });
-
-      await test.step("review page", async () => {
-        await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-        await expect(pageManager.reviewPage.submitButton).toBeEnabled();
-        await pageManager.reviewPage.submitButton.click();
-      });
-
-      await test.step("congrats page", async () => {
-        await expect(
-          pageManager.congratsPage.metroOrNonMetroHeading
-        ).toBeVisible();
-        scrapedBarcode =
-          await pageManager.congratsPage.patronBarcodeNumber.textContent();
-        expect(scrapedBarcode).not.toBeNull();
-      });
+      scrapedBarcode =
+        await pageManager.congratsPage.patronBarcodeNumber.textContent();
+      expect(scrapedBarcode).not.toBeNull();
     });
   });
 
-  test.afterAll("deletes patron", async () => {
+  test.afterEach("deletes patron", async () => {
     if (scrapedBarcode) {
       try {
         const patronID = await getPatronID(scrapedBarcode);
@@ -102,7 +76,10 @@ test.describe("Accessibility tests on Congrats Page", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("it should support keyboard navigation", async ({ page }) => {
+  test("it should support keyboard navigation", async ({
+    page,
+    browserName,
+  }) => {
     const congratsPage = new CongratsPage(page);
 
     const locators = [
@@ -118,7 +95,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
     await expect(congratsPage.metroOrNonMetroHeading).toBeFocused();
 
     for (const locator of locators) {
-      await page.keyboard.press("Tab");
+      await pressTab(page, browserName);
       await expect(locator).toBeFocused();
     }
   });

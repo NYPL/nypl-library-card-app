@@ -30,11 +30,11 @@ export class CongratsPage {
       level: 1,
     });
     this.metroOrNonMetroHeading = page.getByRole("heading", {
-      name: "Congratulations! You now have a digital New York Public Library card.",
+      name: /Congratulations! You now have a digital New York Public Library card./,
       level: 2,
     });
     this.temporaryHeading = page.getByRole("heading", {
-      name: "Congratulations! You now have a temporary digital New York Public Library card.",
+      name: /Congratulations! You now have a temporary digital New York Public Library card./,
       level: 2,
     });
     this.getStartedHeading = page.getByRole("heading", {
@@ -52,7 +52,7 @@ export class CongratsPage {
     this.patronBarcodeNumber = page.locator(".barcode");
     this.libraryCardBackground = page.locator(".background-lion");
     this.locationsLink = page.locator("#mainContent").getByRole("link", {
-      name: "locations",
+      name: /locations/i,
     });
     this.photoIdAndProofOfAddressLink = page.getByRole("link", {
       name: "photo ID and proof of address",

@@ -2,11 +2,16 @@ import { LandingPage } from "../../pageobjects/landing.page";
 import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
 import { PAGE_ROUTES } from "../../utils/constants";
-import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import {
+  A11Y_GUIDELINES,
+  validateA11yCoverage,
+  pressTab,
+} from "../../utils/a11y-utils";
 
 test.describe("Accessibility tests on Landing Page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(PAGE_ROUTES.LANDING);
+    await page.waitForLoadState("networkidle");
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {
@@ -19,10 +24,11 @@ test.describe("Accessibility tests on Landing Page", () => {
 
   test("should have keyboard focus indicators for language links", async ({
     page,
+    browserName,
   }) => {
     const landingPage = new LandingPage(page);
 
-    const languageLocators = [
+    const landingLocators = [
       landingPage.arabicLanguage,
       landingPage.bengaliLanguage,
       landingPage.chineseLanguage,
@@ -34,13 +40,24 @@ test.describe("Accessibility tests on Landing Page", () => {
       landingPage.russianLanguage,
       landingPage.spanishLanguage,
       landingPage.urduLanguage,
+      landingPage.digitalResourcesLink,
+      landingPage.visitLibraryLink,
+      landingPage.alternateFormLink,
+      landingPage.whatYouCanAccess,
+      landingPage.cardholderTerms,
+      landingPage.rulesRegulations,
+      landingPage.privacyPolicy,
+      landingPage.getStartedButton,
     ];
 
-    await languageLocators[0].focus();
-    await expect(languageLocators[0]).toBeFocused();
-    for (let i = 1; i < languageLocators.length; i++) {
-      await page.keyboard.press("Tab");
-      await expect(languageLocators[i]).toBeFocused();
+    await landingPage.mainHeading.evaluate((el) =>
+      el.setAttribute("tabindex", "-1")
+    );
+    await landingPage.mainHeading.focus();
+
+    for (const locator of landingLocators) {
+      await pressTab(page, browserName);
+      await expect(locator).toBeFocused();
     }
   });
 });

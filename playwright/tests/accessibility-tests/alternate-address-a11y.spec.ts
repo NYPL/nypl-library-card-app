@@ -2,7 +2,11 @@ import AxeBuilder from "@axe-core/playwright";
 import { AlternateAddressPage } from "../../pageobjects/alternate-address.page";
 import { test, expect } from "@playwright/test";
 import { PAGE_ROUTES } from "../../utils/constants";
-import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import {
+  A11Y_GUIDELINES,
+  validateA11yCoverage,
+  pressTab,
+} from "../../utils/a11y-utils";
 
 test.describe("Accessibility tests on Alternate Address page", () => {
   test.beforeEach(async ({ page }) => {
@@ -17,20 +21,26 @@ test.describe("Accessibility tests on Alternate Address page", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("should reach all form fields via the tab key", async ({ page }) => {
+  test("should reach all form fields via the tab key", async ({
+    page,
+    browserName,
+  }) => {
     const alternateAddress = new AlternateAddressPage(page);
 
-    const alternateAddressLocators = [
+    const inputLocators = [
       alternateAddress.streetAddressInput,
       alternateAddress.apartmentSuiteInput,
       alternateAddress.cityInput,
       alternateAddress.stateInput,
       alternateAddress.postalCodeInput,
+      alternateAddress.previousButton,
+      alternateAddress.nextButton,
     ];
+
     await expect(alternateAddress.stepHeading).toBeFocused();
 
-    for (const locator of alternateAddressLocators) {
-      await page.keyboard.press("Tab");
+    for (const locator of inputLocators) {
+      await pressTab(page, browserName);
       await expect(locator).toBeFocused();
     }
   });

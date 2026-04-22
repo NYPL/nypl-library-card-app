@@ -69,10 +69,11 @@ export const TEST_MULTIMATCH_ADDRESS_WEST: AddressData = {
 
 // Common timeouts
 export const SPINNER_TIMEOUT = 10000;
+export const PROGRESS_BAR_TIMEOUT = 15000;
 
 // account
-const uniqueSuffix = Date.now().toString().slice(-6);
-const TEST_UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
+const uniqueSuffix = Date.now().toString().slice(-10);
+const TEST_UNIQUE_USERNAME = `qa${uniqueSuffix}`;
 
 export const TEST_ACCOUNT = {
   username: TEST_UNIQUE_USERNAME,
