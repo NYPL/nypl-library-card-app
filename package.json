@@ -88,6 +88,7 @@
     "request-ip": "3.3.0",
     "request-promise-native": "1.0.9",
     "save-dev": "0.0.1-security",
+    "sass": "1.26.9",
     "sinon": "9.0.2",
     "typescript-eslint": "^8.45.0",
     "underscore": "1.13.1",
@@ -108,7 +109,6 @@
     "@playwright/test": "^1.58.2",
     "@types/newrelic": "^9.14.8",
     "next-router-mock": "^0.9.13",
-    "sass": "1.99.0",
     "typescript": "4.9.5"
   }
 }
