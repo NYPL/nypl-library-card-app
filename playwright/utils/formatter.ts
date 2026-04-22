@@ -1,3 +1,5 @@
+import sanitizeHtml from "sanitize-html";
+
 /**
  * Escapes special characters in a string so it can be used safely
  * within a Regular Expression constructor.
@@ -49,5 +51,8 @@ export const formatSierraDate = (dateStr: string): string => {
 };
 
 export const cleanText = (text: string): string => {
-  return text.replace(/<[^>]*>/g, "");
+  return sanitizeHtml(text, {
+    allowedTags: [],
+    allowedAttributes: {},
+  });
 };
