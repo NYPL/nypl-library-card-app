@@ -11,8 +11,9 @@ import {
 import { mockUsernameUnavailable } from "../../utils/mock-api";
 
 test.describe("Account Page Accessibility Tests", () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, browserName }) => {
     await page.goto(PAGE_ROUTES.ACCOUNT);
+    console.log({ browserName, platform: process.platform });
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {
