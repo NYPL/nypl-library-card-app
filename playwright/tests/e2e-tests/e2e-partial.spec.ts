@@ -29,11 +29,8 @@ test("displays error when address is too long", async ({ page }) => {
       state: "NY",
       postalCode: "12345",
     });
-    await clickNextButton(
-      pageManager.addressPage,
-      pageManager.addressPage.nextButton,
-      pageManager.alternateAddressPage.stepHeading
-    );
+    // skips API check since a 400 from address API is expected for an invalid address
+    await pageManager.addressPage.nextButton.click();
   });
 
   await test.step("skips alternate address", async () => {

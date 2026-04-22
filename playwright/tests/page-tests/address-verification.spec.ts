@@ -85,21 +85,15 @@ test.describe("enters home address and alternate address", () => {
     await test.step("enters home address", async () => {
       await expect(addressPage.addressHeading).toBeVisible();
       await fillAddress(addressPage, TEST_MULTIMATCH_ADDRESS);
-      await clickNextButton(
-        addressPage,
-        addressPage.nextButton,
-        alternateAddressPage.stepHeading
-      );
+      // skips API check since a 400 from address API is expected for a multimatch address
+      await addressPage.nextButton.click();
     });
 
     await test.step("enters alternate address", async () => {
       await expect(alternateAddressPage.addressHeading).toBeVisible();
       await fillAddress(alternateAddressPage, TEST_MULTIMATCH_ADDRESS);
-      await clickNextButton(
-        alternateAddressPage,
-        alternateAddressPage.nextButton,
-        addressVerificationPage.stepHeading
-      );
+      // skips API check since a 400 from address API is expected for a multimatch address
+      await alternateAddressPage.nextButton.click();
     });
 
     await test.step("displays address options", async () => {

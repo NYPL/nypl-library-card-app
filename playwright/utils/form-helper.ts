@@ -57,16 +57,37 @@ export async function clickNextButton(
   nextButton: Locator,
   nextPageHeading: Locator
 ): Promise<void> {
-  let apiListener: Promise<Response> | undefined;
+  let apiListener: Promise<Response | null> | null = null;
 
-  if (currentPage instanceof ReviewPage) {
-    apiListener = currentPage.page.waitForResponse(
-      (response) =>
-        response.request().method() === "POST" &&
-        response.url().includes("/library-card/api/create-patron"),
-      { timeout: SPINNER_TIMEOUT }
-    );
-  } // add else if for address API
+  // prepares for the API response triggered after clicking the next/submit button
+  if (currentPage instanceof AddressPage) {
+    apiListener = currentPage.page
+      .waitForResponse(
+        (response) =>
+          response.request().method() === "POST" &&
+          response.url().includes("/library-card/api/address"),
+        { timeout: SPINNER_TIMEOUT }
+      )
+      .catch(() => null);
+  } else if (currentPage instanceof AlternateAddressPage) {
+    apiListener = currentPage.page
+      .waitForResponse(
+        (response) =>
+          response.request().method() === "POST" &&
+          response.url().includes("/library-card/api/address"),
+        { timeout: SPINNER_TIMEOUT }
+      )
+      .catch(() => null);
+  } else if (currentPage instanceof ReviewPage) {
+    apiListener = currentPage.page
+      .waitForResponse(
+        (response) =>
+          response.request().method() === "POST" &&
+          response.url().includes("/library-card/api/create-patron"),
+        { timeout: SPINNER_TIMEOUT }
+      )
+      .catch(() => null);
+  }
 
   await nextButton.click();
 
@@ -79,27 +100,26 @@ export async function clickNextButton(
 
   if (!nextPageLoaded) {
     for (const errorMessage of errorMessages) {
-      // replace with throw new Error?
       await expect(errorMessage).not.toBeVisible();
     }
   }
 }
 
-/* 
-waits for either error messages or next page's heading to display
-returns true if the next page heading displays or false if error messages display
-*/
+/*
+ ** waits for either error messages, next page's heading, or API response to display
+ ** returns true if the next page heading displays or false if error messages display
+ */
 export async function waitForErrorOrHeading(
   errorMessages: Locator[],
   nextPageHeading: Locator,
-  apiListener?: Promise<Response>
+  apiListener?: Promise<Response | null>
 ): Promise<boolean> {
-  const apiStatus: Promise<never> =
-    apiListener !== undefined
+  const apiResponse: Promise<never> =
+    apiListener != null
       ? apiListener.then((response) => {
-          if (!response.ok()) {
+          if (response && !response.ok()) {
             throw new Error(
-              `Create patron API failed with status ${response.status()}: ${response.statusText()} before next page rendered.`
+              `API failed with status ${response.status()}: ${response.statusText()}`
             );
           }
           return new Promise<never>(() => {});
@@ -116,7 +136,7 @@ export async function waitForErrorOrHeading(
     nextPageHeading
       .waitFor({ state: "visible", timeout: SPINNER_TIMEOUT })
       .then(() => true),
-    apiStatus,
+    apiResponse,
   ]);
 }
 
