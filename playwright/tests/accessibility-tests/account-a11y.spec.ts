@@ -8,7 +8,7 @@ import {
   USED_USER_NAME,
   AVAILABLE_USER_NAME,
 } from "../../utils/a11y-utils";
-import { mockUsernameUnavailable } from "../../utils/mock-api";
+import { mockUsernameUnavailable, mockUsernameApi } from "../../utils/mock-api";
 
 test.describe("Account Page Accessibility Tests", () => {
   test.beforeEach(async ({ page, browserName }) => {
@@ -76,6 +76,7 @@ test.describe("Account Page Accessibility Tests", () => {
   test("should retain focus when checking available username", async ({
     page,
   }) => {
+    await mockUsernameApi(page, AVAILABLE_USER_NAME);
     const accountPage = new AccountPage(page);
     await expect(accountPage.stepHeading).toBeFocused();
     await page.keyboard.press("Tab");
