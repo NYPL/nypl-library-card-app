@@ -41,6 +41,9 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      - name: Output process.platform for debugging
+        run: node -e "console.log('process.platform=', process.platform)"
+
       - name: Run Playwright tests
         run: npx playwright test
 

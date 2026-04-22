@@ -9,9 +9,10 @@ import {
 } from "../../utils/a11y-utils";
 
 test.describe("Account Page Accessibility Tests", () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, browserName }) => {
     await page.goto(PAGE_ROUTES.ACCOUNT);
     await page.waitForLoadState("networkidle");
+    console.log({ browserName, platform: process.platform });
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {
