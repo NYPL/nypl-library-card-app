@@ -2,22 +2,27 @@ import { Page } from "@playwright/test";
 import { PATRON_TYPES } from "./constants";
 import { AddressData } from "./types";
 
-export const UNAVAILABLE_RESPONSE = {
-  status: 400,
-  type: "unavailable-username",
-  title: "Bad Username",
-  detail: "This username is unavailable. Please try another.",
-  name: "Bad Username",
-  message: "This username is unavailable. Please try another.",
+export const usernameResponse = {
+  available: {
+    status: 200,
+    message: "This username is available.",
+  },
+  unavailable: {
+    status: 409,
+    message: "This username is unavailable. Please try another.",
+  },
 };
 
-export async function mockUsernameApi(page: Page, isAvailable: boolean = true) {
+export async function mockUsernameApi(
+  page: Page,
+  availability: "available" | "unavailable"
+) {
   await page.route("**/library-card/api/username", async (route) => {
-    const body = isAvailable ? { message: "Success" } : UNAVAILABLE_RESPONSE;
+    const { status, message } = usernameResponse[availability];
     await route.fulfill({
-      status: isAvailable ? 200 : 400,
+      status,
       contentType: "application/json",
-      body: JSON.stringify(body),
+      body: JSON.stringify({ message }),
     });
   });
 }

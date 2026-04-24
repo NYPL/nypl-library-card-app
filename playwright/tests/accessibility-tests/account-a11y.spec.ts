@@ -8,7 +8,7 @@ import {
   USED_USER_NAME,
   AVAILABLE_USER_NAME,
 } from "../../utils/a11y-utils";
-import { mockUsernameApi, UNAVAILABLE_RESPONSE } from "../../utils/mock-api";
+import { mockUsernameApi, usernameResponse } from "../../utils/mock-api";
 
 test.describe("Account Page Accessibility Tests", () => {
   test.beforeEach(async ({ page, browserName }) => {
@@ -59,7 +59,7 @@ test.describe("Account Page Accessibility Tests", () => {
   test("should retain focus when checking unavailable username", async ({
     page,
   }) => {
-    await mockUsernameApi(page, false);
+    await mockUsernameApi(page, "unavailable");
     const accountPage = new AccountPage(page);
     await expect(accountPage.stepHeading).toBeFocused();
     await page.keyboard.press("Tab");
@@ -70,7 +70,7 @@ test.describe("Account Page Accessibility Tests", () => {
     await expect(accountPage.availableUsernameButton).toBeFocused();
     await accountPage.availableUsernameButton.press("Enter");
     await expect(
-      page.getByText(UNAVAILABLE_RESPONSE.message.toString())
+      page.getByText(usernameResponse.unavailable.message)
     ).toBeVisible();
     await expect(accountPage.availableUsernameButton).toBeDisabled();
   });
@@ -78,7 +78,7 @@ test.describe("Account Page Accessibility Tests", () => {
   test("should retain focus when checking available username", async ({
     page,
   }) => {
-    await mockUsernameApi(page, true);
+    await mockUsernameApi(page, "available");
     const accountPage = new AccountPage(page);
     await expect(accountPage.stepHeading).toBeFocused();
     await page.keyboard.press("Tab");
