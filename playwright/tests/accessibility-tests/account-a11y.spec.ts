@@ -12,7 +12,7 @@ import { mockUsernameApi, usernameResponse } from "../../utils/mock-api";
 
 test.describe("Account Page Accessibility Tests", () => {
   test.beforeEach(async ({ page, browserName }) => {
-    await page.goto(PAGE_ROUTES.ACCOUNT);
+    await page.goto(PAGE_ROUTES.ACCOUNT());
     console.log({ browserName, platform: process.platform });
   });
 

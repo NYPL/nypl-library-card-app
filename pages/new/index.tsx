@@ -31,23 +31,44 @@ function HomePage({ policyType, lang }: HomePageProps) {
       <Box mb="s">{t("home.description.part1")}</Box>
       <Box
         mb="s"
-        dangerouslySetInnerHTML={{ __html: t("home.description.part2") }}
+        dangerouslySetInnerHTML={{
+          __html: t("home.description.part2", {
+            digitalResources: t("home.description.digitalResources"),
+            visitNYPL: t("home.description.visitNYPL"),
+          }),
+        }}
       />
       <Box
         mb="s"
-        dangerouslySetInnerHTML={{ __html: t("home.description.part3") }}
+        dangerouslySetInnerHTML={{
+          __html: t("home.description.part3"),
+        }}
       />
       <Box
         mb="s"
-        dangerouslySetInnerHTML={{ __html: t("home.description.part4") }}
+        dangerouslySetInnerHTML={{
+          __html: t("home.description.part4", {
+            alternateForm: t("home.description.alternateForm"),
+          }),
+        }}
       />
       <Box
         mb="s"
-        dangerouslySetInnerHTML={{ __html: t("home.description.part5") }}
+        dangerouslySetInnerHTML={{
+          __html: t("home.description.part5", {
+            whatYouCanAccess: t("home.description.whatYouCanAccess"),
+          }),
+        }}
       />
       <Box
-        mb="l"
-        dangerouslySetInnerHTML={{ __html: t("home.description.part6") }}
+        mb="s"
+        dangerouslySetInnerHTML={{
+          __html: t("home.description.part6", {
+            termsConditions: t("home.description.termsConditions"),
+            rulesRegulations: t("home.description.rulesRegulations"),
+            privacyPolicy: t("home.description.privacyPolicy"),
+          }),
+        }}
       />
       <Banner content={t("home.banner.text")} />
       <RoutingLinks

@@ -31,7 +31,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
 
     const pageManager = new PageManager(page);
     await test.step("filling personal information", async () => {
-      await page.goto(PAGE_ROUTES.PERSONAL);
+      await page.goto(PAGE_ROUTES.PERSONAL());
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
       await pageManager.personalPage.nextButton.click();

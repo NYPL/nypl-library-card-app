@@ -6,7 +6,7 @@ import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 
 test.describe("Accessibility tests on Landing Page", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(PAGE_ROUTES.LANDING);
+    await page.goto(PAGE_ROUTES.LANDING());
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {

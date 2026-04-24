@@ -13,7 +13,7 @@ const Breadcrumbs = () => {
       ? prodHref
       : qaHref;
   const localizedPath = (path: string) =>
-    lang && lang !== "en" ? `/${path}?lang=${lang}` : path;
+    lang && lang !== "en" ? `${path}?lang=${lang}` : path;
   const breadcrumbsData = [
     { url: homeHref, text: "Home", replace: false },
     { url: localizedPath("/new"), text: "Get A Library Card", replace: true },

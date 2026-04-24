@@ -9,6 +9,7 @@ import {
   PAGE_ROUTES,
   PATRON_TYPES,
   SPINNER_TIMEOUT,
+  SUPPORTED_LANGUAGES,
   TEST_ACCOUNT,
   TEST_EDITED_PATRON,
   TEST_OOS_ADDRESS,
@@ -20,7 +21,7 @@ import {
   verifyPatronData,
 } from "../../utils/sierra-api-utils";
 
-let scrapedBarcode: string | null = null;
+const scrapedBarcode: string | null = null;
 
 test.afterAll("deletes patron", async () => {
   if (scrapedBarcode) {
@@ -36,412 +37,453 @@ test.afterAll("deletes patron", async () => {
   }
 });
 
-test.describe("E2E: Edits patron information", () => {
-  test("retains edited name", async ({ page }) => {
-    const pageManager = new PageManager(page);
-    const editedFullName = `${TEST_EDITED_PATRON.firstName} ${TEST_EDITED_PATRON.lastName}`;
+for (const { lang, name } of SUPPORTED_LANGUAGES) {
+  test.describe(`E2E: Edits patron information in ${name} (${lang})`, () => {
+    let pageManager: PageManager;
+    let appContent: any;
+    let scrapedBarcode: string | null = null;
 
-    await test.step("begins at landing", async () => {
-      await page.goto(PAGE_ROUTES.LANDING);
-      await expect(pageManager.landingPage.applyHeading).toBeVisible();
-      await pageManager.landingPage.getStartedButton.click();
+    test.beforeEach(async ({ page }) => {
+      appContent = require(`../../../public/locales/${lang}/common.json`);
+      pageManager = new PageManager(page, appContent);
     });
 
-    await test.step("enters personal information", async () => {
-      await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      await pageManager.personalPage.nextButton.click();
-    });
+    test.afterAll("deletes patron", async () => {
+      if (scrapedBarcode) {
+        try {
+          const patronID = await getPatronID(scrapedBarcode);
 
-    await test.step("enters home address", async () => {
-      await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
-    });
-
-    await test.step("skips alternate address", async () => {
-      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await pageManager.alternateAddressPage.nextButton.click();
-      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
-    });
-
-    await test.step("verifies home address", async () => {
-      await expect(
-        pageManager.addressVerificationPage.stepHeading
-      ).toBeVisible();
-      await pageManager.addressVerificationPage
-        .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-        .click();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
+          if (patronID) {
+            await deletePatron(patronID);
+          }
+        } catch (error) {
+          console.error("Error during patron deletion:", error);
         }
-      );
+      }
     });
 
-    await test.step("enters account information", async () => {
-      await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
+    test("retains edited name", async ({ page }) => {
+      await test.step("begins at landing", async () => {
+        await page.goto(PAGE_ROUTES.LANDING(lang));
+        await expect(pageManager.landingPage.applyHeading).toBeVisible();
+        await pageManager.landingPage.getStartedButton.click();
+      });
+
+      await test.step("enters personal information", async () => {
+        await expect(pageManager.personalPage.stepHeading).toBeVisible();
+        await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+        await pageManager.personalPage.nextButton.click();
+      });
+
+      await test.step("enters home address", async () => {
+        await expect(pageManager.addressPage.stepHeading).toBeVisible();
+        await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
+        await pageManager.addressPage.nextButton.click();
+        await expect(pageManager.addressPage.spinner).not.toBeVisible({
+          timeout: SPINNER_TIMEOUT,
+        });
+      });
+
+      await test.step("skips alternate address", async () => {
+        await expect(
+          pageManager.alternateAddressPage.stepHeading
+        ).toBeVisible();
+        await pageManager.alternateAddressPage.nextButton.click();
+        await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
+          timeout: SPINNER_TIMEOUT,
+        });
+      });
+
+      await test.step("verifies home address", async () => {
+        await expect(
+          pageManager.addressVerificationPage.stepHeading
+        ).toBeVisible();
+        await pageManager.addressVerificationPage
+          .getHomeAddressOption(TEST_OOS_ADDRESS.street)
+          .click();
+        await pageManager.addressVerificationPage.nextButton.click();
+        await expect(
+          pageManager.addressVerificationPage.spinner
+        ).not.toBeVisible({
+          timeout: SPINNER_TIMEOUT,
+        });
+      });
+
+      await test.step("enters account information", async () => {
+        await expect(pageManager.accountPage.stepHeading).toBeVisible();
+        await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+        await pageManager.accountPage.nextButton.click();
+      });
+
+      await test.step("edits personal info on review page", async () => {
+        await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+        await pageManager.reviewPage.editPersonalInfoButton.click();
+        await fillPersonalInfo(pageManager.reviewPage, TEST_EDITED_PATRON);
+        await pageManager.reviewPage.receiveInfoCheckboxLabel.click();
+      });
+
+      await test.step("displays updated personal info on review page", async () => {
+        await expect(pageManager.reviewPage.firstNameInput).toHaveValue(
+          TEST_EDITED_PATRON.firstName
+        );
+        await expect(pageManager.reviewPage.lastNameInput).toHaveValue(
+          TEST_EDITED_PATRON.lastName
+        );
+        await expect(pageManager.reviewPage.dateOfBirthInput).toHaveValue(
+          TEST_EDITED_PATRON.dateOfBirth
+        );
+        await expect(pageManager.reviewPage.emailInput).toHaveValue(
+          TEST_EDITED_PATRON.email
+        );
+      });
+
+      await test.step("submits application", async () => {
+        await expect(pageManager.reviewPage.submitButton).toBeVisible();
+        await pageManager.reviewPage.submitButton.click();
+      });
+
+      await test.step("displays edited name on congrats page", async () => {
+        const editedFullName = `${TEST_EDITED_PATRON.firstName} ${TEST_EDITED_PATRON.lastName}`;
+        await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
+        await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
+        await expect(pageManager.congratsPage.memberName).toHaveText(
+          editedFullName
+        );
+      });
+
+      await test.step("retrieves barcode from congrats page", async () => {
+        scrapedBarcode =
+          await pageManager.congratsPage.patronBarcodeNumber.textContent();
+        expect(scrapedBarcode).not.toBeNull();
+      });
     });
 
-    await test.step("edits personal info on review page", async () => {
-      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await pageManager.reviewPage.editPersonalInfoButton.click();
-      await fillPersonalInfo(pageManager.reviewPage, TEST_EDITED_PATRON);
-    });
+    test.describe("retains ecommunications preference in Sierra", () => {
+      test("unchecks ecommunications preference on personal page", async ({
+        page,
+      }) => {
+        await test.step("enters personal information with ecomms unchecked", async () => {
+          await page.goto(PAGE_ROUTES.PERSONAL(lang));
+          await expect(pageManager.personalPage.stepHeading).toBeVisible();
+          await fillPersonalInfo(pageManager.personalPage, TEST_EDITED_PATRON);
+          await expect(
+            pageManager.personalPage.receiveInfoCheckbox
+          ).not.toBeChecked();
+          await pageManager.personalPage.nextButton.click();
+        });
 
-    await test.step("displays updated personal info on review page", async () => {
-      await expect(pageManager.reviewPage.firstNameInput).toHaveValue(
-        TEST_EDITED_PATRON.firstName
-      );
-      await expect(pageManager.reviewPage.lastNameInput).toHaveValue(
-        TEST_EDITED_PATRON.lastName
-      );
-      await expect(pageManager.reviewPage.dateOfBirthInput).toHaveValue(
-        TEST_EDITED_PATRON.dateOfBirth
-      );
-      await expect(pageManager.reviewPage.emailInput).toHaveValue(
-        TEST_EDITED_PATRON.email
-      );
-      await expect(
-        pageManager.reviewPage.receiveInfoCheckbox
-      ).not.toBeChecked();
-    });
+        await test.step("enters home address", async () => {
+          await expect(pageManager.addressPage.stepHeading).toBeVisible();
+          await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
+          await pageManager.addressPage.nextButton.click();
+          await expect(pageManager.addressPage.spinner).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
+        });
 
-    await test.step("submits application", async () => {
-      await expect(pageManager.reviewPage.submitButton).toBeVisible();
-      await pageManager.reviewPage.submitButton.click();
-    });
+        await test.step("skips alternate address", async () => {
+          await expect(
+            pageManager.alternateAddressPage.stepHeading
+          ).toBeVisible();
+          await pageManager.alternateAddressPage.nextButton.click();
+          await expect(
+            pageManager.alternateAddressPage.spinner
+          ).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
+        });
 
-    await test.step("displays edited name on congrats page", async () => {
-      await expect(pageManager.congratsPage.temporaryHeading).toBeVisible();
-      await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
-      await expect(pageManager.congratsPage.memberName).toHaveText(
-        editedFullName
-      );
-    });
+        await test.step("verifies home address", async () => {
+          await expect(
+            pageManager.addressVerificationPage.stepHeading
+          ).toBeVisible();
+          await pageManager.addressVerificationPage
+            .getHomeAddressOption(TEST_OOS_ADDRESS.street)
+            .click();
+          await pageManager.addressVerificationPage.nextButton.click();
+          await expect(
+            pageManager.addressVerificationPage.spinner
+          ).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
+        });
 
-    await test.step("retrieves barcode from congrats page", async () => {
-      scrapedBarcode =
-        await pageManager.congratsPage.patronBarcodeNumber.textContent();
-      expect(scrapedBarcode).not.toBeNull();
+        await test.step("enters account information", async () => {
+          await expect(pageManager.accountPage.stepHeading).toBeVisible();
+          await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+          await pageManager.accountPage.nextButton.click();
+        });
+
+        await test.step("confirms ecommunications preference is retained on review page", async () => {
+          await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+          await expect(pageManager.reviewPage.receiveInfoChoice).toBeVisible();
+          await pageManager.reviewPage.editPersonalInfoButton.click();
+          await expect(
+            pageManager.reviewPage.receiveInfoCheckbox
+          ).not.toBeChecked();
+        });
+
+        await test.step("submits application and verifies Sierra data", async () => {
+          await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+          await pageManager.reviewPage.submitButton.click();
+          const scrapedBarcode =
+            await pageManager.congratsPage.patronBarcodeNumber.textContent();
+          expect(scrapedBarcode).not.toBeNull();
+          await verifyPatronData(
+            scrapedBarcode,
+            TEST_EDITED_PATRON,
+            TEST_OOS_ADDRESS,
+            PATRON_TYPES.DIGITAL_TEMPORARY
+          );
+        });
+      });
+
+      test("unchecks ecommunications preference on review page", async ({
+        page,
+      }) => {
+        await test.step("enters personal information with ecomms checked", async () => {
+          await page.goto(PAGE_ROUTES.PERSONAL(lang));
+          await expect(pageManager.personalPage.stepHeading).toBeVisible();
+          await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+          await expect(
+            pageManager.personalPage.receiveInfoCheckbox
+          ).toBeChecked();
+          await pageManager.personalPage.nextButton.click();
+        });
+
+        await test.step("enters home address", async () => {
+          await expect(pageManager.addressPage.stepHeading).toBeVisible();
+          await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
+          await pageManager.addressPage.nextButton.click();
+          await expect(pageManager.addressPage.spinner).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
+        });
+
+        await test.step("skips alternate address", async () => {
+          await expect(
+            pageManager.alternateAddressPage.stepHeading
+          ).toBeVisible();
+          await pageManager.alternateAddressPage.nextButton.click();
+          await expect(
+            pageManager.alternateAddressPage.spinner
+          ).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
+        });
+
+        await test.step("verifies home address", async () => {
+          await expect(
+            pageManager.addressVerificationPage.stepHeading
+          ).toBeVisible();
+          await pageManager.addressVerificationPage
+            .getHomeAddressOption(TEST_OOS_ADDRESS.street)
+            .click();
+          await pageManager.addressVerificationPage.nextButton.click();
+          await expect(
+            pageManager.addressVerificationPage.spinner
+          ).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
+        });
+
+        await test.step("enters account information", async () => {
+          await expect(pageManager.accountPage.stepHeading).toBeVisible();
+          await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+          await pageManager.accountPage.nextButton.click();
+        });
+
+        await test.step("unchecks ecommunications preference on review page", async () => {
+          await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+          await expect(pageManager.reviewPage.receiveInfoChoice).toBeVisible();
+          await pageManager.reviewPage.editPersonalInfoButton.click();
+          await pageManager.reviewPage.receiveInfoCheckboxLabel.click();
+          await expect(
+            pageManager.reviewPage.receiveInfoCheckbox
+          ).not.toBeChecked();
+        });
+
+        await test.step("submits application and verifies Sierra data", async () => {
+          await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+          await pageManager.reviewPage.submitButton.click();
+          const scrapedBarcode =
+            await pageManager.congratsPage.patronBarcodeNumber.textContent();
+          expect(scrapedBarcode).not.toBeNull();
+          const expectedPatron = {
+            ...TEST_PATRON,
+            ecommunicationsPref: false,
+          };
+          await verifyPatronData(
+            scrapedBarcode,
+            expectedPatron,
+            TEST_OOS_ADDRESS,
+            PATRON_TYPES.DIGITAL_TEMPORARY
+          );
+        });
+      });
+
+      test("checks ecommunications preference on personal page", async ({
+        page,
+      }) => {
+        await test.step("enters personal information with ecomms checked", async () => {
+          await page.goto(PAGE_ROUTES.PERSONAL(lang));
+          await expect(pageManager.personalPage.stepHeading).toBeVisible();
+          await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
+          await expect(
+            pageManager.personalPage.receiveInfoCheckbox
+          ).toBeChecked();
+          await pageManager.personalPage.nextButton.click();
+        });
+
+        await test.step("enters home address", async () => {
+          await expect(pageManager.addressPage.stepHeading).toBeVisible();
+          await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
+          await pageManager.addressPage.nextButton.click();
+          await expect(pageManager.addressPage.spinner).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
+        });
+
+        await test.step("skips alternate address", async () => {
+          await expect(
+            pageManager.alternateAddressPage.stepHeading
+          ).toBeVisible();
+          await pageManager.alternateAddressPage.nextButton.click();
+          await expect(
+            pageManager.alternateAddressPage.spinner
+          ).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
+        });
+
+        await test.step("verifies home address", async () => {
+          await expect(
+            pageManager.addressVerificationPage.stepHeading
+          ).toBeVisible();
+          await pageManager.addressVerificationPage
+            .getHomeAddressOption(TEST_OOS_ADDRESS.street)
+            .click();
+          await pageManager.addressVerificationPage.nextButton.click();
+          await expect(
+            pageManager.addressVerificationPage.spinner
+          ).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
+        });
+
+        await test.step("enters account information", async () => {
+          await expect(pageManager.accountPage.stepHeading).toBeVisible();
+          await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+          await pageManager.accountPage.nextButton.click();
+        });
+
+        await test.step("confirms ecommunications preference is retained on review page", async () => {
+          await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+          await expect(pageManager.reviewPage.receiveInfoChoice).toBeVisible();
+          await pageManager.reviewPage.editPersonalInfoButton.click();
+          await expect(
+            pageManager.reviewPage.receiveInfoCheckbox
+          ).toBeChecked();
+        });
+
+        await test.step("submits application and verifies Sierra data", async () => {
+          await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+          await pageManager.reviewPage.submitButton.click();
+          const scrapedBarcode =
+            await pageManager.congratsPage.patronBarcodeNumber.textContent();
+          expect(scrapedBarcode).not.toBeNull();
+          await verifyPatronData(
+            scrapedBarcode,
+            TEST_PATRON,
+            TEST_OOS_ADDRESS,
+            PATRON_TYPES.DIGITAL_TEMPORARY
+          );
+        });
+      });
+
+      test("checks ecommunications preference on review page", async ({
+        page,
+      }) => {
+        await test.step("enters personal information with ecomms unchecked", async () => {
+          await page.goto(PAGE_ROUTES.PERSONAL(lang));
+          await expect(pageManager.personalPage.stepHeading).toBeVisible();
+          await fillPersonalInfo(pageManager.personalPage, TEST_EDITED_PATRON);
+          await expect(
+            pageManager.personalPage.receiveInfoCheckbox
+          ).not.toBeChecked();
+          await pageManager.personalPage.nextButton.click();
+        });
+
+        await test.step("enters home address", async () => {
+          await expect(pageManager.addressPage.stepHeading).toBeVisible();
+          await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
+          await pageManager.addressPage.nextButton.click();
+          await expect(pageManager.addressPage.spinner).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
+        });
+
+        await test.step("skips alternate address", async () => {
+          await expect(
+            pageManager.alternateAddressPage.stepHeading
+          ).toBeVisible();
+          await pageManager.alternateAddressPage.nextButton.click();
+          await expect(
+            pageManager.alternateAddressPage.spinner
+          ).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
+        });
+
+        await test.step("verifies home address", async () => {
+          await expect(
+            pageManager.addressVerificationPage.stepHeading
+          ).toBeVisible();
+          await pageManager.addressVerificationPage
+            .getHomeAddressOption(TEST_OOS_ADDRESS.street)
+            .click();
+          await pageManager.addressVerificationPage.nextButton.click();
+          await expect(
+            pageManager.addressVerificationPage.spinner
+          ).not.toBeVisible({
+            timeout: SPINNER_TIMEOUT,
+          });
+        });
+
+        await test.step("enters account information", async () => {
+          await expect(pageManager.accountPage.stepHeading).toBeVisible();
+          await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
+          await pageManager.accountPage.nextButton.click();
+        });
+
+        await test.step("rechecks ecommunications preference on review page", async () => {
+          await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+          await expect(pageManager.reviewPage.receiveInfoChoice).toBeVisible();
+          await pageManager.reviewPage.editPersonalInfoButton.click();
+          await pageManager.reviewPage.receiveInfoCheckboxLabel.click();
+          await expect(
+            pageManager.reviewPage.receiveInfoCheckbox
+          ).toBeChecked();
+        });
+
+        await test.step("submits application and verifies Sierra data", async () => {
+          await expect(pageManager.reviewPage.stepHeading).toBeVisible();
+          await pageManager.reviewPage.submitButton.click();
+          const scrapedBarcode =
+            await pageManager.congratsPage.patronBarcodeNumber.textContent();
+          expect(scrapedBarcode).not.toBeNull();
+          const expectedPatron = {
+            ...TEST_EDITED_PATRON,
+            ecommunicationsPref: true,
+          };
+          await verifyPatronData(
+            scrapedBarcode,
+            expectedPatron,
+            TEST_OOS_ADDRESS,
+            PATRON_TYPES.DIGITAL_TEMPORARY
+          );
+        });
+      });
     });
   });
-});
-
-test.describe("retains ecommunications preference in Sierra", () => {
-  test("unchecks ecommunications preference on personal page", async ({
-    page,
-  }) => {
-    const pageManager = new PageManager(page);
-
-    await test.step("enters personal information with ecomms unchecked", async () => {
-      await page.goto(PAGE_ROUTES.PERSONAL);
-      await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      await fillPersonalInfo(pageManager.personalPage, TEST_EDITED_PATRON);
-      await expect(
-        pageManager.personalPage.receiveInfoCheckbox
-      ).not.toBeChecked();
-      await pageManager.personalPage.nextButton.click();
-    });
-
-    await test.step("enters home address", async () => {
-      await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
-    });
-
-    await test.step("skips alternate address", async () => {
-      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await pageManager.alternateAddressPage.nextButton.click();
-      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
-    });
-
-    await test.step("verifies home address", async () => {
-      await expect(
-        pageManager.addressVerificationPage.stepHeading
-      ).toBeVisible();
-      await pageManager.addressVerificationPage
-        .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-        .click();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
-        }
-      );
-    });
-
-    await test.step("enters account information", async () => {
-      await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
-    });
-
-    await test.step("confirms ecommunications preference is retained on review page", async () => {
-      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("No");
-      await pageManager.reviewPage.editPersonalInfoButton.click();
-      await expect(
-        pageManager.reviewPage.receiveInfoCheckbox
-      ).not.toBeChecked();
-    });
-
-    await test.step("submits application and verifies Sierra data", async () => {
-      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await pageManager.reviewPage.submitButton.click();
-      const scrapedBarcode =
-        await pageManager.congratsPage.patronBarcodeNumber.textContent();
-      expect(scrapedBarcode).not.toBeNull();
-      await verifyPatronData(
-        scrapedBarcode,
-        TEST_EDITED_PATRON,
-        TEST_OOS_ADDRESS,
-        PATRON_TYPES.DIGITAL_TEMPORARY
-      );
-    });
-  });
-
-  test("unchecks ecommunications preference on review page", async ({
-    page,
-  }) => {
-    const pageManager = new PageManager(page);
-
-    await test.step("enters personal information with ecomms checked", async () => {
-      await page.goto(PAGE_ROUTES.PERSONAL);
-      await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      await expect(pageManager.personalPage.receiveInfoCheckbox).toBeChecked();
-      await pageManager.personalPage.nextButton.click();
-    });
-
-    await test.step("enters home address", async () => {
-      await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
-    });
-
-    await test.step("skips alternate address", async () => {
-      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await pageManager.alternateAddressPage.nextButton.click();
-      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
-    });
-
-    await test.step("verifies home address", async () => {
-      await expect(
-        pageManager.addressVerificationPage.stepHeading
-      ).toBeVisible();
-      await pageManager.addressVerificationPage
-        .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-        .click();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
-        }
-      );
-    });
-
-    await test.step("enters account information", async () => {
-      await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
-    });
-
-    await test.step("unchecks ecommunications preference on review page", async () => {
-      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
-      await pageManager.reviewPage.editPersonalInfoButton.click();
-      await pageManager.reviewPage.receiveInfoCheckboxLabel.click();
-      await expect(
-        pageManager.reviewPage.receiveInfoCheckbox
-      ).not.toBeChecked();
-    });
-
-    await test.step("submits application and verifies Sierra data", async () => {
-      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await pageManager.reviewPage.submitButton.click();
-      const scrapedBarcode =
-        await pageManager.congratsPage.patronBarcodeNumber.textContent();
-      expect(scrapedBarcode).not.toBeNull();
-      const expectedPatron = {
-        ...TEST_PATRON,
-        ecommunicationsPref: false,
-      };
-      await verifyPatronData(
-        scrapedBarcode,
-        expectedPatron,
-        TEST_OOS_ADDRESS,
-        PATRON_TYPES.DIGITAL_TEMPORARY
-      );
-    });
-  });
-
-  test("checks ecommunications preference on personal page", async ({
-    page,
-  }) => {
-    const pageManager = new PageManager(page);
-
-    await test.step("enters personal information with ecomms checked", async () => {
-      await page.goto(PAGE_ROUTES.PERSONAL);
-      await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      await expect(pageManager.personalPage.receiveInfoCheckbox).toBeChecked();
-      await pageManager.personalPage.nextButton.click();
-    });
-
-    await test.step("enters home address", async () => {
-      await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
-    });
-
-    await test.step("skips alternate address", async () => {
-      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await pageManager.alternateAddressPage.nextButton.click();
-      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
-    });
-
-    await test.step("verifies home address", async () => {
-      await expect(
-        pageManager.addressVerificationPage.stepHeading
-      ).toBeVisible();
-      await pageManager.addressVerificationPage
-        .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-        .click();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
-        }
-      );
-    });
-
-    await test.step("enters account information", async () => {
-      await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
-    });
-
-    await test.step("confirms ecommunications preference is retained on review page", async () => {
-      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("Yes");
-      await pageManager.reviewPage.editPersonalInfoButton.click();
-      await expect(pageManager.reviewPage.receiveInfoCheckbox).toBeChecked();
-    });
-
-    await test.step("submits application and verifies Sierra data", async () => {
-      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await pageManager.reviewPage.submitButton.click();
-      const scrapedBarcode =
-        await pageManager.congratsPage.patronBarcodeNumber.textContent();
-      expect(scrapedBarcode).not.toBeNull();
-      await verifyPatronData(
-        scrapedBarcode,
-        TEST_PATRON,
-        TEST_OOS_ADDRESS,
-        PATRON_TYPES.DIGITAL_TEMPORARY
-      );
-    });
-  });
-
-  test("checks ecommunications preference on review page", async ({ page }) => {
-    const pageManager = new PageManager(page);
-
-    await test.step("enters personal information with ecomms unchecked", async () => {
-      await page.goto(PAGE_ROUTES.PERSONAL);
-      await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      await fillPersonalInfo(pageManager.personalPage, TEST_EDITED_PATRON);
-      await expect(
-        pageManager.personalPage.receiveInfoCheckbox
-      ).not.toBeChecked();
-      await pageManager.personalPage.nextButton.click();
-    });
-
-    await test.step("enters home address", async () => {
-      await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-      await pageManager.addressPage.nextButton.click();
-      await expect(pageManager.addressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
-    });
-
-    await test.step("skips alternate address", async () => {
-      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-      await pageManager.alternateAddressPage.nextButton.click();
-      await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-        timeout: SPINNER_TIMEOUT,
-      });
-    });
-
-    await test.step("verifies home address", async () => {
-      await expect(
-        pageManager.addressVerificationPage.stepHeading
-      ).toBeVisible();
-      await pageManager.addressVerificationPage
-        .getHomeAddressOption(TEST_OOS_ADDRESS.street)
-        .click();
-      await pageManager.addressVerificationPage.nextButton.click();
-      await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible(
-        {
-          timeout: SPINNER_TIMEOUT,
-        }
-      );
-    });
-
-    await test.step("enters account information", async () => {
-      await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await pageManager.accountPage.nextButton.click();
-    });
-
-    await test.step("rechecks ecommunications preference on review page", async () => {
-      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await expect(pageManager.reviewPage.receiveInfoChoice).toHaveText("No");
-      await pageManager.reviewPage.editPersonalInfoButton.click();
-      await pageManager.reviewPage.receiveInfoCheckboxLabel.click();
-      await expect(pageManager.reviewPage.receiveInfoCheckbox).toBeChecked();
-    });
-
-    await test.step("submits application and verifies Sierra data", async () => {
-      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-      await pageManager.reviewPage.submitButton.click();
-      const scrapedBarcode =
-        await pageManager.congratsPage.patronBarcodeNumber.textContent();
-      expect(scrapedBarcode).not.toBeNull();
-      const expectedPatron = {
-        ...TEST_EDITED_PATRON,
-        ecommunicationsPref: true,
-      };
-      await verifyPatronData(
-        scrapedBarcode,
-        expectedPatron,
-        TEST_OOS_ADDRESS,
-        PATRON_TYPES.DIGITAL_TEMPORARY
-      );
-    });
-  });
-});
+}

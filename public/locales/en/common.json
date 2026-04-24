@@ -11,11 +11,18 @@
     "title": "Apply for a library card today in a few easy steps",
     "description": {
       "part1": "Do you live, work, go to school, or pay property taxes in New York State? Get a free library card now to access everything The New York Public Library has to offer!",
-      "part2": "Start your application now and begin using e-books and other <a href=\"https://www.nypl.org/help/services/remote-resources\">digital resources</a> right away. Then, <a href=\"https://www.nypl.org/locations\">visit any NYPL location</a> to verify your information and receive a physical NYPL card. This card gives you access to even more from the Library, including physical books and the Culture Pass program.",
+      "part2": "Start your application now and begin using e-books and other <a href=\"https://www.nypl.org/help/services/remote-resources\">{{digitalResources}}</a> right away. Then, <a href=\"https://www.nypl.org/locations\">{{visitNYPL}}</a> to verify your information and receive a physical NYPL card. This card gives you access to even more from the Library, including physical books and the Culture Pass program.",
+      "digitalResources": "digital resources",
+      "visitNYPL": "visit any NYPL location",
       "part3": "If you are visiting New York from another state, you can apply for a temporary card with this form. Before your visit, you can request physical materials and schedule research appointments. For additional Library services, you must validate your card in person at an NYPL location within 30 days.",
-      "part4": "If you are visiting from another country, please use our <a href=\"https://www.nypl.org/help/library-card#international-researchers\">alternate form</a> for international visitors. With your temporary card, you may request materials and schedule research appointments.",
-      "part5": "Learn more about <a href=\"https://www.nypl.org/help/library-card\">what you can access</a> with your library card!",
-      "part6": "By submitting an application, you understand and agree to our <a href=\"https://www.nypl.org/help/library-card/terms-conditions\">Cardholder Terms and Conditions</a> and agree to our <a href=\"https://www.nypl.org/help/legal-notices/policies-and-rules\">Rules and Regulations</a>. To learn more about the Library's use of personal information, please read our <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy\">Privacy Policy</a>."
+      "part4": "If you are visiting from another country, please use our <a href=\"https://www.nypl.org/help/library-card#international-researchers\">{{alternateForm}}</a> for international visitors. With your temporary card, you may request materials and schedule research appointments.",
+      "alternateForm": "alternate form",
+      "part5": "Learn more about <a href=\"https://www.nypl.org/help/library-card\">{{whatYouCanAccess}}</a> with your library card!",
+      "whatYouCanAccess": "what you can access",
+      "part6": "By submitting an application, you understand and agree to our <a href=\"https://www.nypl.org/help/library-card/terms-conditions\">{{termsConditions}}</a> and agree to our <a href=\"https://www.nypl.org/help/legal-notices/policies-and-rules\">{{rulesRegulations}}</a>. To learn more about the Library's use of personal information, please read our <a href=\"https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy\">{{privacyPolicy}}</a>.",
+      "termsConditions": "Cardholder Terms and Conditions",
+      "rulesRegulations": "Rules and Regulations",
+      "privacyPolicy": "Privacy Policy"
     },
     "banner": {
       "text":"Please note: You must be at least 13 years old to apply online. To get a digital library card and immediate access to online resources, you must be in New York state when submitting an application."
@@ -36,7 +43,9 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Email address",
-      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://on.nypl.org/internationalresearch'>alternate form</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>locations</a> with proof of identity and home address to pick up your card."
+      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://on.nypl.org/internationalresearch'>{{alternateForm}}</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>{{locations}}</a> with proof of identity and home address to pick up your card.",
+      "alternateForm": "alternate form",
+      "locations": "locations"
     },
     "eCommunications": {
       "labelText": "Yes, I would like to receive information about NYPL's programs and services"
@@ -53,7 +62,8 @@
     "title": "Step 2 of 5: Address",
     "address": {
       "title": "Home address",
-      "description": "If you live in the United States, please provide your home address below. If you are visiting New York from another state, you can apply for a temporary card with this form. A temporary card allows you to request physical materials and schedule research appointments before your visit. International visitors should use our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>alternate form</a>.",
+      "description": "If you live in the United States, please provide your home address below. If you are visiting New York from another state, you can apply for a temporary card with this form. A temporary card allows you to request physical materials and schedule research appointments before your visit. International visitors should use our <a href='https://legacycatalog.nypl.org/selfreg/patonsite'>{{alternateForm}}</a>.",
+      "alternateForm": "alternate form",
       "line1": { "label": "Street address" },
       "line2": { "label": "Apartment / Suite" },
       "city": { "label": "City" },
@@ -107,13 +117,17 @@
       "title": "Home library",
       "description": {
         "part1": "Choosing a home library will help us make sure you're getting everything you need from a branch that's most convenient for you.",
-        "part2": "Please select an <a href='https://www.nypl.org/locations'>NYPL location</a> from the dropdown menu below to be your home library. If you do not have a home library, please select “Virtual.” You may update this at any time through your account settings.",
+        "part2": "Please select an <a href='https://www.nypl.org/locations'>{{nyplLocation}}</a> from the dropdown menu below to be your home library. If you do not have a home library, please select “Virtual.” You may update this at any time through your account settings.",
+        "nyplLocation": "NYPL location",
         "part3": "To borrow physical items, you <strong>must</strong> visit an NYPL location to verify your info and receive a physical card."
       }
     },
     "termsAndCondition": {
       "label": "Yes, I accept the terms and conditions.",
-      "text": "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>Cardholder Terms and Conditions</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>Rules and Regulations</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>Privacy Policy</a>."
+      "text": "By submitting an application, you understand and agree to our <a href='https://www.nypl.org/help/library-card/terms-conditions'>{{termsConditions}}</a> and agree to our <a href='https://www.nypl.org/help/about-nypl/legal-notices/rules-and-regulations'>{{rulesRegulations}}</a>. To learn more about the Library’s use of personal information, please read our <a href='https://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'>{{privacyPolicy}}</a>.",
+      "termsConditions": "Cardholder Terms and Conditions",
+      "rulesRegulations": "Rules and Regulations",
+      "privacyPolicy": "Privacy Policy"
     },
     "errorMessage": {
       "username": "There was a problem. Username must be between 5-25 alphanumeric characters.",
@@ -149,8 +163,13 @@
     },
     "description": {
       "part1": "Print or save this information for your records. Within 24 hours, you will receive an email with the details of your account.",
-      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>locations</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>photo ID and proof of address</a> to complete the application for a physical card.",
-      "part3": "<b>This is a temporary card and will expire in 30 days.</b> If you live, work, attend school, or pay property taxes in New York State, <a href='https://www.nypl.org/help/library-card/terms-conditions#renew'>learn more</a> about how to update your card. If you're a researcher planning an upcoming visit more than 30 days from now, and for all other questions, contact  <a href='mailto:gethelp@nypl.org'>gethelp@nypl.org</a>."
+      "part2": "To borrow physical materials, please visit one of our <a href='http://nypl.org/locations'>{{locations}}</a> with a valid <a href='https://www.nypl.org/help/library-card/terms-conditions#eligibility'>{{proof}}</a> to complete the application for a physical card.",
+      "locations": "locations",
+      "proof": "photo ID and proof of address",
+      "part3": "<b>{{temporaryCard}}</b> If you live, work, attend school, or pay property taxes in New York State, <a href='https://www.nypl.org/help/library-card/terms-conditions#renew'>{{learnMore}}</a> about how to update your card. If you're a researcher planning an upcoming visit more than 30 days from now, and for all other questions, contact <a href='mailto:gethelp@nypl.org'>{{getHelp}}</a>.",
+      "temporaryCard": "This is a temporary card and will expire in 30 days.",
+      "learnMore": "learn more",
+      "getHelp": "gethelp@nypl.org"
     },
     "graphic": {
       "memberName": "MEMBER NAME",
@@ -161,19 +180,24 @@
       "title": "Get started with The New York Public Library",
       "explore": {
         "header": "Explore E-Books & E-Audiobooks",
-        "content": "<a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles."
+        "content": "<a href='https://www.nypl.org/books-music-movies/help'>{{readListen}}</a> with access to a wide array of titles.",
+        "readListen": "Read or listen on-the-go"
       },
       "borrow": {
         "header": "Borrow books & more",
-        "content": "<a href='{{loginUrl}}'> Log into your account</a> and browse the catalog. To check out and borrow physical items, visit any <a href='https://www.nypl.org/locations'>NYPL location</a> to verify your information and receive a physical card."
+        "content": "<a href='{{loginUrl}}'>{{login}}</a> and browse the catalog. To check out and borrow physical items, visit any <a href='https://www.nypl.org/locations'>{{nyplLocation}}</a> to verify your information and receive a physical card.",
+        "login": "Log into your account",
+        "nyplLocation": "NYPL location"
       },
       "updates": {
         "header": "Get updates",
-        "content": "<a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>"
+        "content": "<a href='https://www.nypl.org/enews'>{{findOut}}</a>",
+        "findOut": "Find out about all the Library has to offer."
       },
       "more": {
         "header": "Learn more",
-        "content": "<a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>"
+        "content": "<a href='https://www.nypl.org/discover-library-card'>{{discover}}</a>",
+        "discover": "Discover everything you can do with your library card."
       }
     }
   },
