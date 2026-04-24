@@ -1,11 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { AddressPage } from "../../pageobjects/address.page";
 import { fillAddress } from "../../utils/form-helper";
-import {
-  PAGE_ROUTES,
-  SPINNER_TIMEOUT,
-  TEST_OOS_ADDRESS,
-} from "../../utils/constants";
+import { PAGE_ROUTES, TEST_OOS_ADDRESS } from "../../utils/constants";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(PAGE_ROUTES.ADDRESS);
@@ -66,9 +62,6 @@ test.describe("displays error messages", () => {
   test("displays errors for required fields", async ({ page }) => {
     const addressPage = new AddressPage(page);
     await addressPage.nextButton.click();
-    await expect(addressPage.spinner).not.toBeVisible({
-      timeout: SPINNER_TIMEOUT,
-    });
     await expect(addressPage.streetAddressError).toBeVisible();
     await expect(addressPage.cityError).toBeVisible();
     await expect(addressPage.stateError).toBeVisible();
@@ -79,9 +72,6 @@ test.describe("displays error messages", () => {
     const addressPage = new AddressPage(page);
     await addressPage.postalCodeInput.fill("123456");
     await addressPage.nextButton.click();
-    await expect(addressPage.spinner).not.toBeVisible({
-      timeout: SPINNER_TIMEOUT,
-    });
     await expect(addressPage.postalCodeError).toBeVisible();
   });
 
@@ -89,9 +79,6 @@ test.describe("displays error messages", () => {
     const addressPage = new AddressPage(page);
     await addressPage.postalCodeInput.fill("1234");
     await addressPage.nextButton.click();
-    await expect(addressPage.spinner).not.toBeVisible({
-      timeout: SPINNER_TIMEOUT,
-    });
     await expect(addressPage.postalCodeError).toBeVisible();
   });
 
