@@ -1,5 +1,4 @@
 import { AddressData, PatronData } from "./types";
-import appContent from "../../public/locales/en/common.json";
 
 // personal information
 export const TEST_PATRON: PatronData = {
@@ -7,6 +6,7 @@ export const TEST_PATRON: PatronData = {
   lastName: "Doe",
   email: "test@gmail.com",
   dateOfBirth: "12/25/1984",
+  ecommunicationsPref: true,
 };
 
 export const TEST_EDITED_PATRON: PatronData = {
@@ -14,6 +14,7 @@ export const TEST_EDITED_PATRON: PatronData = {
   lastName: "Nook",
   email: "edited@gmail.com",
   dateOfBirth: "01/01/1990",
+  ecommunicationsPref: false,
 };
 
 // address
@@ -69,7 +70,7 @@ export const TEST_MULTIMATCH_ADDRESS_WEST: AddressData = {
 export const SPINNER_TIMEOUT = 10000;
 
 // account
-const uniqueSuffix = Date.now().toString().slice(-6);
+const uniqueSuffix = Date.now().toString().slice(-10);
 const TEST_UNIQUE_USERNAME = `qauser${uniqueSuffix}`;
 
 export const TEST_ACCOUNT = {
@@ -90,27 +91,7 @@ export const TEST_EDITED_ACCOUNT = {
 export const TEST_BARCODE_NUMBER = "12341234123412";
 export const EXPECTED_BARCODE_PREFIX = "255";
 
-export const ERROR_MESSAGES = {
-  // probs remove this at the end
-  FIRST_NAME_INVALID: appContent.personal.errorMessage.firstName,
-  LAST_NAME_INVALID: appContent.personal.errorMessage.lastName,
-  DATE_OF_BIRTH_INVALID: appContent.personal.errorMessage.birthdate,
-  DATE_OF_BIRTH_ERROR: appContent.personal.errorMessage.ageGate,
-  EMAIL_INVALID: appContent.personal.errorMessage.email,
-  STREET_ADDRESS_INVALID: appContent.location.errorMessage.line1,
-  CITY_INVALID: appContent.location.errorMessage.city,
-  STATE_INVALID: appContent.location.errorMessage.state,
-  POSTAL_CODE_INVALID: appContent.location.errorMessage.zip,
-  USERNAME_INVALID: appContent.account.errorMessage.username,
-  USERNAME_UNAVAILABLE: "This username is unavailable. Please try another.",
-  USERNAME_AVAILABLE: "This username is available.",
-  PASSWORD_INVALID: appContent.account.errorMessage.password,
-  VERIFY_PASSWORD_INVALID: appContent.account.errorMessage.verifyPassword,
-  HOME_LIBRARY_ERROR: appContent.account.errorMessage.homeLibraryCode,
-  ACCEPT_TERMS_ERROR: appContent.account.errorMessage.acceptTerms,
-};
-
-const ALL_SUPPORTED_LANGUAGES = [
+export const ALL_SUPPORTED_LANGUAGES = [
   { lang: "en", name: "English" },
   // { lang: "ar", name: "Arabic" },
   // { lang: "bn", name: "Bengali" },

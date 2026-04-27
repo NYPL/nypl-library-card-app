@@ -6,10 +6,10 @@ import {
   fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
-  // EXPECTED_BARCODE_PREFIX,
+  EXPECTED_BARCODE_PREFIX,
   IP,
   PAGE_ROUTES,
-  // PATRON_TYPES,
+  PATRON_TYPES,
   SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   TEST_ACCOUNT,
@@ -18,16 +18,15 @@ import {
 } from "../../utils/constants";
 import {
   deletePatron,
-  // getPatronData,
   getPatronID,
+  verifyPatronData,
 } from "../../utils/sierra-api-utils";
-// import { createFuzzyMatcher, formatSierraDate } from "../../utils/formatter";
 
 for (const { lang, name } of SUPPORTED_LANGUAGES) {
   test.describe(`E2E: Complete NYC patron application with Sierra API integration in ${name} (${lang})`, () => {
     let pageManager: PageManager;
     let appContent: any;
-    const scrapedBarcode: string | null = null;
+    let scrapedBarcode: string | null = null;
 
     test.beforeEach(async ({ page }) => {
       await page.setExtraHTTPHeaders({
@@ -53,7 +52,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     });
 
     test("submits NYC patron application", async ({ page }) => {
-      // const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
+      const fullName = `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`;
 
       await test.step("begins at landing", async () => {
         await page.goto(PAGE_ROUTES.LANDING(lang));
@@ -82,7 +81,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         ).toBeVisible();
         await pageManager.addressVerificationPage
           .getHomeAddressOption(TEST_NYC_ADDRESS.street)
-          .check();
+          .click();
         await pageManager.addressVerificationPage.nextButton.click();
         await expect(
           pageManager.addressVerificationPage.spinner
@@ -133,8 +132,10 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(
           pageManager.reviewPage.getText(TEST_ACCOUNT.username)
         ).toBeVisible();
-        await expect(pageManager.reviewPage.showPasswordLabel).toBeVisible();
-        await pageManager.reviewPage.showPasswordLabel.check();
+        await expect(
+          pageManager.reviewPage.showPasswordCheckboxLabel
+        ).toBeVisible();
+        await pageManager.reviewPage.showPasswordCheckboxLabel.click();
         await expect(
           pageManager.reviewPage.getText(TEST_ACCOUNT.password)
         ).toBeVisible();
@@ -142,92 +143,41 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       await test.step("submits application", async () => {
         await expect(pageManager.reviewPage.submitButton).toBeVisible();
-        // await pageManager.reviewPage.submitButton.click(); // wait to click til congrats page is ready
+        await pageManager.reviewPage.submitButton.click();
       });
 
-      //   await test.step("displays metro card elements on congrats page", async () => {
-      //     await expect(pageManager.congratsPage.mainHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.metroOrNonMetroHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.readListenLink).toBeVisible();
-      //   });
+      await test.step("displays metro card elements on congrats page", async () => {
+        await expect(pageManager.congratsPage.mainHeading).toBeVisible();
+        await expect(
+          pageManager.congratsPage.metroOrNonMetroHeading
+        ).toBeVisible();
+        await expect(pageManager.congratsPage.readListenLink).toBeVisible();
+      });
 
-      //   await test.step("displays generated library card on congrats page", async () => {
-      //     await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
-      //     await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
-      //     await expect(pageManager.congratsPage.issuedDate).toBeVisible();
-      //     await expect(
-      //       pageManager.congratsPage.patronBarcodeNumber
-      //     ).toBeVisible();
-      //     await expect(
-      //       pageManager.congratsPage.patronBarcodeNumber
-      //     ).toContainText(EXPECTED_BARCODE_PREFIX);
-      //   });
+      await test.step("displays generated library card on congrats page", async () => {
+        await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
+        await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
+        await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
+        await expect(pageManager.congratsPage.issuedDate).toBeVisible();
+        await expect(
+          pageManager.congratsPage.patronBarcodeNumber
+        ).toBeVisible();
+        await expect(
+          pageManager.congratsPage.patronBarcodeNumber
+        ).toContainText(EXPECTED_BARCODE_PREFIX);
+      });
 
-      //   await test.step("retrieves barcode from congrats page", async () => {
-      //     scrapedBarcode =
-      //       await pageManager.congratsPage.patronBarcodeNumber.textContent();
-      //     expect(scrapedBarcode).not.toBeNull();
-      //   });
-
-      //   await test.step("verifies patron data in Sierra database", async () => {
-      //     const patronID = await getPatronID(scrapedBarcode);
-      //     const patronData = await getPatronData(patronID);
-
-      //     expect(patronData, "API response must be a valid object").toEqual(
-      //       expect.objectContaining({
-      //         names: expect.any(Array),
-      //         emails: expect.any(Array),
-      //         addresses: expect.any(Array),
-      //         birthDate: expect.any(String),
-      //         patronType: expect.any(Number),
-      //       })
-      //     );
-
-      //     expect(
-      //       patronData.names.length,
-      //       "Names array should not be empty"
-      //     ).toBeGreaterThan(0);
-      //     expect(
-      //       patronData.birthDate,
-      //       "Birthdate should not be empty"
-      //     ).toBeTruthy();
-      //     expect(
-      //       patronData.emails.length,
-      //       "Emails array should not be empty"
-      //     ).toBeGreaterThan(0);
-      //     expect(
-      //       patronData.addresses.length,
-      //       "Addresses array should not be empty"
-      //     ).toBeGreaterThan(0);
-
-      //     const expectedName =
-      //       `${TEST_PATRON.lastName}, ${TEST_PATRON.firstName}`.toUpperCase();
-      //     const expectedDOB = formatSierraDate(TEST_PATRON.dateOfBirth);
-      //     const expectedEmail = TEST_PATRON.email.toLowerCase();
-      //     const patronEmails = patronData.emails?.map((email) =>
-      //       email.toLowerCase()
-      //     );
-
-      //     const expectedAddress = createFuzzyMatcher([
-      //       TEST_NYC_ADDRESS.street,
-      //       TEST_NYC_ADDRESS.apartmentSuite,
-      //       TEST_NYC_ADDRESS.city,
-      //       TEST_NYC_ADDRESS.state,
-      //       TEST_NYC_ADDRESS.postalCode,
-      //     ]);
-
-      //     const actualAddressText = (patronData.addresses?.[0]?.lines || []).join(
-      //       " "
-      //     );
-      //     const actualName = patronData.names?.[0].toUpperCase();
-
-      //     expect(actualName).toContain(expectedName);
-      //     expect(patronData.birthDate).toBe(expectedDOB);
-      //     expect(actualAddressText).toMatch(expectedAddress);
-      //     expect(patronEmails).toContain(expectedEmail);
-      //     expect(patronData.patronType).toBe(PATRON_TYPES.DIGITAL_METRO);
-      //   });
+      await test.step("verifies patron data in Sierra database", async () => {
+        scrapedBarcode =
+          await pageManager.congratsPage.patronBarcodeNumber.textContent();
+        expect(scrapedBarcode).not.toBeNull();
+        await verifyPatronData(
+          scrapedBarcode,
+          TEST_PATRON,
+          TEST_NYC_ADDRESS,
+          PATRON_TYPES.DIGITAL_METRO
+        );
+      });
     });
   });
 }

@@ -45,6 +45,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+<<<<<<< HEAD
       - name: Run Playwright tests (PR - English only)
         if: ${{ github.event_name == 'pull_request' }}
         env:
@@ -55,6 +56,12 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         env:
           SUPPORTED_LANGUAGES: ${{ inputs.SUPPORTED_LANGUAGES || 'all' }}
+=======
+      - name: Output process.platform for debugging
+        run: node -e "console.log('process.platform=', process.platform)"
+
+      - name: Run Playwright tests
+>>>>>>> SWIS-300/language-agnostic-landing
         run: npx playwright test
 
       - name: Upload Playwright reports on failure

@@ -83,25 +83,27 @@ export class CongratsPage {
     });
     this.readListenLink = page.getByRole("link", {
       name:
-        appContent?.confirmation?.nextSteps?.readListen ||
+        appContent?.confirmation?.nextSteps?.explore?.readListen ||
         "Read or listen on-the-go",
     });
     this.loginLink = page.getByRole("link", {
       name:
-        appContent?.confirmation?.nextSteps?.login || "Log into your account",
+        appContent?.confirmation?.nextSteps?.borrow?.login ||
+        "Log into your account",
     });
     this.nyplLocationLink = page.getByRole("link", {
       name:
-        appContent?.confirmation?.nextSteps?.nyplLocation || "NYPL location",
+        appContent?.confirmation?.nextSteps?.borrow?.nyplLocation ||
+        "NYPL location",
     });
     this.findOutLibraryLink = page.getByRole("link", {
       name:
-        appContent?.confirmation?.nextSteps?.findOut ||
+        appContent?.confirmation?.nextSteps?.updates?.findOut ||
         "Find out about all the Library has to offer.",
     });
     this.discoverLink = page.getByRole("link", {
       name:
-        appContent?.confirmation?.nextSteps?.discover ||
+        appContent?.confirmation?.nextSteps?.more?.discover ||
         "Discover everything you can do with your library card.",
     });
   }

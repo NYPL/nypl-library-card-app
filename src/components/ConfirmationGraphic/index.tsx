@@ -39,25 +39,27 @@ const styles = {
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     height: "100%",
-    p: "0 40px 0 25px",
-    gap: "10px 5px",
+    p: "0 2em 0 1.25em",
+    gap: "0.5em 0.25em",
     gridTemplateColumns: "58% 30%",
-    gridTemplateRows: "20% 40% 20%",
+    gridTemplateRows: "20% 40% 14%",
     justifyContent: "center",
     alignItems: "center",
   },
   memberName: {
     color: "white",
-    fontSize: "0.8em",
+    fontSize: "clamp(0.8rem, 0.8rem + 0.4vw, 1rem)",
+    lineHeight: 1.1,
+    gridColumn: "span 3",
   },
   logoItem: {
     color: "white",
     fontSize: "0.6em",
-    mt: "20px",
+    mt: "1em",
   },
   barcodeContainer: {
     bg: "white",
-    p: "15px 20px 0px",
+    p: "0.75em 1em 0em",
     display: "inline-block",
     gridColumn: "1/3",
     gridRow: "2/2",
@@ -79,7 +81,7 @@ const styles = {
   },
   issuedText: {
     color: "white",
-    fontSize: "1em",
+    fontSize: "clamp(0.6rem, 0.6rem + 0.2vw, 1rem)",
     mb: "s",
   },
 };
@@ -118,7 +120,7 @@ const ConfirmationContainer = () => {
   }, [canvas]);
 
   return (
-    <Box sx={styles.outerBox}>
+    <Box className="card-container" sx={styles.outerBox}>
       <Box className="image-lion" sx={styles.imageLion}>
         <Image
           alt="NYPL Library Barcode Background"
@@ -127,10 +129,13 @@ const ConfirmationContainer = () => {
           width="939"
         />
         <Grid className="background-lion" sx={styles.backgroundLion}>
-          <GridItem id="member-name" sx={styles.memberName}>
-            {t("confirmation.graphic.memberName")}
-            <Box className="content" fontSize="1.6em">
-              {name}
+          <GridItem id="issued" sx={styles.issuedText}>
+            {t("confirmation.graphic.issued")}
+            <Box
+              className="content"
+              fontSize={"clamp(1rem, 1rem + 0.2vw, 1.6rem)"}
+            >
+              {new Date().toLocaleDateString()}
             </Box>
           </GridItem>
           <GridItem sx={styles.logoItem}>
@@ -143,16 +148,16 @@ const ConfirmationContainer = () => {
             <canvas
               id="barcodeCanvas"
               {...canvasArgs}
-              style={{ width: "100%", height: "50px" }}
+              style={{ width: "100%", height: "2.5em" }}
             ></canvas>
             <Box className="barcode" sx={styles.barcode}>
               {barcode}
             </Box>
           </Box>
-          <GridItem id="issued" sx={styles.issuedText}>
-            {t("confirmation.graphic.issued")}
-            <Box className="content" fontSize={"1.6em"}>
-              {new Date().toLocaleDateString()}
+          <GridItem id="member-name" sx={styles.memberName}>
+            {t("confirmation.graphic.memberName")}
+            <Box className="content" fontSize="1.6em">
+              {name}
             </Box>
           </GridItem>
         </Grid>

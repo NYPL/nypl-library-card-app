@@ -3,31 +3,41 @@ import {
   FormField as DSFormField,
   FormRow,
   Link as DSLink,
+  TextInputRefType,
 } from "@nypl/design-system-react-components";
-import { Trans, useTranslation } from "next-i18next";
-import { useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { useTranslation } from "next-i18next";
+import { Controller, useFormContext } from "react-hook-form";
 import { isEmail } from "validator";
 
 import FormField from "../FormField";
 import AgeFormFields from "../AgeFormFields";
 import useFormDataContext from "../../context/FormDataContext";
+import { useMergedRef } from "../../hooks/useMergedRef";
+import { Trans } from "../Trans";
 
 interface PersonalFormFieldsProps {
   agencyType?: string;
   id?: string;
+  firstFieldRef?: React.RefObject<TextInputRefType>;
 }
-function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
+function PersonalFormFields({
+  id = "",
+  firstFieldRef,
+}: PersonalFormFieldsProps) {
   const { t } = useTranslation("common");
   const {
+    control,
     register,
     formState: { errors },
   } = useFormContext();
   const { state } = useFormDataContext();
   const { formValues } = state;
-  const [ecommunicationsPref, setEcommunicationsPref] = useState<boolean>(
-    formValues.ecommunicationsPref
+
+  const { ref: firstNameRegisterRef, ...firstNameRegisterProps } = register(
+    "firstName",
+    { required: t("personal.errorMessage.firstName") }
   );
+  const mergedRef = useMergedRef(firstNameRegisterRef, firstFieldRef);
 
   return (
     <>
@@ -36,13 +46,12 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
           <FormField
             id="firstName"
             label={t("personal.firstName.label")}
-            {...register("firstName", {
-              required: t("personal.errorMessage.firstName"),
-            })}
+            {...firstNameRegisterProps}
             isRequired
             errorState={errors}
             defaultValue={formValues.firstName}
             autoComplete="given-name"
+            ref={mergedRef}
           />
         </DSFormField>
         <DSFormField>
@@ -96,12 +105,18 @@ function PersonalFormFields({ id = "" }: PersonalFormFieldsProps) {
       </FormRow>
       <FormRow id={`${id}-personalForm-4`}>
         <DSFormField>
-          <Checkbox
-            id="eCommunications"
-            isChecked={ecommunicationsPref}
-            labelText={t("personal.eCommunications.labelText")}
-            {...register("ecommunicationsPref")}
-            onChange={() => setEcommunicationsPref((prev) => !prev)}
+          <Controller
+            name="ecommunicationsPref"
+            control={control}
+            defaultValue={formValues.ecommunicationsPref}
+            render={({ field: { onChange, value } }) => (
+              <Checkbox
+                id="eCommunications"
+                isChecked={value}
+                labelText={t("personal.eCommunications.labelText")}
+                onChange={(e) => onChange(e.target.checked)}
+              />
+            )}
           />
         </DSFormField>
       </FormRow>

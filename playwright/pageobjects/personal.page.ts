@@ -16,6 +16,7 @@ export class PersonalPage {
   readonly alternateFormLink: Locator;
   readonly locationsLink: Locator;
   readonly receiveInfoCheckbox: Locator;
+  readonly receiveInfoCheckboxLabel: Locator;
   readonly previousButton: Locator;
   readonly nextButton: Locator;
 
@@ -67,7 +68,12 @@ export class PersonalPage {
     this.locationsLink = this.page.locator("#mainContent").getByRole("link", {
       name: appContent?.personal?.email?.locations || "locations",
     });
-    this.receiveInfoCheckbox = this.page.getByText(
+    this.receiveInfoCheckbox = this.page.getByRole("checkbox", {
+      name:
+        appContent?.personal?.eCommunications?.labelText ||
+        "Yes, I would like to receive information about NYPL's programs and services",
+    });
+    this.receiveInfoCheckboxLabel = this.page.getByText(
       appContent?.personal?.eCommunications?.labelText ||
         "Yes, I would like to receive information about NYPL's programs and services"
     );

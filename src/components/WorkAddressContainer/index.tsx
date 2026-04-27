@@ -157,6 +157,7 @@ const AddressContainer = ({ csrfToken }) => {
         id="work-address-container"
         method="post"
         onSubmit={handleSubmit(submitForm)}
+        noValidate
       >
         <AddressFormFields
           id="work-address-container"

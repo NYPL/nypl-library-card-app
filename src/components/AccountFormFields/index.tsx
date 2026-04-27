@@ -3,6 +3,7 @@ import {
   FormRow,
   FormField as DSFormField,
   HorizontalRule,
+  TextInputRefType,
 } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import React, { useState, useEffect } from "react";
@@ -18,12 +19,14 @@ interface AccountFormFieldsProps {
   id?: string;
   showPasswordOnLoad?: boolean;
   csrfToken: string;
+  firstFieldRef?: React.RefObject<TextInputRefType>;
 }
 
 function AccountFormFields({
   id,
   showPasswordOnLoad,
   csrfToken,
+  firstFieldRef,
 }: AccountFormFieldsProps) {
   const { t } = useTranslation("common");
   const {
@@ -77,6 +80,7 @@ function AccountFormFields({
         id={`${id}-accountForm-1`}
         errorMessage={t("account.errorMessage.username")}
         csrfToken={csrfToken}
+        firstFieldRef={firstFieldRef}
       />
 
       <FormRow id={`${id}-accountForm-2`}>

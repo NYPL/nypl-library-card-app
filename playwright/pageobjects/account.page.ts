@@ -1,4 +1,6 @@
 import { Page, Locator } from "@playwright/test";
+import { apiTranslations } from "../../src/data/apiMessageTranslations";
+import { apiErrorTranslations } from "../../src/data/apiErrorMessageTranslations";
 
 export class AccountPage {
   readonly page: Page;
@@ -14,7 +16,7 @@ export class AccountPage {
   readonly verifyPasswordInput: Locator;
   readonly verifyPasswordError: Locator;
   readonly showPasswordCheckbox: Locator;
-  readonly showPasswordLabel: Locator;
+  readonly showPasswordCheckboxLabel: Locator;
   readonly homeLibraryHeading: Locator;
   readonly nyplLocationLink: Locator;
   readonly selectHomeLibrary: Locator;
@@ -23,12 +25,12 @@ export class AccountPage {
   readonly rulesRegulations: Locator;
   readonly privacyPolicy: Locator;
   readonly acceptTermsCheckbox: Locator;
-  readonly acceptTermsLabel: Locator;
+  readonly acceptTermsCheckboxLabel: Locator;
   readonly acceptTermsError: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
 
-  constructor(page: Page, appContent?: any) {
+  constructor(page: Page, appContent?: any, lang?: string) {
     this.page = page;
 
     const required = appContent?.required || "required";
@@ -56,12 +58,15 @@ export class AccountPage {
         "Check if username is available",
       exact: true,
     });
-    this.availableUsernameMessage = page
-      .getByText("El nombre de usuario está disponible.") // replace when translation available
-      .or(page.getByText("This username is available."));
-    this.unavailableUsernameMessage = page
-      .getByText("Este nombre de usuario no está disponible. Pruebe con otro.") // replace when translation available
-      .or(page.getByText("This username is unavailable. Please try another."));
+    this.availableUsernameMessage = page.getByText(
+      apiTranslations["This username is available."][lang] ||
+        "This username is available."
+    );
+    this.unavailableUsernameMessage = page.getByText(
+      apiErrorTranslations["This username is unavailable. Please try another."][
+        lang
+      ] || "This username is unavailable. Please try another."
+    );
     this.passwordInput = page.getByRole("textbox", {
       name: withRequired(appContent?.account?.password?.label || "Password"),
       exact: true,
@@ -80,13 +85,15 @@ export class AccountPage {
       appContent?.account?.errorMessage?.verifyPassword ||
         "There was a problem. The two passwords don't match."
     );
-    this.showPasswordLabel = page.getByText(
-      appContent?.account?.showPassword || "Show password",
-      { exact: true }
-    );
     this.showPasswordCheckbox = page.getByRole("checkbox", {
       name: appContent?.account?.showPassword || "Show password",
     });
+    this.showPasswordCheckboxLabel = page.getByText(
+      appContent?.account?.showPassword || "Show password",
+      {
+        exact: true,
+      }
+    );
     this.homeLibraryHeading = page.getByRole("heading", {
       name: appContent?.account?.library?.title || "Home library",
       level: 3,
@@ -124,7 +131,7 @@ export class AccountPage {
         appContent?.account?.termsAndCondition?.label ||
         "Yes, I accept the terms and conditions.",
     });
-    this.acceptTermsLabel = page.getByText(
+    this.acceptTermsCheckboxLabel = page.getByText(
       appContent?.account?.termsAndCondition?.label ||
         "Yes, I accept the terms and conditions."
     );

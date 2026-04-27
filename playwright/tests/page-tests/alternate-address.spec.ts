@@ -65,8 +65,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await alternateAddressPage.postalCodeInput.fill(
           TEST_NYC_ADDRESS.postalCode
         );
-        await alternateAddressPage.streetAddressInput.click();
-        await alternateAddressPage.cityInput.click();
         await alternateAddressPage.nextButton.click();
         await expect(alternateAddressPage.streetAddressError).toBeVisible();
         await expect(alternateAddressPage.cityError).toBeVisible();
@@ -77,8 +75,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           TEST_NYC_ADDRESS.street
         );
         await alternateAddressPage.cityInput.fill(TEST_NYC_ADDRESS.city);
-        await alternateAddressPage.stateInput.click();
-        await alternateAddressPage.postalCodeInput.click();
         await alternateAddressPage.nextButton.click();
         await expect(alternateAddressPage.stateError).toBeVisible();
         await expect(alternateAddressPage.postalCodeError).toBeVisible();

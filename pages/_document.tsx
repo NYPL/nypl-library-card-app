@@ -13,6 +13,7 @@ import Script from "next/script";
 
 type DocumentProps = {
   browserTimingHeader: string;
+  isVercel: boolean;
 };
 /**
  * MyDocument
@@ -25,6 +26,7 @@ class MyDocument extends Document<DocumentProps> {
     ctx: DocumentContext
   ): Promise<DocumentInitialProps & DocumentProps> {
     const initialProps = await Document.getInitialProps(ctx);
+    const isVercel = process.env.NEXT_PUBLIC_VERCEL_BUILD === "1";
 
     const browserTimingHeader = newrelic.getBrowserTimingHeader({
       hasToRemoveScriptWrapper: true,
@@ -34,11 +36,12 @@ class MyDocument extends Document<DocumentProps> {
     return {
       ...initialProps,
       browserTimingHeader,
+      isVercel,
     };
   }
 
   render() {
-    const { browserTimingHeader } = this.props;
+    const { browserTimingHeader, isVercel } = this.props;
     return (
       <Html lang="en">
         <Head />
@@ -64,6 +67,16 @@ class MyDocument extends Document<DocumentProps> {
           <script src="https://cdn.optimizely.com/js/284748925.js"></script>
           {/* <!-- OptinMonster --> */}
           <script src="https://assets.nypl.org/js/advocacy.js"></script>
+          {/* 
+              Vercel serverless environment prevents us from generating the 
+              browser header from the agent, so we are injecting the QA instance manually 
+          */}
+          {isVercel && (
+            <script
+              type="text/javascript"
+              src="/library-card/js/new-relic-browser.js"
+            />
+          )}
           {/* New Relic Browser Metric */}
           <Script
             dangerouslySetInnerHTML={{ __html: browserTimingHeader }}

@@ -33,8 +33,8 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   const router = useRouter();
   const formInitialStateCopy = { ...formInitialState };
   const formMethods = useForm<FormInputData>({
-    mode: "onBlur",
-    reValidateMode: "onBlur",
+    mode: "onSubmit",
+    reValidateMode: "onChange",
   });
   const { favIconPath, appTitle } = appConfig;
 

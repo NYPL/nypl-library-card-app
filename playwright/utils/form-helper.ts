@@ -11,6 +11,9 @@ export async function fillPersonalInfo(
   await page.lastNameInput.fill(patronData.lastName);
   await page.dateOfBirthInput.fill(patronData.dateOfBirth);
   await page.emailInput.fill(patronData.email);
+  if (!patronData.ecommunicationsPref) {
+    await page.receiveInfoCheckboxLabel.click();
+  }
 }
 
 export async function fillAddress(
@@ -20,7 +23,6 @@ export async function fillAddress(
   await page.streetAddressInput.fill(addressData.street);
   await page.apartmentSuiteInput.fill(addressData.apartmentSuite);
   await page.cityInput.fill(addressData.city);
-  await page.stateInput.click();
   await page.stateInput.selectOption(addressData.state);
   await page.postalCodeInput.fill(addressData.postalCode);
 }
@@ -32,7 +34,8 @@ export async function fillAccountInfo(
   await page.usernameInput.fill(accountData.username);
   await page.passwordInput.fill(accountData.password);
   await page.verifyPasswordInput.fill(accountData.password);
-  await page.selectHomeLibrary.click();
   await page.selectHomeLibrary.selectOption(accountData.homeLibraryCode);
-  await page.acceptTermsLabel.check();
+  if (!(await page.acceptTermsCheckbox.isChecked())) {
+    await page.acceptTermsCheckboxLabel.click();
+  }
 }

@@ -71,8 +71,7 @@
       "description": {
         "part1": "¿Trabaja, estudia o paga impuestos a la propiedad en el Estado de Nueva York? Incluso si no vive en Nueva York, puede solicitar una tarjeta de la biblioteca.",
         "part2": "Si trabaja o estudia en la ciudad de Nueva York, indique la dirección.",
-        "part3": "{{provideAddress}} Si ninguna de estas opciones le corresponde, haga clic en “Siguiente”.",
-        "provideAddress": "Indique la dirección de su trabajo, escuela o lugar donde paga impuestos a la propiedad en el Estado de Nueva York."
+        "part3": "Indique la dirección de su trabajo, escuela o lugar donde paga impuestos a la propiedad en el Estado de Nueva York. Si ninguna de estas opciones le corresponde, haga clic en “Próximo”."
       }
     },
     "errorMessage": {
@@ -172,15 +171,27 @@
     },
     "nextSteps": {
       "title": "Comenzar con la Biblioteca Pública de Nueva York",
-      "explore": "<b>Consulte los libros y audiolibros electrónicos</b>Acceda a una gran variedad de títulos y <a href='https://www.nypl.org/books-music-movies/help'>{{readListen}}</a>.",
-      "readListen": "léalos o escúchelos donde quiera",
-      "borrow": "<b>Pedir prestados libros y más</b><a href='{{loginUrl}}'>{{login}}</a> y explore el catálogo. Si quiere pedir materiales físicos, visite alguna biblioteca <a href='https://www.nypl.org/locations'>{{nyplLocation}}</a> para verificar su información y recibir una tarjeta física.",
-      "login": "Inicie sesión en su cuenta",
-      "nyplLocation": "de la NYPL",
-      "updates": "<b>Reciba actualizaciones</b><a href='https://www.nypl.org/enews'>{{findOut}}</a>",
-      "findOut": "Descubra todo lo que la Biblioteca tiene para ofrecer.",
-      "more": "<b>Obtener más información</b><a href='https://www.nypl.org/discover-library-card'>{{discover}}</a>",
-      "discover": "Descubra todo lo que puede hacer con su tarjeta de la Biblioteca."
+      "explore": {
+        "header": "Consulte los libros y audiolibros electrónicos",
+        "content": "Acceda a una gran variedad de títulos y <a href='https://www.nypl.org/books-music-movies/help'>{{readListen}}</a>.",
+        "readListen": "léalos o escúchelos donde quiera"
+      },
+      "borrow": {
+        "header": "Pedir prestados libros y más",
+        "content": "<a href='{{loginUrl}}'>{{login}}</a> y explore el catálogo. Si quiere pedir materiales físicos, visite alguna biblioteca <a href='https://www.nypl.org/locations'>{{nyplLocation}}</a> para verificar su información y recibir una tarjeta física.",
+        "login": "Inicie sesión en su cuenta",
+        "nyplLocation": "de la NYPL"
+      },
+      "updates": {
+        "header": "Reciba actualizaciones",
+        "content": "<a href='https://www.nypl.org/enews'>{{findOut}}</a>",
+        "findOut": "Descubra todo lo que la Biblioteca tiene para ofrecer."
+      },
+      "more": {
+        "header": "Obtener más información",
+        "content": "<a href='https://www.nypl.org/discover-library-card'>{{discover}}</a>",
+        "discover": "Descubra todo lo que puede hacer con su tarjeta de la Biblioteca."
+      }
     }
   },
   "button": {

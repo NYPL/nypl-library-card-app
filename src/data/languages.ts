@@ -1,47 +1,76 @@
 // Language data for the language menu.
-export const languageData = [
+export type LanguageData = {
+  charCode: string;
+  englishLabel: string;
+  nativeLabel: string | undefined;
+  langCode: string;
+};
+
+export const languageData: LanguageData[] = [
   {
     charCode: "ar",
-    label: "Arabic | العَرَبِية",
+    englishLabel: "Arabic",
+    nativeLabel: "العَرَبِية",
+    langCode: "ar",
   },
   {
     charCode: "bn",
-    label: "Bengali | বাঙালি",
+    englishLabel: "Bengali",
+    nativeLabel: "বাঙালি",
+    langCode: "bn",
   },
   {
     charCode: "zhcn",
-    label: "Chinese (Simplified) | 简体中文",
+    englishLabel: "Chinese (Simplified)",
+    nativeLabel: "简体中文",
+    langCode: "zh-cn",
   },
   {
     charCode: "en",
-    label: "English",
+    englishLabel: "English",
+    nativeLabel: undefined,
+    langCode: "en",
   },
   {
     charCode: "fr",
-    label: "French | Français",
+    englishLabel: "French",
+    nativeLabel: "Français",
+    langCode: "fr",
   },
   {
     charCode: "ht",
-    label: "Haitian Creole | Kreyòl Ayisyen",
+    englishLabel: "Haitian Creole",
+    nativeLabel: "Kreyòl Ayisyen",
+    langCode: "ht",
   },
   {
     charCode: "ko",
-    label: "Korean | 한국어",
+    englishLabel: "Korean",
+    nativeLabel: "한국어",
+    langCode: "ko",
   },
   {
     charCode: "pl",
-    label: "Polish | Polski",
+    englishLabel: "Polish",
+    nativeLabel: "Polski",
+    langCode: "pl",
   },
   {
     charCode: "ru",
-    label: "Russian | Русский",
+    englishLabel: "Russian",
+    nativeLabel: "Русский",
+    langCode: "ru",
   },
   {
     charCode: "es",
-    label: "Spanish | Español",
+    englishLabel: "Spanish",
+    nativeLabel: "Español",
+    langCode: "es",
   },
   {
     charCode: "ur",
-    label: "Urdu | اُردُو",
+    englishLabel: "Urdu",
+    nativeLabel: "اُردُو",
+    langCode: "ur",
   },
 ];
