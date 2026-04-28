@@ -31,11 +31,9 @@ export class AccountPage {
   readonly previousButton: Locator;
 
   constructor(page: Page, appContent?: any, lang?: string) {
-    this.page = page;
-
     const required = appContent?.required || "required";
     const withRequired = (label: string) => `${label} (${required})`;
-
+    this.page = page;
     this.mainHeading = page.getByRole("heading", {
       name: appContent?.banner?.title || "Apply for a Library Card Online",
       level: 1,

@@ -90,12 +90,12 @@ function PersonalFormFields({
             instructionText={
               <Trans
                 i18nKey="personal.email.instruction"
+                components={{
+                  a: <DSLink variant="external" />,
+                }}
                 values={{
                   alternateForm: t("personal.email.alternateForm"),
                   locations: t("personal.email.locations"),
-                }}
-                components={{
-                  a: <DSLink variant="external" />,
                 }}
               />
             }
