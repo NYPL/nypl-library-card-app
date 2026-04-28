@@ -2,7 +2,11 @@ import { AxeBuilder } from "@axe-core/playwright";
 import { AddressVerificationPage } from "../../pageobjects/address-verification.page";
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
-import { fillAddress, fillPersonalInfo } from "../../utils/form-helper";
+import {
+  clickNextButton,
+  fillAddress,
+  fillPersonalInfo,
+} from "../../utils/form-helper";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 import {
   PAGE_ROUTES,
@@ -18,21 +22,29 @@ test.describe("Accessibility tests on Address Verification page", () => {
     const pageManager = new PageManager(page);
 
     await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-    await pageManager.personalPage.nextButton.click();
+    await clickNextButton(
+      pageManager.personalPage,
+      pageManager.personalPage.nextButton,
+      pageManager.addressPage.stepHeading
+    );
 
     await expect(pageManager.addressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-    await pageManager.addressPage.nextButton.click();
+    await clickNextButton(
+      pageManager.addressPage,
+      pageManager.addressPage.nextButton,
+      pageManager.alternateAddressPage.stepHeading
+    );
 
     await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
-    await pageManager.alternateAddressPage.nextButton.click();
+    await clickNextButton(
+      pageManager.alternateAddressPage,
+      pageManager.alternateAddressPage.nextButton,
+      pageManager.addressVerificationPage.stepHeading
+    );
 
     await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
-
-    await expect(pageManager.addressVerificationPage.spinner).not.toBeVisible({
-      timeout: 10000,
-    });
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {
