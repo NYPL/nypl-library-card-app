@@ -30,7 +30,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
 
     const pageManager = new PageManager(page);
     await test.step("filling personal information", async () => {
-      await page.goto(PAGE_ROUTES.PERSONAL);
+      await page.goto(PAGE_ROUTES.PERSONAL());
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
       await clickNextButton(
@@ -76,7 +76,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
         await clickNextButton(
           pageManager.reviewPage,
           pageManager.reviewPage.submitButton,
-          pageManager.congratsPage.mainHeading
+          pageManager.congratsPage.metroOrNonMetroHeading
         );
       });
 

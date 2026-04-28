@@ -6,7 +6,7 @@ import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 
 test.describe("Accessibility tests on Alternate Address page", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(PAGE_ROUTES.ALTERNATE_ADDRESS);
+    await page.goto(PAGE_ROUTES.ALTERNATE_ADDRESS());
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {

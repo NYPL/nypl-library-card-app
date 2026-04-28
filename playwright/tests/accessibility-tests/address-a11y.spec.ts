@@ -6,7 +6,7 @@ import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 
 test.describe("Accessibility tests on Address Page", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(PAGE_ROUTES.ADDRESS);
+    await page.goto(PAGE_ROUTES.ADDRESS());
   });
 
   test("should have no accessibility violations on load", async ({ page }) => {
@@ -20,7 +20,7 @@ test.describe("Accessibility tests on Address Page", () => {
     const addressPage = new AddressPage(page);
 
     const addressLocators = [
-      addressPage.alternateForm,
+      addressPage.alternateFormLink,
       addressPage.streetAddressInput,
       addressPage.apartmentSuiteInput,
       addressPage.cityInput,

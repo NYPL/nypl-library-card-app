@@ -60,6 +60,9 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
         <Trans
           i18nKey="account.library.description.part2"
           components={{ a: <DSLink variant="external" /> }}
+          values={{
+            nyplLocation: t("account.library.description.nyplLocation"),
+          }}
         />
       </Paragraph>
       <Paragraph

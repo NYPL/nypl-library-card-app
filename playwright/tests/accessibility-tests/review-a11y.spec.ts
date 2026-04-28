@@ -26,7 +26,7 @@ test.describe("Review Page Accessibility Tests", () => {
     });
 
     const pageManager = new PageManager(page);
-    await page.goto(PAGE_ROUTES.PERSONAL);
+    await page.goto(PAGE_ROUTES.PERSONAL());
 
     await test.step("it should display Personal info page", async () => {
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
