@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { CongratsPage } from "../../pageobjects/congrats.page";
 import { PageManager } from "../../pageobjects/page-manager.page";
+import { clickNextButton } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   PATRON_TYPES,
@@ -28,7 +29,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     test("displays library card on congrats page", async ({ page }) => {
       await test.step("submits mocked application", async () => {
         await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER); // defaults to temporary patron type
-        await pageManager.reviewPage.submitButton.click();
+        await clickNextButton(
+          pageManager.reviewPage,
+          pageManager.reviewPage.submitButton,
+          congratsPage.temporaryHeading
+        );
       });
 
       await test.step("displays library card", async () => {
@@ -48,7 +53,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           TEST_BARCODE_NUMBER,
           PATRON_TYPES.DIGITAL_METRO
         );
-        await pageManager.reviewPage.submitButton.click();
+        await clickNextButton(
+          pageManager.reviewPage,
+          pageManager.reviewPage.submitButton,
+          congratsPage.metroOrNonMetroHeading
+        );
       });
 
       await test.step("displays metro card headings and links", async () => {
@@ -92,7 +101,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           TEST_BARCODE_NUMBER,
           PATRON_TYPES.DIGITAL_NON_METRO
         );
-        await pageManager.reviewPage.submitButton.click();
+        await clickNextButton(
+          pageManager.reviewPage,
+          pageManager.reviewPage.submitButton,
+          congratsPage.metroOrNonMetroHeading
+        );
       });
 
       await test.step("displays metro card headings and links", async () => {
@@ -136,7 +149,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           TEST_BARCODE_NUMBER,
           PATRON_TYPES.DIGITAL_TEMPORARY
         );
-        await pageManager.reviewPage.submitButton.click();
+        await clickNextButton(
+          pageManager.reviewPage,
+          pageManager.reviewPage.submitButton,
+          congratsPage.temporaryHeading
+        );
       });
 
       await test.step("displays temporary card headings and links", async () => {

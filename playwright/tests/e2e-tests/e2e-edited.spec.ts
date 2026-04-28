@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
+  clickNextButton,
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
@@ -8,7 +9,6 @@ import {
 import {
   PAGE_ROUTES,
   PATRON_TYPES,
-  SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   TEST_ACCOUNT,
   TEST_EDITED_PATRON,
@@ -72,26 +72,32 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       await test.step("enters personal information", async () => {
         await expect(pageManager.personalPage.stepHeading).toBeVisible();
         await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-        await pageManager.personalPage.nextButton.click();
+        await clickNextButton(
+          pageManager.personalPage,
+          pageManager.personalPage.nextButton,
+          pageManager.addressPage.stepHeading
+        );
       });
 
       await test.step("enters home address", async () => {
         await expect(pageManager.addressPage.stepHeading).toBeVisible();
         await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-        await pageManager.addressPage.nextButton.click();
-        await expect(pageManager.addressPage.spinner).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.addressPage,
+          pageManager.addressPage.nextButton,
+          pageManager.alternateAddressPage.stepHeading
+        );
       });
 
       await test.step("skips alternate address", async () => {
         await expect(
           pageManager.alternateAddressPage.stepHeading
         ).toBeVisible();
-        await pageManager.alternateAddressPage.nextButton.click();
-        await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.alternateAddressPage,
+          pageManager.alternateAddressPage.nextButton,
+          pageManager.addressVerificationPage.stepHeading
+        );
       });
 
       await test.step("verifies home address", async () => {
@@ -101,18 +107,21 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.addressVerificationPage
           .getHomeAddressOption(TEST_OOS_ADDRESS.street)
           .click();
-        await pageManager.addressVerificationPage.nextButton.click();
-        await expect(
-          pageManager.addressVerificationPage.spinner
-        ).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.addressVerificationPage,
+          pageManager.addressVerificationPage.nextButton,
+          pageManager.accountPage.stepHeading
+        );
       });
 
       await test.step("enters account information", async () => {
         await expect(pageManager.accountPage.stepHeading).toBeVisible();
         await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-        await pageManager.accountPage.nextButton.click();
+        await clickNextButton(
+          pageManager.accountPage,
+          pageManager.accountPage.nextButton,
+          pageManager.reviewPage.stepHeading
+        );
       });
 
       await test.step("edits personal info on review page", async () => {
@@ -139,7 +148,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       await test.step("submits application", async () => {
         await expect(pageManager.reviewPage.submitButton).toBeVisible();
-        await pageManager.reviewPage.submitButton.click();
+        await clickNextButton(
+          pageManager.reviewPage,
+          pageManager.reviewPage.submitButton,
+          pageManager.congratsPage.temporaryHeading
+        );
       });
 
       await test.step("displays edited name on congrats page", async () => {
@@ -169,28 +182,32 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await expect(
             pageManager.personalPage.receiveInfoCheckbox
           ).not.toBeChecked();
-          await pageManager.personalPage.nextButton.click();
+          await clickNextButton(
+            pageManager.personalPage,
+            pageManager.personalPage.nextButton,
+            pageManager.addressPage.stepHeading
+          );
         });
 
         await test.step("enters home address", async () => {
           await expect(pageManager.addressPage.stepHeading).toBeVisible();
           await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-          await pageManager.addressPage.nextButton.click();
-          await expect(pageManager.addressPage.spinner).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.addressPage,
+            pageManager.addressPage.nextButton,
+            pageManager.alternateAddressPage.stepHeading
+          );
         });
 
         await test.step("skips alternate address", async () => {
           await expect(
             pageManager.alternateAddressPage.stepHeading
           ).toBeVisible();
-          await pageManager.alternateAddressPage.nextButton.click();
-          await expect(
-            pageManager.alternateAddressPage.spinner
-          ).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.alternateAddressPage,
+            pageManager.alternateAddressPage.nextButton,
+            pageManager.addressVerificationPage.stepHeading
+          );
         });
 
         await test.step("verifies home address", async () => {
@@ -200,18 +217,21 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await pageManager.addressVerificationPage
             .getHomeAddressOption(TEST_OOS_ADDRESS.street)
             .click();
-          await pageManager.addressVerificationPage.nextButton.click();
-          await expect(
-            pageManager.addressVerificationPage.spinner
-          ).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.addressVerificationPage,
+            pageManager.addressVerificationPage.nextButton,
+            pageManager.accountPage.stepHeading
+          );
         });
 
         await test.step("enters account information", async () => {
           await expect(pageManager.accountPage.stepHeading).toBeVisible();
           await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-          await pageManager.accountPage.nextButton.click();
+          await clickNextButton(
+            pageManager.accountPage,
+            pageManager.accountPage.nextButton,
+            pageManager.reviewPage.stepHeading
+          );
         });
 
         await test.step("confirms ecommunications preference is retained on review page", async () => {
@@ -225,7 +245,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
         await test.step("submits application and verifies Sierra data", async () => {
           await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-          await pageManager.reviewPage.submitButton.click();
+          await clickNextButton(
+            pageManager.reviewPage,
+            pageManager.reviewPage.submitButton,
+            pageManager.congratsPage.temporaryHeading
+          );
           const scrapedBarcode =
             await pageManager.congratsPage.patronBarcodeNumber.textContent();
           expect(scrapedBarcode).not.toBeNull();
@@ -248,28 +272,32 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await expect(
             pageManager.personalPage.receiveInfoCheckbox
           ).toBeChecked();
-          await pageManager.personalPage.nextButton.click();
+          await clickNextButton(
+            pageManager.personalPage,
+            pageManager.personalPage.nextButton,
+            pageManager.addressPage.stepHeading
+          );
         });
 
         await test.step("enters home address", async () => {
           await expect(pageManager.addressPage.stepHeading).toBeVisible();
           await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-          await pageManager.addressPage.nextButton.click();
-          await expect(pageManager.addressPage.spinner).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.addressPage,
+            pageManager.addressPage.nextButton,
+            pageManager.alternateAddressPage.stepHeading
+          );
         });
 
         await test.step("skips alternate address", async () => {
           await expect(
             pageManager.alternateAddressPage.stepHeading
           ).toBeVisible();
-          await pageManager.alternateAddressPage.nextButton.click();
-          await expect(
-            pageManager.alternateAddressPage.spinner
-          ).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.alternateAddressPage,
+            pageManager.alternateAddressPage.nextButton,
+            pageManager.addressVerificationPage.stepHeading
+          );
         });
 
         await test.step("verifies home address", async () => {
@@ -279,18 +307,21 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await pageManager.addressVerificationPage
             .getHomeAddressOption(TEST_OOS_ADDRESS.street)
             .click();
-          await pageManager.addressVerificationPage.nextButton.click();
-          await expect(
-            pageManager.addressVerificationPage.spinner
-          ).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.addressVerificationPage,
+            pageManager.addressVerificationPage.nextButton,
+            pageManager.accountPage.stepHeading
+          );
         });
 
         await test.step("enters account information", async () => {
           await expect(pageManager.accountPage.stepHeading).toBeVisible();
           await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-          await pageManager.accountPage.nextButton.click();
+          await clickNextButton(
+            pageManager.accountPage,
+            pageManager.accountPage.nextButton,
+            pageManager.reviewPage.stepHeading
+          );
         });
 
         await test.step("unchecks ecommunications preference on review page", async () => {
@@ -305,7 +336,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
         await test.step("submits application and verifies Sierra data", async () => {
           await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-          await pageManager.reviewPage.submitButton.click();
+          await clickNextButton(
+            pageManager.reviewPage,
+            pageManager.reviewPage.submitButton,
+            pageManager.congratsPage.temporaryHeading
+          );
           const scrapedBarcode =
             await pageManager.congratsPage.patronBarcodeNumber.textContent();
           expect(scrapedBarcode).not.toBeNull();
@@ -332,28 +367,32 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await expect(
             pageManager.personalPage.receiveInfoCheckbox
           ).toBeChecked();
-          await pageManager.personalPage.nextButton.click();
+          await clickNextButton(
+            pageManager.personalPage,
+            pageManager.personalPage.nextButton,
+            pageManager.addressPage.stepHeading
+          );
         });
 
         await test.step("enters home address", async () => {
           await expect(pageManager.addressPage.stepHeading).toBeVisible();
           await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-          await pageManager.addressPage.nextButton.click();
-          await expect(pageManager.addressPage.spinner).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.addressPage,
+            pageManager.addressPage.nextButton,
+            pageManager.alternateAddressPage.stepHeading
+          );
         });
 
         await test.step("skips alternate address", async () => {
           await expect(
             pageManager.alternateAddressPage.stepHeading
           ).toBeVisible();
-          await pageManager.alternateAddressPage.nextButton.click();
-          await expect(
-            pageManager.alternateAddressPage.spinner
-          ).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.alternateAddressPage,
+            pageManager.alternateAddressPage.nextButton,
+            pageManager.addressVerificationPage.stepHeading
+          );
         });
 
         await test.step("verifies home address", async () => {
@@ -363,18 +402,21 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await pageManager.addressVerificationPage
             .getHomeAddressOption(TEST_OOS_ADDRESS.street)
             .click();
-          await pageManager.addressVerificationPage.nextButton.click();
-          await expect(
-            pageManager.addressVerificationPage.spinner
-          ).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.addressVerificationPage,
+            pageManager.addressVerificationPage.nextButton,
+            pageManager.accountPage.stepHeading
+          );
         });
 
         await test.step("enters account information", async () => {
           await expect(pageManager.accountPage.stepHeading).toBeVisible();
           await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-          await pageManager.accountPage.nextButton.click();
+          await clickNextButton(
+            pageManager.accountPage,
+            pageManager.accountPage.nextButton,
+            pageManager.reviewPage.stepHeading
+          );
         });
 
         await test.step("confirms ecommunications preference is retained on review page", async () => {
@@ -388,7 +430,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
         await test.step("submits application and verifies Sierra data", async () => {
           await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-          await pageManager.reviewPage.submitButton.click();
+          await clickNextButton(
+            pageManager.reviewPage,
+            pageManager.reviewPage.submitButton,
+            pageManager.congratsPage.temporaryHeading
+          );
           const scrapedBarcode =
             await pageManager.congratsPage.patronBarcodeNumber.textContent();
           expect(scrapedBarcode).not.toBeNull();
@@ -411,28 +457,32 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await expect(
             pageManager.personalPage.receiveInfoCheckbox
           ).not.toBeChecked();
-          await pageManager.personalPage.nextButton.click();
+          await clickNextButton(
+            pageManager.personalPage,
+            pageManager.personalPage.nextButton,
+            pageManager.addressPage.stepHeading
+          );
         });
 
         await test.step("enters home address", async () => {
           await expect(pageManager.addressPage.stepHeading).toBeVisible();
           await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-          await pageManager.addressPage.nextButton.click();
-          await expect(pageManager.addressPage.spinner).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.addressPage,
+            pageManager.addressPage.nextButton,
+            pageManager.alternateAddressPage.stepHeading
+          );
         });
 
         await test.step("skips alternate address", async () => {
           await expect(
             pageManager.alternateAddressPage.stepHeading
           ).toBeVisible();
-          await pageManager.alternateAddressPage.nextButton.click();
-          await expect(
-            pageManager.alternateAddressPage.spinner
-          ).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.alternateAddressPage,
+            pageManager.alternateAddressPage.nextButton,
+            pageManager.addressVerificationPage.stepHeading
+          );
         });
 
         await test.step("verifies home address", async () => {
@@ -442,18 +492,21 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await pageManager.addressVerificationPage
             .getHomeAddressOption(TEST_OOS_ADDRESS.street)
             .click();
-          await pageManager.addressVerificationPage.nextButton.click();
-          await expect(
-            pageManager.addressVerificationPage.spinner
-          ).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.addressVerificationPage,
+            pageManager.addressVerificationPage.nextButton,
+            pageManager.accountPage.stepHeading
+          );
         });
 
         await test.step("enters account information", async () => {
           await expect(pageManager.accountPage.stepHeading).toBeVisible();
           await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-          await pageManager.accountPage.nextButton.click();
+          await clickNextButton(
+            pageManager.accountPage,
+            pageManager.accountPage.nextButton,
+            pageManager.reviewPage.stepHeading
+          );
         });
 
         await test.step("rechecks ecommunications preference on review page", async () => {
@@ -468,7 +521,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
         await test.step("submits application and verifies Sierra data", async () => {
           await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-          await pageManager.reviewPage.submitButton.click();
+          await clickNextButton(
+            pageManager.reviewPage,
+            pageManager.reviewPage.submitButton,
+            pageManager.congratsPage.temporaryHeading
+          );
           const scrapedBarcode =
             await pageManager.congratsPage.patronBarcodeNumber.textContent();
           expect(scrapedBarcode).not.toBeNull();
