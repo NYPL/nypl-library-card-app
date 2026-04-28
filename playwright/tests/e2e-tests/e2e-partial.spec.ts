@@ -1,13 +1,13 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
+  clickNextButton,
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
-  SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   TEST_ACCOUNT,
   TEST_EDITED_ACCOUNT,
@@ -39,20 +39,19 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           state: "NY",
           postalCode: "12345",
         });
+        // skips API check since a 400 from address API is expected for an invalid address
         await pageManager.addressPage.nextButton.click();
-        await expect(pageManager.addressPage.spinner).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
       });
 
       await test.step("skips alternate address", async () => {
         await expect(
           pageManager.alternateAddressPage.stepHeading
         ).toBeVisible();
-        await pageManager.alternateAddressPage.nextButton.click();
-        await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.alternateAddressPage,
+          pageManager.alternateAddressPage.nextButton,
+          pageManager.addressVerificationPage.stepHeading
+        );
       });
 
       await test.step("verifies home address", async () => {
@@ -62,18 +61,21 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.addressVerificationPage
           .getHomeAddressOption(invalidStreet)
           .click();
-        await pageManager.addressVerificationPage.nextButton.click();
-        await expect(
-          pageManager.addressVerificationPage.spinner
-        ).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.addressVerificationPage,
+          pageManager.addressVerificationPage.nextButton,
+          pageManager.accountPage.stepHeading
+        );
       });
 
       await test.step("enters account information", async () => {
         await expect(pageManager.accountPage.stepHeading).toBeVisible();
         await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-        await pageManager.accountPage.nextButton.click();
+        await clickNextButton(
+          pageManager.accountPage,
+          pageManager.accountPage.nextButton,
+          pageManager.reviewPage.stepHeading
+        );
       });
 
       await test.step("displays error on review page", async () => {
@@ -90,7 +92,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await page.goto(PAGE_ROUTES.ACCOUNT(lang));
         await expect(pageManager.accountPage.stepHeading).toBeVisible();
         await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-        await pageManager.accountPage.nextButton.click();
+        await clickNextButton(
+          pageManager.accountPage,
+          pageManager.accountPage.nextButton,
+          pageManager.reviewPage.stepHeading
+        );
       });
 
       await test.step("edits address from review page", async () => {
@@ -101,20 +107,22 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       await test.step("enters home address", async () => {
         await expect(pageManager.addressPage.stepHeading).toBeVisible();
         await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
-        await pageManager.addressPage.nextButton.click();
-        await expect(pageManager.addressPage.spinner).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.addressPage,
+          pageManager.addressPage.nextButton,
+          pageManager.alternateAddressPage.stepHeading
+        );
       });
 
       await test.step("skips alternate address", async () => {
         await expect(
           pageManager.alternateAddressPage.stepHeading
         ).toBeVisible();
-        await pageManager.alternateAddressPage.nextButton.click();
-        await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.alternateAddressPage,
+          pageManager.alternateAddressPage.nextButton,
+          pageManager.addressVerificationPage.stepHeading
+        );
       });
 
       await test.step("verifies home address", async () => {
@@ -124,18 +132,21 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.addressVerificationPage
           .getHomeAddressOption(TEST_NYC_ADDRESS.street)
           .click();
-        await pageManager.addressVerificationPage.nextButton.click();
-        await expect(
-          pageManager.addressVerificationPage.spinner
-        ).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.addressVerificationPage,
+          pageManager.addressVerificationPage.nextButton,
+          pageManager.accountPage.stepHeading
+        );
       });
 
       await test.step("edits account information", async () => {
         await expect(pageManager.accountPage.stepHeading).toBeVisible();
         await fillAccountInfo(pageManager.accountPage, TEST_EDITED_ACCOUNT);
-        await pageManager.accountPage.nextButton.click();
+        await clickNextButton(
+          pageManager.accountPage,
+          pageManager.accountPage.nextButton,
+          pageManager.reviewPage.stepHeading
+        );
       });
 
       await test.step("displays updated account info on review page", async () => {
@@ -164,16 +175,21 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(
           pageManager.personalPage.receiveInfoCheckbox
         ).not.toBeChecked();
-        await pageManager.personalPage.nextButton.click();
+        await clickNextButton(
+          pageManager.personalPage,
+          pageManager.personalPage.nextButton,
+          pageManager.addressPage.stepHeading
+        );
       });
 
       await test.step("enters home address", async () => {
         await expect(pageManager.addressPage.stepHeading).toBeVisible();
         await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-        await pageManager.addressPage.nextButton.click();
-        await expect(pageManager.addressPage.spinner).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.addressPage,
+          pageManager.addressPage.nextButton,
+          pageManager.alternateAddressPage.stepHeading
+        );
       });
 
       await test.step("enters alternate address", async () => {
@@ -181,10 +197,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           pageManager.alternateAddressPage.stepHeading
         ).toBeVisible();
         await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
-        await pageManager.alternateAddressPage.nextButton.click();
-        await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.alternateAddressPage,
+          pageManager.alternateAddressPage.nextButton,
+          pageManager.addressVerificationPage.stepHeading
+        );
       });
 
       await test.step("verifies home and alternate addresses", async () => {
@@ -197,18 +214,21 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await pageManager.addressVerificationPage
           .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
           .click();
-        await pageManager.addressVerificationPage.nextButton.click();
-        await expect(
-          pageManager.addressVerificationPage.spinner
-        ).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.addressVerificationPage,
+          pageManager.addressVerificationPage.nextButton,
+          pageManager.accountPage.stepHeading
+        );
       });
 
       await test.step("enters account information", async () => {
         await expect(pageManager.accountPage.stepHeading).toBeVisible();
         await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-        await pageManager.accountPage.nextButton.click();
+        await clickNextButton(
+          pageManager.accountPage,
+          pageManager.accountPage.nextButton,
+          pageManager.reviewPage.stepHeading
+        );
       });
 
       await test.step("displays review page and verifies receive info checkbox is unchecked", async () => {
@@ -242,7 +262,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(
           pageManager.personalPage.receiveInfoCheckbox
         ).not.toBeChecked();
-        await pageManager.personalPage.nextButton.click();
+        await clickNextButton(
+          pageManager.personalPage,
+          pageManager.personalPage.nextButton,
+          pageManager.addressPage.stepHeading
+        );
       });
 
       await test.step("retains info on address page", async () => {
@@ -262,10 +286,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(pageManager.addressPage.postalCodeInput).toHaveValue(
           TEST_OOS_ADDRESS.postalCode
         );
-        await pageManager.addressPage.nextButton.click();
-        await expect(pageManager.addressPage.spinner).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.addressPage,
+          pageManager.addressPage.nextButton,
+          pageManager.alternateAddressPage.stepHeading
+        );
       });
 
       await test.step("retains info on alternate address page", async () => {
@@ -287,10 +312,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(
           pageManager.alternateAddressPage.postalCodeInput
         ).toHaveValue(TEST_NYC_ADDRESS.postalCode);
-        await pageManager.alternateAddressPage.nextButton.click();
-        await expect(pageManager.alternateAddressPage.spinner).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.alternateAddressPage,
+          pageManager.alternateAddressPage.nextButton,
+          pageManager.addressVerificationPage.stepHeading
+        );
       });
 
       await test.step("retains info on address verification page", async () => {
@@ -307,12 +333,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
             TEST_NYC_ADDRESS.street
           )
         ).toBeChecked();
-        await pageManager.addressVerificationPage.nextButton.click();
-        await expect(
-          pageManager.addressVerificationPage.spinner
-        ).not.toBeVisible({
-          timeout: SPINNER_TIMEOUT,
-        });
+        await clickNextButton(
+          pageManager.addressVerificationPage,
+          pageManager.addressVerificationPage.nextButton,
+          pageManager.accountPage.stepHeading
+        );
       });
 
       await test.step("retains info on account page", async () => {

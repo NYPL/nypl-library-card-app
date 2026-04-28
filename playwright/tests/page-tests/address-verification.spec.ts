@@ -1,10 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { AddressVerificationPage } from "../../pageobjects/address-verification.page";
 import { PageManager } from "../../pageobjects/page-manager.page";
-import { fillAddress } from "../../utils/form-helper";
+import { clickNextButton, fillAddress } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
-  SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   TEST_MULTIMATCH_ADDRESS,
   TEST_MULTIMATCH_ADDRESS_EAST,
@@ -45,10 +44,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await test.step("enters home address", async () => {
           await expect(pageManager.addressPage.addressHeading).toBeVisible();
           await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-          await pageManager.addressPage.nextButton.click();
-          await expect(pageManager.addressPage.spinner).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.addressPage,
+            pageManager.addressPage.nextButton,
+            pageManager.alternateAddressPage.stepHeading
+          );
         });
 
         await test.step("enters alternate address", async () => {
@@ -56,12 +56,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
             pageManager.alternateAddressPage.addressHeading
           ).toBeVisible();
           await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
-          await pageManager.alternateAddressPage.nextButton.click();
-          await expect(
-            pageManager.alternateAddressPage.spinner
-          ).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.alternateAddressPage,
+            pageManager.alternateAddressPage.nextButton,
+            pageManager.addressVerificationPage.stepHeading
+          );
         });
 
         await test.step("displays home and alternate addresses", async () => {
@@ -85,13 +84,14 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       });
 
       test("prompts multiple address options", async () => {
-        await test.step("enters home and alternate addresses", async () => {
+        await test.step("enters home address", async () => {
           await expect(pageManager.addressPage.addressHeading).toBeVisible();
           await fillAddress(pageManager.addressPage, TEST_MULTIMATCH_ADDRESS);
+          // skips API check since a 400 from address API is expected for a multimatch address
           await pageManager.addressPage.nextButton.click();
-          await expect(pageManager.addressPage.spinner).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+        });
+
+        await test.step("enters alternate address", async () => {
           await expect(
             pageManager.alternateAddressPage.addressHeading
           ).toBeVisible();
@@ -99,12 +99,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
             pageManager.alternateAddressPage,
             TEST_MULTIMATCH_ADDRESS
           );
+          // skips API check since a 400 from address API is expected for a multimatch address
           await pageManager.alternateAddressPage.nextButton.click();
-          await expect(
-            pageManager.alternateAddressPage.spinner
-          ).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
         });
 
         await test.step("displays address options", async () => {

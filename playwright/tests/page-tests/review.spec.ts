@@ -2,13 +2,13 @@ import { test, expect } from "@playwright/test";
 import { ReviewPage } from "../../pageobjects/review.page";
 import { PageManager } from "../../pageobjects/page-manager.page";
 import {
+  clickNextButton,
   fillAccountInfo,
   fillAddress,
   fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
-  SPINNER_TIMEOUT,
   SUPPORTED_LANGUAGES,
   TEST_ACCOUNT,
   TEST_EDITED_ACCOUNT,
@@ -32,9 +32,10 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
     });
 
     test.describe("displays elements on review page", () => {
-      test("displays headings", async () => {
+      test("displays headings and button", async () => {
         await expect(reviewPage.mainHeading).toBeVisible();
         await expect(reviewPage.stepHeading).toBeVisible();
+        await expect(reviewPage.submitButton).toBeVisible();
       });
 
       test("displays Personal Information section", async () => {
@@ -127,10 +128,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await test.step("navigates to address page and enters address", async () => {
           await expect(pageManager.addressPage.stepHeading).toBeVisible();
           await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-          await pageManager.addressPage.nextButton.click();
-          await expect(pageManager.addressPage.spinner).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.addressPage,
+            pageManager.addressPage.nextButton,
+            pageManager.alternateAddressPage.stepHeading
+          );
         });
 
         await test.step("enters alternate address", async () => {
@@ -138,12 +140,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
             pageManager.alternateAddressPage.stepHeading
           ).toBeVisible();
           await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
-          await pageManager.alternateAddressPage.nextButton.click();
-          await expect(
-            pageManager.alternateAddressPage.spinner
-          ).not.toBeVisible({
-            timeout: SPINNER_TIMEOUT,
-          });
+          await clickNextButton(
+            pageManager.alternateAddressPage,
+            pageManager.alternateAddressPage.nextButton,
+            pageManager.addressVerificationPage.stepHeading
+          );
         });
 
         await test.step("verifies home and alternate addresses", async () => {
@@ -156,16 +157,21 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await pageManager.addressVerificationPage
             .getAlternateAddressOption(TEST_NYC_ADDRESS.street)
             .click();
-          await pageManager.addressVerificationPage.nextButton.click();
-          await expect(
-            pageManager.addressVerificationPage.spinner
-          ).not.toBeVisible({ timeout: SPINNER_TIMEOUT });
+          await clickNextButton(
+            pageManager.addressVerificationPage,
+            pageManager.addressVerificationPage.nextButton,
+            pageManager.accountPage.stepHeading
+          );
         });
 
         await test.step("enters account information", async () => {
           await expect(pageManager.accountPage.stepHeading).toBeVisible();
           await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-          await pageManager.accountPage.nextButton.click();
+          await clickNextButton(
+            pageManager.accountPage,
+            pageManager.accountPage.nextButton,
+            pageManager.reviewPage.stepHeading
+          );
         });
 
         await test.step("displays addresses on review page", async () => {
@@ -221,7 +227,11 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           await page.goto(PAGE_ROUTES.ACCOUNT(lang));
           await expect(pageManager.accountPage.stepHeading).toBeVisible();
           await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-          await pageManager.accountPage.nextButton.click();
+          await clickNextButton(
+            pageManager.accountPage,
+            pageManager.accountPage.nextButton,
+            pageManager.reviewPage.stepHeading
+          );
         });
 
         await test.step("edits account info on review page", async () => {
