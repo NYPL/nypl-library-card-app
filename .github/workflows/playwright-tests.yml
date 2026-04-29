@@ -13,6 +13,10 @@ on:
         required: false
         type: string
         default: all
+      PLAYWRIGHT_TEST_FOLDER:
+        required: false
+        type: string
+        default: ""
 
 jobs:
   playwright-tests:
@@ -49,13 +53,13 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         env:
           SUPPORTED_LANGUAGES: en
-        run: npx playwright test
+        run: npx playwright test ${{ inputs.PLAYWRIGHT_TEST_FOLDER || '' }}
 
       - name: Run Playwright tests (Main/QA - all languages)
         if: ${{ github.event_name != 'pull_request' }}
         env:
           SUPPORTED_LANGUAGES: ${{ inputs.SUPPORTED_LANGUAGES || 'all' }}
-        run: npx playwright test
+        run: npx playwright test ${{ inputs.PLAYWRIGHT_TEST_FOLDER || '' }}
 
       - name: Upload Playwright reports on failure
         if: ${{ failure() }}

@@ -15,6 +15,7 @@ jobs:
     secrets: inherit
     with:
       PLAYWRIGHT_BASE_URL: https://qa-www.nypl.org/library-card/new
+      PLAYWRIGHT_TEST_FOLDER: playwright/tests/e2e-tests
 
   deploy-production:
     runs-on: ubuntu-latest
