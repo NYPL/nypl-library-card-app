@@ -4,21 +4,23 @@ import { AxeBuilder } from "@axe-core/playwright";
 import { PAGE_ROUTES } from "../../utils/constants";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 
-test.describe("Accessibility tests on Address Page", () => {
+test.describe("accessibility tests on address page", () => {
+  let addressPage: AddressPage;
+
   test.beforeEach(async ({ page }) => {
     await page.goto(PAGE_ROUTES.ADDRESS());
+    addressPage = new AddressPage(page);
   });
 
-  test("should have no accessibility violations on load", async ({ page }) => {
+  test("does not display accessibility violations", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();
     validateA11yCoverage(accessibilityScanResults);
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
-  test("should reach all form fields via the tab key", async ({ page }) => {
-    const addressPage = new AddressPage(page);
 
+  test("tabs forward through the page", async () => {
     const addressLocators = [
       addressPage.alternateFormLink,
       addressPage.streetAddressInput,
@@ -26,12 +28,12 @@ test.describe("Accessibility tests on Address Page", () => {
       addressPage.cityInput,
       addressPage.stateInput,
       addressPage.postalCodeInput,
+      addressPage.previousButton,
+      addressPage.nextButton,
     ];
-
     await expect(addressPage.stepHeading).toBeFocused();
-
     for (const locator of addressLocators) {
-      await page.keyboard.press("Tab");
+      await addressPage.page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
     }
   });
