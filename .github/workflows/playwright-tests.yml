@@ -17,11 +17,6 @@ on:
         required: false
         type: string
         default: ""
-  workflow_dispatch:
-    inputs:
-      PLAYWRIGHT_TEST_FOLDER:
-        required: false
-        type: string
 
 jobs:
   playwright-tests:
@@ -58,7 +53,6 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         env:
           SUPPORTED_LANGUAGES: en
-          PLAYWRIGHT_TEST_FOLDER: playwright/tests/e2e-tests
         run: npx playwright test ${{ env.PLAYWRIGHT_TEST_FOLDER || ''}}
 
       - name: Run Playwright tests (Main/QA - all languages)
