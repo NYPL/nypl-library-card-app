@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { AccountPage } from "../../pageobjects/account.page";
 import { AxeBuilder } from "@axe-core/playwright";
+import { AccountPage } from "../../pageobjects/account.page";
 import { PAGE_ROUTES } from "../../utils/constants";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 import { mockUsernameApi } from "../../utils/mock-api";

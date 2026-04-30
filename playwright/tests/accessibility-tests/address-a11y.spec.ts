@@ -1,6 +1,6 @@
-import { AddressPage } from "../../pageobjects/address.page";
 import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
+import { AddressPage } from "../../pageobjects/address.page";
 import { PAGE_ROUTES } from "../../utils/constants";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 

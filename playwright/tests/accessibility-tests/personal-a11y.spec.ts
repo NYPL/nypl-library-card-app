@@ -1,6 +1,6 @@
-import { PersonalPage } from "../../pageobjects/personal.page";
 import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
+import { PersonalPage } from "../../pageobjects/personal.page";
 import { PAGE_ROUTES } from "../../utils/constants";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 

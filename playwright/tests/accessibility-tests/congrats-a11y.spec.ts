@@ -1,22 +1,22 @@
-import { AxeBuilder } from "@axe-core/playwright";
-import { CongratsPage } from "../../pageobjects/congrats.page";
 import { test, expect } from "@playwright/test";
+import { AxeBuilder } from "@axe-core/playwright";
 import { PageManager } from "../../pageobjects/page-manager.page";
-import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import { CongratsPage } from "../../pageobjects/congrats.page";
 import {
   clickNextButton,
-  fillPersonalInfo,
-  fillAddress,
   fillAccountInfo,
+  fillAddress,
+  fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
+  IP,
   PAGE_ROUTES,
   TEST_ACCOUNT,
-  TEST_PATRON,
   TEST_NYC_ADDRESS,
-  IP,
+  TEST_PATRON,
 } from "../../utils/constants";
 import { deletePatron, getPatronID } from "../../utils/sierra-api-utils";
+import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 
 test.describe("Accessibility tests on Congrats Page", () => {
   let scrapedBarcode: string | null = null;
