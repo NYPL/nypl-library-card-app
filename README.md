@@ -132,6 +132,15 @@ Our CI/CD pipeline uses GitHub Actions with multiple specialized workflows to en
 | **Playwright Tests**     | End-to-end browser testing       | PRs, pushes to `main`, called by deployments |
 | **Deploy to QA**         | Deploy to QA environment         | `qa-*` tags                                  |
 | **Deploy to Production** | Deploy to production environment | `production-*` tags                          |
+| **Rollback Production**  | Roll back to a previous image    | Manual (`workflow_dispatch`)                 |
+
+### Production Rollback
+
+Each production deploy automatically saves the previous image as `production-previous` in ECR before deploying the new one. If a bad deploy needs to be reverted:
+
+1. Go to the **Run workflow** dashboard
+2. [Optional] specify an `image_tag` (e.g. a git SHA) to roll back to a specific version. Leave blank to use `production-previous` (the image from the last deploy)
+3. The workflow will retag the target image as `production-latest` and trigger a new ECS deployment
 
 ## Internationalization
 

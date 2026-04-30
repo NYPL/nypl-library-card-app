@@ -1,0 +1,68 @@
+name: Rollback Production
+
+on:
+    workflow_dispatch:
+        inputs:
+            image_tag:
+                description: "ECR image tag to roll back to (defaults to production-previous if omitted)"
+                required: false
+                type: string
+
+concurrency:
+    group: production-deploy
+    cancel-in-progress: false
+
+jobs:
+    rollback-production:
+        runs-on: ubuntu-latest
+        environment: production
+
+        permissions:
+            id-token: write
+            contents: read
+
+        steps:
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                  role-to-assume: arn:aws:iam::946183545209:role/GithubActionsDeployerRole
+                  aws-region: us-east-1
+
+            - name: Login to Amazon ECR
+              id: login-ecr
+              uses: aws-actions/amazon-ecr-login@v2
+
+            - name: Retag rollback target as production-latest
+              env:
+                  ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+                  ECR_REPOSITORY: nypl-library-card-app
+                  ROLLBACK_TAG: ${{ inputs.image_tag || 'production-previous' }}
+              run: |
+                  MANIFEST=$(aws ecr batch-get-image \
+                  --repository-name $ECR_REPOSITORY \
+                  --image-ids imageTag=$ROLLBACK_TAG \
+                  --query 'images[0].imageManifest' \
+                  --output text)
+
+                  if [ -z "$MANIFEST" ] || [ "$MANIFEST" = "None" ]; then
+                    echo "ERROR: Image '$ROLLBACK_TAG' not found in ECR. Cannot rollback."
+                    exit 1
+                  fi
+
+                  aws ecr put-image \
+                  --repository-name $ECR_REPOSITORY \
+                  --image-tag production-latest \
+                  --image-manifest "$MANIFEST"
+
+            - name: Force new ECS deployment
+              run: |
+                  aws ecs update-service \
+                    --cluster nypl-library-card-app-production \
+                    --service nypl-library-card-app-production \
+                    --force-new-deployment
+
+            - name: Wait for ECS to stabilize
+              run: |
+                  aws ecs wait services-stable \
+                    --cluster nypl-library-card-app-production \
+                    --services nypl-library-card-app-production

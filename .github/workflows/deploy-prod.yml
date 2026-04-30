@@ -5,6 +5,10 @@ on:
     tags:
       - "production-*"
 
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
 jobs:
   unit-tests:
     uses: ./.github/workflows/unit-tests.yml
@@ -57,7 +61,7 @@ jobs:
           docker build \
            --build-arg NEXT_BUILD_ID="${NEXT_BUILD_ID}" \
            --build-arg NEW_RELIC_APP_NAME="Library Card App" \
-           --build-arg NEW_RELIC_LICENSE_KEY=$NEW_RELIC_LICENSE_KEY \
+           --build-arg NEW_RELIC_LICENSE_KEY="${NEW_RELIC_LICENSE_KEY}" \
            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG  \
            .
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:production-latest
@@ -71,9 +75,33 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:production-latest
 
+      - name: Tag current production-latest as production-previous
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: nypl-library-card-app
+        run: |
+          MANIFEST=$(aws ecr batch-get-image \
+            --repository-name $ECR_REPOSITORY \
+            --image-ids imageTag=production-latest \
+            --query 'images[0].imageManifest' \
+            --output text) || true
+
+          if [ -n "$MANIFEST" ] && [ "$MANIFEST" != "None" ]; then
+            aws ecr put-image \
+              --repository-name $ECR_REPOSITORY \
+              --image-tag production-previous \
+              --image-manifest "$MANIFEST"
+          fi
+
       - name: Deploy to ECS
         run: |
           aws ecs update-service \
             --cluster nypl-library-card-app-production \
             --service nypl-library-card-app-production \
             --force-new-deployment
+
+      - name: Wait for ECS to stabilize
+        run: |
+          aws ecs wait services-stable \
+            --cluster nypl-library-card-app-production \
+            --services nypl-library-card-app-production
