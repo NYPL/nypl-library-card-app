@@ -37,6 +37,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     reValidateMode: "onChange",
   });
   const { favIconPath, appTitle } = appConfig;
+  console.log("MyApp page loaded: April 30, 2026 10:45");
 
   // Setting the "lang" and the "dir" attribute
   const { i18n } = useTranslation("common");
