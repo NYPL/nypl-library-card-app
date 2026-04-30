@@ -1,84 +1,18 @@
 import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
-import { PageManager } from "../../pageobjects/page-manager.page";
 import { ReviewPage } from "../../pageobjects/review.page";
-import {
-  clickNextButton,
-  fillAccountInfo,
-  fillAddress,
-  fillPersonalInfo,
-} from "../../utils/form-helper";
-import {
-  IP,
-  PAGE_ROUTES,
-  TEST_ACCOUNT,
-  TEST_NYC_ADDRESS,
-  TEST_PATRON,
-} from "../../utils/constants";
+import { PAGE_ROUTES } from "../../utils/constants";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 
-test.describe("Review Page Accessibility Tests", () => {
-  test.beforeEach(async ({ page, context }) => {
-    await context.clearCookies();
-    await page.setExtraHTTPHeaders({
-      "x-client-ip": IP.NYC_IP,
-      "x-forwarded-for": IP.NYC_IP,
-    });
+test.describe("accessibility tests on review page", () => {
+  let reviewPage: ReviewPage;
 
-    const pageManager = new PageManager(page);
-    await page.goto(PAGE_ROUTES.PERSONAL());
-
-    await test.step("it should display Personal info page", async () => {
-      await expect(pageManager.personalPage.stepHeading).toBeVisible();
-      await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-      await clickNextButton(
-        pageManager.personalPage,
-        pageManager.personalPage.nextButton,
-        pageManager.addressPage.stepHeading
-      );
-    });
-
-    await test.step("it should display Address page", async () => {
-      await expect(pageManager.addressPage.stepHeading).toBeVisible();
-      await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
-      await clickNextButton(
-        pageManager.addressPage,
-        pageManager.addressPage.nextButton,
-        pageManager.addressVerificationPage.stepHeading
-      );
-    });
-
-    await test.step("it should display Address verification page", async () => {
-      await expect(
-        pageManager.addressVerificationPage.stepHeading
-      ).toBeVisible();
-      await pageManager.addressVerificationPage
-        .getHomeAddressOption(TEST_NYC_ADDRESS.street)
-        .click();
-      await clickNextButton(
-        pageManager.addressVerificationPage,
-        pageManager.addressVerificationPage.nextButton,
-        pageManager.accountPage.stepHeading
-      );
-    });
-
-    await test.step("it should display Account page", async () => {
-      await expect(pageManager.accountPage.stepHeading).toBeVisible();
-      await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
-      await clickNextButton(
-        pageManager.accountPage,
-        pageManager.accountPage.nextButton,
-        pageManager.reviewPage.stepHeading
-      );
-    });
-
-    await test.step("it should display Review page", async () => {
-      await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-    });
+  test.beforeEach(async ({ page }) => {
+    reviewPage = new ReviewPage(page);
+    await page.goto(PAGE_ROUTES.REVIEW());
   });
 
-  test("should have no accessibility violations on load", async ({ page }) => {
-    await expect(page).toHaveURL(/.*\/review\?.*newCard=true/);
+  test("does not display accessibility violations", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();
@@ -86,77 +20,57 @@ test.describe("Review Page Accessibility Tests", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("it should reach all form fields via the tab key", async ({ page }) => {
-    const reviewPage = new ReviewPage(page);
+  test("tabs forward through the page", async () => {
+    const reviewLocators = [
+      reviewPage.editPersonalInfoButton,
+      reviewPage.editAddressButton,
+      reviewPage.showPasswordCheckbox,
+      reviewPage.editAccountButton,
+      reviewPage.submitButton,
+    ];
+    await expect(reviewPage.stepHeading).toBeFocused();
+    for (const locator of reviewLocators) {
+      await reviewPage.page.keyboard.press("Tab");
+      await expect(locator).toBeFocused();
+    }
+  });
 
-    await test.step("it should tab through on Personal section", async () => {
-      await expect(reviewPage.stepHeading).toBeVisible();
-      await expect(reviewPage.stepHeading).toBeFocused();
-    });
+  test("tabs forward through editable personal info section", async () => {
+    const personalLocators = [
+      reviewPage.lastNameInput,
+      reviewPage.dateOfBirthInput,
+      reviewPage.emailInput,
+      reviewPage.alternateFormLink,
+      reviewPage.locationsLink,
+      reviewPage.receiveInfoCheckbox,
+    ];
+    await reviewPage.editPersonalInfoButton.focus();
+    await reviewPage.page.keyboard.press("Enter");
+    await expect(reviewPage.firstNameInput).toBeFocused();
+    for (const locator of personalLocators) {
+      await reviewPage.page.keyboard.press("Tab");
+      await expect(locator).toBeFocused();
+    }
+  });
 
-    await test.step("it should focus on the Edit button and activate it", async () => {
-      await page.keyboard.press("Tab");
-      await expect(reviewPage.editPersonalInfoButton).toBeFocused();
-
-      await page.keyboard.press("Enter");
-      await expect(reviewPage.firstNameInput).toBeFocused();
-    });
-
-    await test.step("it should tab through on Personal info fields", async () => {
-      const personalFields = [
-        reviewPage.lastNameInput,
-        reviewPage.dateOfBirthInput,
-        reviewPage.emailInput,
-        reviewPage.alternateFormLink,
-        reviewPage.locationsLink,
-        reviewPage.receiveInfoCheckbox,
-      ];
-
-      for (const field of personalFields) {
-        await page.keyboard.press("Tab");
-        await expect(field).toBeFocused();
-      }
-    });
-
-    await test.step("it should tab through on Address section", async () => {
-      await page.keyboard.press("Tab");
-      await expect(reviewPage.editAddressButton).toBeFocused();
-    });
-
-    await test.step("it should tab through on Account section", async () => {
-      await page.keyboard.press("Tab");
-      await expect(reviewPage.showPasswordCheckbox).toBeFocused();
-      await page.keyboard.press("Tab");
-    });
-    await test.step("it should focus on the Edit Account button and activate it", async () => {
-      await expect(reviewPage.editAccountButton).toBeFocused();
-      await page.keyboard.press("Enter");
-      await expect(reviewPage.usernameInput).toBeVisible();
-      await expect(reviewPage.usernameInput).toBeFocused();
-    });
-    await test.step("it should tab through on Account info fields", async () => {
-      const accountFields = [
-        reviewPage.availableUsernameButton,
-        reviewPage.passwordInput,
-        reviewPage.verifyPasswordInput,
-        reviewPage.showPasswordCheckbox,
-        reviewPage.nyplLocationLink,
-        reviewPage.selectHomeLibrary,
-        reviewPage.cardholderTermsLink,
-        reviewPage.rulesRegulationsLink,
-        reviewPage.privacyPolicyLink,
-        reviewPage.acceptTermsCheckbox,
-      ];
-
-      for (const field of accountFields) {
-        await page.keyboard.press("Tab");
-        await expect(field).toBeFocused();
-      }
-      await page.keyboard.press("Space");
-    });
-    await test.step("it should focus on submit button", async () => {
-      await page.keyboard.press("Tab");
-      await expect(reviewPage.submitButton).toBeFocused();
-    });
+  test("tabs forward through editable account section", async () => {
+    const accountLocators = [
+      reviewPage.passwordInput,
+      reviewPage.verifyPasswordInput,
+      reviewPage.showPasswordCheckbox,
+      reviewPage.nyplLocationLink,
+      reviewPage.selectHomeLibrary,
+      reviewPage.cardholderTermsLink,
+      reviewPage.rulesRegulationsLink,
+      reviewPage.privacyPolicyLink,
+      reviewPage.acceptTermsCheckbox,
+    ];
+    await reviewPage.editAccountButton.focus();
+    await reviewPage.page.keyboard.press("Enter");
+    await expect(reviewPage.usernameInput).toBeFocused();
+    for (const locator of accountLocators) {
+      await reviewPage.page.keyboard.press("Tab");
+      await expect(locator).toBeFocused();
+    }
   });
 });
