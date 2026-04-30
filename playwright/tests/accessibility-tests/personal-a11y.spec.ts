@@ -4,12 +4,15 @@ import { PersonalPage } from "../../pageobjects/personal.page";
 import { PAGE_ROUTES } from "../../utils/constants";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 
-test.describe("Accessibility tests on personal info page", () => {
+test.describe("accessibility tests on personal page", () => {
+  let personalPage: PersonalPage;
+
   test.beforeEach(async ({ page }) => {
     await page.goto(PAGE_ROUTES.PERSONAL());
+    personalPage = new PersonalPage(page);
   });
 
-  test("should have no accessibility violations on load", async ({ page }) => {
+  test("does not display accessibility violations", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();
@@ -17,20 +20,21 @@ test.describe("Accessibility tests on personal info page", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("should reach all form fields via the tab key", async ({ page }) => {
-    const personalPage = new PersonalPage(page);
-
+  test("tabs forward through the page", async () => {
     const personalLocators = [
       personalPage.firstNameInput,
       personalPage.lastNameInput,
       personalPage.dateOfBirthInput,
       personalPage.emailInput,
+      personalPage.alternateFormLink,
+      personalPage.locationsLink,
+      personalPage.receiveInfoCheckbox,
+      personalPage.previousButton,
+      personalPage.nextButton,
     ];
-
     await expect(personalPage.stepHeading).toBeFocused();
-
     for (const locator of personalLocators) {
-      await page.keyboard.press("Tab");
+      await personalPage.page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
     }
   });
