@@ -92,7 +92,7 @@ jobs:
             --cluster nypl-library-card-app-qa \
             --service nypl-library-card-app-qa \
             --force-new-deployment
-                  - name: Wait for ECS to stabilize
+
       - name: Wait for ECS to stabilize
         run: |
           aws ecs wait services-stable \
