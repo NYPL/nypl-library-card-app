@@ -1,15 +1,21 @@
 import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
 import { LandingPage } from "../../pageobjects/landing.page";
+import { GlobalComponentsPage } from "../../pageobjects/global-components.page";
 import { PAGE_ROUTES } from "../../utils/constants";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 
-test.describe("Accessibility tests on Landing Page", () => {
+test.describe("accessibility tests on landing page", () => {
+  let landingPage: LandingPage;
+  let globalComponents: GlobalComponentsPage;
+
   test.beforeEach(async ({ page }) => {
     await page.goto(PAGE_ROUTES.LANDING());
+    landingPage = new LandingPage(page);
+    globalComponents = new GlobalComponentsPage(page);
   });
 
-  test("should have no accessibility violations on load", async ({ page }) => {
+  test("does not display accessibility violations", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();
@@ -17,12 +23,10 @@ test.describe("Accessibility tests on Landing Page", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("should have keyboard focus indicators for language links", async ({
-    page,
-  }) => {
-    const landingPage = new LandingPage(page);
-
-    const languageLocators = [
+  test("tabs forward through the page", async () => {
+    const landingLocators = [
+      globalComponents.homeBreadcrumb,
+      globalComponents.getLibraryCardBreadcrumb,
       landingPage.arabicLanguage,
       landingPage.bengaliLanguage,
       landingPage.chineseLanguage,
@@ -34,13 +38,18 @@ test.describe("Accessibility tests on Landing Page", () => {
       landingPage.russianLanguage,
       landingPage.spanishLanguage,
       landingPage.urduLanguage,
+      landingPage.digitalResourcesLink,
+      landingPage.visitLibraryLink,
+      landingPage.alternateFormLink,
+      landingPage.whatYouCanAccess,
+      landingPage.cardholderTerms,
+      landingPage.rulesRegulations,
+      landingPage.privacyPolicy,
+      landingPage.getStartedButton,
     ];
-
-    await languageLocators[0].focus();
-    await expect(languageLocators[0]).toBeFocused();
-    for (let i = 1; i < languageLocators.length; i++) {
-      await page.keyboard.press("Tab");
-      await expect(languageLocators[i]).toBeFocused();
+    for (const locator of landingLocators) {
+      await landingPage.page.keyboard.press("Tab");
+      await expect(locator).toBeFocused();
     }
   });
 });
