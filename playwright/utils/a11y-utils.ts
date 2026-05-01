@@ -2,6 +2,9 @@ import { expect } from "@playwright/test";
 
 export const A11Y_GUIDELINES = ["wcag21aa", "wcag22aa"] as const;
 
+export const USED_USER_NAME = "tester";
+export const AVAILABLE_USER_NAME = "testuser";
+
 type A11yResultGroup = { tags: string[] };
 type A11yResults = {
   passes: A11yResultGroup[];

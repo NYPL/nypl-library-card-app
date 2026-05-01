@@ -159,6 +159,9 @@ const AddressContainer = ({ csrfToken }) => {
         <Trans
           i18nKey="location.address.description"
           components={{ a: <DSLink variant="external" /> }}
+          values={{
+            alternateForm: t("location.address.alternateForm"),
+          }}
         />
       </Paragraph>
       <Form
