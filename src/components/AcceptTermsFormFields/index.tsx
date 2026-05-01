@@ -1,6 +1,6 @@
 import { Checkbox, Link as DSLink } from "@nypl/design-system-react-components";
 import { Trans, useTranslation } from "next-i18next";
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Paragraph } from "../Paragraph";
 
@@ -16,7 +16,14 @@ const AcceptTermsForm: React.FC = () => {
   const {
     control,
     formState: { errors },
+    setFocus,
   } = useFormContext();
+
+  useEffect(() => {
+    if (errors?.acceptTerms?.message) {
+      setFocus("acceptTerms");
+    }
+  }, [errors?.acceptTerms?.message, setFocus]);
 
   return (
     <>
@@ -37,9 +44,10 @@ const AcceptTermsForm: React.FC = () => {
         control={control}
         defaultValue={false}
         rules={{ required: t("account.errorMessage.acceptTerms") }}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, value, ref } }) => (
           <Checkbox
             id="acceptTerms"
+            ref={ref}
             invalidText={t("account.errorMessage.acceptTerms")}
             isInvalid={!!errors?.acceptTerms?.message}
             isChecked={value}
