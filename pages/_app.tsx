@@ -39,6 +39,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   const { favIconPath, appTitle } = appConfig;
   console.log("MyApp page loaded: April 30, 2026 10:45");
   console.log("MyApp page loaded: April 30, 2026 15:55");
+  console.log("MyApp page loaded: May 1, 2026 11:20");
 
   // Setting the "lang" and the "dir" attribute
   const { i18n } = useTranslation("common");
