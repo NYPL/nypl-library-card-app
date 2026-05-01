@@ -91,7 +91,7 @@ export const TEST_EDITED_ACCOUNT = {
 export const TEST_BARCODE_NUMBER = "12341234123412";
 export const EXPECTED_BARCODE_PREFIX = "255";
 
-export const SUPPORTED_LANGUAGES = [
+export const ALL_SUPPORTED_LANGUAGES = [
   { lang: "en", name: "English" },
   // { lang: "ar", name: "Arabic" },
   // { lang: "bn", name: "Bengali" },
@@ -104,6 +104,23 @@ export const SUPPORTED_LANGUAGES = [
   // { lang: "ur", name: "Urdu" },
   // { lang: "zhcn", name: "Chinese" },
 ];
+
+const requestedLanguages = process.env.SUPPORTED_LANGUAGES || "all";
+
+const filteredLanguages = ALL_SUPPORTED_LANGUAGES.filter(({ lang }) =>
+  requestedLanguages
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean)
+    .includes(lang)
+);
+
+export const SUPPORTED_LANGUAGES =
+  requestedLanguages === "all"
+    ? ALL_SUPPORTED_LANGUAGES
+    : filteredLanguages.length
+      ? filteredLanguages
+      : [{ lang: "en", name: "English" }];
 
 const withLang = (path: string, lang?: string) =>
   `${path}?newCard=true${lang ? `&lang=${encodeURIComponent(lang)}` : ""}`;
