@@ -49,6 +49,18 @@ jobs:
                     exit 1
                   fi
 
+                  # Check if the rollback target is already the current qa-latest
+                  CURRENT_MANIFEST=$(aws ecr batch-get-image \
+                  --repository-name $ECR_REPOSITORY \
+                  --image-ids imageTag=qa-latest \
+                  --query 'images[0].imageManifest' \
+                  --output text)
+
+                  if [ "$MANIFEST" = "$CURRENT_MANIFEST" ]; then
+                    echo "ERROR: '$ROLLBACK_TAG' is already the current qa-latest. Nothing to rollback."
+                    exit 1
+                  fi
+
                   aws ecr put-image \
                   --repository-name $ECR_REPOSITORY \
                   --image-tag qa-latest \
