@@ -64,17 +64,10 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: nypl-library-card-app
         run: |
-          MANIFEST=$(aws ecr batch-get-image \
-            --repository-name $ECR_REPOSITORY \
-            --image-ids imageTag=qa-latest \
-            --query 'images[0].imageManifest' \
-            --output text) || true
-
-          if [ -n "$MANIFEST" ] && [ "$MANIFEST" != "None" ]; then
-            aws ecr put-image \
-              --repository-name $ECR_REPOSITORY \
-              --image-tag qa-previous \
-              --image-manifest "$MANIFEST"
+          MANIFEST=$(aws ecr batch-get-image --repository-name $ECR_REPOSITORY --image-ids imageTag="qa-latest" --output json | jq --raw-output --join-output '.images[0].imageManifest')
+          PREVIOUS_MANIFEST=$(aws ecr batch-get-image --repository-name $ECR_REPOSITORY --image-ids imageTag="qa-previous" --output json | jq --raw-output --join-output '.images[0].imageManifest')
+          if [ "$MANIFEST" != "$PREVIOUS_MANIFEST" ]; then
+            aws ecr put-image --repository-name $ECR_REPOSITORY --image-tag "qa-previous" --image-manifest "$MANIFEST"
           fi
 
       - name: Push image to Amazon ECR
