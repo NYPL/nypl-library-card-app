@@ -52,7 +52,7 @@
     "@types/react": "^19.1.10",
     "axios": "1.7.2",
     "babel-jest": "27.4.6",
-    "bwip-js": "2.0.10",
+    "bwip-js": "4.10.1",
     "cookie-parser": "1.4.5",
     "cors": "2.8.5",
     "crypto": "1.0.1",
