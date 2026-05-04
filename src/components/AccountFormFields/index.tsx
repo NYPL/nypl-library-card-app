@@ -147,10 +147,7 @@ function AccountFormFields({
 
       <FormRow id={`${id}-accountForm-5`}>
         <DSFormField>
-          <LibraryListFormFields
-            libraryList={ilsLibraryList}
-            id="libraryList"
-          />
+          <LibraryListFormFields libraryList={ilsLibraryList} />
         </DSFormField>
       </FormRow>
     </>
