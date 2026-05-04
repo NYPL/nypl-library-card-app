@@ -30,9 +30,9 @@ function AccountFormFields({
 }: AccountFormFieldsProps) {
   const { t } = useTranslation("common");
   const {
-    register,
     formState: { errors },
     getValues,
+    register,
   } = useFormContext();
   const { state } = useFormDataContext();
   const [showPassword, setShowPassword] = useState(true);
@@ -147,7 +147,10 @@ function AccountFormFields({
 
       <FormRow id={`${id}-accountForm-5`}>
         <DSFormField>
-          <LibraryListFormFields libraryList={ilsLibraryList} />
+          <LibraryListFormFields
+            libraryList={ilsLibraryList}
+            id="libraryList"
+          />
         </DSFormField>
       </FormRow>
     </>

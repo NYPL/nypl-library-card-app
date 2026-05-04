@@ -21,9 +21,23 @@ const AccountFormContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   // Specific functions and object from react-hook-form.
-  const { handleSubmit } = useFormContext();
+  const { handleSubmit, setFocus } = useFormContext();
   // Get the URL query params for `newCard` and `lang`.
   const queryStr = createQueryParams(router?.query);
+  const fieldOrder = [
+    "username",
+    "password",
+    "verifyPassword",
+    "libraryList",
+    "acceptTerms",
+  ];
+  const onError = (errors) => {
+    const firstErrorField = fieldOrder.find((field) => errors[field]);
+    if (firstErrorField) {
+      // Small delay to ensure our focus runs after RHF's internal attempt
+      setTimeout(() => setFocus(firstErrorField), 0);
+    }
+  };
 
   /**
    * submitForm
@@ -48,7 +62,7 @@ const AccountFormContainer = ({ csrfToken }) => {
       // action="/library-card/api/submit"
       id="account-form-container"
       method="post"
-      onSubmit={handleSubmit(submitForm)}
+      onSubmit={handleSubmit(submitForm, onError)}
       noValidate
     >
       <AccountFormFields csrfToken={csrfToken} id="account-form-container" />
