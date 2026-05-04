@@ -28,7 +28,7 @@ const AccountFormContainer = ({ csrfToken }) => {
     "username",
     "password",
     "verifyPassword",
-    "libraryList",
+    "homeLibraryCode",
     "acceptTerms",
   ];
   const onError = (errors) => {
