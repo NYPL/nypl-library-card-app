@@ -8,8 +8,8 @@ import {
 import { useTranslation } from "next-i18next";
 import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-
 import FormField from "../FormField";
+import { isValidUsername } from "../../utils/utils";
 import UsernameValidationFormFields from "../UsernameValidationFormFields";
 import useFormDataContext from "../../context/FormDataContext";
 import ilsLibraryList from "../../data/ilsLibraryList";
@@ -61,6 +61,11 @@ function AccountFormFields({
     setShowPassword(false);
   }, []);
 
+  const { ref: registerRef, ...usernameRegisterProps } = register("username", {
+    validate: (val) =>
+      isValidUsername(val) || t("account.errorMessage.username"),
+  });
+
   const validatePasswordLength = (val) => {
     return (
       (val.length >= minPasswordLength && val.length <= maxPasswordLength) ||
@@ -78,9 +83,10 @@ function AccountFormFields({
     <>
       <UsernameValidationFormFields
         id={`${id}-accountForm-1`}
-        errorMessage={t("account.errorMessage.username")}
         csrfToken={csrfToken}
         firstFieldRef={firstFieldRef}
+        usernameRegisterRef={registerRef}
+        usernameRegisterProps={usernameRegisterProps}
       />
 
       <FormRow id={`${id}-accountForm-2`}>

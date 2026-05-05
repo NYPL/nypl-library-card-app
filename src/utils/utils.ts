@@ -1,6 +1,7 @@
 import isEmpty from "lodash/isEmpty";
 import { PageTitles } from "../interfaces";
 import { NextRouter } from "next/router";
+import { isAlphanumeric } from "validator";
 
 const redirectIfUserHasRegistered = async (
   hasRegistered: boolean,
@@ -80,6 +81,14 @@ const createNestedQueryParams = (dataAsString = {}, key) => {
   return query;
 };
 
+/**
+ * isValidUsername
+ * Validates username based on length and alphanumeric value. Used both
+ * to validate the username/show error and to activate the check button.
+ */
+const isValidUsername = (value = "") =>
+  value.length >= 5 && value.length <= 25 && isAlphanumeric(value);
+
 export {
   redirectIfUserHasRegistered,
   homePageRedirect,
@@ -88,4 +97,5 @@ export {
   createQueryParams,
   createNestedQueryParams,
   getPageTitles,
+  isValidUsername,
 };
