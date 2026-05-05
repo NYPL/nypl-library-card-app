@@ -24,7 +24,7 @@ jobs:
   deploy-production:
     runs-on: ubuntu-latest
     environment: production
-    needs: [unit-tests, playwright-tests]
+    needs: [ unit-tests, playwright-tests ]
 
     permissions:
       id-token: write
@@ -66,6 +66,17 @@ jobs:
            .
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:production-latest
 
+      - name: Tag current production-latest as production-previous
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: nypl-library-card-app
+        run: |
+          MANIFEST=$(aws ecr batch-get-image --repository-name $ECR_REPOSITORY --image-ids imageTag="production-latest" --output json | jq --raw-output --join-output '.images[0].imageManifest')
+          PREVIOUS_MANIFEST=$(aws ecr batch-get-image --repository-name $ECR_REPOSITORY --image-ids imageTag="production-previous" --output json | jq --raw-output --join-output '.images[0].imageManifest')
+          if [ "$MANIFEST" != "$PREVIOUS_MANIFEST" ]; then
+            aws ecr put-image --repository-name $ECR_REPOSITORY --image-tag "production-previous" --image-manifest "$MANIFEST"
+          fi
+
       - name: Push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -74,24 +85,6 @@ jobs:
         run: |
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:production-latest
-
-      - name: Tag current production-latest as production-previous
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: nypl-library-card-app
-        run: |
-          MANIFEST=$(aws ecr batch-get-image \
-            --repository-name $ECR_REPOSITORY \
-            --image-ids imageTag=production-latest \
-            --query 'images[0].imageManifest' \
-            --output text) || true
-
-          if [ -n "$MANIFEST" ] && [ "$MANIFEST" != "None" ]; then
-            aws ecr put-image \
-              --repository-name $ECR_REPOSITORY \
-              --image-tag production-previous \
-              --image-manifest "$MANIFEST"
-          fi
 
       - name: Deploy to ECS
         run: |
