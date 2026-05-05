@@ -33,7 +33,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "이메일 주소",
-      "instruction": "전자책과 같은 많은 디지털 자료를 이용하기 위해서는 이메일 주소가 필요합니다."
+      "instruction": "<span>전자책과 같은 많은 디지털 자료를 이용하기 위해서는 이메일 주소가 필요합니다.</span>"
     },
     "eCommunications": {
       "labelText": "예, NYPL의 프로그램과 서비스에 대한 정보를 받기를 원합니다."
