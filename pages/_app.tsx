@@ -35,7 +35,6 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   const formMethods = useForm<FormInputData>({
     mode: "onSubmit",
     reValidateMode: "onChange",
-    shouldFocusError: false,
   });
   const { favIconPath, appTitle } = appConfig;
 
