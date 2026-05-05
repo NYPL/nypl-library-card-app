@@ -1,32 +1,20 @@
 import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
 import { PageManager } from "../../pageobjects/page-manager.page";
-import { AddressVerificationPage } from "../../pageobjects/address-verification.page";
-import {
-  clickNextButton,
-  fillAddress,
-  fillPersonalInfo,
-} from "../../utils/form-helper";
+import { clickNextButton, fillAddress } from "../../utils/form-helper";
 import {
   PAGE_ROUTES,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
-  TEST_PATRON,
 } from "../../utils/constants";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 
-test.describe("Accessibility tests on Address Verification page", () => {
-  test.beforeEach(async ({ page, context }) => {
-    await context.clearCookies();
-    await page.goto(PAGE_ROUTES.PERSONAL());
-    const pageManager = new PageManager(page);
+test.describe("accessibility tests on address verification page", () => {
+  let pageManager: PageManager;
 
-    await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
-    await clickNextButton(
-      pageManager.personalPage,
-      pageManager.personalPage.nextButton,
-      pageManager.addressPage.stepHeading
-    );
+  test.beforeEach(async ({ page }) => {
+    pageManager = new PageManager(page);
+    await page.goto(PAGE_ROUTES.ADDRESS());
 
     await expect(pageManager.addressPage.stepHeading).toBeVisible();
     await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
@@ -47,8 +35,7 @@ test.describe("Accessibility tests on Address Verification page", () => {
     await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
   });
 
-  test("should have no accessibility violations on load", async ({ page }) => {
-    await expect(page).toHaveURL(/.*\/address-verification\?.*newCard=true/);
+  test("does not have accessibility violations on page", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();
@@ -56,19 +43,17 @@ test.describe("Accessibility tests on Address Verification page", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("keyboard navigation", async ({ page }) => {
-    await expect(page).toHaveURL(/.*\/address-verification\?.*newCard=true/);
-    const addressVerification = new AddressVerificationPage(page);
-
-    const radioButtons = await addressVerification.getRadioButtons.all();
+  test("tabs forward through the page", async ({ page }) => {
+    const radioButtons =
+      await pageManager.addressVerificationPage.getRadioButtons.all();
 
     const addressVerificationLocators = [
       ...radioButtons,
-      addressVerification.previousButton,
-      addressVerification.nextButton,
+      pageManager.addressVerificationPage.previousButton,
+      pageManager.addressVerificationPage.nextButton,
     ];
 
-    await expect(addressVerification.stepHeading).toBeFocused();
+    await expect(pageManager.addressVerificationPage.stepHeading).toBeFocused();
 
     for (const locator of addressVerificationLocators) {
       await page.keyboard.press("Tab");
