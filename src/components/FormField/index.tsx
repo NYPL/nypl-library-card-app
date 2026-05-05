@@ -61,7 +61,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
       attributes = {},
       ...rest
     },
-    ref // use this directly, no updatedRef needed
+    ref
   ) => {
     const errorText = errorState[name];
     const typeToInputTypeMap = {
