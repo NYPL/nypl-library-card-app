@@ -16,7 +16,7 @@ test.describe("accessibility tests on address verification page", () => {
     pageManager = new PageManager(page);
     await page.goto(PAGE_ROUTES.ADDRESS());
 
-    test.step("enters home address", async () => {
+    await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
       await clickNextButton(
@@ -26,7 +26,7 @@ test.describe("accessibility tests on address verification page", () => {
       );
     });
 
-    test.step("enters alternate address", async () => {
+    await test.step("enters alternate address", async () => {
       await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
       await clickNextButton(
@@ -36,7 +36,7 @@ test.describe("accessibility tests on address verification page", () => {
       );
     });
 
-    test.step("displays address verification page", async () => {
+    await test.step("displays address verification page", async () => {
       await expect(
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
