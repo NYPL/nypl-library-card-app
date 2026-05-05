@@ -4,7 +4,8 @@ on:
     workflow_dispatch:
         inputs:
             image_tag:
-                description: "ECR image tag to roll back to (defaults to qa-previous if omitted)"
+                description: "ECR image tag to roll back to (defaults to qa-previous if
+                    omitted)"
                 required: false
                 type: string
 
@@ -38,21 +39,20 @@ jobs:
                   ECR_REPOSITORY: nypl-library-card-app
                   ROLLBACK_TAG: ${{ inputs.image_tag || 'qa-previous' }}
               run: |
-                  MANIFEST=$(aws ecr batch-get-image \
-                  --repository-name $ECR_REPOSITORY \
-                  --image-ids imageTag=$ROLLBACK_TAG \
-                  --query 'images[0].imageManifest' \
-                  --output text)
+                  MANIFEST=$(aws ecr batch-get-image --repository-name $ECR_REPOSITORY --image-ids imageTag="$ROLLBACK_TAG" --output json | jq --raw-output --join-output '.images[0].imageManifest')
+                  CURRENT_MANIFEST=$(aws ecr batch-get-image --repository-name $ECR_REPOSITORY --image-ids imageTag="qa-latest" --output json | jq --raw-output --join-output '.images[0].imageManifest')
 
-                  if [ -z "$MANIFEST" ] || [ "$MANIFEST" = "None" ]; then
+                  if [ -z "$MANIFEST" ]; then
                     echo "ERROR: Image '$ROLLBACK_TAG' not found in ECR. Cannot rollback."
                     exit 1
                   fi
 
-                  aws ecr put-image \
-                  --repository-name $ECR_REPOSITORY \
-                  --image-tag qa-latest \
-                  --image-manifest "$MANIFEST"
+                  if [ "$MANIFEST" = "$CURRENT_MANIFEST" ]; then
+                    echo "ERROR: '$ROLLBACK_TAG' is already the current qa-latest. Nothing to rollback."
+                    exit 1
+                  fi
+
+                  aws ecr put-image --repository-name $ECR_REPOSITORY --image-tag "qa-latest" --image-manifest "$MANIFEST"
 
             - name: Force new ECS deployment
               run: |
