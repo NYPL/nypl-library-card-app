@@ -52,17 +52,15 @@ test.describe("accessibility tests on address verification page", () => {
   });
 
   test("tabs forward through the page", async ({ page }) => {
-    const radioButtons =
-      await pageManager.addressVerificationPage.getRadioButtons.all();
-
+    const radioButtons = pageManager.addressVerificationPage.getRadioButtons;
+    await expect(radioButtons).toHaveCount(2);
     const addressVerificationLocators = [
-      ...radioButtons,
+      radioButtons.first(),
+      radioButtons.nth(1),
       pageManager.addressVerificationPage.previousButton,
       pageManager.addressVerificationPage.nextButton,
     ];
-
     await expect(pageManager.addressVerificationPage.stepHeading).toBeFocused();
-
     for (const locator of addressVerificationLocators) {
       await page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
