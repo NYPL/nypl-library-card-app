@@ -22,13 +22,12 @@ test.describe("accessibility tests on congrats page", () => {
   let scrapedBarcode: string | null = null;
 
   test.beforeEach(async ({ page }) => {
-    // pull out of describe block?
+    pageManager = new PageManager(page);
     await page.setExtraHTTPHeaders({
       "x-client-ip": IP.NYC_IP,
       "x-forwarded-for": IP.NYC_IP,
     });
 
-    pageManager = new PageManager(page);
     await test.step("enters personal information", async () => {
       await page.goto(PAGE_ROUTES.PERSONAL());
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
@@ -103,7 +102,7 @@ test.describe("accessibility tests on congrats page", () => {
     }
   });
 
-  test("does not display accessibility violations", async ({ page }) => {
+  test("does not have accessibility violations on page", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();
@@ -111,7 +110,7 @@ test.describe("accessibility tests on congrats page", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("tabs forward through the page", async () => {
+  test("tabs forward through the page for metro/non-metro patron", async () => {
     const congratsLocators = [
       pageManager.congratsPage.locationsLink,
       pageManager.congratsPage.photoIdAndProofOfAddressLink,

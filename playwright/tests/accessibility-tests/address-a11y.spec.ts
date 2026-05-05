@@ -8,11 +8,11 @@ test.describe("accessibility tests on address page", () => {
   let addressPage: AddressPage;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(PAGE_ROUTES.ADDRESS());
     addressPage = new AddressPage(page);
+    await page.goto(PAGE_ROUTES.ADDRESS());
   });
 
-  test("does not display accessibility violations", async ({ page }) => {
+  test("does not have accessibility violations on page", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();

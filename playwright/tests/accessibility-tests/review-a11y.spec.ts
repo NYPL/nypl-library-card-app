@@ -12,7 +12,7 @@ test.describe("accessibility tests on review page", () => {
     await page.goto(PAGE_ROUTES.REVIEW());
   });
 
-  test("does not display accessibility violations", async ({ page }) => {
+  test("does not have accessibility violations on page", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();

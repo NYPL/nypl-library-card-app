@@ -8,11 +8,11 @@ test.describe("accessibility tests on personal page", () => {
   let personalPage: PersonalPage;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(PAGE_ROUTES.PERSONAL());
     personalPage = new PersonalPage(page);
+    await page.goto(PAGE_ROUTES.PERSONAL());
   });
 
-  test("does not display accessibility violations", async ({ page }) => {
+  test("does not have accessibility violations on page", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();

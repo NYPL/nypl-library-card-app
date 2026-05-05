@@ -16,23 +16,31 @@ test.describe("accessibility tests on address verification page", () => {
     pageManager = new PageManager(page);
     await page.goto(PAGE_ROUTES.ADDRESS());
 
-    await expect(pageManager.addressPage.stepHeading).toBeVisible();
-    await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
-    await clickNextButton(
-      pageManager.addressPage,
-      pageManager.addressPage.nextButton,
-      pageManager.alternateAddressPage.stepHeading
-    );
+    test.step("enters home address", async () => {
+      await expect(pageManager.addressPage.stepHeading).toBeVisible();
+      await fillAddress(pageManager.addressPage, TEST_OOS_ADDRESS);
+      await clickNextButton(
+        pageManager.addressPage,
+        pageManager.addressPage.nextButton,
+        pageManager.alternateAddressPage.stepHeading
+      );
+    });
 
-    await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
-    await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
-    await clickNextButton(
-      pageManager.alternateAddressPage,
-      pageManager.alternateAddressPage.nextButton,
-      pageManager.addressVerificationPage.stepHeading
-    );
+    test.step("enters alternate address", async () => {
+      await expect(pageManager.alternateAddressPage.stepHeading).toBeVisible();
+      await fillAddress(pageManager.alternateAddressPage, TEST_NYC_ADDRESS);
+      await clickNextButton(
+        pageManager.alternateAddressPage,
+        pageManager.alternateAddressPage.nextButton,
+        pageManager.addressVerificationPage.stepHeading
+      );
+    });
 
-    await expect(pageManager.addressVerificationPage.stepHeading).toBeVisible();
+    test.step("displays address verification page", async () => {
+      await expect(
+        pageManager.addressVerificationPage.stepHeading
+      ).toBeVisible();
+    });
   });
 
   test("does not have accessibility violations on page", async ({ page }) => {

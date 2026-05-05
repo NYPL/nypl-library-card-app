@@ -10,12 +10,12 @@ test.describe("accessibility tests on landing page", () => {
   let globalComponents: GlobalComponentsPage;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(PAGE_ROUTES.LANDING());
     landingPage = new LandingPage(page);
     globalComponents = new GlobalComponentsPage(page);
+    await page.goto(PAGE_ROUTES.LANDING());
   });
 
-  test("does not display accessibility violations", async ({ page }) => {
+  test("does not have accessibility violations on page", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();

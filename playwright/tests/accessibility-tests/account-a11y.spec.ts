@@ -9,11 +9,11 @@ test.describe("accessibility tests on account page", () => {
   let accountPage: AccountPage;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(PAGE_ROUTES.ACCOUNT());
     accountPage = new AccountPage(page);
+    await page.goto(PAGE_ROUTES.ACCOUNT());
   });
 
-  test("does not display accessibility violations", async ({ page }) => {
+  test("does not have accessibility violations on page", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();
@@ -50,7 +50,7 @@ test.describe("accessibility tests on account page", () => {
     await expect(accountPage.availableUsernameButton).toBeEnabled();
     await accountPage.page.keyboard.press("Tab");
     await expect(accountPage.availableUsernameButton).toBeFocused();
-    await accountPage.availableUsernameButton.press("Enter"); // or "Space"
+    await accountPage.availableUsernameButton.press("Enter");
     await expect(accountPage.availableUsernameButton).toBeDisabled();
     await expect(accountPage.availableUsernameMessage).toBeVisible();
     await expect(accountPage.usernameInput).toBeFocused();
@@ -63,7 +63,7 @@ test.describe("accessibility tests on account page", () => {
     await expect(accountPage.availableUsernameButton).toBeEnabled();
     await accountPage.page.keyboard.press("Tab");
     await expect(accountPage.availableUsernameButton).toBeFocused();
-    await accountPage.availableUsernameButton.press("Enter"); // or "Space"
+    await accountPage.availableUsernameButton.press("Enter");
     await expect(accountPage.availableUsernameButton).toBeDisabled();
     await expect(accountPage.unavailableUsernameMessage).toBeVisible();
     await expect(accountPage.usernameInput).toBeFocused();
