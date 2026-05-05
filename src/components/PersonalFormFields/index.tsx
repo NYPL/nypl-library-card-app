@@ -93,10 +93,6 @@ function PersonalFormFields({
                 components={{
                   a: <DSLink variant="external" />,
                 }}
-                values={{
-                  alternateForm: t("personal.email.alternateForm"),
-                  locations: t("personal.email.locations"),
-                }}
               />
             }
             autoComplete="email"
