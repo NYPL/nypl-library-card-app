@@ -107,8 +107,6 @@ test.describe("Review Page Accessibility Tests", () => {
         reviewPage.lastNameInput,
         reviewPage.dateOfBirthInput,
         reviewPage.emailInput,
-        reviewPage.alternateFormLink,
-        reviewPage.locationsLink,
         reviewPage.receiveInfoCheckbox,
       ];
 

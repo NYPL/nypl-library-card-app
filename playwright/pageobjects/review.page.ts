@@ -199,12 +199,6 @@ export class ReviewPage {
       appContent?.personal?.eCommunications?.labelText ||
         "Yes, I would like to receive information about NYPL's programs and services"
     );
-    this.alternateFormLink = this.page.getByRole("link", {
-      name: appContent?.personal?.email?.alternateForm || "alternate form",
-    });
-    this.locationsLink = this.page.locator("#mainContent").getByRole("link", {
-      name: appContent?.personal?.email?.locations || "locations",
-    });
     this.editPersonalInfoButton = page.getByRole("button", {
       name: withEdit(
         appContent?.review?.section?.personal || "Personal information"
