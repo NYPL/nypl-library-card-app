@@ -37,9 +37,10 @@ const AcceptTermsForm: React.FC = () => {
         control={control}
         defaultValue={false}
         rules={{ required: t("account.errorMessage.acceptTerms") }}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, value, ref } }) => (
           <Checkbox
             id="acceptTerms"
+            ref={ref}
             invalidText={t("account.errorMessage.acceptTerms")}
             isInvalid={!!errors?.acceptTerms?.message}
             isChecked={value}
