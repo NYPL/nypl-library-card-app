@@ -30,8 +30,6 @@ export class ReviewPage {
   readonly receiveInfoChoice: Locator;
   readonly receiveInfoCheckbox: Locator;
   readonly receiveInfoCheckboxLabel: Locator;
-  readonly alternateFormLink: Locator;
-  readonly locationsLink: Locator;
   readonly editPersonalInfoButton: Locator;
 
   // Address section
