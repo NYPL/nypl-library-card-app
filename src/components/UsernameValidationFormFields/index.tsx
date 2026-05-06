@@ -12,7 +12,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
-import { isAlphanumeric } from "validator";
+import { isValidUsername } from "../../utils/utils";
 
 import FormField from "../FormField";
 import SmallLoadingIndicator from "../SmallLoadingIndicator";
@@ -28,9 +28,10 @@ import { useMergedRef } from "../../hooks/useMergedRef";
 
 interface UsernameValidationFormProps {
   id?: string;
-  errorMessage?: string;
   csrfToken: string;
   firstFieldRef?: React.RefObject<TextInputRefType>;
+  usernameRegisterRef: any;
+  usernameRegisterProps: any;
 }
 
 /**
@@ -40,9 +41,10 @@ interface UsernameValidationFormProps {
  */
 const UsernameValidationForm = ({
   id = "",
-  errorMessage = "",
   csrfToken,
   firstFieldRef,
+  usernameRegisterRef,
+  usernameRegisterProps,
 }: UsernameValidationFormProps) => {
   const { t } = useTranslation("common");
   const {
@@ -54,11 +56,15 @@ const UsernameValidationForm = ({
   };
   const [isLoading, setIsLoading] = useState(false);
   const usernameInputRef = useRef<TextInputRefType>(null);
+  const mergedRef = useMergedRef(
+    usernameRegisterRef,
+    firstFieldRef,
+    usernameInputRef
+  );
   const [usernameIsAvailable, setUsernameIsAvailable] = useState(defaultState);
   const {
     watch,
     getValues,
-    register,
     formState: { errors },
   } = useFormContext();
   const usernameWatch = watch("username");
@@ -128,14 +134,6 @@ const UsernameValidationForm = ({
         usernameInputRef.current?.focus();
       });
   };
-  const { ref: registerRef, ...usernameRegisterProps } = register("username", {
-    validate: (val) => inputValidation(val) || errorMessage,
-  });
-
-  const mergedRef = useMergedRef(registerRef, firstFieldRef, usernameInputRef);
-
-  const inputValidation = (value = "") =>
-    value.length >= 5 && value.length <= 25 && isAlphanumeric(value);
   /**
    * renderButton
    * Render the button to validate a username and enable it only if
@@ -145,7 +143,7 @@ const UsernameValidationForm = ({
   const renderButton = () => {
     const username = getValues("username");
     const canValidate =
-      inputValidation(username) && !usernameIsAvailable.message;
+      isValidUsername(username) && !usernameIsAvailable.message;
     return (
       <ButtonGroup>
         <Button
