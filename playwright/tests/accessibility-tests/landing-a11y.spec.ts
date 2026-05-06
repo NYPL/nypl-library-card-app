@@ -1,17 +1,14 @@
 import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
-import { LandingPage } from "../../pageobjects/landing.page";
-import { GlobalComponentsPage } from "../../pageobjects/global-components.page";
+import { PageManager } from "../../pageobjects/page-manager.page";
 import { PAGE_ROUTES } from "../../utils/constants";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 
 test.describe("accessibility tests on landing page", () => {
-  let landingPage: LandingPage;
-  let globalComponents: GlobalComponentsPage;
+  let pageManager: PageManager;
 
   test.beforeEach(async ({ page }) => {
-    landingPage = new LandingPage(page);
-    globalComponents = new GlobalComponentsPage(page);
+    pageManager = new PageManager(page);
     await page.goto(PAGE_ROUTES.LANDING());
   });
 
@@ -25,30 +22,30 @@ test.describe("accessibility tests on landing page", () => {
 
   test("tabs forward through the page", async () => {
     const landingLocators = [
-      globalComponents.homeBreadcrumb,
-      globalComponents.getLibraryCardBreadcrumb,
-      landingPage.arabicLanguage,
-      landingPage.bengaliLanguage,
-      landingPage.chineseLanguage,
-      landingPage.englishLanguage,
-      landingPage.frenchLanguage,
-      landingPage.haitianCreoleLanguage,
-      landingPage.koreanLanguage,
-      landingPage.polishLanguage,
-      landingPage.russianLanguage,
-      landingPage.spanishLanguage,
-      landingPage.urduLanguage,
-      landingPage.digitalResourcesLink,
-      landingPage.visitLibraryLink,
-      landingPage.alternateFormLink,
-      landingPage.whatYouCanAccess,
-      landingPage.cardholderTerms,
-      landingPage.rulesRegulations,
-      landingPage.privacyPolicy,
-      landingPage.getStartedButton,
+      pageManager.globalComponents.homeBreadcrumb,
+      pageManager.globalComponents.getLibraryCardBreadcrumb,
+      pageManager.landingPage.arabicLanguage,
+      pageManager.landingPage.bengaliLanguage,
+      pageManager.landingPage.chineseLanguage,
+      pageManager.landingPage.englishLanguage,
+      pageManager.landingPage.frenchLanguage,
+      pageManager.landingPage.haitianCreoleLanguage,
+      pageManager.landingPage.koreanLanguage,
+      pageManager.landingPage.polishLanguage,
+      pageManager.landingPage.russianLanguage,
+      pageManager.landingPage.spanishLanguage,
+      pageManager.landingPage.urduLanguage,
+      pageManager.landingPage.digitalResourcesLink,
+      pageManager.landingPage.visitLibraryLink,
+      pageManager.landingPage.alternateFormLink,
+      pageManager.landingPage.whatYouCanAccess,
+      pageManager.landingPage.cardholderTerms,
+      pageManager.landingPage.rulesRegulations,
+      pageManager.landingPage.privacyPolicy,
+      pageManager.landingPage.getStartedButton,
     ];
     for (const locator of landingLocators) {
-      await landingPage.page.keyboard.press("Tab");
+      await pageManager.landingPage.page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
     }
   });
