@@ -58,7 +58,6 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
       maxLength,
       defaultValue,
       autoComplete,
-      // any extra input element attributes
       attributes = {},
       ...rest
     },
@@ -71,13 +70,13 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
       email: "email",
       hidden: "hidden",
     };
-    const updatedRef = ref || attributes?.ref ? ref || attributes?.ref : null;
     let helperText = instructionText || null;
     const { t } = useTranslation("common");
 
     if (errorText?.message) {
       helperText = errorText.message;
     }
+
     if (type === "hidden") {
       return (
         <TextInput
@@ -110,7 +109,7 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
           inputMode={inputMode}
           labelText={label}
           {...attributes}
-          ref={updatedRef}
+          ref={ref} // pass directly
           autoComplete={autoComplete}
           {...rest}
         />
