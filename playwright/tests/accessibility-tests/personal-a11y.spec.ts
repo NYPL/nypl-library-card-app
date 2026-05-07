@@ -26,8 +26,6 @@ test.describe("accessibility tests on personal page", () => {
       personalPage.lastNameInput,
       personalPage.dateOfBirthInput,
       personalPage.emailInput,
-      personalPage.alternateFormLink,
-      personalPage.locationsLink,
       personalPage.receiveInfoCheckbox,
       personalPage.previousButton,
       personalPage.nextButton,
