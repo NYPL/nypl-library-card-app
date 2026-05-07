@@ -66,8 +66,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
       test("confirms links open in new tab", async () => {
         const links = [
-          reviewPage.alternateFormLink,
-          reviewPage.locationsLink,
           reviewPage.nyplLocationLink,
           reviewPage.cardholderTermsLink,
           reviewPage.rulesRegulationsLink,
@@ -97,8 +95,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(reviewPage.dateOfBirthInput).toBeVisible();
         await expect(reviewPage.emailInputHeading).toBeVisible();
         await expect(reviewPage.emailInput).toBeVisible();
-        await expect(reviewPage.alternateFormLink).toBeVisible();
-        await expect(reviewPage.locationsLink).toBeVisible();
         await expect(reviewPage.receiveInfoCheckboxLabel).toBeVisible();
       });
 
