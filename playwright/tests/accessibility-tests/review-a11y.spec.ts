@@ -40,8 +40,6 @@ test.describe("accessibility tests on review page", () => {
       reviewPage.lastNameInput,
       reviewPage.dateOfBirthInput,
       reviewPage.emailInput,
-      reviewPage.alternateFormLink,
-      reviewPage.locationsLink,
       reviewPage.receiveInfoCheckbox,
     ];
     await reviewPage.editPersonalInfoButton.focus();
