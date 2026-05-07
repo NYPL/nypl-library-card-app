@@ -1,22 +1,19 @@
 import { test, expect } from "@playwright/test";
-import { AccountPage } from "../../pageobjects/account.page";
 import { AxeBuilder } from "@axe-core/playwright";
+import { AccountPage } from "../../pageobjects/account.page";
 import { PAGE_ROUTES } from "../../utils/constants";
-import {
-  A11Y_GUIDELINES,
-  validateA11yCoverage,
-  USED_USER_NAME,
-  AVAILABLE_USER_NAME,
-} from "../../utils/a11y-utils";
-import { mockUsernameApi, usernameResponse } from "../../utils/mock-api";
+import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
+import { mockUsernameApi } from "../../utils/mock-api";
 
-test.describe("Account Page Accessibility Tests", () => {
-  test.beforeEach(async ({ page, browserName }) => {
+test.describe("accessibility tests on account page", () => {
+  let accountPage: AccountPage;
+
+  test.beforeEach(async ({ page }) => {
+    accountPage = new AccountPage(page);
     await page.goto(PAGE_ROUTES.ACCOUNT());
-    console.log({ browserName, platform: process.platform });
   });
 
-  test("should have no accessibility violations on load", async ({ page }) => {
+  test("does not have accessibility violations on page", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();
@@ -24,11 +21,9 @@ test.describe("Account Page Accessibility Tests", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("should reach all form fields via the tab key", async ({ page }) => {
-    const accountPage = new AccountPage(page);
-
+  test("tabs forward through the page", async () => {
     const accountLocators = [
-      accountPage.availableUsernameButton,
+      accountPage.usernameInput,
       accountPage.passwordInput,
       accountPage.verifyPasswordInput,
       accountPage.showPasswordCheckbox,
@@ -37,57 +32,59 @@ test.describe("Account Page Accessibility Tests", () => {
       accountPage.cardholderTerms,
       accountPage.rulesRegulations,
       accountPage.privacyPolicy,
+      accountPage.acceptTermsCheckbox,
+      accountPage.previousButton,
+      accountPage.nextButton,
     ];
-
     await expect(accountPage.stepHeading).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(accountPage.usernameInput).toBeFocused();
-    await accountPage.usernameInput.fill("testuser");
-    await expect(accountPage.availableUsernameButton).toBeEnabled();
-
     for (const locator of accountLocators) {
-      await page.keyboard.press("Tab");
+      await accountPage.page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
     }
-
-    await page.keyboard.press("Tab");
-    await expect(accountPage.acceptTermsCheckbox).toBeFocused();
-    await page.keyboard.press("Space");
-    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
   });
 
-  test("should retain focus when checking unavailable username", async ({
-    page,
-  }) => {
-    await mockUsernameApi(page, "unavailable");
-    const accountPage = new AccountPage(page);
-    await expect(accountPage.stepHeading).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(accountPage.usernameInput).toBeFocused();
-    await accountPage.usernameInput.pressSequentially(USED_USER_NAME);
-    await expect(accountPage.availableUsernameButton).toBeEnabled();
-    await page.keyboard.press("Tab");
-    await expect(accountPage.availableUsernameButton).toBeFocused();
-    await accountPage.availableUsernameButton.press("Enter");
-    await expect(
-      page.getByText(usernameResponse.unavailable.message)
-    ).toBeVisible();
-    await expect(accountPage.availableUsernameButton).toBeDisabled();
-  });
-
-  test("should retain focus when checking available username", async ({
-    page,
-  }) => {
+  test("retains focus when checking available username", async ({ page }) => {
     await mockUsernameApi(page, "available");
-    const accountPage = new AccountPage(page);
-    await expect(accountPage.stepHeading).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(accountPage.usernameInput).toBeFocused();
-    await accountPage.usernameInput.pressSequentially(AVAILABLE_USER_NAME);
+    await expect(accountPage.availableUsernameButton).toBeDisabled();
+    await accountPage.usernameInput.fill("AvailableUsername");
     await expect(accountPage.availableUsernameButton).toBeEnabled();
-    await page.keyboard.press("Tab");
+    await accountPage.page.keyboard.press("Tab");
     await expect(accountPage.availableUsernameButton).toBeFocused();
     await accountPage.availableUsernameButton.press("Enter");
     await expect(accountPage.availableUsernameButton).toBeDisabled();
+    await expect(accountPage.availableUsernameMessage).toBeVisible();
+    await expect(accountPage.usernameInput).toBeFocused();
+  });
+
+  test("retains focus when checking unavailable username", async ({ page }) => {
+    await mockUsernameApi(page, "unavailable");
+    await expect(accountPage.availableUsernameButton).toBeDisabled();
+    await accountPage.usernameInput.fill("UnavailableUsername");
+    await expect(accountPage.availableUsernameButton).toBeEnabled();
+    await accountPage.page.keyboard.press("Tab");
+    await expect(accountPage.availableUsernameButton).toBeFocused();
+    await accountPage.availableUsernameButton.press("Enter");
+    await expect(accountPage.availableUsernameButton).toBeDisabled();
+    await expect(accountPage.unavailableUsernameMessage).toBeVisible();
+    await expect(accountPage.usernameInput).toBeFocused();
+  });
+
+  test("interacts with form fields using keyboard", async () => {
+    await accountPage.passwordInput.fill("password123");
+    await accountPage.verifyPasswordInput.fill("password123");
+    await accountPage.showPasswordCheckbox.focus();
+    await accountPage.page.keyboard.press("Space");
+    await expect(accountPage.showPasswordCheckbox).toBeChecked();
+    await expect(accountPage.passwordInput).toHaveValue("password123");
+    await expect(accountPage.verifyPasswordInput).toHaveValue("password123");
+
+    await accountPage.selectHomeLibrary.focus();
+    await accountPage.page.keyboard.press("ArrowDown");
+    await accountPage.page.keyboard.press("Enter");
+    await expect(accountPage.selectHomeLibrary).toHaveValue("vr");
+
+    await accountPage.acceptTermsCheckbox.focus();
+    await accountPage.page.keyboard.press("Space");
+    await expect(accountPage.acceptTermsCheckbox).toBeChecked();
   });
 });

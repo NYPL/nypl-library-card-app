@@ -1,35 +1,34 @@
-import { AxeBuilder } from "@axe-core/playwright";
-import { CongratsPage } from "../../pageobjects/congrats.page";
 import { test, expect } from "@playwright/test";
+import { AxeBuilder } from "@axe-core/playwright";
 import { PageManager } from "../../pageobjects/page-manager.page";
-import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 import {
   clickNextButton,
-  fillPersonalInfo,
-  fillAddress,
   fillAccountInfo,
+  fillAddress,
+  fillPersonalInfo,
 } from "../../utils/form-helper";
 import {
+  IP,
   PAGE_ROUTES,
   TEST_ACCOUNT,
-  TEST_PATRON,
   TEST_NYC_ADDRESS,
-  IP,
+  TEST_PATRON,
 } from "../../utils/constants";
 import { deletePatron, getPatronID } from "../../utils/sierra-api-utils";
+import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
 
-test.describe("Accessibility tests on Congrats Page", () => {
+test.describe("accessibility tests on congrats page", () => {
+  let pageManager: PageManager;
   let scrapedBarcode: string | null = null;
 
-  test.beforeEach(async ({ page, context }) => {
-    await context.clearCookies();
+  test.beforeEach(async ({ page }) => {
+    pageManager = new PageManager(page);
     await page.setExtraHTTPHeaders({
       "x-client-ip": IP.NYC_IP,
       "x-forwarded-for": IP.NYC_IP,
     });
 
-    const pageManager = new PageManager(page);
-    await test.step("filling personal information", async () => {
+    await test.step("enters personal information", async () => {
       await page.goto(PAGE_ROUTES.PERSONAL());
       await expect(pageManager.personalPage.stepHeading).toBeVisible();
       await fillPersonalInfo(pageManager.personalPage, TEST_PATRON);
@@ -40,7 +39,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
       );
     });
 
-    await test.step("filling address information", async () => {
+    await test.step("enters home address", async () => {
       await expect(pageManager.addressPage.stepHeading).toBeVisible();
       await fillAddress(pageManager.addressPage, TEST_NYC_ADDRESS);
       await clickNextButton(
@@ -50,7 +49,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
       );
     });
 
-    await test.step("address verification page", async () => {
+    await test.step("verifies home address", async () => {
       await expect(
         pageManager.addressVerificationPage.stepHeading
       ).toBeVisible();
@@ -60,7 +59,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
         pageManager.accountPage.stepHeading
       );
 
-      await test.step("filling account information", async () => {
+      await test.step("enters account information", async () => {
         await expect(pageManager.accountPage.stepHeading).toBeVisible();
         await fillAccountInfo(pageManager.accountPage, TEST_ACCOUNT);
         await clickNextButton(
@@ -70,9 +69,8 @@ test.describe("Accessibility tests on Congrats Page", () => {
         );
       });
 
-      await test.step("review page", async () => {
+      await test.step("displays review page", async () => {
         await expect(pageManager.reviewPage.stepHeading).toBeVisible();
-        await expect(pageManager.reviewPage.submitButton).toBeEnabled();
         await clickNextButton(
           pageManager.reviewPage,
           pageManager.reviewPage.submitButton,
@@ -80,7 +78,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
         );
       });
 
-      await test.step("congrats page", async () => {
+      await test.step("displays congrats page", async () => {
         await expect(
           pageManager.congratsPage.metroOrNonMetroHeading
         ).toBeVisible();
@@ -95,7 +93,6 @@ test.describe("Accessibility tests on Congrats Page", () => {
     if (scrapedBarcode) {
       try {
         const patronID = await getPatronID(scrapedBarcode);
-
         if (patronID) {
           await deletePatron(patronID);
         }
@@ -105,7 +102,7 @@ test.describe("Accessibility tests on Congrats Page", () => {
     }
   });
 
-  test("should have no accessibility violations on load", async ({ page }) => {
+  test("does not have accessibility violations on page", async ({ page }) => {
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags([...A11Y_GUIDELINES])
       .analyze();
@@ -113,23 +110,19 @@ test.describe("Accessibility tests on Congrats Page", () => {
     expect(accessibilityScanResults.violations).toHaveLength(0);
   });
 
-  test("it should support keyboard navigation", async ({ page }) => {
-    const congratsPage = new CongratsPage(page);
-
-    const locators = [
-      congratsPage.locationsLink,
-      congratsPage.photoIdAndProofOfAddressLink,
-      congratsPage.readListenLink,
-      congratsPage.loginLink,
-      congratsPage.nyplLocationLink,
-      congratsPage.findOutLibraryLink,
-      congratsPage.discoverLink,
+  test("tabs forward through the page for metro/non-metro patron", async () => {
+    const congratsLocators = [
+      pageManager.congratsPage.locationsLink,
+      pageManager.congratsPage.photoIdAndProofOfAddressLink,
+      pageManager.congratsPage.readListenLink,
+      pageManager.congratsPage.loginLink,
+      pageManager.congratsPage.nyplLocationLink,
+      pageManager.congratsPage.findOutLibraryLink,
+      pageManager.congratsPage.discoverLink,
     ];
-
-    await expect(congratsPage.metroOrNonMetroHeading).toBeFocused();
-
-    for (const locator of locators) {
-      await page.keyboard.press("Tab");
+    await expect(pageManager.congratsPage.metroOrNonMetroHeading).toBeFocused();
+    for (const locator of congratsLocators) {
+      await pageManager.congratsPage.page.keyboard.press("Tab");
       await expect(locator).toBeFocused();
     }
   });
