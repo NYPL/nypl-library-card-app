@@ -42,7 +42,7 @@ test.describe("accessibility tests on congrats page", () => {
       );
     });
 
-    await test.step("tabs forward through the page ", async () => {
+    await test.step("tabs forward through the page", async () => {
       const congratsLocators = [
         pageManager.congratsPage.locationsLink,
         pageManager.congratsPage.photoIdAndProofOfAddressLink,
@@ -55,6 +55,41 @@ test.describe("accessibility tests on congrats page", () => {
       await expect(
         pageManager.congratsPage.metroOrNonMetroHeading
       ).toBeFocused();
+      for (const locator of congratsLocators) {
+        await pageManager.congratsPage.page.keyboard.press("Tab");
+        await expect(locator).toBeFocused();
+      }
+    });
+  });
+
+  test("tabs forward through the page for temporary patron", async () => {
+    await test.step("submits mocked application", async () => {
+      await pageManager.page.goto(PAGE_ROUTES.REVIEW());
+      await mockCreatePatronApi(
+        pageManager.congratsPage.page,
+        `${TEST_PATRON.firstName} ${TEST_PATRON.lastName}`,
+        TEST_BARCODE_NUMBER,
+        PATRON_TYPES.DIGITAL_TEMPORARY
+      );
+      await clickNextButton(
+        pageManager.reviewPage,
+        pageManager.reviewPage.submitButton,
+        pageManager.congratsPage.temporaryHeading
+      );
+    });
+
+    await test.step("tabs forward through the page", async () => {
+      const congratsLocators = [
+        pageManager.congratsPage.locationsLink,
+        pageManager.congratsPage.photoIdAndProofOfAddressLink,
+        pageManager.congratsPage.learnMoreLink,
+        pageManager.congratsPage.getHelpEmailLink,
+        pageManager.congratsPage.loginLink,
+        pageManager.congratsPage.nyplLocationLink,
+        pageManager.congratsPage.findOutLibraryLink,
+        pageManager.congratsPage.discoverLink,
+      ];
+      await expect(pageManager.congratsPage.temporaryHeading).toBeFocused();
       for (const locator of congratsLocators) {
         await pageManager.congratsPage.page.keyboard.press("Tab");
         await expect(locator).toBeFocused();
