@@ -7,7 +7,7 @@ import {
 import bwipjs from "bwip-js";
 import Image from "next/image";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { FormResults } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
 import { useTranslation } from "next-i18next";
