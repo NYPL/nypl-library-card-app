@@ -91,20 +91,24 @@ const ConfirmationContainer = () => {
   const formResults = state.results || ({} as FormResults);
   const { barcode, name, expirationDate } = formResults;
   const { t } = useTranslation("common");
-  const router = useRouter();
+  const {
+    query: { lang },
+  } = useRouter();
+  const finalLang =
+    typeof lang === "string"
+      ? lang
+      : Array.isArray(lang) && lang.length > 0
+        ? lang[0]
+        : "en";
+  const isEnglish = finalLang === "en" ? true : false;
+  const displayDate = isEnglish
+    ? expirationDate
+    : new Date().toLocaleDateString();
   const canvasArgs = {
     role: "img",
     ["aria-label"]: `${t("ariaLabel.barcode")}`,
   };
   let canvas;
-  let lang = router.query.lang || "en";
-  if (Array.isArray(lang) && lang.length > 0) {
-    lang = lang[0];
-  }
-  const isEnglish = lang === "en" ? true : false;
-  const displayDate = isEnglish
-    ? expirationDate
-    : new Date().toLocaleDateString();
   // What we want to do is render the HTML and then pick up the canvas element.
   // We can then draw a barcode on it using `bwipjs`. The ILS uses `Codabar` as
   // its barcode type which is `rationalizedCodabar` in the bwip library.
