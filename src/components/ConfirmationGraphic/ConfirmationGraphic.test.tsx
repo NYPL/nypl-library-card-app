@@ -18,6 +18,8 @@ const formResults: FormResults = {
   message: "The library card will be a standard library card.",
   patronId: 1234567,
   name: "Tom Nook",
+  ptype: 9,
+  expirationDate: Date(),
 };
 const formState = {
   results: formResults,
