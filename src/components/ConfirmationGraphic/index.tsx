@@ -79,7 +79,7 @@ const styles = {
       lg: "1.9em",
     },
   },
-  issuedText: {
+  expiresText: {
     color: "white",
     fontSize: "clamp(0.6rem, 0.6rem + 0.2vw, 1rem)",
     mb: "s",
@@ -129,8 +129,8 @@ const ConfirmationContainer = () => {
           width="939"
         />
         <Grid className="background-lion" sx={styles.backgroundLion}>
-          <GridItem id="issued" sx={styles.issuedText}>
-            {t("confirmation.graphic.issued")}
+          <GridItem id="expires" sx={styles.expiresText}>
+            {t("confirmation.graphic.expires")}
             <Box
               className="content"
               fontSize={"clamp(1rem, 1rem + 0.2vw, 1.6rem)"}

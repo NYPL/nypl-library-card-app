@@ -44,7 +44,7 @@ jest.mock("react-i18next", () => {
       graphic: {
         memberName: "MEMBER NAME",
         password: "PASSWORD",
-        issued: "ISSUED",
+        expires: "EXPIRES",
       },
       nextSteps: {
         title: "Get started with The New York Public Library",
@@ -107,6 +107,6 @@ describe("Confirmation", () => {
 
     expect(screen.getByText("12345678912345")).toBeInTheDocument();
 
-    expect(screen.getByText("ISSUED")).toBeInTheDocument();
+    expect(screen.getByText("EXPIRES")).toBeInTheDocument();
   });
 });
