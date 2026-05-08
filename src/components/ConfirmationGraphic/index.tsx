@@ -7,7 +7,7 @@ import {
 import bwipjs from "bwip-js";
 import Image from "next/image";
 import { useEffect } from "react";
-
+import { useRouter } from "next/router";
 import { FormResults } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
 import { useTranslation } from "next-i18next";
@@ -91,11 +91,20 @@ const ConfirmationContainer = () => {
   const formResults = state.results || ({} as FormResults);
   const { barcode, name, expirationDate } = formResults;
   const { t } = useTranslation("common");
+  const router = useRouter();
   const canvasArgs = {
     role: "img",
     ["aria-label"]: `${t("ariaLabel.barcode")}`,
   };
   let canvas;
+  let lang = router.query.lang || "en";
+  if (Array.isArray(lang) && lang.length > 0) {
+    lang = lang[0];
+  }
+  const isEnglish = lang === "en" ? true : false;
+  const displayDate = isEnglish
+    ? expirationDate
+    : new Date().toLocaleDateString();
   // What we want to do is render the HTML and then pick up the canvas element.
   // We can then draw a barcode on it using `bwipjs`. The ILS uses `Codabar` as
   // its barcode type which is `rationalizedCodabar` in the bwip library.
@@ -135,7 +144,7 @@ const ConfirmationContainer = () => {
               className="content"
               fontSize={"clamp(1rem, 1rem + 0.2vw, 1.6rem)"}
             >
-              {expirationDate}
+              {displayDate}
             </Box>
           </GridItem>
           <GridItem sx={styles.logoItem}>
