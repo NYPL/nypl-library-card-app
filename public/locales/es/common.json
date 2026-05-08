@@ -167,7 +167,7 @@
     "graphic": {
       "memberName": "Nombre de miembro",
       "password": "Contraseña",
-      "issued": "Fecha de emisión"
+      "expires": "Fecha de emisión"
     },
     "nextSteps": {
       "title": "Comenzar con la Biblioteca Pública de Nueva York",

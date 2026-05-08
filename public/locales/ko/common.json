@@ -153,7 +153,7 @@
     "graphic": {
       "memberName": "회원 이름",
       "password": "비밀번호",
-      "issued": "발행 날짜"
+      "expires": "발행 날짜"
     },
     "nextSteps": {
       "title": "뉴욕 공공도서관 이용 시작하기",

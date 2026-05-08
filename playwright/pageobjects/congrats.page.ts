@@ -49,7 +49,7 @@ export class CongratsPage {
     this.memberName = page.locator("#member-name .content");
     this.expireDateHeading = page
       .locator("#expires")
-      .getByText(appContent?.confirmation?.graphic?.issued || "ISSUED");
+      .getByText(appContent?.confirmation?.graphic?.expires || "EXPIRES");
     this.expireDate = page.locator("#expires").getByText(this.getDate(), {
       exact: true,
     });
