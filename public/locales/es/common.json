@@ -81,7 +81,7 @@
   },
   "verifyAddress": {
     "title": "Paso 3 de 5: verificación de la dirección",
-    "description": "Seleccione la dirección correcta.",
+    "description": "Por favor, comprueba los datos de tu dirección. Si necesitas hacer algún cambio, haz clic en «Atrás».",
     "homeAddress": "Dirección de domicilio",
     "workAddress": "Dirección alternativa"
   },

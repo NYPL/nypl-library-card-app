@@ -78,7 +78,7 @@
   },
   "verifyAddress": {
     "title": "Krok 3 z 5: weryfikacja adresu",
-    "description": "Wybierz właściwy adres.",
+    "description": "Sprawdź swoje dane adresowe. Jeśli chcesz wprowadzić zmiany, kliknij „Wstecz”.",
     "homeAddress": "Adres zamieszkania",
     "workAddress": "Adres alternatywny"
   },
