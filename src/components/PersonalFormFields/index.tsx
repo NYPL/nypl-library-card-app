@@ -4,6 +4,7 @@ import {
   FormRow,
   Link as DSLink,
   TextInputRefType,
+  Text,
 } from "@nypl/design-system-react-components";
 import { useTranslation } from "next-i18next";
 import { Controller, useFormContext } from "react-hook-form";
@@ -92,10 +93,7 @@ function PersonalFormFields({
                 i18nKey="personal.email.instruction"
                 components={{
                   a: <DSLink variant="external" />,
-                }}
-                values={{
-                  alternateForm: t("personal.email.alternateForm"),
-                  locations: t("personal.email.locations"),
+                  span: <Text mt="xs" />,
                 }}
               />
             }

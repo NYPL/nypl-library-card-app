@@ -22,8 +22,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       test("displays headings, links, and buttons", async () => {
         await expect(personalPage.mainHeading).toBeVisible();
         await expect(personalPage.stepHeading).toBeVisible();
-        await expect(personalPage.alternateFormLink).toBeVisible();
-        await expect(personalPage.locationsLink).toBeVisible();
         await expect(personalPage.previousButton).toBeVisible();
         await expect(personalPage.nextButton).toBeVisible();
       });
@@ -34,20 +32,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
         await expect(personalPage.dateOfBirthInput).toBeVisible();
         await expect(personalPage.emailInput).toBeVisible();
         await expect(personalPage.receiveInfoCheckboxLabel).toBeVisible();
-      });
-
-      test("confirms links open in new tab", async () => {
-        const links = [
-          personalPage.alternateFormLink,
-          personalPage.locationsLink,
-        ];
-        for (const link of links) {
-          await expect(link).toHaveAttribute("target", "_blank");
-          await expect(link).toHaveAttribute(
-            "rel",
-            "nofollow noopener noreferrer"
-          );
-        }
       });
     });
 

@@ -98,3 +98,4 @@ jobs:
     secrets: inherit
     with:
       PLAYWRIGHT_BASE_URL: https://qa-www.nypl.org/library-card/new # run on QA after deploy
+      PLAYWRIGHT_TEST_FOLDER: playwright/tests
