@@ -7,7 +7,6 @@ import {
 import bwipjs from "bwip-js";
 import Image from "next/image";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { FormResults } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
 import { useTranslation } from "next-i18next";
@@ -91,19 +90,6 @@ const ConfirmationContainer = () => {
   const formResults = state.results || ({} as FormResults);
   const { barcode, name, expirationDate } = formResults;
   const { t } = useTranslation("common");
-  const {
-    query: { lang },
-  } = useRouter();
-  const finalLang =
-    typeof lang === "string"
-      ? lang
-      : Array.isArray(lang) && lang.length > 0
-        ? lang[0]
-        : "en";
-  const isEnglish = finalLang === "en" ? true : false;
-  const displayDate = isEnglish
-    ? expirationDate
-    : new Date().toLocaleDateString();
   const canvasArgs = {
     role: "img",
     ["aria-label"]: `${t("ariaLabel.barcode")}`,
@@ -148,7 +134,7 @@ const ConfirmationContainer = () => {
               className="content"
               fontSize={"clamp(1rem, 1rem + 0.2vw, 1.6rem)"}
             >
-              {displayDate}
+              {expirationDate}
             </Box>
           </GridItem>
           <GridItem sx={styles.logoItem}>
