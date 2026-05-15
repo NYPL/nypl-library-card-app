@@ -150,7 +150,7 @@
     "graphic": {
       "memberName": "成员名字",
       "password": "密码",
-      "issued": "发行日期"
+      "expires": "有效期至"
     },
     "nextSteps": {
       "title": "开始使用纽约公共图书馆",

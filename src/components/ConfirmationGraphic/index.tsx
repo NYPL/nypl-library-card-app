@@ -7,7 +7,6 @@ import {
 import bwipjs from "bwip-js";
 import Image from "next/image";
 import { useEffect } from "react";
-
 import { FormResults } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
 import { useTranslation } from "next-i18next";
@@ -79,7 +78,7 @@ const styles = {
       lg: "1.9em",
     },
   },
-  issuedText: {
+  expiresText: {
     color: "white",
     fontSize: "clamp(0.6rem, 0.6rem + 0.2vw, 1rem)",
     mb: "s",
@@ -89,7 +88,7 @@ const styles = {
 const ConfirmationContainer = () => {
   const { state } = useFormDataContext();
   const formResults = state.results || ({} as FormResults);
-  const { barcode, name } = formResults;
+  const { barcode, name, expirationDate } = formResults;
   const { t } = useTranslation("common");
   const canvasArgs = {
     role: "img",
@@ -129,13 +128,13 @@ const ConfirmationContainer = () => {
           width="939"
         />
         <Grid className="background-lion" sx={styles.backgroundLion}>
-          <GridItem id="issued" sx={styles.issuedText}>
-            {t("confirmation.graphic.issued")}
+          <GridItem id="expires" sx={styles.expiresText}>
+            {t("confirmation.graphic.expires")}
             <Box
               className="content"
               fontSize={"clamp(1rem, 1rem + 0.2vw, 1.6rem)"}
             >
-              {new Date().toLocaleDateString()}
+              {expirationDate}
             </Box>
           </GridItem>
           <GridItem sx={styles.logoItem}>

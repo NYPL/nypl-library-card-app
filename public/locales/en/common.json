@@ -175,7 +175,7 @@
     "graphic": {
       "memberName": "MEMBER NAME",
       "password": "PASSWORD",
-      "issued": "ISSUED"
+      "expires": "EXPIRES"
     },
     "nextSteps": {
       "title": "Get started with The New York Public Library",
