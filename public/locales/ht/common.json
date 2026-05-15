@@ -78,9 +78,12 @@
   },
   "verifyAddress": {
     "title": "Etap 3 sou 5: Verifikasyon Adrès",
-    "description": "Tanpri chwazi adrès ki kòrèk la.",
+    "description": "Tanpri verifye detay adrès ou. Si ou bezwen fè chanjman, klike sou 'Anvan'.",
     "homeAddress": "Adrès Lakay Ou",
-    "workAddress": "Lòt adrès"
+    "workAddress": "Lòt adrès",
+    "errorMessage": {
+      "select": "Te gen yon pwoblèm. Tanpri chwazi adrès ki kòrèk la."
+    }
   },
   "account": {
     "title": "Etap 4 sou 5: Pèsonalize Kont Ou",
