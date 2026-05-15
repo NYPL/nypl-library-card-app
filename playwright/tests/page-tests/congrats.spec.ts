@@ -39,8 +39,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       await test.step("displays library card", async () => {
         await expect(congratsPage.memberNameHeading).toBeVisible();
         await expect(congratsPage.memberName).toHaveText(fullName);
-        await expect(congratsPage.issuedDateHeading).toBeVisible();
-        await expect(congratsPage.issuedDate).toBeVisible();
+        await expect(congratsPage.expireDateHeading).toBeVisible();
+        await expect(congratsPage.expireDate).toBeVisible();
         await expect(congratsPage.libraryCardBackground).toBeVisible();
       });
     });

@@ -180,8 +180,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       await test.step("displays generated library card on congrats page", async () => {
         await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
         await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
-        await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
-        await expect(pageManager.congratsPage.issuedDate).toBeVisible();
+        await expect(pageManager.congratsPage.expireDateHeading).toBeVisible();
+        await expect(pageManager.congratsPage.expireDate).toBeVisible();
         await expect(
           pageManager.congratsPage.patronBarcodeNumber
         ).toBeVisible();
