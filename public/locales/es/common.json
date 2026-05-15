@@ -83,7 +83,10 @@
     "title": "Paso 3 de 5: verificación de la dirección",
     "description": "Por favor, comprueba los datos de tu dirección. Si necesitas hacer algún cambio, haz clic en «Atrás».",
     "homeAddress": "Dirección de domicilio",
-    "workAddress": "Dirección alternativa"
+    "workAddress": "Dirección alternativa",
+    "errorMessage": {
+      "select": "Hubo un problema. Seleccione la dirección correcta."
+    }
   },
   "account": {
     "title": "Paso 4 de 5: Personalice su cuenta",

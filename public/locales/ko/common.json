@@ -80,7 +80,10 @@
     "title": "3/5단계: 주소 확인",
     "description": "주소 정보를 확인해 주세요. 수정할 내용이 있다면 ‘이전’을 클릭하세요.",
     "homeAddress": "집 주소",
-    "workAddress": "대체 주소"
+    "workAddress": "대체 주소",
+    "errorMessage": {
+      "select": "문제가 발생했습니다. 정확한 주소를 선택해주십시오."
+    }
   },
   "account": {
     "title": "4/5단계: 계정을 만드십시오.",

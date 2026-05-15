@@ -215,7 +215,12 @@ function AddressVerificationContainer() {
         </RadioGroup>
         <Box m={0} aria-live="polite">
           {selectError && (
-            <Text mt="s" color="ui.error.primary" fontSize="xs">
+            <Text
+              id={`${addressType}-address-error`}
+              mt="s"
+              color="ui.error.primary"
+              fontSize="xs"
+            >
               {selectErrorMessage}
             </Text>
           )}
