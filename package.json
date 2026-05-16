@@ -89,7 +89,7 @@
     "request-promise-native": "1.0.9",
     "sass": "1.26.9",
     "save-dev": "0.0.1-security",
-    "sinon": "9.0.2",
+    "sinon": "22.0.0",
     "typescript": "4.9.5",
     "typescript-eslint": "^8.45.0",
     "underscore": "1.13.1",
