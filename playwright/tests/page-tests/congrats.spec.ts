@@ -7,6 +7,7 @@ import {
   PATRON_TYPES,
   SUPPORTED_LANGUAGES,
   TEST_BARCODE_NUMBER,
+  TEST_EXPIRATION_DATE,
   TEST_PATRON,
 } from "../../utils/constants";
 import { mockCreatePatronApi } from "../../utils/mock-api";
@@ -28,7 +29,12 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test("displays library card on congrats page", async ({ page }) => {
       await test.step("submits mocked application", async () => {
-        await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER); // defaults to temporary patron type
+        await mockCreatePatronApi(
+          page,
+          fullName,
+          TEST_BARCODE_NUMBER,
+          TEST_EXPIRATION_DATE
+        ); // defaults to temporary patron type
         await clickNextButton(
           pageManager.reviewPage,
           pageManager.reviewPage.submitButton,
@@ -51,7 +57,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
-          PATRON_TYPES.DIGITAL_METRO
+          PATRON_TYPES.DIGITAL_METRO,
+          TEST_EXPIRATION_DATE
         );
         await clickNextButton(
           pageManager.reviewPage,
@@ -99,7 +106,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
-          PATRON_TYPES.DIGITAL_NON_METRO
+          PATRON_TYPES.DIGITAL_NON_METRO,
+          TEST_EXPIRATION_DATE
         );
         await clickNextButton(
           pageManager.reviewPage,
@@ -147,7 +155,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
-          PATRON_TYPES.DIGITAL_TEMPORARY
+          PATRON_TYPES.DIGITAL_TEMPORARY,
+          TEST_EXPIRATION_DATE
         );
         await clickNextButton(
           pageManager.reviewPage,

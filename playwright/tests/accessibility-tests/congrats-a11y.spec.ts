@@ -6,6 +6,7 @@ import {
   PAGE_ROUTES,
   PATRON_TYPES,
   TEST_BARCODE_NUMBER,
+  TEST_EXPIRATION_DATE,
   TEST_PATRON,
 } from "../../utils/constants";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
@@ -27,7 +28,8 @@ test.describe("accessibility tests on congrats page", () => {
         page,
         fullName,
         TEST_BARCODE_NUMBER,
-        PATRON_TYPES.DIGITAL_TEMPORARY
+        PATRON_TYPES.DIGITAL_TEMPORARY,
+        TEST_EXPIRATION_DATE
       );
       await clickNextButton(
         pageManager.reviewPage,
@@ -69,7 +71,8 @@ test.describe("accessibility tests on congrats page", () => {
         page,
         fullName,
         TEST_BARCODE_NUMBER,
-        PATRON_TYPES.DIGITAL_METRO
+        PATRON_TYPES.DIGITAL_METRO,
+        expirationDate
       );
       await clickNextButton(
         pageManager.reviewPage,

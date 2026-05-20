@@ -12,6 +12,7 @@ import {
   SUPPORTED_LANGUAGES,
   TEST_ACCOUNT,
   TEST_BARCODE_NUMBER,
+  TEST_EXPIRATION_DATE,
   TEST_NYC_ADDRESS,
   TEST_OOS_ADDRESS,
   TEST_PATRON,
@@ -105,7 +106,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
-          PATRON_TYPES.DIGITAL_TEMPORARY
+          PATRON_TYPES.DIGITAL_TEMPORARY,
+          TEST_EXPIRATION_DATE
         );
         await expect(pageManager.reviewPage.submitButton).toBeVisible();
         await clickNextButton(
