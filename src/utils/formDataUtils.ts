@@ -414,7 +414,6 @@ export {
   getLocationValue,
   constructAddresses,
   constructAddressType,
-  constructProblemDetail,
   constructPatronObject,
   validateFormData,
   validatePersonalFormData,

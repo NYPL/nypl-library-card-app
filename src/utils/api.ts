@@ -5,15 +5,15 @@ import Cors from "cors";
 
 import * as config from "../../appConfig";
 import logger from "../logger/index";
-import { constructPatronObject, constructProblemDetail } from "./formDataUtils";
+import { constructPatronObject } from "./formDataUtils";
 import {
   AddressAPIResponseData,
   AddressAPIRequestData,
-  ProblemDetail,
   FormAPISubmission,
   AddressResponse,
 } from "../interfaces";
 import { validateCsrfToken } from "./csrfUtils";
+import { ApiError, ErrorCodes, ErrorCode } from "../errors";
 
 // Initializing the cors middleware
 export const cors = Cors({
@@ -71,116 +71,61 @@ const app = {};
  * This function makes an API call to the NYPL Auth API endpoint to get a valid
  * token to make requests to the NYPL Platform API. The NYPL Platform API hosts
  * all the Card Creator endpoints. This function is called for all the nextjs
- * API endpoints. If there is no access token available, one will requested
+ * API endpoints. If there is no access token available, one will be requested
  * with an API call and stored in the `app` variable. If there is a token
  * available, but it's expiring in less than ten minutes, then make a request
  * to get a new access token.
  *
+ * Throws ApiError on authentication failure rather than writing to the
+ * response directly — callers are responsible for handling the error.
+ *
  * Note: appObj is used to make testing easier.
  */
-export async function initializeAppAuth(req, res, appObj = app) {
+export async function initializeAppAuth(req, appObj = app) {
   logger.info("initializeAppAuth");
   const tokenObject = appObj["tokenObject"];
   const tokenExpTime = appObj["tokenExpTime"];
   const minuteExpThreshold = 10;
 
+  const fetchToken = async (reason: string) => {
+    let response;
+    try {
+      response = await axios.post(config.api.oauth, qs.stringify(authConfig));
+    } catch (error) {
+      logger.error(`OAuth request failed (${reason})`, { error });
+      throw new ApiError(
+        502,
+        ErrorCodes.AUTH_FAILED,
+        "Could not authenticate with the OAuth service."
+      );
+    }
+    if (!response.data?.access_token) {
+      logger.error(`No access_token in OAuth response (${reason})`);
+      throw new ApiError(
+        502,
+        ErrorCodes.AUTH_FAILED,
+        "No access token returned from the OAuth service."
+      );
+    }
+    app["tokenObject"] = response.data;
+    app["tokenExpTime"] = moment().add(response.data.expires_in, "s");
+  };
+
   // There's no token object at all. This is the initial case before the first
   // API call. Let's request one and store it.
   if (!tokenObject?.access_token) {
-    return axios
-      .post(config.api.oauth, qs.stringify(authConfig))
-      .then((response) => {
-        if (response.data) {
-          // Store the access token and other data. The expiration time is
-          // "3600" but we use moment to convert it to a moment date object.
-          app["tokenObject"] = response.data;
-          app["tokenExpTime"] = moment().add(response.data.expires_in, "s");
-          return;
-        } else {
-          logger.error("No access_token obtained from OAuth Service.");
-          const errorObj = {};
-          Object.assign(errorObj, {
-            oauth: "No access_token obtained from OAuth Service.",
-          });
-          return res
-            .status(400)
-            .json(
-              constructProblemDetail(
-                400,
-                "no-access-token",
-                "No Access Token",
-                "No access_token obtained from OAuth Service.",
-                errorObj
-              )
-            );
-        }
-      })
-      .catch((error) => {
-        // Oh no! Return the error.
-        logger.error(error);
-        res
-          .status(400)
-          .json(
-            constructProblemDetail(
-              400,
-              "app-auth-failed",
-              "App Auth failed",
-              "Could not authenticate App with OAuth service",
-              error
-            )
-          );
-      });
+    await fetchToken("initial");
+    return;
   }
 
   // If there is an access token available but it will expire within ten
-  // minutes, then request a new acces token.
-  if (
-    tokenObject.access_token &&
-    isTokenExpiring(tokenExpTime, minuteExpThreshold)
-  ) {
-    logger.error("The access_token is expiring. Requesting a new access token");
-    return axios
-      .post(config.api.oauth, qs.stringify(authConfig))
-      .then((response) => {
-        if (response.data) {
-          app["tokenObject"] = response.data;
-          app["tokenExpTime"] = moment().add(response.data.expires_in, "s");
-          return;
-        } else {
-          logger.error("No access_token reobtained from OAuth Service.");
-          const errorObj = {};
-          Object.assign(errorObj, {
-            oauth: "No access_token reobtained from OAuth Service.",
-          });
-          return res
-            .status(400)
-            .json(
-              constructProblemDetail(
-                400,
-                "no-access-token",
-                "No Access token",
-                "No access_token reobtained from OAuth Service.",
-                errorObj
-              )
-            );
-        }
-      })
-      .catch((error) => {
-        logger.error(error);
-        return res
-          .status(400)
-          .json(
-            constructProblemDetail(
-              400,
-              "app-reauth-failed",
-              "App re-auth failed",
-              "Could not re-authenticate App with OAuth service",
-              error
-            )
-          );
-      });
+  // minutes, then request a new access token.
+  if (isTokenExpiring(tokenExpTime, minuteExpThreshold)) {
+    logger.warning(
+      "The access_token is expiring. Requesting a new access token"
+    );
+    await fetchToken("refresh");
   }
-  return;
 }
 
 /**
@@ -216,150 +161,153 @@ export function axiosAddressPost(
 }
 
 /**
- * invalidCsrfResponse
- * If the CSRF token is invalid, return a 403 forbidden response.
- */
-function invalidCsrfResponse(res) {
-  return res
-    .status(403)
-    .json(
-      constructProblemDetail(
-        403,
-        "invalid-csrf-token",
-        "Invalid-csrf-token",
-        "The form has been tampered with."
-      )
-    );
-}
-
-/**
  * validateAddress
  * Call the NYPL Platform API to validate an address.
+ *
+ * Returns { status, data } on success or PCS errors
+ * (e.g. multiple address matches). Throws ApiError for app
+ * failures (CSRF, missing token, network timeout).
  */
-export async function validateAddress(req, res, appObj = app) {
-  const tokenObject = appObj["tokenObject"];
-  const csrfTokenValid = validateCsrfToken(req);
-  if (!csrfTokenValid) {
-    return invalidCsrfResponse(res);
-  }
-  if (tokenObject && tokenObject?.access_token) {
-    const token = tokenObject.access_token;
-    const addressRequest: AddressAPIRequestData = {
-      address: req.body.address,
-      isWorkAddress: req.body.isWorkAddress,
-    };
-
-    return axiosAddressPost(addressRequest, token)
-      .then((result) => {
-        const response: AddressResponse = {
-          address: result?.address || result.originalAddress,
-          addresses: result?.addresses,
-          success: result.success,
-          cardType: result.cardType,
-          detail: result.detail || result.message,
-          reason: result.reason,
-        };
-
-        return res.status(result.status).json(response);
-      })
-      .catch((err) => {
-        return res.status(err.response?.status || 502).json({
-          ...err.response?.data,
-        });
-      });
-  }
-
-  // Else return a no token error
-  return res
-    .status(500)
-    .json(
-      constructProblemDetail(
-        500,
-        "no-access-token",
-        "No Access Token",
-        "The access token could not be generated."
-      )
-    );
-}
-
-/**
- * validateUsername
- * Call the NYPL Platform API to validate a username.
- */
-export async function validateUsername(
+export async function validateAddress(
   req,
-  res,
-  validateUrl = `${config.api.validate}/username`,
   appObj = app
-) {
-  const tokenObject = appObj["tokenObject"];
-  const csrfTokenValid = validateCsrfToken(req);
-  if (!csrfTokenValid) {
-    return invalidCsrfResponse(res);
-  }
-  if (tokenObject && tokenObject?.access_token) {
-    const token = tokenObject.access_token;
-    const username = req.body.username;
-    return axios
-      .post(validateUrl, { username }, constructApiHeaders(token))
-      .then((result) => {
-        return res.json({
-          status: result.data.status,
-          ...result.data,
-        });
-      })
-      .catch((err) => {
-        return res.status(err.response?.status || 500).json({
-          status: err.response?.status || 500,
-          ...err.response?.data,
-        });
-      });
-  }
-
-  // Else return a no token error
-  return res
-    .status(500)
-    .json(
-      constructProblemDetail(
-        500,
-        "no-access-token",
-        "No Access Token",
-        "The access token could not be generated."
-      )
+): Promise<{ status: number; data: AddressResponse }> {
+  if (!validateCsrfToken(req)) {
+    throw new ApiError(
+      403,
+      ErrorCodes.CSRF_INVALID,
+      "Form session expired. Please refresh the page and try again."
     );
-}
+  }
 
-/**
- * callPatronAPI
- * Make a validated call to the NYPL Patrons API endpoint to create a patron
- * ILS account.
- */
-export async function callPatronAPI(
-  data,
-  createPatronUrl = config.api.patron,
-  appObj = app
-) {
   const tokenObject = appObj["tokenObject"];
-  if (!tokenObject || !tokenObject.access_token) {
-    const tokenGenerationError =
-      "The access token could not be generated before calling the Card Creator API.";
-
-    logger.error(tokenGenerationError);
-    return {
-      status: 500,
-      type: "no-access-token",
-      title: "No Access Token",
-      error: tokenGenerationError,
-    };
+  if (!tokenObject?.access_token) {
+    throw new ApiError(
+      500,
+      ErrorCodes.AUTH_TOKEN_MISSING,
+      "Authentication token unavailable. Please try again."
+    );
   }
 
   const token = tokenObject.access_token;
-  const patronData = constructPatronObject(data);
-  if ((patronData as ProblemDetail).status === 400) {
-    logger.error("Invalid patron data");
-    logger.error("Patron data", patronData);
-    // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
-    return Promise.reject(patronData);
+  const addressRequest: AddressAPIRequestData = {
+    address: req.body.address,
+    isWorkAddress: req.body.isWorkAddress,
+  };
+
+  const result = await axiosAddressPost(addressRequest, token);
+
+  const httpStatus = Number(result.status) || 0;
+  if (!httpStatus || httpStatus >= 500) {
+    throw new ApiError(
+      502,
+      ErrorCodes.PLATFORM_API_ERROR,
+      "Address validation service is currently unavailable. Please try again."
+    );
+  }
+
+  const response: AddressResponse = {
+    address: result?.address || result.originalAddress,
+    addresses: result?.addresses,
+    success: result.success,
+    cardType: result.cardType,
+    detail: result.detail || result.message,
+    reason: result.reason,
+  };
+
+  return { status: httpStatus, data: response };
+}
+
+export async function validateUsername(
+  req,
+  validateUrl = `${config.api.validate}/username`,
+  appObj = app
+): Promise<{ status: number; data: object }> {
+  if (!validateCsrfToken(req)) {
+    throw new ApiError(
+      403,
+      ErrorCodes.CSRF_INVALID,
+      "Form session expired. Please refresh the page and try again."
+    );
+  }
+
+  const tokenObject = appObj["tokenObject"];
+  if (!tokenObject?.access_token) {
+    throw new ApiError(
+      500,
+      ErrorCodes.AUTH_TOKEN_MISSING,
+      "Authentication token unavailable. Please try again."
+    );
+  }
+
+  const token = tokenObject.access_token;
+  const username = req.body.username;
+
+  try {
+    const result = await axios.post(
+      validateUrl,
+      { username },
+      constructApiHeaders(token)
+    );
+    const appStatus = result.data?.status ?? 200;
+    return { status: appStatus, data: { status: appStatus, ...result.data } };
+  } catch (err) {
+    const status = err.response?.status;
+    if (!status || status >= 500) {
+      throw new ApiError(
+        502,
+        ErrorCodes.PLATFORM_API_ERROR,
+        "Username validation service is currently unavailable. Please try again."
+      );
+    }
+    // PCS returns 4xx (e.g. username unavailable), let's return as-is for client handling.
+    return { status, data: { status, ...err.response?.data } };
+  }
+}
+
+/**
+ * createPatron
+ * Validates CSRF, calls the NYPL Patrons API to create an ILS account,
+ * and returns the result or throws a typed ApiError.
+ */
+export async function createPatron(
+  req,
+  createPatronUrl = config.api.patron,
+  appObj = app
+) {
+  if (!validateCsrfToken(req)) {
+    throw new ApiError(
+      403,
+      ErrorCodes.CSRF_INVALID,
+      "Form session expired. Please refresh the page and try again."
+    );
+  }
+
+  const tokenObject = appObj["tokenObject"];
+  if (!tokenObject?.access_token) {
+    throw new ApiError(
+      500,
+      ErrorCodes.AUTH_TOKEN_MISSING,
+      "Authentication token unavailable. Please try again."
+    );
+  }
+
+  const token = tokenObject.access_token;
+  const patronData = constructPatronObject(req.body);
+
+  if ((patronData as { status?: number }).status === 400) {
+    const pd = patronData as {
+      status: number;
+      detail?: string;
+      error?: object;
+    };
+    logger.error("Invalid patron data", { patronData });
+    throw new ApiError(
+      400,
+      ErrorCodes.INVALID_REQUEST,
+      pd.detail || "There was an error with the submitted form values.",
+      pd.error ? { fields: pd.error } : undefined
+    );
   }
 
   logger.debug(
@@ -368,21 +316,6 @@ export async function callPatronAPI(
     } to ${createPatronUrl}`
   );
 
-  // Used for testing when we don't want to create real accounts,
-  // just return a mocked account data.
-  // return Promise.resolve({
-  //   status: 200,
-  //   type: "card-granted",
-  //   link: "some-link",
-  //   barcode: "12345678912345",
-  //   username: "tomnook",
-  //   password: "1234",
-  //   temporary: false,
-  //   message: "The library card will be a standard library card.",
-  //   patronId: 1234567,
-  //   name: "Tom Nook",
-  //   ptype: 7,
-  // });
   try {
     const result = await axios.post(
       createPatronUrl,
@@ -393,68 +326,50 @@ export async function callPatronAPI(
     const fullName = `${(patronData as FormAPISubmission).firstName} ${
       (patronData as FormAPISubmission).lastName
     }`;
-    return {
-      status: result.data.status,
-      name: fullName,
-      ...result.data,
-    };
+    return { status: result.data.status, name: fullName, ...result.data };
   } catch (err) {
     const status = err.response?.status;
-    console.debug(`error response`, err);
-    let serverError = null;
+
     if (err.message && (!err.response || !status)) {
-      return {
-        status: 500,
-        type: "api-error",
-        title: "API Error",
-        detail: `Bad response from Card Creator API`,
-        error: err.message,
-      };
-    }
-    if (status === 401 || status === 403) {
-      serverError = { type: "internal" };
+      logger.error("Card Creator API request failed", { message: err.message });
+      throw new ApiError(
+        502,
+        ErrorCodes.PLATFORM_API_ERROR,
+        "The patron creation service is currently unavailable. Please try again."
+      );
     }
 
-    const restOfErrors = serverError
-      ? { ...err.response?.data, ...serverError }
-      : err.response?.data;
+    const apiResponse = err.response?.data;
+    logger.error("Error calling Card Creator API", {
+      status,
+      data: apiResponse,
+    });
 
-    logger.error(
-      `Error calling Card Creator API: ${
-        status === 403 ? "bad API call" : JSON.stringify(err)
-      }`
+    throw new ApiError(
+      status,
+      mapPatronErrorCode(apiResponse?.type),
+      apiResponse?.detail || apiResponse?.message || "Patron creation failed.",
+      apiResponse?.error ? { fields: apiResponse.error } : undefined
     );
-    logger.error(
-      `More details - status: ${status}, patron: ${JSON.stringify(
-        patronData
-      )}, data: ${JSON.stringify(err.response?.data)}`
-    );
-    return { ...restOfErrors, status };
   }
 }
 
 /**
- * createPatron
- * Internally, this make a call to `createPatron` and the NYPL Patrons API to
- * create a patron ILS account. This just returns that result as JSON for the
- * `/library-card/api/create-patron` endpoint.
+ * mapPatronErrorCode
+ * Maps Patron Creator Service API error `type` strings to our ErrorCodes.
+ * https://github.com/NYPL/dgx-patron-creator-service/wiki/API-V0.3#error-responses-2
  */
-export async function createPatron(
-  req,
-  res,
-  createPatronUrl = config.api.patron,
-  appObj = app
-) {
-  const data = req.body;
-  const csrfTokenValid = validateCsrfToken(req);
-  if (!csrfTokenValid) {
-    return invalidCsrfResponse(res);
-  }
-  try {
-    const results = await callPatronAPI(data, createPatronUrl, appObj);
-    res.status(results.status).json(results);
-    return res;
-  } catch (error) {
-    return res.status(error.status).json(error);
+function mapPatronErrorCode(type?: string): ErrorCode {
+  switch (type) {
+    case "missing-required-values":
+      return ErrorCodes.MISSING_REQUIRED_FIELDS;
+    case "invalid-username":
+      return ErrorCodes.INVALID_USERNAME;
+    case "unavailable-username":
+      return ErrorCodes.USERNAME_UNAVAILABLE;
+    case "ils-integration-error":
+      return ErrorCodes.ILS_INTEGRATION_ERROR;
+    default:
+      return ErrorCodes.PATRON_CREATION_FAILED;
   }
 }

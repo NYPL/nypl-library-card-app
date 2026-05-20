@@ -20,12 +20,14 @@ import {
   AddressTypes,
 } from "../../interfaces";
 import LoadingIndicator from "../LoadingIndicator";
-import FormField from "../FormField";
 import { constructAddressType } from "../../utils/formDataUtils";
 
 import { nyCounties, nyCities, createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../context/FormDataContext";
-import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
+import {
+  commonAPIErrors,
+  toApiErrorResponse,
+} from "../../data/apiErrorMessageTranslations";
 import { NRError } from "../../logger/newrelic";
 import { PageSubHeading } from "../PageSubHeading";
 import { Paragraph } from "../Paragraph";
@@ -80,10 +82,14 @@ const AddressContainer = ({ csrfToken }) => {
       .catch((error) => {
         // Catch any CSRF token issues and return a generic error message
         // and redirect to the home page.
-        if (error.response.status == 403) {
+        if (error.response?.status === 403) {
           dispatch({
             type: "SET_FORM_ERRORS",
-            value: commonAPIErrors.errorValidatingToken,
+            value: toApiErrorResponse(
+              commonAPIErrors.errorValidatingToken,
+              403,
+              "csrf-invalid"
+            ),
           });
           nextUrl = "/new";
         }
@@ -166,9 +172,7 @@ const AddressContainer = ({ csrfToken }) => {
       </Paragraph>
       <Form
         mt="l"
-        // action="/library-card/api/submit"
         id="address-container"
-        method="post"
         onSubmit={handleSubmit(submitForm)}
         noValidate
       >
@@ -178,25 +182,6 @@ const AddressContainer = ({ csrfToken }) => {
           isRequired
           stateData={stateData}
         />
-
-        <FormRow display="none">
-          <DSFormField>
-            {/* Not register to react-hook-form because we only want to
-            use this value for the no-js scenario. */}
-            <FormField
-              id="hidden-location-page"
-              type="hidden"
-              name="page"
-              defaultValue="location"
-            />
-            <FormField
-              id="hidden-form-values"
-              type="hidden"
-              name="formValues"
-              defaultValue={JSON.stringify(formValues)}
-            />
-          </DSFormField>
-        </FormRow>
 
         <FormRow>
           <DSFormField>

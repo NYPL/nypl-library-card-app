@@ -20,7 +20,6 @@ import PersonalFormFields from "../PersonalFormFields";
 import AccountFormFields from "../AccountFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
-import FormField from "../FormField";
 import LoadingIndicator from "../LoadingIndicator";
 
 import { createQueryParams } from "../../utils/utils";
@@ -32,7 +31,10 @@ import {
   SupportedLoc,
   SupportedLang,
 } from "../../../src/utils/formDataUtils";
-import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
+import {
+  commonAPIErrors,
+  toApiErrorResponse,
+} from "../../data/apiErrorMessageTranslations";
 import { NRError } from "../../logger/newrelic";
 import { PageSubHeading } from "../PageSubHeading";
 
@@ -250,10 +252,14 @@ function ReviewFormContainer({ csrfToken }) {
         setIsLoading(false);
         // Catch any CSRF token issues and return a generic error message
         // and redirect to the home page.
-        if (error.response.status == 403) {
+        if (error.response?.status === 403) {
           dispatch({
             type: "SET_FORM_ERRORS",
-            value: commonAPIErrors.errorValidatingToken,
+            value: toApiErrorResponse(
+              commonAPIErrors.errorValidatingToken,
+              403,
+              "csrf-invalid"
+            ),
           });
           // After a while, remove the errors and redirect to the home page.
           setTimeout(async () => {
@@ -493,32 +499,11 @@ function ReviewFormContainer({ csrfToken }) {
       <Box sx={styles.formSection}>{t("review.nextStep")}</Box>
 
       <Form
-        // action="/library-card/api/submit"
         id="review-submit"
-        method="post"
         onSubmit={handleSubmit(submitForm)}
         mt="l"
         noValidate
       >
-        <FormRow display="none">
-          <DSFormField>
-            {/* Not register to react-hook-form because we only want to
-            use this value for the no-js scenario. */}
-            <FormField
-              id="hidden-review-page"
-              type="hidden"
-              name="page"
-              defaultValue="review"
-            />
-            <FormField
-              id="hidden-form-values"
-              type="hidden"
-              name="formValues"
-              defaultValue={JSON.stringify(formValues)}
-            />
-          </DSFormField>
-        </FormRow>
-
         <FormRow margin-top="20px">
           <DSFormField>
             <RoutingLinks
