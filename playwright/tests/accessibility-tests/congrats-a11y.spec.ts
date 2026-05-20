@@ -72,7 +72,7 @@ test.describe("accessibility tests on congrats page", () => {
         fullName,
         TEST_BARCODE_NUMBER,
         PATRON_TYPES.DIGITAL_METRO,
-        expirationDate
+        TEST_EXPIRATION_DATE
       );
       await clickNextButton(
         pageManager.reviewPage,
