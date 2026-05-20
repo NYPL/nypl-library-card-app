@@ -87,7 +87,7 @@ const styles = {
 
 const ConfirmationContainer = () => {
   const { state } = useFormDataContext();
-  const formResults = state.results || ({} as FormResults);
+  const formResults: FormResults = state.results;
   const { barcode, name, expirationDate } = formResults;
   const { t } = useTranslation("common");
   const canvasArgs = {
@@ -134,7 +134,7 @@ const ConfirmationContainer = () => {
               className="content"
               fontSize={"clamp(1rem, 1rem + 0.2vw, 1.6rem)"}
             >
-              {expirationDate}
+              {expirationDate || "NO DATE"}
             </Box>
           </GridItem>
           <GridItem sx={styles.logoItem}>
