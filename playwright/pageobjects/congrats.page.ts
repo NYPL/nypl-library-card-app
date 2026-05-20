@@ -50,9 +50,7 @@ export class CongratsPage {
     this.expireDateHeading = page
       .locator("#expires")
       .getByText(appContent?.confirmation?.graphic?.expires || "EXPIRES");
-    this.expireDate = page
-      .locator("#expires")
-      .getByText(appContent?.confirmation?.graphic?.expirationDate || "");
+    this.expireDate = page.locator("#expires");
     this.patronBarcodeNumber = page.locator(".barcode");
     this.libraryCardBackground = page.locator(".background-lion");
     this.locationsLink = page.locator("#mainContent").getByRole("link", {
