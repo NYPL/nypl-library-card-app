@@ -10,6 +10,8 @@ export class AddressVerificationPage {
   readonly spinner: Locator;
   readonly nextButton: Locator;
   readonly previousButton: Locator;
+  readonly homeAddressError: Locator;
+  readonly alternateAddressError: Locator;
 
   constructor(page: Page, appContent?: any) {
     this.page = page;
@@ -40,6 +42,20 @@ export class AddressVerificationPage {
       exact: true,
     });
     this.spinner = this.page.getByRole("status", { name: "Loading Indicator" });
+    this.homeAddressError = page
+      .locator("#home-address-error")
+      .getByText(
+        appContent?.verifyAddress?.errorMessage?.select ||
+          "There was a problem. Please select the correct address."
+      )
+      .first();
+    this.alternateAddressError = page
+      .locator("#work-address-error")
+      .getByText(
+        appContent?.verifyAddress?.errorMessage?.select ||
+          "There was a problem. Please select the correct address."
+      )
+      .first();
   }
 
   getHomeAddressOption(street: string): Locator {
