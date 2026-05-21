@@ -95,7 +95,7 @@ const ConfirmationContainer = () => {
     ["aria-label"]: `${t("ariaLabel.barcode")}`,
   };
   let canvas;
-  const formattedDate = new Date(expirationDate).toLocaleDateString("sv");
+  const formattedDate = new Date(expirationDate).toLocaleDateString("en-US");
   // What we want to do is render the HTML and then pick up the canvas element.
   // We can then draw a barcode on it using `bwipjs`. The ILS uses `Codabar` as
   // its barcode type which is `rationalizedCodabar` in the bwip library.
