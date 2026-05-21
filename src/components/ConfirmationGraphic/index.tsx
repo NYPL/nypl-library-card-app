@@ -95,6 +95,7 @@ const ConfirmationContainer = () => {
     ["aria-label"]: `${t("ariaLabel.barcode")}`,
   };
   let canvas;
+  const formattedDate = new Date(expirationDate).toLocaleDateString("sv");
   // What we want to do is render the HTML and then pick up the canvas element.
   // We can then draw a barcode on it using `bwipjs`. The ILS uses `Codabar` as
   // its barcode type which is `rationalizedCodabar` in the bwip library.
@@ -130,7 +131,7 @@ const ConfirmationContainer = () => {
         <Grid className="background-lion" sx={styles.backgroundLion}>
           <GridItem id="expires" sx={styles.expiresText}>
             {t("confirmation.graphic.expires")}
-            <Box>{expirationDate}</Box>
+            <Box>{formattedDate}</Box>
           </GridItem>
           <GridItem sx={styles.logoItem}>
             <Logo decorative name="nyplFullWhite" size="small" mb="xs" />
