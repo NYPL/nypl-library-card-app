@@ -17,9 +17,13 @@ jest.mock("react-i18next", () => {
   const en = {
     verifyAddress: {
       title: "Step 3 of 5: Address verification",
-      description: "Please select the correct address.",
+      description:
+        "Please verify your address details. If you need to make changes, click 'Previous'.",
       homeAddress: "Home address",
       workAddress: "Alternate address",
+      errorMessage: {
+        select: "There was a problem. Please select the correct address.",
+      },
     },
     button: {
       start: "Get started",
@@ -63,6 +67,11 @@ describe("AddressVerificationPage", () => {
     );
     expect(
       screen.getByText("Step 3 of 5: Address verification")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Please verify your address details. If you need to make changes, click 'Previous'."
+      )
     ).toBeInTheDocument();
   });
 });
