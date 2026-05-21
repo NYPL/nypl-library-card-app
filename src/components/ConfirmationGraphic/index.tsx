@@ -49,8 +49,7 @@ const styles = {
     color: "white",
     fontSize: "clamp(0.8rem, 0.8rem + 0.4vw, 1rem)",
     lineHeight: 1.1,
-    gridColumn: "1 / 3",
-    gridRow: "3",
+    gridColumn: "span 3",
   },
   logoItem: {
     color: "white",
