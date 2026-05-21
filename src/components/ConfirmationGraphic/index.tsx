@@ -35,36 +35,15 @@ const styles = {
     top: "6",
     width: "100%",
     position: "absolute",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
     height: "100%",
     p: "0 2em 0 1.25em",
-    display: "grid",
     gap: "0.5em 0.25em",
     gridTemplateColumns: "58% 30%",
-    gridTemplateRows: "1fr 1fr 1fr",
+    gridTemplateRows: "20% 40% 14%",
     justifyContent: "center",
     alignItems: "center",
-  },
-  expiresText: {
-    color: "white",
-    fontSize: "clamp(0.6rem, 0.6rem + 0.2vw, 1rem)",
-    mb: "s",
-    gridColumn: "2",
-    gridRow: "1",
-  },
-  logoItem: {
-    color: "white",
-    fontSize: "0.6em",
-    mt: "1em",
-    gridColumn: "1",
-    gridRow: "1",
-  },
-  barcodeContainer: {
-    bg: "white",
-    p: "0.75em 1em 0em",
-    display: "inline-block",
-    gridColumn: "1 / 3",
-    gridRow: "2",
-    borderRadius: "5px",
   },
   memberName: {
     color: "white",
@@ -73,11 +52,43 @@ const styles = {
     gridColumn: "1 / 3",
     gridRow: "3",
   },
+  logoItem: {
+    color: "white",
+    fontSize: "0.6em",
+    mt: "1em",
+  },
+  barcodeContainer: {
+    bg: "white",
+    p: "0.75em 1em 0em",
+    display: "inline-block",
+    gridColumn: "1/3",
+    gridRow: "2/2",
+    borderTopLeftRadius: "3px",
+    borderTopRightRadius: "3px",
+    borderBottomLeftRadius: "5px",
+    borderBottomRightRadius: "5px",
+  },
+  barcode: {
+    color: "black",
+    mx: "auto",
+    position: "relative",
+    display: "table",
+    fontSize: {
+      base: "1.4em",
+      sm: "1.4em",
+      lg: "1.9em",
+    },
+  },
+  expiresText: {
+    color: "white",
+    fontSize: "clamp(0.6rem, 0.6rem + 0.2vw, 1rem)",
+    mb: "s",
+  },
 };
 
 const ConfirmationContainer = () => {
   const { state } = useFormDataContext();
-  const formResults: FormResults = state.results;
+  const formResults = state.results || ({} as FormResults);
   const { barcode, name, expirationDate } = formResults;
   const { t } = useTranslation("common");
   const canvasArgs = {
@@ -120,12 +131,7 @@ const ConfirmationContainer = () => {
         <Grid className="background-lion" sx={styles.backgroundLion}>
           <GridItem id="expires" sx={styles.expiresText}>
             {t("confirmation.graphic.expires")}
-            <Box
-              className="content"
-              fontSize={"clamp(1rem, 1rem + 0.2vw, 1.6rem)"}
-            >
-              {expirationDate || "NO DATE"}
-            </Box>
+            <Box>{expirationDate}</Box>
           </GridItem>
           <GridItem sx={styles.logoItem}>
             <Logo decorative name="nyplFullWhite" size="small" mb="xs" />
