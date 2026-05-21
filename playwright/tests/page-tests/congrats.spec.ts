@@ -33,6 +33,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
+          undefined,
           TEST_EXPIRATION_DATE
         ); // defaults to temporary patron type
         await clickNextButton(
