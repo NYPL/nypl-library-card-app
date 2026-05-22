@@ -66,10 +66,30 @@ function AddressVerificationContainer() {
     return [addressObj.address];
   };
 
+  const MOCKED_ADDDRESS = [
+    {
+      line1: "123 Main St",
+      line2: "Apt 4B",
+      city: "New York",
+      state: "NY",
+      zip: "10001",
+    },
+    {
+      line1: "123 Main St",
+      line2: "Apt 4B",
+      city: "New York",
+      state: "NY",
+      zip: "10001",
+    },
+  ];
+
   const onChangeHome = (e) => setHomeAddressSelect(e.target?.value);
   const onChangeWork = (e) => setWorkAddressSelect(e.target?.value);
-  const homeAddress = getAddresses(addressesResponse?.home);
-  const workAddress = getAddresses(addressesResponse?.work);
+  const OldhomeAddress = getAddresses(addressesResponse?.home);
+  const OldworkAddress = getAddresses(addressesResponse?.work);
+  console.log(OldhomeAddress, OldworkAddress);
+  const homeAddress = MOCKED_ADDDRESS;
+  const workAddress = MOCKED_ADDDRESS;
 
   /**
    * extractUpdatedAddressValues
