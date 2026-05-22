@@ -156,7 +156,7 @@
     "graphic": {
       "memberName": "Nazwa członka",
       "password": "Hasło",
-      "issued": "Data wydania"
+      "expires": "WYGASA"
     },
     "nextSteps": {
       "title": "Zacznij korzystać z Nowojorskiej Biblioteki Publicznej",

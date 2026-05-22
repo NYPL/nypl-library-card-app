@@ -7,6 +7,7 @@ import {
   PATRON_TYPES,
   SUPPORTED_LANGUAGES,
   TEST_BARCODE_NUMBER,
+  TEST_EXPIRATION_DATE,
   TEST_PATRON,
 } from "../../utils/constants";
 import { mockCreatePatronApi } from "../../utils/mock-api";
@@ -28,7 +29,12 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test("displays library card on congrats page", async ({ page }) => {
       await test.step("submits mocked application", async () => {
-        await mockCreatePatronApi(page, fullName, TEST_BARCODE_NUMBER); // defaults to temporary patron type
+        await mockCreatePatronApi(
+          page,
+          fullName,
+          TEST_BARCODE_NUMBER,
+          TEST_EXPIRATION_DATE
+        );
         await clickNextButton(
           pageManager.reviewPage,
           pageManager.reviewPage.submitButton,
@@ -39,8 +45,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       await test.step("displays library card", async () => {
         await expect(congratsPage.memberNameHeading).toBeVisible();
         await expect(congratsPage.memberName).toHaveText(fullName);
-        await expect(congratsPage.issuedDateHeading).toBeVisible();
-        await expect(congratsPage.issuedDate).toBeVisible();
+        await expect(congratsPage.expireDateHeading).toBeVisible();
+        await expect(congratsPage.expireDate).toBeVisible();
         await expect(congratsPage.libraryCardBackground).toBeVisible();
       });
     });
@@ -51,6 +57,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
+          TEST_EXPIRATION_DATE,
           PATRON_TYPES.DIGITAL_METRO
         );
         await clickNextButton(
@@ -99,6 +106,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
+          TEST_EXPIRATION_DATE,
           PATRON_TYPES.DIGITAL_NON_METRO
         );
         await clickNextButton(
@@ -147,6 +155,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
+          TEST_EXPIRATION_DATE,
           PATRON_TYPES.DIGITAL_TEMPORARY
         );
         await clickNextButton(

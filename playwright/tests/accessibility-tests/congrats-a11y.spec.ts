@@ -6,6 +6,7 @@ import {
   PAGE_ROUTES,
   PATRON_TYPES,
   TEST_BARCODE_NUMBER,
+  TEST_EXPIRATION_DATE,
   TEST_PATRON,
 } from "../../utils/constants";
 import { A11Y_GUIDELINES, validateA11yCoverage } from "../../utils/a11y-utils";
@@ -27,6 +28,7 @@ test.describe("accessibility tests on congrats page", () => {
         page,
         fullName,
         TEST_BARCODE_NUMBER,
+        TEST_EXPIRATION_DATE,
         PATRON_TYPES.DIGITAL_TEMPORARY
       );
       await clickNextButton(
@@ -69,6 +71,7 @@ test.describe("accessibility tests on congrats page", () => {
         page,
         fullName,
         TEST_BARCODE_NUMBER,
+        TEST_EXPIRATION_DATE,
         PATRON_TYPES.DIGITAL_METRO
       );
       await clickNextButton(

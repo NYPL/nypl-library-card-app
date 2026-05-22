@@ -12,6 +12,7 @@ import {
   SUPPORTED_LANGUAGES,
   TEST_ACCOUNT,
   TEST_BARCODE_NUMBER,
+  TEST_EXPIRATION_DATE,
   TEST_NYC_ADDRESS,
   TEST_PATRON,
 } from "../../utils/constants";
@@ -101,6 +102,7 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
+          TEST_EXPIRATION_DATE,
           PATRON_TYPES.DIGITAL_METRO
         );
         await expect(pageManager.reviewPage.submitButton).toBeVisible();
@@ -122,8 +124,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
       await test.step("displays generated library card on congrats page", async () => {
         await expect(pageManager.congratsPage.memberNameHeading).toBeVisible();
         await expect(pageManager.congratsPage.memberName).toHaveText(fullName);
-        await expect(pageManager.congratsPage.issuedDateHeading).toBeVisible();
-        await expect(pageManager.congratsPage.issuedDate).toBeVisible();
+        await expect(pageManager.congratsPage.expireDateHeading).toBeVisible();
+        await expect(pageManager.congratsPage.expireDate).toBeVisible();
         await expect(pageManager.congratsPage.patronBarcodeNumber).toHaveText(
           TEST_BARCODE_NUMBER
         );

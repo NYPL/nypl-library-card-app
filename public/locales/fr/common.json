@@ -156,7 +156,7 @@
     "graphic": {
       "memberName": "Nom de membre",
       "password": "Mot de passe",
-      "issued": "Date de publication"
+      "expires": "EXPIRÉ"
     },
     "nextSteps": {
       "title": "Lancez-vous à la découverte de la Bibliothèque publique de New York",
