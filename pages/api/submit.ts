@@ -1,5 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import isEmpty from "lodash/isEmpty";
+import { createInstance } from "i18next";
+import path from "path";
+import fs from "fs";
 import {
   runMiddleware,
   cors,
@@ -16,6 +19,43 @@ import {
   createQueryParams,
   createNestedQueryParams,
 } from "../../src/utils/utils";
+
+const getT = async (lang = "en") => {
+  const localePath = path.join(
+    process.cwd(),
+    "public/locales",
+    lang,
+    "common.json"
+  );
+  const safeLang = fs.existsSync(localePath) ? lang : "en";
+  const translations = JSON.parse(
+    fs.readFileSync(
+      path.join(process.cwd(), "public/locales", safeLang, "common.json"),
+      "utf-8"
+    )
+  );
+  const i18n = createInstance();
+  await i18n.init({
+    lng: safeLang,
+    fallbackLng: "en",
+    defaultNS: "common",
+    resources: {
+      [safeLang]: { common: translations },
+    },
+  });
+  return i18n.t.bind(i18n);
+};
+
+const getTranslatedErrors = (errors: object, t: (key: string) => string) => {
+  return Object.fromEntries(
+    Object.entries(errors).map(([key, value]) => [
+      key,
+      typeof value === "object"
+        ? getTranslatedErrors(value, t)
+        : t(value as string),
+    ])
+  );
+};
 
 /**
  * serverSubmit
@@ -40,6 +80,14 @@ async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
   delete newSubmittedValues.page;
   delete newSubmittedValues.formValues;
   delete existingValues.newCard;
+
+  const lang = req.query.lang;
+  const finalLang =
+    typeof lang === "string"
+      ? lang
+      : Array.isArray(lang) && lang.length > 0
+        ? lang[0]
+        : "en";
 
   // The default is the current page. If there are no errors, then this gets
   // updated and we can proceed to the next page.
@@ -112,6 +160,11 @@ async function serverSubmit(req: NextApiRequest, res: NextApiResponse) {
     default:
       page = "new";
       break;
+  }
+
+  if (!isEmpty(errors)) {
+    const t = await getT(finalLang);
+    errors = getTranslatedErrors(errors, t);
   }
 
   newSubmittedValues = { ...existingValues, ...newSubmittedValues };
