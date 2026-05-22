@@ -31,8 +31,8 @@ export async function mockCreatePatronApi(
   page: Page,
   name: string,
   barcode: string,
-  expirationDate: string,
-  ptype: number = PATRON_TYPES.DIGITAL_TEMPORARY
+  ptype: number = PATRON_TYPES.DIGITAL_TEMPORARY,
+  expirationDate: string
 ) {
   await page.route("**/library-card/api/create-patron", async (route) => {
     await route.fulfill({
