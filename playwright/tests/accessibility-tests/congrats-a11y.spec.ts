@@ -28,8 +28,8 @@ test.describe("accessibility tests on congrats page", () => {
         page,
         fullName,
         TEST_BARCODE_NUMBER,
-        PATRON_TYPES.DIGITAL_TEMPORARY,
-        TEST_EXPIRATION_DATE
+        TEST_EXPIRATION_DATE,
+        PATRON_TYPES.DIGITAL_TEMPORARY
       );
       await clickNextButton(
         pageManager.reviewPage,
@@ -71,8 +71,8 @@ test.describe("accessibility tests on congrats page", () => {
         page,
         fullName,
         TEST_BARCODE_NUMBER,
-        PATRON_TYPES.DIGITAL_METRO,
-        TEST_EXPIRATION_DATE
+        TEST_EXPIRATION_DATE,
+        PATRON_TYPES.DIGITAL_METRO
       );
       await clickNextButton(
         pageManager.reviewPage,

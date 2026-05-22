@@ -33,8 +33,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
-          undefined,
-          TEST_EXPIRATION_DATE
+          TEST_EXPIRATION_DATE,
+          undefined
         ); // defaults to temporary patron type
         await clickNextButton(
           pageManager.reviewPage,
@@ -58,8 +58,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
-          PATRON_TYPES.DIGITAL_METRO,
-          TEST_EXPIRATION_DATE
+          TEST_EXPIRATION_DATE,
+          PATRON_TYPES.DIGITAL_METRO
         );
         await clickNextButton(
           pageManager.reviewPage,
@@ -107,8 +107,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
-          PATRON_TYPES.DIGITAL_NON_METRO,
-          TEST_EXPIRATION_DATE
+          TEST_EXPIRATION_DATE,
+          PATRON_TYPES.DIGITAL_NON_METRO
         );
         await clickNextButton(
           pageManager.reviewPage,
@@ -156,8 +156,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
-          PATRON_TYPES.DIGITAL_TEMPORARY,
-          TEST_EXPIRATION_DATE
+          TEST_EXPIRATION_DATE,
+          PATRON_TYPES.DIGITAL_TEMPORARY
         );
         await clickNextButton(
           pageManager.reviewPage,

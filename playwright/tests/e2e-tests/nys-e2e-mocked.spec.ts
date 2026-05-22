@@ -102,8 +102,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
-          PATRON_TYPES.DIGITAL_NON_METRO,
-          TEST_EXPIRATION_DATE
+          TEST_EXPIRATION_DATE,
+          PATRON_TYPES.DIGITAL_NON_METRO
         );
         await expect(pageManager.reviewPage.submitButton).toBeVisible();
         await clickNextButton(
