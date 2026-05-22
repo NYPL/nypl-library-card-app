@@ -81,7 +81,7 @@ describe("ApiErrors", () => {
     ).toBeInTheDocument();
   });
 
-  test("it renders a missing required values detail", () => {
+  test("it renders a missing required fields detail", () => {
     const pd: ApiErrorResponse = {
       success: false,
       status: 500,
@@ -92,6 +92,78 @@ describe("ApiErrors", () => {
     render(<ApiErrors problemDetail={pd} />);
     expect(
       screen.getByText("'firsName' and 'password' are missing")
+    ).toBeInTheDocument();
+  });
+
+  test("it renders a patron creation failed detail", () => {
+    const pd: ApiErrorResponse = {
+      success: false,
+      status: 500,
+      type: "patron-creation-failed",
+      message: "The patron could not be created.",
+    };
+
+    render(<ApiErrors problemDetail={pd} />);
+    expect(
+      screen.getByText("The patron could not be created.")
+    ).toBeInTheDocument();
+  });
+
+  test("it renders a platform API error detail", () => {
+    const pd: ApiErrorResponse = {
+      success: false,
+      status: 502,
+      type: "platform-api-error",
+      message: "The service is currently unavailable. Please try again.",
+    };
+
+    render(<ApiErrors problemDetail={pd} />);
+    expect(
+      screen.getByText(
+        "The service is currently unavailable. Please try again."
+      )
+    ).toBeInTheDocument();
+  });
+
+  test("it renders a platform API timeout detail", () => {
+    const pd: ApiErrorResponse = {
+      success: false,
+      status: 504,
+      type: "platform-api-timeout",
+      message: "The request timed out. Please try again.",
+    };
+
+    render(<ApiErrors problemDetail={pd} />);
+    expect(
+      screen.getByText("The request timed out. Please try again.")
+    ).toBeInTheDocument();
+  });
+
+  test("it renders an address validation failed detail", () => {
+    const pd: ApiErrorResponse = {
+      success: false,
+      status: 400,
+      type: "address-validation-failed",
+      message: "The address could not be validated.",
+    };
+
+    render(<ApiErrors problemDetail={pd} />);
+    expect(
+      screen.getByText("The address could not be validated.")
+    ).toBeInTheDocument();
+  });
+
+  test("it renders a CSRF invalid detail", () => {
+    const pd: ApiErrorResponse = {
+      success: false,
+      status: 403,
+      type: "csrf-invalid",
+      message: "A server error occurred validating a token.",
+    };
+
+    render(<ApiErrors problemDetail={pd} />);
+    expect(
+      screen.getByText("A server error occurred validating a token.")
     ).toBeInTheDocument();
   });
 

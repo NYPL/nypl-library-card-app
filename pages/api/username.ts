@@ -5,7 +5,8 @@ import {
   runMiddleware,
   cors,
 } from "../../src/utils/api";
-import { withApiHandler, ApiError, ErrorCodes } from "../../src/errors";
+import { withApiHandler } from "../../src/errors/server";
+import { ApiError, ErrorCodes } from "../../src/errors";
 
 /**
  * username

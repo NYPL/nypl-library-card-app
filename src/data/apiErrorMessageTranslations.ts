@@ -118,14 +118,3 @@ export const commonAPIErrors = {
   errorValidatingToken: "A server error occurred validating a token.",
   errorValidatingUsername: "Cannot validate usernames at this time.",
 };
-
-import { ApiErrorResponse } from "../errors";
-
-/** Converts a plain error message string into an ApiErrorResponse for dispatch. */
-export function toApiErrorResponse(
-  message: string,
-  status = 500,
-  type: ApiErrorResponse["type"] = "internal-server-error"
-): ApiErrorResponse {
-  return { success: false, status, type, message };
-}

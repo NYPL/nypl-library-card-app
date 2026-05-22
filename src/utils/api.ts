@@ -96,7 +96,7 @@ export async function initializeAppAuth(req, appObj = app) {
       throw new ApiError(
         502,
         ErrorCodes.AUTH_FAILED,
-        "Could not authenticate with the OAuth service."
+        "Could not authenticate App with OAuth service"
       );
     }
     if (!response.data?.access_token) {
@@ -236,7 +236,7 @@ export async function validateUsername(
     throw new ApiError(
       500,
       ErrorCodes.AUTH_TOKEN_MISSING,
-      "Authentication token unavailable. Please try again."
+      "Cannot validate usernames at this time."
     );
   }
 
@@ -257,7 +257,7 @@ export async function validateUsername(
       throw new ApiError(
         502,
         ErrorCodes.PLATFORM_API_ERROR,
-        "Username validation service is currently unavailable. Please try again."
+        "Cannot validate usernames at this time."
       );
     }
     // PCS returns 4xx (e.g. username unavailable), let's return as-is for client handling.
@@ -288,13 +288,12 @@ export async function createPatron(
     throw new ApiError(
       500,
       ErrorCodes.AUTH_TOKEN_MISSING,
-      "Authentication token unavailable. Please try again."
+      "The access token could not be generated before calling the Card Creator API."
     );
   }
 
   const token = tokenObject.access_token;
   const patronData = constructPatronObject(req.body);
-
   if ((patronData as { status?: number }).status === 400) {
     const pd = patronData as {
       status: number;
@@ -328,6 +327,7 @@ export async function createPatron(
     }`;
     return { status: result.data.status, name: fullName, ...result.data };
   } catch (err) {
+    console.log("ERROR", err);
     const status = err.response?.status;
 
     if (err.message && (!err.response || !status)) {
@@ -335,7 +335,7 @@ export async function createPatron(
       throw new ApiError(
         502,
         ErrorCodes.PLATFORM_API_ERROR,
-        "The patron creation service is currently unavailable. Please try again."
+        "Bad response from Card Creator API"
       );
     }
 
