@@ -8,8 +8,8 @@ export class CongratsPage {
   readonly memberNameHeading: Locator;
   readonly memberName: Locator;
   readonly patronBarcodeNumber: Locator;
-  readonly issuedDateHeading: Locator;
-  readonly issuedDate: Locator;
+  readonly expireDateHeading: Locator;
+  readonly expireDate: Locator;
   readonly libraryCardBackground: Locator;
   readonly locationsLink: Locator;
   readonly photoIdAndProofOfAddressLink: Locator;
@@ -47,12 +47,12 @@ export class CongratsPage {
         appContent?.confirmation?.graphic?.memberName || "MEMBER NAME"
       );
     this.memberName = page.locator("#member-name .content");
-    this.issuedDateHeading = page
-      .locator("#issued")
-      .getByText(appContent?.confirmation?.graphic?.issued || "ISSUED");
-    this.issuedDate = page.locator("#issued").getByText(this.getDate(), {
-      exact: true,
-    });
+    this.expireDateHeading = page
+      .locator("#expires")
+      .getByText(appContent?.confirmation?.graphic?.expires || "EXPIRES");
+    this.expireDate = page
+      .locator("#expires")
+      .getByText(appContent?.confirmation?.graphic?.expirationDate || "");
     this.patronBarcodeNumber = page.locator(".barcode");
     this.libraryCardBackground = page.locator(".background-lion");
     this.locationsLink = page.locator("#mainContent").getByRole("link", {

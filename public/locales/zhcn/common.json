@@ -33,7 +33,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "电子邮件地址",
-      "instruction": "使用我们的许多数字资源（例如，电子书）都需要一个电子邮件地址。 如果您不希望提供电 子邮件地址，则可以使用我们 <a href='https://on.nypl.org/internationalresearch'>另一个表格</a>来申请实体图书卡。 填写完毕后，请造访我们其中一个 <a href='https://www.nypl.org/locations'>分馆</a>，提供身份和家庭住址证明以领取您的卡。 "
+      "instruction": "<span>使用我们的许多数字资源（例如，电子书）都需要一个电子邮件地址。</span>"
     },
     "eCommunications": {
       "labelText": "是的，我想收到有关NYPL活动和服务的信息"
@@ -75,9 +75,12 @@
   },
   "verifyAddress": {
     "title": "第3步：地址验证",
-    "description": "请选择正确的地址",
+    "description": "请核对您的地址信息。如需修改，请点击“上一页”。",
     "homeAddress": "居住地址",
-    "workAddress": "替代地址"
+    "workAddress": "替代地址",
+    "errorMessage": {
+      "select": "出现了问题。请选择正确的地址。"
+    }
   },
   "account": {
     "title": "第 4 步：自定义您的账户。",
@@ -150,7 +153,7 @@
     "graphic": {
       "memberName": "成员名字",
       "password": "密码",
-      "issued": "发行日期"
+      "expires": "有效期至"
     },
     "nextSteps": {
       "title": "开始使用纽约公共图书馆",

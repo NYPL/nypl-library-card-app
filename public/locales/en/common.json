@@ -43,9 +43,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Email address",
-      "instruction": "An email address is required to use many of our digital resources, such as e-books. If you do not wish to provide an email address, you can apply for a physical card using our <a href='https://on.nypl.org/internationalresearch'>{{alternateForm}}</a>. Once filled out, please visit one of our <a href='https://www.nypl.org/locations'>{{locations}}</a> with proof of identity and home address to pick up your card.",
-      "alternateForm": "alternate form",
-      "locations": "locations"
+      "instruction": "<span>An email address is required to use many of our digital resources, such as e-books.</span>"
     },
     "eCommunications": {
       "labelText": "Yes, I would like to receive information about NYPL's programs and services"
@@ -91,9 +89,12 @@
   },
   "verifyAddress": {
     "title": "Step 3 of 5: Address verification",
-    "description": "Please select the correct address.",
+    "description": "Please verify your address details. If you need to make changes, click 'Previous'.",
     "homeAddress": "Home address",
-    "workAddress": "Alternate address"
+    "workAddress": "Alternate address",
+    "errorMessage": {
+      "select": "There was a problem. Please select the correct address."
+    }
   },
   "account": {
     "title": "Step 4 of 5: Customize your account",
@@ -174,7 +175,7 @@
     "graphic": {
       "memberName": "MEMBER NAME",
       "password": "PASSWORD",
-      "issued": "ISSUED"
+      "expires": "EXPIRES"
     },
     "nextSteps": {
       "title": "Get started with The New York Public Library",

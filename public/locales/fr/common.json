@@ -33,7 +33,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Adresse e-mail",
-      "instruction": "Une adresse e-mail vous sera demandée pour l’utilisation de nombreuses ressources numériques comme les livres électroniques. Si vous ne souhaitez pas renseigner votre adresse e-mail, vous pouvez demander une carte physique en remplissant notre <a href='https://on.nypl.org/internationalresearch'>autre formulaire</a>. Une fois que vous l’aurez rempli, rendez-vous dans l’une de nos <a href='https://www.nypl.org/locations'>bibliothèques</a> avec une pièce d’identité et un justificatif de domicile pour récupérer votre carte."
+      "instruction": "<span>Une adresse e-mail vous sera demandée pour l’utilisation de nombreuses ressources numériques comme les livres électroniques.<span>"
     },
     "eCommunications": {
       "labelText": "Oui, je souhaite recevoir les informations sur les activités et les services de la NYPL."
@@ -78,9 +78,12 @@
   },
   "verifyAddress": {
     "title": "Étape 3/5 : Vérification de l’adresse",
-    "description": "Veuillez sélectionner la bonne adresse.",
+    "description": "Veuillez vérifier vos coordonnées. Si vous souhaitez les modifier, cliquez sur « Précédent ».",
     "homeAddress": "Adresse de votre domicile",
-    "workAddress": "Autre adresse"
+    "workAddress": "Autre adresse",
+    "errorMessage": {
+      "select": "Un incident est survenu. Veuillez sélectionner la bonne adresse."
+    }
   },
   "account": {
     "title": "Étape 4/5 : Personnalisation de votre compte",
@@ -153,7 +156,7 @@
     "graphic": {
       "memberName": "Nom de membre",
       "password": "Mot de passe",
-      "issued": "Date de publication"
+      "expires": "EXPIRÉ"
     },
     "nextSteps": {
       "title": "Lancez-vous à la découverte de la Bibliothèque publique de New York",

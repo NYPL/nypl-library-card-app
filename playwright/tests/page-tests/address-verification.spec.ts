@@ -122,26 +122,47 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           ).toBeVisible();
         });
 
-        await test.step("selects address options", async () => {
+        await test.step("Displays error message when home address is not selected", async () => {
+          await pageManager.addressVerificationPage.nextButton.click();
+          await expect(
+            pageManager.addressVerificationPage.homeAddressError
+          ).toBeVisible();
+        });
+
+        await test.step("selects home address options", async () => {
           await pageManager.addressVerificationPage
             .getHomeAddressOption(TEST_MULTIMATCH_ADDRESS_WEST.street)
             .click();
-          await pageManager.addressVerificationPage
-            .getAlternateAddressOption(TEST_MULTIMATCH_ADDRESS_EAST.street)
-            .click();
-        });
 
-        await test.step("confirms addresses are selected", async () => {
           await expect(
             pageManager.addressVerificationPage.getHomeAddressOption(
               TEST_MULTIMATCH_ADDRESS_WEST.street
             )
           ).toBeChecked();
           await expect(
+            pageManager.addressVerificationPage.homeAddressError
+          ).not.toBeVisible();
+        });
+
+        await test.step("Displays error message when alternate address is not selected", async () => {
+          await pageManager.addressVerificationPage.nextButton.click();
+          await expect(
+            pageManager.addressVerificationPage.alternateAddressError
+          ).toBeVisible();
+        });
+
+        await test.step("selects alternate address options", async () => {
+          await pageManager.addressVerificationPage
+            .getAlternateAddressOption(TEST_MULTIMATCH_ADDRESS_EAST.street)
+            .click();
+          await expect(
             pageManager.addressVerificationPage.getAlternateAddressOption(
               TEST_MULTIMATCH_ADDRESS_EAST.street
             )
           ).toBeChecked();
+          await expect(
+            pageManager.addressVerificationPage.alternateAddressError
+          ).not.toBeVisible();
         });
       });
     });

@@ -33,7 +33,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Imèl",
-      "instruction": "Yon adrès imèl nesesè pou itilize plizyè nan resous nimerik nou yo, tankou liv elektwonik. Si w pa vle bay yon adrès imèl, ou ka aplike pou yon kat fizik lè w sèvi ak <a href='https://on.nypl.org/internationalresearch'>lòt fòm</a> nou an. Yon fwa w ranpli l, tanpri vizite youn nan <a href='https://www.nypl.org/locations'>lokal</a> nou yo avèk prèv idantite ak adrès lakay ou pou w ka pran kat ou a."
+      "instruction": "<span>Yon adrès imèl nesesè pou itilize plizyè nan resous nimerik nou yo, tankou liv elektwonik.</span>"
     },
     "eCommunications": {
       "labelText": "Wi, mwen ta renmen resevwa enfòmasyon sou pwogram ak sèvis Bibliyotèk Piblik New York (NYPL) ofri yo."
@@ -78,9 +78,12 @@
   },
   "verifyAddress": {
     "title": "Etap 3 sou 5: Verifikasyon Adrès",
-    "description": "Tanpri chwazi adrès ki kòrèk la.",
+    "description": "Tanpri verifye detay adrès ou. Si ou bezwen fè chanjman, klike sou 'Anvan'.",
     "homeAddress": "Adrès Lakay Ou",
-    "workAddress": "Lòt adrès"
+    "workAddress": "Lòt adrès",
+    "errorMessage": {
+      "select": "Te gen yon pwoblèm. Tanpri chwazi adrès ki kòrèk la."
+    }
   },
   "account": {
     "title": "Etap 4 sou 5: Pèsonalize Kont Ou",
@@ -153,7 +156,7 @@
     "graphic": {
       "memberName": "Non manm",
       "password": "Modpas",
-      "issued": "Dat pibliye"
+      "expires": "EKSPIRE"
     },
     "nextSteps": {
       "title": "Demare ak Bibliyotèk Piblik New York la",

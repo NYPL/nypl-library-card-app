@@ -33,7 +33,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Adres e-mail",
-      "instruction": "Adres e-mail jest niezbędny, aby móc korzystać z wielu naszych zasobów cyfrowych, takich jak e-booki. Jeśli nie chcesz podać adresu e-mail, możesz wystąpić o fizyczną kartę biblioteczną, używając <a href='https://on.nypl.org/internationalresearch'>innego formularza</a>. Wypełniony formularz złóż w jednym z naszych <a href='https://www.nypl.org/locations'>oddziałów</a>, okazując dokument tożsamości i podając adres zamieszkania, aby odebrać kartę."
+      "instruction": "<span>Adres e-mail jest niezbędny, aby móc korzystać z wielu naszych zasobów cyfrowych, takich jak e-booki.</span>"
     },
     "eCommunications": {
       "labelText": "Tak, chcę otrzymywać informacje o programach i usługach NYPL. "
@@ -78,9 +78,12 @@
   },
   "verifyAddress": {
     "title": "Krok 3 z 5: weryfikacja adresu",
-    "description": "Wybierz właściwy adres.",
+    "description": "Sprawdź swoje dane adresowe. Jeśli chcesz wprowadzić zmiany, kliknij „Wstecz”.",
     "homeAddress": "Adres zamieszkania",
-    "workAddress": "Adres alternatywny"
+    "workAddress": "Adres alternatywny",
+    "errorMessage": {
+      "select": "Wystąpił problem. Wybierz właściwy adres."
+    }
   },
   "account": {
     "title": "Krok 4 z 5: dostosowanie konta",
@@ -153,7 +156,7 @@
     "graphic": {
       "memberName": "Nazwa członka",
       "password": "Hasło",
-      "issued": "Data wydania"
+      "expires": "WYGASA"
     },
     "nextSteps": {
       "title": "Zacznij korzystać z Nowojorskiej Biblioteki Publicznej",

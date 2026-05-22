@@ -5,6 +5,7 @@ import {
   FormRow,
   Radio,
   RadioGroup,
+  Text,
 } from "@nypl/design-system-react-components";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
@@ -31,17 +32,16 @@ const styles = {
  * Main page component for the "address review" page.
  */
 function AddressVerificationContainer() {
-  // Keep track of the user's selection of the preferred home
-  // and/or work address.
   const [homeAddressSelect, setHomeAddressSelect] = useState("");
   const [workAddressSelect, setWorkAddressSelect] = useState("");
-  // Use react-hook-form for the new radio button input form.
-  const { handleSubmit, register } = useForm();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
   const { state, dispatch } = useFormDataContext();
   const [isLoading, setIsLoading] = useState(false);
-  // The `addressesResponse` is the value from Service Objects through the NYPL
-  // Platform API.
-  // The `formValues` object holds all the submitted user values.
+  // The `addressesResponse` is the value from Service Objects through the NYPL Platform API.
   const { formValues, addressesResponse } = state;
   const router = useRouter();
   // Get the URL query params for `newCard` and `lang`.
@@ -164,50 +164,68 @@ function AddressVerificationContainer() {
       addressType === "home"
         ? t("verifyAddress.homeAddress")
         : t("verifyAddress.workAddress");
+
+    const selectError = errors?.[`${addressType}-address-select`]?.message;
+    const selectErrorMessage = t("verifyAddress.errorMessage.select");
+
     return (
-      <RadioGroup
-        className="address-container"
-        name=""
-        id={addressType.replace(/[^0-9a-zA-Z]/g, "-")}
-        labelText={labelText}
-        showLabel={false}
-        sx={{
-          "& .ds-radioGroup-stack": {
-            display: { base: "flex" },
-            flexDirection: { base: "column", sm: "row" },
-          },
-        }}
-        // If there's only one option, it's checked by default.
-        defaultValue={addressesLength === 1 ? `${addressType}-0` : undefined}
-      >
-        {addresses.map((address, idx) => {
-          const selected = `${addressType}-${idx}`;
-          const checked = selected === selectedValue;
-          return (
-            <Radio
-              key={`${addressType}-${idx}`}
-              id={`${addressType}-${idx}`}
-              sx={styles.input}
-              className={`radio-input`}
-              {...register(`${addressType}-address-select`, {
-                required: true,
-                onChange: onChange,
-              })}
-              isChecked={checked}
-              value={selected}
-              labelText={
-                <Box>
-                  <Box>{address.line1}</Box>
-                  {address.line2 && <Box>{address.line2}</Box>}
+      <>
+        <RadioGroup
+          className="address-container"
+          name=""
+          id={addressType.replace(/[^0-9a-zA-Z]/g, "-")}
+          labelText={labelText}
+          showLabel={false}
+          sx={{
+            "& .ds-radioGroup-stack": {
+              display: { base: "flex" },
+              flexDirection: { base: "column", sm: "row" },
+            },
+          }}
+          // If there's only one option, it's checked by default.
+          defaultValue={addressesLength === 1 ? `${addressType}-0` : undefined}
+        >
+          {addresses.map((address, idx) => {
+            const selected = `${addressType}-${idx}`;
+            const checked = selected === selectedValue;
+            return (
+              <Radio
+                key={`${addressType}-${idx}`}
+                id={`${addressType}-${idx}`}
+                sx={styles.input}
+                className={`radio-input`}
+                {...register(`${addressType}-address-select`, {
+                  required: selectErrorMessage,
+                  onChange: onChange,
+                })}
+                isChecked={checked}
+                value={selected}
+                labelText={
                   <Box>
-                    {address.city}, {address.state} {address.zip}
+                    <Box>{address.line1}</Box>
+                    {address.line2 && <Box>{address.line2}</Box>}
+                    <Box>
+                      {address.city}, {address.state} {address.zip}
+                    </Box>
                   </Box>
-                </Box>
-              }
-            />
-          );
-        })}
-      </RadioGroup>
+                }
+              />
+            );
+          })}
+        </RadioGroup>
+        <Box m={0} aria-live="polite">
+          {selectError && (
+            <Text
+              id={`${addressType}-address-error`}
+              mt="s"
+              color="ui.error.primary"
+              fontSize="xs"
+            >
+              {selectErrorMessage}
+            </Text>
+          )}
+        </Box>
+      </>
     );
   };
 
