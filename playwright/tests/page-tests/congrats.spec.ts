@@ -33,9 +33,8 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           page,
           fullName,
           TEST_BARCODE_NUMBER,
-          TEST_EXPIRATION_DATE,
-          undefined
-        ); // defaults to temporary patron type
+          TEST_EXPIRATION_DATE
+        );
         await clickNextButton(
           pageManager.reviewPage,
           pageManager.reviewPage.submitButton,
