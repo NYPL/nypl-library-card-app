@@ -34,11 +34,19 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   const {
     register,
     formState: { errors },
+    setValue: setFormValue,
   } = useFormContext();
+  const formName = "homeLibraryCode";
 
   const onChange = (event) => {
-    setValue(event.target.value);
+    const newValue = event.target.value;
+    setValue(newValue);
+    setFormValue(formName, newValue, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
   };
+
   const inputProps = {
     value,
     onChange,
@@ -52,6 +60,9 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
         <Trans
           i18nKey="account.library.description.part2"
           components={{ a: <DSLink variant="external" /> }}
+          values={{
+            nyplLocation: t("account.library.description.nyplLocation"),
+          }}
         />
       </Paragraph>
       <Paragraph
@@ -69,7 +80,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
         isRequired={true}
         // Pass in the `react-hook-form` register function so it can handle this
         // form element's state for us.
-        {...register("homeLibraryCode", {
+        {...register(formName, {
           required: t("account.errorMessage.homeLibraryCode"),
         })}
         defaultValue={defaultValue}

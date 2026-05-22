@@ -49,6 +49,7 @@ const AccountFormContainer = ({ csrfToken }) => {
       id="account-form-container"
       method="post"
       onSubmit={handleSubmit(submitForm)}
+      noValidate
     >
       <AccountFormFields csrfToken={csrfToken} id="account-form-container" />
       <AcceptTermsFormFields />

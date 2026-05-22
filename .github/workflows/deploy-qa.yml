@@ -5,6 +5,10 @@ on:
     tags:
       - "qa-*"
 
+concurrency:
+  group: qa-deploy
+  cancel-in-progress: false
+
 jobs:
   unit-tests:
     uses: ./.github/workflows/unit-tests.yml
@@ -13,7 +17,7 @@ jobs:
   deploy-qa:
     runs-on: ubuntu-latest
     environment: qa
-    needs: [unit-tests]
+    needs: [ unit-tests ]
 
     permissions:
       id-token: write
@@ -55,6 +59,17 @@ jobs:
            .
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:qa-latest
 
+      - name: Tag current qa-latest as qa-previous
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: nypl-library-card-app
+        run: |
+          MANIFEST=$(aws ecr batch-get-image --repository-name $ECR_REPOSITORY --image-ids imageTag="qa-latest" --output json | jq --raw-output --join-output '.images[0].imageManifest')
+          PREVIOUS_MANIFEST=$(aws ecr batch-get-image --repository-name $ECR_REPOSITORY --image-ids imageTag="qa-previous" --output json | jq --raw-output --join-output '.images[0].imageManifest')
+          if [ "$MANIFEST" != "$PREVIOUS_MANIFEST" ]; then
+            aws ecr put-image --repository-name $ECR_REPOSITORY --image-tag "qa-previous" --image-manifest "$MANIFEST"
+          fi
+
       - name: Push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -71,9 +86,15 @@ jobs:
             --service nypl-library-card-app-qa \
             --force-new-deployment
 
+      - name: Wait for ECS to stabilize
+        run: |
+          aws ecs wait services-stable \
+            --cluster nypl-library-card-app-qa \
+            --services nypl-library-card-app-qa
+
   playwright-tests:
     uses: ./.github/workflows/playwright-tests.yml
-    needs: [deploy-qa]
+    needs: [ deploy-qa ]
     secrets: inherit
     with:
       PLAYWRIGHT_BASE_URL: https://qa-www.nypl.org/library-card/new # run on QA after deploy

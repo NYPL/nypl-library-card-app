@@ -48,13 +48,26 @@ jest.mock("react-i18next", () => {
       },
       nextSteps: {
         title: "Get started with The New York Public Library",
-        explore:
-          "<b>Explore Library E-Books</b><br />Download SimplyE for <a href='https://apps.apple.com/app/apple-store/id1046583900'>iOS</a> or <a href='https://play.google.com/store/apps/details?id=org.nypl.simplified.simplye&referrer=utm_source%3Dnypl.org%26utm_medium%3Dreferral%26utm_content%3Dnypl_website_simplye2%26utm_campaign%3Dnypl_website_simplye2'>Android</a>.",
-        borrow:
-          "<b>Borrow books & more</b><br /><a href='https://login.nypl.org/auth/login?redirect_uri=https%3A%2F%2Fborrow.nypl.org%2F%3FopenAccount%3Dprofile'> Log into your account</a> and browse the catalog.",
-        updates:
-          "<b>Get updates</b><br /><a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
-        more: "<b>Learn more</b><br /><a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>",
+        explore: {
+          header: "Explore E-Books & E-Audiobooks",
+          content:
+            "<a href='https://www.nypl.org/books-music-movies/help'>Read or listen on-the-go</a> with access to a wide array of titles.",
+        },
+        borrow: {
+          header: "Borrow books & more",
+          content:
+            "<a href='{{loginUrl}}'> Log into your account</a> and browse the catalog. To check out and borrow physical items, visit any <a href='https://www.nypl.org/locations'>NYPL location</a> to verify your information and receive a physical card.",
+        },
+        updates: {
+          header: "Get updates",
+          content:
+            "<a href='https://www.nypl.org/enews'>Find out about all the Library has to offer.</a>",
+        },
+        more: {
+          header: "Learn more",
+          content:
+            "<a href='https://www.nypl.org/discover-library-card'>Discover everything you can do with your library card.</a>",
+        },
       },
     },
     ariaLabel: {

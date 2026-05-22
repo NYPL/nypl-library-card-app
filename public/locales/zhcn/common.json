@@ -154,10 +154,22 @@
     },
     "nextSteps": {
       "title": "开始使用纽约公共图书馆",
-      "explore": "<b>探索电子书和电子有声书</b>您可以<a href='https://www.nypl.org/books-music-movies/help'>随时随地阅读或聆听</a>各种各样的书籍。",
-      "borrow": "<b>借阅书籍和其他物品</b><a href='{{loginUrl}}'>登录您的帐户</a>并浏览目录。如需借阅实体物品，请前往任何一家<a href='https://www.nypl.org/locations'>NYPL分馆</a>验证您的信息并领取实体图书卡。",
-      "updates": "<b>获取更新</b><a href='https://www.nypl.org/enews'>发现图书馆提供的所有服务。</a>",
-      "more": "<b>了解更多</b><a href='https://www.nypl.org/discover-library-card'>发现您可以用图书卡做些什么。</a>"
+      "explore": {
+        "header": "探索电子书和电子有声书",
+        "content": "您可以<a href='https://www.nypl.org/books-music-movies/help'>随时随地阅读或聆听</a>各种各样的书籍。"
+      },
+      "borrow": {
+        "header": "借阅书籍和其他物品",
+        "content": "<a href='{{loginUrl}}'>登录您的帐户</a>并浏览目录。如需借阅实体物品，请前往任何一家<a href='https://www.nypl.org/locations'>NYPL分馆</a>验证您的信息并领取实体图书卡。"
+      },
+      "updates": {
+        "header": "获取更新",
+        "content": "<a href='https://www.nypl.org/enews'>发现图书馆提供的所有服务。</a>"
+      },
+      "more": {
+        "header": "了解更多",
+        "content": "<a href='https://www.nypl.org/discover-library-card'>发现您可以用图书卡做些什么。</a>"
+      }
     }
   },
   "button": {

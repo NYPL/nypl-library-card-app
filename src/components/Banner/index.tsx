@@ -8,9 +8,12 @@ interface BannerProps {
   content: string | React.ReactElement;
 }
 
-export const Banner = ({ content }: BannerProps) => {
+export const Banner = ({
+  className,
+  content,
+}: BannerProps & { className?: string }) => {
   return (
-    <Box my="l">
+    <Box my="l" className={className}>
       <DSBanner
         color="ui.typography.body"
         content={content}
