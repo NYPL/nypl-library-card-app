@@ -27,7 +27,7 @@ const metadata = () => {
       name,
       options: {
         httpOnly: true,
-        sameSite: "lax",
+        sameSite: "lax" as const,
         path: "/",
         secure: useSecureCookies,
       },
