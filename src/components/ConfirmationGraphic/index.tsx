@@ -7,7 +7,6 @@ import {
 import bwipjs from "bwip-js";
 import Image from "next/image";
 import { useEffect } from "react";
-
 import { FormResults } from "../../interfaces";
 import useFormDataContext from "../../context/FormDataContext";
 import { useTranslation } from "next-i18next";
@@ -79,7 +78,7 @@ const styles = {
       lg: "1.9em",
     },
   },
-  issuedText: {
+  expiresText: {
     color: "white",
     fontSize: "clamp(0.6rem, 0.6rem + 0.2vw, 1rem)",
     mb: "s",
@@ -89,13 +88,14 @@ const styles = {
 const ConfirmationContainer = () => {
   const { state } = useFormDataContext();
   const formResults = state.results || ({} as FormResults);
-  const { barcode, name } = formResults;
+  const { barcode, name, expirationDate } = formResults;
   const { t } = useTranslation("common");
   const canvasArgs = {
     role: "img",
     ["aria-label"]: `${t("ariaLabel.barcode")}`,
   };
   let canvas;
+  const formattedDate = new Date(expirationDate).toLocaleDateString("en-US");
   // What we want to do is render the HTML and then pick up the canvas element.
   // We can then draw a barcode on it using `bwipjs`. The ILS uses `Codabar` as
   // its barcode type which is `rationalizedCodabar` in the bwip library.
@@ -129,14 +129,9 @@ const ConfirmationContainer = () => {
           width="939"
         />
         <Grid className="background-lion" sx={styles.backgroundLion}>
-          <GridItem id="issued" sx={styles.issuedText}>
-            {t("confirmation.graphic.issued")}
-            <Box
-              className="content"
-              fontSize={"clamp(1rem, 1rem + 0.2vw, 1.6rem)"}
-            >
-              {new Date().toLocaleDateString()}
-            </Box>
+          <GridItem id="expires" sx={styles.expiresText}>
+            {t("confirmation.graphic.expires")}
+            <Box>{formattedDate}</Box>
           </GridItem>
           <GridItem sx={styles.logoItem}>
             <Logo decorative name="nyplFullWhite" size="small" mb="xs" />

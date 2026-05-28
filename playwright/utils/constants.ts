@@ -90,6 +90,7 @@ export const TEST_EDITED_ACCOUNT = {
 // congrats
 export const TEST_BARCODE_NUMBER = "12341234123412";
 export const EXPECTED_BARCODE_PREFIX = "255";
+export const TEST_EXPIRATION_DATE = "12/12/2028";
 
 export const ALL_SUPPORTED_LANGUAGES = [
   { lang: "en", name: "English" },

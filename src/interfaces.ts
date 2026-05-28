@@ -141,6 +141,7 @@ export interface FormResults {
   message: string;
   patronId: number;
   ptype: number;
+  expirationDate: string;
 }
 
 export interface FormData {

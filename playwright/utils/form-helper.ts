@@ -171,7 +171,7 @@ export function getErrorMessages(
       page.postalCodeError,
     ];
   } else if (page instanceof AddressVerificationPage) {
-    return [];
+    return [page.homeAddressError, page.alternateAddressError];
   } else if (page instanceof AccountPage) {
     return [
       page.usernameError,

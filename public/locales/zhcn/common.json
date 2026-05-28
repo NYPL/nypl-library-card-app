@@ -75,9 +75,12 @@
   },
   "verifyAddress": {
     "title": "第3步：地址验证",
-    "description": "请选择正确的地址",
+    "description": "请核对您的地址信息。如需修改，请点击“上一页”。",
     "homeAddress": "居住地址",
-    "workAddress": "替代地址"
+    "workAddress": "替代地址",
+    "errorMessage": {
+      "select": "出现了问题。请选择正确的地址。"
+    }
   },
   "account": {
     "title": "第 4 步：自定义您的账户。",
@@ -150,7 +153,7 @@
     "graphic": {
       "memberName": "成员名字",
       "password": "密码",
-      "issued": "发行日期"
+      "expires": "有效期至"
     },
     "nextSteps": {
       "title": "开始使用纽约公共图书馆",

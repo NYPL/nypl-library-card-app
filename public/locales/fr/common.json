@@ -78,9 +78,12 @@
   },
   "verifyAddress": {
     "title": "Étape 3/5 : Vérification de l’adresse",
-    "description": "Veuillez sélectionner la bonne adresse.",
+    "description": "Veuillez vérifier vos coordonnées. Si vous souhaitez les modifier, cliquez sur « Précédent ».",
     "homeAddress": "Adresse de votre domicile",
-    "workAddress": "Autre adresse"
+    "workAddress": "Autre adresse",
+    "errorMessage": {
+      "select": "Un incident est survenu. Veuillez sélectionner la bonne adresse."
+    }
   },
   "account": {
     "title": "Étape 4/5 : Personnalisation de votre compte",
@@ -153,7 +156,7 @@
     "graphic": {
       "memberName": "Nom de membre",
       "password": "Mot de passe",
-      "issued": "Date de publication"
+      "expires": "EXPIRÉ"
     },
     "nextSteps": {
       "title": "Lancez-vous à la découverte de la Bibliothèque publique de New York",
