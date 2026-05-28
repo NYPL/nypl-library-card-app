@@ -7,7 +7,6 @@ import {
   getLocationValue,
   constructAddressType,
   constructAddresses,
-  constructProblemDetail,
   validateAddressFormData,
   validatePersonalFormData,
   validateAccountFormData,
@@ -186,31 +185,6 @@ describe("constructAddresses", () => {
         state: "NY",
         zip: "10018",
       },
-    });
-  });
-});
-
-describe("constructProblemDetail", () => {
-  test("returns an object with default values", () => {
-    expect(constructProblemDetail()).toEqual({
-      status: 400,
-      type: "general-error",
-      title: "General Error",
-      detail: "There was an error with your request",
-    });
-  });
-
-  test("returns an object along with details", () => {
-    expect(
-      constructProblemDetail(500, "invalid-request", "Invalid Request", "", {
-        field: "uhoh",
-      })
-    ).toEqual({
-      status: 500,
-      type: "invalid-request",
-      title: "Invalid Request",
-      detail: "",
-      error: { field: "uhoh" },
     });
   });
 });

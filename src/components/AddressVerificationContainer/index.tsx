@@ -15,7 +15,6 @@ import useFormDataContext from "../../../src/context/FormDataContext";
 import { Address, AddressResponse } from "../../../src/interfaces";
 import RoutingLinks from "../../../src/components/RoutingLinks.tsx";
 
-import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
 import { useTranslation } from "next-i18next";
@@ -231,9 +230,7 @@ function AddressVerificationContainer() {
 
   return (
     <Form
-      // action="/library-card/api/submit"
       id="address-verification-container"
-      method="post"
       onSubmit={handleSubmit(submitForm)}
       noValidate
     >
@@ -263,25 +260,6 @@ function AddressVerificationContainer() {
               )}
             </Box>
           )}
-        </DSFormField>
-      </FormRow>
-
-      <FormRow display="none">
-        <DSFormField>
-          {/* Not register to react-hook-form because we only want to
-          use this value for the no-js scenario. */}
-          <FormField
-            id="hidden-verification-page"
-            type="hidden"
-            name="page"
-            defaultValue="addressVerification"
-          />
-          <FormField
-            id="hidden-form-values"
-            type="hidden"
-            name="formValues"
-            defaultValue={JSON.stringify(formValues)}
-          />
         </DSFormField>
       </FormRow>
 

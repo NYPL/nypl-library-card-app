@@ -5,24 +5,26 @@ import {
   runMiddleware,
   cors,
 } from "../../src/utils/api";
+import { withApiHandler } from "../../src/errors/server";
+import { ApiError, ErrorCodes } from "../../src/errors";
 
 /**
  * patron
  * @param req - Next request object
  * @param res - Next response object
  */
-async function patron(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "POST") {
-    return res.json(405);
+export default withApiHandler(
+  async (req: NextApiRequest, res: NextApiResponse) => {
+    if (req.method !== "POST") {
+      throw new ApiError(
+        405,
+        ErrorCodes.METHOD_NOT_ALLOWED,
+        "Method not allowed."
+      );
+    }
+    await runMiddleware(req, res, cors);
+    await initializeAppAuth(req);
+    const results = await createPatron(req);
+    res.status(results.status).json(results);
   }
-  // Run the request through the middleware.
-  await runMiddleware(req, res, cors);
-  // Initialize the authentication for the app.
-  // TODO: set a better path for using an CSRF token.
-  await initializeAppAuth(req, res);
-  // Now, we can call the NYPL Platform API to validate the patron's
-  // address and username, and create a new ILS patron account.
-  await createPatron(req, res);
-}
-
-export default patron;
+);

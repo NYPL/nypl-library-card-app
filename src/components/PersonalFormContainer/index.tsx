@@ -5,8 +5,6 @@ import { useRouter } from "next/router";
 import useFormDataContext from "../../context/FormDataContext";
 import PersonalFormFields from "../PersonalFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
-
-import FormField from "../FormField";
 import {
   Form,
   FormField as DSFormField,
@@ -20,7 +18,7 @@ const PersonalFormContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   // Specific functions and object from react-hook-form.
-  const { register, handleSubmit } = useFormContext();
+  const { handleSubmit } = useFormContext();
   // Get the URL query params for `newCard` and `lang`.
   const queryStr = createQueryParams(router?.query);
   // Pass the selected language as the "preferred language"
@@ -50,43 +48,12 @@ const PersonalFormContainer = () => {
     <Form
       id="perform-form-container"
       onSubmit={handleSubmit(submitForm)}
-      method="post"
       noValidate
-      // action="/library-card/api/submit"
     >
       <PersonalFormFields
         agencyType={formValues.policyType}
         id="perform-form-container"
       />
-
-      <FormRow display="none">
-        <DSFormField>
-          <FormField
-            id="hidden-policyType"
-            defaultValue={formValues.policyType}
-            {...register("policyType")}
-            type="hidden"
-          />
-        </DSFormField>
-        <DSFormField>
-          {/* Not register to react-hook-form because we only want to
-              use this value for the no-js scenario. */}
-          <FormField
-            id="hidden-personal-page"
-            type="hidden"
-            name="page"
-            defaultValue="personal"
-          />
-        </DSFormField>
-        <DSFormField>
-          <FormField
-            id="hidden-form-values"
-            type="hidden"
-            name="formValues"
-            defaultValue={JSON.stringify(formValues)}
-          />
-        </DSFormField>
-      </FormRow>
 
       <FormRow>
         <DSFormField>

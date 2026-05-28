@@ -1,4 +1,8 @@
 // The interface for the react-hook-form state data object.
+
+import { type ApiErrorResponse, type ErrorCode } from "./errors";
+export type { ApiErrorResponse } from "./errors";
+
 export interface FormInputData {
   firstName: string;
   lastName: string;
@@ -142,7 +146,7 @@ export interface FormResults {
 
 export interface FormData {
   results: FormResults | undefined;
-  errorObj: ProblemDetail | undefined;
+  errorObj: ApiErrorResponse | undefined;
   formValues: FormInputData;
   addressesResponse: AddressesResponse;
 }
@@ -170,7 +174,7 @@ export interface LibraryListObject {
 
 export interface ProblemDetail {
   status: number;
-  type: string;
+  type: ErrorCode;
   title: string;
   detail?: string;
   message?: string;

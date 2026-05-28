@@ -12,7 +12,6 @@ import RoutingLinks from "../RoutingLinks.tsx";
 import AccountFormFields from "../AccountFormFields";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
 
-import FormField from "../FormField";
 import { createQueryParams } from "../../utils/utils";
 
 const AccountFormContainer = ({ csrfToken }) => {
@@ -45,33 +44,12 @@ const AccountFormContainer = ({ csrfToken }) => {
 
   return (
     <Form
-      // action="/library-card/api/submit"
       id="account-form-container"
-      method="post"
       onSubmit={handleSubmit(submitForm)}
       noValidate
     >
       <AccountFormFields csrfToken={csrfToken} id="account-form-container" />
       <AcceptTermsFormFields />
-
-      <FormRow display="none">
-        <DSFormField>
-          {/* Not register to react-hook-form because we only want to
-              use this value for the no-js scenario. */}
-          <FormField
-            id="hidden-account-page"
-            type="hidden"
-            name="page"
-            defaultValue="account"
-          />
-          <FormField
-            id="hidden-form-values"
-            type="hidden"
-            name="formValues"
-            defaultValue={JSON.stringify(formValues)}
-          />
-        </DSFormField>
-      </FormRow>
 
       <FormRow>
         <DSFormField>

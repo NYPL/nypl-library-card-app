@@ -8,6 +8,7 @@ import {
   FormAPISubmission,
   FormInputData,
 } from "../interfaces";
+import { type ErrorCode, ErrorCodes } from "../errors";
 import { ipLocationMessageTranslations } from "../data/ipLocationMessageTranslations";
 import { every, isEmpty } from "lodash";
 import moment from "moment";
@@ -168,7 +169,7 @@ const constructAddresses = (object = {}): Addresses => {
  */
 const constructProblemDetail = (
   status = 400,
-  type = "general-error",
+  type: ErrorCode = ErrorCodes.INTERNAL_SERVER_ERROR,
   title = "General Error",
   detail = "There was an error with your request",
   error: { [key: string]: string } = null
@@ -364,12 +365,11 @@ const constructPatronObject = (
 
   const addresses: Addresses = constructAddresses(object);
   const errors = validateFormData(object, addresses);
-  console.log("Errors", errors);
 
   if (!isEmpty(errors)) {
     return constructProblemDetail(
       400,
-      "invalid-request",
+      ErrorCodes.INVALID_REQUEST,
       "Invalid Request",
       "There was an error with the submitted form values.",
       errors
@@ -406,7 +406,6 @@ export {
   getLocationValue,
   constructAddresses,
   constructAddressType,
-  constructProblemDetail,
   constructPatronObject,
   validateFormData,
   validatePersonalFormData,
