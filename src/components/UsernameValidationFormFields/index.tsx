@@ -102,17 +102,17 @@ const UsernameValidationForm = ({
       .catch((error) => {
         let message = error.response?.data?.message;
         // Catch any CSRF token issues and return a generic error message.
-        if (error.response.status == 403) {
+        if (error.response?.status === 403) {
           message = commonAPIErrors.errorValidatingToken;
         }
-        // If the server is down, return a server error message.
-        if (error.response.status === 500) {
+        // If there's no response (network failure) or a server error, return a generic message.
+        if (!error.response || error.response?.status >= 500) {
           message = commonAPIErrors.errorValidatingUsername;
         }
 
         // Translate the message if possible.
         if (lang !== "en") {
-          message = apiErrorTranslations[message][lang] || message;
+          message = apiErrorTranslations[message]?.[lang] || message;
         }
 
         NRError(

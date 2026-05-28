@@ -9,11 +9,11 @@ import {
   createUsernameAnchor,
 } from "../../utils/renderErrorsUtils";
 import styles from "./ApiErrors.module.css";
-import { ProblemDetail } from "../../interfaces";
+import { ApiErrorResponse, ErrorCodes } from "../../errors";
 import { apiErrorTranslations } from "../../data/apiErrorMessageTranslations";
 
 interface ApiErrorsProps {
-  problemDetail: ProblemDetail | undefined;
+  problemDetail: ApiErrorResponse | undefined;
   lang?: string;
 }
 
@@ -26,54 +26,44 @@ interface ApiErrorsProps {
 const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
   ({ problemDetail, lang = "en" }, ref) => {
     const { t } = useTranslation("common");
+
     // We expect problem details to have a status greater than or equal to 400.
-    if (!problemDetail || problemDetail?.status < 400) {
+    if (!problemDetail || problemDetail.status < 400) {
       return null;
     }
-    if (typeof problemDetail !== "string" && !problemDetail.detail) {
-      console.log("ApiErrors problemDetail: ", problemDetail);
-      problemDetail.detail = t("apiErrors.defaultError");
+
+    const type = problemDetail.type;
+    const fieldErrors = problemDetail.details?.fields as
+      | Record<string, string>
+      | undefined;
+    let detail = problemDetail.message;
+
+    if (!detail) {
+      detail = t("apiErrors.defaultError");
     }
-    if (
-      lang === "en" &&
-      typeof problemDetail !== "string" &&
-      problemDetail.detail.includes("PIN is trivial")
-    ) {
-      problemDetail.detail =
-        "Password cannot contain consecutively repeating characters three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab";
-    }
-    if (
-      lang !== "en" &&
-      typeof problemDetail !== "string" &&
-      problemDetail.detail.includes("PIN is trivial")
-    ) {
-      problemDetail.detail = t("account.password.instruction").split(
-        "<br />"
-      )[2];
-    } else if (lang !== "en" && typeof problemDetail !== "string") {
-      const errorToTranslate = problemDetail.detail;
+    if (detail.includes("PIN is trivial")) {
+      detail =
+        lang === "en"
+          ? "Password cannot contain consecutively repeating characters three or more times, e.g. aaaatf54 or repeating a pattern, e.g. abcabcab"
+          : t("account.password.instruction").split("<br />")[2];
+    } else if (lang !== "en") {
       let newErrorMessage;
       try {
-        newErrorMessage = errorToTranslate
-          ? apiErrorTranslations[errorToTranslate][lang]
+        newErrorMessage = detail
+          ? apiErrorTranslations[detail][lang]
           : t("apiErrors.defaultError");
       } catch (e) {
-        console.error(
-          "Missing translation for error message: \n",
-          errorToTranslate,
-          e
-        );
+        console.error("Missing translation for error message: \n", detail, e);
         newErrorMessage = t("apiErrors.defaultError");
       }
-      problemDetail.detail = newErrorMessage;
+      detail = newErrorMessage;
     }
 
     /**
      * renderErrorByType
      * Returns list elements with detail errors.
      */
-    const renderErrorByType = (pd) => {
-      const { type, detail, error } = pd;
+    const renderErrorByType = () => {
       const defaultError = t("globalErrors.defaultError");
       let errorElements;
 
@@ -85,18 +75,16 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
           // be the case for empty values or invalid values caught before
           // sending a request to the Card Creator API. The Card Creator API
           // can also return these types of errors based on its own validations.
-          case "invalid-request":
-            if (isEmpty(error)) {
+          case ErrorCodes.INVALID_REQUEST:
+            if (isEmpty(fieldErrors)) {
               errorElements = <li>{detail}</li>;
             } else {
-              errorElements = renderErrorElements(error, lang);
+              errorElements = renderErrorElements(fieldErrors, lang);
             }
             break;
-          // All the errors are in the `error` property but for the `username`,
-          // the error is in the `detail` property. This error is thrown in the
-          // API right away so it can't attempt to create an invalid account.
-          case "invalid-username":
-          case "unavailable-username":
+
+          case ErrorCodes.INVALID_USERNAME:
+          case ErrorCodes.USERNAME_UNAVAILABLE:
             errorElements = (
               <li
                 dangerouslySetInnerHTML={{
@@ -105,18 +93,21 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
               />
             );
             break;
-          // Note: the following shouldn't happen since empty values will be
-          // caught _before_ sending the request to the API. But this is added
-          // because it's part of the error responses.
-          case "missing-required-values":
-          case "ils-integration-error":
+
+          case ErrorCodes.MISSING_REQUIRED_FIELDS:
+          case ErrorCodes.ILS_INTEGRATION_ERROR:
+          case ErrorCodes.PATRON_CREATION_FAILED:
+          case ErrorCodes.PLATFORM_API_ERROR:
+          case ErrorCodes.PLATFORM_API_TIMEOUT:
+          case ErrorCodes.ADDRESS_VALIDATION_FAILED:
+          case ErrorCodes.CSRF_INVALID:
             errorElements = <li>{detail}</li>;
             break;
+
           default:
             errorElements = <li>{defaultError}</li>;
             break;
         }
-        console.warn(`API error: ${detail}`);
       } else {
         errorElements = <li>{defaultError}</li>;
       }
@@ -133,10 +124,12 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
         <Heading level="h2" className={styles.heading}>
           {t("globalErrors.title")}
         </Heading>
-        {renderErrorByType(problemDetail)}
+        {renderErrorByType()}
       </div>
     );
   }
 );
+
+ApiErrors.displayName = "ApiErrors";
 
 export default ApiErrors;

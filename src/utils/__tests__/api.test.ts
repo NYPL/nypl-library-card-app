@@ -5,7 +5,7 @@ import {
   axiosAddressPost,
   validateAddress,
   validateUsername,
-  callPatronAPI,
+  createPatron,
 } from "../api";
 const axios = require("axios");
 import moment from "moment";
@@ -21,17 +21,6 @@ jest.mock("../csrfUtils", () => {
     })),
   };
 });
-let mockedReturnedJson = {};
-class MockRes {
-  status() {
-    return this;
-  }
-  json(obj) {
-    mockedReturnedJson = obj;
-    return;
-  }
-}
-const mockRes = new MockRes();
 
 describe("constructApiHeaders", () => {
   test("it returns authorization headers object", () => {
@@ -78,24 +67,19 @@ describe("initializeAppAuth", () => {
     axios.post.mockClear();
   });
 
-  test("it should throw an error if the Auth endpoint returned bad data", async () => {
+  test("it should throw an ApiError if the Auth endpoint returned bad data", async () => {
     const invalidResp = {
       error: "some error",
     };
     axios.post.mockResolvedValue(invalidResp);
 
-    await initializeAppAuth({}, mockRes, {});
+    await expect(initializeAppAuth({}, {})).rejects.toMatchObject({
+      name: "ApiError",
+      status: 502,
+      type: "auth-failed",
+    });
 
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(mockedReturnedJson).toEqual({
-      status: 400,
-      type: "no-access-token",
-      title: "No Access Token",
-      detail: "No access_token obtained from OAuth Service.",
-      error: {
-        oauth: "No access_token obtained from OAuth Service.",
-      },
-    });
   });
 
   test("calls the Auth API once since there is no access token", async () => {
@@ -110,7 +94,7 @@ describe("initializeAppAuth", () => {
     };
 
     axios.post.mockResolvedValue(validResp);
-    const result = await initializeAppAuth({}, mockRes, {});
+    const result = await initializeAppAuth({}, {});
 
     expect(axios.post).toHaveBeenCalledTimes(1);
     // Nothing is returned from an API call with a valid response.
@@ -135,7 +119,7 @@ describe("initializeAppAuth", () => {
 
     axios.post.mockResolvedValue(validResp);
 
-    const result = await initializeAppAuth({}, mockRes, appObj);
+    const result = await initializeAppAuth({}, appObj);
 
     expect(axios.post).toHaveBeenCalledTimes(0);
     // Nothing is returned from an API call with a valid response.
@@ -160,7 +144,7 @@ describe("initializeAppAuth", () => {
 
     axios.post.mockResolvedValue(validResp);
 
-    const result = await initializeAppAuth({}, mockRes, appObj);
+    const result = await initializeAppAuth({}, appObj);
 
     expect(axios.post).toHaveBeenCalledTimes(1);
     // Nothing is returned from an API call with a valid response.
@@ -291,10 +275,14 @@ describe("validateAddress", () => {
       },
     });
 
-    await validateAddress(req, mockRes, appObj);
+    const { status: httpStatus, data: addressResponse } = await validateAddress(
+      req,
+      appObj
+    );
 
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(mockedReturnedJson).toEqual({
+    expect(httpStatus).toEqual(200);
+    expect(addressResponse).toEqual({
       address: {
         line1: "111 1st St.",
         city: "New York",
@@ -311,15 +299,22 @@ describe("validateAddress", () => {
     });
   });
 
-  test("it does not make an API call without an access token", async () => {
+  test("it throws an ApiError without an access token", async () => {
     const req = {
       body: {
         formData: {},
       },
+      cookies: {
+        "nypl.csrf-token": "csrfToken",
+      },
     };
     axios.post.mockResolvedValue({});
 
-    await validateAddress(req, mockRes, {});
+    await expect(validateAddress(req, {})).rejects.toMatchObject({
+      name: "ApiError",
+      status: 500,
+      type: "auth-token-missing",
+    });
 
     expect(axios.post).toHaveBeenCalledTimes(0);
   });
@@ -330,10 +325,13 @@ describe("validateUsername", () => {
     axios.post.mockClear();
   });
 
-  test("it should not make an API call if there is no oauth token", async () => {
+  test("it should throw an ApiError if there is no oauth token", async () => {
     const req = {
       body: {
         username: "tomnook42",
+      },
+      cookies: {
+        "nypl.csrf-token": "csrfToken",
       },
     };
     axios.post.mockResolvedValue({
@@ -344,7 +342,12 @@ describe("validateUsername", () => {
         message: "This username is available.",
       },
     });
-    await validateUsername(req, mockRes, "url", {});
+
+    await expect(validateUsername(req, "url", {})).rejects.toMatchObject({
+      name: "ApiError",
+      status: 500,
+      type: "auth-token-missing",
+    });
 
     expect(axios.post).toHaveBeenCalledTimes(0);
   });
@@ -371,7 +374,11 @@ describe("validateUsername", () => {
       },
     });
 
-    await validateUsername(req, mockRes, "url", appObj);
+    const { status: httpStatus, data } = await validateUsername(
+      req,
+      "url",
+      appObj
+    );
 
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(
@@ -385,7 +392,8 @@ describe("validateUsername", () => {
         timeout: 10000,
       }
     );
-    expect(mockedReturnedJson).toEqual({
+    expect(httpStatus).toEqual(200);
+    expect(data).toEqual({
       status: 200,
       type: "available-username",
       cardType: "standard",
@@ -418,8 +426,11 @@ describe("validateUsername", () => {
       },
     });
 
-    await validateUsername(req, mockRes, "url", appObj);
-
+    const { status: httpStatus, data } = await validateUsername(
+      req,
+      "url",
+      appObj
+    );
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(
       "url",
@@ -432,7 +443,8 @@ describe("validateUsername", () => {
         timeout: 10000,
       }
     );
-    expect(mockedReturnedJson).toEqual({
+    expect(httpStatus).toEqual(400);
+    expect(data).toEqual({
       status: 400,
       type: "unavailable-username",
       cardType: null,
@@ -442,8 +454,8 @@ describe("validateUsername", () => {
   });
 });
 
-describe("callPatronAPI", () => {
-  const requestData = {
+describe("createPatron", () => {
+  const requestBody = {
     ecommunicationsPref: true,
     policyType: "webApplicant",
     firstName: "Tom",
@@ -473,44 +485,40 @@ describe("callPatronAPI", () => {
     password: "MyLib1731@!",
     verifyPassword: "MyLib1731@!",
     acceptTerms: true,
+    csrfToken: "csrfToken",
+  };
+  const req = {
+    body: requestBody,
+    cookies: { "nypl.csrf-token": "csrfToken" },
   };
 
   beforeEach(() => {
     axios.post.mockClear();
   });
 
-  test("it should not make an API call if there is no oauth token", async () => {
-    const req = {};
+  test("it should throw an ApiError if there is no oauth token", async () => {
     axios.post.mockResolvedValue({});
 
-    try {
-      await callPatronAPI(req, "url", {});
-    } catch (error) {
-      expect(error.type).toEqual("no-access-token");
-      expect(error.detail).toEqual(
-        "The access token could not be generated before calling the Card Creator API."
-      );
-    }
+    await expect(createPatron(req, "url", {})).rejects.toMatchObject({
+      name: "ApiError",
+      status: 500,
+      type: "auth-token-missing",
+    });
 
     expect(axios.post).toHaveBeenCalledTimes(0);
   });
 
-  test("it reports on timeout responses from the API", async () => {
-    const timeoutResponse = {
-      message: "Endpoint request timed out",
-    };
+  test("it throws an ApiError on network/timeout failure", async () => {
     const appObj = {
       tokenObject: { ["access_token"]: "token" },
       tokenExpTime: moment().add(4000, "s"),
     };
-    axios.post.mockResolvedValue(timeoutResponse);
-    const response = await callPatronAPI(requestData, "url", appObj);
-    expect(response).toEqual({
-      detail: "Bad response from Card Creator API",
-      error: "Endpoint request timed out",
-      status: 500,
-      title: "API Error",
-      type: "api-error",
+    axios.post.mockResolvedValue({ message: "Endpoint request timed out" });
+
+    await expect(createPatron(req, "url", appObj)).rejects.toMatchObject({
+      name: "ApiError",
+      status: 502,
+      type: "platform-api-error",
     });
   });
 
@@ -533,7 +541,7 @@ describe("callPatronAPI", () => {
     };
     axios.post.mockResolvedValue(postResponse);
 
-    const response = await callPatronAPI(requestData, "url", appObj);
+    const response = await createPatron(req, "url", appObj);
     expect(response).toEqual({ ...postResponse.data, name: "Tom Nook" });
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(
