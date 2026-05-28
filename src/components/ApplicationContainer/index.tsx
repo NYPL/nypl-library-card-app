@@ -32,7 +32,7 @@ const ApplicationContainer = ({ children }) => {
   // for client-side rendering.
   useEffect(() => {
     if (errorToDisplay) {
-      errorSection.current.focus();
+      errorSection.current?.focus();
     }
   }, [errorToDisplay]);
 

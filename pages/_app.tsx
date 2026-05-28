@@ -18,6 +18,7 @@ import { GetServerSideProps } from "next";
 import Script from "next/script";
 import { theme } from "../src/theme";
 import pkg from "../package.json";
+import ErrorBoundary from "../src/components/ErrorBoundary";
 
 interface MyAppProps {
   Component: any;
@@ -136,13 +137,15 @@ function MyApp({ Component, pageProps }: MyAppProps) {
       <DSProvider theme={theme}>
         <FormProvider {...formMethods}>
           <FormDataContextProvider initState={initState}>
-            <ApplicationContainer>
-              <Component
-                {...pageProps}
-                pageTitles={pageTitles}
-                policyType={router.query.policyType}
-              />
-            </ApplicationContainer>
+            <ErrorBoundary reset={router.asPath}>
+              <ApplicationContainer>
+                <Component
+                  {...pageProps}
+                  pageTitles={pageTitles}
+                  policyType={router.query.policyType}
+                />
+              </ApplicationContainer>
+            </ErrorBoundary>
           </FormDataContextProvider>
         </FormProvider>
       </DSProvider>
