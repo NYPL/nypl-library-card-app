@@ -50,7 +50,7 @@ class ErrorBoundary extends React.Component<
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
     NRError(error, {
       customAttributes: {
-        compnentStack: errorInfo.componentStack,
+        componentStack: errorInfo.componentStack,
       },
     });
   }
@@ -70,10 +70,7 @@ class ErrorBoundary extends React.Component<
               We couldn't process your request at this time. Your application
               progress may not have been saved. Try starting a{" "}
               <Link href="/new">new application</Link> in a few minutes or{" "}
-              <DSLink
-                href="https://www.nypl.org/get-help/contact-us"
-                variant="external"
-              >
+              <DSLink href="https://www.nypl.org/get-help/contact-us">
                 contact us
               </DSLink>{" "}
               if the error persists.
