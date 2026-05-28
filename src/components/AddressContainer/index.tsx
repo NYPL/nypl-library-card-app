@@ -24,10 +24,8 @@ import { constructAddressType } from "../../utils/formDataUtils";
 
 import { nyCounties, nyCities, createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../context/FormDataContext";
-import {
-  commonAPIErrors,
-  toApiErrorResponse,
-} from "../../data/apiErrorMessageTranslations";
+import { normalizeAxiosError } from "../../utils/apiErrorUtils";
+import { ErrorCodes } from "../../errors";
 import { NRError } from "../../logger/newrelic";
 import { PageSubHeading } from "../PageSubHeading";
 import { Paragraph } from "../Paragraph";
@@ -80,17 +78,9 @@ const AddressContainer = ({ csrfToken }) => {
         });
       })
       .catch((error) => {
-        // Catch any CSRF token issues and return a generic error message
-        // and redirect to the home page.
-        if (error.response?.status === 403) {
-          dispatch({
-            type: "SET_FORM_ERRORS",
-            value: toApiErrorResponse(
-              commonAPIErrors.errorValidatingToken,
-              403,
-              "csrf-invalid"
-            ),
-          });
+        const apiError = normalizeAxiosError(error);
+        if (apiError.type === ErrorCodes.CSRF_INVALID) {
+          dispatch({ type: "SET_FORM_ERRORS", value: apiError });
           nextUrl = "/new";
         }
         let home = error.response?.data;

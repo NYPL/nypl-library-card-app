@@ -22,10 +22,8 @@ import { constructAddressType } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
 import { createQueryParams } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
-import {
-  commonAPIErrors,
-  toApiErrorResponse,
-} from "../../data/apiErrorMessageTranslations";
+import { normalizeAxiosError } from "../../utils/apiErrorUtils";
+import { ErrorCodes } from "../../errors";
 import { PageSubHeading } from "../PageSubHeading";
 import stateData from "../../data/stateAbbreviations";
 
@@ -96,17 +94,9 @@ const AddressContainer = ({ csrfToken }) => {
           });
         })
         .catch((error) => {
-          // Catch any CSRF token issues and return a generic error message
-          // and redirect to the home page.
-          if (error.response.status == 403) {
-            dispatch({
-              type: "SET_FORM_ERRORS",
-              value: toApiErrorResponse(
-                commonAPIErrors.errorValidatingToken,
-                403,
-                "csrf-invalid"
-              ),
-            });
+          const apiError = normalizeAxiosError(error);
+          if (apiError.type === ErrorCodes.CSRF_INVALID) {
+            dispatch({ type: "SET_FORM_ERRORS", value: apiError });
             nextUrl = "/new";
           }
           let work = error.response?.data;

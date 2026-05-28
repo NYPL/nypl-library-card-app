@@ -31,11 +31,9 @@ import {
   SupportedLoc,
   SupportedLang,
 } from "../../../src/utils/formDataUtils";
-import {
-  commonAPIErrors,
-  toApiErrorResponse,
-} from "../../data/apiErrorMessageTranslations";
 import { NRError } from "../../logger/newrelic";
+import { normalizeAxiosError } from "../../utils/apiErrorUtils";
+import { ErrorCodes } from "../../errors";
 import { PageSubHeading } from "../PageSubHeading";
 
 const styles = {
@@ -250,26 +248,15 @@ function ReviewFormContainer({ csrfToken }) {
           }
         );
         setIsLoading(false);
-        // Catch any CSRF token issues and return a generic error message
-        // and redirect to the home page.
-        if (error.response?.status === 403) {
-          dispatch({
-            type: "SET_FORM_ERRORS",
-            value: toApiErrorResponse(
-              commonAPIErrors.errorValidatingToken,
-              403,
-              "csrf-invalid"
-            ),
-          });
-          // After a while, remove the errors and redirect to the home page.
+        const apiError = normalizeAxiosError(error);
+        dispatch({ type: "SET_FORM_ERRORS", value: apiError });
+
+        // CSRF expired: show the error briefly then redirect to start.
+        if (apiError.type === ErrorCodes.CSRF_INVALID) {
           setTimeout(async () => {
             dispatch({ type: "SET_FORM_ERRORS", value: null });
             await router.push("/new");
           }, 2500);
-        } else {
-          // There are server-side errors! Display them to the user
-          // so they can be fixed.
-          dispatch({ type: "SET_FORM_ERRORS", value: error.response?.data });
         }
       });
   };
