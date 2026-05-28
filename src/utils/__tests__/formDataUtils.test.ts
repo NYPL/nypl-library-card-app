@@ -15,6 +15,7 @@ import {
   constructPatronObject,
 } from "../formDataUtils";
 import { Addresses, FormInputData, FormAPISubmission } from "../../interfaces";
+import { useTranslation } from "next-i18next";
 
 describe("isDate", () => {
   test("it returns false on an empty input", () => {
@@ -240,12 +241,13 @@ describe("validateAddressFormData", () => {
     const errorObj = { firstName: "uhoh!" };
     // Purposely setting "city" and "zip" to bad values.
     const addresses = { home: { ...homeAddress, city: "", zip: "" } };
+    const { t } = useTranslation("common");
     expect(validateAddressFormData(errorObj, addresses)).toEqual({
       firstName: "uhoh!",
       address: {
         home: {
-          city: errorMessages.address.city,
-          zip: errorMessages.address.zip,
+          city: t(errorMessages.address.city),
+          zip: t(errorMessages.address.zip),
         },
       },
     });
@@ -258,15 +260,16 @@ describe("validateAddressFormData", () => {
       home: { ...homeAddress, state: "New York" },
       work: { ...workAddress, city: "", zip: "111111111111" },
     };
+    const { t } = useTranslation("common");
     expect(validateAddressFormData(errorObj, addresses)).toEqual({
       firstName: "uhoh!",
       address: {
         home: {
-          state: errorMessages.address.state,
+          state: t(errorMessages.address.state),
         },
         work: {
-          city: errorMessages.address.city,
-          zip: errorMessages.address.zip,
+          city: t(errorMessages.address.city),
+          zip: t(errorMessages.address.zip),
         },
       },
     });
@@ -274,6 +277,7 @@ describe("validateAddressFormData", () => {
 });
 
 describe("validatePersonalFormData", () => {
+  const { t } = useTranslation("common");
   test("it should return errors for all bad fields", () => {
     const data = {
       firstName: "",
@@ -284,10 +288,10 @@ describe("validatePersonalFormData", () => {
     };
 
     expect(validatePersonalFormData({}, data)).toEqual({
-      firstName: errorMessages.firstName,
-      lastName: errorMessages.lastName,
-      email: errorMessages.email,
-      birthdate: errorMessages.birthdate,
+      firstName: t(errorMessages.firstName),
+      lastName: t(errorMessages.lastName),
+      email: t(errorMessages.email),
+      birthdate: t(errorMessages.birthdate),
     });
   });
 
@@ -315,12 +319,13 @@ describe("validatePersonalFormData", () => {
 
     expect(validatePersonalFormData(errors, data)).toEqual({
       ...errors,
-      firstName: errorMessages.firstName,
+      firstName: t(errorMessages.firstName),
     });
   });
 });
 
 describe("validateAccountFormData", () => {
+  const { t } = useTranslation("common");
   test("it should return errors for all bad fields", () => {
     const data = {
       username: "",
@@ -331,11 +336,11 @@ describe("validateAccountFormData", () => {
     };
 
     expect(validateAccountFormData({}, data)).toEqual({
-      username: errorMessages.username,
-      password: errorMessages.password,
-      verifyPassword: errorMessages.verifyPassword,
-      acceptTerms: errorMessages.acceptTerms,
-      homeLibraryCode: errorMessages.homeLibraryCode,
+      username: t(errorMessages.username),
+      password: t(errorMessages.password),
+      verifyPassword: t(errorMessages.verifyPassword),
+      acceptTerms: t(errorMessages.acceptTerms),
+      homeLibraryCode: t(errorMessages.homeLibraryCode),
     });
   });
 
@@ -363,7 +368,7 @@ describe("validateAccountFormData", () => {
 
     expect(validateAccountFormData(errors, data)).toEqual({
       ...errors,
-      username: errorMessages.username,
+      username: t(errorMessages.username),
     });
   });
 });
@@ -390,17 +395,18 @@ describe("validateFormData", () => {
 
   test("it should return errors for all bad fields", () => {
     const addresses = { home: { ...homeAddress, city: "" } };
+    const { t } = useTranslation("common");
 
     expect(validateFormData(dataObj, addresses)).toEqual({
-      firstName: errorMessages.firstName,
-      email: errorMessages.email,
-      birthdate: errorMessages.birthdate,
-      username: errorMessages.username,
-      verifyPassword: errorMessages.verifyPassword,
-      homeLibraryCode: errorMessages.homeLibraryCode,
-      acceptTerms: errorMessages.acceptTerms,
+      firstName: t(errorMessages.firstName),
+      email: t(errorMessages.email),
+      birthdate: t(errorMessages.birthdate),
+      username: t(errorMessages.username),
+      verifyPassword: t(errorMessages.verifyPassword),
+      homeLibraryCode: t(errorMessages.homeLibraryCode),
+      acceptTerms: t(errorMessages.acceptTerms),
       address: {
-        home: { city: errorMessages.address.city },
+        home: { city: t(errorMessages.address.city) },
       },
     });
   });
