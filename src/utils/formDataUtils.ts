@@ -13,7 +13,6 @@ import { ipLocationMessageTranslations } from "../data/ipLocationMessageTranslat
 import { every, isEmpty } from "lodash";
 import moment from "moment";
 import stateData from "../data/stateAbbreviations";
-import { useTranslation } from "next-i18next";
 
 const errorMessages = {
   firstName: "personal.errorMessage.firstName",
@@ -204,12 +203,11 @@ const validateAddressFormData = (
   Object.keys(addresses).forEach((addressType: keyof Addresses = "home") => {
     // `addressType` can be either "home" or "work".
     const typeObj = addresses[addressType];
-    const { t } = useTranslation("common");
     // Now validate each field for that specific address object:
     if (isEmpty(typeObj.line1)) {
       addressErrors[addressType] = {
         ...addressErrors[addressType],
-        line1: t("errorMessages.address.line1"),
+        line1: errorMessages.address.line1,
       };
     } else if (typeObj?.line1?.length + typeObj?.line2?.length > 100) {
       addressErrors[addressType] = {
