@@ -16,14 +16,14 @@ import {
   AddressesResponse,
   AddressTypes,
 } from "../../interfaces";
-import FormField from "../FormField";
 import LoadingIndicator from "../LoadingIndicator";
 
 import { constructAddressType } from "../../utils/formDataUtils";
 import useFormDataContext from "../../context/FormDataContext";
 import { createQueryParams } from "../../utils/utils";
 import { useTranslation } from "next-i18next";
-import { commonAPIErrors } from "../../data/apiErrorMessageTranslations";
+import { normalizeAxiosError } from "../../utils/apiErrorUtils";
+import { ErrorCodes } from "../../errors";
 import { PageSubHeading } from "../PageSubHeading";
 import stateData from "../../data/stateAbbreviations";
 
@@ -94,13 +94,9 @@ const AddressContainer = ({ csrfToken }) => {
           });
         })
         .catch((error) => {
-          // Catch any CSRF token issues and return a generic error message
-          // and redirect to the home page.
-          if (error.response.status == 403) {
-            dispatch({
-              type: "SET_FORM_ERRORS",
-              value: commonAPIErrors.errorValidatingToken,
-            });
+          const apiError = normalizeAxiosError(error);
+          if (apiError.type === ErrorCodes.CSRF_INVALID) {
+            dispatch({ type: "SET_FORM_ERRORS", value: apiError });
             nextUrl = "/new";
           }
           let work = error.response?.data;
@@ -153,9 +149,7 @@ const AddressContainer = ({ csrfToken }) => {
       </PageSubHeading>
 
       <Form
-        // action="/library-card/api/submit"
         id="work-address-container"
-        method="post"
         onSubmit={handleSubmit(submitForm)}
         noValidate
       >
@@ -165,25 +159,6 @@ const AddressContainer = ({ csrfToken }) => {
           isRequired={formIsPartiallyFilled}
           stateData={stateData}
         />
-
-        <FormRow display="none">
-          <DSFormField>
-            {/* Not register to react-hook-form because we only want to
-                use this value for the no-js scenario. */}
-            <FormField
-              id="hidden-work-page"
-              type="hidden"
-              name="page"
-              defaultValue="workAddress"
-            />
-            <FormField
-              id="hidden-form-values"
-              type="hidden"
-              name="formValues"
-              defaultValue={JSON.stringify(formValues)}
-            />
-          </DSFormField>
-        </FormRow>
 
         <FormRow>
           <DSFormField>

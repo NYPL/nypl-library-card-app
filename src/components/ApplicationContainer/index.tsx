@@ -13,14 +13,14 @@ import {
 } from "@nypl/design-system-react-components";
 import Breadcrumbs from "../Breadcrumb";
 
-const ApplicationContainer = ({ children, problemDetail }) => {
+const ApplicationContainer = ({ children }) => {
   const {
     query: { lang },
   } = useRouter();
   const errorSection = React.createRef<HTMLDivElement>();
   const { state } = useFormDataContext();
   const { errorObj } = state;
-  const errorToDisplay = problemDetail ? problemDetail : errorObj;
+  const errorToDisplay = errorObj;
   const finalLang =
     typeof lang === "string"
       ? lang

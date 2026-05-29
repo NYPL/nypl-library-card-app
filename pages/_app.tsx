@@ -3,7 +3,6 @@ import "@nypl/design-system-react-components/dist/styles.css";
 import "../src/styles/main.scss";
 import Head from "next/head";
 import { useForm, FormProvider } from "react-hook-form";
-import isEmpty from "lodash/isEmpty";
 import {
   FormDataContextProvider,
   formInitialState,
@@ -12,9 +11,7 @@ import * as appConfig from "../appConfig";
 import { FormInputData } from "../src/interfaces";
 import ApplicationContainer from "../src/components/ApplicationContainer";
 import { getPageTitles } from "../src/utils/utils";
-import { constructProblemDetail } from "../src/utils/formDataUtils";
 import { DSProvider } from "@nypl/design-system-react-components";
-
 import { appWithTranslation, useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
@@ -54,37 +51,6 @@ function MyApp({ Component, pageProps }: MyAppProps) {
       document.getElementById("__next").dir = `${i18n.dir()}`;
     document.documentElement.lang = `${lang}`;
   }, [i18n]);
-
-  let error;
-  // These errors are from the server-side query string form submission.
-  if (!isEmpty(router.query?.errors)) {
-    const errorObject = JSON.parse(router.query.errors as any);
-    // If we already received a problem detail, just forward it. Problem
-    // details get sent when a request is sent to the NYPL Platform API.
-    // If we get simple errors from form field validation, create the problem
-    // detail for the errors.
-    if (errorObject?.status) {
-      error = errorObject;
-    } else {
-      error = constructProblemDetail(
-        400,
-        "invalid-request",
-        "Invalid Request",
-        "",
-        errorObject
-      );
-    }
-    console.log("MyApp error: ", error);
-    // We don't want to keep the errors in this object since it's
-    // going to go into the app's store.
-    delete router.query.errors;
-  }
-  // These are results specifically from the `/library-card/api/create-patron`
-  // API endpoint, which makes a request to the NYPL Platform API. These are
-  // results from the server-side form submission.
-  if (!isEmpty(router.query?.results)) {
-    formInitialStateCopy.results = JSON.parse(router.query.results as any);
-  }
 
   // Update the form values state with the initial url query params in
   // the app's store state.
@@ -170,7 +136,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
       <DSProvider theme={theme}>
         <FormProvider {...formMethods}>
           <FormDataContextProvider initState={initState}>
-            <ApplicationContainer problemDetail={error}>
+            <ApplicationContainer>
               <Component
                 {...pageProps}
                 pageTitles={pageTitles}
