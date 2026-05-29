@@ -424,7 +424,7 @@ describe("constructPatronObject", () => {
       verifyPassword: "MyLib1731@!",
       acceptTerms: true,
     };
-    expect(constructPatronObject(patronFormValuesMissingValues)).toEqual({
+    expect(constructPatronObject(patronFormValuesMissingValues, t)).toEqual({
       status: 400,
       type: "invalid-request",
       title: "Invalid Request",
@@ -507,8 +507,9 @@ describe("constructPatronObject", () => {
       acceptTerms: true,
       location: "nyc",
     };
+    const t = (key: string) => key;
 
-    expect(constructPatronObject(patronFormValues)).toEqual(
+    expect(constructPatronObject(patronFormValues, t)).toEqual(
       patronRequestObject
     );
   });

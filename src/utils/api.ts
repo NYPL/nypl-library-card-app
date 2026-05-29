@@ -293,7 +293,15 @@ export async function createPatron(
   }
 
   const token = tokenObject.access_token;
-  const patronData = constructPatronObject(req.body);
+  const lang = req.query?.lang;
+  const finalLang =
+    typeof lang === "string"
+      ? lang
+      : Array.isArray(lang) && lang.length > 0
+        ? lang[0]
+        : "en";
+  const t = await getT(finalLang);
+  const patronData = constructPatronObject(req.body, t);
   if ((patronData as { status?: number }).status === 400) {
     const pd = patronData as {
       status: number;
