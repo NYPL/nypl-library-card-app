@@ -81,7 +81,7 @@
   },
   "verifyAddress": {
     "title": "Paso 3 de 5: verificación de la dirección",
-    "description": "Por favor, comprueba los datos de tu dirección. Si necesitas hacer algún cambio, haz clic en «Atrás».",
+    "description": "Por favor, comprueba los datos de tu dirección. Si necesitas hacer algún cambio, haz clic en «Previo».",
     "homeAddress": "Dirección de domicilio",
     "workAddress": "Dirección alternativa",
     "errorMessage": {

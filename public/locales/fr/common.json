@@ -78,7 +78,7 @@
   },
   "verifyAddress": {
     "title": "Étape 3/5 : Vérification de l’adresse",
-    "description": "Veuillez vérifier vos coordonnées. Si vous souhaitez les modifier, cliquez sur « Précédent ».",
+    "description": "Veuillez vérifier vos coordonnées. Si vous souhaitez les modifier, cliquez sur « Retour ».",
     "homeAddress": "Adresse de votre domicile",
     "workAddress": "Autre adresse",
     "errorMessage": {
