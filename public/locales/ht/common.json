@@ -78,7 +78,7 @@
   },
   "verifyAddress": {
     "title": "Etap 3 sou 5: Verifikasyon Adrès",
-    "description": "Tanpri verifye detay adrès ou. Si ou bezwen fè chanjman, klike sou 'Anvan'.",
+    "description": "Tanpri verifye detay adrès ou. Si ou bezwen fè chanjman, klike sou 'Avan'.",
     "homeAddress": "Adrès Lakay Ou",
     "workAddress": "Lòt adrès",
     "errorMessage": {
