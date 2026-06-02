@@ -14,7 +14,9 @@ import {
   constructPatronObject,
 } from "../formDataUtils";
 import { Addresses, FormInputData, FormAPISubmission } from "../../interfaces";
-import { useTranslation } from "next-i18next";
+
+// Mock t function that returns the key as-is
+const t = (key: string) => key;
 
 describe("isDate", () => {
   test("it returns false on an empty input", () => {
@@ -206,22 +208,20 @@ describe("validateAddressFormData", () => {
   test("it returns the original error object if the address has no errors", () => {
     const errorObj = { firstName: "uhoh!" };
     const noAddresses = { home: homeAddress };
-    expect(validateAddressFormData(errorObj, noAddresses)).toEqual({
+    expect(validateAddressFormData(errorObj, noAddresses, t)).toEqual({
       firstName: "uhoh!",
     });
   });
 
   test("it returns any errors from the address", () => {
     const errorObj = { firstName: "uhoh!" };
-    // Purposely setting "city" and "zip" to bad values.
     const addresses = { home: { ...homeAddress, city: "", zip: "" } };
-    const { t } = useTranslation("common");
-    expect(validateAddressFormData(errorObj, addresses)).toEqual({
+    expect(validateAddressFormData(errorObj, addresses, t)).toEqual({
       firstName: "uhoh!",
       address: {
         home: {
-          city: t(errorMessages.address.city),
-          zip: t(errorMessages.address.zip),
+          city: errorMessages(t).address.city,
+          zip: errorMessages(t).address.zip,
         },
       },
     });
@@ -229,21 +229,17 @@ describe("validateAddressFormData", () => {
 
   test("it returns error for the work address if it was added", () => {
     const errorObj = { firstName: "uhoh!" };
-    // Purposely setting "city" and "zip" to bad values.
     const addresses = {
       home: { ...homeAddress, state: "New York" },
       work: { ...workAddress, city: "", zip: "111111111111" },
     };
-    const { t } = useTranslation("common");
-    expect(validateAddressFormData(errorObj, addresses)).toEqual({
+    expect(validateAddressFormData(errorObj, addresses, t)).toEqual({
       firstName: "uhoh!",
       address: {
-        home: {
-          state: t(errorMessages.address.state),
-        },
+        home: { state: errorMessages(t).address.state },
         work: {
-          city: t(errorMessages.address.city),
-          zip: t(errorMessages.address.zip),
+          city: errorMessages(t).address.city,
+          zip: errorMessages(t).address.zip,
         },
       },
     });
@@ -251,7 +247,6 @@ describe("validateAddressFormData", () => {
 });
 
 describe("validatePersonalFormData", () => {
-  const { t } = useTranslation("common");
   test("it should return errors for all bad fields", () => {
     const data = {
       firstName: "",
@@ -259,13 +254,12 @@ describe("validatePersonalFormData", () => {
       birthdate: "",
       email: "",
       policyType: "webApplicant",
-    };
-
-    expect(validatePersonalFormData({}, data)).toEqual({
-      firstName: t(errorMessages.firstName),
-      lastName: t(errorMessages.lastName),
-      email: t(errorMessages.email),
-      birthdate: t(errorMessages.birthdate),
+    } as unknown as FormInputData;
+    expect(validatePersonalFormData({}, data, t)).toEqual({
+      firstName: errorMessages(t).firstName,
+      lastName: errorMessages(t).lastName,
+      email: errorMessages(t).email,
+      birthdate: errorMessages(t).birthdate,
     });
   });
 
@@ -276,12 +270,11 @@ describe("validatePersonalFormData", () => {
       birthdate: "01/01/1999",
       email: "tomnook@acnh.com",
       policyType: "webApplicant",
-    };
-
-    expect(validatePersonalFormData({}, data)).toEqual({});
+    } as unknown as FormInputData;
+    expect(validatePersonalFormData({}, data, t)).toEqual({});
   });
 
-  test("it should add erros to the existing error object", () => {
+  test("it should add errors to the existing error object", () => {
     const errors = { someKey: "some value" };
     const data = {
       firstName: "",
@@ -289,17 +282,15 @@ describe("validatePersonalFormData", () => {
       birthdate: "01/01/1999",
       email: "tomnook@acnh.com",
       policyType: "webApplicant",
-    };
-
-    expect(validatePersonalFormData(errors, data)).toEqual({
+    } as unknown as FormInputData;
+    expect(validatePersonalFormData(errors, data, t)).toEqual({
       ...errors,
-      firstName: t(errorMessages.firstName),
+      firstName: errorMessages(t).firstName,
     });
   });
 });
 
 describe("validateAccountFormData", () => {
-  const { t } = useTranslation("common");
   test("it should return errors for all bad fields", () => {
     const data = {
       username: "",
@@ -307,14 +298,13 @@ describe("validateAccountFormData", () => {
       verifyPassword: "",
       acceptTerms: "",
       homeLibraryCode: "non-existent-code",
-    };
-
-    expect(validateAccountFormData({}, data)).toEqual({
-      username: t(errorMessages.username),
-      password: t(errorMessages.password),
-      verifyPassword: t(errorMessages.verifyPassword),
-      acceptTerms: t(errorMessages.acceptTerms),
-      homeLibraryCode: t(errorMessages.homeLibraryCode),
+    } as unknown as FormInputData;
+    expect(validateAccountFormData({}, data, t)).toEqual({
+      username: errorMessages(t).username,
+      password: errorMessages(t).password,
+      verifyPassword: errorMessages(t).verifyPassword,
+      acceptTerms: errorMessages(t).acceptTerms,
+      homeLibraryCode: errorMessages(t).homeLibraryCode,
     });
   });
 
@@ -325,12 +315,11 @@ describe("validateAccountFormData", () => {
       verifyPassword: "MyLib1731@!",
       acceptTerms: true,
       homeLibraryCode: "vr",
-    };
-
-    expect(validateAccountFormData({}, data)).toEqual({});
+    } as unknown as FormInputData;
+    expect(validateAccountFormData({}, data, t)).toEqual({});
   });
 
-  test("it should add erros to the existing error object", () => {
+  test("it should add errors to the existing error object", () => {
     const errors = { someKey: "some value" };
     const data = {
       username: "",
@@ -338,11 +327,10 @@ describe("validateAccountFormData", () => {
       verifyPassword: "MyLib1731@!",
       acceptTerms: true,
       homeLibraryCode: "vr",
-    };
-
-    expect(validateAccountFormData(errors, data)).toEqual({
+    } as unknown as FormInputData;
+    expect(validateAccountFormData(errors, data, t)).toEqual({
       ...errors,
-      username: t(errorMessages.username),
+      username: errorMessages(t).username,
     });
   });
 });
@@ -365,22 +353,20 @@ describe("validateFormData", () => {
     verifyPassword: "NotTheSamePassword",
     acceptTerms: false,
     location: "",
-  };
+  } as unknown as FormInputData;
 
   test("it should return errors for all bad fields", () => {
     const addresses = { home: { ...homeAddress, city: "" } };
-    const { t } = useTranslation("common");
-
-    expect(validateFormData(dataObj, addresses)).toEqual({
-      firstName: t(errorMessages.firstName),
-      email: t(errorMessages.email),
-      birthdate: t(errorMessages.birthdate),
-      username: t(errorMessages.username),
-      verifyPassword: t(errorMessages.verifyPassword),
-      homeLibraryCode: t(errorMessages.homeLibraryCode),
-      acceptTerms: t(errorMessages.acceptTerms),
+    expect(validateFormData(dataObj, addresses, t)).toEqual({
+      firstName: errorMessages(t).firstName,
+      email: errorMessages(t).email,
+      birthdate: errorMessages(t).birthdate,
+      username: errorMessages(t).username,
+      verifyPassword: errorMessages(t).verifyPassword,
+      homeLibraryCode: errorMessages(t).homeLibraryCode,
+      acceptTerms: errorMessages(t).acceptTerms,
       address: {
-        home: { city: t(errorMessages.address.city) },
+        home: { city: errorMessages(t).address.city },
       },
     });
   });
@@ -398,8 +384,7 @@ describe("validateFormData", () => {
       acceptTerms: true,
       location: "nyc",
     };
-
-    expect(validateFormData(patron, addresses)).toEqual({});
+    expect(validateFormData(patron, addresses, t)).toEqual({});
   });
 });
 

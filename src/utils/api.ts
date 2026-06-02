@@ -13,6 +13,7 @@ import {
   AddressResponse,
 } from "../interfaces";
 import { validateCsrfToken } from "./csrfUtils";
+import { getT } from "./i18nUtils";
 import { ApiError, ErrorCodes, ErrorCode } from "../errors";
 
 // Initializing the cors middleware
