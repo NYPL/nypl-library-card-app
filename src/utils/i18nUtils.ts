@@ -2,14 +2,23 @@ import { createInstance } from "i18next";
 import path from "path";
 import fs from "fs";
 
+const SUPPORTED_LANGS = [
+  "ar",
+  "bn",
+  "en",
+  "es",
+  "fr",
+  "ht",
+  "ko",
+  "pl",
+  "ru",
+  "ur",
+  "zhcn",
+];
+
 export const getT = async (lang = "en") => {
-  const localePath = path.join(
-    process.cwd(),
-    "public/locales",
-    lang,
-    "common.json"
-  );
-  const safeLang = fs.existsSync(localePath) ? lang : "en";
+  const safeLang = SUPPORTED_LANGS.includes(lang) ? lang : "en";
+
   const translations = JSON.parse(
     fs.readFileSync(
       path.join(process.cwd(), "public/locales", safeLang, "common.json"),
