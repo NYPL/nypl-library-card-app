@@ -199,6 +199,10 @@ describe("ApiErrors", () => {
     render(<ApiErrors problemDetail={pd} />);
 
     expect(screen.getByText(errorMessages(t).username)).toBeInTheDocument();
-    expect(screen.getByText(errorMessages(t).password)).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        (_, element) => element?.textContent === errorMessages(t).password
+      )
+    ).toBeInTheDocument();
   });
 });
