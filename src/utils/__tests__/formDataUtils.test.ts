@@ -415,11 +415,11 @@ describe("constructPatronObject", () => {
       title: "Invalid Request",
       detail: "There was an error with the submitted form values.",
       error: {
-        lastName: "There was a problem. Please enter a valid last name.",
-        email: "There was a problem. Please enter a valid email address.",
+        lastName: errorMessages(t).lastName,
+        email: errorMessages(t).email,
         address: {
           home: {
-            city: "There was a problem. Please enter a valid city.",
+            city: errorMessages(t).address.city,
           },
         },
       },

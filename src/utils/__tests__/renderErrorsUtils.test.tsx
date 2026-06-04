@@ -5,17 +5,27 @@ import {
   renderErrorElements,
 } from "../renderErrorsUtils";
 import { errorMessages } from "../formDataUtils";
+import translations from "../../../public/locales/en/common.json";
+
+const t = (key: string) => {
+  const keys = key.split(".");
+  let result: any = translations;
+  for (const k of keys) {
+    result = result?.[k];
+  }
+  return result ?? key;
+};
+
+const messages = errorMessages(t);
 
 describe("createAnchorText", () => {
-  // Mocking the error object we got from an API call.
-  // These are the invalid/missing fields.
   const errors = {
-    firstName: errorMessages.firstName,
-    password: errorMessages.password,
-    acceptTerms: errorMessages.acceptTerms,
-    username: errorMessages.username,
-    line1: errorMessages.address.line1,
-    state: errorMessages.address.state,
+    firstName: messages.firstName,
+    password: messages.password,
+    acceptTerms: messages.acceptTerms,
+    username: messages.username,
+    line1: messages.address.line1,
+    state: messages.address.state,
   };
 
   test("it should return undefined if the key does not exist in the list of properties", () => {
@@ -24,16 +34,15 @@ describe("createAnchorText", () => {
       streetAddress: "streetAddress",
     };
 
-    // These keys don't exist in the error object we expect from the API.
     expect(createAnchorText(badKeys.fullName, errors)).toEqual(undefined);
     expect(createAnchorText(badKeys.streetAddress, errors)).toEqual(undefined);
   });
 
   test("it should replace text in the error message with its equivalent anchor element string", () => {
-    expect(errorMessages.firstName).toEqual(
+    expect(messages.firstName).toEqual(
       "There was a problem. Please enter a valid first name."
     );
-    expect(errorMessages.acceptTerms).toEqual(
+    expect(messages.acceptTerms).toEqual(
       "There was a problem. The Terms and Conditions must be checked."
     );
 
@@ -85,19 +94,17 @@ describe("renderErrorElements", () => {
 
   test("it should return a list of li elements for every error", () => {
     const errors = {
-      firstName: errorMessages.firstName,
-      password: errorMessages.password,
+      firstName: messages.firstName,
+      password: messages.password,
       address: {
         home: {
-          state: errorMessages.address.state,
+          state: messages.address.state,
         },
       },
     };
 
     const liList = renderErrorElements(errors);
 
-    // It's easier to stringify and check the results than checking
-    // for the elements themselves.
     expect(JSON.stringify(liList)).toEqual(
       JSON.stringify([
         <li
