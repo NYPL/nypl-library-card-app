@@ -61,6 +61,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   };
   const initState = { ...formInitialStateCopy };
   const pageTitles = getPageTitles();
+  const isErrorPage = ["/404", "/500"].includes(router.pathname);
 
   return (
     <>
@@ -138,13 +139,17 @@ function MyApp({ Component, pageProps }: MyAppProps) {
         <FormProvider {...formMethods}>
           <FormDataContextProvider initState={initState}>
             <ErrorBoundary reset={router.asPath}>
-              <ApplicationContainer>
-                <Component
-                  {...pageProps}
-                  pageTitles={pageTitles}
-                  policyType={router.query.policyType}
-                />
-              </ApplicationContainer>
+              {isErrorPage ? (
+                <Component {...pageProps} />
+              ) : (
+                <ApplicationContainer>
+                  <Component
+                    {...pageProps}
+                    pageTitles={pageTitles}
+                    policyType={router.query.policyType}
+                  />
+                </ApplicationContainer>
+              )}
             </ErrorBoundary>
           </FormDataContextProvider>
         </FormProvider>
