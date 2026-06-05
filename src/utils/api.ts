@@ -283,7 +283,8 @@ export async function createPatron(
       "Form session expired. Please refresh the page and try again."
     );
   }
-
+  console.log("req.body:", req.body);
+  console.log("req.query:", req.query);
   const tokenObject = appObj["tokenObject"];
   if (!tokenObject?.access_token) {
     throw new ApiError(
@@ -294,7 +295,7 @@ export async function createPatron(
   }
 
   const token = tokenObject.access_token;
-  const lang = req.query?.lang;
+  const lang = req.body.lang;
   const finalLang =
     typeof lang === "string"
       ? lang
