@@ -15,6 +15,9 @@ import {
 } from "../formDataUtils";
 import { Addresses, FormInputData, FormAPISubmission } from "../../interfaces";
 
+// Mock t function that returns the key as-is
+const t = (key: string) => key;
+
 describe("isDate", () => {
   test("it returns false on an empty input", () => {
     expect(isDate("")).toEqual(false);
@@ -205,21 +208,20 @@ describe("validateAddressFormData", () => {
   test("it returns the original error object if the address has no errors", () => {
     const errorObj = { firstName: "uhoh!" };
     const noAddresses = { home: homeAddress };
-    expect(validateAddressFormData(errorObj, noAddresses)).toEqual({
+    expect(validateAddressFormData(errorObj, noAddresses, t)).toEqual({
       firstName: "uhoh!",
     });
   });
 
   test("it returns any errors from the address", () => {
     const errorObj = { firstName: "uhoh!" };
-    // Purposely setting "city" and "zip" to bad values.
     const addresses = { home: { ...homeAddress, city: "", zip: "" } };
-    expect(validateAddressFormData(errorObj, addresses)).toEqual({
+    expect(validateAddressFormData(errorObj, addresses, t)).toEqual({
       firstName: "uhoh!",
       address: {
         home: {
-          city: errorMessages.address.city,
-          zip: errorMessages.address.zip,
+          city: errorMessages(t).address.city,
+          zip: errorMessages(t).address.zip,
         },
       },
     });
@@ -227,20 +229,17 @@ describe("validateAddressFormData", () => {
 
   test("it returns error for the work address if it was added", () => {
     const errorObj = { firstName: "uhoh!" };
-    // Purposely setting "city" and "zip" to bad values.
     const addresses = {
       home: { ...homeAddress, state: "New York" },
       work: { ...workAddress, city: "", zip: "111111111111" },
     };
-    expect(validateAddressFormData(errorObj, addresses)).toEqual({
+    expect(validateAddressFormData(errorObj, addresses, t)).toEqual({
       firstName: "uhoh!",
       address: {
-        home: {
-          state: errorMessages.address.state,
-        },
+        home: { state: errorMessages(t).address.state },
         work: {
-          city: errorMessages.address.city,
-          zip: errorMessages.address.zip,
+          city: errorMessages(t).address.city,
+          zip: errorMessages(t).address.zip,
         },
       },
     });
@@ -255,13 +254,12 @@ describe("validatePersonalFormData", () => {
       birthdate: "",
       email: "",
       policyType: "webApplicant",
-    };
-
-    expect(validatePersonalFormData({}, data)).toEqual({
-      firstName: errorMessages.firstName,
-      lastName: errorMessages.lastName,
-      email: errorMessages.email,
-      birthdate: errorMessages.birthdate,
+    } as unknown as FormInputData;
+    expect(validatePersonalFormData({}, data, t)).toEqual({
+      firstName: errorMessages(t).firstName,
+      lastName: errorMessages(t).lastName,
+      email: errorMessages(t).email,
+      birthdate: errorMessages(t).birthdate,
     });
   });
 
@@ -272,12 +270,11 @@ describe("validatePersonalFormData", () => {
       birthdate: "01/01/1999",
       email: "tomnook@acnh.com",
       policyType: "webApplicant",
-    };
-
-    expect(validatePersonalFormData({}, data)).toEqual({});
+    } as unknown as FormInputData;
+    expect(validatePersonalFormData({}, data, t)).toEqual({});
   });
 
-  test("it should add erros to the existing error object", () => {
+  test("it should add errors to the existing error object", () => {
     const errors = { someKey: "some value" };
     const data = {
       firstName: "",
@@ -285,11 +282,10 @@ describe("validatePersonalFormData", () => {
       birthdate: "01/01/1999",
       email: "tomnook@acnh.com",
       policyType: "webApplicant",
-    };
-
-    expect(validatePersonalFormData(errors, data)).toEqual({
+    } as unknown as FormInputData;
+    expect(validatePersonalFormData(errors, data, t)).toEqual({
       ...errors,
-      firstName: errorMessages.firstName,
+      firstName: errorMessages(t).firstName,
     });
   });
 });
@@ -302,14 +298,13 @@ describe("validateAccountFormData", () => {
       verifyPassword: "",
       acceptTerms: "",
       homeLibraryCode: "non-existent-code",
-    };
-
-    expect(validateAccountFormData({}, data)).toEqual({
-      username: errorMessages.username,
-      password: errorMessages.password,
-      verifyPassword: errorMessages.verifyPassword,
-      acceptTerms: errorMessages.acceptTerms,
-      homeLibraryCode: errorMessages.homeLibraryCode,
+    } as unknown as FormInputData;
+    expect(validateAccountFormData({}, data, t)).toEqual({
+      username: errorMessages(t).username,
+      password: errorMessages(t).password,
+      verifyPassword: errorMessages(t).verifyPassword,
+      acceptTerms: errorMessages(t).acceptTerms,
+      homeLibraryCode: errorMessages(t).homeLibraryCode,
     });
   });
 
@@ -320,12 +315,11 @@ describe("validateAccountFormData", () => {
       verifyPassword: "MyLib1731@!",
       acceptTerms: true,
       homeLibraryCode: "vr",
-    };
-
-    expect(validateAccountFormData({}, data)).toEqual({});
+    } as unknown as FormInputData;
+    expect(validateAccountFormData({}, data, t)).toEqual({});
   });
 
-  test("it should add erros to the existing error object", () => {
+  test("it should add errors to the existing error object", () => {
     const errors = { someKey: "some value" };
     const data = {
       username: "",
@@ -333,11 +327,10 @@ describe("validateAccountFormData", () => {
       verifyPassword: "MyLib1731@!",
       acceptTerms: true,
       homeLibraryCode: "vr",
-    };
-
-    expect(validateAccountFormData(errors, data)).toEqual({
+    } as unknown as FormInputData;
+    expect(validateAccountFormData(errors, data, t)).toEqual({
       ...errors,
-      username: errorMessages.username,
+      username: errorMessages(t).username,
     });
   });
 });
@@ -360,21 +353,20 @@ describe("validateFormData", () => {
     verifyPassword: "NotTheSamePassword",
     acceptTerms: false,
     location: "",
-  };
+  } as unknown as FormInputData;
 
   test("it should return errors for all bad fields", () => {
     const addresses = { home: { ...homeAddress, city: "" } };
-
-    expect(validateFormData(dataObj, addresses)).toEqual({
-      firstName: errorMessages.firstName,
-      email: errorMessages.email,
-      birthdate: errorMessages.birthdate,
-      username: errorMessages.username,
-      verifyPassword: errorMessages.verifyPassword,
-      homeLibraryCode: errorMessages.homeLibraryCode,
-      acceptTerms: errorMessages.acceptTerms,
+    expect(validateFormData(dataObj, addresses, t)).toEqual({
+      firstName: errorMessages(t).firstName,
+      email: errorMessages(t).email,
+      birthdate: errorMessages(t).birthdate,
+      username: errorMessages(t).username,
+      verifyPassword: errorMessages(t).verifyPassword,
+      homeLibraryCode: errorMessages(t).homeLibraryCode,
+      acceptTerms: errorMessages(t).acceptTerms,
       address: {
-        home: { city: errorMessages.address.city },
+        home: { city: errorMessages(t).address.city },
       },
     });
   });
@@ -392,8 +384,7 @@ describe("validateFormData", () => {
       acceptTerms: true,
       location: "nyc",
     };
-
-    expect(validateFormData(patron, addresses)).toEqual({});
+    expect(validateFormData(patron, addresses, t)).toEqual({});
   });
 });
 
@@ -418,17 +409,17 @@ describe("constructPatronObject", () => {
       verifyPassword: "MyLib1731@!",
       acceptTerms: true,
     };
-    expect(constructPatronObject(patronFormValuesMissingValues)).toEqual({
+    expect(constructPatronObject(patronFormValuesMissingValues, t)).toEqual({
       status: 400,
       type: "invalid-request",
       title: "Invalid Request",
       detail: "There was an error with the submitted form values.",
       error: {
-        lastName: "There was a problem. Please enter a valid last name.",
-        email: "There was a problem. Please enter a valid email address.",
+        lastName: errorMessages(t).lastName,
+        email: errorMessages(t).email,
         address: {
           home: {
-            city: "There was a problem. Please enter a valid city.",
+            city: errorMessages(t).address.city,
           },
         },
       },
@@ -501,8 +492,9 @@ describe("constructPatronObject", () => {
       acceptTerms: true,
       location: "nyc",
     };
+    const t = (key: string) => key;
 
-    expect(constructPatronObject(patronFormValues)).toEqual(
+    expect(constructPatronObject(patronFormValues, t)).toEqual(
       patronRequestObject
     );
   });

@@ -14,33 +14,24 @@ import { every, isEmpty } from "lodash";
 import moment from "moment";
 import stateData from "../data/stateAbbreviations";
 
-const errorMessages = {
-  firstName: "There was a problem. Please enter a valid first name.",
-  lastName: "There was a problem. Please enter a valid last name.",
-  birthdate:
-    "There was a problem. Please enter a valid date, MM/DD/YYYY, including slashes.",
-  ageGate: "There was a problem. You must be 13 years or older to continue.",
-  email: "There was a problem. Please enter a valid email address.",
-  username:
-    "There was a problem. Username must be between 5-25 alphanumeric characters.",
-  // Technically, the ILS accepts periods but Overdrive does not. This means
-  // we can't allow patrons to add a period to their password or they won't
-  // be able to use Overdrive for digital reading.
-  password:
-    "There was a problem. Your password must be at least 8 characters, include a mixture of both " +
-    "uppercase and lowercase letters, include a mixture of letters and " +
-    "numbers, and have at least one special character except period (.)",
-  verifyPassword: "There was a problem. The two passwords don't match.",
-  homeLibraryCode: "There was a problem. Please select a home library.",
-  acceptTerms: "There was a problem. The Terms and Conditions must be checked.",
+const errorMessages = (t: (key: string) => string) => ({
+  firstName: t("personal.errorMessage.firstName"),
+  lastName: t("personal.errorMessage.lastName"),
+  birthdate: t("personal.errorMessage.birthdate"),
+  ageGate: t("personal.errorMessage.ageGate"),
+  email: t("personal.errorMessage.email"),
+  username: t("account.errorMessage.username"),
+  password: t("account.errorMessage.password"),
+  verifyPassword: t("account.errorMessage.verifyPassword"),
+  homeLibraryCode: t("account.errorMessage.homeLibraryCode"),
+  acceptTerms: t("account.errorMessage.acceptTerms"),
   address: {
-    line1: "There was a problem. Please enter a valid street address.",
-    city: "There was a problem. Please enter a valid city.",
-    state:
-      "There was a problem. Please enter a 2-character state abbreviation.",
-    zip: "There was a problem. Please enter a 5 or 9-digit postal code.",
+    line1: t("location.errorMessage.line1"),
+    city: t("location.errorMessage.city"),
+    state: t("location.errorMessage.state"),
+    zip: t("location.errorMessage.zip"),
   } as Address,
-};
+});
 
 /**
  * isDate
@@ -203,8 +194,10 @@ const constructProblemDetail = (
  */
 const validateAddressFormData = (
   initErrorObj: object,
-  addresses: Addresses
+  addresses: Addresses,
+  t: (key: string) => string
 ) => {
+  const messages = errorMessages(t);
   let errorObj = { ...initErrorObj };
   // Keep track of the home or work address errors in this larger object.
   const addressErrors = {} as { [key in keyof Addresses]?: Address };
@@ -212,12 +205,11 @@ const validateAddressFormData = (
   Object.keys(addresses).forEach((addressType: keyof Addresses = "home") => {
     // `addressType` can be either "home" or "work".
     const typeObj = addresses[addressType];
-
     // Now validate each field for that specific address object:
     if (isEmpty(typeObj.line1)) {
       addressErrors[addressType] = {
         ...addressErrors[addressType],
-        line1: errorMessages.address.line1,
+        line1: messages.address.line1,
       };
     } else if (typeObj?.line1?.length + typeObj?.line2?.length > 100) {
       addressErrors[addressType] = {
@@ -229,21 +221,21 @@ const validateAddressFormData = (
     if (isEmpty(typeObj.city)) {
       addressErrors[addressType] = {
         ...addressErrors[addressType],
-        city: errorMessages.address.city,
+        city: messages.address.city,
       };
     }
 
     if (isEmpty(typeObj.state) || typeObj.state.length !== 2) {
       addressErrors[addressType] = {
         ...addressErrors[addressType],
-        state: errorMessages.address.state,
+        state: messages.address.state,
       };
     }
 
     if (isEmpty(typeObj.zip) || !isLength(typeObj.zip, { min: 5, max: 10 })) {
       addressErrors[addressType] = {
         ...addressErrors[addressType],
-        zip: errorMessages.address.zip,
+        zip: messages.address.zip,
       };
     }
   });
@@ -263,16 +255,18 @@ const validateAddressFormData = (
  */
 const validatePersonalFormData = (
   initErrorObj: object,
-  data: FormInputData
+  data: FormInputData,
+  t: (key: string) => string
 ) => {
+  const messages = errorMessages(t);
   let errorObj = { ...initErrorObj };
   const { firstName, lastName, birthdate, email } = data;
 
   if (isEmpty(firstName)) {
-    errorObj = { ...errorObj, firstName: errorMessages.firstName };
+    errorObj = { ...errorObj, firstName: messages.firstName };
   }
   if (isEmpty(lastName)) {
-    errorObj = { ...errorObj, lastName: errorMessages.lastName };
+    errorObj = { ...errorObj, lastName: messages.lastName };
   }
   const DATE_MAX_LENGTH = 10;
   if (
@@ -281,11 +275,11 @@ const validatePersonalFormData = (
   ) {
     errorObj = {
       ...errorObj,
-      birthdate: errorMessages.birthdate,
+      birthdate: messages.birthdate,
     };
   }
   if (isEmpty(email) || !isEmail(email)) {
-    errorObj = { ...errorObj, email: errorMessages.email };
+    errorObj = { ...errorObj, email: messages.email };
   }
 
   return errorObj;
@@ -295,7 +289,12 @@ const validatePersonalFormData = (
  * validateAccountFormData
  * Validates the username, password, verifyPassword, and acceptTerms fields.
  */
-const validateAccountFormData = (initErrorObj: object, data: FormInputData) => {
+const validateAccountFormData = (
+  initErrorObj: object,
+  data: FormInputData,
+  t: (key: string) => string
+) => {
+  const messages = errorMessages(t);
   let errorObj = { ...initErrorObj };
   const { username, password, verifyPassword, acceptTerms, homeLibraryCode } =
     data;
@@ -307,24 +306,24 @@ const validateAccountFormData = (initErrorObj: object, data: FormInputData) => {
   ) {
     errorObj = {
       ...errorObj,
-      username: errorMessages.username,
+      username: messages.username,
     };
   }
 
   if (isEmpty(password) || !isLength(password, { min: 8, max: 32 })) {
-    errorObj = { ...errorObj, password: errorMessages.password };
+    errorObj = { ...errorObj, password: messages.password };
   }
 
   if (isEmpty(verifyPassword) || password !== verifyPassword) {
-    errorObj = { ...errorObj, verifyPassword: errorMessages.verifyPassword };
+    errorObj = { ...errorObj, verifyPassword: messages.verifyPassword };
   }
 
   if (isEmpty(homeLibraryCode) || !findLibraryName(homeLibraryCode)) {
-    errorObj = { ...errorObj, homeLibraryCode: errorMessages.homeLibraryCode };
+    errorObj = { ...errorObj, homeLibraryCode: messages.homeLibraryCode };
   }
 
   if (!acceptTerms) {
-    errorObj = { ...errorObj, acceptTerms: errorMessages.acceptTerms };
+    errorObj = { ...errorObj, acceptTerms: messages.acceptTerms };
   }
 
   return errorObj;
@@ -337,11 +336,14 @@ const validateAccountFormData = (initErrorObj: object, data: FormInputData) => {
  * easier to validate data on a per page basis if it needs to, and then all at
  * once here.
  */
-const validateFormData = (data: FormInputData, addresses: Addresses) => {
-  // Initially, there are no errors so the first param is an empty object.
-  let errorObj = validatePersonalFormData({}, data);
-  errorObj = validateAddressFormData(errorObj, addresses);
-  errorObj = validateAccountFormData(errorObj, data);
+const validateFormData = (
+  data: FormInputData,
+  addresses: Addresses,
+  t: (key: string) => string
+) => {
+  let errorObj = validatePersonalFormData({}, data, t);
+  errorObj = validateAddressFormData(errorObj, addresses, t);
+  errorObj = validateAccountFormData(errorObj, data, t);
 
   return errorObj;
 };
@@ -352,7 +354,8 @@ const validateFormData = (data: FormInputData, addresses: Addresses) => {
  * object if any fields don't pass their validation requirements.
  */
 const constructPatronObject = (
-  object: FormInputData
+  object: FormInputData,
+  t: (key: string) => string
 ): FormAPISubmission | ProblemDetail => {
   const {
     firstName,
@@ -372,7 +375,7 @@ const constructPatronObject = (
   } = object;
 
   const addresses: Addresses = constructAddresses(object);
-  const errors = validateFormData(object, addresses);
+  const errors = validateFormData(object, addresses, t);
 
   if (!isEmpty(errors)) {
     return constructProblemDetail(
