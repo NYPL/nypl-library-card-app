@@ -13,7 +13,8 @@ const { i18n: i18nConfig } = require("../../next-i18next.config");
  * Falls back to "en" if the language is not in the supported locales list.
  */
 export const getT = async (lang = "en") => {
-  const safeLang = i18nConfig.locales.includes(lang) ? lang : "en";
+  const normalizedLang = lang === "zh-cn" ? "zhcn" : lang;
+  const safeLang = i18nConfig.locales.includes(lang) ? normalizedLang : "en";
 
   const translations = JSON.parse(
     fs.readFileSync(
