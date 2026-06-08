@@ -182,6 +182,7 @@ describe("ApiErrors", () => {
   });
 
   test("it renders multiple errors for invalid requests", () => {
+    const t = (key: string) => key;
     const pd: ApiErrorResponse = {
       success: false,
       status: 400,
@@ -189,20 +190,19 @@ describe("ApiErrors", () => {
       message: "There was a problem with the submission",
       details: {
         fields: {
-          username: errorMessages.username,
-          password: errorMessages.password,
+          username: errorMessages(t).username,
+          password: errorMessages(t).password,
         },
       },
     };
 
     render(<ApiErrors problemDetail={pd} />);
 
-    // Text is broken up by the anchor elements so only checking for the text:
+    expect(screen.getByText(errorMessages(t).username)).toBeInTheDocument();
     expect(
-      screen.getByText(/must be between 5-25 alphanumeric characters./)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/must be at least 8 characters/)
+      screen.getByText(
+        (_, element) => element?.textContent === errorMessages(t).password
+      )
     ).toBeInTheDocument();
   });
 });

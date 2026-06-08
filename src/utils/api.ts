@@ -13,6 +13,7 @@ import {
   AddressResponse,
 } from "../interfaces";
 import { validateCsrfToken } from "./csrfUtils";
+import { getT } from "./i18nUtils";
 import { ApiError, ErrorCodes, ErrorCode } from "../errors";
 
 // Initializing the cors middleware
@@ -282,7 +283,6 @@ export async function createPatron(
       "Form session expired. Please refresh the page and try again."
     );
   }
-
   const tokenObject = appObj["tokenObject"];
   if (!tokenObject?.access_token) {
     throw new ApiError(
@@ -293,7 +293,15 @@ export async function createPatron(
   }
 
   const token = tokenObject.access_token;
-  const patronData = constructPatronObject(req.body);
+  const lang = req.body.lang;
+  const finalLang =
+    typeof lang === "string"
+      ? lang
+      : Array.isArray(lang) && lang.length > 0
+        ? lang[0]
+        : "en";
+  const t = await getT(finalLang);
+  const patronData = constructPatronObject(req.body, t);
   if ((patronData as { status?: number }).status === 400) {
     const pd = patronData as {
       status: number;
