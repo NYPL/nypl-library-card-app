@@ -65,8 +65,6 @@ class MyDocument extends Document<DocumentProps> {
           <NextScript />
           {/* <!-- Optimizely --> */}
           <script src="https://cdn.optimizely.com/js/284748925.js"></script>
-          {/* <!-- OptinMonster --> */}
-          <script src="https://assets.nypl.org/js/advocacy.js"></script>
           {/* 
               Vercel serverless environment prevents us from generating the 
               browser header from the agent, so we are injecting the QA instance manually 
