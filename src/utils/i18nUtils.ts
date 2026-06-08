@@ -1,7 +1,20 @@
 import { createInstance } from "i18next";
 import path from "path";
 import fs from "fs";
-const { i18n: i18nConfig } = require("../../next-i18next.config");
+
+const SUPPORTED_LANGS = [
+  "ar",
+  "bn",
+  "en",
+  "es",
+  "fr",
+  "ht",
+  "ko",
+  "pl",
+  "ru",
+  "ur",
+  "zhcn",
+];
 
 /**
  * getT
@@ -13,8 +26,7 @@ const { i18n: i18nConfig } = require("../../next-i18next.config");
  * Falls back to "en" if the language is not in the supported locales list.
  */
 export const getT = async (lang = "en") => {
-  const normalizedLang = lang === "zhcn" ? "zh-cn" : lang;
-  const safeLang = i18nConfig.locales.includes(lang) ? normalizedLang : "en";
+  const safeLang = SUPPORTED_LANGS.includes(lang) ? lang : "en";
 
   const translations = JSON.parse(
     fs.readFileSync(
