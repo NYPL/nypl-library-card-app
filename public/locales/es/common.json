@@ -36,7 +36,8 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Dirección de correo electrónico",
-      "instruction": "<span>Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos.</span>"
+      "instructionExample": "email@example.com",
+      "instruction": "Se requiere una dirección de correo electrónico para utilizar muchos de nuestros recursos digitales, como los libros electrónicos."
     },
     "eCommunications": {
       "labelText": "Sí, me gustaría recibir información sobre los programas y servicios que ofrece la NYPL"

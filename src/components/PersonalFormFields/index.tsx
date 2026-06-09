@@ -2,7 +2,6 @@ import {
   Checkbox,
   FormField as DSFormField,
   FormRow,
-  Link as DSLink,
   TextInputRefType,
   Text,
 } from "@nypl/design-system-react-components";
@@ -14,7 +13,6 @@ import FormField from "../FormField";
 import AgeFormFields from "../AgeFormFields";
 import useFormDataContext from "../../context/FormDataContext";
 import { useMergedRef } from "../../hooks/useMergedRef";
-import { Trans } from "../Trans";
 
 interface PersonalFormFieldsProps {
   agencyType?: string;
@@ -86,16 +84,14 @@ function PersonalFormFields({
             })}
             errorState={errors}
             isRequired
-            type="email"
+            type="text"
+            inputMode="email"
             defaultValue={formValues.email}
             instructionText={
-              <Trans
-                i18nKey="personal.email.instruction"
-                components={{
-                  a: <DSLink variant="external" />,
-                  span: <Text mt="xs" />,
-                }}
-              />
+              <>
+                <Text>{t("personal.email.instructionExample")}</Text>
+                <Text>{t("personal.email.instruction")}</Text>
+              </>
             }
             autoComplete="email"
           />

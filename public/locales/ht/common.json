@@ -33,7 +33,8 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Imèl",
-      "instruction": "<span>Yon adrès imèl nesesè pou itilize plizyè nan resous nimerik nou yo, tankou liv elektwonik.</span>"
+      "instructionExample": "email@example.com",
+      "instruction": "Yon adrès imèl nesesè pou itilize plizyè nan resous nimerik nou yo, tankou liv elektwonik.</>"
     },
     "eCommunications": {
       "labelText": "Wi, mwen ta renmen resevwa enfòmasyon sou pwogram ak sèvis Bibliyotèk Piblik New York (NYPL) ofri yo."
