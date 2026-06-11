@@ -90,7 +90,7 @@ function PersonalFormFields({
             instructionText={
               <>
                 <Text>{t("personal.email.instructionExample")}</Text>
-                <Text mt="s">{t("personal.email.instruction")}</Text>
+                <Text mt="xs">{t("personal.email.instruction")}</Text>
               </>
             }
             autoComplete="email"
