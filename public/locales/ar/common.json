@@ -33,7 +33,6 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "عنوان البريد الإلكتروني",
-      "instructionExample": "email@example.com",
       "instruction": "مطلوب عنوان بريد إلكتروني لاستخدام العديد من مواردنا الرقمية، مثل الكتب الإلكترونية."
     },
     "eCommunications": {

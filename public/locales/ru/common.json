@@ -33,7 +33,6 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Адрес электронной почты",
-      "instructionExample": "email@example.com",
       "instruction": "Адрес электронной почты необходимо указать для того, чтобы иметь возможность пользоваться большинством наших цифровых ресурсов, например, электронными книгами."
     },
     "eCommunications": {

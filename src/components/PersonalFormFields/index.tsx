@@ -89,7 +89,7 @@ function PersonalFormFields({
             defaultValue={formValues.email}
             instructionText={
               <>
-                <Text>{t("personal.email.instructionExample")}</Text>
+                <Text>{"email@example.com"}</Text>
                 <Text mt="xs">{t("personal.email.instruction")}</Text>
               </>
             }

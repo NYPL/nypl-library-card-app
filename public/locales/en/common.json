@@ -43,7 +43,6 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Email address",
-      "instructionExample": "email@example.com",
       "instruction": "An email address is required to use many of our digital resources, such as e-books."
     },
     "eCommunications": {
