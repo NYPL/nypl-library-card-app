@@ -33,7 +33,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Adres e-mail",
-      "instruction": "<span>Adres e-mail jest niezbędny, aby móc korzystać z wielu naszych zasobów cyfrowych, takich jak e-booki.</span>"
+      "instruction": "Adres e-mail jest niezbędny, aby móc korzystać z wielu naszych zasobów cyfrowych, takich jak e-booki."
     },
     "eCommunications": {
       "labelText": "Tak, chcę otrzymywać informacje o programach i usługach NYPL. "
