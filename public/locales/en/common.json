@@ -43,7 +43,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "Email address",
-      "instruction": "<span>An email address is required to use many of our digital resources, such as e-books.</span>"
+      "instruction": "An email address is required to use many of our digital resources, such as e-books."
     },
     "eCommunications": {
       "labelText": "Yes, I would like to receive information about NYPL's programs and services"

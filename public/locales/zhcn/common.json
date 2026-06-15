@@ -33,7 +33,7 @@
     "ageGate": "Yes, I am over 13 years old.",
     "email": {
       "label": "电子邮件地址",
-      "instruction": "<span>使用我们的许多数字资源（例如，电子书）都需要一个电子邮件地址。</span>"
+      "instruction": "使用我们的许多数字资源（例如，电子书）都需要一个电子邮件地址。"
     },
     "eCommunications": {
       "labelText": "是的，我想收到有关NYPL活动和服务的信息"
