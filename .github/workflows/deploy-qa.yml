@@ -17,7 +17,7 @@ jobs:
   deploy-qa:
     runs-on: ubuntu-latest
     environment: qa
-    needs: [ unit-tests ]
+    needs: [unit-tests]
 
     permissions:
       id-token: write
@@ -53,6 +53,8 @@ jobs:
         run: |
           docker build \
           --build-arg NEXT_BUILD_ID="${NEXT_BUILD_ID}" \
+          --build-arg NEXT_PUBLIC_DS_GLOBAL_HEADER="https://ds-header.nypl.org/header.min.js?containerId=nypl-header" \
+          --build-arg NEXT_PUBLIC_DS_GLOBAL_FOOTER="https://ds-header.nypl.org/footer.min.js?containerId=nypl-footer" \
           --build-arg NEW_RELIC_APP_NAME="Library Card App QA" \
           --build-arg NEW_RELIC_LICENSE_KEY=$NEW_RELIC_LICENSE_KEY \
            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG  \
@@ -94,7 +96,7 @@ jobs:
 
   playwright-tests:
     uses: ./.github/workflows/playwright-tests.yml
-    needs: [ deploy-qa ]
+    needs: [deploy-qa]
     secrets: inherit
     with:
       PLAYWRIGHT_BASE_URL: https://qa-www.nypl.org/library-card/new # run on QA after deploy
