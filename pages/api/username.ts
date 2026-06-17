@@ -7,12 +7,8 @@ import {
 } from "../../src/utils/api";
 import { withApiHandler } from "../../src/errors/server";
 import { ApiError, ErrorCodes } from "../../src/errors";
+import logger from "../../src/logger";
 
-/**
- * username
- * @param req - Next request object
- * @param res - Next response object
- */
 export default withApiHandler(
   async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "POST") {
@@ -23,6 +19,10 @@ export default withApiHandler(
       );
     }
     await runMiddleware(req, res, cors);
+    logger.info("Username validation started", {
+      requestId: req.requestId,
+      hasUsername: !!req.body?.username,
+    });
     await initializeAppAuth(req);
     const { status, data } = await validateUsername(req);
     res.status(status).json(data);

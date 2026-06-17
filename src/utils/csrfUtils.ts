@@ -50,10 +50,10 @@ const validateCsrfToken = (req) => {
   const tokenFromRequestBody = req.body?.csrfToken;
   const tokenFromRequestCookie = parseTokenFromPostRequestCookies(req);
   if (!tokenFromRequestBody || !tokenFromRequestCookie) {
-    logger.debug(`No csrf token missing in body or header}`);
-    logger.debug(`token from request body: `, tokenFromRequestBody);
-    logger.debug(`token from request cookie: `, tokenFromRequestCookie.value);
-
+    logger.debug("CSRF token missing from request", {
+      hasBodyToken: !!tokenFromRequestBody,
+      hasCookieToken: !!tokenFromRequestCookie,
+    });
     return false;
   }
   const bodyAndCookieTokensMatch =
@@ -62,15 +62,11 @@ const validateCsrfToken = (req) => {
     tokenFromRequestCookie
   );
   if (!requestHashMatchesServerHash) {
-    logger.debug("CSRF token validation failed.");
-    logger.debug(`Request hash does not match server hash`);
+    logger.debug("CSRF validation failed", { reason: "hash_mismatch" });
     return false;
   }
   if (!bodyAndCookieTokensMatch) {
-    logger.debug("CSRF token validation failed.");
-    logger.debug(
-      `Request body token: ${tokenFromRequestBody}\nRequestCookie token: ${JSON.stringify(tokenFromRequestCookie)}\nNot a match.`
-    );
+    logger.debug("CSRF validation failed", { reason: "token_mismatch" });
     return false;
   }
   return true;

@@ -7,12 +7,8 @@ import {
 } from "../../src/utils/api";
 import { withApiHandler } from "../../src/errors/server";
 import { ApiError, ErrorCodes } from "../../src/errors";
+import logger from "../../src/logger";
 
-/**
- * patron
- * @param req - Next request object
- * @param res - Next response object
- */
 export default withApiHandler(
   async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "POST") {
@@ -23,8 +19,23 @@ export default withApiHandler(
       );
     }
     await runMiddleware(req, res, cors);
+    logger.info("Patron creation started", {
+      requestId: req.requestId,
+      hasFirstName: !!req.body?.firstName,
+      hasLastName: !!req.body?.lastName,
+      hasEmail: !!req.body?.email,
+      hasUsername: !!req.body?.username,
+      hasBirthdate: !!req.body?.birthdate,
+      hasHomeAddress: !!req.body?.["home-line1"],
+      policyType: req.body?.policyType,
+      lang: req.body?.lang,
+    });
     await initializeAppAuth(req);
     const results = await createPatron(req);
+    logger.info("Patron creation succeeded", {
+      requestId: req.requestId,
+      status: results.status,
+    });
     res.status(results.status).json(results);
   }
 );

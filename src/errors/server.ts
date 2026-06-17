@@ -20,6 +20,11 @@ export function buildErrorResponse(error: ApiError): ApiErrorResponse {
 
   return response;
 }
+declare module "next" {
+  interface NextApiRequest {
+    requestId?: string;
+  }
+}
 
 type ApiRouteHandler = (
   req: NextApiRequest,
@@ -28,12 +33,14 @@ type ApiRouteHandler = (
 
 /**
  * Next.js API route handler wrapper.
+ * - Attaches a unique requestId to each request for tracing across log entries.
  * - Catches ApiError throws and responds with a structured ApiErrorResponse.
  * - Coerces unknown exceptions safely (no stack traces to clients).
  * - Structured logging for all unhandled errors.
  */
 export function withApiHandler(handler: ApiRouteHandler) {
   return async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+    req.requestId = crypto.randomUUID();
     try {
       await handler(req, res);
     } catch (error) {
@@ -46,7 +53,8 @@ export function withApiHandler(handler: ApiRouteHandler) {
             )
           : undefined;
 
-      logger.error("API route error", {
+      logger.error("Unhandled error in API route", {
+        requestId: req.requestId,
         originalError: error instanceof Error ? error.message : String(error),
         stack: error instanceof Error ? error.stack : undefined,
         ...(aggregateErrors && { aggregateErrors }),
