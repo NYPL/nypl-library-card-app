@@ -7,7 +7,6 @@ coverage
 npm-debug.log
 .bower
 .vscode
-log/*.log
 .eslintcache
 
 # WebStorm IDE

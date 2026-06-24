@@ -2,8 +2,6 @@ FROM node:20-alpine AS builder
 RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
-# Create the directory as root
-RUN mkdir -p ./log 
 
 COPY package.json ./
 COPY package-lock.json ./
@@ -49,9 +47,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
 COPY --from=builder --chown=nextjs:nodejs /app/next.config.js ./next.config.js
-
-RUN mkdir -p /log
-RUN chown -R nextjs:nodejs /log
 
 USER nextjs
 

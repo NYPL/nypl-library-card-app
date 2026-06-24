@@ -1,7 +1,7 @@
 import winston from "winston";
 
-const { combine, timestamp, printf, colorize } = winston.format;
-const { File, Console } = winston.transports;
+const { combine, timestamp, printf } = winston.format;
+const { Console } = winston.transports;
 
 // Set default NYPL agreed upon log levels
 // https://github.com/NYPL/engineering-general/blob/master/standards/logging.md
@@ -41,70 +41,46 @@ const getLogLevelCode = (levelString) => {
   }
 };
 
+// We are already logging these so no need for duplicates.
+const BUILT_IN_FIELDS = new Set(["level", "message", "timestamp", "splat"]);
 /**
  * nyplFormat
- * This function is used for creating the logging object that will be printed
- * in the console and in a local file.
+ *
+ * A structured JSON log for used in the API routes.
+ * All extra options passed to logger calls are spread directly
+ * onto the log object for easy querying in CloudWatch Logs Insights.
+ *
+ * Usage: logger.info("Something happened", { status: 422, type: "invalid" })
+ * Output: { "message": "Something happened", "status": 422, "type": "invalid", ... }
  */
 const nyplFormat = printf((options) => {
-  const result = {
-    timestamp: JSON.stringify(options.timestamp),
+  const rest = Object.fromEntries(
+    Object.entries(options).filter(([key]) => !BUILT_IN_FIELDS.has(key))
+  );
+
+  const result: Record<string, unknown> = {
+    timestamp: options.timestamp,
     levelCode: getLogLevelCode(options.level),
     level: options.level.toUpperCase(),
-
-    message: JSON.stringify(options.message),
-    // This is specific to this app to make searching easy.
+    message: options.message,
     appTag: "library-card-app",
-    pid: undefined,
-    meta: undefined,
+    pid: process.pid ? process.pid.toString() : undefined,
+    ...rest,
   };
-
-  if (process.pid) {
-    result.pid = process.pid.toString();
-  }
-
-  if (options.meta) {
-    result.meta = JSON.stringify(options.meta);
-  }
 
   return JSON.stringify(result);
 });
 
-// The transport function that logs to the console.
+// stdout is captured by the CloudWatch log agent
 const consoleTransport = new Console({
   handleExceptions: true,
-  format: combine(
-    timestamp(),
-    nyplFormat,
-    colorize({
-      all: true,
-    })
-  ),
+  format: combine(timestamp(), nyplFormat),
 });
 
-const loggerTransports: winston.transport[] = [consoleTransport];
-
-if (process.env.NODE_ENV !== "test" && !process.env.NEXT_PUBLIC_VERCEL_BUILD) {
-  console.info("Logging to file enabled.");
-  // The transport function that logs to a file.
-  loggerTransports.push(
-    new File({
-      filename: "./log/library-card-app.log",
-      handleExceptions: true,
-      maxsize: 5242880, // 5MB
-      maxFiles: 5,
-      format: combine(timestamp(), nyplFormat),
-    })
-  );
-}
-
-// Create the logger that will be used in the app now that the
-// configs are set up.
-// The linter complains if the constructor is not capitalized.
 const CreateLogger = winston.createLogger;
 const logger = CreateLogger({
   levels: nyplLogLevels.levels,
-  transports: loggerTransports,
+  transports: [consoleTransport],
   exitOnError: false,
 });
 

@@ -83,7 +83,8 @@ const app = {};
  * Note: appObj is used to make testing easier.
  */
 export async function initializeAppAuth(req, appObj = app) {
-  logger.info("initializeAppAuth");
+  const requestId = req?.requestId;
+  logger.info("Initializing app auth", { requestId });
   const tokenObject = appObj["tokenObject"];
   const tokenExpTime = appObj["tokenExpTime"];
   const minuteExpThreshold = 10;
@@ -93,7 +94,11 @@ export async function initializeAppAuth(req, appObj = app) {
     try {
       response = await axios.post(config.api.oauth, qs.stringify(authConfig));
     } catch (error) {
-      logger.error(`OAuth request failed (${reason})`, { error });
+      logger.error("OAuth request failed", {
+        requestId,
+        reason,
+        message: error instanceof Error ? error.message : String(error),
+      });
       throw new ApiError(
         502,
         ErrorCodes.AUTH_FAILED,
@@ -101,7 +106,7 @@ export async function initializeAppAuth(req, appObj = app) {
       );
     }
     if (!response.data?.access_token) {
-      logger.error(`No access_token in OAuth response (${reason})`);
+      logger.error("No access_token in OAuth response", { requestId, reason });
       throw new ApiError(
         502,
         ErrorCodes.AUTH_FAILED,
@@ -122,9 +127,9 @@ export async function initializeAppAuth(req, appObj = app) {
   // If there is an access token available but it will expire within ten
   // minutes, then request a new access token.
   if (isTokenExpiring(tokenExpTime, minuteExpThreshold)) {
-    logger.warning(
-      "The access_token is expiring. Requesting a new access token"
-    );
+    logger.warning("Access token is expiring, requesting a new one", {
+      requestId,
+    });
     await fetchToken("refresh");
   }
 }
@@ -200,6 +205,10 @@ export async function validateAddress(
 
   const httpStatus = Number(result.status) || 0;
   if (!httpStatus || httpStatus >= 500) {
+    logger.error("Address validation service returned an unexpected status", {
+      requestId: req.requestId,
+      status: result.status,
+    });
     throw new ApiError(
       502,
       ErrorCodes.PLATFORM_API_ERROR,
@@ -255,6 +264,14 @@ export async function validateUsername(
   } catch (err) {
     const status = err.response?.status;
     if (!status || status >= 500) {
+      logger.error(
+        "Username validation service returned an unexpected status",
+        {
+          requestId: req.requestId,
+          status,
+          message: err.message,
+        }
+      );
       throw new ApiError(
         502,
         ErrorCodes.PLATFORM_API_ERROR,
@@ -308,7 +325,11 @@ export async function createPatron(
       detail?: string;
       error?: object;
     };
-    logger.error("Invalid patron data", { patronData });
+    logger.error("Invalid patron data", {
+      requestId: req.requestId,
+      detail: pd.detail,
+      error: pd.error,
+    });
     throw new ApiError(
       400,
       ErrorCodes.INVALID_REQUEST,
@@ -317,11 +338,10 @@ export async function createPatron(
     );
   }
 
-  logger.debug(
-    `POSTing patron data with username ${
-      (patronData as FormAPISubmission).username
-    } to ${createPatronUrl}`
-  );
+  logger.debug("Posting patron data to Card Creator API", {
+    requestId: req.requestId,
+    url: createPatronUrl,
+  });
 
   try {
     const result = await axios.post(
@@ -335,11 +355,13 @@ export async function createPatron(
     }`;
     return { status: result.data.status, name: fullName, ...result.data };
   } catch (err) {
-    console.log("ERROR", err);
     const status = err.response?.status;
 
     if (err.message && (!err.response || !status)) {
-      logger.error("Card Creator API request failed", { message: err.message });
+      logger.error("Card Creator API request failed", {
+        requestId: req.requestId,
+        message: err.message,
+      });
       throw new ApiError(
         502,
         ErrorCodes.PLATFORM_API_ERROR,
@@ -349,8 +371,9 @@ export async function createPatron(
 
     const apiResponse = err.response?.data;
     logger.error("Error calling Card Creator API", {
+      requestId: req.requestId,
       status,
-      data: apiResponse,
+      type: apiResponse?.type,
     });
 
     throw new ApiError(

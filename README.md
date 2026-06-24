@@ -263,6 +263,42 @@ if (!csrfTokenValid) {
 
 in three separate locations. Then, build the image and run a container for that image. This will allow you to run the docker image locally in production mode with HTTPS turned off. This should not be deployed to production so remember to exclude this from the commit or uncomment the code for a qa or production deployment.
 
+## Logging
+
+Logging uses [Winston](https://github.com/winstonjs/winston) using the NYPL log levels convention. All logs are written as structured JSON to **stdout** only. In ECS deployments, stdout is captured by the AWS CloudWatch log agent automatically.
+
+### Log format
+
+Each log line is a JSON object:
+
+```json
+{
+  "timestamp": "2026-01-15T12:00:00.000Z",
+  "levelCode": 3,
+  "level": "ERROR",
+  "message": "Error calling Card Creator API",
+  "appTag": "library-card-app",
+  "pid": "1234",
+  "status": 422,
+  "type": "invalid-username"
+}
+```
+
+### Writing logs
+
+Use a plain English message for the first argument and pass structured context as the second argument:
+
+```ts
+logger.info("Patron creation started");
+logger.warning("Username unavailable or invalid", { status });
+logger.error("Error calling Card Creator API", {
+  status,
+  type: apiResponse?.type,
+});
+```
+
+Extra fields are spread directly onto the log object, so you can query them in CloudWatch Logs Insights with `filter status = 422` or search by `message`.
+
 ## Testing
 
 This project uses Playwright for functional, UI, and end-to-end (E2E) testing. Playwright allows you to write and run automated tests across multiple browsers to ensure the application works as expected.

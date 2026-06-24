@@ -7,12 +7,8 @@ import {
 } from "../../src/utils/api";
 import { withApiHandler } from "../../src/errors/server";
 import { ApiError, ErrorCodes } from "../../src/errors";
+import logger from "../../src/logger";
 
-/**
- * address
- * @param req - Next request object
- * @param res - Next response object
- */
 export default withApiHandler(
   async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "POST") {
@@ -23,6 +19,14 @@ export default withApiHandler(
       );
     }
     await runMiddleware(req, res, cors);
+    logger.info("Address validation started", {
+      requestId: req.requestId,
+      isWorkAddress: req.body?.isWorkAddress,
+      hasAddress: !!req.body?.address,
+      hasCity: !!req.body?.address?.city,
+      hasState: !!req.body?.address?.state,
+      hasZip: !!req.body?.address?.zip,
+    });
     await initializeAppAuth(req);
     const { status, data } = await validateAddress(req);
     res.status(status).json(data);
