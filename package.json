@@ -51,7 +51,7 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.62.0",
     "request-ip": "3.3.0",
-    "sass": "1.26.9",
+    "sass": "1.101.0",
     "validator": "13.0.0",
     "winston": "3.3.3"
   },
