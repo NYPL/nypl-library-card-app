@@ -62,6 +62,7 @@ jobs:
            --build-arg NEXT_BUILD_ID="${NEXT_BUILD_ID}" \
            --build-arg NEXT_PUBLIC_DS_GLOBAL_HEADER="https://header.nypl.org/header.min.js?containerId=nypl-header" \
            --build-arg NEXT_PUBLIC_DS_GLOBAL_FOOTER="https://header.nypl.org/footer.min.js?containerId=nypl-footer" \
+           --build-arg NEXT_PUBLIC_APP_URL="https://www.nypl.org" \
            --build-arg NEW_RELIC_APP_NAME="Library Card App" \
            --build-arg NEW_RELIC_LICENSE_KEY="${NEW_RELIC_LICENSE_KEY}" \
            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG  \

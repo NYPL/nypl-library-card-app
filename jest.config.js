@@ -1,4 +1,5 @@
 process.env.IPSTACK_KEY = "some-key";
+process.env.NEXT_PUBLIC_APP_URL = "https://qa-www.nypl.org";
 
 module.exports = {
   collectCoverageFrom: [
