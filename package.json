@@ -36,7 +36,7 @@
     "url": "https://github.com/issues"
   },
   "dependencies": {
-    "@nypl/design-system-react-components": "4.1.6",
+    "@nypl/design-system-react-components": "4.3.0",
     "axios": "1.7.2",
     "bwip-js": "2.0.10",
     "cookie": "^1.0.2",
