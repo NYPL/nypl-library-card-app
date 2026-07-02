@@ -498,6 +498,7 @@ function ReviewFormContainer({ csrfToken }) {
             ref={errorRef}
             problemDetail={errorObj}
             lang={Array.isArray(lang) ? lang[0] : lang}
+            showHeading={false}
           />
         )}
         <FormRow margin-top="20px">
