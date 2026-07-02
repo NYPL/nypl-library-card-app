@@ -75,7 +75,6 @@ export const isServerError = (errorObj) => {
   if (errorObj.status >= 500) return true;
 
   const serverErrorTypes = [
-    ErrorCodes.CSRF_INVALID,
     ErrorCodes.ILS_INTEGRATION_ERROR,
     ErrorCodes.INTERNAL_SERVER_ERROR,
     ErrorCodes.PATRON_CREATION_FAILED,
