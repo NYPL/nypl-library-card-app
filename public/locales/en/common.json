@@ -211,7 +211,7 @@
   },
   "globalErrors": {
     "title": "Form submission error",
-    "defaultError": "There was an error processing your submission. Please try again later."
+    "defaultError": "Our systems are currently unavailable. Please try submitting your application again in a few minutes."
   },
   "apiErrors": {
     "defaultError": "There were errors with your submission."
