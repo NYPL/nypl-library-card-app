@@ -21,6 +21,7 @@ import AccountFormFields from "../AccountFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import LoadingIndicator from "../LoadingIndicator";
+import ApiErrors from "../ApiErrors";
 
 import { createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../../src/context/FormDataContext";
@@ -94,24 +95,23 @@ function ReviewFormContainer({ csrfToken }) {
   const [editAccountInfoFlag, setEditAccountInfoFlag] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const updateShowPassword = () => setShowPassword(!showPassword);
-
+  const errorRef = useRef<HTMLDivElement>(null);
   const firstPersonalFieldRef = useRef<TextInputRefType>(null);
   const firstAccountFieldRef = useRef<TextInputRefType>(null);
 
   // Will run whenever the `errorObj` has changes, specifically for
   // bad requests.
   useEffect(() => {
-    // The password is shown by default when javascript is not enabled. It is
-    // hidden once the component renders on the client side.
     setClientSide(true);
     setShowPassword(false);
 
     if (errorObj) {
       document.title = "Form Submission Error | NYPL";
-      // When we display errors, we want to go into the "Edit" state so
-      // that it's easier to go to input fields from the error messages.
       setEditAccountInfoFlag(true);
       setEditPersonalInfoFlag(true);
+      // Focus the error summary directly above the submit button instead of
+      // the top of the page, so the user can retry without scrolling.
+      setTimeout(() => errorRef.current?.focus(), 0);
     }
   }, [errorObj]);
 
@@ -491,14 +491,16 @@ function ReviewFormContainer({ csrfToken }) {
         mt="l"
         noValidate
       >
+        <ApiErrors
+          ref={errorRef}
+          problemDetail={errorObj}
+          lang={Array.isArray(lang) ? lang[0] : lang}
+        />
         <FormRow margin-top="20px">
           <DSFormField>
             <RoutingLinks
               isDisabled={isLoading}
-              next={{
-                submit: true,
-                text: t("button.submit"),
-              }}
+              next={{ submit: true, text: t("button.submit") }}
             />
           </DSFormField>
         </FormRow>

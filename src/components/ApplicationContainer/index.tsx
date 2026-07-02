@@ -13,7 +13,15 @@ import {
 } from "@nypl/design-system-react-components";
 import Breadcrumbs from "../Breadcrumb";
 
-const ApplicationContainer = ({ children }) => {
+interface ApplicationContainerProps {
+  children: React.ReactNode;
+  hideApiErrors?: boolean;
+}
+
+const ApplicationContainer = ({
+  children,
+  hideApiErrors = false,
+}: ApplicationContainerProps) => {
   const {
     query: { lang },
   } = useRouter();
@@ -28,13 +36,11 @@ const ApplicationContainer = ({ children }) => {
         ? lang[0]
         : "en";
 
-  // If there are errors, focus on the element that displays those errors,
-  // for client-side rendering.
   useEffect(() => {
-    if (errorToDisplay) {
+    if (errorToDisplay && !hideApiErrors) {
       errorSection.current?.focus();
     }
-  }, [errorToDisplay]);
+  }, [errorToDisplay, hideApiErrors]);
 
   return (
     <Template variant="narrow">
@@ -47,11 +53,13 @@ const ApplicationContainer = ({ children }) => {
       <TemplateMain id="mainContent">
         <TemplateContent my="xl">
           <>
-            <ApiErrors
-              lang={finalLang}
-              ref={errorSection}
-              problemDetail={errorToDisplay}
-            />
+            {!hideApiErrors && (
+              <ApiErrors
+                lang={finalLang}
+                ref={errorSection}
+                problemDetail={errorToDisplay}
+              />
+            )}
             {children}
           </>
         </TemplateContent>

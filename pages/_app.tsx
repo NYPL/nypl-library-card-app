@@ -142,7 +142,9 @@ function MyApp({ Component, pageProps }: MyAppProps) {
               {isErrorPage ? (
                 <Component {...pageProps} />
               ) : (
-                <ApplicationContainer>
+                <ApplicationContainer
+                  hideApiErrors={router.pathname === "/review"}
+                >
                   <Component
                     {...pageProps}
                     pageTitles={pageTitles}
