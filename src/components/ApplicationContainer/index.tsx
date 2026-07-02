@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import Hero from "../Hero";
 import ApiErrors from "../ApiErrors";
 import useFormDataContext from "../../context/FormDataContext";
+import { isServerError } from "../../utils/apiErrorUtils";
 import {
   Template,
   TemplateBreakout,
@@ -13,18 +14,11 @@ import {
 } from "@nypl/design-system-react-components";
 import Breadcrumbs from "../Breadcrumb";
 
-interface ApplicationContainerProps {
-  children: React.ReactNode;
-  hideApiErrors?: boolean;
-}
-
-const ApplicationContainer = ({
-  children,
-  hideApiErrors = false,
-}: ApplicationContainerProps) => {
+const ApplicationContainer = ({ children }) => {
+  const router = useRouter();
   const {
     query: { lang },
-  } = useRouter();
+  } = router;
   const errorSection = React.createRef<HTMLDivElement>();
   const { state } = useFormDataContext();
   const { errorObj } = state;
@@ -36,6 +30,11 @@ const ApplicationContainer = ({
         ? lang[0]
         : "en";
 
+  const isReviewPage = router.pathname === "/review";
+  const hideApiErrors = isReviewPage && isServerError(errorToDisplay);
+
+  // If there are errors, focus on the element that displays those errors,
+  // for client-side rendering.
   useEffect(() => {
     if (errorToDisplay && !hideApiErrors) {
       errorSection.current?.focus();

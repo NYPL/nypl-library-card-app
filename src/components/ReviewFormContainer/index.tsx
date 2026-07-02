@@ -21,6 +21,7 @@ import AccountFormFields from "../AccountFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import LoadingIndicator from "../LoadingIndicator";
+import { isServerError } from "../../utils/apiErrorUtils";
 import ApiErrors from "../ApiErrors";
 
 import { createQueryParams } from "../../utils/utils";
@@ -109,9 +110,10 @@ function ReviewFormContainer({ csrfToken }) {
       document.title = "Form Submission Error | NYPL";
       setEditAccountInfoFlag(true);
       setEditPersonalInfoFlag(true);
-      // Focus the error summary directly above the submit button instead of
-      // the top of the page, so the user can retry without scrolling.
-      setTimeout(() => errorRef.current?.focus(), 0);
+
+      if (isServerError(errorObj)) {
+        setTimeout(() => errorRef.current?.focus(), 0);
+      }
     }
   }, [errorObj]);
 
@@ -491,11 +493,13 @@ function ReviewFormContainer({ csrfToken }) {
         mt="l"
         noValidate
       >
-        <ApiErrors
-          ref={errorRef}
-          problemDetail={errorObj}
-          lang={Array.isArray(lang) ? lang[0] : lang}
-        />
+        {isServerError(errorObj) && (
+          <ApiErrors
+            ref={errorRef}
+            problemDetail={errorObj}
+            lang={Array.isArray(lang) ? lang[0] : lang}
+          />
+        )}
         <FormRow margin-top="20px">
           <DSFormField>
             <RoutingLinks
