@@ -2,7 +2,7 @@
 
 ## Verification Flows
 
-Client --> Nexstjs API routes --> Vendor Service --> Vendor API
+### Client --> Nexstjs API routes --> Vendor Service --> Vendor API
 
 There are three flows depending on the patron's age and location.
 
@@ -14,6 +14,7 @@ Patron submits Step 1 (`/personal`) and age is between 13 and 18.
 
 1. Before navigating to the next step, call a server-side API route that sends the submitted email address to the Persona email risk API.
 1. Log or display the result
+1. Render the API response payload on the apge
 1. Continue to the next step regardless of the result
 
 ---
@@ -91,6 +92,7 @@ PERSONA_API_KEY=
 ## Deployment
 
 - Work on a dedicated feature branch (e.g. `identity-verification-poc`)
+  - Each vendor will have its own feature branch against this base feature branch
 - Deploy preview builds to Vercel
 - When trialing a second vendor, branch off the same feature branch.. only the service layer changes
 
@@ -100,6 +102,10 @@ PERSONA_API_KEY=
 
 - Age and email check will need to be implemented given it will be needed for all three flows
 - Answer to: Do we need the alternate-address page at all, or can we replace it with the identity-verification page?
+  - We will remove the alternate-address page for now
 - Webhook vs. synchronous callback confirmed for Flow 3
 - Create all suggested files and folders
 - Vendor account and API keys are ready
+  - What is the API/trail duration
+- Do we have a point of contact at the vendor for questions and support?
+- We will have a few paring session if we need
