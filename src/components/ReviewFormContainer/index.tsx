@@ -22,7 +22,6 @@ import RoutingLinks from "../RoutingLinks.tsx";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import LoadingIndicator from "../LoadingIndicator";
 import { isServerError } from "../../utils/apiErrorUtils";
-import ApiErrors from "../ApiErrors";
 
 import { createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../../src/context/FormDataContext";
@@ -434,6 +433,19 @@ function ReviewFormContainer({ csrfToken }) {
     </Box>
   );
 
+  /**
+   * renderServerError
+   * A simple, hardcoded error message for server-side (5xx) submission
+   * failures, shown directly above the submit button so the user doesn't
+   * need to scroll back up to retry.
+   */
+  const renderServerError = () => (
+    <Box sx={{ color: "ui.error.primary", fontSize: "xs" }}>
+      Our systems are currently unavailable. Please try submitting your
+      application again in a few minutes.
+    </Box>
+  );
+
   return (
     <>
       <LoadingIndicator isLoading={isLoading} />
@@ -493,14 +505,7 @@ function ReviewFormContainer({ csrfToken }) {
         mt="l"
         noValidate
       >
-        {isServerError(errorObj) && (
-          <ApiErrors
-            ref={errorRef}
-            problemDetail={errorObj}
-            lang={Array.isArray(lang) ? lang[0] : lang}
-            showHeading={false}
-          />
-        )}
+        {isServerError(errorObj) && renderServerError()}
         <FormRow margin-top="20px">
           <DSFormField>
             <RoutingLinks

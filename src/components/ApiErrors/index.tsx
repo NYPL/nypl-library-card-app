@@ -15,7 +15,6 @@ import { apiErrorTranslations } from "../../data/apiErrorMessageTranslations";
 interface ApiErrorsProps {
   problemDetail: ApiErrorResponse | undefined;
   lang?: string;
-  showHeading?: boolean;
 }
 
 /**
@@ -25,7 +24,7 @@ interface ApiErrorsProps {
  * specific input element that is returning an error.
  */
 const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
-  ({ problemDetail, lang = "en", showHeading = true }, ref) => {
+  ({ problemDetail, lang = "en" }, ref) => {
     const { t } = useTranslation("common");
 
     // We expect problem details to have a status greater than or equal to 400.
@@ -122,11 +121,9 @@ const ApiErrors = React.forwardRef<HTMLDivElement, ApiErrorsProps>(
 
     return (
       <div ref={ref} className={styles.container} tabIndex={0}>
-        {showHeading && (
-          <Heading level="h2" className={styles.heading}>
-            {t("globalErrors.title")}
-          </Heading>
-        )}
+        <Heading level="h2" className={styles.heading}>
+          {t("globalErrors.title")}
+        </Heading>
         {renderErrorByType()}
       </div>
     );
