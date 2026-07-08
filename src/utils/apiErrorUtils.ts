@@ -34,8 +34,7 @@ export function normalizeAxiosError(error: unknown): ApiErrorResponse {
       success: false,
       status: 502,
       type: ErrorCodes.PLATFORM_API_ERROR,
-      message:
-        "Our systems are currently unavailable. Please try submitting your application again in a few minutes.",
+      message: "The service is currently unavailable. Please try again.",
     };
   }
 
@@ -61,8 +60,7 @@ export function normalizeAxiosError(error: unknown): ApiErrorResponse {
     message:
       (typeof (data as { message?: string })?.message === "string"
         ? (data as { message: string }).message
-        : null) ??
-      "Our systems are currently unavailable. Please try submitting your application again in a few minutes.",
+        : null) ?? "An unexpected error occurred. Please try again.",
   };
 }
 

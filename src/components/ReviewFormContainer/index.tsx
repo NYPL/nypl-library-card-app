@@ -440,7 +440,7 @@ function ReviewFormContainer({ csrfToken }) {
    * need to scroll back up to retry.
    */
   const renderServerError = () => (
-    <Box sx={{ color: "ui.error.primary", fontSize: "xs" }}>
+    <Box ref={errorRef} tabIndex={-1} color="error.primary" fontSize="xs">
       Our systems are currently unavailable. Please try submitting your
       application again in a few minutes.
     </Box>
