@@ -6,6 +6,7 @@ import {
   TextInputRefType,
   AutoCompleteValues,
 } from "@nypl/design-system-react-components";
+import { useFormContext } from "react-hook-form";
 
 interface FormFieldProps {
   id: string;
@@ -63,6 +64,16 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
     },
     ref
   ) => {
+    const formMethods = useFormContext();
+    const { onChange: registeredOnChange, ...restProps } = rest as {
+      onChange?: (event: any) => void;
+    };
+
+    const handleChange = (event: any) => {
+      formMethods?.clearErrors?.(name);
+      registeredOnChange?.(event);
+    };
+
     const errorText = errorState[name];
     const typeToInputTypeMap = {
       text: "text",
@@ -87,7 +98,8 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
           ref={ref}
           type={typeToInputTypeMap[type] as TextInputTypes}
           autoComplete={autoComplete as AutoCompleteValues}
-          {...rest}
+          onChange={handleChange}
+          {...restProps}
         />
       );
     }
@@ -111,7 +123,8 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
           {...attributes}
           ref={ref} // pass directly
           autoComplete={autoComplete}
-          {...rest}
+          onChange={handleChange}
+          {...restProps}
         />
       </div>
     );

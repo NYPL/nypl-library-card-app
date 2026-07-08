@@ -34,15 +34,17 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   const {
     register,
     formState: { errors },
+    clearErrors,
     setValue: setFormValue,
   } = useFormContext();
   const formName = "homeLibraryCode";
 
   const onChange = (event) => {
     const newValue = event.target.value;
+    clearErrors(formName);
     setValue(newValue);
     setFormValue(formName, newValue, {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
   };

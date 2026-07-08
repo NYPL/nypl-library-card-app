@@ -36,8 +36,12 @@ function AddressVerificationContainer() {
   const {
     handleSubmit,
     register,
+    clearErrors,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: "onBlur",
+    reValidateMode: "onBlur",
+  });
   const { state, dispatch } = useFormDataContext();
   const [isLoading, setIsLoading] = useState(false);
   // The `addressesResponse` is the value from Service Objects through the NYPL Platform API.
@@ -65,8 +69,14 @@ function AddressVerificationContainer() {
     return [addressObj.address];
   };
 
-  const onChangeHome = (e) => setHomeAddressSelect(e.target?.value);
-  const onChangeWork = (e) => setWorkAddressSelect(e.target?.value);
+  const onChangeHome = (e) => {
+    clearErrors("home-address-select");
+    setHomeAddressSelect(e.target?.value);
+  };
+  const onChangeWork = (e) => {
+    clearErrors("work-address-select");
+    setWorkAddressSelect(e.target?.value);
+  };
   const homeAddress = getAddresses(addressesResponse?.home);
   const workAddress = getAddresses(addressesResponse?.work);
 

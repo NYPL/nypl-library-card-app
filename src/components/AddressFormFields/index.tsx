@@ -38,6 +38,7 @@ const AddressForm = ({
   const {
     register,
     formState: { errors },
+    clearErrors,
     setValue,
   } = useFormContext<FormInputData>();
   const { state } = useFormDataContext();
@@ -49,14 +50,17 @@ const AddressForm = ({
 
   const onChange = useCallback(
     (event) => {
+      const fieldName = `${type}-state`;
+
+      clearErrors(fieldName);
       // Set value manually to trigger the watch() function
-      setValue(`${type}-state`, event.target.value, {
-        shouldValidate: true,
+      setValue(fieldName, event.target.value, {
+        shouldValidate: false,
         shouldDirty: true,
       });
       setStateValue(event.target.value);
     },
-    [isRequired]
+    [clearErrors, setValue, type]
   );
 
   const inputProps = {
