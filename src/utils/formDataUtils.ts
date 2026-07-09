@@ -33,6 +33,10 @@ const errorMessages = (t: (key: string) => string) => ({
   } as Address,
 });
 
+export function getAge(birthdate: string): number {
+  return moment().diff(moment(birthdate, "MM/DD/YYYY", true), "years");
+}
+
 /**
  * isDate
  * Makes sure that the input value matches the desired path and is a date with
