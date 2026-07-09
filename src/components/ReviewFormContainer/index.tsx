@@ -21,6 +21,7 @@ import AccountFormFields from "../AccountFormFields";
 import RoutingLinks from "../RoutingLinks.tsx";
 import AcceptTermsFormFields from "../AcceptTermsFormFields";
 import LoadingIndicator from "../LoadingIndicator";
+import { isServerError } from "../../utils/apiErrorUtils";
 
 import { createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../../src/context/FormDataContext";
@@ -94,24 +95,24 @@ function ReviewFormContainer({ csrfToken }) {
   const [editAccountInfoFlag, setEditAccountInfoFlag] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const updateShowPassword = () => setShowPassword(!showPassword);
-
+  const errorRef = useRef<HTMLDivElement>(null);
   const firstPersonalFieldRef = useRef<TextInputRefType>(null);
   const firstAccountFieldRef = useRef<TextInputRefType>(null);
 
   // Will run whenever the `errorObj` has changes, specifically for
   // bad requests.
   useEffect(() => {
-    // The password is shown by default when javascript is not enabled. It is
-    // hidden once the component renders on the client side.
     setClientSide(true);
     setShowPassword(false);
 
     if (errorObj) {
       document.title = "Form Submission Error | NYPL";
-      // When we display errors, we want to go into the "Edit" state so
-      // that it's easier to go to input fields from the error messages.
       setEditAccountInfoFlag(true);
       setEditPersonalInfoFlag(true);
+
+      if (isServerError(errorObj)) {
+        setTimeout(() => errorRef.current?.focus(), 0);
+      }
     }
   }, [errorObj]);
 
@@ -432,6 +433,23 @@ function ReviewFormContainer({ csrfToken }) {
     </Box>
   );
 
+  /**
+   * renderServerError
+   * A simple, hardcoded error message for server-side (5xx) submission
+   * failures, shown directly above the submit button so the user doesn't
+   * need to scroll back up to retry.
+   */
+  const renderServerError = () => (
+    <Box
+      ref={errorRef}
+      tabIndex={-1}
+      sx={{ color: "ui.error.primary", fontSize: "xs" }}
+    >
+      Our systems are currently unavailable. Please try submitting your
+      application again in a few minutes.
+    </Box>
+  );
+
   return (
     <>
       <LoadingIndicator isLoading={isLoading} />
@@ -491,14 +509,12 @@ function ReviewFormContainer({ csrfToken }) {
         mt="l"
         noValidate
       >
+        {isServerError(errorObj) && renderServerError()}
         <FormRow margin-top="20px">
           <DSFormField>
             <RoutingLinks
               isDisabled={isLoading}
-              next={{
-                submit: true,
-                text: t("button.submit"),
-              }}
+              next={{ submit: true, text: t("button.submit") }}
             />
           </DSFormField>
         </FormRow>
