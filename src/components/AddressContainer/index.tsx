@@ -100,7 +100,7 @@ const AddressContainer = ({ csrfToken }) => {
     const age = getAge(formValues.birthdate);
     const inNY = updatedHomeAddress.state === "NY";
 
-    // age>-18 and outside NY
+    // age>=18 and outside NY
     if (age >= 18 && !inNY) {
       await router.push(`/identity-verification?${queryStr}`);
       return;
