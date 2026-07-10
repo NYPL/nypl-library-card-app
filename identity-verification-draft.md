@@ -21,7 +21,7 @@ Patron submits Step 1 (`/personal`) and age is between 13 and 18.
 
 ### Flow 2 — Adult (≥ 18) in New York: Database check
 
-Patron submits Step 2 (`/address`), their age is ≥ 18, and the resolved address is in NY state.
+Patron submits Step 2 (`/address`), their age is ≥= 18, and the resolved address is in NY state.
 
 **What happens:**
 
