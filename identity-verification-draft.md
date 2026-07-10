@@ -43,7 +43,7 @@ Patron submits Step 2 (`/address`), their age is ≥= 18, and the resolved addre
 1. Wait for the SDK callback with the result.
 1. Store the result and route to the existing next step, if applicable (`/alternate-address`).
 1. Display the raw response result on the page
-1. Contiue to the next step (address verification or account)
+1. Continue to the next step (address verification or account)
 
 \*\*The ID vendor SDK is client-side only, may need to think about how to do that on Nextjs
 
