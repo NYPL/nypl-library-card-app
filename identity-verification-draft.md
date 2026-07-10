@@ -41,7 +41,7 @@ Patron submits Step 2 (`/address`), their age is ≥ 18, and the resolved addres
 1. Route the patron to a new page (`/identity-verification`) instead of `/alternate-address`.
 1. On that page, render the ID vendor hosted flow / SDK for document upload (government ID, passport, etc.).
 1. Wait for the SDK callback with the result.
-1. Store the result and route to the existing next step (`/alternate-address`).
+1. Store the result and route to the existing next step, if applicable (`/alternate-address`).
 1. Log or display the result
 1. Contiue to the next step (address verification or account)
 
