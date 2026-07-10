@@ -34,7 +34,7 @@ Patron submits Step 2 (`/address`), their age is ≥= 18, and the resolved addre
 
 ### Flow 3 — Adult (≥ 18) outside New York: Document upload
 
-Patron submits Step 2 (`/address`), their age is ≥ 18, and the resolved address is **not** in NY state.
+Patron submits Step 2 (`/address`), their age is ≥= 18, and the resolved address is **not** in NY state.
 
 **What happens:**
 
