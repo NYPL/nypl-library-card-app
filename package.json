@@ -38,7 +38,7 @@
   "dependencies": {
     "@nypl/design-system-react-components": "4.1.6",
     "axios": "1.7.2",
-    "bwip-js": "2.0.10",
+    "bwip-js": "4.11.2",
     "cookie": "^1.0.2",
     "cors": "2.8.5",
     "lodash": "4.17.21",
