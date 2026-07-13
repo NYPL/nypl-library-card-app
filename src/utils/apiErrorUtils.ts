@@ -63,3 +63,24 @@ export function normalizeAxiosError(error: unknown): ApiErrorResponse {
         : null) ?? "An unexpected error occurred. Please try again.",
   };
 }
+
+/**
+ * isServerError
+ * True for errors originating from a failed submission to the backend
+ * (5xx-style failures), as opposed to client-side field validation errors
+ * (400 INVALID_REQUEST) which should stay anchored near their inputs.
+ */
+export const isServerError = (errorObj) => {
+  if (!errorObj) return false;
+  if (errorObj.status >= 500) return true;
+
+  const serverErrorTypes = [
+    ErrorCodes.ILS_INTEGRATION_ERROR,
+    ErrorCodes.INTERNAL_SERVER_ERROR,
+    ErrorCodes.PATRON_CREATION_FAILED,
+    ErrorCodes.PLATFORM_API_ERROR,
+    ErrorCodes.PLATFORM_API_TIMEOUT,
+  ];
+
+  return serverErrorTypes.includes(errorObj.type);
+};
