@@ -1,4 +1,6 @@
+/* eslint-disable camelcase */
 import type { NextApiRequest, NextApiResponse } from "next";
+import redis, { inquiryKey } from "../../../src/lib/redis";
 
 const PERSONA_API_KEY =
   process.env.PERSONA_API_KEY ||
@@ -41,6 +43,13 @@ export default async function handler(
   }
 
   try {
+    const cached = await redis.get<InquiryStatus>(inquiryKey(id));
+    if (cached) {
+      console.log(`Cache hit for ${id}: ${cached}`);
+      return res.status(200).json({ inquiry_id: id, status: cached });
+    }
+
+    console.log(`Cache miss for ${id}, polling Persona`);
     const response = await fetch(`${PERSONA_API_URL}/inquiries/${id}`, {
       method: "GET",
       headers: {
