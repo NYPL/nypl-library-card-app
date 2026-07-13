@@ -40,6 +40,7 @@ const AddressForm = ({
     formState: { errors },
     clearErrors,
     setValue,
+    trigger,
   } = useFormContext<FormInputData>();
   const { state } = useFormDataContext();
   const { formValues } = state;
@@ -63,9 +64,15 @@ const AddressForm = ({
     [clearErrors, setValue, type]
   );
 
+  const handleBlur = useCallback(() => {
+    const fieldName = `${type}-state`;
+    trigger(fieldName);
+  }, [trigger, type]);
+
   const inputProps = {
     value: stateValue,
     onChange,
+    onBlur: handleBlur,
   };
 
   const styles = {

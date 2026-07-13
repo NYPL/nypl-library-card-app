@@ -65,13 +65,23 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
     ref
   ) => {
     const formMethods = useFormContext();
-    const { onChange: registeredOnChange, ...restProps } = rest as {
+    const {
+      onBlur: registeredOnBlur,
+      onChange: registeredOnChange,
+      ...restProps
+    } = rest as {
+      onBlur?: (event: any) => void;
       onChange?: (event: any) => void;
     };
 
     const handleChange = (event: any) => {
       formMethods?.clearErrors?.(name);
       registeredOnChange?.(event);
+    };
+
+    const handleBlur = (event: any) => {
+      registeredOnBlur?.(event);
+      formMethods?.trigger?.(name);
     };
 
     const errorText = errorState[name];
@@ -98,6 +108,8 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
           ref={ref}
           type={typeToInputTypeMap[type] as TextInputTypes}
           autoComplete={autoComplete as AutoCompleteValues}
+          onBlur={handleBlur}
+          onInput={() => formMethods?.clearErrors?.(name)}
           onChange={handleChange}
           {...restProps}
         />
@@ -123,6 +135,8 @@ const FormField = React.forwardRef<TextInputRefType, FormFieldProps>(
           {...attributes}
           ref={ref} // pass directly
           autoComplete={autoComplete}
+          onBlur={handleBlur}
+          onInput={() => formMethods?.clearErrors?.(name)}
           onChange={handleChange}
           {...restProps}
         />
