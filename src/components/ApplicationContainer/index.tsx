@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import Hero from "../Hero";
 import ApiErrors from "../ApiErrors";
 import useFormDataContext from "../../context/FormDataContext";
+import { isServerError } from "../../utils/apiErrorUtils";
 import {
   Template,
   TemplateBreakout,
@@ -14,9 +15,10 @@ import {
 import Breadcrumbs from "../Breadcrumb";
 
 const ApplicationContainer = ({ children }) => {
+  const router = useRouter();
   const {
     query: { lang },
-  } = useRouter();
+  } = router;
   const errorSection = React.createRef<HTMLDivElement>();
   const { state } = useFormDataContext();
   const { errorObj } = state;
@@ -28,13 +30,16 @@ const ApplicationContainer = ({ children }) => {
         ? lang[0]
         : "en";
 
+  const isReviewPage = router.pathname === "/review";
+  const hideApiErrors = isReviewPage && isServerError(errorToDisplay);
+
   // If there are errors, focus on the element that displays those errors,
   // for client-side rendering.
   useEffect(() => {
-    if (errorToDisplay) {
+    if (errorToDisplay && !hideApiErrors) {
       errorSection.current?.focus();
     }
-  }, [errorToDisplay]);
+  }, [errorToDisplay, hideApiErrors]);
 
   return (
     <Template variant="narrow">
@@ -47,11 +52,13 @@ const ApplicationContainer = ({ children }) => {
       <TemplateMain id="mainContent">
         <TemplateContent my="xl">
           <>
-            <ApiErrors
-              lang={finalLang}
-              ref={errorSection}
-              problemDetail={errorToDisplay}
-            />
+            {!hideApiErrors && (
+              <ApiErrors
+                lang={finalLang}
+                ref={errorSection}
+                problemDetail={errorToDisplay}
+              />
+            )}
             {children}
           </>
         </TemplateContent>
