@@ -51,7 +51,7 @@ const AddressForm = ({
 
   const onChange = useCallback(
     (event) => {
-      const fieldName = `${type}-state`;
+      const fieldName: "home-state" | "work-state" = `${type}-state`;
 
       clearErrors(fieldName);
       // Set value manually to trigger the watch() function
@@ -65,7 +65,7 @@ const AddressForm = ({
   );
 
   const handleBlur = useCallback(() => {
-    const fieldName = `${type}-state`;
+    const fieldName: "home-state" | "work-state" = `${type}-state`;
     trigger(fieldName);
   }, [trigger, type]);
 
