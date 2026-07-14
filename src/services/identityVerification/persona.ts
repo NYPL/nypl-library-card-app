@@ -2,20 +2,14 @@
 export const PERSONA_API_URL = "https://api.withpersona.com/api/v1";
 export const PERSONA_VERSION = "2025-10-27";
 
-const PERSONA_API_KEY =
-  process.env.PERSONA_API_KEY ||
-  "PERSONA_SANDBOX_API_KEY_REDACTED";
+const PERSONA_API_KEY = process.env.PERSONA_API_KEY;
 
-const INQUIRY_TEMPLATE_ID =
-  process.env.PERSONA_INQUIRY_TEMPLATE_ID ||
-  "itmpl_AouGvtzJEmTdtsTuD17qjJYxcLNBiB";
+const INQUIRY_TEMPLATE_ID = process.env.PERSONA_INQUIRY_TEMPLATE_ID;
 
-const EMAIL_REPORT_TEMPLATE_ID =
-  process.env.PERSONA_EMAIL_REPORT_TEMPLATE_ID ||
-  "rptp_AouGvtzcJFoU5wt5PfJwsUC4Y9uXUT";
+const EMAIL_REPORT_TEMPLATE_ID = process.env.PERSONA_EMAIL_REPORT_TEMPLATE_ID;
+
 const ADDRESS_REPORT_TEMPLATE_ID =
-  process.env.PERSONA_ADDRESS_REPORT_TEMPLATE_ID ||
-  "rptp_AouGvtzEPxYPyqN9dWqyXKNApvoihn";
+  process.env.PERSONA_ADDRESS_REPORT_TEMPLATE_ID;
 
 export interface PersonaInquiry {
   id: string;
