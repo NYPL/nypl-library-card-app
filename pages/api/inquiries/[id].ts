@@ -1,12 +1,8 @@
 /* eslint-disable camelcase */
 import type { NextApiRequest, NextApiResponse } from "next";
 import redis, { inquiryKey } from "../../../src/lib/redis";
-
-const PERSONA_API_KEY =
-  process.env.PERSONA_API_KEY ||
-  "PERSONA_SANDBOX_API_KEY_REDACTED";
-const PERSONA_API_URL = "https://api.withpersona.com/api/v1";
-const PERSONA_VERSION = "2025-10-27";
+import { getInquiryStatus } from "../../../src/services/identityVerification";
+import logger from "../../../src/logger";
 
 export type InquiryStatus =
   | "created"
@@ -20,6 +16,7 @@ export type InquiryStatus =
 interface SuccessResponse {
   inquiry_id: string;
   status: InquiryStatus;
+  attributes: Record<string, any>;
 }
 
 interface ErrorResponse {
@@ -43,38 +40,28 @@ export default async function handler(
   }
 
   try {
-    const cached = await redis.get<InquiryStatus>(inquiryKey(id));
+    const cached = await redis.get<{
+      status: InquiryStatus;
+      attributes: Record<string, any>;
+    }>(inquiryKey(id));
     if (cached) {
-      console.log(`Cache hit for ${id}: ${cached}`);
-      return res.status(200).json({ inquiry_id: id, status: cached });
+      logger.info("inquiry status: cache hit", { id, status: cached.status });
+      return res.status(200).json({
+        inquiry_id: id,
+        status: cached.status,
+        attributes: cached.attributes ?? {},
+      });
     }
 
-    console.log(`Cache miss for ${id}, polling Persona`);
-    const response = await fetch(`${PERSONA_API_URL}/inquiries/${id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${PERSONA_API_KEY}`,
-        "Content-Type": "application/json",
-        "Persona-Version": PERSONA_VERSION,
-      },
-    });
-
-    if (!response.ok) {
-      const errorBody = await response.text();
-      throw new Error(
-        `Failed to fetch inquiry (${response.status}): ${errorBody}`
-      );
-    }
-
-    const json = await response.json();
-    const status: InquiryStatus = json.data.attributes.status;
-
-    return res.status(200).json({ inquiry_id: id, status });
+    logger.info("inquiry status: polling Persona", { id });
+    const { status, attributes } = await getInquiryStatus(id);
+    return res
+      .status(200)
+      .json({ inquiry_id: id, status: status as InquiryStatus, attributes });
   } catch (error: any) {
-    console.error("Error fetching inquiry status:", error?.message || error);
-    return res.status(500).json({
-      error: "Internal Server Error",
-      details: error?.message,
-    });
+    logger.error("Error fetching inquiry status", { message: error?.message });
+    return res
+      .status(500)
+      .json({ error: "Internal Server Error", details: error?.message });
   }
 }
