@@ -29,6 +29,7 @@ import { ErrorCodes } from "../../errors";
 import { NRError } from "../../logger/newrelic";
 import { PageSubHeading } from "../PageSubHeading";
 import { Paragraph } from "../Paragraph";
+import { pollReport } from "../../utils/pollReports";
 
 const AddressContainer = ({ csrfToken }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -108,15 +109,36 @@ const AddressContainer = ({ csrfToken }) => {
 
     // age >=18 and in NY
     if (age >= 18 && inNY) {
-      //NOTE: We will render the result of this API call on the page
-      const dbCheckResponse = axios
-        .post("/library-card/api/identity-verification/db-check", {
-          // NOTE: We will need to find out what parameters are needed when we implement the API call to the vendor for the database check.
-        })
-        .catch(() => {
-          // We may want to render the errors here?
+      try {
+        const { data } = await axios.post(
+          "/library-card/api/identity-verification/db-check",
+          {
+            "home-line1": formData["home-line1"],
+            "home-line2": formData["home-line2"],
+            "home-city": formData["home-city"],
+            "home-state": formData["home-state"],
+            "home-zip": formData["home-zip"],
+          }
+        );
+        const result =
+          data.status === "pending"
+            ? await pollReport(
+                "/api/identity-verification/db-check",
+                data.report_id
+              )
+            : data;
+
+        dispatch({
+          type: "SET_DB_CHECK_STATUS",
+          value: result ?? {
+            report_id: data.report_id,
+            status: data.status,
+            attributes: data.attributes,
+          },
         });
-      console.log(dbCheckResponse);
+      } catch (err) {
+        console.error("DB check failed", err);
+      }
       await router.push(`/address-verification?${queryStr}`);
       return;
     }

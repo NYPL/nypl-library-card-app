@@ -20,6 +20,9 @@ export const formInitialState: FormData = {
     home: {} as AddressResponse,
     work: {} as AddressResponse,
   } as AddressesResponse,
+  identityVerificationResult: null,
+  emailCheckResult: null,
+  dbCheckResult: null,
 };
 
 interface FormDataContextProps {

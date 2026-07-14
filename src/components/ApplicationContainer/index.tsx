@@ -60,6 +60,31 @@ const ApplicationContainer = ({ children }) => {
               />
             )}
             {children}
+            <details style={{ marginTop: "2rem" }}>
+              <summary style={{ cursor: "pointer", fontWeight: "bold" }}>
+                Debug Panel
+              </summary>
+              <pre
+                style={{
+                  fontSize: "0.75rem",
+                  overflow: "auto",
+                  background: "#f4f4f4",
+                  padding: "1rem",
+                  marginTop: "0.5rem",
+                }}
+              >
+                {JSON.stringify(
+                  {
+                    identityVerificationResult:
+                      state.identityVerificationResult,
+                    emailCheckResult: state.emailCheckResult,
+                    dbCheckResult: state.dbCheckResult,
+                  },
+                  null,
+                  2
+                )}
+              </pre>
+            </details>
           </>
         </TemplateContent>
       </TemplateMain>

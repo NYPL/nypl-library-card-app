@@ -144,11 +144,19 @@ export interface FormResults {
   expirationDate: string;
 }
 
+export interface VerificationResult {
+  status: string;
+  attributes: Record<string, any>;
+}
+
 export interface FormData {
   results: FormResults | undefined;
   errorObj: ApiErrorResponse | undefined;
   formValues: FormInputData;
   addressesResponse: AddressesResponse;
+  identityVerificationResult: VerificationResult | null;
+  emailCheckResult: VerificationResult | null;
+  dbCheckResult: VerificationResult | null;
 }
 
 export interface FormDataContextType {
