@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 import useFormDataContext from "../../context/FormDataContext";
 import PersonalFormFields from "../PersonalFormFields";
@@ -11,6 +12,7 @@ import {
   FormRow,
 } from "@nypl/design-system-react-components";
 import { createQueryParams } from "../../utils/utils";
+import { getAge } from "../../utils/formDataUtils";
 
 const PersonalFormContainer = () => {
   const { state, dispatch } = useFormDataContext();
@@ -39,9 +41,22 @@ const PersonalFormContainer = () => {
       value: { ...formValues, ...formData, preferredLanguage },
     });
 
-    const nextUrl = `/location?${queryStr}`;
+    const age = getAge(formData.birthdate);
+    if (age >= 13 && age <= 17) {
+      // NOTE: We will need to display this result on the page
+      const emailCheckResponse = axios
+        .post("/library-card/api/identity-verification/email-check", {
+          email: formData.email,
+        })
+        .catch(() => {
+          // NOTE: Render whatever error message we get from the API call on the page
+        });
+
+      console.log(emailCheckResponse);
+    }
+
     setIsLoading(false);
-    await router.push(nextUrl);
+    await router.push(`/location?${queryStr}`);
   };
 
   return (

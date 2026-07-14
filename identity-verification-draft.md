@@ -19,9 +19,9 @@ Patron submits Step 1 (`/personal`) and age is between 13 and 18.
 
 ---
 
-### Flow 2 — Adult (≥ 18) in New York: Database check
+### Flow 2 — Adult (≥= 18) in New York: Database check
 
-Patron submits Step 2 (`/address`), their age is ≥ 18, and the resolved address is in NY state.
+Patron submits Step 2 (`/address`), their age is ≥= 18, and the resolved address is in NY state.
 
 **What happens:**
 
@@ -32,18 +32,18 @@ Patron submits Step 2 (`/address`), their age is ≥ 18, and the resolved addres
 
 ---
 
-### Flow 3 — Adult (≥ 18) outside New York: Document upload
+### Flow 3 — Adult (≥= 18) outside New York: Document upload
 
-Patron submits Step 2 (`/address`), their age is ≥ 18, and the resolved address is **not** in NY state.
+Patron submits Step 2 (`/address`), their age is ≥= 18, and the resolved address is **not** in NY state.
 
 **What happens:**
 
 1. Route the patron to a new page (`/identity-verification`) instead of `/alternate-address`.
 1. On that page, render the ID vendor hosted flow / SDK for document upload (government ID, passport, etc.).
 1. Wait for the SDK callback with the result.
-1. Store the result and route to the existing next step (`/alternate-address`).
-1. Log or display the result
-1. Contiue to the next step (address verification or account)
+1. Store the result and route to the existing next step, if applicable (`/alternate-address`).
+1. Display the raw response result on the page
+1. Continue to the next step (address verification or account)
 
 \*\*The ID vendor SDK is client-side only, may need to think about how to do that on Nextjs
 

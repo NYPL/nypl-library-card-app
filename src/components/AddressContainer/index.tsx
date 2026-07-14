@@ -20,7 +20,7 @@ import {
   AddressTypes,
 } from "../../interfaces";
 import LoadingIndicator from "../LoadingIndicator";
-import { constructAddressType } from "../../utils/formDataUtils";
+import { constructAddressType, getAge } from "../../utils/formDataUtils";
 
 import { nyCounties, nyCities, createQueryParams } from "../../utils/utils";
 import useFormDataContext from "../../context/FormDataContext";
@@ -45,7 +45,7 @@ const AddressContainer = ({ csrfToken }) => {
    * submitForm
    * @param formData - data object returned from react-hook-form
    */
-  const submitForm = (formData, e) => {
+  const submitForm = async (formData, e) => {
     e.preventDefault();
     setIsLoading(true);
 
@@ -57,93 +57,82 @@ const AddressContainer = ({ csrfToken }) => {
 
     // This is the home address from the form fields.
     const homeAddress = constructAddressType(formData, "home");
-    // This is either the updated address from the API request or the address
-    // entered in the form.
-    let updatedHomeAddress;
-    let nextUrl;
-    axios
-      .post("/library-card/api/address", {
+    let updatedHomeAddress = homeAddress;
+
+    try {
+      const response = await axios.post("/library-card/api/address", {
         address: homeAddress,
         isWorkAddress: false,
         csrfToken,
-      })
-      .then((response) => {
-        // We got a response back so use the updated address response.
-        const home: AddressResponse = response.data;
-        updatedHomeAddress = home.address;
-        // Update the global address state values with ...
-        dispatch({
-          type: "SET_ADDRESSES_VALUE",
-          value: { home } as AddressesResponse,
-        });
-      })
-      .catch((error) => {
-        const apiError = normalizeAxiosError(error);
-        if (apiError.type === ErrorCodes.CSRF_INVALID) {
-          dispatch({ type: "SET_FORM_ERRORS", value: apiError });
-          nextUrl = "/new";
-        }
-        let home = error.response?.data;
-        // If the API call failed because the service is down and there is no
-        // returned address data from the response, then display the initial
-        // address that the user submitted which we already saved in
-        // `homeAddress`.
-        updatedHomeAddress = homeAddress;
-        if (isEmpty(home)) {
-          home = {
-            address: homeAddress,
-            addresses: [],
-            detail: "",
-          };
-        }
-
-        NRError(
-          new Error(`Error Validating Address. ${JSON.stringify(error)}`),
-          {
-            customAttributes: {
-              contactForm: `Error Validating Address. ${JSON.stringify(error)}`,
-            },
-          }
-        );
-        dispatch({
-          type: "SET_ADDRESSES_VALUE",
-          value: { home },
-        });
-      })
-      .finally(() => {
-        setIsLoading(false);
-        // Check to see if the submitted address is in NYC.
-        const addressInNYC =
-          nyCities.includes(updatedHomeAddress.city?.toLowerCase()) ||
-          nyCounties.includes(updatedHomeAddress.county?.toLowerCase());
-        // If we don't have a 403 error and need to start over, then do the
-        // following check:
-        // If the user is not in "nyc", then we ask the user for their
-        // work address information. If the user is in "nys" and the home
-        // address is not in "nyc", then we ask for their work address.
-        // Otherwise, the home address is enough and we can go to the next step.
-        if (nextUrl !== "/new") {
-          if (
-            formValues.location !== "nyc" ||
-            ((formValues.location === "nyc" || formValues.location === "nys") &&
-              !addressInNYC)
-          ) {
-            nextUrl = `/alternate-address?${queryStr}`;
-          } else {
-            nextUrl = `/address-verification?${queryStr}`;
-          }
-          (async () => {
-            await router.push(nextUrl);
-          })();
-        } else {
-          setTimeout(() => {
-            (async () => {
-              dispatch({ type: "SET_FORM_ERRORS", value: null });
-              await router.push(nextUrl);
-            })();
-          }, 2500);
-        }
       });
+      const home: AddressResponse = response.data;
+      updatedHomeAddress = home.address;
+      dispatch({
+        type: "SET_ADDRESSES_VALUE",
+        value: { home } as AddressesResponse,
+      });
+    } catch (error) {
+      const apiError = normalizeAxiosError(error);
+      if (apiError.type === ErrorCodes.CSRF_INVALID) {
+        dispatch({ type: "SET_FORM_ERRORS", value: apiError });
+        setIsLoading(false);
+        await new Promise((resolve) => setTimeout(resolve, 2500));
+        dispatch({ type: "SET_FORM_ERRORS", value: null });
+        await router.push("/new");
+        return;
+      }
+
+      let home = error.response?.data;
+      if (isEmpty(home)) {
+        home = { address: homeAddress, addresses: [], detail: "" };
+      }
+
+      NRError(new Error(`Error Validating Address. ${JSON.stringify(error)}`), {
+        customAttributes: {
+          contactForm: `Error Validating Address. ${JSON.stringify(error)}`,
+        },
+      });
+      dispatch({ type: "SET_ADDRESSES_VALUE", value: { home } });
+    }
+
+    setIsLoading(false);
+
+    const age = getAge(formValues.birthdate);
+    const inNY = updatedHomeAddress.state === "NY";
+
+    // age>=18 and outside NY
+    if (age >= 18 && !inNY) {
+      await router.push(`/identity-verification?${queryStr}`);
+      return;
+    }
+
+    // age >=18 and in NY
+    if (age >= 18 && inNY) {
+      //NOTE: We will render the result of this API call on the page
+      const dbCheckResponse = axios
+        .post("/library-card/api/identity-verification/db-check", {
+          // NOTE: We will need to find out what parameters are needed when we implement the API call to the vendor for the database check.
+        })
+        .catch(() => {
+          // We may want to render the errors here?
+        });
+      console.log(dbCheckResponse);
+      await router.push(`/address-verification?${queryStr}`);
+      return;
+    }
+
+    const addressInNYC =
+      nyCities.includes(updatedHomeAddress.city?.toLowerCase()) ||
+      nyCounties.includes(updatedHomeAddress.county?.toLowerCase());
+
+    const nextUrl =
+      formValues.location !== "nyc" ||
+      ((formValues.location === "nyc" || formValues.location === "nys") &&
+        !addressInNYC)
+        ? `/alternate-address?${queryStr}`
+        : `/address-verification?${queryStr}`;
+
+    await router.push(nextUrl);
   };
 
   return (
