@@ -8,6 +8,7 @@ const EMAIL_REPORT_TEMPLATE_ID =
   process.env.NEXT_PUBLIC_PERSONA_INQUIRY_TEMPLATE_ID;
 const ADDRESS_REPORT_TEMPLATE_ID =
   process.env.PERSONA_ADDRESS_REPORT_TEMPLATE_ID;
+
 export interface PersonaInquiry {
   id: string;
   attributes: {

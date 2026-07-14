@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 import type { NextApiRequest, NextApiResponse } from "next";
-import redis, { reportKey, KEY_TTL_SECONDS } from "../../../src/utils/redis";
 import {
   createAddressReport,
   getReportStatus,
@@ -38,11 +37,6 @@ export default async function handler(
         state,
         zip,
       });
-      await redis.set(
-        reportKey(result.report_id),
-        { status: result.status, attributes: result.attributes },
-        { ex: KEY_TTL_SECONDS }
-      );
       logger.info("Address report created", {
         report_id: result.report_id,
         status: result.status,
@@ -64,22 +58,6 @@ export default async function handler(
       return res.status(400).json({ error: "reportId is required" });
     }
     try {
-      const cached = await redis.get<{
-        status: string;
-        attributes: Record<string, any>;
-      }>(reportKey(reportId));
-      if (cached && cached.status !== "pending") {
-        logger.info("Address report: cache hit", {
-          reportId,
-          status: cached.status,
-        });
-        return res.status(200).json({
-          report_id: reportId,
-          status: cached.status as CreateReportResult["status"],
-          attributes: cached.attributes,
-        });
-      }
-
       const result = await getReportStatus(reportId);
       return res.status(200).json(result);
     } catch (error: any) {

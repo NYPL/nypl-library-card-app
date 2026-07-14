@@ -57,6 +57,10 @@ const PersonalFormContainer = () => {
           value: result ?? data,
         });
       } catch (err) {
+        dispatch({
+          type: "SET_EMAIL_CHECK_STATUS",
+          value: { err, status: "failed email checking" },
+        });
         console.error("Email check failed", err);
       }
     }

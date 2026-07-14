@@ -130,14 +130,14 @@ const AddressContainer = ({ csrfToken }) => {
 
         dispatch({
           type: "SET_DB_CHECK_STATUS",
-          value: result ?? {
-            report_id: data.report_id,
-            status: data.status,
-            attributes: data.attributes,
-          },
+          value: result ?? data,
         });
       } catch (err) {
         console.error("DB check failed", err);
+        dispatch({
+          type: "SET_DB_CHECK_STATUS",
+          value: { err, status: "failed db checking" },
+        });
       }
       await router.push(`/address-verification?${queryStr}`);
       return;

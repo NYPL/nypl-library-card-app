@@ -71,6 +71,10 @@ const Persona: React.FC<PersonaProps> = ({
         })();
       },
       onError: ({ message }) => {
+        dispatch({
+          type: "SET_IDENTITY_VERIFICATION_STATUS",
+          value: { message, status: "failed" },
+        });
         onError?.(new Error(message));
       },
     };

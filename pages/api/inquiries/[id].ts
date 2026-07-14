@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 import type { NextApiRequest, NextApiResponse } from "next";
-import redis, { inquiryKey } from "../../../src/utils/redis";
 import { getInquiryStatus } from "../../../src/services/identityVerification";
 import logger from "../../../src/logger";
 
@@ -40,20 +39,7 @@ export default async function handler(
   }
 
   try {
-    const cached = await redis.get<{
-      status: InquiryStatus;
-      attributes: Record<string, any>;
-    }>(inquiryKey(id));
-    if (cached) {
-      logger.info("inquiry status: cache hit", { id, status: cached.status });
-      return res.status(200).json({
-        inquiry_id: id,
-        status: cached.status,
-        attributes: cached.attributes ?? {},
-      });
-    }
-
-    logger.info("inquiry status: polling Persona", { id });
+    logger.info("inquiry status: fetching from Persona", { id });
     const { status, attributes } = await getInquiryStatus(id);
     return res
       .status(200)
