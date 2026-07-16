@@ -7,7 +7,7 @@ import {
   RadioGroup,
   Text,
 } from "@nypl/design-system-react-components";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
@@ -33,6 +33,7 @@ const styles = {
 function AddressVerificationContainer() {
   const [homeAddressSelect, setHomeAddressSelect] = useState("");
   const [workAddressSelect, setWorkAddressSelect] = useState("");
+  const formRef = useRef<(HTMLDivElement & HTMLFormElement) | null>(null);
   const {
     handleSubmit,
     register,
@@ -79,6 +80,37 @@ function AddressVerificationContainer() {
   };
   const homeAddress = getAddresses(addressesResponse?.home);
   const workAddress = getAddresses(addressesResponse?.work);
+  const homeSelectError = errors?.["home-address-select"]?.message;
+  const workSelectError = errors?.["work-address-select"]?.message;
+
+  useEffect(() => {
+    const syncErrorDescription = (addressType: "home" | "work") => {
+      const fieldName = `${addressType}-address-select`;
+      const errorId = `${addressType}-address-error`;
+      const hasError = !!errors?.[fieldName]?.message;
+      const inputs = formRef.current?.querySelectorAll<HTMLInputElement>(
+        `input[name='${fieldName}']`
+      );
+
+      inputs?.forEach((input) => {
+        if (hasError) {
+          input.setAttribute("aria-describedby", errorId);
+          input.setAttribute("aria-invalid", "true");
+        } else {
+          input.removeAttribute("aria-describedby");
+          input.removeAttribute("aria-invalid");
+        }
+      });
+    };
+
+    syncErrorDescription("home");
+    syncErrorDescription("work");
+  }, [
+    homeSelectError,
+    workSelectError,
+    homeAddress?.length,
+    workAddress?.length,
+  ]);
 
   /**
    * extractUpdatedAddressValues
@@ -243,6 +275,7 @@ function AddressVerificationContainer() {
 
   return (
     <Form
+      ref={formRef}
       id="address-verification-container"
       onSubmit={handleSubmit(submitForm)}
       noValidate

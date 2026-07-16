@@ -71,7 +71,6 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
           reviewPage.rulesRegulationsLink,
           reviewPage.privacyPolicyLink,
         ];
-        await reviewPage.editPersonalInfoButton.click();
         await reviewPage.editAccountButton.click();
         for (const link of links) {
           await expect(link).toHaveAttribute("target", "_blank");
@@ -274,7 +273,10 @@ for (const { lang, name } of SUPPORTED_LANGUAGES) {
 
     test.describe("displays error messages", () => {
       test("displays errors for required fields", async () => {
+        await expect(reviewPage.editPersonalInfoButton).toBeVisible();
         await reviewPage.editPersonalInfoButton.click();
+        await reviewPage.firstNameInput.focus();
+        await reviewPage.lastNameInput.focus();
         await reviewPage.submitButton.click();
         await expect(reviewPage.firstNameError).toBeVisible();
         await expect(reviewPage.lastNameError).toBeVisible();
