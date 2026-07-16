@@ -98,12 +98,18 @@ function AddressVerificationContainer() {
     return updatedValues;
   };
 
-  const submitForm = (formData, e) => {
-    e.preventDefault();
+  const submitForm = (formData) => {
     setIsLoading(true);
     // These are the values from the radio button inputs if they were rendered.
     const home = formData["home-address-select"];
     const work = formData["work-address-select"];
+
+    // These should already be present after RHF validation, but keep this
+    // defensive guard to avoid runtime crashes if malformed data slips through.
+    if (!home) {
+      setIsLoading(false);
+      return;
+    }
 
     let updatedSelectedHomeAddress = {};
     let selectedWorkAddress;
@@ -176,6 +182,7 @@ function AddressVerificationContainer() {
 
     const selectError = errors?.[`${addressType}-address-select`]?.message;
     const selectErrorMessage = t("verifyAddress.errorMessage.select");
+    const errorId = `${addressType}-address-error`;
 
     return (
       <>
@@ -183,6 +190,7 @@ function AddressVerificationContainer() {
           className="address-container"
           name=""
           id={addressType.replace(/[^0-9a-zA-Z]/g, "-")}
+          aria-describedby={selectError ? errorId : undefined}
           labelText={labelText}
           showLabel={false}
           sx={{
@@ -222,14 +230,9 @@ function AddressVerificationContainer() {
             );
           })}
         </RadioGroup>
-        <Box m={0} aria-live="polite">
+        <Box m={0}>
           {selectError && (
-            <Text
-              id={`${addressType}-address-error`}
-              mt="s"
-              color="ui.error.primary"
-              fontSize="xs"
-            >
+            <Text id={errorId} mt="s" color="ui.error.primary" fontSize="xs">
               {selectErrorMessage}
             </Text>
           )}
