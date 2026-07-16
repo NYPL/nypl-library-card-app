@@ -24,6 +24,24 @@ export function formReducer(state, action) {
         addressesResponse: action.value,
       };
     }
+    case "SET_IDENTITY_VERIFICATION_STATUS": {
+      return {
+        ...state,
+        identityVerificationResult: action.value,
+      };
+    }
+    case "SET_EMAIL_CHECK_STATUS": {
+      return {
+        ...state,
+        emailCheckResult: action.value,
+      };
+    }
+    case "SET_DB_CHECK_STATUS": {
+      return {
+        ...state,
+        dbCheckResult: action.value,
+      };
+    }
     default: {
       return state;
     }
