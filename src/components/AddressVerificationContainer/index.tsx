@@ -7,7 +7,7 @@ import {
   RadioGroup,
   Text,
 } from "@nypl/design-system-react-components";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
@@ -33,11 +33,16 @@ const styles = {
 function AddressVerificationContainer() {
   const [homeAddressSelect, setHomeAddressSelect] = useState("");
   const [workAddressSelect, setWorkAddressSelect] = useState("");
+  const formRef = useRef<(HTMLDivElement & HTMLFormElement) | null>(null);
   const {
     handleSubmit,
     register,
+    clearErrors,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: "onBlur",
+    reValidateMode: "onBlur",
+  });
   const { state, dispatch } = useFormDataContext();
   const [isLoading, setIsLoading] = useState(false);
   // The `addressesResponse` is the value from Service Objects through the NYPL Platform API.
@@ -65,10 +70,47 @@ function AddressVerificationContainer() {
     return [addressObj.address];
   };
 
-  const onChangeHome = (e) => setHomeAddressSelect(e.target?.value);
-  const onChangeWork = (e) => setWorkAddressSelect(e.target?.value);
+  const onChangeHome = (e) => {
+    clearErrors("home-address-select");
+    setHomeAddressSelect(e.target?.value);
+  };
+  const onChangeWork = (e) => {
+    clearErrors("work-address-select");
+    setWorkAddressSelect(e.target?.value);
+  };
   const homeAddress = getAddresses(addressesResponse?.home);
   const workAddress = getAddresses(addressesResponse?.work);
+  const homeSelectError = errors?.["home-address-select"]?.message;
+  const workSelectError = errors?.["work-address-select"]?.message;
+
+  useEffect(() => {
+    const syncErrorDescription = (addressType: "home" | "work") => {
+      const fieldName = `${addressType}-address-select`;
+      const errorId = `${addressType}-address-error`;
+      const hasError = !!errors?.[fieldName]?.message;
+      const inputs = formRef.current?.querySelectorAll<HTMLInputElement>(
+        `input[name='${fieldName}']`
+      );
+
+      inputs?.forEach((input) => {
+        if (hasError) {
+          input.setAttribute("aria-describedby", errorId);
+          input.setAttribute("aria-invalid", "true");
+        } else {
+          input.removeAttribute("aria-describedby");
+          input.removeAttribute("aria-invalid");
+        }
+      });
+    };
+
+    syncErrorDescription("home");
+    syncErrorDescription("work");
+  }, [
+    homeSelectError,
+    workSelectError,
+    homeAddress?.length,
+    workAddress?.length,
+  ]);
 
   /**
    * extractUpdatedAddressValues
@@ -88,12 +130,18 @@ function AddressVerificationContainer() {
     return updatedValues;
   };
 
-  const submitForm = (formData, e) => {
-    e.preventDefault();
+  const submitForm = (formData) => {
     setIsLoading(true);
     // These are the values from the radio button inputs if they were rendered.
     const home = formData["home-address-select"];
     const work = formData["work-address-select"];
+
+    // These should already be present after RHF validation, but keep this
+    // defensive guard to avoid runtime crashes if malformed data slips through.
+    if (!home) {
+      setIsLoading(false);
+      return;
+    }
 
     let updatedSelectedHomeAddress = {};
     let selectedWorkAddress;
@@ -166,6 +214,7 @@ function AddressVerificationContainer() {
 
     const selectError = errors?.[`${addressType}-address-select`]?.message;
     const selectErrorMessage = t("verifyAddress.errorMessage.select");
+    const errorId = `${addressType}-address-error`;
 
     return (
       <>
@@ -173,6 +222,7 @@ function AddressVerificationContainer() {
           className="address-container"
           name=""
           id={addressType.replace(/[^0-9a-zA-Z]/g, "-")}
+          aria-describedby={selectError ? errorId : undefined}
           labelText={labelText}
           showLabel={false}
           sx={{
@@ -212,14 +262,9 @@ function AddressVerificationContainer() {
             );
           })}
         </RadioGroup>
-        <Box m={0} aria-live="polite">
+        <Box m={0}>
           {selectError && (
-            <Text
-              id={`${addressType}-address-error`}
-              mt="s"
-              color="ui.error.primary"
-              fontSize="xs"
-            >
+            <Text id={errorId} mt="s" color="ui.error.primary" fontSize="xs">
               {selectErrorMessage}
             </Text>
           )}
@@ -230,6 +275,7 @@ function AddressVerificationContainer() {
 
   return (
     <Form
+      ref={formRef}
       id="address-verification-container"
       onSubmit={handleSubmit(submitForm)}
       noValidate

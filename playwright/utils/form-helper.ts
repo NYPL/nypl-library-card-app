@@ -1,4 +1,4 @@
-import { expect, Locator, Response } from "@playwright/test";
+import { Locator, Response } from "@playwright/test";
 import { PersonalPage } from "../pageobjects/personal.page";
 import { AddressPage } from "../pageobjects/address.page";
 import { AlternateAddressPage } from "../pageobjects/alternate-address.page";
@@ -98,9 +98,24 @@ export async function clickNextButton(
   );
 
   if (!nextPageLoaded) {
+    let visibleErrors;
+
     for (const errorMessage of errorMessages) {
-      await expect(errorMessage).not.toBeVisible();
+      if (await errorMessage.isVisible()) {
+        const text = (await errorMessage.textContent())?.trim();
+        if (text) {
+          visibleErrors.push(text);
+        }
+      }
     }
+
+    if (visibleErrors.length > 0) {
+      throw new Error(`nextPageLoaded blocked by form validation errors`);
+    }
+
+    throw new Error(
+      "Next page heading did not appear and no visible validation error was found."
+    );
   }
 }
 

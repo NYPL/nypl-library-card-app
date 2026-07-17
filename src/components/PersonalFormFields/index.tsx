@@ -26,6 +26,7 @@ function PersonalFormFields({
   const { t } = useTranslation("common");
   const {
     control,
+    clearErrors,
     register,
     formState: { errors },
   } = useFormContext();
@@ -103,12 +104,16 @@ function PersonalFormFields({
             name="ecommunicationsPref"
             control={control}
             defaultValue={formValues.ecommunicationsPref}
-            render={({ field: { onChange, value } }) => (
+            render={({ field: { onBlur, onChange, value } }) => (
               <Checkbox
                 id="eCommunications"
                 isChecked={value}
                 labelText={t("personal.eCommunications.labelText")}
-                onChange={(e) => onChange(e.target.checked)}
+                onBlur={onBlur}
+                onChange={(e) => {
+                  clearErrors("ecommunicationsPref");
+                  onChange(e.target.checked);
+                }}
               />
             )}
           />

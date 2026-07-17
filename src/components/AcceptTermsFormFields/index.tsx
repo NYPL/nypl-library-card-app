@@ -15,6 +15,7 @@ const AcceptTermsForm: React.FC = () => {
   const { t } = useTranslation("common");
   const {
     control,
+    clearErrors,
     formState: { errors },
   } = useFormContext();
 
@@ -37,7 +38,7 @@ const AcceptTermsForm: React.FC = () => {
         control={control}
         defaultValue={false}
         rules={{ required: t("account.errorMessage.acceptTerms") }}
-        render={({ field: { onChange, value, ref } }) => (
+        render={({ field: { onBlur, onChange, value, ref } }) => (
           <Checkbox
             id="acceptTerms"
             ref={ref}
@@ -45,7 +46,11 @@ const AcceptTermsForm: React.FC = () => {
             isInvalid={!!errors?.acceptTerms?.message}
             isChecked={value}
             labelText={t("account.termsAndCondition.label")}
-            onChange={(e) => onChange(e.target.checked)}
+            onBlur={onBlur}
+            onChange={(e) => {
+              clearErrors("acceptTerms");
+              onChange(e.target.checked);
+            }}
           />
         )}
       />

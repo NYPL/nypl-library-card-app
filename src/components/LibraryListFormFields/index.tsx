@@ -34,15 +34,18 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   const {
     register,
     formState: { errors },
+    clearErrors,
+    trigger,
     setValue: setFormValue,
   } = useFormContext();
   const formName = "homeLibraryCode";
 
   const onChange = (event) => {
     const newValue = event.target.value;
+    clearErrors(formName);
     setValue(newValue);
     setFormValue(formName, newValue, {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
   };
@@ -50,6 +53,7 @@ const LibraryListForm = ({ libraryList = [] }: LibraryListFormProps) => {
   const inputProps = {
     value,
     onChange,
+    onBlur: () => trigger(formName),
   };
 
   return (
