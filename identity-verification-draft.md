@@ -78,14 +78,15 @@ PERSONA_API_KEY=
 
 ## Files to Create
 
-| File                                                | Purpose                     |
-| --------------------------------------------------- | --------------------------- |
-| `src/services/identityVerification/persona.ts`      | Vendor API implementation   |
-| `src/services/identityVerification/index.ts`        | Vendor factory              |
-| `pages/api/identity-verification/email-check.ts`    | Flow 1 API route            |
-| `pages/api/identity-verification/db-check.ts`       | Flow 2 API route            |
-| `pages/api/identity-verification/document-check.ts` | Flow 3 SDK callback         |
-| `pages/identity-verification/index.tsx`             | Flow 3 document upload page |
+| File                                                | Purpose                                       |
+| --------------------------------------------------- | --------------------------------------------- |
+| `src/services/identityVerification/auth.ts`         | Vendor bearer token service                   |
+| `src/services/identityVerification/index.ts`        | Vendor factory                                |
+| `pages/api/identity-verification/token.ts`          | Token endpoint to request vendor bearer token |
+| `pages/api/identity-verification/email-check.ts`    | Flow 1 API route                              |
+| `pages/api/identity-verification/db-check.ts`       | Flow 2 API route                              |
+| `pages/api/identity-verification/document-check.ts` | Flow 3 SDK callback                           |
+| `pages/identity-verification/index.tsx`             | Flow 3 document upload page                   |
 
 ---
 
