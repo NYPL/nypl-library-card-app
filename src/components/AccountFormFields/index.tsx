@@ -68,11 +68,16 @@ function AccountFormFields({
 
   const validatePasswordLength = (val) => {
     return (
-      (val.length >= minPasswordLength && val.length <= maxPasswordLength) ||
+      (val.length >= minPasswordLength &&
+        val.length <= maxPasswordLength &&
+        !val.includes(".")) ||
       t("account.errorMessage.password")
     );
   };
   const verifyPasswordMatch = () => {
+    if (validatePasswordLength(getValues("password")) !== true) {
+      return true;
+    }
     return (
       getValues("password") === getValues("verifyPassword") ||
       t("account.errorMessage.verifyPassword")
