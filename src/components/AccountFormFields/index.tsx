@@ -75,9 +75,6 @@ function AccountFormFields({
     );
   };
   const verifyPasswordMatch = () => {
-    if (validatePasswordLength(getValues("password")) !== true) {
-      return true;
-    }
     return (
       getValues("password") === getValues("verifyPassword") ||
       t("account.errorMessage.verifyPassword")

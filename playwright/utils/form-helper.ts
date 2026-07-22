@@ -8,17 +8,6 @@ import { ReviewPage } from "../pageobjects/review.page";
 import { AddressFormPage, AddressData, AccountData, PatronData } from "./types";
 import { SPINNER_TIMEOUT } from "./constants";
 
-let usernameCounter = 0;
-
-const createUniqueUsername = (username: string): string => {
-  usernameCounter = (usernameCounter + 1) % 100;
-  const sanitizedBase = username.replace(/[^a-zA-Z0-9]/g, "").slice(0, 15);
-  const uniqueSuffix = `${Date.now().toString().slice(-7)}${usernameCounter
-    .toString()
-    .padStart(2, "0")}`;
-  return `${sanitizedBase}${uniqueSuffix}`.slice(0, 25);
-};
-
 export async function fillPersonalInfo(
   page: PersonalPage | ReviewPage,
   patronData: PatronData
@@ -47,7 +36,6 @@ export async function fillAccountInfo(
   page: AccountPage | ReviewPage,
   accountData: AccountData
 ) {
-  accountData.username = createUniqueUsername(accountData.username);
   await page.usernameInput.fill(accountData.username);
   await page.passwordInput.fill(accountData.password);
   await page.verifyPasswordInput.fill(accountData.password);
@@ -110,7 +98,7 @@ export async function clickNextButton(
   );
 
   if (!nextPageLoaded) {
-    const visibleErrors = [];
+    let visibleErrors;
 
     for (const errorMessage of errorMessages) {
       if (await errorMessage.isVisible()) {
