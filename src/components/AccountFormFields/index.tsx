@@ -68,7 +68,9 @@ function AccountFormFields({
 
   const validatePasswordLength = (val) => {
     return (
-      (val.length >= minPasswordLength && val.length <= maxPasswordLength) ||
+      (val.length >= minPasswordLength &&
+        val.length <= maxPasswordLength &&
+        !val.includes(".")) ||
       t("account.errorMessage.password")
     );
   };
