@@ -22,6 +22,7 @@ export class PageNotFoundPage {
       .getByRole("link", { name: "Get A Library Card" });
 
     this.errorIcon = page.locator("svg").first();
+    // need to fix cause it's actually grabbing the logo not the 404 icon.
     // future fix: add data-testid="404-icon to this icon or warpping element
     // swap test with this.errorIcon = page.getByTestID("404-icon");
     this.errorTitle = page.getByRole("heading", {
