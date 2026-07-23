@@ -137,6 +137,7 @@ export const PAGE_ROUTES = {
   ACCOUNT: (lang?: string) => withLang("/library-card/account", lang),
   REVIEW: (lang?: string) => withLang("/library-card/review", lang),
   CONGRATS: (lang?: string) => withLang("/library-card/congrats", lang),
+  NOT_FOUND: () => "/library-card/this-page-does-not-exist",
 };
 
 export const PATRON_TYPES = {
